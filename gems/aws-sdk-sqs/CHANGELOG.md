@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-07-01)
+------------------
+
+* Feature - Documentation updates for Amazon SQS.
+
+1.39.0 (2021-05-27)
+------------------
+
+* Feature - Documentation updates for Amazon SQS for General Availability of high throughput for FIFO queues.
+
+1.38.0 (2021-03-25)
+------------------
+
+* Feature - Documentation updates for Amazon SQS
+
+1.37.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2020-12-17)
+------------------
+
+* Feature - Amazon SQS adds queue attributes to enable high throughput FIFO.
+
 1.34.0 (2020-09-30)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -340,9 +340,19 @@ module Aws::Rekognition
     # Compares a face in the *source* input image with each of the 100
     # largest faces detected in the *target* input image.
     #
-    # <note markdown="1"> If the source image contains multiple faces, the service detects the
+    # If the source image contains multiple faces, the service detects the
     # largest face and compares it with each face detected in the target
     # image.
+    #
+    # <note markdown="1"> CompareFaces uses machine learning algorithms, which are
+    # probabilistic. A false negative is an incorrect prediction that a face
+    # in the target image has a low similarity confidence score when
+    # compared to the face in the source image. To reduce the probability of
+    # false negatives, we recommend that you compare the target image
+    # against multiple source images. If you plan to use `CompareFaces` to
+    # make a decision that impacts an individual's rights, privacy, or
+    # access to services, we recommend that you pass the result to a human
+    # for review and further validation before taking action.
     #
     #  </note>
     #
@@ -578,10 +588,16 @@ module Aws::Rekognition
     #  </note>
     #
     # This operation requires permissions to perform the
-    # `rekognition:CreateCollection` action.
+    # `rekognition:CreateCollection` action. If you want to tag your
+    # collection, you also require permission to perform the
+    # `rekognition:TagResource` operation.
     #
     # @option params [required, String] :collection_id
     #   ID for the collection that you are creating.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   collection.
     #
     # @return [Types::CreateCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -608,6 +624,9 @@ module Aws::Rekognition
     #
     #   resp = client.create_collection({
     #     collection_id: "CollectionId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -688,6 +707,21 @@ module Aws::Rekognition
     # @option params [required, Types::TestingData] :testing_data
     #   The dataset to use for testing.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) that you want to attach to the model.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier for your AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK). You can supply the Amazon Resource Name (ARN) of
+    #   your CMK, the ID of your CMK, or an alias for your CMK. The key is
+    #   used to encrypt training and test images copied into the service for
+    #   model training. Your source images are unaffected. The key is also
+    #   used to encrypt training results and manifest files written to the
+    #   output Amazon S3 bucket (`OutputConfig`).
+    #
+    #   If you don't specify a value for `KmsKeyId`, images copied into the
+    #   service are encrypted using a key that AWS owns and manages.
+    #
     # @return [Types::CreateProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectVersionResponse#project_version_arn #project_version_arn} => String
@@ -728,6 +762,10 @@ module Aws::Rekognition
     #       ],
     #       auto_create: false,
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -760,6 +798,11 @@ module Aws::Rekognition
     # StopStreamProcessor to stop processing. You can delete the stream
     # processor by calling DeleteStreamProcessor.
     #
+    # This operation requires permissions to perform the
+    # `rekognition:CreateStreamProcessor` action. If you want to tag your
+    # stream processor, you also require permission to perform the
+    # `rekognition:TagResource` operation.
+    #
     # @option params [required, Types::StreamProcessorInput] :input
     #   Kinesis video stream stream that provides the source streaming video.
     #   If you are using the AWS CLI, the parameter name is
@@ -783,6 +826,10 @@ module Aws::Rekognition
     #
     # @option params [required, String] :role_arn
     #   ARN of the IAM role that allows access to the stream processor.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) that you want to attach to the stream
+    #   processor.
     #
     # @return [Types::CreateStreamProcessorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -809,6 +856,9 @@ module Aws::Rekognition
     #       },
     #     },
     #     role_arn: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1143,6 +1193,7 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.bucket #=> String
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.name #=> String
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.version #=> String
+    #   resp.project_version_descriptions[0].kms_key_id #=> String
     #   resp.next_token #=> String
     #
     #
@@ -3782,6 +3833,38 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Returns a list of tags in an Amazon Rekognition collection, stream
+    # processor, or Custom Labels model.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:ListTagsForResource` action.
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the model, collection, or stream
+    #   processor that contains the tags that you want a list of.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns an array of celebrities recognized in the input image. For
     # more information, see Recognizing Celebrities in the Amazon
     # Rekognition Developer Guide.
@@ -4057,6 +4140,9 @@ module Aws::Rekognition
     # also returns the bounding box (and a confidence level that the
     # bounding box contains a face) of the face that Amazon Rekognition used
     # for the input image.
+    #
+    # If no faces are detected in the input image, `SearchFacesByImage`
+    # returns an `InvalidParameterException` error.
     #
     # For an example, Searching for a Face Using an Image in the Amazon
     # Rekognition Developer Guide.
@@ -4986,6 +5072,71 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Adds one or more key-value tags to an Amazon Rekognition collection,
+    # stream processor, or Custom Labels model. For more information, see
+    # [Tagging AWS Resources][1].
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:TagResource` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the model, collection, or stream
+    #   processor that you want to assign the tags to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The key-value tags to assign to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from an Amazon Rekognition collection, stream
+    # processor, or Custom Labels model.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:UntagResource` action.
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the model, collection, or stream
+    #   processor that you want to remove the tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of the tags that you want to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4999,7 +5150,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

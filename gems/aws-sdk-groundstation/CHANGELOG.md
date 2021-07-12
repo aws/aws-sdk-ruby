@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-04-21)
+------------------
+
+* Feature - Support new S3 Recording Config allowing customers to write downlink data directly to S3.
+
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.15.0 (2020-10-15)
 ------------------
 

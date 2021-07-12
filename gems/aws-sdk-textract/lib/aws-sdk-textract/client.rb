@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -431,6 +431,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -521,6 +522,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -647,6 +649,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -764,6 +767,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -862,6 +866,13 @@ module Aws::Textract
     #   Amazon Textract will save the results internally to be accessed by the
     #   GetDocumentAnalysis operation.
     #
+    # @option params [String] :kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the KMS
+    #   key will be used for server-side encryption of the objects in the
+    #   customer bucket. When this parameter is not enabled, the result will
+    #   be encrypted server side,using SSE-S3.
+    #
     # @return [Types::StartDocumentAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentAnalysisResponse#job_id #job_id} => String
@@ -887,6 +898,7 @@ module Aws::Textract
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3ObjectName",
     #     },
+    #     kms_key_id: "KMSKeyId",
     #   })
     #
     # @example Response structure
@@ -957,6 +969,13 @@ module Aws::Textract
     #   Amazon Textract will save the results internally to be accessed with
     #   the GetDocumentTextDetection operation.
     #
+    # @option params [String] :kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the KMS
+    #   key will be used for server-side encryption of the objects in the
+    #   customer bucket. When this parameter is not enabled, the result will
+    #   be encrypted server side,using SSE-S3.
+    #
     # @return [Types::StartDocumentTextDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentTextDetectionResponse#job_id #job_id} => String
@@ -981,6 +1000,7 @@ module Aws::Textract
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3ObjectName",
     #     },
+    #     kms_key_id: "KMSKeyId",
     #   })
     #
     # @example Response structure
@@ -1009,7 +1029,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

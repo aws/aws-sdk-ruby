@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -378,6 +378,52 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Adds a partner integration to a cluster. This operation authorizes a
+    # partner to push status updates for the specified database. To complete
+    # the integration, you also set up the integration on the partner
+    # website.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster that receives data from the
+    #   partner.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database that receives data from the partner.
+    #
+    # @option params [required, String] :partner_name
+    #   The name of the partner that is authorized to send data.
+    #
+    # @return [Types::PartnerIntegrationOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PartnerIntegrationOutputMessage#database_name #database_name} => String
+    #   * {Types::PartnerIntegrationOutputMessage#partner_name #partner_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_partner({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName", # required
+    #     partner_name: "PartnerIntegrationPartnerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.partner_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AddPartner AWS API Documentation
+    #
+    # @overload add_partner(params = {})
+    # @param [Hash] params ({})
+    def add_partner(params = {}, options = {})
+      req = build_request(:add_partner, params)
+      req.send_request(options)
+    end
+
     # Adds an inbound (ingress) rule to an Amazon Redshift security group.
     # Depending on whether the application accessing your cluster is running
     # on the Internet or an Amazon EC2 instance, you can authorize inbound
@@ -464,6 +510,59 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Grants access to a cluster.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier of the cluster to grant access to.
+    #
+    # @option params [required, String] :account
+    #   The AWS account ID to grant access to.
+    #
+    # @option params [Array<String>] :vpc_ids
+    #   The virtual private cloud (VPC) identifiers to grant access to.
+    #
+    # @return [Types::EndpointAuthorization] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAuthorization#grantor #grantor} => String
+    #   * {Types::EndpointAuthorization#grantee #grantee} => String
+    #   * {Types::EndpointAuthorization#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAuthorization#authorize_time #authorize_time} => Time
+    #   * {Types::EndpointAuthorization#cluster_status #cluster_status} => String
+    #   * {Types::EndpointAuthorization#status #status} => String
+    #   * {Types::EndpointAuthorization#allowed_all_vp_cs #allowed_all_vp_cs} => Boolean
+    #   * {Types::EndpointAuthorization#allowed_vp_cs #allowed_vp_cs} => Array&lt;String&gt;
+    #   * {Types::EndpointAuthorization#endpoint_count #endpoint_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_endpoint_access({
+    #     cluster_identifier: "String",
+    #     account: "String", # required
+    #     vpc_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grantor #=> String
+    #   resp.grantee #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.authorize_time #=> Time
+    #   resp.cluster_status #=> String
+    #   resp.status #=> String, one of "Authorized", "Revoking"
+    #   resp.allowed_all_vp_cs #=> Boolean
+    #   resp.allowed_vp_cs #=> Array
+    #   resp.allowed_vp_cs[0] #=> String
+    #   resp.endpoint_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeEndpointAccess AWS API Documentation
+    #
+    # @overload authorize_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def authorize_endpoint_access(params = {}, options = {})
+      req = build_request(:authorize_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Authorizes the specified AWS customer account to restore the specified
     # snapshot.
     #
@@ -513,6 +612,7 @@ module Aws::Redshift
     #   resp.snapshot.cluster_create_time #=> Time
     #   resp.snapshot.master_username #=> String
     #   resp.snapshot.cluster_version #=> String
+    #   resp.snapshot.engine_full_version #=> String
     #   resp.snapshot.snapshot_type #=> String
     #   resp.snapshot.node_type #=> String
     #   resp.snapshot.number_of_nodes #=> Integer
@@ -794,6 +894,7 @@ module Aws::Redshift
     #   resp.snapshot.cluster_create_time #=> Time
     #   resp.snapshot.master_username #=> String
     #   resp.snapshot.cluster_version #=> String
+    #   resp.snapshot.engine_full_version #=> String
     #   resp.snapshot.snapshot_type #=> String
     #   resp.snapshot.node_type #=> String
     #   resp.snapshot.number_of_nodes #=> Integer
@@ -909,8 +1010,8 @@ module Aws::Redshift
     #   Cluster Management Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -1027,6 +1128,9 @@ module Aws::Redshift
     #   is 0, automated snapshots are disabled. Even if automated snapshots
     #   are disabled, you can still create manual snapshots when you want with
     #   CreateClusterSnapshot.
+    #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
     #
     #   Default: `1`
     #
@@ -1163,6 +1267,22 @@ module Aws::Redshift
     # @option params [String] :snapshot_schedule_identifier
     #   A unique identifier for the snapshot schedule.
     #
+    # @option params [Boolean] :availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster between
+    #   Availability Zones after the cluster is created.
+    #
+    # @option params [String] :aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) when it is created. Possible values
+    #   include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #     Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1205,6 +1325,8 @@ module Aws::Redshift
     #     iam_roles: ["String"],
     #     maintenance_track_name: "String",
     #     snapshot_schedule_identifier: "String",
+    #     availability_zone_relocation: false,
+    #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #   })
     #
     # @example Response structure
@@ -1218,6 +1340,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -1304,6 +1434,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1552,6 +1687,7 @@ module Aws::Redshift
     #   resp.snapshot.cluster_create_time #=> Time
     #   resp.snapshot.master_username #=> String
     #   resp.snapshot.cluster_version #=> String
+    #   resp.snapshot.engine_full_version #=> String
     #   resp.snapshot.snapshot_type #=> String
     #   resp.snapshot.node_type #=> String
     #   resp.snapshot.number_of_nodes #=> Integer
@@ -1667,6 +1803,83 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def create_cluster_subnet_group(params = {}, options = {})
       req = build_request(:create_cluster_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a Redshift-managed VPC endpoint.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier of the cluster to access.
+    #
+    # @option params [String] :resource_owner
+    #   The AWS account ID of the owner of the cluster. This is only required
+    #   if the cluster is in another AWS account.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The Redshift-managed VPC endpoint name.
+    #
+    #   An endpoint name must contain 1-30 characters. Valid characters are
+    #   A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter.
+    #   The name can't contain two consecutive hyphens or end with a hyphen.
+    #
+    # @option params [required, String] :subnet_group_name
+    #   The subnet group from which Amazon Redshift chooses the subnet to
+    #   deploy the endpoint.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   The security group that defines the ports, protocols, and sources for
+    #   inbound traffic that you are authorizing into your endpoint.
+    #
+    # @return [Types::EndpointAccess] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccess#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAccess#resource_owner #resource_owner} => String
+    #   * {Types::EndpointAccess#subnet_group_name #subnet_group_name} => String
+    #   * {Types::EndpointAccess#endpoint_status #endpoint_status} => String
+    #   * {Types::EndpointAccess#endpoint_name #endpoint_name} => String
+    #   * {Types::EndpointAccess#endpoint_create_time #endpoint_create_time} => Time
+    #   * {Types::EndpointAccess#port #port} => Integer
+    #   * {Types::EndpointAccess#address #address} => String
+    #   * {Types::EndpointAccess#vpc_security_groups #vpc_security_groups} => Array&lt;Types::VpcSecurityGroupMembership&gt;
+    #   * {Types::EndpointAccess#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_endpoint_access({
+    #     cluster_identifier: "String",
+    #     resource_owner: "String",
+    #     endpoint_name: "String", # required
+    #     subnet_group_name: "String", # required
+    #     vpc_security_group_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.resource_owner #=> String
+    #   resp.subnet_group_name #=> String
+    #   resp.endpoint_status #=> String
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_create_time #=> Time
+    #   resp.port #=> Integer
+    #   resp.address #=> String
+    #   resp.vpc_security_groups #=> Array
+    #   resp.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.vpc_security_groups[0].status #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_id #=> String
+    #   resp.vpc_endpoint.network_interfaces #=> Array
+    #   resp.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEndpointAccess AWS API Documentation
+    #
+    # @overload create_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def create_endpoint_access(params = {}, options = {})
+      req = build_request(:create_endpoint_access, params)
       req.send_request(options)
     end
 
@@ -1811,12 +2024,12 @@ module Aws::Redshift
     # addition to creating the HSM certificate, you must create an Amazon
     # Redshift HSM configuration that provides a cluster the information
     # needed to store and use encryption keys in the HSM. For more
-    # information, go to [Hardware Security Modules][1] in the Amazon
-    # Redshift Cluster Management Guide.
+    # information, go to [Hardware Security Modules][1] in the *Amazon
+    # Redshift Cluster Management Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM
     #
     # @option params [required, String] :hsm_client_certificate_identifier
     #   The identifier to be assigned to the new HSM client certificate that
@@ -2409,6 +2622,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -2495,6 +2716,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -2620,6 +2846,7 @@ module Aws::Redshift
     #   resp.snapshot.cluster_create_time #=> Time
     #   resp.snapshot.master_username #=> String
     #   resp.snapshot.cluster_version #=> String
+    #   resp.snapshot.engine_full_version #=> String
     #   resp.snapshot.snapshot_type #=> String
     #   resp.snapshot.node_type #=> String
     #   resp.snapshot.number_of_nodes #=> Integer
@@ -2678,6 +2905,60 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_cluster_subnet_group(params = {}, options = {})
       req = build_request(:delete_cluster_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Redshift-managed VPC endpoint.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The Redshift-managed VPC endpoint to delete.
+    #
+    # @return [Types::EndpointAccess] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccess#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAccess#resource_owner #resource_owner} => String
+    #   * {Types::EndpointAccess#subnet_group_name #subnet_group_name} => String
+    #   * {Types::EndpointAccess#endpoint_status #endpoint_status} => String
+    #   * {Types::EndpointAccess#endpoint_name #endpoint_name} => String
+    #   * {Types::EndpointAccess#endpoint_create_time #endpoint_create_time} => Time
+    #   * {Types::EndpointAccess#port #port} => Integer
+    #   * {Types::EndpointAccess#address #address} => String
+    #   * {Types::EndpointAccess#vpc_security_groups #vpc_security_groups} => Array&lt;Types::VpcSecurityGroupMembership&gt;
+    #   * {Types::EndpointAccess#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint_access({
+    #     endpoint_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.resource_owner #=> String
+    #   resp.subnet_group_name #=> String
+    #   resp.endpoint_status #=> String
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_create_time #=> Time
+    #   resp.port #=> Integer
+    #   resp.address #=> String
+    #   resp.vpc_security_groups #=> Array
+    #   resp.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.vpc_security_groups[0].status #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_id #=> String
+    #   resp.vpc_endpoint.network_interfaces #=> Array
+    #   resp.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEndpointAccess AWS API Documentation
+    #
+    # @overload delete_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint_access(params = {}, options = {})
+      req = build_request(:delete_endpoint_access, params)
       req.send_request(options)
     end
 
@@ -2745,6 +3026,51 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_hsm_configuration(params = {}, options = {})
       req = build_request(:delete_hsm_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a partner integration from a cluster. Data can still flow to
+    # the cluster until the integration is deleted at the partner's
+    # website.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster that receives data from the
+    #   partner.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database that receives data from the partner.
+    #
+    # @option params [required, String] :partner_name
+    #   The name of the partner that is authorized to send data.
+    #
+    # @return [Types::PartnerIntegrationOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PartnerIntegrationOutputMessage#database_name #database_name} => String
+    #   * {Types::PartnerIntegrationOutputMessage#partner_name #partner_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_partner({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName", # required
+    #     partner_name: "PartnerIntegrationPartnerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.partner_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeletePartner AWS API Documentation
+    #
+    # @overload delete_partner(params = {})
+    # @param [Hash] params ({})
+    def delete_partner(params = {}, options = {})
+      req = build_request(:delete_partner, params)
       req.send_request(options)
     end
 
@@ -2931,6 +3257,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterDbRevisionsMessage#marker #marker} => String
     #   * {Types::ClusterDbRevisionsMessage#cluster_db_revisions #cluster_db_revisions} => Array&lt;Types::ClusterDbRevision&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3438,6 +3766,7 @@ module Aws::Redshift
     #   resp.snapshots[0].cluster_create_time #=> Time
     #   resp.snapshots[0].master_username #=> String
     #   resp.snapshots[0].cluster_version #=> String
+    #   resp.snapshots[0].engine_full_version #=> String
     #   resp.snapshots[0].snapshot_type #=> String
     #   resp.snapshots[0].node_type #=> String
     #   resp.snapshots[0].number_of_nodes #=> Integer
@@ -3604,6 +3933,8 @@ module Aws::Redshift
     #
     #   * {Types::TrackListMessage#maintenance_tracks #maintenance_tracks} => Array&lt;Types::MaintenanceTrack&gt;
     #   * {Types::TrackListMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3809,6 +4140,14 @@ module Aws::Redshift
     #   resp.clusters[0].db_name #=> String
     #   resp.clusters[0].endpoint.address #=> String
     #   resp.clusters[0].endpoint.port #=> Integer
+    #   resp.clusters[0].endpoint.vpc_endpoints #=> Array
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.clusters[0].cluster_create_time #=> Time
     #   resp.clusters[0].automated_snapshot_retention_period #=> Integer
     #   resp.clusters[0].manual_snapshot_retention_period #=> Integer
@@ -3895,6 +4234,11 @@ module Aws::Redshift
     #   resp.clusters[0].next_maintenance_window_start_time #=> Time
     #   resp.clusters[0].resize_info.resize_type #=> String
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
+    #   resp.clusters[0].availability_zone_relocation_status #=> String
+    #   resp.clusters[0].cluster_namespace_arn #=> String
+    #   resp.clusters[0].total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.clusters[0].aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.clusters[0].aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3981,6 +4325,151 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_default_cluster_parameters(params = {}, options = {})
       req = build_request(:describe_default_cluster_parameters, params)
+      req.send_request(options)
+    end
+
+    # Describes a Redshift-managed VPC endpoint.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier associated with the described endpoint.
+    #
+    # @option params [String] :resource_owner
+    #   The AWS account ID of the owner of the cluster.
+    #
+    # @option params [String] :endpoint_name
+    #   The name of the endpoint to be described.
+    #
+    # @option params [String] :vpc_id
+    #   The virtual private cloud (VPC) identifier with access to the cluster.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAccess` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by the `MaxRecords` parameter.
+    #
+    # @return [Types::EndpointAccessList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccessList#endpoint_access_list #endpoint_access_list} => Array&lt;Types::EndpointAccess&gt;
+    #   * {Types::EndpointAccessList#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint_access({
+    #     cluster_identifier: "String",
+    #     resource_owner: "String",
+    #     endpoint_name: "String",
+    #     vpc_id: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_access_list #=> Array
+    #   resp.endpoint_access_list[0].cluster_identifier #=> String
+    #   resp.endpoint_access_list[0].resource_owner #=> String
+    #   resp.endpoint_access_list[0].subnet_group_name #=> String
+    #   resp.endpoint_access_list[0].endpoint_status #=> String
+    #   resp.endpoint_access_list[0].endpoint_name #=> String
+    #   resp.endpoint_access_list[0].endpoint_create_time #=> Time
+    #   resp.endpoint_access_list[0].port #=> Integer
+    #   resp.endpoint_access_list[0].address #=> String
+    #   resp.endpoint_access_list[0].vpc_security_groups #=> Array
+    #   resp.endpoint_access_list[0].vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.endpoint_access_list[0].vpc_security_groups[0].status #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.vpc_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces #=> Array
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAccess AWS API Documentation
+    #
+    # @overload describe_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint_access(params = {}, options = {})
+      req = build_request(:describe_endpoint_access, params)
+      req.send_request(options)
+    end
+
+    # Describes an endpoint authorization.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier of the cluster to access.
+    #
+    # @option params [String] :account
+    #   The AWS account ID of either the cluster owner (grantor) or grantee.
+    #   If `Grantee` parameter is true, then the `Account` value is of the
+    #   grantor.
+    #
+    # @option params [Boolean] :grantee
+    #   Indicates whether to check authorization from a grantor or grantee
+    #   point of view. If true, Amazon Redshift returns endpoint
+    #   authorizations that you've been granted. If false (default), checks
+    #   authorization from a grantor point of view.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAuthorization` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by the `MaxRecords` parameter.
+    #
+    # @return [Types::EndpointAuthorizationList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAuthorizationList#endpoint_authorization_list #endpoint_authorization_list} => Array&lt;Types::EndpointAuthorization&gt;
+    #   * {Types::EndpointAuthorizationList#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint_authorization({
+    #     cluster_identifier: "String",
+    #     account: "String",
+    #     grantee: false,
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_authorization_list #=> Array
+    #   resp.endpoint_authorization_list[0].grantor #=> String
+    #   resp.endpoint_authorization_list[0].grantee #=> String
+    #   resp.endpoint_authorization_list[0].cluster_identifier #=> String
+    #   resp.endpoint_authorization_list[0].authorize_time #=> Time
+    #   resp.endpoint_authorization_list[0].cluster_status #=> String
+    #   resp.endpoint_authorization_list[0].status #=> String, one of "Authorized", "Revoking"
+    #   resp.endpoint_authorization_list[0].allowed_all_vp_cs #=> Boolean
+    #   resp.endpoint_authorization_list[0].allowed_vp_cs #=> Array
+    #   resp.endpoint_authorization_list[0].allowed_vp_cs[0] #=> String
+    #   resp.endpoint_authorization_list[0].endpoint_count #=> Integer
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAuthorization AWS API Documentation
+    #
+    # @overload describe_endpoint_authorization(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint_authorization(params = {}, options = {})
+      req = build_request(:describe_endpoint_authorization, params)
       req.send_request(options)
     end
 
@@ -4673,6 +5162,57 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Returns information about the partner integrations defined for a
+    # cluster.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration is
+    #   being described.
+    #
+    # @option params [String] :database_name
+    #   The name of the database whose partner integration is being described.
+    #   If database name is not specified, then all databases in the cluster
+    #   are described.
+    #
+    # @option params [String] :partner_name
+    #   The name of the partner that is being described. If partner name is
+    #   not specified, then all partner integrations are described.
+    #
+    # @return [Types::DescribePartnersOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePartnersOutputMessage#partner_integration_info_list #partner_integration_info_list} => Array&lt;Types::PartnerIntegrationInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_partners({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName",
+    #     partner_name: "PartnerIntegrationPartnerName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.partner_integration_info_list #=> Array
+    #   resp.partner_integration_info_list[0].database_name #=> String
+    #   resp.partner_integration_info_list[0].partner_name #=> String
+    #   resp.partner_integration_info_list[0].status #=> String, one of "Active", "Inactive", "RuntimeFailure", "ConnectionFailure"
+    #   resp.partner_integration_info_list[0].status_message #=> String
+    #   resp.partner_integration_info_list[0].created_at #=> Time
+    #   resp.partner_integration_info_list[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribePartners AWS API Documentation
+    #
+    # @overload describe_partners(params = {})
+    # @param [Hash] params ({})
+    def describe_partners(params = {}, options = {})
+      req = build_request(:describe_partners, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the available reserved node offerings by Amazon
     # Redshift with their descriptions including the node type, the fixed
     # and recurring costs of reserving the node and duration the node will
@@ -5049,6 +5589,8 @@ module Aws::Redshift
     #   * {Types::SnapshotCopyGrantMessage#marker #marker} => String
     #   * {Types::SnapshotCopyGrantMessage#snapshot_copy_grants #snapshot_copy_grants} => Array&lt;Types::SnapshotCopyGrant&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshot_copy_grants({
@@ -5112,6 +5654,8 @@ module Aws::Redshift
     #
     #   * {Types::DescribeSnapshotSchedulesOutputMessage#snapshot_schedules #snapshot_schedules} => Array&lt;Types::SnapshotSchedule&gt;
     #   * {Types::DescribeSnapshotSchedulesOutputMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5205,6 +5749,8 @@ module Aws::Redshift
     #
     #   * {Types::TableRestoreStatusMessage#table_restore_status_details #table_restore_status_details} => Array&lt;Types::TableRestoreStatus&gt;
     #   * {Types::TableRestoreStatusMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5341,6 +5887,8 @@ module Aws::Redshift
     #
     #   * {Types::TaggedResourceListMessage#tagged_resources #tagged_resources} => Array&lt;Types::TaggedResource&gt;
     #   * {Types::TaggedResourceListMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5556,6 +6104,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -5642,6 +6198,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -5790,6 +6351,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -5876,6 +6445,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -6066,6 +6640,8 @@ module Aws::Redshift
     #   * {Types::GetReservedNodeExchangeOfferingsOutputMessage#marker #marker} => String
     #   * {Types::GetReservedNodeExchangeOfferingsOutputMessage#reserved_node_offerings #reserved_node_offerings} => Array&lt;Types::ReservedNodeOffering&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_reserved_node_exchange_offerings({
@@ -6096,6 +6672,47 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def get_reserved_node_exchange_offerings(params = {}, options = {})
       req = build_request(:get_reserved_node_exchange_offerings, params)
+      req.send_request(options)
+    end
+
+    # Modifies whether a cluster can use AQUA (Advanced Query Accelerator).
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to be modified.
+    #
+    # @option params [String] :aqua_configuration_status
+    #   The new value of AQUA configuration status. Possible values include
+    #   the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #     Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #
+    # @return [Types::ModifyAquaOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyAquaOutputMessage#aqua_configuration #aqua_configuration} => Types::AquaConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_aqua_configuration({
+    #     cluster_identifier: "String", # required
+    #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaConfiguration AWS API Documentation
+    #
+    # @overload modify_aqua_configuration(params = {})
+    # @param [Hash] params ({})
+    def modify_aqua_configuration(params = {}, options = {})
+      req = build_request(:modify_aqua_configuration, params)
       req.send_request(options)
     end
 
@@ -6144,8 +6761,8 @@ module Aws::Redshift
     #   Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -6232,6 +6849,9 @@ module Aws::Redshift
     #   If you decrease the automated snapshot retention period from its
     #   current value, existing automated snapshots that fall outside of the
     #   new retention period will be immediately deleted.
+    #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
     #
     #   Default: Uses existing setting.
     #
@@ -6366,6 +6986,17 @@ module Aws::Redshift
     #   The AWS Key Management Service (KMS) key ID of the encryption key that
     #   you want to use to encrypt data in the cluster.
     #
+    # @option params [Boolean] :availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster between
+    #   Availability Zones after the cluster modification is complete.
+    #
+    # @option params [String] :availability_zone
+    #   The option to initiate relocation for an Amazon Redshift cluster to
+    #   the target Availability Zone.
+    #
+    # @option params [Integer] :port
+    #   The option to change the port of an Amazon Redshift cluster.
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -6395,6 +7026,9 @@ module Aws::Redshift
     #     maintenance_track_name: "String",
     #     encrypted: false,
     #     kms_key_id: "String",
+    #     availability_zone_relocation: false,
+    #     availability_zone: "String",
+    #     port: 1,
     #   })
     #
     # @example Response structure
@@ -6408,6 +7042,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6494,6 +7136,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -6539,6 +7186,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6625,6 +7280,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -6677,6 +7337,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6763,6 +7431,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -6824,6 +7497,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6910,6 +7591,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -7026,6 +7712,7 @@ module Aws::Redshift
     #   resp.snapshot.cluster_create_time #=> Time
     #   resp.snapshot.master_username #=> String
     #   resp.snapshot.cluster_version #=> String
+    #   resp.snapshot.engine_full_version #=> String
     #   resp.snapshot.snapshot_type #=> String
     #   resp.snapshot.node_type #=> String
     #   resp.snapshot.number_of_nodes #=> Integer
@@ -7146,6 +7833,65 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_cluster_subnet_group(params = {}, options = {})
       req = build_request(:modify_cluster_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Modifies a Redshift-managed VPC endpoint.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The endpoint to be modified.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   The complete list of VPC security groups associated with the endpoint
+    #   after the endpoint is modified.
+    #
+    # @return [Types::EndpointAccess] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccess#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAccess#resource_owner #resource_owner} => String
+    #   * {Types::EndpointAccess#subnet_group_name #subnet_group_name} => String
+    #   * {Types::EndpointAccess#endpoint_status #endpoint_status} => String
+    #   * {Types::EndpointAccess#endpoint_name #endpoint_name} => String
+    #   * {Types::EndpointAccess#endpoint_create_time #endpoint_create_time} => Time
+    #   * {Types::EndpointAccess#port #port} => Integer
+    #   * {Types::EndpointAccess#address #address} => String
+    #   * {Types::EndpointAccess#vpc_security_groups #vpc_security_groups} => Array&lt;Types::VpcSecurityGroupMembership&gt;
+    #   * {Types::EndpointAccess#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_endpoint_access({
+    #     endpoint_name: "String", # required
+    #     vpc_security_group_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.resource_owner #=> String
+    #   resp.subnet_group_name #=> String
+    #   resp.endpoint_status #=> String
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_create_time #=> Time
+    #   resp.port #=> Integer
+    #   resp.address #=> String
+    #   resp.vpc_security_groups #=> Array
+    #   resp.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.vpc_security_groups[0].status #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_id #=> String
+    #   resp.vpc_endpoint.network_interfaces #=> Array
+    #   resp.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEndpointAccess AWS API Documentation
+    #
+    # @overload modify_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def modify_endpoint_access(params = {}, options = {})
+      req = build_request(:modify_endpoint_access, params)
       req.send_request(options)
     end
 
@@ -7406,6 +8152,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -7492,6 +8246,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -7636,6 +8395,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -7722,6 +8489,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -7829,6 +8601,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -7915,6 +8695,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -8008,6 +8793,8 @@ module Aws::Redshift
     #
     #   * ds2.8xlarge
     #
+    #   * ra3.xlplus
+    #
     #   * ra3.4xlarge
     #
     #   * ra3.16xlarge
@@ -8059,6 +8846,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8145,6 +8940,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -8312,6 +9112,9 @@ module Aws::Redshift
     #   are disabled, you can still create manual snapshots when you want with
     #   CreateClusterSnapshot.
     #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
+    #
     #   Default: The value selected for the cluster from which the snapshot
     #   was taken.
     #
@@ -8390,6 +9193,22 @@ module Aws::Redshift
     # @option params [Integer] :number_of_nodes
     #   The number of nodes specified when provisioning the restored cluster.
     #
+    # @option params [Boolean] :availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster between
+    #   Availability Zones after the cluster is restored.
+    #
+    # @option params [String] :aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) after the cluster is restored. Possible
+    #   values include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #     Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -8423,6 +9242,8 @@ module Aws::Redshift
     #     maintenance_track_name: "String",
     #     snapshot_schedule_identifier: "String",
     #     number_of_nodes: 1,
+    #     availability_zone_relocation: false,
+    #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #   })
     #
     # @example Response structure
@@ -8436,6 +9257,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8522,6 +9351,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -8576,6 +9410,11 @@ module Aws::Redshift
     # @option params [required, String] :new_table_name
     #   The name of the table to create as a result of the current request.
     #
+    # @option params [Boolean] :enable_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table are
+    #   case sensitive. If `true`, the names are case sensitive. If `false`
+    #   (default), the names are not case sensitive.
+    #
     # @return [Types::RestoreTableFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableFromClusterSnapshotResult#table_restore_status #table_restore_status} => Types::TableRestoreStatus
@@ -8591,6 +9430,7 @@ module Aws::Redshift
     #     target_database_name: "String",
     #     target_schema_name: "String",
     #     new_table_name: "String", # required
+    #     enable_case_sensitive_identifier: false,
     #   })
     #
     # @example Response structure
@@ -8645,6 +9485,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8731,6 +9579,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -8818,6 +9671,66 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Revokes access to a cluster.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster to revoke access from.
+    #
+    # @option params [String] :account
+    #   The AWS account ID whose access is to be revoked.
+    #
+    # @option params [Array<String>] :vpc_ids
+    #   The virtual private cloud (VPC) identifiers for which access is to be
+    #   revoked.
+    #
+    # @option params [Boolean] :force
+    #   Indicates whether to force the revoke action. If true, the
+    #   Redshift-managed VPC endpoints associated with the endpoint
+    #   authorization are also deleted.
+    #
+    # @return [Types::EndpointAuthorization] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAuthorization#grantor #grantor} => String
+    #   * {Types::EndpointAuthorization#grantee #grantee} => String
+    #   * {Types::EndpointAuthorization#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAuthorization#authorize_time #authorize_time} => Time
+    #   * {Types::EndpointAuthorization#cluster_status #cluster_status} => String
+    #   * {Types::EndpointAuthorization#status #status} => String
+    #   * {Types::EndpointAuthorization#allowed_all_vp_cs #allowed_all_vp_cs} => Boolean
+    #   * {Types::EndpointAuthorization#allowed_vp_cs #allowed_vp_cs} => Array&lt;String&gt;
+    #   * {Types::EndpointAuthorization#endpoint_count #endpoint_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_endpoint_access({
+    #     cluster_identifier: "String",
+    #     account: "String",
+    #     vpc_ids: ["String"],
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grantor #=> String
+    #   resp.grantee #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.authorize_time #=> Time
+    #   resp.cluster_status #=> String
+    #   resp.status #=> String, one of "Authorized", "Revoking"
+    #   resp.allowed_all_vp_cs #=> Boolean
+    #   resp.allowed_vp_cs #=> Array
+    #   resp.allowed_vp_cs[0] #=> String
+    #   resp.endpoint_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeEndpointAccess AWS API Documentation
+    #
+    # @overload revoke_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def revoke_endpoint_access(params = {}, options = {})
+      req = build_request(:revoke_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Removes the ability of the specified AWS customer account to restore
     # the specified snapshot. If the account is currently restoring the
     # snapshot, the restore will run to completion.
@@ -8866,6 +9779,7 @@ module Aws::Redshift
     #   resp.snapshot.cluster_create_time #=> Time
     #   resp.snapshot.master_username #=> String
     #   resp.snapshot.cluster_version #=> String
+    #   resp.snapshot.engine_full_version #=> String
     #   resp.snapshot.snapshot_type #=> String
     #   resp.snapshot.node_type #=> String
     #   resp.snapshot.number_of_nodes #=> Integer
@@ -8935,6 +9849,14 @@ module Aws::Redshift
     #   resp.cluster.db_name #=> String
     #   resp.cluster.endpoint.address #=> String
     #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -9021,6 +9943,11 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -9028,6 +9955,58 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def rotate_encryption_key(params = {}, options = {})
       req = build_request(:rotate_encryption_key, params)
+      req.send_request(options)
+    end
+
+    # Updates the status of a partner integration.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration status
+    #   is being updated.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database whose partner integration status is being
+    #   updated.
+    #
+    # @option params [required, String] :partner_name
+    #   The name of the partner whose integration status is being updated.
+    #
+    # @option params [required, String] :status
+    #   The value of the updated status.
+    #
+    # @option params [String] :status_message
+    #   The status message provided by the partner.
+    #
+    # @return [Types::PartnerIntegrationOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PartnerIntegrationOutputMessage#database_name #database_name} => String
+    #   * {Types::PartnerIntegrationOutputMessage#partner_name #partner_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_partner_status({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName", # required
+    #     partner_name: "PartnerIntegrationPartnerName", # required
+    #     status: "Active", # required, accepts Active, Inactive, RuntimeFailure, ConnectionFailure
+    #     status_message: "PartnerIntegrationStatusMessage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.partner_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdatePartnerStatus AWS API Documentation
+    #
+    # @overload update_partner_status(params = {})
+    # @param [Hash] params ({})
+    def update_partner_status(params = {}, options = {})
+      req = build_request(:update_partner_status, params)
       req.send_request(options)
     end
 
@@ -9044,7 +10023,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

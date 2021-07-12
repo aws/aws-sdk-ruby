@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-sesv2/customizations'
 # @!group service
 module Aws::SESV2
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.17.0'
 
 end

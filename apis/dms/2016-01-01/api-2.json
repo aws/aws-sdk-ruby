@@ -64,7 +64,8 @@
         {"shape":"ResourceQuotaExceededFault"},
         {"shape":"InvalidResourceStateFault"},
         {"shape":"ResourceNotFoundFault"},
-        {"shape":"AccessDeniedFault"}
+        {"shape":"AccessDeniedFault"},
+        {"shape":"S3AccessDeniedFault"}
       ]
     },
     "CreateEventSubscription":{
@@ -295,6 +296,15 @@
       "errors":[
         {"shape":"ResourceNotFoundFault"}
       ]
+    },
+    "DescribeEndpointSettings":{
+      "name":"DescribeEndpointSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeEndpointSettingsMessage"},
+      "output":{"shape":"DescribeEndpointSettingsResponse"}
     },
     "DescribeEndpointTypes":{
       "name":"DescribeEndpointTypes",
@@ -604,6 +614,21 @@
         {"shape":"KMSKeyNotAccessibleFault"}
       ]
     },
+    "MoveReplicationTask":{
+      "name":"MoveReplicationTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"MoveReplicationTaskMessage"},
+      "output":{"shape":"MoveReplicationTaskResponse"},
+      "errors":[
+        {"shape":"AccessDeniedFault"},
+        {"shape":"InvalidResourceStateFault"},
+        {"shape":"ResourceNotFoundFault"},
+        {"shape":"KMSKeyNotAccessibleFault"}
+      ]
+    },
     "RebootReplicationInstance":{
       "name":"RebootReplicationInstance",
       "http":{
@@ -732,7 +757,8 @@
         {"shape":"ResourceNotFoundFault"},
         {"shape":"InvalidResourceStateFault"},
         {"shape":"KMSKeyNotAccessibleFault"},
-        {"shape":"ResourceQuotaExceededFault"}
+        {"shape":"ResourceQuotaExceededFault"},
+        {"shape":"AccessDeniedFault"}
       ]
     }
   },
@@ -919,7 +945,8 @@
         "SybaseSettings":{"shape":"SybaseSettings"},
         "MicrosoftSQLServerSettings":{"shape":"MicrosoftSQLServerSettings"},
         "IBMDb2Settings":{"shape":"IBMDb2Settings"},
-        "ResourceIdentifier":{"shape":"String"}
+        "ResourceIdentifier":{"shape":"String"},
+        "DocDbSettings":{"shape":"DocDbSettings"}
       }
     },
     "CreateEndpointResponse":{
@@ -1226,6 +1253,22 @@
         "Connections":{"shape":"ConnectionList"}
       }
     },
+    "DescribeEndpointSettingsMessage":{
+      "type":"structure",
+      "required":["EngineName"],
+      "members":{
+        "EngineName":{"shape":"String"},
+        "MaxRecords":{"shape":"IntegerOptional"},
+        "Marker":{"shape":"String"}
+      }
+    },
+    "DescribeEndpointSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "Marker":{"shape":"String"},
+        "EndpointSettings":{"shape":"EndpointSettingsList"}
+      }
+    },
     "DescribeEndpointTypesMessage":{
       "type":"structure",
       "members":{
@@ -1508,6 +1551,22 @@
         "BucketName":{"shape":"String"}
       }
     },
+    "DocDbSettings":{
+      "type":"structure",
+      "members":{
+        "Username":{"shape":"String"},
+        "Password":{"shape":"SecretString"},
+        "ServerName":{"shape":"String"},
+        "Port":{"shape":"IntegerOptional"},
+        "DatabaseName":{"shape":"String"},
+        "NestingLevel":{"shape":"NestingLevelValue"},
+        "ExtractDocId":{"shape":"BooleanOptional"},
+        "DocsToInvestigate":{"shape":"IntegerOptional"},
+        "KmsKeyId":{"shape":"String"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
+      }
+    },
     "DynamoDbSettings":{
       "type":"structure",
       "required":["ServiceAccessRoleArn"],
@@ -1577,12 +1636,43 @@
         "OracleSettings":{"shape":"OracleSettings"},
         "SybaseSettings":{"shape":"SybaseSettings"},
         "MicrosoftSQLServerSettings":{"shape":"MicrosoftSQLServerSettings"},
-        "IBMDb2Settings":{"shape":"IBMDb2Settings"}
+        "IBMDb2Settings":{"shape":"IBMDb2Settings"},
+        "DocDbSettings":{"shape":"DocDbSettings"}
       }
     },
     "EndpointList":{
       "type":"list",
       "member":{"shape":"Endpoint"}
+    },
+    "EndpointSetting":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"String"},
+        "Type":{"shape":"EndpointSettingTypeValue"},
+        "EnumValues":{"shape":"EndpointSettingEnumValues"},
+        "Sensitive":{"shape":"BooleanOptional"},
+        "Units":{"shape":"String"},
+        "Applicability":{"shape":"String"},
+        "IntValueMin":{"shape":"IntegerOptional"},
+        "IntValueMax":{"shape":"IntegerOptional"}
+      }
+    },
+    "EndpointSettingEnumValues":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "EndpointSettingTypeValue":{
+      "type":"string",
+      "enum":[
+        "string",
+        "boolean",
+        "integer",
+        "enum"
+      ]
+    },
+    "EndpointSettingsList":{
+      "type":"list",
+      "member":{"shape":"EndpointSetting"}
     },
     "Event":{
       "type":"structure",
@@ -1665,7 +1755,9 @@
         "SetDataCaptureChanges":{"shape":"BooleanOptional"},
         "CurrentLsn":{"shape":"String"},
         "MaxKBytesPerRead":{"shape":"IntegerOptional"},
-        "Username":{"shape":"String"}
+        "Username":{"shape":"String"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
       }
     },
     "ImportCertificateMessage":{
@@ -1673,7 +1765,7 @@
       "required":["CertificateIdentifier"],
       "members":{
         "CertificateIdentifier":{"shape":"String"},
-        "CertificatePem":{"shape":"String"},
+        "CertificatePem":{"shape":"SecretString"},
         "CertificateWallet":{"shape":"CertificateWallet"},
         "Tags":{"shape":"TagList"}
       }
@@ -1771,6 +1863,15 @@
       },
       "exception":true
     },
+    "KafkaSecurityProtocol":{
+      "type":"string",
+      "enum":[
+        "plaintext",
+        "ssl-authentication",
+        "ssl-encryption",
+        "sasl-ssl"
+      ]
+    },
     "KafkaSettings":{
       "type":"structure",
       "members":{
@@ -1783,7 +1884,14 @@
         "IncludeTableAlterOperations":{"shape":"BooleanOptional"},
         "IncludeControlDetails":{"shape":"BooleanOptional"},
         "MessageMaxBytes":{"shape":"IntegerOptional"},
-        "IncludeNullAndEmpty":{"shape":"BooleanOptional"}
+        "IncludeNullAndEmpty":{"shape":"BooleanOptional"},
+        "SecurityProtocol":{"shape":"KafkaSecurityProtocol"},
+        "SslClientCertificateArn":{"shape":"String"},
+        "SslClientKeyArn":{"shape":"String"},
+        "SslClientKeyPassword":{"shape":"SecretString"},
+        "SslCaCertificateArn":{"shape":"String"},
+        "SaslUsername":{"shape":"String"},
+        "SaslPassword":{"shape":"SecretString"}
       }
     },
     "KeyList":{
@@ -1833,11 +1941,15 @@
         "DatabaseName":{"shape":"String"},
         "ControlTablesFileGroup":{"shape":"String"},
         "Password":{"shape":"SecretString"},
+        "QuerySingleAlwaysOnNode":{"shape":"BooleanOptional"},
         "ReadBackupOnly":{"shape":"BooleanOptional"},
         "SafeguardPolicy":{"shape":"SafeguardPolicy"},
         "ServerName":{"shape":"String"},
         "Username":{"shape":"String"},
-        "UseBcpFullLoad":{"shape":"BooleanOptional"}
+        "UseBcpFullLoad":{"shape":"BooleanOptional"},
+        "UseThirdPartyBackupDevice":{"shape":"BooleanOptional"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
       }
     },
     "MigrationTypeValue":{
@@ -1880,7 +1992,8 @@
         "OracleSettings":{"shape":"OracleSettings"},
         "SybaseSettings":{"shape":"SybaseSettings"},
         "MicrosoftSQLServerSettings":{"shape":"MicrosoftSQLServerSettings"},
-        "IBMDb2Settings":{"shape":"IBMDb2Settings"}
+        "IBMDb2Settings":{"shape":"IBMDb2Settings"},
+        "DocDbSettings":{"shape":"DocDbSettings"}
       }
     },
     "ModifyEndpointResponse":{
@@ -1982,13 +2095,33 @@
         "ExtractDocId":{"shape":"String"},
         "DocsToInvestigate":{"shape":"String"},
         "AuthSource":{"shape":"String"},
-        "KmsKeyId":{"shape":"String"}
+        "KmsKeyId":{"shape":"String"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
+      }
+    },
+    "MoveReplicationTaskMessage":{
+      "type":"structure",
+      "required":[
+        "ReplicationTaskArn",
+        "TargetReplicationInstanceArn"
+      ],
+      "members":{
+        "ReplicationTaskArn":{"shape":"String"},
+        "TargetReplicationInstanceArn":{"shape":"String"}
+      }
+    },
+    "MoveReplicationTaskResponse":{
+      "type":"structure",
+      "members":{
+        "ReplicationTask":{"shape":"ReplicationTask"}
       }
     },
     "MySQLSettings":{
       "type":"structure",
       "members":{
         "AfterConnectScript":{"shape":"String"},
+        "CleanSourceMetadataOnMismatch":{"shape":"BooleanOptional"},
         "DatabaseName":{"shape":"String"},
         "EventsPollInterval":{"shape":"IntegerOptional"},
         "TargetDbType":{"shape":"TargetDbType"},
@@ -1998,7 +2131,9 @@
         "Port":{"shape":"IntegerOptional"},
         "ServerName":{"shape":"String"},
         "ServerTimezone":{"shape":"String"},
-        "Username":{"shape":"String"}
+        "Username":{"shape":"String"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
       }
     },
     "NeptuneSettings":{
@@ -2056,7 +2191,12 @@
         "SecurityDbEncryption":{"shape":"SecretString"},
         "SecurityDbEncryptionName":{"shape":"String"},
         "ServerName":{"shape":"String"},
-        "Username":{"shape":"String"}
+        "SpatialDataOptionToGeoJsonFunctionName":{"shape":"String"},
+        "Username":{"shape":"String"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"},
+        "SecretsManagerOracleAsmAccessRoleArn":{"shape":"String"},
+        "SecretsManagerOracleAsmSecretId":{"shape":"String"}
       }
     },
     "OrderableReplicationInstance":{
@@ -2117,7 +2257,9 @@
         "Port":{"shape":"IntegerOptional"},
         "ServerName":{"shape":"String"},
         "Username":{"shape":"String"},
-        "SlotName":{"shape":"String"}
+        "SlotName":{"shape":"String"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
       }
     },
     "RebootReplicationInstanceMessage":{
@@ -2164,7 +2306,9 @@
         "TrimBlanks":{"shape":"BooleanOptional"},
         "TruncateColumns":{"shape":"BooleanOptional"},
         "Username":{"shape":"String"},
-        "WriteBufferSize":{"shape":"IntegerOptional"}
+        "WriteBufferSize":{"shape":"IntegerOptional"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
       }
     },
     "RefreshSchemasMessage":{
@@ -2362,7 +2506,8 @@
         "RecoveryCheckpoint":{"shape":"String"},
         "ReplicationTaskArn":{"shape":"String"},
         "ReplicationTaskStats":{"shape":"ReplicationTaskStats"},
-        "TaskData":{"shape":"String"}
+        "TaskData":{"shape":"String"},
+        "TargetReplicationInstanceArn":{"shape":"String"}
       }
     },
     "ReplicationTaskAssessmentResult":{
@@ -2513,7 +2658,11 @@
         "CdcInsertsAndUpdates":{"shape":"BooleanOptional"},
         "DatePartitionEnabled":{"shape":"BooleanOptional"},
         "DatePartitionSequence":{"shape":"DatePartitionSequenceValue"},
-        "DatePartitionDelimiter":{"shape":"DatePartitionDelimiterValue"}
+        "DatePartitionDelimiter":{"shape":"DatePartitionDelimiterValue"},
+        "UseCsvNoSupValue":{"shape":"BooleanOptional"},
+        "CsvNoSupValue":{"shape":"String"},
+        "PreserveTransactions":{"shape":"BooleanOptional"},
+        "CdcPath":{"shape":"String"}
       }
     },
     "SNSInvalidTopicFault":{
@@ -2686,7 +2835,9 @@
         "Password":{"shape":"SecretString"},
         "Port":{"shape":"IntegerOptional"},
         "ServerName":{"shape":"String"},
-        "Username":{"shape":"String"}
+        "Username":{"shape":"String"},
+        "SecretsManagerAccessRoleArn":{"shape":"String"},
+        "SecretsManagerSecretId":{"shape":"String"}
       }
     },
     "TStamp":{"type":"timestamp"},

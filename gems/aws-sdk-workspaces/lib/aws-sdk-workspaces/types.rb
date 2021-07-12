@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -212,7 +212,14 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the compute type.
+    # Describes the compute type of the bundle.
+    #
+    # @note When making an API call, you may pass ComputeType
+    #   data as a hash:
+    #
+    #       {
+    #         name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #       }
     #
     # @!attribute [rw] name
     #   The compute type.
@@ -545,6 +552,90 @@ module Aws::WorkSpaces
     #
     class CreateTagsResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass CreateWorkspaceBundleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bundle_name: "WorkspaceBundleName", # required
+    #         bundle_description: "WorkspaceBundleDescription", # required
+    #         image_id: "WorkspaceImageId", # required
+    #         compute_type: { # required
+    #           name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #         },
+    #         user_storage: { # required
+    #           capacity: "NonEmptyString",
+    #         },
+    #         root_storage: {
+    #           capacity: "NonEmptyString",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] bundle_name
+    #   The name of the bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] bundle_description
+    #   The description of the bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The identifier of the image that is used to create the bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   Describes the compute type of the bundle.
+    #   @return [Types::ComputeType]
+    #
+    # @!attribute [rw] user_storage
+    #   Describes the user volume for a WorkSpace bundle.
+    #   @return [Types::UserStorage]
+    #
+    # @!attribute [rw] root_storage
+    #   Describes the root volume for a WorkSpace bundle.
+    #   @return [Types::RootStorage]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the bundle.
+    #
+    #   <note markdown="1"> To add tags at the same time when you're creating the bundle, you
+    #   must create an IAM policy that grants your IAM user permissions to
+    #   use `workspaces:CreateTags`.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceBundleRequest AWS API Documentation
+    #
+    class CreateWorkspaceBundleRequest < Struct.new(
+      :bundle_name,
+      :bundle_description,
+      :image_id,
+      :compute_type,
+      :user_storage,
+      :root_storage,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_bundle
+    #   Describes a WorkSpace bundle.
+    #   @return [Types::WorkspaceBundle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceBundleResult AWS API Documentation
+    #
+    class CreateWorkspaceBundleResult < Struct.new(
+      :workspace_bundle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateWorkspacesRequest
     #   data as a hash:
     #
@@ -757,6 +848,29 @@ module Aws::WorkSpaces
     #
     class DeleteTagsResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteWorkspaceBundleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bundle_id: "BundleId",
+    #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The identifier of the bundle.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceBundleRequest AWS API Documentation
+    #
+    class DeleteWorkspaceBundleRequest < Struct.new(
+      :bundle_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceBundleResult AWS API Documentation
+    #
+    class DeleteWorkspaceBundleResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteWorkspaceImageRequest
     #   data as a hash:
     #
@@ -831,8 +945,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::AccountModification>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountModificationsResult AWS API Documentation
@@ -945,8 +1059,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::ConnectionAliasPermission>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasPermissionsResult AWS API Documentation
@@ -1003,8 +1117,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::ConnectionAlias>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasesResult AWS API Documentation
@@ -1053,8 +1167,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspacesIpGroup>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsResult AWS API Documentation
@@ -1117,8 +1231,9 @@ module Aws::WorkSpaces
     #   The owner of the bundles. You cannot combine this parameter with any
     #   other filter.
     #
-    #   Specify `AMAZON` to describe the bundles provided by AWS or null to
-    #   describe the bundles that belong to your account.
+    #   To describe the bundles provided by AWS, specify `AMAZON`. To
+    #   describe the bundles that belong to your account, don't specify a
+    #   value.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1141,9 +1256,9 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspaceBundle>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if
-    #   there are no more results available. This token is valid for one day
-    #   and must be used within that time frame.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return. This token is valid
+    #   for one day and must be used within that time frame.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundlesResult AWS API Documentation
@@ -1193,8 +1308,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspaceDirectory>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesResult AWS API Documentation
@@ -1248,8 +1363,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::ImagePermission>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagePermissionsResult AWS API Documentation
@@ -1305,8 +1420,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspaceImage>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagesResult AWS API Documentation
@@ -1389,8 +1504,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::WorkspaceConnectionStatus>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatusResult AWS API Documentation
@@ -1471,8 +1586,8 @@ module Aws::WorkSpaces
     #   @return [Array<Types::Workspace>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesResult AWS API Documentation
@@ -1615,7 +1730,7 @@ module Aws::WorkSpaces
     #
     #       {
     #         ec2_image_id: "Ec2ImageId", # required
-    #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
+    #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_REGULAR_WSP
     #         image_name: "WorkspaceImageName", # required
     #         image_description: "WorkspaceImageDescription", # required
     #         tags: [
@@ -1632,9 +1747,15 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] ingestion_process
-    #   The ingestion process to be used when importing the image. For
-    #   non-GPU-enabled bundles (bundles other than Graphics or
-    #   GraphicsPro), specify `BYOL_REGULAR`.
+    #   The ingestion process to be used when importing the image, depending
+    #   on which protocol you want to use for your BYOL Workspace image,
+    #   either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP,
+    #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
+    #   that does not end in `_WSP`.
+    #
+    #   For non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`,
+    #   depending on the protocol.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -1784,8 +1905,8 @@ module Aws::WorkSpaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results, or null if no
-    #   more results are available.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAvailableManagementCidrRangesResult AWS API Documentation
@@ -1974,6 +2095,7 @@ module Aws::WorkSpaces
     #           device_type_android: "ALLOW", # accepts ALLOW, DENY
     #           device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
     #           device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #           device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #         },
     #       }
     #
@@ -2478,6 +2600,13 @@ module Aws::WorkSpaces
 
     # Describes the root volume for a WorkSpace bundle.
     #
+    # @note When making an API call, you may pass RootStorage
+    #   data as a hash:
+    #
+    #       {
+    #         capacity: "NonEmptyString",
+    #       }
+    #
     # @!attribute [rw] capacity
     #   The size of the root volume.
     #   @return [String]
@@ -2861,6 +2990,35 @@ module Aws::WorkSpaces
     #
     class UpdateRulesOfIpGroupResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateWorkspaceBundleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bundle_id: "BundleId",
+    #         image_id: "WorkspaceImageId",
+    #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The identifier of the bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceBundleRequest AWS API Documentation
+    #
+    class UpdateWorkspaceBundleRequest < Struct.new(
+      :bundle_id,
+      :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceBundleResult AWS API Documentation
+    #
+    class UpdateWorkspaceBundleResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateWorkspaceImagePermissionRequest
     #   data as a hash:
     #
@@ -2901,10 +3059,17 @@ module Aws::WorkSpaces
     #
     class UpdateWorkspaceImagePermissionResult < Aws::EmptyStructure; end
 
-    # Describes the user storage for a WorkSpace bundle.
+    # Describes the user volume for a WorkSpace bundle.
+    #
+    # @note When making an API call, you may pass UserStorage
+    #   data as a hash:
+    #
+    #       {
+    #         capacity: "NonEmptyString",
+    #       }
     #
     # @!attribute [rw] capacity
-    #   The size of the user storage.
+    #   The size of the user volume.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UserStorage AWS API Documentation
@@ -3041,6 +3206,7 @@ module Aws::WorkSpaces
     #         device_type_android: "ALLOW", # accepts ALLOW, DENY
     #         device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
     #         device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #         device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #       }
     #
     # @!attribute [rw] device_type_windows
@@ -3092,6 +3258,11 @@ module Aws::WorkSpaces
     #   WorkSpaces.
     #   @return [String]
     #
+    # @!attribute [rw] device_type_linux
+    #   Indicates whether users can use Linux clients to access their
+    #   WorkSpaces.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceAccessProperties AWS API Documentation
     #
     class WorkspaceAccessProperties < Struct.new(
@@ -3101,7 +3272,8 @@ module Aws::WorkSpaces
       :device_type_ios,
       :device_type_android,
       :device_type_chrome_os,
-      :device_type_zero_client)
+      :device_type_zero_client,
+      :device_type_linux)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3109,7 +3281,7 @@ module Aws::WorkSpaces
     # Describes a WorkSpace bundle.
     #
     # @!attribute [rw] bundle_id
-    #   The bundle identifier.
+    #   The identifier of the bundle.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3122,11 +3294,11 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description.
+    #   The description of the bundle.
     #   @return [String]
     #
     # @!attribute [rw] image_id
-    #   The image identifier of the bundle.
+    #   The identifier of the image that was used to create the bundle.
     #   @return [String]
     #
     # @!attribute [rw] root_storage
@@ -3134,12 +3306,12 @@ module Aws::WorkSpaces
     #   @return [Types::RootStorage]
     #
     # @!attribute [rw] user_storage
-    #   The size of the user storage.
+    #   The size of the user volume.
     #   @return [Types::UserStorage]
     #
     # @!attribute [rw] compute_type
-    #   The compute type. For more information, see [Amazon WorkSpaces
-    #   Bundles][1].
+    #   The compute type of the bundle. For more information, see [Amazon
+    #   WorkSpaces Bundles][1].
     #
     #
     #
@@ -3148,6 +3320,10 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] last_updated_time
     #   The last time that the bundle was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the bundle was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceBundle AWS API Documentation
@@ -3161,7 +3337,8 @@ module Aws::WorkSpaces
       :root_storage,
       :user_storage,
       :compute_type,
-      :last_updated_time)
+      :last_updated_time,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end

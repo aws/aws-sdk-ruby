@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2020-11-16)
+------------------
+
+* Feature - AWS Synthetics now supports Environment Variables  to assign runtime parameters in the canary scripts.
+
 1.9.0 (2020-09-30)
 ------------------
 

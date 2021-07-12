@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -837,6 +837,9 @@ module Aws::DeviceFarm
     # @option params [String] :description
     #   Human-readable description of the project.
     #
+    # @option params [Types::TestGridVpcConfig] :vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #
     # @return [Types::CreateTestGridProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTestGridProjectResult#test_grid_project #test_grid_project} => Types::TestGridProject
@@ -846,6 +849,11 @@ module Aws::DeviceFarm
     #   resp = client.create_test_grid_project({
     #     name: "ResourceName", # required
     #     description: "ResourceDescription",
+    #     vpc_config: {
+    #       security_group_ids: ["NonEmptyString"], # required
+    #       subnet_ids: ["NonEmptyString"], # required
+    #       vpc_id: "NonEmptyString", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -853,6 +861,11 @@ module Aws::DeviceFarm
     #   resp.test_grid_project.arn #=> String
     #   resp.test_grid_project.name #=> String
     #   resp.test_grid_project.description #=> String
+    #   resp.test_grid_project.vpc_config.security_group_ids #=> Array
+    #   resp.test_grid_project.vpc_config.security_group_ids[0] #=> String
+    #   resp.test_grid_project.vpc_config.subnet_ids #=> Array
+    #   resp.test_grid_project.vpc_config.subnet_ids[0] #=> String
+    #   resp.test_grid_project.vpc_config.vpc_id #=> String
     #   resp.test_grid_project.created #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateTestGridProject AWS API Documentation
@@ -2534,6 +2547,11 @@ module Aws::DeviceFarm
     #   resp.test_grid_project.arn #=> String
     #   resp.test_grid_project.name #=> String
     #   resp.test_grid_project.description #=> String
+    #   resp.test_grid_project.vpc_config.security_group_ids #=> Array
+    #   resp.test_grid_project.vpc_config.security_group_ids[0] #=> String
+    #   resp.test_grid_project.vpc_config.subnet_ids #=> Array
+    #   resp.test_grid_project.vpc_config.subnet_ids[0] #=> String
+    #   resp.test_grid_project.vpc_config.vpc_id #=> String
     #   resp.test_grid_project.created #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestGridProject AWS API Documentation
@@ -3064,9 +3082,9 @@ module Aws::DeviceFarm
     #     next_token: "PaginationToken",
     #     filters: [
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
-    #         values: ["String"],
+    #         attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #         operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #         values: ["String"], # required
     #       },
     #     ],
     #   })
@@ -4154,6 +4172,11 @@ module Aws::DeviceFarm
     #   resp.test_grid_projects[0].arn #=> String
     #   resp.test_grid_projects[0].name #=> String
     #   resp.test_grid_projects[0].description #=> String
+    #   resp.test_grid_projects[0].vpc_config.security_group_ids #=> Array
+    #   resp.test_grid_projects[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.test_grid_projects[0].vpc_config.subnet_ids #=> Array
+    #   resp.test_grid_projects[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.test_grid_projects[0].vpc_config.vpc_id #=> String
     #   resp.test_grid_projects[0].created #=> Time
     #   resp.next_token #=> String
     #
@@ -4692,10 +4715,10 @@ module Aws::DeviceFarm
     # invoke this operation, contact
     # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com).
     #
-    # @option params [String] :offering_id
+    # @option params [required, String] :offering_id
     #   The ID of the offering.
     #
-    # @option params [Integer] :quantity
+    # @option params [required, Integer] :quantity
     #   The number of device slots to purchase in an offering request.
     #
     # @option params [String] :offering_promotion_id
@@ -4741,8 +4764,8 @@ module Aws::DeviceFarm
     # @example Request syntax with placeholder values
     #
     #   resp = client.purchase_offering({
-    #     offering_id: "OfferingIdentifier",
-    #     quantity: 1,
+    #     offering_id: "OfferingIdentifier", # required
+    #     quantity: 1, # required
     #     offering_promotion_id: "OfferingPromotionIdentifier",
     #   })
     #
@@ -4780,10 +4803,10 @@ module Aws::DeviceFarm
     # operation. If you must be able to invoke this operation, contact
     # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com).
     #
-    # @option params [String] :offering_id
+    # @option params [required, String] :offering_id
     #   The ID of a request to renew an offering.
     #
-    # @option params [Integer] :quantity
+    # @option params [required, Integer] :quantity
     #   The quantity requested in an offering renewal.
     #
     # @return [Types::RenewOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4826,8 +4849,8 @@ module Aws::DeviceFarm
     # @example Request syntax with placeholder values
     #
     #   resp = client.renew_offering({
-    #     offering_id: "OfferingIdentifier",
-    #     quantity: 1,
+    #     offering_id: "OfferingIdentifier", # required
+    #     quantity: 1, # required
     #   })
     #
     # @example Response structure
@@ -4925,9 +4948,9 @@ module Aws::DeviceFarm
     #     device_selection_configuration: {
     #       filters: [ # required
     #         {
-    #           attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #           operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
-    #           values: ["String"],
+    #           attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #           operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #           values: ["String"], # required
     #         },
     #       ],
     #       max_devices: 1, # required
@@ -5799,6 +5822,9 @@ module Aws::DeviceFarm
     # @option params [String] :description
     #   Human-readable description for the project.
     #
+    # @option params [Types::TestGridVpcConfig] :vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #
     # @return [Types::UpdateTestGridProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTestGridProjectResult#test_grid_project #test_grid_project} => Types::TestGridProject
@@ -5809,6 +5835,11 @@ module Aws::DeviceFarm
     #     project_arn: "DeviceFarmArn", # required
     #     name: "ResourceName",
     #     description: "ResourceDescription",
+    #     vpc_config: {
+    #       security_group_ids: ["NonEmptyString"], # required
+    #       subnet_ids: ["NonEmptyString"], # required
+    #       vpc_id: "NonEmptyString", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -5816,6 +5847,11 @@ module Aws::DeviceFarm
     #   resp.test_grid_project.arn #=> String
     #   resp.test_grid_project.name #=> String
     #   resp.test_grid_project.description #=> String
+    #   resp.test_grid_project.vpc_config.security_group_ids #=> Array
+    #   resp.test_grid_project.vpc_config.security_group_ids[0] #=> String
+    #   resp.test_grid_project.vpc_config.subnet_ids #=> Array
+    #   resp.test_grid_project.vpc_config.subnet_ids[0] #=> String
+    #   resp.test_grid_project.vpc_config.vpc_id #=> String
     #   resp.test_grid_project.created #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateTestGridProject AWS API Documentation
@@ -5946,7 +5982,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -23,7 +23,6 @@ module Aws::ServiceCatalog
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
     AddTags = Shapes::ListShape.new(name: 'AddTags')
-    AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     ApproximateCount = Shapes::IntegerShape.new(name: 'ApproximateCount')
     AssociateBudgetWithResourceInput = Shapes::StructureShape.new(name: 'AssociateBudgetWithResourceInput')
@@ -41,6 +40,7 @@ module Aws::ServiceCatalog
     BatchAssociateServiceActionWithProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'BatchAssociateServiceActionWithProvisioningArtifactOutput')
     BatchDisassociateServiceActionFromProvisioningArtifactInput = Shapes::StructureShape.new(name: 'BatchDisassociateServiceActionFromProvisioningArtifactInput')
     BatchDisassociateServiceActionFromProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'BatchDisassociateServiceActionFromProvisioningArtifactOutput')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BudgetDetail = Shapes::StructureShape.new(name: 'BudgetDetail')
     BudgetName = Shapes::StringShape.new(name: 'BudgetName')
     Budgets = Shapes::ListShape.new(name: 'Budgets')
@@ -104,6 +104,9 @@ module Aws::ServiceCatalog
     DescribePortfolioOutput = Shapes::StructureShape.new(name: 'DescribePortfolioOutput')
     DescribePortfolioShareStatusInput = Shapes::StructureShape.new(name: 'DescribePortfolioShareStatusInput')
     DescribePortfolioShareStatusOutput = Shapes::StructureShape.new(name: 'DescribePortfolioShareStatusOutput')
+    DescribePortfolioShareType = Shapes::StringShape.new(name: 'DescribePortfolioShareType')
+    DescribePortfolioSharesInput = Shapes::StructureShape.new(name: 'DescribePortfolioSharesInput')
+    DescribePortfolioSharesOutput = Shapes::StructureShape.new(name: 'DescribePortfolioSharesOutput')
     DescribeProductAsAdminInput = Shapes::StructureShape.new(name: 'DescribeProductAsAdminInput')
     DescribeProductAsAdminOutput = Shapes::StructureShape.new(name: 'DescribeProductAsAdminOutput')
     DescribeProductInput = Shapes::StructureShape.new(name: 'DescribeProductInput')
@@ -168,6 +171,8 @@ module Aws::ServiceCatalog
     Id = Shapes::StringShape.new(name: 'Id')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IgnoreErrors = Shapes::BooleanShape.new(name: 'IgnoreErrors')
+    ImportAsProvisionedProductInput = Shapes::StructureShape.new(name: 'ImportAsProvisionedProductInput')
+    ImportAsProvisionedProductOutput = Shapes::StructureShape.new(name: 'ImportAsProvisionedProductOutput')
     InstructionType = Shapes::StringShape.new(name: 'InstructionType')
     InstructionValue = Shapes::StringShape.new(name: 'InstructionValue')
     InvalidParametersException = Shapes::StructureShape.new(name: 'InvalidParametersException')
@@ -222,6 +227,7 @@ module Aws::ServiceCatalog
     NoEcho = Shapes::BooleanShape.new(name: 'NoEcho')
     NotificationArn = Shapes::StringShape.new(name: 'NotificationArn')
     NotificationArns = Shapes::ListShape.new(name: 'NotificationArns')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     OperationNotSupportedException = Shapes::StructureShape.new(name: 'OperationNotSupportedException')
     OrganizationNode = Shapes::StructureShape.new(name: 'OrganizationNode')
     OrganizationNodeType = Shapes::StringShape.new(name: 'OrganizationNodeType')
@@ -231,7 +237,9 @@ module Aws::ServiceCatalog
     OutputKey = Shapes::StringShape.new(name: 'OutputKey')
     OutputKeys = Shapes::ListShape.new(name: 'OutputKeys')
     OutputValue = Shapes::StringShape.new(name: 'OutputValue')
+    Owner = Shapes::StringShape.new(name: 'Owner')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
+    PageSizeMax100 = Shapes::IntegerShape.new(name: 'PageSizeMax100')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
     ParameterConstraints = Shapes::StructureShape.new(name: 'ParameterConstraints')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
@@ -245,6 +253,8 @@ module Aws::ServiceCatalog
     PortfolioDetails = Shapes::ListShape.new(name: 'PortfolioDetails')
     PortfolioDisplayName = Shapes::StringShape.new(name: 'PortfolioDisplayName')
     PortfolioName = Shapes::StringShape.new(name: 'PortfolioName')
+    PortfolioShareDetail = Shapes::StructureShape.new(name: 'PortfolioShareDetail')
+    PortfolioShareDetails = Shapes::ListShape.new(name: 'PortfolioShareDetails')
     PortfolioShareType = Shapes::StringShape.new(name: 'PortfolioShareType')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalARN = Shapes::StringShape.new(name: 'PrincipalARN')
@@ -361,6 +371,7 @@ module Aws::ServiceCatalog
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTargetDefinition = Shapes::StructureShape.new(name: 'ResourceTargetDefinition')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RetainPhysicalResources = Shapes::BooleanShape.new(name: 'RetainPhysicalResources')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ScanProvisionedProductsInput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsInput')
     ScanProvisionedProductsOutput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsOutput')
@@ -408,6 +419,7 @@ module Aws::ServiceCatalog
     Status = Shapes::StringShape.new(name: 'Status')
     StatusDetail = Shapes::StringShape.new(name: 'StatusDetail')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
+    String = Shapes::StringShape.new(name: 'String')
     SuccessfulShares = Shapes::ListShape.new(name: 'SuccessfulShares')
     SupportDescription = Shapes::StringShape.new(name: 'SupportDescription')
     SupportEmail = Shapes::StringShape.new(name: 'SupportEmail')
@@ -434,6 +446,8 @@ module Aws::ServiceCatalog
     UpdateConstraintOutput = Shapes::StructureShape.new(name: 'UpdateConstraintOutput')
     UpdatePortfolioInput = Shapes::StructureShape.new(name: 'UpdatePortfolioInput')
     UpdatePortfolioOutput = Shapes::StructureShape.new(name: 'UpdatePortfolioOutput')
+    UpdatePortfolioShareInput = Shapes::StructureShape.new(name: 'UpdatePortfolioShareInput')
+    UpdatePortfolioShareOutput = Shapes::StructureShape.new(name: 'UpdatePortfolioShareOutput')
     UpdateProductInput = Shapes::StructureShape.new(name: 'UpdateProductInput')
     UpdateProductOutput = Shapes::StructureShape.new(name: 'UpdateProductOutput')
     UpdateProvisionedProductInput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductInput')
@@ -472,7 +486,7 @@ module Aws::ServiceCatalog
 
     AddTags.member = Shapes::ShapeRef.new(shape: Tag)
 
-    AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
+    AllowedValues.member = Shapes::ShapeRef.new(shape: String)
 
     AssociateBudgetWithResourceInput.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     AssociateBudgetWithResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
@@ -594,6 +608,7 @@ module Aws::ServiceCatalog
     CreatePortfolioShareInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
     CreatePortfolioShareInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     CreatePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
+    CreatePortfolioShareInput.add_member(:share_tag_options, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShareTagOptions"))
     CreatePortfolioShareInput.struct_class = Types::CreatePortfolioShareInput
 
     CreatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
@@ -757,9 +772,20 @@ module Aws::ServiceCatalog
     DescribePortfolioShareStatusOutput.add_member(:share_details, Shapes::ShapeRef.new(shape: ShareDetails, location_name: "ShareDetails"))
     DescribePortfolioShareStatusOutput.struct_class = Types::DescribePortfolioShareStatusOutput
 
+    DescribePortfolioSharesInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
+    DescribePortfolioSharesInput.add_member(:type, Shapes::ShapeRef.new(shape: DescribePortfolioShareType, required: true, location_name: "Type"))
+    DescribePortfolioSharesInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    DescribePortfolioSharesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
+    DescribePortfolioSharesInput.struct_class = Types::DescribePortfolioSharesInput
+
+    DescribePortfolioSharesOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
+    DescribePortfolioSharesOutput.add_member(:portfolio_share_details, Shapes::ShapeRef.new(shape: PortfolioShareDetails, location_name: "PortfolioShareDetails"))
+    DescribePortfolioSharesOutput.struct_class = Types::DescribePortfolioSharesOutput
+
     DescribeProductAsAdminInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DescribeProductAsAdminInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
     DescribeProductAsAdminInput.add_member(:name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "Name"))
+    DescribeProductAsAdminInput.add_member(:source_portfolio_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourcePortfolioId"))
     DescribeProductAsAdminInput.struct_class = Types::DescribeProductAsAdminInput
 
     DescribeProductAsAdminOutput.add_member(:product_view_detail, Shapes::ShapeRef.new(shape: ProductViewDetail, location_name: "ProductViewDetail"))
@@ -970,6 +996,17 @@ module Aws::ServiceCatalog
     GetProvisionedProductOutputsOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     GetProvisionedProductOutputsOutput.struct_class = Types::GetProvisionedProductOutputsOutput
 
+    ImportAsProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ImportAsProvisionedProductInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
+    ImportAsProvisionedProductInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
+    ImportAsProvisionedProductInput.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductName, required: true, location_name: "ProvisionedProductName"))
+    ImportAsProvisionedProductInput.add_member(:physical_id, Shapes::ShapeRef.new(shape: PhysicalId, required: true, location_name: "PhysicalId"))
+    ImportAsProvisionedProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    ImportAsProvisionedProductInput.struct_class = Types::ImportAsProvisionedProductInput
+
+    ImportAsProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
+    ImportAsProvisionedProductOutput.struct_class = Types::ImportAsProvisionedProductOutput
+
     InvalidParametersException.struct_class = Types::InvalidParametersException
 
     InvalidStateException.struct_class = Types::InvalidStateException
@@ -992,7 +1029,7 @@ module Aws::ServiceCatalog
 
     ListAcceptedPortfolioSharesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListAcceptedPortfolioSharesInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListAcceptedPortfolioSharesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListAcceptedPortfolioSharesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListAcceptedPortfolioSharesInput.add_member(:portfolio_share_type, Shapes::ShapeRef.new(shape: PortfolioShareType, location_name: "PortfolioShareType"))
     ListAcceptedPortfolioSharesInput.struct_class = Types::ListAcceptedPortfolioSharesInput
 
@@ -1046,7 +1083,7 @@ module Aws::ServiceCatalog
     ListPortfolioAccessInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
     ListPortfolioAccessInput.add_member(:organization_parent_id, Shapes::ShapeRef.new(shape: Id, location_name: "OrganizationParentId"))
     ListPortfolioAccessInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListPortfolioAccessInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListPortfolioAccessInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListPortfolioAccessInput.struct_class = Types::ListPortfolioAccessInput
 
     ListPortfolioAccessOutput.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "AccountIds"))
@@ -1056,7 +1093,7 @@ module Aws::ServiceCatalog
     ListPortfoliosForProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListPortfoliosForProductInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
     ListPortfoliosForProductInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListPortfoliosForProductInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListPortfoliosForProductInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListPortfoliosForProductInput.struct_class = Types::ListPortfoliosForProductInput
 
     ListPortfoliosForProductOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
@@ -1065,7 +1102,7 @@ module Aws::ServiceCatalog
 
     ListPortfoliosInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListPortfoliosInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListPortfoliosInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListPortfoliosInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListPortfoliosInput.struct_class = Types::ListPortfoliosInput
 
     ListPortfoliosOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
@@ -1195,6 +1232,12 @@ module Aws::ServiceCatalog
     OutputKeys.member = Shapes::ShapeRef.new(shape: OutputKey)
 
     ParameterConstraints.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValues, location_name: "AllowedValues"))
+    ParameterConstraints.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: String, location_name: "AllowedPattern"))
+    ParameterConstraints.add_member(:constraint_description, Shapes::ShapeRef.new(shape: String, location_name: "ConstraintDescription"))
+    ParameterConstraints.add_member(:max_length, Shapes::ShapeRef.new(shape: String, location_name: "MaxLength"))
+    ParameterConstraints.add_member(:min_length, Shapes::ShapeRef.new(shape: String, location_name: "MinLength"))
+    ParameterConstraints.add_member(:max_value, Shapes::ShapeRef.new(shape: String, location_name: "MaxValue"))
+    ParameterConstraints.add_member(:min_value, Shapes::ShapeRef.new(shape: String, location_name: "MinValue"))
     ParameterConstraints.struct_class = Types::ParameterConstraints
 
     PortfolioDetail.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
@@ -1206,6 +1249,14 @@ module Aws::ServiceCatalog
     PortfolioDetail.struct_class = Types::PortfolioDetail
 
     PortfolioDetails.member = Shapes::ShapeRef.new(shape: PortfolioDetail)
+
+    PortfolioShareDetail.add_member(:principal_id, Shapes::ShapeRef.new(shape: Id, location_name: "PrincipalId"))
+    PortfolioShareDetail.add_member(:type, Shapes::ShapeRef.new(shape: DescribePortfolioShareType, location_name: "Type"))
+    PortfolioShareDetail.add_member(:accepted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Accepted"))
+    PortfolioShareDetail.add_member(:share_tag_options, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShareTagOptions"))
+    PortfolioShareDetail.struct_class = Types::PortfolioShareDetail
+
+    PortfolioShareDetails.member = Shapes::ShapeRef.new(shape: PortfolioShareDetail)
 
     Principal.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalARN, location_name: "PrincipalARN"))
     Principal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
@@ -1531,7 +1582,7 @@ module Aws::ServiceCatalog
 
     SearchProductsInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     SearchProductsInput.add_member(:filters, Shapes::ShapeRef.new(shape: ProductViewFilters, location_name: "Filters"))
-    SearchProductsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    SearchProductsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     SearchProductsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: ProductViewSortBy, location_name: "SortBy"))
     SearchProductsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     SearchProductsInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
@@ -1617,6 +1668,7 @@ module Aws::ServiceCatalog
     TagOptionDetail.add_member(:value, Shapes::ShapeRef.new(shape: TagOptionValue, location_name: "Value"))
     TagOptionDetail.add_member(:active, Shapes::ShapeRef.new(shape: TagOptionActive, location_name: "Active"))
     TagOptionDetail.add_member(:id, Shapes::ShapeRef.new(shape: TagOptionId, location_name: "Id"))
+    TagOptionDetail.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     TagOptionDetail.struct_class = Types::TagOptionDetail
 
     TagOptionDetails.member = Shapes::ShapeRef.new(shape: TagOptionDetail)
@@ -1638,6 +1690,7 @@ module Aws::ServiceCatalog
     TerminateProvisionedProductInput.add_member(:terminate_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "TerminateToken", metadata: {"idempotencyToken"=>true}))
     TerminateProvisionedProductInput.add_member(:ignore_errors, Shapes::ShapeRef.new(shape: IgnoreErrors, location_name: "IgnoreErrors"))
     TerminateProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    TerminateProvisionedProductInput.add_member(:retain_physical_resources, Shapes::ShapeRef.new(shape: RetainPhysicalResources, location_name: "RetainPhysicalResources"))
     TerminateProvisionedProductInput.struct_class = Types::TerminateProvisionedProductInput
 
     TerminateProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
@@ -1666,6 +1719,17 @@ module Aws::ServiceCatalog
     UpdatePortfolioOutput.add_member(:portfolio_detail, Shapes::ShapeRef.new(shape: PortfolioDetail, location_name: "PortfolioDetail"))
     UpdatePortfolioOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdatePortfolioOutput.struct_class = Types::UpdatePortfolioOutput
+
+    UpdatePortfolioShareInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    UpdatePortfolioShareInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
+    UpdatePortfolioShareInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    UpdatePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
+    UpdatePortfolioShareInput.add_member(:share_tag_options, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ShareTagOptions"))
+    UpdatePortfolioShareInput.struct_class = Types::UpdatePortfolioShareInput
+
+    UpdatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
+    UpdatePortfolioShareOutput.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "Status"))
+    UpdatePortfolioShareOutput.struct_class = Types::UpdatePortfolioShareOutput
 
     UpdateProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     UpdateProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
@@ -2100,6 +2164,22 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
+      api.add_operation(:describe_portfolio_shares, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePortfolioShares"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePortfolioSharesInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribePortfolioSharesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_product, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeProduct"
         o.http_method = "POST"
@@ -2325,6 +2405,18 @@ module Aws::ServiceCatalog
             "next_page_token" => "page_token"
           }
         )
+      end)
+
+      api.add_operation(:import_as_provisioned_product, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportAsProvisionedProduct"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportAsProvisionedProductInput)
+        o.output = Shapes::ShapeRef.new(shape: ImportAsProvisionedProductOutput)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:list_accepted_portfolio_shares, Seahorse::Model::Operation.new.tap do |o|
@@ -2694,6 +2786,18 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+      end)
+
+      api.add_operation(:update_portfolio_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePortfolioShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePortfolioShareInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePortfolioShareOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:update_product, Seahorse::Model::Operation.new.tap do |o|

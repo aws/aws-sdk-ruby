@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-06-14)
+------------------
+
+* Feature - Adds support for data store partitions.
+
+1.38.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-12-15)
+------------------
+
+* Feature - FileFormatConfiguration enables data store to save data in JSON or Parquet format. S3Paths enables you to specify the S3 objects that save your channel messages when you reprocess the pipeline.
+
+1.35.0 (2020-11-09)
+------------------
+
+* Feature - AWS IoT Analytics now supports Late Data Notifications for datasets, dataset content creation using previous version IDs, and includes the LastMessageArrivalTime attribute for channels and datastores.
+
 1.34.0 (2020-09-30)
 ------------------
 

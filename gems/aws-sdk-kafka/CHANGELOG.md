@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-05-06)
+------------------
+
+* Feature - IAM Access Control for Amazon MSK enables you to create clusters that use IAM to authenticate clients and to allow or deny Apache Kafka actions for those clients.
+
+1.35.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2021-01-21)
+------------------
+
+* Feature - Amazon MSK has added a new API that allows you to update all the brokers in the cluster to the specified type.
+
+1.32.0 (2020-12-04)
+------------------
+
+* Feature - Adding HEALING to ClusterState.
+
+1.31.0 (2020-11-23)
+------------------
+
+* Feature - Adding MAINTENANCE and REBOOTING_BROKER to Cluster states.
+
+1.30.0 (2020-11-20)
+------------------
+
+* Feature - This release adds support for PER TOPIC PER PARTITION monitoring on AWS MSK clusters.
+
 1.29.0 (2020-10-01)
 ------------------
 

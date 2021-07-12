@@ -31,6 +31,7 @@ client's region instead.
           handlers.add(UrlHandler)
         end
 
+        # After extracting out any ARN input, resolve a new URL with it.
         class UrlHandler < Seahorse::Client::Handler
           def call(context)
             if context.metadata[:s3_arn]
@@ -38,13 +39,18 @@ client's region instead.
                 context.http_request.endpoint,
                 context.metadata[:s3_arn][:arn],
                 context.metadata[:s3_arn][:resolved_region],
-                context.metadata[:s3_arn][:dualstack]
+                context.metadata[:s3_arn][:dualstack],
+                # if regional_endpoint is false, a custom endpoint was provided
+                # in this case, we want to prefix the endpoint using the ARN
+                !context.config.regional_endpoint
               )
             end
             @handler.call(context)
           end
         end
 
+        # This plugin will extract out any ARN input and set context for other
+        # plugins to use without having to translate the ARN again.
         class ARNHandler < Seahorse::Client::Handler
           def call(context)
             arn_member = _arn_member(context.operation.input.shape)
@@ -54,6 +60,7 @@ client's region instead.
                 context.config.region,
                 context.config.s3_use_arn_region
               )
+              validate_outpost_dualstack!(context)
               if arn
                 validate_config!(context, arn)
 
@@ -68,7 +75,6 @@ client's region instead.
                 # depending on the ARN's resource type, put the resource value
                 # back onto params
                 context.params[arn_member] = arn.input_member
-
                 context.metadata[:s3_arn] = {
                   arn: arn,
                   resolved_region: resolved_region,
@@ -80,6 +86,17 @@ client's region instead.
           end
 
           private
+
+          # this validation has nothing to do with ARNs (can't be in
+          # validate_config!) outposts does not support dualstack, so operations
+          # using an outpost id should be validated too.
+          def validate_outpost_dualstack!(context)
+            if context.params[:outpost_id] && context[:use_dualstack_endpoint]
+              raise ArgumentError,
+                    'Cannot provide an Outpost ID when '\
+                    '`:use_dualstack_endpoint` is set to true.'
+            end
+          end
 
           # This looks for BucketName or AccessPointName, but prefers BucketName
           # for CreateAccessPoint because it contains both but should not have
@@ -102,16 +119,10 @@ client's region instead.
           end
 
           def validate_config!(context, arn)
-            unless context.config.regional_endpoint
-              raise ArgumentError,
-                    'Cannot provide both an Access Point ARN and setting '\
-                    ':endpoint.'
-            end
-
             if !arn.support_dualstack? && context[:use_dualstack_endpoint]
               raise ArgumentError,
-                    'Cannot provide both an Outpost Access Point ARN and '\
-                    'setting :use_dualstack_endpoint to true.'
+                    'Cannot provide an Outpost Access Point ARN when '\
+                    '`:use_dualstack_endpoint` is set to true.'
             end
           end
 
@@ -154,8 +165,9 @@ client's region instead.
           end
 
           # @api private
-          def resolve_url!(url, arn, region, dualstack = false)
-            url.host = arn.host_url(region, dualstack)
+          def resolve_url!(url, arn, region, dualstack = false, has_custom_endpoint = false)
+            custom_endpoint = url.host if has_custom_endpoint
+            url.host = arn.host_url(region, dualstack, custom_endpoint)
             url
           end
 
@@ -169,9 +181,9 @@ client's region instead.
             # Raise if provided value is not true or false
             if value.nil?
               raise ArgumentError,
-                    'Must provide either `true` or `false` for '\
-                    's3_use_arn_region profile option or for '\
-                    "ENV['AWS_S3_USE_ARN_REGION']"
+                    'Must provide either `true` or `false` for the '\
+                    '`s3_use_arn_region` profile option or for '\
+                    "ENV['AWS_S3_USE_ARN_REGION']."
             end
             value
           end
@@ -191,7 +203,7 @@ client's region instead.
               if !fips && !use_arn_region && region.include?('fips')
                 raise ArgumentError,
                       'FIPS client regions are not supported for this type of '\
-                      'ARN without s3_use_arn_region.'
+                      'ARN without `:s3_use_arn_region`.'
               end
 
               # if it's a fips region, attempt to normalize it

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -99,6 +99,8 @@ module Aws::CodeArtifact
     ListRepositoriesMaxResults = Shapes::IntegerShape.new(name: 'ListRepositoriesMaxResults')
     ListRepositoriesRequest = Shapes::StructureShape.new(name: 'ListRepositoriesRequest')
     ListRepositoriesResult = Shapes::StructureShape.new(name: 'ListRepositoriesResult')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
     PackageDependency = Shapes::StructureShape.new(name: 'PackageDependency')
@@ -142,8 +144,17 @@ module Aws::CodeArtifact
     String255 = Shapes::StringShape.new(name: 'String255')
     SuccessfulPackageVersionInfo = Shapes::StructureShape.new(name: 'SuccessfulPackageVersionInfo')
     SuccessfulPackageVersionInfoMap = Shapes::MapShape.new(name: 'SuccessfulPackageVersionInfoMap')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResult = Shapes::StructureShape.new(name: 'TagResourceResult')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
     UpdatePackageVersionsStatusRequest = Shapes::StructureShape.new(name: 'UpdatePackageVersionsStatusRequest')
     UpdatePackageVersionsStatusResult = Shapes::StructureShape.new(name: 'UpdatePackageVersionsStatusResult')
     UpdateRepositoryRequest = Shapes::StructureShape.new(name: 'UpdateRepositoryRequest')
@@ -201,6 +212,7 @@ module Aws::CodeArtifact
 
     CreateDomainRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "querystring", location_name: "domain"))
     CreateDomainRequest.add_member(:encryption_key, Shapes::ShapeRef.new(shape: Arn, location_name: "encryptionKey"))
+    CreateDomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResult.add_member(:domain, Shapes::ShapeRef.new(shape: DomainDescription, location_name: "domain"))
@@ -211,6 +223,7 @@ module Aws::CodeArtifact
     CreateRepositoryRequest.add_member(:repository, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location: "querystring", location_name: "repository"))
     CreateRepositoryRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateRepositoryRequest.add_member(:upstreams, Shapes::ShapeRef.new(shape: UpstreamRepositoryList, location_name: "upstreams"))
+    CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryRequest.struct_class = Types::CreateRepositoryRequest
 
     CreateRepositoryResult.add_member(:repository, Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "repository"))
@@ -321,6 +334,7 @@ module Aws::CodeArtifact
     DomainDescription.add_member(:encryption_key, Shapes::ShapeRef.new(shape: Arn, location_name: "encryptionKey"))
     DomainDescription.add_member(:repository_count, Shapes::ShapeRef.new(shape: Integer, location_name: "repositoryCount"))
     DomainDescription.add_member(:asset_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "assetSizeBytes"))
+    DomainDescription.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "s3BucketArn"))
     DomainDescription.struct_class = Types::DomainDescription
 
     DomainSummary.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, location_name: "name"))
@@ -513,6 +527,12 @@ module Aws::CodeArtifact
     ListRepositoriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRepositoriesResult.struct_class = Types::ListRepositoriesResult
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
+
     PackageDependency.add_member(:namespace, Shapes::ShapeRef.new(shape: PackageNamespace, location_name: "namespace"))
     PackageDependency.add_member(:package, Shapes::ShapeRef.new(shape: PackageName, location_name: "package"))
     PackageDependency.add_member(:dependency_type, Shapes::ShapeRef.new(shape: String, location_name: "dependencyType"))
@@ -629,9 +649,29 @@ module Aws::CodeArtifact
     SuccessfulPackageVersionInfoMap.key = Shapes::ShapeRef.new(shape: PackageVersion)
     SuccessfulPackageVersionInfoMap.value = Shapes::ShapeRef.new(shape: SuccessfulPackageVersionInfo)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResult.struct_class = Types::TagResourceResult
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResult.struct_class = Types::UntagResourceResult
 
     UpdatePackageVersionsStatusRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "querystring", location_name: "domain"))
     UpdatePackageVersionsStatusRequest.add_member(:domain_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "domain-owner"))
@@ -760,7 +800,6 @@ module Aws::CodeArtifact
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -927,6 +966,7 @@ module Aws::CodeArtifact
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_package_version_readme, Seahorse::Model::Operation.new.tap do |o|
@@ -1093,6 +1133,18 @@ module Aws::CodeArtifact
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/tags"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:put_domain_permissions_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutDomainPermissionsPolicy"
         o.http_method = "PUT"
@@ -1119,6 +1171,31 @@ module Aws::CodeArtifact
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/tag"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/untag"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -327,22 +327,27 @@ module Aws::ElastiCache
 
     # @!group API Operations
 
-    # Adds up to 50 cost allocation tags to the named resource. A cost
-    # allocation tag is a key-value pair where the key and value are
-    # case-sensitive. You can use cost allocation tags to categorize and
-    # track your AWS costs.
+    # A tag is a key-value pair where the key and value are case-sensitive.
+    # You can use tags to categorize and track all your ElastiCache
+    # resources, with the exception of global replication group. When you
+    # add or remove tags on replication groups, those actions will be
+    # replicated to all nodes in the replication group. For more
+    # information, see [Resource-level permissions][1].
     #
-    # When you apply tags to your ElastiCache resources, AWS generates a
-    # cost allocation report as a comma-separated value (CSV) file with your
-    # usage and costs aggregated by your tags. You can apply tags that
-    # represent business categories (such as cost centers, application
-    # names, or owners) to organize your costs across multiple services. For
-    # more information, see [Using Cost Allocation Tags in Amazon
-    # ElastiCache][1] in the *ElastiCache User Guide*.
+    # For example, you can use cost-allocation tags to your ElastiCache
+    # resources, AWS generates a cost allocation report as a comma-separated
+    # value (CSV) file with your usage and costs aggregated by your tags.
+    # You can apply tags that represent business categories (such as cost
+    # centers, application names, or owners) to organize your costs across
+    # multiple services.
+    #
+    # For more information, see [Using Cost Allocation Tags in Amazon
+    # ElastiCache][2] in the *ElastiCache User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
+    # [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource to which the tags are
@@ -359,8 +364,9 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   A list of cost allocation tags to be added to this resource. A tag is
-    #   a key-value pair. A tag key must be accompanied by a tag value.
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -632,6 +638,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -669,6 +681,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -780,10 +800,15 @@ module Aws::ElastiCache
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
-    #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key used to encrypt the target snapshot.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -839,6 +864,12 @@ module Aws::ElastiCache
     #     target_snapshot_name: "String", # required
     #     target_bucket: "String",
     #     kms_key_id: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -972,9 +1003,9 @@ module Aws::ElastiCache
     #   The initial number of cache nodes that the cluster has.
     #
     #   For clusters running Redis, this value must be 1. For clusters running
-    #   Memcached, this value must be between 1 and 20.
+    #   Memcached, this value must be between 1 and 40.
     #
-    #   If you need more than 20 nodes for your Memcached cluster, please fill
+    #   If you need more than 40 nodes for your Memcached cluster, please fill
     #   out the ElastiCache Limit Increase Request form at
     #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request/][1].
     #
@@ -994,6 +1025,17 @@ module Aws::ElastiCache
     #   * General purpose:
     #
     #     * Current generation:
+    #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -1028,6 +1070,17 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
     #       `cache.r5.24xlarge`
@@ -1057,6 +1110,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are not
     #     supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #
     # @option params [String] :engine
     #   The name of the cache engine to be used for this cluster.
@@ -1111,7 +1168,7 @@ module Aws::ElastiCache
     #   Virtual Private Cloud (Amazon VPC).
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of cost allocation tags to be added to this resource.
+    #   A list of tags to be added to this resource.
     #
     # @option params [Array<String>] :snapshot_arns
     #   A single-element string list containing an Amazon Resource Name (ARN)
@@ -1139,29 +1196,6 @@ module Aws::ElastiCache
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
     #   window is a 60 minute period. Valid values for `ddd` are:
-    #
-    #   Specifies the weekly time range during which maintenance on the
-    #   cluster is performed. It is specified as a range in the format
-    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period.
-    #
-    #   Valid values for `ddd` are:
-    #
-    #   * `sun`
-    #
-    #   * `mon`
-    #
-    #   * `tue`
-    #
-    #   * `wed`
-    #
-    #   * `thu`
-    #
-    #   * `fri`
-    #
-    #   * `sat`
-    #
-    #   Example: `sun:23:00-mon:01:30`
     #
     # @option params [Integer] :port
     #   The port number on which each of the cache nodes accepts connections.
@@ -1234,6 +1268,9 @@ module Aws::ElastiCache
     #
     # @option params [Array<String>] :preferred_outpost_arns
     #   The outpost ARNs in which the cache cluster is created.
+    #
+    # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
     #
     # @return [Types::CreateCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1362,6 +1399,22 @@ module Aws::ElastiCache
     #     outpost_mode: "single-outpost", # accepts single-outpost, cross-outpost
     #     preferred_outpost_arn: "String",
     #     preferred_outpost_arns: ["String"],
+    #     log_delivery_configurations: [
+    #       {
+    #         log_type: "slow-log", # accepts slow-log
+    #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #         destination_details: {
+    #           cloud_watch_logs_details: {
+    #             log_group: "String",
+    #           },
+    #           kinesis_firehose_details: {
+    #             delivery_stream: "String",
+    #           },
+    #         },
+    #         log_format: "text", # accepts text, json
+    #         enabled: false,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1385,6 +1438,12 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -1417,6 +1476,15 @@ module Aws::ElastiCache
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #   resp.cache_cluster.arn #=> String
+    #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
+    #   resp.cache_cluster.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster AWS API Documentation
     #
@@ -1453,11 +1521,17 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that the cache parameter
     #   group can be used with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::CreateCacheParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1489,6 +1563,12 @@ module Aws::ElastiCache
     #     cache_parameter_group_name: "String", # required
     #     cache_parameter_group_family: "String", # required
     #     description: "String", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1532,6 +1612,11 @@ module Aws::ElastiCache
     # @option params [required, String] :description
     #   A description for the cache security group.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::CreateCacheSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCacheSecurityGroupResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
@@ -1551,6 +1636,12 @@ module Aws::ElastiCache
     #   resp = client.create_cache_security_group({
     #     cache_security_group_name: "String", # required
     #     description: "String", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1592,6 +1683,11 @@ module Aws::ElastiCache
     #
     # @option params [required, Array<String>] :subnet_ids
     #   A list of VPC subnet IDs for the cache subnet group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::CreateCacheSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1647,6 +1743,12 @@ module Aws::ElastiCache
     #     cache_subnet_group_name: "String", # required
     #     cache_subnet_group_description: "String", # required
     #     subnet_ids: ["String"], # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1674,34 +1776,37 @@ module Aws::ElastiCache
     # can create cross-region read replica clusters for ElastiCache for
     # Redis to enable low-latency reads and disaster recovery across
     # regions. For more information, see [Replication Across Regions Using
-    # Global
-    # Datastore](/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html).
+    # Global Datastore][1].
     #
     # * The **GlobalReplicationGroupIdSuffix** is the name of the Global
-    #   Datastore.
+    #   datastore.
     #
     # * The **PrimaryReplicationGroupId** represents the name of the primary
     #   cluster that accepts writes and will replicate updates to the
     #   secondary cluster.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html
+    #
     # @option params [required, String] :global_replication_group_id_suffix
-    #   The suffix name of a Global Datastore. Amazon ElastiCache
-    #   automatically applies a prefix to the Global Datastore ID when it is
+    #   The suffix name of a Global datastore. Amazon ElastiCache
+    #   automatically applies a prefix to the Global datastore ID when it is
     #   created. Each AWS Region has its own prefix. For instance, a Global
-    #   Datastore ID created in the US-West-1 region will begin with "dsdfu"
+    #   datastore ID created in the US-West-1 region will begin with "dsdfu"
     #   along with the suffix name you provide. The suffix, combined with the
-    #   auto-generated prefix, guarantees uniqueness of the Global Datastore
+    #   auto-generated prefix, guarantees uniqueness of the Global datastore
     #   name across multiple regions.
     #
-    #   For a full list of AWS Regions and their respective Global Datastore
-    #   iD prefixes, see [Using the AWS CLI with Global Datastores ][1].
+    #   For a full list of AWS Regions and their respective Global datastore
+    #   iD prefixes, see [Using the AWS CLI with Global datastores ][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html
     #
     # @option params [String] :global_replication_group_description
-    #   Provides details of the Global Datastore
+    #   Provides details of the Global datastore
     #
     # @option params [required, String] :primary_replication_group_id
     #   The name of the primary cluster that accepts writes and will replicate
@@ -1755,26 +1860,39 @@ module Aws::ElastiCache
     # enabled) replication group.
     #
     # This API can be used to create a standalone regional replication group
-    # or a secondary replication group associated with a Global Datastore.
+    # or a secondary replication group associated with a Global datastore.
     #
     # A Redis (cluster mode disabled) replication group is a collection of
     # clusters, where one of the clusters is a read/write primary and the
     # others are read-only replicas. Writes to the primary are
     # asynchronously propagated to the replicas.
     #
-    # A Redis (cluster mode enabled) replication group is a collection of 1
-    # to 90 node groups (shards). Each node group (shard) has one read/write
-    # primary node and up to 5 read-only replica nodes. Writes to the
-    # primary are asynchronously propagated to the replicas. Redis (cluster
-    # mode enabled) replication groups partition the data across node groups
-    # (shards).
+    # A Redis cluster-mode enabled cluster is comprised of from 1 to 90
+    # shards (API/CLI: node groups). Each shard has a primary node and up to
+    # 5 read-only replica nodes. The configuration can range from 90 shards
+    # and 0 replicas to 15 shards and 5 replicas, which is the maximum
+    # number or replicas allowed.
+    #
+    # The node or shard limit can be increased to a maximum of 500 per
+    # cluster if the Redis engine version is 5.0.6 or higher. For example,
+    # you can choose to configure a 500 node cluster that ranges between 83
+    # shards (one primary and 5 replicas per shard) and 500 shards (single
+    # primary and no replicas). Make sure there are enough available IP
+    # addresses to accommodate the increase. Common pitfalls include the
+    # subnets in the subnet group have too small a CIDR range or the subnets
+    # are shared and heavily used by other clusters. For more information,
+    # see [Creating a Subnet Group][1]. For versions below 5.0.6, the limit
+    # is 250 per cluster.
+    #
+    # To request a limit increase, see [AWS Service Limits][2] and choose
+    # the limit type **Nodes per cluster per instance type**.
     #
     # When a Redis (cluster mode disabled) replication group has been
     # successfully created, you can add one or more read replicas to it, up
     # to a total of 5 read replicas. If you need to increase or decrease the
     # number of node groups (console: shards), you can avail yourself of
     # ElastiCache for Redis' scaling. For more information, see [Scaling
-    # ElastiCache for Redis Clusters][1] in the *ElastiCache User Guide*.
+    # ElastiCache for Redis Clusters][3] in the *ElastiCache User Guide*.
     #
     # <note markdown="1"> This operation is valid for Redis only.
     #
@@ -1782,7 +1900,9 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    # [3]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
     #
     # @option params [required, String] :replication_group_id
     #   The replication group identifier. This parameter is stored as a
@@ -1800,7 +1920,7 @@ module Aws::ElastiCache
     #   A user-created description for the replication group.
     #
     # @option params [String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [String] :primary_cluster_id
     #   The identifier of the cluster that serves as the primary for this
@@ -1901,6 +2021,17 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -1934,6 +2065,17 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
     #       `cache.r5.24xlarge`
@@ -1964,9 +2106,13 @@ module Aws::ElastiCache
     #   * Redis configuration variables `appendonly` and `appendfsync` are not
     #     supported on Redis version 2.8.22 and later.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+    #
     # @option params [String] :engine
     #   The name of the cache engine to be used for the clusters in this
-    #   replication group.
+    #   replication group. Must be Redis.
     #
     # @option params [String] :engine_version
     #   The version number of the cache engine to be used for the clusters in
@@ -1988,12 +2134,6 @@ module Aws::ElastiCache
     #   The name of the parameter group to associate with this replication
     #   group. If this argument is omitted, the default cache parameter group
     #   for the specified engine is used.
-    #
-    #   <note markdown="1"> If you are restoring to an engine version that is different than the
-    #   original, you must specify the default version of that version. For
-    #   example, `CacheParameterGroupName=default.redis4.0`.
-    #
-    #    </note>
     #
     #   If you are running Redis version 3.2.4 or later, only one node group
     #   (shard), and want to use a default parameter group, we recommend that
@@ -2029,10 +2169,11 @@ module Aws::ElastiCache
     #   an Amazon Virtual Private Cloud (Amazon VPC).
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of cost allocation tags to be added to this resource. Tags are
-    #   comma-separated key,value pairs (e.g. Key=`myKey`, Value=`myKeyValue`.
-    #   You can include multiple tags as shown following: Key=`myKey`,
-    #   Value=`myKeyValue` Key=`mySecondKey`, Value=`mySecondKeyValue`.
+    #   A list of tags to be added to this resource. Tags are comma-separated
+    #   key,value pairs (e.g. Key=`myKey`, Value=`myKeyValue`. You can include
+    #   multiple tags as shown following: Key=`myKey`, Value=`myKeyValue`
+    #   Key=`mySecondKey`, Value=`mySecondKeyValue`. Tags on replication
+    #   groups will be replicated to all nodes.
     #
     # @option params [Array<String>] :snapshot_arns
     #   A list of Amazon Resource Names (ARN) that uniquely identify the Redis
@@ -2180,7 +2321,10 @@ module Aws::ElastiCache
     #   The ID of the KMS key used to encrypt the disk in the cluster.
     #
     # @option params [Array<String>] :user_group_ids
-    #   The list of user groups to associate with the replication group.
+    #   The user group to associate with the replication group.
+    #
+    # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2327,6 +2471,22 @@ module Aws::ElastiCache
     #     at_rest_encryption_enabled: false,
     #     kms_key_id: "String",
     #     user_group_ids: ["UserGroupId"],
+    #     log_delivery_configurations: [
+    #       {
+    #         log_type: "slow-log", # accepts slow-log
+    #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #         destination_details: {
+    #           cloud_watch_logs_details: {
+    #             log_group: "String",
+    #           },
+    #           kinesis_firehose_details: {
+    #             delivery_stream: "String",
+    #           },
+    #         },
+    #         log_format: "text", # accepts text, json
+    #         enabled: false,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2344,6 +2504,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2381,6 +2547,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -2411,6 +2585,11 @@ module Aws::ElastiCache
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key used to encrypt the snapshot.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::CreateSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2548,6 +2727,12 @@ module Aws::ElastiCache
     #     cache_cluster_id: "String",
     #     snapshot_name: "String", # required
     #     kms_key_id: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2604,7 +2789,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Creates a Redis user. For more
+    # For Redis engine version 6.x onwards: Creates a Redis user. For more
     # information, see [Using Role Based Access Control (RBAC)][1].
     #
     #
@@ -2618,17 +2803,22 @@ module Aws::ElastiCache
     #   The username of the user.
     #
     # @option params [required, String] :engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #
     # @option params [Array<String>] :passwords
-    #   Passwords used for this user account. You can create up to two
-    #   passwords for each user.
+    #   Passwords used for this user. You can create up to two passwords for
+    #   each user.
     #
     # @option params [required, String] :access_string
-    #   Access permissions string used for this user account.
+    #   Access permissions string used for this user.
     #
     # @option params [Boolean] :no_password_required
-    #   Indicates a password is not required for this user account.
+    #   Indicates a password is not required for this user.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2650,6 +2840,12 @@ module Aws::ElastiCache
     #     passwords: ["String"],
     #     access_string: "AccessString", # required
     #     no_password_required: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2674,7 +2870,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Creates a Redis user group. For
+    # For Redis engine version 6.x onwards: Creates a Redis user group. For
     # more information, see [Using Role Based Access Control (RBAC)][1]
     #
     #
@@ -2685,10 +2881,15 @@ module Aws::ElastiCache
     #   The ID of the user group.
     #
     # @option params [required, String] :engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #
     # @option params [Array<String>] :user_ids
     #   The list of user IDs that belong to the user group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::UserGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2706,6 +2907,12 @@ module Aws::ElastiCache
     #     user_group_id: "String", # required
     #     engine: "EngineType", # required
     #     user_ids: ["UserId"],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2732,10 +2939,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Decreases the number of node groups in a Global Datastore
+    # Decreases the number of node groups in a Global datastore
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Integer] :node_group_count
     #   The number of node groups (shards) that results from the modification
@@ -2744,16 +2951,16 @@ module Aws::ElastiCache
     # @option params [Array<String>] :global_node_groups_to_remove
     #   If the value of NodeGroupCount is less than the current number of node
     #   groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain
-    #   is required. NodeGroupsToRemove is a list of NodeGroupIds to remove
-    #   from the cluster. ElastiCache for Redis will attempt to remove all
-    #   node groups listed by NodeGroupsToRemove from the cluster.
+    #   is required. GlobalNodeGroupsToRemove is a list of NodeGroupIds to
+    #   remove from the cluster. ElastiCache for Redis will attempt to remove
+    #   all node groups listed by GlobalNodeGroupsToRemove from the cluster.
     #
     # @option params [Array<String>] :global_node_groups_to_retain
     #   If the value of NodeGroupCount is less than the current number of node
     #   groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain
-    #   is required. NodeGroupsToRemove is a list of NodeGroupIds to remove
-    #   from the cluster. ElastiCache for Redis will attempt to remove all
-    #   node groups listed by NodeGroupsToRemove from the cluster.
+    #   is required. GlobalNodeGroupsToRetain is a list of NodeGroupIds to
+    #   retain from the cluster. ElastiCache for Redis will attempt to retain
+    #   all node groups listed by GlobalNodeGroupsToRetain from the cluster.
     #
     # @option params [required, Boolean] :apply_immediately
     #   Indicates that the shard reconfiguration process begins immediately.
@@ -2883,6 +3090,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2920,6 +3133,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -2940,7 +3161,11 @@ module Aws::ElastiCache
     #
     # * Redis (cluster mode enabled) clusters
     #
+    # * Redis (cluster mode disabled) clusters
+    #
     # * A cluster that is the last read replica of a replication group
+    #
+    # * A cluster that is the primary node of a replication group
     #
     # * A node group (shard) that has Multi-AZ mode enabled
     #
@@ -3030,6 +3255,12 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -3062,6 +3293,15 @@ module Aws::ElastiCache
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #   resp.cache_cluster.arn #=> String
+    #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
+    #   resp.cache_cluster.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster AWS API Documentation
     #
@@ -3073,7 +3313,8 @@ module Aws::ElastiCache
     end
 
     # Deletes the specified cache parameter group. You cannot delete a cache
-    # parameter group if it is associated with any cache clusters.
+    # parameter group if it is associated with any cache clusters. You
+    # cannot delete the default cache parameter groups in your account.
     #
     # @option params [required, String] :cache_parameter_group_name
     #   The name of the cache parameter group to delete.
@@ -3151,8 +3392,8 @@ module Aws::ElastiCache
 
     # Deletes a cache subnet group.
     #
-    # <note markdown="1"> You cannot delete a cache subnet group if it is associated with any
-    # clusters.
+    # <note markdown="1"> You cannot delete a default cache subnet group or one that is
+    # associated with any clusters.
     #
     #  </note>
     #
@@ -3188,25 +3429,28 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Deleting a Global Datastore is a two-step process:
+    # Deleting a Global datastore is a two-step process:
     #
     # * First, you must DisassociateGlobalReplicationGroup to remove the
-    #   secondary clusters in the Global Datastore.
+    #   secondary clusters in the Global datastore.
     #
-    # * Once the Global Datastore contains only the primary cluster, you can
-    #   use DeleteGlobalReplicationGroup API to delete the Global Datastore
-    #   while retainining the primary cluster using Retain…= true.
+    # * Once the Global datastore contains only the primary cluster, you can
+    #   use the `DeleteGlobalReplicationGroup` API to delete the Global
+    #   datastore while retainining the primary cluster using
+    #   `RetainPrimaryReplicationGroup=true`.
     #
     # Since the Global Datastore has only a primary cluster, you can delete
     # the Global Datastore while retaining the primary by setting
-    # `RetainPrimaryCluster=true`.
+    # `RetainPrimaryReplicationGroup=true`. The primary cluster is never
+    # deleted when deleting a Global Datastore. It can only be deleted when
+    # it no longer is associated with any Global Datastore.
     #
     # When you receive a successful response from this operation, Amazon
     # ElastiCache immediately begins deleting the selected resources; you
     # cannot cancel or revert this operation.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Boolean] :retain_primary_replication_group
     #   The primary replication group is retained as a standalone replication
@@ -3333,6 +3577,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -3370,6 +3620,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -3496,10 +3754,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Deletes a user. The user will
-    # be removed from all user groups and in turn removed from all
-    # replication groups. For more information, see [Using Role Based Access
-    # Control (RBAC)][1].
+    # For Redis engine version 6.x onwards: Deletes a user. The user will be
+    # removed from all user groups and in turn removed from all replication
+    # groups. For more information, see [Using Role Based Access Control
+    # (RBAC)][1].
     #
     #
     #
@@ -3547,8 +3805,8 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Deletes a ser group. The user
-    # group must first be disassociated from the replcation group before it
+    # For Redis engine version 6.x onwards: Deletes a user group. The user
+    # group must first be disassociated from the replication group before it
     # can be deleted. For more information, see [Using Role Based Access
     # Control (RBAC)][1].
     #
@@ -3804,6 +4062,12 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].pending_modified_values.engine_version #=> String
     #   resp.cache_clusters[0].pending_modified_values.cache_node_type #=> String
     #   resp.cache_clusters[0].pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_clusters[0].notification_configuration.topic_arn #=> String
     #   resp.cache_clusters[0].notification_configuration.topic_status #=> String
     #   resp.cache_clusters[0].cache_security_groups #=> Array
@@ -3836,6 +4100,15 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].transit_encryption_enabled #=> Boolean
     #   resp.cache_clusters[0].at_rest_encryption_enabled #=> Boolean
     #   resp.cache_clusters[0].arn #=> String
+    #   resp.cache_clusters[0].replication_group_log_delivery_enabled #=> Boolean
+    #   resp.cache_clusters[0].log_delivery_configurations #=> Array
+    #   resp.cache_clusters[0].log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_clusters[0].log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_clusters[0].log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_clusters[0].log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_clusters[0].log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_clusters[0].log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.cache_clusters[0].log_delivery_configurations[0].message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3866,8 +4139,9 @@ module Aws::ElastiCache
     #   The name of a specific cache parameter group family to return details
     #   for.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     #   Constraints:
     #
@@ -4848,8 +5122,9 @@ module Aws::ElastiCache
     # @option params [required, String] :cache_parameter_group_family
     #   The name of the cache parameter group family.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -5714,10 +5989,10 @@ module Aws::ElastiCache
 
     # Returns information about a particular global replication group. If no
     # identifier is specified, returns information about all Global
-    # Datastores.
+    # datastores.
     #
     # @option params [String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -5732,7 +6007,7 @@ module Aws::ElastiCache
     #   the value specified by `MaxRecords`.
     #
     # @option params [Boolean] :show_member_info
-    #   Returns the list of members that comprise the Global Datastore.
+    #   Returns the list of members that comprise the Global datastore.
     #
     # @return [Types::DescribeGlobalReplicationGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5910,6 +6185,12 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_groups[0].member_clusters #=> Array
     #   resp.replication_groups[0].member_clusters[0] #=> String
     #   resp.replication_groups[0].node_groups #=> Array
@@ -5947,6 +6228,14 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].arn #=> String
     #   resp.replication_groups[0].user_group_ids #=> Array
     #   resp.replication_groups[0].user_group_ids[0] #=> String
+    #   resp.replication_groups[0].log_delivery_configurations #=> Array
+    #   resp.replication_groups[0].log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_groups[0].log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_groups[0].log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_groups[0].log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_groups[0].log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_groups[0].log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_groups[0].log_delivery_configurations[0].message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5987,6 +6276,17 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -6020,6 +6320,17 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
     #       `cache.r5.24xlarge`
@@ -6050,6 +6361,10 @@ module Aws::ElastiCache
     #   * Redis configuration variables `appendonly` and `appendfsync` are not
     #     supported on Redis version 2.8.22 and later.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+    #
     # @option params [String] :duration
     #   The duration filter value, specified in years or seconds. Use this
     #   parameter to show only reservations for this duration.
@@ -6065,7 +6380,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization"|"All Upfront"|"Partial Upfront"| "No Upfront"`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6164,6 +6479,17 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -6197,6 +6523,17 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
     #       `cache.r5.24xlarge`
@@ -6227,6 +6564,10 @@ module Aws::ElastiCache
     #   * Redis configuration variables `appendonly` and `appendfsync` are not
     #     supported on Redis version 2.8.22 and later.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+    #
     # @option params [String] :duration
     #   Duration filter value, specified in years or seconds. Use this
     #   parameter to show only reservations for a given duration.
@@ -6242,7 +6583,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid Values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -7088,21 +7429,21 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Remove a secondary cluster from the Global Datastore using the Global
-    # Datastore name. The secondary cluster will no longer receive updates
+    # Remove a secondary cluster from the Global datastore using the Global
+    # datastore name. The secondary cluster will no longer receive updates
     # from the primary cluster, but will remain as a standalone cluster in
     # that AWS region.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, String] :replication_group_id
     #   The name of the secondary cluster you wish to remove from the Global
-    #   Datastore
+    #   datastore
     #
     # @option params [required, String] :replication_group_region
     #   The AWS region of secondary cluster you wish to remove from the Global
-    #   Datastore
+    #   datastore
     #
     # @return [Types::DisassociateGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7153,10 +7494,10 @@ module Aws::ElastiCache
     # clusters will become secondary.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, String] :primary_region
-    #   The AWS region of the primary cluster of the Global Datastore
+    #   The AWS region of the primary cluster of the Global datastore
     #
     # @option params [required, String] :primary_replication_group_id
     #   The name of the primary replication group
@@ -7205,10 +7546,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Increase the number of node groups in the Global Datastore
+    # Increase the number of node groups in the Global datastore
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Integer] :node_group_count
     #   The number of node groups you wish to add
@@ -7216,7 +7557,7 @@ module Aws::ElastiCache
     # @option params [Array<Types::RegionalConfiguration>] :regional_configurations
     #   Describes the replication group IDs, the AWS regions where they are
     #   stored and the shard configuration for each that comprise the Global
-    #   Datastore
+    #   datastore
     #
     # @option params [required, Boolean] :apply_immediately
     #   Indicates that the process begins immediately. At present, the only
@@ -7278,7 +7619,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Dynamically increases the number of replics in a Redis (cluster mode
+    # Dynamically increases the number of replicas in a Redis (cluster mode
     # disabled) replication group or the number of replica nodes in one or
     # more node groups (shards) of a Redis (cluster mode enabled)
     # replication group. This operation is performed with no cluster down
@@ -7340,6 +7681,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -7377,6 +7724,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -7478,20 +7833,21 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Lists all cost allocation tags currently on the named resource. A
-    # `cost allocation tag` is a key-value pair where the key is
-    # case-sensitive and the value is optional. You can use cost allocation
-    # tags to categorize and track your AWS costs.
+    # Lists all tags currently on a named resource.
+    #
+    # A tag is a key-value pair where the key and value are case-sensitive.
+    # You can use tags to categorize and track all your ElastiCache
+    # resources, with the exception of global replication group. When you
+    # add or remove tags on replication groups, those actions will be
+    # replicated to all nodes in the replication group. For more
+    # information, see [Resource-level permissions][1].
     #
     # If the cluster is not in the *available* state, `ListTagsForResource`
     # returns an error.
     #
-    # You can have a maximum of 50 cost allocation tags on an ElastiCache
-    # resource. For more information, see [Monitoring Costs with Tags][1].
     #
     #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource for which you want the
@@ -7576,7 +7932,7 @@ module Aws::ElastiCache
     #   cache nodes to remove.
     #
     #   For clusters running Redis, this value must be 1. For clusters running
-    #   Memcached, this value must be between 1 and 20.
+    #   Memcached, this value must be between 1 and 40.
     #
     #   <note markdown="1"> Adding or removing Memcached cache nodes can be applied immediately or
     #   as a pending operation (see `ApplyImmediately`).
@@ -7633,6 +7989,10 @@ module Aws::ElastiCache
     #    </note>
     #
     # @option params [Array<String>] :new_availability_zones
+    #   <note markdown="1"> This option is only supported on Memcached clusters.
+    #
+    #    </note>
+    #
     #   The list of Availability Zones where the new Memcached cache nodes are
     #   created.
     #
@@ -7641,8 +8001,6 @@ module Aws::ElastiCache
     #   number of cache nodes pending creation (which may be zero). The number
     #   of Availability Zones supplied in this list must match the cache nodes
     #   being added in this request.
-    #
-    #   This option is only supported on Memcached clusters.
     #
     #   Scenarios:
     #
@@ -7856,7 +8214,10 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #
+    # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
     #
     # @return [Types::ModifyCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7925,6 +8286,22 @@ module Aws::ElastiCache
     #     cache_node_type: "String",
     #     auth_token: "String",
     #     auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
+    #     log_delivery_configurations: [
+    #       {
+    #         log_type: "slow-log", # accepts slow-log
+    #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #         destination_details: {
+    #           cloud_watch_logs_details: {
+    #             log_group: "String",
+    #           },
+    #           kinesis_firehose_details: {
+    #             delivery_stream: "String",
+    #           },
+    #         },
+    #         log_format: "text", # accepts text, json
+    #         enabled: false,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7948,6 +8325,12 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -7980,6 +8363,15 @@ module Aws::ElastiCache
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #   resp.cache_cluster.arn #=> String
+    #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
+    #   resp.cache_cluster.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster AWS API Documentation
     #
@@ -8158,10 +8550,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Modifies the settings for a Global Datastore.
+    # Modifies the settings for a Global datastore.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Boolean] :apply_immediately
     #   This parameter causes the modifications in this request and any
@@ -8170,15 +8562,20 @@ module Aws::ElastiCache
     #   requested to be applied in PreferredMaintenceWindow.
     #
     # @option params [String] :cache_node_type
-    #   A valid cache node type that you want to scale this Global Datastore
+    #   A valid cache node type that you want to scale this Global datastore
     #   to.
     #
     # @option params [String] :engine_version
     #   The upgraded version of the cache engine to be run on the clusters in
-    #   the Global Datastore.
+    #   the Global datastore.
+    #
+    # @option params [String] :cache_parameter_group_name
+    #   The name of the cache parameter group to use with the Global
+    #   datastore. It must be compatible with the major engine version used by
+    #   the Global datastore.
     #
     # @option params [String] :global_replication_group_description
-    #   A description of the Global Datastore
+    #   A description of the Global datastore
     #
     # @option params [Boolean] :automatic_failover_enabled
     #   Determines whether a read replica is automatically promoted to
@@ -8195,6 +8592,7 @@ module Aws::ElastiCache
     #     apply_immediately: false, # required
     #     cache_node_type: "String",
     #     engine_version: "String",
+    #     cache_parameter_group_name: "String",
     #     global_replication_group_description: "String",
     #     automatic_failover_enabled: false,
     #   })
@@ -8273,13 +8671,9 @@ module Aws::ElastiCache
     #   Valid values: `true` \| `false`
     #
     # @option params [Boolean] :multi_az_enabled
-    #   A flag indicating if you have Multi-AZ enabled to enhance fault
-    #   tolerance. For more information, see [Minimizing Downtime:
-    #   Multi-AZ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @option params [String] :node_group_id
     #   Deprecated. This parameter is not used.
@@ -8433,17 +8827,20 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
     # @option params [Array<String>] :user_group_ids_to_add
-    #   A list of user group IDs.
+    #   The user group you are associating with the replication group.
     #
     # @option params [Array<String>] :user_group_ids_to_remove
-    #   A list of users groups to remove, meaning the users in the group no
-    #   longer can access thereplication group.
+    #   The user group to remove, meaning the users in the group no longer can
+    #   access the replication group.
     #
     # @option params [Boolean] :remove_user_groups
     #   Removes the user groups that can access this replication group.
+    #
+    # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
     #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8547,6 +8944,22 @@ module Aws::ElastiCache
     #     user_group_ids_to_add: ["UserGroupId"],
     #     user_group_ids_to_remove: ["UserGroupId"],
     #     remove_user_groups: false,
+    #     log_delivery_configurations: [
+    #       {
+    #         log_type: "slow-log", # accepts slow-log
+    #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #         destination_details: {
+    #           cloud_watch_logs_details: {
+    #             log_group: "String",
+    #           },
+    #           kinesis_firehose_details: {
+    #             delivery_stream: "String",
+    #           },
+    #         },
+    #         log_format: "text", # accepts text, json
+    #         enabled: false,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8564,6 +8977,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -8601,6 +9020,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -8613,7 +9040,7 @@ module Aws::ElastiCache
 
     # Modifies a replication group's shards (node groups) by allowing you
     # to add shards, remove shards, or rebalance the keyspaces among
-    # exisiting shards.
+    # existing shards.
     #
     # @option params [required, String] :replication_group_id
     #   The name of the Redis (cluster mode enabled) cluster (replication
@@ -8692,6 +9119,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -8729,6 +9162,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -8745,17 +9186,16 @@ module Aws::ElastiCache
     #   The ID of the user.
     #
     # @option params [String] :access_string
-    #   Access permissions string used for this user account.
+    #   Access permissions string used for this user.
     #
     # @option params [String] :append_access_string
     #   Adds additional user permissions to the access string.
     #
     # @option params [Array<String>] :passwords
-    #   The passwords belonging to the user account. You are allowed up to
-    #   two.
+    #   The passwords belonging to the user. You are allowed up to two.
     #
     # @option params [Boolean] :no_password_required
-    #   Indicates no password is required for the user account.
+    #   Indicates no password is required for the user.
     #
     # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8853,7 +9293,15 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Allows you to purchase a reserved cache node offering.
+    # Allows you to purchase a reserved cache node offering. Reserved nodes
+    # are not eligible for cancellation and are non-refundable. For more
+    # information, see [Managing Costs with Reserved Nodes][1] for Redis or
+    # [Managing Costs with Reserved Nodes][2] for Memcached.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/reserved-nodes.html
+    # [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/reserved-nodes.html
     #
     # @option params [required, String] :reserved_cache_nodes_offering_id
     #   The ID of the reserved cache node offering to purchase.
@@ -8876,6 +9324,11 @@ module Aws::ElastiCache
     #
     #   Default: `1`
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::PurchaseReservedCacheNodesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseReservedCacheNodesOfferingResult#reserved_cache_node #reserved_cache_node} => Types::ReservedCacheNode
@@ -8895,6 +9348,12 @@ module Aws::ElastiCache
     #     reserved_cache_nodes_offering_id: "String", # required
     #     reserved_cache_node_id: "String",
     #     cache_node_count: 1,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8928,7 +9387,7 @@ module Aws::ElastiCache
     # shards in the cluster.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Boolean] :apply_immediately
     #   If `True`, redistribution is applied immediately.
@@ -9085,6 +9544,12 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.engine_version #=> String
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -9117,6 +9582,15 @@ module Aws::ElastiCache
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #   resp.cache_cluster.arn #=> String
+    #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
+    #   resp.cache_cluster.log_delivery_configurations #=> Array
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster AWS API Documentation
     #
@@ -9128,7 +9602,16 @@ module Aws::ElastiCache
     end
 
     # Removes the tags identified by the `TagKeys` list from the named
-    # resource.
+    # resource. A tag is a key-value pair where the key and value are
+    # case-sensitive. You can use tags to categorize and track all your
+    # ElastiCache resources, with the exception of global replication group.
+    # When you add or remove tags on replication groups, those actions will
+    # be replicated to all nodes in the replication group. For more
+    # information, see [Resource-level permissions][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource from which you want the
@@ -9379,6 +9862,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -9416,6 +9905,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -9454,10 +9951,10 @@ module Aws::ElastiCache
     #   1.  Replication group message: `Test Failover API called for node
     #       group <node-group-id>`
     #
-    #   2.  Cache cluster message: `Failover from master node
+    #   2.  Cache cluster message: `Failover from primary node
     #       <primary-node-id> to replica node <node-id> completed`
     #
-    #   3.  Replication group message: `Failover from master node
+    #   3.  Replication group message: `Failover from primary node
     #       <primary-node-id> to replica node <node-id> completed`
     #
     #   4.  Cache cluster message: `Recovering cache nodes <node-id>`
@@ -9515,6 +10012,12 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -9552,6 +10055,14 @@ module Aws::ElastiCache
     #   resp.replication_group.arn #=> String
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -9575,7 +10086,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

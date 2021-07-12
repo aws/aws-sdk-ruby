@@ -1,6 +1,93 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2021-06-17)
+------------------
+
+* Feature - This release enables Database Activity Streams for RDS Oracle
+
+1.120.0 (2021-06-16)
+------------------
+
+* Feature - This release enables fast cloning in Aurora Serverless. You can now clone between Aurora Serverless clusters and Aurora Provisioned clusters.
+
+1.119.0 (2021-06-04)
+------------------
+
+* Feature - Documentation updates for RDS: fixing an outdated link to the RDS documentation in DBInstance$DBInstanceStatus
+
+1.118.0 (2021-04-13)
+------------------
+
+* Feature - Clarify that enabling or disabling automated backups causes a brief downtime, not an outage.
+
+1.117.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.116.0 (2021-03-09)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy endpoints.
+
+1.115.0 (2021-02-19)
+------------------
+
+* Feature - Added awsBackupRecoveryPointArn in ModifyDBInstanceRequest and in the response of ModifyDBInstance.
+
+1.114.0 (2021-02-12)
+------------------
+
+* Feature - EngineMode in the response of DescribeDBClusterSnapshots. SupportedEngineModes, SupportsParallelQuery and SupportsGlobalDatabases in ValidUpgradeTarget of DBEngineVersions in DescribeDBEngineVersions.
+
+1.113.0 (2021-02-11)
+------------------
+
+* Feature - Adding support for RDS Aurora Global Database Failover
+
+1.112.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2021-01-22)
+------------------
+
+* Feature - Documentation updates for Amazon RDS
+
+1.110.0 (2021-01-11)
+------------------
+
+* Feature - This releases adds support for Major Version Upgrades on Aurora MySQL Global Clusters. Customers will be able to upgrade their whole Aurora MySQL Global Cluster to a new major engine version.
+
+1.109.0 (2020-12-22)
+------------------
+
+* Feature - Adds customer-owned IP address (CoIP) support to Amazon RDS on AWS Outposts.
+
+1.108.0 (2020-12-18)
+------------------
+
+* Feature - Adds IAM DB authentication information to the PendingModifiedValues output of the DescribeDBInstances API. Adds ClusterPendingModifiedValues information to the output of the DescribeDBClusters API.
+
+1.107.0 (2020-12-04)
+------------------
+
+* Feature - Adds support for Amazon RDS Cross-Region Automated Backups, the ability to setup automatic replication of snapshots and transaction logs from a primary AWS Region to a secondary AWS Region.
+
+* Feature - Support `pre_signed_url` generation for `StartDBInstanceAutomatedBackupsReplication`.
+
+1.106.0 (2020-11-17)
+------------------
+
+* Feature - Support copy-db-snapshot in the one region on cross clusters and local cluster for RDSonVmware. Add target-custom-availability-zone parameter to specify where a snapshot should be copied.
+
+1.105.0 (2020-11-05)
+------------------
+
+* Feature - Supports a new parameter to set the max allocated storage in gigabytes for the CreateDBInstanceReadReplica API.
+
 1.104.0 (2020-10-15)
 ------------------
 

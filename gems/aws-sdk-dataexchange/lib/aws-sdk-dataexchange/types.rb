@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -325,10 +325,9 @@ module Aws::DataExchange
 
     # The CreateJob request. AWS Data Exchange Jobs are asynchronous import
     # or export operations used to create or copy assets. A data set owner
-    # can both import and export as they see fit. Someone with an
-    # entitlement to a data set can only export. Jobs are deleted 90 days
-    # after they are created. Created jobs must be started with the StartJob
-    # operation.
+    # can both import and export assets. A subscriber with an entitlement to
+    # a data set can only export. Jobs are deleted 90 days after they are
+    # created. Created jobs must be started with the StartJob operation.
     #
     # @note When making an API call, you may pass CreateJobRequest
     #   data as a hash:
@@ -355,6 +354,20 @@ module Aws::DataExchange
     #             },
     #             revision_id: "Id", # required
     #           },
+    #           export_revisions_to_s3: {
+    #             data_set_id: "Id", # required
+    #             encryption: {
+    #               kms_key_arn: "__string",
+    #               type: "aws:kms", # required, accepts aws:kms, AES256
+    #             },
+    #             revision_destinations: [ # required
+    #               {
+    #                 bucket: "__string", # required
+    #                 key_pattern: "__string",
+    #                 revision_id: "Id", # required
+    #               },
+    #             ],
+    #           },
     #           import_asset_from_signed_url: {
     #             asset_name: "AssetName", # required
     #             data_set_id: "Id", # required
@@ -372,7 +385,7 @@ module Aws::DataExchange
     #             revision_id: "Id", # required
     #           },
     #         },
-    #         type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL
+    #         type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3
     #       }
     #
     # @!attribute [rw] details
@@ -831,6 +844,74 @@ module Aws::DataExchange
       :data_set_id,
       :encryption,
       :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the operation to be performed by the job.
+    #
+    # @note When making an API call, you may pass ExportRevisionsToS3RequestDetails
+    #   data as a hash:
+    #
+    #       {
+    #         data_set_id: "Id", # required
+    #         encryption: {
+    #           kms_key_arn: "__string",
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
+    #         revision_destinations: [ # required
+    #           {
+    #             bucket: "__string", # required
+    #             key_pattern: "__string",
+    #             revision_id: "Id", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for the data set associated with this export
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   Encryption configuration for the export job.
+    #   @return [Types::ExportServerSideEncryption]
+    #
+    # @!attribute [rw] revision_destinations
+    #   The destination for the revision.
+    #   @return [Array<Types::RevisionDestinationEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ExportRevisionsToS3RequestDetails AWS API Documentation
+    #
+    class ExportRevisionsToS3RequestDetails < Struct.new(
+      :data_set_id,
+      :encryption,
+      :revision_destinations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the export revisions to Amazon S3 response.
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for the data set associated with this export
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   Encryption configuration of the export job.
+    #   @return [Types::ExportServerSideEncryption]
+    #
+    # @!attribute [rw] revision_destinations
+    #   The destination in Amazon S3 where the revision is exported.
+    #   @return [Array<Types::RevisionDestinationEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ExportRevisionsToS3ResponseDetails AWS API Documentation
+    #
+    class ExportRevisionsToS3ResponseDetails < Struct.new(
+      :data_set_id,
+      :encryption,
+      :revision_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1716,6 +1797,20 @@ module Aws::DataExchange
     #           },
     #           revision_id: "Id", # required
     #         },
+    #         export_revisions_to_s3: {
+    #           data_set_id: "Id", # required
+    #           encryption: {
+    #             kms_key_arn: "__string",
+    #             type: "aws:kms", # required, accepts aws:kms, AES256
+    #           },
+    #           revision_destinations: [ # required
+    #             {
+    #               bucket: "__string", # required
+    #               key_pattern: "__string",
+    #               revision_id: "Id", # required
+    #             },
+    #           ],
+    #         },
     #         import_asset_from_signed_url: {
     #           asset_name: "AssetName", # required
     #           data_set_id: "Id", # required
@@ -1742,6 +1837,10 @@ module Aws::DataExchange
     #   Details about the export to Amazon S3 request.
     #   @return [Types::ExportAssetsToS3RequestDetails]
     #
+    # @!attribute [rw] export_revisions_to_s3
+    #   Details about the export to Amazon S3 request.
+    #   @return [Types::ExportRevisionsToS3RequestDetails]
+    #
     # @!attribute [rw] import_asset_from_signed_url
     #   Details about the import from signed URL request.
     #   @return [Types::ImportAssetFromSignedUrlRequestDetails]
@@ -1755,6 +1854,7 @@ module Aws::DataExchange
     class RequestDetails < Struct.new(
       :export_asset_to_signed_url,
       :export_assets_to_s3,
+      :export_revisions_to_s3,
       :import_asset_from_signed_url,
       :import_assets_from_s3)
       SENSITIVE = []
@@ -1795,6 +1895,10 @@ module Aws::DataExchange
     #   Details for the export to Amazon S3 response.
     #   @return [Types::ExportAssetsToS3ResponseDetails]
     #
+    # @!attribute [rw] export_revisions_to_s3
+    #   Details for the export revisions to Amazon S3 response.
+    #   @return [Types::ExportRevisionsToS3ResponseDetails]
+    #
     # @!attribute [rw] import_asset_from_signed_url
     #   Details for the import from signed URL response.
     #   @return [Types::ImportAssetFromSignedUrlResponseDetails]
@@ -1808,8 +1912,49 @@ module Aws::DataExchange
     class ResponseDetails < Struct.new(
       :export_asset_to_signed_url,
       :export_assets_to_s3,
+      :export_revisions_to_s3,
       :import_asset_from_signed_url,
       :import_assets_from_s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination where the assets in the revision will be exported.
+    #
+    # @note When making an API call, you may pass RevisionDestinationEntry
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "__string", # required
+    #         key_pattern: "__string",
+    #         revision_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket that is the destination for the assets in the
+    #   revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pattern
+    #   A string representing the pattern for generated names of the
+    #   individual assets in the revision. For more information about key
+    #   patterns, see [Key patterns when exporting revisions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The unique identifier for the revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevisionDestinationEntry AWS API Documentation
+    #
+    class RevisionDestinationEntry < Struct.new(
+      :bucket,
+      :key_pattern,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-04-01)
+------------------
+
+* Feature - Lex now supports the ja-JP locale
+
+1.44.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-11-24)
+------------------
+
+* Feature - Lex now supports es-419, de-DE locales
+
+1.41.0 (2020-11-19)
+------------------
+
+* Feature - Amazon Lex supports managing input and output contexts as well as default values for slots.
+
+1.40.0 (2020-11-12)
+------------------
+
+* Feature - Lex now supports es-ES, it-IT, fr-FR and fr-CA locales
+
 1.39.0 (2020-09-30)
 ------------------
 

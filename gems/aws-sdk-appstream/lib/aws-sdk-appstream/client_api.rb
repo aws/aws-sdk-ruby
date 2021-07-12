@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -54,6 +54,8 @@ module Aws::AppStream
     CreateStackResult = Shapes::StructureShape.new(name: 'CreateStackResult')
     CreateStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateStreamingURLRequest')
     CreateStreamingURLResult = Shapes::StructureShape.new(name: 'CreateStreamingURLResult')
+    CreateUpdatedImageRequest = Shapes::StructureShape.new(name: 'CreateUpdatedImageRequest')
+    CreateUpdatedImageResult = Shapes::StructureShape.new(name: 'CreateUpdatedImageResult')
     CreateUsageReportSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateUsageReportSubscriptionRequest')
     CreateUsageReportSubscriptionResult = Shapes::StructureShape.new(name: 'CreateUsageReportSubscriptionResult')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
@@ -392,6 +394,18 @@ module Aws::AppStream
     CreateStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateStreamingURLResult.struct_class = Types::CreateStreamingURLResult
 
+    CreateUpdatedImageRequest.add_member(:existing_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "existingImageName"))
+    CreateUpdatedImageRequest.add_member(:new_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "newImageName"))
+    CreateUpdatedImageRequest.add_member(:new_image_description, Shapes::ShapeRef.new(shape: Description, location_name: "newImageDescription"))
+    CreateUpdatedImageRequest.add_member(:new_image_display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "newImageDisplayName"))
+    CreateUpdatedImageRequest.add_member(:new_image_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "newImageTags"))
+    CreateUpdatedImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CreateUpdatedImageRequest.struct_class = Types::CreateUpdatedImageRequest
+
+    CreateUpdatedImageResult.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "image"))
+    CreateUpdatedImageResult.add_member(:can_update_image, Shapes::ShapeRef.new(shape: Boolean, location_name: "canUpdateImage"))
+    CreateUpdatedImageResult.struct_class = Types::CreateUpdatedImageResult
+
     CreateUsageReportSubscriptionRequest.struct_class = Types::CreateUsageReportSubscriptionRequest
 
     CreateUsageReportSubscriptionResult.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))
@@ -635,6 +649,7 @@ module Aws::AppStream
     Image.add_member(:public_base_image_released_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublicBaseImageReleasedDate"))
     Image.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     Image.add_member(:image_permissions, Shapes::ShapeRef.new(shape: ImagePermissions, location_name: "ImagePermissions"))
+    Image.add_member(:image_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "ImageErrors"))
     Image.struct_class = Types::Image
 
     ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -1105,6 +1120,21 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:create_updated_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUpdatedImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUpdatedImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUpdatedImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
       api.add_operation(:create_usage_report_subscription, Seahorse::Model::Operation.new.tap do |o|

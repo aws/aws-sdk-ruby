@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -40,8 +40,10 @@ module Aws::ServiceQuotas
   # * {ResourceAlreadyExistsException}
   # * {ServiceException}
   # * {ServiceQuotaTemplateNotInUseException}
+  # * {TagPolicyViolationException}
   # * {TemplatesNotAvailableInRegionException}
   # * {TooManyRequestsException}
+  # * {TooManyTagsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -244,6 +246,21 @@ module Aws::ServiceQuotas
       end
     end
 
+    class TagPolicyViolationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ServiceQuotas::Types::TagPolicyViolationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class TemplatesNotAvailableInRegionException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -264,6 +281,21 @@ module Aws::ServiceQuotas
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ServiceQuotas::Types::TooManyRequestsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ServiceQuotas::Types::TooManyTagsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

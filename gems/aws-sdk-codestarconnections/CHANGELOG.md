@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-04-14)
+------------------
+
+* Feature - This release adds tagging support for CodeStar Connections Host resources
+
+1.14.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2020-11-23)
+------------------
+
+* Feature - Added support for the UpdateHost API.
+
 1.11.0 (2020-09-30)
 ------------------
 

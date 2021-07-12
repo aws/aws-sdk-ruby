@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -122,8 +122,8 @@ module Aws::RDS
     # The unique identifier for the lease associated with the reserved DB
     # instance.
     #
-    # <note markdown="1"> AWS Support might request the lease ID for an issue related to a
-    # reserved DB instance.
+    # <note markdown="1"> Amazon Web Services Support might request the lease ID for an issue
+    # related to a reserved DB instance.
     #
     #  </note>
     # @return [String]

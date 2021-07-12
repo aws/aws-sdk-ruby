@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -16,6 +16,7 @@ module Aws::ForecastService
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
+    AutoMLOverrideStrategy = Shapes::StringShape.new(name: 'AutoMLOverrideStrategy')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CategoricalParameterRange = Shapes::StructureShape.new(name: 'CategoricalParameterRange')
     CategoricalParameterRanges = Shapes::ListShape.new(name: 'CategoricalParameterRanges')
@@ -31,6 +32,8 @@ module Aws::ForecastService
     CreateForecastExportJobResponse = Shapes::StructureShape.new(name: 'CreateForecastExportJobResponse')
     CreateForecastRequest = Shapes::StructureShape.new(name: 'CreateForecastRequest')
     CreateForecastResponse = Shapes::StructureShape.new(name: 'CreateForecastResponse')
+    CreatePredictorBacktestExportJobRequest = Shapes::StructureShape.new(name: 'CreatePredictorBacktestExportJobRequest')
+    CreatePredictorBacktestExportJobResponse = Shapes::StructureShape.new(name: 'CreatePredictorBacktestExportJobResponse')
     CreatePredictorRequest = Shapes::StructureShape.new(name: 'CreatePredictorRequest')
     CreatePredictorResponse = Shapes::StructureShape.new(name: 'CreatePredictorResponse')
     DataDestination = Shapes::StructureShape.new(name: 'DataDestination')
@@ -47,7 +50,9 @@ module Aws::ForecastService
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
     DeleteForecastExportJobRequest = Shapes::StructureShape.new(name: 'DeleteForecastExportJobRequest')
     DeleteForecastRequest = Shapes::StructureShape.new(name: 'DeleteForecastRequest')
+    DeletePredictorBacktestExportJobRequest = Shapes::StructureShape.new(name: 'DeletePredictorBacktestExportJobRequest')
     DeletePredictorRequest = Shapes::StructureShape.new(name: 'DeletePredictorRequest')
+    DeleteResourceTreeRequest = Shapes::StructureShape.new(name: 'DeleteResourceTreeRequest')
     DescribeDatasetGroupRequest = Shapes::StructureShape.new(name: 'DescribeDatasetGroupRequest')
     DescribeDatasetGroupResponse = Shapes::StructureShape.new(name: 'DescribeDatasetGroupResponse')
     DescribeDatasetImportJobRequest = Shapes::StructureShape.new(name: 'DescribeDatasetImportJobRequest')
@@ -58,12 +63,16 @@ module Aws::ForecastService
     DescribeForecastExportJobResponse = Shapes::StructureShape.new(name: 'DescribeForecastExportJobResponse')
     DescribeForecastRequest = Shapes::StructureShape.new(name: 'DescribeForecastRequest')
     DescribeForecastResponse = Shapes::StructureShape.new(name: 'DescribeForecastResponse')
+    DescribePredictorBacktestExportJobRequest = Shapes::StructureShape.new(name: 'DescribePredictorBacktestExportJobRequest')
+    DescribePredictorBacktestExportJobResponse = Shapes::StructureShape.new(name: 'DescribePredictorBacktestExportJobResponse')
     DescribePredictorRequest = Shapes::StructureShape.new(name: 'DescribePredictorRequest')
     DescribePredictorResponse = Shapes::StructureShape.new(name: 'DescribePredictorResponse')
     Domain = Shapes::StringShape.new(name: 'Domain')
     Double = Shapes::FloatShape.new(name: 'Double')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorMetric = Shapes::StructureShape.new(name: 'ErrorMetric')
+    ErrorMetrics = Shapes::ListShape.new(name: 'ErrorMetrics')
     EvaluationParameters = Shapes::StructureShape.new(name: 'EvaluationParameters')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationType = Shapes::StringShape.new(name: 'EvaluationType')
@@ -86,6 +95,7 @@ module Aws::ForecastService
     ForecastTypes = Shapes::ListShape.new(name: 'ForecastTypes')
     Forecasts = Shapes::ListShape.new(name: 'Forecasts')
     Frequency = Shapes::StringShape.new(name: 'Frequency')
+    GeolocationFormat = Shapes::StringShape.new(name: 'GeolocationFormat')
     GetAccuracyMetricsRequest = Shapes::StructureShape.new(name: 'GetAccuracyMetricsRequest')
     GetAccuracyMetricsResponse = Shapes::StructureShape.new(name: 'GetAccuracyMetricsResponse')
     HyperParameterTuningJobConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobConfig')
@@ -107,10 +117,13 @@ module Aws::ForecastService
     ListForecastExportJobsResponse = Shapes::StructureShape.new(name: 'ListForecastExportJobsResponse')
     ListForecastsRequest = Shapes::StructureShape.new(name: 'ListForecastsRequest')
     ListForecastsResponse = Shapes::StructureShape.new(name: 'ListForecastsResponse')
+    ListPredictorBacktestExportJobsRequest = Shapes::StructureShape.new(name: 'ListPredictorBacktestExportJobsRequest')
+    ListPredictorBacktestExportJobsResponse = Shapes::StructureShape.new(name: 'ListPredictorBacktestExportJobsResponse')
     ListPredictorsRequest = Shapes::StructureShape.new(name: 'ListPredictorsRequest')
     ListPredictorsResponse = Shapes::StructureShape.new(name: 'ListPredictorsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
     Metrics = Shapes::StructureShape.new(name: 'Metrics')
@@ -119,6 +132,8 @@ module Aws::ForecastService
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
     ParameterRanges = Shapes::StructureShape.new(name: 'ParameterRanges')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
+    PredictorBacktestExportJobSummary = Shapes::StructureShape.new(name: 'PredictorBacktestExportJobSummary')
+    PredictorBacktestExportJobs = Shapes::ListShape.new(name: 'PredictorBacktestExportJobs')
     PredictorEvaluationResults = Shapes::ListShape.new(name: 'PredictorEvaluationResults')
     PredictorExecution = Shapes::StructureShape.new(name: 'PredictorExecution')
     PredictorExecutionDetails = Shapes::StructureShape.new(name: 'PredictorExecutionDetails')
@@ -136,6 +151,7 @@ module Aws::ForecastService
     SchemaAttributes = Shapes::ListShape.new(name: 'SchemaAttributes')
     Statistics = Shapes::StructureShape.new(name: 'Statistics')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopResourceRequest = Shapes::StructureShape.new(name: 'StopResourceRequest')
     String = Shapes::StringShape.new(name: 'String')
     SupplementaryFeature = Shapes::StructureShape.new(name: 'SupplementaryFeature')
     SupplementaryFeatures = Shapes::ListShape.new(name: 'SupplementaryFeatures')
@@ -149,6 +165,7 @@ module Aws::ForecastService
     TestWindowDetails = Shapes::ListShape.new(name: 'TestWindowDetails')
     TestWindowSummary = Shapes::StructureShape.new(name: 'TestWindowSummary')
     TestWindows = Shapes::ListShape.new(name: 'TestWindows')
+    TimeZone = Shapes::StringShape.new(name: 'TimeZone')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampFormat = Shapes::StringShape.new(name: 'TimestampFormat')
     TrainingParameters = Shapes::MapShape.new(name: 'TrainingParameters')
@@ -156,6 +173,7 @@ module Aws::ForecastService
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDatasetGroupRequest = Shapes::StructureShape.new(name: 'UpdateDatasetGroupRequest')
     UpdateDatasetGroupResponse = Shapes::StructureShape.new(name: 'UpdateDatasetGroupResponse')
+    UseGeolocationForTimeZone = Shapes::BooleanShape.new(name: 'UseGeolocationForTimeZone')
     Value = Shapes::StringShape.new(name: 'Value')
     Values = Shapes::ListShape.new(name: 'Values')
     WeightedQuantileLoss = Shapes::StructureShape.new(name: 'WeightedQuantileLoss')
@@ -191,6 +209,9 @@ module Aws::ForecastService
     CreateDatasetImportJobRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DatasetArn"))
     CreateDatasetImportJobRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
     CreateDatasetImportJobRequest.add_member(:timestamp_format, Shapes::ShapeRef.new(shape: TimestampFormat, location_name: "TimestampFormat"))
+    CreateDatasetImportJobRequest.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
+    CreateDatasetImportJobRequest.add_member(:use_geolocation_for_time_zone, Shapes::ShapeRef.new(shape: UseGeolocationForTimeZone, location_name: "UseGeolocationForTimeZone"))
+    CreateDatasetImportJobRequest.add_member(:geolocation_format, Shapes::ShapeRef.new(shape: GeolocationFormat, location_name: "GeolocationFormat"))
     CreateDatasetImportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDatasetImportJobRequest.struct_class = Types::CreateDatasetImportJobRequest
 
@@ -227,10 +248,21 @@ module Aws::ForecastService
     CreateForecastResponse.add_member(:forecast_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ForecastArn"))
     CreateForecastResponse.struct_class = Types::CreateForecastResponse
 
+    CreatePredictorBacktestExportJobRequest.add_member(:predictor_backtest_export_job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "PredictorBacktestExportJobName"))
+    CreatePredictorBacktestExportJobRequest.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorArn"))
+    CreatePredictorBacktestExportJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: DataDestination, required: true, location_name: "Destination"))
+    CreatePredictorBacktestExportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreatePredictorBacktestExportJobRequest.struct_class = Types::CreatePredictorBacktestExportJobRequest
+
+    CreatePredictorBacktestExportJobResponse.add_member(:predictor_backtest_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorBacktestExportJobArn"))
+    CreatePredictorBacktestExportJobResponse.struct_class = Types::CreatePredictorBacktestExportJobResponse
+
     CreatePredictorRequest.add_member(:predictor_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "PredictorName"))
     CreatePredictorRequest.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlgorithmArn"))
     CreatePredictorRequest.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ForecastHorizon"))
+    CreatePredictorRequest.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     CreatePredictorRequest.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformAutoML"))
+    CreatePredictorRequest.add_member(:auto_ml_override_strategy, Shapes::ShapeRef.new(shape: AutoMLOverrideStrategy, location_name: "AutoMLOverrideStrategy"))
     CreatePredictorRequest.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformHPO"))
     CreatePredictorRequest.add_member(:training_parameters, Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
     CreatePredictorRequest.add_member(:evaluation_parameters, Shapes::ShapeRef.new(shape: EvaluationParameters, location_name: "EvaluationParameters"))
@@ -294,8 +326,14 @@ module Aws::ForecastService
     DeleteForecastRequest.add_member(:forecast_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ForecastArn"))
     DeleteForecastRequest.struct_class = Types::DeleteForecastRequest
 
+    DeletePredictorBacktestExportJobRequest.add_member(:predictor_backtest_export_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorBacktestExportJobArn"))
+    DeletePredictorBacktestExportJobRequest.struct_class = Types::DeletePredictorBacktestExportJobRequest
+
     DeletePredictorRequest.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorArn"))
     DeletePredictorRequest.struct_class = Types::DeletePredictorRequest
+
+    DeleteResourceTreeRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    DeleteResourceTreeRequest.struct_class = Types::DeleteResourceTreeRequest
 
     DescribeDatasetGroupRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DatasetGroupArn"))
     DescribeDatasetGroupRequest.struct_class = Types::DescribeDatasetGroupRequest
@@ -316,7 +354,11 @@ module Aws::ForecastService
     DescribeDatasetImportJobResponse.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DatasetImportJobArn"))
     DescribeDatasetImportJobResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DatasetArn"))
     DescribeDatasetImportJobResponse.add_member(:timestamp_format, Shapes::ShapeRef.new(shape: TimestampFormat, location_name: "TimestampFormat"))
+    DescribeDatasetImportJobResponse.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
+    DescribeDatasetImportJobResponse.add_member(:use_geolocation_for_time_zone, Shapes::ShapeRef.new(shape: UseGeolocationForTimeZone, location_name: "UseGeolocationForTimeZone"))
+    DescribeDatasetImportJobResponse.add_member(:geolocation_format, Shapes::ShapeRef.new(shape: GeolocationFormat, location_name: "GeolocationFormat"))
     DescribeDatasetImportJobResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DescribeDatasetImportJobResponse.add_member(:estimated_time_remaining_in_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "EstimatedTimeRemainingInMinutes"))
     DescribeDatasetImportJobResponse.add_member(:field_statistics, Shapes::ShapeRef.new(shape: FieldStatistics, location_name: "FieldStatistics"))
     DescribeDatasetImportJobResponse.add_member(:data_size, Shapes::ShapeRef.new(shape: Double, location_name: "DataSize"))
     DescribeDatasetImportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
@@ -361,11 +403,25 @@ module Aws::ForecastService
     DescribeForecastResponse.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     DescribeForecastResponse.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorArn"))
     DescribeForecastResponse.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DatasetGroupArn"))
+    DescribeForecastResponse.add_member(:estimated_time_remaining_in_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "EstimatedTimeRemainingInMinutes"))
     DescribeForecastResponse.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DescribeForecastResponse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DescribeForecastResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeForecastResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
     DescribeForecastResponse.struct_class = Types::DescribeForecastResponse
+
+    DescribePredictorBacktestExportJobRequest.add_member(:predictor_backtest_export_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorBacktestExportJobArn"))
+    DescribePredictorBacktestExportJobRequest.struct_class = Types::DescribePredictorBacktestExportJobRequest
+
+    DescribePredictorBacktestExportJobResponse.add_member(:predictor_backtest_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorBacktestExportJobArn"))
+    DescribePredictorBacktestExportJobResponse.add_member(:predictor_backtest_export_job_name, Shapes::ShapeRef.new(shape: Name, location_name: "PredictorBacktestExportJobName"))
+    DescribePredictorBacktestExportJobResponse.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorArn"))
+    DescribePredictorBacktestExportJobResponse.add_member(:destination, Shapes::ShapeRef.new(shape: DataDestination, location_name: "Destination"))
+    DescribePredictorBacktestExportJobResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    DescribePredictorBacktestExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    DescribePredictorBacktestExportJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribePredictorBacktestExportJobResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DescribePredictorBacktestExportJobResponse.struct_class = Types::DescribePredictorBacktestExportJobResponse
 
     DescribePredictorRequest.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorArn"))
     DescribePredictorRequest.struct_class = Types::DescribePredictorRequest
@@ -374,7 +430,9 @@ module Aws::ForecastService
     DescribePredictorResponse.add_member(:predictor_name, Shapes::ShapeRef.new(shape: Name, location_name: "PredictorName"))
     DescribePredictorResponse.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlgorithmArn"))
     DescribePredictorResponse.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: Integer, location_name: "ForecastHorizon"))
+    DescribePredictorResponse.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     DescribePredictorResponse.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformAutoML"))
+    DescribePredictorResponse.add_member(:auto_ml_override_strategy, Shapes::ShapeRef.new(shape: AutoMLOverrideStrategy, location_name: "AutoMLOverrideStrategy"))
     DescribePredictorResponse.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformHPO"))
     DescribePredictorResponse.add_member(:training_parameters, Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
     DescribePredictorResponse.add_member(:evaluation_parameters, Shapes::ShapeRef.new(shape: EvaluationParameters, location_name: "EvaluationParameters"))
@@ -383,6 +441,7 @@ module Aws::ForecastService
     DescribePredictorResponse.add_member(:featurization_config, Shapes::ShapeRef.new(shape: FeaturizationConfig, location_name: "FeaturizationConfig"))
     DescribePredictorResponse.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     DescribePredictorResponse.add_member(:predictor_execution_details, Shapes::ShapeRef.new(shape: PredictorExecutionDetails, location_name: "PredictorExecutionDetails"))
+    DescribePredictorResponse.add_member(:estimated_time_remaining_in_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "EstimatedTimeRemainingInMinutes"))
     DescribePredictorResponse.add_member(:dataset_import_job_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "DatasetImportJobArns"))
     DescribePredictorResponse.add_member(:auto_ml_algorithm_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "AutoMLAlgorithmArns"))
     DescribePredictorResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
@@ -394,6 +453,13 @@ module Aws::ForecastService
     EncryptionConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
     EncryptionConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, required: true, location_name: "KMSKeyArn"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
+
+    ErrorMetric.add_member(:forecast_type, Shapes::ShapeRef.new(shape: ForecastType, location_name: "ForecastType"))
+    ErrorMetric.add_member(:wape, Shapes::ShapeRef.new(shape: Double, location_name: "WAPE"))
+    ErrorMetric.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, location_name: "RMSE"))
+    ErrorMetric.struct_class = Types::ErrorMetric
+
+    ErrorMetrics.member = Shapes::ShapeRef.new(shape: ErrorMetric)
 
     EvaluationParameters.add_member(:number_of_backtest_windows, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfBacktestWindows"))
     EvaluationParameters.add_member(:back_test_window_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BackTestWindowOffset"))
@@ -464,6 +530,7 @@ module Aws::ForecastService
     GetAccuracyMetricsRequest.struct_class = Types::GetAccuracyMetricsRequest
 
     GetAccuracyMetricsResponse.add_member(:predictor_evaluation_results, Shapes::ShapeRef.new(shape: PredictorEvaluationResults, location_name: "PredictorEvaluationResults"))
+    GetAccuracyMetricsResponse.add_member(:auto_ml_override_strategy, Shapes::ShapeRef.new(shape: AutoMLOverrideStrategy, location_name: "AutoMLOverrideStrategy"))
     GetAccuracyMetricsResponse.struct_class = Types::GetAccuracyMetricsResponse
 
     HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, location_name: "ParameterRanges"))
@@ -533,6 +600,15 @@ module Aws::ForecastService
     ListForecastsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListForecastsResponse.struct_class = Types::ListForecastsResponse
 
+    ListPredictorBacktestExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPredictorBacktestExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPredictorBacktestExportJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListPredictorBacktestExportJobsRequest.struct_class = Types::ListPredictorBacktestExportJobsRequest
+
+    ListPredictorBacktestExportJobsResponse.add_member(:predictor_backtest_export_jobs, Shapes::ShapeRef.new(shape: PredictorBacktestExportJobs, location_name: "PredictorBacktestExportJobs"))
+    ListPredictorBacktestExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPredictorBacktestExportJobsResponse.struct_class = Types::ListPredictorBacktestExportJobsResponse
+
     ListPredictorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPredictorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListPredictorsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
@@ -548,14 +624,26 @@ module Aws::ForecastService
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    Metrics.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, location_name: "RMSE"))
+    Metrics.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, deprecated: true, location_name: "RMSE", metadata: {"deprecatedMessage"=>"This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"}))
     Metrics.add_member(:weighted_quantile_losses, Shapes::ShapeRef.new(shape: WeightedQuantileLosses, location_name: "WeightedQuantileLosses"))
+    Metrics.add_member(:error_metrics, Shapes::ShapeRef.new(shape: ErrorMetrics, location_name: "ErrorMetrics"))
     Metrics.struct_class = Types::Metrics
 
     ParameterRanges.add_member(:categorical_parameter_ranges, Shapes::ShapeRef.new(shape: CategoricalParameterRanges, location_name: "CategoricalParameterRanges"))
     ParameterRanges.add_member(:continuous_parameter_ranges, Shapes::ShapeRef.new(shape: ContinuousParameterRanges, location_name: "ContinuousParameterRanges"))
     ParameterRanges.add_member(:integer_parameter_ranges, Shapes::ShapeRef.new(shape: IntegerParameterRanges, location_name: "IntegerParameterRanges"))
     ParameterRanges.struct_class = Types::ParameterRanges
+
+    PredictorBacktestExportJobSummary.add_member(:predictor_backtest_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorBacktestExportJobArn"))
+    PredictorBacktestExportJobSummary.add_member(:predictor_backtest_export_job_name, Shapes::ShapeRef.new(shape: Name, location_name: "PredictorBacktestExportJobName"))
+    PredictorBacktestExportJobSummary.add_member(:destination, Shapes::ShapeRef.new(shape: DataDestination, location_name: "Destination"))
+    PredictorBacktestExportJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    PredictorBacktestExportJobSummary.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PredictorBacktestExportJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    PredictorBacktestExportJobSummary.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    PredictorBacktestExportJobSummary.struct_class = Types::PredictorBacktestExportJobSummary
+
+    PredictorBacktestExportJobs.member = Shapes::ShapeRef.new(shape: PredictorBacktestExportJobSummary)
 
     PredictorEvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResult)
 
@@ -610,7 +698,14 @@ module Aws::ForecastService
     Statistics.add_member(:max, Shapes::ShapeRef.new(shape: String, location_name: "Max"))
     Statistics.add_member(:avg, Shapes::ShapeRef.new(shape: Double, location_name: "Avg"))
     Statistics.add_member(:stddev, Shapes::ShapeRef.new(shape: Double, location_name: "Stddev"))
+    Statistics.add_member(:count_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountLong"))
+    Statistics.add_member(:count_distinct_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountDistinctLong"))
+    Statistics.add_member(:count_null_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountNullLong"))
+    Statistics.add_member(:count_nan_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountNanLong"))
     Statistics.struct_class = Types::Statistics
+
+    StopResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    StopResourceRequest.struct_class = Types::StopResourceRequest
 
     SupplementaryFeature.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     SupplementaryFeature.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
@@ -767,6 +862,19 @@ module Aws::ForecastService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_predictor_backtest_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePredictorBacktestExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePredictorBacktestExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePredictorBacktestExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:delete_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataset"
         o.http_method = "POST"
@@ -833,6 +941,28 @@ module Aws::ForecastService
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:delete_predictor_backtest_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePredictorBacktestExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePredictorBacktestExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_resource_tree, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourceTree"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourceTreeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:describe_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDataset"
         o.http_method = "POST"
@@ -889,6 +1019,16 @@ module Aws::ForecastService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePredictorRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePredictorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_predictor_backtest_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePredictorBacktestExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePredictorBacktestExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePredictorBacktestExportJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -982,6 +1122,22 @@ module Aws::ForecastService
         )
       end)
 
+      api.add_operation(:list_predictor_backtest_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPredictorBacktestExportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPredictorBacktestExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPredictorBacktestExportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_predictors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPredictors"
         o.http_method = "POST"
@@ -1006,6 +1162,17 @@ module Aws::ForecastService
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:stop_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

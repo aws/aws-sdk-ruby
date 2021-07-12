@@ -1,6 +1,236 @@
 Unreleased Changes
 ------------------
 
+1.248.0 (2021-07-07)
+------------------
+
+* Feature - This release adds resource ids and tagging support for VPC security group rules.
+
+1.247.0 (2021-07-02)
+------------------
+
+* Feature - This release removes network-insights-boundary
+
+1.246.0 (2021-07-01)
+------------------
+
+* Feature - Adding a new reserved field to support future infrastructure improvements for Amazon EC2 Fleet.
+
+1.245.0 (2021-06-23)
+------------------
+
+* Feature - This release adds support for provisioning your own IP (BYOIP) range in multiple regions. This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+
+1.244.0 (2021-06-16)
+------------------
+
+* Feature - This release adds support for VLAN-tagged network traffic over an Elastic Network Interface (ENI). This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+
+1.243.0 (2021-06-15)
+------------------
+
+* Feature - EC2 M5n, M5dn, R5n, R5dn metal instances with 100 Gbps network performance and Elastic Fabric Adapter (EFA) for ultra low latency
+
+1.242.0 (2021-06-11)
+------------------
+
+* Feature - Amazon EC2 adds new AMI property to flag outdated AMIs
+
+1.241.0 (2021-06-10)
+------------------
+
+* Feature - This release adds a new optional parameter connectivityType (public, private) for the CreateNatGateway API. Private NatGateway does not require customers to attach an InternetGateway to the VPC and can be used for communication with other VPCs and on-premise networks.
+
+1.240.0 (2021-06-01)
+------------------
+
+* Feature - Added idempotency to CreateNetworkInterface using the ClientToken parameter.
+
+1.239.0 (2021-05-27)
+------------------
+
+* Feature - This release removes resource ids and tagging support for VPC security group rules.
+
+1.238.0 (2021-05-26)
+------------------
+
+* Feature - This release adds resource ids and tagging support for VPC security group rules.
+
+1.237.0 (2021-05-24)
+------------------
+
+* Feature - This release adds support for creating and managing EC2 On-Demand Capacity Reservations on Outposts.
+
+1.236.0 (2021-05-12)
+------------------
+
+* Feature - High Memory virtual instances are powered by Intel Sky Lake CPUs and offer up to 12TB of memory.
+
+1.235.0 (2021-04-26)
+------------------
+
+* Feature - Adding support for Red Hat Enterprise Linux with HA for Reserved Instances.
+
+1.234.0 (2021-04-09)
+------------------
+
+* Feature - Add paginator support to DescribeStoreImageTasks and update documentation.
+
+1.233.0 (2021-04-06)
+------------------
+
+* Feature - This release adds support for storing EBS-backed AMIs in S3 and restoring them from S3 to enable cross-partition copying of AMIs
+
+1.232.0 (2021-04-01)
+------------------
+
+* Feature - VPC Flow Logs Service adds a new API, GetFlowLogsIntegrationTemplate, which generates CloudFormation templates for Athena. For more info, see https://docs.aws.amazon.com/console/vpc/flow-logs/athena
+
+1.231.0 (2021-03-30)
+------------------
+
+* Feature - ReplaceRootVolume feature enables customers to replace the EBS root volume of a running instance to a previously known state. Add support to grant account-level access to the EC2 serial console
+
+1.230.0 (2021-03-24)
+------------------
+
+* Feature - maximumEfaInterfaces added to DescribeInstanceTypes API
+
+1.229.0 (2021-03-22)
+------------------
+
+* Feature - This release adds support for UEFI boot on selected AMD- and Intel-based EC2 instances.
+
+1.228.0 (2021-03-19)
+------------------
+
+* Feature - X2gd instances are the next generation of memory-optimized instances powered by AWS-designed, Arm-based AWS Graviton2 processors.
+
+1.227.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.226.0 (2021-03-05)
+------------------
+
+* Feature - Expands EC2/Spot Fleet capacity-optimized allocation strategy to allow users to prioritize instance pools. Fleet attempts to fulfill priorities on a best-effort basis but optimizes for capacity first.
+
+1.225.0 (2021-02-17)
+------------------
+
+* Feature - This release includes a new filter for describe-vpc-endpoint-services.
+
+1.224.0 (2021-02-04)
+------------------
+
+* Feature - AWS Outposts now supports EBS local snapshots on Outposts that allows customers to store snapshots of EBS volumes and AMIs locally on S3 on Outposts.
+
+1.223.0 (2021-02-03)
+------------------
+
+* Feature - EC2 Public IP now supports API for setting PTR records on Elastic IP address.
+
+1.222.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.221.0 (2021-01-22)
+------------------
+
+* Feature - Introducing startDate field for CapacityReservation object for the date and time which the reservation started and adding reserved parameter for ModifyCapacityReservation.
+
+1.220.0 (2020-12-21)
+------------------
+
+* Feature - This release adds Tag On Create feature support for the AllocateAddress API.
+
+1.219.0 (2020-12-18)
+------------------
+
+* Feature - EBS io2 volumes now supports Multi-Attach
+
+1.218.0 (2020-12-17)
+------------------
+
+* Feature - C6gn instances are powered by AWS Graviton2 processors and offer 100 Gbps networking bandwidth. These instances deliver up to 40% better price-performance benefit versus comparable x86-based instances
+
+1.217.0 (2020-12-14)
+------------------
+
+* Feature - Add c5n.metal to ec2 instance types list
+
+1.216.0 (2020-12-10)
+------------------
+
+* Feature - TGW connect simplifies connectivity of SD-WAN appliances; IGMP support for TGW multicast; VPC Reachability Analyzer for VPC resources connectivity analysis.
+
+1.215.0 (2020-12-09)
+------------------
+
+* Feature - This release adds support for G4ad instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
+
+1.214.0 (2020-12-04)
+------------------
+
+* Feature - This release introduces tag-on-create capability for the CreateImage API. A user can now specify tags that will be applied to the new resources (image, snapshots or both), during creation time.
+
+1.213.0 (2020-12-01)
+------------------
+
+* Feature - This release adds support for: EBS gp3 volumes; and D3/D3en/R5b/M5zn instances powered by Intel Cascade Lake CPUs
+
+1.212.0 (2020-12-01)
+------------------
+
+* Feature - This release introduces Amazon EC2 Mac1 instances, a new Amazon EC2 instance family built on Apple Mac mini computers, powered by AWS Nitro System, and support running macOS workloads on Amazon EC2
+
+1.211.0 (2020-11-23)
+------------------
+
+* Feature - This release adds support for Multiple Private DNS names to DescribeVpcEndpointServices response.
+
+1.210.0 (2020-11-18)
+------------------
+
+* Feature - EC2 Fleet adds support of DeleteFleets API for instant type fleets. Now you can delete an instant type fleet and terminate all associated instances with a single API call.
+
+1.209.0 (2020-11-10)
+------------------
+
+* Feature - This release adds support for Gateway Load Balancer VPC endpoints and VPC endpoint services
+
+1.208.0 (2020-11-06)
+------------------
+
+* Feature - Network card support with four new attributes: NetworkCardIndex, NetworkPerformance, DefaultNetworkCardIndex, and MaximumNetworkInterfaces, added to the DescribeInstanceTypes API.
+
+1.207.0 (2020-11-05)
+------------------
+
+* Feature - Documentation updates for EC2.
+
+1.206.0 (2020-11-04)
+------------------
+
+* Feature - Added support for Client Connect Handler for AWS Client VPN. Fleet supports launching replacement instances in response to Capacity Rebalance recommendation.
+
+1.205.0 (2020-11-02)
+------------------
+
+* Feature - This release adds support for the following features: 1. P4d instances based on NVIDIA A100 GPUs.  2. NetworkCardIndex attribute to support multiple network cards.
+
+1.204.0 (2020-10-29)
+------------------
+
+* Feature - Support for Appliance mode on Transit Gateway that simplifies deployment of stateful network appliances. Added support for AWS Client VPN Self-Service Portal.
+
+1.203.0 (2020-10-28)
+------------------
+
+* Feature - AWS Nitro Enclaves general availability. Added support to RunInstances for creating enclave-enabled EC2 instances. New APIs to associate an ACM certificate with an IAM role, for enclave consumption.
+
 1.202.0 (2020-10-21)
 ------------------
 

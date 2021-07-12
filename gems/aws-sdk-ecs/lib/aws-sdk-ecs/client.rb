@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -400,6 +400,7 @@ module Aws::ECS
     #         target_capacity: 1,
     #         minimum_scaling_step_size: 1,
     #         maximum_scaling_step_size: 1,
+    #         instance_warmup_period: 1,
     #       },
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
     #     },
@@ -421,8 +422,9 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
@@ -459,7 +461,8 @@ module Aws::ECS
     # @option params [String] :cluster_name
     #   The name of your cluster. If you do not specify a name for your
     #   cluster, you create a cluster named `default`. Up to 255 letters
-    #   (uppercase and lowercase), numbers, and hyphens are allowed.
+    #   (uppercase and lowercase), numbers, underscores, and hyphens are
+    #   allowed.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the cluster to help you categorize and
@@ -497,14 +500,20 @@ module Aws::ECS
     #   specified, it will override the `containerInsights` value set with
     #   PutAccountSetting or PutAccountSettingDefault.
     #
+    # @option params [Types::ClusterConfiguration] :configuration
+    #   The execute command configuration for the cluster.
+    #
     # @option params [Array<String>] :capacity_providers
     #   The short name of one or more capacity providers to associate with the
-    #   cluster.
+    #   cluster. A capacity provider must be associated with a cluster before
+    #   it can be included as part of the default capacity provider strategy
+    #   of the cluster or used in a capacity provider strategy when calling
+    #   the CreateService or RunTask actions.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must already be created and not already associated
-    #   with another cluster. New capacity providers can be created with the
-    #   CreateCapacityProvider API operation.
+    #   with another cluster. New Auto Scaling group capacity providers can be
+    #   created with the CreateCapacityProvider API operation.
     #
     #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
     #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
@@ -516,27 +525,11 @@ module Aws::ECS
     #   is created.
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :default_capacity_provider_strategy
-    #   The capacity provider strategy to use by default for the cluster.
-    #
-    #   When creating a service or running a task on a cluster, if no capacity
-    #   provider or launch type is specified then the default capacity
-    #   provider strategy for the cluster is used.
-    #
-    #   A capacity provider strategy consists of one or more capacity
-    #   providers along with the `base` and `weight` to assign to them. A
-    #   capacity provider must be associated with the cluster to be used in a
-    #   capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
-    #   providers with an `ACTIVE` or `UPDATING` status can be used.
-    #
-    #   If specifying a capacity provider that uses an Auto Scaling group, the
-    #   capacity provider must already be created. New capacity providers can
-    #   be created with the CreateCapacityProvider API operation.
-    #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be associated
-    #   with a cluster to be used.
+    #   The capacity provider strategy to set as the default for the cluster.
+    #   When a default capacity provider strategy is set for a cluster, when
+    #   calling the RunTask or CreateService APIs wtih no capacity provider
+    #   strategy or launch type specified, the default capacity provider
+    #   strategy for the cluster is used.
     #
     #   If a default capacity provider strategy is not defined for a cluster
     #   during creation, it can be defined later with the
@@ -584,6 +577,19 @@ module Aws::ECS
     #         value: "String",
     #       },
     #     ],
+    #     configuration: {
+    #       execute_command_configuration: {
+    #         kms_key_id: "String",
+    #         logging: "NONE", # accepts NONE, DEFAULT, OVERRIDE
+    #         log_configuration: {
+    #           cloud_watch_log_group_name: "String",
+    #           cloud_watch_encryption_enabled: false,
+    #           s3_bucket_name: "String",
+    #           s3_encryption_enabled: false,
+    #           s3_key_prefix: "String",
+    #         },
+    #       },
+    #     },
     #     capacity_providers: ["String"],
     #     default_capacity_provider_strategy: [
     #       {
@@ -598,6 +604,13 @@ module Aws::ECS
     #
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.execute_command_configuration.logging #=> String, one of "NONE", "DEFAULT", "OVERRIDE"
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -766,17 +779,17 @@ module Aws::ECS
     #
     # @option params [required, String] :service_name
     #   The name of your service. Up to 255 letters (uppercase and lowercase),
-    #   numbers, and hyphens are allowed. Service names must be unique within
-    #   a cluster, but you can have similarly named services in multiple
-    #   clusters within a Region or across multiple Regions.
+    #   numbers, underscores, and hyphens are allowed. Service names must be
+    #   unique within a cluster, but you can have similarly named services in
+    #   multiple clusters within a Region or across multiple Regions.
     #
     # @option params [String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
     #   task definition to run in your service. If a `revision` is not
     #   specified, the latest `ACTIVE` revision is used.
     #
-    #   A task definition must be specified if the service is using the `ECS`
-    #   deployment controller.
+    #   A task definition must be specified if the service is using either the
+    #   `ECS` or `CODE_DEPLOY` deployment controllers.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancers to use with
@@ -785,11 +798,11 @@ module Aws::ECS
     #
     #   If the service is using the rolling update (`ECS`) deployment
     #   controller and using either an Application Load Balancer or Network
-    #   Load Balancer, you can specify multiple target groups to attach to the
-    #   service. The service-linked role is required for services that make
-    #   use of multiple target groups. For more information, see [Using
-    #   Service-Linked Roles for Amazon ECS][2] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   Load Balancer, you must specify one or more target group ARNs to
+    #   attach to the service. The service-linked role is required for
+    #   services that make use of multiple target groups. For more
+    #   information, see [Using service-linked roles for Amazon ECS][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -812,15 +825,17 @@ module Aws::ECS
     #   For Application Load Balancers and Network Load Balancers, this object
     #   must contain the load balancer target group ARN, the container name
     #   (as it appears in a container definition), and the container port to
-    #   access from the load balancer. When a task from this service is placed
-    #   on a container instance, the container instance and port combination
-    #   is registered as a target in the target group specified here.
+    #   access from the load balancer. The load balancer name parameter must
+    #   be omitted. When a task from this service is placed on a container
+    #   instance, the container instance and port combination is registered as
+    #   a target in the target group specified here.
     #
     #   For Classic Load Balancers, this object must contain the load balancer
     #   name, the container name (as it appears in a container definition),
-    #   and the container port to access from the load balancer. When a task
-    #   from this service is placed on a container instance, the container
-    #   instance is registered with the load balancer specified here.
+    #   and the container port to access from the load balancer. The target
+    #   group ARN parameter must be omitted. When a task from this service is
+    #   placed on a container instance, the container instance is registered
+    #   with the load balancer specified here.
     #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
@@ -836,19 +851,17 @@ module Aws::ECS
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
-    #   The details of the service discovery registries to assign to this
-    #   service. For more information, see [Service Discovery][1].
+    #   The details of the service discovery registry to associate with this
+    #   service. For more information, see [Service discovery][1].
     #
-    #   <note markdown="1"> Service discovery is supported for Fargate tasks if you are using
-    #   platform version v1.1.0 or later. For more information, see [AWS
-    #   Fargate Platform Versions][2].
+    #   <note markdown="1"> Each service may be associated with one service registry. Multiple
+    #   service registries per service isn't supported.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
@@ -863,51 +876,48 @@ module Aws::ECS
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #
     # @option params [String] :launch_type
-    #   The launch type on which to run your service. For more information,
-    #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
+    #   The infrastructure on which to run your service. For more information,
+    #   see [Amazon ECS launch types][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
-    #   If a `launchType` is specified, the `capacityProviderStrategy`
-    #   parameter must be omitted.
+    #   The `FARGATE` launch type runs your tasks on AWS Fargate On-Demand
+    #   infrastructure.
+    #
+    #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
+    #   provider strategy must be used. For more information, see [AWS Fargate
+    #   capacity providers][2] in the *Amazon ECS User Guide for AWS Fargate*.
+    #
+    #    </note>
+    #
+    #   The `EC2` launch type runs your tasks on Amazon EC2 instances
+    #   registered to your cluster.
+    #
+    #   The `EXTERNAL` launch type runs your tasks on your on-premise server
+    #   or virtual machine (VM) capacity registered to your cluster.
+    #
+    #   A service can use either a launch type or a capacity provider
+    #   strategy. If a `launchType` is specified, the
+    #   `capacityProviderStrategy` parameter must be omitted.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the service.
-    #
-    #   A capacity provider strategy consists of one or more capacity
-    #   providers along with the `base` and `weight` to assign to them. A
-    #   capacity provider must be associated with the cluster to be used in a
-    #   capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
-    #   providers with an `ACTIVE` or `UPDATING` status can be used.
     #
     #   If a `capacityProviderStrategy` is specified, the `launchType`
     #   parameter must be omitted. If no `capacityProviderStrategy` or
     #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
     #   the cluster is used.
     #
-    #   If specifying a capacity provider that uses an Auto Scaling group, the
-    #   capacity provider must already be created. New capacity providers can
-    #   be created with the CreateCapacityProvider API operation.
-    #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be associated
-    #   with a cluster to be used.
-    #
-    #   The PutClusterCapacityProviders API operation is used to update the
-    #   list of available capacity providers for a cluster after the cluster
-    #   is created.
-    #
     # @option params [String] :platform_version
     #   The platform version that your tasks in the service are running on. A
     #   platform version is specified only for tasks using the Fargate launch
     #   type. If one isn't specified, the `LATEST` platform version is used
-    #   by default. For more information, see [AWS Fargate Platform
-    #   Versions][1] in the *Amazon Elastic Container Service Developer
+    #   by default. For more information, see [AWS Fargate platform
+    #   versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     #
@@ -929,14 +939,14 @@ module Aws::ECS
     #   configured to use service discovery, an external deployment
     #   controller, multiple target groups, or Elastic Inference accelerators
     #   in which case you should not specify a role here. For more
-    #   information, see [Using Service-Linked Roles for Amazon ECS][1] in the
+    #   information, see [Using service-linked roles for Amazon ECS][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
     #   name with the path. For example, if a role with the name `bar` has a
     #   path of `/foo/` then you would specify `/foo/bar` as the role name.
-    #   For more information, see [Friendly Names and Paths][2] in the *IAM
+    #   For more information, see [Friendly names and paths][2] in the *IAM
     #   User Guide*.
     #
     #
@@ -962,7 +972,7 @@ module Aws::ECS
     #   The network configuration for the service. This parameter is required
     #   for task definitions that use the `awsvpc` network mode to receive
     #   their own elastic network interface, and it is not supported for other
-    #   network modes. For more information, see [Task Networking][1] in the
+    #   network modes. For more information, see [Task networking][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
@@ -1017,7 +1027,8 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     #
     # @option params [Types::DeploymentController] :deployment_controller
-    #   The deployment controller to use for the service.
+    #   The deployment controller to use for the service. If no deployment
+    #   controller is specified, the default value of `ECS` is used.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the service to help you categorize and
@@ -1066,6 +1077,11 @@ module Aws::ECS
     #   tags are not propagated. Tags can only be propagated to the tasks
     #   within the service during service creation. To add tags to a task
     #   after service creation, use the TagResource API action.
+    #
+    # @option params [Boolean] :enable_execute_command
+    #   Whether or not the execute command functionality is enabled for the
+    #   service. If `true`, this enables execute command functionality on all
+    #   containers in the service tasks.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1213,7 +1229,7 @@ module Aws::ECS
     #     ],
     #     desired_count: 1,
     #     client_token: "String",
-    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #     capacity_provider_strategy: [
     #       {
     #         capacity_provider: "String", # required
@@ -1224,6 +1240,10 @@ module Aws::ECS
     #     platform_version: "String",
     #     role: "String",
     #     deployment_configuration: {
+    #       deployment_circuit_breaker: {
+    #         enable: false, # required
+    #         rollback: false, # required
+    #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
     #     },
@@ -1259,6 +1279,7 @@ module Aws::ECS
     #     ],
     #     enable_ecs_managed_tags: false,
     #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     enable_execute_command: false,
     #   })
     #
     # @example Response structure
@@ -1280,13 +1301,15 @@ module Aws::ECS
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
-    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.capacity_provider_strategy #=> Array
     #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.task_sets #=> Array
@@ -1303,7 +1326,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].running_count #=> Integer
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
-    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -1338,19 +1361,22 @@ module Aws::ECS
     #   resp.service.deployments[0].desired_count #=> Integer
     #   resp.service.deployments[0].pending_count #=> Integer
     #   resp.service.deployments[0].running_count #=> Integer
+    #   resp.service.deployments[0].failed_tasks #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
     #   resp.service.deployments[0].capacity_provider_strategy #=> Array
     #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.service.deployments[0].rollout_state_reason #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -1377,6 +1403,7 @@ module Aws::ECS
     #   resp.service.created_by #=> String
     #   resp.service.enable_ecs_managed_tags #=> Boolean
     #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.service.enable_execute_command #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
     #
@@ -1415,8 +1442,7 @@ module Aws::ECS
     #   The task definition for the tasks in the task set to use.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
-    #   An object representing the network configuration for a task or
-    #   service.
+    #   An object representing the network configuration for a task set.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancer to use with the
@@ -1550,7 +1576,7 @@ module Aws::ECS
     #         container_port: 1,
     #       },
     #     ],
-    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #     capacity_provider_strategy: [
     #       {
     #         capacity_provider: "String", # required
@@ -1587,7 +1613,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -1800,8 +1826,9 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
@@ -1867,6 +1894,13 @@ module Aws::ECS
     #
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.execute_command_configuration.logging #=> String, one of "NONE", "DEFAULT", "OVERRIDE"
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -1986,13 +2020,15 @@ module Aws::ECS
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
-    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.capacity_provider_strategy #=> Array
     #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.task_sets #=> Array
@@ -2009,7 +2045,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].running_count #=> Integer
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
-    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -2044,19 +2080,22 @@ module Aws::ECS
     #   resp.service.deployments[0].desired_count #=> Integer
     #   resp.service.deployments[0].pending_count #=> Integer
     #   resp.service.deployments[0].running_count #=> Integer
+    #   resp.service.deployments[0].failed_tasks #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
     #   resp.service.deployments[0].capacity_provider_strategy #=> Array
     #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.service.deployments[0].rollout_state_reason #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -2083,6 +2122,7 @@ module Aws::ECS
     #   resp.service.created_by #=> String
     #   resp.service.enable_ecs_managed_tags #=> Boolean
     #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.service.enable_execute_command #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
@@ -2146,7 +2186,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -2477,6 +2517,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -2487,9 +2531,9 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
-    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.requires_compatibilities #=> Array
-    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.inference_accelerators #=> Array
@@ -2502,6 +2546,10 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties #=> Array
     #   resp.task_definition.proxy_configuration.properties[0].name #=> String
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
+    #   resp.task_definition.registered_at #=> Time
+    #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.registered_by #=> String
+    #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -2575,8 +2623,9 @@ module Aws::ECS
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_providers[0].update_status_reason #=> String
     #   resp.capacity_providers[0].tags #=> Array
     #   resp.capacity_providers[0].tags[0].key #=> String
@@ -2604,33 +2653,16 @@ module Aws::ECS
     #   assumed.
     #
     # @option params [Array<String>] :include
-    #   Whether to include additional information about your clusters in the
-    #   response. If this field is omitted, the attachments, statistics, and
-    #   tags are not included.
+    #   Whether to include additional information about the clusters in the
+    #   response. If this field is omitted, this information isn't included.
     #
     #   If `ATTACHMENTS` is specified, the attachments for the container
     #   instances or tasks within the cluster are included.
     #
     #   If `SETTINGS` is specified, the settings for the cluster are included.
     #
-    #   If `STATISTICS` is specified, the following additional information,
-    #   separated by launch type, is included:
-    #
-    #   * runningEC2TasksCount
-    #
-    #   * runningFargateTasksCount
-    #
-    #   * pendingEC2TasksCount
-    #
-    #   * pendingFargateTasksCount
-    #
-    #   * activeEC2ServiceCount
-    #
-    #   * activeFargateServiceCount
-    #
-    #   * drainingEC2ServiceCount
-    #
-    #   * drainingFargateServiceCount
+    #   If `STATISTICS` is specified, the task and service count is included,
+    #   separated by launch type.
     #
     #   If `TAGS` is specified, the metadata tags associated with the cluster
     #   are included.
@@ -2668,7 +2700,7 @@ module Aws::ECS
     #
     #   resp = client.describe_clusters({
     #     clusters: ["String"],
-    #     include: ["ATTACHMENTS"], # accepts ATTACHMENTS, SETTINGS, STATISTICS, TAGS
+    #     include: ["ATTACHMENTS"], # accepts ATTACHMENTS, CONFIGURATIONS, SETTINGS, STATISTICS, TAGS
     #   })
     #
     # @example Response structure
@@ -2676,6 +2708,13 @@ module Aws::ECS
     #   resp.clusters #=> Array
     #   resp.clusters[0].cluster_arn #=> String
     #   resp.clusters[0].cluster_name #=> String
+    #   resp.clusters[0].configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.clusters[0].configuration.execute_command_configuration.logging #=> String, one of "NONE", "DEFAULT", "OVERRIDE"
+    #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
     #   resp.clusters[0].status #=> String
     #   resp.clusters[0].registered_container_instances_count #=> Integer
     #   resp.clusters[0].running_tasks_count #=> Integer
@@ -2718,8 +2757,7 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Describes Amazon Elastic Container Service container instances.
-    # Returns metadata about registered and remaining resources on each
+    # Describes one or more container instances. Returns metadata about each
     # container instance requested.
     #
     # @option params [String] :cluster
@@ -3008,13 +3046,15 @@ module Aws::ECS
     #   resp.services[0].desired_count #=> Integer
     #   resp.services[0].running_count #=> Integer
     #   resp.services[0].pending_count #=> Integer
-    #   resp.services[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.services[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.services[0].capacity_provider_strategy #=> Array
     #   resp.services[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.services[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.services[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].platform_version #=> String
     #   resp.services[0].task_definition #=> String
+    #   resp.services[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.services[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.services[0].deployment_configuration.maximum_percent #=> Integer
     #   resp.services[0].deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.services[0].task_sets #=> Array
@@ -3031,7 +3071,7 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].running_count #=> Integer
     #   resp.services[0].task_sets[0].created_at #=> Time
     #   resp.services[0].task_sets[0].updated_at #=> Time
-    #   resp.services[0].task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.services[0].task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.services[0].task_sets[0].capacity_provider_strategy #=> Array
     #   resp.services[0].task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.services[0].task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -3066,19 +3106,22 @@ module Aws::ECS
     #   resp.services[0].deployments[0].desired_count #=> Integer
     #   resp.services[0].deployments[0].pending_count #=> Integer
     #   resp.services[0].deployments[0].running_count #=> Integer
+    #   resp.services[0].deployments[0].failed_tasks #=> Integer
     #   resp.services[0].deployments[0].created_at #=> Time
     #   resp.services[0].deployments[0].updated_at #=> Time
     #   resp.services[0].deployments[0].capacity_provider_strategy #=> Array
     #   resp.services[0].deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.services[0].deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.services[0].deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.services[0].deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.services[0].deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.services[0].deployments[0].platform_version #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.services[0].deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.services[0].deployments[0].rollout_state_reason #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -3105,6 +3148,7 @@ module Aws::ECS
     #   resp.services[0].created_by #=> String
     #   resp.services[0].enable_ecs_managed_tags #=> Boolean
     #   resp.services[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.services[0].enable_execute_command #=> Boolean
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3345,6 +3389,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3355,9 +3403,9 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
-    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.requires_compatibilities #=> Array
-    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.inference_accelerators #=> Array
@@ -3370,6 +3418,10 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties #=> Array
     #   resp.task_definition.proxy_configuration.properties[0].name #=> String
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
+    #   resp.task_definition.registered_at #=> Time
+    #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.registered_by #=> String
+    #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -3438,7 +3490,7 @@ module Aws::ECS
     #   resp.task_sets[0].running_count #=> Integer
     #   resp.task_sets[0].created_at #=> Time
     #   resp.task_sets[0].updated_at #=> Time
-    #   resp.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -3601,6 +3653,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].managed_agents #=> Array
+    #   resp.tasks[0].containers[0].managed_agents[0].last_started_at #=> Time
+    #   resp.tasks[0].containers[0].managed_agents[0].name #=> String, one of "ExecuteCommandAgent"
+    #   resp.tasks[0].containers[0].managed_agents[0].reason #=> String
+    #   resp.tasks[0].containers[0].managed_agents[0].last_status #=> String
     #   resp.tasks[0].containers[0].cpu #=> String
     #   resp.tasks[0].containers[0].memory #=> String
     #   resp.tasks[0].containers[0].memory_reservation #=> String
@@ -3609,6 +3666,7 @@ module Aws::ECS
     #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].desired_status #=> String
+    #   resp.tasks[0].enable_execute_command #=> Boolean
     #   resp.tasks[0].execution_stopped_at #=> Time
     #   resp.tasks[0].group #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
@@ -3616,7 +3674,7 @@ module Aws::ECS
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].overrides.container_overrides #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].name #=> String
@@ -3641,6 +3699,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].overrides.memory #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
@@ -3656,6 +3715,7 @@ module Aws::ECS
     #   resp.tasks[0].task_arn #=> String
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
+    #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3721,6 +3781,66 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Runs a command remotely on a container within a task.
+    #
+    # @option params [String] :cluster
+    #   The Amazon Resource Name (ARN) or short name of the cluster the task
+    #   is running in. If you do not specify a cluster, the default cluster is
+    #   assumed.
+    #
+    # @option params [String] :container
+    #   The name of the container to execute the command on. A container name
+    #   only needs to be specified for tasks containing multiple containers.
+    #
+    # @option params [required, String] :command
+    #   The command to run on the container.
+    #
+    # @option params [required, Boolean] :interactive
+    #   Use this flag to run your command in interactive mode.
+    #
+    # @option params [required, String] :task
+    #   The Amazon Resource Name (ARN) or ID of the task the container is part
+    #   of.
+    #
+    # @return [Types::ExecuteCommandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteCommandResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::ExecuteCommandResponse#container_arn #container_arn} => String
+    #   * {Types::ExecuteCommandResponse#container_name #container_name} => String
+    #   * {Types::ExecuteCommandResponse#interactive #interactive} => Boolean
+    #   * {Types::ExecuteCommandResponse#session #session} => Types::Session
+    #   * {Types::ExecuteCommandResponse#task_arn #task_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_command({
+    #     cluster: "String",
+    #     container: "String",
+    #     command: "String", # required
+    #     interactive: false, # required
+    #     task: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.container_arn #=> String
+    #   resp.container_name #=> String
+    #   resp.interactive #=> Boolean
+    #   resp.session.session_id #=> String
+    #   resp.session.stream_url #=> String
+    #   resp.session.token_value #=> String
+    #   resp.task_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExecuteCommand AWS API Documentation
+    #
+    # @overload execute_command(params = {})
+    # @param [Hash] params ({})
+    def execute_command(params = {}, options = {})
+      req = build_request(:execute_command, params)
+      req.send_request(options)
+    end
+
     # Lists the account settings for a specified principal.
     #
     # @option params [String] :name
@@ -3734,6 +3854,11 @@ module Aws::ECS
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
     #   root user. If this field is omitted, the account settings are listed
     #   only for the authenticated user.
+    #
+    #   <note markdown="1"> Federated users assume the account setting of the root user and can't
+    #   have explicit account settings set for them.
+    #
+    #    </note>
     #
     # @option params [Boolean] :effective_settings
     #   Specifies whether to return the effective settings. If `true`, the
@@ -4115,12 +4240,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Lists the services that are running in a specified cluster.
+    # Returns a list of services. You can filter the results by cluster,
+    # launch type, and scheduling strategy.
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   hosts the services to list. If you do not specify a cluster, the
-    #   default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   use when filtering the `ListServices` results. If you do not specify a
+    #   cluster, the default cluster is assumed.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListServices` request
@@ -4145,10 +4271,11 @@ module Aws::ECS
     #   and a `nextToken` value if applicable.
     #
     # @option params [String] :launch_type
-    #   The launch type for the services to list.
+    #   The launch type to use when filtering the `ListServices` results.
     #
     # @option params [String] :scheduling_strategy
-    #   The scheduling strategy for services to list.
+    #   The scheduling strategy to use when filtering the `ListServices`
+    #   results.
     #
     # @return [Types::ListServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4178,7 +4305,7 @@ module Aws::ECS
     #     cluster: "String",
     #     next_token: "String",
     #     max_results: 1,
-    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #   })
     #
@@ -4483,30 +4610,29 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Returns a list of tasks for a specified cluster. You can filter the
-    # results by family name, by a particular container instance, or by the
-    # desired status of the task with the `family`, `containerInstance`, and
-    # `desiredStatus` parameters.
+    # Returns a list of tasks. You can filter the results by cluster, task
+    # definition family, container instance, launch type, what IAM principal
+    # started the task, or by the desired status of the task.
     #
     # Recently stopped tasks might appear in the returned results.
     # Currently, stopped tasks appear in the returned results for at least
     # one hour.
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   hosts the tasks to list. If you do not specify a cluster, the default
-    #   cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   use when filtering the `ListTasks` results. If you do not specify a
+    #   cluster, the default cluster is assumed.
     #
     # @option params [String] :container_instance
-    #   The container instance ID or full ARN of the container instance with
-    #   which to filter the `ListTasks` results. Specifying a
+    #   The container instance ID or full ARN of the container instance to use
+    #   when filtering the `ListTasks` results. Specifying a
     #   `containerInstance` limits the results to tasks that belong to that
     #   container instance.
     #
     # @option params [String] :family
-    #   The name of the family with which to filter the `ListTasks` results.
-    #   Specifying a `family` limits the results to tasks that belong to that
-    #   family.
+    #   The name of the task definition family to use when filtering the
+    #   `ListTasks` results. Specifying a `family` limits the results to tasks
+    #   that belong to that family.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListTasks` request indicating
@@ -4536,12 +4662,12 @@ module Aws::ECS
     #   started with that value.
     #
     # @option params [String] :service_name
-    #   The name of the service with which to filter the `ListTasks` results.
+    #   The name of the service to use when filtering the `ListTasks` results.
     #   Specifying a `serviceName` limits the results to tasks that belong to
     #   that service.
     #
     # @option params [String] :desired_status
-    #   The task desired status with which to filter the `ListTasks` results.
+    #   The task desired status to use when filtering the `ListTasks` results.
     #   Specifying a `desiredStatus` of `STOPPED` limits the results to tasks
     #   that Amazon ECS has set the desired status to `STOPPED`. This can be
     #   useful for debugging tasks that are not starting properly or have died
@@ -4556,7 +4682,7 @@ module Aws::ECS
     #    </note>
     #
     # @option params [String] :launch_type
-    #   The launch type for services to list.
+    #   The launch type to use when filtering the `ListTasks` results.
     #
     # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4610,7 +4736,7 @@ module Aws::ECS
     #     started_by: "String",
     #     service_name: "String",
     #     desired_status: "RUNNING", # accepts RUNNING, PENDING, STOPPED
-    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #   })
     #
     # @example Response structure
@@ -4692,6 +4818,11 @@ module Aws::ECS
     #   unless an IAM user or role explicitly overrides these settings. If
     #   this field is omitted, the setting is changed only for the
     #   authenticated user.
+    #
+    #   <note markdown="1"> Federated users assume the account setting of the root user and can't
+    #   have explicit account settings set for them.
+    #
+    #    </note>
     #
     # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4966,6 +5097,13 @@ module Aws::ECS
     #
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.execute_command_configuration.logging #=> String, one of "NONE", "DEFAULT", "OVERRIDE"
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -5217,7 +5355,7 @@ module Aws::ECS
     #   You must specify a `family` for a task definition, which allows you to
     #   track multiple versions of the same task definition. The `family` is
     #   used as a name for your task definition. Up to 255 letters (uppercase
-    #   and lowercase), numbers, and hyphens are allowed.
+    #   and lowercase), numbers, underscores, and hyphens are allowed.
     #
     # @option params [String] :task_role_arn
     #   The short name or full Amazon Resource Name (ARN) of the IAM role that
@@ -5244,22 +5382,27 @@ module Aws::ECS
     #
     # @option params [String] :network_mode
     #   The Docker networking mode to use for the containers in the task. The
-    #   valid values are `none`, `bridge`, `awsvpc`, and `host`. The default
-    #   Docker network mode is `bridge`. If you are using the Fargate launch
-    #   type, the `awsvpc` network mode is required. If you are using the EC2
-    #   launch type, any network mode can be used. If the network mode is set
-    #   to `none`, you cannot specify port mappings in your container
-    #   definitions, and the tasks containers do not have external
-    #   connectivity. The `host` and `awsvpc` network modes offer the highest
-    #   networking performance for containers because they use the EC2 network
-    #   stack instead of the virtualized network stack provided by the
-    #   `bridge` mode.
+    #   valid values are `none`, `bridge`, `awsvpc`, and `host`. If no network
+    #   mode is specified, the default is `bridge`.
+    #
+    #   For Amazon ECS tasks on Fargate, the `awsvpc` network mode is
+    #   required. For Amazon ECS tasks on Amazon EC2 instances, any network
+    #   mode can be used. If the network mode is set to `none`, you cannot
+    #   specify port mappings in your container definitions, and the tasks
+    #   containers do not have external connectivity. The `host` and `awsvpc`
+    #   network modes offer the highest networking performance for containers
+    #   because they use the EC2 network stack instead of the virtualized
+    #   network stack provided by the `bridge` mode.
     #
     #   With the `host` and `awsvpc` network modes, exposed container ports
     #   are mapped directly to the corresponding host port (for the `host`
     #   network mode) or the attached elastic network interface port (for the
     #   `awsvpc` network mode), so you cannot take advantage of dynamic host
     #   port mappings.
+    #
+    #   When using the `host` network mode, you should not run containers
+    #   using the root user (UID 0). It is considered best practice to use a
+    #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
     #   network interface, and you must specify a NetworkConfiguration value
@@ -5305,8 +5448,10 @@ module Aws::ECS
     #   constraints in the task definition and those specified at runtime).
     #
     # @option params [Array<String>] :requires_compatibilities
-    #   The launch type required by the task. If no value is specified, it
-    #   defaults to `EC2`.
+    #   The task launch type that Amazon ECS should validate the task
+    #   definition against. A client exception is returned if the task
+    #   definition doesn't validate against the compatibilities specified. If
+    #   no value is specified, the parameter is omitted from the response.
     #
     # @option params [String] :cpu
     #   The number of CPU units used by the task. It can be expressed as an
@@ -5422,8 +5567,8 @@ module Aws::ECS
     #   risk of undesired process namespace expose. For more information, see
     #   [Docker security][2].
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks using
-    #   the Fargate launch type.
+    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run on
+    #   AWS Fargate.
     #
     #    </note>
     #
@@ -5461,8 +5606,8 @@ module Aws::ECS
     #   * For tasks that use the `task` IPC mode, IPC namespace related
     #     `systemControls` will apply to all containers within a task.
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks using
-    #   the Fargate launch type.
+    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run on
+    #   AWS Fargate.
     #
     #    </note>
     #
@@ -5475,25 +5620,38 @@ module Aws::ECS
     # @option params [Types::ProxyConfiguration] :proxy_configuration
     #   The configuration details for the App Mesh proxy.
     #
-    #   For tasks using the EC2 launch type, the container instances require
-    #   at least version 1.26.0 of the container agent and at least version
-    #   1.26.0-1 of the `ecs-init` package to enable a proxy configuration. If
-    #   your container instances are launched from the Amazon ECS-optimized
-    #   AMI version `20190301` or later, then they contain the required
-    #   versions of the container agent and `ecs-init`. For more information,
-    #   see [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
-    #
-    #   For tasks using the Fargate launch type, the task or service requires
-    #   platform version 1.3.0 or later.
+    #   For tasks hosted on Amazon EC2 instances, the container instances
+    #   require at least version `1.26.0` of the container agent and at least
+    #   version `1.26.0-1` of the `ecs-init` package to enable a proxy
+    #   configuration. If your container instances are launched from the
+    #   Amazon ECS-optimized AMI version `20190301` or later, then they
+    #   contain the required versions of the container agent and `ecs-init`.
+    #   For more information, see [Amazon ECS-optimized AMI versions][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-versions.html
     #
     # @option params [Array<Types::InferenceAccelerator>] :inference_accelerators
     #   The Elastic Inference accelerators to use for the containers in the
     #   task.
+    #
+    # @option params [Types::EphemeralStorage] :ephemeral_storage
+    #   The amount of ephemeral storage to allocate for the task. This
+    #   parameter is used to expand the total amount of ephemeral storage
+    #   available, beyond the default amount, for tasks hosted on AWS Fargate.
+    #   For more information, see [Fargate task storage][1] in the *Amazon ECS
+    #   User Guide for AWS Fargate*.
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate using
+    #   platform version `1.4.0` or later.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5741,6 +5899,14 @@ module Aws::ECS
     #             iam: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
+    #         fsx_windows_file_server_volume_configuration: {
+    #           file_system_id: "String", # required
+    #           root_directory: "String", # required
+    #           authorization_config: { # required
+    #             credentials_parameter: "String", # required
+    #             domain: "String", # required
+    #           },
+    #         },
     #       },
     #     ],
     #     placement_constraints: [
@@ -5749,7 +5915,7 @@ module Aws::ECS
     #         expression: "String",
     #       },
     #     ],
-    #     requires_compatibilities: ["EC2"], # accepts EC2, FARGATE
+    #     requires_compatibilities: ["EC2"], # accepts EC2, FARGATE, EXTERNAL
     #     cpu: "String",
     #     memory: "String",
     #     tags: [
@@ -5776,6 +5942,9 @@ module Aws::ECS
     #         device_type: "String", # required
     #       },
     #     ],
+    #     ephemeral_storage: {
+    #       size_in_gi_b: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -5903,6 +6072,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -5913,9 +6086,9 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
-    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.requires_compatibilities #=> Array
-    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.inference_accelerators #=> Array
@@ -5928,6 +6101,10 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties #=> Array
     #   resp.task_definition.proxy_configuration.properties[0].name #=> String
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
+    #   resp.task_definition.registered_at #=> Time
+    #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.registered_by #=> String
+    #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -5980,30 +6157,10 @@ module Aws::ECS
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
     #
-    #   A capacity provider strategy consists of one or more capacity
-    #   providers along with the `base` and `weight` to assign to them. A
-    #   capacity provider must be associated with the cluster to be used in a
-    #   capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
-    #   providers with an `ACTIVE` or `UPDATING` status can be used.
-    #
     #   If a `capacityProviderStrategy` is specified, the `launchType`
     #   parameter must be omitted. If no `capacityProviderStrategy` or
     #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
     #   the cluster is used.
-    #
-    #   If specifying a capacity provider that uses an Auto Scaling group, the
-    #   capacity provider must already be created. New capacity providers can
-    #   be created with the CreateCapacityProvider API operation.
-    #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be associated
-    #   with a cluster to be used.
-    #
-    #   The PutClusterCapacityProviders API operation is used to update the
-    #   list of available capacity providers for a cluster after the cluster
-    #   is created.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -6023,22 +6180,44 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
+    # @option params [Boolean] :enable_execute_command
+    #   Whether or not to enable the execute command functionality for the
+    #   containers in this task. If `true`, this enables execute command
+    #   functionality on all containers in the task.
+    #
     # @option params [String] :group
     #   The name of the task group to associate with the task. The default
     #   value is the family name of the task definition (for example,
     #   family:my-family-name).
     #
     # @option params [String] :launch_type
-    #   The launch type on which to run your task. For more information, see
-    #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   The infrastructure on which to run your standalone task. For more
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
+    #   The `FARGATE` launch type runs your tasks on AWS Fargate On-Demand
+    #   infrastructure.
+    #
+    #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
+    #   provider strategy must be used. For more information, see [AWS Fargate
+    #   capacity providers][2] in the *Amazon ECS User Guide for AWS Fargate*.
+    #
+    #    </note>
+    #
+    #   The `EC2` launch type runs your tasks on Amazon EC2 instances
+    #   registered to your cluster.
+    #
+    #   The `EXTERNAL` launch type runs your tasks on your on-premise server
+    #   or virtual machine (VM) capacity registered to your cluster.
+    #
+    #   A task can use either a launch type or a capacity provider strategy.
     #   If a `launchType` is specified, the `capacityProviderStrategy`
     #   parameter must be omitted.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the task. This parameter is required for
@@ -6203,8 +6382,9 @@ module Aws::ECS
     #     cluster: "String",
     #     count: 1,
     #     enable_ecs_managed_tags: false,
+    #     enable_execute_command: false,
     #     group: "String",
-    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #     network_configuration: {
     #       awsvpc_configuration: {
     #         subnets: ["String"], # required
@@ -6250,6 +6430,9 @@ module Aws::ECS
     #       execution_role_arn: "String",
     #       memory: "String",
     #       task_role_arn: "String",
+    #       ephemeral_storage: {
+    #         size_in_gi_b: 1, # required
+    #       },
     #     },
     #     placement_constraints: [
     #       {
@@ -6317,6 +6500,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].managed_agents #=> Array
+    #   resp.tasks[0].containers[0].managed_agents[0].last_started_at #=> Time
+    #   resp.tasks[0].containers[0].managed_agents[0].name #=> String, one of "ExecuteCommandAgent"
+    #   resp.tasks[0].containers[0].managed_agents[0].reason #=> String
+    #   resp.tasks[0].containers[0].managed_agents[0].last_status #=> String
     #   resp.tasks[0].containers[0].cpu #=> String
     #   resp.tasks[0].containers[0].memory #=> String
     #   resp.tasks[0].containers[0].memory_reservation #=> String
@@ -6325,6 +6513,7 @@ module Aws::ECS
     #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].desired_status #=> String
+    #   resp.tasks[0].enable_execute_command #=> Boolean
     #   resp.tasks[0].execution_stopped_at #=> Time
     #   resp.tasks[0].group #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
@@ -6332,7 +6521,7 @@ module Aws::ECS
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].overrides.container_overrides #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].name #=> String
@@ -6357,6 +6546,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].overrides.memory #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
@@ -6372,6 +6562,7 @@ module Aws::ECS
     #   resp.tasks[0].task_arn #=> String
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
+    #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -6415,6 +6606,11 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #
+    # @option params [Boolean] :enable_execute_command
+    #   Whether or not the execute command functionality is enabled for the
+    #   task. If `true`, this enables execute command functionality on all
+    #   containers in the task.
     #
     # @option params [String] :group
     #   The name of the task group to associate with the task. The default
@@ -6507,6 +6703,7 @@ module Aws::ECS
     #     cluster: "String",
     #     container_instances: ["String"], # required
     #     enable_ecs_managed_tags: false,
+    #     enable_execute_command: false,
     #     group: "String",
     #     network_configuration: {
     #       awsvpc_configuration: {
@@ -6553,6 +6750,9 @@ module Aws::ECS
     #       execution_role_arn: "String",
     #       memory: "String",
     #       task_role_arn: "String",
+    #       ephemeral_storage: {
+    #         size_in_gi_b: 1, # required
+    #       },
     #     },
     #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
     #     reference_id: "String",
@@ -6607,6 +6807,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].managed_agents #=> Array
+    #   resp.tasks[0].containers[0].managed_agents[0].last_started_at #=> Time
+    #   resp.tasks[0].containers[0].managed_agents[0].name #=> String, one of "ExecuteCommandAgent"
+    #   resp.tasks[0].containers[0].managed_agents[0].reason #=> String
+    #   resp.tasks[0].containers[0].managed_agents[0].last_status #=> String
     #   resp.tasks[0].containers[0].cpu #=> String
     #   resp.tasks[0].containers[0].memory #=> String
     #   resp.tasks[0].containers[0].memory_reservation #=> String
@@ -6615,6 +6820,7 @@ module Aws::ECS
     #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].desired_status #=> String
+    #   resp.tasks[0].enable_execute_command #=> Boolean
     #   resp.tasks[0].execution_stopped_at #=> Time
     #   resp.tasks[0].group #=> String
     #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
@@ -6622,7 +6828,7 @@ module Aws::ECS
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].overrides.container_overrides #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].name #=> String
@@ -6647,6 +6853,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].overrides.memory #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
@@ -6662,6 +6869,7 @@ module Aws::ECS
     #   resp.tasks[0].task_arn #=> String
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
+    #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -6764,6 +6972,11 @@ module Aws::ECS
     #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.task.containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.task.containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.task.containers[0].managed_agents #=> Array
+    #   resp.task.containers[0].managed_agents[0].last_started_at #=> Time
+    #   resp.task.containers[0].managed_agents[0].name #=> String, one of "ExecuteCommandAgent"
+    #   resp.task.containers[0].managed_agents[0].reason #=> String
+    #   resp.task.containers[0].managed_agents[0].last_status #=> String
     #   resp.task.containers[0].cpu #=> String
     #   resp.task.containers[0].memory #=> String
     #   resp.task.containers[0].memory_reservation #=> String
@@ -6772,6 +6985,7 @@ module Aws::ECS
     #   resp.task.cpu #=> String
     #   resp.task.created_at #=> Time
     #   resp.task.desired_status #=> String
+    #   resp.task.enable_execute_command #=> Boolean
     #   resp.task.execution_stopped_at #=> Time
     #   resp.task.group #=> String
     #   resp.task.health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
@@ -6779,7 +6993,7 @@ module Aws::ECS
     #   resp.task.inference_accelerators[0].device_name #=> String
     #   resp.task.inference_accelerators[0].device_type #=> String
     #   resp.task.last_status #=> String
-    #   resp.task.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task.memory #=> String
     #   resp.task.overrides.container_overrides #=> Array
     #   resp.task.overrides.container_overrides[0].name #=> String
@@ -6804,6 +7018,7 @@ module Aws::ECS
     #   resp.task.overrides.execution_role_arn #=> String
     #   resp.task.overrides.memory #=> String
     #   resp.task.overrides.task_role_arn #=> String
+    #   resp.task.overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task.platform_version #=> String
     #   resp.task.pull_started_at #=> Time
     #   resp.task.pull_stopped_at #=> Time
@@ -6819,6 +7034,7 @@ module Aws::ECS
     #   resp.task.task_arn #=> String
     #   resp.task.task_definition_arn #=> String
     #   resp.task.version #=> Integer
+    #   resp.task.ephemeral_storage.size_in_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -6967,6 +7183,9 @@ module Aws::ECS
     # @option params [Array<Types::AttachmentStateChange>] :attachments
     #   Any attachments associated with the state change request.
     #
+    # @option params [Array<Types::ManagedAgentStateChange>] :managed_agents
+    #   The details for the managed agent associated with the task.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :pull_started_at
     #   The Unix timestamp for when the container image pull began.
     #
@@ -7009,6 +7228,14 @@ module Aws::ECS
     #       {
     #         attachment_arn: "String", # required
     #         status: "String", # required
+    #       },
+    #     ],
+    #     managed_agents: [
+    #       {
+    #         container_name: "String", # required
+    #         managed_agent_name: "ExecuteCommandAgent", # required, accepts ExecuteCommandAgent
+    #         status: "String", # required
+    #         reason: "String",
     #       },
     #     ],
     #     pull_started_at: Time.now,
@@ -7154,6 +7381,151 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies the parameters for a capacity provider.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity provider to update.
+    #
+    # @option params [required, Types::AutoScalingGroupProviderUpdate] :auto_scaling_group_provider
+    #   An object representing the parameters to update for the Auto Scaling
+    #   group capacity provider.
+    #
+    # @return [Types::UpdateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCapacityProviderResponse#capacity_provider #capacity_provider} => Types::CapacityProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_capacity_provider({
+    #     name: "String", # required
+    #     auto_scaling_group_provider: { # required
+    #       managed_scaling: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         target_capacity: 1,
+    #         minimum_scaling_step_size: 1,
+    #         maximum_scaling_step_size: 1,
+    #         instance_warmup_period: 1,
+    #       },
+    #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider.capacity_provider_arn #=> String
+    #   resp.capacity_provider.name #=> String
+    #   resp.capacity_provider.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.capacity_provider.update_status_reason #=> String
+    #   resp.capacity_provider.tags #=> Array
+    #   resp.capacity_provider.tags[0].key #=> String
+    #   resp.capacity_provider.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProvider AWS API Documentation
+    #
+    # @overload update_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def update_capacity_provider(params = {}, options = {})
+      req = build_request(:update_capacity_provider, params)
+      req.send_request(options)
+    end
+
+    # Updates the cluster.
+    #
+    # @option params [required, String] :cluster
+    #   The name of the cluster to modify the settings for.
+    #
+    # @option params [Array<Types::ClusterSetting>] :settings
+    #   The cluster settings for your cluster.
+    #
+    # @option params [Types::ClusterConfiguration] :configuration
+    #   The execute command configuration for the cluster.
+    #
+    # @return [Types::UpdateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster({
+    #     cluster: "String", # required
+    #     settings: [
+    #       {
+    #         name: "containerInsights", # accepts containerInsights
+    #         value: "String",
+    #       },
+    #     ],
+    #     configuration: {
+    #       execute_command_configuration: {
+    #         kms_key_id: "String",
+    #         logging: "NONE", # accepts NONE, DEFAULT, OVERRIDE
+    #         log_configuration: {
+    #           cloud_watch_log_group_name: "String",
+    #           cloud_watch_encryption_enabled: false,
+    #           s3_bucket_name: "String",
+    #           s3_encryption_enabled: false,
+    #           s3_key_prefix: "String",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.execute_command_configuration.logging #=> String, one of "NONE", "DEFAULT", "OVERRIDE"
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.status #=> String
+    #   resp.cluster.registered_container_instances_count #=> Integer
+    #   resp.cluster.running_tasks_count #=> Integer
+    #   resp.cluster.pending_tasks_count #=> Integer
+    #   resp.cluster.active_services_count #=> Integer
+    #   resp.cluster.statistics #=> Array
+    #   resp.cluster.statistics[0].name #=> String
+    #   resp.cluster.statistics[0].value #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
+    #   resp.cluster.capacity_providers #=> Array
+    #   resp.cluster.capacity_providers[0] #=> String
+    #   resp.cluster.default_capacity_provider_strategy #=> Array
+    #   resp.cluster.default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.cluster.default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.cluster.default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.cluster.attachments #=> Array
+    #   resp.cluster.attachments[0].id #=> String
+    #   resp.cluster.attachments[0].type #=> String
+    #   resp.cluster.attachments[0].status #=> String
+    #   resp.cluster.attachments[0].details #=> Array
+    #   resp.cluster.attachments[0].details[0].name #=> String
+    #   resp.cluster.attachments[0].details[0].value #=> String
+    #   resp.cluster.attachments_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCluster AWS API Documentation
+    #
+    # @overload update_cluster(params = {})
+    # @param [Hash] params ({})
+    def update_cluster(params = {}, options = {})
+      req = build_request(:update_cluster, params)
+      req.send_request(options)
+    end
+
     # Modifies the settings to use for a cluster.
     #
     # @option params [required, String] :cluster
@@ -7185,6 +7557,13 @@ module Aws::ECS
     #
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.execute_command_configuration.logging #=> String, one of "NONE", "DEFAULT", "OVERRIDE"
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -7230,15 +7609,25 @@ module Aws::ECS
     # instance was launched with the Amazon ECS-optimized AMI or another
     # operating system.
     #
-    # `UpdateContainerAgent` requires the Amazon ECS-optimized AMI or Amazon
-    # Linux with the `ecs-init` service installed and running. For help
-    # updating the Amazon ECS container agent on other operating systems,
-    # see [Manually Updating the Amazon ECS Container Agent][1] in the
-    # *Amazon Elastic Container Service Developer Guide*.
+    # <note markdown="1"> The `UpdateContainerAgent` API isn't supported for container
+    # instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI.
+    # To update the container agent, you can update the `ecs-init` package
+    # which will update the agent. For more information, see [Updating the
+    # Amazon ECS container agent][1] in the *Amazon Elastic Container
+    # Service Developer Guide*.
+    #
+    #  </note>
+    #
+    # The `UpdateContainerAgent` API requires an Amazon ECS-optimized AMI or
+    # Amazon Linux AMI with the `ecs-init` service installed and running.
+    # For help updating the Amazon ECS container agent on other operating
+    # systems, see [Manually updating the Amazon ECS container agent][2] in
+    # the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -7639,8 +8028,7 @@ module Aws::ECS
     #   the deployment and the ordering of stopping and starting tasks.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
-    #   An object representing the network configuration for a task or
-    #   service.
+    #   An object representing the network configuration for the service.
     #
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of task placement constraint objects to update the service to
@@ -7694,6 +8082,13 @@ module Aws::ECS
     #   prevent the ECS service scheduler from marking tasks as unhealthy and
     #   stopping them before they have time to come up.
     #
+    # @option params [Boolean] :enable_execute_command
+    #   If `true`, this enables execute command functionality on all task
+    #   containers.
+    #
+    #   If you do not want to override the value that was set when the service
+    #   was created, you can set this to `null` when performing this action.
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
@@ -7740,6 +8135,10 @@ module Aws::ECS
     #       },
     #     ],
     #     deployment_configuration: {
+    #       deployment_circuit_breaker: {
+    #         enable: false, # required
+    #         rollback: false, # required
+    #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
     #     },
@@ -7765,6 +8164,7 @@ module Aws::ECS
     #     platform_version: "String",
     #     force_new_deployment: false,
     #     health_check_grace_period_seconds: 1,
+    #     enable_execute_command: false,
     #   })
     #
     # @example Response structure
@@ -7786,13 +8186,15 @@ module Aws::ECS
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
-    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.capacity_provider_strategy #=> Array
     #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.task_sets #=> Array
@@ -7809,7 +8211,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].running_count #=> Integer
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
-    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -7844,19 +8246,22 @@ module Aws::ECS
     #   resp.service.deployments[0].desired_count #=> Integer
     #   resp.service.deployments[0].pending_count #=> Integer
     #   resp.service.deployments[0].running_count #=> Integer
+    #   resp.service.deployments[0].failed_tasks #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
     #   resp.service.deployments[0].capacity_provider_strategy #=> Array
     #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.service.deployments[0].rollout_state_reason #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -7883,6 +8288,7 @@ module Aws::ECS
     #   resp.service.created_by #=> String
     #   resp.service.enable_ecs_managed_tags #=> Boolean
     #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.service.enable_execute_command #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
     #
@@ -7943,7 +8349,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -8037,7 +8443,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -8088,7 +8494,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -258,16 +258,7 @@ module Aws::EC2
       data[:security_groups]
     end
 
-    # Specifies whether to enable an instance launched in a VPC to perform
-    # NAT. This controls whether source/destination checking is enabled on
-    # the instance. A value of `true` means that checking is enabled, and
-    # `false` means that checking is disabled. The value must be `false` for
-    # the instance to perform NAT. For more information, see [NAT
-    # Instances][1] in the *Amazon Virtual Private Cloud User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    # Indicates whether source/destination checking is enabled.
     # @return [Boolean]
     def source_dest_check
       data[:source_dest_check]
@@ -338,6 +329,24 @@ module Aws::EC2
     # @return [Types::InstanceMetadataOptionsResponse]
     def metadata_options
       data[:metadata_options]
+    end
+
+    # Indicates whether the instance is enabled for Amazon Web Services
+    # Nitro Enclaves.
+    # @return [Types::EnclaveOptions]
+    def enclave_options
+      data[:enclave_options]
+    end
+
+    # The boot mode of the instance. For more information, see [Boot
+    # modes][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    # @return [String]
+    def boot_mode
+      data[:boot_mode]
     end
 
     # @!endgroup
@@ -645,8 +654,10 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
+    #           throughput: 1,
+    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -656,6 +667,17 @@ module Aws::EC2
     #     dry_run: false,
     #     name: "String", # required
     #     no_reboot: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -677,10 +699,29 @@ module Aws::EC2
     #   single quotes ('), at-signs (@), or underscores(\_)
     # @option options [Boolean] :no_reboot
     #   By default, Amazon EC2 attempts to shut down and reboot the instance
-    #   before creating the image. If the 'No Reboot' option is set, Amazon
+    #   before creating the image. If the `No Reboot` option is set, Amazon
     #   EC2 doesn't shut down the instance before creating the image. When
     #   this option is used, file system integrity on the created image can't
     #   be guaranteed.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the AMI and snapshots on creation. You can tag
+    #   the AMI, the snapshots, or both.
+    #
+    #   * To tag the AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the snapshots that are created of the root volume and of
+    #     other EBS volumes that are attached to the instance, the value for
+    #     `ResourceType` must be `snapshot`. The same tag is applied to all of
+    #     the snapshots that are created.
+    #
+    #   If you specify other values for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI or snapshot after it has been created, see
+    #   [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     # @return [Image]
     def create_image(options = {})
       options = options.merge(instance_id: @id)
@@ -774,7 +815,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.describe_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -855,7 +896,7 @@ module Aws::EC2
     #     source_dest_check: {
     #       value: false,
     #     },
-    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
@@ -890,10 +931,12 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Types::AttributeBooleanValue] :source_dest_check
-    #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means that checking
-    #   is disabled. This value must be `false` for a NAT instance to perform
-    #   NAT.
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     # @option options [String] :attribute
     #   The name of the attribute.
     # @option options [Array<Types::InstanceBlockDeviceMappingSpecification>] :block_device_mappings
@@ -905,7 +948,7 @@ module Aws::EC2
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
     #   [Updating the block device mapping when launching an instance][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -931,18 +974,19 @@ module Aws::EC2
     #   This option is supported only for HVM instances. Specifying this
     #   option with a PV instance can make it unreachable.
     # @option options [Array<String>] :groups
-    #   \[EC2-VPC\] Changes the security groups of the instance. You must
-    #   specify at least one security group, even if it's just the default
-    #   security group for the VPC. You must specify the security group ID,
-    #   not the security group name.
+    #   \[EC2-VPC\] Replaces the security groups of the instance with the
+    #   specified security groups. You must specify at least one security
+    #   group, even if it's just the default security group for the VPC. You
+    #   must specify the security group ID, not the security group name.
     # @option options [Types::AttributeValue] :instance_initiated_shutdown_behavior
     #   Specifies whether an instance stops or terminates when you initiate
     #   shutdown from the instance (using the operating system command for
     #   system shutdown).
     # @option options [Types::AttributeValue] :instance_type
     #   Changes the instance type to the specified value. For more
-    #   information, see [Instance types][1]. If the instance type is not
-    #   valid, the error returned is `InvalidInstanceAttributeValue`.
+    #   information, see [Instance types][1] in the *Amazon EC2 User Guide*.
+    #   If the instance type is not valid, the error returned is
+    #   `InvalidInstanceAttributeValue`.
     #
     #
     #
@@ -974,9 +1018,9 @@ module Aws::EC2
     #   option with a PV instance can make it unreachable.
     # @option options [Types::BlobAttributeValue] :user_data
     #   Changes the instance's user data to the specified value. If you are
-    #   using an AWS SDK or command line tool, base64-encoding is performed
-    #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide base64-encoded text.
+    #   using an Amazon Web Services SDK or command line tool, base64-encoding
+    #   is performed for you, and you can load the text from a file.
+    #   Otherwise, you must provide base64-encoded text.
     # @option options [String] :value
     #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
     #   `userData`, `disableApiTermination`, or
@@ -1103,7 +1147,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.reset_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1221,7 +1265,7 @@ module Aws::EC2
     #   Hibernates the instance if the instance was enabled for hibernation at
     #   launch. If the instance cannot hibernate successfully, a normal
     #   shutdown occurs. For more information, see [Hibernate your
-    #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   instance][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
@@ -1423,10 +1467,8 @@ module Aws::EC2
     #
     #   * `volume-id` - The volume ID.
     #
-    #   * `volume-type` - The Amazon EBS volume type. This can be `gp2` for
-    #     General Purpose SSD, `io1` or `io2` for Provisioned IOPS SSD, `st1`
-    #     for Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
-    #     Magnetic volumes.
+    #   * `volume-type` - The Amazon EBS volume type (`gp2` \| `gp3` \| `io1`
+    #     \| `io2` \| `st1` \| `sc1`\| `standard`)
     # @option options [Array<String>] :volume_ids
     #   The volume IDs.
     # @option options [Boolean] :dry_run
@@ -1497,12 +1539,13 @@ module Aws::EC2
     #     with, if any.
     #
     #   * `network-border-group` - A unique set of Availability Zones, Local
-    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
+    #     Zones, or Wavelength Zones from where Amazon Web Services advertises
+    #     IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #
-    #   * `network-interface-owner-id` - The AWS account ID of the owner.
+    #   * `network-interface-owner-id` - The account ID of the owner.
     #
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
@@ -1762,7 +1805,7 @@ module Aws::EC2
       #   Hibernates the instance if the instance was enabled for hibernation at
       #   launch. If the instance cannot hibernate successfully, a normal
       #   shutdown occurs. For more information, see [Hibernate your
-      #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      #   instance][1] in the *Amazon EC2 User Guide*.
       #
       #   Default: `false`
       #

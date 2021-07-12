@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -18,6 +18,9 @@ module Aws::PersonalizeRuntime
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Context = Shapes::MapShape.new(name: 'Context')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FilterAttributeName = Shapes::StringShape.new(name: 'FilterAttributeName')
+    FilterAttributeValue = Shapes::StringShape.new(name: 'FilterAttributeValue')
+    FilterValues = Shapes::MapShape.new(name: 'FilterValues')
     GetPersonalizedRankingRequest = Shapes::StructureShape.new(name: 'GetPersonalizedRankingRequest')
     GetPersonalizedRankingResponse = Shapes::StructureShape.new(name: 'GetPersonalizedRankingResponse')
     GetRecommendationsRequest = Shapes::StructureShape.new(name: 'GetRecommendationsRequest')
@@ -36,11 +39,15 @@ module Aws::PersonalizeRuntime
     Context.key = Shapes::ShapeRef.new(shape: AttributeName)
     Context.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
+    FilterValues.key = Shapes::ShapeRef.new(shape: FilterAttributeName)
+    FilterValues.value = Shapes::ShapeRef.new(shape: FilterAttributeValue)
+
     GetPersonalizedRankingRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
     GetPersonalizedRankingRequest.add_member(:input_list, Shapes::ShapeRef.new(shape: InputList, required: true, location_name: "inputList"))
     GetPersonalizedRankingRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserID, required: true, location_name: "userId"))
     GetPersonalizedRankingRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "context"))
     GetPersonalizedRankingRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    GetPersonalizedRankingRequest.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
     GetPersonalizedRankingRequest.struct_class = Types::GetPersonalizedRankingRequest
 
     GetPersonalizedRankingResponse.add_member(:personalized_ranking, Shapes::ShapeRef.new(shape: ItemList, location_name: "personalizedRanking"))
@@ -53,6 +60,7 @@ module Aws::PersonalizeRuntime
     GetRecommendationsRequest.add_member(:num_results, Shapes::ShapeRef.new(shape: NumResults, location_name: "numResults"))
     GetRecommendationsRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "context"))
     GetRecommendationsRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    GetRecommendationsRequest.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
     GetRecommendationsRequest.struct_class = Types::GetRecommendationsRequest
 
     GetRecommendationsResponse.add_member(:item_list, Shapes::ShapeRef.new(shape: ItemList, location_name: "itemList"))

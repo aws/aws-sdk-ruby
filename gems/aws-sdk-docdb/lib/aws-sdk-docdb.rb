@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,7 +29,7 @@ require_relative 'aws-sdk-docdb/customizations'
 # structure.
 #
 #     doc_db = Aws::DocDB::Client.new
-#     resp = doc_db.add_tags_to_resource(params)
+#     resp = doc_db.add_source_identifier_to_subscription(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-docdb/customizations'
 # @!group service
 module Aws::DocDB
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.32.0'
 
 end

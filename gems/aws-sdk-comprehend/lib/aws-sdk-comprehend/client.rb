@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -621,6 +621,44 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Analyzes input text for the presence of personally identifiable
+    # information (PII) and returns the labels of identified PII entity
+    # types such as name, address, bank account number, or phone number.
+    #
+    # @option params [required, String] :text
+    #   Creates a new document classification request to analyze a single
+    #   document in real-time, returning personally identifiable information
+    #   (PII) entity labels.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents.
+    #
+    # @return [Types::ContainsPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ContainsPiiEntitiesResponse#labels #labels} => Array&lt;Types::EntityLabel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.contains_pii_entities({
+    #     text: "String", # required
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.labels #=> Array
+    #   resp.labels[0].name #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.labels[0].score #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntities AWS API Documentation
+    #
+    # @overload contains_pii_entities(params = {})
+    # @param [Hash] params ({})
+    def contains_pii_entities(params = {}, options = {})
+      req = build_request(:contains_pii_entities, params)
+      req.send_request(options)
+    end
+
     # Creates a new document classifier that you can use to categorize
     # documents. To create a classifier, you provide a set of training
     # documents that labeled with the categories that you want to use. After
@@ -690,6 +728,16 @@ module Aws::Comprehend
     #   multiple labels for an individual document are separated by a
     #   delimiter. The default delimiter between labels is a pipe (\|).
     #
+    # @option params [String] :model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt trained custom models. The ModelKmsKeyId can be either
+    #   of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentClassifierResponse#document_classifier_arn #document_classifier_arn} => String
@@ -728,6 +776,7 @@ module Aws::Comprehend
     #       subnets: ["SubnetId"], # required
     #     },
     #     mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
+    #     model_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -773,6 +822,12 @@ module Aws::Comprehend
     #   "Sales" as the key might be added to an endpoint to indicate its use
     #   by the sales department.
     #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   trained custom models encrypted with a customer managed key
+    #   (ModelKmsKeyId).
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint_arn #endpoint_arn} => String
@@ -790,6 +845,7 @@ module Aws::Comprehend
     #         value: "TagValue",
     #       },
     #     ],
+    #     data_access_role_arn: "IamRoleArn",
     #   })
     #
     # @example Response structure
@@ -864,6 +920,16 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [String] :model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt trained custom models. The ModelKmsKeyId can be either
+    #   of the following formats
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::CreateEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEntityRecognizerResponse#entity_recognizer_arn #entity_recognizer_arn} => String
@@ -909,6 +975,7 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     model_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1110,6 +1177,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.vpc_config.subnets #=> Array
     #   resp.document_classifier_properties.vpc_config.subnets[0] #=> String
     #   resp.document_classifier_properties.mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
+    #   resp.document_classifier_properties.model_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -1191,6 +1259,7 @@ module Aws::Comprehend
     #   resp.endpoint_properties.current_inference_units #=> Integer
     #   resp.endpoint_properties.creation_time #=> Time
     #   resp.endpoint_properties.last_modified_time #=> Time
+    #   resp.endpoint_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpoint AWS API Documentation
     #
@@ -1302,6 +1371,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.vpc_config.security_group_ids[0] #=> String
     #   resp.entity_recognizer_properties.vpc_config.subnets #=> Array
     #   resp.entity_recognizer_properties.vpc_config.subnets[0] #=> String
+    #   resp.entity_recognizer_properties.model_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -1309,6 +1379,47 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def describe_entity_recognizer(params = {}, options = {})
       req = build_request(:describe_entity_recognizer, params)
+      req.send_request(options)
+    end
+
+    # Gets the status and details of an events detection job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the events detection job.
+    #
+    # @return [Types::DescribeEventsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventsDetectionJobResponse#events_detection_job_properties #events_detection_job_properties} => Types::EventsDetectionJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_events_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events_detection_job_properties.job_id #=> String
+    #   resp.events_detection_job_properties.job_name #=> String
+    #   resp.events_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.events_detection_job_properties.message #=> String
+    #   resp.events_detection_job_properties.submit_time #=> Time
+    #   resp.events_detection_job_properties.end_time #=> Time
+    #   resp.events_detection_job_properties.input_data_config.s3_uri #=> String
+    #   resp.events_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.events_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.events_detection_job_properties.output_data_config.kms_key_id #=> String
+    #   resp.events_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.events_detection_job_properties.data_access_role_arn #=> String
+    #   resp.events_detection_job_properties.target_event_types #=> Array
+    #   resp.events_detection_job_properties.target_event_types[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEventsDetectionJob AWS API Documentation
+    #
+    # @overload describe_events_detection_job(params = {})
+    # @param [Hash] params ({})
+    def describe_events_detection_job(params = {}, options = {})
+      req = build_request(:describe_events_detection_job, params)
       req.send_request(options)
     end
 
@@ -1886,6 +1997,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].vpc_config.subnets #=> Array
     #   resp.document_classifier_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.document_classifier_properties_list[0].mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
+    #   resp.document_classifier_properties_list[0].model_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -2005,6 +2117,7 @@ module Aws::Comprehend
     #   resp.endpoint_properties_list[0].current_inference_units #=> Integer
     #   resp.endpoint_properties_list[0].creation_time #=> Time
     #   resp.endpoint_properties_list[0].last_modified_time #=> Time
+    #   resp.endpoint_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpoints AWS API Documentation
@@ -2160,6 +2273,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].vpc_config.security_group_ids[0] #=> String
     #   resp.entity_recognizer_properties_list[0].vpc_config.subnets #=> Array
     #   resp.entity_recognizer_properties_list[0].vpc_config.subnets[0] #=> String
+    #   resp.entity_recognizer_properties_list[0].model_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -2168,6 +2282,67 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_entity_recognizers(params = {}, options = {})
       req = build_request(:list_entity_recognizers, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the events detection jobs that you have submitted.
+    #
+    # @option params [Types::EventsDetectionJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their name,
+    #   status, or the date and time that they were submitted. You can only
+    #   set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page.
+    #
+    # @return [Types::ListEventsDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventsDetectionJobsResponse#events_detection_job_properties_list #events_detection_job_properties_list} => Array&lt;Types::EventsDetectionJobProperties&gt;
+    #   * {Types::ListEventsDetectionJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_events_detection_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events_detection_job_properties_list #=> Array
+    #   resp.events_detection_job_properties_list[0].job_id #=> String
+    #   resp.events_detection_job_properties_list[0].job_name #=> String
+    #   resp.events_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.events_detection_job_properties_list[0].message #=> String
+    #   resp.events_detection_job_properties_list[0].submit_time #=> Time
+    #   resp.events_detection_job_properties_list[0].end_time #=> Time
+    #   resp.events_detection_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.events_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.events_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.events_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
+    #   resp.events_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.events_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.events_detection_job_properties_list[0].target_event_types #=> Array
+    #   resp.events_detection_job_properties_list[0].target_event_types[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEventsDetectionJobs AWS API Documentation
+    #
+    # @overload list_events_detection_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_events_detection_jobs(params = {}, options = {})
+      req = build_request(:list_events_detection_jobs, params)
       req.send_request(options)
     end
 
@@ -2747,6 +2922,73 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Starts an asynchronous event detection job for a collection of
+    # documents.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #
+    # @option params [String] :job_name
+    #   The identifier of the events detection job.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the input documents.
+    #
+    # @option params [String] :client_request_token
+    #   An unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Array<String>] :target_event_types
+    #   The types of events to detect in the input documents.
+    #
+    # @return [Types::StartEventsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartEventsDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartEventsDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_events_detection_job({
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #     client_request_token: "ClientRequestTokenString",
+    #     target_event_types: ["EventTypeString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEventsDetectionJob AWS API Documentation
+    #
+    # @overload start_events_detection_job(params = {})
+    # @param [Hash] params ({})
+    def start_events_detection_job(params = {}, options = {})
+      req = build_request(:start_events_detection_job, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous key phrase detection job for a collection of
     # documents. Use the operation to track the status of a job.
     #
@@ -3198,6 +3440,36 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Stops an events detection job in progress.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the events detection job to stop.
+    #
+    # @return [Types::StopEventsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopEventsDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StopEventsDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_events_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopEventsDetectionJob AWS API Documentation
+    #
+    # @overload stop_events_detection_job(params = {})
+    # @param [Hash] params ({})
+    def stop_events_detection_job(params = {}, options = {})
+      req = build_request(:stop_events_detection_job, params)
+      req.send_request(options)
+    end
+
     # Stops a key phrases detection job in progress.
     #
     # If the job state is `IN_PROGRESS` the job is marked for termination
@@ -3481,7 +3753,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

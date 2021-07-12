@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -421,11 +421,6 @@ module Aws::CodePipeline
     # @option params [required, String] :category
     #   The category of the custom action, such as a build action or a test
     #   action.
-    #
-    #   <note markdown="1"> Although `Source` and `Approval` are listed as valid values, they are
-    #   not currently functional. These values are reserved for future use.
-    #
-    #    </note>
     #
     # @option params [required, String] :provider
     #   The provider of the service used in the custom action, such as AWS
@@ -876,6 +871,93 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Returns information about an action type created for an external
+    # provider, where the action is to be used by customers of the external
+    # provider. The action can be created with any supported integration
+    # model.
+    #
+    # @option params [required, String] :category
+    #   Defines what kind of action can be taken in the stage. The following
+    #   are the valid values:
+    #
+    #   * `Source`
+    #
+    #   * `Build`
+    #
+    #   * `Test`
+    #
+    #   * `Deploy`
+    #
+    #   * `Approval`
+    #
+    #   * `Invoke`
+    #
+    # @option params [required, String] :owner
+    #   The creator of an action type that was created with any supported
+    #   integration model. There are two valid values: `AWS` and `ThirdParty`.
+    #
+    # @option params [required, String] :provider
+    #   The provider of the action type being called. The provider name is
+    #   specified when the action type is created.
+    #
+    # @option params [required, String] :version
+    #   A string that describes the action type version.
+    #
+    # @return [Types::GetActionTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetActionTypeOutput#action_type #action_type} => Types::ActionTypeDeclaration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_action_type({
+    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #     owner: "ActionTypeOwner", # required
+    #     provider: "ActionProvider", # required
+    #     version: "Version", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_type.description #=> String
+    #   resp.action_type.executor.configuration.lambda_executor_configuration.lambda_function_arn #=> String
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_accounts #=> Array
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_accounts[0] #=> String
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_service_principals #=> Array
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_service_principals[0] #=> String
+    #   resp.action_type.executor.type #=> String, one of "JobWorker", "Lambda"
+    #   resp.action_type.executor.policy_statements_template #=> String
+    #   resp.action_type.executor.job_timeout #=> Integer
+    #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_type.id.owner #=> String
+    #   resp.action_type.id.provider #=> String
+    #   resp.action_type.id.version #=> String
+    #   resp.action_type.input_artifact_details.minimum_count #=> Integer
+    #   resp.action_type.input_artifact_details.maximum_count #=> Integer
+    #   resp.action_type.output_artifact_details.minimum_count #=> Integer
+    #   resp.action_type.output_artifact_details.maximum_count #=> Integer
+    #   resp.action_type.permissions.allowed_accounts #=> Array
+    #   resp.action_type.permissions.allowed_accounts[0] #=> String
+    #   resp.action_type.properties #=> Array
+    #   resp.action_type.properties[0].name #=> String
+    #   resp.action_type.properties[0].optional #=> Boolean
+    #   resp.action_type.properties[0].key #=> Boolean
+    #   resp.action_type.properties[0].no_echo #=> Boolean
+    #   resp.action_type.properties[0].queryable #=> Boolean
+    #   resp.action_type.properties[0].description #=> String
+    #   resp.action_type.urls.configuration_url #=> String
+    #   resp.action_type.urls.entity_url_template #=> String
+    #   resp.action_type.urls.execution_url_template #=> String
+    #   resp.action_type.urls.revision_url_template #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetActionType AWS API Documentation
+    #
+    # @overload get_action_type(params = {})
+    # @param [Hash] params ({})
+    def get_action_type(params = {}, options = {})
+      req = build_request(:get_action_type, params)
+      req.send_request(options)
+    end
+
     # Returns information about a job. Used for custom actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
@@ -1042,7 +1124,8 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.pipeline_name #=> String
     #   resp.pipeline_execution.pipeline_version #=> Integer
     #   resp.pipeline_execution.pipeline_execution_id #=> String
-    #   resp.pipeline_execution.status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution.status #=> String, one of "Cancelled", "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution.status_summary #=> String
     #   resp.pipeline_execution.artifact_revisions #=> Array
     #   resp.pipeline_execution.artifact_revisions[0].name #=> String
     #   resp.pipeline_execution.artifact_revisions[0].revision_id #=> String
@@ -1092,6 +1175,8 @@ module Aws::CodePipeline
     #   resp.pipeline_version #=> Integer
     #   resp.stage_states #=> Array
     #   resp.stage_states[0].stage_name #=> String
+    #   resp.stage_states[0].inbound_execution.pipeline_execution_id #=> String
+    #   resp.stage_states[0].inbound_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.stage_states[0].inbound_transition_state.enabled #=> Boolean
     #   resp.stage_states[0].inbound_transition_state.last_changed_by #=> String
     #   resp.stage_states[0].inbound_transition_state.last_changed_at #=> Time
@@ -1101,6 +1186,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].current_revision.revision_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.revision_change_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.created #=> Time
+    #   resp.stage_states[0].action_states[0].latest_execution.action_execution_id #=> String
     #   resp.stage_states[0].action_states[0].latest_execution.status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
     #   resp.stage_states[0].action_states[0].latest_execution.summary #=> String
     #   resp.stage_states[0].action_states[0].latest_execution.last_status_change #=> Time
@@ -1114,7 +1200,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].entity_url #=> String
     #   resp.stage_states[0].action_states[0].revision_url #=> String
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
-    #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].latest_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -1300,6 +1386,9 @@ module Aws::CodePipeline
     #   call, which can be used to return the next set of action types in the
     #   list.
     #
+    # @option params [String] :region_filter
+    #   The Region to filter on for the list of action types.
+    #
     # @return [Types::ListActionTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListActionTypesOutput#action_types #action_types} => Array&lt;Types::ActionType&gt;
@@ -1312,6 +1401,7 @@ module Aws::CodePipeline
     #   resp = client.list_action_types({
     #     action_owner_filter: "AWS", # accepts AWS, ThirdParty, Custom
     #     next_token: "NextToken",
+    #     region_filter: "AWSRegionName",
     #   })
     #
     # @example Response structure
@@ -1384,7 +1474,7 @@ module Aws::CodePipeline
     #
     #   resp.pipeline_execution_summaries #=> Array
     #   resp.pipeline_execution_summaries[0].pipeline_execution_id #=> String
-    #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution_summaries[0].status #=> String, one of "Cancelled", "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
     #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
@@ -1412,6 +1502,12 @@ module Aws::CodePipeline
     #   An identifier that was returned from the previous list pipelines call.
     #   It can be used to return the next set of pipelines in the list.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of pipelines to return in a single call. To
+    #   retrieve the remaining pipelines, make another call with the returned
+    #   nextToken value. The minimum value you can specify is 1. The maximum
+    #   accepted value is 1000.
+    #
     # @return [Types::ListPipelinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPipelinesOutput#pipelines #pipelines} => Array&lt;Types::PipelineSummary&gt;
@@ -1423,6 +1519,7 @@ module Aws::CodePipeline
     #
     #   resp = client.list_pipelines({
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -2267,6 +2364,80 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Updates an action type that was created with any supported integration
+    # model, where the action type is to be used by customers of the action
+    # type provider. Use a JSON file with the action definition and
+    # `UpdateActionType` to provide the full structure.
+    #
+    # @option params [required, Types::ActionTypeDeclaration] :action_type
+    #   The action type definition for the action type to be updated.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_action_type({
+    #     action_type: { # required
+    #       description: "ActionTypeDescription",
+    #       executor: { # required
+    #         configuration: { # required
+    #           lambda_executor_configuration: {
+    #             lambda_function_arn: "LambdaFunctionArn", # required
+    #           },
+    #           job_worker_executor_configuration: {
+    #             polling_accounts: ["AccountId"],
+    #             polling_service_principals: ["ServicePrincipal"],
+    #           },
+    #         },
+    #         type: "JobWorker", # required, accepts JobWorker, Lambda
+    #         policy_statements_template: "PolicyStatementsTemplate",
+    #         job_timeout: 1,
+    #       },
+    #       id: { # required
+    #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #         owner: "ActionTypeOwner", # required
+    #         provider: "ActionProvider", # required
+    #         version: "Version", # required
+    #       },
+    #       input_artifact_details: { # required
+    #         minimum_count: 1, # required
+    #         maximum_count: 1, # required
+    #       },
+    #       output_artifact_details: { # required
+    #         minimum_count: 1, # required
+    #         maximum_count: 1, # required
+    #       },
+    #       permissions: {
+    #         allowed_accounts: ["AllowedAccount"], # required
+    #       },
+    #       properties: [
+    #         {
+    #           name: "ActionConfigurationKey", # required
+    #           optional: false, # required
+    #           key: false, # required
+    #           no_echo: false, # required
+    #           queryable: false,
+    #           description: "PropertyDescription",
+    #         },
+    #       ],
+    #       urls: {
+    #         configuration_url: "Url",
+    #         entity_url_template: "UrlTemplate",
+    #         execution_url_template: "UrlTemplate",
+    #         revision_url_template: "UrlTemplate",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdateActionType AWS API Documentation
+    #
+    # @overload update_action_type(params = {})
+    # @param [Hash] params ({})
+    def update_action_type(params = {}, options = {})
+      req = build_request(:update_action_type, params)
+      req.send_request(options)
+    end
+
     # Updates a specified pipeline with edits or changes to its structure.
     # Use a JSON file with the pipeline structure and `UpdatePipeline` to
     # provide the full structure of the pipeline. Updating the pipeline
@@ -2404,7 +2575,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -17,7 +17,13 @@ module Aws::Translate
     AppliedTerminologyList = Shapes::ListShape.new(name: 'AppliedTerminologyList')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
     ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
+    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CreateParallelDataRequest = Shapes::StructureShape.new(name: 'CreateParallelDataRequest')
+    CreateParallelDataResponse = Shapes::StructureShape.new(name: 'CreateParallelDataResponse')
+    DeleteParallelDataRequest = Shapes::StructureShape.new(name: 'DeleteParallelDataRequest')
+    DeleteParallelDataResponse = Shapes::StructureShape.new(name: 'DeleteParallelDataResponse')
     DeleteTerminologyRequest = Shapes::StructureShape.new(name: 'DeleteTerminologyRequest')
     DescribeTextTranslationJobRequest = Shapes::StructureShape.new(name: 'DescribeTextTranslationJobRequest')
     DescribeTextTranslationJobResponse = Shapes::StructureShape.new(name: 'DescribeTextTranslationJobResponse')
@@ -26,6 +32,8 @@ module Aws::Translate
     EncryptionKey = Shapes::StructureShape.new(name: 'EncryptionKey')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
     EncryptionKeyType = Shapes::StringShape.new(name: 'EncryptionKeyType')
+    GetParallelDataRequest = Shapes::StructureShape.new(name: 'GetParallelDataRequest')
+    GetParallelDataResponse = Shapes::StructureShape.new(name: 'GetParallelDataResponse')
     GetTerminologyRequest = Shapes::StructureShape.new(name: 'GetTerminologyRequest')
     GetTerminologyResponse = Shapes::StructureShape.new(name: 'GetTerminologyResponse')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
@@ -44,14 +52,24 @@ module Aws::Translate
     LanguageCodeString = Shapes::StringShape.new(name: 'LanguageCodeString')
     LanguageCodeStringList = Shapes::ListShape.new(name: 'LanguageCodeStringList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListParallelDataRequest = Shapes::StructureShape.new(name: 'ListParallelDataRequest')
+    ListParallelDataResponse = Shapes::StructureShape.new(name: 'ListParallelDataResponse')
     ListTerminologiesRequest = Shapes::StructureShape.new(name: 'ListTerminologiesRequest')
     ListTerminologiesResponse = Shapes::StructureShape.new(name: 'ListTerminologiesResponse')
     ListTextTranslationJobsRequest = Shapes::StructureShape.new(name: 'ListTextTranslationJobsRequest')
     ListTextTranslationJobsResponse = Shapes::StructureShape.new(name: 'ListTextTranslationJobsResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     MergeStrategy = Shapes::StringShape.new(name: 'MergeStrategy')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    ParallelDataArn = Shapes::StringShape.new(name: 'ParallelDataArn')
+    ParallelDataConfig = Shapes::StructureShape.new(name: 'ParallelDataConfig')
+    ParallelDataDataLocation = Shapes::StructureShape.new(name: 'ParallelDataDataLocation')
+    ParallelDataFormat = Shapes::StringShape.new(name: 'ParallelDataFormat')
+    ParallelDataProperties = Shapes::StructureShape.new(name: 'ParallelDataProperties')
+    ParallelDataPropertiesList = Shapes::ListShape.new(name: 'ParallelDataPropertiesList')
+    ParallelDataStatus = Shapes::StringShape.new(name: 'ParallelDataStatus')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -82,12 +100,38 @@ module Aws::Translate
     TranslateTextResponse = Shapes::StructureShape.new(name: 'TranslateTextResponse')
     UnboundedLengthString = Shapes::StringShape.new(name: 'UnboundedLengthString')
     UnsupportedLanguagePairException = Shapes::StructureShape.new(name: 'UnsupportedLanguagePairException')
+    UpdateParallelDataRequest = Shapes::StructureShape.new(name: 'UpdateParallelDataRequest')
+    UpdateParallelDataResponse = Shapes::StructureShape.new(name: 'UpdateParallelDataResponse')
 
     AppliedTerminology.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
     AppliedTerminology.add_member(:terms, Shapes::ShapeRef.new(shape: TermList, location_name: "Terms"))
     AppliedTerminology.struct_class = Types::AppliedTerminology
 
     AppliedTerminologyList.member = Shapes::ShapeRef.new(shape: AppliedTerminology)
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
+    CreateParallelDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    CreateParallelDataRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateParallelDataRequest.add_member(:parallel_data_config, Shapes::ShapeRef.new(shape: ParallelDataConfig, required: true, location_name: "ParallelDataConfig"))
+    CreateParallelDataRequest.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
+    CreateParallelDataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateParallelDataRequest.struct_class = Types::CreateParallelDataRequest
+
+    CreateParallelDataResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    CreateParallelDataResponse.add_member(:status, Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
+    CreateParallelDataResponse.struct_class = Types::CreateParallelDataResponse
+
+    DeleteParallelDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    DeleteParallelDataRequest.struct_class = Types::DeleteParallelDataRequest
+
+    DeleteParallelDataResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    DeleteParallelDataResponse.add_member(:status, Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
+    DeleteParallelDataResponse.struct_class = Types::DeleteParallelDataResponse
 
     DeleteTerminologyRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     DeleteTerminologyRequest.struct_class = Types::DeleteTerminologyRequest
@@ -105,6 +149,15 @@ module Aws::Translate
     EncryptionKey.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionKeyType, required: true, location_name: "Type"))
     EncryptionKey.add_member(:id, Shapes::ShapeRef.new(shape: EncryptionKeyID, required: true, location_name: "Id"))
     EncryptionKey.struct_class = Types::EncryptionKey
+
+    GetParallelDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    GetParallelDataRequest.struct_class = Types::GetParallelDataRequest
+
+    GetParallelDataResponse.add_member(:parallel_data_properties, Shapes::ShapeRef.new(shape: ParallelDataProperties, location_name: "ParallelDataProperties"))
+    GetParallelDataResponse.add_member(:data_location, Shapes::ShapeRef.new(shape: ParallelDataDataLocation, location_name: "DataLocation"))
+    GetParallelDataResponse.add_member(:auxiliary_data_location, Shapes::ShapeRef.new(shape: ParallelDataDataLocation, location_name: "AuxiliaryDataLocation"))
+    GetParallelDataResponse.add_member(:latest_update_attempt_auxiliary_data_location, Shapes::ShapeRef.new(shape: ParallelDataDataLocation, location_name: "LatestUpdateAttemptAuxiliaryDataLocation"))
+    GetParallelDataResponse.struct_class = Types::GetParallelDataResponse
 
     GetTerminologyRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     GetTerminologyRequest.add_member(:terminology_data_format, Shapes::ShapeRef.new(shape: TerminologyDataFormat, required: true, location_name: "TerminologyDataFormat"))
@@ -150,6 +203,14 @@ module Aws::Translate
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListParallelDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListParallelDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListParallelDataRequest.struct_class = Types::ListParallelDataRequest
+
+    ListParallelDataResponse.add_member(:parallel_data_properties_list, Shapes::ShapeRef.new(shape: ParallelDataPropertiesList, location_name: "ParallelDataPropertiesList"))
+    ListParallelDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListParallelDataResponse.struct_class = Types::ListParallelDataResponse
+
     ListTerminologiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTerminologiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
     ListTerminologiesRequest.struct_class = Types::ListTerminologiesRequest
@@ -170,6 +231,35 @@ module Aws::Translate
     OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
+    ParallelDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    ParallelDataConfig.add_member(:format, Shapes::ShapeRef.new(shape: ParallelDataFormat, required: true, location_name: "Format"))
+    ParallelDataConfig.struct_class = Types::ParallelDataConfig
+
+    ParallelDataDataLocation.add_member(:repository_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RepositoryType"))
+    ParallelDataDataLocation.add_member(:location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Location"))
+    ParallelDataDataLocation.struct_class = Types::ParallelDataDataLocation
+
+    ParallelDataProperties.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    ParallelDataProperties.add_member(:arn, Shapes::ShapeRef.new(shape: ParallelDataArn, location_name: "Arn"))
+    ParallelDataProperties.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ParallelDataProperties.add_member(:status, Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
+    ParallelDataProperties.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
+    ParallelDataProperties.add_member(:target_language_codes, Shapes::ShapeRef.new(shape: LanguageCodeStringList, location_name: "TargetLanguageCodes"))
+    ParallelDataProperties.add_member(:parallel_data_config, Shapes::ShapeRef.new(shape: ParallelDataConfig, location_name: "ParallelDataConfig"))
+    ParallelDataProperties.add_member(:message, Shapes::ShapeRef.new(shape: UnboundedLengthString, location_name: "Message"))
+    ParallelDataProperties.add_member(:imported_data_size, Shapes::ShapeRef.new(shape: Long, location_name: "ImportedDataSize"))
+    ParallelDataProperties.add_member(:imported_record_count, Shapes::ShapeRef.new(shape: Long, location_name: "ImportedRecordCount"))
+    ParallelDataProperties.add_member(:failed_record_count, Shapes::ShapeRef.new(shape: Long, location_name: "FailedRecordCount"))
+    ParallelDataProperties.add_member(:skipped_record_count, Shapes::ShapeRef.new(shape: Long, location_name: "SkippedRecordCount"))
+    ParallelDataProperties.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
+    ParallelDataProperties.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    ParallelDataProperties.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
+    ParallelDataProperties.add_member(:latest_update_attempt_status, Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "LatestUpdateAttemptStatus"))
+    ParallelDataProperties.add_member(:latest_update_attempt_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestUpdateAttemptAt"))
+    ParallelDataProperties.struct_class = Types::ParallelDataProperties
+
+    ParallelDataPropertiesList.member = Shapes::ShapeRef.new(shape: ParallelDataProperties)
+
     ResourceNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -185,6 +275,7 @@ module Aws::Translate
     StartTextTranslationJobRequest.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
     StartTextTranslationJobRequest.add_member(:target_language_codes, Shapes::ShapeRef.new(shape: TargetLanguageCodeStringList, required: true, location_name: "TargetLanguageCodes"))
     StartTextTranslationJobRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
+    StartTextTranslationJobRequest.add_member(:parallel_data_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "ParallelDataNames"))
     StartTextTranslationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     StartTextTranslationJobRequest.struct_class = Types::StartTextTranslationJobRequest
 
@@ -245,6 +336,7 @@ module Aws::Translate
     TextTranslationJobProperties.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
     TextTranslationJobProperties.add_member(:target_language_codes, Shapes::ShapeRef.new(shape: TargetLanguageCodeStringList, location_name: "TargetLanguageCodes"))
     TextTranslationJobProperties.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
+    TextTranslationJobProperties.add_member(:parallel_data_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "ParallelDataNames"))
     TextTranslationJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: UnboundedLengthString, location_name: "Message"))
     TextTranslationJobProperties.add_member(:submitted_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedTime"))
     TextTranslationJobProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
@@ -275,6 +367,18 @@ module Aws::Translate
     UnsupportedLanguagePairException.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode"))
     UnsupportedLanguagePairException.struct_class = Types::UnsupportedLanguagePairException
 
+    UpdateParallelDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    UpdateParallelDataRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateParallelDataRequest.add_member(:parallel_data_config, Shapes::ShapeRef.new(shape: ParallelDataConfig, required: true, location_name: "ParallelDataConfig"))
+    UpdateParallelDataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateParallelDataRequest.struct_class = Types::UpdateParallelDataRequest
+
+    UpdateParallelDataResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    UpdateParallelDataResponse.add_member(:status, Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
+    UpdateParallelDataResponse.add_member(:latest_update_attempt_status, Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "LatestUpdateAttemptStatus"))
+    UpdateParallelDataResponse.add_member(:latest_update_attempt_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestUpdateAttemptAt"))
+    UpdateParallelDataResponse.struct_class = Types::UpdateParallelDataResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -293,6 +397,32 @@ module Aws::Translate
         "targetPrefix" => "AWSShineFrontendService_20170701",
         "uid" => "translate-2017-07-01",
       }
+
+      api.add_operation(:create_parallel_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateParallelData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateParallelDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateParallelDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_parallel_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteParallelData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteParallelDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteParallelDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:delete_terminology, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTerminology"
@@ -313,6 +443,18 @@ module Aws::Translate
         o.input = Shapes::ShapeRef.new(shape: DescribeTextTranslationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTextTranslationJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_parallel_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetParallelData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetParallelDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetParallelDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -339,6 +481,23 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_parallel_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListParallelData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListParallelDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListParallelDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_terminologies, Seahorse::Model::Operation.new.tap do |o|
@@ -414,6 +573,22 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_parallel_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateParallelData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateParallelDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateParallelDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
 

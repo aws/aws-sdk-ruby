@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -53,7 +53,7 @@ module Aws::EC2
       data[:ip_permissions]
     end
 
-    # The AWS account ID of the owner of the security group.
+    # The Amazon Web Services account ID of the owner of the security group.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -251,6 +251,17 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     cidr_ip: "String",
     #     from_port: 1,
     #     ip_protocol: "String",
@@ -267,6 +278,8 @@ module Aws::EC2
     # @option options [Array<Types::IpPermission>] :ip_permissions
     #   The sets of IP permissions. You can't specify a destination security
     #   group and a CIDR IP address range in the same set of permissions.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags applied to the security group rule.
     # @option options [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
@@ -282,7 +295,7 @@ module Aws::EC2
     # @option options [String] :source_security_group_owner_id
     #   Not supported. Use a set of IP permissions to specify a destination
     #   security group.
-    # @return [EmptyStructure]
+    # @return [Types::AuthorizeSecurityGroupEgressResult]
     def authorize_egress(options = {})
       options = options.merge(group_id: @id)
       resp = @client.authorize_security_group_egress(options)
@@ -336,6 +349,17 @@ module Aws::EC2
     #     source_security_group_owner_id: "String",
     #     to_port: 1,
     #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :cidr_ip
@@ -381,13 +405,14 @@ module Aws::EC2
     #   IP protocol and port range, use a set of IP permissions instead. For
     #   EC2-VPC, the source security group must be in the same VPC.
     # @option options [String] :source_security_group_owner_id
-    #   \[nondefault VPC\] The AWS account ID for the source security group,
-    #   if the source security group is in a different account. You can't
-    #   specify this parameter in combination with the following parameters:
-    #   the CIDR IP address range, the IP protocol, the start of the port
-    #   range, and the end of the port range. Creates rules that grant full
-    #   ICMP, UDP, and TCP access. To create a rule with a specific IP
-    #   protocol and port range, use a set of IP permissions instead.
+    #   \[nondefault VPC\] The Amazon Web Services account ID for the source
+    #   security group, if the source security group is in a different
+    #   account. You can't specify this parameter in combination with the
+    #   following parameters: the CIDR IP address range, the IP protocol, the
+    #   start of the port range, and the end of the port range. Creates rules
+    #   that grant full ICMP, UDP, and TCP access. To create a rule with a
+    #   specific IP protocol and port range, use a set of IP permissions
+    #   instead.
     # @option options [Integer] :to_port
     #   The end of port range for the TCP and UDP protocols, or an ICMP code
     #   number. For the ICMP code number, use `-1` to specify all codes. If
@@ -400,7 +425,9 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @return [EmptyStructure]
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   \[VPC Only\] The tags applied to the security group rule.
+    # @return [Types::AuthorizeSecurityGroupIngressResult]
     def authorize_ingress(options = {})
       options = options.merge(group_id: @id)
       resp = @client.authorize_security_group_ingress(options)
@@ -549,6 +576,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     security_group_rule_ids: ["String"],
     #     cidr_ip: "String",
     #     from_port: 1,
     #     ip_protocol: "String",
@@ -565,6 +593,8 @@ module Aws::EC2
     # @option options [Array<Types::IpPermission>] :ip_permissions
     #   The sets of IP permissions. You can't specify a destination security
     #   group and a CIDR IP address range in the same set of permissions.
+    # @option options [Array<String>] :security_group_rule_ids
+    #   The IDs of the security group rules.
     # @option options [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
@@ -634,6 +664,7 @@ module Aws::EC2
     #     source_security_group_owner_id: "String",
     #     to_port: 1,
     #     dry_run: false,
+    #     security_group_rule_ids: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :cidr_ip
@@ -665,12 +696,13 @@ module Aws::EC2
     #   rule for an IP protocol and port range, use a set of IP permissions
     #   instead.
     # @option options [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account ID of the source security group, if
-    #   the source security group is in a different account. You can't
-    #   specify this parameter in combination with the following parameters:
-    #   the CIDR IP address range, the IP protocol, the start of the port
-    #   range, and the end of the port range. To revoke a specific rule for an
-    #   IP protocol and port range, use a set of IP permissions instead.
+    #   \[EC2-Classic\] The Amazon Web Services account ID of the source
+    #   security group, if the source security group is in a different
+    #   account. You can't specify this parameter in combination with the
+    #   following parameters: the CIDR IP address range, the IP protocol, the
+    #   start of the port range, and the end of the port range. To revoke a
+    #   specific rule for an IP protocol and port range, use a set of IP
+    #   permissions instead.
     # @option options [Integer] :to_port
     #   The end of port range for the TCP and UDP protocols, or an ICMP code
     #   number. For the ICMP code number, use `-1` to specify all ICMP codes
@@ -680,6 +712,8 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :security_group_rule_ids
+    #   The IDs of the security group rules.
     # @return [Types::RevokeSecurityGroupIngressResult]
     def revoke_ingress(options = {})
       options = options.merge(group_id: @id)

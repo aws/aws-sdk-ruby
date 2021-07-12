@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-03-24)
+------------------
+
+* Feature - Updated the parameters to make name required for CreateGroup API.
+
+1.39.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.37.0 (2020-09-30)
 ------------------
 

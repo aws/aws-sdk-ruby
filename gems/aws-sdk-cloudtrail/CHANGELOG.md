@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-06-04)
+------------------
+
+* Feature - AWS CloudTrail supports data events on new service resources, including Amazon DynamoDB tables and S3 Object Lambda access points.
+
+1.34.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2021-02-08)
+------------------
+
+* Feature - ConflictException is now thrown when certain operations are called on resources before CloudTrail has time to load the resources. Two new exceptions have been added to the PutInsightSelectors API.
+
+1.32.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2020-12-11)
+------------------
+
+* Feature - CloudTrailInvalidClientTokenIdException is now thrown when a call results in the InvalidClientTokenId error code. The Name parameter of the AdvancedEventSelector data type is now optional.
+
+1.30.0 (2020-11-24)
+------------------
+
+* Feature - CloudTrail now includes advanced event selectors, which give you finer-grained control over the events that are logged to your trail.
+
 1.29.0 (2020-09-30)
 ------------------
 

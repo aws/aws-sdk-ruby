@@ -86,7 +86,8 @@
       "input":{"shape":"GetHostInput"},
       "output":{"shape":"GetHostOutput"},
       "errors":[
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceUnavailableException"}
       ]
     },
     "ListConnections":{
@@ -143,6 +144,21 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ]
+    },
+    "UpdateHost":{
+      "name":"UpdateHost",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateHostInput"},
+      "output":{"shape":"UpdateHostOutput"},
+      "errors":[
+        {"shape":"ConflictException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceUnavailableException"},
+        {"shape":"UnsupportedOperationException"}
+      ]
     }
   },
   "shapes":{
@@ -155,7 +171,15 @@
     "AmazonResourceName":{
       "type":"string",
       "max":1011,
-      "min":1
+      "min":1,
+      "pattern":"arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
+    },
+    "ConflictException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
     },
     "Connection":{
       "type":"structure",
@@ -181,7 +205,8 @@
     "ConnectionName":{
       "type":"string",
       "max":32,
-      "min":1
+      "min":1,
+      "pattern":"[\\s\\S]*"
     },
     "ConnectionStatus":{
       "type":"string",
@@ -220,13 +245,15 @@
         "Name":{"shape":"HostName"},
         "ProviderType":{"shape":"ProviderType"},
         "ProviderEndpoint":{"shape":"Url"},
-        "VpcConfiguration":{"shape":"VpcConfiguration"}
+        "VpcConfiguration":{"shape":"VpcConfiguration"},
+        "Tags":{"shape":"TagList"}
       }
     },
     "CreateHostOutput":{
       "type":"structure",
       "members":{
-        "HostArn":{"shape":"HostArn"}
+        "HostArn":{"shape":"HostArn"},
+        "Tags":{"shape":"TagList"}
       }
     },
     "DeleteConnectionInput":{
@@ -311,10 +338,16 @@
     },
     "HostName":{
       "type":"string",
-      "max":32,
-      "min":1
+      "max":64,
+      "min":1,
+      "pattern":".*"
     },
-    "HostStatus":{"type":"string"},
+    "HostStatus":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":".*"
+    },
     "HostStatusMessage":{"type":"string"},
     "LimitExceededException":{
       "type":"structure",
@@ -374,7 +407,8 @@
     "NextToken":{
       "type":"string",
       "max":1024,
-      "min":1
+      "min":1,
+      "pattern":".*"
     },
     "ProviderType":{
       "type":"string",
@@ -400,6 +434,8 @@
     },
     "SecurityGroupId":{
       "type":"string",
+      "max":20,
+      "min":11,
       "pattern":"sg-\\w{8}(\\w{9})?"
     },
     "SecurityGroupIds":{
@@ -410,6 +446,8 @@
     },
     "SubnetId":{
       "type":"string",
+      "max":24,
+      "min":15,
       "pattern":"subnet-\\w{8}(\\w{9})?"
     },
     "SubnetIds":{
@@ -432,7 +470,8 @@
     "TagKey":{
       "type":"string",
       "max":128,
-      "min":1
+      "min":1,
+      "pattern":".*"
     },
     "TagKeyList":{
       "type":"list",
@@ -465,12 +504,21 @@
     "TagValue":{
       "type":"string",
       "max":256,
-      "min":0
+      "min":0,
+      "pattern":".*"
     },
     "TlsCertificate":{
       "type":"string",
       "max":16384,
-      "min":1
+      "min":1,
+      "pattern":"[\\s\\S]*"
+    },
+    "UnsupportedOperationException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
     },
     "UntagResourceInput":{
       "type":"structure",
@@ -488,10 +536,25 @@
       "members":{
       }
     },
+    "UpdateHostInput":{
+      "type":"structure",
+      "required":["HostArn"],
+      "members":{
+        "HostArn":{"shape":"HostArn"},
+        "ProviderEndpoint":{"shape":"Url"},
+        "VpcConfiguration":{"shape":"VpcConfiguration"}
+      }
+    },
+    "UpdateHostOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "Url":{
       "type":"string",
       "max":512,
-      "min":1
+      "min":1,
+      "pattern":".*"
     },
     "VpcConfiguration":{
       "type":"structure",
@@ -509,6 +572,8 @@
     },
     "VpcId":{
       "type":"string",
+      "max":21,
+      "min":12,
       "pattern":"vpc-\\w{8}(\\w{9})?"
     }
   }

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -16,6 +16,7 @@ module Aws::CostandUsageReportService
     AWSRegion = Shapes::StringShape.new(name: 'AWSRegion')
     AdditionalArtifact = Shapes::StringShape.new(name: 'AdditionalArtifact')
     AdditionalArtifactList = Shapes::ListShape.new(name: 'AdditionalArtifactList')
+    BillingViewArn = Shapes::StringShape.new(name: 'BillingViewArn')
     CompressionFormat = Shapes::StringShape.new(name: 'CompressionFormat')
     DeleteReportDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteReportDefinitionRequest')
     DeleteReportDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteReportDefinitionResponse')
@@ -89,6 +90,7 @@ module Aws::CostandUsageReportService
     ReportDefinition.add_member(:additional_artifacts, Shapes::ShapeRef.new(shape: AdditionalArtifactList, location_name: "AdditionalArtifacts"))
     ReportDefinition.add_member(:refresh_closed_reports, Shapes::ShapeRef.new(shape: RefreshClosedReports, location_name: "RefreshClosedReports"))
     ReportDefinition.add_member(:report_versioning, Shapes::ShapeRef.new(shape: ReportVersioning, location_name: "ReportVersioning"))
+    ReportDefinition.add_member(:billing_view_arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "BillingViewArn"))
     ReportDefinition.struct_class = Types::ReportDefinition
 
     ReportDefinitionList.member = Shapes::ShapeRef.new(shape: ReportDefinition)

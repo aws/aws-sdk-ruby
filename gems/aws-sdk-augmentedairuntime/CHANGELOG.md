@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-05-17)
+------------------
+
+* Feature - Documentation updates for Amazon A2I Runtime model
+
+1.12.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.10.0 (2020-09-30)
 ------------------
 

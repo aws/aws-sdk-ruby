@@ -58,36 +58,10 @@ module Aws
           )
         end
 
-        it 'works with HTTP endpoints' do
-          client = Client.new(
-            options.merge(
-              use_dualstack_endpoint: true,
-              endpoint: 'http://s3.us-west-2.amazonaws.com'
-            )
-          )
-          resp = client.put_object(bucket: 'bucket-name', key: 'key')
-          expect(resp.context.http_request.endpoint.to_s).to eq(
-            'http://bucket-name.s3.dualstack.us-west-2.amazonaws.com/key'
-          )
-        end
-
         it 'works with DNS incompatible buckets' do
           resp = dualstack_client.put_object(bucket: 'bucket.name', key: 'key')
           expect(resp.context.http_request.endpoint.to_s).to eq(
             'https://s3.dualstack.us-west-2.amazonaws.com/bucket.name/key'
-          )
-        end
-
-        it 'works with DNS incompatible buckets in HTTP scheme' do
-          client = Client.new(
-            options.merge(
-              use_dualstack_endpoint: true,
-              endpoint: 'http://s3.us-west-2.amazonaws.com'
-            )
-          )
-          resp = client.put_object(bucket: 'bucket.name', key: 'key')
-          expect(resp.context.http_request.endpoint.to_s).to eq(
-            'http://bucket.name.s3.dualstack.us-west-2.amazonaws.com/key'
           )
         end
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -20,8 +20,17 @@ module Aws::ConfigService
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AggregateComplianceByConfigRule = Shapes::StructureShape.new(name: 'AggregateComplianceByConfigRule')
     AggregateComplianceByConfigRuleList = Shapes::ListShape.new(name: 'AggregateComplianceByConfigRuleList')
+    AggregateComplianceByConformancePack = Shapes::StructureShape.new(name: 'AggregateComplianceByConformancePack')
+    AggregateComplianceByConformancePackList = Shapes::ListShape.new(name: 'AggregateComplianceByConformancePackList')
     AggregateComplianceCount = Shapes::StructureShape.new(name: 'AggregateComplianceCount')
     AggregateComplianceCountList = Shapes::ListShape.new(name: 'AggregateComplianceCountList')
+    AggregateConformancePackCompliance = Shapes::StructureShape.new(name: 'AggregateConformancePackCompliance')
+    AggregateConformancePackComplianceCount = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceCount')
+    AggregateConformancePackComplianceFilters = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceFilters')
+    AggregateConformancePackComplianceSummary = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceSummary')
+    AggregateConformancePackComplianceSummaryFilters = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceSummaryFilters')
+    AggregateConformancePackComplianceSummaryGroupKey = Shapes::StringShape.new(name: 'AggregateConformancePackComplianceSummaryGroupKey')
+    AggregateConformancePackComplianceSummaryList = Shapes::ListShape.new(name: 'AggregateConformancePackComplianceSummaryList')
     AggregateEvaluationResult = Shapes::StructureShape.new(name: 'AggregateEvaluationResult')
     AggregateEvaluationResultList = Shapes::ListShape.new(name: 'AggregateEvaluationResultList')
     AggregateResourceIdentifier = Shapes::StructureShape.new(name: 'AggregateResourceIdentifier')
@@ -117,6 +126,7 @@ module Aws::ConfigService
     ConformancePackStatusDetailsList = Shapes::ListShape.new(name: 'ConformancePackStatusDetailsList')
     ConformancePackStatusReason = Shapes::StringShape.new(name: 'ConformancePackStatusReason')
     ConformancePackTemplateValidationException = Shapes::StructureShape.new(name: 'ConformancePackTemplateValidationException')
+    ControlsList = Shapes::ListShape.new(name: 'ControlsList')
     CosmosPageLimit = Shapes::IntegerShape.new(name: 'CosmosPageLimit')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'DeleteAggregationAuthorizationRequest')
@@ -136,6 +146,8 @@ module Aws::ConfigService
     DeleteRemediationExceptionsResponse = Shapes::StructureShape.new(name: 'DeleteRemediationExceptionsResponse')
     DeleteResourceConfigRequest = Shapes::StructureShape.new(name: 'DeleteResourceConfigRequest')
     DeleteRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRetentionConfigurationRequest')
+    DeleteStoredQueryRequest = Shapes::StructureShape.new(name: 'DeleteStoredQueryRequest')
+    DeleteStoredQueryResponse = Shapes::StructureShape.new(name: 'DeleteStoredQueryResponse')
     DeliverConfigSnapshotRequest = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotRequest')
     DeliverConfigSnapshotResponse = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotResponse')
     DeliveryChannel = Shapes::StructureShape.new(name: 'DeliveryChannel')
@@ -148,6 +160,8 @@ module Aws::ConfigService
     DeliveryStatus = Shapes::StringShape.new(name: 'DeliveryStatus')
     DescribeAggregateComplianceByConfigRulesRequest = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConfigRulesRequest')
     DescribeAggregateComplianceByConfigRulesResponse = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConfigRulesResponse')
+    DescribeAggregateComplianceByConformancePacksRequest = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConformancePacksRequest')
+    DescribeAggregateComplianceByConformancePacksResponse = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConformancePacksResponse')
     DescribeAggregationAuthorizationsRequest = Shapes::StructureShape.new(name: 'DescribeAggregationAuthorizationsRequest')
     DescribeAggregationAuthorizationsResponse = Shapes::StructureShape.new(name: 'DescribeAggregationAuthorizationsResponse')
     DescribeComplianceByConfigRuleRequest = Shapes::StructureShape.new(name: 'DescribeComplianceByConfigRuleRequest')
@@ -199,6 +213,7 @@ module Aws::ConfigService
     DiscoveredResourceIdentifierList = Shapes::ListShape.new(name: 'DiscoveredResourceIdentifierList')
     EarlierTime = Shapes::TimestampShape.new(name: 'EarlierTime')
     EmptiableStringWithCharLimit256 = Shapes::StringShape.new(name: 'EmptiableStringWithCharLimit256')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationResultIdentifier = Shapes::StructureShape.new(name: 'EvaluationResultIdentifier')
@@ -209,6 +224,7 @@ module Aws::ConfigService
     ExcludedAccounts = Shapes::ListShape.new(name: 'ExcludedAccounts')
     ExecutionControls = Shapes::StructureShape.new(name: 'ExecutionControls')
     Expression = Shapes::StringShape.new(name: 'Expression')
+    ExternalEvaluation = Shapes::StructureShape.new(name: 'ExternalEvaluation')
     FailedDeleteRemediationExceptionsBatch = Shapes::StructureShape.new(name: 'FailedDeleteRemediationExceptionsBatch')
     FailedDeleteRemediationExceptionsBatches = Shapes::ListShape.new(name: 'FailedDeleteRemediationExceptionsBatches')
     FailedRemediationBatch = Shapes::StructureShape.new(name: 'FailedRemediationBatch')
@@ -222,6 +238,8 @@ module Aws::ConfigService
     GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
     GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
     GetAggregateConfigRuleComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryResponse')
+    GetAggregateConformancePackComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConformancePackComplianceSummaryRequest')
+    GetAggregateConformancePackComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetAggregateConformancePackComplianceSummaryResponse')
     GetAggregateDiscoveredResourceCountsRequest = Shapes::StructureShape.new(name: 'GetAggregateDiscoveredResourceCountsRequest')
     GetAggregateDiscoveredResourceCountsResponse = Shapes::StructureShape.new(name: 'GetAggregateDiscoveredResourceCountsResponse')
     GetAggregateResourceConfigRequest = Shapes::StructureShape.new(name: 'GetAggregateResourceConfigRequest')
@@ -246,6 +264,8 @@ module Aws::ConfigService
     GetOrganizationConformancePackDetailedStatusResponse = Shapes::StructureShape.new(name: 'GetOrganizationConformancePackDetailedStatusResponse')
     GetResourceConfigHistoryRequest = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryRequest')
     GetResourceConfigHistoryResponse = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryResponse')
+    GetStoredQueryRequest = Shapes::StructureShape.new(name: 'GetStoredQueryRequest')
+    GetStoredQueryResponse = Shapes::StructureShape.new(name: 'GetStoredQueryResponse')
     GroupByAPILimit = Shapes::IntegerShape.new(name: 'GroupByAPILimit')
     GroupedResourceCount = Shapes::StructureShape.new(name: 'GroupedResourceCount')
     GroupedResourceCountList = Shapes::ListShape.new(name: 'GroupedResourceCountList')
@@ -263,6 +283,7 @@ module Aws::ConfigService
     InvalidResultTokenException = Shapes::StructureShape.new(name: 'InvalidResultTokenException')
     InvalidRoleException = Shapes::StructureShape.new(name: 'InvalidRoleException')
     InvalidS3KeyPrefixException = Shapes::StructureShape.new(name: 'InvalidS3KeyPrefixException')
+    InvalidS3KmsKeyArnException = Shapes::StructureShape.new(name: 'InvalidS3KmsKeyArnException')
     InvalidSNSTopicARNException = Shapes::StructureShape.new(name: 'InvalidSNSTopicARNException')
     InvalidTimeRangeException = Shapes::StructureShape.new(name: 'InvalidTimeRangeException')
     LastDeliveryChannelDeleteFailedException = Shapes::StructureShape.new(name: 'LastDeliveryChannelDeleteFailedException')
@@ -273,6 +294,8 @@ module Aws::ConfigService
     ListAggregateDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListAggregateDiscoveredResourcesResponse')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
     ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
+    ListStoredQueriesRequest = Shapes::StructureShape.new(name: 'ListStoredQueriesRequest')
+    ListStoredQueriesResponse = Shapes::StructureShape.new(name: 'ListStoredQueriesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -353,6 +376,8 @@ module Aws::ConfigService
     PutDeliveryChannelRequest = Shapes::StructureShape.new(name: 'PutDeliveryChannelRequest')
     PutEvaluationsRequest = Shapes::StructureShape.new(name: 'PutEvaluationsRequest')
     PutEvaluationsResponse = Shapes::StructureShape.new(name: 'PutEvaluationsResponse')
+    PutExternalEvaluationRequest = Shapes::StructureShape.new(name: 'PutExternalEvaluationRequest')
+    PutExternalEvaluationResponse = Shapes::StructureShape.new(name: 'PutExternalEvaluationResponse')
     PutOrganizationConfigRuleRequest = Shapes::StructureShape.new(name: 'PutOrganizationConfigRuleRequest')
     PutOrganizationConfigRuleResponse = Shapes::StructureShape.new(name: 'PutOrganizationConfigRuleResponse')
     PutOrganizationConformancePackRequest = Shapes::StructureShape.new(name: 'PutOrganizationConformancePackRequest')
@@ -364,7 +389,14 @@ module Aws::ConfigService
     PutResourceConfigRequest = Shapes::StructureShape.new(name: 'PutResourceConfigRequest')
     PutRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'PutRetentionConfigurationRequest')
     PutRetentionConfigurationResponse = Shapes::StructureShape.new(name: 'PutRetentionConfigurationResponse')
+    PutStoredQueryRequest = Shapes::StructureShape.new(name: 'PutStoredQueryRequest')
+    PutStoredQueryResponse = Shapes::StructureShape.new(name: 'PutStoredQueryResponse')
+    QueryArn = Shapes::StringShape.new(name: 'QueryArn')
+    QueryDescription = Shapes::StringShape.new(name: 'QueryDescription')
+    QueryExpression = Shapes::StringShape.new(name: 'QueryExpression')
+    QueryId = Shapes::StringShape.new(name: 'QueryId')
     QueryInfo = Shapes::StructureShape.new(name: 'QueryInfo')
+    QueryName = Shapes::StringShape.new(name: 'QueryName')
     RecorderName = Shapes::StringShape.new(name: 'RecorderName')
     RecorderStatus = Shapes::StringShape.new(name: 'RecorderStatus')
     RecordingGroup = Shapes::StructureShape.new(name: 'RecordingGroup')
@@ -390,6 +422,7 @@ module Aws::ConfigService
     RemediationParameterValue = Shapes::StructureShape.new(name: 'RemediationParameterValue')
     RemediationParameters = Shapes::MapShape.new(name: 'RemediationParameters')
     RemediationTargetType = Shapes::StringShape.new(name: 'RemediationTargetType')
+    ResourceConcurrentModificationException = Shapes::StructureShape.new(name: 'ResourceConcurrentModificationException')
     ResourceCount = Shapes::StructureShape.new(name: 'ResourceCount')
     ResourceCountFilters = Shapes::StructureShape.new(name: 'ResourceCountFilters')
     ResourceCountGroupKey = Shapes::StringShape.new(name: 'ResourceCountGroupKey')
@@ -442,6 +475,9 @@ module Aws::ConfigService
     StaticValue = Shapes::StructureShape.new(name: 'StaticValue')
     StatusDetailFilters = Shapes::StructureShape.new(name: 'StatusDetailFilters')
     StopConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StopConfigurationRecorderRequest')
+    StoredQuery = Shapes::StructureShape.new(name: 'StoredQuery')
+    StoredQueryMetadata = Shapes::StructureShape.new(name: 'StoredQueryMetadata')
+    StoredQueryMetadataList = Shapes::ListShape.new(name: 'StoredQueryMetadataList')
     String = Shapes::StringShape.new(name: 'String')
     StringWithCharLimit1024 = Shapes::StringShape.new(name: 'StringWithCharLimit1024')
     StringWithCharLimit128 = Shapes::StringShape.new(name: 'StringWithCharLimit128')
@@ -487,11 +523,45 @@ module Aws::ConfigService
 
     AggregateComplianceByConfigRuleList.member = Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRule)
 
+    AggregateComplianceByConformancePack.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
+    AggregateComplianceByConformancePack.add_member(:compliance, Shapes::ShapeRef.new(shape: AggregateConformancePackCompliance, location_name: "Compliance"))
+    AggregateComplianceByConformancePack.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateComplianceByConformancePack.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateComplianceByConformancePack.struct_class = Types::AggregateComplianceByConformancePack
+
+    AggregateComplianceByConformancePackList.member = Shapes::ShapeRef.new(shape: AggregateComplianceByConformancePack)
+
     AggregateComplianceCount.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName"))
     AggregateComplianceCount.add_member(:compliance_summary, Shapes::ShapeRef.new(shape: ComplianceSummary, location_name: "ComplianceSummary"))
     AggregateComplianceCount.struct_class = Types::AggregateComplianceCount
 
     AggregateComplianceCountList.member = Shapes::ShapeRef.new(shape: AggregateComplianceCount)
+
+    AggregateConformancePackCompliance.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
+    AggregateConformancePackCompliance.add_member(:compliant_rule_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CompliantRuleCount"))
+    AggregateConformancePackCompliance.add_member(:non_compliant_rule_count, Shapes::ShapeRef.new(shape: Integer, location_name: "NonCompliantRuleCount"))
+    AggregateConformancePackCompliance.add_member(:total_rule_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalRuleCount"))
+    AggregateConformancePackCompliance.struct_class = Types::AggregateConformancePackCompliance
+
+    AggregateConformancePackComplianceCount.add_member(:compliant_conformance_pack_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CompliantConformancePackCount"))
+    AggregateConformancePackComplianceCount.add_member(:non_compliant_conformance_pack_count, Shapes::ShapeRef.new(shape: Integer, location_name: "NonCompliantConformancePackCount"))
+    AggregateConformancePackComplianceCount.struct_class = Types::AggregateConformancePackComplianceCount
+
+    AggregateConformancePackComplianceFilters.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
+    AggregateConformancePackComplianceFilters.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
+    AggregateConformancePackComplianceFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateConformancePackComplianceFilters.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateConformancePackComplianceFilters.struct_class = Types::AggregateConformancePackComplianceFilters
+
+    AggregateConformancePackComplianceSummary.add_member(:compliance_summary, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceCount, location_name: "ComplianceSummary"))
+    AggregateConformancePackComplianceSummary.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName"))
+    AggregateConformancePackComplianceSummary.struct_class = Types::AggregateConformancePackComplianceSummary
+
+    AggregateConformancePackComplianceSummaryFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateConformancePackComplianceSummaryFilters.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateConformancePackComplianceSummaryFilters.struct_class = Types::AggregateConformancePackComplianceSummaryFilters
+
+    AggregateConformancePackComplianceSummaryList.member = Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummary)
 
     AggregateEvaluationResult.add_member(:evaluation_result_identifier, Shapes::ShapeRef.new(shape: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier"))
     AggregateEvaluationResult.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
@@ -769,6 +839,7 @@ module Aws::ConfigService
 
     ConformancePackRuleCompliance.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
     ConformancePackRuleCompliance.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
+    ConformancePackRuleCompliance.add_member(:controls, Shapes::ShapeRef.new(shape: ControlsList, location_name: "Controls"))
     ConformancePackRuleCompliance.struct_class = Types::ConformancePackRuleCompliance
 
     ConformancePackRuleComplianceList.member = Shapes::ShapeRef.new(shape: ConformancePackRuleCompliance)
@@ -788,6 +859,8 @@ module Aws::ConfigService
     ConformancePackStatusDetailsList.member = Shapes::ShapeRef.new(shape: ConformancePackStatusDetail)
 
     ConformancePackTemplateValidationException.struct_class = Types::ConformancePackTemplateValidationException
+
+    ControlsList.member = Shapes::ShapeRef.new(shape: StringWithCharLimit128)
 
     DeleteAggregationAuthorizationRequest.add_member(:authorized_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AuthorizedAccountId"))
     DeleteAggregationAuthorizationRequest.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AuthorizedAwsRegion"))
@@ -843,6 +916,11 @@ module Aws::ConfigService
     DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "RetentionConfigurationName"))
     DeleteRetentionConfigurationRequest.struct_class = Types::DeleteRetentionConfigurationRequest
 
+    DeleteStoredQueryRequest.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    DeleteStoredQueryRequest.struct_class = Types::DeleteStoredQueryRequest
+
+    DeleteStoredQueryResponse.struct_class = Types::DeleteStoredQueryResponse
+
     DeliverConfigSnapshotRequest.add_member(:delivery_channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "deliveryChannelName"))
     DeliverConfigSnapshotRequest.struct_class = Types::DeliverConfigSnapshotRequest
 
@@ -852,6 +930,7 @@ module Aws::ConfigService
     DeliveryChannel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     DeliveryChannel.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "s3BucketName"))
     DeliveryChannel.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "s3KeyPrefix"))
+    DeliveryChannel.add_member(:s3_kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "s3KmsKeyArn"))
     DeliveryChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "snsTopicARN"))
     DeliveryChannel.add_member(:config_snapshot_delivery_properties, Shapes::ShapeRef.new(shape: ConfigSnapshotDeliveryProperties, location_name: "configSnapshotDeliveryProperties"))
     DeliveryChannel.struct_class = Types::DeliveryChannel
@@ -877,6 +956,16 @@ module Aws::ConfigService
     DescribeAggregateComplianceByConfigRulesResponse.add_member(:aggregate_compliance_by_config_rules, Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRuleList, location_name: "AggregateComplianceByConfigRules"))
     DescribeAggregateComplianceByConfigRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAggregateComplianceByConfigRulesResponse.struct_class = Types::DescribeAggregateComplianceByConfigRulesResponse
+
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceFilters, location_name: "Filters"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConformancePacksRequest.struct_class = Types::DescribeAggregateComplianceByConformancePacksRequest
+
+    DescribeAggregateComplianceByConformancePacksResponse.add_member(:aggregate_compliance_by_conformance_packs, Shapes::ShapeRef.new(shape: AggregateComplianceByConformancePackList, location_name: "AggregateComplianceByConformancePacks"))
+    DescribeAggregateComplianceByConformancePacksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConformancePacksResponse.struct_class = Types::DescribeAggregateComplianceByConformancePacksResponse
 
     DescribeAggregationAuthorizationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DescribeAggregationAuthorizationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -1108,6 +1197,13 @@ module Aws::ConfigService
     ExecutionControls.add_member(:ssm_controls, Shapes::ShapeRef.new(shape: SsmControls, location_name: "SsmControls"))
     ExecutionControls.struct_class = Types::ExecutionControls
 
+    ExternalEvaluation.add_member(:compliance_resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ComplianceResourceType"))
+    ExternalEvaluation.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, required: true, location_name: "ComplianceResourceId"))
+    ExternalEvaluation.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, required: true, location_name: "ComplianceType"))
+    ExternalEvaluation.add_member(:annotation, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
+    ExternalEvaluation.add_member(:ordering_timestamp, Shapes::ShapeRef.new(shape: OrderingTimestamp, required: true, location_name: "OrderingTimestamp"))
+    ExternalEvaluation.struct_class = Types::ExternalEvaluation
+
     FailedDeleteRemediationExceptionsBatch.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     FailedDeleteRemediationExceptionsBatch.add_member(:failed_items, Shapes::ShapeRef.new(shape: RemediationExceptionResourceKeys, location_name: "FailedItems"))
     FailedDeleteRemediationExceptionsBatch.struct_class = Types::FailedDeleteRemediationExceptionsBatch
@@ -1155,6 +1251,18 @@ module Aws::ConfigService
     GetAggregateConfigRuleComplianceSummaryResponse.add_member(:aggregate_compliance_counts, Shapes::ShapeRef.new(shape: AggregateComplianceCountList, location_name: "AggregateComplianceCounts"))
     GetAggregateConfigRuleComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetAggregateConfigRuleComplianceSummaryResponse.struct_class = Types::GetAggregateConfigRuleComplianceSummaryResponse
+
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryFilters, location_name: "Filters"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:group_by_key, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryGroupKey, location_name: "GroupByKey"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConformancePackComplianceSummaryRequest.struct_class = Types::GetAggregateConformancePackComplianceSummaryRequest
+
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:aggregate_conformance_pack_compliance_summaries, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryList, location_name: "AggregateConformancePackComplianceSummaries"))
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:group_by_key, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupByKey"))
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConformancePackComplianceSummaryResponse.struct_class = Types::GetAggregateConformancePackComplianceSummaryResponse
 
     GetAggregateDiscoveredResourceCountsRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
     GetAggregateDiscoveredResourceCountsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ResourceCountFilters, location_name: "Filters"))
@@ -1268,6 +1376,12 @@ module Aws::ConfigService
     GetResourceConfigHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetResourceConfigHistoryResponse.struct_class = Types::GetResourceConfigHistoryResponse
 
+    GetStoredQueryRequest.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    GetStoredQueryRequest.struct_class = Types::GetStoredQueryRequest
+
+    GetStoredQueryResponse.add_member(:stored_query, Shapes::ShapeRef.new(shape: StoredQuery, location_name: "StoredQuery"))
+    GetStoredQueryResponse.struct_class = Types::GetStoredQueryResponse
+
     GroupedResourceCount.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "GroupName"))
     GroupedResourceCount.add_member(:resource_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ResourceCount"))
     GroupedResourceCount.struct_class = Types::GroupedResourceCount
@@ -1297,6 +1411,8 @@ module Aws::ConfigService
     InvalidRoleException.struct_class = Types::InvalidRoleException
 
     InvalidS3KeyPrefixException.struct_class = Types::InvalidS3KeyPrefixException
+
+    InvalidS3KmsKeyArnException.struct_class = Types::InvalidS3KmsKeyArnException
 
     InvalidSNSTopicARNException.struct_class = Types::InvalidSNSTopicARNException
 
@@ -1328,6 +1444,14 @@ module Aws::ConfigService
     ListDiscoveredResourcesResponse.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, location_name: "resourceIdentifiers"))
     ListDiscoveredResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDiscoveredResourcesResponse.struct_class = Types::ListDiscoveredResourcesResponse
+
+    ListStoredQueriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken", metadata: {"box"=>true}))
+    ListStoredQueriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListStoredQueriesRequest.struct_class = Types::ListStoredQueriesRequest
+
+    ListStoredQueriesResponse.add_member(:stored_query_metadata, Shapes::ShapeRef.new(shape: StoredQueryMetadataList, location_name: "StoredQueryMetadata"))
+    ListStoredQueriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListStoredQueriesResponse.struct_class = Types::ListStoredQueriesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -1541,6 +1665,12 @@ module Aws::ConfigService
     PutEvaluationsResponse.add_member(:failed_evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))
     PutEvaluationsResponse.struct_class = Types::PutEvaluationsResponse
 
+    PutExternalEvaluationRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
+    PutExternalEvaluationRequest.add_member(:external_evaluation, Shapes::ShapeRef.new(shape: ExternalEvaluation, required: true, location_name: "ExternalEvaluation"))
+    PutExternalEvaluationRequest.struct_class = Types::PutExternalEvaluationRequest
+
+    PutExternalEvaluationResponse.struct_class = Types::PutExternalEvaluationResponse
+
     PutOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
     PutOrganizationConfigRuleRequest.add_member(:organization_managed_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
     PutOrganizationConfigRuleRequest.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
@@ -1590,6 +1720,13 @@ module Aws::ConfigService
 
     PutRetentionConfigurationResponse.add_member(:retention_configuration, Shapes::ShapeRef.new(shape: RetentionConfiguration, location_name: "RetentionConfiguration"))
     PutRetentionConfigurationResponse.struct_class = Types::PutRetentionConfigurationResponse
+
+    PutStoredQueryRequest.add_member(:stored_query, Shapes::ShapeRef.new(shape: StoredQuery, required: true, location_name: "StoredQuery"))
+    PutStoredQueryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutStoredQueryRequest.struct_class = Types::PutStoredQueryRequest
+
+    PutStoredQueryResponse.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn"))
+    PutStoredQueryResponse.struct_class = Types::PutStoredQueryResponse
 
     QueryInfo.add_member(:select_fields, Shapes::ShapeRef.new(shape: FieldInfoList, location_name: "SelectFields"))
     QueryInfo.struct_class = Types::QueryInfo
@@ -1668,6 +1805,9 @@ module Aws::ConfigService
 
     RemediationParameters.key = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
     RemediationParameters.value = Shapes::ShapeRef.new(shape: RemediationParameterValue)
+
+    ResourceConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceConcurrentModificationException.struct_class = Types::ResourceConcurrentModificationException
 
     ResourceCount.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     ResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "count"))
@@ -1800,6 +1940,21 @@ module Aws::ConfigService
 
     StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
     StopConfigurationRecorderRequest.struct_class = Types::StopConfigurationRecorderRequest
+
+    StoredQuery.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId", metadata: {"box"=>true}))
+    StoredQuery.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn", metadata: {"box"=>true}))
+    StoredQuery.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    StoredQuery.add_member(:description, Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description", metadata: {"box"=>true}))
+    StoredQuery.add_member(:expression, Shapes::ShapeRef.new(shape: QueryExpression, location_name: "Expression", metadata: {"box"=>true}))
+    StoredQuery.struct_class = Types::StoredQuery
+
+    StoredQueryMetadata.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, required: true, location_name: "QueryId"))
+    StoredQueryMetadata.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, required: true, location_name: "QueryArn"))
+    StoredQueryMetadata.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    StoredQueryMetadata.add_member(:description, Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description"))
+    StoredQueryMetadata.struct_class = Types::StoredQueryMetadata
+
+    StoredQueryMetadataList.member = Shapes::ShapeRef.new(shape: StoredQueryMetadata)
 
     SupplementaryConfiguration.key = Shapes::ShapeRef.new(shape: SupplementaryConfigurationName)
     SupplementaryConfiguration.value = Shapes::ShapeRef.new(shape: SupplementaryConfigurationValue)
@@ -1977,6 +2132,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: RemediationInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:delete_remediation_exceptions, Seahorse::Model::Operation.new.tap do |o|
@@ -2008,6 +2164,16 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
       end)
 
+      api.add_operation(:delete_stored_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStoredQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStoredQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteStoredQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:deliver_config_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeliverConfigSnapshot"
         o.http_method = "POST"
@@ -2029,6 +2195,30 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_aggregate_compliance_by_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAggregateComplianceByConformancePacks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConformancePacksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConformancePacksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_aggregation_authorizations, Seahorse::Model::Operation.new.tap do |o|
@@ -2040,6 +2230,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_compliance_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2051,6 +2247,11 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_compliance_by_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2061,6 +2262,12 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeComplianceByResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_config_rule_evaluation_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2072,6 +2279,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_config_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -2082,6 +2295,11 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeConfigRulesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_configuration_aggregator_sources_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2094,6 +2312,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_configuration_aggregators, Seahorse::Model::Operation.new.tap do |o|
@@ -2106,6 +2330,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_configuration_recorder_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2137,6 +2367,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleInConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_conformance_pack_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2148,6 +2384,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
@@ -2160,6 +2402,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_delivery_channel_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2190,6 +2438,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_organization_config_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -2202,6 +2456,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_organization_conformance_pack_statuses, Seahorse::Model::Operation.new.tap do |o|
@@ -2214,6 +2474,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_organization_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
@@ -2226,6 +2492,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_pending_aggregation_requests, Seahorse::Model::Operation.new.tap do |o|
@@ -2237,6 +2509,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_remediation_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -2271,6 +2549,7 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeRemediationExecutionStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2288,6 +2567,11 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_compliance_details_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2300,6 +2584,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_config_rule_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -2312,6 +2602,30 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_aggregate_conformance_pack_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAggregateConformancePackComplianceSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAggregateConformancePackComplianceSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAggregateConformancePackComplianceSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_discovered_resource_counts, Seahorse::Model::Operation.new.tap do |o|
@@ -2324,6 +2638,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2347,6 +2667,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_compliance_details_by_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2356,6 +2682,11 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: GetComplianceDetailsByResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetComplianceDetailsByResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_compliance_summary_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2386,6 +2717,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleInConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_conformance_pack_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -2397,6 +2734,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_discovered_resource_counts, Seahorse::Model::Operation.new.tap do |o|
@@ -2408,6 +2751,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_organization_config_rule_detailed_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2420,6 +2769,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_organization_conformance_pack_detailed_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2432,6 +2787,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_resource_config_history, Seahorse::Model::Operation.new.tap do |o|
@@ -2454,6 +2815,16 @@ module Aws::ConfigService
         )
       end)
 
+      api.add_operation(:get_stored_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStoredQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetStoredQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStoredQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_aggregate_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAggregateDiscoveredResources"
         o.http_method = "POST"
@@ -2464,6 +2835,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
@@ -2476,6 +2853,28 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_stored_queries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStoredQueries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStoredQueriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStoredQueriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2488,6 +2887,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_aggregation_authorization, Seahorse::Model::Operation.new.tap do |o|
@@ -2562,6 +2967,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeliveryChannelNameException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchBucketException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3KeyPrefixException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3KmsKeyArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSNSTopicARNException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDeliveryPolicyException)
       end)
@@ -2575,6 +2981,16 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResultTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+      end)
+
+      api.add_operation(:put_external_evaluation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutExternalEvaluation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutExternalEvaluationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutExternalEvaluationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:put_organization_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2651,6 +3067,17 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfRetentionConfigurationsExceededException)
       end)
 
+      api.add_operation(:put_stored_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutStoredQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutStoredQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutStoredQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConcurrentModificationException)
+      end)
+
       api.add_operation(:select_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SelectAggregateResourceConfig"
         o.http_method = "POST"
@@ -2662,7 +3089,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
+          limit_key: "limit",
           tokens: {
             "next_token" => "next_token"
           }
@@ -2678,6 +3105,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidExpressionException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:start_config_rules_evaluation, Seahorse::Model::Operation.new.tap do |o|

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -32,7 +32,8 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # An AWS account that is the master of or a member of a behavior graph.
+    # An AWS account that is the administrator account of or a member of a
+    # behavior graph.
     #
     # @note When making an API call, you may pass Account
     #   data as a hash:
@@ -72,6 +73,30 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateGraphRequest
+    #   data as a hash:
+    #
+    #       {
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the new behavior graph. You can add up to 50
+    #   tags. For each tag, you provide the tag key and the tag value. Each
+    #   tag key can contain up to 128 characters. Each tag value can contain
+    #   up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/CreateGraphRequest AWS API Documentation
+    #
+    class CreateGraphRequest < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] graph_arn
     #   The ARN of the new behavior graph.
     #   @return [String]
@@ -90,6 +115,7 @@ module Aws::Detective
     #       {
     #         graph_arn: "GraphArn", # required
     #         message: "EmailMessage",
+    #         disable_email_notification: false,
     #         accounts: [ # required
     #           {
     #             account_id: "AccountId", # required
@@ -108,10 +134,17 @@ module Aws::Detective
     #   to the invited member accounts.
     #   @return [String]
     #
+    # @!attribute [rw] disable_email_notification
+    #   if set to `true`, then the member accounts do not receive email
+    #   notifications. By default, this is set to `false`, and the member
+    #   accounts receive email notifications.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] accounts
     #   The list of AWS accounts to invite to become member accounts in the
-    #   behavior graph. For each invited account, the account list contains
-    #   the account identifier and the AWS account root user email address.
+    #   behavior graph. You can invite up to 50 accounts at a time. For each
+    #   invited account, the account list contains the account identifier
+    #   and the AWS account root user email address.
     #   @return [Array<Types::Account>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/CreateMembersRequest AWS API Documentation
@@ -119,6 +152,7 @@ module Aws::Detective
     class CreateMembersRequest < Struct.new(
       :graph_arn,
       :message,
+      :disable_email_notification,
       :accounts)
       SENSITIVE = []
       include Aws::Structure
@@ -180,7 +214,8 @@ module Aws::Detective
     #
     # @!attribute [rw] account_ids
     #   The list of AWS account identifiers for the member accounts to
-    #   delete from the behavior graph.
+    #   delete from the behavior graph. You can delete up to 50 member
+    #   accounts at a time.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/DeleteMembersRequest AWS API Documentation
@@ -249,7 +284,8 @@ module Aws::Detective
     #
     # @!attribute [rw] account_ids
     #   The list of AWS account identifiers for the member account for which
-    #   to return member details.
+    #   to return member details. You can request details for up to 50
+    #   member accounts at a time.
     #
     #   You cannot use `GetMembers` to retrieve information about member
     #   accounts that were removed from the behavior graph.
@@ -350,7 +386,8 @@ module Aws::Detective
     end
 
     # @!attribute [rw] graph_list
-    #   A list of behavior graphs that the account is a master for.
+    #   A list of behavior graphs that the account is an administrator
+    #   account for.
     #   @return [Array<Types::Graph>]
     #
     # @!attribute [rw] next_token
@@ -477,6 +514,38 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GraphArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the behavior graph for which to retrieve the tag values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tag values that are assigned to the behavior graph. The request
+    #   returns up to 50 tag values.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a member account that was invited to contribute to a
     # behavior graph.
     #
@@ -494,8 +563,13 @@ module Aws::Detective
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   The AWS account identifier of the master account for the behavior
-    #   graph.
+    #   The AWS account identifier of the administrator account for the
+    #   behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] administrator_id
+    #   The AWS account identifier of the administrator account for the
+    #   behavior graph.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -551,6 +625,15 @@ module Aws::Detective
     #   value is in milliseconds since the epoch.
     #   @return [Time]
     #
+    # @!attribute [rw] volume_usage_in_bytes
+    #   The data volume in bytes per day for the member account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_usage_updated_time
+    #   The data and time when the member account data volume was last
+    #   updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] percent_of_graph_utilization
     #   The member account data volume as a percentage of the maximum
     #   allowed data volume. 0 indicates 0 percent, and 100 indicates 100
@@ -578,10 +661,13 @@ module Aws::Detective
       :email_address,
       :graph_arn,
       :master_id,
+      :administrator_id,
       :status,
       :disabled_reason,
       :invited_time,
       :updated_time,
+      :volume_usage_in_bytes,
+      :volume_usage_updated_time,
       :percent_of_graph_utilization,
       :percent_of_graph_utilization_updated_time)
       SENSITIVE = []
@@ -675,6 +761,40 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GraphArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the behavior graph to assign the tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the behavior graph. You can add up to 50 tags.
+    #   For each tag, you provide the tag key and the tag value. Each tag
+    #   key can contain up to 128 characters. Each tag value can contain up
+    #   to 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # A member account that was included in a request but for which the
     # request could not be processed.
     #
@@ -695,6 +815,36 @@ module Aws::Detective
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GraphArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the behavior graph to remove the tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys of the tags to remove from the behavior graph. You can
+    #   remove up to 50 tags at a time.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # The request parameters are invalid.
     #

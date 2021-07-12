@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -21,6 +21,9 @@ module Aws::PersonalizeRuntime
     #           "AttributeName" => "AttributeValue",
     #         },
     #         filter_arn: "Arn",
+    #         filter_values: {
+    #           "FilterAttributeName" => "FilterAttributeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -47,9 +50,35 @@ module Aws::PersonalizeRuntime
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] filter_arn
-    #   The Amazon Resource Name (ARN) of a filter you created to include or
-    #   exclude items from recommendations for a given user.
+    #   The Amazon Resource Name (ARN) of a filter you created to include
+    #   items or exclude items from recommendations for a given user. For
+    #   more information, see [Filtering Recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #   @return [String]
+    #
+    # @!attribute [rw] filter_values
+    #   The values to use when filtering recommendations. For each
+    #   placeholder parameter in your filter expression, provide the
+    #   parameter name (in matching case) as a key and the filter value(s)
+    #   as the corresponding value. Separate multiple values for one
+    #   parameter with a comma.
+    #
+    #   For filter expressions that use an `INCLUDE` element to include
+    #   items, you must provide values for all parameters that are defined
+    #   in the expression. For filters with expressions that use an
+    #   `EXCLUDE` element to exclude items, you can omit the
+    #   `filter-values`.In this case, Amazon Personalize doesn't use that
+    #   portion of the expression to filter recommendations.
+    #
+    #   For more information, see [Filtering Recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRankingRequest AWS API Documentation
     #
@@ -58,7 +87,8 @@ module Aws::PersonalizeRuntime
       :input_list,
       :user_id,
       :context,
-      :filter_arn)
+      :filter_arn,
+      :filter_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -93,6 +123,9 @@ module Aws::PersonalizeRuntime
     #           "AttributeName" => "AttributeValue",
     #         },
     #         filter_arn: "Arn",
+    #         filter_values: {
+    #           "FilterAttributeName" => "FilterAttributeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -126,14 +159,35 @@ module Aws::PersonalizeRuntime
     #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to apply to the returned recommendations. For
-    #   more information, see [Using Filters with Amazon Personalize][1].
+    #   more information, see [Filtering Recommendations][1].
     #
     #   When using this parameter, be sure the filter resource is `ACTIVE`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #   @return [String]
+    #
+    # @!attribute [rw] filter_values
+    #   The values to use when filtering recommendations. For each
+    #   placeholder parameter in your filter expression, provide the
+    #   parameter name (in matching case) as a key and the filter value(s)
+    #   as the corresponding value. Separate multiple values for one
+    #   parameter with a comma.
+    #
+    #   For filter expressions that use an `INCLUDE` element to include
+    #   items, you must provide values for all parameters that are defined
+    #   in the expression. For filters with expressions that use an
+    #   `EXCLUDE` element to exclude items, you can omit the
+    #   `filter-values`.In this case, Amazon Personalize doesn't use that
+    #   portion of the expression to filter recommendations.
+    #
+    #   For more information, see [Filtering Recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation
     #
@@ -143,7 +197,8 @@ module Aws::PersonalizeRuntime
       :user_id,
       :num_results,
       :context,
-      :filter_arn)
+      :filter_arn,
+      :filter_values)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-03-31)
+------------------
+
+* Feature - This release adds support for mobile device access rules management in Amazon WorkMail.
+
+1.36.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2021-02-03)
+------------------
+
+* Feature - Increased maximum length of ipRanges values for Access Control Rules from 10 to 1024.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-10-28)
+------------------
+
+* Feature - Documentation update for Amazon WorkMail
+
 1.32.0 (2020-10-15)
 ------------------
 

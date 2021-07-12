@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -269,7 +269,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     # @option options [String] :copy_source_if_match
     #   Copies the object if its entity tag (ETag) matches the specified tag.
     # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_modified_since
@@ -317,17 +317,17 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected destination bucket owner. If the
+    #   The account ID of the expected destination bucket owner. If the
     #   destination bucket is owned by a different account, the request will
     #   fail with an HTTP `403 (Access Denied)` error.
     # @option options [String] :expected_source_bucket_owner
-    #   The account id of the expected source bucket owner. If the source
+    #   The account ID of the expected source bucket owner. If the source
     #   bucket is owned by a different account, the request will fail with an
     #   HTTP `403 (Access Denied)` error.
     # @return [Types::UploadPartCopyOutput]
@@ -384,13 +384,13 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::UploadPartOutput]

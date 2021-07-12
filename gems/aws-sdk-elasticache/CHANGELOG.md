@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-05-17)
+------------------
+
+* Feature - Documentation updates for elasticache
+
+1.56.0 (2021-04-22)
+------------------
+
+* Feature - This release introduces log delivery of Redis slow log from Amazon ElastiCache.
+
+1.55.0 (2021-04-07)
+------------------
+
+* Feature - This release adds tagging support for all AWS ElastiCache resources except Global Replication Groups.
+
+1.54.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2021-02-08)
+------------------
+
+* Feature - Documentation updates for elasticache
+
+1.52.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2021-01-27)
+------------------
+
+* Feature - Add support to pass ParameterGroup name as part updating Engine Version of Global Datastore.
+
+1.50.0 (2021-01-12)
+------------------
+
+* Feature - Documentation updates for elasticache
+
+1.49.0 (2020-12-30)
+------------------
+
+* Feature - Documentation updates for elasticache
+
+1.48.0 (2020-12-22)
+------------------
+
+* Feature - Documentation updates for elasticache
+
+1.47.0 (2020-11-23)
+------------------
+
+* Feature - Documentation updates for elasticache
+
+1.46.0 (2020-11-18)
+------------------
+
+* Feature - Adding Memcached 1.6 to parameter family
+
+1.45.0 (2020-10-30)
+------------------
+
+* Feature - Documentation updates for AWS ElastiCache
+
 1.44.0 (2020-10-07)
 ------------------
 

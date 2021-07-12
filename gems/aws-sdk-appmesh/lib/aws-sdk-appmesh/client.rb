@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -393,6 +393,11 @@ module Aws::AppMesh
     #     spec: { # required
     #       grpc_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -400,11 +405,43 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
     #           service_name: "ServiceName",
     #         },
     #       },
     #       http2_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -412,11 +449,56 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
     #       http_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -424,14 +506,48 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
+    #       priority: 1,
     #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_gateway_name: "ResourceName", # required
@@ -448,13 +564,68 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
-    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateGatewayRoute AWS API Documentation
@@ -518,7 +689,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -534,7 +705,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
-    #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMesh AWS API Documentation
     #
@@ -642,18 +813,18 @@ module Aws::AppMesh
     #           http_retry_events: ["HttpRetryPolicyEvent"],
     #           max_retries: 1, # required
     #           per_retry_timeout: { # required
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           per_request: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -684,26 +855,38 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
-    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
-    #           prefix: "String", # required
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
     #           http_retry_events: ["HttpRetryPolicyEvent"],
     #           max_retries: 1, # required
     #           per_retry_timeout: { # required
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           per_request: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -734,26 +917,38 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
-    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
-    #           prefix: "String", # required
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
     #           http_retry_events: ["HttpRetryPolicyEvent"],
     #           max_retries: 1, # required
     #           per_retry_timeout: { # required
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           per_request: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -770,7 +965,7 @@ module Aws::AppMesh
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -779,7 +974,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_router_name: "ResourceName", # required
@@ -815,13 +1010,13 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
@@ -835,19 +1030,24 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
-    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
@@ -861,27 +1061,32 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
-    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
-    #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.route.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRoute AWS API Documentation
@@ -958,15 +1163,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -975,18 +1197,30 @@ module Aws::AppMesh
     #       },
     #       listeners: [ # required
     #         {
+    #           connection_pool: {
+    #             grpc: {
+    #               max_requests: 1, # required
+    #             },
+    #             http: {
+    #               max_connections: 1, # required
+    #               max_pending_requests: 1,
+    #             },
+    #             http2: {
+    #               max_requests: 1, # required
+    #             },
+    #           },
     #           health_check: {
     #             healthy_threshold: 1, # required
     #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #             protocol: "http", # required, accepts http, http2, grpc
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #             protocol: "http", # required, accepts http, http2, grpc
     #           },
     #           tls: {
     #             certificate: { # required
@@ -997,8 +1231,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
     #             },
-    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -1013,7 +1265,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_gateway_name: "ResourceName", # required
@@ -1029,28 +1281,43 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
-    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualGateway AWS API Documentation
@@ -1076,26 +1343,30 @@ module Aws::AppMesh
     # communicate to is specified as a `backend`.
     #
     # The response metadata for your new virtual node contains the `arn`
-    # that is associated with the virtual node. Set this value (either the
-    # full ARN or the truncated resource name: for example,
-    # `mesh/default/virtualNode/simpleapp`) as the
-    # `APPMESH_VIRTUAL_NODE_NAME` environment variable for your task
+    # that is associated with the virtual node. Set this value to the full
+    # ARN; for example,
+    # `arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp`)
+    # as the `APPMESH_RESOURCE_ARN` environment variable for your task
     # group's Envoy proxy container in your task definition or pod spec.
     # This is then mapped to the `node.id` and `node.cluster` Envoy
     # parameters.
     #
-    # <note markdown="1"> If you require your Envoy stats or tracing to use a different name,
-    # you can override the `node.cluster` value that is set by
-    # `APPMESH_VIRTUAL_NODE_NAME` with the `APPMESH_VIRTUAL_NODE_CLUSTER`
-    # environment variable.
+    # <note markdown="1"> By default, App Mesh uses the name of the resource you specified in
+    # `APPMESH_RESOURCE_ARN` when Envoy is referring to itself in metrics
+    # and traces. You can override this behavior by setting the
+    # `APPMESH_RESOURCE_CLUSTER` environment variable with your own name.
     #
     #  </note>
     #
-    # For more information about virtual nodes, see [Virtual nodes][1].
+    # For more information about virtual nodes, see [Virtual nodes][1]. You
+    # must be using `1.15.0` or later of the Envoy image when setting these
+    # variables. For more information aboutApp Mesh Envoy variables, see
+    # [Envoy image][2] in the AWS App Mesh User Guide.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html
+    # [2]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -1146,15 +1417,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -1166,15 +1454,32 @@ module Aws::AppMesh
     #           virtual_service: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -1186,53 +1491,80 @@ module Aws::AppMesh
     #       ],
     #       listeners: [
     #         {
+    #           connection_pool: {
+    #             grpc: {
+    #               max_requests: 1, # required
+    #             },
+    #             http: {
+    #               max_connections: 1, # required
+    #               max_pending_requests: 1,
+    #             },
+    #             http2: {
+    #               max_requests: 1, # required
+    #             },
+    #             tcp: {
+    #               max_connections: 1, # required
+    #             },
+    #           },
     #           health_check: {
     #             healthy_threshold: 1, # required
     #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #             protocol: "http", # required, accepts http, tcp, http2, grpc
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
+    #           outlier_detection: {
+    #             base_ejection_duration: { # required
+    #               unit: "s", # accepts s, ms
+    #               value: 1,
+    #             },
+    #             interval: { # required
+    #               unit: "s", # accepts s, ms
+    #               value: 1,
+    #             },
+    #             max_ejection_percent: 1, # required
+    #             max_server_errors: 1, # required
+    #           },
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #             protocol: "http", # required, accepts http, tcp, http2, grpc
     #           },
     #           timeout: {
     #             grpc: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #               per_request: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
     #             http: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #               per_request: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
     #             http2: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #               per_request: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
     #             tcp: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
@@ -1246,8 +1578,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
     #             },
-    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -1271,13 +1621,14 @@ module Aws::AppMesh
     #         },
     #         dns: {
     #           hostname: "Hostname", # required
+    #           response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #         },
     #       },
     #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_node_name: "ResourceName", # required
@@ -1293,48 +1644,76 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
+    #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.tcp.max_connections #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp", "http2", "grpc"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_ejection_percent #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_server_errors #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1342,7 +1721,8 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
-    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
+    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualNode AWS API Documentation
@@ -1419,7 +1799,7 @@ module Aws::AppMesh
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #             protocol: "http", # required, accepts http, tcp, http2, grpc
     #           },
     #         },
     #       ],
@@ -1427,7 +1807,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_router_name: "ResourceName", # required
@@ -1445,8 +1825,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_router.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualRouter AWS API Documentation
@@ -1532,7 +1912,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_service_name: "ServiceName", # required
@@ -1550,7 +1930,7 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
     #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
-    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_service.virtual_service_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualService AWS API Documentation
@@ -1607,13 +1987,68 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
-    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteGatewayRoute AWS API Documentation
@@ -1655,7 +2090,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
-    #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMesh AWS API Documentation
     #
@@ -1730,13 +2165,13 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
@@ -1750,19 +2185,24 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
-    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
@@ -1776,27 +2216,32 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
-    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
-    #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.route.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRoute AWS API Documentation
@@ -1849,28 +2294,43 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
-    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualGateway AWS API Documentation
@@ -1925,48 +2385,76 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
+    #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.tcp.max_connections #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp", "http2", "grpc"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_ejection_percent #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_server_errors #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1974,7 +2462,8 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
-    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
+    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualNode AWS API Documentation
@@ -2031,8 +2520,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_router.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualRouter AWS API Documentation
@@ -2086,7 +2575,7 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
     #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
-    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_service.virtual_service_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualService AWS API Documentation
@@ -2144,13 +2633,68 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
-    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeGatewayRoute AWS API Documentation
@@ -2199,7 +2743,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
-    #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMesh AWS API Documentation
     #
@@ -2274,13 +2818,13 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
@@ -2294,19 +2838,24 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
-    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
@@ -2320,27 +2869,32 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
-    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
-    #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.route.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeRoute AWS API Documentation
@@ -2392,28 +2946,43 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
-    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualGateway AWS API Documentation
@@ -2465,48 +3034,76 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
+    #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.tcp.max_connections #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp", "http2", "grpc"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_ejection_percent #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_server_errors #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -2514,7 +3111,8 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
-    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
+    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualNode AWS API Documentation
@@ -2568,8 +3166,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_router.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualRouter AWS API Documentation
@@ -2623,7 +3221,7 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
     #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
-    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_service.virtual_service_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualService AWS API Documentation
@@ -3194,7 +3792,7 @@ module Aws::AppMesh
     #     tags: [ # required
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -3283,6 +3881,11 @@ module Aws::AppMesh
     #     spec: { # required
     #       grpc_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -3290,11 +3893,43 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
     #           service_name: "ServiceName",
     #         },
     #       },
     #       http2_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -3302,11 +3937,56 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
     #       http_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -3314,9 +3994,43 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
+    #       priority: 1,
     #     },
     #     virtual_gateway_name: "ResourceName", # required
     #   })
@@ -3332,13 +4046,68 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
-    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateGatewayRoute AWS API Documentation
@@ -3393,7 +4162,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
-    #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.mesh.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMesh AWS API Documentation
     #
@@ -3484,18 +4253,18 @@ module Aws::AppMesh
     #           http_retry_events: ["HttpRetryPolicyEvent"],
     #           max_retries: 1, # required
     #           per_retry_timeout: { # required
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           per_request: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -3526,26 +4295,38 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
-    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
-    #           prefix: "String", # required
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
     #           http_retry_events: ["HttpRetryPolicyEvent"],
     #           max_retries: 1, # required
     #           per_retry_timeout: { # required
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           per_request: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -3576,26 +4357,38 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
-    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
-    #           prefix: "String", # required
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
     #           http_retry_events: ["HttpRetryPolicyEvent"],
     #           max_retries: 1, # required
     #           per_retry_timeout: { # required
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #           per_request: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -3612,7 +4405,7 @@ module Aws::AppMesh
     #         },
     #         timeout: {
     #           idle: {
-    #             unit: "ms", # accepts ms, s
+    #             unit: "s", # accepts s, ms
     #             value: 1,
     #           },
     #         },
@@ -3651,13 +4444,13 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.grpc_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
@@ -3671,19 +4464,24 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
-    #   resp.route.spec.http2_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http2_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
@@ -3697,27 +4495,32 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
+    #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
     #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
-    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
-    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.idle.value #=> Integer
-    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "s", "ms"
     #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
-    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "s", "ms"
     #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
-    #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.route.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRoute AWS API Documentation
@@ -3773,15 +4576,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -3790,18 +4610,30 @@ module Aws::AppMesh
     #       },
     #       listeners: [ # required
     #         {
+    #           connection_pool: {
+    #             grpc: {
+    #               max_requests: 1, # required
+    #             },
+    #             http: {
+    #               max_connections: 1, # required
+    #               max_pending_requests: 1,
+    #             },
+    #             http2: {
+    #               max_requests: 1, # required
+    #             },
+    #           },
     #           health_check: {
     #             healthy_threshold: 1, # required
     #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #             protocol: "http", # required, accepts http, http2, grpc
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #             protocol: "http", # required, accepts http, http2, grpc
     #           },
     #           tls: {
     #             certificate: { # required
@@ -3812,8 +4644,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
     #             },
-    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -3838,28 +4688,43 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "http2", "grpc"
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
-    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualGateway AWS API Documentation
@@ -3915,15 +4780,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -3935,15 +4817,32 @@ module Aws::AppMesh
     #           virtual_service: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -3955,53 +4854,80 @@ module Aws::AppMesh
     #       ],
     #       listeners: [
     #         {
+    #           connection_pool: {
+    #             grpc: {
+    #               max_requests: 1, # required
+    #             },
+    #             http: {
+    #               max_connections: 1, # required
+    #               max_pending_requests: 1,
+    #             },
+    #             http2: {
+    #               max_requests: 1, # required
+    #             },
+    #             tcp: {
+    #               max_connections: 1, # required
+    #             },
+    #           },
     #           health_check: {
     #             healthy_threshold: 1, # required
     #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #             protocol: "http", # required, accepts http, tcp, http2, grpc
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
+    #           outlier_detection: {
+    #             base_ejection_duration: { # required
+    #               unit: "s", # accepts s, ms
+    #               value: 1,
+    #             },
+    #             interval: { # required
+    #               unit: "s", # accepts s, ms
+    #               value: 1,
+    #             },
+    #             max_ejection_percent: 1, # required
+    #             max_server_errors: 1, # required
+    #           },
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #             protocol: "http", # required, accepts http, tcp, http2, grpc
     #           },
     #           timeout: {
     #             grpc: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #               per_request: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
     #             http: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #               per_request: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
     #             http2: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #               per_request: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
     #             tcp: {
     #               idle: {
-    #                 unit: "ms", # accepts ms, s
+    #                 unit: "s", # accepts s, ms
     #                 value: 1,
     #               },
     #             },
@@ -4015,8 +4941,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
     #             },
-    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -4040,6 +4984,7 @@ module Aws::AppMesh
     #         },
     #         dns: {
     #           hostname: "Hostname", # required
+    #           response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #         },
     #       },
     #     },
@@ -4056,48 +5001,76 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
+    #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_connections #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http.max_pending_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.http2.max_requests #=> Integer
+    #   resp.virtual_node.spec.listeners[0].connection_pool.tcp.max_connections #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.path #=> String
     #   resp.virtual_node.spec.listeners[0].health_check.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].health_check.protocol #=> String, one of "http", "tcp", "http2", "grpc"
     #   resp.virtual_node.spec.listeners[0].health_check.timeout_millis #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.base_ejection_duration.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.unit #=> String, one of "s", "ms"
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.interval.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_ejection_percent #=> Integer
+    #   resp.virtual_node.spec.listeners[0].outlier_detection.max_server_errors #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
-    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "s", "ms"
     #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
-    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -4105,7 +5078,8 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
-    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
+    #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNode AWS API Documentation
@@ -4162,7 +5136,7 @@ module Aws::AppMesh
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
-    #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #             protocol: "http", # required, accepts http, tcp, http2, grpc
     #           },
     #         },
     #       ],
@@ -4182,8 +5156,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
     #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
-    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
-    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp", "http2", "grpc"
+    #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_router.virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouter AWS API Documentation
@@ -4260,7 +5234,7 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
     #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
-    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_service.virtual_service_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualService AWS API Documentation
@@ -4285,7 +5259,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

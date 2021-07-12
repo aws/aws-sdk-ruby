@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -15,6 +15,7 @@ require_relative 'aws-sdk-mediaconnect/types'
 require_relative 'aws-sdk-mediaconnect/client_api'
 require_relative 'aws-sdk-mediaconnect/client'
 require_relative 'aws-sdk-mediaconnect/errors'
+require_relative 'aws-sdk-mediaconnect/waiters'
 require_relative 'aws-sdk-mediaconnect/resource'
 require_relative 'aws-sdk-mediaconnect/customizations'
 
@@ -28,7 +29,7 @@ require_relative 'aws-sdk-mediaconnect/customizations'
 # structure.
 #
 #     media_connect = Aws::MediaConnect::Client.new
-#     resp = media_connect.add_flow_outputs(params)
+#     resp = media_connect.add_flow_media_streams(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-mediaconnect/customizations'
 # @!group service
 module Aws::MediaConnect
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.34.0'
 
 end

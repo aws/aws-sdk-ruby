@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -1268,7 +1268,7 @@ module Aws::Pinpoint
     #                   dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1291,7 +1291,7 @@ module Aws::Pinpoint
     #                 segment_dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -1348,7 +1348,7 @@ module Aws::Pinpoint
     #                   },
     #                   user_attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -1385,7 +1385,7 @@ module Aws::Pinpoint
     #                   dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1408,7 +1408,7 @@ module Aws::Pinpoint
     #                 segment_dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -1465,7 +1465,7 @@ module Aws::Pinpoint
     #                   },
     #                   user_attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -1499,7 +1499,10 @@ module Aws::Pinpoint
     #         sms: {
     #           message_config: {
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #           next_activity: "__string",
     #           template_name: "__string",
@@ -2015,15 +2018,26 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
-    #         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #         values: ["__string"], # required
     #       }
     #
     # @!attribute [rw] attribute_type
-    #   The type of segment dimension to use. Valid values are: INCLUSIVE,
-    #   endpoints that match the criteria are included in the segment; and,
-    #   EXCLUSIVE, endpoints that match the criteria are excluded from the
-    #   segment.
+    #   * INCLUSIVE - endpoints that have attributes matching the values are
+    #     included in the segment.
+    #   * EXCLUSIVE - endpoints that have attributes matching the values are
+    #     excluded in the segment.
+    #   * CONTAINS - endpoints that have attributes' substrings match the
+    #     values are included in the segment.
+    #   * BEFORE - endpoints with attributes read as ISO\_INSTANT datetimes
+    #     before the value are included in the segment.
+    #   * AFTER - endpoints with attributes read as ISO\_INSTANT datetimes
+    #     after the value are included in the segment.
+    #   * ON - endpoints with attributes read as ISO\_INSTANT dates on the
+    #     value are included in the segment. Time is ignored in this
+    #     comparison.
+    #   * BETWEEN - endpoints with attributes read as ISO\_INSTANT datetimes
+    #     between the values are included in the segment.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2495,7 +2509,7 @@ module Aws::Pinpoint
     #         dimensions: { # required
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -2787,7 +2801,10 @@ module Aws::Pinpoint
     #       {
     #         body: "__string",
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         origination_number: "__string",
     #         sender_id: "__string",
+    #         entity_id: "__string",
+    #         template_id: "__string",
     #       }
     #
     # @!attribute [rw] body
@@ -2801,9 +2818,27 @@ module Aws::Pinpoint
     #   time-sensitive, such as marketing messages).
     #   @return [String]
     #
+    # @!attribute [rw] origination_number
+    #   The long code to send the SMS message from. This value should be one
+    #   of the dedicated long codes that's assigned to your AWS account.
+    #   Although it isn't required, we recommend that you specify the long
+    #   code using an E.164 format to ensure prompt and accurate delivery of
+    #   the message. For example, +12065550100.
+    #   @return [String]
+    #
     # @!attribute [rw] sender_id
     #   The sender ID to display on recipients' devices when they receive
     #   the SMS message.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The entity ID or Principal Entity (PE) id received from the
+    #   regulatory body for sending SMS in your country.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The template ID received from the regulatory body for sending SMS in
+    #   your country.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignSmsMessage AWS API Documentation
@@ -2811,7 +2846,10 @@ module Aws::Pinpoint
     class CampaignSmsMessage < Struct.new(
       :body,
       :message_type,
-      :sender_id)
+      :origination_number,
+      :sender_id,
+      :entity_id,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2948,7 +2986,7 @@ module Aws::Pinpoint
     #               dimensions: {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -2971,7 +3009,7 @@ module Aws::Pinpoint
     #             segment_dimensions: {
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -3028,7 +3066,7 @@ module Aws::Pinpoint
     #               },
     #               user_attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -3086,7 +3124,7 @@ module Aws::Pinpoint
     #                 dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -3109,7 +3147,7 @@ module Aws::Pinpoint
     #               segment_dimensions: {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -3166,7 +3204,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -3397,7 +3435,10 @@ module Aws::Pinpoint
     #                 sms_message: {
     #                   body: "__string",
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #               },
     #               schedule: {
@@ -3406,7 +3447,7 @@ module Aws::Pinpoint
     #                   dimensions: { # required
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -3556,7 +3597,10 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #           },
     #           name: "__string",
@@ -3566,7 +3610,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -3818,7 +3862,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -3841,7 +3885,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -3898,7 +3942,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -3935,7 +3979,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -3958,7 +4002,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -4015,7 +4059,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -4049,7 +4093,10 @@ module Aws::Pinpoint
     #               sms: {
     #                 message_config: {
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #                 next_activity: "__string",
     #                 template_name: "__string",
@@ -4070,6 +4117,7 @@ module Aws::Pinpoint
     #             daily_cap: 1,
     #             endpoint_reentry_cap: 1,
     #             messages_per_second: 1,
+    #             endpoint_reentry_interval: "__string",
     #           },
     #           local_time: false,
     #           name: "__string", # required
@@ -4091,7 +4139,7 @@ module Aws::Pinpoint
     #                 dimensions: { # required
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -4114,7 +4162,9 @@ module Aws::Pinpoint
     #               segment_id: "__string", # required
     #             },
     #           },
-    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #           wait_for_quiet_time: false,
+    #           refresh_on_segment_update: false,
     #         },
     #       }
     #
@@ -4440,7 +4490,7 @@ module Aws::Pinpoint
     #           dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -4497,7 +4547,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -4510,7 +4560,7 @@ module Aws::Pinpoint
     #                   {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -4567,7 +4617,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -5925,6 +5975,8 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #         voice_message: {
     #           body: "__string",
@@ -7379,7 +7431,7 @@ module Aws::Pinpoint
     #         dimensions: {
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -7424,7 +7476,7 @@ module Aws::Pinpoint
     #       {
     #         attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -7485,7 +7537,7 @@ module Aws::Pinpoint
     #         dimensions: { # required
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -7561,7 +7613,7 @@ module Aws::Pinpoint
     #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -10711,6 +10763,7 @@ module Aws::Pinpoint
     #         daily_cap: 1,
     #         endpoint_reentry_cap: 1,
     #         messages_per_second: 1,
+    #         endpoint_reentry_interval: "__string",
     #       }
     #
     # @!attribute [rw] daily_cap
@@ -10729,12 +10782,16 @@ module Aws::Pinpoint
     #   second.
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_reentry_interval
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyLimits AWS API Documentation
     #
     class JourneyLimits < Struct.new(
       :daily_cap,
       :endpoint_reentry_cap,
-      :messages_per_second)
+      :messages_per_second,
+      :endpoint_reentry_interval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10860,6 +10917,10 @@ module Aws::Pinpoint
     #     status is ACTIVE, you can't add, change, or remove activities
     #     from it.
     #
+    #   * PAUSED - The journey has been paused. Amazon Pinpoint continues to
+    #     perform activities that are currently in progress, until those
+    #     activities are complete.
+    #
     #   * COMPLETED - The journey has been published and has finished
     #     running. All participants have entered the journey and no
     #     participants are waiting to complete the journey or any activities
@@ -10913,7 +10974,10 @@ module Aws::Pinpoint
     #
     #       {
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         origination_number: "__string",
     #         sender_id: "__string",
+    #         entity_id: "__string",
+    #         template_id: "__string",
     #       }
     #
     # @!attribute [rw] message_type
@@ -10921,6 +10985,14 @@ module Aws::Pinpoint
     #   that are critical or time-sensitive, such as a one-time passwords)
     #   and PROMOTIONAL (for messsages that aren't critical or
     #   time-sensitive, such as marketing messages).
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_number
+    #   The long code to send the SMS message from. This value should be one
+    #   of the dedicated long codes that's assigned to your AWS account.
+    #   Although it isn't required, we recommend that you specify the long
+    #   code using an E.164 format to ensure prompt and accurate delivery of
+    #   the message. For example, +12065550100.
     #   @return [String]
     #
     # @!attribute [rw] sender_id
@@ -10934,11 +11006,24 @@ module Aws::Pinpoint
     #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html
     #   @return [String]
     #
+    # @!attribute [rw] entity_id
+    #   The entity ID or Principal Entity (PE) id received from the
+    #   regulatory body for sending SMS in your country.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The template ID received from the regulatory body for sending SMS in
+    #   your country.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneySMSMessage AWS API Documentation
     #
     class JourneySMSMessage < Struct.new(
       :message_type,
-      :sender_id)
+      :origination_number,
+      :sender_id,
+      :entity_id,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10991,12 +11076,12 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
-    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #       }
     #
     # @!attribute [rw] state
-    #   The status of the journey. Currently, the only supported value is
-    #   CANCELLED.
+    #   The status of the journey. Currently, Supported values are ACTIVE,
+    #   PAUSED, and CANCELLED
     #
     #   If you cancel a journey, Amazon Pinpoint continues to perform
     #   activities that are currently in progress, until those activities
@@ -11009,6 +11094,14 @@ module Aws::Pinpoint
     #   activities from the journey. In addition, Amazon Pinpoint stops
     #   evaluating the journey and doesn't perform any activities that
     #   haven't started.
+    #
+    #   When the journey is paused, Amazon Pinpoint continues to perform
+    #   activities that are currently in progress, until those activities
+    #   are complete. Endpoints will stop entering journeys when the journey
+    #   is paused and will resume entering the journey after the journey is
+    #   resumed. For wait activities, wait time is paused when the journey
+    #   is paused. Currently, PAUSED only supports journeys with a segment
+    #   refresh interval.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyStateRequest AWS API Documentation
@@ -11456,7 +11549,10 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #       }
     #
@@ -11704,6 +11800,8 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #           voice_message: {
     #             body: "__string",
@@ -11953,7 +12051,7 @@ module Aws::Pinpoint
     #             dimensions: {
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -11976,7 +12074,7 @@ module Aws::Pinpoint
     #           segment_dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -12033,7 +12131,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -12089,7 +12187,7 @@ module Aws::Pinpoint
     #                 dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -12112,7 +12210,7 @@ module Aws::Pinpoint
     #               segment_dimensions: {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -12169,7 +12267,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -13498,6 +13596,8 @@ module Aws::Pinpoint
     #         substitutions: {
     #           "__string" => ["__string"],
     #         },
+    #         entity_id: "__string",
+    #         template_id: "__string",
     #       }
     #
     # @!attribute [rw] body
@@ -13539,6 +13639,16 @@ module Aws::Pinpoint
     #   the default variables with individual address variables.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] entity_id
+    #   The entity ID or Principal Entity (PE) id received from the
+    #   regulatory body for sending SMS in your country.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The template ID received from the regulatory body for sending SMS in
+    #   your country.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSMessage AWS API Documentation
     #
     class SMSMessage < Struct.new(
@@ -13548,7 +13658,9 @@ module Aws::Pinpoint
       :message_type,
       :origination_number,
       :sender_id,
-      :substitutions)
+      :substitutions,
+      :entity_id,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13562,7 +13674,10 @@ module Aws::Pinpoint
     #       {
     #         message_config: {
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #         next_activity: "__string",
     #         template_name: "__string",
@@ -13762,7 +13877,7 @@ module Aws::Pinpoint
     #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -13987,7 +14102,7 @@ module Aws::Pinpoint
     #       {
     #         attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -14044,7 +14159,7 @@ module Aws::Pinpoint
     #         },
     #         user_attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -14102,7 +14217,7 @@ module Aws::Pinpoint
     #           {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -14159,7 +14274,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -14230,7 +14345,7 @@ module Aws::Pinpoint
     #               {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -14287,7 +14402,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -14733,6 +14848,8 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #             voice_message: {
     #               body: "__string",
@@ -14950,6 +15067,8 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #           voice_message: {
     #             body: "__string",
@@ -15223,6 +15342,8 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #             voice_message: {
     #               body: "__string",
@@ -15380,7 +15501,7 @@ module Aws::Pinpoint
     #           dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -15403,7 +15524,7 @@ module Aws::Pinpoint
     #         segment_dimensions: {
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -15460,7 +15581,7 @@ module Aws::Pinpoint
     #           },
     #           user_attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -15581,7 +15702,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -16550,7 +16671,10 @@ module Aws::Pinpoint
     #                 sms_message: {
     #                   body: "__string",
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #               },
     #               schedule: {
@@ -16559,7 +16683,7 @@ module Aws::Pinpoint
     #                   dimensions: { # required
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -16709,7 +16833,10 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #           },
     #           name: "__string",
@@ -16719,7 +16846,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -17136,7 +17263,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -17159,7 +17286,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17216,7 +17343,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17253,7 +17380,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -17276,7 +17403,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17333,7 +17460,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17367,7 +17494,10 @@ module Aws::Pinpoint
     #               sms: {
     #                 message_config: {
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #                 next_activity: "__string",
     #                 template_name: "__string",
@@ -17388,6 +17518,7 @@ module Aws::Pinpoint
     #             daily_cap: 1,
     #             endpoint_reentry_cap: 1,
     #             messages_per_second: 1,
+    #             endpoint_reentry_interval: "__string",
     #           },
     #           local_time: false,
     #           name: "__string", # required
@@ -17409,7 +17540,7 @@ module Aws::Pinpoint
     #                 dimensions: { # required
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -17432,7 +17563,9 @@ module Aws::Pinpoint
     #               segment_id: "__string", # required
     #             },
     #           },
-    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #           wait_for_quiet_time: false,
+    #           refresh_on_segment_update: false,
     #         },
     #       }
     #
@@ -17476,7 +17609,7 @@ module Aws::Pinpoint
     #         application_id: "__string", # required
     #         journey_id: "__string", # required
     #         journey_state_request: { # required
-    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #         },
     #       }
     #
@@ -17822,7 +17955,7 @@ module Aws::Pinpoint
     #           dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -17879,7 +18012,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -17892,7 +18025,7 @@ module Aws::Pinpoint
     #                   {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -17949,7 +18082,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -18827,7 +18960,10 @@ module Aws::Pinpoint
     #               sms_message: {
     #                 body: "__string",
     #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                 origination_number: "__string",
     #                 sender_id: "__string",
+    #                 entity_id: "__string",
+    #                 template_id: "__string",
     #               },
     #             },
     #             schedule: {
@@ -18836,7 +18972,7 @@ module Aws::Pinpoint
     #                 dimensions: { # required
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -18986,7 +19122,10 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #         },
     #         name: "__string",
@@ -18996,7 +19135,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -19214,7 +19353,7 @@ module Aws::Pinpoint
     #                       dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -19237,7 +19376,7 @@ module Aws::Pinpoint
     #                     segment_dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19294,7 +19433,7 @@ module Aws::Pinpoint
     #                       },
     #                       user_attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19331,7 +19470,7 @@ module Aws::Pinpoint
     #                       dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -19354,7 +19493,7 @@ module Aws::Pinpoint
     #                     segment_dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19411,7 +19550,7 @@ module Aws::Pinpoint
     #                       },
     #                       user_attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19445,7 +19584,10 @@ module Aws::Pinpoint
     #             sms: {
     #               message_config: {
     #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                 origination_number: "__string",
     #                 sender_id: "__string",
+    #                 entity_id: "__string",
+    #                 template_id: "__string",
     #               },
     #               next_activity: "__string",
     #               template_name: "__string",
@@ -19466,6 +19608,7 @@ module Aws::Pinpoint
     #           daily_cap: 1,
     #           endpoint_reentry_cap: 1,
     #           messages_per_second: 1,
+    #           endpoint_reentry_interval: "__string",
     #         },
     #         local_time: false,
     #         name: "__string", # required
@@ -19487,7 +19630,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -19510,7 +19653,9 @@ module Aws::Pinpoint
     #             segment_id: "__string", # required
     #           },
     #         },
-    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #         wait_for_quiet_time: false,
+    #         refresh_on_segment_update: false,
     #       }
     #
     # @!attribute [rw] activities
@@ -19597,12 +19742,19 @@ module Aws::Pinpoint
     #     the scheduled start time. If a journey's status is ACTIVE, you
     #     can't add, change, or remove activities from it.
     #
-    #   The CANCELLED, COMPLETED, and CLOSED values are not supported in
-    #   requests to create or update a journey. To cancel a journey, use the
-    #   <link linkend="apps-application-id-journeys-journey-id-state" />
+    #   PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in
+    #   requests to create or update a journey. To cancel, pause, or resume
+    #   a journey, use the <link
+    #   linkend="apps-application-id-journeys-journey-id-state" />
     #
     #   Journey State</link> resource.
     #   @return [String]
+    #
+    # @!attribute [rw] wait_for_quiet_time
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] refresh_on_segment_update
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
     #
@@ -19618,7 +19770,9 @@ module Aws::Pinpoint
       :schedule,
       :start_activity,
       :start_condition,
-      :state)
+      :state,
+      :wait_for_quiet_time,
+      :refresh_on_segment_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19634,7 +19788,7 @@ module Aws::Pinpoint
     #         dimensions: {
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -19691,7 +19845,7 @@ module Aws::Pinpoint
     #           },
     #           user_attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -19704,7 +19858,7 @@ module Aws::Pinpoint
     #                 {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -19761,7 +19915,7 @@ module Aws::Pinpoint
     #                   },
     #                   user_attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -19910,7 +20064,10 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #         },
     #         schedule: {
@@ -19919,7 +20076,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },

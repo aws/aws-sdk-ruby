@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -53,23 +53,23 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A list of AWS accounts and the active CloudFront key pairs in each
-    # account that CloudFront can use to verify the signatures of signed
-    # URLs and signed cookies.
+    # A list of accounts and the active CloudFront key pairs in each account
+    # that CloudFront can use to verify the signatures of signed URLs and
+    # signed cookies.
     #
     # @!attribute [rw] enabled
-    #   This field is `true` if any of the AWS accounts in the list have
-    #   active CloudFront key pairs that CloudFront can use to verify the
+    #   This field is `true` if any of the accounts in the list have active
+    #   CloudFront key pairs that CloudFront can use to verify the
     #   signatures of signed URLs and signed cookies. If not, this field is
     #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] quantity
-    #   The number of AWS accounts in the list.
+    #   The number of accounts in the list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   A list of AWS accounts and the identifiers of active CloudFront key
+    #   A list of accounts and the identifiers of active CloudFront key
     #   pairs in each account that CloudFront can use to verify the
     #   signatures of signed URLs and signed cookies.
     #   @return [Array<Types::Signer>]
@@ -84,15 +84,17 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # AWS services in China customers must file for an Internet Content
-    # Provider (ICP) recordal if they want to serve content publicly on an
-    # alternate domain name, also known as a CNAME, that they've added to
-    # CloudFront. AliasICPRecordal provides the ICP recordal status for
-    # CNAMEs associated with distributions. The status is returned in the
-    # CloudFront response; you can't configure it yourself.
+    # Amazon Web Services services in China customers must file for an
+    # Internet Content Provider (ICP) recordal if they want to serve content
+    # publicly on an alternate domain name, also known as a CNAME, that
+    # they've added to CloudFront. AliasICPRecordal provides the ICP
+    # recordal status for CNAMEs associated with distributions. The status
+    # is returned in the CloudFront response; you can't configure it
+    # yourself.
     #
     # For more information about ICP recordals, see [ Signup, Accounts, and
-    # Credentials][1] in *Getting Started with AWS services in China*.
+    # Credentials][1] in *Getting Started with Amazon Web Services services
+    # in China*.
     #
     #
     #
@@ -230,6 +232,31 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_distribution_id: "string", # required
+    #         alias: "string", # required
+    #       }
+    #
+    # @!attribute [rw] target_distribution_id
+    #   The ID of the distribution that you’re associating the alias with.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias (also known as a CNAME) to add to the target distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateAliasRequest AWS API Documentation
+    #
+    class AssociateAliasRequest < Struct.new(
+      :target_distribution_id,
+      :alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Invalidation batch specified is too large.
     #
     # @!attribute [rw] message
@@ -327,6 +354,15 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               function_arn: "FunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
     #         field_level_encryption_id: "string",
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
@@ -387,16 +423,16 @@ module Aws::CloudFront
     # @!attribute [rw] trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   A list of AWS account IDs whose public keys CloudFront can use to
+    #   A list of account IDs whose public keys CloudFront can use to
     #   validate signed URLs or signed cookies.
     #
     #   When a cache behavior contains trusted signers, CloudFront requires
     #   signed URLs or signed cookies for all requests that match the cache
     #   behavior. The URLs or cookies must be signed with the private key of
-    #   a CloudFront key pair in the trusted signer’s AWS account. The
-    #   signed URL or cookie contains information about which public key
-    #   CloudFront should use to verify the signature. For more information,
-    #   see [Serving private content][1] in the *Amazon CloudFront Developer
+    #   a CloudFront key pair in the trusted signer’s account. The signed
+    #   URL or cookie contains information about which public key CloudFront
+    #   should use to verify the signature. For more information, see
+    #   [Serving private content][1] in the *Amazon CloudFront Developer
     #   Guide*.
     #
     #
@@ -499,9 +535,15 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_function_associations
-    #   A complex type that contains zero or more Lambda function
+    #   A complex type that contains zero or more Lambda@Edge function
     #   associations for a cache behavior.
     #   @return [Types::LambdaFunctionAssociations]
+    #
+    # @!attribute [rw] function_associations
+    #   A list of CloudFront functions that are associated with this cache
+    #   behavior. CloudFront functions must be published to the `LIVE` stage
+    #   to associate them with a cache behavior.
+    #   @return [Types::FunctionAssociations]
     #
     # @!attribute [rw] field_level_encryption_id
     #   The value of `ID` for the field-level encryption configuration that
@@ -524,6 +566,9 @@ module Aws::CloudFront
     #   cache behavior. For more information, see [Creating cache
     #   policies][1] or [Using the managed cache policies][2] in the *Amazon
     #   CloudFront Developer Guide*.
+    #
+    #   A `CacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #
     #
@@ -558,6 +603,9 @@ module Aws::CloudFront
     #   cache key, use an origin request policy. For more information, see
     #   [Creating origin request policies][4] or [Using the managed origin
     #   request policies][5] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   A `CacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #   A complex type that specifies how CloudFront handles query strings,
     #   cookies, and HTTP headers.
@@ -650,6 +698,7 @@ module Aws::CloudFront
       :smooth_streaming,
       :compress,
       :lambda_function_associations,
+      :function_associations,
       :field_level_encryption_id,
       :realtime_log_config_arn,
       :cache_policy_id,
@@ -701,6 +750,15 @@ module Aws::CloudFront
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                 },
     #               ],
     #             },
@@ -864,7 +922,8 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] comment
-    #   A comment to describe the cache policy.
+    #   A comment to describe the cache policy. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1149,8 +1208,8 @@ module Aws::CloudFront
     # Contains a cache policy.
     #
     # @!attribute [rw] type
-    #   The type of cache policy, either `managed` (created by AWS) or
-    #   `custom` (created in this AWS account).
+    #   The type of cache policy, either `managed` (created by Amazon Web
+    #   Services) or `custom` (created in this account).
     #   @return [String]
     #
     # @!attribute [rw] cache_policy
@@ -1298,7 +1357,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   Any comments you want to include about the origin access identity.
+    #   A comment to describe the origin access identity. The comment cannot
+    #   be longer than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityConfig AWS API Documentation
@@ -1360,13 +1420,13 @@ module Aws::CloudFront
     #
     # @!attribute [rw] quantity
     #   The number of CloudFront origin access identities that were created
-    #   by the current AWS account.
+    #   by the current account.
     #   @return [Integer]
     #
     # @!attribute [rw] items
     #   A complex type that contains one
     #   `CloudFrontOriginAccessIdentitySummary` element for each origin
-    #   access identity that was created by the current AWS account.
+    #   access identity that was created by the current account.
     #   @return [Array<Types::CloudFrontOriginAccessIdentitySummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityList AWS API Documentation
@@ -1406,6 +1466,73 @@ module Aws::CloudFront
       :id,
       :s3_canonical_user_id,
       :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alias (also called a CNAME) and the CloudFront distribution and
+    # Amazon Web Services account ID that it’s associated with. The
+    # distribution and account IDs are partially hidden, which allows you to
+    # identify the distributions and accounts that you own, but helps to
+    # protect the information of ones that you don’t own.
+    #
+    # @!attribute [rw] alias
+    #   An alias (also called a CNAME).
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_id
+    #   The (partially hidden) ID of the CloudFront distribution associated
+    #   with the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The (partially hidden) ID of the Amazon Web Services account that
+    #   owns the distribution that’s associated with the alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConflictingAlias AWS API Documentation
+    #
+    class ConflictingAlias < Struct.new(
+      :alias,
+      :distribution_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of aliases (also called CNAMEs) and the CloudFront
+    # distributions and Amazon Web Services accounts that they are
+    # associated with. In the list, the distribution and account IDs are
+    # partially hidden, which allows you to identify the distributions and
+    # accounts that you own, but helps to protect the information of ones
+    # that you don’t own.
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value that you should use in the
+    #   `Marker` field of a subsequent request to continue listing
+    #   conflicting aliases where you left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of conflicting aliases requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quantity
+    #   The number of conflicting aliases returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the conflicting aliases in the list.
+    #   @return [Array<Types::ConflictingAlias>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConflictingAliasesList AWS API Documentation
+    #
+    class ConflictingAliasesList < Struct.new(
+      :next_marker,
+      :max_items,
+      :quantity,
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1630,7 +1757,7 @@ module Aws::CloudFront
     #
     #   For the current limit on the number of cookie names that you can
     #   whitelist for each cache behavior, see [ CloudFront Limits][3] in
-    #   the *AWS General Reference*.
+    #   the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1885,6 +2012,15 @@ module Aws::CloudFront
     #                 },
     #               ],
     #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
     #             field_level_encryption_id: "string",
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
@@ -1948,6 +2084,15 @@ module Aws::CloudFront
     #                     },
     #                   ],
     #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     },
+    #                   ],
+    #                 },
     #                 field_level_encryption_id: "string",
     #                 realtime_log_config_arn: "string",
     #                 cache_policy_id: "string",
@@ -2001,7 +2146,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -2163,6 +2308,15 @@ module Aws::CloudFront
     #                   },
     #                 ],
     #               },
+    #               function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     function_arn: "FunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   },
+    #                 ],
+    #               },
     #               field_level_encryption_id: "string",
     #               realtime_log_config_arn: "string",
     #               cache_policy_id: "string",
@@ -2226,6 +2380,15 @@ module Aws::CloudFront
     #                       },
     #                     ],
     #                   },
+    #                   function_associations: {
+    #                     quantity: 1, # required
+    #                     items: [
+    #                       {
+    #                         function_arn: "FunctionARN", # required
+    #                         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       },
+    #                     ],
+    #                   },
     #                   field_level_encryption_id: "string",
     #                   realtime_log_config_arn: "string",
     #                   cache_policy_id: "string",
@@ -2279,7 +2442,7 @@ module Aws::CloudFront
     #               iam_certificate_id: "string",
     #               acm_certificate_arn: "string",
     #               ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #               certificate: "string",
     #               certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #             },
@@ -2466,6 +2629,72 @@ module Aws::CloudFront
     #
     class CreateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
+      :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "FunctionName", # required
+    #         function_config: { # required
+    #           comment: "string", # required
+    #           runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #         },
+    #         function_code: "data", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A name to identify the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_config
+    #   Configuration information about the function, including an optional
+    #   comment and the function’s runtime.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] function_code
+    #   The function code. For more information about writing a CloudFront
+    #   function, see [Writing function code for CloudFront Functions][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunctionRequest AWS API Documentation
+    #
+    class CreateFunctionRequest < Struct.new(
+      :name,
+      :function_config,
+      :function_code)
+      SENSITIVE = [:function_code]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] location
+    #   The URL of the CloudFront function. Use the URL to manage the
+    #   function with the CloudFront API.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunctionResult AWS API Documentation
+    #
+    class CreateFunctionResult < Struct.new(
+      :function_summary,
       :location,
       :etag)
       SENSITIVE = []
@@ -3279,6 +3508,15 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               function_arn: "FunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
     #         field_level_encryption_id: "string",
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
@@ -3314,14 +3552,14 @@ module Aws::CloudFront
     # @!attribute [rw] trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   A list of AWS account IDs whose public keys CloudFront can use to
+    #   A list of account IDs whose public keys CloudFront can use to
     #   validate signed URLs or signed cookies.
     #
     #   When a cache behavior contains trusted signers, CloudFront requires
     #   signed URLs or signed cookies for all requests that match the cache
     #   behavior. The URLs or cookies must be signed with the private key of
-    #   a CloudFront key pair in a trusted signer’s AWS account. The signed
-    #   URL or cookie contains information about which public key CloudFront
+    #   a CloudFront key pair in a trusted signer’s account. The signed URL
+    #   or cookie contains information about which public key CloudFront
     #   should use to verify the signature. For more information, see
     #   [Serving private content][1] in the *Amazon CloudFront Developer
     #   Guide*.
@@ -3426,9 +3664,15 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_function_associations
-    #   A complex type that contains zero or more Lambda function
+    #   A complex type that contains zero or more Lambda@Edge function
     #   associations for a cache behavior.
     #   @return [Types::LambdaFunctionAssociations]
+    #
+    # @!attribute [rw] function_associations
+    #   A list of CloudFront functions that are associated with this cache
+    #   behavior. CloudFront functions must be published to the `LIVE` stage
+    #   to associate them with a cache behavior.
+    #   @return [Types::FunctionAssociations]
     #
     # @!attribute [rw] field_level_encryption_id
     #   The value of `ID` for the field-level encryption configuration that
@@ -3451,6 +3695,9 @@ module Aws::CloudFront
     #   default cache behavior. For more information, see [Creating cache
     #   policies][1] or [Using the managed cache policies][2] in the *Amazon
     #   CloudFront Developer Guide*.
+    #
+    #   A `DefaultCacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #
     #
@@ -3485,6 +3732,9 @@ module Aws::CloudFront
     #   cache key, use an origin request policy. For more information, see
     #   [Creating origin request policies][4] or [Using the managed origin
     #   request policies][5] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   A `DefaultCacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #   A complex type that specifies how CloudFront handles query strings,
     #   cookies, and HTTP headers.
@@ -3576,6 +3826,7 @@ module Aws::CloudFront
       :smooth_streaming,
       :compress,
       :lambda_function_associations,
+      :function_associations,
       :field_level_encryption_id,
       :realtime_log_config_arn,
       :cache_policy_id,
@@ -3766,6 +4017,32 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   deleting, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFunctionRequest AWS API Documentation
+    #
+    class DeleteFunctionRequest < Struct.new(
+      :name,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteKeyGroupRequest
     #   data as a hash:
     #
@@ -3927,6 +4204,50 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are getting information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunctionRequest AWS API Documentation
+    #
+    class DescribeFunctionRequest < Struct.new(
+      :name,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunctionResult AWS API Documentation
+    #
+    class DescribeFunctionResult < Struct.new(
+      :function_summary,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A distribution tells CloudFront where you want content to be delivered
     # from, and the details about how to track and manage content delivery.
     #
@@ -3937,7 +4258,7 @@ module Aws::CloudFront
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) for the distribution. For example:
     #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
-    #   where `123456789012` is your AWS account ID.
+    #   where `123456789012` is your account ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3964,8 +4285,8 @@ module Aws::CloudFront
     #
     #   CloudFront automatically adds this field to the response if you’ve
     #   configured a cache behavior in this distribution to serve private
-    #   content using trusted signers. This field contains a list of AWS
-    #   account IDs and the active CloudFront key pairs in each account that
+    #   content using trusted signers. This field contains a list of account
+    #   IDs and the active CloudFront key pairs in each account that
     #   CloudFront can use to verify the signatures of signed URLs or signed
     #   cookies.
     #   @return [Types::ActiveTrustedSigners]
@@ -3985,14 +4306,15 @@ module Aws::CloudFront
     #   @return [Types::DistributionConfig]
     #
     # @!attribute [rw] alias_icp_recordals
-    #   AWS services in China customers must file for an Internet Content
-    #   Provider (ICP) recordal if they want to serve content publicly on an
-    #   alternate domain name, also known as a CNAME, that they've added to
-    #   CloudFront. AliasICPRecordal provides the ICP recordal status for
-    #   CNAMEs associated with distributions.
+    #   Amazon Web Services services in China customers must file for an
+    #   Internet Content Provider (ICP) recordal if they want to serve
+    #   content publicly on an alternate domain name, also known as a CNAME,
+    #   that they've added to CloudFront. AliasICPRecordal provides the ICP
+    #   recordal status for CNAMEs associated with distributions.
     #
     #   For more information about ICP recordals, see [ Signup, Accounts,
-    #   and Credentials][1] in *Getting Started with AWS services in China*.
+    #   and Credentials][1] in *Getting Started with Amazon Web Services
+    #   services in China*.
     #
     #
     #
@@ -4136,6 +4458,15 @@ module Aws::CloudFront
     #               },
     #             ],
     #           },
+    #           function_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 function_arn: "FunctionARN", # required
+    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               },
+    #             ],
+    #           },
     #           field_level_encryption_id: "string",
     #           realtime_log_config_arn: "string",
     #           cache_policy_id: "string",
@@ -4199,6 +4530,15 @@ module Aws::CloudFront
     #                   },
     #                 ],
     #               },
+    #               function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     function_arn: "FunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   },
+    #                 ],
+    #               },
     #               field_level_encryption_id: "string",
     #               realtime_log_config_arn: "string",
     #               cache_policy_id: "string",
@@ -4252,7 +4592,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "string",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #           certificate: "string",
     #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #         },
@@ -4355,16 +4695,8 @@ module Aws::CloudFront
     #   @return [Types::CustomErrorResponses]
     #
     # @!attribute [rw] comment
-    #   Any comments you want to include about the distribution.
-    #
-    #   If you don't want to specify a comment, include an empty `Comment`
-    #   element.
-    #
-    #   To delete an existing comment, update the distribution configuration
-    #   and include an empty `Comment` element.
-    #
-    #   To add or change a comment, update the distribution configuration
-    #   and specify the new comment.
+    #   An optional comment to describe the distribution. The comment cannot
+    #   be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -4419,22 +4751,22 @@ module Aws::CloudFront
     #   @return [Types::Restrictions]
     #
     # @!attribute [rw] web_acl_id
-    #   A unique identifier that specifies the AWS WAF web ACL, if any, to
+    #   A unique identifier that specifies the WAF web ACL, if any, to
     #   associate with this distribution. To specify a web ACL created using
-    #   the latest version of AWS WAF, use the ACL ARN, for example
+    #   the latest version of WAF, use the ACL ARN, for example
     #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a`.
-    #   To specify a web ACL created using AWS WAF Classic, use the ACL ID,
-    #   for example `473e64fd-f30b-4765-81a0-62ad96dd167a`.
+    #   To specify a web ACL created using WAF Classic, use the ACL ID, for
+    #   example `473e64fd-f30b-4765-81a0-62ad96dd167a`.
     #
-    #   AWS WAF is a web application firewall that lets you monitor the HTTP
-    #   and HTTPS requests that are forwarded to CloudFront, and lets you
+    #   WAF is a web application firewall that lets you monitor the HTTP and
+    #   HTTPS requests that are forwarded to CloudFront, and lets you
     #   control access to your content. Based on conditions that you
     #   specify, such as the IP addresses that requests originate from or
     #   the values of query strings, CloudFront responds to requests either
     #   with the requested content or with an HTTP 403 status code
     #   (Forbidden). You can also configure CloudFront to return a custom
-    #   error page when a request is blocked. For more information about AWS
-    #   WAF, see the [AWS WAF Developer Guide][1].
+    #   error page when a request is blocked. For more information about
+    #   WAF, see the [WAF Developer Guide][1].
     #
     #
     #
@@ -4475,23 +4807,24 @@ module Aws::CloudFront
     #   more information, see [Creating a Signed URL Using a Custom
     #   Policy][1] in the *Amazon CloudFront Developer Guide*.
     #
-    #   If you're using an Amazon Route 53 alias resource record set to
-    #   route traffic to your CloudFront distribution, you need to create a
-    #   second alias resource record set when both of the following are
-    #   true:
+    #   If you're using an Route 53 Amazon Web Services Integration alias
+    #   resource record set to route traffic to your CloudFront
+    #   distribution, you need to create a second alias resource record set
+    #   when both of the following are true:
     #
     #   * You enable IPv6 for the distribution
     #
     #   * You're using alternate domain names in the URLs for your objects
     #
     #   For more information, see [Routing Traffic to an Amazon CloudFront
-    #   Web Distribution by Using Your Domain Name][2] in the *Amazon Route
-    #   53 Developer Guide*.
+    #   Web Distribution by Using Your Domain Name][2] in the *Route 53
+    #   Amazon Web Services Integration Developer Guide*.
     #
-    #   If you created a CNAME resource record set, either with Amazon Route
-    #   53 or with another DNS service, you don't need to make any changes.
-    #   A CNAME record will route traffic to your distribution regardless of
-    #   the IP address format of the viewer request.
+    #   If you created a CNAME resource record set, either with Route 53
+    #   Amazon Web Services Integration or with another DNS service, you
+    #   don't need to make any changes. A CNAME record will route traffic
+    #   to your distribution regardless of the IP address format of the
+    #   viewer request.
     #
     #
     #
@@ -4631,6 +4964,15 @@ module Aws::CloudFront
     #                 },
     #               ],
     #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
     #             field_level_encryption_id: "string",
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
@@ -4694,6 +5036,15 @@ module Aws::CloudFront
     #                     },
     #                   ],
     #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     },
+    #                   ],
+    #                 },
     #                 field_level_encryption_id: "string",
     #                 realtime_log_config_arn: "string",
     #                 cache_policy_id: "string",
@@ -4747,7 +5098,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -4857,13 +5208,13 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] quantity
-    #   The number of distributions that were created by the current AWS
+    #   The number of distributions that were created by the current
     #   account.
     #   @return [Integer]
     #
     # @!attribute [rw] items
     #   A complex type that contains one `DistributionSummary` element for
-    #   each distribution that was created by the current AWS account.
+    #   each distribution that was created by the current account.
     #   @return [Array<Types::DistributionSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionList AWS API Documentation
@@ -4902,7 +5253,7 @@ module Aws::CloudFront
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) for the distribution. For example:
     #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
-    #   where `123456789012` is your AWS account ID.
+    #   where `123456789012` is your account ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4992,14 +5343,15 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] alias_icp_recordals
-    #   AWS services in China customers must file for an Internet Content
-    #   Provider (ICP) recordal if they want to serve content publicly on an
-    #   alternate domain name, also known as a CNAME, that they've added to
-    #   CloudFront. AliasICPRecordal provides the ICP recordal status for
-    #   CNAMEs associated with distributions.
+    #   Amazon Web Services services in China customers must file for an
+    #   Internet Content Provider (ICP) recordal if they want to serve
+    #   content publicly on an alternate domain name, also known as a CNAME,
+    #   that they've added to CloudFront. AliasICPRecordal provides the ICP
+    #   recordal status for CNAMEs associated with distributions.
     #
     #   For more information about ICP recordals, see [ Signup, Accounts,
-    #   and Credentials][1] in *Getting Started with AWS services in China*.
+    #   and Credentials][1] in *Getting Started with Amazon Web Services
+    #   services in China*.
     #
     #
     #
@@ -5220,7 +5572,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   An optional comment about the configuration.
+    #   An optional comment about the configuration. The comment cannot be
+    #   longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] query_arg_profile_config
@@ -5377,7 +5730,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   An optional comment for the field-level encryption profile.
+    #   An optional comment for the field-level encryption profile. The
+    #   comment cannot be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] encryption_entities
@@ -5478,6 +5832,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] comment
     #   An optional comment for the field-level encryption profile summary.
+    #   The comment cannot be longer than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileSummary AWS API Documentation
@@ -5504,7 +5859,8 @@ module Aws::CloudFront
     #   @return [Time]
     #
     # @!attribute [rw] comment
-    #   An optional comment about the field-level encryption item.
+    #   An optional comment about the field-level encryption item. The
+    #   comment cannot be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] query_arg_profile_config
@@ -5728,6 +6084,245 @@ module Aws::CloudFront
       :cookies,
       :headers,
       :query_string_cache_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A function with the same name already exists in this account. To
+    # create a function, you must provide a unique name. To update an
+    # existing function, use `UpdateFunction`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionAlreadyExists AWS API Documentation
+    #
+    class FunctionAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CloudFront function that is associated with a cache behavior in a
+    # CloudFront distribution.
+    #
+    # @note When making an API call, you may pass FunctionAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         function_arn: "FunctionARN", # required
+    #         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #       }
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The event type of the function, either `viewer-request` or
+    #   `viewer-response`. You cannot use origin-facing event types
+    #   (`origin-request` and `origin-response`) with a CloudFront function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionAssociation AWS API Documentation
+    #
+    class FunctionAssociation < Struct.new(
+      :function_arn,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CloudFront functions that are associated with a cache
+    # behavior in a CloudFront distribution. CloudFront functions must be
+    # published to the `LIVE` stage to associate them with a cache behavior.
+    #
+    # @note When making an API call, you may pass FunctionAssociations
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             function_arn: "FunctionARN", # required
+    #             event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of CloudFront functions in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   The CloudFront functions that are associated with a cache behavior
+    #   in a CloudFront distribution. CloudFront functions must be published
+    #   to the `LIVE` stage to associate them with a cache behavior.
+    #   @return [Array<Types::FunctionAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionAssociations AWS API Documentation
+    #
+    class FunctionAssociations < Struct.new(
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information about a CloudFront function.
+    #
+    # @note When making an API call, you may pass FunctionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         comment: "string", # required
+    #         runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #       }
+    #
+    # @!attribute [rw] comment
+    #   A comment to describe the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The function’s runtime environment. The only valid value is
+    #   `cloudfront-js-1.0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionConfig AWS API Documentation
+    #
+    class FunctionConfig < Struct.new(
+      :comment,
+      :runtime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cannot delete the function because it’s attached to one or more cache
+    # behaviors.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionInUse AWS API Documentation
+    #
+    class FunctionInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CloudFront functions.
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value that you should use in the
+    #   `Marker` field of a subsequent request to continue listing functions
+    #   where you left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of functions requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quantity
+    #   The number of functions returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the functions in the list.
+    #   @return [Array<Types::FunctionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionList AWS API Documentation
+    #
+    class FunctionList < Struct.new(
+      :next_marker,
+      :max_items,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a CloudFront function.
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the function. The ARN uniquely
+    #   identifies the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The stage that the function is in, either `DEVELOPMENT` or `LIVE`.
+    #
+    #   When a function is in the `DEVELOPMENT` stage, you can test the
+    #   function with `TestFunction`, and update it with `UpdateFunction`.
+    #
+    #   When a function is in the `LIVE` stage, you can attach the function
+    #   to a distribution’s cache behavior, using the function’s ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time when the function was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the function was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionMetadata AWS API Documentation
+    #
+    class FunctionMetadata < Struct.new(
+      :function_arn,
+      :stage,
+      :created_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The function is too large. For more information, see [Quotas][1]
+    # (formerly known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionSizeLimitExceeded AWS API Documentation
+    #
+    class FunctionSizeLimitExceeded < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information and metadata about a CloudFront
+    # function.
+    #
+    # @!attribute [rw] name
+    #   The name of the CloudFront function.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the CloudFront function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_config
+    #   Contains configuration information about a CloudFront function.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] function_metadata
+    #   Contains metadata about a CloudFront function.
+    #   @return [Types::FunctionMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionSummary AWS API Documentation
+    #
+    class FunctionSummary < Struct.new(
+      :name,
+      :status,
+      :function_config,
+      :function_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6190,6 +6785,54 @@ module Aws::CloudFront
       :field_level_encryption,
       :etag)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function whose code you are getting.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunctionRequest AWS API Documentation
+    #
+    class GetFunctionRequest < Struct.new(
+      :name,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_code
+    #   The function code of a CloudFront function.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type (media type) of the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunctionResult AWS API Documentation
+    #
+    class GetFunctionResult < Struct.new(
+      :function_code,
+      :etag,
+      :content_type)
+      SENSITIVE = [:function_code]
       include Aws::Structure
     end
 
@@ -6759,6 +7402,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A CloudFront function association is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidFunctionAssociation AWS API Documentation
+    #
+    class InvalidFunctionAssociation < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified geo restriction parameter is not valid.
     #
     # @!attribute [rw] message
@@ -6798,7 +7454,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The specified Lambda function association is invalid.
+    # The specified Lambda@Edge function association is invalid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -7000,10 +7656,10 @@ module Aws::CloudFront
     end
 
     # A web ACL ID specified is not valid. To specify a web ACL created
-    # using the latest version of AWS WAF, use the ACL ARN, for example
+    # using the latest version of WAF, use the ACL ARN, for example
     # `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a`.
-    # To specify a web ACL created using AWS WAF Classic, use the ACL ID,
-    # for example `473e64fd-f30b-4765-81a0-62ad96dd167a`.
+    # To specify a web ACL created using WAF Classic, use the ACL ID, for
+    # example `473e64fd-f30b-4765-81a0-62ad96dd167a`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -7133,12 +7789,12 @@ module Aws::CloudFront
     #
     # @!attribute [rw] quantity
     #   The number of invalidation batches that were created by the current
-    #   AWS account.
+    #   account.
     #   @return [Integer]
     #
     # @!attribute [rw] items
     #   A complex type that contains one `InvalidationSummary` element for
-    #   each invalidation batch created by the current AWS account.
+    #   each invalidation batch created by the current account.
     #   @return [Array<Types::InvalidationSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidationList AWS API Documentation
@@ -7270,7 +7926,8 @@ module Aws::CloudFront
     #   @return [Array<String>]
     #
     # @!attribute [rw] comment
-    #   A comment to describe the key group.
+    #   A comment to describe the key group. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyGroupConfig AWS API Documentation
@@ -7360,9 +8017,9 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
-    #   Management (IAM) role that CloudFront can use to send real-time log
-    #   data to your Kinesis data stream.
+    #   The Amazon Resource Name (ARN) of an Identity and Access Management
+    #   (IAM) role that CloudFront can use to send real-time log data to
+    #   your Kinesis data stream.
     #
     #   For more information the IAM role, see [Real-time log configuration
     #   IAM role][1] in the *Amazon CloudFront Developer Guide*.
@@ -7386,7 +8043,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that contains a Lambda function association.
+    # A complex type that contains a Lambda@Edge function association.
     #
     # @note When making an API call, you may pass LambdaFunctionAssociation
     #   data as a hash:
@@ -7398,13 +8055,13 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] lambda_function_arn
-    #   The ARN of the Lambda function. You must specify the ARN of a
-    #   function version; you can't specify a Lambda alias or $LATEST.
+    #   The ARN of the Lambda@Edge function. You must specify the ARN of a
+    #   function version; you can't specify an alias or $LATEST.
     #   @return [String]
     #
     # @!attribute [rw] event_type
-    #   Specifies the event type that triggers a Lambda function invocation.
-    #   You can specify the following values:
+    #   Specifies the event type that triggers a Lambda@Edge function
+    #   invocation. You can specify the following values:
     #
     #   * `viewer-request`\: The function executes when CloudFront receives
     #     a request from a viewer and before it checks to see whether the
@@ -7428,9 +8085,9 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] include_body
-    #   A flag that allows a Lambda function to have read access to the body
-    #   content. For more information, see [Accessing the Request Body by
-    #   Choosing the Include Body Option][1] in the Amazon CloudFront
+    #   A flag that allows a Lambda@Edge function to have read access to the
+    #   body content. For more information, see [Accessing the Request Body
+    #   by Choosing the Include Body Option][1] in the Amazon CloudFront
     #   Developer Guide.
     #
     #
@@ -7448,18 +8105,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that specifies a list of Lambda functions associations
-    # for a cache behavior.
+    # A complex type that specifies a list of Lambda@Edge functions
+    # associations for a cache behavior.
     #
-    # If you want to invoke one or more Lambda functions triggered by
+    # If you want to invoke one or more Lambda@Edge functions triggered by
     # requests that match the `PathPattern` of the cache behavior, specify
     # the applicable values for `Quantity` and `Items`. Note that there can
     # be up to 4 `LambdaFunctionAssociation` items in this list (one for
     # each possible value of `EventType`) and each `EventType` can be
-    # associated with the Lambda function only once.
+    # associated with only one function.
     #
-    # If you don't want to invoke any Lambda functions for the requests
-    # that match `PathPattern`, specify `0` for `Quantity` and omit `Items`.
+    # If you don't want to invoke any Lambda@Edge functions for the
+    # requests that match `PathPattern`, specify `0` for `Quantity` and omit
+    # `Items`.
     #
     # @note When making an API call, you may pass LambdaFunctionAssociations
     #   data as a hash:
@@ -7476,7 +8134,8 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] quantity
-    #   The number of Lambda function associations for this cache behavior.
+    #   The number of Lambda@Edge function associations for this cache
+    #   behavior.
     #   @return [Integer]
     #
     # @!attribute [rw] items
@@ -7507,9 +8166,10 @@ module Aws::CloudFront
     #   A filter to return only the specified kinds of cache policies. Valid
     #   values are:
     #
-    #   * `managed` – Returns only the managed policies created by AWS.
+    #   * `managed` – Returns only the managed policies created by Amazon
+    #     Web Services.
     #
-    #   * `custom` – Returns only the custom policies created in your AWS
+    #   * `custom` – Returns only the custom policies created in your
     #     account.
     #   @return [String]
     #
@@ -7590,6 +8250,61 @@ module Aws::CloudFront
     #
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
       :cloud_front_origin_access_identity_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConflictingAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_id: "distributionIdString", # required
+    #         alias: "aliasString", # required
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID of a distribution in your account that has an attached
+    #   SSL/TLS certificate that includes the provided alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias (also called a CNAME) to search for conflicting aliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   the list of conflicting aliases. The response includes conflicting
+    #   aliases in the list that occur after the marker. To get the next
+    #   page of the list, set this field’s value to the value of
+    #   `NextMarker` from the current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of conflicting aliases that you want in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConflictingAliasesRequest AWS API Documentation
+    #
+    class ListConflictingAliasesRequest < Struct.new(
+      :distribution_id,
+      :alias,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conflicting_aliases_list
+    #   A list of conflicting aliases.
+    #   @return [Types::ConflictingAliasesList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConflictingAliasesResult AWS API Documentation
+    #
+    class ListConflictingAliasesResult < Struct.new(
+      :conflicting_aliases_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7797,7 +8512,7 @@ module Aws::CloudFront
     end
 
     # The request to list distributions that are associated with a specified
-    # AWS WAF web ACL.
+    # WAF web ACL.
     #
     # @note When making an API call, you may pass ListDistributionsByWebACLIdRequest
     #   data as a hash:
@@ -7824,7 +8539,7 @@ module Aws::CloudFront
     #   @return [Integer]
     #
     # @!attribute [rw] web_acl_id
-    #   The ID of the AWS WAF web ACL that you want to list the associated
+    #   The ID of the WAF web ACL that you want to list the associated
     #   distributions. If you specify "null" for the ID, the request
     #   returns a list of the distributions that aren't associated with a
     #   web ACL.
@@ -7841,7 +8556,7 @@ module Aws::CloudFront
     end
 
     # The response to a request to list the distributions that are
-    # associated with a specified AWS WAF web ACL.
+    # associated with a specified WAF web ACL.
     #
     # @!attribute [rw] distribution_list
     #   The `DistributionList` type.
@@ -7988,6 +8703,54 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListFunctionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of functions. The response includes functions in the list
+    #   that occur after the marker. To get the next page of the list, set
+    #   this field’s value to the value of `NextMarker` from the current
+    #   page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of functions that you want in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stage
+    #   An optional filter to return only the functions that are in the
+    #   specified stage, either `DEVELOPMENT` or `LIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFunctionsRequest AWS API Documentation
+    #
+    class ListFunctionsRequest < Struct.new(
+      :marker,
+      :max_items,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_list
+    #   A list of CloudFront functions.
+    #   @return [Types::FunctionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFunctionsResult AWS API Documentation
+    #
+    class ListFunctionsResult < Struct.new(
+      :function_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to list invalidations.
     #
     # @note When making an API call, you may pass ListInvalidationsRequest
@@ -8097,9 +8860,10 @@ module Aws::CloudFront
     #   A filter to return only the specified kinds of origin request
     #   policies. Valid values are:
     #
-    #   * `managed` – Returns only the managed policies created by AWS.
+    #   * `managed` – Returns only the managed policies created by Amazon
+    #     Web Services.
     #
-    #   * `custom` – Returns only the custom policies created in your AWS
+    #   * `custom` – Returns only the custom policies created in your
     #     account.
     #   @return [String]
     #
@@ -8455,6 +9219,19 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchFieldLevelEncryptionProfile AWS API Documentation
     #
     class NoSuchFieldLevelEncryptionProfile < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The function does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchFunctionExists AWS API Documentation
+    #
+    class NoSuchFunctionExists < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9063,7 +9840,8 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] comment
-    #   A comment to describe the origin request policy.
+    #   A comment to describe the origin request policy. The comment cannot
+    #   be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9287,8 +10065,8 @@ module Aws::CloudFront
     # Contains an origin request policy.
     #
     # @!attribute [rw] type
-    #   The type of origin request policy, either `managed` (created by AWS)
-    #   or `custom` (created in this AWS account).
+    #   The type of origin request policy, either `managed` (created by
+    #   Amazon Web Services) or `custom` (created in this account).
     #   @return [String]
     #
     # @!attribute [rw] origin_request_policy
@@ -9332,17 +10110,17 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] origin_shield_region
-    #   The AWS Region for Origin Shield.
+    #   The Region for Origin Shield.
     #
-    #   Specify the AWS Region that has the lowest latency to your origin.
-    #   To specify a region, use the region code, not the region name. For
+    #   Specify the Region that has the lowest latency to your origin. To
+    #   specify a region, use the region code, not the region name. For
     #   example, specify the US East (Ohio) region as `us-east-2`.
     #
-    #   When you enable CloudFront Origin Shield, you must specify the AWS
-    #   Region for Origin Shield. For the list of AWS Regions that you can
+    #   When you enable CloudFront Origin Shield, you must specify the
+    #   Region for Origin Shield. For the list of Regions that you can
     #   specify, and for help choosing the best Region for your origin, see
-    #   [Choosing the AWS Region for Origin Shield][1] in the *Amazon
-    #   CloudFront Developer Guide*.
+    #   [Choosing the Region for Origin Shield][1] in the *Amazon CloudFront
+    #   Developer Guide*.
     #
     #
     #
@@ -9637,8 +10415,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The precondition given in one or more of the request header fields
-    # evaluated to `false`.
+    # The precondition in one or more of the request fields evaluated to
+    # `false`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -9740,7 +10518,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   A comment to describe the public key.
+    #   A comment to describe the public key. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyConfig AWS API Documentation
@@ -9823,7 +10602,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   A comment to describe the public key.
+    #   A comment to describe the public key. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeySummary AWS API Documentation
@@ -9834,6 +10614,45 @@ module Aws::CloudFront
       :created_time,
       :encoded_key,
       :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PublishFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are publishing.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   publishing, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishFunctionRequest AWS API Documentation
+    #
+    class PublishFunctionRequest < Struct.new(
+      :name,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishFunctionResult AWS API Documentation
+    #
+    class PublishFunctionResult < Struct.new(
+      :function_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10098,6 +10917,20 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The specified real-time log configuration belongs to a different
+    # account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeLogConfigOwnerMismatch AWS API Documentation
+    #
+    class RealtimeLogConfigOwnerMismatch < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of real-time log configurations.
     #
     # @!attribute [rw] max_items
@@ -10303,16 +11136,16 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A list of AWS accounts and the active CloudFront key pairs in each
-    # account that CloudFront can use to verify the signatures of signed
-    # URLs and signed cookies.
+    # A list of accounts and the active CloudFront key pairs in each account
+    # that CloudFront can use to verify the signatures of signed URLs and
+    # signed cookies.
     #
     # @!attribute [rw] aws_account_number
-    #   An AWS account number that contains active CloudFront key pairs that
+    #   An account number that contains active CloudFront key pairs that
     #   CloudFront can use to verify the signatures of signed URLs and
-    #   signed cookies. If the AWS account that owns the key pairs is the
-    #   same account that owns the CloudFront distribution, the value of
-    #   this field is `self`.
+    #   signed cookies. If the account that owns the key pairs is the same
+    #   account that owns the CloudFront distribution, the value of this
+    #   field is `self`.
     #   @return [String]
     #
     # @!attribute [rw] key_pair_ids
@@ -10369,7 +11202,7 @@ module Aws::CloudFront
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) for the distribution. For example:
     #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
-    #   where `123456789012` is your AWS account ID.
+    #   where `123456789012` is your account ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10388,17 +11221,17 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] active_trusted_signers
-    #   A complex type that lists the AWS accounts, if any, that you
-    #   included in the `TrustedSigners` complex type for this distribution.
-    #   These are the accounts that you want to allow to create signed URLs
-    #   for private content.
+    #   A complex type that lists the accounts, if any, that you included in
+    #   the `TrustedSigners` complex type for this distribution. These are
+    #   the accounts that you want to allow to create signed URLs for
+    #   private content.
     #
-    #   The `Signer` complex type lists the AWS account number of the
-    #   trusted signer or `self` if the signer is the AWS account that
-    #   created the distribution. The `Signer` element also includes the IDs
-    #   of any active CloudFront key pairs that are associated with the
-    #   trusted signer's AWS account. If no `KeyPairId` element appears for
-    #   a `Signer`, that signer can't create signed URLs.
+    #   The `Signer` complex type lists the account number of the trusted
+    #   signer or `self` if the signer is the account that created the
+    #   distribution. The `Signer` element also includes the IDs of any
+    #   active CloudFront key pairs that are associated with the trusted
+    #   signer's account. If no `KeyPairId` element appears for a `Signer`,
+    #   that signer can't create signed URLs.
     #
     #   For more information, see [Serving Private Content through
     #   CloudFront][1] in the *Amazon CloudFront Developer Guide*.
@@ -10504,8 +11337,8 @@ module Aws::CloudFront
     #   @return [Types::StreamingLoggingConfig]
     #
     # @!attribute [rw] trusted_signers
-    #   A complex type that specifies any AWS accounts that you want to
-    #   permit to create signed URLs for private content. If you want the
+    #   A complex type that specifies any accounts that you want to permit
+    #   to create signed URLs for private content. If you want the
     #   distribution to use signed URLs, include this element; if you want
     #   the distribution to use public URLs, remove this element. For more
     #   information, see [Serving Private Content through CloudFront][1] in
@@ -10624,12 +11457,12 @@ module Aws::CloudFront
     #
     # @!attribute [rw] quantity
     #   The number of streaming distributions that were created by the
-    #   current AWS account.
+    #   current account.
     #   @return [Integer]
     #
     # @!attribute [rw] items
     #   A complex type that contains one `StreamingDistributionSummary`
-    #   element for each distribution that was created by the current AWS
+    #   element for each distribution that was created by the current
     #   account.
     #   @return [Array<Types::StreamingDistributionSummary>]
     #
@@ -10670,7 +11503,7 @@ module Aws::CloudFront
     #   The ARN (Amazon Resource Name) for the streaming distribution. For
     #   example:
     #   `arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5`,
-    #   where `123456789012` is your AWS account ID.
+    #   where `123456789012` is your account ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10700,9 +11533,9 @@ module Aws::CloudFront
     #   @return [Types::Aliases]
     #
     # @!attribute [rw] trusted_signers
-    #   A complex type that specifies the AWS accounts, if any, that you
-    #   want to allow to create signed URLs for private content. If you want
-    #   to require signed URLs in requests for objects in the target origin
+    #   A complex type that specifies the accounts, if any, that you want to
+    #   allow to create signed URLs for private content. If you want to
+    #   require signed URLs in requests for objects in the target origin
     #   that match the `PathPattern` for this cache behavior, specify `true`
     #   for `Enabled`, and specify the applicable values for `Quantity` and
     #   `Items`.If you don't want to require signed URLs in requests for
@@ -10914,6 +11747,124 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The CloudFront function failed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunctionFailed AWS API Documentation
+    #
+    class TestFunctionFailed < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TestFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #         event_object: "data", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are testing.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   testing, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The stage of the function that you are testing, either `DEVELOPMENT`
+    #   or `LIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_object
+    #   The event object to test the function with. For more information
+    #   about the structure of the event object, see [Testing functions][1]
+    #   in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunctionRequest AWS API Documentation
+    #
+    class TestFunctionRequest < Struct.new(
+      :name,
+      :if_match,
+      :stage,
+      :event_object)
+      SENSITIVE = [:event_object]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_result
+    #   An object that represents the result of running the function with
+    #   the provided event object.
+    #   @return [Types::TestResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunctionResult AWS API Documentation
+    #
+    class TestFunctionResult < Struct.new(
+      :test_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the result of testing a CloudFront function with
+    # `TestFunction`.
+    #
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about the CloudFront
+    #   function that was tested.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] compute_utilization
+    #   The amount of time that the function took to run as a percentage of
+    #   the maximum allowed time. For example, a compute utilization of 35
+    #   means that the function completed in 35% of the maximum allowed
+    #   time.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_execution_logs
+    #   Contains the log lines that the function wrote (if any) when running
+    #   the test.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] function_error_message
+    #   If the result of testing the function was an error, this field
+    #   contains the error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_output
+    #   The event object returned by the function. For more information
+    #   about the structure of the event object, see [Event object
+    #   structure][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-event-structure.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestResult AWS API Documentation
+    #
+    class TestResult < Struct.new(
+      :function_summary,
+      :compute_utilization,
+      :function_execution_logs,
+      :function_error_message,
+      :function_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You cannot create more cache behaviors for the distribution.
     #
     # @!attribute [rw] message
@@ -10927,7 +11878,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # You have reached the maximum number of cache policies for this AWS
+    # You have reached the maximum number of cache policies for this
     # account. For more information, see [Quotas][1] (formerly known as
     # limits) in the *Amazon CloudFront Developer Guide*.
     #
@@ -11123,8 +12074,28 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # You have reached the maximum number of distributions that are
+    # associated with a CloudFront function. For more information, see
+    # [Quotas][1] (formerly known as limits) in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsWithFunctionAssociations AWS API Documentation
+    #
+    class TooManyDistributionsWithFunctionAssociations < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Processing your request would cause the maximum number of
-    # distributions with Lambda function associations per owner to be
+    # distributions with Lambda@Edge function associations per owner to be
     # exceeded.
     #
     # @!attribute [rw] message
@@ -11139,7 +12110,7 @@ module Aws::CloudFront
     end
 
     # The maximum number of distributions have been associated with the
-    # specified Lambda function.
+    # specified Lambda@Edge function.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -11236,6 +12207,45 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # You have reached the maximum number of CloudFront function
+    # associations for this distribution. For more information, see
+    # [Quotas][1] (formerly known as limits) in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFunctionAssociations AWS API Documentation
+    #
+    class TooManyFunctionAssociations < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of CloudFront functions for this
+    # account. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFunctions AWS API Documentation
+    #
+    class TooManyFunctions < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The number of headers in the cache policy exceeds the maximum. For
     # more information, see [Quotas][1] (formerly known as limits) in the
     # *Amazon CloudFront Developer Guide*.
@@ -11301,9 +12311,9 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # You have reached the maximum number of key groups for this AWS
-    # account. For more information, see [Quotas][1] (formerly known as
-    # limits) in the *Amazon CloudFront Developer Guide*.
+    # You have reached the maximum number of key groups for this account.
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
     #
     #
     #
@@ -11339,7 +12349,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # Your request contains more Lambda function associations than are
+    # Your request contains more Lambda@Edge function associations than are
     # allowed per distribution.
     #
     # @!attribute [rw] message
@@ -11381,8 +12391,8 @@ module Aws::CloudFront
     end
 
     # You have reached the maximum number of origin request policies for
-    # this AWS account. For more information, see [Quotas][1] (formerly
-    # known as limits) in the *Amazon CloudFront Developer Guide*.
+    # this account. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
     #
     #
     #
@@ -11497,7 +12507,7 @@ module Aws::CloudFront
     end
 
     # You have reached the maximum number of real-time log configurations
-    # for this AWS account. For more information, see [Quotas][1] (formerly
+    # for this account. For more information, see [Quotas][1] (formerly
     # known as limits) in the *Amazon CloudFront Developer Guide*.
     #
     #
@@ -11618,8 +12628,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A list of AWS accounts whose public keys CloudFront can use to verify
-    # the signatures of signed URLs and signed cookies.
+    # A list of accounts whose public keys CloudFront can use to verify the
+    # signatures of signed URLs and signed cookies.
     #
     # @note When making an API call, you may pass TrustedSigners
     #   data as a hash:
@@ -11631,17 +12641,17 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] enabled
-    #   This field is `true` if any of the AWS accounts have public keys
-    #   that CloudFront can use to verify the signatures of signed URLs and
+    #   This field is `true` if any of the accounts have public keys that
+    #   CloudFront can use to verify the signatures of signed URLs and
     #   signed cookies. If not, this field is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] quantity
-    #   The number of AWS accounts in the list.
+    #   The number of accounts in the list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   A list of AWS account identifiers.
+    #   A list of account identifiers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustedSigners AWS API Documentation
@@ -11650,6 +12660,19 @@ module Aws::CloudFront
       :enabled,
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This operation is not supported in this region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UnsupportedOperation AWS API Documentation
+    #
+    class UnsupportedOperation < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11930,6 +12953,15 @@ module Aws::CloudFront
     #                 },
     #               ],
     #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
     #             field_level_encryption_id: "string",
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
@@ -11993,6 +13025,15 @@ module Aws::CloudFront
     #                     },
     #                   ],
     #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     },
+    #                   ],
+    #                 },
     #                 field_level_encryption_id: "string",
     #                 realtime_log_config_arn: "string",
     #                 cache_policy_id: "string",
@@ -12046,7 +13087,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -12247,6 +13288,72 @@ module Aws::CloudFront
     #
     class UpdateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #         function_config: { # required
+    #           comment: "string", # required
+    #           runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #         },
+    #         function_code: "data", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   updating, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_config
+    #   Configuration information about the function.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] function_code
+    #   The function code. For more information about writing a CloudFront
+    #   function, see [Writing function code for CloudFront Functions][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFunctionRequest AWS API Documentation
+    #
+    class UpdateFunctionRequest < Struct.new(
+      :name,
+      :if_match,
+      :function_config,
+      :function_code)
+      SENSITIVE = [:function_code]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFunctionResult AWS API Documentation
+    #
+    class UpdateFunctionResult < Struct.new(
+      :function_summary,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -12619,9 +13726,9 @@ module Aws::CloudFront
     #   value for `MinimumProtocolVersion`. For more information, see
     #   [Security Policy][2] in the *Amazon CloudFront Developer Guide*.
     #
-    # * The location of the SSL/TLS certificate, [AWS Certificate Manager
-    #   (ACM)][3] (recommended) or [AWS Identity and Access Management (AWS
-    #   IAM)][4]. You specify the location by setting a value in one of the
+    # * The location of the SSL/TLS certificate, [Certificate Manager
+    #   (ACM)][3] (recommended) or [Identity and Access Management
+    #   (IAM)][4]. You specify the location by setting a value in one of the
     #   following fields (not both):
     #
     #   * `ACMCertificateArn`
@@ -12655,7 +13762,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #       }
@@ -12678,12 +13785,11 @@ module Aws::CloudFront
     #
     # @!attribute [rw] iam_certificate_id
     #   If the distribution uses `Aliases` (alternate domain names or
-    #   CNAMEs) and the SSL/TLS certificate is stored in [AWS Identity and
-    #   Access Management (AWS IAM)][1], provide the ID of the IAM
-    #   certificate.
+    #   CNAMEs) and the SSL/TLS certificate is stored in [Identity and
+    #   Access Management (IAM)][1], provide the ID of the IAM certificate.
     #
     #   If you specify an IAM certificate ID, you must also specify values
-    #   for `MinimumProtocolVerison` and `SSLSupportMethod`.
+    #   for `MinimumProtocolVersion` and `SSLSupportMethod`.
     #
     #
     #
@@ -12692,13 +13798,13 @@ module Aws::CloudFront
     #
     # @!attribute [rw] acm_certificate_arn
     #   If the distribution uses `Aliases` (alternate domain names or
-    #   CNAMEs) and the SSL/TLS certificate is stored in [AWS Certificate
+    #   CNAMEs) and the SSL/TLS certificate is stored in [Certificate
     #   Manager (ACM)][1], provide the Amazon Resource Name (ARN) of the ACM
     #   certificate. CloudFront only supports ACM certificates in the US
     #   East (N. Virginia) Region (`us-east-1`).
     #
     #   If you specify an ACM certificate ARN, you must also specify values
-    #   for `MinimumProtocolVerison` and `SSLSupportMethod`.
+    #   for `MinimumProtocolVersion` and `SSLSupportMethod`.
     #
     #
     #
@@ -12722,8 +13828,8 @@ module Aws::CloudFront
     #   * `static-ip` - Do not specify this value unless your distribution
     #     has been enabled for this feature by the CloudFront team. If you
     #     have a use case that requires static IP addresses for a
-    #     distribution, contact CloudFront through the [AWS Support
-    #     Center][2].
+    #     distribution, contact CloudFront through the [Amazon Web Services
+    #     Support Center][2].
     #
     #   If the distribution uses the CloudFront domain name such as
     #   `d111111abcdef8.cloudfront.net`, don’t set a value for this field.

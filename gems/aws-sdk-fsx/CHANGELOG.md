@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-06-08)
+------------------
+
+* Feature - This release adds support for auditing end-user access to files, folders, and file shares using Windows event logs, enabling customers to meet their security and compliance needs.
+
+1.37.0 (2021-05-27)
+------------------
+
+* Feature - This release adds LZ4 data compression support to FSx for Lustre to reduce storage consumption of both file system storage and file system backups.
+
+1.36.0 (2021-04-12)
+------------------
+
+* Feature - Support for cross-region and cross-account backup copies
+
+1.35.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-11-24)
+------------------
+
+* Feature - This release adds the capability to increase storage capacity of Amazon FSx for Lustre file systems, providing the flexibility to meet evolving storage needs over time.
+
+1.32.0 (2020-11-09)
+------------------
+
+* Feature - This release adds support for creating DNS aliases for Amazon FSx for Windows File Server, and using AWS Backup to automate scheduled, policy-driven backup plans for Amazon FSx file systems.
+
 1.31.0 (2020-09-30)
 ------------------
 

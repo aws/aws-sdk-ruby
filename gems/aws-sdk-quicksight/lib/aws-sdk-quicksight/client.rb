@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -784,12 +784,19 @@ module Aws::QuickSight
     #   Groupings of columns that work together in certain QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #
+    # @option params [Hash<String,Types::FieldFolder>] :field_folders
+    #   The folder that contains fields and nested subfolders for your
+    #   dataset.
+    #
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   A list of resource permissions on the dataset.
     #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   The row-level security configuration for the data that you want to
     #   create.
+    #
+    # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
@@ -814,6 +821,7 @@ module Aws::QuickSight
     #       "PhysicalTableId" => {
     #         relational_table: {
     #           data_source_arn: "Arn", # required
+    #           catalog: "RelationalTableCatalog",
     #           schema: "RelationalTableSchema",
     #           name: "RelationalTableName", # required
     #           input_columns: [ # required
@@ -898,6 +906,12 @@ module Aws::QuickSight
     #           join_instruction: {
     #             left_operand: "LogicalTableId", # required
     #             right_operand: "LogicalTableId", # required
+    #             left_join_key_properties: {
+    #               unique_key: false,
+    #             },
+    #             right_join_key_properties: {
+    #               unique_key: false,
+    #             },
     #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #             on_clause: "OnClause", # required
     #           },
@@ -915,6 +929,12 @@ module Aws::QuickSight
     #         },
     #       },
     #     ],
+    #     field_folders: {
+    #       "FieldFolderPath" => {
+    #         description: "FieldFolderDescription",
+    #         columns: ["String"],
+    #       },
+    #     },
     #     permissions: [
     #       {
     #         principal: "Principal", # required
@@ -925,7 +945,14 @@ module Aws::QuickSight
     #       namespace: "Namespace",
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #       format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #     },
+    #     column_level_permission_rules: [
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -966,9 +993,12 @@ module Aws::QuickSight
     #
     # @option params [required, String] :type
     #   The type of the data source. Currently, the supported types for this
-    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL,
-    #   POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER,
-    #   TERADATA`. Use `ListDataSources` to return a list of all data sources.
+    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL,
+    #   AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT,
+    #   S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA`. Use `ListDataSources` to
+    #   return a list of all data sources.
+    #
+    #   `AMAZON_ELASTICSEARCH` is for Amazon managed Elasticsearch Service.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
     #   The parameters that QuickSight uses to connect to your underlying
@@ -1008,7 +1038,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     data_source_id: "ResourceId", # required
     #     name: "ResourceName", # required
-    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
+    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
     #     data_source_parameters: {
     #       amazon_elasticsearch_parameters: {
     #         domain: "Domain", # required
@@ -1038,6 +1068,11 @@ module Aws::QuickSight
     #         database: "Database", # required
     #       },
     #       my_sql_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       },
+    #       oracle_parameters: {
     #         host: "Host", # required
     #         port: 1, # required
     #         database: "Database", # required
@@ -1133,6 +1168,11 @@ module Aws::QuickSight
     #               port: 1, # required
     #               database: "Database", # required
     #             },
+    #             oracle_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
     #             postgre_sql_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
@@ -1224,6 +1264,127 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def create_data_source(params = {}, options = {})
       req = build_request(:create_data_source, params)
+      req.send_request(options)
+    end
+
+    # Creates an empty shared folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS Account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @option params [String] :name
+    #   The name of the folder.
+    #
+    # @option params [String] :folder_type
+    #   The type of folder. By default, `folderType` is `SHARED`.
+    #
+    # @option params [String] :parent_folder_arn
+    #   The Amazon Resource Name (ARN) for the parent folder.
+    #
+    #   `ParentFolderArn` can be null. An empty `parentFolderArn` creates a
+    #   root-level folder.
+    #
+    # @option params [Array<Types::ResourcePermission>] :permissions
+    #   A structure that describes the principals and the resource-level
+    #   permissions of a folder.
+    #
+    #   To specify no permissions, omit `Permissions`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags for the folder.
+    #
+    # @return [Types::CreateFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFolderResponse#status #status} => Integer
+    #   * {Types::CreateFolderResponse#arn #arn} => String
+    #   * {Types::CreateFolderResponse#folder_id #folder_id} => String
+    #   * {Types::CreateFolderResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_folder({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #     name: "FolderName",
+    #     folder_type: "SHARED", # accepts SHARED
+    #     parent_folder_arn: "Arn",
+    #     permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.arn #=> String
+    #   resp.folder_id #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolder AWS API Documentation
+    #
+    # @overload create_folder(params = {})
+    # @param [Hash] params ({})
+    def create_folder(params = {}, options = {})
+      req = build_request(:create_folder, params)
+      req.send_request(options)
+    end
+
+    # Adds an asset, such as a dashboard, analysis, or dataset into a
+    # folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS Account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @option params [required, String] :member_id
+    #   The ID of the asset (the dashboard, analysis, or dataset).
+    #
+    # @option params [required, String] :member_type
+    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
+    #   `DATASET`.
+    #
+    # @return [Types::CreateFolderMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFolderMembershipResponse#status #status} => Integer
+    #   * {Types::CreateFolderMembershipResponse#folder_member #folder_member} => Types::FolderMember
+    #   * {Types::CreateFolderMembershipResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_folder_membership({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #     member_id: "RestrictiveResourceId", # required
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.folder_member.member_id #=> String
+    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET"
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembership AWS API Documentation
+    #
+    # @overload create_folder_membership(params = {})
+    # @param [Hash] params ({})
+    def create_folder_membership(params = {}, options = {})
+      req = build_request(:create_folder_membership, params)
       req.send_request(options)
     end
 
@@ -1330,16 +1491,18 @@ module Aws::QuickSight
     end
 
     # Creates an assignment with one specified IAM policy, identified by its
-    # Amazon Resource Name (ARN). This policy will be assigned to specified
-    # groups or users of Amazon QuickSight. The users and groups need to be
-    # in the same namespace.
+    # Amazon Resource Name (ARN). This policy assignment is attached to the
+    # specified groups or users of Amazon QuickSight. Assignment names are
+    # unique per AWS account. To avoid overwriting rules in other
+    # namespaces, use assignment names that are unique.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the AWS account where you want to assign an IAM policy to
     #   QuickSight users or groups.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment, also called a rule. It must be unique
+    #   within an AWS account.
     #
     # @option params [required, String] :assignment_status
     #   The status of the assignment. Possible values are as follows:
@@ -1418,7 +1581,7 @@ module Aws::QuickSight
     #
     #
     #
-    # [1]: https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
+    # [1]: http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
     #
     # @option params [required, String] :data_set_id
     #   The ID of the dataset used in the ingestion.
@@ -2100,6 +2263,89 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_data_source(params = {}, options = {})
       req = build_request(:delete_data_source, params)
+      req.send_request(options)
+    end
+
+    # Deletes an empty folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS Account ID for the folder.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @return [Types::DeleteFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFolderResponse#status #status} => Integer
+    #   * {Types::DeleteFolderResponse#arn #arn} => String
+    #   * {Types::DeleteFolderResponse#folder_id #folder_id} => String
+    #   * {Types::DeleteFolderResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_folder({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.arn #=> String
+    #   resp.folder_id #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolder AWS API Documentation
+    #
+    # @overload delete_folder(params = {})
+    # @param [Hash] params ({})
+    def delete_folder(params = {}, options = {})
+      req = build_request(:delete_folder, params)
+      req.send_request(options)
+    end
+
+    # Removes an asset, such as a dashboard, analysis, or dataset, from a
+    # folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS Account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The Folder ID.
+    #
+    # @option params [required, String] :member_id
+    #   The ID of the asset (the dashboard, analysis, or dataset) that you
+    #   want to delete.
+    #
+    # @option params [required, String] :member_type
+    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
+    #   `DATASET`
+    #
+    # @return [Types::DeleteFolderMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFolderMembershipResponse#status #status} => Integer
+    #   * {Types::DeleteFolderMembershipResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_folder_membership({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #     member_id: "RestrictiveResourceId", # required
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderMembership AWS API Documentation
+    #
+    # @overload delete_folder_membership(params = {})
+    # @param [Hash] params ({})
+    def delete_folder_membership(params = {}, options = {})
+      req = build_request(:delete_folder_membership, params)
       req.send_request(options)
     end
 
@@ -2916,6 +3162,7 @@ module Aws::QuickSight
     #   resp.data_set.last_updated_time #=> Time
     #   resp.data_set.physical_table_map #=> Hash
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.data_source_arn #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.catalog #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.schema #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns #=> Array
@@ -2957,6 +3204,8 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_description.text #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.right_operand #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_join_key_properties.unique_key #=> Boolean
+    #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.right_join_key_properties.unique_key #=> Boolean
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.type #=> String, one of "INNER", "OUTER", "LEFT", "RIGHT"
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.on_clause #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.physical_table_id #=> String
@@ -2971,9 +3220,19 @@ module Aws::QuickSight
     #   resp.data_set.column_groups[0].geo_spatial_column_group.country_code #=> String, one of "US"
     #   resp.data_set.column_groups[0].geo_spatial_column_group.columns #=> Array
     #   resp.data_set.column_groups[0].geo_spatial_column_group.columns[0] #=> String
+    #   resp.data_set.field_folders #=> Hash
+    #   resp.data_set.field_folders["FieldFolderPath"].description #=> String
+    #   resp.data_set.field_folders["FieldFolderPath"].columns #=> Array
+    #   resp.data_set.field_folders["FieldFolderPath"].columns[0] #=> String
     #   resp.data_set.row_level_permission_data_set.namespace #=> String
     #   resp.data_set.row_level_permission_data_set.arn #=> String
     #   resp.data_set.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set.row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
+    #   resp.data_set.column_level_permission_rules #=> Array
+    #   resp.data_set.column_level_permission_rules[0].principals #=> Array
+    #   resp.data_set.column_level_permission_rules[0].principals[0] #=> String
+    #   resp.data_set.column_level_permission_rules[0].column_names #=> Array
+    #   resp.data_set.column_level_permission_rules[0].column_names[0] #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -3060,7 +3319,7 @@ module Aws::QuickSight
     #   resp.data_source.arn #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.name #=> String
-    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
+    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
     #   resp.data_source.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_source.created_time #=> Time
     #   resp.data_source.last_updated_time #=> Time
@@ -3080,6 +3339,9 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.my_sql_parameters.host #=> String
     #   resp.data_source.data_source_parameters.my_sql_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.my_sql_parameters.database #=> String
+    #   resp.data_source.data_source_parameters.oracle_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.oracle_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.oracle_parameters.database #=> String
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.database #=> String
@@ -3125,6 +3387,9 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.database #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -3213,6 +3478,137 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes a folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @return [Types::DescribeFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFolderResponse#status #status} => Integer
+    #   * {Types::DescribeFolderResponse#folder #folder} => Types::Folder
+    #   * {Types::DescribeFolderResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_folder({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.folder.folder_id #=> String
+    #   resp.folder.arn #=> String
+    #   resp.folder.name #=> String
+    #   resp.folder.folder_type #=> String, one of "SHARED"
+    #   resp.folder.folder_path #=> Array
+    #   resp.folder.folder_path[0] #=> String
+    #   resp.folder.created_time #=> Time
+    #   resp.folder.last_updated_time #=> Time
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolder AWS API Documentation
+    #
+    # @overload describe_folder(params = {})
+    # @param [Hash] params ({})
+    def describe_folder(params = {}, options = {})
+      req = build_request(:describe_folder, params)
+      req.send_request(options)
+    end
+
+    # Describes permissions for a folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS Account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @return [Types::DescribeFolderPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFolderPermissionsResponse#status #status} => Integer
+    #   * {Types::DescribeFolderPermissionsResponse#folder_id #folder_id} => String
+    #   * {Types::DescribeFolderPermissionsResponse#arn #arn} => String
+    #   * {Types::DescribeFolderPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
+    #   * {Types::DescribeFolderPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_folder_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.folder_id #=> String
+    #   resp.arn #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissions AWS API Documentation
+    #
+    # @overload describe_folder_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_folder_permissions(params = {}, options = {})
+      req = build_request(:describe_folder_permissions, params)
+      req.send_request(options)
+    end
+
+    # Describes the folder resolved permissions. Permissions consists of
+    # both folder direct permissions and the inherited permissions from the
+    # ancestor folders.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @return [Types::DescribeFolderResolvedPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFolderResolvedPermissionsResponse#status #status} => Integer
+    #   * {Types::DescribeFolderResolvedPermissionsResponse#folder_id #folder_id} => String
+    #   * {Types::DescribeFolderResolvedPermissionsResponse#arn #arn} => String
+    #   * {Types::DescribeFolderResolvedPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
+    #   * {Types::DescribeFolderResolvedPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_folder_resolved_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.folder_id #=> String
+    #   resp.arn #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissions AWS API Documentation
+    #
+    # @overload describe_folder_resolved_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_folder_resolved_permissions(params = {}, options = {})
+      req = build_request(:describe_folder_resolved_permissions, params)
+      req.send_request(options)
+    end
+
     # Returns an Amazon QuickSight group's description and Amazon Resource
     # Name (ARN).
     #
@@ -3267,7 +3663,7 @@ module Aws::QuickSight
     #   to describe.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment, also called a rule.
     #
     # @option params [required, String] :namespace
     #   The namespace that contains the assignment.
@@ -3784,6 +4180,9 @@ module Aws::QuickSight
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
+    #   resp.user.external_login_federation_provider_type #=> String
+    #   resp.user.external_login_federation_provider_url #=> String
+    #   resp.user.external_login_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -3813,19 +4212,20 @@ module Aws::QuickSight
     #
     # * The resulting user session is valid for 10 hours.
     #
-    # For more information, see [Embedding Amazon QuickSight][1] in the
-    # *Amazon QuickSight User Guide* .
+    # For more information, see [Embedded Analytics][1] in the *Amazon
+    # QuickSight User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that contains the dashboard that you're
     #   embedding.
     #
     # @option params [required, String] :dashboard_id
-    #   The ID for the dashboard, also added to the IAM policy.
+    #   The ID for the dashboard, also added to the AWS Identity and Access
+    #   Management (IAM) policy.
     #
     # @option params [required, String] :identity_type
     #   The authentication method that the user uses to sign in.
@@ -3841,6 +4241,16 @@ module Aws::QuickSight
     # @option params [Boolean] :reset_disabled
     #   Remove the reset button on the embedded dashboard. The default is
     #   FALSE, which enables the reset button.
+    #
+    # @option params [Boolean] :state_persistence_enabled
+    #   Adds persistence of state for the user session in an embedded
+    #   dashboard. Persistence applies to the sheet and the parameter
+    #   settings. These are control settings that the dashboard subscriber
+    #   (QuickSight reader) chooses while viewing the dashboard. If this is
+    #   set to `TRUE`, the settings are the same when the subscriber reopens
+    #   the same dashboard URL. The state is stored in QuickSight, not in a
+    #   browser cookie. If this is set to FALSE, the state of the user session
+    #   is not persisted. The default is `FALSE`.
     #
     # @option params [String] :user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
@@ -3859,6 +4269,20 @@ module Aws::QuickSight
     #   Omit this parameter for users in the third group – IAM users and IAM
     #   role-based sessions.
     #
+    # @option params [String] :namespace
+    #   The QuickSight namespace that contains the dashboard IDs in this
+    #   request. If you're not using a custom namespace, set this to
+    #   "`default`".
+    #
+    # @option params [Array<String>] :additional_dashboard_ids
+    #   A list of one or more dashboard IDs that you want to add to a session
+    #   that includes anonymous users. The `IdentityType` parameter must be
+    #   set to `ANONYMOUS` for this to work, because other identity types
+    #   authenticate as QuickSight or IAM users. For example, if you set
+    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
+    #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDashboardEmbedUrlResponse#embed_url #embed_url} => String
@@ -3870,11 +4294,14 @@ module Aws::QuickSight
     #   resp = client.get_dashboard_embed_url({
     #     aws_account_id: "AwsAccountId", # required
     #     dashboard_id: "RestrictiveResourceId", # required
-    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, ANONYMOUS
     #     session_lifetime_in_minutes: 1,
     #     undo_redo_disabled: false,
     #     reset_disabled: false,
+    #     state_persistence_enabled: false,
     #     user_arn: "Arn",
+    #     namespace: "Namespace",
+    #     additional_dashboard_ids: ["RestrictiveResourceId"],
     #   })
     #
     # @example Response structure
@@ -3949,11 +4376,11 @@ module Aws::QuickSight
     #
     #   2.  Invited nonfederated users
     #
-    #   3.  IAM users and IAM role-based sessions authenticated through
-    #       Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #       federation
+    #   3.  AWS Identity and Access Management (IAM) users and IAM role-based
+    #       sessions authenticated through Federated Single Sign-On using
+    #       SAML, OpenID Connect, or IAM federation
     #
-    #   Omit this parameter for users in the third group – IAM users and IAM
+    #   Omit this parameter for users in the third group, IAM users and IAM
     #   role-based sessions.
     #
     # @return [Types::GetSessionEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4192,6 +4619,8 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.namespace #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.arn #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set_summaries[0].row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
+    #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -4241,7 +4670,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].arn #=> String
     #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].name #=> String
-    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
+    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
     #   resp.data_sources[0].status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_sources[0].created_time #=> Time
     #   resp.data_sources[0].last_updated_time #=> Time
@@ -4261,6 +4690,9 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.database #=> String
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.database #=> String
@@ -4306,6 +4738,9 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.database #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -4348,6 +4783,104 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_data_sources(params = {}, options = {})
       req = build_request(:list_data_sources, params)
+      req.send_request(options)
+    end
+
+    # List all assets (`DASHBOARD`, `ANALYSIS`, and `DATASET`) in a folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListFolderMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFolderMembersResponse#status #status} => Integer
+    #   * {Types::ListFolderMembersResponse#folder_member_list #folder_member_list} => Array&lt;Types::MemberIdArnPair&gt;
+    #   * {Types::ListFolderMembersResponse#next_token #next_token} => String
+    #   * {Types::ListFolderMembersResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_folder_members({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.folder_member_list #=> Array
+    #   resp.folder_member_list[0].member_id #=> String
+    #   resp.folder_member_list[0].member_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFolderMembers AWS API Documentation
+    #
+    # @overload list_folder_members(params = {})
+    # @param [Hash] params ({})
+    def list_folder_members(params = {}, options = {})
+      req = build_request(:list_folder_members, params)
+      req.send_request(options)
+    end
+
+    # Lists all folders in an account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListFoldersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFoldersResponse#status #status} => Integer
+    #   * {Types::ListFoldersResponse#folder_summary_list #folder_summary_list} => Array&lt;Types::FolderSummary&gt;
+    #   * {Types::ListFoldersResponse#next_token #next_token} => String
+    #   * {Types::ListFoldersResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_folders({
+    #     aws_account_id: "AwsAccountId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.folder_summary_list #=> Array
+    #   resp.folder_summary_list[0].arn #=> String
+    #   resp.folder_summary_list[0].folder_id #=> String
+    #   resp.folder_summary_list[0].name #=> String
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].created_time #=> Time
+    #   resp.folder_summary_list[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFolders AWS API Documentation
+    #
+    # @overload list_folders(params = {})
+    # @param [Hash] params ({})
+    def list_folders(params = {}, options = {})
+      req = build_request(:list_folders, params)
       req.send_request(options)
     end
 
@@ -4950,6 +5483,8 @@ module Aws::QuickSight
     #   * {Types::ListThemeVersionsResponse#status #status} => Integer
     #   * {Types::ListThemeVersionsResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_theme_versions({
@@ -5011,6 +5546,8 @@ module Aws::QuickSight
     #   * {Types::ListThemesResponse#next_token #next_token} => String
     #   * {Types::ListThemesResponse#status #status} => Integer
     #   * {Types::ListThemesResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5143,6 +5680,9 @@ module Aws::QuickSight
     #   resp.user_list[0].active #=> Boolean
     #   resp.user_list[0].principal_id #=> String
     #   resp.user_list[0].custom_permissions_name #=> String
+    #   resp.user_list[0].external_login_federation_provider_type #=> String
+    #   resp.user_list[0].external_login_federation_provider_url #=> String
+    #   resp.user_list[0].external_login_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -5203,7 +5743,7 @@ module Aws::QuickSight
     #
     #
     #
-    #   [1]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that the user is in. Currently, you use the
@@ -5248,6 +5788,31 @@ module Aws::QuickSight
     #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
     #   (SSO).
     #
+    # @option params [String] :external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into Amazon QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. The type of supported
+    #   external login provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO` provider
+    #     type, don’t use the "CustomFederationProviderUrl" parameter which
+    #     is only needed when the external provider is custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When choosing
+    #     `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl` parameter
+    #     to provide the custom OIDC provider URL.
+    #
+    # @option params [String] :custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. This parameter should only
+    #   be used when `ExternalLoginFederationProviderType` parameter is set to
+    #   `CUSTOM_OIDC`.
+    #
+    # @option params [String] :external_login_id
+    #   The identity ID for a user in the external login provider.
+    #
     # @return [Types::RegisterUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterUserResponse#user #user} => Types::User
@@ -5267,6 +5832,9 @@ module Aws::QuickSight
     #     namespace: "Namespace", # required
     #     user_name: "UserName",
     #     custom_permissions_name: "RoleName",
+    #     external_login_federation_provider_type: "String",
+    #     custom_federation_provider_url: "String",
+    #     external_login_id: "String",
     #   })
     #
     # @example Response structure
@@ -5279,6 +5847,9 @@ module Aws::QuickSight
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
+    #   resp.user.external_login_federation_provider_type #=> String
+    #   resp.user.external_login_federation_provider_url #=> String
+    #   resp.user.external_login_id #=> String
     #   resp.user_invitation_url #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -5455,6 +6026,68 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def search_dashboards(params = {}, options = {})
       req = build_request(:search_dashboards, params)
+      req.send_request(options)
+    end
+
+    # Searches the subfolders in a folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [required, Array<Types::FolderSearchFilter>] :filters
+    #   The filters to apply to the search. Currently, you can search only by
+    #   the parent folder ARN. For example, `"Filters": [ \{ "Name":
+    #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::SearchFoldersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchFoldersResponse#status #status} => Integer
+    #   * {Types::SearchFoldersResponse#folder_summary_list #folder_summary_list} => Array&lt;Types::FolderSummary&gt;
+    #   * {Types::SearchFoldersResponse#next_token #next_token} => String
+    #   * {Types::SearchFoldersResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_folders({
+    #     aws_account_id: "AwsAccountId", # required
+    #     filters: [ # required
+    #       {
+    #         operator: "StringEquals", # accepts StringEquals
+    #         name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #         value: "String",
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.folder_summary_list #=> Array
+    #   resp.folder_summary_list[0].arn #=> String
+    #   resp.folder_summary_list[0].folder_id #=> String
+    #   resp.folder_summary_list[0].name #=> String
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].created_time #=> Time
+    #   resp.folder_summary_list[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchFolders AWS API Documentation
+    #
+    # @overload search_folders(params = {})
+    # @param [Hash] params ({})
+    def search_folders(params = {}, options = {})
+      req = build_request(:search_folders, params)
       req.send_request(options)
     end
 
@@ -6098,8 +6731,15 @@ module Aws::QuickSight
     #   Groupings of columns that work together in certain QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #
+    # @option params [Hash<String,Types::FieldFolder>] :field_folders
+    #   The folder that contains fields and nested subfolders for your
+    #   dataset.
+    #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   The row-level security configuration for the data you want to create.
+    #
+    # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
     #
     # @return [Types::UpdateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6120,6 +6760,7 @@ module Aws::QuickSight
     #       "PhysicalTableId" => {
     #         relational_table: {
     #           data_source_arn: "Arn", # required
+    #           catalog: "RelationalTableCatalog",
     #           schema: "RelationalTableSchema",
     #           name: "RelationalTableName", # required
     #           input_columns: [ # required
@@ -6204,6 +6845,12 @@ module Aws::QuickSight
     #           join_instruction: {
     #             left_operand: "LogicalTableId", # required
     #             right_operand: "LogicalTableId", # required
+    #             left_join_key_properties: {
+    #               unique_key: false,
+    #             },
+    #             right_join_key_properties: {
+    #               unique_key: false,
+    #             },
     #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #             on_clause: "OnClause", # required
     #           },
@@ -6221,11 +6868,24 @@ module Aws::QuickSight
     #         },
     #       },
     #     ],
+    #     field_folders: {
+    #       "FieldFolderPath" => {
+    #         description: "FieldFolderDescription",
+    #         columns: ["String"],
+    #       },
+    #     },
     #     row_level_permission_data_set: {
     #       namespace: "Namespace",
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #       format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #     },
+    #     column_level_permission_rules: [
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6382,6 +7042,11 @@ module Aws::QuickSight
     #         port: 1, # required
     #         database: "Database", # required
     #       },
+    #       oracle_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       },
     #       postgre_sql_parameters: {
     #         host: "Host", # required
     #         port: 1, # required
@@ -6469,6 +7134,11 @@ module Aws::QuickSight
     #               database: "Database", # required
     #             },
     #             my_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             oracle_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
@@ -6614,6 +7284,109 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates the name of a folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @option params [required, String] :name
+    #   The name of the folder.
+    #
+    # @return [Types::UpdateFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFolderResponse#status #status} => Integer
+    #   * {Types::UpdateFolderResponse#arn #arn} => String
+    #   * {Types::UpdateFolderResponse#folder_id #folder_id} => String
+    #   * {Types::UpdateFolderResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_folder({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #     name: "FolderName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.arn #=> String
+    #   resp.folder_id #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolder AWS API Documentation
+    #
+    # @overload update_folder(params = {})
+    # @param [Hash] params ({})
+    def update_folder(params = {}, options = {})
+      req = build_request(:update_folder, params)
+      req.send_request(options)
+    end
+
+    # Updates permissions of a folder.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [required, String] :folder_id
+    #   The folder ID.
+    #
+    # @option params [Array<Types::ResourcePermission>] :grant_permissions
+    #   The permissions that you want to grant on a resource.
+    #
+    # @option params [Array<Types::ResourcePermission>] :revoke_permissions
+    #   The permissions that you want to revoke from a resource.
+    #
+    # @return [Types::UpdateFolderPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFolderPermissionsResponse#status #status} => Integer
+    #   * {Types::UpdateFolderPermissionsResponse#arn #arn} => String
+    #   * {Types::UpdateFolderPermissionsResponse#folder_id #folder_id} => String
+    #   * {Types::UpdateFolderPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
+    #   * {Types::UpdateFolderPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_folder_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     folder_id: "RestrictiveResourceId", # required
+    #     grant_permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #     revoke_permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.arn #=> String
+    #   resp.folder_id #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissions AWS API Documentation
+    #
+    # @overload update_folder_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_folder_permissions(params = {}, options = {})
+      req = build_request(:update_folder_permissions, params)
+      req.send_request(options)
+    end
+
     # Changes a group description.
     #
     # @option params [required, String] :group_name
@@ -6665,14 +7438,14 @@ module Aws::QuickSight
 
     # Updates an existing IAM policy assignment. This operation updates only
     # the optional parameter or parameters that are specified in the
-    # request.
+    # request. This overwrites all of the users included in `Identities`.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the AWS account that contains the IAM policy assignment.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment. This name must be unique within an AWS
-    #   account.
+    #   The name of the assignment, also called a rule. This name must be
+    #   unique within an AWS account.
     #
     # @option params [required, String] :namespace
     #   The namespace of the assignment.
@@ -7256,6 +8029,35 @@ module Aws::QuickSight
     #   This parameter defaults to NULL and it doesn't accept any other
     #   value.
     #
+    # @option params [String] :external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into QuickSight with an associated AWS Identity
+    #   and Access Management (IAM) role. The type of supported external login
+    #   provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO` provider
+    #     type, don’t use the "CustomFederationProviderUrl" parameter which
+    #     is only needed when the external provider is custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When choosing
+    #     `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl` parameter
+    #     to provide the custom OIDC provider URL.
+    #
+    #   * `NONE`\: This clears all the previously saved external login
+    #     information for a user. Use ` DescribeUser ` API to check the
+    #     external login information.
+    #
+    # @option params [String] :custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. This parameter should only
+    #   be used when `ExternalLoginFederationProviderType` parameter is set to
+    #   `CUSTOM_OIDC`.
+    #
+    # @option params [String] :external_login_id
+    #   The identity ID for a user in the external login provider.
+    #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserResponse#user #user} => Types::User
@@ -7272,6 +8074,9 @@ module Aws::QuickSight
     #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #     custom_permissions_name: "RoleName",
     #     unapply_custom_permissions: false,
+    #     external_login_federation_provider_type: "String",
+    #     custom_federation_provider_url: "String",
+    #     external_login_id: "String",
     #   })
     #
     # @example Response structure
@@ -7284,6 +8089,9 @@ module Aws::QuickSight
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
+    #   resp.user.external_login_federation_provider_type #=> String
+    #   resp.user.external_login_federation_provider_url #=> String
+    #   resp.user.external_login_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -7309,7 +8117,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

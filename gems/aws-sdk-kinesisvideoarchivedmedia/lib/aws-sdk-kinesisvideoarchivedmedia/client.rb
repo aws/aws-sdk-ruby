@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -334,7 +334,7 @@ module Aws::KinesisVideoArchivedMedia
     # must specify either the StreamName or the StreamARN when invoking this
     # API operation.
     #
-    # As a prerequsite to using GetCLip API, you must obtain an endpoint
+    # As a prerequisite to using GetCLip API, you must obtain an endpoint
     # using `GetDataEndpoint`, specifying GET\_CLIP for` the APIName
     # parameter. </p> An Amazon Kinesis video stream has the following
     # requirements for providing data through MP4:   The media must contain
@@ -447,10 +447,10 @@ module Aws::KinesisVideoArchivedMedia
     #     MPEG-DASH *manifest* (the root resource needed for streaming with
     #     MPEG-DASH).
     #
-    #     <note markdown="1"> Don't share or store this token where an unauthorized entity
-    #     could access it. The token provides access to the content of the
-    #     stream. Safeguard the token with the same measures that you would
-    #     use with your AWS credentials.
+    #     <note markdown="1"> Don't share or store this token where an unauthorized entity can
+    #     access it. The token provides access to the content of the stream.
+    #     Safeguard the token with the same measures that you use with your
+    #     AWS credentials.
     #
     #      </note>
     #
@@ -504,25 +504,8 @@ module Aws::KinesisVideoArchivedMedia
     #       Data retrieved with this action is billable. See [Pricing][6]
     #       for details.
     #
-    # <note markdown="1"> The following restrictions apply to MPEG-DASH sessions:
-    #
-    #  * A streaming session URL should not be shared between players. The
-    #   service might throttle a session if multiple media players are
-    #   sharing it. For connection limits, see [Kinesis Video Streams
-    #   Limits][7].
-    #
-    # * A Kinesis video stream can have a maximum of ten active MPEG-DASH
-    #   streaming sessions. If a new session is created when the maximum
-    #   number of sessions is already active, the oldest (earliest created)
-    #   session is closed. The number of active `GetMedia` connections on a
-    #   Kinesis video stream does not count against this limit, and the
-    #   number of active MPEG-DASH sessions does not count against the
-    #   active `GetMedia` connection limit.
-    #
-    #   <note markdown="1"> The maximum limits for active HLS and MPEG-DASH streaming sessions
-    #   are independent of each other.
-    #
-    #    </note>
+    # <note markdown="1"> For restrictions that apply to MPEG-DASH sessions, see [Kinesis Video
+    # Streams Limits][7].
     #
     #  </note>
     #
@@ -624,8 +607,8 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   * <b> <code>ON_DEMAND</code> </b>\: For sessions of this type, the
     #     MPEG-DASH manifest contains all the fragments for the session, up to
-    #     the number that is specified in `MaxMediaPlaylistFragmentResults`.
-    #     The manifest must be retrieved only once for each session. When this
+    #     the number that is specified in `MaxManifestFragmentResults`. The
+    #     manifest must be retrieved only once for each session. When this
     #     type of session is played in a media player, the user interface
     #     typically displays a scrubber control for choosing the position in
     #     the playback window to display.
@@ -882,27 +865,9 @@ module Aws::KinesisVideoArchivedMedia
     #       Data retrieved with this action is billable. For more
     #       information, see [Kinesis Video Streams pricing][6].
     #
-    # <note markdown="1"> The following restrictions apply to HLS sessions:
-    #
-    #  * A streaming session URL should not be shared between players. The
-    #   service might throttle a session if multiple media players are
-    #   sharing it. For connection limits, see [Kinesis Video Streams
-    #   Limits][7].
-    #
-    # * A Kinesis video stream can have a maximum of ten active HLS
-    #   streaming sessions. If a new session is created when the maximum
-    #   number of sessions is already active, the oldest (earliest created)
-    #   session is closed. The number of active `GetMedia` connections on a
-    #   Kinesis video stream does not count against this limit, and the
-    #   number of active HLS sessions does not count against the active
-    #   `GetMedia` connection limit.
-    #
-    #   <note markdown="1"> The maximum limits for active HLS and MPEG-DASH streaming sessions
-    #   are independent of each other.
-    #
-    #    </note>
-    #
-    #  </note>
+    # A streaming session URL must not be shared between players. The
+    # service might throttle a session if multiple media players are sharing
+    # it. For connection limits, see [Kinesis Video Streams Limits][7].
     #
     # You can monitor the amount of data that the media player consumes by
     # monitoring the `GetMP4MediaFragment.OutgoingBytes` Amazon CloudWatch
@@ -1011,12 +976,12 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   In all playback modes, if `FragmentSelectorType` is
     #   `PRODUCER_TIMESTAMP`, and if there are multiple fragments with the
-    #   same start timestamp, the fragment that has the larger fragment number
-    #   (that is, the newer fragment) is included in the HLS media playlist.
-    #   The other fragments are not included. Fragments that have different
-    #   timestamps but have overlapping durations are still included in the
-    #   HLS media playlist. This can lead to unexpected behavior in the media
-    #   player.
+    #   same start timestamp, the fragment that has the largest fragment
+    #   number (that is, the newest fragment) is included in the HLS media
+    #   playlist. The other fragments are not included. Fragments that have
+    #   different timestamps but have overlapping durations are still included
+    #   in the HLS media playlist. This can lead to unexpected behavior in the
+    #   media player.
     #
     #   The default is `LIVE`.
     #
@@ -1070,7 +1035,7 @@ module Aws::KinesisVideoArchivedMedia
     #     recommended to use a value of `NEVER` to ensure the media player
     #     timeline most accurately maps to the producer timestamps.
     #
-    #   * `ON_DISCONTIUNITY`\: a discontinuity marker is placed between
+    #   * `ON_DISCONTINUITY`\: a discontinuity marker is placed between
     #     fragments that have a gap or overlap of more than 50 milliseconds.
     #     For most playback scenarios, it is recommended to use a value of
     #     `ON_DISCONTINUITY` so that the media player timeline is only reset
@@ -1125,9 +1090,9 @@ module Aws::KinesisVideoArchivedMedia
     #   The default is 5 fragments if `PlaybackMode` is `LIVE` or
     #   `LIVE_REPLAY`, and 1,000 if `PlaybackMode` is `ON_DEMAND`.
     #
-    #   The maximum value of 1,000 fragments corresponds to more than 16
-    #   minutes of video on streams with 1-second fragments, and more than 2
-    #   1/2 hours of video on streams with 10-second fragments.
+    #   The maximum value of 5,000 fragments corresponds to more than 80
+    #   minutes of video on streams with 1-second fragments, and more than 13
+    #   hours of video on streams with 10-second fragments.
     #
     # @return [Types::GetHLSStreamingSessionURLOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1175,15 +1140,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     #  </note>
     #
-    # The following limits apply when using the `GetMediaForFragmentList`
-    # API:
-    #
-    # * A client can call `GetMediaForFragmentList` up to five times per
-    #   second per stream.
-    #
-    # * Kinesis Video Streams sends media data at a rate of up to 25
-    #   megabytes per second (or 200 megabits per second) during a
-    #   `GetMediaForFragmentList` session.
+    # For limits, see [Kinesis Video Streams Limits][2].
     #
     # If an error is thrown after invoking a Kinesis Video Streams archived
     # media API, in addition to the HTTP status code and the response body,
@@ -1204,15 +1161,22 @@ module Aws::KinesisVideoArchivedMedia
     #
     #  For more information, see the **Errors** section at the bottom of
     # this
-    # topic, as well as [Common Errors][2].
+    # topic, as well as [Common Errors][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cli/latest/reference/
-    # [2]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
+    # [2]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html
+    # [3]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
     #
-    # @option params [required, String] :stream_name
-    #   The name of the stream from which to retrieve fragment media.
+    # @option params [String] :stream_name
+    #   The name of the stream from which to retrieve fragment media. Specify
+    #   either this parameter or the `StreamARN` parameter.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve
+    #   fragment media. Specify either this parameter or the `StreamName`
+    #   parameter.
     #
     # @option params [required, Array<String>] :fragments
     #   A list of the numbers of fragments for which to retrieve media. You
@@ -1226,7 +1190,8 @@ module Aws::KinesisVideoArchivedMedia
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_media_for_fragment_list({
-    #     stream_name: "StreamName", # required
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
     #     fragments: ["FragmentNumberString"], # required
     #   })
     #
@@ -1285,8 +1250,14 @@ module Aws::KinesisVideoArchivedMedia
     # [1]: https://docs.aws.amazon.com/cli/latest/reference/
     # [2]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
     #
-    # @option params [required, String] :stream_name
-    #   The name of the stream from which to retrieve a fragment list.
+    # @option params [String] :stream_name
+    #   The name of the stream from which to retrieve a fragment list. Specify
+    #   either this parameter or the `StreamARN` parameter.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve a
+    #   fragment list. Specify either this parameter or the `StreamName`
+    #   parameter.
     #
     # @option params [Integer] :max_results
     #   The total number of fragments to return. If the total number of
@@ -1312,7 +1283,8 @@ module Aws::KinesisVideoArchivedMedia
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fragments({
-    #     stream_name: "StreamName", # required
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
     #     max_results: 1,
     #     next_token: "NextToken",
     #     fragment_selector: {
@@ -1356,7 +1328,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

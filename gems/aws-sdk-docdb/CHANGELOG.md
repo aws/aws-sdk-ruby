@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-06-23)
+------------------
+
+* Feature - DocumentDB documentation-only edits
+
+1.31.0 (2021-06-02)
+------------------
+
+* Feature - This SDK release adds support for DocDB global clusters.
+
+1.30.0 (2021-03-29)
+------------------
+
+* Feature - This release adds support for Event Subscriptions to DocumentDB.
+
+1.29.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-12-04)
+------------------
+
+* Feature - Support `pre_signed_url` generation for `CopyDBClusterSnapshot` and `CreateDBCluster`.
+
 1.26.0 (2020-10-19)
 ------------------
 

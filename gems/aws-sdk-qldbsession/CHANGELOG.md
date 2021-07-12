@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2021-02-09)
+------------------
+
+* Feature - This release adds CapacityExceededException to the AWS QLDBSession API.
+
+1.11.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2020-12-21)
+------------------
+
+* Feature - Adds "TimingInformation" to all SendCommand API results and "IOUsage" to ExecuteStatementResult, FetchPageResult and CommitTransactionResult.
+
 1.9.0 (2020-09-30)
 ------------------
 

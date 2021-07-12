@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -327,10 +327,254 @@ module Aws::Connect
 
     # @!group API Operations
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Associates an approved origin to an Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :origin
+    #   The domain to add to your allow list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_approved_origin({
+    #     instance_id: "InstanceId", # required
+    #     origin: "Origin", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateApprovedOrigin AWS API Documentation
+    #
+    # @overload associate_approved_origin(params = {})
+    # @param [Hash] params ({})
+    def associate_approved_origin(params = {}, options = {})
+      req = build_request(:associate_approved_origin, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Allows the specified Amazon Connect instance to access the specified
+    # Amazon Lex or Amazon Lex V2 bot.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [Types::LexBot] :lex_bot
+    #   Configuration information of an Amazon Lex bot.
+    #
+    # @option params [Types::LexV2Bot] :lex_v2_bot
+    #   The Amazon Lex V2 bot to associate with the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_bot({
+    #     instance_id: "InstanceId", # required
+    #     lex_bot: {
+    #       name: "BotName",
+    #       lex_region: "LexRegion",
+    #     },
+    #     lex_v2_bot: {
+    #       alias_arn: "AliasArn",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateBot AWS API Documentation
+    #
+    # @overload associate_bot(params = {})
+    # @param [Hash] params ({})
+    def associate_bot(params = {}, options = {})
+      req = build_request(:associate_bot, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Associates a storage resource type for the first time. You can only
+    # associate one type of storage configuration in a single call. This
+    # means, for example, that you can't define an instance with multiple
+    # S3 buckets for storing chat transcripts.
+    #
+    # This API does not create a resource that doesn't exist. It only
+    # associates it to the instance. Ensure that the resource being
+    # specified in the storage configuration, like an S3 bucket, exists when
+    # being used for association.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @option params [required, Types::InstanceStorageConfig] :storage_config
+    #   A valid storage type.
+    #
+    # @return [Types::AssociateInstanceStorageConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateInstanceStorageConfigResponse#association_id #association_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_instance_storage_config({
+    #     instance_id: "InstanceId", # required
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #     storage_config: { # required
+    #       association_id: "AssociationId",
+    #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
+    #       s3_config: {
+    #         bucket_name: "BucketName", # required
+    #         bucket_prefix: "Prefix", # required
+    #         encryption_config: {
+    #           encryption_type: "KMS", # required, accepts KMS
+    #           key_id: "KeyId", # required
+    #         },
+    #       },
+    #       kinesis_video_stream_config: {
+    #         prefix: "Prefix", # required
+    #         retention_period_hours: 1, # required
+    #         encryption_config: { # required
+    #           encryption_type: "KMS", # required, accepts KMS
+    #           key_id: "KeyId", # required
+    #         },
+    #       },
+    #       kinesis_stream_config: {
+    #         stream_arn: "ARN", # required
+    #       },
+    #       kinesis_firehose_config: {
+    #         firehose_arn: "ARN", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateInstanceStorageConfig AWS API Documentation
+    #
+    # @overload associate_instance_storage_config(params = {})
+    # @param [Hash] params ({})
+    def associate_instance_storage_config(params = {}, options = {})
+      req = build_request(:associate_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Allows the specified Amazon Connect instance to access the specified
+    # Lambda function.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :function_arn
+    #   The Amazon Resource Name (ARN) for the Lambda function being
+    #   associated. Maximum number of characters allowed is 140.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_lambda_function({
+    #     instance_id: "InstanceId", # required
+    #     function_arn: "FunctionArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateLambdaFunction AWS API Documentation
+    #
+    # @overload associate_lambda_function(params = {})
+    # @param [Hash] params ({})
+    def associate_lambda_function(params = {}, options = {})
+      req = build_request(:associate_lambda_function, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Allows the specified Amazon Connect instance to access the specified
+    # Amazon Lex bot.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, Types::LexBot] :lex_bot
+    #   The Amazon Lex bot to associate with the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_lex_bot({
+    #     instance_id: "InstanceId", # required
+    #     lex_bot: { # required
+    #       name: "BotName",
+    #       lex_region: "LexRegion",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateLexBot AWS API Documentation
+    #
+    # @overload associate_lex_bot(params = {})
+    # @param [Hash] params ({})
+    def associate_lex_bot(params = {}, options = {})
+      req = build_request(:associate_lex_bot, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Associates a set of quick connects with a queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [required, Array<String>] :quick_connect_ids
+    #   The quick connects to associate with this queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_queue_quick_connects({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     quick_connect_ids: ["QuickConnectId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateQueueQuickConnects AWS API Documentation
+    #
+    # @overload associate_queue_quick_connects(params = {})
+    # @param [Hash] params ({})
+    def associate_queue_quick_connects(params = {}, options = {})
+      req = build_request(:associate_queue_quick_connects, params)
+      req.send_request(options)
+    end
+
     # Associates a set of queues with a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -349,7 +593,7 @@ module Aws::Connect
     #       {
     #         queue_reference: { # required
     #           queue_id: "QueueId", # required
-    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
@@ -363,6 +607,42 @@ module Aws::Connect
     # @param [Hash] params ({})
     def associate_routing_profile_queues(params = {}, options = {})
       req = build_request(:associate_routing_profile_queues, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Associates a security key to the instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :key
+    #   A valid security key in PEM format.
+    #
+    # @return [Types::AssociateSecurityKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSecurityKeyResponse#association_id #association_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_security_key({
+    #     instance_id: "InstanceId", # required
+    #     key: "PEM", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateSecurityKey AWS API Documentation
+    #
+    # @overload associate_security_key(params = {})
+    # @param [Hash] params ({})
+    def associate_security_key(params = {}, options = {})
+      req = build_request(:associate_security_key, params)
       req.send_request(options)
     end
 
@@ -431,10 +711,262 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Initiates an Amazon Connect instance with all the supported channels
+    # enabled. It does not attach any storage, such as Amazon Simple Storage
+    # Service (Amazon S3) or Amazon Kinesis. It also does not allow for any
+    # configurations on features, such as Contact Lens for Amazon Connect.
+    #
+    # Amazon Connect enforces a limit on the total number of instances that
+    # you can create or delete in 30 days. If you exceed this limit, you
+    # will get an error message indicating there has been an excessive
+    # number of attempts at creating or deleting instances. You must wait 30
+    # days before you can restart creating and deleting instances in your
+    # account.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token.
+    #
+    # @option params [required, String] :identity_management_type
+    #   The type of identity management for your Amazon Connect users.
+    #
+    # @option params [String] :instance_alias
+    #   The name for your instance.
+    #
+    # @option params [String] :directory_id
+    #   The identifier for the directory.
+    #
+    # @option params [required, Boolean] :inbound_calls_enabled
+    #   Your contact center handles incoming contacts.
+    #
+    # @option params [required, Boolean] :outbound_calls_enabled
+    #   Your contact center allows outbound calls.
+    #
+    # @return [Types::CreateInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInstanceResponse#id #id} => String
+    #   * {Types::CreateInstanceResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_instance({
+    #     client_token: "ClientToken",
+    #     identity_management_type: "SAML", # required, accepts SAML, CONNECT_MANAGED, EXISTING_DIRECTORY
+    #     instance_alias: "DirectoryAlias",
+    #     directory_id: "DirectoryId",
+    #     inbound_calls_enabled: false, # required
+    #     outbound_calls_enabled: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateInstance AWS API Documentation
+    #
+    # @overload create_instance(params = {})
+    # @param [Hash] params ({})
+    def create_instance(params = {}, options = {})
+      req = build_request(:create_instance, params)
+      req.send_request(options)
+    end
+
+    # Create an AppIntegration association with an Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :integration_type
+    #   The type of information to be ingested.
+    #
+    # @option params [required, String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #
+    # @option params [required, String] :source_application_url
+    #   The URL for the external application.
+    #
+    # @option params [required, String] :source_application_name
+    #   The name of the external application.
+    #
+    # @option params [required, String] :source_type
+    #   The type of the data source.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIntegrationAssociationResponse#integration_association_id #integration_association_id} => String
+    #   * {Types::CreateIntegrationAssociationResponse#integration_association_arn #integration_association_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_integration_association({
+    #     instance_id: "InstanceId", # required
+    #     integration_type: "EVENT", # required, accepts EVENT
+    #     integration_arn: "ARN", # required
+    #     source_application_url: "URI", # required
+    #     source_application_name: "SourceApplicationName", # required
+    #     source_type: "SALESFORCE", # required, accepts SALESFORCE, ZENDESK
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_association_id #=> String
+    #   resp.integration_association_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociation AWS API Documentation
+    #
+    # @overload create_integration_association(params = {})
+    # @param [Hash] params ({})
+    def create_integration_association(params = {}, options = {})
+      req = build_request(:create_integration_association, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Creates a new queue for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the queue.
+    #
+    # @option params [String] :description
+    #   The description of the queue.
+    #
+    # @option params [Types::OutboundCallerConfig] :outbound_caller_config
+    #   The outbound caller ID name, number, and outbound whisper flow.
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #
+    # @option params [Integer] :max_contacts
+    #   The maximum number of contacts that can be in the queue before it is
+    #   considered full.
+    #
+    # @option params [Array<String>] :quick_connect_ids
+    #   The quick connects available to agents who are working the queue.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQueueResponse#queue_arn #queue_arn} => String
+    #   * {Types::CreateQueueResponse#queue_id #queue_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_queue({
+    #     instance_id: "InstanceId", # required
+    #     name: "CommonNameLength127", # required
+    #     description: "QueueDescription",
+    #     outbound_caller_config: {
+    #       outbound_caller_id_name: "OutboundCallerIdName",
+    #       outbound_caller_id_number_id: "PhoneNumberId",
+    #       outbound_flow_id: "ContactFlowId",
+    #     },
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #     max_contacts: 1,
+    #     quick_connect_ids: ["QuickConnectId"],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_arn #=> String
+    #   resp.queue_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueue AWS API Documentation
+    #
+    # @overload create_queue(params = {})
+    # @param [Hash] params ({})
+    def create_queue(params = {}, options = {})
+      req = build_request(:create_queue, params)
+      req.send_request(options)
+    end
+
+    # Creates a quick connect for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the quick connect.
+    #
+    # @option params [String] :description
+    #   The description of the quick connect.
+    #
+    # @option params [required, Types::QuickConnectConfig] :quick_connect_config
+    #   Configuration settings for the quick connect.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuickConnectResponse#quick_connect_arn #quick_connect_arn} => String
+    #   * {Types::CreateQuickConnectResponse#quick_connect_id #quick_connect_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_quick_connect({
+    #     instance_id: "InstanceId", # required
+    #     name: "QuickConnectName", # required
+    #     description: "QuickConnectDescription",
+    #     quick_connect_config: { # required
+    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #       user_config: {
+    #         user_id: "UserId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       queue_config: {
+    #         queue_id: "QueueId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       phone_config: {
+    #         phone_number: "PhoneNumber", # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connect_arn #=> String
+    #   resp.quick_connect_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnect AWS API Documentation
+    #
+    # @overload create_quick_connect(params = {})
+    # @param [Hash] params ({})
+    def create_quick_connect(params = {}, options = {})
+      req = build_request(:create_quick_connect, params)
+      req.send_request(options)
+    end
+
     # Creates a new routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :name
     #   The name of the routing profile. Must not be more than 127 characters.
@@ -448,11 +980,11 @@ module Aws::Connect
     #
     # @option params [Array<Types::RoutingProfileQueueConfig>] :queue_configs
     #   The inbound queues associated with the routing profile. If no queue is
-    #   added, the agent can only make outbound calls.
+    #   added, the agent can make only outbound calls.
     #
     # @option params [required, Array<Types::MediaConcurrency>] :media_concurrencies
-    #   The channels agents can handle in the Contact Control Panel (CCP) for
-    #   this routing profile.
+    #   The channels that agents can handle in the Contact Control Panel (CCP)
+    #   for this routing profile.
     #
     # @option params [Hash<String,String>] :tags
     #   One or more tags.
@@ -473,7 +1005,7 @@ module Aws::Connect
     #       {
     #         queue_reference: { # required
     #           queue_id: "QueueId", # required
-    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
@@ -481,7 +1013,7 @@ module Aws::Connect
     #     ],
     #     media_concurrencies: [ # required
     #       {
-    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         concurrency: 1, # required
     #       },
     #     ],
@@ -501,6 +1033,53 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_routing_profile(params = {}, options = {})
       req = build_request(:create_routing_profile, params)
+      req.send_request(options)
+    end
+
+    # Creates a use case for an AppIntegration association.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :integration_association_id
+    #   The identifier for the AppIntegration association.
+    #
+    # @option params [required, String] :use_case_type
+    #   The type of use case to associate to the AppIntegration association.
+    #   Each AppIntegration association can have only one of each use case
+    #   type.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUseCaseResponse#use_case_id #use_case_id} => String
+    #   * {Types::CreateUseCaseResponse#use_case_arn #use_case_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_use_case({
+    #     instance_id: "InstanceId", # required
+    #     integration_association_id: "IntegrationAssociationId", # required
+    #     use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.use_case_id #=> String
+    #   resp.use_case_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCase AWS API Documentation
+    #
+    # @overload create_use_case(params = {})
+    # @param [Hash] params ({})
+    def create_use_case(params = {}, options = {})
+      req = build_request(:create_use_case, params)
       req.send_request(options)
     end
 
@@ -554,7 +1133,8 @@ module Aws::Connect
     #   The identifier of the hierarchy group for the user.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [Hash<String,String>] :tags
     #   One or more tags.
@@ -604,6 +1184,166 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a new user hierarchy group.
+    #
+    # @option params [required, String] :name
+    #   The name of the user hierarchy group. Must not be more than 100
+    #   characters.
+    #
+    # @option params [String] :parent_group_id
+    #   The identifier for the parent hierarchy group. The user hierarchy is
+    #   created at level one if the parent group ID is null.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Types::CreateUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserHierarchyGroupResponse#hierarchy_group_id #hierarchy_group_id} => String
+    #   * {Types::CreateUserHierarchyGroupResponse#hierarchy_group_arn #hierarchy_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user_hierarchy_group({
+    #     name: "HierarchyGroupName", # required
+    #     parent_group_id: "HierarchyGroupId",
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hierarchy_group_id #=> String
+    #   resp.hierarchy_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroup AWS API Documentation
+    #
+    # @overload create_user_hierarchy_group(params = {})
+    # @param [Hash] params ({})
+    def create_user_hierarchy_group(params = {}, options = {})
+      req = build_request(:create_user_hierarchy_group, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Deletes the Amazon Connect instance.
+    #
+    # Amazon Connect enforces a limit on the total number of instances that
+    # you can create or delete in 30 days. If you exceed this limit, you
+    # will get an error message indicating there has been an excessive
+    # number of attempts at creating or deleting instances. You must wait 30
+    # days before you can restart creating and deleting instances in your
+    # account.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_instance({
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteInstance AWS API Documentation
+    #
+    # @overload delete_instance(params = {})
+    # @param [Hash] params ({})
+    def delete_instance(params = {}, options = {})
+      req = build_request(:delete_instance, params)
+      req.send_request(options)
+    end
+
+    # Deletes an AppIntegration association from an Amazon Connect instance.
+    # The association must not have any use cases associated with it.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :integration_association_id
+    #   The identifier for the AppIntegration association.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_integration_association({
+    #     instance_id: "InstanceId", # required
+    #     integration_association_id: "IntegrationAssociationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteIntegrationAssociation AWS API Documentation
+    #
+    # @overload delete_integration_association(params = {})
+    # @param [Hash] params ({})
+    def delete_integration_association(params = {}, options = {})
+      req = build_request(:delete_integration_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes a quick connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_quick_connect({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteQuickConnect AWS API Documentation
+    #
+    # @overload delete_quick_connect(params = {})
+    # @param [Hash] params ({})
+    def delete_quick_connect(params = {}, options = {})
+      req = build_request(:delete_quick_connect, params)
+      req.send_request(options)
+    end
+
+    # Deletes a use case from an AppIntegration association.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :integration_association_id
+    #   The identifier for the AppIntegration association.
+    #
+    # @option params [required, String] :use_case_id
+    #   The identifier for the use case.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_use_case({
+    #     instance_id: "InstanceId", # required
+    #     integration_association_id: "IntegrationAssociationId", # required
+    #     use_case_id: "UseCaseId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUseCase AWS API Documentation
+    #
+    # @overload delete_use_case(params = {})
+    # @param [Hash] params ({})
+    def delete_use_case(params = {}, options = {})
+      req = build_request(:delete_use_case, params)
+      req.send_request(options)
+    end
+
     # Deletes a user account from the specified Amazon Connect instance.
     #
     # For information about what happens to a user's data when their
@@ -615,7 +1355,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :user_id
     #   The identifier of the user.
@@ -635,6 +1376,34 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_user(params = {}, options = {})
       req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing user hierarchy group. It must not be associated
+    # with any agents or have any active child groups.
+    #
+    # @option params [required, String] :hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_hierarchy_group({
+    #     hierarchy_group_id: "HierarchyGroupId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserHierarchyGroup AWS API Documentation
+    #
+    # @overload delete_user_hierarchy_group(params = {})
+    # @param [Hash] params ({})
+    def delete_user_hierarchy_group(params = {}, options = {})
+      req = build_request(:delete_user_hierarchy_group, params)
       req.send_request(options)
     end
 
@@ -684,10 +1453,288 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Describes the hours of operation.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #
+    # @return [Types::DescribeHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHoursOfOperationResponse#hours_of_operation #hours_of_operation} => Types::HoursOfOperation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hours_of_operation({
+    #     instance_id: "InstanceId", # required
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hours_of_operation.hours_of_operation_id #=> String
+    #   resp.hours_of_operation.hours_of_operation_arn #=> String
+    #   resp.hours_of_operation.name #=> String
+    #   resp.hours_of_operation.description #=> String
+    #   resp.hours_of_operation.time_zone #=> String
+    #   resp.hours_of_operation.config #=> Array
+    #   resp.hours_of_operation.config[0].day #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.hours_of_operation.config[0].start_time.hours #=> Integer
+    #   resp.hours_of_operation.config[0].start_time.minutes #=> Integer
+    #   resp.hours_of_operation.config[0].end_time.hours #=> Integer
+    #   resp.hours_of_operation.config[0].end_time.minutes #=> Integer
+    #   resp.hours_of_operation.tags #=> Hash
+    #   resp.hours_of_operation.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeHoursOfOperation AWS API Documentation
+    #
+    # @overload describe_hours_of_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_hours_of_operation(params = {}, options = {})
+      req = build_request(:describe_hours_of_operation, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Returns the current state of the specified instance identifier. It
+    # tracks the instance while it is being created and returns an error
+    # status, if applicable.
+    #
+    # If an instance is not created successfully, the instance status reason
+    # field returns details relevant to the reason. The instance in a failed
+    # state is returned only for 24 hours after the CreateInstance API was
+    # invoked.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Types::DescribeInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceResponse#instance #instance} => Types::Instance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance({
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance.id #=> String
+    #   resp.instance.arn #=> String
+    #   resp.instance.identity_management_type #=> String, one of "SAML", "CONNECT_MANAGED", "EXISTING_DIRECTORY"
+    #   resp.instance.instance_alias #=> String
+    #   resp.instance.created_time #=> Time
+    #   resp.instance.service_role #=> String
+    #   resp.instance.instance_status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED"
+    #   resp.instance.status_reason.message #=> String
+    #   resp.instance.inbound_calls_enabled #=> Boolean
+    #   resp.instance.outbound_calls_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstance AWS API Documentation
+    #
+    # @overload describe_instance(params = {})
+    # @param [Hash] params ({})
+    def describe_instance(params = {}, options = {})
+      req = build_request(:describe_instance, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Describes the specified instance attribute.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :attribute_type
+    #   The type of attribute.
+    #
+    # @return [Types::DescribeInstanceAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceAttributeResponse#attribute #attribute} => Types::Attribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_attribute({
+    #     instance_id: "InstanceId", # required
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA"
+    #   resp.attribute.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttribute AWS API Documentation
+    #
+    # @overload describe_instance_attribute(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_attribute(params = {}, options = {})
+      req = build_request(:describe_instance_attribute, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Retrieves the current storage configurations for the specified
+    # resource type, association ID, and instance ID.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @return [Types::DescribeInstanceStorageConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceStorageConfigResponse#storage_config #storage_config} => Types::InstanceStorageConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_storage_config({
+    #     instance_id: "InstanceId", # required
+    #     association_id: "AssociationId", # required
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_config.association_id #=> String
+    #   resp.storage_config.storage_type #=> String, one of "S3", "KINESIS_VIDEO_STREAM", "KINESIS_STREAM", "KINESIS_FIREHOSE"
+    #   resp.storage_config.s3_config.bucket_name #=> String
+    #   resp.storage_config.s3_config.bucket_prefix #=> String
+    #   resp.storage_config.s3_config.encryption_config.encryption_type #=> String, one of "KMS"
+    #   resp.storage_config.s3_config.encryption_config.key_id #=> String
+    #   resp.storage_config.kinesis_video_stream_config.prefix #=> String
+    #   resp.storage_config.kinesis_video_stream_config.retention_period_hours #=> Integer
+    #   resp.storage_config.kinesis_video_stream_config.encryption_config.encryption_type #=> String, one of "KMS"
+    #   resp.storage_config.kinesis_video_stream_config.encryption_config.key_id #=> String
+    #   resp.storage_config.kinesis_stream_config.stream_arn #=> String
+    #   resp.storage_config.kinesis_firehose_config.firehose_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceStorageConfig AWS API Documentation
+    #
+    # @overload describe_instance_storage_config(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_storage_config(params = {}, options = {})
+      req = build_request(:describe_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Describes the specified queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @return [Types::DescribeQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueueResponse#queue #queue} => Types::Queue
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_queue({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue.name #=> String
+    #   resp.queue.queue_arn #=> String
+    #   resp.queue.queue_id #=> String
+    #   resp.queue.description #=> String
+    #   resp.queue.outbound_caller_config.outbound_caller_id_name #=> String
+    #   resp.queue.outbound_caller_config.outbound_caller_id_number_id #=> String
+    #   resp.queue.outbound_caller_config.outbound_flow_id #=> String
+    #   resp.queue.hours_of_operation_id #=> String
+    #   resp.queue.max_contacts #=> Integer
+    #   resp.queue.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.queue.tags #=> Hash
+    #   resp.queue.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQueue AWS API Documentation
+    #
+    # @overload describe_queue(params = {})
+    # @param [Hash] params ({})
+    def describe_queue(params = {}, options = {})
+      req = build_request(:describe_queue, params)
+      req.send_request(options)
+    end
+
+    # Describes the quick connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @return [Types::DescribeQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQuickConnectResponse#quick_connect #quick_connect} => Types::QuickConnect
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_quick_connect({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connect.quick_connect_arn #=> String
+    #   resp.quick_connect.quick_connect_id #=> String
+    #   resp.quick_connect.name #=> String
+    #   resp.quick_connect.description #=> String
+    #   resp.quick_connect.quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect.quick_connect_config.user_config.user_id #=> String
+    #   resp.quick_connect.quick_connect_config.user_config.contact_flow_id #=> String
+    #   resp.quick_connect.quick_connect_config.queue_config.queue_id #=> String
+    #   resp.quick_connect.quick_connect_config.queue_config.contact_flow_id #=> String
+    #   resp.quick_connect.quick_connect_config.phone_config.phone_number #=> String
+    #   resp.quick_connect.tags #=> Hash
+    #   resp.quick_connect.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQuickConnect AWS API Documentation
+    #
+    # @overload describe_quick_connect(params = {})
+    # @param [Hash] params ({})
+    def describe_quick_connect(params = {}, options = {})
+      req = build_request(:describe_quick_connect, params)
+      req.send_request(options)
+    end
+
     # Describes the specified routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -711,7 +1758,7 @@ module Aws::Connect
     #   resp.routing_profile.routing_profile_id #=> String
     #   resp.routing_profile.description #=> String
     #   resp.routing_profile.media_concurrencies #=> Array
-    #   resp.routing_profile.media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT"
+    #   resp.routing_profile.media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.routing_profile.media_concurrencies[0].concurrency #=> Integer
     #   resp.routing_profile.default_outbound_queue_id #=> String
     #   resp.routing_profile.tags #=> Hash
@@ -735,7 +1782,8 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -783,7 +1831,8 @@ module Aws::Connect
     #   The identifier of the hierarchy group.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Types::DescribeUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -831,7 +1880,8 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Types::DescribeUserHierarchyStructureResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -870,10 +1920,218 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Revokes access to integrated applications from Amazon Connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :origin
+    #   The domain URL of the integrated application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_approved_origin({
+    #     instance_id: "InstanceId", # required
+    #     origin: "Origin", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateApprovedOrigin AWS API Documentation
+    #
+    # @overload disassociate_approved_origin(params = {})
+    # @param [Hash] params ({})
+    def disassociate_approved_origin(params = {}, options = {})
+      req = build_request(:disassociate_approved_origin, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Revokes authorization from the specified instance to access the
+    # specified Amazon Lex or Amazon Lex V2 bot.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [Types::LexBot] :lex_bot
+    #   Configuration information of an Amazon Lex bot.
+    #
+    # @option params [Types::LexV2Bot] :lex_v2_bot
+    #   The Amazon Lex V2 bot to disassociate from the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_bot({
+    #     instance_id: "InstanceId", # required
+    #     lex_bot: {
+    #       name: "BotName",
+    #       lex_region: "LexRegion",
+    #     },
+    #     lex_v2_bot: {
+    #       alias_arn: "AliasArn",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateBot AWS API Documentation
+    #
+    # @overload disassociate_bot(params = {})
+    # @param [Hash] params ({})
+    def disassociate_bot(params = {}, options = {})
+      req = build_request(:disassociate_bot, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Removes the storage type configurations for the specified resource
+    # type and association ID.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_instance_storage_config({
+    #     instance_id: "InstanceId", # required
+    #     association_id: "AssociationId", # required
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateInstanceStorageConfig AWS API Documentation
+    #
+    # @overload disassociate_instance_storage_config(params = {})
+    # @param [Hash] params ({})
+    def disassociate_instance_storage_config(params = {}, options = {})
+      req = build_request(:disassociate_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Remove the Lambda function from the dropdown options available in the
+    # relevant contact flow blocks.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance..
+    #
+    # @option params [required, String] :function_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function being
+    #   disassociated.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_lambda_function({
+    #     instance_id: "InstanceId", # required
+    #     function_arn: "FunctionArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateLambdaFunction AWS API Documentation
+    #
+    # @overload disassociate_lambda_function(params = {})
+    # @param [Hash] params ({})
+    def disassociate_lambda_function(params = {}, options = {})
+      req = build_request(:disassociate_lambda_function, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Revokes authorization from the specified instance to access the
+    # specified Amazon Lex bot.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :bot_name
+    #   The name of the Amazon Lex bot. Maximum character limit of 50.
+    #
+    # @option params [required, String] :lex_region
+    #   The Region in which the Amazon Lex bot has been created.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_lex_bot({
+    #     instance_id: "InstanceId", # required
+    #     bot_name: "BotName", # required
+    #     lex_region: "LexRegion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateLexBot AWS API Documentation
+    #
+    # @overload disassociate_lex_bot(params = {})
+    # @param [Hash] params ({})
+    def disassociate_lex_bot(params = {}, options = {})
+      req = build_request(:disassociate_lex_bot, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Disassociates a set of quick connects from a queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [required, Array<String>] :quick_connect_ids
+    #   The quick connects to disassociate from the queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_queue_quick_connects({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     quick_connect_ids: ["QuickConnectId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateQueueQuickConnects AWS API Documentation
+    #
+    # @overload disassociate_queue_quick_connects(params = {})
+    # @param [Hash] params ({})
+    def disassociate_queue_quick_connects(params = {}, options = {})
+      req = build_request(:disassociate_queue_quick_connects, params)
+      req.send_request(options)
+    end
+
     # Disassociates a set of queues from a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -891,7 +2149,7 @@ module Aws::Connect
     #     queue_references: [ # required
     #       {
     #         queue_id: "QueueId", # required
-    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #       },
     #     ],
     #   })
@@ -902,6 +2160,37 @@ module Aws::Connect
     # @param [Hash] params ({})
     def disassociate_routing_profile_queues(params = {}, options = {})
       req = build_request(:disassociate_routing_profile_queues, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Deletes the specified security key.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_security_key({
+    #     instance_id: "InstanceId", # required
+    #     association_id: "AssociationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateSecurityKey AWS API Documentation
+    #
+    # @overload disassociate_security_key(params = {})
+    # @param [Hash] params ({})
+    def disassociate_security_key(params = {}, options = {})
+      req = build_request(:disassociate_security_key, params)
       req.send_request(options)
     end
 
@@ -949,20 +2238,21 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, Types::Filters] :filters
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
-    #   `CHAT` channels are supported.
+    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
+    #   TASK channels are supported.
     #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
     #   grouped by `QUEUE`, the metrics returned apply to each queue rather
     #   than aggregated for all queues. If you group by `CHANNEL`, you should
-    #   include a Channels filter. Both `VOICE` and `CHAT` channels are
+    #   include a Channels filter. VOICE, CHAT, and TASK channels are
     #   supported.
     #
     #   If no `Grouping` is included in the request, a summary of metrics is
@@ -1086,7 +2376,7 @@ module Aws::Connect
     #   parameters as the request that generated the token.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::GetCurrentMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1102,7 +2392,7 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     filters: { # required
     #       queues: ["QueueId"],
-    #       channels: ["VOICE"], # accepts VOICE, CHAT
+    #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #     },
     #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #     current_metrics: [ # required
@@ -1121,7 +2411,7 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
-    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT"
+    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
@@ -1139,8 +2429,18 @@ module Aws::Connect
 
     # Retrieves a token for federation.
     #
+    # <note markdown="1"> This API doesn't support root users. If you try to invoke
+    # GetFederationToken with root credentials, an error message similar to
+    # the following one appears:
+    #
+    #  `Provided identity: Principal: .... User: .... cannot be used for
+    # federation with Amazon Connect`
+    #
+    #  </note>
+    #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1179,7 +2479,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
@@ -1203,16 +2504,19 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
-    #   `CHAT` channels are supported.
+    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
+    #   TASK channels are supported.
+    #
+    #   <note markdown="1"> To filter by `Queues`, enter the queue ID/ARN, not the name of the
+    #   queue.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
     #   results are grouped by queue, the metrics returned are grouped by
     #   queue. The values returned apply to the metrics for each queue rather
     #   than aggregated for all queues.
-    #
-    #   The only supported grouping is `QUEUE`.
     #
     #   If no grouping is specified, a summary of metrics for all queues is
     #   returned.
@@ -1222,6 +2526,11 @@ module Aws::Connect
     #   each metric. The following historical metrics are available. For a
     #   description of each metric, see [Historical Metrics Definitions][1] in
     #   the *Amazon Connect Administrator Guide*.
+    #
+    #   <note markdown="1"> This API does not support a contacts incoming metric (there's no
+    #   CONTACTS\_INCOMING metric missing from the documented list).
+    #
+    #    </note>
     #
     #   ABANDON\_TIME
     #
@@ -1369,13 +2678,15 @@ module Aws::Connect
     #
     #   SERVICE\_LEVEL
     #
-    #   : Unit: PERCENT
+    #   : You can include up to 20 SERVICE\_LEVEL metrics in a request.
+    #
+    #     Unit: PERCENT
     #
     #     Statistic: AVG
     #
-    #     Threshold: Only "Less than" comparisons are supported, with the
-    #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120,
-    #     180, 240, 300, 600
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #
     #
@@ -1387,7 +2698,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::GetMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1404,7 +2715,7 @@ module Aws::Connect
     #     end_time: Time.now, # required
     #     filters: { # required
     #       queues: ["QueueId"],
-    #       channels: ["VOICE"], # accepts VOICE, CHAT
+    #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #     },
     #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #     historical_metrics: [ # required
@@ -1428,7 +2739,7 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
-    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT"
+    #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
@@ -1443,6 +2754,108 @@ module Aws::Connect
     # @param [Hash] params ({})
     def get_metric_data(params = {}, options = {})
       req = build_request(:get_metric_data, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Returns a paginated list of all approved origins associated with the
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListApprovedOriginsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApprovedOriginsResponse#origins #origins} => Array&lt;String&gt;
+    #   * {Types::ListApprovedOriginsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_approved_origins({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origins #=> Array
+    #   resp.origins[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListApprovedOrigins AWS API Documentation
+    #
+    # @overload list_approved_origins(params = {})
+    # @param [Hash] params ({})
+    def list_approved_origins(params = {}, options = {})
+      req = build_request(:list_approved_origins, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # For the specified version of Amazon Lex, returns a paginated list of
+    # all the Amazon Lex bots currently associated with the instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [required, String] :lex_version
+    #   The version of Amazon Lex or Amazon Lex V2.
+    #
+    # @return [Types::ListBotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotsResponse#lex_bots #lex_bots} => Array&lt;Types::LexBotConfig&gt;
+    #   * {Types::ListBotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bots({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     lex_version: "V1", # required, accepts V1, V2
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lex_bots #=> Array
+    #   resp.lex_bots[0].lex_bot.name #=> String
+    #   resp.lex_bots[0].lex_bot.lex_region #=> String
+    #   resp.lex_bots[0].lex_v2_bot.alias_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListBots AWS API Documentation
+    #
+    # @overload list_bots(params = {})
+    # @param [Hash] params ({})
+    def list_bots(params = {}, options = {})
+      req = build_request(:list_bots, params)
       req.send_request(options)
     end
 
@@ -1461,7 +2874,8 @@ module Aws::Connect
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [Array<String>] :contact_flow_types
     #   The type of contact flow.
@@ -1472,7 +2886,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListContactFlowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1519,7 +2933,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1527,7 +2942,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListHoursOfOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1561,6 +2976,320 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Returns a paginated list of all attribute types for the given
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListInstanceAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInstanceAttributesResponse#attributes #attributes} => Array&lt;Types::Attribute&gt;
+    #   * {Types::ListInstanceAttributesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_instance_attributes({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA"
+    #   resp.attributes[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceAttributes AWS API Documentation
+    #
+    # @overload list_instance_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_instance_attributes(params = {}, options = {})
+      req = build_request(:list_instance_attributes, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Returns a paginated list of storage configs for the identified
+    # instance and resource type.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListInstanceStorageConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInstanceStorageConfigsResponse#storage_configs #storage_configs} => Array&lt;Types::InstanceStorageConfig&gt;
+    #   * {Types::ListInstanceStorageConfigsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_instance_storage_configs({
+    #     instance_id: "InstanceId", # required
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_configs #=> Array
+    #   resp.storage_configs[0].association_id #=> String
+    #   resp.storage_configs[0].storage_type #=> String, one of "S3", "KINESIS_VIDEO_STREAM", "KINESIS_STREAM", "KINESIS_FIREHOSE"
+    #   resp.storage_configs[0].s3_config.bucket_name #=> String
+    #   resp.storage_configs[0].s3_config.bucket_prefix #=> String
+    #   resp.storage_configs[0].s3_config.encryption_config.encryption_type #=> String, one of "KMS"
+    #   resp.storage_configs[0].s3_config.encryption_config.key_id #=> String
+    #   resp.storage_configs[0].kinesis_video_stream_config.prefix #=> String
+    #   resp.storage_configs[0].kinesis_video_stream_config.retention_period_hours #=> Integer
+    #   resp.storage_configs[0].kinesis_video_stream_config.encryption_config.encryption_type #=> String, one of "KMS"
+    #   resp.storage_configs[0].kinesis_video_stream_config.encryption_config.key_id #=> String
+    #   resp.storage_configs[0].kinesis_stream_config.stream_arn #=> String
+    #   resp.storage_configs[0].kinesis_firehose_config.firehose_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceStorageConfigs AWS API Documentation
+    #
+    # @overload list_instance_storage_configs(params = {})
+    # @param [Hash] params ({})
+    def list_instance_storage_configs(params = {}, options = {})
+      req = build_request(:list_instance_storage_configs, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Return a list of instances which are in active state,
+    # creation-in-progress state, and failed state. Instances that aren't
+    # successfully created (they are in a failed state) are returned only
+    # for 24 hours after the CreateInstance API was invoked.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInstancesResponse#instance_summary_list #instance_summary_list} => Array&lt;Types::InstanceSummary&gt;
+    #   * {Types::ListInstancesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_instances({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_summary_list #=> Array
+    #   resp.instance_summary_list[0].id #=> String
+    #   resp.instance_summary_list[0].arn #=> String
+    #   resp.instance_summary_list[0].identity_management_type #=> String, one of "SAML", "CONNECT_MANAGED", "EXISTING_DIRECTORY"
+    #   resp.instance_summary_list[0].instance_alias #=> String
+    #   resp.instance_summary_list[0].created_time #=> Time
+    #   resp.instance_summary_list[0].service_role #=> String
+    #   resp.instance_summary_list[0].instance_status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED"
+    #   resp.instance_summary_list[0].inbound_calls_enabled #=> Boolean
+    #   resp.instance_summary_list[0].outbound_calls_enabled #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstances AWS API Documentation
+    #
+    # @overload list_instances(params = {})
+    # @param [Hash] params ({})
+    def list_instances(params = {}, options = {})
+      req = build_request(:list_instances, params)
+      req.send_request(options)
+    end
+
+    # Provides summary information about the AppIntegration associations for
+    # the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListIntegrationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntegrationAssociationsResponse#integration_association_summary_list #integration_association_summary_list} => Array&lt;Types::IntegrationAssociationSummary&gt;
+    #   * {Types::ListIntegrationAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_integration_associations({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_association_summary_list #=> Array
+    #   resp.integration_association_summary_list[0].integration_association_id #=> String
+    #   resp.integration_association_summary_list[0].integration_association_arn #=> String
+    #   resp.integration_association_summary_list[0].instance_id #=> String
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT"
+    #   resp.integration_association_summary_list[0].integration_arn #=> String
+    #   resp.integration_association_summary_list[0].source_application_url #=> String
+    #   resp.integration_association_summary_list[0].source_application_name #=> String
+    #   resp.integration_association_summary_list[0].source_type #=> String, one of "SALESFORCE", "ZENDESK"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociations AWS API Documentation
+    #
+    # @overload list_integration_associations(params = {})
+    # @param [Hash] params ({})
+    def list_integration_associations(params = {}, options = {})
+      req = build_request(:list_integration_associations, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Returns a paginated list of all Lambda functions that display in the
+    # dropdown options in the relevant contact flow blocks.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListLambdaFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLambdaFunctionsResponse#lambda_functions #lambda_functions} => Array&lt;String&gt;
+    #   * {Types::ListLambdaFunctionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lambda_functions({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lambda_functions #=> Array
+    #   resp.lambda_functions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLambdaFunctions AWS API Documentation
+    #
+    # @overload list_lambda_functions(params = {})
+    # @param [Hash] params ({})
+    def list_lambda_functions(params = {}, options = {})
+      req = build_request(:list_lambda_functions, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Returns a paginated list of all the Amazon Lex bots currently
+    # associated with the instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListLexBotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLexBotsResponse#lex_bots #lex_bots} => Array&lt;Types::LexBot&gt;
+    #   * {Types::ListLexBotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lex_bots({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lex_bots #=> Array
+    #   resp.lex_bots[0].name #=> String
+    #   resp.lex_bots[0].lex_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLexBots AWS API Documentation
+    #
+    # @overload list_lex_bots(params = {})
+    # @param [Hash] params ({})
+    def list_lex_bots(params = {}, options = {})
+      req = build_request(:list_lex_bots, params)
+      req.send_request(options)
+    end
+
     # Provides information about the phone numbers for the specified Amazon
     # Connect instance.
     #
@@ -1573,7 +3302,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [Array<String>] :phone_number_types
     #   The type of phone number.
@@ -1587,7 +3317,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListPhoneNumbersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1671,8 +3401,67 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Lists the quick connects associated with a queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListQueueQuickConnectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueueQuickConnectsResponse#next_token #next_token} => String
+    #   * {Types::ListQueueQuickConnectsResponse#quick_connect_summary_list #quick_connect_summary_list} => Array&lt;Types::QuickConnectSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queue_quick_connects({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.quick_connect_summary_list #=> Array
+    #   resp.quick_connect_summary_list[0].id #=> String
+    #   resp.quick_connect_summary_list[0].arn #=> String
+    #   resp.quick_connect_summary_list[0].name #=> String
+    #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnects AWS API Documentation
+    #
+    # @overload list_queue_quick_connects(params = {})
+    # @param [Hash] params ({})
+    def list_queue_quick_connects(params = {}, options = {})
+      req = build_request(:list_queue_quick_connects, params)
+      req.send_request(options)
+    end
+
     # Provides information about the queues for the specified Amazon Connect
     # instance.
+    #
+    # If you do not specify a `QueueTypes` parameter, both standard and
+    # agent queues are returned. This might cause an unexpected truncation
+    # of results if you have more than 1000 agents and you limit the number
+    # of results of the API call in code.
     #
     # For more information about queues, see [Queues: Standard and Agent][1]
     # in the *Amazon Connect Administrator Guide*.
@@ -1682,7 +3471,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [Array<String>] :queue_types
     #   The type of queue.
@@ -1693,7 +3483,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1729,10 +3519,66 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # List the queues associated with a routing profile.
+    # Provides information about the quick connects for the specified Amazon
+    # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Array<String>] :quick_connect_types
+    #   The type of quick connect. In the Amazon Connect console, when you
+    #   create a quick connect, you are prompted to assign one of the
+    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
+    #   (QUEUE).
+    #
+    # @return [Types::ListQuickConnectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQuickConnectsResponse#quick_connect_summary_list #quick_connect_summary_list} => Array&lt;Types::QuickConnectSummary&gt;
+    #   * {Types::ListQuickConnectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_quick_connects({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     quick_connect_types: ["USER"], # accepts USER, QUEUE, PHONE_NUMBER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connect_summary_list #=> Array
+    #   resp.quick_connect_summary_list[0].id #=> String
+    #   resp.quick_connect_summary_list[0].arn #=> String
+    #   resp.quick_connect_summary_list[0].name #=> String
+    #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQuickConnects AWS API Documentation
+    #
+    # @overload list_quick_connects(params = {})
+    # @param [Hash] params ({})
+    def list_quick_connects(params = {}, options = {})
+      req = build_request(:list_quick_connects, params)
+      req.send_request(options)
+    end
+
+    # Lists the queues associated with a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -1743,7 +3589,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListRoutingProfileQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1770,7 +3616,7 @@ module Aws::Connect
     #   resp.routing_profile_queue_config_summary_list[0].queue_name #=> String
     #   resp.routing_profile_queue_config_summary_list[0].priority #=> Integer
     #   resp.routing_profile_queue_config_summary_list[0].delay #=> Integer
-    #   resp.routing_profile_queue_config_summary_list[0].channel #=> String, one of "VOICE", "CHAT"
+    #   resp.routing_profile_queue_config_summary_list[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueues AWS API Documentation
     #
@@ -1794,7 +3640,8 @@ module Aws::Connect
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1802,7 +3649,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListRoutingProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1836,6 +3683,56 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Returns a paginated list of all security keys associated with the
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListSecurityKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityKeysResponse#security_keys #security_keys} => Array&lt;Types::SecurityKey&gt;
+    #   * {Types::ListSecurityKeysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_keys({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_keys #=> Array
+    #   resp.security_keys[0].association_id #=> String
+    #   resp.security_keys[0].key #=> String
+    #   resp.security_keys[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityKeys AWS API Documentation
+    #
+    # @overload list_security_keys(params = {})
+    # @param [Hash] params ({})
+    def list_security_keys(params = {}, options = {})
+      req = build_request(:list_security_keys, params)
+      req.send_request(options)
+    end
+
     # Provides summary information about the security profiles for the
     # specified Amazon Connect instance.
     #
@@ -1847,7 +3744,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1855,7 +3753,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1925,6 +3823,56 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists the use cases.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :integration_association_id
+    #   The identifier for the integration association.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListUseCasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUseCasesResponse#use_case_summary_list #use_case_summary_list} => Array&lt;Types::UseCase&gt;
+    #   * {Types::ListUseCasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_use_cases({
+    #     instance_id: "InstanceId", # required
+    #     integration_association_id: "IntegrationAssociationId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.use_case_summary_list #=> Array
+    #   resp.use_case_summary_list[0].use_case_id #=> String
+    #   resp.use_case_summary_list[0].use_case_arn #=> String
+    #   resp.use_case_summary_list[0].use_case_type #=> String, one of "RULES_EVALUATION"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUseCases AWS API Documentation
+    #
+    # @overload list_use_cases(params = {})
+    # @param [Hash] params ({})
+    def list_use_cases(params = {}, options = {})
+      req = build_request(:list_use_cases, params)
+      req.send_request(options)
+    end
+
     # Provides summary information about the hierarchy groups for the
     # specified Amazon Connect instance.
     #
@@ -1936,7 +3884,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1944,7 +3893,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListUserHierarchyGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1982,7 +3931,8 @@ module Aws::Connect
     # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1990,7 +3940,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2030,7 +3980,8 @@ module Aws::Connect
     # Only voice recordings are supported at this time.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -2063,7 +4014,7 @@ module Aws::Connect
     # from the [CreateParticipantConnection][1] API in the Amazon Connect
     # Participant Service.
     #
-    # When a new chat contact is successfully created, clients need to
+    # When a new chat contact is successfully created, clients must
     # subscribe to the participant’s connection for the created chat within
     # 5 minutes. This is achieved by invoking
     # [CreateParticipantConnection][1] with WEBSOCKET and
@@ -2072,13 +4023,13 @@ module Aws::Connect
     # A 429 error occurs in two situations:
     #
     # * API rate limit is exceeded. API TPS throttling returns a
-    #   `TooManyRequests` exception from the API Gateway.
+    #   `TooManyRequests` exception.
     #
     # * The [quota for concurrent active chats][2] is exceeded. Active chat
     #   throttling returns a `LimitExceededException`.
     #
-    # For more information about how chat works, see [Chat][3] in the
-    # *Amazon Connect Administrator Guide*.
+    # For more information about chat, see [Chat][3] in the *Amazon Connect
+    # Administrator Guide*.
     #
     #
     #
@@ -2087,7 +4038,8 @@ module Aws::Connect
     # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/chat.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the contact flow for initiating the chat. To see the
@@ -2101,7 +4053,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   standard Amazon Connect attributes. They can be accessed in contact
     #   flows just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -2160,7 +4112,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API starts recording the contact when the agent joins the call.
+    # Starts recording the contact when the agent joins the call.
     # StartContactRecording is a one-time action. For example, if you use
     # StopContactRecording to stop recording an ongoing call, you can't use
     # StartContactRecording to restart it. For scenarios where the recording
@@ -2178,7 +4130,8 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -2188,7 +4141,7 @@ module Aws::Connect
     #   associated with the first interaction with the contact center.
     #
     # @option params [required, Types::VoiceRecordingConfiguration] :voice_recording_configuration
-    #   Who is being recorded.
+    #   The person being recorded.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2212,16 +4165,16 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API places an outbound call to a contact, and then initiates the
-    # contact flow. It performs the actions in the contact flow that's
-    # specified (in `ContactFlowId`).
+    # Places an outbound call to a contact, and then initiates the contact
+    # flow. It performs the actions in the contact flow that's specified
+    # (in `ContactFlowId`).
     #
-    # Agents are not involved in initiating the outbound API (that is,
-    # dialing the contact). If the contact flow places an outbound call to a
-    # contact, and then puts the contact in queue, that's when the call is
-    # routed to the agent, like any other inbound case.
+    # Agents do not initiate the outbound API, which means that they do not
+    # dial the contact. If the contact flow places an outbound call to a
+    # contact, and then puts the contact in queue, the call is then routed
+    # to the agent, like any other inbound case.
     #
-    # There is a 60 second dialing timeout for this operation. If the call
+    # There is a 60-second dialing timeout for this operation. If the call
     # is not connected after 60 seconds, it fails.
     #
     # <note markdown="1"> UK numbers with a 447 prefix are not allowed by default. Before you
@@ -2249,13 +4202,13 @@ module Aws::Connect
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. The token is valid for 7 days after
     #   creation. If a contact is already started, the contact ID is returned.
-    #   If the contact is disconnected, a new contact is started.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2311,13 +4264,98 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Initiates a contact flow to start a new task.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :previous_contact_id
+    #   The identifier of the previous chat, voice, or task contact.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow for initiating the tasks. To see
+    #   the ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the contact
+    #   flow, choose **Show additional flow information**. The ContactFlowId
+    #   is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
+    #
+    # @option params [required, String] :name
+    #   The name of a task that is shown to an agent in the Contact Control
+    #   Panel (CCP).
+    #
+    # @option params [Hash<String,Types::Reference>] :references
+    #   A formatted URL that is shown to an agent in the Contact Control Panel
+    #   (CCP).
+    #
+    # @option params [String] :description
+    #   A description of the task that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartTaskContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTaskContactResponse#contact_id #contact_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_task_contact({
+    #     instance_id: "InstanceId", # required
+    #     previous_contact_id: "ContactId",
+    #     contact_flow_id: "ContactFlowId", # required
+    #     attributes: {
+    #       "AttributeName" => "AttributeValue",
+    #     },
+    #     name: "Name", # required
+    #     references: {
+    #       "ReferenceKey" => {
+    #         value: "ReferenceValue", # required
+    #         type: "URL", # required, accepts URL
+    #       },
+    #     },
+    #     description: "Description",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContact AWS API Documentation
+    #
+    # @overload start_task_contact(params = {})
+    # @param [Hash] params ({})
+    def start_task_contact(params = {}, options = {})
+      req = build_request(:start_task_contact, params)
+      req.send_request(options)
+    end
+
     # Ends the specified contact.
     #
     # @option params [required, String] :contact_id
     #   The ID of the contact.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2337,7 +4375,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # When a contact is being recorded, this API stops recording the call.
+    # Stops recording a call when a contact is being recorded.
     # StopContactRecording is a one-time action. If you use
     # StopContactRecording to stop recording an ongoing call, you can't use
     # StartContactRecording to restart it. For scenarios where the recording
@@ -2348,7 +4386,8 @@ module Aws::Connect
     # Only voice recordings are supported at this time.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -2387,7 +4426,8 @@ module Aws::Connect
     # Only voice recordings are supported at this time.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -2417,8 +4457,8 @@ module Aws::Connect
 
     # Adds the specified tags to the specified resource.
     #
-    # The supported resource types are users, routing profiles, and contact
-    # flows.
+    # The supported resource types are users, routing profiles, queues,
+    # quick connects, and contact flows.
     #
     # For sample policies that use tags, see [Amazon Connect Identity-Based
     # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
@@ -2480,43 +4520,44 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Creates or updates the contact attributes associated with the
+    # Creates or updates user-defined contact attributes associated with the
     # specified contact.
     #
-    # You can add or update attributes for both ongoing and completed
-    # contacts. For example, you can update the customer's name or the
-    # reason the customer called while the call is active, or add notes
-    # about steps that the agent took during the call that are displayed to
-    # the next agent that takes the call. You can also update attributes for
-    # a contact using data from your CRM application and save the data with
-    # the contact in Amazon Connect. You could also flag calls for
-    # additional analysis, such as legal review or identifying abusive
+    # You can create or update user-defined attributes for both ongoing and
+    # completed contacts. For example, while the call is active, you can
+    # update the customer's name or the reason the customer called. You can
+    # add notes about steps that the agent took during the call that display
+    # to the next agent that takes the call. You can also update attributes
+    # for a contact using data from your CRM application and save the data
+    # with the contact in Amazon Connect. You could also flag calls for
+    # additional analysis, such as legal review or to identify abusive
     # callers.
     #
     # Contact attributes are available in Amazon Connect for 24 months, and
-    # are then deleted.
-    #
-    # This operation is also available in the Amazon Connect Flow language.
-    # See [UpdateContactAttributes][1].
+    # are then deleted. For information about CTR retention and the maximum
+    # size of the CTR attributes section, see [Feature specifications][1] in
+    # the *Amazon Connect Administrator Guide*.
     #
     # **Important:** You cannot use the operation to update attributes for
-    # contacts that occurred prior to the release of the API, September 12,
-    # 2018. You can update attributes only for contacts that started after
-    # the release of the API. If you attempt to update attributes for a
-    # contact that occurred prior to the release of the API, a 400 error is
-    # returned. This applies also to queued callbacks that were initiated
-    # prior to the release of the API but are still active in your instance.
+    # contacts that occurred prior to the release of the API, which was
+    # September 12, 2018. You can update attributes only for contacts that
+    # started after the release of the API. If you attempt to update
+    # attributes for a contact that occurred prior to the release of the
+    # API, a 400 error is returned. This applies also to queued callbacks
+    # that were initiated prior to the release of the API but are still
+    # active in your instance.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-actions-updatecontactattributes.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
     #
     # @option params [required, String] :initial_contact_id
     #   The identifier of the contact. This is the identifier of the contact
     #   associated with the first interaction with the contact center.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, Hash<String,String>] :attributes
     #   The Amazon Connect attributes. These attributes can be accessed in
@@ -2592,6 +4633,13 @@ module Aws::Connect
 
     # The name of the contact flow.
     #
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -2624,17 +4672,381 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the value for the specified attribute type.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :attribute_type
+    #   The type of attribute.
+    #
+    # @option params [required, String] :value
+    #   The value for the attribute. Maximum character limit is 100.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_instance_attribute({
+    #     instance_id: "InstanceId", # required
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA
+    #     value: "InstanceAttributeValue", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateInstanceAttribute AWS API Documentation
+    #
+    # @overload update_instance_attribute(params = {})
+    # @param [Hash] params ({})
+    def update_instance_attribute(params = {}, options = {})
+      req = build_request(:update_instance_attribute, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates an existing configuration for a resource type. This API is
+    # idempotent.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @option params [required, Types::InstanceStorageConfig] :storage_config
+    #   The storage configuration for the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_instance_storage_config({
+    #     instance_id: "InstanceId", # required
+    #     association_id: "AssociationId", # required
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #     storage_config: { # required
+    #       association_id: "AssociationId",
+    #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
+    #       s3_config: {
+    #         bucket_name: "BucketName", # required
+    #         bucket_prefix: "Prefix", # required
+    #         encryption_config: {
+    #           encryption_type: "KMS", # required, accepts KMS
+    #           key_id: "KeyId", # required
+    #         },
+    #       },
+    #       kinesis_video_stream_config: {
+    #         prefix: "Prefix", # required
+    #         retention_period_hours: 1, # required
+    #         encryption_config: { # required
+    #           encryption_type: "KMS", # required, accepts KMS
+    #           key_id: "KeyId", # required
+    #         },
+    #       },
+    #       kinesis_stream_config: {
+    #         stream_arn: "ARN", # required
+    #       },
+    #       kinesis_firehose_config: {
+    #         firehose_arn: "ARN", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateInstanceStorageConfig AWS API Documentation
+    #
+    # @overload update_instance_storage_config(params = {})
+    # @param [Hash] params ({})
+    def update_instance_storage_config(params = {}, options = {})
+      req = build_request(:update_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the hours of operation for the specified queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue_hours_of_operation({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueHoursOfOperation AWS API Documentation
+    #
+    # @overload update_queue_hours_of_operation(params = {})
+    # @param [Hash] params ({})
+    def update_queue_hours_of_operation(params = {}, options = {})
+      req = build_request(:update_queue_hours_of_operation, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the maximum number of contacts allowed in a queue before it is
+    # considered full.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [Integer] :max_contacts
+    #   The maximum number of contacts that can be in the queue before it is
+    #   considered full.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue_max_contacts({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     max_contacts: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueMaxContacts AWS API Documentation
+    #
+    # @overload update_queue_max_contacts(params = {})
+    # @param [Hash] params ({})
+    def update_queue_max_contacts(params = {}, options = {})
+      req = build_request(:update_queue_max_contacts, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the name and description of a queue. At least `Name` or
+    # `Description` must be provided.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [String] :name
+    #   The name of the queue.
+    #
+    # @option params [String] :description
+    #   The description of the queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue_name({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     name: "CommonNameLength127",
+    #     description: "QueueDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueName AWS API Documentation
+    #
+    # @overload update_queue_name(params = {})
+    # @param [Hash] params ({})
+    def update_queue_name(params = {}, options = {})
+      req = build_request(:update_queue_name, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the outbound caller ID name, number, and outbound whisper flow
+    # for a specified queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [required, Types::OutboundCallerConfig] :outbound_caller_config
+    #   The outbound caller ID name, number, and outbound whisper flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue_outbound_caller_config({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     outbound_caller_config: { # required
+    #       outbound_caller_id_name: "OutboundCallerIdName",
+    #       outbound_caller_id_number_id: "PhoneNumberId",
+    #       outbound_flow_id: "ContactFlowId",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueOutboundCallerConfig AWS API Documentation
+    #
+    # @overload update_queue_outbound_caller_config(params = {})
+    # @param [Hash] params ({})
+    def update_queue_outbound_caller_config(params = {}, options = {})
+      req = build_request(:update_queue_outbound_caller_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the status of the queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [required, String] :status
+    #   The status of the queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue_status({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #     status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueStatus AWS API Documentation
+    #
+    # @overload update_queue_status(params = {})
+    # @param [Hash] params ({})
+    def update_queue_status(params = {}, options = {})
+      req = build_request(:update_queue_status, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration settings for the specified quick connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @option params [required, Types::QuickConnectConfig] :quick_connect_config
+    #   Information about the configuration settings for the quick connect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_quick_connect_config({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #     quick_connect_config: { # required
+    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #       user_config: {
+    #         user_id: "UserId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       queue_config: {
+    #         queue_id: "QueueId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       phone_config: {
+    #         phone_number: "PhoneNumber", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQuickConnectConfig AWS API Documentation
+    #
+    # @overload update_quick_connect_config(params = {})
+    # @param [Hash] params ({})
+    def update_quick_connect_config(params = {}, options = {})
+      req = build_request(:update_quick_connect_config, params)
+      req.send_request(options)
+    end
+
+    # Updates the name and description of a quick connect. The request
+    # accepts the following data in JSON format. At least `Name` or
+    # `Description` must be provided.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @option params [String] :name
+    #   The name of the quick connect.
+    #
+    # @option params [String] :description
+    #   The description of the quick connect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_quick_connect_name({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #     name: "QuickConnectName",
+    #     description: "UpdateQuickConnectDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQuickConnectName AWS API Documentation
+    #
+    # @overload update_quick_connect_name(params = {})
+    # @param [Hash] params ({})
+    def update_quick_connect_name(params = {}, options = {})
+      req = build_request(:update_quick_connect_name, params)
+      req.send_request(options)
+    end
+
     # Updates the channels that agents can handle in the Contact Control
     # Panel (CCP) for a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
     #
     # @option params [required, Array<Types::MediaConcurrency>] :media_concurrencies
-    #   The channels agents can handle in the Contact Control Panel (CCP).
+    #   The channels that agents can handle in the Contact Control Panel
+    #   (CCP).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2645,7 +5057,7 @@ module Aws::Connect
     #     routing_profile_id: "RoutingProfileId", # required
     #     media_concurrencies: [ # required
     #       {
-    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         concurrency: 1, # required
     #       },
     #     ],
@@ -2663,7 +5075,8 @@ module Aws::Connect
     # Updates the default outbound queue of a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -2695,7 +5108,8 @@ module Aws::Connect
     # `Description` must be provided.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -2731,13 +5145,16 @@ module Aws::Connect
     # profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
     #
     # @option params [required, Array<Types::RoutingProfileQueueConfig>] :queue_configs
-    #   The queues to be updated for this routing profile.
+    #   The queues to be updated for this routing profile. Queues must first
+    #   be associated to the routing profile. You can do this using
+    #   AssociateRoutingProfileQueues.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2750,7 +5167,7 @@ module Aws::Connect
     #       {
     #         queue_reference: { # required
     #           queue_id: "QueueId", # required
-    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
@@ -2776,7 +5193,8 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2797,16 +5215,90 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the name of the user hierarchy group.
+    #
+    # @option params [required, String] :name
+    #   The name of the hierarchy group. Must not be more than 100 characters.
+    #
+    # @option params [required, String] :hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_hierarchy_group_name({
+    #     name: "HierarchyGroupName", # required
+    #     hierarchy_group_id: "HierarchyGroupId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyGroupName AWS API Documentation
+    #
+    # @overload update_user_hierarchy_group_name(params = {})
+    # @param [Hash] params ({})
+    def update_user_hierarchy_group_name(params = {}, options = {})
+      req = build_request(:update_user_hierarchy_group_name, params)
+      req.send_request(options)
+    end
+
+    # Updates the user hierarchy structure: add, remove, and rename user
+    # hierarchy levels.
+    #
+    # @option params [required, Types::HierarchyStructureUpdate] :hierarchy_structure
+    #   The hierarchy levels to update.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_hierarchy_structure({
+    #     hierarchy_structure: { # required
+    #       level_one: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_two: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_three: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_four: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_five: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #     },
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyStructure AWS API Documentation
+    #
+    # @overload update_user_hierarchy_structure(params = {})
+    # @param [Hash] params ({})
+    def update_user_hierarchy_structure(params = {}, options = {})
+      req = build_request(:update_user_hierarchy_structure, params)
+      req.send_request(options)
+    end
+
     # Updates the identity information for the specified user.
     #
-    # Someone with the ability to invoke `UpdateUserIndentityInfo` can
-    # change the login credentials of other users by changing their email
-    # address. This poses a security risk to your organization. They can
-    # change the email address of a user to the attacker's email address,
-    # and then reset the password through email. We strongly recommend
-    # limiting who has the ability to invoke `UpdateUserIndentityInfo`. For
-    # more information, see [Best Practices for Security Profiles][1] in the
-    # *Amazon Connect Administrator Guide*.
+    # We strongly recommend limiting who has the ability to invoke
+    # `UpdateUserIdentityInfo`. Someone with that ability can change the
+    # login credentials of other users by changing their email address. This
+    # poses a security risk to your organization. They can change the email
+    # address of a user to the attacker's email address, and then reset the
+    # password through email. For more information, see [Best Practices for
+    # Security Profiles][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
@@ -2819,7 +5311,8 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2853,7 +5346,8 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2888,7 +5382,8 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2918,7 +5413,8 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2952,7 +5448,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

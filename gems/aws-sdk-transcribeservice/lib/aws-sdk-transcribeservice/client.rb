@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -373,7 +373,7 @@ module Aws::TranscribeService
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_language_model({
-    #     language_code: "en-US", # required, accepts en-US
+    #     language_code: "en-US", # required, accepts en-US, hi-IN, es-US, en-GB, en-AU
     #     base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
     #     model_name: "ModelName", # required
     #     input_data_config: { # required
@@ -385,7 +385,7 @@ module Aws::TranscribeService
     #
     # @example Response structure
     #
-    #   resp.language_code #=> String, one of "en-US"
+    #   resp.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
     #   resp.base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.model_name #=> String
     #   resp.input_data_config.s3_uri #=> String
@@ -486,7 +486,8 @@ module Aws::TranscribeService
     #   `ConflictException` error.
     #
     # @option params [required, String] :language_code
-    #   The language code of the vocabulary entries.
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see what-is-transcribe.
     #
     # @option params [Array<String>] :phrases
     #   An array of strings that contains the vocabulary entries.
@@ -505,7 +506,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -776,7 +777,7 @@ module Aws::TranscribeService
     #   resp.language_model.model_name #=> String
     #   resp.language_model.create_time #=> Time
     #   resp.language_model.last_modified_time #=> Time
-    #   resp.language_model.language_code #=> String, one of "en-US"
+    #   resp.language_model.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
     #   resp.language_model.base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.language_model.model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.language_model.upgrade_availability #=> Boolean
@@ -832,6 +833,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.settings.show_alternatives #=> Boolean
     #   resp.medical_transcription_job.settings.max_alternatives #=> Integer
     #   resp.medical_transcription_job.settings.vocabulary_name #=> String
+    #   resp.medical_transcription_job.content_identification_type #=> String, one of "PHI"
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
     #
@@ -924,7 +926,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
-    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
@@ -1064,7 +1066,7 @@ module Aws::TranscribeService
     #   resp.models[0].model_name #=> String
     #   resp.models[0].create_time #=> Time
     #   resp.models[0].last_modified_time #=> Time
-    #   resp.models[0].language_code #=> String, one of "en-US"
+    #   resp.models[0].language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
     #   resp.models[0].base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.models[0].model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.models[0].upgrade_availability #=> Boolean
@@ -1136,6 +1138,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job_summaries[0].failure_reason #=> String
     #   resp.medical_transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
     #   resp.medical_transcription_job_summaries[0].specialty #=> String, one of "PRIMARYCARE"
+    #   resp.medical_transcription_job_summaries[0].content_identification_type #=> String, one of "PHI"
     #   resp.medical_transcription_job_summaries[0].type #=> String, one of "CONVERSATION", "DICTATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalTranscriptionJobs AWS API Documentation
@@ -1483,6 +1486,12 @@ module Aws::TranscribeService
     # @option params [Types::MedicalTranscriptionSetting] :settings
     #   Optional settings for the medical transcription job.
     #
+    # @option params [String] :content_identification_type
+    #   You can configure Amazon Transcribe Medical to label content in the
+    #   transcription output. If you specify `PHI`, Amazon Transcribe Medical
+    #   labels the personal health information (PHI) that it identifies in the
+    #   transcription output.
+    #
     # @option params [required, String] :specialty
     #   The medical specialty of any clinician speaking in the input media.
     #
@@ -1517,6 +1526,7 @@ module Aws::TranscribeService
     #       max_alternatives: 1,
     #       vocabulary_name: "VocabularyName",
     #     },
+    #     content_identification_type: "PHI", # accepts PHI
     #     specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
     #     type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #   })
@@ -1540,6 +1550,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.settings.show_alternatives #=> Boolean
     #   resp.medical_transcription_job.settings.max_alternatives #=> Integer
     #   resp.medical_transcription_job.settings.vocabulary_name #=> String
+    #   resp.medical_transcription_job.content_identification_type #=> String, one of "PHI"
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
     #
@@ -1562,6 +1573,9 @@ module Aws::TranscribeService
     #
     # @option params [String] :language_code
     #   The language code for the language used in the input media file.
+    #
+    #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
+    #   video file must be encoded at a sample rate of 16000 Hz or higher.
     #
     # @option params [Integer] :media_sample_rate_hertz
     #   The sample rate, in Hertz, of the audio track in the input media file.
@@ -1712,7 +1726,7 @@ module Aws::TranscribeService
     #       show_alternatives: false,
     #       max_alternatives: 1,
     #       vocabulary_filter_name: "VocabularyFilterName",
-    #       vocabulary_filter_method: "remove", # accepts remove, mask
+    #       vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #     },
     #     model_settings: {
     #       language_model_name: "ModelName",
@@ -1750,7 +1764,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
-    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
@@ -1851,7 +1865,8 @@ module Aws::TranscribeService
     #   vocabulary you will receive a `ConflictException` error.
     #
     # @option params [required, String] :language_code
-    #   The language code of the vocabulary entries.
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see what-is-transcribe.
     #
     # @option params [Array<String>] :phrases
     #   An array of strings containing the vocabulary entries.
@@ -1983,7 +1998,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

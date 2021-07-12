@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-05-14)
+------------------
+
+* Feature - Adds support for cold storage.
+
+1.51.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2021-03-03)
+------------------
+
+* Feature - AWS ElasticSearch Feature : Support for adding tags in elastic search domain during domain creation
+
+1.49.0 (2021-02-24)
+------------------
+
+* Feature - Amazon Elasticsearch Service now supports Auto-Tune, which monitors performance metrics and automatically optimizes domains
+
+1.48.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2021-01-27)
+------------------
+
+* Feature - Amazon Elasticsearch Service adds support for node-to-node encryption and encryption at rest for existing domains running Elasticsearch version 6.7 and above
+
+1.46.0 (2020-11-09)
+------------------
+
+* Feature - Adding support for package versioning in Amazon Elasticsearch Service
+
+1.45.0 (2020-11-05)
+------------------
+
+* Feature - Amazon Elasticsearch Service now provides the ability to define a custom endpoint for your domain and link an SSL certificate from ACM, making it easier to refer to Kibana and the domain endpoint.
+
+1.44.0 (2020-11-04)
+------------------
+
+* Feature - Amazon Elasticsearch Service now supports native SAML authentication that seamlessly integrates with the customers' existing SAML 2.0 Identity Provider (IdP).
+
 1.43.0 (2020-09-30)
 ------------------
 

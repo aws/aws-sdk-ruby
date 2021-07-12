@@ -3,12 +3,25 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ACM
   module Types
+
+    # You do not have access required to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass AddTagsToCertificateRequest
     #   data as a hash:
@@ -29,8 +42,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -55,8 +68,8 @@ module Aws::ACM
     #
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the certificate. For more
-    #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces][1] in the *AWS General Reference*.
+    #   information about ARNs, see [Amazon Resource Names (ARNs)][1] in the
+    #   *AWS General Reference*.
     #
     #
     #
@@ -98,8 +111,7 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time at which the certificate was requested. This value exists
-    #   only when the certificate type is `AMAZON_ISSUED`.
+    #   The time at which the certificate was requested.
     #   @return [Time]
     #
     # @!attribute [rw] issued_at
@@ -293,8 +305,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -315,6 +327,21 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # You are trying to update a resource or configuration that is already
+    # being created or updated. Wait for the previous operation to finish
+    # and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteCertificateRequest
     #   data as a hash:
     #
@@ -328,8 +355,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -357,8 +384,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -490,6 +517,32 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Object containing expiration events options associated with an AWS
+    # account.
+    #
+    # @note When making an API call, you may pass ExpiryEventsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         days_before_expiry: 1,
+    #       }
+    #
+    # @!attribute [rw] days_before_expiry
+    #   Specifies the number of days prior to certificate expiration when
+    #   ACM starts generating `EventBridge` events. ACM sends one event per
+    #   day per certificate until the certificate expires. By default,
+    #   accounts receive events starting 45 days before certificate
+    #   expiration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExpiryEventsConfiguration AWS API Documentation
+    #
+    class ExpiryEventsConfiguration < Struct.new(
+      :days_before_expiry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ExportCertificateRequest
     #   data as a hash:
     #
@@ -613,8 +666,9 @@ module Aws::ACM
     #   Specify one or more algorithms that can be used to generate key
     #   pairs.
     #
-    #   Default filtering returns only `RSA_2048` certificates. To return
-    #   other certificate types, provide the desired type signatures in a
+    #   Default filtering returns only `RSA_1024` and `RSA_2048`
+    #   certificates that have at least one domain. To return other
+    #   certificate types, provide the desired type signatures in a
     #   comma-separated list. For example, `"keyTypes":
     #   ["RSA_2048,RSA_4096"]` returns both `RSA_2048` and `RSA_4096`
     #   certificates.
@@ -626,6 +680,19 @@ module Aws::ACM
       :extended_key_usage,
       :key_usage,
       :key_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] expiry_events
+    #   Expiration events configuration options associated with the AWS
+    #   account.
+    #   @return [Types::ExpiryEventsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetAccountConfigurationResponse AWS API Documentation
+    #
+    class GetAccountConfigurationResponse < Struct.new(
+      :expiry_events)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -642,8 +709,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -941,8 +1008,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -969,6 +1036,38 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutAccountConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         expiry_events: {
+    #           days_before_expiry: 1,
+    #         },
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] expiry_events
+    #   Specifies expiration events associated with an account.
+    #   @return [Types::ExpiryEventsConfiguration]
+    #
+    # @!attribute [rw] idempotency_token
+    #   Customer-chosen string used to distinguish between calls to
+    #   `PutAccountConfiguration`. Idempotency tokens time out after one
+    #   hour. If you call `PutAccountConfiguration` multiple times with the
+    #   same unexpired idempotency token, ACM treats it as the same request
+    #   and returns the original result. If you change the idempotency token
+    #   for each call, ACM treats each call as a new request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/PutAccountConfigurationRequest AWS API Documentation
+    #
+    class PutAccountConfigurationRequest < Struct.new(
+      :expiry_events,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveTagsFromCertificateRequest
     #   data as a hash:
     #
@@ -988,8 +1087,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -1022,8 +1121,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -1412,6 +1511,19 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # The request was denied because it exceeded a quota.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request contains too many tags. Try the request again with fewer
     # tags.
     #
@@ -1458,6 +1570,19 @@ module Aws::ACM
     class UpdateCertificateOptionsRequest < Struct.new(
       :certificate_arn,
       :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The supplied input failed to satisfy constraints of an AWS service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

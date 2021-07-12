@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -371,6 +371,10 @@ module Aws::DatabaseMigrationService
     #           date_partition_enabled: false,
     #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #           use_csv_no_sup_value: false,
+    #           csv_no_sup_value: "String",
+    #           preserve_transactions: false,
+    #           cdc_path: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -389,6 +393,8 @@ module Aws::DatabaseMigrationService
     #           docs_to_investigate: "String",
     #           auth_source: "String",
     #           kms_key_id: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         kinesis_settings: {
     #           stream_arn: "String",
@@ -412,6 +418,13 @@ module Aws::DatabaseMigrationService
     #           include_control_details: false,
     #           message_max_bytes: 1,
     #           include_null_and_empty: false,
+    #           security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #           ssl_client_certificate_arn: "String",
+    #           ssl_client_key_arn: "String",
+    #           ssl_client_key_password: "SecretString",
+    #           ssl_ca_certificate_arn: "String",
+    #           sasl_username: "String",
+    #           sasl_password: "SecretString",
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -457,6 +470,8 @@ module Aws::DatabaseMigrationService
     #           truncate_columns: false,
     #           username: "String",
     #           write_buffer_size: 1,
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         postgre_sql_settings: {
     #           after_connect_script: "String",
@@ -471,9 +486,12 @@ module Aws::DatabaseMigrationService
     #           server_name: "String",
     #           username: "String",
     #           slot_name: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
+    #           clean_source_metadata_on_mismatch: false,
     #           database_name: "String",
     #           events_poll_interval: 1,
     #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -484,6 +502,8 @@ module Aws::DatabaseMigrationService
     #           server_name: "String",
     #           server_timezone: "String",
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         oracle_settings: {
     #           add_supplemental_logging: false,
@@ -515,7 +535,12 @@ module Aws::DatabaseMigrationService
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
+    #           spatial_data_option_to_geo_json_function_name: "String",
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
+    #           secrets_manager_oracle_asm_access_role_arn: "String",
+    #           secrets_manager_oracle_asm_secret_id: "String",
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -523,6 +548,8 @@ module Aws::DatabaseMigrationService
     #           port: 1,
     #           server_name: "String",
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         microsoft_sql_server_settings: {
     #           port: 1,
@@ -530,11 +557,15 @@ module Aws::DatabaseMigrationService
     #           database_name: "String",
     #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           query_single_always_on_node: false,
     #           read_backup_only: false,
     #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
     #           use_bcp_full_load: false,
+    #           use_third_party_backup_device: false,
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
@@ -545,8 +576,23 @@ module Aws::DatabaseMigrationService
     #           current_lsn: "String",
     #           max_k_bytes_per_read: 1,
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         resource_identifier: "String",
+    #         doc_db_settings: {
+    #           username: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           nesting_level: "none", # accepts none, one
+    #           extract_doc_id: false,
+    #           docs_to_investigate: 1,
+    #           kms_key_id: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_identifier
@@ -834,6 +880,10 @@ module Aws::DatabaseMigrationService
     #   default identifier value for the end of `EndpointArn`.
     #   @return [String]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
     class CreateEndpointMessage < Struct.new(
@@ -867,7 +917,8 @@ module Aws::DatabaseMigrationService
       :sybase_settings,
       :microsoft_sql_server_settings,
       :ibm_db_2_settings,
-      :resource_identifier)
+      :resource_identifier,
+      :doc_db_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -1923,6 +1974,62 @@ module Aws::DatabaseMigrationService
     class DescribeConnectionsResponse < Struct.new(
       :marker,
       :connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEndpointSettingsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         engine_name: "String", # required
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] engine_name
+    #   The databse engine used for your source or target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointSettingsMessage AWS API Documentation
+    #
+    class DescribeEndpointSettingsMessage < Struct.new(
+      :engine_name,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_settings
+    #   Descriptions of the endpoint settings available for your source or
+    #   target database engine.
+    #   @return [Array<Types::EndpointSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointSettingsResponse AWS API Documentation
+    #
+    class DescribeEndpointSettingsResponse < Struct.new(
+      :marker,
+      :endpoint_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3070,6 +3177,125 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a DocumentDB endpoint.
+    #
+    # @note When making an API call, you may pass DocDbSettings
+    #   data as a hash:
+    #
+    #       {
+    #         username: "String",
+    #         password: "SecretString",
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         nesting_level: "none", # accepts none, one
+    #         extract_doc_id: false,
+    #         docs_to_investigate: 1,
+    #         kms_key_id: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
+    #       }
+    #
+    # @!attribute [rw] username
+    #   The user name you use to access the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the user account you use to access the DocumentDB
+    #   source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server on the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the DocumentDB source endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] nesting_level
+    #   Specifies either document or table mode.
+    #
+    #   Default value is `"none"`. Specify `"none"` to use document mode.
+    #   Specify `"one"` to use table mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] extract_doc_id
+    #   Specifies the document ID. Use this setting when `NestingLevel` is
+    #   set to `"none"`.
+    #
+    #   Default value is `"false"`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] docs_to_investigate
+    #   Indicates the number of documents to preview to determine the
+    #   document organization. Use this setting when `NestingLevel` is set
+    #   to `"one"`.
+    #
+    #   Must be a positive value greater than `0`. Default value is `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier that is used to encrypt the content on
+    #   the replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then AWS DMS uses your default encryption key.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the DocumentDB endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the DocumentDB endpoint
+    #   connection details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DocDbSettings AWS API Documentation
+    #
+    class DocDbSettings < Struct.new(
+      :username,
+      :password,
+      :server_name,
+      :port,
+      :database_name,
+      :nesting_level,
+      :extract_doc_id,
+      :docs_to_investigate,
+      :kms_key_id,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
     # Provides the Amazon Resource Name (ARN) of the AWS Identity and Access
     # Management (IAM) role used to define an Amazon DynamoDB target
     # endpoint.
@@ -3336,6 +3562,10 @@ module Aws::DatabaseMigrationService
     #   information, see the `IBMDb2Settings` structure.
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -3370,7 +3600,58 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :doc_db_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Endpoint settings.
+    #
+    # @!attribute [rw] name
+    #   The name that you want to give the endpoint settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of endpoint. Valid values are `source` and `target`.
+    #   @return [String]
+    #
+    # @!attribute [rw] enum_values
+    #   Enumerated values to use for this endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sensitive
+    #   A value that marks this endpoint setting as sensitive.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] units
+    #   The unit of measure for this endpoint setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] applicability
+    #   The relevance or validity of an endpoint setting for an engine name
+    #   and its endpoint type.
+    #   @return [String]
+    #
+    # @!attribute [rw] int_value_min
+    #   The minimum value of an endpoint setting that is of type `int`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] int_value_max
+    #   The maximum value of an endpoint setting that is of type `int`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/EndpointSetting AWS API Documentation
+    #
+    class EndpointSetting < Struct.new(
+      :name,
+      :type,
+      :enum_values,
+      :sensitive,
+      :units,
+      :applicability,
+      :int_value_min,
+      :int_value_max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3514,7 +3795,7 @@ module Aws::DatabaseMigrationService
     # Identifies the name and value of a filter object. This filter is used
     # to limit the number and type of AWS DMS objects that are returned for
     # a particular `Describe*` call or similar operation. Filters are used
-    # as an optional parameter to the following APIs.
+    # as an optional parameter for certain API operations.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -3557,6 +3838,8 @@ module Aws::DatabaseMigrationService
     #         current_lsn: "String",
     #         max_k_bytes_per_read: 1,
     #         username: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
     #       }
     #
     # @!attribute [rw] database_name
@@ -3594,6 +3877,36 @@ module Aws::DatabaseMigrationService
     #   Endpoint connection user name.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the Db2 LUW endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the Db2 LUW endpoint connection
+    #   details.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/IBMDb2Settings AWS API Documentation
     #
     class IBMDb2Settings < Struct.new(
@@ -3604,7 +3917,9 @@ module Aws::DatabaseMigrationService
       :set_data_capture_changes,
       :current_lsn,
       :max_k_bytes_per_read,
-      :username)
+      :username,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -3614,7 +3929,7 @@ module Aws::DatabaseMigrationService
     #
     #       {
     #         certificate_identifier: "String", # required
-    #         certificate_pem: "String",
+    #         certificate_pem: "SecretString",
     #         certificate_wallet: "data",
     #         tags: [
     #           {
@@ -3651,7 +3966,7 @@ module Aws::DatabaseMigrationService
       :certificate_pem,
       :certificate_wallet,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:certificate_pem]
       include Aws::Structure
     end
 
@@ -3833,13 +4148,27 @@ module Aws::DatabaseMigrationService
     #         include_control_details: false,
     #         message_max_bytes: 1,
     #         include_null_and_empty: false,
+    #         security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #         ssl_client_certificate_arn: "String",
+    #         ssl_client_key_arn: "String",
+    #         ssl_client_key_password: "SecretString",
+    #         ssl_ca_certificate_arn: "String",
+    #         sasl_username: "String",
+    #         sasl_password: "SecretString",
     #       }
     #
     # @!attribute [rw] broker
-    #   The broker location and port of the Kafka broker that hosts your
-    #   Kafka instance. Specify the broker in the form `
-    #   broker-hostname-or-ip:port `. For example,
-    #   `"ec2-12-345-678-901.compute-1.amazonaws.com:2345"`.
+    #   A comma-separated list of one or more broker locations in your Kafka
+    #   cluster that host your Kafka instance. Specify each broker location
+    #   in the form ` broker-hostname-or-ip:port `. For example,
+    #   `"ec2-12-345-678-901.compute-1.amazonaws.com:2345"`. For more
+    #   information and examples of specifying a list of broker locations,
+    #   see [Using Apache Kafka as a target for AWS Database Migration
+    #   Service][1] in the *AWS Data Migration Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
     #   @return [String]
     #
     # @!attribute [rw] topic
@@ -3900,6 +4229,46 @@ module Aws::DatabaseMigrationService
     #   The default is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] security_protocol
+    #   Set secure connection to a Kafka target endpoint using Transport
+    #   Layer Security (TLS). Options include `ssl-encryption`,
+    #   `ssl-authentication`, and `sasl-ssl`. `sasl-ssl` requires
+    #   `SaslUsername` and `SaslPassword`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_client_certificate_arn
+    #   The Amazon Resource Name (ARN) of the client certificate used to
+    #   securely connect to a Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_client_key_arn
+    #   The Amazon Resource Name (ARN) for the client private key used to
+    #   securely connect to a Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_client_key_password
+    #   The password for the client private key used to securely connect to
+    #   a Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_ca_certificate_arn
+    #   The Amazon Resource Name (ARN) for the private Certification
+    #   Authority (CA) cert that AWS DMS uses to securely connect to your
+    #   Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] sasl_username
+    #   The secure username you created when you first set up your MSK
+    #   cluster to validate a client identity and make an encrypted
+    #   connection between server and client using SASL-SSL authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] sasl_password
+    #   The secure password you created when you first set up your MSK
+    #   cluster to validate a client identity and make an encrypted
+    #   connection between server and client using SASL-SSL authentication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KafkaSettings AWS API Documentation
     #
     class KafkaSettings < Struct.new(
@@ -3912,8 +4281,15 @@ module Aws::DatabaseMigrationService
       :include_table_alter_operations,
       :include_control_details,
       :message_max_bytes,
-      :include_null_and_empty)
-      SENSITIVE = []
+      :include_null_and_empty,
+      :security_protocol,
+      :ssl_client_certificate_arn,
+      :ssl_client_key_arn,
+      :ssl_client_key_password,
+      :ssl_ca_certificate_arn,
+      :sasl_username,
+      :sasl_password)
+      SENSITIVE = [:ssl_client_key_password, :sasl_password]
       include Aws::Structure
     end
 
@@ -4054,11 +4430,15 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         control_tables_file_group: "String",
     #         password: "SecretString",
+    #         query_single_always_on_node: false,
     #         read_backup_only: false,
     #         safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #         server_name: "String",
     #         username: "String",
     #         use_bcp_full_load: false,
+    #         use_third_party_backup_device: false,
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
     #       }
     #
     # @!attribute [rw] port
@@ -4075,15 +4455,22 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] control_tables_file_group
-    #   Specify a filegroup for the AWS DMS internal tables. When the
+    #   Specifies a file group for the AWS DMS internal tables. When the
     #   replication task starts, all the internal AWS DMS control tables
     #   (awsdms\_ apply\_exception, awsdms\_apply, awsdms\_changes) are
-    #   created on the specified filegroup.
+    #   created for the specified file group.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   Endpoint connection password.
     #   @return [String]
+    #
+    # @!attribute [rw] query_single_always_on_node
+    #   Cleans and recreates table metadata information on the replication
+    #   instance when a mismatch occurs. An example is a situation where
+    #   running an alter DDL statement on a table might result in different
+    #   information about the table cached in the replication instance.
+    #   @return [Boolean]
     #
     # @!attribute [rw] read_backup_only
     #   When this attribute is set to `Y`, AWS DMS only reads changes from
@@ -4131,6 +4518,41 @@ module Aws::DatabaseMigrationService
     #   loading table option.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_third_party_backup_device
+    #   When this attribute is set to `Y`, DMS processes third-party
+    #   transaction log backups if they are created in native format.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the SQL Server endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the SQL Server endpoint
+    #   connection details.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
     #
     class MicrosoftSQLServerSettings < Struct.new(
@@ -4139,11 +4561,15 @@ module Aws::DatabaseMigrationService
       :database_name,
       :control_tables_file_group,
       :password,
+      :query_single_always_on_node,
       :read_backup_only,
       :safeguard_policy,
       :server_name,
       :username,
-      :use_bcp_full_load)
+      :use_bcp_full_load,
+      :use_third_party_backup_device,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -4194,6 +4620,10 @@ module Aws::DatabaseMigrationService
     #           date_partition_enabled: false,
     #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #           use_csv_no_sup_value: false,
+    #           csv_no_sup_value: "String",
+    #           preserve_transactions: false,
+    #           cdc_path: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -4212,6 +4642,8 @@ module Aws::DatabaseMigrationService
     #           docs_to_investigate: "String",
     #           auth_source: "String",
     #           kms_key_id: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         kinesis_settings: {
     #           stream_arn: "String",
@@ -4235,6 +4667,13 @@ module Aws::DatabaseMigrationService
     #           include_control_details: false,
     #           message_max_bytes: 1,
     #           include_null_and_empty: false,
+    #           security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #           ssl_client_certificate_arn: "String",
+    #           ssl_client_key_arn: "String",
+    #           ssl_client_key_password: "SecretString",
+    #           ssl_ca_certificate_arn: "String",
+    #           sasl_username: "String",
+    #           sasl_password: "SecretString",
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -4280,6 +4719,8 @@ module Aws::DatabaseMigrationService
     #           truncate_columns: false,
     #           username: "String",
     #           write_buffer_size: 1,
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         postgre_sql_settings: {
     #           after_connect_script: "String",
@@ -4294,9 +4735,12 @@ module Aws::DatabaseMigrationService
     #           server_name: "String",
     #           username: "String",
     #           slot_name: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
+    #           clean_source_metadata_on_mismatch: false,
     #           database_name: "String",
     #           events_poll_interval: 1,
     #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -4307,6 +4751,8 @@ module Aws::DatabaseMigrationService
     #           server_name: "String",
     #           server_timezone: "String",
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         oracle_settings: {
     #           add_supplemental_logging: false,
@@ -4338,7 +4784,12 @@ module Aws::DatabaseMigrationService
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
+    #           spatial_data_option_to_geo_json_function_name: "String",
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
+    #           secrets_manager_oracle_asm_access_role_arn: "String",
+    #           secrets_manager_oracle_asm_secret_id: "String",
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -4346,6 +4797,8 @@ module Aws::DatabaseMigrationService
     #           port: 1,
     #           server_name: "String",
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         microsoft_sql_server_settings: {
     #           port: 1,
@@ -4353,11 +4806,15 @@ module Aws::DatabaseMigrationService
     #           database_name: "String",
     #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           query_single_always_on_node: false,
     #           read_backup_only: false,
     #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
     #           use_bcp_full_load: false,
+    #           use_third_party_backup_device: false,
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
@@ -4368,6 +4825,21 @@ module Aws::DatabaseMigrationService
     #           current_lsn: "String",
     #           max_k_bytes_per_read: 1,
     #           username: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
+    #         },
+    #         doc_db_settings: {
+    #           username: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           nesting_level: "none", # accepts none, one
+    #           extract_doc_id: false,
+    #           docs_to_investigate: 1,
+    #           kms_key_id: "String",
+    #           secrets_manager_access_role_arn: "String",
+    #           secrets_manager_secret_id: "String",
     #         },
     #       }
     #
@@ -4625,6 +5097,18 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Settings in JSON format for the source DocumentDB endpoint. For more
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using DocumentDB as a Target for AWS
+    #   Database Migration Service][1] in the *AWS Database Migration
+    #   Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
     #
     class ModifyEndpointMessage < Struct.new(
@@ -4656,7 +5140,8 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :doc_db_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -4833,7 +5318,7 @@ module Aws::DatabaseMigrationService
     #   A value that indicates that minor version upgrades are applied
     #   automatically to the replication instance during the maintenance
     #   window. Changing this parameter doesn't result in an outage, except
-    #   in the case dsecribed following. The change is asynchronously
+    #   in the case described following. The change is asynchronously
     #   applied as soon as possible.
     #
     #   An outage does result if these factors apply:
@@ -4963,8 +5448,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] table_mappings
     #   When using the AWS CLI or boto3, provide the path of the JSON file
     #   that contains the table mappings. Precede the path with `file://`.
-    #   When working with the DMS API, provide the JSON as the parameter
-    #   value, for example: `--table-mappings file://mappingfile.json`
+    #   For example, `--table-mappings file://mappingfile.json`. When
+    #   working with the DMS API, provide the JSON as the parameter value.
     #   @return [String]
     #
     # @!attribute [rw] replication_task_settings
@@ -5078,6 +5563,8 @@ module Aws::DatabaseMigrationService
     #         docs_to_investigate: "String",
     #         auth_source: "String",
     #         kms_key_id: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
     #       }
     #
     # @!attribute [rw] username
@@ -5157,6 +5644,36 @@ module Aws::DatabaseMigrationService
     #   Region.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the MongoDB endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the MongoDB endpoint connection
+    #   details.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MongoDbSettings AWS API Documentation
     #
     class MongoDbSettings < Struct.new(
@@ -5171,8 +5688,48 @@ module Aws::DatabaseMigrationService
       :extract_doc_id,
       :docs_to_investigate,
       :auth_source,
-      :kms_key_id)
+      :kms_key_id,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
       SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MoveReplicationTaskMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String", # required
+    #         target_replication_instance_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   The Amazon Resource Name (ARN) of the task that you want to move.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_replication_instance_arn
+    #   The ARN of the replication instance where you want to move the task
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTaskMessage AWS API Documentation
+    #
+    class MoveReplicationTaskMessage < Struct.new(
+      :replication_task_arn,
+      :target_replication_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task
+    #   The replication task that was moved.
+    #   @return [Types::ReplicationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTaskResponse AWS API Documentation
+    #
+    class MoveReplicationTaskResponse < Struct.new(
+      :replication_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5183,6 +5740,7 @@ module Aws::DatabaseMigrationService
     #
     #       {
     #         after_connect_script: "String",
+    #         clean_source_metadata_on_mismatch: false,
     #         database_name: "String",
     #         events_poll_interval: 1,
     #         target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -5193,6 +5751,8 @@ module Aws::DatabaseMigrationService
     #         server_name: "String",
     #         server_timezone: "String",
     #         username: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
     #       }
     #
     # @!attribute [rw] after_connect_script
@@ -5200,6 +5760,13 @@ module Aws::DatabaseMigrationService
     #   endpoint. The migration task continues running regardless if the SQL
     #   statement succeeds or fails.
     #   @return [String]
+    #
+    # @!attribute [rw] clean_source_metadata_on_mismatch
+    #   Adjusts the behavior of DMS when migrating from an SQL Server source
+    #   database that is hosted as part of an Always On availability group
+    #   cluster. If you need DMS to poll all the nodes in the Always On
+    #   cluster for transaction backups, set this attribute to `false`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
@@ -5230,7 +5797,7 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] parallel_load_threads
-    #   Improves performance when loading data into the MySQLcompatible
+    #   Improves performance when loading data into the MySQL-compatible
     #   target database. Specifies how many threads to use to load the data
     #   into the MySQL-compatible target database. Setting a large number of
     #   threads can have an adverse effect on database performance, because
@@ -5263,10 +5830,41 @@ module Aws::DatabaseMigrationService
     #   Endpoint connection user name.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the MySQL endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the MySQL endpoint connection
+    #   details.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySQLSettings AWS API Documentation
     #
     class MySQLSettings < Struct.new(
       :after_connect_script,
+      :clean_source_metadata_on_mismatch,
       :database_name,
       :events_poll_interval,
       :target_db_type,
@@ -5276,7 +5874,9 @@ module Aws::DatabaseMigrationService
       :port,
       :server_name,
       :server_timezone,
-      :username)
+      :username,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -5395,7 +5995,12 @@ module Aws::DatabaseMigrationService
     #         security_db_encryption: "SecretString",
     #         security_db_encryption_name: "String",
     #         server_name: "String",
+    #         spatial_data_option_to_geo_json_function_name: "String",
     #         username: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
+    #         secrets_manager_oracle_asm_access_role_arn: "String",
+    #         secrets_manager_oracle_asm_secret_id: "String",
     #       }
     #
     # @!attribute [rw] add_supplemental_logging
@@ -5629,8 +6234,79 @@ module Aws::DatabaseMigrationService
     #   Fully qualified domain name of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] spatial_data_option_to_geo_json_function_name
+    #   Use this attribute to convert `SDO_GEOMETRY` to `GEOJSON` format. By
+    #   default, DMS calls the `SDO2GEOJSON` custom function if present and
+    #   accessible. Or you can create your own custom function that mimics
+    #   the operation of `SDOGEOJSON` and set
+    #   `SpatialDataOptionToGeoJsonFunctionName` to call it instead.
+    #   @return [String]
+    #
     # @!attribute [rw] username
     #   Endpoint connection user name.
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the Oracle endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the Oracle endpoint connection
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_oracle_asm_access_role_arn
+    #   Required only if your Oracle endpoint uses Advanced Storage Manager
+    #   (ASM). The full ARN of the IAM role that specifies AWS DMS as the
+    #   trusted entity and grants the required permissions to access the
+    #   `SecretsManagerOracleAsmSecret`. This
+    #   `SecretsManagerOracleAsmSecret` has the secret value that allows
+    #   access to the Oracle ASM of the endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerOracleAsmSecretId`. Or you can specify clear-text
+    #   values for `AsmUserName`, `AsmPassword`, and `AsmServerName`. You
+    #   can't specify both. For more information on creating this
+    #   `SecretsManagerOracleAsmSecret` and the
+    #   `SecretsManagerOracleAsmAccessRoleArn` and
+    #   `SecretsManagerOracleAsmSecretId` required to access it, see [Using
+    #   secrets to access AWS Database Migration Service resources][1] in
+    #   the *AWS Database Migration Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_oracle_asm_secret_id
+    #   Required only if your Oracle endpoint uses Advanced Storage Manager
+    #   (ASM). The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerOracleAsmSecret` that contains the Oracle ASM
+    #   connection details for the Oracle endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
@@ -5665,7 +6341,12 @@ module Aws::DatabaseMigrationService
       :security_db_encryption,
       :security_db_encryption_name,
       :server_name,
-      :username)
+      :spatial_data_option_to_geo_json_function_name,
+      :username,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id,
+      :secrets_manager_oracle_asm_access_role_arn,
+      :secrets_manager_oracle_asm_secret_id)
       SENSITIVE = [:asm_password, :password, :security_db_encryption]
       include Aws::Structure
     end
@@ -5821,6 +6502,8 @@ module Aws::DatabaseMigrationService
     #         server_name: "String",
     #         username: "String",
     #         slot_name: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
     #       }
     #
     # @!attribute [rw] after_connect_script
@@ -5897,6 +6580,36 @@ module Aws::DatabaseMigrationService
     #   this attribute also enables using native CDC start points.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the PostgreSQL endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the PostgreSQL endpoint
+    #   connection details.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
@@ -5911,7 +6624,9 @@ module Aws::DatabaseMigrationService
       :port,
       :server_name,
       :username,
-      :slot_name)
+      :slot_name,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -5989,6 +6704,8 @@ module Aws::DatabaseMigrationService
     #         truncate_columns: false,
     #         username: "String",
     #         write_buffer_size: 1,
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
     #       }
     #
     # @!attribute [rw] accept_any_date
@@ -6015,8 +6732,8 @@ module Aws::DatabaseMigrationService
     #   and loads them to the *BucketFolder/TableID* path. AWS DMS uses the
     #   Redshift `COPY` command to upload the .csv files to the target
     #   table. The files are deleted once the `COPY` operation has finished.
-    #   For more information, see [Amazon Redshift Database Developer
-    #   Guide][1]
+    #   For more information, see [COPY][1] in the *Amazon Redshift Database
+    #   Developer Guide*.
     #
     #   For change-data-capture (CDC) mode, AWS DMS creates a *NetChanges*
     #   table, and loads the .csv files to this
@@ -6204,6 +6921,36 @@ module Aws::DatabaseMigrationService
     #   instance. The default value is 1000 (buffer size is 1000KB).
     #   @return [Integer]
     #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the Amazon Redshift endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the Amazon Redshift endpoint
+    #   connection details.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftSettings AWS API Documentation
     #
     class RedshiftSettings < Struct.new(
@@ -6234,7 +6981,9 @@ module Aws::DatabaseMigrationService
       :trim_blanks,
       :truncate_columns,
       :username,
-      :write_buffer_size)
+      :write_buffer_size,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -6736,17 +7485,16 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] source_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   The Amazon Resource Name (ARN) that uniquely identifies the
     #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] target_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   endpoint.
+    #   The ARN that uniquely identifies the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_arn
-    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   The ARN of the replication instance.
     #   @return [String]
     #
     # @!attribute [rw] migration_type
@@ -6762,7 +7510,73 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the replication task.
+    #   The status of the replication task. This response parameter can
+    #   return one of the following values:
+    #
+    #   * `"moving"` – The task is being moved in response to running the [
+    #     `MoveReplicationTask` ][1] operation.
+    #
+    #   * `"creating"` – The task is being created in response to running
+    #     the [ `CreateReplicationTask` ][2] operation.
+    #
+    #   * `"deleting"` – The task is being deleted in response to running
+    #     the [ `DeleteReplicationTask` ][3] operation.
+    #
+    #   * `"failed"` – The task failed to successfully complete the database
+    #     migration in response to running the [ `StartReplicationTask` ][4]
+    #     operation.
+    #
+    #   * `"failed-move"` – The task failed to move in response to running
+    #     the [ `MoveReplicationTask` ][1] operation.
+    #
+    #   * `"modifying"` – The task definition is being modified in response
+    #     to running the [ `ModifyReplicationTask` ][5] operation.
+    #
+    #   * `"ready"` – The task is in a `ready` state where it can respond to
+    #     other task operations, such as [ `StartReplicationTask` ][4] or [
+    #     `DeleteReplicationTask` ][3].
+    #
+    #   * `"running"` – The task is performing a database migration in
+    #     response to running the [ `StartReplicationTask` ][4] operation.
+    #
+    #   * `"starting"` – The task is preparing to perform a database
+    #     migration in response to running the [ `StartReplicationTask` ][4]
+    #     operation.
+    #
+    #   * `"stopped"` – The task has stopped in response to running the [
+    #     `StopReplicationTask` ][6] operation.
+    #
+    #   * `"stopping"` – The task is preparing to stop in response to
+    #     running the [ `StopReplicationTask` ][6] operation.
+    #
+    #   * `"testing"` – The database migration specified for this task is
+    #     being tested in response to running either the [
+    #     `StartReplicationTaskAssessmentRun` ][7] or the [
+    #     `StartReplicationTaskAssessment` ][8] operation.
+    #
+    #     <note markdown="1"> [ `StartReplicationTaskAssessmentRun` ][7] is an improved
+    #     premigration task assessment operation. The [
+    #     `StartReplicationTaskAssessment` ][8] operation assesses data type
+    #     compatibility only between the source and target database of a
+    #     given migration task. In contrast, [
+    #     `StartReplicationTaskAssessmentRun` ][7] enables you to specify a
+    #     variety of premigration task assessments in addition to data type
+    #     compatibility. These assessments include ones for the validity of
+    #     primary key definitions and likely issues with database migration
+    #     performance, among others.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html
+    #   [3]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html
+    #   [4]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html
+    #   [5]: https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html
+    #   [6]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html
+    #   [7]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html
+    #   [8]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html
     #   @return [String]
     #
     # @!attribute [rw] last_failure_message
@@ -6780,7 +7594,7 @@ module Aws::DatabaseMigrationService
     #     load completed.
     #
     #   * `"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"` – In a full-load and
-    #     CDC migration, the full-load stopped as specified before starting
+    #     CDC migration, the full load stopped as specified before starting
     #     the CDC migration.
     #
     #   * `"STOP_REASON_SERVER_TIME"` – The migration stopped at the
@@ -6849,6 +7663,17 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #   @return [String]
     #
+    # @!attribute [rw] target_replication_instance_arn
+    #   The ARN of the replication instance to which this task is moved in
+    #   response to running the [ `MoveReplicationTask` ][1] operation.
+    #   Otherwise, this response parameter isn't a member of the
+    #   `ReplicationTask` object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTask AWS API Documentation
     #
     class ReplicationTask < Struct.new(
@@ -6869,7 +7694,8 @@ module Aws::DatabaseMigrationService
       :recovery_checkpoint,
       :replication_task_arn,
       :replication_task_stats,
-      :task_data)
+      :task_data,
+      :target_replication_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7301,12 +8127,16 @@ module Aws::DatabaseMigrationService
     #         date_partition_enabled: false,
     #         date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #         date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #         use_csv_no_sup_value: false,
+    #         csv_no_sup_value: "String",
+    #         preserve_transactions: false,
+    #         cdc_path: "String",
     #       }
     #
     # @!attribute [rw] service_access_role_arn
     #   The Amazon Resource Name (ARN) used by the service access IAM role.
     #   It is a required parameter that enables DMS to write and read
-    #   objects from an 3S bucket.
+    #   objects from an S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] external_table_definition
@@ -7625,11 +8455,11 @@ module Aws::DatabaseMigrationService
     #   When set to `true`, this parameter partitions S3 bucket folders
     #   based on transaction commit dates. The default value is `false`. For
     #   more information about date-based folder partitoning, see [Using
-    #   date-based folder partitioning][1]
+    #   date-based folder partitioning][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning
     #   @return [Boolean]
     #
     # @!attribute [rw] date_partition_sequence
@@ -7642,6 +8472,94 @@ module Aws::DatabaseMigrationService
     #   Specifies a date separating delimiter to use during folder
     #   partitioning. The default value is `SLASH`. Use this parameter when
     #   `DatePartitionedEnabled` is set to `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_csv_no_sup_value
+    #   This setting applies if the S3 output files during a change data
+    #   capture (CDC) load are written in .csv format. If set to `true` for
+    #   columns not included in the supplemental log, AWS DMS uses the value
+    #   specified by [ `CsvNoSupValue` ][1]. If not set or set to `false`,
+    #   AWS DMS uses the null value for these columns.
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.1 and later.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] csv_no_sup_value
+    #   This setting only applies if your Amazon S3 output files during a
+    #   change data capture (CDC) load are written in .csv format. If [
+    #   `UseCsvNoSupValue` ][1] is set to true, specify a string value that
+    #   you want AWS DMS to use for all columns not included in the
+    #   supplemental log. If you do not specify a string value, AWS DMS uses
+    #   the null value for these columns regardless of the
+    #   `UseCsvNoSupValue` setting.
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.1 and later.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue
+    #   @return [String]
+    #
+    # @!attribute [rw] preserve_transactions
+    #   If set to `true`, AWS DMS saves the transaction order for a change
+    #   data capture (CDC) load on the Amazon S3 target specified by [
+    #   `CdcPath` ][1]. For more information, see [Capturing data changes
+    #   (CDC) including transaction order on the S3 target][2].
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.2 and later.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cdc_path
+    #   Specifies the folder path of CDC files. For an S3 source, this
+    #   setting is required if a task captures change data; otherwise, it's
+    #   optional. If `CdcPath` is set, AWS DMS reads CDC files from this
+    #   path and replicates the data changes to the target endpoint. For an
+    #   S3 target if you set [ `PreserveTransactions` ][1] to `true`, AWS
+    #   DMS verifies that you have set this parameter to a folder path on
+    #   your S3 target where AWS DMS can save the transaction order for the
+    #   CDC load. AWS DMS creates this CDC folder path in either your S3
+    #   target working directory or the S3 target location specified by [
+    #   `BucketFolder` ][2] and [ `BucketName` ][3].
+    #
+    #   For example, if you specify `CdcPath` as `MyChangedData`, and you
+    #   specify `BucketName` as `MyTargetBucket` but do not specify
+    #   `BucketFolder`, AWS DMS creates the CDC folder path following:
+    #   `MyTargetBucket/MyChangedData`.
+    #
+    #   If you specify the same `CdcPath`, and you specify `BucketName` as
+    #   `MyTargetBucket` and `BucketFolder` as `MyTargetData`, AWS DMS
+    #   creates the CDC folder path following:
+    #   `MyTargetBucket/MyTargetData/MyChangedData`.
+    #
+    #   For more information on CDC including transaction order on an S3
+    #   target, see [Capturing data changes (CDC) including transaction
+    #   order on the S3 target][4].
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.2 and later.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions
+    #   [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder
+    #   [3]: https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName
+    #   [4]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
@@ -7670,7 +8588,11 @@ module Aws::DatabaseMigrationService
       :cdc_inserts_and_updates,
       :date_partition_enabled,
       :date_partition_sequence,
-      :date_partition_delimiter)
+      :date_partition_delimiter,
+      :use_csv_no_sup_value,
+      :csv_no_sup_value,
+      :preserve_transactions,
+      :cdc_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8084,6 +9006,8 @@ module Aws::DatabaseMigrationService
     #         port: 1,
     #         server_name: "String",
     #         username: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #         secrets_manager_secret_id: "String",
     #       }
     #
     # @!attribute [rw] database_name
@@ -8106,6 +9030,36 @@ module Aws::DatabaseMigrationService
     #   Endpoint connection user name.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_access_role_arn
+    #   The full Amazon Resource Name (ARN) of the IAM role that specifies
+    #   AWS DMS as the trusted entity and grants the required permissions to
+    #   access the value in `SecretsManagerSecret`. `SecretsManagerSecret`
+    #   has the value of the AWS Secrets Manager secret that allows access
+    #   to the SAP ASE endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerSecretId`. Or you can specify clear-text values for
+    #   `UserName`, `Password`, `ServerName`, and `Port`. You can't specify
+    #   both. For more information on creating this `SecretsManagerSecret`
+    #   and the `SecretsManagerAccessRoleArn` and `SecretsManagerSecretId`
+    #   required to access it, see [Using secrets to access AWS Database
+    #   Migration Service resources][1] in the *AWS Database Migration
+    #   Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_secret_id
+    #   The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerSecret` that contains the SAP SAE endpoint connection
+    #   details.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SybaseSettings AWS API Documentation
     #
     class SybaseSettings < Struct.new(
@@ -8113,7 +9067,9 @@ module Aws::DatabaseMigrationService
       :password,
       :port,
       :server_name,
-      :username)
+      :username,
+      :secrets_manager_access_role_arn,
+      :secrets_manager_secret_id)
       SENSITIVE = [:password]
       include Aws::Structure
     end

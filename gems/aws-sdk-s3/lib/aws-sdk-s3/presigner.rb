@@ -58,8 +58,7 @@ module Aws
       #   is returned instead of the default HTTPS URL.
       #
       # @option params [Boolean] :virtual_host (false) When `true`, the
-      #   bucket name will be used as the hostname. This will cause
-      #   the returned URL to be 'http' and not 'https'.
+      #   bucket name will be used as the hostname.
       #
       # @option params [Boolean] :use_accelerate_endpoint (false) When `true`,
       #   Presigner will attempt to use accelerated endpoint.
@@ -139,6 +138,7 @@ module Aws
 
         req = @client.build_request(method, params)
         use_bucket_as_hostname(req) if virtual_host
+        handle_presigned_url_context(req)
 
         x_amz_headers = sign_but_dont_send(
           req, expires_in, scheme, time, unsigned_headers, hoist
@@ -184,6 +184,17 @@ module Aws
         end
       end
 
+      # Used for excluding presigned_urls from API request count.
+      #
+      # Store context information as early as possible, to allow
+      # handlers to perform decisions based on this flag if need.
+      def handle_presigned_url_context(req)
+        req.handle(step: :initialize, priority: 98) do |context|
+          context[:presigned_url] = true
+          @handler.call(context)
+        end
+      end
+
       # @param [Seahorse::Client::Request] req
       def sign_but_dont_send(
         req, expires_in, scheme, time, unsigned_headers, hoist = true
@@ -195,8 +206,6 @@ module Aws
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
         req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
-
-        signer = build_signer(req.context.config, unsigned_headers)
 
         req.handle(step: :send) do |context|
           if scheme != http_req.endpoint.scheme
@@ -222,6 +231,20 @@ module Aws
           end
           http_req.endpoint.query = query.join('&') unless query.empty?
 
+          # If it's an ARN, get the resolved region and service
+          if (arn = context.metadata[:s3_arn])
+            region = arn[:resolved_region]
+            service = arn[:arn].service
+          end
+
+          signer = Aws::Sigv4::Signer.new(
+            service: service || 's3',
+            region: region || context.config.region,
+            credentials_provider: context.config.credentials,
+            unsigned_headers: unsigned_headers,
+            uri_escape_path: false
+          )
+
           url = signer.presign_url(
             http_method: http_req.http_method,
             url: http_req.endpoint,
@@ -231,23 +254,10 @@ module Aws
             time: time
           ).to_s
 
-          # Used for excluding presigned_urls from API request count
-          context[:presigned_url] = true
-
           Seahorse::Client::Response.new(context: context, data: url)
         end
         # Return the headers
         x_amz_headers
-      end
-
-      def build_signer(cfg, unsigned_headers)
-        Aws::Sigv4::Signer.new(
-          service: 's3',
-          region: cfg.region,
-          credentials_provider: cfg.credentials,
-          unsigned_headers: unsigned_headers,
-          uri_escape_path: false
-        )
       end
     end
   end

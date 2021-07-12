@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -182,7 +182,7 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]
@@ -198,6 +198,7 @@ module Aws::S3
     #     cors_configuration: { # required
     #       cors_rules: [ # required
     #         {
+    #           id: "ID",
     #           allowed_headers: ["AllowedHeader"],
     #           allowed_methods: ["AllowedMethod"], # required
     #           allowed_origins: ["AllowedOrigin"], # required
@@ -213,8 +214,7 @@ module Aws::S3
     # @option options [required, Types::CORSConfiguration] :cors_configuration
     #   Describes the cross-origin access configuration for objects in an
     #   Amazon S3 bucket. For more information, see [Enabling Cross-Origin
-    #   Resource Sharing][1] in the *Amazon Simple Storage Service Developer
-    #   Guide*.
+    #   Resource Sharing][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -224,11 +224,14 @@ module Aws::S3
     #   used as a message integrity check to verify that the request body was
     #   not corrupted in transit. For more information, go to [RFC 1864.][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]

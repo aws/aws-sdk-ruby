@@ -328,6 +328,74 @@ module Aws
           ).to eq('AR_AKID')
         end
 
+        it 'supports assume role chaining' do
+          assume_role_stub(
+            'arn:aws:iam:123456789012:role/role_b',
+            'ACCESS_KEY_BASE',
+            'AK_1',
+            'SECRET_AK_1',
+            'TOKEN_1'
+          )
+
+          assume_role_stub(
+            'arn:aws:iam:123456789012:role/role_a',
+            'AK_1',
+            'AK_2',
+            'SECRET_AK_2',
+            'TOKEN_2'
+          )
+
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'assume_role_chain_b', region: 'us-east-1'
+          )
+          expect(
+            client.config.credentials.credentials.access_key_id
+          ).to eq('AK_2')
+        end
+
+        it 'uses source credentials when source and static are both set' do
+          assume_role_stub(
+            'arn:aws:iam:123456789012:role/role_a',
+            'ACCESS_KEY_BASE',
+            'AK_2',
+            'SECRET_AK_2',
+            'TOKEN_2'
+          )
+
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'assume_role_source_and_credentials', region: 'us-east-1'
+          )
+          expect(
+            client.config.credentials.credentials.access_key_id
+          ).to eq('AK_2')
+        end
+
+        it 'uses static credentials when the profile self references' do
+          assume_role_stub(
+            'arn:aws:iam:123456789012:role/role_a',
+            'ACCESS_KEY_SELF',
+            'AK_2',
+            'SECRET_AK_2',
+            'TOKEN_2'
+          )
+
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'assume_role_self_reference', region: 'us-east-1'
+          )
+          expect(
+            client.config.credentials.credentials.access_key_id
+          ).to eq('AK_2')
+        end
+
+        it 'raises if there is a loop in chained profiles' do
+          expect do
+            ApiHelper.sample_rest_xml::Client.new(
+              profile: 'assume_role_chain_loop_a', region: 'us-east-1'
+            )
+          end.to raise_error(Errors::SourceProfileCircularReferenceError)
+        end
+
+
         it 'raises if credential_source is present but invalid' do
           expect do
             ApiHelper.sample_rest_xml::Client.new(

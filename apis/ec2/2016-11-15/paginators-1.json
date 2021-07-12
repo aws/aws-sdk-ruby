@@ -6,6 +6,12 @@
     "DescribeAddresses": {
       "result_key": "Addresses"
     },
+    "DescribeAddressesAttribute": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Addresses"
+    },
     "DescribeAvailabilityZones": {
       "result_key": "AvailabilityZones"
     },
@@ -279,6 +285,18 @@
       "output_token": "NextToken",
       "result_key": "NetworkAcls"
     },
+    "DescribeNetworkInsightsAnalyses": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "NetworkInsightsAnalyses"
+    },
+    "DescribeNetworkInsightsPaths": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "NetworkInsightsPaths"
+    },
     "DescribeNetworkInterfacePermissions": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -315,6 +333,12 @@
     "DescribeRegions": {
       "result_key": "Regions"
     },
+    "DescribeReplaceRootVolumeTasks": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "ReplaceRootVolumeTasks"
+    },
     "DescribeReservedInstances": {
       "result_key": "ReservedInstances"
     },
@@ -349,6 +373,12 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "ScheduledInstanceSet"
+    },
+    "DescribeSecurityGroupRules": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "SecurityGroupRules"
     },
     "DescribeSecurityGroups": {
       "input_token": "NextToken",
@@ -386,6 +416,12 @@
       "output_token": "NextToken",
       "result_key": "StaleSecurityGroupSet"
     },
+    "DescribeStoreImageTasks": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "StoreImageTaskResults"
+    },
     "DescribeSubnets": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -421,6 +457,18 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "TransitGatewayAttachments"
+    },
+    "DescribeTransitGatewayConnectPeers": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "TransitGatewayConnectPeers"
+    },
+    "DescribeTransitGatewayConnects": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "TransitGatewayConnects"
     },
     "DescribeTransitGatewayMulticastDomains": {
       "input_token": "NextToken",

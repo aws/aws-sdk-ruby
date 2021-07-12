@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -19,13 +19,14 @@ module Aws::Braket
     CancellationStatus = Shapes::StringShape.new(name: 'CancellationStatus')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateQuantumTaskRequest = Shapes::StructureShape.new(name: 'CreateQuantumTaskRequest')
-    CreateQuantumTaskRequestdeviceParametersJsonValue = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestdeviceParametersJsonValue')
-    CreateQuantumTaskRequestoutputS3BucketString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestoutputS3BucketString')
-    CreateQuantumTaskRequestoutputS3KeyPrefixString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestoutputS3KeyPrefixString')
-    CreateQuantumTaskRequestshotsLong = Shapes::IntegerShape.new(name: 'CreateQuantumTaskRequestshotsLong')
+    CreateQuantumTaskRequestDeviceParametersString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestDeviceParametersString')
+    CreateQuantumTaskRequestOutputS3BucketString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestOutputS3BucketString')
+    CreateQuantumTaskRequestOutputS3KeyPrefixString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestOutputS3KeyPrefixString')
+    CreateQuantumTaskRequestShotsLong = Shapes::IntegerShape.new(name: 'CreateQuantumTaskRequestShotsLong')
     CreateQuantumTaskResponse = Shapes::StructureShape.new(name: 'CreateQuantumTaskResponse')
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
     DeviceOfflineException = Shapes::StructureShape.new(name: 'DeviceOfflineException')
+    DeviceRetiredException = Shapes::StructureShape.new(name: 'DeviceRetiredException')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
     DeviceSummaryList = Shapes::ListShape.new(name: 'DeviceSummaryList')
@@ -36,6 +37,8 @@ module Aws::Braket
     GetQuantumTaskResponse = Shapes::StructureShape.new(name: 'GetQuantumTaskResponse')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     QuantumTaskArn = Shapes::StringShape.new(name: 'QuantumTaskArn')
     QuantumTaskStatus = Shapes::StringShape.new(name: 'QuantumTaskStatus')
@@ -43,25 +46,31 @@ module Aws::Braket
     QuantumTaskSummaryList = Shapes::ListShape.new(name: 'QuantumTaskSummaryList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SearchDevicesFilter = Shapes::StructureShape.new(name: 'SearchDevicesFilter')
-    SearchDevicesFilternameString = Shapes::StringShape.new(name: 'SearchDevicesFilternameString')
-    SearchDevicesFiltervaluesString256List = Shapes::ListShape.new(name: 'SearchDevicesFiltervaluesString256List')
+    SearchDevicesFilterNameString = Shapes::StringShape.new(name: 'SearchDevicesFilterNameString')
+    SearchDevicesFilterValuesList = Shapes::ListShape.new(name: 'SearchDevicesFilterValuesList')
     SearchDevicesRequest = Shapes::StructureShape.new(name: 'SearchDevicesRequest')
-    SearchDevicesRequestfiltersSearchDevicesFilterList = Shapes::ListShape.new(name: 'SearchDevicesRequestfiltersSearchDevicesFilterList')
-    SearchDevicesRequestmaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchDevicesRequestmaxResultsInteger')
+    SearchDevicesRequestFiltersList = Shapes::ListShape.new(name: 'SearchDevicesRequestFiltersList')
+    SearchDevicesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchDevicesRequestMaxResultsInteger')
     SearchDevicesResponse = Shapes::StructureShape.new(name: 'SearchDevicesResponse')
     SearchQuantumTasksFilter = Shapes::StructureShape.new(name: 'SearchQuantumTasksFilter')
     SearchQuantumTasksFilterOperator = Shapes::StringShape.new(name: 'SearchQuantumTasksFilterOperator')
-    SearchQuantumTasksFiltervaluesString256List = Shapes::ListShape.new(name: 'SearchQuantumTasksFiltervaluesString256List')
+    SearchQuantumTasksFilterValuesList = Shapes::ListShape.new(name: 'SearchQuantumTasksFilterValuesList')
     SearchQuantumTasksRequest = Shapes::StructureShape.new(name: 'SearchQuantumTasksRequest')
-    SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList = Shapes::ListShape.new(name: 'SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList')
-    SearchQuantumTasksRequestmaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchQuantumTasksRequestmaxResultsInteger')
+    SearchQuantumTasksRequestFiltersList = Shapes::ListShape.new(name: 'SearchQuantumTasksRequestFiltersList')
+    SearchQuantumTasksRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchQuantumTasksRequestMaxResultsInteger')
     SearchQuantumTasksResponse = Shapes::StructureShape.new(name: 'SearchQuantumTasksResponse')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     String256 = Shapes::StringShape.new(name: 'String256')
     String64 = Shapes::StringShape.new(name: 'String64')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -81,10 +90,11 @@ module Aws::Braket
     CreateQuantumTaskRequest.add_member(:action, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "action", metadata: {"jsonvalue"=>true}))
     CreateQuantumTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateQuantumTaskRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
-    CreateQuantumTaskRequest.add_member(:device_parameters, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestdeviceParametersJsonValue, location_name: "deviceParameters", metadata: {"jsonvalue"=>true}))
-    CreateQuantumTaskRequest.add_member(:output_s3_bucket, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestoutputS3BucketString, required: true, location_name: "outputS3Bucket"))
-    CreateQuantumTaskRequest.add_member(:output_s3_key_prefix, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestoutputS3KeyPrefixString, required: true, location_name: "outputS3KeyPrefix"))
-    CreateQuantumTaskRequest.add_member(:shots, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestshotsLong, required: true, location_name: "shots"))
+    CreateQuantumTaskRequest.add_member(:device_parameters, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestDeviceParametersString, location_name: "deviceParameters", metadata: {"jsonvalue"=>true}))
+    CreateQuantumTaskRequest.add_member(:output_s3_bucket, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestOutputS3BucketString, required: true, location_name: "outputS3Bucket"))
+    CreateQuantumTaskRequest.add_member(:output_s3_key_prefix, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestOutputS3KeyPrefixString, required: true, location_name: "outputS3KeyPrefix"))
+    CreateQuantumTaskRequest.add_member(:shots, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestShotsLong, required: true, location_name: "shots"))
+    CreateQuantumTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateQuantumTaskRequest.struct_class = Types::CreateQuantumTaskRequest
 
     CreateQuantumTaskResponse.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location_name: "quantumTaskArn"))
@@ -92,6 +102,9 @@ module Aws::Braket
 
     DeviceOfflineException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     DeviceOfflineException.struct_class = Types::DeviceOfflineException
+
+    DeviceRetiredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DeviceRetiredException.struct_class = Types::DeviceRetiredException
 
     DeviceSummary.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
     DeviceSummary.add_member(:device_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "deviceName"))
@@ -126,10 +139,17 @@ module Aws::Braket
     GetQuantumTaskResponse.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location_name: "quantumTaskArn"))
     GetQuantumTaskResponse.add_member(:shots, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "shots"))
     GetQuantumTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: QuantumTaskStatus, required: true, location_name: "status"))
+    GetQuantumTaskResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetQuantumTaskResponse.struct_class = Types::GetQuantumTaskResponse
 
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServiceException.struct_class = Types::InternalServiceException
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     QuantumTaskSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     QuantumTaskSummary.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
@@ -139,6 +159,7 @@ module Aws::Braket
     QuantumTaskSummary.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location_name: "quantumTaskArn"))
     QuantumTaskSummary.add_member(:shots, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "shots"))
     QuantumTaskSummary.add_member(:status, Shapes::ShapeRef.new(shape: QuantumTaskStatus, required: true, location_name: "status"))
+    QuantumTaskSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     QuantumTaskSummary.struct_class = Types::QuantumTaskSummary
 
     QuantumTaskSummaryList.member = Shapes::ShapeRef.new(shape: QuantumTaskSummary)
@@ -146,18 +167,18 @@ module Aws::Braket
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    SearchDevicesFilter.add_member(:name, Shapes::ShapeRef.new(shape: SearchDevicesFilternameString, required: true, location_name: "name"))
-    SearchDevicesFilter.add_member(:values, Shapes::ShapeRef.new(shape: SearchDevicesFiltervaluesString256List, required: true, location_name: "values"))
+    SearchDevicesFilter.add_member(:name, Shapes::ShapeRef.new(shape: SearchDevicesFilterNameString, required: true, location_name: "name"))
+    SearchDevicesFilter.add_member(:values, Shapes::ShapeRef.new(shape: SearchDevicesFilterValuesList, required: true, location_name: "values"))
     SearchDevicesFilter.struct_class = Types::SearchDevicesFilter
 
-    SearchDevicesFiltervaluesString256List.member = Shapes::ShapeRef.new(shape: String256)
+    SearchDevicesFilterValuesList.member = Shapes::ShapeRef.new(shape: String256)
 
-    SearchDevicesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchDevicesRequestfiltersSearchDevicesFilterList, required: true, location_name: "filters"))
-    SearchDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchDevicesRequestmaxResultsInteger, location_name: "maxResults"))
+    SearchDevicesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchDevicesRequestFiltersList, required: true, location_name: "filters"))
+    SearchDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchDevicesRequestMaxResultsInteger, location_name: "maxResults"))
     SearchDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchDevicesRequest.struct_class = Types::SearchDevicesRequest
 
-    SearchDevicesRequestfiltersSearchDevicesFilterList.member = Shapes::ShapeRef.new(shape: SearchDevicesFilter)
+    SearchDevicesRequestFiltersList.member = Shapes::ShapeRef.new(shape: SearchDevicesFilter)
 
     SearchDevicesResponse.add_member(:devices, Shapes::ShapeRef.new(shape: DeviceSummaryList, required: true, location_name: "devices"))
     SearchDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -165,17 +186,17 @@ module Aws::Braket
 
     SearchQuantumTasksFilter.add_member(:name, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "name"))
     SearchQuantumTasksFilter.add_member(:operator, Shapes::ShapeRef.new(shape: SearchQuantumTasksFilterOperator, required: true, location_name: "operator"))
-    SearchQuantumTasksFilter.add_member(:values, Shapes::ShapeRef.new(shape: SearchQuantumTasksFiltervaluesString256List, required: true, location_name: "values"))
+    SearchQuantumTasksFilter.add_member(:values, Shapes::ShapeRef.new(shape: SearchQuantumTasksFilterValuesList, required: true, location_name: "values"))
     SearchQuantumTasksFilter.struct_class = Types::SearchQuantumTasksFilter
 
-    SearchQuantumTasksFiltervaluesString256List.member = Shapes::ShapeRef.new(shape: String256)
+    SearchQuantumTasksFilterValuesList.member = Shapes::ShapeRef.new(shape: String256)
 
-    SearchQuantumTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList, required: true, location_name: "filters"))
-    SearchQuantumTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchQuantumTasksRequestmaxResultsInteger, location_name: "maxResults"))
+    SearchQuantumTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchQuantumTasksRequestFiltersList, required: true, location_name: "filters"))
+    SearchQuantumTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchQuantumTasksRequestMaxResultsInteger, location_name: "maxResults"))
     SearchQuantumTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchQuantumTasksRequest.struct_class = Types::SearchQuantumTasksRequest
 
-    SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList.member = Shapes::ShapeRef.new(shape: SearchQuantumTasksFilter)
+    SearchQuantumTasksRequestFiltersList.member = Shapes::ShapeRef.new(shape: SearchQuantumTasksFilter)
 
     SearchQuantumTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchQuantumTasksResponse.add_member(:quantum_tasks, Shapes::ShapeRef.new(shape: QuantumTaskSummaryList, required: true, location_name: "quantumTasks"))
@@ -184,8 +205,25 @@ module Aws::Braket
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    TagKeys.member = Shapes::ShapeRef.new(shape: String)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TagsMap.key = Shapes::ShapeRef.new(shape: String)
+    TagsMap.value = Shapes::ShapeRef.new(shape: String)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -245,6 +283,8 @@ module Aws::Braket
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceOfflineException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceRetiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -258,6 +298,17 @@ module Aws::Braket
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -296,6 +347,28 @@ module Aws::Braket
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end
 

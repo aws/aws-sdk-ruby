@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-06-09)
+------------------
+
+* Feature - Support for unstructured text inputs in the items dataset to to automatically extract key information from product/content description as an input when creating solution versions.
+
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2021-02-12)
+------------------
+
+* Feature - Increased maximum char size of PutUsers and PutItems properties.
+
+1.15.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2020-10-02)
 ------------------
 

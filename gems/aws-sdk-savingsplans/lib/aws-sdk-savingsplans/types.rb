@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -178,9 +178,9 @@ module Aws::SavingsPlans
     #       {
     #         savings_plan_offering_ids: ["UUID"],
     #         savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #         savings_plan_types: ["Compute"], # accepts Compute, EC2Instance
-    #         products: ["EC2"], # accepts EC2, Fargate, Lambda
-    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AWSLambda
+    #         savings_plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker
+    #         products: ["EC2"], # accepts EC2, Fargate, Lambda, SageMaker
+    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda, AmazonSageMaker
     #         usage_types: ["SavingsPlanRateUsageType"],
     #         operations: ["SavingsPlanRateOperation"],
     #         filters: [
@@ -276,8 +276,8 @@ module Aws::SavingsPlans
     #       {
     #         offering_ids: ["UUID"],
     #         payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #         product_type: "EC2", # accepts EC2, Fargate, Lambda
-    #         plan_types: ["Compute"], # accepts Compute, EC2Instance
+    #         product_type: "EC2", # accepts EC2, Fargate, Lambda, SageMaker
+    #         plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker
     #         durations: [1],
     #         currencies: ["CNY"], # accepts CNY, USD
     #         descriptions: ["SavingsPlanDescription"],

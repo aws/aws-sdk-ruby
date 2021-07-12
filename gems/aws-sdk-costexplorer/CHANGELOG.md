@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-05-24)
+------------------
+
+* Feature - Introduced FindingReasonCodes, PlatformDifferences, DiskResourceUtilization and NetworkResourceUtilization to GetRightsizingRecommendation action
+
+1.61.0 (2021-04-19)
+------------------
+
+* Feature - Adding support for Sagemaker savings plans in GetSavingsPlansPurchaseRecommendation API
+
+1.60.0 (2021-03-23)
+------------------
+
+* Feature - You can now create cost categories with inherited value rules and specify default values for any uncategorized costs.
+
+1.59.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2021-02-03)
+------------------
+
+* Feature - Clarify valid values for the filter parameter for certain APIs.
+
+1.57.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2021-01-05)
+------------------
+
+* Feature - Add new GetCostcategories API - Support filter for GetDimensions, GetTags and GetCostcategories api - Support sortBy metrics for GetDimensions, GetTags and GetCostcategories api
+
+1.55.0 (2020-12-22)
+------------------
+
+* Feature - This release adds additional metadata that may be applicable to the Rightsizing Recommendations.
+
+1.54.0 (2020-12-16)
+------------------
+
+* Feature - This release updates the "MonitorArnList" from a list of String to be a list of Arn for both CreateAnomalySubscription and UpdateAnomalySubscription APIs
+
+1.53.0 (2020-11-19)
+------------------
+
+* Feature - Additional metadata that may be applicable to the recommendation.
+
 1.52.0 (2020-10-15)
 ------------------
 

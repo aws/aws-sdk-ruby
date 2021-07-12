@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-05-25)
+------------------
+
+* Feature - Adds support for Linux device types in WorkspaceAccessProperties
+
+1.52.0 (2021-03-12)
+------------------
+
+* Feature - Adds API support for WorkSpaces bundle management operations.
+
+1.51.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2020-12-04)
+------------------
+
+* Feature - Update the import-workspace-image API to have "BYOL_REGULAR_WSP" as a valid input string for ingestion-process.
+
 1.48.0 (2020-10-15)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -337,6 +337,98 @@ module Aws::Route53Resolver
 
     # @!group API Operations
 
+    # Associates a FirewallRuleGroup with a VPC, to provide DNS filtering
+    # for the VPC.
+    #
+    # @option params [required, String] :creator_request_id
+    #   A unique string that identifies the request and that allows failed
+    #   requests to be retried without the risk of running the operation
+    #   twice. `CreatorRequestId` can be any unique string, for example, a
+    #   date/time stamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group.
+    #
+    # @option params [required, String] :vpc_id
+    #   The unique identifier of the VPC that you want to associate with the
+    #   rule group.
+    #
+    # @option params [required, Integer] :priority
+    #   The setting that determines the processing order of the rule group
+    #   among the rule groups that you associate with the specified VPC. DNS
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
+    #
+    #   You must specify a unique priority for each rule group that you
+    #   associate with a single VPC. To make it easier to insert rule groups
+    #   later, leave space between the numbers, for example, use 101, 200, and
+    #   so on. You can change the priority setting for a rule group
+    #   association after you create it.
+    #
+    #   The allowed values for `Priority` are between 100 and 9900.
+    #
+    # @option params [required, String] :name
+    #   A name that lets you identify the association, to manage and use it.
+    #
+    # @option params [String] :mutation_protection
+    #   If enabled, this setting disallows modification or removal of the
+    #   association, to help prevent against accidentally altering DNS
+    #   firewall protections. When you create the association, the default
+    #   setting is `DISABLED`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of the tag keys and values that you want to associate with the
+    #   rule group association.
+    #
+    # @return [Types::AssociateFirewallRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateFirewallRuleGroupResponse#firewall_rule_group_association #firewall_rule_group_association} => Types::FirewallRuleGroupAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_firewall_rule_group({
+    #     creator_request_id: "CreatorRequestId", # required
+    #     firewall_rule_group_id: "ResourceId", # required
+    #     vpc_id: "ResourceId", # required
+    #     priority: 1, # required
+    #     name: "Name", # required
+    #     mutation_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group_association.id #=> String
+    #   resp.firewall_rule_group_association.arn #=> String
+    #   resp.firewall_rule_group_association.firewall_rule_group_id #=> String
+    #   resp.firewall_rule_group_association.vpc_id #=> String
+    #   resp.firewall_rule_group_association.name #=> String
+    #   resp.firewall_rule_group_association.priority #=> Integer
+    #   resp.firewall_rule_group_association.mutation_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_rule_group_association.managed_owner_name #=> String
+    #   resp.firewall_rule_group_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group_association.status_message #=> String
+    #   resp.firewall_rule_group_association.creator_request_id #=> String
+    #   resp.firewall_rule_group_association.creation_time #=> String
+    #   resp.firewall_rule_group_association.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateFirewallRuleGroup AWS API Documentation
+    #
+    # @overload associate_firewall_rule_group(params = {})
+    # @param [Hash] params ({})
+    def associate_firewall_rule_group(params = {}, options = {})
+      req = build_request(:associate_firewall_rule_group, params)
+      req.send_request(options)
+    end
+
     # Adds IP addresses to an inbound or an outbound Resolver endpoint. If
     # you want to add more than one IP address, submit one
     # `AssociateResolverEndpointIpAddress` request for each IP address.
@@ -514,6 +606,248 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Creates an empty firewall domain list for use in DNS Firewall rules.
+    # You can populate the domains for the new list with a file, using
+    # ImportFirewallDomains, or with domain strings, using
+    # UpdateFirewallDomains.
+    #
+    # @option params [required, String] :creator_request_id
+    #   A unique string that identifies the request and that allows you to
+    #   retry failed requests without the risk of running the operation twice.
+    #   `CreatorRequestId` can be any unique string, for example, a date/time
+    #   stamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   A name that lets you identify the domain list to manage and use it.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of the tag keys and values that you want to associate with the
+    #   domain list.
+    #
+    # @return [Types::CreateFirewallDomainListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFirewallDomainListResponse#firewall_domain_list #firewall_domain_list} => Types::FirewallDomainList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_firewall_domain_list({
+    #     creator_request_id: "CreatorRequestId", # required
+    #     name: "Name", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_domain_list.id #=> String
+    #   resp.firewall_domain_list.arn #=> String
+    #   resp.firewall_domain_list.name #=> String
+    #   resp.firewall_domain_list.domain_count #=> Integer
+    #   resp.firewall_domain_list.status #=> String, one of "COMPLETE", "COMPLETE_IMPORT_FAILED", "IMPORTING", "DELETING", "UPDATING"
+    #   resp.firewall_domain_list.status_message #=> String
+    #   resp.firewall_domain_list.managed_owner_name #=> String
+    #   resp.firewall_domain_list.creator_request_id #=> String
+    #   resp.firewall_domain_list.creation_time #=> String
+    #   resp.firewall_domain_list.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallDomainList AWS API Documentation
+    #
+    # @overload create_firewall_domain_list(params = {})
+    # @param [Hash] params ({})
+    def create_firewall_domain_list(params = {}, options = {})
+      req = build_request(:create_firewall_domain_list, params)
+      req.send_request(options)
+    end
+
+    # Creates a single DNS Firewall rule in the specified rule group, using
+    # the specified domain list.
+    #
+    # @option params [required, String] :creator_request_id
+    #   A unique string that identifies the request and that allows you to
+    #   retry failed requests without the risk of running the operation twice.
+    #   `CreatorRequestId` can be any unique string, for example, a date/time
+    #   stamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group where you want to
+    #   create the rule.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list that you want to use in the rule.
+    #
+    # @option params [required, Integer] :priority
+    #   The setting that determines the processing order of the rule in the
+    #   rule group. DNS Firewall processes the rules in a rule group by order
+    #   of priority, starting from the lowest setting.
+    #
+    #   You must specify a unique priority for each rule in a rule group. To
+    #   make it easier to insert rules later, leave space between the numbers,
+    #   for example, use 100, 200, and so on. You can change the priority
+    #   setting for the rules in a rule group at any time.
+    #
+    # @option params [required, String] :action
+    #   The action that DNS Firewall should take on a DNS query when it
+    #   matches one of the domains in the rule's domain list:
+    #
+    #   * `ALLOW` - Permit the request to go through.
+    #
+    #   * `ALERT` - Permit the request and send metrics and logs to Cloud
+    #     Watch.
+    #
+    #   * `BLOCK` - Disallow the request. This option requires additional
+    #     details in the rule's `BlockResponse`.
+    #
+    # @option params [String] :block_response
+    #   The way that you want DNS Firewall to block the request, used with the
+    #   rule action setting `BLOCK`.
+    #
+    #   * `NODATA` - Respond indicating that the query was successful, but no
+    #     response is available for it.
+    #
+    #   * `NXDOMAIN` - Respond indicating that the domain name that's in the
+    #     query doesn't exist.
+    #
+    #   * `OVERRIDE` - Provide a custom override in the response. This option
+    #     requires custom handling details in the rule's `BlockOverride*`
+    #     settings.
+    #
+    #   This setting is required if the rule action setting is `BLOCK`.
+    #
+    # @option params [String] :block_override_domain
+    #   The custom DNS record to send back in response to the query. Used for
+    #   the rule action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    #   This setting is required if the `BlockResponse` setting is `OVERRIDE`.
+    #
+    # @option params [String] :block_override_dns_type
+    #   The DNS record's type. This determines the format of the record value
+    #   that you provided in `BlockOverrideDomain`. Used for the rule action
+    #   `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    #   This setting is required if the `BlockResponse` setting is `OVERRIDE`.
+    #
+    # @option params [Integer] :block_override_ttl
+    #   The recommended amount of time, in seconds, for the DNS resolver or
+    #   web browser to cache the provided override record. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    #   This setting is required if the `BlockResponse` setting is `OVERRIDE`.
+    #
+    # @option params [required, String] :name
+    #   A name that lets you identify the rule in the rule group.
+    #
+    # @return [Types::CreateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_firewall_rule({
+    #     creator_request_id: "CreatorRequestId", # required
+    #     firewall_rule_group_id: "ResourceId", # required
+    #     firewall_domain_list_id: "ResourceId", # required
+    #     priority: 1, # required
+    #     action: "ALLOW", # required, accepts ALLOW, BLOCK, ALERT
+    #     block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
+    #     block_override_domain: "BlockOverrideDomain",
+    #     block_override_dns_type: "CNAME", # accepts CNAME
+    #     block_override_ttl: 1,
+    #     name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule.firewall_rule_group_id #=> String
+    #   resp.firewall_rule.firewall_domain_list_id #=> String
+    #   resp.firewall_rule.name #=> String
+    #   resp.firewall_rule.priority #=> Integer
+    #   resp.firewall_rule.action #=> String, one of "ALLOW", "BLOCK", "ALERT"
+    #   resp.firewall_rule.block_response #=> String, one of "NODATA", "NXDOMAIN", "OVERRIDE"
+    #   resp.firewall_rule.block_override_domain #=> String
+    #   resp.firewall_rule.block_override_dns_type #=> String, one of "CNAME"
+    #   resp.firewall_rule.block_override_ttl #=> Integer
+    #   resp.firewall_rule.creator_request_id #=> String
+    #   resp.firewall_rule.creation_time #=> String
+    #   resp.firewall_rule.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRule AWS API Documentation
+    #
+    # @overload create_firewall_rule(params = {})
+    # @param [Hash] params ({})
+    def create_firewall_rule(params = {}, options = {})
+      req = build_request(:create_firewall_rule, params)
+      req.send_request(options)
+    end
+
+    # Creates an empty DNS Firewall rule group for filtering DNS network
+    # traffic in a VPC. You can add rules to the new rule group by calling
+    # CreateFirewallRule.
+    #
+    # @option params [required, String] :creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of running the operation
+    #   twice. This can be any unique string, for example, a timestamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   A name that lets you identify the rule group, to manage and use it.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of the tag keys and values that you want to associate with the
+    #   rule group.
+    #
+    # @return [Types::CreateFirewallRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFirewallRuleGroupResponse#firewall_rule_group #firewall_rule_group} => Types::FirewallRuleGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_firewall_rule_group({
+    #     creator_request_id: "CreatorRequestId", # required
+    #     name: "Name", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group.id #=> String
+    #   resp.firewall_rule_group.arn #=> String
+    #   resp.firewall_rule_group.name #=> String
+    #   resp.firewall_rule_group.rule_count #=> Integer
+    #   resp.firewall_rule_group.status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group.status_message #=> String
+    #   resp.firewall_rule_group.owner_id #=> String
+    #   resp.firewall_rule_group.creator_request_id #=> String
+    #   resp.firewall_rule_group.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #   resp.firewall_rule_group.creation_time #=> String
+    #   resp.firewall_rule_group.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleGroup AWS API Documentation
+    #
+    # @overload create_firewall_rule_group(params = {})
+    # @param [Hash] params ({})
+    def create_firewall_rule_group(params = {}, options = {})
+      req = build_request(:create_firewall_rule_group, params)
+      req.send_request(options)
+    end
+
     # Creates a Resolver endpoint. There are two types of Resolver
     # endpoints, inbound and outbound:
     #
@@ -525,7 +859,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -630,7 +964,7 @@ module Aws::Route53Resolver
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html
     #
     # @option params [required, String] :name
-    #   The name that you want to give the query logging configuration
+    #   The name that you want to give the query logging configuration.
     #
     # @option params [required, String] :destination_arn
     #   The ARN of the resource that you want Resolver to send query logs. You
@@ -656,7 +990,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -714,7 +1048,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -747,7 +1081,7 @@ module Aws::Route53Resolver
     #
     # @option params [Array<Types::TargetAddress>] :target_ips
     #   The IPs that you want Resolver to forward DNS queries to. You can
-    #   specify only IPv4 addresses. Separate IP addresses with a comma.
+    #   specify only IPv4 addresses. Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
     #   `FORWARD`.
@@ -811,6 +1145,126 @@ module Aws::Route53Resolver
     # @param [Hash] params ({})
     def create_resolver_rule(params = {}, options = {})
       req = build_request(:create_resolver_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified domain list.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list that you want to delete.
+    #
+    # @return [Types::DeleteFirewallDomainListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFirewallDomainListResponse#firewall_domain_list #firewall_domain_list} => Types::FirewallDomainList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_firewall_domain_list({
+    #     firewall_domain_list_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_domain_list.id #=> String
+    #   resp.firewall_domain_list.arn #=> String
+    #   resp.firewall_domain_list.name #=> String
+    #   resp.firewall_domain_list.domain_count #=> Integer
+    #   resp.firewall_domain_list.status #=> String, one of "COMPLETE", "COMPLETE_IMPORT_FAILED", "IMPORTING", "DELETING", "UPDATING"
+    #   resp.firewall_domain_list.status_message #=> String
+    #   resp.firewall_domain_list.managed_owner_name #=> String
+    #   resp.firewall_domain_list.creator_request_id #=> String
+    #   resp.firewall_domain_list.creation_time #=> String
+    #   resp.firewall_domain_list.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallDomainList AWS API Documentation
+    #
+    # @overload delete_firewall_domain_list(params = {})
+    # @param [Hash] params ({})
+    def delete_firewall_domain_list(params = {}, options = {})
+      req = build_request(:delete_firewall_domain_list, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified firewall rule.
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   delete the rule from.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list that's used in the rule.
+    #
+    # @return [Types::DeleteFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_firewall_rule({
+    #     firewall_rule_group_id: "ResourceId", # required
+    #     firewall_domain_list_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule.firewall_rule_group_id #=> String
+    #   resp.firewall_rule.firewall_domain_list_id #=> String
+    #   resp.firewall_rule.name #=> String
+    #   resp.firewall_rule.priority #=> Integer
+    #   resp.firewall_rule.action #=> String, one of "ALLOW", "BLOCK", "ALERT"
+    #   resp.firewall_rule.block_response #=> String, one of "NODATA", "NXDOMAIN", "OVERRIDE"
+    #   resp.firewall_rule.block_override_domain #=> String
+    #   resp.firewall_rule.block_override_dns_type #=> String, one of "CNAME"
+    #   resp.firewall_rule.block_override_ttl #=> Integer
+    #   resp.firewall_rule.creator_request_id #=> String
+    #   resp.firewall_rule.creation_time #=> String
+    #   resp.firewall_rule.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRule AWS API Documentation
+    #
+    # @overload delete_firewall_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_firewall_rule(params = {}, options = {})
+      req = build_request(:delete_firewall_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified firewall rule group.
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   delete.
+    #
+    # @return [Types::DeleteFirewallRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFirewallRuleGroupResponse#firewall_rule_group #firewall_rule_group} => Types::FirewallRuleGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_firewall_rule_group({
+    #     firewall_rule_group_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group.id #=> String
+    #   resp.firewall_rule_group.arn #=> String
+    #   resp.firewall_rule_group.name #=> String
+    #   resp.firewall_rule_group.rule_count #=> Integer
+    #   resp.firewall_rule_group.status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group.status_message #=> String
+    #   resp.firewall_rule_group.owner_id #=> String
+    #   resp.firewall_rule_group.creator_request_id #=> String
+    #   resp.firewall_rule_group.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #   resp.firewall_rule_group.creation_time #=> String
+    #   resp.firewall_rule_group.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleGroup AWS API Documentation
+    #
+    # @overload delete_firewall_rule_group(params = {})
+    # @param [Hash] params ({})
+    def delete_firewall_rule_group(params = {}, options = {})
+      req = build_request(:delete_firewall_rule_group, params)
       req.send_request(options)
     end
 
@@ -970,6 +1424,47 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Disassociates a FirewallRuleGroup from a VPC, to remove DNS filtering
+    # from the VPC.
+    #
+    # @option params [required, String] :firewall_rule_group_association_id
+    #   The identifier of the FirewallRuleGroupAssociation.
+    #
+    # @return [Types::DisassociateFirewallRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateFirewallRuleGroupResponse#firewall_rule_group_association #firewall_rule_group_association} => Types::FirewallRuleGroupAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_firewall_rule_group({
+    #     firewall_rule_group_association_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group_association.id #=> String
+    #   resp.firewall_rule_group_association.arn #=> String
+    #   resp.firewall_rule_group_association.firewall_rule_group_id #=> String
+    #   resp.firewall_rule_group_association.vpc_id #=> String
+    #   resp.firewall_rule_group_association.name #=> String
+    #   resp.firewall_rule_group_association.priority #=> Integer
+    #   resp.firewall_rule_group_association.mutation_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_rule_group_association.managed_owner_name #=> String
+    #   resp.firewall_rule_group_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group_association.status_message #=> String
+    #   resp.firewall_rule_group_association.creator_request_id #=> String
+    #   resp.firewall_rule_group_association.creation_time #=> String
+    #   resp.firewall_rule_group_association.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateFirewallRuleGroup AWS API Documentation
+    #
+    # @overload disassociate_firewall_rule_group(params = {})
+    # @param [Hash] params ({})
+    def disassociate_firewall_rule_group(params = {}, options = {})
+      req = build_request(:disassociate_firewall_rule_group, params)
+      req.send_request(options)
+    end
+
     # Removes IP addresses from an inbound or an outbound Resolver endpoint.
     # If you want to remove more than one IP address, submit one
     # `DisassociateResolverEndpointIpAddress` request for each IP address.
@@ -1031,10 +1526,10 @@ module Aws::Route53Resolver
     # Disassociates a VPC from a query logging configuration.
     #
     # <note markdown="1"> Before you can delete a query logging configuration, you must first
-    # disassociate all VPCs from the configuration. If you used Resource
-    # Access Manager (RAM) to share a query logging configuration with other
-    # accounts, VPCs can be disassociated from the configuration in the
-    # following ways:
+    # disassociate all VPCs from the configuration. If you used AWS Resource
+    # Access Manager (AWS RAM) to share a query logging configuration with
+    # other accounts, VPCs can be disassociated from the configuration in
+    # the following ways:
     #
     #  * The accounts that you shared the configuration with can disassociate
     #   VPCs from the configuration.
@@ -1122,6 +1617,219 @@ module Aws::Route53Resolver
     # @param [Hash] params ({})
     def disassociate_resolver_rule(params = {}, options = {})
       req = build_request(:disassociate_resolver_rule, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configuration of the firewall behavior provided by DNS
+    # Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon
+    # VPC).
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the VPC from Amazon VPC that the configuration is for.
+    #
+    # @return [Types::GetFirewallConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFirewallConfigResponse#firewall_config #firewall_config} => Types::FirewallConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_firewall_config({
+    #     resource_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_config.id #=> String
+    #   resp.firewall_config.resource_id #=> String
+    #   resp.firewall_config.owner_id #=> String
+    #   resp.firewall_config.firewall_fail_open #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallConfig AWS API Documentation
+    #
+    # @overload get_firewall_config(params = {})
+    # @param [Hash] params ({})
+    def get_firewall_config(params = {}, options = {})
+      req = build_request(:get_firewall_config, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified firewall domain list.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list.
+    #
+    # @return [Types::GetFirewallDomainListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFirewallDomainListResponse#firewall_domain_list #firewall_domain_list} => Types::FirewallDomainList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_firewall_domain_list({
+    #     firewall_domain_list_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_domain_list.id #=> String
+    #   resp.firewall_domain_list.arn #=> String
+    #   resp.firewall_domain_list.name #=> String
+    #   resp.firewall_domain_list.domain_count #=> Integer
+    #   resp.firewall_domain_list.status #=> String, one of "COMPLETE", "COMPLETE_IMPORT_FAILED", "IMPORTING", "DELETING", "UPDATING"
+    #   resp.firewall_domain_list.status_message #=> String
+    #   resp.firewall_domain_list.managed_owner_name #=> String
+    #   resp.firewall_domain_list.creator_request_id #=> String
+    #   resp.firewall_domain_list.creation_time #=> String
+    #   resp.firewall_domain_list.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallDomainList AWS API Documentation
+    #
+    # @overload get_firewall_domain_list(params = {})
+    # @param [Hash] params ({})
+    def get_firewall_domain_list(params = {}, options = {})
+      req = build_request(:get_firewall_domain_list, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified firewall rule group.
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group.
+    #
+    # @return [Types::GetFirewallRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFirewallRuleGroupResponse#firewall_rule_group #firewall_rule_group} => Types::FirewallRuleGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_firewall_rule_group({
+    #     firewall_rule_group_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group.id #=> String
+    #   resp.firewall_rule_group.arn #=> String
+    #   resp.firewall_rule_group.name #=> String
+    #   resp.firewall_rule_group.rule_count #=> Integer
+    #   resp.firewall_rule_group.status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group.status_message #=> String
+    #   resp.firewall_rule_group.owner_id #=> String
+    #   resp.firewall_rule_group.creator_request_id #=> String
+    #   resp.firewall_rule_group.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #   resp.firewall_rule_group.creation_time #=> String
+    #   resp.firewall_rule_group.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroup AWS API Documentation
+    #
+    # @overload get_firewall_rule_group(params = {})
+    # @param [Hash] params ({})
+    def get_firewall_rule_group(params = {}, options = {})
+      req = build_request(:get_firewall_rule_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a firewall rule group association, which enables DNS
+    # filtering for a VPC with one rule group. A VPC can have more than one
+    # firewall rule group association, and a rule group can be associated
+    # with more than one VPC.
+    #
+    # @option params [required, String] :firewall_rule_group_association_id
+    #   The identifier of the FirewallRuleGroupAssociation.
+    #
+    # @return [Types::GetFirewallRuleGroupAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFirewallRuleGroupAssociationResponse#firewall_rule_group_association #firewall_rule_group_association} => Types::FirewallRuleGroupAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_firewall_rule_group_association({
+    #     firewall_rule_group_association_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group_association.id #=> String
+    #   resp.firewall_rule_group_association.arn #=> String
+    #   resp.firewall_rule_group_association.firewall_rule_group_id #=> String
+    #   resp.firewall_rule_group_association.vpc_id #=> String
+    #   resp.firewall_rule_group_association.name #=> String
+    #   resp.firewall_rule_group_association.priority #=> Integer
+    #   resp.firewall_rule_group_association.mutation_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_rule_group_association.managed_owner_name #=> String
+    #   resp.firewall_rule_group_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group_association.status_message #=> String
+    #   resp.firewall_rule_group_association.creator_request_id #=> String
+    #   resp.firewall_rule_group_association.creation_time #=> String
+    #   resp.firewall_rule_group_association.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupAssociation AWS API Documentation
+    #
+    # @overload get_firewall_rule_group_association(params = {})
+    # @param [Hash] params ({})
+    def get_firewall_rule_group_association(params = {}, options = {})
+      req = build_request(:get_firewall_rule_group_association, params)
+      req.send_request(options)
+    end
+
+    # Returns the AWS Identity and Access Management (AWS IAM) policy for
+    # sharing the specified rule group. You can use the policy to share the
+    # rule group using AWS Resource Access Manager (AWS RAM).
+    #
+    # @option params [required, String] :arn
+    #   The ARN (Amazon Resource Name) for the rule group.
+    #
+    # @return [Types::GetFirewallRuleGroupPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFirewallRuleGroupPolicyResponse#firewall_rule_group_policy #firewall_rule_group_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_firewall_rule_group_policy({
+    #     arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupPolicy AWS API Documentation
+    #
+    # @overload get_firewall_rule_group_policy(params = {})
+    # @param [Hash] params ({})
+    def get_firewall_rule_group_policy(params = {}, options = {})
+      req = build_request(:get_firewall_rule_group_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets DNSSEC validation information for a specified resource.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the virtual private cloud (VPC) for the DNSSEC validation
+    #   status.
+    #
+    # @return [Types::GetResolverDnssecConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResolverDnssecConfigResponse#resolver_dnssec_config #resolver_dnssec_config} => Types::ResolverDnssecConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resolver_dnssec_config({
+    #     resource_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolver_dnssec_config.id #=> String
+    #   resp.resolver_dnssec_config.owner_id #=> String
+    #   resp.resolver_dnssec_config.resource_id #=> String
+    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverDnssecConfig AWS API Documentation
+    #
+    # @overload get_resolver_dnssec_config(params = {})
+    # @param [Hash] params ({})
+    def get_resolver_dnssec_config(params = {}, options = {})
+      req = build_request(:get_resolver_dnssec_config, params)
       req.send_request(options)
     end
 
@@ -1362,13 +2070,14 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Gets information about a Resolver rule policy. A Resolver rule policy
-    # specifies the Resolver operations and resources that you want to allow
-    # another AWS account to be able to use.
+    # Gets information about the Resolver rule policy for a specified rule.
+    # A Resolver rule policy includes the rule that you want to share with
+    # another account, the account that you want to share the rule with, and
+    # the Resolver operations that you want to allow the account to use.
     #
     # @option params [required, String] :arn
-    #   The ID of the Resolver rule policy that you want to get information
-    #   about.
+    #   The ID of the Resolver rule that you want to get the Resolver rule
+    #   policy for.
     #
     # @return [Types::GetResolverRulePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1390,6 +2099,543 @@ module Aws::Route53Resolver
     # @param [Hash] params ({})
     def get_resolver_rule_policy(params = {}, options = {})
       req = build_request(:get_resolver_rule_policy, params)
+      req.send_request(options)
+    end
+
+    # Imports domain names from a file into a domain list, for use in a DNS
+    # firewall rule group.
+    #
+    # Each domain specification in your domain list must satisfy the
+    # following requirements:
+    #
+    # * It can optionally start with `*` (asterisk).
+    #
+    # * With the exception of the optional starting asterisk, it must only
+    #   contain the following characters: `A-Z`, `a-z`, `0-9`, `-` (hyphen).
+    #
+    # * It must be from 1-255 characters in length.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list that you want to modify with the import
+    #   operation.
+    #
+    # @option params [required, String] :operation
+    #   What you want DNS Firewall to do with the domains that are listed in
+    #   the file. This must be set to `REPLACE`, which updates the domain list
+    #   to exactly match the list in the file.
+    #
+    # @option params [required, String] :domain_file_url
+    #   The fully qualified URL or URI of the file stored in Amazon Simple
+    #   Storage Service (Amazon S3) that contains the list of domains to
+    #   import.
+    #
+    #   The file must be in an S3 bucket that's in the same Region as your
+    #   DNS Firewall. The file must be a text file and must contain a single
+    #   domain per line.
+    #
+    # @return [Types::ImportFirewallDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportFirewallDomainsResponse#id #id} => String
+    #   * {Types::ImportFirewallDomainsResponse#name #name} => String
+    #   * {Types::ImportFirewallDomainsResponse#status #status} => String
+    #   * {Types::ImportFirewallDomainsResponse#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_firewall_domains({
+    #     firewall_domain_list_id: "ResourceId", # required
+    #     operation: "REPLACE", # required, accepts REPLACE
+    #     domain_file_url: "DomainListFileUrl", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "COMPLETE", "COMPLETE_IMPORT_FAILED", "IMPORTING", "DELETING", "UPDATING"
+    #   resp.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ImportFirewallDomains AWS API Documentation
+    #
+    # @overload import_firewall_domains(params = {})
+    # @param [Hash] params ({})
+    def import_firewall_domains(params = {}, options = {})
+      req = build_request(:import_firewall_domains, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the firewall configurations that you have defined. DNS
+    # Firewall uses the configurations to manage firewall behavior for your
+    # VPCs.
+    #
+    # A single call might return only a partial list of the configurations.
+    # For information, see `MaxResults`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response, Resolver
+    #   provides a `NextToken` value that you can use in a subsequent call to
+    #   get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up to
+    #   100 objects.
+    #
+    # @option params [String] :next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #
+    # @return [Types::ListFirewallConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListFirewallConfigsResponse#firewall_configs #firewall_configs} => Array&lt;Types::FirewallConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_configs({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.firewall_configs #=> Array
+    #   resp.firewall_configs[0].id #=> String
+    #   resp.firewall_configs[0].resource_id #=> String
+    #   resp.firewall_configs[0].owner_id #=> String
+    #   resp.firewall_configs[0].firewall_fail_open #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallConfigs AWS API Documentation
+    #
+    # @overload list_firewall_configs(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_configs(params = {}, options = {})
+      req = build_request(:list_firewall_configs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the firewall domain lists that you have defined. For each
+    # firewall domain list, you can retrieve the domains that are defined
+    # for a list by calling ListFirewallDomains.
+    #
+    # A single call to this list operation might return only a partial list
+    # of the domain lists. For information, see `MaxResults`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response, Resolver
+    #   provides a `NextToken` value that you can use in a subsequent call to
+    #   get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up to
+    #   100 objects.
+    #
+    # @option params [String] :next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #
+    # @return [Types::ListFirewallDomainListsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallDomainListsResponse#next_token #next_token} => String
+    #   * {Types::ListFirewallDomainListsResponse#firewall_domain_lists #firewall_domain_lists} => Array&lt;Types::FirewallDomainListMetadata&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_domain_lists({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.firewall_domain_lists #=> Array
+    #   resp.firewall_domain_lists[0].id #=> String
+    #   resp.firewall_domain_lists[0].arn #=> String
+    #   resp.firewall_domain_lists[0].name #=> String
+    #   resp.firewall_domain_lists[0].creator_request_id #=> String
+    #   resp.firewall_domain_lists[0].managed_owner_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallDomainLists AWS API Documentation
+    #
+    # @overload list_firewall_domain_lists(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_domain_lists(params = {}, options = {})
+      req = build_request(:list_firewall_domain_lists, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the domains that you have defined for the specified firewall
+    # domain list.
+    #
+    # A single call might return only a partial list of the domains. For
+    # information, see `MaxResults`.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list whose domains you want to retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response, Resolver
+    #   provides a `NextToken` value that you can use in a subsequent call to
+    #   get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up to
+    #   100 objects.
+    #
+    # @option params [String] :next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #
+    # @return [Types::ListFirewallDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallDomainsResponse#next_token #next_token} => String
+    #   * {Types::ListFirewallDomainsResponse#domains #domains} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_domains({
+    #     firewall_domain_list_id: "ResourceId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.domains #=> Array
+    #   resp.domains[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallDomains AWS API Documentation
+    #
+    # @overload list_firewall_domains(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_domains(params = {}, options = {})
+      req = build_request(:list_firewall_domains, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the firewall rule group associations that you have defined.
+    # Each association enables DNS filtering for a VPC with one rule group.
+    #
+    # A single call might return only a partial list of the associations.
+    # For information, see `MaxResults`.
+    #
+    # @option params [String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   retrieve the associations for. Leave this blank to retrieve
+    #   associations for any rule group.
+    #
+    # @option params [String] :vpc_id
+    #   The unique identifier of the VPC that you want to retrieve the
+    #   associations for. Leave this blank to retrieve associations for any
+    #   VPC.
+    #
+    # @option params [Integer] :priority
+    #   The setting that determines the processing order of the rule group
+    #   among the rule groups that are associated with a single VPC. DNS
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
+    #
+    # @option params [String] :status
+    #   The association `Status` setting that you want DNS Firewall to filter
+    #   on for the list. If you don't specify this, then DNS Firewall returns
+    #   all associations, regardless of status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response, Resolver
+    #   provides a `NextToken` value that you can use in a subsequent call to
+    #   get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up to
+    #   100 objects.
+    #
+    # @option params [String] :next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #
+    # @return [Types::ListFirewallRuleGroupAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallRuleGroupAssociationsResponse#next_token #next_token} => String
+    #   * {Types::ListFirewallRuleGroupAssociationsResponse#firewall_rule_group_associations #firewall_rule_group_associations} => Array&lt;Types::FirewallRuleGroupAssociation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_rule_group_associations({
+    #     firewall_rule_group_id: "ResourceId",
+    #     vpc_id: "ResourceId",
+    #     priority: 1,
+    #     status: "COMPLETE", # accepts COMPLETE, DELETING, UPDATING
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.firewall_rule_group_associations #=> Array
+    #   resp.firewall_rule_group_associations[0].id #=> String
+    #   resp.firewall_rule_group_associations[0].arn #=> String
+    #   resp.firewall_rule_group_associations[0].firewall_rule_group_id #=> String
+    #   resp.firewall_rule_group_associations[0].vpc_id #=> String
+    #   resp.firewall_rule_group_associations[0].name #=> String
+    #   resp.firewall_rule_group_associations[0].priority #=> Integer
+    #   resp.firewall_rule_group_associations[0].mutation_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_rule_group_associations[0].managed_owner_name #=> String
+    #   resp.firewall_rule_group_associations[0].status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group_associations[0].status_message #=> String
+    #   resp.firewall_rule_group_associations[0].creator_request_id #=> String
+    #   resp.firewall_rule_group_associations[0].creation_time #=> String
+    #   resp.firewall_rule_group_associations[0].modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleGroupAssociations AWS API Documentation
+    #
+    # @overload list_firewall_rule_group_associations(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_rule_group_associations(params = {}, options = {})
+      req = build_request(:list_firewall_rule_group_associations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the minimal high-level information for the rule groups that
+    # you have defined.
+    #
+    # A single call might return only a partial list of the rule groups. For
+    # information, see `MaxResults`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response, Resolver
+    #   provides a `NextToken` value that you can use in a subsequent call to
+    #   get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up to
+    #   100 objects.
+    #
+    # @option params [String] :next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #
+    # @return [Types::ListFirewallRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallRuleGroupsResponse#next_token #next_token} => String
+    #   * {Types::ListFirewallRuleGroupsResponse#firewall_rule_groups #firewall_rule_groups} => Array&lt;Types::FirewallRuleGroupMetadata&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_rule_groups({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.firewall_rule_groups #=> Array
+    #   resp.firewall_rule_groups[0].id #=> String
+    #   resp.firewall_rule_groups[0].arn #=> String
+    #   resp.firewall_rule_groups[0].name #=> String
+    #   resp.firewall_rule_groups[0].owner_id #=> String
+    #   resp.firewall_rule_groups[0].creator_request_id #=> String
+    #   resp.firewall_rule_groups[0].share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleGroups AWS API Documentation
+    #
+    # @overload list_firewall_rule_groups(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_rule_groups(params = {}, options = {})
+      req = build_request(:list_firewall_rule_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the firewall rules that you have defined for the specified
+    # firewall rule group. DNS Firewall uses the rules in a rule group to
+    # filter DNS network traffic for a VPC.
+    #
+    # A single call might return only a partial list of the rules. For
+    # information, see `MaxResults`.
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   retrieve the rules for.
+    #
+    # @option params [Integer] :priority
+    #   Optional additional filter for the rules to retrieve.
+    #
+    #   The setting that determines the processing order of the rules in a
+    #   rule group. DNS Firewall processes the rules in a rule group by order
+    #   of priority, starting from the lowest setting.
+    #
+    # @option params [String] :action
+    #   Optional additional filter for the rules to retrieve.
+    #
+    #   The action that DNS Firewall should take on a DNS query when it
+    #   matches one of the domains in the rule's domain list:
+    #
+    #   * `ALLOW` - Permit the request to go through.
+    #
+    #   * `ALERT` - Permit the request to go through but send an alert to the
+    #     logs.
+    #
+    #   * `BLOCK` - Disallow the request. If this is specified, additional
+    #     handling details are provided in the rule's `BlockResponse`
+    #     setting.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response, Resolver
+    #   provides a `NextToken` value that you can use in a subsequent call to
+    #   get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up to
+    #   100 objects.
+    #
+    # @option params [String] :next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #
+    # @return [Types::ListFirewallRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallRulesResponse#next_token #next_token} => String
+    #   * {Types::ListFirewallRulesResponse#firewall_rules #firewall_rules} => Array&lt;Types::FirewallRule&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_rules({
+    #     firewall_rule_group_id: "ResourceId", # required
+    #     priority: 1,
+    #     action: "ALLOW", # accepts ALLOW, BLOCK, ALERT
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.firewall_rules #=> Array
+    #   resp.firewall_rules[0].firewall_rule_group_id #=> String
+    #   resp.firewall_rules[0].firewall_domain_list_id #=> String
+    #   resp.firewall_rules[0].name #=> String
+    #   resp.firewall_rules[0].priority #=> Integer
+    #   resp.firewall_rules[0].action #=> String, one of "ALLOW", "BLOCK", "ALERT"
+    #   resp.firewall_rules[0].block_response #=> String, one of "NODATA", "NXDOMAIN", "OVERRIDE"
+    #   resp.firewall_rules[0].block_override_domain #=> String
+    #   resp.firewall_rules[0].block_override_dns_type #=> String, one of "CNAME"
+    #   resp.firewall_rules[0].block_override_ttl #=> Integer
+    #   resp.firewall_rules[0].creator_request_id #=> String
+    #   resp.firewall_rules[0].creation_time #=> String
+    #   resp.firewall_rules[0].modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRules AWS API Documentation
+    #
+    # @overload list_firewall_rules(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_rules(params = {}, options = {})
+      req = build_request(:list_firewall_rules, params)
+      req.send_request(options)
+    end
+
+    # Lists the configurations for DNSSEC validation that are associated
+    # with the current AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   *Optional*\: An integer that specifies the maximum number of DNSSEC
+    #   configuration results that you want Amazon Route 53 to return. If you
+    #   don't specify a value for `MaxResults`, Route 53 returns up to 100
+    #   configuration per page.
+    #
+    # @option params [String] :next_token
+    #   (Optional) If the current AWS account has more than `MaxResults`
+    #   DNSSEC configurations, use `NextToken` to get the second and
+    #   subsequent pages of results.
+    #
+    #   For the first `ListResolverDnssecConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An optional specification to return a subset of objects.
+    #
+    # @return [Types::ListResolverDnssecConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResolverDnssecConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListResolverDnssecConfigsResponse#resolver_dnssec_configs #resolver_dnssec_configs} => Array&lt;Types::ResolverDnssecConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resolver_dnssec_configs({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resolver_dnssec_configs #=> Array
+    #   resp.resolver_dnssec_configs[0].id #=> String
+    #   resp.resolver_dnssec_configs[0].owner_id #=> String
+    #   resp.resolver_dnssec_configs[0].resource_id #=> String
+    #   resp.resolver_dnssec_configs[0].validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverDnssecConfigs AWS API Documentation
+    #
+    # @overload list_resolver_dnssec_configs(params = {})
+    # @param [Hash] params ({})
+    def list_resolver_dnssec_configs(params = {}, options = {})
+      req = build_request(:list_resolver_dnssec_configs, params)
       req.send_request(options)
     end
 
@@ -2012,6 +3258,42 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Attaches an AWS Identity and Access Management (AWS IAM) policy for
+    # sharing the rule group. You can use the policy to share the rule group
+    # using AWS Resource Access Manager (AWS RAM).
+    #
+    # @option params [required, String] :arn
+    #   The ARN (Amazon Resource Name) for the rule group that you want to
+    #   share.
+    #
+    # @option params [required, String] :firewall_rule_group_policy
+    #   The AWS Identity and Access Management (AWS IAM) policy to attach to
+    #   the rule group.
+    #
+    # @return [Types::PutFirewallRuleGroupPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFirewallRuleGroupPolicyResponse#return_value #return_value} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_firewall_rule_group_policy({
+    #     arn: "Arn", # required
+    #     firewall_rule_group_policy: "FirewallRuleGroupPolicy", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutFirewallRuleGroupPolicy AWS API Documentation
+    #
+    # @overload put_firewall_rule_group_policy(params = {})
+    # @param [Hash] params ({})
+    def put_firewall_rule_group_policy(params = {}, options = {})
+      req = build_request(:put_firewall_rule_group_policy, params)
+      req.send_request(options)
+    end
+
     # Specifies an AWS account that you want to share a query logging
     # configuration with, the query logging configuration that you want to
     # share, and the operations that you want the account to be able to
@@ -2064,19 +3346,19 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Specifies an AWS account that you want to share rules with, the
-    # Resolver rules that you want to share, and the operations that you
-    # want the account to be able to perform on those rules.
+    # Specifies an AWS rule that you want to share with another account, the
+    # account that you want to share the rule with, and the operations that
+    # you want the account to be able to perform on the rule.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the account that you want to share
-    #   rules with.
+    #   The Amazon Resource Name (ARN) of the rule that you want to share with
+    #   another account.
     #
     # @option params [required, String] :resolver_rule_policy
     #   An AWS Identity and Access Management policy statement that lists the
     #   rules that you want to share with another AWS account and the
     #   operations that you want the account to be able to perform. You can
-    #   specify the following operations in the `Actions` section of the
+    #   specify the following operations in the `Action` section of the
     #   statement:
     #
     #   * `route53resolver:GetResolverRule`
@@ -2089,9 +3371,9 @@ module Aws::Route53Resolver
     #
     #   * `route53resolver:ListResolverRuleAssociations`
     #
-    #   In the `Resource` section of the statement, you specify the ARNs for
-    #   the rules that you want to share with the account that you specified
-    #   in `Arn`.
+    #   In the `Resource` section of the statement, specify the ARN for the
+    #   rule that you want to share with another account. Specify the same ARN
+    #   that you specified in `Arn`.
     #
     # @return [Types::PutResolverRulePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2220,6 +3502,325 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Updates the configuration of the firewall behavior provided by DNS
+    # Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon
+    # VPC).
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the VPC that the configuration is for.
+    #
+    # @option params [required, String] :firewall_fail_open
+    #   Determines how Route 53 Resolver handles queries during failures, for
+    #   example when all traffic that is sent to DNS Firewall fails to receive
+    #   a reply.
+    #
+    #   * By default, fail open is disabled, which means the failure mode is
+    #     closed. This approach favors security over availability. DNS
+    #     Firewall blocks queries that it is unable to evaluate properly.
+    #
+    #   * If you enable this option, the failure mode is open. This approach
+    #     favors availability over security. DNS Firewall allows queries to
+    #     proceed if it is unable to properly evaluate them.
+    #
+    #   This behavior is only enforced for VPCs that have at least one DNS
+    #   Firewall rule group association.
+    #
+    # @return [Types::UpdateFirewallConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFirewallConfigResponse#firewall_config #firewall_config} => Types::FirewallConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_firewall_config({
+    #     resource_id: "ResourceId", # required
+    #     firewall_fail_open: "ENABLED", # required, accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_config.id #=> String
+    #   resp.firewall_config.resource_id #=> String
+    #   resp.firewall_config.owner_id #=> String
+    #   resp.firewall_config.firewall_fail_open #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallConfig AWS API Documentation
+    #
+    # @overload update_firewall_config(params = {})
+    # @param [Hash] params ({})
+    def update_firewall_config(params = {}, options = {})
+      req = build_request(:update_firewall_config, params)
+      req.send_request(options)
+    end
+
+    # Updates the firewall domain list from an array of domain
+    # specifications.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list whose domains you want to update.
+    #
+    # @option params [required, String] :operation
+    #   What you want DNS Firewall to do with the domains that you are
+    #   providing:
+    #
+    #   * `ADD` - Add the domains to the ones that are already in the domain
+    #     list.
+    #
+    #   * `REMOVE` - Search the domain list for the domains and remove them
+    #     from the list.
+    #
+    #   * `REPLACE` - Update the domain list to exactly match the list that
+    #     you are providing.
+    #
+    # @option params [required, Array<String>] :domains
+    #   A list of domains to use in the update operation.
+    #
+    #   Each domain specification in your domain list must satisfy the
+    #   following requirements:
+    #
+    #   * It can optionally start with `*` (asterisk).
+    #
+    #   * With the exception of the optional starting asterisk, it must only
+    #     contain the following characters: `A-Z`, `a-z`, `0-9`, `-` (hyphen).
+    #
+    #   * It must be from 1-255 characters in length.
+    #
+    # @return [Types::UpdateFirewallDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFirewallDomainsResponse#id #id} => String
+    #   * {Types::UpdateFirewallDomainsResponse#name #name} => String
+    #   * {Types::UpdateFirewallDomainsResponse#status #status} => String
+    #   * {Types::UpdateFirewallDomainsResponse#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_firewall_domains({
+    #     firewall_domain_list_id: "ResourceId", # required
+    #     operation: "ADD", # required, accepts ADD, REMOVE, REPLACE
+    #     domains: ["FirewallDomainName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "COMPLETE", "COMPLETE_IMPORT_FAILED", "IMPORTING", "DELETING", "UPDATING"
+    #   resp.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallDomains AWS API Documentation
+    #
+    # @overload update_firewall_domains(params = {})
+    # @param [Hash] params ({})
+    def update_firewall_domains(params = {}, options = {})
+      req = build_request(:update_firewall_domains, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified firewall rule.
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group for the rule.
+    #
+    # @option params [required, String] :firewall_domain_list_id
+    #   The ID of the domain list to use in the rule.
+    #
+    # @option params [Integer] :priority
+    #   The setting that determines the processing order of the rule in the
+    #   rule group. DNS Firewall processes the rules in a rule group by order
+    #   of priority, starting from the lowest setting.
+    #
+    #   You must specify a unique priority for each rule in a rule group. To
+    #   make it easier to insert rules later, leave space between the numbers,
+    #   for example, use 100, 200, and so on. You can change the priority
+    #   setting for the rules in a rule group at any time.
+    #
+    # @option params [String] :action
+    #   The action that DNS Firewall should take on a DNS query when it
+    #   matches one of the domains in the rule's domain list:
+    #
+    #   * `ALLOW` - Permit the request to go through.
+    #
+    #   * `ALERT` - Permit the request to go through but send an alert to the
+    #     logs.
+    #
+    #   * `BLOCK` - Disallow the request. This option requires additional
+    #     details in the rule's `BlockResponse`.
+    #
+    # @option params [String] :block_response
+    #   The way that you want DNS Firewall to block the request. Used for the
+    #   rule action setting `BLOCK`.
+    #
+    #   * `NODATA` - Respond indicating that the query was successful, but no
+    #     response is available for it.
+    #
+    #   * `NXDOMAIN` - Respond indicating that the domain name that's in the
+    #     query doesn't exist.
+    #
+    #   * `OVERRIDE` - Provide a custom override in the response. This option
+    #     requires custom handling details in the rule's `BlockOverride*`
+    #     settings.
+    #
+    # @option params [String] :block_override_domain
+    #   The custom DNS record to send back in response to the query. Used for
+    #   the rule action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    # @option params [String] :block_override_dns_type
+    #   The DNS record's type. This determines the format of the record value
+    #   that you provided in `BlockOverrideDomain`. Used for the rule action
+    #   `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    # @option params [Integer] :block_override_ttl
+    #   The recommended amount of time, in seconds, for the DNS resolver or
+    #   web browser to cache the provided override record. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    # @option params [String] :name
+    #   The name of the rule.
+    #
+    # @return [Types::UpdateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_firewall_rule({
+    #     firewall_rule_group_id: "ResourceId", # required
+    #     firewall_domain_list_id: "ResourceId", # required
+    #     priority: 1,
+    #     action: "ALLOW", # accepts ALLOW, BLOCK, ALERT
+    #     block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
+    #     block_override_domain: "BlockOverrideDomain",
+    #     block_override_dns_type: "CNAME", # accepts CNAME
+    #     block_override_ttl: 1,
+    #     name: "Name",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule.firewall_rule_group_id #=> String
+    #   resp.firewall_rule.firewall_domain_list_id #=> String
+    #   resp.firewall_rule.name #=> String
+    #   resp.firewall_rule.priority #=> Integer
+    #   resp.firewall_rule.action #=> String, one of "ALLOW", "BLOCK", "ALERT"
+    #   resp.firewall_rule.block_response #=> String, one of "NODATA", "NXDOMAIN", "OVERRIDE"
+    #   resp.firewall_rule.block_override_domain #=> String
+    #   resp.firewall_rule.block_override_dns_type #=> String, one of "CNAME"
+    #   resp.firewall_rule.block_override_ttl #=> Integer
+    #   resp.firewall_rule.creator_request_id #=> String
+    #   resp.firewall_rule.creation_time #=> String
+    #   resp.firewall_rule.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRule AWS API Documentation
+    #
+    # @overload update_firewall_rule(params = {})
+    # @param [Hash] params ({})
+    def update_firewall_rule(params = {}, options = {})
+      req = build_request(:update_firewall_rule, params)
+      req.send_request(options)
+    end
+
+    # Changes the association of a FirewallRuleGroup with a VPC. The
+    # association enables DNS filtering for the VPC.
+    #
+    # @option params [required, String] :firewall_rule_group_association_id
+    #   The identifier of the FirewallRuleGroupAssociation.
+    #
+    # @option params [Integer] :priority
+    #   The setting that determines the processing order of the rule group
+    #   among the rule groups that you associate with the specified VPC. DNS
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
+    #
+    #   You must specify a unique priority for each rule group that you
+    #   associate with a single VPC. To make it easier to insert rule groups
+    #   later, leave space between the numbers, for example, use 100, 200, and
+    #   so on. You can change the priority setting for a rule group
+    #   association after you create it.
+    #
+    # @option params [String] :mutation_protection
+    #   If enabled, this setting disallows modification or removal of the
+    #   association, to help prevent against accidentally altering DNS
+    #   firewall protections.
+    #
+    # @option params [String] :name
+    #   The name of the rule group association.
+    #
+    # @return [Types::UpdateFirewallRuleGroupAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFirewallRuleGroupAssociationResponse#firewall_rule_group_association #firewall_rule_group_association} => Types::FirewallRuleGroupAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_firewall_rule_group_association({
+    #     firewall_rule_group_association_id: "ResourceId", # required
+    #     priority: 1,
+    #     mutation_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     name: "Name",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_rule_group_association.id #=> String
+    #   resp.firewall_rule_group_association.arn #=> String
+    #   resp.firewall_rule_group_association.firewall_rule_group_id #=> String
+    #   resp.firewall_rule_group_association.vpc_id #=> String
+    #   resp.firewall_rule_group_association.name #=> String
+    #   resp.firewall_rule_group_association.priority #=> Integer
+    #   resp.firewall_rule_group_association.mutation_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_rule_group_association.managed_owner_name #=> String
+    #   resp.firewall_rule_group_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING"
+    #   resp.firewall_rule_group_association.status_message #=> String
+    #   resp.firewall_rule_group_association.creator_request_id #=> String
+    #   resp.firewall_rule_group_association.creation_time #=> String
+    #   resp.firewall_rule_group_association.modification_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleGroupAssociation AWS API Documentation
+    #
+    # @overload update_firewall_rule_group_association(params = {})
+    # @param [Hash] params ({})
+    def update_firewall_rule_group_association(params = {}, options = {})
+      req = build_request(:update_firewall_rule_group_association, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing DNSSEC validation configuration. If there is no
+    # existing DNSSEC validation configuration, one is created.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the virtual private cloud (VPC) that you're updating the
+    #   DNSSEC validation status for.
+    #
+    # @option params [required, String] :validation
+    #   The new value that you are specifying for DNSSEC validation for the
+    #   VPC. The value can be `ENABLE` or `DISABLE`. Be aware that it can take
+    #   time for a validation status change to be completed.
+    #
+    # @return [Types::UpdateResolverDnssecConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResolverDnssecConfigResponse#resolver_dnssec_config #resolver_dnssec_config} => Types::ResolverDnssecConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resolver_dnssec_config({
+    #     resource_id: "ResourceId", # required
+    #     validation: "ENABLE", # required, accepts ENABLE, DISABLE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolver_dnssec_config.id #=> String
+    #   resp.resolver_dnssec_config.owner_id #=> String
+    #   resp.resolver_dnssec_config.resource_id #=> String
+    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverDnssecConfig AWS API Documentation
+    #
+    # @overload update_resolver_dnssec_config(params = {})
+    # @param [Hash] params ({})
+    def update_resolver_dnssec_config(params = {}, options = {})
+      req = build_request(:update_resolver_dnssec_config, params)
+      req.send_request(options)
+    end
+
     # Updates the name of an inbound or an outbound Resolver endpoint.
     #
     # @option params [required, String] :resolver_endpoint_id
@@ -2335,7 +3936,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -160,6 +160,114 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The batch prediction details.
+    #
+    # @!attribute [rw] job_id
+    #   The job ID for the batch prediction.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The batch prediction status.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason a batch prediction job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Timestamp of when the batch prediction job started.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_time
+    #   Timestamp of when the batch prediction job comleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_heartbeat_time
+    #   Timestamp of most recent heartbeat indicating the batch prediction
+    #   job was making progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_path
+    #   The Amazon S3 location of your training file.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_path
+    #   The Amazon S3 location of your output file.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The name of the event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_name
+    #   The name of the detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version
+    #   The detector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role to use for this job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of batch prediction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] processed_records_count
+    #   The number of records processed by the batch prediction job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_records_count
+    #   The total number of records in the batch prediction job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/BatchPrediction AWS API Documentation
+    #
+    class BatchPrediction < Struct.new(
+      :job_id,
+      :status,
+      :failure_reason,
+      :start_time,
+      :completion_time,
+      :last_heartbeat_time,
+      :input_path,
+      :output_path,
+      :event_type_name,
+      :detector_name,
+      :detector_version,
+      :iam_role_arn,
+      :arn,
+      :processed_records_count,
+      :total_records_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CancelBatchPredictionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch prediction job to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchPredictionJobRequest AWS API Documentation
+    #
+    class CancelBatchPredictionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchPredictionJobResult AWS API Documentation
+    #
+    class CancelBatchPredictionJobResult < Aws::EmptyStructure; end
+
     # An exception indicating there was a conflict during a delete
     # operation. The following delete operations can cause a conflict
     # exception:
@@ -184,6 +292,76 @@ module Aws::FraudDetector
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateBatchPredictionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #         input_path: "s3BucketLocation", # required
+    #         output_path: "s3BucketLocation", # required
+    #         event_type_name: "identifier", # required
+    #         detector_name: "identifier", # required
+    #         detector_version: "wholeNumberVersionString",
+    #         iam_role_arn: "iamRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "tagKey", # required
+    #             value: "tagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch prediction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_path
+    #   The Amazon S3 location of your training file.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_path
+    #   The Amazon S3 location of your output file.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The name of the event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_name
+    #   The name of the detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version
+    #   The detector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role to use for this job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key and value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchPredictionJobRequest AWS API Documentation
+    #
+    class CreateBatchPredictionJobRequest < Struct.new(
+      :job_id,
+      :input_path,
+      :output_path,
+      :event_type_name,
+      :detector_name,
+      :detector_version,
+      :iam_role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchPredictionJobResult AWS API Documentation
+    #
+    class CreateBatchPredictionJobResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateDetectorVersionRequest
     #   data as a hash:
@@ -608,6 +786,29 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteBatchPredictionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch prediction job to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchPredictionJobRequest AWS API Documentation
+    #
+    class DeleteBatchPredictionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchPredictionJobResult AWS API Documentation
+    #
+    class DeleteBatchPredictionJobResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteDetectorRequest
     #   data as a hash:
     #
@@ -660,12 +861,35 @@ module Aws::FraudDetector
     #
     class DeleteDetectorVersionResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteEntityTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the entity type to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEntityTypeRequest AWS API Documentation
+    #
+    class DeleteEntityTypeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEntityTypeResult AWS API Documentation
+    #
+    class DeleteEntityTypeResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteEventRequest
     #   data as a hash:
     #
     #       {
-    #         event_id: "string", # required
-    #         event_type_name: "string", # required
+    #         event_id: "identifier", # required
+    #         event_type_name: "identifier", # required
     #       }
     #
     # @!attribute [rw] event_id
@@ -688,6 +912,162 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventResult AWS API Documentation
     #
     class DeleteEventResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteEventTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the event type to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventTypeRequest AWS API Documentation
+    #
+    class DeleteEventTypeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventTypeResult AWS API Documentation
+    #
+    class DeleteEventTypeResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteExternalModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_endpoint: "sageMakerEndpointIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] model_endpoint
+    #   The endpoint of the Amazon Sagemaker model to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteExternalModelRequest AWS API Documentation
+    #
+    class DeleteExternalModelRequest < Struct.new(
+      :model_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteExternalModelResult AWS API Documentation
+    #
+    class DeleteExternalModelResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the label to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteLabelRequest AWS API Documentation
+    #
+    class DeleteLabelRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteLabelResult AWS API Documentation
+    #
+    class DeleteLabelResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_id: "modelIdentifier", # required
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #       }
+    #
+    # @!attribute [rw] model_id
+    #   The model ID of the model to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_type
+    #   The model type of the model to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelRequest AWS API Documentation
+    #
+    class DeleteModelRequest < Struct.new(
+      :model_id,
+      :model_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelResult AWS API Documentation
+    #
+    class DeleteModelResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteModelVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_id: "modelIdentifier", # required
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_version_number: "floatVersionString", # required
+    #       }
+    #
+    # @!attribute [rw] model_id
+    #   The model ID of the model version to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_type
+    #   The model type of the model version to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version_number
+    #   The model version number of the model version to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelVersionRequest AWS API Documentation
+    #
+    class DeleteModelVersionRequest < Struct.new(
+      :model_id,
+      :model_type,
+      :model_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelVersionResult AWS API Documentation
+    #
+    class DeleteModelVersionResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteOutcomeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the outcome to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteOutcomeRequest AWS API Documentation
+    #
+    class DeleteOutcomeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteOutcomeResult AWS API Documentation
+    #
+    class DeleteOutcomeResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteRuleRequest
     #   data as a hash:
@@ -715,6 +1095,29 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteRuleResult AWS API Documentation
     #
     class DeleteRuleResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteVariableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the variable to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteVariableRequest AWS API Documentation
+    #
+    class DeleteVariableRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteVariableResult AWS API Documentation
+    #
+    class DeleteVariableResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeDetectorRequest
     #   data as a hash:
@@ -1153,6 +1556,54 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetBatchPredictionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier",
+    #         max_results: 1,
+    #         next_token: "string",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The batch prediction job for which to get the details.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects to return for the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next token from the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchPredictionJobsRequest AWS API Documentation
+    #
+    class GetBatchPredictionJobsRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_predictions
+    #   An array containing the details of each batch prediction job.
+    #   @return [Array<Types::BatchPrediction>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token for the subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchPredictionJobsResult AWS API Documentation
+    #
+    class GetBatchPredictionJobsResult < Struct.new(
+      :batch_predictions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDetectorVersionRequest
     #   data as a hash:
     #
@@ -1404,6 +1855,30 @@ module Aws::FraudDetector
     #   Names of the event type's variables you defined in Amazon Fraud
     #   Detector to represent data elements and their corresponding values
     #   for the event you are sending for evaluation.
+    #
+    #   * You must provide at least one eventVariable
+    #
+    #   * If detectorVersion is associated with a modelVersion, you must
+    #     provide at least one associated eventVariable
+    #
+    #   To ensure highest possible fraud prediction and to simplify your
+    #   data preparation, Amazon Fraud Detector will replace all missing
+    #   variables or values as follows:
+    #
+    #   **For Amazon Fraud Detector trained models:**
+    #
+    #   If a null value is provided explicitly for a variable or if a
+    #   variable is missing, model will replace the null value or the
+    #   missing variable (no variable name in the eventVariables map) with
+    #   calculated default mean/medians for numeric variables and with
+    #   special values for categorical variables.
+    #
+    #   **For External models ( for example, imported SageMaker):**
+    #
+    #   If a null value is provided explicitly for a variable, the model and
+    #   rules will use “null” as the value. If a variable is not provided
+    #   (no variable name in the eventVariables map), model and rules will
+    #   use the default value that is provided for the variable.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] external_model_endpoint_data_blobs
@@ -1660,6 +2135,26 @@ module Aws::FraudDetector
     #
     # @!attribute [rw] status
     #   The model version status.
+    #
+    #   Possible values are:
+    #
+    #   * `TRAINING_IN_PROGRESS`
+    #
+    #   * `TRAINING_COMPLETE`
+    #
+    #   * `ACTIVATE_REQUESTED`
+    #
+    #   * `ACTIVATE_IN_PROGRESS`
+    #
+    #   * `ACTIVE`
+    #
+    #   * `INACTIVATE_REQUESTED`
+    #
+    #   * `INACTIVATE_IN_PROGRESS`
+    #
+    #   * `INACTIVE`
+    #
+    #   * `ERROR`
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2027,6 +2522,30 @@ module Aws::FraudDetector
     class ListTagsForResourceResult < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The logit metric details.
+    #
+    # @!attribute [rw] variable_name
+    #   The name of the variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] variable_type
+    #   The type of variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] variable_importance
+    #   The relative importance of the variable.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/LogitMetric AWS API Documentation
+    #
+    class LogitMetric < Struct.new(
+      :variable_name,
+      :variable_type,
+      :variable_importance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2974,11 +3493,16 @@ module Aws::FraudDetector
     #   The training metric details.
     #   @return [Types::TrainingMetrics]
     #
+    # @!attribute [rw] variable_importance_metrics
+    #   The variable importance metrics.
+    #   @return [Types::VariableImportanceMetrics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TrainingResult AWS API Documentation
     #
     class TrainingResult < Struct.new(
       :data_validation_metrics,
-      :training_metrics)
+      :training_metrics,
+      :variable_importance_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3287,7 +3811,7 @@ module Aws::FraudDetector
     #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         model_version_number: "floatVersionString", # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #       }
     #
     # @!attribute [rw] model_id
@@ -3614,6 +4138,20 @@ module Aws::FraudDetector
       :default_value,
       :description,
       :variable_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The variable importance metrics details.
+    #
+    # @!attribute [rw] logit_metrics
+    #   List of variable metrics.
+    #   @return [Array<Types::LogitMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/VariableImportanceMetrics AWS API Documentation
+    #
+    class VariableImportanceMetrics < Struct.new(
+      :logit_metrics)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -136,10 +136,24 @@ module Aws::AutoScalingPlans
     # @!attribute [rw] application_source
     #   A CloudFormation stack or set of tags. You can create one scaling
     #   plan per application source.
+    #
+    #   For more information, see [ApplicationSource][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html
     #   @return [Types::ApplicationSource]
     #
     # @!attribute [rw] scaling_instructions
     #   The scaling instructions.
+    #
+    #   For more information, see [ScalingInstruction][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html
     #   @return [Array<Types::ScalingInstruction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CreateScalingPlanRequest AWS API Documentation
@@ -153,9 +167,8 @@ module Aws::AutoScalingPlans
     end
 
     # @!attribute [rw] scaling_plan_version
-    #   The version number of the scaling plan. This value is always 1.
-    #
-    #   Currently, you cannot specify multiple scaling plan versions.
+    #   The version number of the scaling plan. This value is always `1`.
+    #   Currently, you cannot have multiple scaling plan versions.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CreateScalingPlanResponse AWS API Documentation
@@ -172,8 +185,6 @@ module Aws::AutoScalingPlans
     # For predictive scaling to work with a customized load metric
     # specification, AWS Auto Scaling needs access to the `Sum` and
     # `Average` statistics that CloudWatch computes from metric data.
-    # Statistics are calculations used to aggregate data over specified time
-    # periods.
     #
     # When you choose a load metric, make sure that the required `Sum` and
     # `Average` statistics for your metric are available in CloudWatch and
@@ -186,13 +197,25 @@ module Aws::AutoScalingPlans
     # then the `Average` statistic for the specified metric must represent
     # the average request count processed by each instance of the group.
     #
+    # If you publish your own metrics, you can aggregate the data points at
+    # a given interval and then publish the aggregated data points to
+    # CloudWatch. Before AWS Auto Scaling generates the forecast, it sums up
+    # all the metric data points that occurred within each hour to match the
+    # granularity period that is used in the forecast (60 minutes).
+    #
     # For information about terminology, available metrics, or how to
     # publish new metrics, see [Amazon CloudWatch Concepts][1] in the
     # *Amazon CloudWatch User Guide*.
     #
+    # After creating your scaling plan, you can use the AWS Auto Scaling
+    # console to visualize forecasts for the specified metric. For more
+    # information, see [View Scaling Information for a Resource][2] in the
+    # *AWS Auto Scaling User Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource
     #
     # @note When making an API call, you may pass CustomizedLoadMetricSpecification
     #   data as a hash:
@@ -227,8 +250,7 @@ module Aws::AutoScalingPlans
     #   @return [Array<Types::MetricDimension>]
     #
     # @!attribute [rw] statistic
-    #   The statistic of the metric. Currently, the value must always be
-    #   `Sum`.
+    #   The statistic of the metric. The only valid value is `Sum`.
     #   @return [String]
     #
     # @!attribute [rw] unit
@@ -263,8 +285,9 @@ module Aws::AutoScalingPlans
     #   the number of capacity units. That is, the value of the metric
     #   should decrease when capacity increases.
     #
-    # For more information about CloudWatch, see [Amazon CloudWatch
-    # Concepts][2].
+    # For information about terminology, available metrics, or how to
+    # publish new metrics, see [Amazon CloudWatch Concepts][2] in the
+    # *Amazon CloudWatch User Guide*.
     #
     #
     #
@@ -356,7 +379,8 @@ module Aws::AutoScalingPlans
     #   @return [String]
     #
     # @!attribute [rw] scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DeleteScalingPlanRequest AWS API Documentation
@@ -387,7 +411,8 @@ module Aws::AutoScalingPlans
     #   @return [String]
     #
     # @!attribute [rw] scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_results
@@ -455,8 +480,13 @@ module Aws::AutoScalingPlans
     #   @return [Array<String>]
     #
     # @!attribute [rw] scaling_plan_version
-    #   The version number of the scaling plan. If you specify a scaling
-    #   plan version, you must also specify a scaling plan name.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
+    #
+    #   <note markdown="1"> If you specify a scaling plan version, you must also specify a
+    #   scaling plan name.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] application_sources
@@ -522,42 +552,24 @@ module Aws::AutoScalingPlans
     #   @return [String]
     #
     # @!attribute [rw] scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service.
+    #   The namespace of the AWS service. The only valid value is
+    #   `autoscaling`.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource. This string consists of the resource type
-    #   and unique identifier.
-    #
-    #   * Auto Scaling group - The resource type is `autoScalingGroup` and
-    #     the unique identifier is the name of the Auto Scaling group.
-    #     Example: `autoScalingGroup/my-asg`.
-    #
-    #   * ECS service - The resource type is `service` and the unique
-    #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
-    #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
-    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
-    #
-    #   * DynamoDB table - The resource type is `table` and the unique
-    #     identifier is the resource ID. Example: `table/my-table`.
-    #
-    #   * DynamoDB global secondary index - The resource type is `index` and
-    #     the unique identifier is the resource ID. Example:
-    #     `table/my-table/index/my-table-index`.
-    #
-    #   * Aurora DB cluster - The resource type is `cluster` and the unique
-    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #   The ID of the resource. This string consists of a prefix
+    #   (`autoScalingGroup`) followed by the name of a specified Auto
+    #   Scaling group (`my-asg`). Example: `autoScalingGroup/my-asg`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
-    #   The scalable dimension for the resource.
+    #   The scalable dimension for the resource. The only valid value is
+    #   `autoscaling:autoScalingGroup:DesiredCapacity`.
     #   @return [String]
     #
     # @!attribute [rw] forecast_data_type
@@ -705,6 +717,15 @@ module Aws::AutoScalingPlans
     # Represents a predefined metric that can be used for predictive
     # scaling.
     #
+    # After creating your scaling plan, you can use the AWS Auto Scaling
+    # console to visualize forecasts for the specified metric. For more
+    # information, see [View Scaling Information for a Resource][1] in the
+    # *AWS Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource
+    #
     # @note When making an API call, you may pass PredefinedLoadMetricSpecification
     #   data as a hash:
     #
@@ -720,18 +741,32 @@ module Aws::AutoScalingPlans
     # @!attribute [rw] resource_label
     #   Identifies the resource associated with the metric type. You can't
     #   specify a resource label unless the metric type is
-    #   `ALBRequestCountPerTarget` and there is a target group for an
+    #   `ALBTargetGroupRequestCount` and there is a target group for an
     #   Application Load Balancer attached to the Auto Scaling group.
     #
-    #   The format is
+    #   You create the resource label by appending the final portion of the
+    #   load balancer ARN and the final portion of the target group ARN into
+    #   a single value, separated by a forward slash (/). The format is
     #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
     #   where:
     #
     #   * app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the
-    #     final portion of the load balancer ARN.
+    #     final portion of the load balancer ARN
     #
     #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
     #     the final portion of the target group ARN.
+    #
+    #   This is an example:
+    #   app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+    #
+    #   To find the ARN for an Application Load Balancer, use the
+    #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
+    #   target group, use the [DescribeTargetGroups][2] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/PredefinedLoadMetricSpecification AWS API Documentation
@@ -766,15 +801,29 @@ module Aws::AutoScalingPlans
     #   Application Load Balancer attached to the Auto Scaling group, Spot
     #   Fleet request, or ECS service.
     #
-    #   The format is
+    #   You create the resource label by appending the final portion of the
+    #   load balancer ARN and the final portion of the target group ARN into
+    #   a single value, separated by a forward slash (/). The format is
     #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
     #   where:
     #
     #   * app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the
-    #     final portion of the load balancer ARN.
+    #     final portion of the load balancer ARN
     #
     #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
     #     the final portion of the target group ARN.
+    #
+    #   This is an example:
+    #   app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+    #
+    #   To find the ARN for an Application Load Balancer, use the
+    #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
+    #   target group, use the [DescribeTargetGroups][2] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/PredefinedScalingMetricSpecification AWS API Documentation
@@ -786,12 +835,8 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
-    # Describes a scaling instruction for a scalable resource.
-    #
-    # The scaling instruction is used in combination with a scaling plan,
-    # which is a set of instructions for configuring dynamic scaling and
-    # predictive scaling for the scalable resources in your application.
-    # Each scaling instruction applies to one resource.
+    # Describes a scaling instruction for a scalable resource in a scaling
+    # plan. Each scaling instruction applies to one resource.
     #
     # AWS Auto Scaling creates target tracking scaling policies based on the
     # scaling instructions. Target tracking scaling policies adjust the
@@ -810,13 +855,13 @@ module Aws::AutoScalingPlans
     #
     # We recommend waiting a minimum of 24 hours after creating an Auto
     # Scaling group to configure predictive scaling. At minimum, there must
-    # be 24 hours of historical data to generate a forecast.
+    # be 24 hours of historical data to generate a forecast. For more
+    # information, see [Best Practices for AWS Auto Scaling][1] in the *AWS
+    # Auto Scaling User Guide*.
     #
-    # For more information, see [Getting Started with AWS Auto Scaling][1].
     #
     #
-    #
-    # [1]: https://docs.aws.amazon.com/autoscaling/plans/userguide/auto-scaling-getting-started.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-best-practices.html
     #
     # @note When making an API call, you may pass ScalingInstruction
     #   data as a hash:
@@ -947,17 +992,9 @@ module Aws::AutoScalingPlans
     #   @return [Integer]
     #
     # @!attribute [rw] target_tracking_configurations
-    #   The structure that defines new target tracking configurations (up to
-    #   10). Each of these structures includes a specific scaling metric and
-    #   a target value for the metric, along with various parameters to use
-    #   with dynamic scaling.
-    #
-    #   With predictive scaling and dynamic scaling, the resource scales
-    #   based on the target tracking configuration that provides the largest
-    #   capacity for both scale in and scale out.
-    #
-    #   Condition: The scaling metric must be unique across target tracking
-    #   configurations.
+    #   The target tracking configurations (up to 10). Each of these
+    #   structures must specify a unique scaling metric and a target value
+    #   for the metric.
     #   @return [Array<Types::TargetTrackingConfiguration>]
     #
     # @!attribute [rw] predefined_load_metric_specification
@@ -1092,7 +1129,8 @@ module Aws::AutoScalingPlans
     #   @return [Integer]
     #
     # @!attribute [rw] application_source
-    #   The application source.
+    #   A CloudFormation stack or a set of tags. You can create one scaling
+    #   plan per application source.
     #   @return [Types::ApplicationSource]
     #
     # @!attribute [rw] scaling_instructions
@@ -1349,8 +1387,9 @@ module Aws::AutoScalingPlans
     #   @return [Types::CustomizedScalingMetricSpecification]
     #
     # @!attribute [rw] target_value
-    #   The target value for the metric. The range is 8.515920e-109 to
-    #   1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+    #   The target value for the metric. Although this property accepts
+    #   numbers of type Double, it won't accept values that are either too
+    #   small or too large. Values must be in the range of -2^360 to 2^360.
     #   @return [Float]
     #
     # @!attribute [rw] disable_scale_in
@@ -1365,27 +1404,30 @@ module Aws::AutoScalingPlans
     #   @return [Boolean]
     #
     # @!attribute [rw] scale_out_cooldown
-    #   The amount of time, in seconds, after a scale-out activity completes
-    #   before another scale-out activity can start. This value is not used
-    #   if the scalable resource is an Auto Scaling group.
+    #   The amount of time, in seconds, to wait for a previous scale-out
+    #   activity to take effect. This property is not used if the scalable
+    #   resource is an Auto Scaling group.
     #
-    #   While the cooldown period is in effect, the capacity that has been
-    #   added by the previous scale-out event that initiated the cooldown is
-    #   calculated as part of the desired capacity for the next scale out.
-    #   The intention is to continuously (but not excessively) scale out.
+    #   With the *scale-out cooldown period*, the intention is to
+    #   continuously (but not excessively) scale out. After Auto Scaling
+    #   successfully scales out using a target tracking scaling policy, it
+    #   starts to calculate the cooldown time. The scaling policy won't
+    #   increase the desired capacity again unless either a larger scale out
+    #   is triggered or the cooldown period ends.
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_cooldown
-    #   The amount of time, in seconds, after a scale in activity completes
-    #   before another scale in activity can start. This value is not used
-    #   if the scalable resource is an Auto Scaling group.
+    #   The amount of time, in seconds, after a scale-in activity completes
+    #   before another scale-in activity can start. This property is not
+    #   used if the scalable resource is an Auto Scaling group.
     #
-    #   The cooldown period is used to block subsequent scale in requests
-    #   until it has expired. The intention is to scale in conservatively to
-    #   protect your application's availability. However, if another alarm
-    #   triggers a scale-out policy during the cooldown period after a
-    #   scale-in, AWS Auto Scaling scales out your scalable target
-    #   immediately.
+    #   With the *scale-in cooldown period*, the intention is to scale in
+    #   conservatively to protect your application’s availability, so
+    #   scale-in activities are blocked until the cooldown period has
+    #   expired. However, if another alarm triggers a scale-out activity
+    #   during the scale-in cooldown period, Auto Scaling scales out the
+    #   target immediately. In this case, the scale-in cooldown period stops
+    #   and doesn't complete.
     #   @return [Integer]
     #
     # @!attribute [rw] estimated_instance_warmup
@@ -1486,15 +1528,30 @@ module Aws::AutoScalingPlans
     #   @return [String]
     #
     # @!attribute [rw] scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. The only valid value is `1`.
+    #   Currently, you cannot have multiple scaling plan versions.
     #   @return [Integer]
     #
     # @!attribute [rw] application_source
     #   A CloudFormation stack or set of tags.
+    #
+    #   For more information, see [ApplicationSource][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html
     #   @return [Types::ApplicationSource]
     #
     # @!attribute [rw] scaling_instructions
     #   The scaling instructions.
+    #
+    #   For more information, see [ScalingInstruction][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html
     #   @return [Array<Types::ScalingInstruction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlanRequest AWS API Documentation

@@ -413,6 +413,19 @@
         {"shape":"OperationNotSupportedException"}
       ]
     },
+    "DescribePortfolioShares":{
+      "name":"DescribePortfolioShares",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePortfolioSharesInput"},
+      "output":{"shape":"DescribePortfolioSharesOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ]
+    },
     "DescribeProduct":{
       "name":"DescribeProduct",
       "http":{
@@ -698,6 +711,21 @@
       "errors":[
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "ImportAsProvisionedProduct":{
+      "name":"ImportAsProvisionedProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ImportAsProvisionedProductInput"},
+      "output":{"shape":"ImportAsProvisionedProductOutput"},
+      "errors":[
+        {"shape":"DuplicateResourceException"},
+        {"shape":"InvalidStateException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
       ]
     },
     "ListAcceptedPortfolioShares":{
@@ -1048,6 +1076,21 @@
         {"shape":"TagOptionNotMigratedException"}
       ]
     },
+    "UpdatePortfolioShare":{
+      "name":"UpdatePortfolioShare",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdatePortfolioShareInput"},
+      "output":{"shape":"UpdatePortfolioShareOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"},
+        {"shape":"OperationNotSupportedException"},
+        {"shape":"InvalidStateException"}
+      ]
+    },
     "UpdateProduct":{
       "name":"UpdateProduct",
       "http":{
@@ -1187,10 +1230,9 @@
       "member":{"shape":"Tag"},
       "max":20
     },
-    "AllowedValue":{"type":"string"},
     "AllowedValues":{
       "type":"list",
-      "member":{"shape":"AllowedValue"}
+      "member":{"shape":"String"}
     },
     "ApproximateCount":{"type":"integer"},
     "AssociateBudgetWithResourceInput":{
@@ -1310,6 +1352,7 @@
         "FailedServiceActionAssociations":{"shape":"FailedServiceActionAssociations"}
       }
     },
+    "Boolean":{"type":"boolean"},
     "BudgetDetail":{
       "type":"structure",
       "members":{
@@ -1485,7 +1528,8 @@
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "PortfolioId":{"shape":"Id"},
         "AccountId":{"shape":"AccountId"},
-        "OrganizationNode":{"shape":"OrganizationNode"}
+        "OrganizationNode":{"shape":"OrganizationNode"},
+        "ShareTagOptions":{"shape":"Boolean"}
       }
     },
     "CreatePortfolioShareOutput":{
@@ -1814,12 +1858,42 @@
         "ShareDetails":{"shape":"ShareDetails"}
       }
     },
+    "DescribePortfolioShareType":{
+      "type":"string",
+      "enum":[
+        "ACCOUNT",
+        "ORGANIZATION",
+        "ORGANIZATIONAL_UNIT",
+        "ORGANIZATION_MEMBER_ACCOUNT"
+      ]
+    },
+    "DescribePortfolioSharesInput":{
+      "type":"structure",
+      "required":[
+        "PortfolioId",
+        "Type"
+      ],
+      "members":{
+        "PortfolioId":{"shape":"Id"},
+        "Type":{"shape":"DescribePortfolioShareType"},
+        "PageToken":{"shape":"PageToken"},
+        "PageSize":{"shape":"PageSizeMax100"}
+      }
+    },
+    "DescribePortfolioSharesOutput":{
+      "type":"structure",
+      "members":{
+        "NextPageToken":{"shape":"PageToken"},
+        "PortfolioShareDetails":{"shape":"PortfolioShareDetails"}
+      }
+    },
     "DescribeProductAsAdminInput":{
       "type":"structure",
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "Id":{"shape":"Id"},
-        "Name":{"shape":"ProductViewName"}
+        "Name":{"shape":"ProductViewName"},
+        "SourcePortfolioId":{"shape":"Id"}
       }
     },
     "DescribeProductAsAdminOutput":{
@@ -2268,6 +2342,33 @@
       "pattern":"[a-zA-Z0-9][a-zA-Z0-9_-]*"
     },
     "IgnoreErrors":{"type":"boolean"},
+    "ImportAsProvisionedProductInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "ProvisioningArtifactId",
+        "ProvisionedProductName",
+        "PhysicalId",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{"shape":"AcceptLanguage"},
+        "ProductId":{"shape":"Id"},
+        "ProvisioningArtifactId":{"shape":"Id"},
+        "ProvisionedProductName":{"shape":"ProvisionedProductName"},
+        "PhysicalId":{"shape":"PhysicalId"},
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "ImportAsProvisionedProductOutput":{
+      "type":"structure",
+      "members":{
+        "RecordDetail":{"shape":"RecordDetail"}
+      }
+    },
     "InstructionType":{"type":"string"},
     "InstructionValue":{"type":"string"},
     "InvalidParametersException":{
@@ -2318,7 +2419,7 @@
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSize"},
+        "PageSize":{"shape":"PageSizeMax100"},
         "PortfolioShareType":{"shape":"PortfolioShareType"}
       }
     },
@@ -2410,7 +2511,7 @@
         "PortfolioId":{"shape":"Id"},
         "OrganizationParentId":{"shape":"Id"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSize"}
+        "PageSize":{"shape":"PageSizeMax100"}
       }
     },
     "ListPortfolioAccessOutput":{
@@ -2427,7 +2528,7 @@
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "ProductId":{"shape":"Id"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSize"}
+        "PageSize":{"shape":"PageSizeMax100"}
       }
     },
     "ListPortfoliosForProductOutput":{
@@ -2442,7 +2543,7 @@
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSize"}
+        "PageSize":{"shape":"PageSizeMax100"}
       }
     },
     "ListPortfoliosOutput":{
@@ -2653,6 +2754,10 @@
       "member":{"shape":"NotificationArn"},
       "max":5
     },
+    "NullableBoolean":{
+      "type":"boolean",
+      "box":true
+    },
     "OperationNotSupportedException":{
       "type":"structure",
       "members":{
@@ -2693,9 +2798,15 @@
       "max":60
     },
     "OutputValue":{"type":"string"},
+    "Owner":{"type":"string"},
     "PageSize":{
       "type":"integer",
       "max":20,
+      "min":0
+    },
+    "PageSizeMax100":{
+      "type":"integer",
+      "max":100,
       "min":0
     },
     "PageToken":{
@@ -2706,7 +2817,13 @@
     "ParameterConstraints":{
       "type":"structure",
       "members":{
-        "AllowedValues":{"shape":"AllowedValues"}
+        "AllowedValues":{"shape":"AllowedValues"},
+        "AllowedPattern":{"shape":"String"},
+        "ConstraintDescription":{"shape":"String"},
+        "MaxLength":{"shape":"String"},
+        "MinLength":{"shape":"String"},
+        "MaxValue":{"shape":"String"},
+        "MinValue":{"shape":"String"}
       }
     },
     "ParameterKey":{
@@ -2751,6 +2868,19 @@
       "min":1
     },
     "PortfolioName":{"type":"string"},
+    "PortfolioShareDetail":{
+      "type":"structure",
+      "members":{
+        "PrincipalId":{"shape":"Id"},
+        "Type":{"shape":"DescribePortfolioShareType"},
+        "Accepted":{"shape":"Boolean"},
+        "ShareTagOptions":{"shape":"Boolean"}
+      }
+    },
+    "PortfolioShareDetails":{
+      "type":"list",
+      "member":{"shape":"PortfolioShareDetail"}
+    },
     "PortfolioShareType":{
       "type":"string",
       "enum":[
@@ -2900,7 +3030,7 @@
     "PropertyValue":{
       "type":"string",
       "max":1024,
-      "min":1
+      "min":0
     },
     "ProviderName":{
       "type":"string",
@@ -3450,6 +3580,7 @@
       }
     },
     "ResourceType":{"type":"string"},
+    "RetainPhysicalResources":{"type":"boolean"},
     "RoleArn":{
       "type":"string",
       "max":1224,
@@ -3503,7 +3634,7 @@
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "Filters":{"shape":"ProductViewFilters"},
-        "PageSize":{"shape":"PageSize"},
+        "PageSize":{"shape":"PageSizeMax100"},
         "SortBy":{"shape":"ProductViewSortBy"},
         "SortOrder":{"shape":"SortOrder"},
         "PageToken":{"shape":"PageToken"}
@@ -3744,6 +3875,7 @@
       "type":"string",
       "pattern":"[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*"
     },
+    "String":{"type":"string"},
     "SuccessfulShares":{
       "type":"list",
       "member":{"shape":"AccountId"}
@@ -3788,7 +3920,8 @@
         "Key":{"shape":"TagOptionKey"},
         "Value":{"shape":"TagOptionValue"},
         "Active":{"shape":"TagOptionActive"},
-        "Id":{"shape":"TagOptionId"}
+        "Id":{"shape":"TagOptionId"},
+        "Owner":{"shape":"Owner"}
       }
     },
     "TagOptionDetails":{
@@ -3855,7 +3988,8 @@
           "idempotencyToken":true
         },
         "IgnoreErrors":{"shape":"IgnoreErrors"},
-        "AcceptLanguage":{"shape":"AcceptLanguage"}
+        "AcceptLanguage":{"shape":"AcceptLanguage"},
+        "RetainPhysicalResources":{"shape":"RetainPhysicalResources"}
       }
     },
     "TerminateProvisionedProductOutput":{
@@ -3901,6 +4035,24 @@
       "members":{
         "PortfolioDetail":{"shape":"PortfolioDetail"},
         "Tags":{"shape":"Tags"}
+      }
+    },
+    "UpdatePortfolioShareInput":{
+      "type":"structure",
+      "required":["PortfolioId"],
+      "members":{
+        "AcceptLanguage":{"shape":"AcceptLanguage"},
+        "PortfolioId":{"shape":"Id"},
+        "AccountId":{"shape":"AccountId"},
+        "OrganizationNode":{"shape":"OrganizationNode"},
+        "ShareTagOptions":{"shape":"NullableBoolean"}
+      }
+    },
+    "UpdatePortfolioShareOutput":{
+      "type":"structure",
+      "members":{
+        "PortfolioShareToken":{"shape":"Id"},
+        "Status":{"shape":"ShareStatus"}
       }
     },
     "UpdateProductInput":{

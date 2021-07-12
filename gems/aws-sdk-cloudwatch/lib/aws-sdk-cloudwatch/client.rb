@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -478,6 +478,28 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Permanently deletes the metric stream that you specify.
+    #
+    # @option params [required, String] :name
+    #   The name of the metric stream to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_metric_stream({
+    #     name: "MetricStreamName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteMetricStream AWS API Documentation
+    #
+    # @overload delete_metric_stream(params = {})
+    # @param [Hash] params ({})
+    def delete_metric_stream(params = {}, options = {})
+      req = build_request(:delete_metric_stream, params)
+      req.send_request(options)
+    end
+
     # Retrieves the history for the specified alarm. You can filter the
     # results by date range or item type. If an alarm name is not specified,
     # the histories for either all metric alarms or all composite alarms are
@@ -557,7 +579,7 @@ module Aws::CloudWatch
     end
 
     # Retrieves the specified alarms. You can filter the results by
-    # specifying a a prefix for the alarm name, the alarm state, or a prefix
+    # specifying a prefix for the alarm name, the alarm state, or a prefix
     # for any action.
     #
     # @option params [Array<String>] :alarm_names
@@ -738,6 +760,11 @@ module Aws::CloudWatch
 
     # Retrieves the alarms for the specified metric. To filter the results,
     # specify a statistic, period, or unit.
+    #
+    # This operation retrieves only standard alarms that are based on the
+    # specified metric. It does not return alarms based on math expressions
+    # that use the specified metric, or composite alarms that use the
+    # specified metric.
     #
     # @option params [required, String] :metric_name
     #   The name of the metric.
@@ -921,7 +948,6 @@ module Aws::CloudWatch
     end
 
     # Returns a list of all the Contributor Insights rules in your account.
-    # All rules in your account are returned with a single operation.
     #
     # For more information about Contributor Insights, see [Using
     # Contributor Insights to Analyze High-Cardinality Data][1].
@@ -931,11 +957,12 @@ module Aws::CloudWatch
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html
     #
     # @option params [String] :next_token
-    #   Reserved for future use.
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of rules.
     #
     # @option params [Integer] :max_results
-    #   This parameter is not currently used. Reserved for future use. If it
-    #   is used in the future, the maximum value might be different.
+    #   The maximum number of results to return in one operation. If you omit
+    #   this parameter, the default of 500 is used.
     #
     # @return [Types::DescribeInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1376,8 +1403,8 @@ module Aws::CloudWatch
     #   response from CloudWatch than setting 12:07 or 12:29 as the `EndTime`.
     #
     # @option params [String] :next_token
-    #   Include this value, if it was returned by the previous call, to get
-    #   the next set of data points.
+    #   Include this value, if it was returned by the previous `GetMetricData`
+    #   operation, to get the next set of data points.
     #
     # @option params [String] :scan_by
     #   The order in which data points should be returned.
@@ -1389,6 +1416,11 @@ module Aws::CloudWatch
     # @option params [Integer] :max_datapoints
     #   The maximum number of data points the request should return before
     #   paginating. If you omit this, the default of 100,800 is used.
+    #
+    # @option params [Types::LabelOptions] :label_options
+    #   This structure includes the `Timezone` parameter, which you can use to
+    #   specify your time zone so that the labels of returned data display the
+    #   correct time for your time zone.
     #
     # @return [Types::GetMetricDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1430,6 +1462,9 @@ module Aws::CloudWatch
     #     next_token: "NextToken",
     #     scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
     #     max_datapoints: 1,
+    #     label_options: {
+    #       timezone: "GetMetricDataLabelTimezone",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1673,6 +1708,54 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Returns information about the metric stream that you specify.
+    #
+    # @option params [required, String] :name
+    #   The name of the metric stream to retrieve information about.
+    #
+    # @return [Types::GetMetricStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricStreamOutput#arn #arn} => String
+    #   * {Types::GetMetricStreamOutput#name #name} => String
+    #   * {Types::GetMetricStreamOutput#include_filters #include_filters} => Array&lt;Types::MetricStreamFilter&gt;
+    #   * {Types::GetMetricStreamOutput#exclude_filters #exclude_filters} => Array&lt;Types::MetricStreamFilter&gt;
+    #   * {Types::GetMetricStreamOutput#firehose_arn #firehose_arn} => String
+    #   * {Types::GetMetricStreamOutput#role_arn #role_arn} => String
+    #   * {Types::GetMetricStreamOutput#state #state} => String
+    #   * {Types::GetMetricStreamOutput#creation_date #creation_date} => Time
+    #   * {Types::GetMetricStreamOutput#last_update_date #last_update_date} => Time
+    #   * {Types::GetMetricStreamOutput#output_format #output_format} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metric_stream({
+    #     name: "MetricStreamName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.include_filters #=> Array
+    #   resp.include_filters[0].namespace #=> String
+    #   resp.exclude_filters #=> Array
+    #   resp.exclude_filters[0].namespace #=> String
+    #   resp.firehose_arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.state #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_update_date #=> Time
+    #   resp.output_format #=> String, one of "json", "opentelemetry0.7"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStream AWS API Documentation
+    #
+    # @overload get_metric_stream(params = {})
+    # @param [Hash] params ({})
+    def get_metric_stream(params = {}, options = {})
+      req = build_request(:get_metric_stream, params)
+      req.send_request(options)
+    end
+
     # You can use the `GetMetricWidgetImage` API to retrieve a snapshot
     # graph of one or more Amazon CloudWatch metrics as a bitmap image. You
     # can then embed this image into your services and products, such as
@@ -1816,6 +1899,50 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Returns a list of metric streams in this account.
+    #
+    # @option params [String] :next_token
+    #   Include this value, if it was returned by the previous call, to get
+    #   the next set of metric streams.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in one operation.
+    #
+    # @return [Types::ListMetricStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetricStreamsOutput#next_token #next_token} => String
+    #   * {Types::ListMetricStreamsOutput#entries #data.entries} => Array&lt;Types::MetricStreamEntry&gt; (This method conflicts with a method on Response, call it through the data member)
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metric_streams({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].arn #=> String
+    #   resp.data.entries[0].creation_date #=> Time
+    #   resp.data.entries[0].last_update_date #=> Time
+    #   resp.data.entries[0].name #=> String
+    #   resp.data.entries[0].firehose_arn #=> String
+    #   resp.data.entries[0].state #=> String
+    #   resp.data.entries[0].output_format #=> String, one of "json", "opentelemetry0.7"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricStreams AWS API Documentation
+    #
+    # @overload list_metric_streams(params = {})
+    # @param [Hash] params ({})
+    def list_metric_streams(params = {}, options = {})
+      req = build_request(:list_metric_streams, params)
+      req.send_request(options)
+    end
+
     # List the specified metrics. You can use the returned metrics with
     # [GetMetricData][1] or [GetMetricStatistics][2] to obtain statistical
     # data.
@@ -1837,13 +1964,16 @@ module Aws::CloudWatch
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html
     #
     # @option params [String] :namespace
-    #   The namespace to filter against.
+    #   The metric namespace to filter against. Only the namespace that
+    #   matches exactly will be returned.
     #
     # @option params [String] :metric_name
-    #   The name of the metric to filter against.
+    #   The name of the metric to filter against. Only the metrics with names
+    #   that match exactly will be returned.
     #
     # @option params [Array<Types::DimensionFilter>] :dimensions
-    #   The dimensions to filter against.
+    #   The dimensions to filter against. Only the dimensions that match
+    #   exactly will be returned.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to indicate that there is more
@@ -1974,8 +2104,6 @@ module Aws::CloudWatch
     #   The configuration can also include the time zone to use for the
     #   metric.
     #
-    #   You can in
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2056,6 +2184,9 @@ module Aws::CloudWatch
     # the update completely overwrites the previous configuration of the
     # alarm.
     #
+    # If you are an IAM user, you must have `iam:CreateServiceLinkedRole` to
+    # create a composite alarm that has Systems Manager OpsItem actions.
+    #
     # @option params [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
     #   alarm state of the composite alarm. The default is `TRUE`.
@@ -2065,7 +2196,8 @@ module Aws::CloudWatch
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:ssm:region:account-id:opsitem:severity `
     #
     # @option params [String] :alarm_description
     #   The description for the composite alarm.
@@ -2339,36 +2471,17 @@ module Aws::CloudWatch
     # If you are an IAM user, you must have Amazon EC2 permissions for some
     # alarm operations:
     #
-    # * `iam:CreateServiceLinkedRole` for all alarms with EC2 actions
+    # * The `iam:CreateServiceLinkedRole` for all alarms with EC2 actions
     #
-    # * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
-    #   alarms on EC2 instance status metrics
-    #
-    # * `ec2:StopInstances` for alarms with stop actions
-    #
-    # * `ec2:TerminateInstances` for alarms with terminate actions
-    #
-    # * No specific permissions are needed for alarms with recover actions
-    #
-    # If you have read/write permissions for Amazon CloudWatch but not for
-    # Amazon EC2, you can still create an alarm, but the stop or terminate
-    # actions are not performed. However, if you are later granted the
-    # required permissions, the alarm actions that you created earlier are
-    # performed.
-    #
-    # If you are using an IAM role (for example, an EC2 instance profile),
-    # you cannot stop or terminate the instance using alarm actions.
-    # However, you can still see the alarm state and perform any other
-    # actions such as Amazon SNS notifications or Auto Scaling policies.
-    #
-    # If you are using temporary security credentials granted using AWS STS,
-    # you cannot stop or terminate an EC2 instance using alarm actions.
+    # * The `iam:CreateServiceLinkedRole` to create an alarm with Systems
+    #   Manager OpsItem actions.
     #
     # The first time you create an alarm in the AWS Management Console, the
     # CLI, or by using the PutMetricAlarm API, CloudWatch creates the
-    # necessary service-linked role for you. The service-linked role is
-    # called `AWSServiceRoleForCloudWatchEvents`. For more information, see
-    # [AWS service-linked role][1].
+    # necessary service-linked role for you. The service-linked roles are
+    # called `AWSServiceRoleForCloudWatchEvents` and
+    # `AWSServiceRoleForCloudWatchAlarms_ActionSSM`. For more information,
+    # see [AWS service-linked role][1].
     #
     #
     #
@@ -2403,6 +2516,8 @@ module Aws::CloudWatch
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #   \|
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
     #
     # @option params [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
@@ -2415,7 +2530,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   `
+    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity `
     #
     #   Valid Values (for use with IAM roles):
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
@@ -2594,8 +2709,8 @@ module Aws::CloudWatch
     #   a math expression.
     #
     #   One item in the `Metrics` array is the expression that the alarm
-    #   watches. You designate this expression by setting `ReturnValue` to
-    #   true for this object in the array. For more information, see
+    #   watches. You designate this expression by setting `ReturnData` to true
+    #   for this object in the array. For more information, see
     #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
@@ -2615,6 +2730,15 @@ module Aws::CloudWatch
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions by granting a user permission to
     #   access or change only resources with certain tag values.
+    #
+    #   If you are using this operation to update an existing alarm, any tags
+    #   you specify in this parameter are ignored. To change the tags of an
+    #   existing alarm, use [TagResource][1] or [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #
     # @option params [String] :threshold_metric_id
     #   If this is an alarm based on an anomaly detection model, make this
@@ -2725,6 +2849,10 @@ module Aws::CloudWatch
     # pair. For more information about specifying dimensions, see
     # [Publishing Metrics][2] in the *Amazon CloudWatch User Guide*.
     #
+    # You specify the time stamp to be associated with each data point. You
+    # can specify time stamps that are as much as two weeks before the
+    # current date, and as much as 2 hours after the current day and time.
+    #
     # Data points with time stamps from 24 hours ago or longer can take at
     # least 48 hours to become available for [GetMetricData][3] or
     # [GetMetricStatistics][4] from the time they are submitted. Data points
@@ -2800,6 +2928,134 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates or updates a metric stream. Metric streams can automatically
+    # stream CloudWatch metrics to AWS destinations including Amazon S3 and
+    # to many third-party solutions.
+    #
+    # For more information, see [ Using Metric Streams][1].
+    #
+    # To create a metric stream, you must be logged on to an account that
+    # has the `iam:PassRole` permission and either the
+    # `CloudWatchFullAccess` policy or the `cloudwatch:PutMetricStream`
+    # permission.
+    #
+    # When you create or update a metric stream, you choose one of the
+    # following:
+    #
+    # * Stream metrics from all metric namespaces in the account.
+    #
+    # * Stream metrics from all metric namespaces in the account, except for
+    #   the namespaces that you list in `ExcludeFilters`.
+    #
+    # * Stream metrics from only the metric namespaces that you list in
+    #   `IncludeFilters`.
+    #
+    # When you use `PutMetricStream` to create a new metric stream, the
+    # stream is created in the `running` state. If you use it to update an
+    # existing stream, the state of the stream is not changed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html
+    #
+    # @option params [required, String] :name
+    #   If you are creating a new metric stream, this is the name for the new
+    #   stream. The name must be different than the names of other metric
+    #   streams in this account and Region.
+    #
+    #   If you are updating a metric stream, specify the name of that stream
+    #   here.
+    #
+    #   Valid characters are A-Z, a-z, 0-9, "-" and "\_".
+    #
+    # @option params [Array<Types::MetricStreamFilter>] :include_filters
+    #   If you specify this parameter, the stream sends only the metrics from
+    #   the metric namespaces that you specify here.
+    #
+    #   You cannot include `IncludeFilters` and `ExcludeFilters` in the same
+    #   operation.
+    #
+    # @option params [Array<Types::MetricStreamFilter>] :exclude_filters
+    #   If you specify this parameter, the stream sends metrics from all
+    #   metric namespaces except for the namespaces that you specify here.
+    #
+    #   You cannot include `ExcludeFilters` and `IncludeFilters` in the same
+    #   operation.
+    #
+    # @option params [required, String] :firehose_arn
+    #   The ARN of the Amazon Kinesis Firehose delivery stream to use for this
+    #   metric stream. This Amazon Kinesis Firehose delivery stream must
+    #   already exist and must be in the same account as the metric stream.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of an IAM role that this metric stream will use to access
+    #   Amazon Kinesis Firehose resources. This IAM role must already exist
+    #   and must be in the same account as the metric stream. This IAM role
+    #   must include the following permissions:
+    #
+    #   * firehose:PutRecord
+    #
+    #   * firehose:PutRecordBatch
+    #
+    # @option params [required, String] :output_format
+    #   The output format for the stream. Valid values are `json` and
+    #   `opentelemetry0.7`. For more information about metric stream output
+    #   formats, see [ Metric streams output formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the metric stream. You can
+    #   associate as many as 50 tags with a metric stream.
+    #
+    #   Tags can help you organize and categorize your resources. You can also
+    #   use them to scope user permissions by granting a user permission to
+    #   access or change only resources with certain tag values.
+    #
+    # @return [Types::PutMetricStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutMetricStreamOutput#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_metric_stream({
+    #     name: "MetricStreamName", # required
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace",
+    #       },
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace",
+    #       },
+    #     ],
+    #     firehose_arn: "AmazonResourceName", # required
+    #     role_arn: "AmazonResourceName", # required
+    #     output_format: "json", # required, accepts json, opentelemetry0.7
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricStream AWS API Documentation
+    #
+    # @overload put_metric_stream(params = {})
+    # @param [Hash] params ({})
+    def put_metric_stream(params = {}, options = {})
+      req = build_request(:put_metric_stream, params)
+      req.send_request(options)
+    end
+
     # Temporarily sets the state of an alarm for testing purposes. When the
     # updated state differs from the previous value, the action configured
     # for the appropriate state is invoked. For example, if your alarm is
@@ -2861,6 +3117,59 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def set_alarm_state(params = {}, options = {})
       req = build_request(:set_alarm_state, params)
+      req.send_request(options)
+    end
+
+    # Starts the streaming of metrics for one or more of your metric
+    # streams.
+    #
+    # @option params [required, Array<String>] :names
+    #   The array of the names of metric streams to start streaming.
+    #
+    #   This is an "all or nothing" operation. If you do not have permission
+    #   to access all of the metric streams that you list here, then none of
+    #   the streams that you list in the operation will start streaming.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metric_streams({
+    #     names: ["MetricStreamName"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartMetricStreams AWS API Documentation
+    #
+    # @overload start_metric_streams(params = {})
+    # @param [Hash] params ({})
+    def start_metric_streams(params = {}, options = {})
+      req = build_request(:start_metric_streams, params)
+      req.send_request(options)
+    end
+
+    # Stops the streaming of metrics for one or more of your metric streams.
+    #
+    # @option params [required, Array<String>] :names
+    #   The array of the names of metric streams to stop streaming.
+    #
+    #   This is an "all or nothing" operation. If you do not have permission
+    #   to access all of the metric streams that you list here, then none of
+    #   the streams that you list in the operation will stop streaming.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_metric_streams({
+    #     names: ["MetricStreamName"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StopMetricStreams AWS API Documentation
+    #
+    # @overload stop_metric_streams(params = {})
+    # @param [Hash] params ({})
+    def stop_metric_streams(params = {}, options = {})
+      req = build_request(:stop_metric_streams, params)
       req.send_request(options)
     end
 
@@ -2977,7 +3286,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

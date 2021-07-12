@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -394,6 +394,7 @@ module Aws::Lex
     #   * {Types::GetSessionResponse#session_attributes #session_attributes} => Hash&lt;String,String&gt;
     #   * {Types::GetSessionResponse#session_id #session_id} => String
     #   * {Types::GetSessionResponse#dialog_action #dialog_action} => Types::DialogAction
+    #   * {Types::GetSessionResponse#active_contexts #active_contexts} => Array&lt;Types::ActiveContext&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -426,6 +427,12 @@ module Aws::Lex
     #   resp.dialog_action.fulfillment_state #=> String, one of "Fulfilled", "Failed", "ReadyForFulfillment"
     #   resp.dialog_action.message #=> String
     #   resp.dialog_action.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
+    #   resp.active_contexts #=> Array
+    #   resp.active_contexts[0].name #=> String
+    #   resp.active_contexts[0].time_to_live.time_to_live_in_seconds #=> Integer
+    #   resp.active_contexts[0].time_to_live.turns_to_live #=> Integer
+    #   resp.active_contexts[0].parameters #=> Hash
+    #   resp.active_contexts[0].parameters["ParameterName"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSession AWS API Documentation
     #
@@ -639,6 +646,19 @@ module Aws::Lex
     #   you get better performance if you stream audio data rather than
     #   buffering the data locally.
     #
+    # @option params [String] :active_contexts
+    #   A list of contexts active for the request. A context can be activated
+    #   when a previous intent is fulfilled, or by including the context in
+    #   the request,
+    #
+    #   If you don't specify a list of contexts, Amazon Lex will use the
+    #   current list of contexts for the session. If you specify an empty
+    #   list, all contexts for the session are cleared.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
     # @return [Types::PostContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PostContentResponse#content_type #content_type} => String
@@ -649,13 +669,16 @@ module Aws::Lex
     #   * {Types::PostContentResponse#session_attributes #session_attributes} => String
     #   * {Types::PostContentResponse#sentiment_response #sentiment_response} => String
     #   * {Types::PostContentResponse#message #message} => String
+    #   * {Types::PostContentResponse#encoded_message #encoded_message} => String
     #   * {Types::PostContentResponse#message_format #message_format} => String
     #   * {Types::PostContentResponse#dialog_state #dialog_state} => String
     #   * {Types::PostContentResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PostContentResponse#input_transcript #input_transcript} => String
+    #   * {Types::PostContentResponse#encoded_input_transcript #encoded_input_transcript} => String
     #   * {Types::PostContentResponse#audio_stream #audio_stream} => IO
     #   * {Types::PostContentResponse#bot_version #bot_version} => String
     #   * {Types::PostContentResponse#session_id #session_id} => String
+    #   * {Types::PostContentResponse#active_contexts #active_contexts} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -668,6 +691,7 @@ module Aws::Lex
     #     content_type: "HttpContentType", # required
     #     accept: "Accept",
     #     input_stream: "data", # required
+    #     active_contexts: "ActiveContextsString",
     #   })
     #
     # @example Response structure
@@ -680,13 +704,16 @@ module Aws::Lex
     #   resp.session_attributes #=> String
     #   resp.sentiment_response #=> String
     #   resp.message #=> String
+    #   resp.encoded_message #=> String
     #   resp.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
     #   resp.dialog_state #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Fulfilled", "ReadyForFulfillment", "Failed"
     #   resp.slot_to_elicit #=> String
     #   resp.input_transcript #=> String
+    #   resp.encoded_input_transcript #=> String
     #   resp.audio_stream #=> IO
     #   resp.bot_version #=> String
     #   resp.session_id #=> String
+    #   resp.active_contexts #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent AWS API Documentation
     #
@@ -812,6 +839,15 @@ module Aws::Lex
     # @option params [required, String] :input_text
     #   The text that the user entered (Amazon Lex interprets this text).
     #
+    # @option params [Array<Types::ActiveContext>] :active_contexts
+    #   A list of contexts active for the request. A context can be activated
+    #   when a previous intent is fulfilled, or by including the context in
+    #   the request,
+    #
+    #   If you don't specify a list of contexts, Amazon Lex will use the
+    #   current list of contexts for the session. If you specify an empty
+    #   list, all contexts for the session are cleared.
+    #
     # @return [Types::PostTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PostTextResponse#intent_name #intent_name} => String
@@ -827,6 +863,7 @@ module Aws::Lex
     #   * {Types::PostTextResponse#response_card #response_card} => Types::ResponseCard
     #   * {Types::PostTextResponse#session_id #session_id} => String
     #   * {Types::PostTextResponse#bot_version #bot_version} => String
+    #   * {Types::PostTextResponse#active_contexts #active_contexts} => Array&lt;Types::ActiveContext&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -841,6 +878,18 @@ module Aws::Lex
     #       "String" => "String",
     #     },
     #     input_text: "Text", # required
+    #     active_contexts: [
+    #       {
+    #         name: "ActiveContextName", # required
+    #         time_to_live: { # required
+    #           time_to_live_in_seconds: 1,
+    #           turns_to_live: 1,
+    #         },
+    #         parameters: { # required
+    #           "ParameterName" => "Text",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -874,6 +923,12 @@ module Aws::Lex
     #   resp.response_card.generic_attachments[0].buttons[0].value #=> String
     #   resp.session_id #=> String
     #   resp.bot_version #=> String
+    #   resp.active_contexts #=> Array
+    #   resp.active_contexts[0].name #=> String
+    #   resp.active_contexts[0].time_to_live.time_to_live_in_seconds #=> Integer
+    #   resp.active_contexts[0].time_to_live.turns_to_live #=> Integer
+    #   resp.active_contexts[0].parameters #=> Hash
+    #   resp.active_contexts[0].parameters["ParameterName"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText AWS API Documentation
     #
@@ -964,6 +1019,15 @@ module Aws::Lex
     #
     #     * `text/plain; charset=utf-8`
     #
+    # @option params [Array<Types::ActiveContext>] :active_contexts
+    #   A list of contexts active for the request. A context can be activated
+    #   when a previous intent is fulfilled, or by including the context in
+    #   the request,
+    #
+    #   If you don't specify a list of contexts, Amazon Lex will use the
+    #   current list of contexts for the session. If you specify an empty
+    #   list, all contexts for the session are cleared.
+    #
     # @return [Types::PutSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutSessionResponse#content_type #content_type} => String
@@ -971,11 +1035,13 @@ module Aws::Lex
     #   * {Types::PutSessionResponse#slots #slots} => String
     #   * {Types::PutSessionResponse#session_attributes #session_attributes} => String
     #   * {Types::PutSessionResponse#message #message} => String
+    #   * {Types::PutSessionResponse#encoded_message #encoded_message} => String
     #   * {Types::PutSessionResponse#message_format #message_format} => String
     #   * {Types::PutSessionResponse#dialog_state #dialog_state} => String
     #   * {Types::PutSessionResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PutSessionResponse#audio_stream #audio_stream} => IO
     #   * {Types::PutSessionResponse#session_id #session_id} => String
+    #   * {Types::PutSessionResponse#active_contexts #active_contexts} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1011,6 +1077,18 @@ module Aws::Lex
     #       },
     #     ],
     #     accept: "Accept",
+    #     active_contexts: [
+    #       {
+    #         name: "ActiveContextName", # required
+    #         time_to_live: { # required
+    #           time_to_live_in_seconds: 1,
+    #           turns_to_live: 1,
+    #         },
+    #         parameters: { # required
+    #           "ParameterName" => "Text",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1020,11 +1098,13 @@ module Aws::Lex
     #   resp.slots #=> String
     #   resp.session_attributes #=> String
     #   resp.message #=> String
+    #   resp.encoded_message #=> String
     #   resp.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
     #   resp.dialog_state #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Fulfilled", "ReadyForFulfillment", "Failed"
     #   resp.slot_to_elicit #=> String
     #   resp.audio_stream #=> IO
     #   resp.session_id #=> String
+    #   resp.active_contexts #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSession AWS API Documentation
     #
@@ -1048,7 +1128,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,7 +29,7 @@ require_relative 'aws-sdk-cloudfront/customizations'
 # structure.
 #
 #     cloud_front = Aws::CloudFront::Client.new
-#     resp = cloud_front.create_cache_policy(params)
+#     resp = cloud_front.associate_alias(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-cloudfront/customizations'
 # @!group service
 module Aws::CloudFront
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.53.0'
 
 end

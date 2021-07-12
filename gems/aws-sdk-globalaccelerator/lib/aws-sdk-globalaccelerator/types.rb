@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -170,6 +170,54 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AddCustomRoutingEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_configurations: [ # required
+    #           {
+    #             endpoint_id: "GenericString",
+    #           },
+    #         ],
+    #         endpoint_group_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_configurations
+    #   The list of endpoint objects to add to a custom routing accelerator.
+    #   @return [Array<Types::CustomRoutingEndpointConfiguration>]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group for the custom
+    #   routing endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddCustomRoutingEndpointsRequest AWS API Documentation
+    #
+    class AddCustomRoutingEndpointsRequest < Struct.new(
+      :endpoint_configurations,
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_descriptions
+    #   The endpoint objects added to the custom routing accelerator.
+    #   @return [Array<Types::CustomRoutingEndpointDescription>]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group for the custom
+    #   routing endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddCustomRoutingEndpointsResponse AWS API Documentation
+    #
+    class AddCustomRoutingEndpointsResponse < Struct.new(
+      :endpoint_descriptions,
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AdvertiseByoipCidrRequest
     #   data as a hash:
     #
@@ -199,6 +247,71 @@ module Aws::GlobalAccelerator
     #
     class AdvertiseByoipCidrResponse < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AllowCustomRoutingTrafficRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_group_arn: "GenericString", # required
+    #         endpoint_id: "GenericString", # required
+    #         destination_addresses: ["IpAddress"],
+    #         destination_ports: [1],
+    #         allow_all_traffic_to_endpoint: false,
+    #       }
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   An ID for the endpoint. For custom routing accelerators, this is the
+    #   virtual private cloud (VPC) subnet ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_addresses
+    #   A list of specific Amazon EC2 instance IP addresses (destination
+    #   addresses) in a subnet that you want to allow to receive traffic.
+    #   The IP addresses must be a subset of the IP addresses that you
+    #   specified for the endpoint group.
+    #
+    #   `DestinationAddresses` is required if `AllowAllTrafficToEndpoint` is
+    #   `FALSE` or is not specified.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination_ports
+    #   A list of specific Amazon EC2 instance ports (destination ports)
+    #   that you want to allow to receive traffic.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] allow_all_traffic_to_endpoint
+    #   Indicates whether all destination IP addresses and ports for a
+    #   specified VPC subnet endpoint can receive traffic from a custom
+    #   routing accelerator. The value is TRUE or FALSE.
+    #
+    #   When set to TRUE, *all* destinations in the custom routing VPC
+    #   subnet can receive traffic. Note that you cannot specify destination
+    #   IP addresses and ports when the value is set to TRUE.
+    #
+    #   When set to FALSE (or not specified), you *must* specify a list of
+    #   destination IP addresses that are allowed to receive traffic. A list
+    #   of ports is optional. If you don't specify a list of ports, the
+    #   ports that can accept traffic is the same as the ports configured
+    #   for the endpoint group.
+    #
+    #   The default value is FALSE.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AllowCustomRoutingTrafficRequest AWS API Documentation
+    #
+    class AllowCustomRoutingTrafficRequest < Struct.new(
+      :endpoint_group_arn,
+      :endpoint_id,
+      :destination_addresses,
+      :destination_ports,
+      :allow_all_traffic_to_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -381,6 +494,19 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # You can't use both of those options.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAcceleratorRequest
     #   data as a hash:
     #
@@ -413,7 +539,7 @@ module Aws::GlobalAccelerator
     #   Accelerator (BYOIP), you can choose IP addresses from your own pool
     #   to use for the accelerator's static IP addresses when you create an
     #   accelerator. You can specify one or two addresses, separated by a
-    #   comma. Do not include the /32 suffix.
+    #   space. Do not include the /32 suffix.
     #
     #   Only one IP address from each of your IP address ranges can be used
     #   for each accelerator. If you specify only one IP address from your
@@ -485,6 +611,234 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCustomRoutingAcceleratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "GenericString", # required
+    #         ip_address_type: "IPV4", # accepts IPV4
+    #         ip_addresses: ["IpAddress"],
+    #         enabled: false,
+    #         idempotency_token: "IdempotencyToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of a custom routing accelerator. The name can have a
+    #   maximum of 64 characters, must contain only alphanumeric characters
+    #   or hyphens (-), and must not begin or end with a hyphen.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The value for the address type must be IPv4.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   Optionally, if you've added your own IP address pool to Global
+    #   Accelerator (BYOIP), you can choose IP addresses from your own pool
+    #   to use for the accelerator's static IP addresses when you create an
+    #   accelerator. You can specify one or two addresses, separated by a
+    #   space. Do not include the /32 suffix.
+    #
+    #   Only one IP address from each of your IP address ranges can be used
+    #   for each accelerator. If you specify only one IP address from your
+    #   IP address range, Global Accelerator assigns a second static IP
+    #   address for the accelerator from the AWS IP address pool.
+    #
+    #   Note that you can't update IP addresses for an existing
+    #   accelerator. To change them, you must create a new accelerator with
+    #   the new addresses.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether an accelerator is enabled. The value is true or
+    #   false. The default value is true.
+    #
+    #   If the value is set to true, an accelerator cannot be deleted. If
+    #   set to false, the accelerator can be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Create tags for an accelerator.
+    #
+    #   For more information, see [Tagging in AWS Global Accelerator][1] in
+    #   the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingAcceleratorRequest AWS API Documentation
+    #
+    class CreateCustomRoutingAcceleratorRequest < Struct.new(
+      :name,
+      :ip_address_type,
+      :ip_addresses,
+      :enabled,
+      :idempotency_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accelerator
+    #   The accelerator that is created.
+    #   @return [Types::CustomRoutingAccelerator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingAcceleratorResponse AWS API Documentation
+    #
+    class CreateCustomRoutingAcceleratorResponse < Struct.new(
+      :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCustomRoutingEndpointGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "GenericString", # required
+    #         endpoint_group_region: "GenericString", # required
+    #         destination_configurations: [ # required
+    #           {
+    #             from_port: 1, # required
+    #             to_port: 1, # required
+    #             protocols: ["TCP"], # required, accepts TCP, UDP
+    #           },
+    #         ],
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener for a custom routing
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_group_region
+    #   The AWS Region where the endpoint group is located. A listener can
+    #   have only one endpoint group in a specific Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_configurations
+    #   Sets the port range and protocol for all endpoints (virtual private
+    #   cloud subnets) in a custom routing endpoint group to accept client
+    #   traffic on.
+    #   @return [Array<Types::CustomRoutingDestinationConfiguration>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingEndpointGroupRequest AWS API Documentation
+    #
+    class CreateCustomRoutingEndpointGroupRequest < Struct.new(
+      :listener_arn,
+      :endpoint_group_region,
+      :destination_configurations,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_group
+    #   The information about the endpoint group created for a custom
+    #   routing accelerator.
+    #   @return [Types::CustomRoutingEndpointGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingEndpointGroupResponse AWS API Documentation
+    #
+    class CreateCustomRoutingEndpointGroupResponse < Struct.new(
+      :endpoint_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCustomRoutingListenerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #         port_ranges: [ # required
+    #           {
+    #             from_port: 1,
+    #             to_port: 1,
+    #           },
+    #         ],
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator for a custom
+    #   routing listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_ranges
+    #   The port range to support for connections from clients to your
+    #   accelerator.
+    #
+    #   Separately, you set port ranges for endpoints. For more information,
+    #   see [About endpoints for custom routing accelerators][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html
+    #   @return [Array<Types::PortRange>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingListenerRequest AWS API Documentation
+    #
+    class CreateCustomRoutingListenerRequest < Struct.new(
+      :accelerator_arn,
+      :port_ranges,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] listener
+    #   The listener that you've created for a custom routing accelerator.
+    #   @return [Types::CustomRoutingListener]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingListenerResponse AWS API Documentation
+    #
+    class CreateCustomRoutingListenerResponse < Struct.new(
+      :listener)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateEndpointGroupRequest
     #   data as a hash:
     #
@@ -501,7 +855,7 @@ module Aws::GlobalAccelerator
     #         traffic_dial_percentage: 1.0,
     #         health_check_port: 1,
     #         health_check_protocol: "TCP", # accepts TCP, HTTP, HTTPS
-    #         health_check_path: "GenericString",
+    #         health_check_path: "HealthCheckPath",
     #         health_check_interval_seconds: 1,
     #         threshold_count: 1,
     #         idempotency_token: "IdempotencyToken", # required
@@ -709,6 +1063,293 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # Attributes of a custom routing accelerator.
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the accelerator. The name must contain only alphanumeric
+    #   characters or hyphens (-), and must not begin or end with a hyphen.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The value for the address type must be IPv4.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the accelerator is enabled. The value is true or
+    #   false. The default value is true.
+    #
+    #   If the value is set to true, the accelerator cannot be deleted. If
+    #   set to false, accelerator can be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ip_sets
+    #   The static IP addresses that Global Accelerator associates with the
+    #   accelerator.
+    #   @return [Array<Types::IpSet>]
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name System (DNS) name that Global Accelerator creates
+    #   that points to your accelerator's static IP addresses.
+    #
+    #   The naming convention for the DNS name is the following: A lowercase
+    #   letter a, followed by a 16-bit random hex string, followed by
+    #   .awsglobalaccelerator.com. For example:
+    #   a1234567890abcdef.awsglobalaccelerator.com.
+    #
+    #   For more information about the default DNS name, see [ Support for
+    #   DNS Addressing in Global Accelerator][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes the deployment status of the accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that the accelerator was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the accelerator was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingAccelerator AWS API Documentation
+    #
+    class CustomRoutingAccelerator < Struct.new(
+      :accelerator_arn,
+      :name,
+      :ip_address_type,
+      :enabled,
+      :ip_sets,
+      :dns_name,
+      :status,
+      :created_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Attributes of a custom routing accelerator.
+    #
+    # @!attribute [rw] flow_logs_enabled
+    #   Indicates whether flow logs are enabled. The default value is false.
+    #   If the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must
+    #   be specified.
+    #
+    #   For more information, see [Flow Logs][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] flow_logs_s3_bucket
+    #   The name of the Amazon S3 bucket for the flow logs. Attribute is
+    #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
+    #   have a bucket policy that grants AWS Global Accelerator permission
+    #   to write to the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_logs_s3_prefix
+    #   The prefix for the location in the Amazon S3 bucket for the flow
+    #   logs. Attribute is required if `FlowLogsEnabled` is `true`.
+    #
+    #   If you don’t specify a prefix, the flow logs are stored in the root
+    #   of the bucket. If you specify slash (/) for the S3 bucket prefix,
+    #   the log file bucket folder structure will include a double slash
+    #   (//), like the following:
+    #
+    #   DOC-EXAMPLE-BUCKET//AWSLogs/aws\_account\_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingAcceleratorAttributes AWS API Documentation
+    #
+    class CustomRoutingAcceleratorAttributes < Struct.new(
+      :flow_logs_enabled,
+      :flow_logs_s3_bucket,
+      :flow_logs_s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For a custom routing accelerator, sets the port range and protocol for
+    # all endpoints (virtual private cloud subnets) in an endpoint group to
+    # accept client traffic on.
+    #
+    # @note When making an API call, you may pass CustomRoutingDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         from_port: 1, # required
+    #         to_port: 1, # required
+    #         protocols: ["TCP"], # required, accepts TCP, UDP
+    #       }
+    #
+    # @!attribute [rw] from_port
+    #   The first port, inclusive, in the range of ports for the endpoint
+    #   group that is associated with a custom routing accelerator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The last port, inclusive, in the range of ports for the endpoint
+    #   group that is associated with a custom routing accelerator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocols
+    #   The protocol for the endpoint group that is associated with a custom
+    #   routing accelerator. The protocol can be either TCP or UDP.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingDestinationConfiguration AWS API Documentation
+    #
+    class CustomRoutingDestinationConfiguration < Struct.new(
+      :from_port,
+      :to_port,
+      :protocols)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For a custom routing accelerator, describes the port range and
+    # protocol for all endpoints (virtual private cloud subnets) in an
+    # endpoint group to accept client traffic on.
+    #
+    # @!attribute [rw] from_port
+    #   The first port, inclusive, in the range of ports for the endpoint
+    #   group that is associated with a custom routing accelerator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The last port, inclusive, in the range of ports for the endpoint
+    #   group that is associated with a custom routing accelerator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocols
+    #   The protocol for the endpoint group that is associated with a custom
+    #   routing accelerator. The protocol can be either TCP or UDP.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingDestinationDescription AWS API Documentation
+    #
+    class CustomRoutingDestinationDescription < Struct.new(
+      :from_port,
+      :to_port,
+      :protocols)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of endpoint objects. For custom routing, this is a list of
+    # virtual private cloud (VPC) subnet IDs.
+    #
+    # @note When making an API call, you may pass CustomRoutingEndpointConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_id: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] endpoint_id
+    #   An ID for the endpoint. For custom routing accelerators, this is the
+    #   virtual private cloud (VPC) subnet ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingEndpointConfiguration AWS API Documentation
+    #
+    class CustomRoutingEndpointConfiguration < Struct.new(
+      :endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type for an endpoint for a custom routing accelerator. Each
+    # endpoint group can include one or more endpoints, which are virtual
+    # private cloud (VPC) subnets.
+    #
+    # @!attribute [rw] endpoint_id
+    #   An ID for the endpoint. For custom routing accelerators, this is the
+    #   virtual private cloud (VPC) subnet ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingEndpointDescription AWS API Documentation
+    #
+    class CustomRoutingEndpointDescription < Struct.new(
+      :endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type for the endpoint group for a custom routing
+    # accelerator. An AWS Region can have only one endpoint group for a
+    # specific listener.
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_group_region
+    #   The AWS Region where the endpoint group is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_descriptions
+    #   For a custom routing accelerator, describes the port range and
+    #   protocol for all endpoints (virtual private cloud subnets) in an
+    #   endpoint group to accept client traffic on.
+    #   @return [Array<Types::CustomRoutingDestinationDescription>]
+    #
+    # @!attribute [rw] endpoint_descriptions
+    #   For a custom routing accelerator, describes the endpoints (virtual
+    #   private cloud subnets) in an endpoint group to accept client traffic
+    #   on.
+    #   @return [Array<Types::CustomRoutingEndpointDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingEndpointGroup AWS API Documentation
+    #
+    class CustomRoutingEndpointGroup < Struct.new(
+      :endpoint_group_arn,
+      :endpoint_group_region,
+      :destination_descriptions,
+      :endpoint_descriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type for a listener for a custom routing accelerator.
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_ranges
+    #   The port range to support for connections from clients to your
+    #   accelerator.
+    #
+    #   Separately, you set port ranges for endpoints. For more information,
+    #   see [About endpoints for custom routing accelerators][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html
+    #   @return [Array<Types::PortRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingListener AWS API Documentation
+    #
+    class CustomRoutingListener < Struct.new(
+      :listener_arn,
+      :port_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAcceleratorRequest
     #   data as a hash:
     #
@@ -724,6 +1365,64 @@ module Aws::GlobalAccelerator
     #
     class DeleteAcceleratorRequest < Struct.new(
       :accelerator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCustomRoutingAcceleratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCustomRoutingAcceleratorRequest AWS API Documentation
+    #
+    class DeleteCustomRoutingAcceleratorRequest < Struct.new(
+      :accelerator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCustomRoutingEndpointGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_group_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCustomRoutingEndpointGroupRequest AWS API Documentation
+    #
+    class DeleteCustomRoutingEndpointGroupRequest < Struct.new(
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCustomRoutingListenerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCustomRoutingListenerRequest AWS API Documentation
+    #
+    class DeleteCustomRoutingListenerRequest < Struct.new(
+      :listener_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -762,6 +1461,68 @@ module Aws::GlobalAccelerator
     #
     class DeleteListenerRequest < Struct.new(
       :listener_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DenyCustomRoutingTrafficRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_group_arn: "GenericString", # required
+    #         endpoint_id: "GenericString", # required
+    #         destination_addresses: ["IpAddress"],
+    #         destination_ports: [1],
+    #         deny_all_traffic_to_endpoint: false,
+    #       }
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   An ID for the endpoint. For custom routing accelerators, this is the
+    #   virtual private cloud (VPC) subnet ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_addresses
+    #   A list of specific Amazon EC2 instance IP addresses (destination
+    #   addresses) in a subnet that you want to prevent from receiving
+    #   traffic. The IP addresses must be a subset of the IP addresses
+    #   allowed for the VPC subnet associated with the endpoint group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination_ports
+    #   A list of specific Amazon EC2 instance ports (destination ports) in
+    #   a subnet endpoint that you want to prevent from receiving traffic.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] deny_all_traffic_to_endpoint
+    #   Indicates whether all destination IP addresses and ports for a
+    #   specified VPC subnet endpoint *cannot* receive traffic from a custom
+    #   routing accelerator. The value is TRUE or FALSE.
+    #
+    #   When set to TRUE, *no* destinations in the custom routing VPC subnet
+    #   can receive traffic. Note that you cannot specify destination IP
+    #   addresses and ports when the value is set to TRUE.
+    #
+    #   When set to FALSE (or not specified), you *must* specify a list of
+    #   destination IP addresses that cannot receive traffic. A list of
+    #   ports is optional. If you don't specify a list of ports, the ports
+    #   that can accept traffic is the same as the ports configured for the
+    #   endpoint group.
+    #
+    #   The default value is FALSE.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DenyCustomRoutingTrafficRequest AWS API Documentation
+    #
+    class DenyCustomRoutingTrafficRequest < Struct.new(
+      :endpoint_group_arn,
+      :endpoint_id,
+      :destination_addresses,
+      :destination_ports,
+      :deny_all_traffic_to_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -861,6 +1622,132 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeCustomRoutingAcceleratorAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator to
+    #   describe the attributes for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingAcceleratorAttributesRequest AWS API Documentation
+    #
+    class DescribeCustomRoutingAcceleratorAttributesRequest < Struct.new(
+      :accelerator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accelerator_attributes
+    #   The attributes of the custom routing accelerator.
+    #   @return [Types::CustomRoutingAcceleratorAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingAcceleratorAttributesResponse AWS API Documentation
+    #
+    class DescribeCustomRoutingAcceleratorAttributesResponse < Struct.new(
+      :accelerator_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCustomRoutingAcceleratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingAcceleratorRequest AWS API Documentation
+    #
+    class DescribeCustomRoutingAcceleratorRequest < Struct.new(
+      :accelerator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accelerator
+    #   The description of the custom routing accelerator.
+    #   @return [Types::CustomRoutingAccelerator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingAcceleratorResponse AWS API Documentation
+    #
+    class DescribeCustomRoutingAcceleratorResponse < Struct.new(
+      :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCustomRoutingEndpointGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_group_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingEndpointGroupRequest AWS API Documentation
+    #
+    class DescribeCustomRoutingEndpointGroupRequest < Struct.new(
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_group
+    #   The description of an endpoint group for a custom routing
+    #   accelerator.
+    #   @return [Types::CustomRoutingEndpointGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingEndpointGroupResponse AWS API Documentation
+    #
+    class DescribeCustomRoutingEndpointGroupResponse < Struct.new(
+      :endpoint_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCustomRoutingListenerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingListenerRequest AWS API Documentation
+    #
+    class DescribeCustomRoutingListenerRequest < Struct.new(
+      :listener_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] listener
+    #   The description of a listener for a custom routing accelerator.
+    #   @return [Types::CustomRoutingListener]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingListenerResponse AWS API Documentation
+    #
+    class DescribeCustomRoutingListenerResponse < Struct.new(
+      :listener)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeEndpointGroupRequest
     #   data as a hash:
     #
@@ -919,6 +1806,73 @@ module Aws::GlobalAccelerator
     #
     class DescribeListenerResponse < Struct.new(
       :listener)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The port mappings for a specified endpoint IP address (destination).
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator
+    #   that you have port mappings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] accelerator_socket_addresses
+    #   The IP address/port combinations (sockets) that map to a given
+    #   destination socket address.
+    #   @return [Array<Types::SocketAddress>]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The ID for the virtual private cloud (VPC) subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_group_region
+    #   The AWS Region for the endpoint group.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_socket_address
+    #   The endpoint IP address/port combination for traffic received on the
+    #   accelerator socket address.
+    #   @return [Types::SocketAddress]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type, which must be IPv4.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_traffic_state
+    #   Indicates whether or not a port mapping destination can receive
+    #   traffic. The value is either ALLOW, if traffic is allowed to the
+    #   destination, or DENY, if traffic is not allowed to the destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DestinationPortMapping AWS API Documentation
+    #
+    class DestinationPortMapping < Struct.new(
+      :accelerator_arn,
+      :accelerator_socket_addresses,
+      :endpoint_group_arn,
+      :endpoint_id,
+      :endpoint_group_region,
+      :destination_socket_address,
+      :ip_address_type,
+      :destination_traffic_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The endpoint that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointAlreadyExistsException AWS API Documentation
+    #
+    class EndpointAlreadyExistsException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -999,8 +1953,8 @@ module Aws::GlobalAccelerator
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
     #   of the resource. If the endpoint is an Elastic IP address, this is
-    #   the Elastic IP address allocation ID. For EC2 instances, this is the
-    #   EC2 instance ID.
+    #   the Elastic IP address allocation ID. For Amazon EC2 instances, this
+    #   is the EC2 instance ID.
     #
     #   An Application Load Balancer can be either internal or
     #   internet-facing.
@@ -1027,27 +1981,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] health_reason
-    #   The reason code associated with why the endpoint is not healthy. If
-    #   the endpoint state is healthy, a reason code is not provided.
-    #
-    #   If the endpoint state is **unhealthy**, the reason code can be one
-    #   of the following values:
-    #
-    #   * **Timeout**\: The health check requests to the endpoint are timing
-    #     out before returning a status.
-    #
-    #   * **Failed**\: The health check failed, for example because the
-    #     endpoint response was invalid (malformed).
-    #
-    #   If the endpoint state is **initial**, the reason code can be one of
-    #   the following values:
-    #
-    #   * **ProvisioningInProgress**\: The endpoint is in the process of
-    #     being provisioned.
-    #
-    #   * **InitialHealthChecking**\: Global Accelerator is still setting up
-    #     the minimum number of health checks for the endpoint that are
-    #     required to determine its health status.
+    #   Returns a null result.
     #   @return [String]
     #
     # @!attribute [rw] client_ip_preservation_enabled
@@ -1186,6 +2120,19 @@ module Aws::GlobalAccelerator
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupNotFoundException AWS API Documentation
     #
     class EndpointGroupNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The endpoint that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointNotFoundException AWS API Documentation
+    #
+    class EndpointNotFoundException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1376,6 +2323,274 @@ module Aws::GlobalAccelerator
     #
     class ListByoipCidrsResponse < Struct.new(
       :byoip_cidrs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomRoutingAcceleratorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The number of custom routing Global Accelerator objects that you
+    #   want to return with this call. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingAcceleratorsRequest AWS API Documentation
+    #
+    class ListCustomRoutingAcceleratorsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accelerators
+    #   The list of custom routing accelerators for a customer account.
+    #   @return [Array<Types::CustomRoutingAccelerator>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingAcceleratorsResponse AWS API Documentation
+    #
+    class ListCustomRoutingAcceleratorsResponse < Struct.new(
+      :accelerators,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomRoutingEndpointGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "GenericString", # required
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to list endpoint
+    #   groups for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of endpoint group objects that you want to return with
+    #   this call. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingEndpointGroupsRequest AWS API Documentation
+    #
+    class ListCustomRoutingEndpointGroupsRequest < Struct.new(
+      :listener_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_groups
+    #   The list of the endpoint groups associated with a listener for a
+    #   custom routing accelerator.
+    #   @return [Array<Types::CustomRoutingEndpointGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingEndpointGroupsResponse AWS API Documentation
+    #
+    class ListCustomRoutingEndpointGroupsResponse < Struct.new(
+      :endpoint_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomRoutingListenersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to list listeners
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of listener objects that you want to return with this
+    #   call. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingListenersRequest AWS API Documentation
+    #
+    class ListCustomRoutingListenersRequest < Struct.new(
+      :accelerator_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] listeners
+    #   The list of listeners for a custom routing accelerator.
+    #   @return [Array<Types::CustomRoutingListener>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingListenersResponse AWS API Documentation
+    #
+    class ListCustomRoutingListenersResponse < Struct.new(
+      :listeners,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomRoutingPortMappingsByDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_id: "GenericString", # required
+    #         destination_address: "GenericString", # required
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] endpoint_id
+    #   The ID for the virtual private cloud (VPC) subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_address
+    #   The endpoint IP address in a virtual private cloud (VPC) subnet for
+    #   which you want to receive back port mappings.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of destination port mappings that you want to return with
+    #   this call. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingPortMappingsByDestinationRequest AWS API Documentation
+    #
+    class ListCustomRoutingPortMappingsByDestinationRequest < Struct.new(
+      :endpoint_id,
+      :destination_address,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_port_mappings
+    #   The port mappings for the endpoint IP address that you specified in
+    #   the request.
+    #   @return [Array<Types::DestinationPortMapping>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingPortMappingsByDestinationResponse AWS API Documentation
+    #
+    class ListCustomRoutingPortMappingsByDestinationResponse < Struct.new(
+      :destination_port_mappings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomRoutingPortMappingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #         endpoint_group_arn: "GenericString",
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to list the custom
+    #   routing port mappings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to list the
+    #   custom routing port mappings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of destination port mappings that you want to return with
+    #   this call. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingPortMappingsRequest AWS API Documentation
+    #
+    class ListCustomRoutingPortMappingsRequest < Struct.new(
+      :accelerator_arn,
+      :endpoint_group_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] port_mappings
+    #   The port mappings for a custom routing accelerator.
+    #   @return [Array<Types::PortMapping>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingPortMappingsResponse AWS API Documentation
+    #
+    class ListCustomRoutingPortMappingsResponse < Struct.new(
+      :port_mappings,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1581,6 +2796,53 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # Returns the ports and associated IP addresses and ports of Amazon EC2
+    # instances in your virtual private cloud (VPC) subnets. Custom routing
+    # is a port mapping protocol in AWS Global Accelerator that statically
+    # associates port ranges with VPC subnets, which allows Global
+    # Accelerator to route to specific instances and ports within one or
+    # more subnets.
+    #
+    # @!attribute [rw] accelerator_port
+    #   The accelerator port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The IP address of the VPC subnet (the subnet ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_socket_address
+    #   The EC2 instance IP address and port number in the virtual private
+    #   cloud (VPC) subnet.
+    #   @return [Types::SocketAddress]
+    #
+    # @!attribute [rw] protocols
+    #   The protocols supported by the endpoint group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination_traffic_state
+    #   Indicates whether or not a port mapping destination can receive
+    #   traffic. The value is either ALLOW, if traffic is allowed to the
+    #   destination, or DENY, if traffic is not allowed to the destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/PortMapping AWS API Documentation
+    #
+    class PortMapping < Struct.new(
+      :accelerator_port,
+      :endpoint_group_arn,
+      :endpoint_id,
+      :destination_socket_address,
+      :protocols,
+      :destination_traffic_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Override specific listener ports used to route traffic to endpoints
     # that are part of an endpoint group. For example, you can create a port
     # override in which the listener receives user traffic on ports 80 and
@@ -1690,6 +2952,52 @@ module Aws::GlobalAccelerator
     #
     class ProvisionByoipCidrResponse < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveCustomRoutingEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_ids: ["GenericString"], # required
+    #         endpoint_group_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_ids
+    #   The IDs for the endpoints. For custom routing accelerators, endpoint
+    #   IDs are the virtual private cloud (VPC) subnet IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to remove
+    #   endpoints from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/RemoveCustomRoutingEndpointsRequest AWS API Documentation
+    #
+    class RemoveCustomRoutingEndpointsRequest < Struct.new(
+      :endpoint_ids,
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IP address/port combination.
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address for the socket address.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port for the socket address.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/SocketAddress AWS API Documentation
+    #
+    class SocketAddress < Struct.new(
+      :ip_address,
+      :port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1879,7 +3187,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The value for the address type must be IPv4.
+    #   The IP address type, which must be IPv4.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -1913,6 +3221,183 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateCustomRoutingAcceleratorAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #         flow_logs_enabled: false,
+    #         flow_logs_s3_bucket: "GenericString",
+    #         flow_logs_s3_prefix: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator to
+    #   update attributes for.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_logs_enabled
+    #   Update whether flow logs are enabled. The default value is false. If
+    #   the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must be
+    #   specified.
+    #
+    #   For more information, see [Flow Logs][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] flow_logs_s3_bucket
+    #   The name of the Amazon S3 bucket for the flow logs. Attribute is
+    #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
+    #   have a bucket policy that grants AWS Global Accelerator permission
+    #   to write to the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_logs_s3_prefix
+    #   Update the prefix for the location in the Amazon S3 bucket for the
+    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`.
+    #
+    #   If you don’t specify a prefix, the flow logs are stored in the root
+    #   of the bucket. If you specify slash (/) for the S3 bucket prefix,
+    #   the log file bucket folder structure will include a double slash
+    #   (//), like the following:
+    #
+    #   DOC-EXAMPLE-BUCKET//AWSLogs/aws\_account\_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingAcceleratorAttributesRequest AWS API Documentation
+    #
+    class UpdateCustomRoutingAcceleratorAttributesRequest < Struct.new(
+      :accelerator_arn,
+      :flow_logs_enabled,
+      :flow_logs_s3_bucket,
+      :flow_logs_s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accelerator_attributes
+    #   Updated custom routing accelerator.
+    #   @return [Types::CustomRoutingAcceleratorAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingAcceleratorAttributesResponse AWS API Documentation
+    #
+    class UpdateCustomRoutingAcceleratorAttributesResponse < Struct.new(
+      :accelerator_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCustomRoutingAcceleratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         accelerator_arn: "GenericString", # required
+    #         name: "GenericString",
+    #         ip_address_type: "IPV4", # accepts IPV4
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the accelerator. The name can have a maximum of 32
+    #   characters, must contain only alphanumeric characters or hyphens
+    #   (-), and must not begin or end with a hyphen.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The value for the address type must be IPv4.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether an accelerator is enabled. The value is true or
+    #   false. The default value is true.
+    #
+    #   If the value is set to true, the accelerator cannot be deleted. If
+    #   set to false, the accelerator can be deleted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingAcceleratorRequest AWS API Documentation
+    #
+    class UpdateCustomRoutingAcceleratorRequest < Struct.new(
+      :accelerator_arn,
+      :name,
+      :ip_address_type,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accelerator
+    #   Information about the updated custom routing accelerator.
+    #   @return [Types::CustomRoutingAccelerator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingAcceleratorResponse AWS API Documentation
+    #
+    class UpdateCustomRoutingAcceleratorResponse < Struct.new(
+      :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCustomRoutingListenerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "GenericString", # required
+    #         port_ranges: [ # required
+    #           {
+    #             from_port: 1,
+    #             to_port: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_ranges
+    #   The updated port range to support for connections from clients to
+    #   your accelerator. If you remove ports that are currently being used
+    #   by a subnet endpoint, the call fails.
+    #
+    #   Separately, you set port ranges for endpoints. For more information,
+    #   see [About endpoints for custom routing accelerators][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html
+    #   @return [Array<Types::PortRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingListenerRequest AWS API Documentation
+    #
+    class UpdateCustomRoutingListenerRequest < Struct.new(
+      :listener_arn,
+      :port_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] listener
+    #   Information for the updated listener for a custom routing
+    #   accelerator.
+    #   @return [Types::CustomRoutingListener]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingListenerResponse AWS API Documentation
+    #
+    class UpdateCustomRoutingListenerResponse < Struct.new(
+      :listener)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateEndpointGroupRequest
     #   data as a hash:
     #
@@ -1928,7 +3413,7 @@ module Aws::GlobalAccelerator
     #         traffic_dial_percentage: 1.0,
     #         health_check_port: 1,
     #         health_check_protocol: "TCP", # accepts TCP, HTTP, HTTPS
-    #         health_check_path: "GenericString",
+    #         health_check_path: "HealthCheckPath",
     #         health_check_interval_seconds: 1,
     #         threshold_count: 1,
     #         port_overrides: [

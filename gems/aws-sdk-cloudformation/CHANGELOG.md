@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-06-21)
+------------------
+
+* Feature - CloudFormation registry service now supports 3rd party public type sharing
+
+1.52.0 (2021-04-28)
+------------------
+
+* Feature - Add CallAs parameter to GetTemplateSummary to enable use with StackSets delegated administrator integration
+
+1.51.0 (2021-04-21)
+------------------
+
+* Feature - Added support for creating and updating stack sets with self-managed permissions from templates that reference macros.
+
+1.50.0 (2021-03-31)
+------------------
+
+* Feature - 1. Added a new parameter "RegionConcurrencyType" in OperationPreferences. 2. Changed the name of "AccountUrl" to "AccountsUrl" in "DeploymentTargets" parameter.
+
+1.49.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-02-18)
+------------------
+
+* Feature - Adding the 'callAs' parameter to all CloudFormation StackSets APIs except getTemplateSummary to support creating and managing service-managed StackSets with AWS Organizations Delegated Administrators
+
+1.47.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2020-11-24)
+------------------
+
+* Feature - Adds support for the new Modules feature for CloudFormation. A module encapsulates one or more resources and their respective configurations for reuse across your organization.
+
+1.45.0 (2020-11-18)
+------------------
+
+* Feature - This release adds ChangeSets support for Nested Stacks. ChangeSets offer a preview of how proposed changes to a stack might impact existing resources or create new ones.
+
 1.44.0 (2020-09-30)
 ------------------
 

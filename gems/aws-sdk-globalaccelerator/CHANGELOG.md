@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-02-08)
+------------------
+
+* Feature - Global Accelerator now supports bringing your own IP addresses for custom routing accelerators
+
+1.28.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-12-14)
+------------------
+
+* Feature - This release adds support for custom routing accelerators
+
+1.26.0 (2020-12-09)
+------------------
+
+* Feature - This release adds support for custom routing accelerators
+
 1.25.0 (2020-10-21)
 ------------------
 

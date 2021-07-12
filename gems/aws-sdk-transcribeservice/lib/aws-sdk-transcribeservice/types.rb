@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -78,7 +78,7 @@ module Aws::TranscribeService
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US
+    #         language_code: "en-US", # required, accepts en-US, hi-IN, es-US, en-GB, en-AU
     #         base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
     #         model_name: "ModelName", # required
     #         input_data_config: { # required
@@ -364,7 +364,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code of the vocabulary entries.
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see what-is-transcribe.
     #   @return [String]
     #
     # @!attribute [rw] phrases
@@ -385,7 +386,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest AWS API Documentation
@@ -1553,6 +1554,13 @@ module Aws::TranscribeService
     #   Object that contains object.
     #   @return [Types::MedicalTranscriptionSetting]
     #
+    # @!attribute [rw] content_identification_type
+    #   Shows the type of content that you've configured Amazon Transcribe
+    #   Medical to identify in a transcription job. If the value is `PHI`,
+    #   you've configured the job to identify personal health information
+    #   (PHI) in the transcription output.
+    #   @return [String]
+    #
     # @!attribute [rw] specialty
     #   The medical specialty of any clinicians providing a dictation or
     #   having a conversation. `PRIMARYCARE` is the only available setting
@@ -1586,6 +1594,7 @@ module Aws::TranscribeService
       :completion_time,
       :failure_reason,
       :settings,
+      :content_identification_type,
       :specialty,
       :type)
       SENSITIVE = []
@@ -1636,6 +1645,13 @@ module Aws::TranscribeService
     #   the only valid value.
     #   @return [String]
     #
+    # @!attribute [rw] content_identification_type
+    #   Shows the type of information you've configured Amazon Transcribe
+    #   Medical to identify in a transcription job. If the value is `PHI`,
+    #   you've configured the transcription job to identify personal health
+    #   information (PHI).
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The speech of the clinician in the input audio.
     #   @return [String]
@@ -1652,6 +1668,7 @@ module Aws::TranscribeService
       :failure_reason,
       :output_location_type,
       :specialty,
+      :content_identification_type,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -1787,7 +1804,7 @@ module Aws::TranscribeService
     #         show_alternatives: false,
     #         max_alternatives: 1,
     #         vocabulary_filter_name: "VocabularyFilterName",
-    #         vocabulary_filter_method: "remove", # accepts remove, mask
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -1853,7 +1870,10 @@ module Aws::TranscribeService
     #   Set to `mask` to remove filtered text from the transcript and
     #   replace it with three asterisks ("***") as placeholder text.
     #   Set to `remove` to remove filtered text from the transcript without
-    #   using placeholder text.
+    #   using placeholder text. Set to `tag` to mark the word in the
+    #   transcription output that matches the vocabulary filter. When you
+    #   set the filter method to `tag`, the words matching your vocabulary
+    #   filter are not masked or removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings AWS API Documentation
@@ -1893,6 +1913,7 @@ module Aws::TranscribeService
     #           max_alternatives: 1,
     #           vocabulary_name: "VocabularyName",
     #         },
+    #         content_identification_type: "PHI", # accepts PHI
     #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
     #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #       }
@@ -2012,6 +2033,13 @@ module Aws::TranscribeService
     #   Optional settings for the medical transcription job.
     #   @return [Types::MedicalTranscriptionSetting]
     #
+    # @!attribute [rw] content_identification_type
+    #   You can configure Amazon Transcribe Medical to label content in the
+    #   transcription output. If you specify `PHI`, Amazon Transcribe
+    #   Medical labels the personal health information (PHI) that it
+    #   identifies in the transcription output.
+    #   @return [String]
+    #
     # @!attribute [rw] specialty
     #   The medical specialty of any clinician speaking in the input media.
     #   @return [String]
@@ -2035,6 +2063,7 @@ module Aws::TranscribeService
       :output_key,
       :output_encryption_kms_key_id,
       :settings,
+      :content_identification_type,
       :specialty,
       :type)
       SENSITIVE = []
@@ -2075,7 +2104,7 @@ module Aws::TranscribeService
     #           show_alternatives: false,
     #           max_alternatives: 1,
     #           vocabulary_filter_name: "VocabularyFilterName",
-    #           vocabulary_filter_method: "remove", # accepts remove, mask
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         },
     #         model_settings: {
     #           language_model_name: "ModelName",
@@ -2102,6 +2131,10 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code for the language used in the input media file.
+    #
+    #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio
+    #   or video file must be encoded at a sample rate of 16000 Hz or
+    #   higher.
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
@@ -2724,7 +2757,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code of the vocabulary entries.
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see what-is-transcribe.
     #   @return [String]
     #
     # @!attribute [rw] phrases

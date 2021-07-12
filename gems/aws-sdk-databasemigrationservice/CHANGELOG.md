@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-04-15)
+------------------
+
+* Feature - AWS DMS added support of TLS for Kafka endpoint. Added Describe endpoint setting API for DMS endpoints.
+
+1.52.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2020-12-23)
+------------------
+
+* Feature - AWS DMS launches support for AWS Secrets Manager to manage Oracle ASM Database credentials
+
+1.49.0 (2020-12-21)
+------------------
+
+* Feature - AWS DMS launches support for AWS Secrets Manager to manage source and target database credentials.
+
+1.48.0 (2020-12-07)
+------------------
+
+* Feature - Added PreserveTransaction setting to preserve order of CDC for S3 as target. Added CsvNoSupValue setting to replace empty value for columns not included in the supplemental log for S3 as target.
+
+1.47.0 (2020-11-16)
+------------------
+
+* Feature - Adding MoveReplicationTask feature to move replication tasks between instances
+
+1.46.0 (2020-10-30)
+------------------
+
+* Feature - Adding DocDbSettings to support DocumentDB as a source.
+
 1.45.0 (2020-10-15)
 ------------------
 

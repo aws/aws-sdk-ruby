@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -426,6 +426,22 @@ module Aws::MarketplaceCommerceAnalytics
     #     From 2017-09-15 to present: Available monthly on the 15th day of the
     #     month by 24:00 UTC.
     #
+    #   * **disbursed\_amount\_by\_product\_with\_uncollected\_funds**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
+    #
+    #   * **customer\_profile\_by\_industry**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
+    #
+    #   * **customer\_profile\_by\_revenue**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
+    #
+    #   * **customer\_profile\_by\_geography**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :data_set_publication_date
     #   The date a data set was published. For daily data sets, provide a date
     #   with day-level granularity for the desired day. For monthly data sets
@@ -597,7 +613,7 @@ module Aws::MarketplaceCommerceAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

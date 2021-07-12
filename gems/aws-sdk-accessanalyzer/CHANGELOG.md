@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-04-07)
+------------------
+
+* Feature - IAM Access Analyzer now analyzes your CloudTrail events to identify actions and services that have been used by an IAM entity (user or role) and generates an IAM policy that is based on that activity.
+
+1.18.0 (2021-03-16)
+------------------
+
+* Feature - This release adds support for the ValidatePolicy API. IAM Access Analyzer is adding over 100 policy checks and actionable recommendations that help you validate your policies during authoring.
+
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - This release adds support to preview IAM Access Analyzer findings for a resource before deploying resource permission changes.
+
+1.16.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2021-01-27)
+------------------
+
+* Feature - This release adds Secrets Manager secrets as a supported resource in IAM Access Analyzer to help you identify secrets that can be accessed from outside your account or AWS organization.
+
 1.14.0 (2020-10-22)
 ------------------
 

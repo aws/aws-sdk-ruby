@@ -4,7 +4,6 @@ require 'set'
 require 'time'
 require 'openssl'
 require 'cgi'
-require 'webrick/httputils'
 require 'aws-sdk-core/query'
 
 module Aws
@@ -157,33 +156,24 @@ module Aws
       end
 
       def uri_escape(s)
-
         #URI.escape(s)
 
-        # URI.escape is deprecated, replacing it with escape from webrick
-        # to squelch the massive number of warnings generated from Ruby.
-        # The following script was used to determine the differences
-        # between the various escape methods available. The webrick
-        # escape only had two differences and it is available in the
-        # standard lib.
-        #
-        #     (0..255).each {|c|
-        #       s = [c].pack("C")
-        #       e = [
-        #         CGI.escape(s),
-        #         ERB::Util.url_encode(s),
-        #         URI.encode_www_form_component(s),
-        #         WEBrick::HTTPUtils.escape_form(s),
-        #         WEBrick::HTTPUtils.escape(s),
-        #         URI.escape(s),
-        #       ]
-        #       next if e.uniq.length == 1
-        #       puts("%5s %5s %5s %5s %5s %5s %5s" % ([s.inspect] + e))
-        #     }
-        #
-        WEBrick::HTTPUtils.escape(s).gsub('%5B', '[').gsub('%5D', ']')
+        # (0..255).each {|c|
+        #   s = [c].pack("C")
+        #   e = [
+        #     CGI.escape(s),
+        #     ERB::Util.url_encode(s),
+        #     URI.encode_www_form_component(s),
+        #     WEBrick::HTTPUtils.escape_form(s),
+        #     WEBrick::HTTPUtils.escape(s),
+        #     URI.escape(s),
+        #     URI::DEFAULT_PARSER.escape(s)
+        #   ]
+        #   next if e.uniq.length == 1
+        #   puts("%5s %5s %5s %5s %5s %5s %5s %5s" % ([s.inspect] + e))
+        # }
+        URI::DEFAULT_PARSER.escape(s)
       end
-
     end
   end
 end

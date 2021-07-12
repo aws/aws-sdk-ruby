@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-04-09)
+------------------
+
+* Feature - CreateProtection now throws InvalidParameterException instead of InternalErrorException when system tags (tag with keys prefixed with "aws:") are passed in.
+
+1.36.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2021-03-05)
+------------------
+
+* Feature - Add support for tagging of Shield protection and protection group resources.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-11-13)
+------------------
+
+* Feature - This release adds APIs for two new features: 1) Allow customers to bundle resources into protection groups and treat as a single unit. 2) Provide per-account event summaries to all AWS customers.
+
 1.32.0 (2020-09-30)
 ------------------
 

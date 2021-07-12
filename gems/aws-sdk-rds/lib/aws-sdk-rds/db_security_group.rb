@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -35,7 +35,8 @@ module Aws::RDS
     end
     alias :db_security_group_name :name
 
-    # Provides the AWS ID of the owner of a specific DB security group.
+    # Provides the Amazon Web Services ID of the owner of a specific DB
+    # security group.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -227,11 +228,12 @@ module Aws::RDS
     #   `EC2SecurityGroupOwnerId` and either `EC2SecurityGroupName` or
     #   `EC2SecurityGroupId` must be provided.
     # @option options [String] :ec2_security_group_owner_id
-    #   AWS account number of the owner of the EC2 security group specified in
-    #   the `EC2SecurityGroupName` parameter. The AWS access key ID isn't an
-    #   acceptable value. For VPC DB security groups, `EC2SecurityGroupId`
-    #   must be provided. Otherwise, `EC2SecurityGroupOwnerId` and either
-    #   `EC2SecurityGroupName` or `EC2SecurityGroupId` must be provided.
+    #   Amazon Web Services account number of the owner of the EC2 security
+    #   group specified in the `EC2SecurityGroupName` parameter. The Amazon
+    #   Web Services access key ID isn't an acceptable value. For VPC DB
+    #   security groups, `EC2SecurityGroupId` must be provided. Otherwise,
+    #   `EC2SecurityGroupOwnerId` and either `EC2SecurityGroupName` or
+    #   `EC2SecurityGroupId` must be provided.
     # @return [DBSecurityGroup]
     def authorize_ingress(options = {})
       options = options.merge(db_security_group_name: @name)
@@ -305,10 +307,10 @@ module Aws::RDS
     #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
     #   `EC2SecurityGroupId` must be provided.
     # @option options [String] :ec2_security_group_owner_id
-    #   The AWS account number of the owner of the EC2 security group
-    #   specified in the `EC2SecurityGroupName` parameter. The AWS access key
-    #   ID isn't an acceptable value. For VPC DB security groups,
-    #   `EC2SecurityGroupId` must be provided. Otherwise,
+    #   The Amazon Web Services account number of the owner of the EC2
+    #   security group specified in the `EC2SecurityGroupName` parameter. The
+    #   Amazon Web Services access key ID isn't an acceptable value. For VPC
+    #   DB security groups, `EC2SecurityGroupId` must be provided. Otherwise,
     #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
     #   `EC2SecurityGroupId` must be provided.
     # @return [DBSecurityGroup]

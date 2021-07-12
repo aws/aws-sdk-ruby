@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-06-23)
+------------------
+
+* Feature - Adds support for S3 based full repository analysis and changed lines scan.
+
+1.17.0 (2021-04-26)
+------------------
+
+* Feature - Include KMS Key Details in Repository Association APIs to enable usage of customer managed KMS Keys.
+
+1.16.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2020-11-20)
+------------------
+
+* Feature - This release supports tagging repository association resources in Amazon CodeGuru Reviewer.
+
 1.13.0 (2020-09-30)
 ------------------
 

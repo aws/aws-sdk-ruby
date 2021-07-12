@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -263,7 +263,7 @@ module Aws::CodeGuruProfiler
     #         period: "Period",
     #         profiling_group_name: "ProfilingGroupName", # required
     #         start_time: Time.now,
-    #         target_resolution: "P1D", # accepts P1D, PT1H, PT5M
+    #         target_resolution: "PT5M", # accepts PT5M, PT1H, P1D
     #       }
     #
     # @!attribute [rw] end_time
@@ -433,7 +433,7 @@ module Aws::CodeGuruProfiler
     #       {
     #         fleet_instance_id: "FleetInstanceId",
     #         metadata: {
-    #           "AgentId" => "String",
+    #           "ComputePlatform" => "String",
     #         },
     #         profiling_group_name: "ProfilingGroupName", # required
     #       }
@@ -535,7 +535,7 @@ module Aws::CodeGuruProfiler
     #           profiling_enabled: false, # required
     #         },
     #         client_token: "ClientToken", # required
-    #         compute_platform: "AWSLambda", # accepts AWSLambda, Default
+    #         compute_platform: "Default", # accepts Default, AWSLambda
     #         profiling_group_name: "ProfilingGroupName", # required
     #         tags: {
     #           "String" => "String",
@@ -1261,8 +1261,8 @@ module Aws::CodeGuruProfiler
     #         end_time: Time.now, # required
     #         max_results: 1,
     #         next_token: "PaginationToken",
-    #         order_by: "TimestampAscending", # accepts TimestampAscending, TimestampDescending
-    #         period: "P1D", # required, accepts P1D, PT1H, PT5M
+    #         order_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
+    #         period: "PT5M", # required, accepts PT5M, PT1H, P1D
     #         profiling_group_name: "ProfilingGroupName", # required
     #         start_time: Time.now, # required
     #       }
@@ -2053,7 +2053,7 @@ module Aws::CodeGuruProfiler
     #         anomaly_instance_id: "AnomalyInstanceId", # required
     #         comment: "String",
     #         profiling_group_name: "ProfilingGroupName", # required
-    #         type: "Negative", # required, accepts Negative, Positive
+    #         type: "Positive", # required, accepts Positive, Negative
     #       }
     #
     # @!attribute [rw] anomaly_instance_id

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -91,7 +91,7 @@ module Aws::RDSDataService
     #           [
     #             {
     #               name: "ParameterName",
-    #               type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
+    #               type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #               value: {
     #                 array_value: {
     #                   array_values: [
@@ -458,7 +458,7 @@ module Aws::RDSDataService
     #         parameters: [
     #           {
     #             name: "ParameterName",
-    #             type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
+    #             type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #             value: {
     #               array_value: {
     #                 array_values: [
@@ -482,7 +482,7 @@ module Aws::RDSDataService
     #         ],
     #         resource_arn: "Arn", # required
     #         result_set_options: {
-    #           decimal_return_type: "DOUBLE_OR_LONG", # accepts DOUBLE_OR_LONG, STRING
+    #           decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
     #         },
     #         schema: "DbName",
     #         secret_arn: "Arn", # required
@@ -527,6 +527,10 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] schema
     #   The name of the database schema.
+    #
+    #   <note markdown="1"> Currently, the `schema` parameter isn't supported.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -755,7 +759,7 @@ module Aws::RDSDataService
     #   data as a hash:
     #
     #       {
-    #         decimal_return_type: "DOUBLE_OR_LONG", # accepts DOUBLE_OR_LONG, STRING
+    #         decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
     #       }
     #
     # @!attribute [rw] decimal_return_type
@@ -840,7 +844,7 @@ module Aws::RDSDataService
     #
     #       {
     #         name: "ParameterName",
-    #         type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
+    #         type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #         value: {
     #           array_value: {
     #             array_values: [
@@ -868,23 +872,28 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] type_hint
     #   A hint that specifies the correct object type for data type mapping.
+    #   Possible values are as follows:
     #
-    #   **Values:**
+    #   * `DATE` - The corresponding `String` parameter value is sent as an
+    #     object of `DATE` type to the database. The accepted format is
+    #     `YYYY-MM-DD`.
     #
     #   * `DECIMAL` - The corresponding `String` parameter value is sent as
     #     an object of `DECIMAL` type to the database.
     #
-    #   * `TIMESTAMP` - The corresponding `String` parameter value is sent
-    #     as an object of `TIMESTAMP` type to the database. The accepted
-    #     format is `YYYY-MM-DD HH:MM:SS[.FFF]`.
+    #   * `JSON` - The corresponding `String` parameter value is sent as an
+    #     object of `JSON` type to the database.
     #
     #   * `TIME` - The corresponding `String` parameter value is sent as an
     #     object of `TIME` type to the database. The accepted format is
     #     `HH:MM:SS[.FFF]`.
     #
-    #   * `DATE` - The corresponding `String` parameter value is sent as an
-    #     object of `DATE` type to the database. The accepted format is
-    #     `YYYY-MM-DD`.
+    #   * `TIMESTAMP` - The corresponding `String` parameter value is sent
+    #     as an object of `TIMESTAMP` type to the database. The accepted
+    #     format is `YYYY-MM-DD HH:MM:SS[.FFF]`.
+    #
+    #   * `UUID` - The corresponding `String` parameter value is sent as an
+    #     object of `UUID` type to the database.
     #   @return [String]
     #
     # @!attribute [rw] value

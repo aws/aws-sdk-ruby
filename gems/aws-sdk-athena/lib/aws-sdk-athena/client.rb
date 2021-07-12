@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -430,6 +430,8 @@ module Aws::Athena
     #   resp.query_executions[0].statistics.query_planning_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.service_processing_time_in_millis #=> Integer
     #   resp.query_executions[0].work_group #=> String
+    #   resp.query_executions[0].engine_version.selected_engine_version #=> String
+    #   resp.query_executions[0].engine_version.effective_engine_version #=> String
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
     #   resp.unprocessed_query_execution_ids[0].error_code #=> String
@@ -454,8 +456,14 @@ module Aws::Athena
     #   underscore, at sign, or hyphen characters.
     #
     # @option params [required, String] :type
-    #   The type of data catalog to create: `LAMBDA` for a federated catalog,
-    #   `GLUE` for AWS Glue Catalog, or `HIVE` for an external hive metastore.
+    #   The type of data catalog to create: `LAMBDA` for a federated catalog
+    #   or `HIVE` for an external hive metastore.
+    #
+    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
+    #   already exists in your account, of which you can have only one.
+    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   A description of the data catalog to be created.
@@ -486,8 +494,6 @@ module Aws::Athena
     #       function.
     #
     #       `function=lambda_arn `
-    #
-    #   * The `GLUE` type has no parameters.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of comma separated tags to add to the data catalog that is
@@ -589,6 +595,40 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Creates a prepared statement for use with SQL queries in Athena.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the workgroup to which the prepared statement belongs.
+    #
+    # @option params [required, String] :query_statement
+    #   The query string for the prepared statement.
+    #
+    # @option params [String] :description
+    #   The description of the prepared statement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #     query_statement: "QueryString", # required
+    #     description: "DescriptionString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreatePreparedStatement AWS API Documentation
+    #
+    # @overload create_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def create_prepared_statement(params = {}, options = {})
+      req = build_request(:create_prepared_statement, params)
+      req.send_request(options)
+    end
+
     # Creates a workgroup with the specified name.
     #
     # @option params [required, String] :name
@@ -630,6 +670,10 @@ module Aws::Athena
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
     #       requester_pays_enabled: false,
+    #       engine_version: {
+    #         selected_engine_version: "NameString",
+    #         effective_engine_version: "NameString",
+    #       },
     #     },
     #     description: "WorkGroupDescriptionString",
     #     tags: [
@@ -704,6 +748,33 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Deletes the prepared statement with the specified name from the
+    # specified workgroup.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement to delete.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to which the statement to be deleted belongs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeletePreparedStatement AWS API Documentation
+    #
+    # @overload delete_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def delete_prepared_statement(params = {}, options = {})
+      req = build_request(:delete_prepared_statement, params)
+      req.send_request(options)
+    end
+
     # Deletes the workgroup with the specified name. The primary workgroup
     # cannot be deleted.
     #
@@ -712,7 +783,7 @@ module Aws::Athena
     #
     # @option params [Boolean] :recursive_delete_option
     #   The option to delete the workgroup and its contents even if the
-    #   workgroup contains any named queries.
+    #   workgroup contains any named queries or query executions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -764,7 +835,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Returns a database object for the specfied database and data catalog.
+    # Returns a database object for the specified database and data catalog.
     #
     # @option params [required, String] :catalog_name
     #   The name of the data catalog that contains the database to return.
@@ -833,6 +904,43 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Retrieves the prepared statement with the specified name from the
+    # specified workgroup.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement to retrieve.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to which the statement to be retrieved belongs.
+    #
+    # @return [Types::GetPreparedStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPreparedStatementOutput#prepared_statement #prepared_statement} => Types::PreparedStatement
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prepared_statement.statement_name #=> String
+    #   resp.prepared_statement.query_statement #=> String
+    #   resp.prepared_statement.work_group_name #=> String
+    #   resp.prepared_statement.description #=> String
+    #   resp.prepared_statement.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetPreparedStatement AWS API Documentation
+    #
+    # @overload get_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def get_prepared_statement(params = {}, options = {})
+      req = build_request(:get_prepared_statement, params)
+      req.send_request(options)
+    end
+
     # Returns information about a single execution of a query if you have
     # access to the workgroup in which the query ran. Each time a query
     # executes, information about the query execution is saved with a unique
@@ -873,6 +981,8 @@ module Aws::Athena
     #   resp.query_execution.statistics.query_planning_time_in_millis #=> Integer
     #   resp.query_execution.statistics.service_processing_time_in_millis #=> Integer
     #   resp.query_execution.work_group #=> String
+    #   resp.query_execution.engine_version.selected_engine_version #=> String
+    #   resp.query_execution.engine_version.effective_engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
     #
@@ -1035,6 +1145,8 @@ module Aws::Athena
     #   resp.work_group.configuration.publish_cloud_watch_metrics_enabled #=> Boolean
     #   resp.work_group.configuration.bytes_scanned_cutoff_per_query #=> Integer
     #   resp.work_group.configuration.requester_pays_enabled #=> Boolean
+    #   resp.work_group.configuration.engine_version.selected_engine_version #=> String
+    #   resp.work_group.configuration.engine_version.effective_engine_version #=> String
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
     #
@@ -1135,6 +1247,46 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Returns a list of engine versions that are available to choose from,
+    # including the Auto option.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of engine versions to return in this request.
+    #
+    # @return [Types::ListEngineVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEngineVersionsOutput#engine_versions #engine_versions} => Array&lt;Types::EngineVersion&gt;
+    #   * {Types::ListEngineVersionsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_engine_versions({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.engine_versions #=> Array
+    #   resp.engine_versions[0].selected_engine_version #=> String
+    #   resp.engine_versions[0].effective_engine_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListEngineVersions AWS API Documentation
+    #
+    # @overload list_engine_versions(params = {})
+    # @param [Hash] params ({})
+    def list_engine_versions(params = {}, options = {})
+      req = build_request(:list_engine_versions, params)
+      req.send_request(options)
+    end
+
     # Provides a list of available query IDs only for queries saved in the
     # specified workgroup. Requires that you have access to the specified
     # workgroup. If a workgroup is not specified, lists the saved queries
@@ -1188,6 +1340,51 @@ module Aws::Athena
     # @param [Hash] params ({})
     def list_named_queries(params = {}, options = {})
       req = build_request(:list_named_queries, params)
+      req.send_request(options)
+    end
+
+    # Lists the prepared statements in the specfied workgroup.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to list the prepared statements for.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListPreparedStatementsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPreparedStatementsOutput#prepared_statements #prepared_statements} => Array&lt;Types::PreparedStatementSummary&gt;
+    #   * {Types::ListPreparedStatementsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_prepared_statements({
+    #     work_group: "WorkGroupName", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prepared_statements #=> Array
+    #   resp.prepared_statements[0].statement_name #=> String
+    #   resp.prepared_statements[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListPreparedStatements AWS API Documentation
+    #
+    # @overload list_prepared_statements(params = {})
+    # @param [Hash] params ({})
+    def list_prepared_statements(params = {}, options = {})
+      req = build_request(:list_prepared_statements, params)
       req.send_request(options)
     end
 
@@ -1393,6 +1590,8 @@ module Aws::Athena
     #   resp.work_groups[0].state #=> String, one of "ENABLED", "DISABLED"
     #   resp.work_groups[0].description #=> String
     #   resp.work_groups[0].creation_time #=> Time
+    #   resp.work_groups[0].engine_version.selected_engine_version #=> String
+    #   resp.work_groups[0].engine_version.effective_engine_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListWorkGroups AWS API Documentation
@@ -1601,8 +1800,13 @@ module Aws::Athena
     #
     # @option params [required, String] :type
     #   Specifies the type of data catalog to update. Specify `LAMBDA` for a
-    #   federated catalog, `GLUE` for AWS Glue Catalog, or `HIVE` for an
-    #   external hive metastore.
+    #   federated catalog or `HIVE` for an external hive metastore.
+    #
+    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
+    #   already exists in your account, of which you can have only one.
+    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   New or modified text that describes the data catalog.
@@ -1634,8 +1838,6 @@ module Aws::Athena
     #
     #       `function=lambda_arn `
     #
-    #   * The `GLUE` type has no parameters.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1655,6 +1857,40 @@ module Aws::Athena
     # @param [Hash] params ({})
     def update_data_catalog(params = {}, options = {})
       req = build_request(:update_data_catalog, params)
+      req.send_request(options)
+    end
+
+    # Updates a prepared statement.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup for the prepared statement.
+    #
+    # @option params [required, String] :query_statement
+    #   The query string for the prepared statement.
+    #
+    # @option params [String] :description
+    #   The description of the prepared statement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #     query_statement: "QueryString", # required
+    #     description: "DescriptionString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdatePreparedStatement AWS API Documentation
+    #
+    # @overload update_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def update_prepared_statement(params = {}, options = {})
+      req = build_request(:update_prepared_statement, params)
       req.send_request(options)
     end
 
@@ -1696,6 +1932,10 @@ module Aws::Athena
     #       bytes_scanned_cutoff_per_query: 1,
     #       remove_bytes_scanned_cutoff_per_query: false,
     #       requester_pays_enabled: false,
+    #       engine_version: {
+    #         selected_engine_version: "NameString",
+    #         effective_engine_version: "NameString",
+    #       },
     #     },
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
@@ -1722,7 +1962,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

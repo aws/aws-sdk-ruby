@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -185,10 +185,12 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
-    #   &gt;The base64-encoded 128-bit MD5 digest of the data. You must use
-    #   this header as a message integrity check to verify that the request
-    #   body was not corrupted in transit. For more information, see [RFC
-    #   1864][1].
+    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   header as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, see [RFC 1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -196,7 +198,7 @@ module Aws::S3
     # @option options [required, Types::RequestPaymentConfiguration] :request_payment_configuration
     #   Container for Payer.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -705,7 +705,7 @@ module Aws::CognitoIdentityProvider
     #
     class AdminDisableProviderForUserResponse < Aws::EmptyStructure; end
 
-    # Represents the request to disable any user as an administrator.
+    # Represents the request to disable the user as an administrator.
     #
     # @note When making an API call, you may pass AdminDisableUserRequest
     #   data as a hash:
@@ -1191,10 +1191,22 @@ module Aws::CognitoIdentityProvider
     #     with `USERNAME` and `PASSWORD` directly. An app client must be
     #     enabled to use this flow.
     #
-    #   * `NEW_PASSWORD_REQUIRED`\: For users which are required to change
+    #   * `NEW_PASSWORD_REQUIRED`\: For users who are required to change
     #     their passwords after successful first login. This challenge
     #     should be passed with `NEW_PASSWORD` and any other required
     #     attributes.
+    #
+    #   * `MFA_SETUP`\: For users who are required to setup an MFA factor
+    #     before they can sign-in. The MFA types enabled for the user pool
+    #     will be listed in the challenge parameters `MFA_CAN_SETUP` value.
+    #
+    #     To setup software token MFA, use the session returned here from
+    #     `InitiateAuth` as an input to `AssociateSoftwareToken`, and use
+    #     the session returned by `VerifySoftwareToken` as an input to
+    #     `RespondToAuthChallenge` with challenge name `MFA_SETUP` to
+    #     complete sign-in. To setup SMS MFA, users will need help from an
+    #     administrator to add a phone number to their account and then call
+    #     `InitiateAuth` again to restart sign-in.
     #   @return [String]
     #
     # @!attribute [rw] session
@@ -1670,6 +1682,10 @@ module Aws::CognitoIdentityProvider
     #   * `NEW_PASSWORD_REQUIRED`\: `NEW_PASSWORD`, any other required
     #     attributes, `USERNAME`, `SECRET_HASH` (if app client is configured
     #     with client secret).
+    #
+    #   * `MFA_SETUP` requires `USERNAME`, plus you need to use the session
+    #     value returned by `VerifySoftwareToken` in the `Session`
+    #     parameter.
     #
     #   The value of the `USERNAME` attribute must be the user's actual
     #   username, not an alias (such as email address or phone number). To
@@ -3294,6 +3310,7 @@ module Aws::CognitoIdentityProvider
     #           user_data_shared: false,
     #         },
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
+    #         enable_token_revocation: false,
     #       }
     #
     # @!attribute [rw] user_pool_id
@@ -3502,6 +3519,18 @@ module Aws::CognitoIdentityProvider
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] enable_token_revocation
+    #   Enables or disables token revocation. For more information about
+    #   revoking tokens, see [RevokeToken][1].
+    #
+    #   If you don't include this parameter, token revocation is
+    #   automatically enabled for the new user pool client.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientRequest AWS API Documentation
     #
     class CreateUserPoolClientRequest < Struct.new(
@@ -3523,7 +3552,8 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_scopes,
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
-      :prevent_user_existence_errors)
+      :prevent_user_existence_errors,
+      :enable_token_revocation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3628,6 +3658,15 @@ module Aws::CognitoIdentityProvider
     #           verify_auth_challenge_response: "ArnType",
     #           pre_token_generation: "ArnType",
     #           user_migration: "ArnType",
+    #           custom_sms_sender: {
+    #             lambda_version: "V1_0", # required, accepts V1_0
+    #             lambda_arn: "ArnType", # required
+    #           },
+    #           custom_email_sender: {
+    #             lambda_version: "V1_0", # required, accepts V1_0
+    #             lambda_arn: "ArnType", # required
+    #           },
+    #           kms_key_id: "ArnType",
     #         },
     #         auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #         alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
@@ -3757,10 +3796,22 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] email_verification_message
     #   A string representing the email verification message.
+    #   EmailVerificationMessage is allowed only if [EmailSendingAccount][1]
+    #   is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @!attribute [rw] email_verification_subject
     #   A string representing the email verification subject.
+    #   EmailVerificationSubject is allowed only if [EmailSendingAccount][1]
+    #   is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @!attribute [rw] verification_message_template
@@ -3894,6 +3945,66 @@ module Aws::CognitoIdentityProvider
     #
     class CustomDomainConfigType < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom email sender Lambda configuration type.
+    #
+    # @note When making an API call, you may pass CustomEmailLambdaVersionConfigType
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       }
+    #
+    # @!attribute [rw] lambda_version
+    #   The Lambda version represents the signature of the "request"
+    #   attribute in the "event" information Amazon Cognito passes to your
+    #   custom email Lambda function. The only supported value is `V1_0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_arn
+    #   The Lambda Amazon Resource Name of the Lambda function that Amazon
+    #   Cognito triggers to send email notifications to users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomEmailLambdaVersionConfigType AWS API Documentation
+    #
+    class CustomEmailLambdaVersionConfigType < Struct.new(
+      :lambda_version,
+      :lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom SMS sender Lambda configuration type.
+    #
+    # @note When making an API call, you may pass CustomSMSLambdaVersionConfigType
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       }
+    #
+    # @!attribute [rw] lambda_version
+    #   The Lambda version represents the signature of the "request"
+    #   attribute in the "event" information Amazon Cognito passes to your
+    #   custom SMS Lambda function. The only supported value is `V1_0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_arn
+    #   The Lambda Amazon Resource Name of the Lambda function that Amazon
+    #   Cognito triggers to send SMS notifications to users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomSMSLambdaVersionConfigType AWS API Documentation
+    #
+    class CustomSMSLambdaVersionConfigType < Struct.new(
+      :lambda_version,
+      :lambda_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4528,6 +4639,16 @@ module Aws::CognitoIdentityProvider
 
     # The email configuration type.
     #
+    # <note markdown="1"> Amazon Cognito has specific regions for use with Amazon SES. For more
+    # information on the supported regions, see [Email Settings for Amazon
+    # Cognito User Pools][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html
+    #
     # @note When making an API call, you may pass EmailConfigurationType
     #   data as a hash:
     #
@@ -4579,6 +4700,29 @@ module Aws::CognitoIdentityProvider
     #     The default FROM address is no-reply@verificationemail.com. To
     #     customize the FROM address, provide the ARN of an Amazon SES
     #     verified email address for the `SourceArn` parameter.
+    #
+    #     If EmailSendingAccount is COGNITO\_DEFAULT, the following
+    #     parameters aren't allowed:
+    #
+    #     * EmailVerificationMessage
+    #
+    #     * EmailVerificationSubject
+    #
+    #     * InviteMessageTemplate.EmailMessage
+    #
+    #     * InviteMessageTemplate.EmailSubject
+    #
+    #     * VerificationMessageTemplate.EmailMessage
+    #
+    #     * VerificationMessageTemplate.EmailMessageByLink
+    #
+    #     * VerificationMessageTemplate.EmailSubject,
+    #
+    #     * VerificationMessageTemplate.EmailSubjectByLink
+    #
+    #     <note markdown="1"> DEVELOPER EmailSendingAccount is required.
+    #
+    #      </note>
     #
     #   DEVELOPER
     #
@@ -5534,8 +5678,6 @@ module Aws::CognitoIdentityProvider
     #     * jwks\_uri *if not available from discovery URL specified by
     #       oidc\_issuer key*
     #
-    #     * authorize\_scopes
-    #
     #   * For SAML providers:
     #
     #     * MetadataFile OR MetadataURL
@@ -5775,10 +5917,22 @@ module Aws::CognitoIdentityProvider
     #   * `DEVICE_PASSWORD_VERIFIER`\: Similar to `PASSWORD_VERIFIER`, but
     #     for devices only.
     #
-    #   * `NEW_PASSWORD_REQUIRED`\: For users which are required to change
+    #   * `NEW_PASSWORD_REQUIRED`\: For users who are required to change
     #     their passwords after successful first login. This challenge
     #     should be passed with `NEW_PASSWORD` and any other required
     #     attributes.
+    #
+    #   * `MFA_SETUP`\: For users who are required to setup an MFA factor
+    #     before they can sign-in. The MFA types enabled for the user pool
+    #     will be listed in the challenge parameters `MFA_CAN_SETUP` value.
+    #
+    #     To setup software token MFA, use the session returned here from
+    #     `InitiateAuth` as an input to `AssociateSoftwareToken`, and use
+    #     the session returned by `VerifySoftwareToken` as an input to
+    #     `RespondToAuthChallenge` with challenge name `MFA_SETUP` to
+    #     complete sign-in. To setup SMS MFA, users will need help from an
+    #     administrator to add a phone number to their account and then call
+    #     `InitiateAuth` again to restart sign-in.
     #   @return [String]
     #
     # @!attribute [rw] session
@@ -5975,6 +6129,15 @@ module Aws::CognitoIdentityProvider
     #         verify_auth_challenge_response: "ArnType",
     #         pre_token_generation: "ArnType",
     #         user_migration: "ArnType",
+    #         custom_sms_sender: {
+    #           lambda_version: "V1_0", # required, accepts V1_0
+    #           lambda_arn: "ArnType", # required
+    #         },
+    #         custom_email_sender: {
+    #           lambda_version: "V1_0", # required, accepts V1_0
+    #           lambda_arn: "ArnType", # required
+    #         },
+    #         kms_key_id: "ArnType",
     #       }
     #
     # @!attribute [rw] pre_sign_up
@@ -6017,6 +6180,21 @@ module Aws::CognitoIdentityProvider
     #   The user migration Lambda config type.
     #   @return [String]
     #
+    # @!attribute [rw] custom_sms_sender
+    #   A custom SMS sender AWS Lambda trigger.
+    #   @return [Types::CustomSMSLambdaVersionConfigType]
+    #
+    # @!attribute [rw] custom_email_sender
+    #   A custom email sender AWS Lambda trigger.
+    #   @return [Types::CustomEmailLambdaVersionConfigType]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name of Key Management Service [Customer master
+    #   keys](/kms/latest/developerguide/concepts.html#master_keys) . Amazon
+    #   Cognito uses the key to encrypt codes and temporary passwords sent
+    #   to `CustomEmailSender` and `CustomSMSSender`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LambdaConfigType AWS API Documentation
     #
     class LambdaConfigType < Struct.new(
@@ -6029,7 +6207,10 @@ module Aws::CognitoIdentityProvider
       :create_auth_challenge,
       :verify_auth_challenge_response,
       :pre_token_generation,
-      :user_migration)
+      :user_migration,
+      :custom_sms_sender,
+      :custom_email_sender,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6690,11 +6871,21 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] email_message
-    #   The message template for email messages.
+    #   The message template for email messages. EmailMessage is allowed
+    #   only if [EmailSendingAccount][1] is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @!attribute [rw] email_subject
-    #   The subject line for email messages.
+    #   The subject line for email messages. EmailSubject is allowed only if
+    #   [EmailSendingAccount][1] is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/MessageTemplateType AWS API Documentation
@@ -7316,6 +7507,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `DEVICE_PASSWORD_VERIFIER` requires everything that
     #     `PASSWORD_VERIFIER` requires plus `DEVICE_KEY`.
+    #
+    #   * `MFA_SETUP` requires `USERNAME`, plus you need to use the session
+    #     value returned by `VerifySoftwareToken` in the `Session`
+    #     parameter.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] analytics_metadata
@@ -7427,6 +7622,42 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RevokeTokenRequest
+    #   data as a hash:
+    #
+    #       {
+    #         token: "TokenModelType", # required
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType",
+    #       }
+    #
+    # @!attribute [rw] token
+    #   The token that you want to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the token that you want to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The secret for the client ID. This is required only if the client ID
+    #   has a secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenRequest AWS API Documentation
+    #
+    class RevokeTokenRequest < Struct.new(
+      :token,
+      :client_id,
+      :client_secret)
+      SENSITIVE = [:token, :client_id, :client_secret]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenResponse AWS API Documentation
+    #
+    class RevokeTokenResponse < Aws::EmptyStructure; end
+
     # The risk configuration type.
     #
     # @!attribute [rw] user_pool_id
@@ -7499,7 +7730,13 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The type used for enabling SMS MFA at the user level.
+    # The type used for enabling SMS MFA at the user level. Phone numbers
+    # don't need to be verified to be used for SMS MFA. If an MFA type is
+    # enabled for a user, the user will be prompted for MFA during all sign
+    # in attempts, unless device tracking is turned on and the device has
+    # been trusted. If you would like MFA to be applied selectively based on
+    # the assessed risk level of sign in attempts, disable MFA for users and
+    # turn on Adaptive Authentication for the user pool.
     #
     # @note When making an API call, you may pass SMSMfaSettingsType
     #   data as a hash:
@@ -7510,7 +7747,10 @@ module Aws::CognitoIdentityProvider
     #       }
     #
     # @!attribute [rw] enabled
-    #   Specifies whether SMS text message MFA is enabled.
+    #   Specifies whether SMS text message MFA is enabled. If an MFA type is
+    #   enabled for a user, the user will be prompted for MFA during all
+    #   sign in attempts, unless device tracking is turned on and the device
+    #   has been trusted.
     #   @return [Boolean]
     #
     # @!attribute [rw] preferred_mfa
@@ -7857,7 +8097,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::SoftwareTokenMfaConfigType]
     #
     # @!attribute [rw] mfa_configuration
-    #   The MFA configuration. Valid values include:
+    #   The MFA configuration. Users who don't have an MFA factor set up
+    #   won't be able to sign-in if you set the MfaConfiguration value to
+    #   ‘ON’. See [Adding Multi-Factor Authentication (MFA) to a User
+    #   Pool](cognito/latest/developerguide/user-pool-settings-mfa.html) to
+    #   learn more. Valid values include:
     #
     #   * `OFF` MFA will not be used for any users.
     #
@@ -8119,7 +8363,12 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] sns_caller_arn
     #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
     #   Service (SNS) caller. This is the ARN of the IAM role in your AWS
-    #   account which Cognito will use to send SMS messages.
+    #   account which Cognito will use to send SMS messages. SMS messages
+    #   are subject to a [spending limit][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html
     #   @return [String]
     #
     # @!attribute [rw] external_id
@@ -8132,6 +8381,14 @@ module Aws::CognitoIdentityProvider
     #   role for SMS MFA, Cognito will create a role with the required
     #   permissions and a trust policy that demonstrates use of the
     #   `ExternalId`.
+    #
+    #   For more information about the `ExternalId` of a role, see [How to
+    #   use an external ID when granting access to your AWS resources to a
+    #   third party][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsConfigurationType AWS API Documentation
@@ -8212,7 +8469,13 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The type used for enabling software token MFA at the user level.
+    # The type used for enabling software token MFA at the user level. If an
+    # MFA type is enabled for a user, the user will be prompted for MFA
+    # during all sign in attempts, unless device tracking is turned on and
+    # the device has been trusted. If you would like MFA to be applied
+    # selectively based on the assessed risk level of sign in attempts,
+    # disable MFA for users and turn on Adaptive Authentication for the user
+    # pool.
     #
     # @note When making an API call, you may pass SoftwareTokenMfaSettingsType
     #   data as a hash:
@@ -8223,7 +8486,10 @@ module Aws::CognitoIdentityProvider
     #       }
     #
     # @!attribute [rw] enabled
-    #   Specifies whether software token MFA is enabled.
+    #   Specifies whether software token MFA is enabled. If an MFA type is
+    #   enabled for a user, the user will be prompted for MFA during all
+    #   sign in attempts, unless device tracking is turned on and the device
+    #   has been trusted.
     #   @return [Boolean]
     #
     # @!attribute [rw] preferred_mfa
@@ -8498,6 +8764,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when the request is not authorized. This can
+    # happen due to an invalid access token in the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when the Amazon Cognito service encounters an
     # unexpected exception with the AWS Lambda service.
     #
@@ -8523,6 +8803,34 @@ module Aws::CognitoIdentityProvider
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedIdentityProviderException AWS API Documentation
     #
     class UnsupportedIdentityProviderException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception is thrown when you attempt to perform an operation that
+    # is not enabled for the user pool client.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception is thrown when an unsupported token is passed to an
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedTokenTypeException AWS API Documentation
+    #
+    class UnsupportedTokenTypeException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8962,6 +9270,7 @@ module Aws::CognitoIdentityProvider
     #           user_data_shared: false,
     #         },
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
+    #         enable_token_revocation: false,
     #       }
     #
     # @!attribute [rw] user_pool_id
@@ -9153,6 +9462,15 @@ module Aws::CognitoIdentityProvider
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] enable_token_revocation
+    #   Enables or disables token revocation. For more information about
+    #   revoking tokens, see [RevokeToken][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest AWS API Documentation
     #
     class UpdateUserPoolClientRequest < Struct.new(
@@ -9174,7 +9492,8 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_scopes,
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
-      :prevent_user_existence_errors)
+      :prevent_user_existence_errors,
+      :enable_token_revocation)
       SENSITIVE = [:client_id]
       include Aws::Structure
     end
@@ -9281,6 +9600,15 @@ module Aws::CognitoIdentityProvider
     #           verify_auth_challenge_response: "ArnType",
     #           pre_token_generation: "ArnType",
     #           user_migration: "ArnType",
+    #           custom_sms_sender: {
+    #             lambda_version: "V1_0", # required, accepts V1_0
+    #             lambda_arn: "ArnType", # required
+    #           },
+    #           custom_email_sender: {
+    #             lambda_version: "V1_0", # required, accepts V1_0
+    #             lambda_arn: "ArnType", # required
+    #           },
+    #           kms_key_id: "ArnType",
     #         },
     #         auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #         sms_verification_message: "SmsVerificationMessageType",
@@ -9381,10 +9709,16 @@ module Aws::CognitoIdentityProvider
     #     user registration.
     #
     #   * `ON` - MFA tokens are required for all user registrations. You can
-    #     only specify required when you are initially creating a user pool.
+    #     only specify ON when you are initially creating a user pool. You
+    #     can use the [SetUserPoolMfaConfig][1] API operation to turn MFA
+    #     "ON" for existing user pools.
     #
     #   * `OPTIONAL` - Users have the option when registering to create an
     #     MFA token.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
     #   @return [String]
     #
     # @!attribute [rw] device_configuration
@@ -9899,6 +10233,17 @@ module Aws::CognitoIdentityProvider
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] enable_token_revocation
+    #   Indicates whether token revocation is enabled for the user pool
+    #   client. When you create a new user pool client, token revocation is
+    #   enabled by default. For more information about revoking tokens, see
+    #   [RevokeToken][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientType AWS API Documentation
     #
     class UserPoolClientType < Struct.new(
@@ -9923,7 +10268,8 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_scopes,
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
-      :prevent_user_existence_errors)
+      :prevent_user_existence_errors,
+      :enable_token_revocation)
       SENSITIVE = [:client_id, :client_secret]
       include Aws::Structure
     end
@@ -10115,6 +10461,24 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] sms_configuration_failure
     #   The reason why the SMS configuration cannot send the messages to
     #   your users.
+    #
+    #   This message might include comma-separated values to describe why
+    #   your SMS configuration can't send messages to user pool end users.
+    #
+    #   * InvalidSmsRoleAccessPolicyException - The IAM role which Cognito
+    #     uses to send SMS messages is not properly configured. For more
+    #     information, see [SmsConfigurationType][1].
+    #
+    #   * SNSSandbox - The AWS account is in SNS Sandbox and messages won’t
+    #     reach unverified end users. This parameter won’t get populated
+    #     with SNSSandbox if the IAM user creating the user pool doesn’t
+    #     have SNS permissions. To learn how to move your AWS account out of
+    #     the sandbox, see [Moving out of the SMS sandbox][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html
     #   @return [String]
     #
     # @!attribute [rw] email_configuration_failure
@@ -10347,21 +10711,41 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] email_message
-    #   The email message template.
+    #   The email message template. EmailMessage is allowed only if [
+    #   EmailSendingAccount][1] is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @!attribute [rw] email_subject
-    #   The subject line for the email message template.
+    #   The subject line for the email message template. EmailSubject is
+    #   allowed only if [EmailSendingAccount][1] is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @!attribute [rw] email_message_by_link
     #   The email message template for sending a confirmation link to the
-    #   user.
+    #   user. EmailMessageByLink is allowed only if [
+    #   EmailSendingAccount][1] is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @!attribute [rw] email_subject_by_link
     #   The subject line for the email message template for sending a
-    #   confirmation link to the user.
+    #   confirmation link to the user. EmailSubjectByLink is allowed only [
+    #   EmailSendingAccount][1] is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #   @return [String]
     #
     # @!attribute [rw] default_email_option

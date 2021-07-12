@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -43,6 +43,7 @@ module Aws::QuickSight
   # * {ResourceUnavailableException}
   # * {SessionLifetimeInMinutesInvalidException}
   # * {ThrottlingException}
+  # * {UnsupportedPricingPlanException}
   # * {UnsupportedUserEditionException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -376,6 +377,26 @@ module Aws::QuickSight
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::QuickSight::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class UnsupportedPricingPlanException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QuickSight::Types::UnsupportedPricingPlanException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

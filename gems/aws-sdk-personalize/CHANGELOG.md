@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-06-07)
+------------------
+
+* Feature - Update regex validation in kmsKeyArn and s3 path API parameters for AWS Personalize APIs
+
+1.26.0 (2021-05-20)
+------------------
+
+* Feature - Added new API to stop a solution version creation that is pending or in progress for Amazon Personalize
+
+1.25.0 (2021-05-18)
+------------------
+
+* Feature - Amazon Personalize now supports the ability to optimize a solution for a custom objective in addition to maximizing relevance.
+
+1.24.0 (2021-04-30)
+------------------
+
+* Feature - Update URL for dataset export job documentation.
+
+1.23.0 (2021-04-26)
+------------------
+
+* Feature - Added support for exporting data imported into an Amazon Personalize dataset to a specified data source (Amazon S3 bucket).
+
+1.22.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2021-01-13)
+------------------
+
+* Feature - Miscellaneous updates and improvements to the documentation
+
 1.19.0 (2020-09-30)
 ------------------
 

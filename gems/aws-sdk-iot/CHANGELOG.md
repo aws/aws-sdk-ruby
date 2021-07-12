@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-05-25)
+------------------
+
+* Feature - This release includes support for a new feature: Job templates for AWS IoT Device Management Jobs. The release includes job templates as a new resource and APIs for managing job templates.
+
+1.68.0 (2021-03-31)
+------------------
+
+* Feature - Added ability to prefix search on attribute value for ListThings API.
+
+1.67.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2021-01-28)
+------------------
+
+* Feature - Documentation updates for IoT DeleteOTAUpdate API
+
+1.64.0 (2020-12-15)
+------------------
+
+* Feature - AWS IoT Rules Engine adds Kafka Action that allows sending data to Apache Kafka clusters inside a VPC. AWS IoT Device Defender adds custom metrics and machine-learning based anomaly detection.
+
+1.63.0 (2020-11-23)
+------------------
+
+* Feature - This release enables users to identify different file types in the over-the-air update (OTA) functionality using fileType parameter for CreateOTAUpdate API
+
+1.62.0 (2020-11-12)
+------------------
+
+* Feature - This release adds a batchMode parameter to the IotEvents, IotAnalytics, and Firehose actions which allows customers to send an array of messages to the corresponding services
+
+1.61.0 (2020-11-04)
+------------------
+
+* Feature - Updated API documentation and added paginator for AWS Iot Registry ListThingPrincipals API.
+
+1.60.0 (2020-10-28)
+------------------
+
+* Feature - This release adds support for GG-Managed Job Namespace
+
 1.59.0 (2020-10-15)
 ------------------
 

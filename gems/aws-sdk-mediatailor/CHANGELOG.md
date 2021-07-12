@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-07-08)
+------------------
+
+* Feature - Add ListAlerts for Channel, Program, Source Location, and VOD Source to return alerts for resources.
+
+1.40.0 (2021-06-23)
+------------------
+
+* Feature - Update GetChannelSchedule to return information on ad breaks.
+
+1.39.0 (2021-06-16)
+------------------
+
+* Feature - Adds AWS Secrets Manager Access Token Authentication for Source Locations
+
+1.38.0 (2021-03-16)
+------------------
+
+* Feature - MediaTailor channel assembly is a new manifest-only service that allows you to assemble linear streams using your existing VOD content.
+
+1.37.0 (2021-03-12)
+------------------
+
+* Feature - MediaTailor channel assembly is a new manifest-only service that allows you to assemble linear streams using your existing VOD content.
+
+1.36.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2021-02-15)
+------------------
+
+* Feature - MediaTailor now supports specifying aliases for dynamic variables. This allows use cases such as binding multiple origin domains to a single MediaTailor playback configuration.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.33.0 (2020-10-23)
 ------------------
 

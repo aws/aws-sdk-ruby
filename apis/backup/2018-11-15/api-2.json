@@ -148,6 +148,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"MissingParameterValueException"},
+        {"shape":"InvalidResourceStateException"},
         {"shape":"ServiceUnavailableException"},
         {"shape":"InvalidRequestException"}
       ],
@@ -201,6 +202,19 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
+    },
+    "DescribeGlobalSettings":{
+      "name":"DescribeGlobalSettings",
+      "http":{
+        "method":"GET",
+        "requestUri":"/global-settings"
+      },
+      "input":{"shape":"DescribeGlobalSettingsInput"},
+      "output":{"shape":"DescribeGlobalSettingsOutput"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
+      ]
     },
     "DescribeProtectedResource":{
       "name":"DescribeProtectedResource",
@@ -262,6 +276,22 @@
         {"shape":"DependencyFailureException"}
       ],
       "idempotent":true
+    },
+    "DisassociateRecoveryPoint":{
+      "name":"DisassociateRecoveryPoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}/disassociate"
+      },
+      "input":{"shape":"DisassociateRecoveryPointInput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"MissingParameterValueException"},
+        {"shape":"InvalidResourceStateException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InvalidRequestException"}
+      ]
     },
     "ExportBackupPlanTemplate":{
       "name":"ExportBackupPlanTemplate",
@@ -626,6 +656,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"MissingParameterValueException"},
+        {"shape":"InvalidRequestException"},
         {"shape":"ServiceUnavailableException"},
         {"shape":"LimitExceededException"}
       ],
@@ -644,7 +675,8 @@
         {"shape":"InvalidParameterValueException"},
         {"shape":"MissingParameterValueException"},
         {"shape":"ServiceUnavailableException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidRequestException"}
       ],
       "idempotent":true
     },
@@ -725,6 +757,20 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
+    },
+    "UpdateGlobalSettings":{
+      "name":"UpdateGlobalSettings",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/global-settings"
+      },
+      "input":{"shape":"UpdateGlobalSettingsInput"},
+      "errors":[
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"MissingParameterValueException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidRequestException"}
+      ]
     },
     "UpdateRecoveryPointLifecycle":{
       "name":"UpdateRecoveryPointLifecycle",
@@ -913,7 +959,8 @@
         "Lifecycle":{"shape":"Lifecycle"},
         "RecoveryPointTags":{"shape":"Tags"},
         "RuleId":{"shape":"string"},
-        "CopyActions":{"shape":"CopyActions"}
+        "CopyActions":{"shape":"CopyActions"},
+        "EnableContinuousBackup":{"shape":"Boolean"}
       }
     },
     "BackupRuleInput":{
@@ -930,7 +977,8 @@
         "CompletionWindowMinutes":{"shape":"WindowMinutes"},
         "Lifecycle":{"shape":"Lifecycle"},
         "RecoveryPointTags":{"shape":"Tags"},
-        "CopyActions":{"shape":"CopyActions"}
+        "CopyActions":{"shape":"CopyActions"},
+        "EnableContinuousBackup":{"shape":"Boolean"}
       }
     },
     "BackupRuleName":{
@@ -1335,6 +1383,18 @@
         "CopyJob":{"shape":"CopyJob"}
       }
     },
+    "DescribeGlobalSettingsInput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeGlobalSettingsOutput":{
+      "type":"structure",
+      "members":{
+        "GlobalSettings":{"shape":"GlobalSettings"},
+        "LastUpdateTime":{"shape":"timestamp"}
+      }
+    },
     "DescribeProtectedResourceInput":{
       "type":"structure",
       "required":["ResourceArn"],
@@ -1379,6 +1439,7 @@
         "RecoveryPointArn":{"shape":"ARN"},
         "BackupVaultName":{"shape":"BackupVaultName"},
         "BackupVaultArn":{"shape":"ARN"},
+        "SourceBackupVaultArn":{"shape":"ARN"},
         "ResourceArn":{"shape":"ARN"},
         "ResourceType":{"shape":"ResourceType"},
         "CreatedBy":{"shape":"RecoveryPointCreator"},
@@ -1433,6 +1494,25 @@
         "ExpectedCompletionTimeMinutes":{"shape":"Long"},
         "CreatedResourceArn":{"shape":"ARN"},
         "ResourceType":{"shape":"ResourceType"}
+      }
+    },
+    "DisassociateRecoveryPointInput":{
+      "type":"structure",
+      "required":[
+        "BackupVaultName",
+        "RecoveryPointArn"
+      ],
+      "members":{
+        "BackupVaultName":{
+          "shape":"BackupVaultName",
+          "location":"uri",
+          "locationName":"backupVaultName"
+        },
+        "RecoveryPointArn":{
+          "shape":"ARN",
+          "location":"uri",
+          "locationName":"recoveryPointArn"
+        }
       }
     },
     "ExportBackupPlanTemplateInput":{
@@ -1613,6 +1693,13 @@
         "ResourceTypes":{"shape":"ResourceTypes"}
       }
     },
+    "GlobalSettings":{
+      "type":"map",
+      "key":{"shape":"GlobalSettingsName"},
+      "value":{"shape":"GlobalSettingsValue"}
+    },
+    "GlobalSettingsName":{"type":"string"},
+    "GlobalSettingsValue":{"type":"string"},
     "IAMPolicy":{"type":"string"},
     "IAMRoleArn":{"type":"string"},
     "InvalidParameterValueException":{
@@ -1626,6 +1713,16 @@
       "exception":true
     },
     "InvalidRequestException":{
+      "type":"structure",
+      "members":{
+        "Code":{"shape":"string"},
+        "Message":{"shape":"string"},
+        "Type":{"shape":"string"},
+        "Context":{"shape":"string"}
+      },
+      "exception":true
+    },
+    "InvalidResourceStateException":{
       "type":"structure",
       "members":{
         "Code":{"shape":"string"},
@@ -2142,6 +2239,7 @@
         "RecoveryPointArn":{"shape":"ARN"},
         "BackupVaultName":{"shape":"BackupVaultName"},
         "BackupVaultArn":{"shape":"ARN"},
+        "SourceBackupVaultArn":{"shape":"ARN"},
         "ResourceArn":{"shape":"ARN"},
         "ResourceType":{"shape":"ResourceType"},
         "CreatedBy":{"shape":"RecoveryPointCreator"},
@@ -2422,6 +2520,12 @@
         "CreationDate":{"shape":"timestamp"},
         "VersionId":{"shape":"string"},
         "AdvancedBackupSettings":{"shape":"AdvancedBackupSettings"}
+      }
+    },
+    "UpdateGlobalSettingsInput":{
+      "type":"structure",
+      "members":{
+        "GlobalSettings":{"shape":"GlobalSettings"}
       }
     },
     "UpdateRecoveryPointLifecycleInput":{

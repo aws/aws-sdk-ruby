@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-07-07)
+------------------
+
+* Feature - This release add storage configuration APIs for AWS IoT SiteWise.
+
+1.23.0 (2021-05-27)
+------------------
+
+* Feature - IoT SiteWise Monitor Portal API updates to add alarms feature configuration.
+
+1.22.0 (2021-05-18)
+------------------
+
+* Feature - Documentation updates for AWS IoT SiteWise.
+
+1.21.0 (2021-04-28)
+------------------
+
+* Feature - AWS IoT SiteWise interpolation API will get interpolated values for an asset property per specified time interval during a period of time.
+
+1.20.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2021-02-08)
+------------------
+
+* Feature - Recall CreatePresignedPortalUrl API
+
+1.18.0 (2021-02-03)
+------------------
+
+* Feature - Update AccessPolicy API input to support IAM role for IAM mode. Iam role is added as part of accessPolicyIdentity.
+
+1.17.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2020-12-11)
+------------------
+
+* Feature - Added the ListAssetRelationships operation and support for composite asset models, which represent structured sets of properties within asset models.
+
+1.15.0 (2020-11-24)
+------------------
+
+* Feature - This release adds support for customer managed customer master key (CMK) based encryption in IoT SiteWise.
+
+1.14.0 (2020-11-16)
+------------------
+
+* Feature - This release supports Unicode characters for string operations in formulae computes in SiteWise. For more information, search for SiteWise in Amazon What's new or refer the SiteWise documentation.
+
+1.13.0 (2020-11-06)
+------------------
+
+* Feature - Remove the CreatePresignedPortalUrl API
+
 1.12.0 (2020-09-30)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -192,9 +192,14 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of data catalog to create: `LAMBDA` for a federated
-    #   catalog, `GLUE` for AWS Glue Catalog, or `HIVE` for an external hive
-    #   metastore.
+    #   The type of data catalog to create: `LAMBDA` for a federated catalog
+    #   or `HIVE` for an external hive metastore.
+    #
+    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
+    #   already exists in your account, of which you can have only one.
+    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -227,8 +232,6 @@ module Aws::Athena
     #       Lambda function.
     #
     #       `function=lambda_arn `
-    #
-    #   * The `GLUE` type has no parameters.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -325,6 +328,47 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreatePreparedStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statement_name: "StatementName", # required
+    #         work_group: "WorkGroupName", # required
+    #         query_statement: "QueryString", # required
+    #         description: "DescriptionString",
+    #       }
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup to which the prepared statement belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_statement
+    #   The query string for the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the prepared statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreatePreparedStatementInput AWS API Documentation
+    #
+    class CreatePreparedStatementInput < Struct.new(
+      :statement_name,
+      :work_group,
+      :query_statement,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreatePreparedStatementOutput AWS API Documentation
+    #
+    class CreatePreparedStatementOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateWorkGroupInput
     #   data as a hash:
     #
@@ -342,6 +386,10 @@ module Aws::Athena
     #           publish_cloud_watch_metrics_enabled: false,
     #           bytes_scanned_cutoff_per_query: 1,
     #           requester_pays_enabled: false,
+    #           engine_version: {
+    #             selected_engine_version: "NameString",
+    #             effective_engine_version: "NameString",
+    #           },
     #         },
     #         description: "WorkGroupDescriptionString",
     #         tags: [
@@ -405,8 +453,10 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of data catalog: `LAMBDA` for a federated catalog, `GLUE`
-    #   for AWS Glue Catalog, or `HIVE` for an external hive metastore.
+    #   The type of data catalog: `LAMBDA` for a federated catalog or `HIVE`
+    #   for an external hive metastore. `GLUE` refers to the
+    #   `AwsDataCatalog` that already exists in your account, of which you
+    #   can have only one.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -434,8 +484,6 @@ module Aws::Athena
     #       Lambda function.
     #
     #       `function=lambda_arn `
-    #
-    #   * The `GLUE` type has no parameters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalog AWS API Documentation
@@ -556,6 +604,35 @@ module Aws::Athena
     #
     class DeleteNamedQueryOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeletePreparedStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statement_name: "StatementName", # required
+    #         work_group: "WorkGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the prepared statement to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group
+    #   The workgroup to which the statement to be deleted belongs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeletePreparedStatementInput AWS API Documentation
+    #
+    class DeletePreparedStatementInput < Struct.new(
+      :statement_name,
+      :work_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeletePreparedStatementOutput AWS API Documentation
+    #
+    class DeletePreparedStatementOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteWorkGroupInput
     #   data as a hash:
     #
@@ -570,7 +647,7 @@ module Aws::Athena
     #
     # @!attribute [rw] recursive_delete_option
     #   The option to delete the workgroup and its contents even if the
-    #   workgroup contains any named queries.
+    #   workgroup contains any named queries or query executions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteWorkGroupInput AWS API Documentation
@@ -618,6 +695,41 @@ module Aws::Athena
     class EncryptionConfiguration < Struct.new(
       :encryption_option,
       :kms_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Athena engine version for running queries.
+    #
+    # @note When making an API call, you may pass EngineVersion
+    #   data as a hash:
+    #
+    #       {
+    #         selected_engine_version: "NameString",
+    #         effective_engine_version: "NameString",
+    #       }
+    #
+    # @!attribute [rw] selected_engine_version
+    #   The engine version requested by the user. Possible values are
+    #   determined by the output of `ListEngineVersions`, including Auto.
+    #   The default is Auto.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_engine_version
+    #   Read only. The engine version on which the query runs. If the user
+    #   requests a valid engine version other than Auto, the effective
+    #   engine version is the same as the engine version that the user
+    #   requested. If the user requests Auto, the effective engine version
+    #   is chosen by Athena. When a request to update the engine version is
+    #   made by a `CreateWorkGroup` or `UpdateWorkGroup` operation, the
+    #   `EffectiveEngineVersion` field is ignored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EngineVersion AWS API Documentation
+    #
+    class EngineVersion < Struct.new(
+      :selected_engine_version,
+      :effective_engine_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -717,6 +829,43 @@ module Aws::Athena
     #
     class GetNamedQueryOutput < Struct.new(
       :named_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPreparedStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statement_name: "StatementName", # required
+    #         work_group: "WorkGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the prepared statement to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group
+    #   The workgroup to which the statement to be retrieved belongs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetPreparedStatementInput AWS API Documentation
+    #
+    class GetPreparedStatementInput < Struct.new(
+      :statement_name,
+      :work_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prepared_statement
+    #   The name of the prepared statement that was retrieved.
+    #   @return [Types::PreparedStatement]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetPreparedStatementOutput AWS API Documentation
+    #
+    class GetPreparedStatementOutput < Struct.new(
+      :prepared_statement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1022,6 +1171,54 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEngineVersionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of engine versions to return in this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListEngineVersionsInput AWS API Documentation
+    #
+    class ListEngineVersionsInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engine_versions
+    #   A list of engine versions that are available to choose from.
+    #   @return [Array<Types::EngineVersion>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListEngineVersionsOutput AWS API Documentation
+    #
+    class ListEngineVersionsOutput < Struct.new(
+      :engine_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListNamedQueriesInput
     #   data as a hash:
     #
@@ -1073,6 +1270,60 @@ module Aws::Athena
     #
     class ListNamedQueriesOutput < Struct.new(
       :named_query_ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPreparedStatementsInput
+    #   data as a hash:
+    #
+    #       {
+    #         work_group: "WorkGroupName", # required
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] work_group
+    #   The workgroup to list the prepared statements for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListPreparedStatementsInput AWS API Documentation
+    #
+    class ListPreparedStatementsInput < Struct.new(
+      :work_group,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prepared_statements
+    #   The list of prepared statements for the workgroup.
+    #   @return [Array<Types::PreparedStatementSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListPreparedStatementsOutput AWS API Documentation
+    #
+    class ListPreparedStatementsOutput < Struct.new(
+      :prepared_statements,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1280,8 +1531,8 @@ module Aws::Athena
     end
 
     # @!attribute [rw] work_groups
-    #   The list of workgroups, including their names, descriptions,
-    #   creation times, and states.
+    #   A list of WorkGroupSummary objects that include the names,
+    #   descriptions, creation times, and states for each workgroup.
     #   @return [Array<Types::WorkGroupSummary>]
     #
     # @!attribute [rw] next_token
@@ -1358,6 +1609,59 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # A prepared SQL statement for use with Athena.
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_statement
+    #   The query string for the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group_name
+    #   The name of the workgroup to which the prepared statement belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the prepared statement.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/PreparedStatement AWS API Documentation
+    #
+    class PreparedStatement < Struct.new(
+      :statement_name,
+      :query_statement,
+      :work_group_name,
+      :description,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name and last modified time of the prepared statement.
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the prepared statement.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/PreparedStatementSummary AWS API Documentation
+    #
+    class PreparedStatementSummary < Struct.new(
+      :statement_name,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a single instance of a query execution.
     #
     # @!attribute [rw] query_execution_id
@@ -1404,6 +1708,10 @@ module Aws::Athena
     #   The name of the workgroup in which the query ran.
     #   @return [String]
     #
+    # @!attribute [rw] engine_version
+    #   The engine version that executed the query.
+    #   @return [Types::EngineVersion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution AWS API Documentation
     #
     class QueryExecution < Struct.new(
@@ -1414,7 +1722,8 @@ module Aws::Athena
       :query_execution_context,
       :status,
       :statistics,
-      :work_group)
+      :work_group,
+      :engine_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2114,8 +2423,13 @@ module Aws::Athena
     #
     # @!attribute [rw] type
     #   Specifies the type of data catalog to update. Specify `LAMBDA` for a
-    #   federated catalog, `GLUE` for AWS Glue Catalog, or `HIVE` for an
-    #   external hive metastore.
+    #   federated catalog or `HIVE` for an external hive metastore.
+    #
+    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
+    #   already exists in your account, of which you can have only one.
+    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2148,8 +2462,6 @@ module Aws::Athena
     #       Lambda function.
     #
     #       `function=lambda_arn `
-    #
-    #   * The `GLUE` type has no parameters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateDataCatalogInput AWS API Documentation
@@ -2166,6 +2478,47 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateDataCatalogOutput AWS API Documentation
     #
     class UpdateDataCatalogOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdatePreparedStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statement_name: "StatementName", # required
+    #         work_group: "WorkGroupName", # required
+    #         query_statement: "QueryString", # required
+    #         description: "DescriptionString",
+    #       }
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group
+    #   The workgroup for the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_statement
+    #   The query string for the prepared statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the prepared statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdatePreparedStatementInput AWS API Documentation
+    #
+    class UpdatePreparedStatementInput < Struct.new(
+      :statement_name,
+      :work_group,
+      :query_statement,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdatePreparedStatementOutput AWS API Documentation
+    #
+    class UpdatePreparedStatementOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateWorkGroupInput
     #   data as a hash:
@@ -2188,6 +2541,10 @@ module Aws::Athena
     #           bytes_scanned_cutoff_per_query: 1,
     #           remove_bytes_scanned_cutoff_per_query: false,
     #           requester_pays_enabled: false,
+    #           engine_version: {
+    #             selected_engine_version: "NameString",
+    #             effective_engine_version: "NameString",
+    #           },
     #         },
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #       }
@@ -2302,6 +2659,10 @@ module Aws::Athena
     #         publish_cloud_watch_metrics_enabled: false,
     #         bytes_scanned_cutoff_per_query: 1,
     #         requester_pays_enabled: false,
+    #         engine_version: {
+    #           selected_engine_version: "NameString",
+    #           effective_engine_version: "NameString",
+    #         },
     #       }
     #
     # @!attribute [rw] result_configuration
@@ -2354,6 +2715,12 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] engine_version
+    #   The engine version that all queries running on the workgroup use.
+    #   Queries on the `AmazonAthenaPreviewFunctionality` workgroup run on
+    #   the preview engine regardless of this setting.
+    #   @return [Types::EngineVersion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfiguration AWS API Documentation
     #
     class WorkGroupConfiguration < Struct.new(
@@ -2361,7 +2728,8 @@ module Aws::Athena
       :enforce_work_group_configuration,
       :publish_cloud_watch_metrics_enabled,
       :bytes_scanned_cutoff_per_query,
-      :requester_pays_enabled)
+      :requester_pays_enabled,
+      :engine_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2392,6 +2760,10 @@ module Aws::Athena
     #         bytes_scanned_cutoff_per_query: 1,
     #         remove_bytes_scanned_cutoff_per_query: false,
     #         requester_pays_enabled: false,
+    #         engine_version: {
+    #           selected_engine_version: "NameString",
+    #           effective_engine_version: "NameString",
+    #         },
     #       }
     #
     # @!attribute [rw] enforce_work_group_configuration
@@ -2440,6 +2812,14 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] engine_version
+    #   The engine version requested when a workgroup is updated. After the
+    #   update, all queries on the workgroup run on the requested engine
+    #   version. If no value was previously set, the default is Auto.
+    #   Queries on the `AmazonAthenaPreviewFunctionality` workgroup run on
+    #   the preview engine regardless of this setting.
+    #   @return [Types::EngineVersion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfigurationUpdates AWS API Documentation
     #
     class WorkGroupConfigurationUpdates < Struct.new(
@@ -2448,7 +2828,8 @@ module Aws::Athena
       :publish_cloud_watch_metrics_enabled,
       :bytes_scanned_cutoff_per_query,
       :remove_bytes_scanned_cutoff_per_query,
-      :requester_pays_enabled)
+      :requester_pays_enabled,
+      :engine_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2472,13 +2853,20 @@ module Aws::Athena
     #   The workgroup creation date and time.
     #   @return [Time]
     #
+    # @!attribute [rw] engine_version
+    #   The engine version setting for all queries on the workgroup. Queries
+    #   on the `AmazonAthenaPreviewFunctionality` workgroup run on the
+    #   preview engine regardless of this setting.
+    #   @return [Types::EngineVersion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupSummary AWS API Documentation
     #
     class WorkGroupSummary < Struct.new(
       :name,
       :state,
       :description,
-      :creation_time)
+      :creation_time,
+      :engine_version)
       SENSITIVE = []
       include Aws::Structure
     end

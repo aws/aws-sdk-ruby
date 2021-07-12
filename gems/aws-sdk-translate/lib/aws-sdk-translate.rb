@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -28,7 +28,7 @@ require_relative 'aws-sdk-translate/customizations'
 # structure.
 #
 #     translate = Aws::Translate::Client.new
-#     resp = translate.delete_terminology(params)
+#     resp = translate.create_parallel_data(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-translate/customizations'
 # @!group service
 module Aws::Translate
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.31.0'
 
 end

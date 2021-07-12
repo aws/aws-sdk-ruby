@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -207,12 +207,20 @@ module Aws::MediaPackageVod
     #   data as a hash:
     #
     #       {
+    #         constant_initialization_vector: "__string",
     #         speke_key_provider: { # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
     #           url: "__string", # required
     #         },
     #       }
+    #
+    # @!attribute [rw] constant_initialization_vector
+    #   An optional 128-bit, 16-byte hex value represented by a 32-character
+    #   string, used in conjunction with the key for encrypting blocks. If
+    #   you don't specify a value, then MediaPackage creates the constant
+    #   initialization vector (IV).
+    #   @return [String]
     #
     # @!attribute [rw] speke_key_provider
     #   A configuration for accessing an external Secure Packager and
@@ -223,6 +231,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CmafEncryption AWS API Documentation
     #
     class CmafEncryption < Struct.new(
+      :constant_initialization_vector,
       :speke_key_provider)
       SENSITIVE = []
       include Aws::Structure
@@ -235,6 +244,7 @@ module Aws::MediaPackageVod
     #
     #       {
     #         encryption: {
+    #           constant_initialization_vector: "__string",
     #           speke_key_provider: { # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -255,6 +265,7 @@ module Aws::MediaPackageVod
     #             },
     #           },
     #         ],
+    #         include_encoder_configuration_in_segments: false,
     #         segment_duration_seconds: 1,
     #       }
     #
@@ -266,6 +277,15 @@ module Aws::MediaPackageVod
     #   A list of HLS manifest configurations.
     #   @return [Array<Types::HlsManifest>]
     #
+    # @!attribute [rw] include_encoder_configuration_in_segments
+    #   When includeEncoderConfigurationInSegments is set to true,
+    #   MediaPackage places your encoder's Sequence Parameter Set (SPS),
+    #   Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata
+    #   in every video segment instead of in the init fragment. This lets
+    #   you use different SPS/PPS/VPS settings for your assets during
+    #   content playback.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] segment_duration_seconds
     #   Duration (in seconds) of each fragment. Actual fragments will be
     #   rounded to the nearest multiple of the source fragment duration.
@@ -276,7 +296,82 @@ module Aws::MediaPackageVod
     class CmafPackage < Struct.new(
       :encryption,
       :hls_manifests,
+      :include_encoder_configuration_in_segments,
       :segment_duration_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration parameters for egress access logging.
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogsParameters AWS API Documentation
+    #
+    class ConfigureLogsParameters < Struct.new(
+      :egress_access_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ConfigureLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         egress_access_logs: {
+    #           log_group_name: "__string",
+    #         },
+    #         id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogsRequest AWS API Documentation
+    #
+    class ConfigureLogsRequest < Struct.new(
+      :egress_access_logs,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogsResponse AWS API Documentation
+    #
+    class ConfigureLogsResponse < Struct.new(
+      :arn,
+      :authorization,
+      :domain_name,
+      :egress_access_logs,
+      :id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -377,6 +472,7 @@ module Aws::MediaPackageVod
     #       {
     #         cmaf_package: {
     #           encryption: {
+    #             constant_initialization_vector: "__string",
     #             speke_key_provider: { # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -397,6 +493,7 @@ module Aws::MediaPackageVod
     #               },
     #             },
     #           ],
+    #           include_encoder_configuration_in_segments: false,
     #           segment_duration_seconds: 1,
     #         },
     #         dash_package: {
@@ -420,6 +517,7 @@ module Aws::MediaPackageVod
     #               url: "__string", # required
     #             },
     #           },
+    #           include_encoder_configuration_in_segments: false,
     #           period_triggers: ["ADS"], # accepts ADS
     #           segment_duration_seconds: 1,
     #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -572,6 +670,9 @@ module Aws::MediaPackageVod
     #           cdn_identifier_secret: "__string", # required
     #           secrets_role_arn: "__string", # required
     #         },
+    #         egress_access_logs: {
+    #           log_group_name: "__string",
+    #         },
     #         id: "__string", # required
     #         tags: {
     #           "__string" => "__string",
@@ -581,6 +682,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] authorization
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
     #
     # @!attribute [rw] id
     #   @return [String]
@@ -593,6 +698,7 @@ module Aws::MediaPackageVod
     #
     class CreatePackagingGroupRequest < Struct.new(
       :authorization,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -609,6 +715,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -622,6 +732,7 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -737,6 +848,7 @@ module Aws::MediaPackageVod
     #             url: "__string", # required
     #           },
     #         },
+    #         include_encoder_configuration_in_segments: false,
     #         period_triggers: ["ADS"], # accepts ADS
     #         segment_duration_seconds: 1,
     #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -750,6 +862,15 @@ module Aws::MediaPackageVod
     #   A Dynamic Adaptive Streaming over HTTP (DASH) encryption
     #   configuration.
     #   @return [Types::DashEncryption]
+    #
+    # @!attribute [rw] include_encoder_configuration_in_segments
+    #   When includeEncoderConfigurationInSegments is set to true,
+    #   MediaPackage places your encoder's Sequence Parameter Set (SPS),
+    #   Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata
+    #   in every video segment instead of in the init fragment. This lets
+    #   you use different SPS/PPS/VPS settings for your assets during
+    #   content playback.
+    #   @return [Boolean]
     #
     # @!attribute [rw] period_triggers
     #   A list of triggers that controls when the outgoing Dynamic Adaptive
@@ -780,6 +901,7 @@ module Aws::MediaPackageVod
     class DashPackage < Struct.new(
       :dash_manifests,
       :encryption,
+      :include_encoder_configuration_in_segments,
       :period_triggers,
       :segment_duration_seconds,
       :segment_template_format)
@@ -1006,6 +1128,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1019,8 +1145,30 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configure egress access logging.
+    #
+    # @note When making an API call, you may pass EgressAccessLogs
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   Customize the log group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/EgressAccessLogs AWS API Documentation
+    #
+    class EgressAccessLogs < Struct.new(
+      :log_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1639,6 +1787,10 @@ module Aws::MediaPackageVod
     #   The fully qualified domain name for Assets in the PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   The ID of the PackagingGroup.
     #   @return [String]
@@ -1653,6 +1805,7 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -1666,6 +1819,10 @@ module Aws::MediaPackageVod
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   The ID of the PackagingGroup.
     #   @return [String]
@@ -1678,6 +1835,7 @@ module Aws::MediaPackageVod
     #
     class PackagingGroupCreateParameters < Struct.new(
       :authorization,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -1916,6 +2074,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1929,6 +2091,7 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []

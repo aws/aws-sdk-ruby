@@ -27,7 +27,6 @@ module Seahorse
           private
 
           def add_event_listeners(context, target)
-            handler = self
             context.http_response.on_headers(200..299) do
               # In a fresh response body will be a StringIO
               # However, when a request is retried we may have

@@ -13,7 +13,53 @@ module Aws
         )
       end
 
+      let(:bucket_name) { 'my.bucket.com' }
+      let(:key) { 'test.txt' }
+
       describe '#presigned_url' do
+        context 'method name automatic suffix' do
+          let(:presigner) do
+            double("DummyPresigner", presigned_url: 'some url')
+          end
+
+          before do
+            allow(Aws::S3::Presigner).to receive(:new).and_return(presigner)
+          end
+
+          method_expectations = {
+            # HTTP Methods
+            delete: :delete_object,
+            head: :head_object,
+            get: :get_object,
+            put: :put_object,
+            # Non-HTTP methods
+            create_multipart_upload: :create_multipart_upload,
+            list_multipart_uploads: :list_multipart_uploads,
+            complete_multipart_upload: :complete_multipart_upload,
+            abort_multipart_upload: :abort_multipart_upload,
+            list_parts: :list_parts,
+            upload_part: :upload_part
+          }
+
+          method_expectations.each do |method, expected_method|
+            it "rewrites #{method} as #{expected_method} to the Presigner" do
+              obj = Object.new(
+                bucket_name: bucket_name,
+                key: key,
+                client: client
+              )
+
+              expect(presigner).to receive(:presigned_url).with(
+                expected_method,
+                bucket: bucket_name,
+                key: key
+              )
+
+              obj.presigned_url(method)
+            end
+          end
+        end
+
         # from http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
         it 'generates a valid presigned url' do
           obj = Object.new(

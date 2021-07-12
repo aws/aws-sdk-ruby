@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -65,6 +65,7 @@ module Aws::Amplify
     CreateWebhookResult = Shapes::StructureShape.new(name: 'CreateWebhookResult')
     CustomDomain = Shapes::StringShape.new(name: 'CustomDomain')
     CustomDomains = Shapes::ListShape.new(name: 'CustomDomains')
+    CustomHeaders = Shapes::StringShape.new(name: 'CustomHeaders')
     CustomRule = Shapes::StructureShape.new(name: 'CustomRule')
     CustomRules = Shapes::ListShape.new(name: 'CustomRules')
     DNSRecord = Shapes::StringShape.new(name: 'DNSRecord')
@@ -240,6 +241,7 @@ module Aws::Amplify
     App.add_member(:custom_rules, Shapes::ShapeRef.new(shape: CustomRules, location_name: "customRules"))
     App.add_member(:production_branch, Shapes::ShapeRef.new(shape: ProductionBranch, location_name: "productionBranch"))
     App.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
+    App.add_member(:custom_headers, Shapes::ShapeRef.new(shape: CustomHeaders, location_name: "customHeaders"))
     App.add_member(:enable_auto_branch_creation, Shapes::ShapeRef.new(shape: EnableAutoBranchCreation, location_name: "enableAutoBranchCreation"))
     App.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     App.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))
@@ -330,6 +332,7 @@ module Aws::Amplify
     CreateAppRequest.add_member(:custom_rules, Shapes::ShapeRef.new(shape: CustomRules, location_name: "customRules"))
     CreateAppRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAppRequest.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
+    CreateAppRequest.add_member(:custom_headers, Shapes::ShapeRef.new(shape: CustomHeaders, location_name: "customHeaders"))
     CreateAppRequest.add_member(:enable_auto_branch_creation, Shapes::ShapeRef.new(shape: EnableAutoBranchCreation, location_name: "enableAutoBranchCreation"))
     CreateAppRequest.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     CreateAppRequest.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))
@@ -733,6 +736,7 @@ module Aws::Amplify
     UpdateAppRequest.add_member(:basic_auth_credentials, Shapes::ShapeRef.new(shape: BasicAuthCredentials, location_name: "basicAuthCredentials"))
     UpdateAppRequest.add_member(:custom_rules, Shapes::ShapeRef.new(shape: CustomRules, location_name: "customRules"))
     UpdateAppRequest.add_member(:build_spec, Shapes::ShapeRef.new(shape: BuildSpec, location_name: "buildSpec"))
+    UpdateAppRequest.add_member(:custom_headers, Shapes::ShapeRef.new(shape: CustomHeaders, location_name: "customHeaders"))
     UpdateAppRequest.add_member(:enable_auto_branch_creation, Shapes::ShapeRef.new(shape: EnableAutoBranchCreation, location_name: "enableAutoBranchCreation"))
     UpdateAppRequest.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     UpdateAppRequest.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))

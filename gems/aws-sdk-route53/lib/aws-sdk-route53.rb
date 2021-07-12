@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,7 +29,7 @@ require_relative 'aws-sdk-route53/customizations'
 # structure.
 #
 #     route_53 = Aws::Route53::Client.new
-#     resp = route_53.associate_vpc_with_hosted_zone(params)
+#     resp = route_53.activate_key_signing_key(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-route53/customizations'
 # @!group service
 module Aws::Route53
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.49.0'
 
 end

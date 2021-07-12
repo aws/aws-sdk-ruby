@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -67,6 +67,7 @@ module Aws::Kafka
     GetBootstrapBrokersResponse = Shapes::StructureShape.new(name: 'GetBootstrapBrokersResponse')
     GetCompatibleKafkaVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleKafkaVersionsRequest')
     GetCompatibleKafkaVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleKafkaVersionsResponse')
+    Iam = Shapes::StructureShape.new(name: 'Iam')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JmxExporter = Shapes::StructureShape.new(name: 'JmxExporter')
     JmxExporterInfo = Shapes::StructureShape.new(name: 'JmxExporterInfo')
@@ -118,6 +119,8 @@ module Aws::Kafka
     UpdateBrokerCountResponse = Shapes::StructureShape.new(name: 'UpdateBrokerCountResponse')
     UpdateBrokerStorageRequest = Shapes::StructureShape.new(name: 'UpdateBrokerStorageRequest')
     UpdateBrokerStorageResponse = Shapes::StructureShape.new(name: 'UpdateBrokerStorageResponse')
+    UpdateBrokerTypeRequest = Shapes::StructureShape.new(name: 'UpdateBrokerTypeRequest')
+    UpdateBrokerTypeResponse = Shapes::StructureShape.new(name: 'UpdateBrokerTypeResponse')
     UpdateClusterConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationRequest')
     UpdateClusterConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationResponse')
     UpdateClusterKafkaVersionRequest = Shapes::StructureShape.new(name: 'UpdateClusterKafkaVersionRequest')
@@ -391,6 +394,7 @@ module Aws::Kafka
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerString"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringTls"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_scram, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslScram"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_iam, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslIam"))
     GetBootstrapBrokersResponse.struct_class = Types::GetBootstrapBrokersResponse
 
     GetCompatibleKafkaVersionsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "clusterArn"))
@@ -398,6 +402,9 @@ module Aws::Kafka
 
     GetCompatibleKafkaVersionsResponse.add_member(:compatible_kafka_versions, Shapes::ShapeRef.new(shape: __listOfCompatibleKafkaVersion, location_name: "compatibleKafkaVersions"))
     GetCompatibleKafkaVersionsResponse.struct_class = Types::GetCompatibleKafkaVersionsResponse
+
+    Iam.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
+    Iam.struct_class = Types::Iam
 
     InternalServerErrorException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -490,6 +497,7 @@ module Aws::Kafka
     MutableClusterInfo.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     MutableClusterInfo.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __string, location_name: "kafkaVersion"))
     MutableClusterInfo.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
+    MutableClusterInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __stringMin5Max32, location_name: "instanceType"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -538,6 +546,7 @@ module Aws::Kafka
     S3.struct_class = Types::S3
 
     Sasl.add_member(:scram, Shapes::ShapeRef.new(shape: Scram, location_name: "scram"))
+    Sasl.add_member(:iam, Shapes::ShapeRef.new(shape: Iam, location_name: "iam"))
     Sasl.struct_class = Types::Sasl
 
     Scram.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
@@ -595,6 +604,15 @@ module Aws::Kafka
     UpdateBrokerStorageResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
     UpdateBrokerStorageResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     UpdateBrokerStorageResponse.struct_class = Types::UpdateBrokerStorageResponse
+
+    UpdateBrokerTypeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateBrokerTypeRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
+    UpdateBrokerTypeRequest.add_member(:target_instance_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "targetInstanceType"))
+    UpdateBrokerTypeRequest.struct_class = Types::UpdateBrokerTypeRequest
+
+    UpdateBrokerTypeResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    UpdateBrokerTypeResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    UpdateBrokerTypeResponse.struct_class = Types::UpdateBrokerTypeResponse
 
     UpdateClusterConfigurationRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     UpdateClusterConfigurationRequest.add_member(:configuration_info, Shapes::ShapeRef.new(shape: ConfigurationInfo, required: true, location_name: "configurationInfo"))
@@ -1043,6 +1061,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:update_broker_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBrokerType"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/nodes/type"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBrokerTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBrokerTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_broker_storage, Seahorse::Model::Operation.new.tap do |o|

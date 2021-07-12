@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -335,14 +335,14 @@ module Aws::CodeGuruReviewer
     # Reviewer console. For more information, see [Recommendations in Amazon
     # CodeGuru Reviewer][1] in the *Amazon CodeGuru Reviewer User Guide.*
     #
-    # If you associate a CodeCommit repository, it must be in the same AWS
-    # Region and AWS account where its CodeGuru Reviewer code reviews are
-    # configured.
+    # If you associate a CodeCommit or S3 repository, it must be in the same
+    # AWS Region and AWS account where its CodeGuru Reviewer code reviews
+    # are configured.
     #
     # Bitbucket and GitHub Enterprise Server repositories are managed by AWS
     # CodeStar Connections to connect to CodeGuru Reviewer. For more
-    # information, see [Connect to a repository source provider][2] in the
-    # *Amazon CodeGuru Reviewer User Guide.*
+    # information, see [Associate a repository][2] in the *Amazon CodeGuru
+    # Reviewer User Guide.*
     #
     # <note markdown="1"> You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a
     # GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub
@@ -355,7 +355,7 @@ module Aws::CodeGuruReviewer
     #
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html
-    # [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/reviewer-ug/step-one.html#select-repository-source-provider
+    # [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html
     # [3]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html
     #
     # @option params [required, Types::Repository] :repository
@@ -369,9 +369,32 @@ module Aws::CodeGuruReviewer
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`, or
+    #     `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #
+    # @option params [Types::KMSKeyDetails] :kms_key_details
+    #   A `KMSKeyDetails` object that contains:
+    #
+    #   * The encryption option for this repository association. It is either
+    #     owned by AWS Key Management Service (KMS) (`AWS_OWNED_CMK`) or
+    #     customer managed (`CUSTOMER_MANAGED_CMK`).
+    #
+    #   * The ID of the AWS KMS key that is associated with this respository
+    #     association.
+    #
     # @return [Types::AssociateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateRepositoryResponse#repository_association #repository_association} => Types::RepositoryAssociation
+    #   * {Types::AssociateRepositoryResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -390,8 +413,19 @@ module Aws::CodeGuruReviewer
     #         connection_arn: "ConnectionArn", # required
     #         owner: "Owner", # required
     #       },
+    #       s3_bucket: {
+    #         name: "Name", # required
+    #         bucket_name: "S3BucketName", # required
+    #       },
     #     },
     #     client_request_token: "ClientRequestToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     kms_key_details: {
+    #       kms_key_id: "KMSKeyId",
+    #       encryption_option: "AWS_OWNED_CMK", # accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #     },
     #   })
     #
     # @example Response structure
@@ -401,11 +435,18 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
-    #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer", "S3Bucket"
+    #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating", "Disassociated"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
     #   resp.repository_association.created_time_stamp #=> Time
+    #   resp.repository_association.kms_key_details.kms_key_id #=> String
+    #   resp.repository_association.kms_key_details.encryption_option #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
+    #   resp.repository_association.s3_repository_details.bucket_name #=> String
+    #   resp.repository_association.s3_repository_details.code_artifacts.source_code_artifacts_object_key #=> String
+    #   resp.repository_association.s3_repository_details.code_artifacts.build_artifacts_object_key #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/AssociateRepository AWS API Documentation
     #
@@ -416,15 +457,23 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Use to create a code review for a repository analysis.
+    # Use to create a code review with a [ `CodeReviewType` ][1] of
+    # `RepositoryAnalysis`. This type of code review analyzes all code under
+    # a specified branch in an associated repository. `PullRequest` code
+    # reviews are automatically triggered by a pull request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html
     #
     # @option params [required, String] :name
-    #   The name of the code review. Each code review of the same code review
-    #   type must have a unique name in your AWS account.
+    #   The name of the code review. The name of each code review in your AWS
+    #   account must be unique.
     #
     # @option params [required, String] :repository_association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
     #
     #   A code review can only be created on an associated repository. This is
     #   the ARN of the associated repository.
@@ -432,10 +481,12 @@ module Aws::CodeGuruReviewer
     #
     #
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #
     # @option params [required, Types::CodeReviewType] :type
     #   The type of code review to create. This is specified using a [
-    #   `CodeReviewType` ][1] object.
+    #   `CodeReviewType` ][1] object. You can create a code review only of
+    #   type `RepositoryAnalysis`.
     #
     #
     #
@@ -456,13 +507,47 @@ module Aws::CodeGuruReviewer
     #
     #   resp = client.create_code_review({
     #     name: "CodeReviewName", # required
-    #     repository_association_arn: "Arn", # required
+    #     repository_association_arn: "AssociationArn", # required
     #     type: { # required
     #       repository_analysis: { # required
-    #         repository_head: { # required
+    #         repository_head: {
     #           branch_name: "BranchName", # required
     #         },
+    #         source_code_type: {
+    #           commit_diff: {
+    #             source_commit: "CommitId",
+    #             destination_commit: "CommitId",
+    #             merge_base_commit: "CommitId",
+    #           },
+    #           repository_head: {
+    #             branch_name: "BranchName", # required
+    #           },
+    #           branch_diff: {
+    #             source_branch_name: "BranchName", # required
+    #             destination_branch_name: "BranchName", # required
+    #           },
+    #           s3_bucket_repository: {
+    #             name: "Name", # required
+    #             details: {
+    #               bucket_name: "S3BucketName",
+    #               code_artifacts: {
+    #                 source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
+    #                 build_artifacts_object_key: "BuildArtifactsObjectKey",
+    #               },
+    #             },
+    #           },
+    #           request_metadata: {
+    #             request_id: "RequestId",
+    #             requester: "Requester",
+    #             event_info: {
+    #               name: "EventName",
+    #               state: "EventState",
+    #             },
+    #             vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
+    #           },
+    #         },
     #       },
+    #       analysis_types: ["Security"], # accepts Security, CodeQuality
     #     },
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -473,7 +558,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.code_review_arn #=> String
     #   resp.code_review.repository_name #=> String
     #   resp.code_review.owner #=> String
-    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer", "S3Bucket"
     #   resp.code_review.state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review.state_reason #=> String
     #   resp.code_review.created_time_stamp #=> Time
@@ -482,9 +567,24 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.pull_request_id #=> String
     #   resp.code_review.source_code_type.commit_diff.source_commit #=> String
     #   resp.code_review.source_code_type.commit_diff.destination_commit #=> String
+    #   resp.code_review.source_code_type.commit_diff.merge_base_commit #=> String
     #   resp.code_review.source_code_type.repository_head.branch_name #=> String
+    #   resp.code_review.source_code_type.branch_diff.source_branch_name #=> String
+    #   resp.code_review.source_code_type.branch_diff.destination_branch_name #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.name #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.details.bucket_name #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.details.code_artifacts.source_code_artifacts_object_key #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.details.code_artifacts.build_artifacts_object_key #=> String
+    #   resp.code_review.source_code_type.request_metadata.request_id #=> String
+    #   resp.code_review.source_code_type.request_metadata.requester #=> String
+    #   resp.code_review.source_code_type.request_metadata.event_info.name #=> String
+    #   resp.code_review.source_code_type.request_metadata.event_info.state #=> String
+    #   resp.code_review.source_code_type.request_metadata.vendor_name #=> String, one of "GitHub", "GitLab", "NativeS3"
+    #   resp.code_review.association_arn #=> String
     #   resp.code_review.metrics.metered_lines_of_code_count #=> Integer
     #   resp.code_review.metrics.findings_count #=> Integer
+    #   resp.code_review.analysis_types #=> Array
+    #   resp.code_review.analysis_types[0] #=> String, one of "Security", "CodeQuality"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CreateCodeReview AWS API Documentation
     #
@@ -521,7 +621,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.code_review_arn #=> String
     #   resp.code_review.repository_name #=> String
     #   resp.code_review.owner #=> String
-    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer", "S3Bucket"
     #   resp.code_review.state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review.state_reason #=> String
     #   resp.code_review.created_time_stamp #=> Time
@@ -530,9 +630,29 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.pull_request_id #=> String
     #   resp.code_review.source_code_type.commit_diff.source_commit #=> String
     #   resp.code_review.source_code_type.commit_diff.destination_commit #=> String
+    #   resp.code_review.source_code_type.commit_diff.merge_base_commit #=> String
     #   resp.code_review.source_code_type.repository_head.branch_name #=> String
+    #   resp.code_review.source_code_type.branch_diff.source_branch_name #=> String
+    #   resp.code_review.source_code_type.branch_diff.destination_branch_name #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.name #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.details.bucket_name #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.details.code_artifacts.source_code_artifacts_object_key #=> String
+    #   resp.code_review.source_code_type.s3_bucket_repository.details.code_artifacts.build_artifacts_object_key #=> String
+    #   resp.code_review.source_code_type.request_metadata.request_id #=> String
+    #   resp.code_review.source_code_type.request_metadata.requester #=> String
+    #   resp.code_review.source_code_type.request_metadata.event_info.name #=> String
+    #   resp.code_review.source_code_type.request_metadata.event_info.state #=> String
+    #   resp.code_review.source_code_type.request_metadata.vendor_name #=> String, one of "GitHub", "GitLab", "NativeS3"
+    #   resp.code_review.association_arn #=> String
     #   resp.code_review.metrics.metered_lines_of_code_count #=> Integer
     #   resp.code_review.metrics.findings_count #=> Integer
+    #   resp.code_review.analysis_types #=> Array
+    #   resp.code_review.analysis_types[0] #=> String, one of "Security", "CodeQuality"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * code_review_completed
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DescribeCodeReview AWS API Documentation
     #
@@ -610,20 +730,23 @@ module Aws::CodeGuruReviewer
     #
     # @option params [required, String] :association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #
     # @return [Types::DescribeRepositoryAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRepositoryAssociationResponse#repository_association #repository_association} => Types::RepositoryAssociation
+    #   * {Types::DescribeRepositoryAssociationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_repository_association({
-    #     association_arn: "Arn", # required
+    #     association_arn: "AssociationArn", # required
     #   })
     #
     # @example Response structure
@@ -633,11 +756,23 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
-    #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer", "S3Bucket"
+    #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating", "Disassociated"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
     #   resp.repository_association.created_time_stamp #=> Time
+    #   resp.repository_association.kms_key_details.kms_key_id #=> String
+    #   resp.repository_association.kms_key_details.encryption_option #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
+    #   resp.repository_association.s3_repository_details.bucket_name #=> String
+    #   resp.repository_association.s3_repository_details.code_artifacts.source_code_artifacts_object_key #=> String
+    #   resp.repository_association.s3_repository_details.code_artifacts.build_artifacts_object_key #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * repository_association_succeeded
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DescribeRepositoryAssociation AWS API Documentation
     #
@@ -653,20 +788,23 @@ module Aws::CodeGuruReviewer
     #
     # @option params [required, String] :association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #
     # @return [Types::DisassociateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DisassociateRepositoryResponse#repository_association #repository_association} => Types::RepositoryAssociation
+    #   * {Types::DisassociateRepositoryResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_repository({
-    #     association_arn: "Arn", # required
+    #     association_arn: "AssociationArn", # required
     #   })
     #
     # @example Response structure
@@ -676,11 +814,18 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
-    #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer", "S3Bucket"
+    #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating", "Disassociated"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
     #   resp.repository_association.created_time_stamp #=> Time
+    #   resp.repository_association.kms_key_details.kms_key_id #=> String
+    #   resp.repository_association.kms_key_details.encryption_option #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
+    #   resp.repository_association.s3_repository_details.bucket_name #=> String
+    #   resp.repository_association.s3_repository_details.code_artifacts.source_code_artifacts_object_key #=> String
+    #   resp.repository_association.s3_repository_details.code_artifacts.build_artifacts_object_key #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DisassociateRepository AWS API Documentation
     #
@@ -741,7 +886,7 @@ module Aws::CodeGuruReviewer
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_code_reviews({
-    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
+    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer, S3Bucket
     #     states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #     repository_names: ["Name"],
     #     type: "PullRequest", # required, accepts PullRequest, RepositoryAnalysis
@@ -756,7 +901,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review_summaries[0].code_review_arn #=> String
     #   resp.code_review_summaries[0].repository_name #=> String
     #   resp.code_review_summaries[0].owner #=> String
-    #   resp.code_review_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.code_review_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer", "S3Bucket"
     #   resp.code_review_summaries[0].state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review_summaries[0].created_time_stamp #=> Time
     #   resp.code_review_summaries[0].last_updated_time_stamp #=> Time
@@ -764,6 +909,21 @@ module Aws::CodeGuruReviewer
     #   resp.code_review_summaries[0].pull_request_id #=> String
     #   resp.code_review_summaries[0].metrics_summary.metered_lines_of_code_count #=> Integer
     #   resp.code_review_summaries[0].metrics_summary.findings_count #=> Integer
+    #   resp.code_review_summaries[0].source_code_type.commit_diff.source_commit #=> String
+    #   resp.code_review_summaries[0].source_code_type.commit_diff.destination_commit #=> String
+    #   resp.code_review_summaries[0].source_code_type.commit_diff.merge_base_commit #=> String
+    #   resp.code_review_summaries[0].source_code_type.repository_head.branch_name #=> String
+    #   resp.code_review_summaries[0].source_code_type.branch_diff.source_branch_name #=> String
+    #   resp.code_review_summaries[0].source_code_type.branch_diff.destination_branch_name #=> String
+    #   resp.code_review_summaries[0].source_code_type.s3_bucket_repository.name #=> String
+    #   resp.code_review_summaries[0].source_code_type.s3_bucket_repository.details.bucket_name #=> String
+    #   resp.code_review_summaries[0].source_code_type.s3_bucket_repository.details.code_artifacts.source_code_artifacts_object_key #=> String
+    #   resp.code_review_summaries[0].source_code_type.s3_bucket_repository.details.code_artifacts.build_artifacts_object_key #=> String
+    #   resp.code_review_summaries[0].source_code_type.request_metadata.request_id #=> String
+    #   resp.code_review_summaries[0].source_code_type.request_metadata.requester #=> String
+    #   resp.code_review_summaries[0].source_code_type.request_metadata.event_info.name #=> String
+    #   resp.code_review_summaries[0].source_code_type.request_metadata.event_info.state #=> String
+    #   resp.code_review_summaries[0].source_code_type.request_metadata.vendor_name #=> String, one of "GitHub", "GitLab", "NativeS3"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListCodeReviews AWS API Documentation
@@ -890,6 +1050,7 @@ module Aws::CodeGuruReviewer
     #   resp.recommendation_summaries[0].start_line #=> Integer
     #   resp.recommendation_summaries[0].end_line #=> Integer
     #   resp.recommendation_summaries[0].description #=> String
+    #   resp.recommendation_summaries[0].recommendation_category #=> String, one of "AWSBestPractices", "AWSCloudFormationIssues", "DuplicateCode", "CodeMaintenanceIssues", "ConcurrencyIssues", "InputValidations", "PythonBestPractices", "JavaBestPractices", "ResourceLeaks", "SecurityIssues"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListRecommendations AWS API Documentation
@@ -945,6 +1106,18 @@ module Aws::CodeGuruReviewer
     #   * **Disassociating**\: CodeGuru Reviewer is removing the repository's
     #     pull request notifications and source code access.
     #
+    #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated the
+    #     repository. You can create a new association with this repository if
+    #     you want to review source code in it later. You can control access
+    #     to code reviews created in an associated repository with tags after
+    #     it has been disassociated. For more information, see [Using tags to
+    #     control access to associated repositories][1] in the *Amazon
+    #     CodeGuru Reviewer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html
+    #
     # @option params [Array<String>] :names
     #   List of repository names to use as a filter.
     #
@@ -988,8 +1161,8 @@ module Aws::CodeGuruReviewer
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_repository_associations({
-    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
-    #     states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating
+    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer, S3Bucket
+    #     states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating, Disassociated
     #     names: ["Name"],
     #     owners: ["Owner"],
     #     max_results: 1,
@@ -1005,8 +1178,8 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association_summaries[0].association_id #=> String
     #   resp.repository_association_summaries[0].name #=> String
     #   resp.repository_association_summaries[0].owner #=> String
-    #   resp.repository_association_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
-    #   resp.repository_association_summaries[0].state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
+    #   resp.repository_association_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer", "S3Bucket"
+    #   resp.repository_association_summaries[0].state #=> String, one of "Associated", "Associating", "Failed", "Disassociating", "Disassociated"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListRepositoryAssociations AWS API Documentation
@@ -1015,6 +1188,43 @@ module Aws::CodeGuruReviewer
     # @param [Hash] params ({})
     def list_repository_associations(params = {}, options = {})
       req = build_request(:list_repository_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of tags associated with an associated repository
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AssociationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1056,6 +1266,84 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
+    # Adds one or more tags to an associated repository.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`, or
+    #     `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AssociationArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a tag from an associated repository.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of the keys for each tag you want to remove from an associated
+    #   repository.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AssociationArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1069,14 +1357,129 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name                      | params                                   | :delay   | :max_attempts |
+    # | -------------------------------- | ---------------------------------------- | -------- | ------------- |
+    # | code_review_completed            | {Client#describe_code_review}            | 10       | 60            |
+    # | repository_association_succeeded | {Client#describe_repository_association} | 10       | 20            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        code_review_completed: Waiters::CodeReviewCompleted,
+        repository_association_succeeded: Waiters::RepositoryAssociationSucceeded
+      }
     end
 
     class << self

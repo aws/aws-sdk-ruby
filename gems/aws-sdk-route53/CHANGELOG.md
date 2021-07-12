@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-04-14)
+------------------
+
+* Feature - Documentation updates for route53
+
+1.48.0 (2021-03-24)
+------------------
+
+* Feature - Documentation updates for route53
+
+1.47.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2021-02-02)
+------------------
+
+* Feature - Documentation updates for Route 53
+
+1.45.0 (2020-12-17)
+------------------
+
+* Feature - This release adds support for DNSSEC signing in Amazon Route 53.
+
 1.44.0 (2020-09-30)
 ------------------
 

@@ -3,12 +3,51 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DLM
   module Types
+
+    # Specifies an action for an event-based policy.
+    #
+    # @note When making an API call, you may pass Action
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ActionName", # required
+    #         cross_region_copy: [ # required
+    #           {
+    #             target: "Target", # required
+    #             encryption_configuration: { # required
+    #               encrypted: false, # required
+    #               cmk_arn: "CmkArn",
+    #             },
+    #             retain_rule: {
+    #               interval: 1,
+    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] cross_region_copy
+    #   The rule for copying shared snapshots across Regions.
+    #   @return [Array<Types::CrossRegionCopyAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Action AWS API Documentation
+    #
+    class Action < Struct.new(
+      :name,
+      :cross_region_copy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateLifecyclePolicyRequest
     #   data as a hash:
@@ -18,8 +57,9 @@ module Aws::DLM
     #         description: "PolicyDescription", # required
     #         state: "ENABLED", # required, accepts ENABLED, DISABLED
     #         policy_details: { # required
-    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #           resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -43,6 +83,7 @@ module Aws::DLM
     #                 },
     #               ],
     #               create_rule: {
+    #                 location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #                 interval: 1,
     #                 interval_unit: "HOURS", # accepts HOURS
     #                 times: ["Time"],
@@ -61,7 +102,8 @@ module Aws::DLM
     #               },
     #               cross_region_copy_rules: [
     #                 {
-    #                   target_region: "TargetRegion", # required
+    #                   target_region: "TargetRegion",
+    #                   target: "Target",
     #                   encrypted: false, # required
     #                   cmk_arn: "CmkArn",
     #                   copy_tags: false,
@@ -71,11 +113,45 @@ module Aws::DLM
     #                   },
     #                 },
     #               ],
+    #               share_rules: [
+    #                 {
+    #                   target_accounts: ["AwsAccountId"], # required
+    #                   unshare_interval: 1,
+    #                   unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                 },
+    #               ],
     #             },
     #           ],
     #           parameters: {
     #             exclude_boot_volume: false,
+    #             no_reboot: false,
     #           },
+    #           event_source: {
+    #             type: "MANAGED_CWE", # required, accepts MANAGED_CWE
+    #             parameters: {
+    #               event_type: "shareSnapshot", # required, accepts shareSnapshot
+    #               snapshot_owner: ["AwsAccountId"], # required
+    #               description_regex: "DescriptionRegex", # required
+    #             },
+    #           },
+    #           actions: [
+    #             {
+    #               name: "ActionName", # required
+    #               cross_region_copy: [ # required
+    #                 {
+    #                   target: "Target", # required
+    #                   encryption_configuration: { # required
+    #                     encrypted: false, # required
+    #                     cmk_arn: "CmkArn",
+    #                   },
+    #                   retain_rule: {
+    #                     interval: 1,
+    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -137,11 +213,27 @@ module Aws::DLM
     #   data as a hash:
     #
     #       {
+    #         location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #         interval: 1,
     #         interval_unit: "HOURS", # accepts HOURS
     #         times: ["Time"],
     #         cron_expression: "CronExpression",
     #       }
+    #
+    # @!attribute [rw] location
+    #   Specifies the destination for snapshots created by the policy. To
+    #   create snapshots in the same Region as the source resource, specify
+    #   `CLOUD`. To create snapshots on the same Outpost as the source
+    #   resource, specify `OUTPOST_LOCAL`. If you omit this parameter,
+    #   `CLOUD` is used by default.
+    #
+    #   If the policy targets resources in an AWS Region, then you must
+    #   create snapshots in the same Region as the source resource.
+    #
+    #   If the policy targets resources on an Outpost, then you can create
+    #   snapshots on the same Outpost as the source resource, or in the
+    #   Region of that Outpost.
+    #   @return [String]
     #
     # @!attribute [rw] interval
     #   The interval between snapshots. The supported values are 1, 2, 3, 4,
@@ -174,10 +266,50 @@ module Aws::DLM
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CreateRule AWS API Documentation
     #
     class CreateRule < Struct.new(
+      :location,
       :interval,
       :interval_unit,
       :times,
       :cron_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a rule for copying shared snapshots across Regions.
+    #
+    # @note When making an API call, you may pass CrossRegionCopyAction
+    #   data as a hash:
+    #
+    #       {
+    #         target: "Target", # required
+    #         encryption_configuration: { # required
+    #           encrypted: false, # required
+    #           cmk_arn: "CmkArn",
+    #         },
+    #         retain_rule: {
+    #           interval: 1,
+    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target
+    #   The target Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption settings for the copied snapshot.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] retain_rule
+    #   Specifies the retention rule for cross-Region snapshot copies.
+    #   @return [Types::CrossRegionCopyRetainRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyAction AWS API Documentation
+    #
+    class CrossRegionCopyAction < Struct.new(
+      :target,
+      :encryption_configuration,
+      :retain_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -216,7 +348,8 @@ module Aws::DLM
     #   data as a hash:
     #
     #       {
-    #         target_region: "TargetRegion", # required
+    #         target_region: "TargetRegion",
+    #         target: "Target",
     #         encrypted: false, # required
     #         cmk_arn: "CmkArn",
     #         copy_tags: false,
@@ -227,7 +360,18 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] target_region
-    #   The target Region.
+    #   The target Region for the snapshot copies.
+    #
+    #   If you specify a target Region, you must omit **Target**. You cannot
+    #   specify a target Region and a target Outpost in the same rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The Amazon Resource Name (ARN) of the target AWS Outpost for the
+    #   snapshot copies.
+    #
+    #   If you specify an ARN, you must omit **TargetRegion**. You cannot
+    #   specify a target Region and a target Outpost in the same rule.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -256,6 +400,7 @@ module Aws::DLM
     #
     class CrossRegionCopyRule < Struct.new(
       :target_region,
+      :target,
       :encrypted,
       :cmk_arn,
       :copy_tags,
@@ -286,6 +431,115 @@ module Aws::DLM
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/DeleteLifecyclePolicyResponse AWS API Documentation
     #
     class DeleteLifecyclePolicyResponse < Aws::EmptyStructure; end
+
+    # Specifies the encryption settings for shared snapshots that are copied
+    # across Regions.
+    #
+    # @note When making an API call, you may pass EncryptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         encrypted: false, # required
+    #         cmk_arn: "CmkArn",
+    #       }
+    #
+    # @!attribute [rw] encrypted
+    #   To encrypt a copy of an unencrypted snapshot when encryption by
+    #   default is not enabled, enable encryption using this parameter.
+    #   Copies of encrypted snapshots are encrypted, even if this parameter
+    #   is false or when encryption by default is not enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cmk_arn
+    #   The Amazon Resource Name (ARN) of the AWS KMS customer master key
+    #   (CMK) to use for EBS encryption. If this parameter is not specified,
+    #   your AWS managed CMK for EBS is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :encrypted,
+      :cmk_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an event that triggers an event-based policy.
+    #
+    # @note When making an API call, you may pass EventParameters
+    #   data as a hash:
+    #
+    #       {
+    #         event_type: "shareSnapshot", # required, accepts shareSnapshot
+    #         snapshot_owner: ["AwsAccountId"], # required
+    #         description_regex: "DescriptionRegex", # required
+    #       }
+    #
+    # @!attribute [rw] event_type
+    #   The type of event. Currently, only snapshot sharing events are
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_owner
+    #   The IDs of the AWS accounts that can trigger policy by sharing
+    #   snapshots with your account. The policy only runs if one of the
+    #   specified AWS accounts shares a snapshot with your account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description_regex
+    #   The snapshot description that can trigger the policy. The
+    #   description pattern is specified using a regular expression. The
+    #   policy runs only if a snapshot with a description that matches the
+    #   specified pattern is shared with your account.
+    #
+    #   For example, specifying `^.*Created for policy:
+    #   policy-1234567890abcdef0.*$` configures the policy to run only if
+    #   snapshots created by policy `policy-1234567890abcdef0` are shared
+    #   with your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/EventParameters AWS API Documentation
+    #
+    class EventParameters < Struct.new(
+      :event_type,
+      :snapshot_owner,
+      :description_regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an event that triggers an event-based policy.
+    #
+    # @note When making an API call, you may pass EventSource
+    #   data as a hash:
+    #
+    #       {
+    #         type: "MANAGED_CWE", # required, accepts MANAGED_CWE
+    #         parameters: {
+    #           event_type: "shareSnapshot", # required, accepts shareSnapshot
+    #           snapshot_owner: ["AwsAccountId"], # required
+    #           description_regex: "DescriptionRegex", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The source of the event. Currently only managed AWS CloudWatch
+    #   Events rules are supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Information about the event.
+    #   @return [Types::EventParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/EventSource AWS API Documentation
+    #
+    class EventSource < Struct.new(
+      :type,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies a rule for enabling fast snapshot restore. You can enable
     # fast snapshot restore based on either a count or a time interval.
@@ -545,13 +799,21 @@ module Aws::DLM
     #   The tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] policy_type
+    #   The type of policy. `EBS_SNAPSHOT_MANAGEMENT` indicates that the
+    #   policy manages the lifecycle of Amazon EBS snapshots.
+    #   `IMAGE_MANAGEMENT` indicates that the policy manages the lifecycle
+    #   of EBS-backed AMIs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicySummary AWS API Documentation
     #
     class LifecyclePolicySummary < Struct.new(
       :policy_id,
       :description,
       :state,
-      :tags)
+      :tags,
+      :policy_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -618,6 +880,7 @@ module Aws::DLM
     #
     #       {
     #         exclude_boot_volume: false,
+    #         no_reboot: false,
     #       }
     #
     # @!attribute [rw] exclude_boot_volume
@@ -630,10 +893,19 @@ module Aws::DLM
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] no_reboot
+    #   Applies to AMI lifecycle policies only. Indicates whether targeted
+    #   instances are rebooted when the lifecycle policy runs. `true`
+    #   indicates that targeted instances are not rebooted when the policy
+    #   runs. `false` indicates that target instances are rebooted when the
+    #   policy runs. The default is `true` (instances are not rebooted).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters AWS API Documentation
     #
     class Parameters < Struct.new(
-      :exclude_boot_volume)
+      :exclude_boot_volume,
+      :no_reboot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -644,8 +916,9 @@ module Aws::DLM
     #   data as a hash:
     #
     #       {
-    #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #         resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #         target_tags: [
     #           {
     #             key: "String", # required
@@ -669,6 +942,7 @@ module Aws::DLM
     #               },
     #             ],
     #             create_rule: {
+    #               location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #               interval: 1,
     #               interval_unit: "HOURS", # accepts HOURS
     #               times: ["Time"],
@@ -687,7 +961,8 @@ module Aws::DLM
     #             },
     #             cross_region_copy_rules: [
     #               {
-    #                 target_region: "TargetRegion", # required
+    #                 target_region: "TargetRegion",
+    #                 target: "Target",
     #                 encrypted: false, # required
     #                 cmk_arn: "CmkArn",
     #                 copy_tags: false,
@@ -697,46 +972,129 @@ module Aws::DLM
     #                 },
     #               },
     #             ],
+    #             share_rules: [
+    #               {
+    #                 target_accounts: ["AwsAccountId"], # required
+    #                 unshare_interval: 1,
+    #                 unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
+    #             ],
     #           },
     #         ],
     #         parameters: {
     #           exclude_boot_volume: false,
+    #           no_reboot: false,
     #         },
+    #         event_source: {
+    #           type: "MANAGED_CWE", # required, accepts MANAGED_CWE
+    #           parameters: {
+    #             event_type: "shareSnapshot", # required, accepts shareSnapshot
+    #             snapshot_owner: ["AwsAccountId"], # required
+    #             description_regex: "DescriptionRegex", # required
+    #           },
+    #         },
+    #         actions: [
+    #           {
+    #             name: "ActionName", # required
+    #             cross_region_copy: [ # required
+    #               {
+    #                 target: "Target", # required
+    #                 encryption_configuration: { # required
+    #                   encrypted: false, # required
+    #                   cmk_arn: "CmkArn",
+    #                 },
+    #                 retain_rule: {
+    #                   interval: 1,
+    #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] policy_type
-    #   The valid target resource types and actions a policy can manage. The
-    #   default is EBS\_SNAPSHOT\_MANAGEMENT.
+    #   The valid target resource types and actions a policy can manage.
+    #   Specify `EBS_SNAPSHOT_MANAGEMENT` to create a lifecycle policy that
+    #   manages the lifecycle of Amazon EBS snapshots. Specify
+    #   `IMAGE_MANAGEMENT` to create a lifecycle policy that manages the
+    #   lifecycle of EBS-backed AMIs. Specify `EVENT_BASED_POLICY ` to
+    #   create an event-based policy that performs specific actions when a
+    #   defined event occurs in your AWS account.
+    #
+    #   The default is `EBS_SNAPSHOT_MANAGEMENT`.
     #   @return [String]
     #
     # @!attribute [rw] resource_types
-    #   The resource type. Use VOLUME to create snapshots of individual
-    #   volumes or use INSTANCE to create multi-volume snapshots from the
-    #   volumes for an instance.
+    #   The target resource type for snapshot and AMI lifecycle policies.
+    #   Use `VOLUME `to create snapshots of individual volumes or use
+    #   `INSTANCE` to create multi-volume snapshots from the volumes for an
+    #   instance.
+    #
+    #   This parameter is required for snapshot and AMI policies only. If
+    #   you are creating an event-based policy, omit this parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_locations
+    #   The location of the resources to backup. If the source resources are
+    #   located in an AWS Region, specify `CLOUD`. If the source resources
+    #   are located on an AWS Outpost in your account, specify `OUTPOST`.
+    #
+    #   If you specify `OUTPOST`, Amazon Data Lifecycle Manager backs up all
+    #   resources of the specified type with matching target tags across all
+    #   of the Outposts in your account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_tags
     #   The single tag that identifies targeted resources for this policy.
+    #
+    #   This parameter is required for snapshot and AMI policies only. If
+    #   you are creating an event-based policy, omit this parameter.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] schedules
-    #   The schedules of policy-defined actions. A policy can have up to
-    #   four schedules - one mandatory schedule and up to three optional
-    #   schedules.
+    #   The schedules of policy-defined actions for snapshot and AMI
+    #   lifecycle policies. A policy can have up to four schedules—one
+    #   mandatory schedule and up to three optional schedules.
+    #
+    #   This parameter is required for snapshot and AMI policies only. If
+    #   you are creating an event-based policy, omit this parameter.
     #   @return [Array<Types::Schedule>]
     #
     # @!attribute [rw] parameters
-    #   A set of optional parameters for the policy.
+    #   A set of optional parameters for snapshot and AMI lifecycle
+    #   policies.
+    #
+    #   This parameter is required for snapshot and AMI policies only. If
+    #   you are creating an event-based policy, omit this parameter.
     #   @return [Types::Parameters]
+    #
+    # @!attribute [rw] event_source
+    #   The event that triggers the event-based policy.
+    #
+    #   This parameter is required for event-based policies only. If you are
+    #   creating a snapshot or AMI policy, omit this parameter.
+    #   @return [Types::EventSource]
+    #
+    # @!attribute [rw] actions
+    #   The actions to be performed when the event-based policy is
+    #   triggered. You can specify only one action per policy.
+    #
+    #   This parameter is required for event-based policies only. If you are
+    #   creating a snapshot or AMI policy, omit this parameter.
+    #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails AWS API Documentation
     #
     class PolicyDetails < Struct.new(
       :policy_type,
       :resource_types,
+      :resource_locations,
       :target_tags,
       :schedules,
-      :parameters)
+      :parameters,
+      :event_source,
+      :actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -804,7 +1162,7 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies a backup schedule.
+    # Specifies a backup schedule for a snapshot or AMI lifecycle policy.
     #
     # @note When making an API call, you may pass Schedule
     #   data as a hash:
@@ -825,6 +1183,7 @@ module Aws::DLM
     #           },
     #         ],
     #         create_rule: {
+    #           location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #           interval: 1,
     #           interval_unit: "HOURS", # accepts HOURS
     #           times: ["Time"],
@@ -843,7 +1202,8 @@ module Aws::DLM
     #         },
     #         cross_region_copy_rules: [
     #           {
-    #             target_region: "TargetRegion", # required
+    #             target_region: "TargetRegion",
+    #             target: "Target",
     #             encrypted: false, # required
     #             cmk_arn: "CmkArn",
     #             copy_tags: false,
@@ -851,6 +1211,13 @@ module Aws::DLM
     #               interval: 1,
     #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #             },
+    #           },
+    #         ],
+    #         share_rules: [
+    #           {
+    #             target_accounts: ["AwsAccountId"], # required
+    #             unshare_interval: 1,
+    #             unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #           },
     #         ],
     #       }
@@ -891,7 +1258,17 @@ module Aws::DLM
     #
     # @!attribute [rw] cross_region_copy_rules
     #   The rule for cross-Region snapshot copies.
+    #
+    #   You can only specify cross-Region copy rules for policies that
+    #   create snapshots in a Region. If the policy creates snapshots on an
+    #   Outpost, then you cannot copy the snapshots to a Region or to an
+    #   Outpost. If the policy creates snapshots in a Region, then snapshots
+    #   can be copied to up to three Regions or Outposts.
     #   @return [Array<Types::CrossRegionCopyRule>]
+    #
+    # @!attribute [rw] share_rules
+    #   The rule for sharing snapshots with other AWS accounts.
+    #   @return [Array<Types::ShareRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Schedule AWS API Documentation
     #
@@ -903,7 +1280,42 @@ module Aws::DLM
       :create_rule,
       :retain_rule,
       :fast_restore_rule,
-      :cross_region_copy_rules)
+      :cross_region_copy_rules,
+      :share_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a rule for sharing snapshots across AWS accounts.
+    #
+    # @note When making an API call, you may pass ShareRule
+    #   data as a hash:
+    #
+    #       {
+    #         target_accounts: ["AwsAccountId"], # required
+    #         unshare_interval: 1,
+    #         unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #       }
+    #
+    # @!attribute [rw] target_accounts
+    #   The IDs of the AWS accounts with which to share the snapshots.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] unshare_interval
+    #   The period after which snapshots that are shared with other AWS
+    #   accounts are automatically unshared.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unshare_interval_unit
+    #   The unit of time for the automatic unsharing interval.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ShareRule AWS API Documentation
+    #
+    class ShareRule < Struct.new(
+      :target_accounts,
+      :unshare_interval,
+      :unshare_interval_unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1004,8 +1416,9 @@ module Aws::DLM
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         description: "PolicyDescription",
     #         policy_details: {
-    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #           resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -1029,6 +1442,7 @@ module Aws::DLM
     #                 },
     #               ],
     #               create_rule: {
+    #                 location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #                 interval: 1,
     #                 interval_unit: "HOURS", # accepts HOURS
     #                 times: ["Time"],
@@ -1047,7 +1461,8 @@ module Aws::DLM
     #               },
     #               cross_region_copy_rules: [
     #                 {
-    #                   target_region: "TargetRegion", # required
+    #                   target_region: "TargetRegion",
+    #                   target: "Target",
     #                   encrypted: false, # required
     #                   cmk_arn: "CmkArn",
     #                   copy_tags: false,
@@ -1057,11 +1472,45 @@ module Aws::DLM
     #                   },
     #                 },
     #               ],
+    #               share_rules: [
+    #                 {
+    #                   target_accounts: ["AwsAccountId"], # required
+    #                   unshare_interval: 1,
+    #                   unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                 },
+    #               ],
     #             },
     #           ],
     #           parameters: {
     #             exclude_boot_volume: false,
+    #             no_reboot: false,
     #           },
+    #           event_source: {
+    #             type: "MANAGED_CWE", # required, accepts MANAGED_CWE
+    #             parameters: {
+    #               event_type: "shareSnapshot", # required, accepts shareSnapshot
+    #               snapshot_owner: ["AwsAccountId"], # required
+    #               description_regex: "DescriptionRegex", # required
+    #             },
+    #           },
+    #           actions: [
+    #             {
+    #               name: "ActionName", # required
+    #               cross_region_copy: [ # required
+    #                 {
+    #                   target: "Target", # required
+    #                   encryption_configuration: { # required
+    #                     encrypted: false, # required
+    #                     cmk_arn: "CmkArn",
+    #                   },
+    #                   retain_rule: {
+    #                     interval: 1,
+    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
     #         },
     #       }
     #

@@ -4,11 +4,12 @@
   "operations": {
     "AcceptSharedDirectory": "<p>Accepts a directory sharing request that was sent from the directory owner account.</p>",
     "AddIpRoutes": "<p>If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. <i>AddIpRoutes</i> adds this address block. You can also use <i>AddIpRoutes</i> to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. </p> <p>Before you call <i>AddIpRoutes</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>AddIpRoutes</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>",
+    "AddRegion": "<p>Adds two domain controllers in the specified Region for the specified directory.</p>",
     "AddTagsToResource": "<p>Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.</p>",
     "CancelSchemaExtension": "<p>Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; <code>Initializing</code>, <code>CreatingSnapshot</code>, and <code>UpdatingSchema</code>.</p>",
     "ConnectDirectory": "<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <code>ConnectDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>ConnectDirectory</code> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>",
     "CreateAlias": "<p>Creates an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as <code>http://&lt;alias&gt;.awsapps.com</code>.</p> <important> <p>After an alias has been created, it cannot be deleted or reused, so this operation should only be used when absolutely necessary.</p> </important>",
-    "CreateComputer": "<p>Creates a computer account in the specified directory, and joins the computer to the directory.</p>",
+    "CreateComputer": "<p>Creates an Active Directory computer object in the specified directory.</p>",
     "CreateConditionalForwarder": "<p>Creates a conditional forwarder associated with your AWS directory. Conditional forwarders are required in order to set up a trust relationship with another domain. The conditional forwarder points to the trusted domain.</p>",
     "CreateDirectory": "<p>Creates a Simple AD directory. For more information, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html\">Simple Active Directory</a> in the <i>AWS Directory Service Admin Guide</i>.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>",
     "CreateLogSubscription": "<p>Creates a subscription to forward real-time Directory Service domain controller security logs to the specified Amazon CloudWatch log group in your AWS account.</p>",
@@ -20,34 +21,38 @@
     "DeleteLogSubscription": "<p>Deletes the specified log subscription.</p>",
     "DeleteSnapshot": "<p>Deletes a directory snapshot.</p>",
     "DeleteTrust": "<p>Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.</p>",
-    "DeregisterCertificate": "<p>Deletes from the system the certificate that was registered for a secured LDAP connection.</p>",
+    "DeregisterCertificate": "<p>Deletes from the system the certificate that was registered for secure LDAP or client certificate authentication.</p>",
     "DeregisterEventTopic": "<p>Removes the specified directory as a publisher to the specified SNS topic.</p>",
-    "DescribeCertificate": "<p>Displays information about the certificate registered for a secured LDAP connection.</p>",
+    "DescribeCertificate": "<p>Displays information about the certificate registered for secure LDAP or client certificate authentication.</p>",
     "DescribeConditionalForwarders": "<p>Obtains information about the conditional forwarders for this account.</p> <p>If no input parameters are provided for RemoteDomainNames, this request describes all conditional forwarders for the specified directory ID.</p>",
     "DescribeDirectories": "<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <code>DirectoryIds</code> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>DescribeDirectoriesResult.NextToken</code> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <code>Limit</code> parameter.</p>",
     "DescribeDomainControllers": "<p>Provides information about any domain controllers in your directory.</p>",
     "DescribeEventTopics": "<p>Obtains information about which SNS topics receive status messages from the specified directory.</p> <p>If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.</p>",
     "DescribeLDAPSSettings": "<p>Describes the status of LDAP security for the specified directory.</p>",
+    "DescribeRegions": "<p>Provides information about the Regions that are configured for multi-Region replication.</p>",
     "DescribeSharedDirectories": "<p>Returns the shared directories in your account. </p>",
     "DescribeSnapshots": "<p>Obtains information about the directory snapshots that belong to this account.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeSnapshots.NextToken</i> member contains a token that you pass in the next call to <a>DescribeSnapshots</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>",
     "DescribeTrusts": "<p>Obtains information about the trust relationships for this account.</p> <p>If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.</p>",
+    "DisableClientAuthentication": "<p>Disables alternative client authentication methods for the specified directory. </p>",
     "DisableLDAPS": "<p>Deactivates LDAP secure calls for the specified directory.</p>",
     "DisableRadius": "<p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>",
     "DisableSso": "<p>Disables single-sign on for a directory.</p>",
+    "EnableClientAuthentication": "<p>Enables alternative client authentication methods for the specified directory.</p>",
     "EnableLDAPS": "<p>Activates the switch for the specific directory to always use LDAP secure calls.</p>",
     "EnableRadius": "<p>Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>",
     "EnableSso": "<p>Enables single sign-on for a directory. Single sign-on allows users in your directory to access certain AWS services from a computer joined to the directory without having to enter their credentials separately.</p>",
     "GetDirectoryLimits": "<p>Obtains directory limit information for the current Region.</p>",
     "GetSnapshotLimits": "<p>Obtains the manual snapshot limits for a directory.</p>",
-    "ListCertificates": "<p>For the specified directory, lists all the certificates registered for a secured LDAP connection.</p>",
+    "ListCertificates": "<p>For the specified directory, lists all the certificates registered for a secure LDAP or client certificate authentication.</p>",
     "ListIpRoutes": "<p>Lists the address blocks that you have added to a directory.</p>",
     "ListLogSubscriptions": "<p>Lists the active log subscriptions for the AWS account.</p>",
     "ListSchemaExtensions": "<p>Lists all schema extensions applied to a Microsoft AD Directory.</p>",
     "ListTagsForResource": "<p>Lists all tags on a directory.</p>",
-    "RegisterCertificate": "<p>Registers a certificate for secured LDAP connection.</p>",
+    "RegisterCertificate": "<p>Registers a certificate for a secure LDAP or client certificate authentication.</p>",
     "RegisterEventTopic": "<p>Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.</p>",
     "RejectSharedDirectory": "<p>Rejects a directory sharing request that was sent from the directory owner account.</p>",
     "RemoveIpRoutes": "<p>Removes IP address blocks from a directory.</p>",
+    "RemoveRegion": "<p>Stops all replication and removes the domain controllers from the specified Region. You cannot remove the primary Region with this operation. Instead, use the <code>DeleteDirectory</code> API.</p>",
     "RemoveTagsFromResource": "<p>Removes tags from a directory.</p>",
     "ResetUserPassword": "<p>Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.</p> <p>You can reset the password for any user in your directory with the following exceptions:</p> <ul> <li> <p>For Simple AD, you cannot reset the password for any user that is a member of either the <b>Domain Admins</b> or <b>Enterprise Admins</b> group except for the administrator user.</p> </li> <li> <p>For AWS Managed Microsoft AD, you can only reset the password for a user that is in an OU based off of the NetBIOS name that you typed when you created your directory. For example, you cannot reset the password for a user in the <b>AWS Reserved</b> OU. For more information about the OU structure for an AWS Managed Microsoft AD directory, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html\">What Gets Created</a> in the <i>AWS Directory Service Administration Guide</i>.</p> </li> </ul>",
     "RestoreFromSnapshot": "<p>Restores a directory using an existing directory snapshot.</p> <p>When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten.</p> <p>This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the <a>DescribeDirectories</a> operation with the directory identifier. When the <b>DirectoryDescription.Stage</b> value changes to <code>Active</code>, the restore operation is complete.</p>",
@@ -72,7 +77,7 @@
       }
     },
     "AccessDeniedException": {
-      "base": "<p>You do not have sufficient access to perform this action.</p>",
+      "base": "<p>Client authentication is not available in this region at this time.</p>",
       "refs": {
       }
     },
@@ -92,6 +97,16 @@
       "refs": {
       }
     },
+    "AddRegionRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "AddRegionResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "AddTagsToResourceRequest": {
       "base": null,
       "refs": {
@@ -106,6 +121,12 @@
       "base": null,
       "refs": {
         "IpRouteInfo$AddedDateTime": "<p>The date and time the address block was added to the directory.</p>"
+      }
+    },
+    "AdditionalRegions": {
+      "base": null,
+      "refs": {
+        "RegionsInfo$AdditionalRegions": "<p>Lists the Regions where the directory has been replicated, excluding the primary Region.</p>"
       }
     },
     "AliasName": {
@@ -251,6 +272,14 @@
         "Certificate$StateReason": "<p>Describes a state change for the certificate.</p>"
       }
     },
+    "CertificateType": {
+      "base": null,
+      "refs": {
+        "Certificate$Type": "<p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>",
+        "CertificateInfo$Type": "<p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>",
+        "RegisterCertificateRequest$Type": "<p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>"
+      }
+    },
     "CertificatesInfo": {
       "base": null,
       "refs": {
@@ -269,6 +298,20 @@
       "base": null,
       "refs": {
         "RemoveIpRoutesRequest$CidrIps": "<p>IP address blocks that you want to remove.</p>"
+      }
+    },
+    "ClientAuthenticationType": {
+      "base": null,
+      "refs": {
+        "DisableClientAuthenticationRequest$Type": "<p>The type of client authentication to disable. Currently, only the parameter, <code>SmartCard</code> is supported.</p>",
+        "EnableClientAuthenticationRequest$Type": "<p>The type of client authentication to enable. Currently only the value <code>SmartCard</code> is supported. Smart card authentication in AD Connector requires that you enable Kerberos Constrained Delegation for the Service User to the LDAP service in the on-premises AD. </p>"
+      }
+    },
+    "ClientCertAuthSettings": {
+      "base": "<p>Contains information about the client certificate authentication settings for the <code>RegisterCertificate</code> and <code>DescribeCertificate</code> operations. </p>",
+      "refs": {
+        "Certificate$ClientCertAuthSettings": "<p>A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.</p>",
+        "RegisterCertificateRequest$ClientCertAuthSettings": "<p>A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.</p>"
       }
     },
     "ClientException": {
@@ -582,6 +625,16 @@
       "refs": {
       }
     },
+    "DescribeRegionsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribeRegionsResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DescribeSharedDirectoriesRequest": {
       "base": null,
       "refs": {
@@ -629,7 +682,13 @@
       "base": null,
       "refs": {
         "DirectoryDescription$DesiredNumberOfDomainControllers": "<p>The desired number of domain controllers in the directory if the directory is Microsoft AD.</p>",
+        "RegionDescription$DesiredNumberOfDomainControllers": "<p>The desired number of domain controllers in the specified Region for the specified directory.</p>",
         "UpdateNumberOfDomainControllersRequest$DesiredNumber": "<p>The number of domain controllers desired in the directory.</p>"
+      }
+    },
+    "DirectoryAlreadyInRegionException": {
+      "base": "<p>The Region you specified is the same Region where the AWS Managed Microsoft AD directory was created. Specify a different Region and try again.</p>",
+      "refs": {
       }
     },
     "DirectoryAlreadySharedException": {
@@ -678,6 +737,7 @@
       "refs": {
         "AcceptSharedDirectoryRequest$SharedDirectoryId": "<p>Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account. </p>",
         "AddIpRoutesRequest$DirectoryId": "<p>Identifier (ID) of the directory to which to add the address block.</p>",
+        "AddRegionRequest$DirectoryId": "<p>The identifier of the directory to which you want to add Region replication.</p>",
         "CancelSchemaExtensionRequest$DirectoryId": "<p>The identifier of the directory whose schema extension will be canceled.</p>",
         "ConnectDirectoryResult$DirectoryId": "<p>The identifier of the new directory.</p>",
         "CreateAliasRequest$DirectoryId": "<p>The identifier of the directory for which to create the alias.</p>",
@@ -700,15 +760,18 @@
         "DescribeDomainControllersRequest$DirectoryId": "<p>Identifier of the directory for which to retrieve the domain controller information.</p>",
         "DescribeEventTopicsRequest$DirectoryId": "<p>The Directory ID for which to get the list of associated SNS topics. If this member is null, associations for all Directory IDs are returned.</p>",
         "DescribeLDAPSSettingsRequest$DirectoryId": "<p>The identifier of the directory.</p>",
+        "DescribeRegionsRequest$DirectoryId": "<p>The identifier of the directory.</p>",
         "DescribeSharedDirectoriesRequest$OwnerDirectoryId": "<p>Returns the identifier of the directory in the directory owner account. </p>",
         "DescribeSnapshotsRequest$DirectoryId": "<p>The identifier of the directory for which to retrieve snapshot information.</p>",
         "DescribeTrustsRequest$DirectoryId": "<p>The Directory ID of the AWS directory that is a part of the requested trust relationship.</p>",
         "DirectoryDescription$DirectoryId": "<p>The directory identifier.</p>",
         "DirectoryIds$member": null,
+        "DisableClientAuthenticationRequest$DirectoryId": "<p>The identifier of the directory </p>",
         "DisableLDAPSRequest$DirectoryId": "<p>The identifier of the directory.</p>",
         "DisableRadiusRequest$DirectoryId": "<p>The identifier of the directory for which to disable MFA.</p>",
         "DisableSsoRequest$DirectoryId": "<p>The identifier of the directory for which to disable single-sign on.</p>",
         "DomainController$DirectoryId": "<p>Identifier of the directory where the domain controller resides.</p>",
+        "EnableClientAuthenticationRequest$DirectoryId": "<p>The identifier of the specified directory. </p>",
         "EnableLDAPSRequest$DirectoryId": "<p>The identifier of the directory.</p>",
         "EnableRadiusRequest$DirectoryId": "<p>The identifier of the directory for which to enable MFA.</p>",
         "EnableSsoRequest$DirectoryId": "<p>The identifier of the directory for which to enable single-sign on.</p>",
@@ -721,11 +784,13 @@
         "ListSchemaExtensionsRequest$DirectoryId": "<p>The identifier of the directory from which to retrieve the schema extension information.</p>",
         "LogSubscription$DirectoryId": "<p>Identifier (ID) of the directory that you want to associate with the log subscription.</p>",
         "OwnerDirectoryDescription$DirectoryId": "<p>Identifier of the AWS Managed Microsoft AD directory in the directory owner account.</p>",
+        "RegionDescription$DirectoryId": "<p>The identifier of the directory.</p>",
         "RegisterCertificateRequest$DirectoryId": "<p>The identifier of the directory.</p>",
         "RegisterEventTopicRequest$DirectoryId": "<p>The Directory ID that will publish status messages to the SNS topic.</p>",
         "RejectSharedDirectoryRequest$SharedDirectoryId": "<p>Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.</p>",
         "RejectSharedDirectoryResult$SharedDirectoryId": "<p>Identifier of the shared directory in the directory consumer account.</p>",
         "RemoveIpRoutesRequest$DirectoryId": "<p>Identifier (ID) of the directory from which you want to remove the IP addresses.</p>",
+        "RemoveRegionRequest$DirectoryId": "<p>The identifier of the directory for which you want to remove Region replication.</p>",
         "ResetUserPasswordRequest$DirectoryId": "<p>Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user resides.</p>",
         "SchemaExtensionInfo$DirectoryId": "<p>The identifier of the directory to which the schema extension is applied.</p>",
         "ShareDirectoryRequest$DirectoryId": "<p>Identifier of the AWS Managed Microsoft AD directory that you want to share with other AWS accounts.</p>",
@@ -794,7 +859,8 @@
     "DirectoryStage": {
       "base": null,
       "refs": {
-        "DirectoryDescription$Stage": "<p>The current stage of the directory.</p>"
+        "DirectoryDescription$Stage": "<p>The current stage of the directory.</p>",
+        "RegionDescription$Status": "<p>The status of the replication process for the specified Region.</p>"
       }
     },
     "DirectoryType": {
@@ -811,8 +877,10 @@
     "DirectoryVpcSettings": {
       "base": "<p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>",
       "refs": {
+        "AddRegionRequest$VPCSettings": null,
         "CreateDirectoryRequest$VpcSettings": "<p>A <a>DirectoryVpcSettings</a> object that contains additional information for the operation.</p>",
-        "CreateMicrosoftADRequest$VpcSettings": "<p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>"
+        "CreateMicrosoftADRequest$VpcSettings": "<p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>",
+        "RegionDescription$VpcSettings": null
       }
     },
     "DirectoryVpcSettingsDescription": {
@@ -820,6 +888,16 @@
       "refs": {
         "DirectoryDescription$VpcSettings": "<p>A <a>DirectoryVpcSettingsDescription</a> object that contains additional information about a directory. This member is only present if the directory is a Simple AD or Managed AD directory.</p>",
         "OwnerDirectoryDescription$VpcSettings": "<p>Information about the VPC settings for the directory.</p>"
+      }
+    },
+    "DisableClientAuthenticationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DisableClientAuthenticationResult": {
+      "base": null,
+      "refs": {
       }
     },
     "DisableLDAPSRequest": {
@@ -906,6 +984,16 @@
         "DescribeDomainControllersResult$DomainControllers": "<p>List of the <a>DomainController</a> objects that were retrieved.</p>"
       }
     },
+    "EnableClientAuthenticationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "EnableClientAuthenticationResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "EnableLDAPSRequest": {
       "base": null,
       "refs": {
@@ -974,6 +1062,7 @@
         "CertificateInUseException$Message": null,
         "CertificateLimitExceededException$Message": null,
         "ClientException$Message": null,
+        "DirectoryAlreadyInRegionException$Message": null,
         "DirectoryAlreadySharedException$Message": null,
         "DirectoryDoesNotExistException$Message": null,
         "DirectoryLimitExceededException$Message": null,
@@ -984,6 +1073,7 @@
         "EntityDoesNotExistException$Message": null,
         "InsufficientPermissionsException$Message": null,
         "InvalidCertificateException$Message": null,
+        "InvalidClientAuthStatusException$Message": null,
         "InvalidLDAPSStatusException$Message": null,
         "InvalidNextTokenException$Message": null,
         "InvalidParameterException$Message": null,
@@ -992,6 +1082,7 @@
         "IpRouteLimitExceededException$Message": null,
         "NoAvailableCertificateException$Message": null,
         "OrganizationsException$Message": null,
+        "RegionLimitExceededException$Message": null,
         "ServiceException$Message": null,
         "ShareLimitExceededException$Message": null,
         "SnapshotLimitExceededException$Message": null,
@@ -1027,6 +1118,11 @@
     },
     "InvalidCertificateException": {
       "base": "<p>The certificate PEM that was provided has incorrect encoding.</p>",
+      "refs": {
+      }
+    },
+    "InvalidClientAuthStatusException": {
+      "base": "<p>Client authentication is already enabled.</p>",
       "refs": {
       }
     },
@@ -1148,6 +1244,7 @@
         "DirectoryDescription$StageLastUpdatedDateTime": "<p>The date and time that the stage was last updated.</p>",
         "DomainController$StatusLastUpdatedDateTime": "<p>The date and time that the status was last updated.</p>",
         "LDAPSSettingInfo$LastUpdatedDateTime": "<p>The date and time when the LDAPS settings were last updated.</p>",
+        "RegionDescription$LastUpdatedDateTime": "<p>The date and time that the Region description was last updated.</p>",
         "SharedDirectory$LastUpdatedDateTime": "<p>The date and time that the shared directory was last updated.</p>",
         "Trust$LastUpdatedDateTime": "<p>The date and time that the trust relationship was last updated.</p>"
       }
@@ -1156,7 +1253,8 @@
       "base": null,
       "refs": {
         "DirectoryDescription$LaunchTime": "<p>Specifies when the directory was created.</p>",
-        "DomainController$LaunchTime": "<p>Specifies when the domain controller was created.</p>"
+        "DomainController$LaunchTime": "<p>Specifies when the domain controller was created.</p>",
+        "RegionDescription$LaunchTime": "<p>Specifies when the Region replication began.</p>"
       }
     },
     "LdifContent": {
@@ -1271,6 +1369,8 @@
         "DescribeDomainControllersResult$NextToken": "<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.</p>",
         "DescribeLDAPSSettingsRequest$NextToken": "<p>The type of next token used for pagination.</p>",
         "DescribeLDAPSSettingsResult$NextToken": "<p>The next token used to retrieve the LDAPS settings if the number of setting types exceeds page limit and there is another page.</p>",
+        "DescribeRegionsRequest$NextToken": "<p>The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.</p>",
+        "DescribeRegionsResult$NextToken": "<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.</p>",
         "DescribeSharedDirectoriesRequest$NextToken": "<p>The <code>DescribeSharedDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeSharedDirectories</a>. Pass null if this is the first call. </p>",
         "DescribeSharedDirectoriesResult$NextToken": "<p>If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.</p>",
         "DescribeSnapshotsRequest$NextToken": "<p>The <i>DescribeSnapshotsResult.NextToken</i> value from a previous call to <a>DescribeSnapshots</a>. Pass null if this is the first call.</p>",
@@ -1290,7 +1390,7 @@
       }
     },
     "NoAvailableCertificateException": {
-      "base": "<p>The LDAP activities could not be performed because at least one valid certificate must be registered with the system.</p>",
+      "base": "<p>Client authentication setup could not be completed because at least one valid certificate must be registered in the system.</p>",
       "refs": {
       }
     },
@@ -1300,6 +1400,12 @@
         "DirectoryDescription$ShareNotes": "<p>A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.</p>",
         "ShareDirectoryRequest$ShareNotes": "<p>A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.</p>",
         "SharedDirectory$ShareNotes": "<p>A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.</p>"
+      }
+    },
+    "OCSPUrl": {
+      "base": null,
+      "refs": {
+        "ClientCertAuthSettings$OCSPUrl": "<p>Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.</p>"
       }
     },
     "OrganizationalUnitDN": {
@@ -1329,7 +1435,7 @@
     "Password": {
       "base": null,
       "refs": {
-        "CreateDirectoryRequest$Password": "<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>",
+        "CreateDirectoryRequest$Password": "<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p> <p>The regex pattern for this string is made up of the following conditions:</p> <ul> <li> <p>Length (?=^.{8,64}$) – Must be between 8 and 64 characters</p> </li> </ul> <p>AND any 3 of the following password complexity rules required by Active Directory:</p> <ul> <li> <p>Numbers and upper case and lowercase (?=.*\\d)(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and special characters and lower case (?=.*\\d)(?=.*[^A-Za-z0-9\\s])(?=.*[a-z])</p> </li> <li> <p>Special characters and upper case and lower case (?=.*[^A-Za-z0-9\\s])(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and upper case and special characters (?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\\s])</p> </li> </ul> <p>For additional information about how Active Directory passwords are enforced, see <a href=\"https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements\">Password must meet complexity requirements</a> on the Microsoft website.</p>",
         "CreateMicrosoftADRequest$Password": "<p>The password for the default administrative user named <code>Admin</code>.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>"
       }
     },
@@ -1383,6 +1489,45 @@
       "base": null,
       "refs": {
         "RadiusSettings$RadiusTimeout": "<p>The amount of time, in seconds, to wait for the RADIUS server to respond.</p>"
+      }
+    },
+    "RegionDescription": {
+      "base": "<p>The replicated Region information for a directory.</p>",
+      "refs": {
+        "RegionsDescription$member": null
+      }
+    },
+    "RegionLimitExceededException": {
+      "base": "<p>You have reached the limit for maximum number of simultaneous Region replications per directory.</p>",
+      "refs": {
+      }
+    },
+    "RegionName": {
+      "base": null,
+      "refs": {
+        "AddRegionRequest$RegionName": "<p>The name of the Region where you want to add domain controllers for replication. For example, <code>us-east-1</code>.</p>",
+        "AdditionalRegions$member": null,
+        "DescribeRegionsRequest$RegionName": "<p>The name of the Region. For example, <code>us-east-1</code>.</p>",
+        "RegionDescription$RegionName": "<p>The name of the Region. For example, <code>us-east-1</code>.</p>",
+        "RegionsInfo$PrimaryRegion": "<p>The Region where the AWS Managed Microsoft AD directory was originally created.</p>"
+      }
+    },
+    "RegionType": {
+      "base": null,
+      "refs": {
+        "RegionDescription$RegionType": "<p>Specifies whether the Region is the primary Region or an additional Region.</p>"
+      }
+    },
+    "RegionsDescription": {
+      "base": null,
+      "refs": {
+        "DescribeRegionsResult$RegionsDescription": "<p>List of Region information related to the directory for each replicated Region.</p>"
+      }
+    },
+    "RegionsInfo": {
+      "base": "<p>Provides information about the Regions that are configured for multi-Region replication.</p>",
+      "refs": {
+        "DirectoryDescription$RegionsInfo": "<p>Lists the Regions where the directory has replicated.</p>"
       }
     },
     "RegisterCertificateRequest": {
@@ -1443,6 +1588,16 @@
       "refs": {
       }
     },
+    "RemoveRegionRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "RemoveRegionResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "RemoveTagsFromResourceRequest": {
       "base": null,
       "refs": {
@@ -1469,6 +1624,7 @@
         "CertificateInUseException$RequestId": null,
         "CertificateLimitExceededException$RequestId": null,
         "ClientException$RequestId": null,
+        "DirectoryAlreadyInRegionException$RequestId": null,
         "DirectoryAlreadySharedException$RequestId": null,
         "DirectoryDoesNotExistException$RequestId": null,
         "DirectoryLimitExceededException$RequestId": null,
@@ -1479,6 +1635,7 @@
         "EntityDoesNotExistException$RequestId": null,
         "InsufficientPermissionsException$RequestId": null,
         "InvalidCertificateException$RequestId": null,
+        "InvalidClientAuthStatusException$RequestId": null,
         "InvalidLDAPSStatusException$RequestId": null,
         "InvalidNextTokenException$RequestId": null,
         "InvalidParameterException$RequestId": null,
@@ -1487,6 +1644,7 @@
         "IpRouteLimitExceededException$RequestId": null,
         "NoAvailableCertificateException$RequestId": null,
         "OrganizationsException$RequestId": null,
+        "RegionLimitExceededException$RequestId": null,
         "ServiceException$RequestId": null,
         "ShareLimitExceededException$RequestId": null,
         "SnapshotLimitExceededException$RequestId": null,
@@ -1586,7 +1744,7 @@
     "Servers": {
       "base": null,
       "refs": {
-        "RadiusSettings$RadiusServers": "<p>An array of strings that contains the IP addresses of the RADIUS server endpoints, or the IP addresses of your RADIUS server load balancer.</p>"
+        "RadiusSettings$RadiusServers": "<p>An array of strings that contains the fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server load balancer.</p>"
       }
     },
     "ServiceException": {
@@ -1739,6 +1897,7 @@
     "StateLastUpdatedDateTime": {
       "base": null,
       "refs": {
+        "RegionDescription$StatusLastUpdatedDateTime": "<p>The date and time that the Region status was last updated.</p>",
         "Trust$StateLastUpdatedDateTime": "<p>The date and time that the TrustState was last updated.</p>"
       }
     },

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -102,6 +102,22 @@ module Aws::MarketplaceCommerceAnalytics
     #   * **us\_sales\_and\_use\_tax\_records**
     #     From 2017-09-15 to present: Available monthly on the 15th day of
     #     the month by 24:00 UTC.
+    #
+    #   * **disbursed\_amount\_by\_product\_with\_uncollected\_funds**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
+    #
+    #   * **customer\_profile\_by\_industry**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
+    #
+    #   * **customer\_profile\_by\_revenue**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
+    #
+    #   * **customer\_profile\_by\_geography**
+    #     This data set is deprecated. Download related reports from AMMP
+    #     instead!
     #   @return [String]
     #
     # @!attribute [rw] data_set_publication_date

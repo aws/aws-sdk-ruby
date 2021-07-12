@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -217,6 +217,25 @@ module Aws::States
     #
     class ActivityWorkerLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes workflow billing details.
+    #
+    # @!attribute [rw] billed_memory_used_in_mb
+    #   Billed memory consumption of your workflow, in MB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] billed_duration_in_milliseconds
+    #   Billed duration of your workflow, in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/BillingDetails AWS API Documentation
+    #
+    class BillingDetails < Struct.new(
+      :billed_memory_used_in_mb,
+      :billed_duration_in_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -594,7 +613,7 @@ module Aws::States
     end
 
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that id entifies the execution.
+    #   The Amazon Resource Name (ARN) that identifies the execution.
     #   @return [String]
     #
     # @!attribute [rw] state_machine_arn
@@ -657,7 +676,7 @@ module Aws::States
     #   @return [Types::CloudWatchEventsExecutionDataDetails]
     #
     # @!attribute [rw] trace_header
-    #   The AWS X-Ray trace header which was passed to the execution.
+    #   The AWS X-Ray trace header that was passed to the execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
@@ -931,7 +950,7 @@ module Aws::States
     # Contains details about an execution.
     #
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that id entifies the execution.
+    #   The Amazon Resource Name (ARN) that identifies the execution.
     #   @return [String]
     #
     # @!attribute [rw] state_machine_arn
@@ -2160,7 +2179,7 @@ module Aws::States
     end
 
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that id entifies the execution.
+    #   The Amazon Resource Name (ARN) that identifies the execution.
     #   @return [String]
     #
     # @!attribute [rw] start_date
@@ -2173,6 +2192,141 @@ module Aws::States
       :execution_arn,
       :start_date)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartSyncExecutionInput
+    #   data as a hash:
+    #
+    #       {
+    #         state_machine_arn: "Arn", # required
+    #         name: "Name",
+    #         input: "SensitiveData",
+    #         trace_header: "TraceHeader",
+    #       }
+    #
+    # @!attribute [rw] state_machine_arn
+    #   The Amazon Resource Name (ARN) of the state machine to execute.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   The string that contains the JSON input data for the execution, for
+    #   example:
+    #
+    #   `"input": "\{"first_name" : "test"\}"`
+    #
+    #   <note markdown="1"> If you don't include any JSON input data, you still must include
+    #   the two braces, for example: `"input": "\{\}"`
+    #
+    #    </note>
+    #
+    #   Length constraints apply to the payload size, and are expressed as
+    #   bytes in UTF-8 encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_header
+    #   Passes the AWS X-Ray trace header. The trace header can also be
+    #   passed in the request payload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartSyncExecutionInput AWS API Documentation
+    #
+    class StartSyncExecutionInput < Struct.new(
+      :state_machine_arn,
+      :name,
+      :input,
+      :trace_header)
+      SENSITIVE = [:input]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_arn
+    #   The Amazon Resource Name (ARN) that identifies the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_machine_arn
+    #   The Amazon Resource Name (ARN) that identifies the state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date the execution is started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_date
+    #   If the execution has already ended, the date the execution stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error code of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A more detailed explanation of the cause of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   The string that contains the JSON input data of the execution.
+    #   Length constraints apply to the payload size, and are expressed as
+    #   bytes in UTF-8 encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_details
+    #   Provides details about execution input or output.
+    #   @return [Types::CloudWatchEventsExecutionDataDetails]
+    #
+    # @!attribute [rw] output
+    #   The JSON output data of the execution. Length constraints apply to
+    #   the payload size, and are expressed as bytes in UTF-8 encoding.
+    #
+    #   <note markdown="1"> This field is set only if the execution succeeds. If the execution
+    #   fails, this field is null.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Provides details about execution input or output.
+    #   @return [Types::CloudWatchEventsExecutionDataDetails]
+    #
+    # @!attribute [rw] trace_header
+    #   The AWS X-Ray trace header that was passed to the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_details
+    #   An object that describes workflow billing details, including billed
+    #   duration and memory use.
+    #   @return [Types::BillingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartSyncExecutionOutput AWS API Documentation
+    #
+    class StartSyncExecutionOutput < Struct.new(
+      :execution_arn,
+      :state_machine_arn,
+      :name,
+      :start_date,
+      :stop_date,
+      :status,
+      :error,
+      :cause,
+      :input,
+      :input_details,
+      :output,
+      :output_details,
+      :trace_header,
+      :billing_details)
+      SENSITIVE = [:error, :cause, :input, :output]
       include Aws::Structure
     end
 

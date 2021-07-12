@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -83,7 +83,7 @@ module Aws::EC2
       data[:outpost_arn]
     end
 
-    # The AWS account ID of the owner of the network interface.
+    # The account ID of the owner of the network interface.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -107,20 +107,21 @@ module Aws::EC2
       data[:private_ip_addresses]
     end
 
-    # The ID of the entity that launched the instance on your behalf (for
-    # example, AWS Management Console or Auto Scaling).
+    # The alias or account ID of the principal or service that created the
+    # network interface.
     # @return [String]
     def requester_id
       data[:requester_id]
     end
 
-    # Indicates whether the network interface is being managed by AWS.
+    # Indicates whether the network interface is being managed by Amazon Web
+    # Services.
     # @return [Boolean]
     def requester_managed
       data[:requester_managed]
     end
 
-    # Indicates whether traffic to or from the instance is validated.
+    # Indicates whether source/destination checking is enabled.
     # @return [Boolean]
     def source_dest_check
       data[:source_dest_check]
@@ -320,6 +321,7 @@ module Aws::EC2
     #     device_index: 1, # required
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
+    #     network_card_index: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, Integer] :device_index
@@ -331,6 +333,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :instance_id
     #   The ID of the instance.
+    # @option options [Integer] :network_card_index
+    #   The index of the network card. Some instance types support multiple
+    #   network cards. The primary network interface must be assigned to
+    #   network card index 0. The default is network card index 0.
     # @return [Types::AttachNetworkInterfaceResult]
     def attach(options = {})
       options = options.merge(network_interface_id: @id)
@@ -530,15 +536,12 @@ module Aws::EC2
     #   one group, even if it's just the default security group in the VPC.
     #   You must specify the ID of the security group, not the name.
     # @option options [Types::AttributeBooleanValue] :source_dest_check
-    #   Indicates whether source/destination checking is enabled. A value of
-    #   `true` means checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT. For more information, see [NAT Instances][1] in the *Amazon
-    #   Virtual Private Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -13,6 +13,7 @@ module Aws::ApplicationInsights
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AffectedResource = Shapes::StringShape.new(name: 'AffectedResource')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ApplicationComponent = Shapes::StructureShape.new(name: 'ApplicationComponent')
@@ -45,6 +46,7 @@ module Aws::ApplicationInsights
     CreateComponentResponse = Shapes::StructureShape.new(name: 'CreateComponentResponse')
     CreateLogPatternRequest = Shapes::StructureShape.new(name: 'CreateLogPatternRequest')
     CreateLogPatternResponse = Shapes::StructureShape.new(name: 'CreateLogPatternResponse')
+    CustomComponentName = Shapes::StringShape.new(name: 'CustomComponentName')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteComponentRequest = Shapes::StructureShape.new(name: 'DeleteComponentRequest')
@@ -67,6 +69,11 @@ module Aws::ApplicationInsights
     DescribeProblemObservationsResponse = Shapes::StructureShape.new(name: 'DescribeProblemObservationsResponse')
     DescribeProblemRequest = Shapes::StructureShape.new(name: 'DescribeProblemRequest')
     DescribeProblemResponse = Shapes::StructureShape.new(name: 'DescribeProblemResponse')
+    DetectedWorkload = Shapes::MapShape.new(name: 'DetectedWorkload')
+    EbsCause = Shapes::StringShape.new(name: 'EbsCause')
+    EbsEvent = Shapes::StringShape.new(name: 'EbsEvent')
+    EbsRequestId = Shapes::StringShape.new(name: 'EbsRequestId')
+    EbsResult = Shapes::StringShape.new(name: 'EbsResult')
     Ec2State = Shapes::StringShape.new(name: 'Ec2State')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMsg = Shapes::StringShape.new(name: 'ErrorMsg')
@@ -108,19 +115,23 @@ module Aws::ApplicationInsights
     LogPatternSetName = Shapes::StringShape.new(name: 'LogPatternSetName')
     LogText = Shapes::StringShape.new(name: 'LogText')
     MaxEntities = Shapes::IntegerShape.new(name: 'MaxEntities')
+    MetaDataKey = Shapes::StringShape.new(name: 'MetaDataKey')
+    MetaDataValue = Shapes::StringShape.new(name: 'MetaDataValue')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricNamespace = Shapes::StringShape.new(name: 'MetricNamespace')
     Monitor = Shapes::BooleanShape.new(name: 'Monitor')
-    NewComponentName = Shapes::StringShape.new(name: 'NewComponentName')
     Observation = Shapes::StructureShape.new(name: 'Observation')
     ObservationId = Shapes::StringShape.new(name: 'ObservationId')
     ObservationList = Shapes::ListShape.new(name: 'ObservationList')
     OpsCenterEnabled = Shapes::BooleanShape.new(name: 'OpsCenterEnabled')
     OpsItemSNSTopicArn = Shapes::StringShape.new(name: 'OpsItemSNSTopicArn')
+    OsType = Shapes::StringShape.new(name: 'OsType')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Problem = Shapes::StructureShape.new(name: 'Problem')
     ProblemId = Shapes::StringShape.new(name: 'ProblemId')
     ProblemList = Shapes::ListShape.new(name: 'ProblemList')
+    RdsEventCategories = Shapes::StringShape.new(name: 'RdsEventCategories')
+    RdsEventMessage = Shapes::StringShape.new(name: 'RdsEventMessage')
     RelatedObservations = Shapes::StructureShape.new(name: 'RelatedObservations')
     Remarks = Shapes::StringShape.new(name: 'Remarks')
     RemoveSNSTopic = Shapes::BooleanShape.new(name: 'RemoveSNSTopic')
@@ -130,10 +141,15 @@ module Aws::ApplicationInsights
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    S3EventName = Shapes::StringShape.new(name: 'S3EventName')
     SeverityLevel = Shapes::StringShape.new(name: 'SeverityLevel')
     SourceARN = Shapes::StringShape.new(name: 'SourceARN')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
+    StatesArn = Shapes::StringShape.new(name: 'StatesArn')
+    StatesExecutionArn = Shapes::StringShape.new(name: 'StatesExecutionArn')
+    StatesInput = Shapes::StringShape.new(name: 'StatesInput')
+    StatesStatus = Shapes::StringShape.new(name: 'StatesStatus')
     Status = Shapes::StringShape.new(name: 'Status')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -159,6 +175,7 @@ module Aws::ApplicationInsights
     UpdateLogPatternResponse = Shapes::StructureShape.new(name: 'UpdateLogPatternResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::FloatShape.new(name: 'Value')
+    WorkloadMetaData = Shapes::MapShape.new(name: 'WorkloadMetaData')
     XRayErrorPercent = Shapes::IntegerShape.new(name: 'XRayErrorPercent')
     XRayFaultPercent = Shapes::IntegerShape.new(name: 'XRayFaultPercent')
     XRayNodeName = Shapes::StringShape.new(name: 'XRayNodeName')
@@ -167,10 +184,16 @@ module Aws::ApplicationInsights
     XRayRequestCount = Shapes::IntegerShape.new(name: 'XRayRequestCount')
     XRayThrottlePercent = Shapes::IntegerShape.new(name: 'XRayThrottlePercent')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMsg, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     ApplicationComponent.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, location_name: "ComponentName"))
+    ApplicationComponent.add_member(:component_remarks, Shapes::ShapeRef.new(shape: Remarks, location_name: "ComponentRemarks"))
     ApplicationComponent.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ApplicationComponent.add_member(:os_type, Shapes::ShapeRef.new(shape: OsType, location_name: "OsType"))
     ApplicationComponent.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, location_name: "Tier"))
     ApplicationComponent.add_member(:monitor, Shapes::ShapeRef.new(shape: Monitor, location_name: "Monitor"))
+    ApplicationComponent.add_member(:detected_workload, Shapes::ShapeRef.new(shape: DetectedWorkload, location_name: "DetectedWorkload"))
     ApplicationComponent.struct_class = Types::ApplicationComponent
 
     ApplicationComponentList.member = Shapes::ShapeRef.new(shape: ApplicationComponent)
@@ -209,7 +232,7 @@ module Aws::ApplicationInsights
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
     CreateComponentRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
-    CreateComponentRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, required: true, location_name: "ComponentName"))
+    CreateComponentRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: CustomComponentName, required: true, location_name: "ComponentName"))
     CreateComponentRequest.add_member(:resource_list, Shapes::ShapeRef.new(shape: ResourceList, required: true, location_name: "ResourceList"))
     CreateComponentRequest.struct_class = Types::CreateComponentRequest
 
@@ -232,7 +255,7 @@ module Aws::ApplicationInsights
     DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
 
     DeleteComponentRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
-    DeleteComponentRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, required: true, location_name: "ComponentName"))
+    DeleteComponentRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: CustomComponentName, required: true, location_name: "ComponentName"))
     DeleteComponentRequest.struct_class = Types::DeleteComponentRequest
 
     DeleteComponentResponse.struct_class = Types::DeleteComponentResponse
@@ -301,6 +324,9 @@ module Aws::ApplicationInsights
 
     DescribeProblemResponse.add_member(:problem, Shapes::ShapeRef.new(shape: Problem, location_name: "Problem"))
     DescribeProblemResponse.struct_class = Types::DescribeProblemResponse
+
+    DetectedWorkload.key = Shapes::ShapeRef.new(shape: Tier)
+    DetectedWorkload.value = Shapes::ShapeRef.new(shape: WorkloadMetaData)
 
     Feedback.key = Shapes::ShapeRef.new(shape: FeedbackKey)
     Feedback.value = Shapes::ShapeRef.new(shape: FeedbackValue)
@@ -412,6 +438,17 @@ module Aws::ApplicationInsights
     Observation.add_member(:code_deploy_application, Shapes::ShapeRef.new(shape: CodeDeployApplication, location_name: "CodeDeployApplication"))
     Observation.add_member(:code_deploy_instance_group_id, Shapes::ShapeRef.new(shape: CodeDeployInstanceGroupId, location_name: "CodeDeployInstanceGroupId"))
     Observation.add_member(:ec2_state, Shapes::ShapeRef.new(shape: Ec2State, location_name: "Ec2State"))
+    Observation.add_member(:rds_event_categories, Shapes::ShapeRef.new(shape: RdsEventCategories, location_name: "RdsEventCategories"))
+    Observation.add_member(:rds_event_message, Shapes::ShapeRef.new(shape: RdsEventMessage, location_name: "RdsEventMessage"))
+    Observation.add_member(:s3_event_name, Shapes::ShapeRef.new(shape: S3EventName, location_name: "S3EventName"))
+    Observation.add_member(:states_execution_arn, Shapes::ShapeRef.new(shape: StatesExecutionArn, location_name: "StatesExecutionArn"))
+    Observation.add_member(:states_arn, Shapes::ShapeRef.new(shape: StatesArn, location_name: "StatesArn"))
+    Observation.add_member(:states_status, Shapes::ShapeRef.new(shape: StatesStatus, location_name: "StatesStatus"))
+    Observation.add_member(:states_input, Shapes::ShapeRef.new(shape: StatesInput, location_name: "StatesInput"))
+    Observation.add_member(:ebs_event, Shapes::ShapeRef.new(shape: EbsEvent, location_name: "EbsEvent"))
+    Observation.add_member(:ebs_result, Shapes::ShapeRef.new(shape: EbsResult, location_name: "EbsResult"))
+    Observation.add_member(:ebs_cause, Shapes::ShapeRef.new(shape: EbsCause, location_name: "EbsCause"))
+    Observation.add_member(:ebs_request_id, Shapes::ShapeRef.new(shape: EbsRequestId, location_name: "EbsRequestId"))
     Observation.add_member(:x_ray_fault_percent, Shapes::ShapeRef.new(shape: XRayFaultPercent, location_name: "XRayFaultPercent"))
     Observation.add_member(:x_ray_throttle_percent, Shapes::ShapeRef.new(shape: XRayThrottlePercent, location_name: "XRayThrottlePercent"))
     Observation.add_member(:x_ray_error_percent, Shapes::ShapeRef.new(shape: XRayErrorPercent, location_name: "XRayErrorPercent"))
@@ -495,8 +532,8 @@ module Aws::ApplicationInsights
     UpdateComponentConfigurationResponse.struct_class = Types::UpdateComponentConfigurationResponse
 
     UpdateComponentRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
-    UpdateComponentRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, required: true, location_name: "ComponentName"))
-    UpdateComponentRequest.add_member(:new_component_name, Shapes::ShapeRef.new(shape: NewComponentName, location_name: "NewComponentName"))
+    UpdateComponentRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: CustomComponentName, required: true, location_name: "ComponentName"))
+    UpdateComponentRequest.add_member(:new_component_name, Shapes::ShapeRef.new(shape: CustomComponentName, location_name: "NewComponentName"))
     UpdateComponentRequest.add_member(:resource_list, Shapes::ShapeRef.new(shape: ResourceList, location_name: "ResourceList"))
     UpdateComponentRequest.struct_class = Types::UpdateComponentRequest
 
@@ -515,6 +552,9 @@ module Aws::ApplicationInsights
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMsg, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
+
+    WorkloadMetaData.key = Shapes::ShapeRef.new(shape: MetaDataKey)
+    WorkloadMetaData.value = Shapes::ShapeRef.new(shape: MetaDataValue)
 
 
     # @api private
@@ -547,6 +587,7 @@ module Aws::ApplicationInsights
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: TagsAlreadyExistException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_component, Seahorse::Model::Operation.new.tap do |o|

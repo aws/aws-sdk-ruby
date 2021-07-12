@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -18,6 +18,7 @@ module Aws::Batch
     ArrayProperties = Shapes::StructureShape.new(name: 'ArrayProperties')
     ArrayPropertiesDetail = Shapes::StructureShape.new(name: 'ArrayPropertiesDetail')
     ArrayPropertiesSummary = Shapes::StructureShape.new(name: 'ArrayPropertiesSummary')
+    AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
     AttemptContainerDetail = Shapes::StructureShape.new(name: 'AttemptContainerDetail')
     AttemptDetail = Shapes::StructureShape.new(name: 'AttemptDetail')
     AttemptDetails = Shapes::ListShape.new(name: 'AttemptDetails')
@@ -62,10 +63,19 @@ module Aws::Batch
     DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
     DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
     DevicesList = Shapes::ListShape.new(name: 'DevicesList')
+    EFSAuthorizationConfig = Shapes::StructureShape.new(name: 'EFSAuthorizationConfig')
+    EFSAuthorizationConfigIAM = Shapes::StringShape.new(name: 'EFSAuthorizationConfigIAM')
+    EFSTransitEncryption = Shapes::StringShape.new(name: 'EFSTransitEncryption')
+    EFSVolumeConfiguration = Shapes::StructureShape.new(name: 'EFSVolumeConfiguration')
+    Ec2Configuration = Shapes::StructureShape.new(name: 'Ec2Configuration')
+    Ec2ConfigurationList = Shapes::ListShape.new(name: 'Ec2ConfigurationList')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     EvaluateOnExit = Shapes::StructureShape.new(name: 'EvaluateOnExit')
     EvaluateOnExitList = Shapes::ListShape.new(name: 'EvaluateOnExitList')
+    FargatePlatformConfiguration = Shapes::StructureShape.new(name: 'FargatePlatformConfiguration')
     Host = Shapes::StructureShape.new(name: 'Host')
+    ImageIdOverride = Shapes::StringShape.new(name: 'ImageIdOverride')
+    ImageType = Shapes::StringShape.new(name: 'ImageType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
     JQStatus = Shapes::StringShape.new(name: 'JQStatus')
@@ -95,6 +105,7 @@ module Aws::Batch
     Long = Shapes::IntegerShape.new(name: 'Long')
     MountPoint = Shapes::StructureShape.new(name: 'MountPoint')
     MountPoints = Shapes::ListShape.new(name: 'MountPoints')
+    NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
     NodeDetails = Shapes::StructureShape.new(name: 'NodeDetails')
@@ -106,6 +117,8 @@ module Aws::Batch
     NodeRangeProperties = Shapes::ListShape.new(name: 'NodeRangeProperties')
     NodeRangeProperty = Shapes::StructureShape.new(name: 'NodeRangeProperty')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
+    PlatformCapability = Shapes::StringShape.new(name: 'PlatformCapability')
+    PlatformCapabilityList = Shapes::ListShape.new(name: 'PlatformCapabilityList')
     RegisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterJobDefinitionRequest')
     RegisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterJobDefinitionResponse')
     ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
@@ -204,25 +217,28 @@ module Aws::Batch
 
     ComputeResource.add_member(:type, Shapes::ShapeRef.new(shape: CRType, required: true, location_name: "type"))
     ComputeResource.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: CRAllocationStrategy, location_name: "allocationStrategy"))
-    ComputeResource.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "minvCpus"))
+    ComputeResource.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "minvCpus"))
     ComputeResource.add_member(:maxv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxvCpus"))
     ComputeResource.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))
-    ComputeResource.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceTypes"))
-    ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    ComputeResource.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
+    ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "imageId", metadata: {"deprecatedMessage"=>"This field is deprecated, use ec2Configuration[].imageIdOverride instead."}))
     ComputeResource.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
     ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     ComputeResource.add_member(:ec2_key_pair, Shapes::ShapeRef.new(shape: String, location_name: "ec2KeyPair"))
-    ComputeResource.add_member(:instance_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceRole"))
+    ComputeResource.add_member(:instance_role, Shapes::ShapeRef.new(shape: String, location_name: "instanceRole"))
     ComputeResource.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ComputeResource.add_member(:placement_group, Shapes::ShapeRef.new(shape: String, location_name: "placementGroup"))
     ComputeResource.add_member(:bid_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "bidPercentage"))
     ComputeResource.add_member(:spot_iam_fleet_role, Shapes::ShapeRef.new(shape: String, location_name: "spotIamFleetRole"))
     ComputeResource.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
+    ComputeResource.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationList, location_name: "ec2Configuration"))
     ComputeResource.struct_class = Types::ComputeResource
 
     ComputeResourceUpdate.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "minvCpus"))
     ComputeResourceUpdate.add_member(:maxv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "maxvCpus"))
     ComputeResourceUpdate.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))
+    ComputeResourceUpdate.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "subnets"))
+    ComputeResourceUpdate.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     ComputeResourceUpdate.struct_class = Types::ComputeResourceUpdate
 
     ContainerDetail.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
@@ -249,10 +265,12 @@ module Aws::Batch
     ContainerDetail.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     ContainerDetail.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
     ContainerDetail.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
+    ContainerDetail.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    ContainerDetail.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
-    ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, location_name: "vcpus"))
-    ContainerOverrides.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, location_name: "memory"))
+    ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
+    ContainerOverrides.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "memory", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
     ContainerOverrides.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ContainerOverrides.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
@@ -260,8 +278,8 @@ module Aws::Batch
     ContainerOverrides.struct_class = Types::ContainerOverrides
 
     ContainerProperties.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
-    ContainerProperties.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, location_name: "vcpus"))
-    ContainerProperties.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, location_name: "memory"))
+    ContainerProperties.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
+    ContainerProperties.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "memory", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
     ContainerProperties.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerProperties.add_member(:job_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobRoleArn"))
     ContainerProperties.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "executionRoleArn"))
@@ -277,6 +295,8 @@ module Aws::Batch
     ContainerProperties.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     ContainerProperties.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
     ContainerProperties.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
+    ContainerProperties.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    ContainerProperties.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
     ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
@@ -287,7 +307,7 @@ module Aws::Batch
     CreateComputeEnvironmentRequest.add_member(:type, Shapes::ShapeRef.new(shape: CEType, required: true, location_name: "type"))
     CreateComputeEnvironmentRequest.add_member(:state, Shapes::ShapeRef.new(shape: CEState, location_name: "state"))
     CreateComputeEnvironmentRequest.add_member(:compute_resources, Shapes::ShapeRef.new(shape: ComputeResource, location_name: "computeResources"))
-    CreateComputeEnvironmentRequest.add_member(:service_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceRole"))
+    CreateComputeEnvironmentRequest.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "serviceRole"))
     CreateComputeEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     CreateComputeEnvironmentRequest.struct_class = Types::CreateComputeEnvironmentRequest
 
@@ -365,6 +385,23 @@ module Aws::Batch
 
     DevicesList.member = Shapes::ShapeRef.new(shape: Device)
 
+    EFSAuthorizationConfig.add_member(:access_point_id, Shapes::ShapeRef.new(shape: String, location_name: "accessPointId"))
+    EFSAuthorizationConfig.add_member(:iam, Shapes::ShapeRef.new(shape: EFSAuthorizationConfigIAM, location_name: "iam"))
+    EFSAuthorizationConfig.struct_class = Types::EFSAuthorizationConfig
+
+    EFSVolumeConfiguration.add_member(:file_system_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fileSystemId"))
+    EFSVolumeConfiguration.add_member(:root_directory, Shapes::ShapeRef.new(shape: String, location_name: "rootDirectory"))
+    EFSVolumeConfiguration.add_member(:transit_encryption, Shapes::ShapeRef.new(shape: EFSTransitEncryption, location_name: "transitEncryption"))
+    EFSVolumeConfiguration.add_member(:transit_encryption_port, Shapes::ShapeRef.new(shape: Integer, location_name: "transitEncryptionPort"))
+    EFSVolumeConfiguration.add_member(:authorization_config, Shapes::ShapeRef.new(shape: EFSAuthorizationConfig, location_name: "authorizationConfig"))
+    EFSVolumeConfiguration.struct_class = Types::EFSVolumeConfiguration
+
+    Ec2Configuration.add_member(:image_type, Shapes::ShapeRef.new(shape: ImageType, required: true, location_name: "imageType"))
+    Ec2Configuration.add_member(:image_id_override, Shapes::ShapeRef.new(shape: ImageIdOverride, location_name: "imageIdOverride"))
+    Ec2Configuration.struct_class = Types::Ec2Configuration
+
+    Ec2ConfigurationList.member = Shapes::ShapeRef.new(shape: Ec2Configuration)
+
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
     EvaluateOnExit.add_member(:on_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "onStatusReason"))
@@ -374,6 +411,9 @@ module Aws::Batch
     EvaluateOnExit.struct_class = Types::EvaluateOnExit
 
     EvaluateOnExitList.member = Shapes::ShapeRef.new(shape: EvaluateOnExit)
+
+    FargatePlatformConfiguration.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    FargatePlatformConfiguration.struct_class = Types::FargatePlatformConfiguration
 
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
     Host.struct_class = Types::Host
@@ -389,6 +429,8 @@ module Aws::Batch
     JobDefinition.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     JobDefinition.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodeProperties, location_name: "nodeProperties"))
     JobDefinition.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    JobDefinition.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
+    JobDefinition.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
     JobDefinition.struct_class = Types::JobDefinition
 
     JobDefinitionList.member = Shapes::ShapeRef.new(shape: JobDefinition)
@@ -419,6 +461,8 @@ module Aws::Batch
     JobDetail.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayPropertiesDetail, location_name: "arrayProperties"))
     JobDetail.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     JobDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    JobDetail.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
+    JobDetail.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
     JobDetail.struct_class = Types::JobDetail
 
     JobDetailList.member = Shapes::ShapeRef.new(shape: JobDetail)
@@ -503,6 +547,9 @@ module Aws::Batch
 
     MountPoints.member = Shapes::ShapeRef.new(shape: MountPoint)
 
+    NetworkConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "assignPublicIp"))
+    NetworkConfiguration.struct_class = Types::NetworkConfiguration
+
     NetworkInterface.add_member(:attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "attachmentId"))
     NetworkInterface.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     NetworkInterface.add_member(:private_ipv_4_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpv4Address"))
@@ -543,14 +590,18 @@ module Aws::Batch
     ParametersMap.key = Shapes::ShapeRef.new(shape: String)
     ParametersMap.value = Shapes::ShapeRef.new(shape: String)
 
+    PlatformCapabilityList.member = Shapes::ShapeRef.new(shape: PlatformCapability)
+
     RegisterJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
     RegisterJobDefinitionRequest.add_member(:type, Shapes::ShapeRef.new(shape: JobDefinitionType, required: true, location_name: "type"))
     RegisterJobDefinitionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
     RegisterJobDefinitionRequest.add_member(:container_properties, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "containerProperties"))
     RegisterJobDefinitionRequest.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodeProperties, location_name: "nodeProperties"))
     RegisterJobDefinitionRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
+    RegisterJobDefinitionRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
     RegisterJobDefinitionRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     RegisterJobDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    RegisterJobDefinitionRequest.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
     RegisterJobDefinitionRequest.struct_class = Types::RegisterJobDefinitionRequest
 
     RegisterJobDefinitionResponse.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
@@ -588,6 +639,7 @@ module Aws::Batch
     SubmitJobRequest.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
     SubmitJobRequest.add_member(:node_overrides, Shapes::ShapeRef.new(shape: NodeOverrides, location_name: "nodeOverrides"))
     SubmitJobRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
+    SubmitJobRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
     SubmitJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     SubmitJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     SubmitJobRequest.struct_class = Types::SubmitJobRequest
@@ -659,6 +711,7 @@ module Aws::Batch
 
     Volume.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "host"))
     Volume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Volume.add_member(:efs_volume_configuration, Shapes::ShapeRef.new(shape: EFSVolumeConfiguration, location_name: "efsVolumeConfiguration"))
     Volume.struct_class = Types::Volume
 
     Volumes.member = Shapes::ShapeRef.new(shape: Volume)

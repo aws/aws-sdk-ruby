@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -701,7 +701,7 @@ module Aws::Organizations
     #
     # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
     #   For information on using AWS CloudTrail with AWS Organizations, see
-    #   [Monitoring the Activity in Your Organization][1] in the *AWS
+    #   [Logging and monitoring in AWS Organizations][1] in the *AWS
     #   Organizations User Guide.*
     #
     # The user who calls the API to create an account must have the
@@ -764,7 +764,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
     # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
     # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
@@ -895,7 +895,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -1146,7 +1146,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount AWS API Documentation
     #
@@ -1770,7 +1770,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
     #
     # @option params [required, String] :account_id
     #   The account ID number of the member account in the organization that
@@ -1930,7 +1930,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -2412,25 +2412,56 @@ module Aws::Organizations
     # operations in older accounts until the service completes its clean-up
     # from AWS Organizations.
     #
+    # We <b> <i>strongly recommend</i> </b> that you don't use this command
+    # to disable integration between AWS Organizations and the specified AWS
+    # service. Instead, use the console or commands that are provided by the
+    # specified service. This lets the trusted service perform any required
+    # initialization when enabling trusted access, such as creating any
+    # required resources and any required clean up of resources when
+    # disabling trusted access.
     #
+    #  For information about how to disable trusted service access to your
+    # organization using the trusted service, see the **Learn more** link
+    # under the **Supports Trusted Access** column at [AWS services that you
+    # can use with AWS Organizations][2]. on this page.
     #
-    # We recommend that you disable integration between AWS Organizations
-    # and the specified AWS service by using the console or commands that
-    # are provided by the specified service. Doing so ensures that the other
-    # service is aware that it can clean up any resources that are required
-    # only for the integration. How the service cleans up its resources in
-    # the organization's accounts depends on that service. For more
-    # information, see the documentation for the other AWS service.
+    #  If you disable access by using this command, it causes the following
+    # actions to occur:
+    #
+    #  * The service can no longer create a service-linked role in the
+    #   accounts in your organization. This means that the service can't
+    #   perform operations on your behalf on any new accounts in your
+    #   organization. The service can still perform operations in older
+    #   accounts until the service completes its clean-up from AWS
+    #   Organizations.
+    #
+    # * The service can no longer perform tasks in the member accounts in
+    #   the organization, unless those operations are explicitly permitted
+    #   by the IAM policies that are attached to your roles. This includes
+    #   any data aggregation from the member accounts to the management
+    #   account, or to a delegated administrator account, where relevant.
+    #
+    # * Some services detect this and clean up any remaining data or
+    #   resources related to the integration, while other services stop
+    #   accessing the organization but leave any historical data and
+    #   configuration in place to support a possible re-enabling of the
+    #   integration.
+    #
+    #  Using the other service's console or commands to disable the
+    # integration ensures that the other service is aware that it can clean
+    # up any resources that are required only for the integration. How the
+    # service cleans up its resources in the organization's accounts
+    # depends on that service. For more information, see the documentation
+    # for the other AWS service.
     #
     # After you perform the `DisableAWSServiceAccess` operation, the
     # specified service can no longer perform operations in your
-    # organization's accounts unless the operations are explicitly
-    # permitted by the IAM policies that are attached to your roles.
+    # organization's accounts
     #
     # For more information about integrating other services with AWS
     # Organizations, including the list of services that work with
     # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][2] in the *AWS Organizations User Guide.*
+    # Services][3] in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's management
     # account.
@@ -2438,7 +2469,8 @@ module Aws::Organizations
     #
     #
     # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
+    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
     #
     # @option params [required, String] :service_principal
     #   The service principal name of the AWS service for which you want to
@@ -3041,6 +3073,12 @@ module Aws::Organizations
     #   all required account information has not yet been provided][1] in
     #   the *AWS Organizations User Guide.*
     #
+    # * The account that you want to leave must not be a delegated
+    #   administrator account for any AWS service enabled for your
+    #   organization. If the account is a delegated administrator, you must
+    #   first change the delegated administrator account to another account
+    #   that is remaining in the organization.
+    #
     # * You can leave an organization only after you enable IAM user access
     #   to billing in your account. For more information, see [Activating
     #   Access to the Billing and Cost Management Console][2] in the *AWS
@@ -3049,6 +3087,10 @@ module Aws::Organizations
     # * After the account leaves the organization, all tags that were
     #   attached to the account object in the organization are deleted. AWS
     #   accounts outside of an organization do not support tags.
+    #
+    # * A newly created account has a waiting period before it can be
+    #   removed from its organization. If you get an error that indicates
+    #   that a wait period is required, then try again in a few days.
     #
     #
     #
@@ -3599,7 +3641,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
     #   resp.create_account_statuses[0].gov_cloud_account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -4946,7 +4988,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
     #
     # @option params [required, String] :account_id
     #   The account ID number of the member account in the organization to
@@ -5001,6 +5043,12 @@ module Aws::Organizations
     #   steps at [ To leave an organization when all required account
     #   information has not yet been provided][1] in the *AWS Organizations
     #   User Guide.*
+    #
+    # * The account that you want to leave must not be a delegated
+    #   administrator account for any AWS service enabled for your
+    #   organization. If the account is a delegated administrator, you must
+    #   first change the delegated administrator account to another account
+    #   that is remaining in the organization.
     #
     # * After the account leaves the organization, all tags that were
     #   attached to the account object in the organization are deleted. AWS
@@ -5380,7 +5428,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -15,11 +15,17 @@ module Aws::CloudTrail
 
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
     AddTagsResponse = Shapes::StructureShape.new(name: 'AddTagsResponse')
+    AdvancedEventSelector = Shapes::StructureShape.new(name: 'AdvancedEventSelector')
+    AdvancedEventSelectors = Shapes::ListShape.new(name: 'AdvancedEventSelectors')
+    AdvancedFieldSelector = Shapes::StructureShape.new(name: 'AdvancedFieldSelector')
+    AdvancedFieldSelectors = Shapes::ListShape.new(name: 'AdvancedFieldSelectors')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ByteBuffer = Shapes::BlobShape.new(name: 'ByteBuffer')
     CloudTrailARNInvalidException = Shapes::StructureShape.new(name: 'CloudTrailARNInvalidException')
     CloudTrailAccessNotEnabledException = Shapes::StructureShape.new(name: 'CloudTrailAccessNotEnabledException')
+    CloudTrailInvalidClientTokenIdException = Shapes::StructureShape.new(name: 'CloudTrailInvalidClientTokenIdException')
     CloudWatchLogsDeliveryUnavailableException = Shapes::StructureShape.new(name: 'CloudWatchLogsDeliveryUnavailableException')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateTrailRequest = Shapes::StructureShape.new(name: 'CreateTrailRequest')
     CreateTrailResponse = Shapes::StructureShape.new(name: 'CreateTrailResponse')
     DataResource = Shapes::StructureShape.new(name: 'DataResource')
@@ -89,6 +95,8 @@ module Aws::CloudTrail
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotOrganizationMasterAccountException = Shapes::StructureShape.new(name: 'NotOrganizationMasterAccountException')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
+    Operator = Shapes::ListShape.new(name: 'Operator')
+    OperatorValue = Shapes::StringShape.new(name: 'OperatorValue')
     OrganizationNotInAllFeaturesModeException = Shapes::StructureShape.new(name: 'OrganizationNotInAllFeaturesModeException')
     OrganizationsNotInUseException = Shapes::StructureShape.new(name: 'OrganizationsNotInUseException')
     PublicKey = Shapes::StructureShape.new(name: 'PublicKey')
@@ -108,6 +116,8 @@ module Aws::CloudTrail
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
     ResourceTypeNotSupportedException = Shapes::StructureShape.new(name: 'ResourceTypeNotSupportedException')
     S3BucketDoesNotExistException = Shapes::StructureShape.new(name: 'S3BucketDoesNotExistException')
+    SelectorField = Shapes::StringShape.new(name: 'SelectorField')
+    SelectorName = Shapes::StringShape.new(name: 'SelectorName')
     StartLoggingRequest = Shapes::StructureShape.new(name: 'StartLoggingRequest')
     StartLoggingResponse = Shapes::StructureShape.new(name: 'StartLoggingResponse')
     StopLoggingRequest = Shapes::StructureShape.new(name: 'StopLoggingRequest')
@@ -134,11 +144,32 @@ module Aws::CloudTrail
 
     AddTagsResponse.struct_class = Types::AddTagsResponse
 
+    AdvancedEventSelector.add_member(:name, Shapes::ShapeRef.new(shape: SelectorName, location_name: "Name"))
+    AdvancedEventSelector.add_member(:field_selectors, Shapes::ShapeRef.new(shape: AdvancedFieldSelectors, required: true, location_name: "FieldSelectors"))
+    AdvancedEventSelector.struct_class = Types::AdvancedEventSelector
+
+    AdvancedEventSelectors.member = Shapes::ShapeRef.new(shape: AdvancedEventSelector)
+
+    AdvancedFieldSelector.add_member(:field, Shapes::ShapeRef.new(shape: SelectorField, required: true, location_name: "Field"))
+    AdvancedFieldSelector.add_member(:equals, Shapes::ShapeRef.new(shape: Operator, location_name: "Equals"))
+    AdvancedFieldSelector.add_member(:starts_with, Shapes::ShapeRef.new(shape: Operator, location_name: "StartsWith"))
+    AdvancedFieldSelector.add_member(:ends_with, Shapes::ShapeRef.new(shape: Operator, location_name: "EndsWith"))
+    AdvancedFieldSelector.add_member(:not_equals, Shapes::ShapeRef.new(shape: Operator, location_name: "NotEquals"))
+    AdvancedFieldSelector.add_member(:not_starts_with, Shapes::ShapeRef.new(shape: Operator, location_name: "NotStartsWith"))
+    AdvancedFieldSelector.add_member(:not_ends_with, Shapes::ShapeRef.new(shape: Operator, location_name: "NotEndsWith"))
+    AdvancedFieldSelector.struct_class = Types::AdvancedFieldSelector
+
+    AdvancedFieldSelectors.member = Shapes::ShapeRef.new(shape: AdvancedFieldSelector)
+
     CloudTrailARNInvalidException.struct_class = Types::CloudTrailARNInvalidException
 
     CloudTrailAccessNotEnabledException.struct_class = Types::CloudTrailAccessNotEnabledException
 
+    CloudTrailInvalidClientTokenIdException.struct_class = Types::CloudTrailInvalidClientTokenIdException
+
     CloudWatchLogsDeliveryUnavailableException.struct_class = Types::CloudWatchLogsDeliveryUnavailableException
+
+    ConflictException.struct_class = Types::ConflictException
 
     CreateTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CreateTrailRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
@@ -217,6 +248,7 @@ module Aws::CloudTrail
 
     GetEventSelectorsResponse.add_member(:trail_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrailARN"))
     GetEventSelectorsResponse.add_member(:event_selectors, Shapes::ShapeRef.new(shape: EventSelectors, location_name: "EventSelectors"))
+    GetEventSelectorsResponse.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
     GetEventSelectorsResponse.struct_class = Types::GetEventSelectorsResponse
 
     GetInsightSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
@@ -359,6 +391,8 @@ module Aws::CloudTrail
 
     OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
 
+    Operator.member = Shapes::ShapeRef.new(shape: OperatorValue)
+
     OrganizationNotInAllFeaturesModeException.struct_class = Types::OrganizationNotInAllFeaturesModeException
 
     OrganizationsNotInUseException.struct_class = Types::OrganizationsNotInUseException
@@ -372,11 +406,13 @@ module Aws::CloudTrail
     PublicKeyList.member = Shapes::ShapeRef.new(shape: PublicKey)
 
     PutEventSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
-    PutEventSelectorsRequest.add_member(:event_selectors, Shapes::ShapeRef.new(shape: EventSelectors, required: true, location_name: "EventSelectors"))
+    PutEventSelectorsRequest.add_member(:event_selectors, Shapes::ShapeRef.new(shape: EventSelectors, location_name: "EventSelectors"))
+    PutEventSelectorsRequest.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
     PutEventSelectorsRequest.struct_class = Types::PutEventSelectorsRequest
 
     PutEventSelectorsResponse.add_member(:trail_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrailARN"))
     PutEventSelectorsResponse.add_member(:event_selectors, Shapes::ShapeRef.new(shape: EventSelectors, location_name: "EventSelectors"))
+    PutEventSelectorsResponse.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
     PutEventSelectorsResponse.struct_class = Types::PutEventSelectorsResponse
 
     PutInsightSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
@@ -565,6 +601,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationsNotInUseException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudTrailInvalidClientTokenIdException)
       end)
 
       api.add_operation(:delete_trail, Seahorse::Model::Operation.new.tap do |o|
@@ -580,6 +617,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:describe_trails, Seahorse::Model::Operation.new.tap do |o|
@@ -743,6 +781,8 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidInsightSelectorsException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientS3BucketPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientEncryptionPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: S3BucketDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
@@ -827,6 +867,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationsNotInUseException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudTrailInvalidClientTokenIdException)
       end)
     end
 

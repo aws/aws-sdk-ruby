@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -742,6 +742,11 @@ module Aws::DeviceFarm
     #       {
     #         name: "ResourceName", # required
     #         description: "ResourceDescription",
+    #         vpc_config: {
+    #           security_group_ids: ["NonEmptyString"], # required
+    #           subnet_ids: ["NonEmptyString"], # required
+    #           vpc_id: "NonEmptyString", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -752,11 +757,16 @@ module Aws::DeviceFarm
     #   Human-readable description of the project.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::TestGridVpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateTestGridProjectRequest AWS API Documentation
     #
     class CreateTestGridProjectRequest < Struct.new(
       :name,
-      :description)
+      :description,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -814,7 +824,7 @@ module Aws::DeviceFarm
     class CreateTestGridUrlResult < Struct.new(
       :url,
       :expires)
-      SENSITIVE = []
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 
@@ -1426,9 +1436,9 @@ module Aws::DeviceFarm
     #   data as a hash:
     #
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
-    #         values: ["String"],
+    #         attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #         operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #         values: ["String"], # required
     #       }
     #
     # @!attribute [rw] attribute
@@ -1717,9 +1727,9 @@ module Aws::DeviceFarm
     #       {
     #         filters: [ # required
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
-    #             values: ["String"],
+    #             attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #             operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #             values: ["String"], # required
     #           },
     #         ],
     #         max_devices: 1, # required
@@ -3170,9 +3180,9 @@ module Aws::DeviceFarm
     #         next_token: "PaginationToken",
     #         filters: [
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
-    #             values: ["String"],
+    #             attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #             operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #             values: ["String"], # required
     #           },
     #         ],
     #       }
@@ -4774,8 +4784,8 @@ module Aws::DeviceFarm
     #   data as a hash:
     #
     #       {
-    #         offering_id: "OfferingIdentifier",
-    #         quantity: 1,
+    #         offering_id: "OfferingIdentifier", # required
+    #         quantity: 1, # required
     #         offering_promotion_id: "OfferingPromotionIdentifier",
     #       }
     #
@@ -5092,8 +5102,8 @@ module Aws::DeviceFarm
     #   data as a hash:
     #
     #       {
-    #         offering_id: "OfferingIdentifier",
-    #         quantity: 1,
+    #         offering_id: "OfferingIdentifier", # required
+    #         quantity: 1, # required
     #       }
     #
     # @!attribute [rw] offering_id
@@ -5727,9 +5737,9 @@ module Aws::DeviceFarm
     #         device_selection_configuration: {
     #           filters: [ # required
     #             {
-    #               attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #               operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
-    #               values: ["String"],
+    #               attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #               operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #               values: ["String"], # required
     #             },
     #           ],
     #           max_devices: 1, # required
@@ -6550,6 +6560,10 @@ module Aws::DeviceFarm
     #   A human-readable description for the project.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::TestGridVpcConfig]
+    #
     # @!attribute [rw] created
     #   When the project was created.
     #   @return [Time]
@@ -6560,6 +6574,7 @@ module Aws::DeviceFarm
       :arn,
       :name,
       :description,
+      :vpc_config,
       :created)
       SENSITIVE = []
       include Aws::Structure
@@ -6667,6 +6682,39 @@ module Aws::DeviceFarm
       :filename,
       :type,
       :url)
+      SENSITIVE = [:url]
+      include Aws::Structure
+    end
+
+    # The VPC security groups and subnets that are attached to a project.
+    #
+    # @note When making an API call, you may pass TestGridVpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["NonEmptyString"], # required
+    #         subnet_ids: ["NonEmptyString"], # required
+    #         vpc_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of VPC security group IDs in your Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of VPC subnet IDs in your Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TestGridVpcConfig AWS API Documentation
+    #
+    class TestGridVpcConfig < Struct.new(
+      :security_group_ids,
+      :subnet_ids,
+      :vpc_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7131,6 +7179,11 @@ module Aws::DeviceFarm
     #         project_arn: "DeviceFarmArn", # required
     #         name: "ResourceName",
     #         description: "ResourceDescription",
+    #         vpc_config: {
+    #           security_group_ids: ["NonEmptyString"], # required
+    #           subnet_ids: ["NonEmptyString"], # required
+    #           vpc_id: "NonEmptyString", # required
+    #         },
     #       }
     #
     # @!attribute [rw] project_arn
@@ -7145,12 +7198,17 @@ module Aws::DeviceFarm
     #   Human-readable description for the project.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::TestGridVpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateTestGridProjectRequest AWS API Documentation
     #
     class UpdateTestGridProjectRequest < Struct.new(
       :project_arn,
       :name,
-      :description)
+      :description,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7420,7 +7478,7 @@ module Aws::DeviceFarm
       :content_type,
       :message,
       :category)
-      SENSITIVE = []
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 

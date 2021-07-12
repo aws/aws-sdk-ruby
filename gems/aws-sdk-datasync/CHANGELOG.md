@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-05-28)
+------------------
+
+* Feature - Added SecurityDescriptorCopyFlags option that allows for control of which components of SMB security descriptors are copied from source to destination objects.
+
+1.31.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2021-03-02)
+------------------
+
+* Feature - Additional API Support to update NFS/SMB/ObjectStorage locations
+
+1.29.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2020-11-09)
+------------------
+
+* Feature - DataSync now enables customers to adjust the network bandwidth used by a running AWS DataSync task.
+
 1.27.0 (2020-09-30)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -328,9 +328,9 @@ module Aws::Batch
     # @!group API Operations
 
     # Cancels a job in an AWS Batch job queue. Jobs that are in the
-    # `SUBMITTED`, `PENDING`, or `RUNNABLE` state are cancelled. Jobs that
-    # have progressed to `STARTING` or `RUNNING` are not cancelled (but the
-    # API operation still succeeds, even if no job is cancelled); these jobs
+    # `SUBMITTED`, `PENDING`, or `RUNNABLE` state are canceled. Jobs that
+    # have progressed to `STARTING` or `RUNNING` aren't canceled, but the
+    # API operation still succeeds, even if no job is canceled. These jobs
     # must be terminated with the TerminateJob operation.
     #
     # @option params [required, String] :job_id
@@ -374,49 +374,53 @@ module Aws::Batch
     end
 
     # Creates an AWS Batch compute environment. You can create `MANAGED` or
-    # `UNMANAGED` compute environments.
+    # `UNMANAGED` compute environments. `MANAGED` compute environments can
+    # use Amazon EC2 or AWS Fargate resources. `UNMANAGED` compute
+    # environments can only use EC2 resources.
     #
     # In a managed compute environment, AWS Batch manages the capacity and
     # instance types of the compute resources within the environment. This
     # is based on the compute resource specification that you define or the
     # [launch template][1] that you specify when you create the compute
-    # environment. You can choose to use Amazon EC2 On-Demand Instances or
-    # Spot Instances in your managed compute environment. You can optionally
-    # set a maximum price so that Spot Instances only launch when the Spot
-    # Instance price is below a specified percentage of the On-Demand price.
+    # environment. Either, you can choose to use EC2 On-Demand Instances and
+    # EC2 Spot Instances. Or, you can use Fargate and Fargate Spot capacity
+    # in your managed compute environment. You can optionally set a maximum
+    # price so that Spot Instances only launch when the Spot Instance price
+    # is less than a specified percentage of the On-Demand price.
     #
-    # <note markdown="1"> Multi-node parallel jobs are not supported on Spot Instances.
+    # <note markdown="1"> Multi-node parallel jobs aren't supported on Spot Instances.
     #
     #  </note>
     #
-    # In an unmanaged compute environment, you can manage your own compute
-    # resources. This provides more compute resource configuration options,
-    # such as using a custom AMI, but you must ensure that your AMI meets
-    # the Amazon ECS container instance AMI specification. For more
-    # information, see [Container Instance AMIs][2] in the *Amazon Elastic
-    # Container Service Developer Guide*. After you have created your
-    # unmanaged compute environment, you can use the
-    # DescribeComputeEnvironments operation to find the Amazon ECS cluster
-    # that is associated with it. Then, manually launch your container
+    # In an unmanaged compute environment, you can manage your own EC2
+    # compute resources and have a lot of flexibility with how you configure
+    # your compute resources. For example, you can use custom AMIs. However,
+    # you must verify that each of your AMIs meet the Amazon ECS container
+    # instance AMI specification. For more information, see [container
+    # instance AMIs][2] in the *Amazon Elastic Container Service Developer
+    # Guide*. After you created your unmanaged compute environment, you can
+    # use the DescribeComputeEnvironments operation to find the Amazon ECS
+    # cluster that's associated with it. Then, launch your container
     # instances into that Amazon ECS cluster. For more information, see
-    # [Launching an Amazon ECS Container Instance][3] in the *Amazon Elastic
+    # [Launching an Amazon ECS container instance][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
-    # <note markdown="1"> AWS Batch does not upgrade the AMIs in a compute environment after it
-    # is created (for example, when a newer version of the Amazon
-    # ECS-optimized AMI is available). You are responsible for the
-    # management of the guest operating system (including updates and
-    # security patches) and any additional application software or utilities
-    # that you install on the compute resources. To use a new AMI for your
-    # AWS Batch jobs:
+    # <note markdown="1"> AWS Batch doesn't upgrade the AMIs in a compute environment after the
+    # environment is created. For example, it doesn't update the AMIs when
+    # a newer version of the Amazon ECS optimized AMI is available.
+    # Therefore, you're responsible for managing the guest operating system
+    # (including its updates and security patches) and any additional
+    # application software or utilities that you install on the compute
+    # resources. To use a new AMI for your AWS Batch jobs, complete these
+    # steps:
     #
     #  1.  Create a new compute environment with the new AMI.
     #
     # 2.  Add the compute environment to an existing job queue.
     #
-    # 3.  Remove the old compute environment from your job queue.
+    # 3.  Remove the earlier compute environment from your job queue.
     #
-    # 4.  Delete the old compute environment.
+    # 4.  Delete the earlier compute environment.
     #
     #  </note>
     #
@@ -431,8 +435,9 @@ module Aws::Batch
     #   and lowercase), numbers, hyphens, and underscores are allowed.
     #
     # @option params [required, String] :type
-    #   The type of the compute environment. For more information, see
-    #   [Compute Environments][1] in the *AWS Batch User Guide*.
+    #   The type of the compute environment: `MANAGED` or `UNMANAGED`. For
+    #   more information, see [Compute Environments][1] in the *AWS Batch User
+    #   Guide*.
     #
     #
     #
@@ -443,32 +448,60 @@ module Aws::Batch
     #   the compute environment accepts jobs from a queue and can scale out
     #   automatically based on queues.
     #
+    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt to
+    #   place jobs from an associated job queue on the compute resources
+    #   within the environment. If the compute environment is managed, then it
+    #   can scale its instances out or in automatically, based on the job
+    #   queue demand.
+    #
+    #   If the state is `DISABLED`, then the AWS Batch scheduler doesn't
+    #   attempt to place jobs within the environment. Jobs in a `STARTING` or
+    #   `RUNNING` state continue to progress normally. Managed compute
+    #   environments in the `DISABLED` state don't scale out. However, they
+    #   scale in to `minvCpus` value after instances become idle.
+    #
     # @option params [Types::ComputeResource] :compute_resources
-    #   Details of the compute resources managed by the compute environment.
-    #   This parameter is required for managed compute environments. For more
-    #   information, see [Compute Environments][1] in the *AWS Batch User
-    #   Guide*.
+    #   Details about the compute resources managed by the compute
+    #   environment. This parameter is required for managed compute
+    #   environments. For more information, see [Compute Environments][1] in
+    #   the *AWS Batch User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
-    # @option params [required, String] :service_role
+    # @option params [String] :service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
-    #   Batch to make calls to other AWS services on your behalf.
+    #   Batch to make calls to other AWS services on your behalf. For more
+    #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
+    #   User Guide*.
     #
-    #   If your specified role has a path other than `/`, then you must either
-    #   specify the full role ARN (this is recommended) or prefix the role
-    #   name with the path.
+    #   If your account has already created the AWS Batch service-linked role,
+    #   that role is used by default for your compute environment unless you
+    #   specify a role here. If the AWS Batch service-linked role does not
+    #   exist in your account, and no role is specified here, the service will
+    #   try to create the AWS Batch service-linked role in your account.
     #
-    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN may
-    #   contain the `service-role` path prefix. When you only specify the name
-    #   of the service role, AWS Batch assumes that your ARN does not use the
-    #   `service-role` path prefix. Because of this, we recommend that you
-    #   specify the full ARN of your service role when you create compute
+    #   If your specified role has a path other than `/`, then you must
+    #   specify either the full role ARN (recommended) or prefix the role name
+    #   with the path. For example, if a role with the name `bar` has a path
+    #   of `/foo/` then you would specify `/foo/bar` as the role name. For
+    #   more information, see [Friendly names and paths][2] in the *IAM User
+    #   Guide*.
+    #
+    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN
+    #   might contain the `service-role` path prefix. When you only specify
+    #   the name of the service role, AWS Batch assumes that your ARN doesn't
+    #   use the `service-role` path prefix. Because of this, we recommend that
+    #   you specify the full ARN of your service role when you create compute
     #   environments.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the compute environment to help you
@@ -477,7 +510,7 @@ module Aws::Batch
     #   Resources][1] in *AWS General Reference*.
     #
     #   These tags can be updated or removed using the [TagResource][2] and
-    #   [UntagResource][3] API operations. These tags do not propagate to the
+    #   [UntagResource][3] API operations. These tags don't propagate to the
     #   underlying compute resources.
     #
     #
@@ -585,17 +618,17 @@ module Aws::Batch
     #     type: "MANAGED", # required, accepts MANAGED, UNMANAGED
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     compute_resources: {
-    #       type: "EC2", # required, accepts EC2, SPOT
+    #       type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT
     #       allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
-    #       minv_cpus: 1, # required
+    #       minv_cpus: 1,
     #       maxv_cpus: 1, # required
     #       desiredv_cpus: 1,
-    #       instance_types: ["String"], # required
+    #       instance_types: ["String"],
     #       image_id: "String",
     #       subnets: ["String"], # required
     #       security_group_ids: ["String"],
     #       ec2_key_pair: "String",
-    #       instance_role: "String", # required
+    #       instance_role: "String",
     #       tags: {
     #         "String" => "String",
     #       },
@@ -607,8 +640,14 @@ module Aws::Batch
     #         launch_template_name: "String",
     #         version: "String",
     #       },
+    #       ec2_configuration: [
+    #         {
+    #           image_type: "ImageType", # required
+    #           image_id_override: "ImageIdOverride",
+    #         },
+    #       ],
     #     },
-    #     service_role: "String", # required
+    #     service_role: "String",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -632,46 +671,57 @@ module Aws::Batch
     # associate one or more compute environments to the queue and assign an
     # order of preference for the compute environments.
     #
-    # You also set a priority to the job queue that determines the order in
-    # which the AWS Batch scheduler places jobs onto its associated compute
+    # You also set a priority to the job queue that determines the order
+    # that the AWS Batch scheduler places jobs onto its associated compute
     # environments. For example, if a compute environment is associated with
     # more than one job queue, the job queue with a higher priority is given
     # preference for scheduling jobs to that compute environment.
     #
     # @option params [required, String] :job_queue_name
-    #   The name of the job queue.
+    #   The name of the job queue. Up to 128 letters (uppercase and
+    #   lowercase), numbers, and underscores are allowed.
     #
     # @option params [String] :state
     #   The state of the job queue. If the job queue state is `ENABLED`, it is
     #   able to accept jobs. If the job queue state is `DISABLED`, new jobs
-    #   cannot be added to the queue, but jobs already in the queue can
+    #   can't be added to the queue, but jobs already in the queue can
     #   finish.
     #
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
     #   higher integer value for the `priority` parameter) are evaluated first
     #   when associated with the same compute environment. Priority is
-    #   determined in descending order, for example, a job queue with a
+    #   determined in descending order. For example, a job queue with a
     #   priority value of `10` is given scheduling preference over a job queue
-    #   with a priority value of `1`.
+    #   with a priority value of `1`. All of the compute environments must be
+    #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`);
+    #   EC2 and Fargate compute environments cannot be mixed.
     #
     # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
     #   relative to each other. The job scheduler uses this parameter to
-    #   determine which compute environment should execute a given job.
-    #   Compute environments must be in the `VALID` state before you can
-    #   associate them with a job queue. You can associate up to three compute
-    #   environments with a job queue.
+    #   determine which compute environment should run a specific job. Compute
+    #   environments must be in the `VALID` state before you can associate
+    #   them with a job queue. You can associate up to three compute
+    #   environments with a job queue. All of the compute environments must be
+    #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`);
+    #   EC2 and Fargate compute environments can't be mixed.
+    #
+    #   <note markdown="1"> All compute environments that are associated with a job queue must
+    #   share the same architecture. AWS Batch doesn't support mixing compute
+    #   environment architecture types in a single job queue.
+    #
+    #    </note>
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the job queue to help you categorize and
     #   organize your resources. Each tag consists of a key and an optional
-    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
-    #   General Reference*.
+    #   value. For more information, see [Tagging your AWS Batch resources][1]
+    #   in *AWS Batch User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
     #
     # @return [Types::CreateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -764,7 +814,10 @@ module Aws::Batch
     # Before you can delete a compute environment, you must set its state to
     # `DISABLED` with the UpdateComputeEnvironment API operation and
     # disassociate it from any job queues with the UpdateJobQueue API
-    # operation.
+    # operation. Compute environments that use AWS Fargate resources must
+    # terminate all active jobs on that compute environment before deleting
+    # the compute environment. If this isn't done, the compute environment
+    # enters an invalid state.
     #
     # @option params [required, String] :compute_environment
     #   The name or Amazon Resource Name (ARN) of the compute environment to
@@ -802,9 +855,10 @@ module Aws::Batch
 
     # Deletes the specified job queue. You must first disable submissions
     # for a queue with the UpdateJobQueue operation. All jobs in the queue
-    # are terminated when you delete a job queue.
+    # are eventually terminated when you delete a job queue. The jobs are
+    # terminated at a rate of about 16 jobs each second.
     #
-    # It is not necessary to disassociate compute environments from a queue
+    # It's not necessary to disassociate compute environments from a queue
     # before submitting a `DeleteJobQueue` request.
     #
     # @option params [required, String] :job_queue
@@ -841,7 +895,7 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Deregisters an AWS Batch job definition. Job definitions will be
+    # Deregisters an AWS Batch job definition. Job definitions are
     # permanently deleted after 180 days.
     #
     # @option params [required, String] :job_definition
@@ -880,7 +934,7 @@ module Aws::Batch
 
     # Describes one or more of your compute environments.
     #
-    # If you are using an unmanaged compute environment, you can use the
+    # If you're using an unmanaged compute environment, you can use the
     # `DescribeComputeEnvironment` operation to determine the
     # `ecsClusterArn` that you should launch your Amazon ECS container
     # instances into.
@@ -897,7 +951,7 @@ module Aws::Batch
     #   The remaining results of the initial request can be seen by sending
     #   another `DescribeComputeEnvironments` request with the returned
     #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `DescribeComputeEnvironments` returns up
+    #   parameter isn't used, then `DescribeComputeEnvironments` returns up
     #   to 100 results and a `nextToken` value if applicable.
     #
     # @option params [String] :next_token
@@ -907,7 +961,7 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -989,7 +1043,7 @@ module Aws::Batch
     #   resp.compute_environments[0].state #=> String, one of "ENABLED", "DISABLED"
     #   resp.compute_environments[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
     #   resp.compute_environments[0].status_reason #=> String
-    #   resp.compute_environments[0].compute_resources.type #=> String, one of "EC2", "SPOT"
+    #   resp.compute_environments[0].compute_resources.type #=> String, one of "EC2", "SPOT", "FARGATE", "FARGATE_SPOT"
     #   resp.compute_environments[0].compute_resources.allocation_strategy #=> String, one of "BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED"
     #   resp.compute_environments[0].compute_resources.minv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.maxv_cpus #=> Integer
@@ -1011,6 +1065,9 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_id #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_name #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.version #=> String
+    #   resp.compute_environments[0].compute_resources.ec2_configuration #=> Array
+    #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
+    #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
     #   resp.compute_environments[0].service_role #=> String
     #   resp.next_token #=> String
     #
@@ -1034,10 +1091,10 @@ module Aws::Batch
     #   The maximum number of results returned by `DescribeJobDefinitions` in
     #   paginated output. When this parameter is used,
     #   `DescribeJobDefinitions` only returns `maxResults` results in a single
-    #   page along with a `nextToken` response element. The remaining results
-    #   of the initial request can be seen by sending another
+    #   page and a `nextToken` response element. The remaining results of the
+    #   initial request can be seen by sending another
     #   `DescribeJobDefinitions` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
+    #   This value can be between 1 and 100. If this parameter isn't used,
     #   then `DescribeJobDefinitions` returns up to 100 results and a
     #   `nextToken` value if applicable.
     #
@@ -1045,7 +1102,7 @@ module Aws::Batch
     #   The name of the job definition to describe.
     #
     # @option params [String] :status
-    #   The status with which to filter job definitions.
+    #   The status used to filter job definitions.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -1054,7 +1111,7 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1142,6 +1199,12 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.volumes #=> Array
     #   resp.job_definitions[0].container_properties.volumes[0].host.source_path #=> String
     #   resp.job_definitions[0].container_properties.volumes[0].name #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].container_properties.environment #=> Array
     #   resp.job_definitions[0].container_properties.environment[0].name #=> String
     #   resp.job_definitions[0].container_properties.environment[0].value #=> String
@@ -1159,7 +1222,7 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.instance_type #=> String
     #   resp.job_definitions[0].container_properties.resource_requirements #=> Array
     #   resp.job_definitions[0].container_properties.resource_requirements[0].value #=> String
-    #   resp.job_definitions[0].container_properties.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].container_properties.resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
     #   resp.job_definitions[0].container_properties.linux_parameters.devices #=> Array
     #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].host_path #=> String
     #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].container_path #=> String
@@ -1183,6 +1246,8 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.secrets #=> Array
     #   resp.job_definitions[0].container_properties.secrets[0].name #=> String
     #   resp.job_definitions[0].container_properties.secrets[0].value_from #=> String
+    #   resp.job_definitions[0].container_properties.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].container_properties.fargate_platform_configuration.platform_version #=> String
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1198,6 +1263,12 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
@@ -1215,7 +1286,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.instance_type #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
-    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
@@ -1239,8 +1310,13 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
     #   resp.job_definitions[0].tags #=> Hash
     #   resp.job_definitions[0].tags["TagKey"] #=> String
+    #   resp.job_definitions[0].propagate_tags #=> Boolean
+    #   resp.job_definitions[0].platform_capabilities #=> Array
+    #   resp.job_definitions[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1261,12 +1337,12 @@ module Aws::Batch
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobQueues` in
     #   paginated output. When this parameter is used, `DescribeJobQueues`
-    #   only returns `maxResults` results in a single page along with a
-    #   `nextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `DescribeJobQueues` request
-    #   with the returned `nextToken` value. This value can be between 1 and
-    #   100. If this parameter is not used, then `DescribeJobQueues` returns
-    #   up to 100 results and a `nextToken` value if applicable.
+    #   only returns `maxResults` results in a single page and a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `DescribeJobQueues` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter isn't used, then `DescribeJobQueues` returns up to 100
+    #   results and a `nextToken` value if applicable.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -1275,7 +1351,7 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1464,6 +1540,12 @@ module Aws::Batch
     #   resp.jobs[0].container.volumes #=> Array
     #   resp.jobs[0].container.volumes[0].host.source_path #=> String
     #   resp.jobs[0].container.volumes[0].name #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].container.environment #=> Array
     #   resp.jobs[0].container.environment[0].name #=> String
     #   resp.jobs[0].container.environment[0].value #=> String
@@ -1490,7 +1572,7 @@ module Aws::Batch
     #   resp.jobs[0].container.network_interfaces[0].private_ipv_4_address #=> String
     #   resp.jobs[0].container.resource_requirements #=> Array
     #   resp.jobs[0].container.resource_requirements[0].value #=> String
-    #   resp.jobs[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].container.resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
     #   resp.jobs[0].container.linux_parameters.devices #=> Array
     #   resp.jobs[0].container.linux_parameters.devices[0].host_path #=> String
     #   resp.jobs[0].container.linux_parameters.devices[0].container_path #=> String
@@ -1514,6 +1596,8 @@ module Aws::Batch
     #   resp.jobs[0].container.secrets #=> Array
     #   resp.jobs[0].container.secrets[0].name #=> String
     #   resp.jobs[0].container.secrets[0].value_from #=> String
+    #   resp.jobs[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].container.fargate_platform_configuration.platform_version #=> String
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1530,6 +1614,12 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].node_properties.node_range_properties[0].container.environment #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
@@ -1547,7 +1637,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.instance_type #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
-    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
@@ -1571,6 +1661,8 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets[0].name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -1578,6 +1670,9 @@ module Aws::Batch
     #   resp.jobs[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.jobs[0].tags #=> Hash
     #   resp.jobs[0].tags["TagKey"] #=> String
+    #   resp.jobs[0].propagate_tags #=> Boolean
+    #   resp.jobs[0].platform_capabilities #=> Array
+    #   resp.jobs[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -1590,21 +1685,21 @@ module Aws::Batch
 
     # Returns a list of AWS Batch jobs.
     #
-    # You must specify only one of the following:
+    # You must specify only one of the following items:
     #
-    # * a job queue ID to return a list of jobs in that job queue
+    # * A job queue ID to return a list of jobs in that job queue
     #
-    # * a multi-node parallel job ID to return a list of that job's nodes
+    # * A multi-node parallel job ID to return a list of nodes for that job
     #
-    # * an array job ID to return a list of that job's children
+    # * An array job ID to return a list of the children for that job
     #
     # You can filter the results by job status with the `jobStatus`
-    # parameter. If you do not specify a status, only `RUNNING` jobs are
+    # parameter. If you don't specify a status, only `RUNNING` jobs are
     # returned.
     #
     # @option params [String] :job_queue
-    #   The name or full Amazon Resource Name (ARN) of the job queue with
-    #   which to list jobs.
+    #   The name or full Amazon Resource Name (ARN) of the job queue used to
+    #   list jobs.
     #
     # @option params [String] :array_job_id
     #   The job ID for an array job. Specifying an array job ID with this
@@ -1616,18 +1711,18 @@ module Aws::Batch
     #   associated with the specified job.
     #
     # @option params [String] :job_status
-    #   The job status with which to filter jobs in the specified queue. If
-    #   you do not specify a status, only `RUNNING` jobs are returned.
+    #   The job status used to filter jobs in the specified queue. If you
+    #   don't specify a status, only `RUNNING` jobs are returned.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `ListJobs` in paginated
     #   output. When this parameter is used, `ListJobs` only returns
-    #   `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListJobs` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListJobs` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   `maxResults` results in a single page and a `nextToken` response
+    #   element. The remaining results of the initial request can be seen by
+    #   sending another `ListJobs` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If this parameter isn't
+    #   used, then `ListJobs` returns up to 100 results and a `nextToken`
+    #   value if applicable.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListJobs`
@@ -1636,7 +1731,7 @@ module Aws::Batch
     #   results that returned the `nextToken` value. This value is `null` when
     #   there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1727,14 +1822,14 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # List the tags for an AWS Batch resource. AWS Batch resources that
+    # Lists the tags for an AWS Batch resource. AWS Batch resources that
     # support tags are compute environments, jobs, job definitions, and job
     # queues. ARNs for child jobs of array and multi-node parallel (MNP)
     # jobs are not supported.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) that identifies the resource for which
-    #   to list the tags. AWS Batch resources that support tags are compute
+    #   The Amazon Resource Name (ARN) that identifies the resource that tags
+    #   are listed for. AWS Batch resources that support tags are compute
     #   environments, jobs, job definitions, and job queues. ARNs for child
     #   jobs of array and multi-node parallel (MNP) jobs are not supported.
     #
@@ -1788,7 +1883,18 @@ module Aws::Batch
     #   allowed.
     #
     # @option params [required, String] :type
-    #   The type of job definition.
+    #   The type of job definition. For more information about multi-node
+    #   parallel jobs, see [Creating a multi-node parallel job definition][1]
+    #   in the *AWS Batch User Guide*.
+    #
+    #   <note markdown="1"> If the job is run on Fargate resources, then `multinode` isn't
+    #   supported.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html
     #
     # @option params [Hash<String,String>] :parameters
     #   Default parameter substitution placeholders to set in the job
@@ -1802,6 +1908,11 @@ module Aws::Batch
     #   `container`, then you must specify either `containerProperties` or
     #   `nodeProperties`.
     #
+    #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
+    #   `nodeProperties`; use only `containerProperties`.
+    #
+    #    </note>
+    #
     # @option params [Types::NodeProperties] :node_properties
     #   An object with various properties specific to multi-node parallel
     #   jobs. If you specify node properties for a job, it becomes a
@@ -1810,39 +1921,57 @@ module Aws::Batch
     #   definition's `type` parameter is `container`, then you must specify
     #   either `containerProperties` or `nodeProperties`.
     #
+    #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
+    #   `nodeProperties`; use `containerProperties` instead.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with this
-    #   job definition. Any retry strategy that is specified during a
+    #   job definition. Any retry strategy that's specified during a
     #   SubmitJob operation overrides the retry strategy defined here. If a
-    #   job is terminated due to a timeout, it is not retried.
+    #   job is terminated due to a timeout, it isn't retried.
+    #
+    # @option params [Boolean] :propagate_tags
+    #   Specifies whether to propagate the tags from the job or job definition
+    #   to the corresponding Amazon ECS task. If no value is specified, the
+    #   tags are not propagated. Tags can only be propagated to the tasks
+    #   during task creation. For tags with the same name, job tags are given
+    #   priority over job definitions tags. If the total number of combined
+    #   tags from the job and job definition is over 50, the job is moved to
+    #   the `FAILED` state.
     #
     # @option params [Types::JobTimeout] :timeout
     #   The timeout configuration for jobs that are submitted with this job
     #   definition, after which AWS Batch terminates your jobs if they have
-    #   not finished. If a job is terminated due to a timeout, it is not
+    #   not finished. If a job is terminated due to a timeout, it isn't
     #   retried. The minimum value for the timeout is 60 seconds. Any timeout
-    #   configuration that is specified during a SubmitJob operation overrides
+    #   configuration that's specified during a SubmitJob operation overrides
     #   the timeout configuration defined here. For more information, see [Job
-    #   Timeouts][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   Timeouts][1] in the *AWS Batch User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the job definition to help you categorize
     #   and organize your resources. Each tag consists of a key and an
     #   optional value. For more information, see [Tagging AWS Resources][1]
-    #   in *AWS General Reference*.
+    #   in *AWS Batch User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #
+    # @option params [Array<String>] :platform_capabilities
+    #   The platform capabilities required by the job definition. If no value
+    #   is specified, it defaults to `EC2`. To run the job on Fargate
+    #   resources, specify `FARGATE`.
     #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1926,6 +2055,16 @@ module Aws::Batch
     #             source_path: "String",
     #           },
     #           name: "String",
+    #           efs_volume_configuration: {
+    #             file_system_id: "String", # required
+    #             root_directory: "String",
+    #             transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #             transit_encryption_port: 1,
+    #             authorization_config: {
+    #               access_point_id: "String",
+    #               iam: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
     #         },
     #       ],
     #       environment: [
@@ -1955,7 +2094,7 @@ module Aws::Batch
     #       resource_requirements: [
     #         {
     #           value: "String", # required
-    #           type: "GPU", # required, accepts GPU
+    #           type: "GPU", # required, accepts GPU, VCPU, MEMORY
     #         },
     #       ],
     #       linux_parameters: {
@@ -1996,6 +2135,12 @@ module Aws::Batch
     #           value_from: "String", # required
     #         },
     #       ],
+    #       network_configuration: {
+    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #       fargate_platform_configuration: {
+    #         platform_version: "String",
+    #       },
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -2016,6 +2161,16 @@ module Aws::Batch
     #                   source_path: "String",
     #                 },
     #                 name: "String",
+    #                 efs_volume_configuration: {
+    #                   file_system_id: "String", # required
+    #                   root_directory: "String",
+    #                   transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                   transit_encryption_port: 1,
+    #                   authorization_config: {
+    #                     access_point_id: "String",
+    #                     iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                   },
+    #                 },
     #               },
     #             ],
     #             environment: [
@@ -2045,7 +2200,7 @@ module Aws::Batch
     #             resource_requirements: [
     #               {
     #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU
+    #                 type: "GPU", # required, accepts GPU, VCPU, MEMORY
     #               },
     #             ],
     #             linux_parameters: {
@@ -2086,6 +2241,12 @@ module Aws::Batch
     #                 value_from: "String", # required
     #               },
     #             ],
+    #             network_configuration: {
+    #               assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             fargate_platform_configuration: {
+    #               platform_version: "String",
+    #             },
     #           },
     #         },
     #       ],
@@ -2101,12 +2262,14 @@ module Aws::Batch
     #         },
     #       ],
     #     },
+    #     propagate_tags: false,
     #     timeout: {
     #       attempt_duration_seconds: 1,
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     platform_capabilities: ["EC2"], # accepts EC2, FARGATE
     #   })
     #
     # @example Response structure
@@ -2124,8 +2287,18 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Submits an AWS Batch job from a job definition. Parameters specified
-    # during SubmitJob override parameters defined in the job definition.
+    # Submits an AWS Batch job from a job definition. Parameters that are
+    # specified during SubmitJob override parameters defined in the job
+    # definition. vCPU and memory requirements that are specified in the
+    # `ResourceRequirements` objects in the job definition are the
+    # exception. They can't be overridden this way using the `memory` and
+    # `vcpus` parameters. Rather, you must specify updates to job definition
+    # parameters in a `ResourceRequirements` object that's included in the
+    # `containerOverrides` parameter.
+    #
+    # Jobs that run on Fargate resources can't be guaranteed to run for
+    # more than 14 days. This is because, after 14 days, Fargate resources
+    # might become unavailable and job might be terminated.
     #
     # @option params [required, String] :job_name
     #   The name of the job. The first character must be alphanumeric, and up
@@ -2133,8 +2306,8 @@ module Aws::Batch
     #   underscores are allowed.
     #
     # @option params [required, String] :job_queue
-    #   The job queue into which the job is submitted. You can specify either
-    #   the name or the Amazon Resource Name (ARN) of the queue.
+    #   The job queue where the job is submitted. You can specify either the
+    #   name or the Amazon Resource Name (ARN) of the queue.
     #
     # @option params [Types::ArrayProperties] :array_properties
     #   The array properties for the submitted job, such as the size of the
@@ -2169,29 +2342,43 @@ module Aws::Batch
     #   from the job definition.
     #
     # @option params [Types::ContainerOverrides] :container_overrides
-    #   A list of container overrides in JSON format that specify the name of
-    #   a container in the specified job definition and the overrides it
-    #   should receive. You can override the default command for a container
-    #   (that is specified in the job definition or the Docker image) with a
+    #   A list of container overrides in the JSON format that specify the name
+    #   of a container in the specified job definition and the overrides it
+    #   should receive. You can override the default command for a container,
+    #   which is specified in the job definition or the Docker image, with a
     #   `command` override. You can also override existing environment
-    #   variables (that are specified in the job definition or Docker image)
-    #   on a container or add new environment variables to it with an
-    #   `environment` override.
+    #   variables on a container or add new environment variables to it with
+    #   an `environment` override.
     #
     # @option params [Types::NodeOverrides] :node_overrides
     #   A list of node overrides in JSON format that specify the node range to
     #   target and the container overrides for that node range.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate resources;
+    #   use `containerOverrides` instead.
+    #
+    #    </note>
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs from this SubmitJob
     #   operation. When a retry strategy is specified here, it overrides the
     #   retry strategy defined in the job definition.
     #
+    # @option params [Boolean] :propagate_tags
+    #   Specifies whether to propagate the tags from the job or job definition
+    #   to the corresponding Amazon ECS task. If no value is specified, the
+    #   tags aren't propagated. Tags can only be propagated to the tasks
+    #   during task creation. For tags with the same name, job tags are given
+    #   priority over job definitions tags. If the total number of combined
+    #   tags from the job and job definition is over 50, the job is moved to
+    #   the `FAILED` state. When specified, this overrides the tag propagation
+    #   setting in the job definition.
+    #
     # @option params [Types::JobTimeout] :timeout
     #   The timeout configuration for this SubmitJob operation. You can
     #   specify a timeout duration after which AWS Batch terminates your jobs
-    #   if they have not finished. If a job is terminated due to a timeout, it
-    #   is not retried. The minimum value for the timeout is 60 seconds. This
+    #   if they haven't finished. If a job is terminated due to a timeout, it
+    #   isn't retried. The minimum value for the timeout is 60 seconds. This
     #   configuration overrides any timeout configuration specified in the job
     #   definition. For array jobs, child jobs have the same timeout
     #   configuration as the parent job. For more information, see [Job
@@ -2267,7 +2454,7 @@ module Aws::Batch
     #       resource_requirements: [
     #         {
     #           value: "String", # required
-    #           type: "GPU", # required, accepts GPU
+    #           type: "GPU", # required, accepts GPU, VCPU, MEMORY
     #         },
     #       ],
     #     },
@@ -2290,7 +2477,7 @@ module Aws::Batch
     #             resource_requirements: [
     #               {
     #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU
+    #                 type: "GPU", # required, accepts GPU, VCPU, MEMORY
     #               },
     #             ],
     #           },
@@ -2308,6 +2495,7 @@ module Aws::Batch
     #         },
     #       ],
     #     },
+    #     propagate_tags: false,
     #     timeout: {
     #       attempt_duration_seconds: 1,
     #     },
@@ -2332,15 +2520,15 @@ module Aws::Batch
     end
 
     # Associates the specified tags to a resource with the specified
-    # `resourceArn`. If existing tags on a resource are not specified in the
-    # request parameters, they are not changed. When a resource is deleted,
+    # `resourceArn`. If existing tags on a resource aren't specified in the
+    # request parameters, they aren't changed. When a resource is deleted,
     # the tags associated with that resource are deleted as well. AWS Batch
     # resources that support tags are compute environments, jobs, job
     # definitions, and job queues. ARNs for child jobs of array and
     # multi-node parallel (MNP) jobs are not supported.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   The Amazon Resource Name (ARN) of the resource that tags are added to.
     #   AWS Batch resources that support tags are compute environments, jobs,
     #   job definitions, and job queues. ARNs for child jobs of array and
     #   multi-node parallel (MNP) jobs are not supported.
@@ -2492,26 +2680,53 @@ module Aws::Batch
     #   `ENABLED` state can accept jobs from a queue and scale in or out
     #   automatically based on the workload demand of its associated queues.
     #
+    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt to
+    #   place jobs from an associated job queue on the compute resources
+    #   within the environment. If the compute environment is managed, then it
+    #   can scale its instances out or in automatically, based on the job
+    #   queue demand.
+    #
+    #   If the state is `DISABLED`, then the AWS Batch scheduler doesn't
+    #   attempt to place jobs within the environment. Jobs in a `STARTING` or
+    #   `RUNNING` state continue to progress normally. Managed compute
+    #   environments in the `DISABLED` state don't scale out. However, they
+    #   scale in to `minvCpus` value after instances become idle.
+    #
     # @option params [Types::ComputeResourceUpdate] :compute_resources
     #   Details of the compute resources managed by the compute environment.
-    #   Required for a managed compute environment.
+    #   Required for a managed compute environment. For more information, see
+    #   [Compute Environments][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [String] :service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
-    #   Batch to make calls to other AWS services on your behalf.
+    #   Batch to make calls to other AWS services on your behalf. For more
+    #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
+    #   User Guide*.
+    #
+    #   If the compute environment has a service-linked role, it cannot be
+    #   changed to use a regular IAM role. If the compute environment has a
+    #   regular IAM role, it cannot be changed to use a service-linked role.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
     #   name with the path.
     #
-    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN may
-    #   contain the `service-role` path prefix. When you only specify the name
-    #   of the service role, AWS Batch assumes that your ARN does not use the
-    #   `service-role` path prefix. Because of this, we recommend that you
-    #   specify the full ARN of your service role when you create compute
+    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN
+    #   might contain the `service-role` path prefix. When you only specify
+    #   the name of the service role, AWS Batch assumes that your ARN doesn't
+    #   use the `service-role` path prefix. Because of this, we recommend that
+    #   you specify the full ARN of your service role when you create compute
     #   environments.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
     #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2543,6 +2758,8 @@ module Aws::Batch
     #       minv_cpus: 1,
     #       maxv_cpus: 1,
     #       desiredv_cpus: 1,
+    #       subnets: ["String"],
+    #       security_group_ids: ["String"],
     #     },
     #     service_role: "String",
     #   })
@@ -2568,9 +2785,9 @@ module Aws::Batch
     #
     # @option params [String] :state
     #   Describes the queue's ability to accept new jobs. If the job queue
-    #   state is `ENABLED`, it is able to accept jobs. If the job queue state
-    #   is `DISABLED`, new jobs cannot be added to the queue, but jobs already
-    #   in the queue can finish.
+    #   state is `ENABLED`, it can accept jobs. If the job queue state is
+    #   `DISABLED`, new jobs can't be added to the queue, but jobs already in
+    #   the queue can finish.
     #
     # @option params [Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -2578,13 +2795,25 @@ module Aws::Batch
     #   when associated with the same compute environment. Priority is
     #   determined in descending order, for example, a job queue with a
     #   priority value of `10` is given scheduling preference over a job queue
-    #   with a priority value of `1`.
+    #   with a priority value of `1`. All of the compute environments must be
+    #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`).
+    #   EC2 and Fargate compute environments can't be mixed.
     #
     # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   Details the set of compute environments mapped to a job queue and
     #   their order relative to each other. This is one of the parameters used
-    #   by the job scheduler to determine which compute environment should
-    #   execute a given job.
+    #   by the job scheduler to determine which compute environment should run
+    #   a given job. Compute environments must be in the `VALID` state before
+    #   you can associate them with a job queue. All of the compute
+    #   environments must be either EC2 (`EC2` or `SPOT`) or Fargate
+    #   (`FARGATE` or `FARGATE_SPOT`). EC2 and Fargate compute environments
+    #   can't be mixed.
+    #
+    #   <note markdown="1"> All compute environments that are associated with a job queue must
+    #   share the same architecture. AWS Batch doesn't support mixing compute
+    #   environment architecture types in a single job queue.
+    #
+    #    </note>
     #
     # @return [Types::UpdateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2648,7 +2877,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

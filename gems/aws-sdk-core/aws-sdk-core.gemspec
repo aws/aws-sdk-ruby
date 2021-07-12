@@ -10,8 +10,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.require_paths = ['lib']
-  spec.files         = ['ca-bundle.crt', 'VERSION']
-  spec.files         += Dir['lib/**/*.rb']
+  spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb', 'ca-bundle.crt']
 
   spec.add_dependency('jmespath', '~> 1.0')
   spec.add_dependency('aws-partitions', '~> 1', '>= 1.239.0') # necessary for STS & S3 regional
@@ -19,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-eventstream', '~> 1', '>= 1.0.2') # necessary for binary eventstream
 
   spec.metadata = {
-    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-core',
-    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-core/CHANGELOG.md'
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core/CHANGELOG.md'
   }
 end

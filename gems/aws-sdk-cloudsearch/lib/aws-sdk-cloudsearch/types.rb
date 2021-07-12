@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -2268,6 +2268,11 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # The request was rejected because it attempted to create a resource
+    # that already exists.
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
     # The request was rejected because it attempted to reference a resource
     # that does not exist.
     #
@@ -2280,7 +2285,7 @@ module Aws::CloudSearch
     #   data as a hash:
     #
     #       {
-    #         desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge
+    #         desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge, search.previousgeneration.small, search.previousgeneration.large, search.previousgeneration.xlarge, search.previousgeneration.2xlarge
     #         desired_replication_count: 1,
     #         desired_partition_count: 1,
     #       }
@@ -2615,7 +2620,7 @@ module Aws::CloudSearch
     #       {
     #         domain_name: "DomainName", # required
     #         scaling_parameters: { # required
-    #           desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge
+    #           desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge, search.previousgeneration.small, search.previousgeneration.large, search.previousgeneration.xlarge, search.previousgeneration.2xlarge
     #           desired_replication_count: 1,
     #           desired_partition_count: 1,
     #         },

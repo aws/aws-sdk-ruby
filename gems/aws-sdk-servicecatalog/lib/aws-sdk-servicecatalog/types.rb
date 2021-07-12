@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -858,6 +858,7 @@ module Aws::ServiceCatalog
     #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
     #           value: "OrganizationNodeValue",
     #         },
+    #         share_tag_options: false,
     #       }
     #
     # @!attribute [rw] accept_language
@@ -887,13 +888,20 @@ module Aws::ServiceCatalog
     #   `PortfolioShare` creation process.
     #   @return [Types::OrganizationNode]
     #
+    # @!attribute [rw] share_tag_options
+    #   Enables or disables `TagOptions ` sharing when creating the
+    #   portfolio share. If this flag is not provided, TagOptions sharing is
+    #   disabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput AWS API Documentation
     #
     class CreatePortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id,
       :account_id,
-      :organization_node)
+      :organization_node,
+      :share_tag_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -978,6 +986,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] support_url
     #   The contact URL for product support.
+    #
+    #   `^https?:\/\// `/ is the pattern used to validate SupportUrl.
     #   @return [String]
     #
     # @!attribute [rw] product_type
@@ -1247,7 +1257,21 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
+    #   Specify the template source with one of the following options, but
+    #   not both. Keys accepted: \[ `LoadTemplateFromURL`,
+    #   `ImportFromPhysicalId` \].
+    #
     #   The URL of the CloudFormation template in Amazon S3, in JSON format.
+    #
+    #   `LoadTemplateFromURL`
+    #
+    #   Use the URL of the CloudFormation template in Amazon S3 in JSON
+    #   format.
+    #
+    #   `ImportFromPhysicalId`
+    #
+    #   Use the physical id of the resource that contains the template;
+    #   currently supports CloudFormation stack ARN.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -1930,6 +1954,76 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePortfolioSharesInput
+    #   data as a hash:
+    #
+    #       {
+    #         portfolio_id: "Id", # required
+    #         type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT
+    #         page_token: "PageToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] portfolio_id
+    #   The unique identifier of the portfolio for which shares will be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of portfolio share to summarize. This field acts as a
+    #   filter on the type of portfolio share, which can be one of the
+    #   following:
+    #
+    #   1\. `ACCOUNT` - Represents an external account to account share.
+    #
+    #   2\. `ORGANIZATION` - Represents a share to an organization. This
+    #   share is available to every account in the organization.
+    #
+    #   3\. `ORGANIZATIONAL_UNIT` - Represents a share to an organizational
+    #   unit.
+    #
+    #   4\. `ORGANIZATION_MEMBER_ACCOUNT` - Represents a share to an account
+    #   in the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioSharesInput AWS API Documentation
+    #
+    class DescribePortfolioSharesInput < Struct.new(
+      :portfolio_id,
+      :type,
+      :page_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_share_details
+    #   Summaries about each of the portfolio shares.
+    #   @return [Array<Types::PortfolioShareDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioSharesOutput AWS API Documentation
+    #
+    class DescribePortfolioSharesOutput < Struct.new(
+      :next_page_token,
+      :portfolio_share_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProductAsAdminInput
     #   data as a hash:
     #
@@ -1937,6 +2031,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         id: "Id",
     #         name: "ProductViewName",
+    #         source_portfolio_id: "Id",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1957,12 +2052,24 @@ module Aws::ServiceCatalog
     #   The product name.
     #   @return [String]
     #
+    # @!attribute [rw] source_portfolio_id
+    #   The unique identifier of the shared portfolio that the specified
+    #   product is associated with.
+    #
+    #   You can provide this parameter to retrieve the shared TagOptions
+    #   associated with the product. If this parameter is provided and if
+    #   TagOptions sharing is enabled in the portfolio share, the API
+    #   returns both local and shared TagOptions associated with the
+    #   product. Otherwise only local TagOptions will be returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminInput AWS API Documentation
     #
     class DescribeProductAsAdminInput < Struct.new(
       :accept_language,
       :id,
-      :name)
+      :name,
+      :source_portfolio_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3127,6 +3234,81 @@ module Aws::ServiceCatalog
     class GetProvisionedProductOutputsOutput < Struct.new(
       :outputs,
       :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportAsProvisionedProductInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         provisioned_product_name: "ProvisionedProductName", # required
+    #         physical_id: "PhysicalId", # required
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_name
+    #   The user-friendly name of the provisioned product. The value must be
+    #   unique for the AWS account. The name cannot be updated after the
+    #   product is provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_id
+    #   The unique identifier of the resource to be imported. It only
+    #   currently supports CloudFormation stack IDs.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProductInput AWS API Documentation
+    #
+    class ImportAsProvisionedProductInput < Struct.new(
+      :accept_language,
+      :product_id,
+      :provisioning_artifact_id,
+      :provisioned_product_name,
+      :physical_id,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_detail
+    #   Information about a request operation.
+    #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProductOutput AWS API Documentation
+    #
+    class ImportAsProvisionedProductOutput < Struct.new(
+      :record_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4456,10 +4638,59 @@ module Aws::ServiceCatalog
     #   The values that the administrator has allowed for the parameter.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allowed_pattern
+    #   A regular expression that represents the patterns that allow for
+    #   `String` types. The pattern must match the entire parameter value
+    #   provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] constraint_description
+    #   A string that explains a constraint when the constraint is violated.
+    #   For example, without a constraint description, a parameter that has
+    #   an allowed pattern of `[A-Za-z0-9]+` displays the following error
+    #   message when the user specifies an invalid value:
+    #
+    #   `Malformed input-Parameter MyParameter must match pattern
+    #   [A-Za-z0-9]+`
+    #
+    #   By adding a constraint description, such as must only contain
+    #   letters (uppercase and lowercase) and numbers, you can display the
+    #   following customized error message:
+    #
+    #   `Malformed input-Parameter MyParameter must only contain uppercase
+    #   and lowercase letters and numbers.`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_length
+    #   An integer value that determines the largest number of characters
+    #   you want to allow for `String` types.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_length
+    #   An integer value that determines the smallest number of characters
+    #   you want to allow for `String` types.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   A numeric value that determines the largest numeric value you want
+    #   to allow for `Number` types.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_value
+    #   A numeric value that determines the smallest numeric value you want
+    #   to allow for `Number` types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ParameterConstraints AWS API Documentation
     #
     class ParameterConstraints < Struct.new(
-      :allowed_values)
+      :allowed_values,
+      :allowed_pattern,
+      :constraint_description,
+      :max_length,
+      :min_length,
+      :max_value,
+      :min_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4499,6 +4730,48 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :provider_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the portfolio share.
+    #
+    # @!attribute [rw] principal_id
+    #   The identifier of the recipient entity that received the portfolio
+    #   share. The recipient entities can be one of the following:
+    #
+    #   1\. An external account.
+    #
+    #   2\. An organziation member account.
+    #
+    #   3\. An organzational unit (OU).
+    #
+    #   4\. The organization itself. (This shares with every account in the
+    #   organization).
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the portfolio share.
+    #   @return [String]
+    #
+    # @!attribute [rw] accepted
+    #   Indicates whether the shared portfolio is imported by the recipient
+    #   account. If the recipient is in an organization node, the share is
+    #   automatically imported, and the field is always set to true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] share_tag_options
+    #   Indicates whether TagOptions sharing is enabled or disabled for the
+    #   portfolio share.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/PortfolioShareDetail AWS API Documentation
+    #
+    class PortfolioShareDetail < Struct.new(
+      :principal_id,
+      :type,
+      :accepted,
+      :share_tag_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5409,11 +5682,21 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] info
+    #   Specify the template source with one of the following options, but
+    #   not both. Keys accepted: \[ `LoadTemplateFromURL`,
+    #   `ImportFromPhysicalId` \]
+    #
     #   The URL of the CloudFormation template in Amazon S3. Specify the URL
     #   in JSON format as follows:
     #
     #   `"LoadTemplateFromURL":
     #   "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."`
+    #
+    #   `ImportFromPhysicalId`\: The physical id of the resource that
+    #   contains the template. Currently only supports CloudFormation stack
+    #   arn. Specify the physical id in JSON format as follows:
+    #   `ImportFromPhysicalId:
+    #   “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
@@ -5529,7 +5812,20 @@ module Aws::ServiceCatalog
 
     # The user-defined preferences that will be applied when updating a
     # provisioned product. Not all preferences are applicable to all
-    # provisioned product types.
+    # provisioned product type
+    #
+    # One or more AWS accounts that will have access to the provisioned
+    # product.
+    #
+    # Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    # The AWS accounts specified should be within the list of accounts in
+    # the `STACKSET` constraint. To get the list of accounts in the
+    # `STACKSET` constraint, use the `DescribeProvisioningParameters`
+    # operation.
+    #
+    # If no values are specified, the default value is all accounts from the
+    # `STACKSET` constraint.
     #
     # @note When making an API call, you may pass ProvisioningPreferences
     #   data as a hash:
@@ -5544,17 +5840,17 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] stack_set_accounts
-    #   One or more AWS accounts that will have access to the provisioned
-    #   product.
+    #   One or more AWS accounts where the provisioned product will be
+    #   available.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
-    #   The AWS accounts specified should be within the list of accounts in
+    #   The specified accounts should be within the list of accounts from
     #   the `STACKSET` constraint. To get the list of accounts in the
     #   `STACKSET` constraint, use the `DescribeProvisioningParameters`
     #   operation.
     #
-    #   If no values are specified, the default value is all accounts from
+    #   If no values are specified, the default value is all acounts from
     #   the `STACKSET` constraint.
     #   @return [Array<String>]
     #
@@ -6583,13 +6879,18 @@ module Aws::ServiceCatalog
     #   The TagOption identifier.
     #   @return [String]
     #
+    # @!attribute [rw] owner
+    #   The AWS account Id of the owner account that created the TagOption.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionDetail AWS API Documentation
     #
     class TagOptionDetail < Struct.new(
       :key,
       :value,
       :active,
-      :id)
+      :id,
+      :owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6631,6 +6932,7 @@ module Aws::ServiceCatalog
     #         terminate_token: "IdempotencyToken", # required
     #         ignore_errors: false,
     #         accept_language: "AcceptLanguage",
+    #         retain_physical_resources: false,
     #       }
     #
     # @!attribute [rw] provisioned_product_name
@@ -6670,6 +6972,14 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] retain_physical_resources
+    #   When this boolean parameter is set to true, the
+    #   `TerminateProvisionedProduct` API deletes the Service Catalog
+    #   provisioned product. However, it does not remove the CloudFormation
+    #   stack, stack set, or the underlying resources of the deleted
+    #   provisioned product. The default value is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductInput AWS API Documentation
     #
     class TerminateProvisionedProductInput < Struct.new(
@@ -6677,7 +6987,8 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :terminate_token,
       :ignore_errors,
-      :accept_language)
+      :accept_language,
+      :retain_physical_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6910,6 +7221,82 @@ module Aws::ServiceCatalog
     class UpdatePortfolioOutput < Struct.new(
       :portfolio_detail,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePortfolioShareInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         portfolio_id: "Id", # required
+    #         account_id: "AccountId",
+    #         organization_node: {
+    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #           value: "OrganizationNodeValue",
+    #         },
+    #         share_tag_options: false,
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The unique identifier of the portfolio for which the share will be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS Account Id of the recipient account. This field is required
+    #   when updating an external account to account type share.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_node
+    #   Information about the organization node.
+    #   @return [Types::OrganizationNode]
+    #
+    # @!attribute [rw] share_tag_options
+    #   A flag to enable or disable TagOptions sharing for the portfolio
+    #   share. If this field is not provided, the current state of
+    #   TagOptions sharing on the portfolio share will not be modified.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioShareInput AWS API Documentation
+    #
+    class UpdatePortfolioShareInput < Struct.new(
+      :accept_language,
+      :portfolio_id,
+      :account_id,
+      :organization_node,
+      :share_tag_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portfolio_share_token
+    #   The token that tracks the status of the `UpdatePortfolioShare`
+    #   operation for external account to account or organizational type
+    #   sharing.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of `UpdatePortfolioShare` operation. You can also obtain
+    #   the operation status using `DescribePortfolioShareStatus` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioShareOutput AWS API Documentation
+    #
+    class UpdatePortfolioShareOutput < Struct.new(
+      :portfolio_share_token,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7193,13 +7580,12 @@ module Aws::ServiceCatalog
     #   A map that contains the provisioned product properties to be
     #   updated.
     #
-    #   The `LAUNCH_ROLE` key accepts user ARNs and role ARNs. This key
-    #   allows an administrator to call `UpdateProvisionedProductProperties`
-    #   to update the launch role that is associated with a provisioned
-    #   product. This role is used when an end-user calls a provisioning
-    #   operation such as `UpdateProvisionedProduct`,
-    #   `TerminateProvisionedProduct`, or
-    #   `ExecuteProvisionedProductServiceAction`. Only an ARN role is valid.
+    #   The `LAUNCH_ROLE` key accepts role ARNs. This key allows an
+    #   administrator to call `UpdateProvisionedProductProperties` to update
+    #   the launch role that is associated with a provisioned product. This
+    #   role is used when an end user calls a provisioning operation such as
+    #   `UpdateProvisionedProduct`, `TerminateProvisionedProduct`, or
+    #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid.
     #   A user ARN is invalid.
     #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the

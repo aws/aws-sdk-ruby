@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
+require 'aws-sdk-neptune/plugins/cross_region_copying.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:neptune)
 
@@ -75,6 +76,7 @@ module Aws::Neptune
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::Neptune::Plugins::CrossRegionCopying)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -535,12 +537,12 @@ module Aws::Neptune
     #
     #   * Must specify a valid DB cluster parameter group.
     #
-    #   * If the source DB cluster parameter group is in the same AWS Region
-    #     as the copy, specify a valid DB parameter group identifier, for
-    #     example `my-db-cluster-param-group`, or a valid ARN.
+    #   * If the source DB cluster parameter group is in the same Amazon
+    #     Region as the copy, specify a valid DB parameter group identifier,
+    #     for example `my-db-cluster-param-group`, or a valid ARN.
     #
-    #   * If the source DB parameter group is in a different AWS Region than
-    #     the copy, specify a valid DB cluster parameter group ARN, for
+    #   * If the source DB parameter group is in a different Amazon Region
+    #     than the copy, specify a valid DB cluster parameter group ARN, for
     #     example
     #     `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
     #
@@ -613,8 +615,6 @@ module Aws::Neptune
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
     #
-    #   You can't copy from one AWS Region to another.
-    #
     #   Constraints:
     #
     #   * Must specify a valid system snapshot in the "available" state.
@@ -638,22 +638,22 @@ module Aws::Neptune
     #   Example: `my-cluster-snapshot2`
     #
     # @option params [String] :kms_key_id
-    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
-    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
-    #   KMS key alias for the KMS encryption key.
+    #   The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot. The
+    #   KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or
+    #   the KMS key alias for the KMS encryption key.
     #
-    #   If you copy an encrypted DB cluster snapshot from your AWS account,
+    #   If you copy an encrypted DB cluster snapshot from your Amazon account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
     #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
     #   the copy of the DB cluster snapshot is encrypted with the same KMS key
     #   as the source DB cluster snapshot.
     #
     #   If you copy an encrypted DB cluster snapshot that is shared from
-    #   another AWS account, then you must specify a value for `KmsKeyId`.
+    #   another Amazon account, then you must specify a value for `KmsKeyId`.
     #
-    #   KMS encryption keys are specific to the AWS Region that they are
-    #   created in, and you can't use encryption keys from one AWS Region in
-    #   another AWS Region.
+    #   KMS encryption keys are specific to the Amazon Region that they are
+    #   created in, and you can't use encryption keys from one Amazon Region
+    #   in another Amazon Region.
     #
     #   You cannot encrypt an unencrypted DB cluster snapshot when you copy
     #   it. If you try to copy an unencrypted DB cluster snapshot and specify
@@ -668,6 +668,10 @@ module Aws::Neptune
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the new DB cluster snapshot copy.
+    #
+    # @option params [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
     #
     # @return [Types::CopyDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -687,6 +691,7 @@ module Aws::Neptune
     #         value: "String",
     #       },
     #     ],
+    #     source_region: "String",
     #   })
     #
     # @example Response structure
@@ -826,6 +831,10 @@ module Aws::Neptune
     # @option params [String] :character_set_name
     #   *(Not supported by Neptune)*
     #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   *If set to `true`, tags are copied to any snapshot of the DB cluster
+    #   that is created.*
+    #
     # @option params [String] :database_name
     #   The name for your database of up to 64 alpha-numeric characters. If
     #   you do not provide a name, Amazon Neptune will not create a database
@@ -885,21 +894,10 @@ module Aws::Neptune
     #   Default: `8182`
     #
     # @option params [String] :master_username
-    #   The name of the master user for the DB cluster.
-    #
-    #   Constraints:
-    #
-    #   * Must be 1 to 16 letters or numbers.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   Not supported by Neptune.
     #
     # @option params [String] :master_user_password
-    #   The password for the master database user. This password can contain
-    #   any printable ASCII character except "/", """, or "@".
-    #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Not supported by Neptune.
     #
     # @option params [String] :option_group_name
     #   *(Not supported by Neptune)*
@@ -910,9 +908,9 @@ module Aws::Neptune
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   Neptune User Guide.*
+    #   block of time for each Amazon Region. To see the time blocks
+    #   available, see [ Adjusting the Preferred Maintenance Window][1] in the
+    #   *Amazon Neptune User Guide.*
     #
     #   Constraints:
     #
@@ -935,7 +933,7 @@ module Aws::Neptune
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
+    #   block of time for each Amazon Region, occurring on a random day of the
     #   week. To see the time blocks available, see [ Adjusting the Preferred
     #   Maintenance Window][1] in the *Amazon Neptune User Guide.*
     #
@@ -958,10 +956,10 @@ module Aws::Neptune
     #   Specifies whether the DB cluster is encrypted.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB cluster.
+    #   The Amazon KMS key identifier for an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB cluster with the same AWS
+    #   encryption key. If you are creating a DB cluster with the same Amazon
     #   account that owns the KMS encryption key used to encrypt the new DB
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
@@ -977,20 +975,24 @@ module Aws::Neptune
     #     `ReplicationSourceIdentifier` is not specified, then Amazon Neptune
     #     will use your default encryption key.
     #
-    #   AWS KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   Region.
+    #   Amazon KMS creates the default encryption key for your Amazon account.
+    #   Your Amazon account has a different default encryption key for each
+    #   Amazon Region.
     #
-    #   If you create a Read Replica of an encrypted DB cluster in another AWS
-    #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination AWS Region. This key is used to encrypt the Read Replica
-    #   in that AWS Region.
+    #   If you create a Read Replica of an encrypted DB cluster in another
+    #   Amazon Region, you must set `KmsKeyId` to a KMS key ID that is valid
+    #   in the destination Amazon Region. This key is used to encrypt the Read
+    #   Replica in that Amazon Region.
     #
     # @option params [String] :pre_signed_url
     #   This parameter is not currently supported.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   Not supported by Neptune.
+    #   If set to `true`, enables Amazon Identity and Access Management (IAM)
+    #   authentication for the entire DB cluster (this cannot be set at an
+    #   instance level).
+    #
+    #   Default: `false`.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
@@ -1000,6 +1002,10 @@ module Aws::Neptune
     #   A value that indicates whether the DB cluster has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is enabled.
+    #
+    # @option params [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
     #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1011,6 +1017,7 @@ module Aws::Neptune
     #     availability_zones: ["String"],
     #     backup_retention_period: 1,
     #     character_set_name: "String",
+    #     copy_tags_to_snapshot: false,
     #     database_name: "String",
     #     db_cluster_identifier: "String", # required
     #     db_cluster_parameter_group_name: "String",
@@ -1037,6 +1044,7 @@ module Aws::Neptune
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     source_region: "String",
     #   })
     #
     # @example Response structure
@@ -1089,9 +1097,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1375,17 +1386,11 @@ module Aws::Neptune
     #   Example: `mydbinstance`
     #
     # @option params [Integer] :allocated_storage
-    #   The amount of storage (in gibibytes) to allocate for the DB instance.
-    #
-    #   Type: Integer
-    #
-    #   Not applicable. Neptune cluster volumes automatically grow as the
-    #   amount of data in your database increases, though you are only charged
-    #   for the space that you use in a Neptune cluster volume.
+    #   Not supported by Neptune.
     #
     # @option params [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
     #   Regions.
     #
     # @option params [required, String] :engine
@@ -1394,13 +1399,10 @@ module Aws::Neptune
     #   Valid Values: `neptune`
     #
     # @option params [String] :master_username
-    #   The name for the master user. Not used.
+    #   Not supported by Neptune.
     #
     # @option params [String] :master_user_password
-    #   The password for the master user. The password can include any
-    #   printable ASCII character except "/", """, or "@".
-    #
-    #   Not used.
+    #   Not supported by Neptune.
     #
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to associate with this DB instance.
@@ -1420,13 +1422,13 @@ module Aws::Neptune
     #   The EC2 Availability Zone that the DB instance is created in
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
-    #   AWS Region.
+    #   Amazon Region.
     #
     #   Example: `us-east-1d`
     #
     #   Constraint: The AvailabilityZone parameter can't be specified if the
     #   MultiAZ parameter is set to `true`. The specified Availability Zone
-    #   must be in the same AWS Region as the current endpoint.
+    #   must be in the same Amazon Region as the current endpoint.
     #
     # @option params [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
@@ -1440,7 +1442,7 @@ module Aws::Neptune
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
+    #   block of time for each Amazon Region, occurring on a random day of the
     #   week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
@@ -1556,10 +1558,10 @@ module Aws::Neptune
     #   Default: false
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB instance.
+    #   The Amazon KMS key identifier for an encrypted DB instance.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB instance with the same AWS
+    #   encryption key. If you are creating a DB instance with the same Amazon
     #   account that owns the KMS encryption key used to encrypt the new DB
     #   instance, then you can use the KMS key alias instead of the ARN for
     #   the KM encryption key.
@@ -1569,9 +1571,9 @@ module Aws::Neptune
     #
     #   If the `StorageEncrypted` parameter is true, and you do not specify a
     #   value for the `KmsKeyId` parameter, then Amazon Neptune will use your
-    #   default encryption key. AWS KMS creates the default encryption key for
-    #   your AWS account. Your AWS account has a different default encryption
-    #   key for each AWS Region.
+    #   default encryption key. Amazon KMS creates the default encryption key
+    #   for your Amazon account. Your Amazon account has a different default
+    #   encryption key for each Amazon Region.
     #
     # @option params [String] :domain
     #   Specify the Active Directory Domain to create the instance in.
@@ -1615,10 +1617,7 @@ module Aws::Neptune
     #   The time zone of the DB instance.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   True to enable AWS Identity and Access Management (IAM) authentication
-    #   for Neptune.
-    #
-    #   Default: `false`
+    #   Not supported by Neptune (ignored).
     #
     # @option params [Boolean] :enable_performance_insights
     #   *(Not supported by Neptune)*
@@ -1896,7 +1895,7 @@ module Aws::Neptune
     end
 
     # Creates a new DB subnet group. DB subnet groups must contain at least
-    # one subnet in at least two AZs in the AWS Region.
+    # one subnet in at least two AZs in the Amazon Region.
     #
     # @option params [required, String] :db_subnet_group_name
     #   The name for the DB subnet group. This value is stored as a lowercase
@@ -2187,9 +2186,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -2769,6 +2771,8 @@ module Aws::Neptune
     #   * {Types::DBClusterParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBClusterParameterGroupsMessage#db_cluster_parameter_groups #db_cluster_parameter_groups} => Array&lt;Types::DBClusterParameterGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_parameter_groups({
@@ -2843,6 +2847,8 @@ module Aws::Neptune
     #   * {Types::DBClusterParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBClusterParameterGroupDetails#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_parameters({
@@ -2885,16 +2891,18 @@ module Aws::Neptune
     # Returns a list of DB cluster snapshot attribute names and values for a
     # manual DB cluster snapshot.
     #
-    # When sharing snapshots with other AWS accounts,
+    # When sharing snapshots with other Amazon accounts,
     # `DescribeDBClusterSnapshotAttributes` returns the `restore` attribute
-    # and a list of IDs for the AWS accounts that are authorized to copy or
-    # restore the manual DB cluster snapshot. If `all` is included in the
+    # and a list of IDs for the Amazon accounts that are authorized to copy
+    # or restore the manual DB cluster snapshot. If `all` is included in the
     # list of values for the `restore` attribute, then the manual DB cluster
-    # snapshot is public and can be copied or restored by all AWS accounts.
+    # snapshot is public and can be copied or restored by all Amazon
+    # accounts.
     #
-    # To add or remove access for an AWS account to copy or restore a manual
-    # DB cluster snapshot, or to make the manual DB cluster snapshot public
-    # or private, use the ModifyDBClusterSnapshotAttribute API action.
+    # To add or remove access for an Amazon account to copy or restore a
+    # manual DB cluster snapshot, or to make the manual DB cluster snapshot
+    # public or private, use the ModifyDBClusterSnapshotAttribute API
+    # action.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
     #   The identifier for the DB cluster snapshot to describe the attributes
@@ -2960,13 +2968,13 @@ module Aws::Neptune
     #   of the following values:
     #
     #   * `automated` - Return all DB cluster snapshots that have been
-    #     automatically taken by Amazon Neptune for my AWS account.
+    #     automatically taken by Amazon Neptune for my Amazon account.
     #
     #   * `manual` - Return all DB cluster snapshots that have been taken by
     #     my AWS account.
     #
     #   * `shared` - Return all manual DB cluster snapshots that have been
-    #     shared to my AWS account.
+    #     shared to my Amazon account.
     #
     #   * `public` - Return all DB cluster snapshots that have been marked as
     #     public.
@@ -3003,17 +3011,17 @@ module Aws::Neptune
     #   specified by `MaxRecords`.
     #
     # @option params [Boolean] :include_shared
-    #   True to include shared manual DB cluster snapshots from other AWS
+    #   True to include shared manual DB cluster snapshots from other Amazon
     #   accounts that this AWS account has been given permission to copy or
     #   restore, and otherwise false. The default is `false`.
     #
-    #   You can give an AWS account permission to restore a manual DB cluster
-    #   snapshot from another AWS account by the
+    #   You can give an Amazon account permission to restore a manual DB
+    #   cluster snapshot from another Amazon account by the
     #   ModifyDBClusterSnapshotAttribute API action.
     #
     # @option params [Boolean] :include_public
     #   True to include manual DB cluster snapshots that are public and can be
-    #   copied or restored by any AWS account, and otherwise false. The
+    #   copied or restored by any Amazon account, and otherwise false. The
     #   default is `false`. The default is false.
     #
     #   You can share a manual DB cluster snapshot as public by using the
@@ -3023,6 +3031,8 @@ module Aws::Neptune
     #
     #   * {Types::DBClusterSnapshotMessage#marker #marker} => String
     #   * {Types::DBClusterSnapshotMessage#db_cluster_snapshots #db_cluster_snapshots} => Array&lt;Types::DBClusterSnapshot&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3108,7 +3118,7 @@ module Aws::Neptune
     #   * `engine` - Accepts an engine name (such as `neptune`), and restricts
     #     the results list to DB clusters created by that engine.
     #
-    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   For example, to invoke this API from the Amazon CLI and filter so that
     #   only Neptune DB clusters are returned, you could use the following
     #   command:
     #
@@ -3131,6 +3141,8 @@ module Aws::Neptune
     #
     #   * {Types::DBClusterMessage#marker #marker} => String
     #   * {Types::DBClusterMessage#db_clusters #db_clusters} => Array&lt;Types::DBCluster&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3198,9 +3210,12 @@ module Aws::Neptune
     #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
+    #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
+    #   resp.db_clusters[0].cross_account_clone #=> Boolean
+    #   resp.db_clusters[0].automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -3357,7 +3372,7 @@ module Aws::Neptune
     #   * `engine` - Accepts an engine name (such as `neptune`), and restricts
     #     the results list to DB instances created by that engine.
     #
-    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   For example, to invoke this API from the Amazon CLI and filter so that
     #   only Neptune DB instances are returned, you could use the following
     #   command:
     #
@@ -4278,6 +4293,8 @@ module Aws::Neptune
     #   * {Types::PendingMaintenanceActionsMessage#pending_maintenance_actions #pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
     #   * {Types::PendingMaintenanceActionsMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_pending_maintenance_actions({
@@ -4446,9 +4463,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -4539,13 +4559,11 @@ module Aws::Neptune
     #   the DB cluster. If this parameter is set to `false`, changes to the DB
     #   cluster are applied during the next maintenance window.
     #
-    #   The `ApplyImmediately` parameter only affects the
-    #   `NewDBClusterIdentifier` and `MasterUserPassword` values. If you set
-    #   the `ApplyImmediately` parameter value to false, then changes to the
-    #   `NewDBClusterIdentifier` and `MasterUserPassword` values are applied
-    #   during the next maintenance window. All other changes are applied
-    #   immediately, regardless of the value of the `ApplyImmediately`
-    #   parameter.
+    #   The `ApplyImmediately` parameter only affects `NewDBClusterIdentifier`
+    #   values. If you set the `ApplyImmediately` parameter value to false,
+    #   then changes to `NewDBClusterIdentifier` values are applied during the
+    #   next maintenance window. All other changes are applied immediately,
+    #   regardless of the value of the `ApplyImmediately` parameter.
     #
     #   Default: `false`
     #
@@ -4575,13 +4593,10 @@ module Aws::Neptune
     #   Default: The same port as the original DB cluster.
     #
     # @option params [String] :master_user_password
-    #   The new password for the master database user. This password can
-    #   contain any printable ASCII character except "/", """, or "@".
-    #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Not supported by Neptune.
     #
     # @option params [String] :option_group_name
-    #   *(Not supported by Neptune)*
+    #   *Not supported by Neptune.*
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -4589,7 +4604,7 @@ module Aws::Neptune
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region.
+    #   block of time for each Amazon Region.
     #
     #   Constraints:
     #
@@ -4608,7 +4623,7 @@ module Aws::Neptune
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
+    #   block of time for each Amazon Region, occurring on a random day of the
     #   week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
@@ -4616,7 +4631,7 @@ module Aws::Neptune
     #   Constraints: Minimum 30-minute window.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   True to enable mapping of Amazon Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
@@ -4644,6 +4659,10 @@ module Aws::Neptune
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is disabled.
     #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   *If set to `true`, tags are copied to any snapshot of the DB cluster
+    #   that is created.*
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -4669,6 +4688,7 @@ module Aws::Neptune
     #     },
     #     engine_version: "String",
     #     deletion_protection: false,
+    #     copy_tags_to_snapshot: false,
     #   })
     #
     # @example Response structure
@@ -4721,9 +4741,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -4868,20 +4891,21 @@ module Aws::Neptune
     # Adds an attribute and values to, or removes an attribute and values
     # from, a manual DB cluster snapshot.
     #
-    # To share a manual DB cluster snapshot with other AWS accounts, specify
-    # `restore` as the `AttributeName` and use the `ValuesToAdd` parameter
-    # to add a list of IDs of the AWS accounts that are authorized to
-    # restore the manual DB cluster snapshot. Use the value `all` to make
-    # the manual DB cluster snapshot public, which means that it can be
-    # copied or restored by all AWS accounts. Do not add the `all` value for
-    # any manual DB cluster snapshots that contain private information that
-    # you don't want available to all AWS accounts. If a manual DB cluster
-    # snapshot is encrypted, it can be shared, but only by specifying a list
-    # of authorized AWS account IDs for the `ValuesToAdd` parameter. You
-    # can't use `all` as a value for that parameter in this case.
+    # To share a manual DB cluster snapshot with other Amazon accounts,
+    # specify `restore` as the `AttributeName` and use the `ValuesToAdd`
+    # parameter to add a list of IDs of the Amazon accounts that are
+    # authorized to restore the manual DB cluster snapshot. Use the value
+    # `all` to make the manual DB cluster snapshot public, which means that
+    # it can be copied or restored by all Amazon accounts. Do not add the
+    # `all` value for any manual DB cluster snapshots that contain private
+    # information that you don't want available to all Amazon accounts. If
+    # a manual DB cluster snapshot is encrypted, it can be shared, but only
+    # by specifying a list of authorized Amazon account IDs for the
+    # `ValuesToAdd` parameter. You can't use `all` as a value for that
+    # parameter in this case.
     #
-    # To view which AWS accounts have access to copy or restore a manual DB
-    # cluster snapshot, or whether a manual DB cluster snapshot public or
+    # To view which Amazon accounts have access to copy or restore a manual
+    # DB cluster snapshot, or whether a manual DB cluster snapshot public or
     # private, use the DescribeDBClusterSnapshotAttributes API action.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
@@ -4891,17 +4915,17 @@ module Aws::Neptune
     # @option params [required, String] :attribute_name
     #   The name of the DB cluster snapshot attribute to modify.
     #
-    #   To manage authorization for other AWS accounts to copy or restore a
+    #   To manage authorization for other Amazon accounts to copy or restore a
     #   manual DB cluster snapshot, set this value to `restore`.
     #
     # @option params [Array<String>] :values_to_add
     #   A list of DB cluster snapshot attributes to add to the attribute
     #   specified by `AttributeName`.
     #
-    #   To authorize other AWS accounts to copy or restore a manual DB cluster
-    #   snapshot, set this list to include one or more AWS account IDs, or
-    #   `all` to make the manual DB cluster snapshot restorable by any AWS
-    #   account. Do not add the `all` value for any manual DB cluster
+    #   To authorize other Amazon accounts to copy or restore a manual DB
+    #   cluster snapshot, set this list to include one or more Amazon account
+    #   IDs, or `all` to make the manual DB cluster snapshot restorable by any
+    #   Amazon account. Do not add the `all` value for any manual DB cluster
     #   snapshots that contain private information that you don't want
     #   available to all AWS accounts.
     #
@@ -4909,13 +4933,13 @@ module Aws::Neptune
     #   A list of DB cluster snapshot attributes to remove from the attribute
     #   specified by `AttributeName`.
     #
-    #   To remove authorization for other AWS accounts to copy or restore a
-    #   manual DB cluster snapshot, set this list to include one or more AWS
-    #   account identifiers, or `all` to remove authorization for any AWS
-    #   account to copy or restore the DB cluster snapshot. If you specify
-    #   `all`, an AWS account whose account ID is explicitly added to the
-    #   `restore` attribute can still copy or restore a manual DB cluster
-    #   snapshot.
+    #   To remove authorization for other Amazon accounts to copy or restore a
+    #   manual DB cluster snapshot, set this list to include one or more
+    #   Amazon account identifiers, or `all` to remove authorization for any
+    #   Amazon account to copy or restore the DB cluster snapshot. If you
+    #   specify `all`, an Amazon account whose account ID is explicitly added
+    #   to the `restore` attribute can still copy or restore a manual DB
+    #   cluster snapshot.
     #
     # @return [Types::ModifyDBClusterSnapshotAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4964,10 +4988,7 @@ module Aws::Neptune
     #   ^
     #
     # @option params [Integer] :allocated_storage
-    #   The new amount of storage (in gibibytes) to allocate for the DB
-    #   instance.
-    #
-    #   Not applicable. Storage is managed by the DB Cluster.
+    #   Not supported by Neptune.
     #
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example,
@@ -5031,7 +5052,7 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [String] :master_user_password
-    #   Not applicable.
+    #   Not supported by Neptune.
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
@@ -5115,7 +5136,7 @@ module Aws::Neptune
     #   enabled auto patching for that engine version.
     #
     # @option params [String] :license_model
-    #   Not supported.
+    #   Not supported by Neptune.
     #
     # @option params [Integer] :iops
     #   The new Provisioned IOPS (I/O operations per second) value for the
@@ -5215,13 +5236,13 @@ module Aws::Neptune
     #   Valid Values: 0 - 15
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   True to enable mapping of Amazon Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following database
     #   engines
     #
-    #   Not applicable. Mapping AWS IAM accounts to database accounts is
+    #   Not applicable. Mapping Amazon IAM accounts to database accounts is
     #   managed by the DB cluster. For more information, see ModifyDBCluster.
     #
     #   Default: `false`
@@ -5491,7 +5512,7 @@ module Aws::Neptune
     end
 
     # Modifies an existing DB subnet group. DB subnet groups must contain at
-    # least one subnet in at least two AZs in the AWS Region.
+    # least one subnet in at least two AZs in the Amazon Region.
     #
     # @option params [required, String] :db_subnet_group_name
     #   The name for the DB subnet group. This value is stored as a lowercase
@@ -5678,9 +5699,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -6167,11 +6191,11 @@ module Aws::Neptune
     #   The tags to be assigned to the restored DB cluster.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
+    #   The Amazon KMS key identifier to use when restoring an encrypted DB
     #   cluster from a DB snapshot or DB cluster snapshot.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are restoring a DB cluster with the same AWS
+    #   encryption key. If you are restoring a DB cluster with the same Amazon
     #   account that owns the KMS encryption key used to encrypt the new DB
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
@@ -6187,7 +6211,7 @@ module Aws::Neptune
     #     not encrypted, then the restored DB cluster is not encrypted.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   True to enable mapping of Amazon Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
@@ -6211,6 +6235,10 @@ module Aws::Neptune
     #   A value that indicates whether the DB cluster has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is disabled.
+    #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   *If set to `true`, tags are copied to any snapshot of the restored DB
+    #   cluster that is created.*
     #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6240,6 +6268,7 @@ module Aws::Neptune
     #     enable_cloudwatch_logs_exports: ["String"],
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     copy_tags_to_snapshot: false,
     #   })
     #
     # @example Response structure
@@ -6292,9 +6321,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -6407,11 +6439,11 @@ module Aws::Neptune
     #   The tags to be applied to the restored DB cluster.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
+    #   The Amazon KMS key identifier to use when restoring an encrypted DB
     #   cluster from an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are restoring a DB cluster with the same AWS
+    #   encryption key. If you are restoring a DB cluster with the same Amazon
     #   account that owns the KMS encryption key used to encrypt the new DB
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
@@ -6435,7 +6467,7 @@ module Aws::Neptune
     #   then the restore request is rejected.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   True to enable mapping of Amazon Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
@@ -6539,9 +6571,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -6553,7 +6588,7 @@ module Aws::Neptune
     end
 
     # Starts an Amazon Neptune DB cluster that was stopped using the AWS
-    # console, the AWS CLI stop-db-cluster command, or the StopDBCluster
+    # console, the Amazon CLI stop-db-cluster command, or the StopDBCluster
     # API.
     #
     # @option params [required, String] :db_cluster_identifier
@@ -6620,9 +6655,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -6704,9 +6742,12 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -6730,7 +6771,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

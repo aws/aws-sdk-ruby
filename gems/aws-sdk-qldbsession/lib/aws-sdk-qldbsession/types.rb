@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -20,9 +20,17 @@ module Aws::QLDBSession
 
     # Contains the details of the aborted transaction.
     #
+    # @!attribute [rw] timing_information
+    #   Contains server-side performance information for the command.
+    #   @return [Types::TimingInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/AbortTransactionResult AWS API Documentation
     #
-    class AbortTransactionResult < Aws::EmptyStructure; end
+    class AbortTransactionResult < Struct.new(
+      :timing_information)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Returned if the request is malformed or contains an error such as an
     # invalid parameter value or a missing required parameter.
@@ -38,6 +46,20 @@ module Aws::QLDBSession
     class BadRequestException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returned when the request exceeds the processing capacity of the
+    # ledger.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/CapacityExceededException AWS API Documentation
+    #
+    class CapacityExceededException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61,6 +83,11 @@ module Aws::QLDBSession
     #   active transaction, the commit digest must be passed. QLDB validates
     #   `CommitDigest` and rejects the commit with an error if the digest
     #   computed on the client does not match the digest computed by QLDB.
+    #
+    #   The purpose of the `CommitDigest` parameter is to ensure that QLDB
+    #   commits a transaction if and only if the server has processed the
+    #   exact set of statements sent by the client, in the same order that
+    #   client sent them, and with no duplicates.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/CommitTransactionRequest AWS API Documentation
@@ -82,11 +109,22 @@ module Aws::QLDBSession
     #   The commit digest of the committed transaction.
     #   @return [String]
     #
+    # @!attribute [rw] timing_information
+    #   Contains server-side performance information for the command.
+    #   @return [Types::TimingInformation]
+    #
+    # @!attribute [rw] consumed_i_os
+    #   Contains metrics about the number of I/O requests that were
+    #   consumed.
+    #   @return [Types::IOUsage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/CommitTransactionResult AWS API Documentation
     #
     class CommitTransactionResult < Struct.new(
       :transaction_id,
-      :commit_digest)
+      :commit_digest,
+      :timing_information,
+      :consumed_i_os)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -101,9 +139,17 @@ module Aws::QLDBSession
 
     # Contains the details of the ended session.
     #
+    # @!attribute [rw] timing_information
+    #   Contains server-side performance information for the command.
+    #   @return [Types::TimingInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/EndSessionResult AWS API Documentation
     #
-    class EndSessionResult < Aws::EmptyStructure; end
+    class EndSessionResult < Struct.new(
+      :timing_information)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies a request to execute a statement.
     #
@@ -150,10 +196,21 @@ module Aws::QLDBSession
     #   Contains the details of the first fetched page.
     #   @return [Types::Page]
     #
+    # @!attribute [rw] timing_information
+    #   Contains server-side performance information for the command.
+    #   @return [Types::TimingInformation]
+    #
+    # @!attribute [rw] consumed_i_os
+    #   Contains metrics about the number of I/O requests that were
+    #   consumed.
+    #   @return [Types::IOUsage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/ExecuteStatementResult AWS API Documentation
     #
     class ExecuteStatementResult < Struct.new(
-      :first_page)
+      :first_page,
+      :timing_information,
+      :consumed_i_os)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -191,10 +248,40 @@ module Aws::QLDBSession
     #   Contains details of the fetched page.
     #   @return [Types::Page]
     #
+    # @!attribute [rw] timing_information
+    #   Contains server-side performance information for the command.
+    #   @return [Types::TimingInformation]
+    #
+    # @!attribute [rw] consumed_i_os
+    #   Contains metrics about the number of I/O requests that were
+    #   consumed.
+    #   @return [Types::IOUsage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/FetchPageResult AWS API Documentation
     #
     class FetchPageResult < Struct.new(
-      :page)
+      :page,
+      :timing_information,
+      :consumed_i_os)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains I/O usage metrics for a command that was invoked.
+    #
+    # @!attribute [rw] read_i_os
+    #   The number of read I/O requests that the command made.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_i_os
+    #   The number of write I/O requests that the command made.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/IOUsage AWS API Documentation
+    #
+    class IOUsage < Struct.new(
+      :read_i_os,
+      :write_i_os)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -438,10 +525,15 @@ module Aws::QLDBSession
     #   current session.
     #   @return [String]
     #
+    # @!attribute [rw] timing_information
+    #   Contains server-side performance information for the command.
+    #   @return [Types::TimingInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/StartSessionResult AWS API Documentation
     #
     class StartSessionResult < Struct.new(
-      :session_token)
+      :session_token,
+      :timing_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -460,16 +552,37 @@ module Aws::QLDBSession
     #   The transaction ID of the started transaction.
     #   @return [String]
     #
+    # @!attribute [rw] timing_information
+    #   Contains server-side performance information for the command.
+    #   @return [Types::TimingInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/StartTransactionResult AWS API Documentation
     #
     class StartTransactionResult < Struct.new(
-      :transaction_id)
+      :transaction_id,
+      :timing_information)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A structure that can contain an Amazon Ion value in multiple encoding
-    # formats.
+    # Contains server-side performance information for a command. Amazon
+    # QLDB captures timing information between the times when it receives
+    # the request and when it sends the corresponding response.
+    #
+    # @!attribute [rw] processing_time_milliseconds
+    #   The amount of time that QLDB spent on processing the command,
+    #   measured in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/TimingInformation AWS API Documentation
+    #
+    class TimingInformation < Struct.new(
+      :processing_time_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that can contain a value in multiple encoding formats.
     #
     # @note When making an API call, you may pass ValueHolder
     #   data as a hash:

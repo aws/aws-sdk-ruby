@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -355,6 +355,46 @@ module Aws::DynamoDB
     end
 
     # @!group API Operations
+
+    # This operation allows you to perform batch reads and writes on data
+    # stored in DynamoDB, using PartiQL.
+    #
+    # @option params [required, Array<Types::BatchStatementRequest>] :statements
+    #   The list of PartiQL statements representing the batch to run.
+    #
+    # @return [Types::BatchExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchExecuteStatementOutput#responses #responses} => Array&lt;Types::BatchStatementResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_execute_statement({
+    #     statements: [ # required
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         consistent_read: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responses #=> Array
+    #   resp.responses[0].error.code #=> String, one of "ConditionalCheckFailed", "ItemCollectionSizeLimitExceeded", "RequestLimitExceeded", "ValidationError", "ProvisionedThroughputExceeded", "TransactionConflict", "ThrottlingError", "InternalServerError", "ResourceNotFound", "AccessDenied", "DuplicateItem"
+    #   resp.responses[0].error.message #=> String
+    #   resp.responses[0].table_name #=> String
+    #   resp.responses[0].item #=> Hash
+    #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatement AWS API Documentation
+    #
+    # @overload batch_execute_statement(params = {})
+    # @param [Hash] params ({})
+    def batch_execute_statement(params = {}, options = {})
+      req = build_request(:batch_execute_statement, params)
+      req.send_request(options)
+    end
 
     # The `BatchGetItem` operation returns the attributes of one or more
     # items from one or more tables. You identify requested items by primary
@@ -1036,7 +1076,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -1481,7 +1521,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -1976,7 +2016,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -2193,6 +2233,52 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Describes an existing table export.
+    #
+    # @option params [required, String] :export_arn
+    #   The Amazon Resource Name (ARN) associated with the export.
+    #
+    # @return [Types::DescribeExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExportOutput#export_description #export_description} => Types::ExportDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_export({
+    #     export_arn: "ExportArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_description.export_arn #=> String
+    #   resp.export_description.export_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.export_description.start_time #=> Time
+    #   resp.export_description.end_time #=> Time
+    #   resp.export_description.export_manifest #=> String
+    #   resp.export_description.table_arn #=> String
+    #   resp.export_description.table_id #=> String
+    #   resp.export_description.export_time #=> Time
+    #   resp.export_description.client_token #=> String
+    #   resp.export_description.s3_bucket #=> String
+    #   resp.export_description.s3_bucket_owner #=> String
+    #   resp.export_description.s3_prefix #=> String
+    #   resp.export_description.s3_sse_algorithm #=> String, one of "AES256", "KMS"
+    #   resp.export_description.s3_sse_kms_key_id #=> String
+    #   resp.export_description.failure_code #=> String
+    #   resp.export_description.failure_message #=> String
+    #   resp.export_description.export_format #=> String, one of "DYNAMODB_JSON", "ION"
+    #   resp.export_description.billed_size_bytes #=> Integer
+    #   resp.export_description.item_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExport AWS API Documentation
+    #
+    # @overload describe_export(params = {})
+    # @param [Hash] params ({})
+    def describe_export(params = {}, options = {})
+      req = build_request(:describe_export, params)
+      req.send_request(options)
+    end
+
     # Returns information about the specified global table.
     #
     # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
@@ -2224,7 +2310,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -2277,7 +2363,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -2334,6 +2420,39 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_global_table_settings(params = {}, options = {})
       req = build_request(:describe_global_table_settings, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the status of Kinesis streaming.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table being described.
+    #
+    # @return [Types::DescribeKinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::DescribeKinesisStreamingDestinationOutput#kinesis_data_stream_destinations #kinesis_data_stream_destinations} => Array&lt;Types::KinesisDataStreamDestination&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_kinesis_streaming_destination({
+    #     table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.kinesis_data_stream_destinations #=> Array
+    #   resp.kinesis_data_stream_destinations[0].stream_arn #=> String
+    #   resp.kinesis_data_stream_destinations[0].destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.kinesis_data_stream_destinations[0].destination_status_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload describe_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def describe_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:describe_kinesis_streaming_destination, params)
       req.send_request(options)
     end
 
@@ -2575,7 +2694,7 @@ module Aws::DynamoDB
     #   resp.table.global_table_version #=> String
     #   resp.table.replicas #=> Array
     #   resp.table.replicas[0].region_name #=> String
-    #   resp.table.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.table.replicas[0].replica_status_description #=> String
     #   resp.table.replicas[0].replica_status_percent_progress #=> String
     #   resp.table.replicas[0].kms_master_key_id #=> String
@@ -2685,7 +2804,7 @@ module Aws::DynamoDB
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableReplicaAutoScaling AWS API Documentation
     #
@@ -2723,6 +2842,280 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_time_to_live(params = {}, options = {})
       req = build_request(:describe_time_to_live, params)
+      req.send_request(options)
+    end
+
+    # Stops replication from the DynamoDB table to the Kinesis data stream.
+    # This is done without deleting either of the resources.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the DynamoDB table.
+    #
+    # @option params [required, String] :stream_arn
+    #   The ARN for a Kinesis data stream.
+    #
+    # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
+    #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_kinesis_streaming_destination({
+    #     table_name: "TableName", # required
+    #     stream_arn: "StreamArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DisableKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload disable_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def disable_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:disable_kinesis_streaming_destination, params)
+      req.send_request(options)
+    end
+
+    # Starts table data replication to the specified Kinesis data stream at
+    # a timestamp chosen during the enable workflow. If this operation
+    # doesn't return results immediately, use
+    # DescribeKinesisStreamingDestination to check if streaming to the
+    # Kinesis data stream is ACTIVE.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the DynamoDB table.
+    #
+    # @option params [required, String] :stream_arn
+    #   The ARN for a Kinesis data stream.
+    #
+    # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
+    #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_kinesis_streaming_destination({
+    #     table_name: "TableName", # required
+    #     stream_arn: "StreamArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/EnableKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload enable_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def enable_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:enable_kinesis_streaming_destination, params)
+      req.send_request(options)
+    end
+
+    # This operation allows you to perform reads and singleton writes on
+    # data stored in DynamoDB, using PartiQL.
+    #
+    # @option params [required, String] :statement
+    #   The PartiQL statement representing the operation to run.
+    #
+    # @option params [Array<Types::AttributeValue>] :parameters
+    #   The parameters for the PartiQL statement, if any.
+    #
+    # @option params [Boolean] :consistent_read
+    #   The consistency of a read operation. If set to `true`, then a strongly
+    #   consistent read is used; otherwise, an eventually consistent read is
+    #   used.
+    #
+    # @option params [String] :next_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #
+    # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteStatementOutput#items #items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
+    #   * {Types::ExecuteStatementOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_statement({
+    #     statement: "PartiQLStatement", # required
+    #     parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     consistent_read: false,
+    #     next_token: "PartiQLNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0] #=> Hash
+    #   resp.items[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatement AWS API Documentation
+    #
+    # @overload execute_statement(params = {})
+    # @param [Hash] params ({})
+    def execute_statement(params = {}, options = {})
+      req = build_request(:execute_statement, params)
+      req.send_request(options)
+    end
+
+    # This operation allows you to perform transactional reads or writes on
+    # data stored in DynamoDB, using PartiQL.
+    #
+    # @option params [required, Array<Types::ParameterizedStatement>] :transact_statements
+    #   The list of PartiQL statements representing the transaction to run.
+    #
+    # @option params [String] :client_request_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ExecuteTransactionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteTransactionOutput#responses #responses} => Array&lt;Types::ItemResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_transaction({
+    #     transact_statements: [ # required
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responses #=> Array
+    #   resp.responses[0].item #=> Hash
+    #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransaction AWS API Documentation
+    #
+    # @overload execute_transaction(params = {})
+    # @param [Hash] params ({})
+    def execute_transaction(params = {}, options = {})
+      req = build_request(:execute_transaction, params)
+      req.send_request(options)
+    end
+
+    # Exports table data to an S3 bucket. The table must have point in time
+    # recovery enabled, and you can export data from any time within the
+    # point in time recovery window.
+    #
+    # @option params [required, String] :table_arn
+    #   The Amazon Resource Name (ARN) associated with the table to export.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :export_time
+    #   Time in the past from which to export table data. The table export
+    #   will be a snapshot of the table's state at this point in time.
+    #
+    # @option params [String] :client_token
+    #   Providing a `ClientToken` makes the call to
+    #   `ExportTableToPointInTimeInput` idempotent, meaning that multiple
+    #   identical calls have the same effect as one single call.
+    #
+    #   A client token is valid for 8 hours after the first request that uses
+    #   it is completed. After 8 hours, any request with the same client token
+    #   is treated as a new request. Do not resubmit the same request with the
+    #   same client token for more than 8 hours, or the result might not be
+    #   idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 8-hour idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :s3_bucket
+    #   The name of the Amazon S3 bucket to export the snapshot to.
+    #
+    # @option params [String] :s3_bucket_owner
+    #   The ID of the AWS account that owns the bucket the export will be
+    #   stored in.
+    #
+    # @option params [String] :s3_prefix
+    #   The Amazon S3 bucket prefix to use as the file name and path of the
+    #   exported snapshot.
+    #
+    # @option params [String] :s3_sse_algorithm
+    #   Type of encryption used on the bucket where export data will be
+    #   stored. Valid values for `S3SseAlgorithm` are:
+    #
+    #   * `AES256` - server-side encryption with Amazon S3 managed keys
+    #
+    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #
+    # @option params [String] :s3_sse_kms_key_id
+    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket where
+    #   export data will be stored (if applicable).
+    #
+    # @option params [String] :export_format
+    #   The format for the exported data. Valid values for `ExportFormat` are
+    #   `DYNAMODB_JSON` or `ION`.
+    #
+    # @return [Types::ExportTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportTableToPointInTimeOutput#export_description #export_description} => Types::ExportDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_table_to_point_in_time({
+    #     table_arn: "TableArn", # required
+    #     export_time: Time.now,
+    #     client_token: "ClientToken",
+    #     s3_bucket: "S3Bucket", # required
+    #     s3_bucket_owner: "S3BucketOwner",
+    #     s3_prefix: "S3Prefix",
+    #     s3_sse_algorithm: "AES256", # accepts AES256, KMS
+    #     s3_sse_kms_key_id: "S3SseKmsKeyId",
+    #     export_format: "DYNAMODB_JSON", # accepts DYNAMODB_JSON, ION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_description.export_arn #=> String
+    #   resp.export_description.export_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.export_description.start_time #=> Time
+    #   resp.export_description.end_time #=> Time
+    #   resp.export_description.export_manifest #=> String
+    #   resp.export_description.table_arn #=> String
+    #   resp.export_description.table_id #=> String
+    #   resp.export_description.export_time #=> Time
+    #   resp.export_description.client_token #=> String
+    #   resp.export_description.s3_bucket #=> String
+    #   resp.export_description.s3_bucket_owner #=> String
+    #   resp.export_description.s3_prefix #=> String
+    #   resp.export_description.s3_sse_algorithm #=> String, one of "AES256", "KMS"
+    #   resp.export_description.s3_sse_kms_key_id #=> String
+    #   resp.export_description.failure_code #=> String
+    #   resp.export_description.failure_message #=> String
+    #   resp.export_description.export_format #=> String, one of "DYNAMODB_JSON", "ION"
+    #   resp.export_description.billed_size_bytes #=> Integer
+    #   resp.export_description.item_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTime AWS API Documentation
+    #
+    # @overload export_table_to_point_in_time(params = {})
+    # @param [Hash] params ({})
+    def export_table_to_point_in_time(params = {}, options = {})
+      req = build_request(:export_table_to_point_in_time, params)
       req.send_request(options)
     end
 
@@ -3045,6 +3438,50 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def list_contributor_insights(params = {}, options = {})
       req = build_request(:list_contributor_insights, params)
+      req.send_request(options)
+    end
+
+    # Lists completed exports within the past 90 days.
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) associated with the exported table.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListExports`. When provided in this manner, the
+    #   API fetches the next page of results.
+    #
+    # @return [Types::ListExportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportsOutput#export_summaries #export_summaries} => Array&lt;Types::ExportSummary&gt;
+    #   * {Types::ListExportsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exports({
+    #     table_arn: "TableArn",
+    #     max_results: 1,
+    #     next_token: "ExportNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_summaries #=> Array
+    #   resp.export_summaries[0].export_arn #=> String
+    #   resp.export_summaries[0].export_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExports AWS API Documentation
+    #
+    # @overload list_exports(params = {})
+    # @param [Hash] params ({})
+    def list_exports(params = {}, options = {})
+      req = build_request(:list_exports, params)
       req.send_request(options)
     end
 
@@ -4251,7 +4688,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -4474,7 +4911,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -5479,7 +5916,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -5637,7 +6074,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -6398,7 +6835,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -6588,7 +7025,7 @@ module Aws::DynamoDB
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableReplicaAutoScaling AWS API Documentation
     #
@@ -6684,7 +7121,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10,8 +10,6 @@ module Aws
           @resource.split(/[:,\/]/)
       end
 
-      attr_reader :outpost_id, :access_point_name
-
       def support_dualstack?
         false
       end
@@ -22,17 +20,17 @@ module Aws
 
       def validate_arn!
         unless @service == 's3-outposts'
-          raise ArgumentError, 'Must provide a valid S3 outposts ARN.'
+          raise ArgumentError, 'Must provide a valid S3 Outposts ARN.'
         end
 
         if @region.empty? || @account_id.empty?
           raise ArgumentError,
-                'S3 accesspoint ARNs must contain both a region '\
+                'S3 Outpost ARNs must contain both a region '\
                 'and an account id.'
         end
 
         if @type != 'outpost' && @subtype != 'accesspoint'
-          raise ArgumentError, 'Invalid ARN, resource format is not correct'
+          raise ArgumentError, 'Invalid ARN, resource format is not correct.'
         end
 
         if @outpost_id.nil? || @outpost_id.empty?
@@ -62,9 +60,13 @@ module Aws
       end
 
       # Outpost ARNs currently do not support dualstack
-      def host_url(region, _dualstack = false)
-        "#{@access_point_name}-#{@account_id}.#{@outpost_id}"\
-        ".s3-outposts.#{region}.amazonaws.com"
+      def host_url(region, _fips = false, _dualstack = false, custom_endpoint = nil)
+        pfx = "#{@access_point_name}-#{@account_id}.#{@outpost_id}"
+        if custom_endpoint
+          "#{pfx}.#{custom_endpoint}"
+        else
+          "#{pfx}.s3-outposts.#{region}.amazonaws.com"
+        end
       end
     end
   end

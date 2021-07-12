@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-07-06)
+------------------
+
+* Feature - Adds support for specifying parameters to customize components for recipes. Expands configuration of the Amazon EC2 instances that are used for building and testing images, including the ability to specify commands to run on launch, and more control over installation and removal of the SSM agent.
+
+1.22.0 (2021-05-14)
+------------------
+
+* Feature - Text-only updates for bundled documentation feedback tickets - spring 2021.
+
+1.21.0 (2021-04-02)
+------------------
+
+* Feature - This release adds support for Block Device Mappings for container image builds, and adds distribution configuration support for EC2 launch templates in AMI builds.
+
+1.20.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2021-02-25)
+------------------
+
+* Feature - This release introduces a new API (ListImagePackages) for listing packages installed on an image, and adds support for GP3 volume types, and for specifying a time zone in an image pipeline schedule.
+
+1.18.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2020-12-17)
+------------------
+
+* Feature - This release adds support for building and distributing container images within EC2 Image Builder.
+
+1.16.0 (2020-10-30)
+------------------
+
+* Feature - This feature increases the number of accounts that can be added to the Launch permissions within an Image Builder Distribution configuration.
+
 1.15.0 (2020-09-30)
 ------------------
 

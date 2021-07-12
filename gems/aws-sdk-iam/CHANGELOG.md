@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-07-07)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.55.0 (2021-06-02)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.54.0 (2021-05-20)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.53.0 (2021-05-19)
+------------------
+
+* Feature - Add pagination to ListUserTags operation
+
+1.52.0 (2021-03-29)
+------------------
+
+* Feature - AWS Identity and Access Management GetAccessKeyLastUsed API will throw a custom error if customer public key is not found for access keys.
+
+1.51.0 (2021-03-23)
+------------------
+
+* Feature - Documentation updates for IAM operations and descriptions.
+
+1.50.0 (2021-03-16)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.49.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-02-12)
+------------------
+
+* Feature - AWS Identity and Access Management now supports tagging for the following resources: customer managed policies, identity providers, instance profiles, server certificates, and virtual MFA devices.
+
+1.47.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2020-09-30)
 ------------------
 

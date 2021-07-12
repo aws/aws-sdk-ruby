@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -38,12 +38,14 @@ module Aws::S3
     AnalyticsId = Shapes::StringShape.new(name: 'AnalyticsId')
     AnalyticsS3BucketDestination = Shapes::StructureShape.new(name: 'AnalyticsS3BucketDestination')
     AnalyticsS3ExportFileFormat = Shapes::StringShape.new(name: 'AnalyticsS3ExportFileFormat')
+    ArchiveStatus = Shapes::StringShape.new(name: 'ArchiveStatus')
     Body = Shapes::BlobShape.new(name: 'Body')
     Bucket = Shapes::StructureShape.new(name: 'Bucket')
     BucketAccelerateStatus = Shapes::StringShape.new(name: 'BucketAccelerateStatus')
     BucketAlreadyExists = Shapes::StructureShape.new(name: 'BucketAlreadyExists')
     BucketAlreadyOwnedByYou = Shapes::StructureShape.new(name: 'BucketAlreadyOwnedByYou')
     BucketCannedACL = Shapes::StringShape.new(name: 'BucketCannedACL')
+    BucketKeyEnabled = Shapes::BooleanShape.new(name: 'BucketKeyEnabled')
     BucketLifecycleConfiguration = Shapes::StructureShape.new(name: 'BucketLifecycleConfiguration')
     BucketLocationConstraint = Shapes::StringShape.new(name: 'BucketLocationConstraint')
     BucketLoggingStatus = Shapes::StructureShape.new(name: 'BucketLoggingStatus')
@@ -112,6 +114,7 @@ module Aws::S3
     DeleteBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketAnalyticsConfigurationRequest')
     DeleteBucketCorsRequest = Shapes::StructureShape.new(name: 'DeleteBucketCorsRequest')
     DeleteBucketEncryptionRequest = Shapes::StructureShape.new(name: 'DeleteBucketEncryptionRequest')
+    DeleteBucketIntelligentTieringConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketIntelligentTieringConfigurationRequest')
     DeleteBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketInventoryConfigurationRequest')
     DeleteBucketLifecycleRequest = Shapes::StructureShape.new(name: 'DeleteBucketLifecycleRequest')
     DeleteBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketMetricsConfigurationRequest')
@@ -149,7 +152,9 @@ module Aws::S3
     End = Shapes::IntegerShape.new(name: 'End')
     EndEvent = Shapes::StructureShape.new(name: 'EndEvent')
     Error = Shapes::StructureShape.new(name: 'Error')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDocument = Shapes::StructureShape.new(name: 'ErrorDocument')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Errors = Shapes::ListShape.new(name: 'Errors', flattened: true)
     Event = Shapes::StringShape.new(name: 'Event')
     EventList = Shapes::ListShape.new(name: 'EventList', flattened: true)
@@ -181,6 +186,8 @@ module Aws::S3
     GetBucketCorsRequest = Shapes::StructureShape.new(name: 'GetBucketCorsRequest')
     GetBucketEncryptionOutput = Shapes::StructureShape.new(name: 'GetBucketEncryptionOutput')
     GetBucketEncryptionRequest = Shapes::StructureShape.new(name: 'GetBucketEncryptionRequest')
+    GetBucketIntelligentTieringConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketIntelligentTieringConfigurationOutput')
+    GetBucketIntelligentTieringConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketIntelligentTieringConfigurationRequest')
     GetBucketInventoryConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketInventoryConfigurationOutput')
     GetBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketInventoryConfigurationRequest')
     GetBucketLifecycleConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketLifecycleConfigurationOutput')
@@ -218,6 +225,7 @@ module Aws::S3
     GetObjectLockConfigurationRequest = Shapes::StructureShape.new(name: 'GetObjectLockConfigurationRequest')
     GetObjectOutput = Shapes::StructureShape.new(name: 'GetObjectOutput')
     GetObjectRequest = Shapes::StructureShape.new(name: 'GetObjectRequest')
+    GetObjectResponseStatusCode = Shapes::IntegerShape.new(name: 'GetObjectResponseStatusCode')
     GetObjectRetentionOutput = Shapes::StructureShape.new(name: 'GetObjectRetentionOutput')
     GetObjectRetentionRequest = Shapes::StructureShape.new(name: 'GetObjectRetentionRequest')
     GetObjectTaggingOutput = Shapes::StructureShape.new(name: 'GetObjectTaggingOutput')
@@ -250,6 +258,15 @@ module Aws::S3
     Initiated = Shapes::TimestampShape.new(name: 'Initiated')
     Initiator = Shapes::StructureShape.new(name: 'Initiator')
     InputSerialization = Shapes::StructureShape.new(name: 'InputSerialization')
+    IntelligentTieringAccessTier = Shapes::StringShape.new(name: 'IntelligentTieringAccessTier')
+    IntelligentTieringAndOperator = Shapes::StructureShape.new(name: 'IntelligentTieringAndOperator')
+    IntelligentTieringConfiguration = Shapes::StructureShape.new(name: 'IntelligentTieringConfiguration')
+    IntelligentTieringConfigurationList = Shapes::ListShape.new(name: 'IntelligentTieringConfigurationList', flattened: true)
+    IntelligentTieringDays = Shapes::IntegerShape.new(name: 'IntelligentTieringDays')
+    IntelligentTieringFilter = Shapes::StructureShape.new(name: 'IntelligentTieringFilter')
+    IntelligentTieringId = Shapes::StringShape.new(name: 'IntelligentTieringId')
+    IntelligentTieringStatus = Shapes::StringShape.new(name: 'IntelligentTieringStatus')
+    InvalidObjectState = Shapes::StructureShape.new(name: 'InvalidObjectState')
     InventoryConfiguration = Shapes::StructureShape.new(name: 'InventoryConfiguration')
     InventoryConfigurationList = Shapes::ListShape.new(name: 'InventoryConfigurationList', flattened: true)
     InventoryDestination = Shapes::StructureShape.new(name: 'InventoryDestination')
@@ -286,6 +303,8 @@ module Aws::S3
     LifecycleRules = Shapes::ListShape.new(name: 'LifecycleRules', flattened: true)
     ListBucketAnalyticsConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketAnalyticsConfigurationsOutput')
     ListBucketAnalyticsConfigurationsRequest = Shapes::StructureShape.new(name: 'ListBucketAnalyticsConfigurationsRequest')
+    ListBucketIntelligentTieringConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketIntelligentTieringConfigurationsOutput')
+    ListBucketIntelligentTieringConfigurationsRequest = Shapes::StructureShape.new(name: 'ListBucketIntelligentTieringConfigurationsRequest')
     ListBucketInventoryConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketInventoryConfigurationsOutput')
     ListBucketInventoryConfigurationsRequest = Shapes::StructureShape.new(name: 'ListBucketInventoryConfigurationsRequest')
     ListBucketMetricsConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketMetricsConfigurationsOutput')
@@ -399,6 +418,7 @@ module Aws::S3
     PutBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAnalyticsConfigurationRequest')
     PutBucketCorsRequest = Shapes::StructureShape.new(name: 'PutBucketCorsRequest')
     PutBucketEncryptionRequest = Shapes::StructureShape.new(name: 'PutBucketEncryptionRequest')
+    PutBucketIntelligentTieringConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketIntelligentTieringConfigurationRequest')
     PutBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketInventoryConfigurationRequest')
     PutBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleConfigurationRequest')
     PutBucketLifecycleRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleRequest')
@@ -442,6 +462,8 @@ module Aws::S3
     ReplaceKeyPrefixWith = Shapes::StringShape.new(name: 'ReplaceKeyPrefixWith')
     ReplaceKeyWith = Shapes::StringShape.new(name: 'ReplaceKeyWith')
     ReplicaKmsKeyID = Shapes::StringShape.new(name: 'ReplicaKmsKeyID')
+    ReplicaModifications = Shapes::StructureShape.new(name: 'ReplicaModifications')
+    ReplicaModificationsStatus = Shapes::StringShape.new(name: 'ReplicaModificationsStatus')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
     ReplicationRuleAndOperator = Shapes::StructureShape.new(name: 'ReplicationRuleAndOperator')
@@ -456,12 +478,14 @@ module Aws::S3
     RequestPayer = Shapes::StringShape.new(name: 'RequestPayer')
     RequestPaymentConfiguration = Shapes::StructureShape.new(name: 'RequestPaymentConfiguration')
     RequestProgress = Shapes::StructureShape.new(name: 'RequestProgress')
+    RequestRoute = Shapes::StringShape.new(name: 'RequestRoute')
+    RequestToken = Shapes::StringShape.new(name: 'RequestToken')
     ResponseCacheControl = Shapes::StringShape.new(name: 'ResponseCacheControl')
     ResponseContentDisposition = Shapes::StringShape.new(name: 'ResponseContentDisposition')
     ResponseContentEncoding = Shapes::StringShape.new(name: 'ResponseContentEncoding')
     ResponseContentLanguage = Shapes::StringShape.new(name: 'ResponseContentLanguage')
     ResponseContentType = Shapes::StringShape.new(name: 'ResponseContentType')
-    ResponseExpires = Shapes::TimestampShape.new(name: 'ResponseExpires')
+    ResponseExpires = Shapes::TimestampShape.new(name: 'ResponseExpires', timestampFormat: "rfc822")
     Restore = Shapes::StringShape.new(name: 'Restore')
     RestoreObjectOutput = Shapes::StructureShape.new(name: 'RestoreObjectOutput')
     RestoreObjectRequest = Shapes::StructureShape.new(name: 'RestoreObjectRequest')
@@ -517,6 +541,8 @@ module Aws::S3
     TargetGrants = Shapes::ListShape.new(name: 'TargetGrants')
     TargetPrefix = Shapes::StringShape.new(name: 'TargetPrefix')
     Tier = Shapes::StringShape.new(name: 'Tier')
+    Tiering = Shapes::StructureShape.new(name: 'Tiering')
+    TieringList = Shapes::ListShape.new(name: 'TieringList', flattened: true)
     Token = Shapes::StringShape.new(name: 'Token')
     TopicArn = Shapes::StringShape.new(name: 'TopicArn')
     TopicConfiguration = Shapes::StructureShape.new(name: 'TopicConfiguration')
@@ -538,6 +564,7 @@ module Aws::S3
     VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     WebsiteConfiguration = Shapes::StructureShape.new(name: 'WebsiteConfiguration')
     WebsiteRedirectLocation = Shapes::StringShape.new(name: 'WebsiteRedirectLocation')
+    WriteGetObjectResponseRequest = Shapes::StructureShape.new(name: 'WriteGetObjectResponseRequest')
     Years = Shapes::IntegerShape.new(name: 'Years')
 
     AbortIncompleteMultipartUpload.add_member(:days_after_initiation, Shapes::ShapeRef.new(shape: DaysAfterInitiation, location_name: "DaysAfterInitiation"))
@@ -613,6 +640,7 @@ module Aws::S3
     CORSConfiguration.add_member(:cors_rules, Shapes::ShapeRef.new(shape: CORSRules, required: true, location_name: "CORSRule"))
     CORSConfiguration.struct_class = Types::CORSConfiguration
 
+    CORSRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     CORSRule.add_member(:allowed_headers, Shapes::ShapeRef.new(shape: AllowedHeaders, location_name: "AllowedHeader"))
     CORSRule.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, required: true, location_name: "AllowedMethod"))
     CORSRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: AllowedOrigins, required: true, location_name: "AllowedOrigin"))
@@ -658,6 +686,7 @@ module Aws::S3
     CompleteMultipartUploadOutput.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-server-side-encryption"))
     CompleteMultipartUploadOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     CompleteMultipartUploadOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    CompleteMultipartUploadOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     CompleteMultipartUploadOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     CompleteMultipartUploadOutput.struct_class = Types::CompleteMultipartUploadOutput
 
@@ -695,6 +724,7 @@ module Aws::S3
     CopyObjectOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CopyObjectOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     CopyObjectOutput.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
+    CopyObjectOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     CopyObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     CopyObjectOutput.struct_class = Types::CopyObjectOutput
     CopyObjectOutput[:payload] = :copy_object_result
@@ -729,6 +759,7 @@ module Aws::S3
     CopyObjectRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CopyObjectRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     CopyObjectRequest.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
+    CopyObjectRequest.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     CopyObjectRequest.add_member(:copy_source_sse_customer_algorithm, Shapes::ShapeRef.new(shape: CopySourceSSECustomerAlgorithm, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-algorithm"))
     CopyObjectRequest.add_member(:copy_source_sse_customer_key, Shapes::ShapeRef.new(shape: CopySourceSSECustomerKey, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-key"))
     CopyObjectRequest.add_member(:copy_source_sse_customer_key_md5, Shapes::ShapeRef.new(shape: CopySourceSSECustomerKeyMD5, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-key-MD5"))
@@ -778,6 +809,7 @@ module Aws::S3
     CreateMultipartUploadOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CreateMultipartUploadOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     CreateMultipartUploadOutput.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
+    CreateMultipartUploadOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     CreateMultipartUploadOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     CreateMultipartUploadOutput.struct_class = Types::CreateMultipartUploadOutput
 
@@ -803,6 +835,7 @@ module Aws::S3
     CreateMultipartUploadRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     CreateMultipartUploadRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     CreateMultipartUploadRequest.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
+    CreateMultipartUploadRequest.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     CreateMultipartUploadRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     CreateMultipartUploadRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
     CreateMultipartUploadRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
@@ -832,6 +865,10 @@ module Aws::S3
     DeleteBucketEncryptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     DeleteBucketEncryptionRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     DeleteBucketEncryptionRequest.struct_class = Types::DeleteBucketEncryptionRequest
+
+    DeleteBucketIntelligentTieringConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    DeleteBucketIntelligentTieringConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntelligentTieringId, required: true, location: "querystring", location_name: "id"))
+    DeleteBucketIntelligentTieringConfigurationRequest.struct_class = Types::DeleteBucketIntelligentTieringConfigurationRequest
 
     DeleteBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     DeleteBucketInventoryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location: "querystring", location_name: "id"))
@@ -1017,6 +1054,15 @@ module Aws::S3
     GetBucketEncryptionRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     GetBucketEncryptionRequest.struct_class = Types::GetBucketEncryptionRequest
 
+    GetBucketIntelligentTieringConfigurationOutput.add_member(:intelligent_tiering_configuration, Shapes::ShapeRef.new(shape: IntelligentTieringConfiguration, location_name: "IntelligentTieringConfiguration"))
+    GetBucketIntelligentTieringConfigurationOutput.struct_class = Types::GetBucketIntelligentTieringConfigurationOutput
+    GetBucketIntelligentTieringConfigurationOutput[:payload] = :intelligent_tiering_configuration
+    GetBucketIntelligentTieringConfigurationOutput[:payload_member] = GetBucketIntelligentTieringConfigurationOutput.member(:intelligent_tiering_configuration)
+
+    GetBucketIntelligentTieringConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetBucketIntelligentTieringConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntelligentTieringId, required: true, location: "querystring", location_name: "id"))
+    GetBucketIntelligentTieringConfigurationRequest.struct_class = Types::GetBucketIntelligentTieringConfigurationRequest
+
     GetBucketInventoryConfigurationOutput.add_member(:inventory_configuration, Shapes::ShapeRef.new(shape: InventoryConfiguration, location_name: "InventoryConfiguration"))
     GetBucketInventoryConfigurationOutput.struct_class = Types::GetBucketInventoryConfigurationOutput
     GetBucketInventoryConfigurationOutput[:payload] = :inventory_configuration
@@ -1194,6 +1240,7 @@ module Aws::S3
     GetObjectOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     GetObjectOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     GetObjectOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    GetObjectOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     GetObjectOutput.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location: "header", location_name: "x-amz-storage-class"))
     GetObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     GetObjectOutput.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-replication-status"))
@@ -1248,6 +1295,7 @@ module Aws::S3
     GetObjectTaggingRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
     GetObjectTaggingRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
     GetObjectTaggingRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    GetObjectTaggingRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     GetObjectTaggingRequest.struct_class = Types::GetObjectTaggingRequest
 
     GetObjectTorrentOutput.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body", metadata: {"streaming"=>true}))
@@ -1295,6 +1343,7 @@ module Aws::S3
     HeadObjectOutput.add_member(:accept_ranges, Shapes::ShapeRef.new(shape: AcceptRanges, location: "header", location_name: "accept-ranges"))
     HeadObjectOutput.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location: "header", location_name: "x-amz-expiration"))
     HeadObjectOutput.add_member(:restore, Shapes::ShapeRef.new(shape: Restore, location: "header", location_name: "x-amz-restore"))
+    HeadObjectOutput.add_member(:archive_status, Shapes::ShapeRef.new(shape: ArchiveStatus, location: "header", location_name: "x-amz-archive-status"))
     HeadObjectOutput.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location: "header", location_name: "Last-Modified"))
     HeadObjectOutput.add_member(:content_length, Shapes::ShapeRef.new(shape: ContentLength, location: "header", location_name: "Content-Length"))
     HeadObjectOutput.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
@@ -1313,6 +1362,7 @@ module Aws::S3
     HeadObjectOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     HeadObjectOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     HeadObjectOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    HeadObjectOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     HeadObjectOutput.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location: "header", location_name: "x-amz-storage-class"))
     HeadObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     HeadObjectOutput.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-replication-status"))
@@ -1350,6 +1400,27 @@ module Aws::S3
     InputSerialization.add_member(:json, Shapes::ShapeRef.new(shape: JSONInput, location_name: "JSON"))
     InputSerialization.add_member(:parquet, Shapes::ShapeRef.new(shape: ParquetInput, location_name: "Parquet"))
     InputSerialization.struct_class = Types::InputSerialization
+
+    IntelligentTieringAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    IntelligentTieringAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+    IntelligentTieringAndOperator.struct_class = Types::IntelligentTieringAndOperator
+
+    IntelligentTieringConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: IntelligentTieringId, required: true, location_name: "Id"))
+    IntelligentTieringConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: IntelligentTieringFilter, location_name: "Filter"))
+    IntelligentTieringConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: IntelligentTieringStatus, required: true, location_name: "Status"))
+    IntelligentTieringConfiguration.add_member(:tierings, Shapes::ShapeRef.new(shape: TieringList, required: true, location_name: "Tiering"))
+    IntelligentTieringConfiguration.struct_class = Types::IntelligentTieringConfiguration
+
+    IntelligentTieringConfigurationList.member = Shapes::ShapeRef.new(shape: IntelligentTieringConfiguration)
+
+    IntelligentTieringFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    IntelligentTieringFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    IntelligentTieringFilter.add_member(:and, Shapes::ShapeRef.new(shape: IntelligentTieringAndOperator, location_name: "And"))
+    IntelligentTieringFilter.struct_class = Types::IntelligentTieringFilter
+
+    InvalidObjectState.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    InvalidObjectState.add_member(:access_tier, Shapes::ShapeRef.new(shape: IntelligentTieringAccessTier, location_name: "AccessTier"))
+    InvalidObjectState.struct_class = Types::InvalidObjectState
 
     InventoryConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: InventoryDestination, required: true, location_name: "Destination"))
     InventoryConfiguration.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
@@ -1438,6 +1509,16 @@ module Aws::S3
     ListBucketAnalyticsConfigurationsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
     ListBucketAnalyticsConfigurationsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     ListBucketAnalyticsConfigurationsRequest.struct_class = Types::ListBucketAnalyticsConfigurationsRequest
+
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:next_continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:intelligent_tiering_configuration_list, Shapes::ShapeRef.new(shape: IntelligentTieringConfigurationList, location_name: "IntelligentTieringConfiguration"))
+    ListBucketIntelligentTieringConfigurationsOutput.struct_class = Types::ListBucketIntelligentTieringConfigurationsOutput
+
+    ListBucketIntelligentTieringConfigurationsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    ListBucketIntelligentTieringConfigurationsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
+    ListBucketIntelligentTieringConfigurationsRequest.struct_class = Types::ListBucketIntelligentTieringConfigurationsRequest
 
     ListBucketInventoryConfigurationsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
     ListBucketInventoryConfigurationsOutput.add_member(:inventory_configuration_list, Shapes::ShapeRef.new(shape: InventoryConfigurationList, location_name: "InventoryConfiguration"))
@@ -1600,7 +1681,7 @@ module Aws::S3
     MetadataEntry.struct_class = Types::MetadataEntry
 
     Metrics.add_member(:status, Shapes::ShapeRef.new(shape: MetricsStatus, required: true, location_name: "Status"))
-    Metrics.add_member(:event_threshold, Shapes::ShapeRef.new(shape: ReplicationTimeValue, required: true, location_name: "EventThreshold"))
+    Metrics.add_member(:event_threshold, Shapes::ShapeRef.new(shape: ReplicationTimeValue, location_name: "EventThreshold"))
     Metrics.struct_class = Types::Metrics
 
     MetricsAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
@@ -1758,7 +1839,7 @@ module Aws::S3
     PutBucketAclRequest.add_member(:acl, Shapes::ShapeRef.new(shape: BucketCannedACL, location: "header", location_name: "x-amz-acl"))
     PutBucketAclRequest.add_member(:access_control_policy, Shapes::ShapeRef.new(shape: AccessControlPolicy, location_name: "AccessControlPolicy", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketAclRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketAclRequest.add_member(:grant_full_control, Shapes::ShapeRef.new(shape: GrantFullControl, location: "header", location_name: "x-amz-grant-full-control"))
     PutBucketAclRequest.add_member(:grant_read, Shapes::ShapeRef.new(shape: GrantRead, location: "header", location_name: "x-amz-grant-read"))
     PutBucketAclRequest.add_member(:grant_read_acp, Shapes::ShapeRef.new(shape: GrantReadACP, location: "header", location_name: "x-amz-grant-read-acp"))
@@ -1779,19 +1860,26 @@ module Aws::S3
 
     PutBucketCorsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketCorsRequest.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: CORSConfiguration, required: true, location_name: "CORSConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
-    PutBucketCorsRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketCorsRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketCorsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketCorsRequest.struct_class = Types::PutBucketCorsRequest
     PutBucketCorsRequest[:payload] = :cors_configuration
     PutBucketCorsRequest[:payload_member] = PutBucketCorsRequest.member(:cors_configuration)
 
     PutBucketEncryptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketEncryptionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketEncryptionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketEncryptionRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, required: true, location_name: "ServerSideEncryptionConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketEncryptionRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketEncryptionRequest.struct_class = Types::PutBucketEncryptionRequest
     PutBucketEncryptionRequest[:payload] = :server_side_encryption_configuration
     PutBucketEncryptionRequest[:payload_member] = PutBucketEncryptionRequest.member(:server_side_encryption_configuration)
+
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntelligentTieringId, required: true, location: "querystring", location_name: "id"))
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:intelligent_tiering_configuration, Shapes::ShapeRef.new(shape: IntelligentTieringConfiguration, required: true, location_name: "IntelligentTieringConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutBucketIntelligentTieringConfigurationRequest.struct_class = Types::PutBucketIntelligentTieringConfigurationRequest
+    PutBucketIntelligentTieringConfigurationRequest[:payload] = :intelligent_tiering_configuration
+    PutBucketIntelligentTieringConfigurationRequest[:payload_member] = PutBucketIntelligentTieringConfigurationRequest.member(:intelligent_tiering_configuration)
 
     PutBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketInventoryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location: "querystring", location_name: "id"))
@@ -1809,7 +1897,7 @@ module Aws::S3
     PutBucketLifecycleConfigurationRequest[:payload_member] = PutBucketLifecycleConfigurationRequest.member(:lifecycle_configuration)
 
     PutBucketLifecycleRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketLifecycleRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketLifecycleRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketLifecycleRequest.add_member(:lifecycle_configuration, Shapes::ShapeRef.new(shape: LifecycleConfiguration, location_name: "LifecycleConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketLifecycleRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketLifecycleRequest.struct_class = Types::PutBucketLifecycleRequest
@@ -1818,7 +1906,7 @@ module Aws::S3
 
     PutBucketLoggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketLoggingRequest.add_member(:bucket_logging_status, Shapes::ShapeRef.new(shape: BucketLoggingStatus, required: true, location_name: "BucketLoggingStatus", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
-    PutBucketLoggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketLoggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketLoggingRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketLoggingRequest.struct_class = Types::PutBucketLoggingRequest
     PutBucketLoggingRequest[:payload] = :bucket_logging_status
@@ -1840,7 +1928,7 @@ module Aws::S3
     PutBucketNotificationConfigurationRequest[:payload_member] = PutBucketNotificationConfigurationRequest.member(:notification_configuration)
 
     PutBucketNotificationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketNotificationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketNotificationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketNotificationRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfigurationDeprecated, required: true, location_name: "NotificationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketNotificationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketNotificationRequest.struct_class = Types::PutBucketNotificationRequest
@@ -1856,7 +1944,7 @@ module Aws::S3
     PutBucketOwnershipControlsRequest[:payload_member] = PutBucketOwnershipControlsRequest.member(:ownership_controls)
 
     PutBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketPolicyRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketPolicyRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketPolicyRequest.add_member(:confirm_remove_self_bucket_access, Shapes::ShapeRef.new(shape: ConfirmRemoveSelfBucketAccess, location: "header", location_name: "x-amz-confirm-remove-self-bucket-access"))
     PutBucketPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutBucketPolicyRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
@@ -1865,7 +1953,7 @@ module Aws::S3
     PutBucketPolicyRequest[:payload_member] = PutBucketPolicyRequest.member(:policy)
 
     PutBucketReplicationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketReplicationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketReplicationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketReplicationRequest.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, required: true, location_name: "ReplicationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketReplicationRequest.add_member(:token, Shapes::ShapeRef.new(shape: ObjectLockToken, location: "header", location_name: "x-amz-bucket-object-lock-token"))
     PutBucketReplicationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
@@ -1874,7 +1962,7 @@ module Aws::S3
     PutBucketReplicationRequest[:payload_member] = PutBucketReplicationRequest.member(:replication_configuration)
 
     PutBucketRequestPaymentRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketRequestPaymentRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketRequestPaymentRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketRequestPaymentRequest.add_member(:request_payment_configuration, Shapes::ShapeRef.new(shape: RequestPaymentConfiguration, required: true, location_name: "RequestPaymentConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketRequestPaymentRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketRequestPaymentRequest.struct_class = Types::PutBucketRequestPaymentRequest
@@ -1882,7 +1970,7 @@ module Aws::S3
     PutBucketRequestPaymentRequest[:payload_member] = PutBucketRequestPaymentRequest.member(:request_payment_configuration)
 
     PutBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketTaggingRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketTaggingRequest.struct_class = Types::PutBucketTaggingRequest
@@ -1890,7 +1978,7 @@ module Aws::S3
     PutBucketTaggingRequest[:payload_member] = PutBucketTaggingRequest.member(:tagging)
 
     PutBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketVersioningRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketVersioningRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketVersioningRequest.add_member(:mfa, Shapes::ShapeRef.new(shape: MFA, location: "header", location_name: "x-amz-mfa"))
     PutBucketVersioningRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, required: true, location_name: "VersioningConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketVersioningRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
@@ -1899,7 +1987,7 @@ module Aws::S3
     PutBucketVersioningRequest[:payload_member] = PutBucketVersioningRequest.member(:versioning_configuration)
 
     PutBucketWebsiteRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketWebsiteRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutBucketWebsiteRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketWebsiteRequest.add_member(:website_configuration, Shapes::ShapeRef.new(shape: WebsiteConfiguration, required: true, location_name: "WebsiteConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketWebsiteRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketWebsiteRequest.struct_class = Types::PutBucketWebsiteRequest
@@ -1912,7 +2000,7 @@ module Aws::S3
     PutObjectAclRequest.add_member(:acl, Shapes::ShapeRef.new(shape: ObjectCannedACL, location: "header", location_name: "x-amz-acl"))
     PutObjectAclRequest.add_member(:access_control_policy, Shapes::ShapeRef.new(shape: AccessControlPolicy, location_name: "AccessControlPolicy", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectAclRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutObjectAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutObjectAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutObjectAclRequest.add_member(:grant_full_control, Shapes::ShapeRef.new(shape: GrantFullControl, location: "header", location_name: "x-amz-grant-full-control"))
     PutObjectAclRequest.add_member(:grant_read, Shapes::ShapeRef.new(shape: GrantRead, location: "header", location_name: "x-amz-grant-read"))
     PutObjectAclRequest.add_member(:grant_read_acp, Shapes::ShapeRef.new(shape: GrantReadACP, location: "header", location_name: "x-amz-grant-read-acp"))
@@ -1934,7 +2022,7 @@ module Aws::S3
     PutObjectLegalHoldRequest.add_member(:legal_hold, Shapes::ShapeRef.new(shape: ObjectLockLegalHold, location_name: "LegalHold", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectLegalHoldRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectLegalHoldRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
-    PutObjectLegalHoldRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutObjectLegalHoldRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutObjectLegalHoldRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutObjectLegalHoldRequest.struct_class = Types::PutObjectLegalHoldRequest
     PutObjectLegalHoldRequest[:payload] = :legal_hold
@@ -1947,7 +2035,7 @@ module Aws::S3
     PutObjectLockConfigurationRequest.add_member(:object_lock_configuration, Shapes::ShapeRef.new(shape: ObjectLockConfiguration, location_name: "ObjectLockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectLockConfigurationRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectLockConfigurationRequest.add_member(:token, Shapes::ShapeRef.new(shape: ObjectLockToken, location: "header", location_name: "x-amz-bucket-object-lock-token"))
-    PutObjectLockConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutObjectLockConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutObjectLockConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutObjectLockConfigurationRequest.struct_class = Types::PutObjectLockConfigurationRequest
     PutObjectLockConfigurationRequest[:payload] = :object_lock_configuration
@@ -1961,6 +2049,7 @@ module Aws::S3
     PutObjectOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     PutObjectOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     PutObjectOutput.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
+    PutObjectOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     PutObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     PutObjectOutput.struct_class = Types::PutObjectOutput
 
@@ -1989,6 +2078,7 @@ module Aws::S3
     PutObjectRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     PutObjectRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     PutObjectRequest.add_member(:ssekms_encryption_context, Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location: "header", location_name: "x-amz-server-side-encryption-context"))
+    PutObjectRequest.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     PutObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
     PutObjectRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
@@ -2008,7 +2098,7 @@ module Aws::S3
     PutObjectRetentionRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectRetentionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
     PutObjectRetentionRequest.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location: "header", location_name: "x-amz-bypass-governance-retention"))
-    PutObjectRetentionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutObjectRetentionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutObjectRetentionRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutObjectRetentionRequest.struct_class = Types::PutObjectRetentionRequest
     PutObjectRetentionRequest[:payload] = :retention
@@ -2020,15 +2110,16 @@ module Aws::S3
     PutObjectTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutObjectTaggingRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
     PutObjectTaggingRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
-    PutObjectTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutObjectTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutObjectTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectTaggingRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    PutObjectTaggingRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectTaggingRequest.struct_class = Types::PutObjectTaggingRequest
     PutObjectTaggingRequest[:payload] = :tagging
     PutObjectTaggingRequest[:payload_member] = PutObjectTaggingRequest.member(:tagging)
 
     PutPublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutPublicAccessBlockRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
+    PutPublicAccessBlockRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutPublicAccessBlockRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutPublicAccessBlockRequest.struct_class = Types::PutPublicAccessBlockRequest
@@ -2062,6 +2153,9 @@ module Aws::S3
     RedirectAllRequestsTo.add_member(:host_name, Shapes::ShapeRef.new(shape: HostName, required: true, location_name: "HostName"))
     RedirectAllRequestsTo.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
     RedirectAllRequestsTo.struct_class = Types::RedirectAllRequestsTo
+
+    ReplicaModifications.add_member(:status, Shapes::ShapeRef.new(shape: ReplicaModificationsStatus, required: true, location_name: "Status"))
+    ReplicaModifications.struct_class = Types::ReplicaModifications
 
     ReplicationConfiguration.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
     ReplicationConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ReplicationRules, required: true, location_name: "Rule"))
@@ -2205,11 +2299,13 @@ module Aws::S3
     ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
 
     ServerSideEncryptionRule.add_member(:apply_server_side_encryption_by_default, Shapes::ShapeRef.new(shape: ServerSideEncryptionByDefault, location_name: "ApplyServerSideEncryptionByDefault"))
+    ServerSideEncryptionRule.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled"))
     ServerSideEncryptionRule.struct_class = Types::ServerSideEncryptionRule
 
     ServerSideEncryptionRules.member = Shapes::ShapeRef.new(shape: ServerSideEncryptionRule)
 
     SourceSelectionCriteria.add_member(:sse_kms_encrypted_objects, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjects, location_name: "SseKmsEncryptedObjects"))
+    SourceSelectionCriteria.add_member(:replica_modifications, Shapes::ShapeRef.new(shape: ReplicaModifications, location_name: "ReplicaModifications"))
     SourceSelectionCriteria.struct_class = Types::SourceSelectionCriteria
 
     SseKmsEncryptedObjects.add_member(:status, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjectsStatus, required: true, location_name: "Status"))
@@ -2245,6 +2341,12 @@ module Aws::S3
 
     TargetGrants.member = Shapes::ShapeRef.new(shape: TargetGrant, location_name: "Grant")
 
+    Tiering.add_member(:days, Shapes::ShapeRef.new(shape: IntelligentTieringDays, required: true, location_name: "Days"))
+    Tiering.add_member(:access_tier, Shapes::ShapeRef.new(shape: IntelligentTieringAccessTier, required: true, location_name: "AccessTier"))
+    Tiering.struct_class = Types::Tiering
+
+    TieringList.member = Shapes::ShapeRef.new(shape: Tiering)
+
     TopicConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
     TopicConfiguration.add_member(:topic_arn, Shapes::ShapeRef.new(shape: TopicArn, required: true, location_name: "Topic"))
     TopicConfiguration.add_member(:events, Shapes::ShapeRef.new(shape: EventList, required: true, location_name: "Event"))
@@ -2272,6 +2374,7 @@ module Aws::S3
     UploadPartCopyOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     UploadPartCopyOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     UploadPartCopyOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    UploadPartCopyOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     UploadPartCopyOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     UploadPartCopyOutput.struct_class = Types::UploadPartCopyOutput
     UploadPartCopyOutput[:payload] = :copy_part_result
@@ -2303,6 +2406,7 @@ module Aws::S3
     UploadPartOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     UploadPartOutput.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
     UploadPartOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
+    UploadPartOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     UploadPartOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     UploadPartOutput.struct_class = Types::UploadPartOutput
 
@@ -2333,6 +2437,46 @@ module Aws::S3
     WebsiteConfiguration.add_member(:redirect_all_requests_to, Shapes::ShapeRef.new(shape: RedirectAllRequestsTo, location_name: "RedirectAllRequestsTo"))
     WebsiteConfiguration.add_member(:routing_rules, Shapes::ShapeRef.new(shape: RoutingRules, location_name: "RoutingRules"))
     WebsiteConfiguration.struct_class = Types::WebsiteConfiguration
+
+    WriteGetObjectResponseRequest.add_member(:request_route, Shapes::ShapeRef.new(shape: RequestRoute, required: true, location: "header", location_name: "x-amz-request-route", metadata: {"hostLabel"=>true, "hostLabelName"=>"RequestRoute"}))
+    WriteGetObjectResponseRequest.add_member(:request_token, Shapes::ShapeRef.new(shape: RequestToken, required: true, location: "header", location_name: "x-amz-request-token"))
+    WriteGetObjectResponseRequest.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body", metadata: {"streaming"=>true}))
+    WriteGetObjectResponseRequest.add_member(:status_code, Shapes::ShapeRef.new(shape: GetObjectResponseStatusCode, location: "header", location_name: "x-amz-fwd-status"))
+    WriteGetObjectResponseRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location: "header", location_name: "x-amz-fwd-error-code"))
+    WriteGetObjectResponseRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location: "header", location_name: "x-amz-fwd-error-message"))
+    WriteGetObjectResponseRequest.add_member(:accept_ranges, Shapes::ShapeRef.new(shape: AcceptRanges, location: "header", location_name: "x-amz-fwd-header-accept-ranges"))
+    WriteGetObjectResponseRequest.add_member(:cache_control, Shapes::ShapeRef.new(shape: CacheControl, location: "header", location_name: "x-amz-fwd-header-Cache-Control"))
+    WriteGetObjectResponseRequest.add_member(:content_disposition, Shapes::ShapeRef.new(shape: ContentDisposition, location: "header", location_name: "x-amz-fwd-header-Content-Disposition"))
+    WriteGetObjectResponseRequest.add_member(:content_encoding, Shapes::ShapeRef.new(shape: ContentEncoding, location: "header", location_name: "x-amz-fwd-header-Content-Encoding"))
+    WriteGetObjectResponseRequest.add_member(:content_language, Shapes::ShapeRef.new(shape: ContentLanguage, location: "header", location_name: "x-amz-fwd-header-Content-Language"))
+    WriteGetObjectResponseRequest.add_member(:content_length, Shapes::ShapeRef.new(shape: ContentLength, location: "header", location_name: "Content-Length"))
+    WriteGetObjectResponseRequest.add_member(:content_range, Shapes::ShapeRef.new(shape: ContentRange, location: "header", location_name: "x-amz-fwd-header-Content-Range"))
+    WriteGetObjectResponseRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "x-amz-fwd-header-Content-Type"))
+    WriteGetObjectResponseRequest.add_member(:delete_marker, Shapes::ShapeRef.new(shape: DeleteMarker, location: "header", location_name: "x-amz-fwd-header-x-amz-delete-marker"))
+    WriteGetObjectResponseRequest.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "x-amz-fwd-header-ETag"))
+    WriteGetObjectResponseRequest.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location: "header", location_name: "x-amz-fwd-header-Expires"))
+    WriteGetObjectResponseRequest.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location: "header", location_name: "x-amz-fwd-header-x-amz-expiration"))
+    WriteGetObjectResponseRequest.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location: "header", location_name: "x-amz-fwd-header-Last-Modified"))
+    WriteGetObjectResponseRequest.add_member(:missing_meta, Shapes::ShapeRef.new(shape: MissingMeta, location: "header", location_name: "x-amz-fwd-header-x-amz-missing-meta"))
+    WriteGetObjectResponseRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location: "headers", location_name: "x-amz-meta-"))
+    WriteGetObjectResponseRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-fwd-header-x-amz-object-lock-mode"))
+    WriteGetObjectResponseRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-fwd-header-x-amz-object-lock-legal-hold"))
+    WriteGetObjectResponseRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-fwd-header-x-amz-object-lock-retain-until-date"))
+    WriteGetObjectResponseRequest.add_member(:parts_count, Shapes::ShapeRef.new(shape: PartsCount, location: "header", location_name: "x-amz-fwd-header-x-amz-mp-parts-count"))
+    WriteGetObjectResponseRequest.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-fwd-header-x-amz-replication-status"))
+    WriteGetObjectResponseRequest.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-fwd-header-x-amz-request-charged"))
+    WriteGetObjectResponseRequest.add_member(:restore, Shapes::ShapeRef.new(shape: Restore, location: "header", location_name: "x-amz-fwd-header-x-amz-restore"))
+    WriteGetObjectResponseRequest.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption"))
+    WriteGetObjectResponseRequest.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-customer-algorithm"))
+    WriteGetObjectResponseRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-aws-kms-key-id"))
+    WriteGetObjectResponseRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-customer-key-MD5"))
+    WriteGetObjectResponseRequest.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location: "header", location_name: "x-amz-fwd-header-x-amz-storage-class"))
+    WriteGetObjectResponseRequest.add_member(:tag_count, Shapes::ShapeRef.new(shape: TagCount, location: "header", location_name: "x-amz-fwd-header-x-amz-tagging-count"))
+    WriteGetObjectResponseRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-fwd-header-x-amz-version-id"))
+    WriteGetObjectResponseRequest.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-bucket-key-enabled"))
+    WriteGetObjectResponseRequest.struct_class = Types::WriteGetObjectResponseRequest
+    WriteGetObjectResponseRequest[:payload] = :body
+    WriteGetObjectResponseRequest[:payload_member] = WriteGetObjectResponseRequest.member(:body)
 
 
     # @api private
@@ -2425,6 +2569,14 @@ module Aws::S3
         o.http_method = "DELETE"
         o.http_request_uri = "/{Bucket}?encryption"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketEncryptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_bucket_intelligent_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBucketIntelligentTieringConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBucketIntelligentTieringConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
@@ -2565,6 +2717,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: GetBucketEncryptionOutput)
       end)
 
+      api.add_operation(:get_bucket_intelligent_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketIntelligentTieringConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketIntelligentTieringConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketIntelligentTieringConfigurationOutput)
+      end)
+
       api.add_operation(:get_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketInventoryConfiguration"
         o.http_method = "GET"
@@ -2702,6 +2862,7 @@ module Aws::S3
         o.input = Shapes::ShapeRef.new(shape: GetObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidObjectState)
       end)
 
       api.add_operation(:get_object_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -2785,6 +2946,14 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}?analytics"
         o.input = Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsOutput)
+      end)
+
+      api.add_operation(:list_bucket_intelligent_tiering_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBucketIntelligentTieringConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
+        o.input = Shapes::ShapeRef.new(shape: ListBucketIntelligentTieringConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBucketIntelligentTieringConfigurationsOutput)
       end)
 
       api.add_operation(:list_bucket_inventory_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -2932,6 +3101,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:put_bucket_intelligent_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBucketIntelligentTieringConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
+        o.input = Shapes::ShapeRef.new(shape: PutBucketIntelligentTieringConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:put_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketInventoryConfiguration"
         o.http_method = "PUT"
@@ -2998,6 +3175,7 @@ module Aws::S3
         o.name = "PutBucketOwnershipControls"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?ownershipControls"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketOwnershipControlsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -3155,6 +3333,18 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: UploadPartCopyRequest)
         o.output = Shapes::ShapeRef.new(shape: UploadPartCopyOutput)
+      end)
+
+      api.add_operation(:write_get_object_response, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "WriteGetObjectResponse"
+        o.http_method = "POST"
+        o.http_request_uri = "/WriteGetObjectResponse"
+        o['authtype'] = "v4-unsigned-body"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{RequestRoute}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: WriteGetObjectResponseRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
     end
 

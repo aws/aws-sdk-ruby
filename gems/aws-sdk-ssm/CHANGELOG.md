@@ -1,6 +1,86 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2021-06-03)
+------------------
+
+* Feature - Documentation updates for ssm to fix customer reported issue
+
+1.110.0 (2021-05-10)
+------------------
+
+* Feature - This release adds new APIs to associate, disassociate and list related items in SSM OpsCenter; and this release adds DisplayName as a version-level attribute for SSM Documents and introduces two new document types: ProblemAnalysis, ProblemAnalysisTemplate.
+
+1.109.0 (2021-05-06)
+------------------
+
+* Feature - SSM feature release - ChangeCalendar integration with StateManager.
+
+1.108.0 (2021-04-06)
+------------------
+
+* Feature - Supports removing a label or labels from a parameter, enables ScheduledEndTime and ChangeDetails for StartChangeRequestExecution API, supports critical/security/other noncompliant count for patch API.
+
+1.107.0 (2021-03-24)
+------------------
+
+* Feature - This release allows SSM Explorer customers to enable OpsData sources across their organization when creating a resource data sync.
+
+1.106.0 (2021-03-10)
+------------------
+
+* Feature - Systems Manager support for tagging OpsMetadata.
+
+1.105.0 (2021-03-01)
+------------------
+
+* Feature - Add Support for Patch Manger Baseline Override parameter.
+
+1.104.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2021-01-22)
+------------------
+
+* Feature - Documentation updates for the ListDocumentFilters API action.
+
+1.102.0 (2021-01-12)
+------------------
+
+* Feature - AWS Systems Manager adds pagination support for DescribeDocumentPermission API
+
+1.101.0 (2020-12-22)
+------------------
+
+* Feature - SSM Maintenance Window support for registering/updating maintenance window tasks without targets.
+
+1.100.0 (2020-12-15)
+------------------
+
+* Feature - Adding support for Change Manager API content
+
+1.99.0 (2020-12-04)
+------------------
+
+* Feature - AWS Systems Manager Patch Manager MAC OS Support and OpsMetadata Store APIs to store operational metadata for an Application.
+
+1.98.0 (2020-11-10)
+------------------
+
+* Feature - Add SessionId as a filter for DescribeSessions API
+
+1.97.0 (2020-11-09)
+------------------
+
+* Feature - add a new filter to allow customer to filter automation executions by using resource-group which used for execute automation
+
+1.96.0 (2020-11-06)
+------------------
+
+* Feature - Documentation updates for Systems Manager
+
 1.95.0 (2020-10-19)
 ------------------
 

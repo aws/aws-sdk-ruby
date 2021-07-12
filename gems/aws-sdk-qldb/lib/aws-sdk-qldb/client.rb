@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -338,7 +338,8 @@ module Aws::QLDB
     #   The name of the ledger.
     #
     # @option params [required, String] :stream_id
-    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #   The UUID (represented in Base62-encoded text) of the QLDB journal
+    #   stream to be canceled.
     #
     # @return [Types::CancelJournalKinesisStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -364,7 +365,7 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Creates a new ledger in your AWS account.
+    # Creates a new ledger in your AWS account in the current Region.
     #
     # @option params [required, String] :name
     #   The name of the ledger that you want to create. The name must be
@@ -384,6 +385,37 @@ module Aws::QLDB
     #
     # @option params [required, String] :permissions_mode
     #   The permissions mode to assign to the ledger that you want to create.
+    #   This parameter can have one of the following values:
+    #
+    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access control
+    #     with API-level granularity for ledgers.
+    #
+    #     This mode allows users who have the `SendCommand` API permission for
+    #     this ledger to run all PartiQL commands (hence, `ALLOW_ALL`) on any
+    #     tables in the specified ledger. This mode disregards any table-level
+    #     or command-level IAM permissions policies that you create for the
+    #     ledger.
+    #
+    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables access
+    #     control with finer granularity for ledgers, tables, and PartiQL
+    #     commands.
+    #
+    #     By default, this mode denies all user requests to run any PartiQL
+    #     commands on any tables in this ledger. To allow PartiQL commands to
+    #     run, you must create IAM permissions policies for specific table
+    #     resources and PartiQL actions, in addition to the `SendCommand` API
+    #     permission for the ledger. For information, see [Getting started
+    #     with the standard permissions mode][1] in the *Amazon QLDB Developer
+    #     Guide*.
+    #
+    #   <note markdown="1"> We strongly recommend using the `STANDARD` permissions mode to
+    #   maximize the security of your ledger data.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html
     #
     # @option params [Boolean] :deletion_protection
     #   The flag that prevents a ledger from being deleted by any user. If not
@@ -391,10 +423,8 @@ module Aws::QLDB
     #   default.
     #
     #   If deletion protection is enabled, you must first disable it before
-    #   you can delete the ledger using the QLDB API or the AWS Command Line
-    #   Interface (AWS CLI). You can disable it by calling the `UpdateLedger`
-    #   operation to set the flag to `false`. The QLDB console disables
-    #   deletion protection for you when you use it to delete a ledger.
+    #   you can delete the ledger. You can disable it by calling the
+    #   `UpdateLedger` operation to set the flag to `false`.
     #
     # @return [Types::CreateLedgerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -402,6 +432,7 @@ module Aws::QLDB
     #   * {Types::CreateLedgerResponse#arn #arn} => String
     #   * {Types::CreateLedgerResponse#state #state} => String
     #   * {Types::CreateLedgerResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateLedgerResponse#permissions_mode #permissions_mode} => String
     #   * {Types::CreateLedgerResponse#deletion_protection #deletion_protection} => Boolean
     #
     # @example Request syntax with placeholder values
@@ -411,7 +442,7 @@ module Aws::QLDB
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL
+    #     permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
     #     deletion_protection: false,
     #   })
     #
@@ -421,6 +452,7 @@ module Aws::QLDB
     #   resp.arn #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
     #   resp.creation_date_time #=> Time
+    #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
     #   resp.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedger AWS API Documentation
@@ -435,10 +467,8 @@ module Aws::QLDB
     # Deletes a ledger and all of its contents. This action is irreversible.
     #
     # If deletion protection is enabled, you must first disable it before
-    # you can delete the ledger using the QLDB API or the AWS Command Line
-    # Interface (AWS CLI). You can disable it by calling the `UpdateLedger`
-    # operation to set the flag to `false`. The QLDB console disables
-    # deletion protection for you when you use it to delete a ledger.
+    # you can delete the ledger. You can disable it by calling the
+    # `UpdateLedger` operation to set the flag to `false`.
     #
     # @option params [required, String] :name
     #   The name of the ledger that you want to delete.
@@ -462,14 +492,23 @@ module Aws::QLDB
 
     # Returns detailed information about a given Amazon QLDB journal stream.
     # The output includes the Amazon Resource Name (ARN), stream name,
-    # current status, creation time, and the parameters of your original
+    # current status, creation time, and the parameters of the original
     # stream creation request.
+    #
+    # This action does not return any expired journal streams. For more
+    # information, see [Expiration for terminal streams][1] in the *Amazon
+    # QLDB Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration
     #
     # @option params [required, String] :ledger_name
     #   The name of the ledger.
     #
     # @option params [required, String] :stream_id
-    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #   The UUID (represented in Base62-encoded text) of the QLDB journal
+    #   stream to describe.
     #
     # @return [Types::DescribeJournalKinesisStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -507,11 +546,11 @@ module Aws::QLDB
     end
 
     # Returns information about a journal export job, including the ledger
-    # name, export ID, when it was created, current status, and its start
-    # and end time export parameters.
+    # name, export ID, creation time, current status, and the parameters of
+    # the original export creation request.
     #
     # This action does not return any expired export jobs. For more
-    # information, see [Export Job Expiration][1] in the *Amazon QLDB
+    # information, see [Export job expiration][1] in the *Amazon QLDB
     # Developer Guide*.
     #
     # If the export job with the given `ExportId` doesn't exist, then
@@ -528,7 +567,8 @@ module Aws::QLDB
     #   The name of the ledger.
     #
     # @option params [required, String] :export_id
-    #   The unique ID of the journal export job that you want to describe.
+    #   The UUID (represented in Base62-encoded text) of the journal export
+    #   job to describe.
     #
     # @return [Types::DescribeJournalS3ExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -576,6 +616,7 @@ module Aws::QLDB
     #   * {Types::DescribeLedgerResponse#arn #arn} => String
     #   * {Types::DescribeLedgerResponse#state #state} => String
     #   * {Types::DescribeLedgerResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeLedgerResponse#permissions_mode #permissions_mode} => String
     #   * {Types::DescribeLedgerResponse#deletion_protection #deletion_protection} => Boolean
     #
     # @example Request syntax with placeholder values
@@ -590,6 +631,7 @@ module Aws::QLDB
     #   resp.arn #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
     #   resp.creation_date_time #=> Time
+    #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
     #   resp.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedger AWS API Documentation
@@ -619,12 +661,12 @@ module Aws::QLDB
     #   The name of the ledger.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :inclusive_start_time
-    #   The inclusive start date and time for the range of journal contents
-    #   that you want to export.
+    #   The inclusive start date and time for the range of journal contents to
+    #   export.
     #
     #   The `InclusiveStartTime` must be in `ISO 8601` date and time format
     #   and in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #
     #   The `InclusiveStartTime` must be before `ExclusiveEndTime`.
     #
@@ -633,12 +675,12 @@ module Aws::QLDB
     #   `CreationDateTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :exclusive_end_time
-    #   The exclusive end date and time for the range of journal contents that
-    #   you want to export.
+    #   The exclusive end date and time for the range of journal contents to
+    #   export.
     #
     #   The `ExclusiveEndTime` must be in `ISO 8601` date and time format and
     #   in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #
     #   The `ExclusiveEndTime` must be less than or equal to the current UTC
     #   date and time.
@@ -718,14 +760,14 @@ module Aws::QLDB
     #   The location of the block that you want to request. An address is an
     #   Amazon Ion structure that has two fields: `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
     #
     # @option params [Types::ValueHolder] :digest_tip_address
     #   The latest block location covered by the digest for which to request a
     #   proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
     #
     # @return [Types::GetBlockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -802,17 +844,18 @@ module Aws::QLDB
     #   is an Amazon Ion structure that has two fields: `strandId` and
     #   `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
     #
     # @option params [required, String] :document_id
-    #   The unique ID of the document to be verified.
+    #   The UUID (represented in Base62-encoded text) of the document to be
+    #   verified.
     #
     # @option params [Types::ValueHolder] :digest_tip_address
     #   The latest block location covered by the digest for which to request a
     #   proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
     #
     # @return [Types::GetRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -850,9 +893,17 @@ module Aws::QLDB
     # given ledger. The output of each stream descriptor includes the same
     # details that are returned by `DescribeJournalKinesisStream`.
     #
+    # This action does not return any expired journal streams. For more
+    # information, see [Expiration for terminal streams][1] in the *Amazon
+    # QLDB Developer Guide*.
+    #
     # This action returns a maximum of `MaxResults` items. It is paginated
     # so that you can retrieve all the items by calling
     # `ListJournalKinesisStreamsForLedger` multiple times.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration
     #
     # @option params [required, String] :ledger_name
     #   The name of the ledger.
@@ -917,7 +968,7 @@ module Aws::QLDB
     # `ListJournalS3Exports` multiple times.
     #
     # This action does not return any expired export jobs. For more
-    # information, see [Export Job Expiration][1] in the *Amazon QLDB
+    # information, see [Export job expiration][1] in the *Amazon QLDB
     # Developer Guide*.
     #
     #
@@ -982,7 +1033,7 @@ module Aws::QLDB
     # `ListJournalS3ExportsForLedger` multiple times.
     #
     # This action does not return any expired export jobs. For more
-    # information, see [Export Job Expiration][1] in the *Amazon QLDB
+    # information, see [Export job expiration][1] in the *Amazon QLDB
     # Developer Guide*.
     #
     #
@@ -1094,8 +1145,8 @@ module Aws::QLDB
     # Returns all tags for a specified Amazon QLDB resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) for which you want to list the tags.
-    #   For example:
+    #   The Amazon Resource Name (ARN) for which to list the tags. For
+    #   example:
     #
     #   `arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger`
     #
@@ -1145,7 +1196,7 @@ module Aws::QLDB
     #   The inclusive start date and time from which to start streaming
     #   journal data. This parameter must be in `ISO 8601` date and time
     #   format and in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #
     #   The `InclusiveStartTime` cannot be in the future and must be before
     #   `ExclusiveEndTime`.
@@ -1161,7 +1212,7 @@ module Aws::QLDB
     #
     #   The `ExclusiveEndTime` must be in `ISO 8601` date and time format and
     #   in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #
     # @option params [required, Types::KinesisConfiguration] :kinesis_configuration
     #   The configuration settings of the Kinesis Data Streams destination for
@@ -1256,13 +1307,13 @@ module Aws::QLDB
     # can specify up to 50 tag keys to remove.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) from which you want to remove the tags.
-    #   For example:
+    #   The Amazon Resource Name (ARN) from which to remove the tags. For
+    #   example:
     #
     #   `arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger`
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The list of tag keys that you want to remove.
+    #   The list of tag keys to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1293,10 +1344,8 @@ module Aws::QLDB
     #   default.
     #
     #   If deletion protection is enabled, you must first disable it before
-    #   you can delete the ledger using the QLDB API or the AWS Command Line
-    #   Interface (AWS CLI). You can disable it by calling the `UpdateLedger`
-    #   operation to set the flag to `false`. The QLDB console disables
-    #   deletion protection for you when you use it to delete a ledger.
+    #   you can delete the ledger. You can disable it by calling the
+    #   `UpdateLedger` operation to set the flag to `false`.
     #
     # @return [Types::UpdateLedgerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1330,6 +1379,82 @@ module Aws::QLDB
       req.send_request(options)
     end
 
+    # Updates the permissions mode of a ledger.
+    #
+    # Before you switch to the `STANDARD` permissions mode, you must first
+    # create all required IAM policies and table tags to avoid disruption to
+    # your users. To learn more, see [Migrating to the standard permissions
+    # mode][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/ledger-management.basics.html#ledger-mgmt.basics.update-permissions.migrating
+    #
+    # @option params [required, String] :name
+    #   The name of the ledger.
+    #
+    # @option params [required, String] :permissions_mode
+    #   The permissions mode to assign to the ledger. This parameter can have
+    #   one of the following values:
+    #
+    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access control
+    #     with API-level granularity for ledgers.
+    #
+    #     This mode allows users who have the `SendCommand` API permission for
+    #     this ledger to run all PartiQL commands (hence, `ALLOW_ALL`) on any
+    #     tables in the specified ledger. This mode disregards any table-level
+    #     or command-level IAM permissions policies that you create for the
+    #     ledger.
+    #
+    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables access
+    #     control with finer granularity for ledgers, tables, and PartiQL
+    #     commands.
+    #
+    #     By default, this mode denies all user requests to run any PartiQL
+    #     commands on any tables in this ledger. To allow PartiQL commands to
+    #     run, you must create IAM permissions policies for specific table
+    #     resources and PartiQL actions, in addition to the `SendCommand` API
+    #     permission for the ledger. For information, see [Getting started
+    #     with the standard permissions mode][1] in the *Amazon QLDB Developer
+    #     Guide*.
+    #
+    #   <note markdown="1"> We strongly recommend using the `STANDARD` permissions mode to
+    #   maximize the security of your ledger data.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html
+    #
+    # @return [Types::UpdateLedgerPermissionsModeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLedgerPermissionsModeResponse#name #name} => String
+    #   * {Types::UpdateLedgerPermissionsModeResponse#arn #arn} => String
+    #   * {Types::UpdateLedgerPermissionsModeResponse#permissions_mode #permissions_mode} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ledger_permissions_mode({
+    #     name: "LedgerName", # required
+    #     permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerPermissionsMode AWS API Documentation
+    #
+    # @overload update_ledger_permissions_mode(params = {})
+    # @param [Hash] params ({})
+    def update_ledger_permissions_mode(params = {}, options = {})
+      req = build_request(:update_ledger_permissions_mode, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1343,7 +1468,7 @@ module Aws::QLDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

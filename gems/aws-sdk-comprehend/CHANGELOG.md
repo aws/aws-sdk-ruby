@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-03-31)
+------------------
+
+* Feature - Support for customer managed KMS encryption of Comprehend custom models
+
+1.45.0 (2021-03-11)
+------------------
+
+* Feature - ContainsPiiEntities API analyzes the input text for the presence of personally identifiable information(PII) and returns the labels of identified PII entity types such as name, address etc.
+
+1.44.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-11-24)
+------------------
+
+* Feature - Support Comprehend events detection APIs
+
 1.41.0 (2020-09-30)
 ------------------
 

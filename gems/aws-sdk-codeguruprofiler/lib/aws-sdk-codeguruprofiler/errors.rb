@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -68,6 +68,10 @@ module Aws::CodeGuruProfiler
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -98,6 +102,10 @@ module Aws::CodeGuruProfiler
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class ThrottlingException < ServiceError
@@ -112,6 +120,10 @@ module Aws::CodeGuruProfiler
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

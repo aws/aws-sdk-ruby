@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -247,7 +247,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -256,7 +256,7 @@ module Aws::S3
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::DeleteObjectOutput]
@@ -330,13 +330,13 @@ module Aws::S3
     # @option options [Time,DateTime,Date,Integer,String] :response_expires
     #   Sets the `Expires` header of the response.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (for
+    #   Specifies the algorithm to use to when decrypting the object (for
     #   example, AES256).
     # @option options [String] :sse_customer_key
-    #   Specifies the customer-provided encryption key for Amazon S3 to use in
-    #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon S3 does not store the encryption key. The key must
-    #   be appropriate for use with the algorithm specified in the
+    #   Specifies the customer-provided encryption key for Amazon S3 used to
+    #   encrypt the data. This value is used to decrypt the object when
+    #   recovering it and must match the one used when storing the data. The
+    #   key must be appropriate for use with the algorithm specified in the
     #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -347,7 +347,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -358,7 +358,7 @@ module Aws::S3
     #   for the part specified. Useful for downloading just a part of an
     #   object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::GetObjectOutput]
@@ -431,7 +431,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -442,7 +442,7 @@ module Aws::S3
     #   for the part specified. Useful querying about the size of the part and
     #   the number of parts in this object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::HeadObjectOutput]
@@ -536,7 +536,7 @@ module Aws::S3
       #   request. Bucket owners need not specify this parameter in their
       #   requests. For information about downloading objects from requester
       #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-      #   in the *Amazon S3 Developer Guide*.
+      #   in the *Amazon S3 User Guide*.
       #
       #
       #
@@ -546,7 +546,7 @@ module Aws::S3
       #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @option options [String] :expected_bucket_owner
-      #   The account id of the expected bucket owner. If the bucket is owned by
+      #   The account ID of the expected bucket owner. If the bucket is owned by
       #   a different account, the request will fail with an HTTP `403 (Access
       #   Denied)` error.
       # @return [void]

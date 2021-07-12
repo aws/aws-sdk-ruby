@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -337,6 +337,86 @@ module Aws::FSx
 
     # @!group API Operations
 
+    # Use this action to associate one or more Domain Name Server (DNS)
+    # aliases with an existing Amazon FSx for Windows File Server file
+    # system. A file systen can have a maximum of 50 DNS aliases associated
+    # with it at any one time. If you try to associate a DNS alias that is
+    # already associated with the file system, FSx takes no action on that
+    # alias in the request. For more information, see [Working with DNS
+    # Aliases][1] and [Walkthrough 5: Using DNS aliases to access your file
+    # system][2], including additional steps you must take to be able to
+    # access your file system using a DNS alias.
+    #
+    # The system response shows the DNS aliases that Amazon FSx is
+    # attempting to associate with the file system. Use the API operation to
+    # monitor the status of the aliases Amazon FSx is associating with the
+    # file system.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :file_system_id
+    #   Specifies the file system with which you want to associate one or more
+    #   DNS aliases.
+    #
+    # @option params [required, Array<String>] :aliases
+    #   An array of one or more DNS alias names to associate with the file
+    #   system. The alias name has to comply with the following formatting
+    #   requirements:
+    #
+    #   * Formatted as a fully-qualified domain name (FQDN), <i>
+    #     <code>hostname.domain</code> </i>, for example,
+    #     `accounting.corp.example.com`.
+    #
+    #   * Can contain alphanumeric characters and the hyphen (-).
+    #
+    #   * Cannot start or end with a hyphen.
+    #
+    #   * Can start with a numeric.
+    #
+    #   For DNS alias names, Amazon FSx stores alphabetic characters as
+    #   lowercase letters (a-z), regardless of how you specify them: as
+    #   uppercase letters, lowercase letters, or the corresponding letters in
+    #   escape codes.
+    #
+    # @return [Types::AssociateFileSystemAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateFileSystemAliasesResponse#aliases #aliases} => Array&lt;Types::Alias&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_file_system_aliases({
+    #     client_request_token: "ClientRequestToken",
+    #     file_system_id: "FileSystemId", # required
+    #     aliases: ["AlternateDNSName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aliases #=> Array
+    #   resp.aliases[0].name #=> String
+    #   resp.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AssociateFileSystemAliases AWS API Documentation
+    #
+    # @overload associate_file_system_aliases(params = {})
+    # @param [Hash] params ({})
+    def associate_file_system_aliases(params = {}, options = {})
+      req = build_request(:associate_file_system_aliases, params)
+      req.send_request(options)
+    end
+
     # Cancels an existing Amazon FSx for Lustre data repository task if that
     # task is in either the `PENDING` or `EXECUTING` state. When you cancel
     # a task, Amazon FSx does the following.
@@ -376,6 +456,242 @@ module Aws::FSx
       req.send_request(options)
     end
 
+    # Copies an existing backup within the same AWS account to another
+    # Region (cross-Region copy) or within the same Region (in-Region copy).
+    # You can have up to five backup copy requests in progress to a single
+    # destination Region per account.
+    #
+    # You can use cross-Region backup copies for cross-region disaster
+    # recovery. You periodically take backups and copy them to another
+    # Region so that in the event of a disaster in the primary Region, you
+    # can restore from backup and recover availability quickly in the other
+    # Region. You can make cross-Region copies only within your AWS
+    # partition.
+    #
+    # You can also use backup copies to clone your file data set to another
+    # Region or within the same Region.
+    #
+    # You can use the `SourceRegion` parameter to specify the AWS Region
+    # from which the backup will be copied. For example, if you make the
+    # call from the `us-west-1` Region and want to copy a backup from the
+    # `us-east-2` Region, you specify `us-east-2` in the `SourceRegion`
+    # parameter to make a cross-Region copy. If you don't specify a Region,
+    # the backup copy is created in the same Region where the request is
+    # sent from (in-Region copy).
+    #
+    # For more information on creating backup copies, see [ Copying
+    # backups][1] in the *Amazon FSx for Windows User Guide* and [Copying
+    # backups][2] in the *Amazon FSx for Lustre User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :source_backup_id
+    #   The ID of the source backup. Specifies the ID of the backup that is
+    #   being copied.
+    #
+    # @option params [String] :source_region
+    #   The source AWS Region of the backup. Specifies the AWS Region from
+    #   which the backup is being copied. The source and destination Regions
+    #   must be in the same AWS partition. If you don't specify a Region, it
+    #   defaults to the Region where the request is sent from (in-Region
+    #   copy).
+    #
+    # @option params [String] :kms_key_id
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
+    #   the file system's data for Amazon FSx for Windows File Server file
+    #   systems and Amazon FSx for Lustre `PERSISTENT_1` file systems at rest.
+    #   In either case, if not specified, the Amazon FSx managed key is used.
+    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are
+    #   always encrypted at rest using Amazon FSx managed keys. For more
+    #   information, see [Encrypt][1] in the *AWS Key Management Service API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #
+    # @option params [Boolean] :copy_tags
+    #   A boolean flag indicating whether tags from the source backup should
+    #   be copied to the backup copy. This value defaults to false.
+    #
+    #   If you set `CopyTags` to true and the source backup has existing tags,
+    #   you can use the `Tags` parameter to create new tags, provided that the
+    #   sum of the source backup tags and the new tags doesn't exceed 50.
+    #   Both sets of tags are merged. If there are tag conflicts (for example,
+    #   two tags with the same key but different values), the tags created
+    #   with the `Tags` parameter take precedence.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CopyBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyBackupResponse#backup #backup} => Types::Backup
+    #
+    #
+    # @example Example: To copy a backup
+    #
+    #   # This operation copies an Amazon FSx backup.
+    #
+    #   resp = client.copy_backup({
+    #     source_backup_id: "backup-03e3c82e0183b7b6b", 
+    #     source_region: "us-east-2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     backup: {
+    #       backup_id: "backup-0a3364eded1014b28", 
+    #       creation_time: Time.parse(1617954808.068), 
+    #       file_system: {
+    #         file_system_id: "fs-0498eed5fe91001ec", 
+    #         file_system_type: "LUSTRE", 
+    #         lustre_configuration: {
+    #           automatic_backup_retention_days: 0, 
+    #           deployment_type: "PERSISTENT_1", 
+    #           per_unit_storage_throughput: 50, 
+    #           weekly_maintenance_start_time: "1:05:00", 
+    #         }, 
+    #         resource_arn: "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0f5179e395f597e66", 
+    #         storage_capacity: 2400, 
+    #         storage_type: "SSD", 
+    #       }, 
+    #       kms_key_id: "arn:aws:fsx:us-east-1:012345678912:key/d1234e22-543a-12b7-a98f-e12c2b54001a", 
+    #       lifecycle: "COPYING", 
+    #       owner_id: "123456789012", 
+    #       resource_arn: "arn:aws:fsx:us-east-1:012345678912:backup/backup-0a3364eded1014b28", 
+    #       tags: [
+    #         {
+    #           key: "Name", 
+    #           value: "MyBackup", 
+    #         }, 
+    #       ], 
+    #       type: "USER_INITIATED", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_backup({
+    #     client_request_token: "ClientRequestToken",
+    #     source_backup_id: "SourceBackupId", # required
+    #     source_region: "Region",
+    #     kms_key_id: "KmsKeyId",
+    #     copy_tags: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup.backup_id #=> String
+    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED", "PENDING", "COPYING"
+    #   resp.backup.failure_details.message #=> String
+    #   resp.backup.type #=> String, one of "AUTOMATIC", "USER_INITIATED", "AWS_BACKUP"
+    #   resp.backup.progress_percent #=> Integer
+    #   resp.backup.creation_time #=> Time
+    #   resp.backup.kms_key_id #=> String
+    #   resp.backup.resource_arn #=> String
+    #   resp.backup.tags #=> Array
+    #   resp.backup.tags[0].key #=> String
+    #   resp.backup.tags[0].value #=> String
+    #   resp.backup.file_system.owner_id #=> String
+    #   resp.backup.file_system.creation_time #=> Time
+    #   resp.backup.file_system.file_system_id #=> String
+    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backup.file_system.failure_details.message #=> String
+    #   resp.backup.file_system.storage_capacity #=> Integer
+    #   resp.backup.file_system.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.backup.file_system.vpc_id #=> String
+    #   resp.backup.file_system.subnet_ids #=> Array
+    #   resp.backup.file_system.subnet_ids[0] #=> String
+    #   resp.backup.file_system.network_interface_ids #=> Array
+    #   resp.backup.file_system.network_interface_ids[0] #=> String
+    #   resp.backup.file_system.dns_name #=> String
+    #   resp.backup.file_system.kms_key_id #=> String
+    #   resp.backup.file_system.resource_arn #=> String
+    #   resp.backup.file_system.tags #=> Array
+    #   resp.backup.file_system.tags[0].key #=> String
+    #   resp.backup.file_system.tags[0].value #=> String
+    #   resp.backup.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backup.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backup.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backup.file_system.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.backup.file_system.windows_configuration.throughput_capacity #=> Integer
+    #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.backup.file_system.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.windows_configuration.aliases #=> Array
+    #   resp.backup.file_system.windows_configuration.aliases[0].name #=> String
+    #   resp.backup.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backup.file_system.lustre_configuration.mount_name #=> String
+    #   resp.backup.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.backup.file_system.administrative_actions #=> Array
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backup.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.backup.directory_information.domain_name #=> String
+    #   resp.backup.directory_information.active_directory_id #=> String
+    #   resp.backup.directory_information.resource_arn #=> String
+    #   resp.backup.owner_id #=> String
+    #   resp.backup.source_backup_id #=> String
+    #   resp.backup.source_backup_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackup AWS API Documentation
+    #
+    # @overload copy_backup(params = {})
+    # @param [Hash] params ({})
+    def copy_backup(params = {}, options = {})
+      req = build_request(:copy_backup, params)
+      req.send_request(options)
+    end
+
     # Creates a backup of an existing Amazon FSx file system. Creating
     # regular backups for your file system is a best practice, enabling you
     # to restore a file system from a backup if an issue arises with the
@@ -391,7 +707,7 @@ module Aws::FSx
     # For more information about backing up Amazon FSx for Lustre file
     # systems, see [Working with FSx for Lustre backups][1].
     #
-    # For more information about backing up Amazon FSx for Lustre file
+    # For more information about backing up Amazon FSx for Windows file
     # systems, see [Working with FSx for Windows backups][2].
     #
     # If a backup with the specified client request token exists, and the
@@ -506,9 +822,9 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup.backup_id #=> String
-    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
+    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED", "PENDING", "COPYING"
     #   resp.backup.failure_details.message #=> String
-    #   resp.backup.type #=> String, one of "AUTOMATIC", "USER_INITIATED"
+    #   resp.backup.type #=> String, one of "AUTOMATIC", "USER_INITIATED", "AWS_BACKUP"
     #   resp.backup.progress_percent #=> Integer
     #   resp.backup.creation_time #=> Time
     #   resp.backup.kms_key_id #=> String
@@ -553,6 +869,12 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backup.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.windows_configuration.aliases #=> Array
+    #   resp.backup.file_system.windows_configuration.aliases[0].name #=> String
+    #   resp.backup.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -567,8 +889,9 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -576,6 +899,10 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
+    #   resp.backup.directory_information.resource_arn #=> String
+    #   resp.backup.owner_id #=> String
+    #   resp.backup.source_backup_id #=> String
+    #   resp.backup.source_backup_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup AWS API Documentation
     #
@@ -594,14 +921,14 @@ module Aws::FSx
     # from your FSx file system to its linked data repository. A
     # `CreateDataRepositoryTask` operation will fail if a data repository is
     # not linked to the FSx file system. To learn more about data repository
-    # tasks, see [Using Data Repository Tasks][1]. To learn more about
-    # linking a data repository to your file system, see [Setting the Export
-    # Prefix][2].
+    # tasks, see [Data Repository Tasks][1]. To learn more about linking a
+    # data repository to your file system, see [Linking your file system to
+    # an S3 bucket][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html
-    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-fs-linked-data-repo.html
     #
     # @option params [required, String] :type
     #   Specifies the type of data repository task to create.
@@ -795,11 +1122,16 @@ module Aws::FSx
     #   types, provide exactly two subnet IDs, one for the preferred file
     #   server and one for the standby file server. You specify one of these
     #   subnets as the preferred subnet using the `WindowsConfiguration >
-    #   PreferredSubnetID` property.
+    #   PreferredSubnetID` property. For more information, see [ Availability
+    #   and durability: Single-AZ and Multi-AZ file systems][1].
     #
     #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
     #   types and Lustre file systems, provide exactly one subnet ID. The file
     #   server is launched in that subnet's Availability Zone.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
     #
     # @option params [Array<String>] :security_group_ids
     #   A list of IDs specifying the security groups to apply to all network
@@ -837,16 +1169,17 @@ module Aws::FSx
     #
     # @example Example: To create a new file system
     #
-    #   # This operation creates a new file system.
+    #   # This operation creates a new Amazon FSx for Windows File Server file system.
     #
     #   resp = client.create_file_system({
     #     client_request_token: "a8ca07e4-61ec-4399-99f4-19853801bcd5", 
     #     file_system_type: "WINDOWS", 
-    #     kms_key_id: "arn:aws:kms:us-east-1:012345678912:key/0ff3ea8d-130e-4133-877f-93908b6fdbd6", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:012345678912:key/1111abcd-2222-3333-4444-55556666eeff", 
     #     security_group_ids: [
     #       "sg-edcd9784", 
     #     ], 
-    #     storage_capacity: 300, 
+    #     storage_capacity: 3200, 
+    #     storage_type: "HDD", 
     #     subnet_ids: [
     #       "subnet-1234abcd", 
     #     ], 
@@ -858,9 +1191,12 @@ module Aws::FSx
     #     ], 
     #     windows_configuration: {
     #       active_directory_id: "d-1234abcd12", 
+    #       aliases: [
+    #         "accounting.corp.example.com", 
+    #       ], 
     #       automatic_backup_retention_days: 30, 
     #       daily_automatic_backup_start_time: "05:00", 
-    #       throughput_capacity: 8, 
+    #       throughput_capacity: 32, 
     #       weekly_maintenance_start_time: "1:05:00", 
     #     }, 
     #   })
@@ -869,13 +1205,14 @@ module Aws::FSx
     #   {
     #     file_system: {
     #       creation_time: Time.parse("1481841524.0"), 
-    #       dns_name: "fs-0498eed5fe91001ec.fsx.com", 
-    #       file_system_id: "fs-0498eed5fe91001ec", 
-    #       kms_key_id: "arn:aws:kms:us-east-1:012345678912:key/0ff3ea8d-130e-4133-877f-93908b6fdbd6", 
+    #       dns_name: "fs-0123456789abcdef0.fsx.com", 
+    #       file_system_id: "fs-0123456789abcdef0", 
+    #       kms_key_id: "arn:aws:kms:us-east-1:012345678912:key/1111abcd-2222-3333-4444-55556666eeff", 
     #       lifecycle: "CREATING", 
     #       owner_id: "012345678912", 
-    #       resource_arn: "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec", 
-    #       storage_capacity: 300, 
+    #       resource_arn: "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0123456789abcdef0", 
+    #       storage_capacity: 3200, 
+    #       storage_type: "HDD", 
     #       subnet_ids: [
     #         "subnet-1234abcd", 
     #       ], 
@@ -888,9 +1225,15 @@ module Aws::FSx
     #       vpc_id: "vpc-ab1234cd", 
     #       windows_configuration: {
     #         active_directory_id: "d-1234abcd12", 
+    #         aliases: [
+    #           {
+    #             lifecycle: "CREATING", 
+    #             name: "accounting.corp.example.com", 
+    #           }, 
+    #         ], 
     #         automatic_backup_retention_days: 30, 
     #         daily_automatic_backup_start_time: "05:00", 
-    #         throughput_capacity: 8, 
+    #         throughput_capacity: 32, 
     #         weekly_maintenance_start_time: "1:05:00", 
     #       }, 
     #     }, 
@@ -929,6 +1272,12 @@ module Aws::FSx
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
+    #       aliases: ["AlternateDNSName"],
+    #       audit_log_configuration: {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -942,6 +1291,7 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       drive_cache_type: "NONE", # accepts NONE, READ
+    #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
     #   })
     #
@@ -984,6 +1334,12 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.windows_configuration.aliases #=> Array
+    #   resp.file_system.windows_configuration.aliases[0].name #=> String
+    #   resp.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -998,8 +1354,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1053,8 +1410,7 @@ module Aws::FSx
     #  </note>
     #
     # @option params [required, String] :backup_id
-    #   The ID of the backup. Specifies the backup to use if you're creating
-    #   a file system from an existing backup.
+    #   The ID of the source backup. Specifies the backup you are copying.
     #
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
@@ -1114,6 +1470,20 @@ module Aws::FSx
     #   least 2000 GiB.
     #
     #    </note>
+    #
+    # @option params [String] :kms_key_id
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
+    #   the file system's data for Amazon FSx for Windows File Server file
+    #   systems and Amazon FSx for Lustre `PERSISTENT_1` file systems at rest.
+    #   In either case, if not specified, the Amazon FSx managed key is used.
+    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are
+    #   always encrypted at rest using Amazon FSx managed keys. For more
+    #   information, see [Encrypt][1] in the *AWS Key Management Service API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1205,6 +1575,12 @@ module Aws::FSx
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
+    #       aliases: ["AlternateDNSName"],
+    #       audit_log_configuration: {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -1218,8 +1594,10 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       drive_cache_type: "NONE", # accepts NONE, READ
+    #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1261,6 +1639,12 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.windows_configuration.aliases #=> Array
+    #   resp.file_system.windows_configuration.aliases[0].name #=> String
+    #   resp.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1275,8 +1659,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1342,7 +1727,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup_id #=> String
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED", "PENDING", "COPYING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteBackup AWS API Documentation
     #
@@ -1575,9 +1960,9 @@ module Aws::FSx
     #
     #   resp.backups #=> Array
     #   resp.backups[0].backup_id #=> String
-    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
+    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED", "PENDING", "COPYING"
     #   resp.backups[0].failure_details.message #=> String
-    #   resp.backups[0].type #=> String, one of "AUTOMATIC", "USER_INITIATED"
+    #   resp.backups[0].type #=> String, one of "AUTOMATIC", "USER_INITIATED", "AWS_BACKUP"
     #   resp.backups[0].progress_percent #=> Integer
     #   resp.backups[0].creation_time #=> Time
     #   resp.backups[0].kms_key_id #=> String
@@ -1622,6 +2007,12 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backups[0].file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].file_system.windows_configuration.aliases #=> Array
+    #   resp.backups[0].file_system.windows_configuration.aliases[0].name #=> String
+    #   resp.backups[0].file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1636,8 +2027,9 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backups[0].file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backups[0].file_system.administrative_actions #=> Array
-    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1645,6 +2037,10 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
+    #   resp.backups[0].directory_information.resource_arn #=> String
+    #   resp.backups[0].owner_id #=> String
+    #   resp.backups[0].source_backup_id #=> String
+    #   resp.backups[0].source_backup_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups AWS API Documentation
@@ -1744,6 +2140,70 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_data_repository_tasks(params = {}, options = {})
       req = build_request(:describe_data_repository_tasks, params)
+      req.send_request(options)
+    end
+
+    # Returns the DNS aliases that are associated with the specified Amazon
+    # FSx for Windows File Server file system. A history of all DNS aliases
+    # that have been associated with and disassociated from the file system
+    # is available in the list of AdministrativeAction provided in the
+    # DescribeFileSystems operation response.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :file_system_id
+    #   The ID of the file system to return the associated DNS aliases for
+    #   (String).
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of DNS aliases to return in the response (integer).
+    #   This parameter value must be greater than 0. The number of items that
+    #   Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number of
+    #   items per page.
+    #
+    # @option params [String] :next_token
+    #   Opaque pagination token returned from a previous
+    #   `DescribeFileSystemAliases` operation (String). If a token is included
+    #   in the request, the action continues the list from where the previous
+    #   returning call left off.
+    #
+    # @return [Types::DescribeFileSystemAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFileSystemAliasesResponse#aliases #aliases} => Array&lt;Types::Alias&gt;
+    #   * {Types::DescribeFileSystemAliasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_file_system_aliases({
+    #     client_request_token: "ClientRequestToken",
+    #     file_system_id: "FileSystemId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aliases #=> Array
+    #   resp.aliases[0].name #=> String
+    #   resp.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystemAliases AWS API Documentation
+    #
+    # @overload describe_file_system_aliases(params = {})
+    # @param [Hash] params ({})
+    def describe_file_system_aliases(params = {}, options = {})
+      req = build_request(:describe_file_system_aliases, params)
       req.send_request(options)
     end
 
@@ -1889,6 +2349,12 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_systems[0].windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_systems[0].windows_configuration.aliases #=> Array
+    #   resp.file_systems[0].windows_configuration.aliases[0].name #=> String
+    #   resp.file_systems[0].windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_systems[0].windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_systems[0].windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_systems[0].windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1903,8 +2369,9 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_systems[0].lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_systems[0].administrative_actions #=> Array
-    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
     #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1918,6 +2385,64 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_file_systems(params = {}, options = {})
       req = build_request(:describe_file_systems, params)
+      req.send_request(options)
+    end
+
+    # Use this action to disassociate, or remove, one or more Domain Name
+    # Service (DNS) aliases from an Amazon FSx for Windows File Server file
+    # system. If you attempt to disassociate a DNS alias that is not
+    # associated with the file system, Amazon FSx responds with a 400 Bad
+    # Request. For more information, see [Working with DNS Aliases][1].
+    #
+    # The system generated response showing the DNS aliases that Amazon FSx
+    # is attempting to disassociate from the file system. Use the API
+    # operation to monitor the status of the aliases Amazon FSx is
+    # disassociating with the file system.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :file_system_id
+    #   Specifies the file system from which to disassociate the DNS aliases.
+    #
+    # @option params [required, Array<String>] :aliases
+    #   An array of one or more DNS alias names to disassociate, or remove,
+    #   from the file system.
+    #
+    # @return [Types::DisassociateFileSystemAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateFileSystemAliasesResponse#aliases #aliases} => Array&lt;Types::Alias&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_file_system_aliases({
+    #     client_request_token: "ClientRequestToken",
+    #     file_system_id: "FileSystemId", # required
+    #     aliases: ["AlternateDNSName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aliases #=> Array
+    #   resp.aliases[0].name #=> String
+    #   resp.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DisassociateFileSystemAliases AWS API Documentation
+    #
+    # @overload disassociate_file_system_aliases(params = {})
+    # @param [Hash] params ({})
+    def disassociate_file_system_aliases(params = {}, options = {})
+      req = build_request(:disassociate_file_system_aliases, params)
       req.send_request(options)
     end
 
@@ -2102,6 +2627,8 @@ module Aws::FSx
     # For Amazon FSx for Windows File Server file systems, you can update
     # the following properties:
     #
+    # * AuditLogConfiguration
+    #
     # * AutomaticBackupRetentionDays
     #
     # * DailyAutomaticBackupStartTime
@@ -2123,6 +2650,10 @@ module Aws::FSx
     #
     # * DailyAutomaticBackupStartTime
     #
+    # * DataCompressionType
+    #
+    # * StorageCapacity
+    #
     # * WeeklyMaintenanceStartTime
     #
     # @option params [required, String] :file_system_id
@@ -2138,18 +2669,39 @@ module Aws::FSx
     #
     # @option params [Integer] :storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server file system. Specifies the storage capacity
-    #   target value, GiB, for the file system you're updating. The storage
-    #   capacity target value must be at least 10 percent (%) greater than the
-    #   current storage capacity value. In order to increase storage capacity,
-    #   the file system needs to have at least 16 MB/s of throughput capacity.
-    #   You cannot make a storage capacity increase request if there is an
-    #   existing storage capacity increase request in progress. For more
-    #   information, see [Managing Storage Capacity][1].
+    #   file system. Specifies the storage capacity target value, GiB, to
+    #   increase the storage capacity for the file system that you're
+    #   updating. You cannot make a storage capacity increase request if there
+    #   is an existing storage capacity increase request in progress.
+    #
+    #   For Windows file systems, the storage capacity target value must be at
+    #   least 10 percent (%) greater than the current storage capacity value.
+    #   In order to increase storage capacity, the file system must have at
+    #   least 16 MB/s of throughput capacity.
+    #
+    #   For Lustre file systems, the storage capacity target value can be the
+    #   following:
+    #
+    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
+    #     values are in multiples of 2400 GiB. The value must be greater than
+    #     the current storage capacity.
+    #
+    #   * For `PERSISTENT HDD` file systems, valid values are multiples of
+    #     6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for
+    #     40 MB/s/TiB file systems. The values must be greater than the
+    #     current storage capacity.
+    #
+    #   * For `SCRATCH_1` file systems, you cannot increase the storage
+    #     capacity.
+    #
+    #   For more information, see [Managing storage capacity][1] in the
+    #   *Amazon FSx for Windows File Server User Guide* and [Managing storage
+    #   and throughput capacity][2] in the *Amazon FSx for Lustre User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration updates for an Amazon FSx for Windows File Server
@@ -2223,12 +2775,18 @@ module Aws::FSx
     #         password: "DirectoryPassword",
     #         dns_ips: ["IpAddress"],
     #       },
+    #       audit_log_configuration: {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
     #   })
     #
@@ -2271,6 +2829,12 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.windows_configuration.aliases #=> Array
+    #   resp.file_system.windows_configuration.aliases[0].name #=> String
+    #   resp.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -2285,8 +2849,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -2315,7 +2880,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

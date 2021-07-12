@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -58,6 +58,9 @@ module Aws::CloudWatchLogs
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationName = Shapes::StringShape.new(name: 'DestinationName')
     Destinations = Shapes::ListShape.new(name: 'Destinations')
+    Dimensions = Shapes::MapShape.new(name: 'Dimensions')
+    DimensionsKey = Shapes::StringShape.new(name: 'DimensionsKey')
+    DimensionsValue = Shapes::StringShape.new(name: 'DimensionsValue')
     DisassociateKmsKeyRequest = Shapes::StructureShape.new(name: 'DisassociateKmsKeyRequest')
     Distribution = Shapes::StringShape.new(name: 'Distribution')
     EventId = Shapes::StringShape.new(name: 'EventId')
@@ -173,6 +176,7 @@ module Aws::CloudWatchLogs
     SearchedLogStreams = Shapes::ListShape.new(name: 'SearchedLogStreams')
     SequenceToken = Shapes::StringShape.new(name: 'SequenceToken')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    StandardUnit = Shapes::StringShape.new(name: 'StandardUnit')
     StartFromHead = Shapes::BooleanShape.new(name: 'StartFromHead')
     StartQueryRequest = Shapes::StructureShape.new(name: 'StartQueryRequest')
     StartQueryResponse = Shapes::StructureShape.new(name: 'StartQueryResponse')
@@ -358,6 +362,9 @@ module Aws::CloudWatchLogs
 
     Destinations.member = Shapes::ShapeRef.new(shape: Destination)
 
+    Dimensions.key = Shapes::ShapeRef.new(shape: DimensionsKey)
+    Dimensions.value = Shapes::ShapeRef.new(shape: DimensionsValue)
+
     DisassociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     DisassociateKmsKeyRequest.struct_class = Types::DisassociateKmsKeyRequest
 
@@ -525,6 +532,8 @@ module Aws::CloudWatchLogs
     MetricTransformation.add_member(:metric_namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "metricNamespace"))
     MetricTransformation.add_member(:metric_value, Shapes::ShapeRef.new(shape: MetricValue, required: true, location_name: "metricValue"))
     MetricTransformation.add_member(:default_value, Shapes::ShapeRef.new(shape: DefaultValue, location_name: "defaultValue"))
+    MetricTransformation.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "dimensions"))
+    MetricTransformation.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "unit"))
     MetricTransformation.struct_class = Types::MetricTransformation
 
     MetricTransformations.member = Shapes::ShapeRef.new(shape: MetricTransformation)

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -60,6 +60,8 @@ module Aws::ResourceGroups
     GroupString = Shapes::StringShape.new(name: 'GroupString')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ListGroupResourcesInput = Shapes::StructureShape.new(name: 'ListGroupResourcesInput')
+    ListGroupResourcesItem = Shapes::StructureShape.new(name: 'ListGroupResourcesItem')
+    ListGroupResourcesItemList = Shapes::ListShape.new(name: 'ListGroupResourcesItemList')
     ListGroupResourcesOutput = Shapes::StructureShape.new(name: 'ListGroupResourcesOutput')
     ListGroupsInput = Shapes::StructureShape.new(name: 'ListGroupsInput')
     ListGroupsOutput = Shapes::StructureShape.new(name: 'ListGroupsOutput')
@@ -67,6 +69,10 @@ module Aws::ResourceGroups
     MethodNotAllowedException = Shapes::StructureShape.new(name: 'MethodNotAllowedException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    PendingResource = Shapes::StructureShape.new(name: 'PendingResource')
+    PendingResourceList = Shapes::ListShape.new(name: 'PendingResourceList')
+    PutGroupConfigurationInput = Shapes::StructureShape.new(name: 'PutGroupConfigurationInput')
+    PutGroupConfigurationOutput = Shapes::StructureShape.new(name: 'PutGroupConfigurationOutput')
     Query = Shapes::StringShape.new(name: 'Query')
     QueryError = Shapes::StructureShape.new(name: 'QueryError')
     QueryErrorCode = Shapes::StringShape.new(name: 'QueryErrorCode')
@@ -83,6 +89,8 @@ module Aws::ResourceGroups
     ResourceIdentifier = Shapes::StructureShape.new(name: 'ResourceIdentifier')
     ResourceIdentifierList = Shapes::ListShape.new(name: 'ResourceIdentifierList')
     ResourceQuery = Shapes::StructureShape.new(name: 'ResourceQuery')
+    ResourceStatus = Shapes::StructureShape.new(name: 'ResourceStatus')
+    ResourceStatusValue = Shapes::StringShape.new(name: 'ResourceStatusValue')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     SearchResourcesInput = Shapes::StructureShape.new(name: 'SearchResourcesInput')
     SearchResourcesOutput = Shapes::StructureShape.new(name: 'SearchResourcesOutput')
@@ -214,6 +222,7 @@ module Aws::ResourceGroups
 
     GroupResourcesOutput.add_member(:succeeded, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "Succeeded"))
     GroupResourcesOutput.add_member(:failed, Shapes::ShapeRef.new(shape: FailedResourceList, location_name: "Failed"))
+    GroupResourcesOutput.add_member(:pending, Shapes::ShapeRef.new(shape: PendingResourceList, location_name: "Pending"))
     GroupResourcesOutput.struct_class = Types::GroupResourcesOutput
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -226,7 +235,14 @@ module Aws::ResourceGroups
     ListGroupResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupResourcesInput.struct_class = Types::ListGroupResourcesInput
 
-    ListGroupResourcesOutput.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, location_name: "ResourceIdentifiers"))
+    ListGroupResourcesItem.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Identifier"))
+    ListGroupResourcesItem.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "Status"))
+    ListGroupResourcesItem.struct_class = Types::ListGroupResourcesItem
+
+    ListGroupResourcesItemList.member = Shapes::ShapeRef.new(shape: ListGroupResourcesItem)
+
+    ListGroupResourcesOutput.add_member(:resources, Shapes::ShapeRef.new(shape: ListGroupResourcesItemList, location_name: "Resources"))
+    ListGroupResourcesOutput.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, deprecated: true, location_name: "ResourceIdentifiers", metadata: {"deprecatedMessage"=>"This field is deprecated, use Resources instead."}))
     ListGroupResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupResourcesOutput.add_member(:query_errors, Shapes::ShapeRef.new(shape: QueryErrorList, location_name: "QueryErrors"))
     ListGroupResourcesOutput.struct_class = Types::ListGroupResourcesOutput
@@ -246,6 +262,17 @@ module Aws::ResourceGroups
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
+
+    PendingResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    PendingResource.struct_class = Types::PendingResource
+
+    PendingResourceList.member = Shapes::ShapeRef.new(shape: PendingResource)
+
+    PutGroupConfigurationInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupString, location_name: "Group"))
+    PutGroupConfigurationInput.add_member(:configuration, Shapes::ShapeRef.new(shape: GroupConfigurationList, location_name: "Configuration"))
+    PutGroupConfigurationInput.struct_class = Types::PutGroupConfigurationInput
+
+    PutGroupConfigurationOutput.struct_class = Types::PutGroupConfigurationOutput
 
     QueryError.add_member(:error_code, Shapes::ShapeRef.new(shape: QueryErrorCode, location_name: "ErrorCode"))
     QueryError.add_member(:message, Shapes::ShapeRef.new(shape: QueryErrorMessage, location_name: "Message"))
@@ -272,6 +299,9 @@ module Aws::ResourceGroups
     ResourceQuery.add_member(:type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "Type"))
     ResourceQuery.add_member(:query, Shapes::ShapeRef.new(shape: Query, required: true, location_name: "Query"))
     ResourceQuery.struct_class = Types::ResourceQuery
+
+    ResourceStatus.add_member(:name, Shapes::ShapeRef.new(shape: ResourceStatusValue, location_name: "Name"))
+    ResourceStatus.struct_class = Types::ResourceStatus
 
     SearchResourcesInput.add_member(:resource_query, Shapes::ShapeRef.new(shape: ResourceQuery, required: true, location_name: "ResourceQuery"))
     SearchResourcesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -308,6 +338,7 @@ module Aws::ResourceGroups
 
     UngroupResourcesOutput.add_member(:succeeded, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "Succeeded"))
     UngroupResourcesOutput.add_member(:failed, Shapes::ShapeRef.new(shape: FailedResourceList, location_name: "Failed"))
+    UngroupResourcesOutput.add_member(:pending, Shapes::ShapeRef.new(shape: PendingResourceList, location_name: "Pending"))
     UngroupResourcesOutput.struct_class = Types::UngroupResourcesOutput
 
     UntagInput.add_member(:arn, Shapes::ShapeRef.new(shape: GroupArn, required: true, location: "uri", location_name: "Arn"))
@@ -487,6 +518,20 @@ module Aws::ResourceGroups
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_group_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutGroupConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/put-group-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutGroupConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: PutGroupConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:search_resources, Seahorse::Model::Operation.new.tap do |o|

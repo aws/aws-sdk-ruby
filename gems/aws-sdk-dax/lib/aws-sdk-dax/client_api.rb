@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -18,6 +18,7 @@ module Aws::DAX
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'ClusterAlreadyExistsFault')
+    ClusterEndpointEncryptionType = Shapes::StringShape.new(name: 'ClusterEndpointEncryptionType')
     ClusterList = Shapes::ListShape.new(name: 'ClusterList')
     ClusterNameList = Shapes::ListShape.new(name: 'ClusterNameList')
     ClusterNotFoundFault = Shapes::StructureShape.new(name: 'ClusterNotFoundFault')
@@ -98,6 +99,7 @@ module Aws::DAX
     SecurityGroupMembership = Shapes::StructureShape.new(name: 'SecurityGroupMembership')
     SecurityGroupMembershipList = Shapes::ListShape.new(name: 'SecurityGroupMembershipList')
     ServiceLinkedRoleNotFoundFault = Shapes::StructureShape.new(name: 'ServiceLinkedRoleNotFoundFault')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
@@ -147,6 +149,7 @@ module Aws::DAX
     Cluster.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
     Cluster.add_member(:parameter_group, Shapes::ShapeRef.new(shape: ParameterGroupStatus, location_name: "ParameterGroup"))
     Cluster.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
+    Cluster.add_member(:cluster_endpoint_encryption_type, Shapes::ShapeRef.new(shape: ClusterEndpointEncryptionType, location_name: "ClusterEndpointEncryptionType"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -172,6 +175,7 @@ module Aws::DAX
     CreateClusterRequest.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateClusterRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
+    CreateClusterRequest.add_member(:cluster_endpoint_encryption_type, Shapes::ShapeRef.new(shape: ClusterEndpointEncryptionType, location_name: "ClusterEndpointEncryptionType"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -279,6 +283,7 @@ module Aws::DAX
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
+    Endpoint.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "URL"))
     Endpoint.struct_class = Types::Endpoint
 
     Event.add_member(:source_name, Shapes::ShapeRef.new(shape: String, location_name: "SourceName"))
@@ -415,6 +420,8 @@ module Aws::DAX
 
     ServiceLinkedRoleNotFoundFault.struct_class = Types::ServiceLinkedRoleNotFoundFault
 
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SubnetAvailabilityZone"))
     Subnet.struct_class = Types::Subnet
@@ -535,6 +542,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_parameter_group, Seahorse::Model::Operation.new.tap do |o|

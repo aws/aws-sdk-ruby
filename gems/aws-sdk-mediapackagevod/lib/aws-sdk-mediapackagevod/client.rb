@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -327,6 +327,52 @@ module Aws::MediaPackageVod
 
     # @!group API Operations
 
+    # Changes the packaging group's properities to configure log
+    # subscription
+    #
+    # @option params [Types::EgressAccessLogs] :egress_access_logs
+    #   Configure egress access logging.
+    #
+    # @option params [required, String] :id
+    #
+    # @return [Types::ConfigureLogsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfigureLogsResponse#arn #arn} => String
+    #   * {Types::ConfigureLogsResponse#authorization #authorization} => Types::Authorization
+    #   * {Types::ConfigureLogsResponse#domain_name #domain_name} => String
+    #   * {Types::ConfigureLogsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
+    #   * {Types::ConfigureLogsResponse#id #id} => String
+    #   * {Types::ConfigureLogsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.configure_logs({
+    #     egress_access_logs: {
+    #       log_group_name: "__string",
+    #     },
+    #     id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
+    #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
+    #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogs AWS API Documentation
+    #
+    # @overload configure_logs(params = {})
+    # @param [Hash] params ({})
+    def configure_logs(params = {}, options = {})
+      req = build_request(:configure_logs, params)
+      req.send_request(options)
+    end
+
     # Creates a new MediaPackage VOD Asset resource.
     #
     # @option params [required, String] :id
@@ -428,6 +474,7 @@ module Aws::MediaPackageVod
     #   resp = client.create_packaging_configuration({
     #     cmaf_package: {
     #       encryption: {
+    #         constant_initialization_vector: "__string",
     #         speke_key_provider: { # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -448,6 +495,7 @@ module Aws::MediaPackageVod
     #           },
     #         },
     #       ],
+    #       include_encoder_configuration_in_segments: false,
     #       segment_duration_seconds: 1,
     #     },
     #     dash_package: {
@@ -471,6 +519,7 @@ module Aws::MediaPackageVod
     #           url: "__string", # required
     #         },
     #       },
+    #       include_encoder_configuration_in_segments: false,
     #       period_triggers: ["ADS"], # accepts ADS
     #       segment_duration_seconds: 1,
     #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -532,6 +581,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.cmaf_package.encryption.constant_initialization_vector #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
@@ -545,6 +595,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.dash_manifests #=> Array
     #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
@@ -558,6 +609,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
@@ -608,6 +660,9 @@ module Aws::MediaPackageVod
     # @option params [Types::Authorization] :authorization
     #   CDN Authorization credentials
     #
+    # @option params [Types::EgressAccessLogs] :egress_access_logs
+    #   Configure egress access logging.
+    #
     # @option params [required, String] :id
     #
     # @option params [Hash<String,String>] :tags
@@ -618,6 +673,7 @@ module Aws::MediaPackageVod
     #   * {Types::CreatePackagingGroupResponse#arn #arn} => String
     #   * {Types::CreatePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::CreatePackagingGroupResponse#domain_name #domain_name} => String
+    #   * {Types::CreatePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::CreatePackagingGroupResponse#id #id} => String
     #   * {Types::CreatePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -627,6 +683,9 @@ module Aws::MediaPackageVod
     #     authorization: {
     #       cdn_identifier_secret: "__string", # required
     #       secrets_role_arn: "__string", # required
+    #     },
+    #     egress_access_logs: {
+    #       log_group_name: "__string",
     #     },
     #     id: "__string", # required
     #     tags: {
@@ -640,6 +699,7 @@ module Aws::MediaPackageVod
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -787,6 +847,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.cmaf_package.encryption.constant_initialization_vector #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
@@ -800,6 +861,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.dash_manifests #=> Array
     #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
@@ -813,6 +875,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
@@ -867,6 +930,7 @@ module Aws::MediaPackageVod
     #   * {Types::DescribePackagingGroupResponse#arn #arn} => String
     #   * {Types::DescribePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::DescribePackagingGroupResponse#domain_name #domain_name} => String
+    #   * {Types::DescribePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::DescribePackagingGroupResponse#id #id} => String
     #   * {Types::DescribePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -882,6 +946,7 @@ module Aws::MediaPackageVod
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -970,6 +1035,7 @@ module Aws::MediaPackageVod
     #   resp.next_token #=> String
     #   resp.packaging_configurations #=> Array
     #   resp.packaging_configurations[0].arn #=> String
+    #   resp.packaging_configurations[0].cmaf_package.encryption.constant_initialization_vector #=> String
     #   resp.packaging_configurations[0].cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.packaging_configurations[0].cmaf_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.packaging_configurations[0].cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
@@ -983,6 +1049,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.packaging_configurations[0].cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.packaging_configurations[0].cmaf_package.segment_duration_seconds #=> Integer
     #   resp.packaging_configurations[0].dash_package.dash_manifests #=> Array
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
@@ -996,6 +1063,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.packaging_configurations[0].dash_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.packaging_configurations[0].dash_package.period_triggers #=> Array
     #   resp.packaging_configurations[0].dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.packaging_configurations[0].dash_package.segment_duration_seconds #=> Integer
@@ -1069,6 +1137,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_groups[0].authorization.cdn_identifier_secret #=> String
     #   resp.packaging_groups[0].authorization.secrets_role_arn #=> String
     #   resp.packaging_groups[0].domain_name #=> String
+    #   resp.packaging_groups[0].egress_access_logs.log_group_name #=> String
     #   resp.packaging_groups[0].id #=> String
     #   resp.packaging_groups[0].tags #=> Hash
     #   resp.packaging_groups[0].tags["__string"] #=> String
@@ -1175,6 +1244,7 @@ module Aws::MediaPackageVod
     #   * {Types::UpdatePackagingGroupResponse#arn #arn} => String
     #   * {Types::UpdatePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::UpdatePackagingGroupResponse#domain_name #domain_name} => String
+    #   * {Types::UpdatePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::UpdatePackagingGroupResponse#id #id} => String
     #   * {Types::UpdatePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -1194,6 +1264,7 @@ module Aws::MediaPackageVod
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -1220,7 +1291,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

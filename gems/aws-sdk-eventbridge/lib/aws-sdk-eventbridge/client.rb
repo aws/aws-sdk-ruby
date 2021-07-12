@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -361,6 +361,264 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Cancels the specified replay.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to cancel.
+    #
+    # @return [Types::CancelReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::CancelReplayResponse#state #state} => String
+    #   * {Types::CancelReplayResponse#state_reason #state_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_replay({
+    #     replay_name: "ReplayName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_arn #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CancelReplay AWS API Documentation
+    #
+    # @overload cancel_replay(params = {})
+    # @param [Hash] params ({})
+    def cancel_replay(params = {}, options = {})
+      req = build_request(:cancel_replay, params)
+      req.send_request(options)
+    end
+
+    # Creates an API destination, which is an HTTP invocation endpoint
+    # configured as a target for events.
+    #
+    # @option params [required, String] :name
+    #   The name for the API destination to create.
+    #
+    # @option params [String] :description
+    #   A description for the API destination to create.
+    #
+    # @option params [required, String] :connection_arn
+    #   The ARN of the connection to use for the API destination. The
+    #   destination endpoint must support the authorization type specified for
+    #   the connection.
+    #
+    # @option params [required, String] :invocation_endpoint
+    #   The URL to the HTTP invocation endpoint for the API destination.
+    #
+    # @option params [required, String] :http_method
+    #   The method to use for the request to the HTTP invocation endpoint.
+    #
+    # @option params [Integer] :invocation_rate_limit_per_second
+    #   The maximum number of requests per second to send to the HTTP
+    #   invocation endpoint.
+    #
+    # @return [Types::CreateApiDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApiDestinationResponse#api_destination_arn #api_destination_arn} => String
+    #   * {Types::CreateApiDestinationResponse#api_destination_state #api_destination_state} => String
+    #   * {Types::CreateApiDestinationResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateApiDestinationResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_api_destination({
+    #     name: "ApiDestinationName", # required
+    #     description: "ApiDestinationDescription",
+    #     connection_arn: "ConnectionArn", # required
+    #     invocation_endpoint: "HttpsEndpoint", # required
+    #     http_method: "POST", # required, accepts POST, GET, HEAD, OPTIONS, PUT, PATCH, DELETE
+    #     invocation_rate_limit_per_second: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destination_arn #=> String
+    #   resp.api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateApiDestination AWS API Documentation
+    #
+    # @overload create_api_destination(params = {})
+    # @param [Hash] params ({})
+    def create_api_destination(params = {}, options = {})
+      req = build_request(:create_api_destination, params)
+      req.send_request(options)
+    end
+
+    # Creates an archive of events with the specified settings. When you
+    # create an archive, incoming events might not immediately start being
+    # sent to the archive. Allow a short period of time for changes to take
+    # effect. If you do not specify a pattern to filter events sent to the
+    # archive, all events are sent to the archive except replayed events.
+    # Replayed events are not sent to an archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name for the archive to create.
+    #
+    # @option params [required, String] :event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #
+    # @option params [String] :description
+    #   A description for the archive.
+    #
+    # @option params [String] :event_pattern
+    #   An event pattern to use to filter events sent to the archive.
+    #
+    # @option params [Integer] :retention_days
+    #   The number of days to retain events for. Default value is 0. If set to
+    #   0, events are retained indefinitely
+    #
+    # @return [Types::CreateArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::CreateArchiveResponse#state #state} => String
+    #   * {Types::CreateArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::CreateArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_archive({
+    #     archive_name: "ArchiveName", # required
+    #     event_source_arn: "Arn", # required
+    #     description: "ArchiveDescription",
+    #     event_pattern: "EventPattern",
+    #     retention_days: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateArchive AWS API Documentation
+    #
+    # @overload create_archive(params = {})
+    # @param [Hash] params ({})
+    def create_archive(params = {}, options = {})
+      req = build_request(:create_archive, params)
+      req.send_request(options)
+    end
+
+    # Creates a connection. A connection defines the authorization type and
+    # credentials to use for authorization with an API destination HTTP
+    # endpoint.
+    #
+    # @option params [required, String] :name
+    #   The name for the connection to create.
+    #
+    # @option params [String] :description
+    #   A description for the connection to create.
+    #
+    # @option params [required, String] :authorization_type
+    #   The type of authorization to use for the connection.
+    #
+    # @option params [required, Types::CreateConnectionAuthRequestParameters] :auth_parameters
+    #   A `CreateConnectionAuthRequestParameters` object that contains the
+    #   authorization parameters to use to authorize with the endpoint.
+    #
+    # @return [Types::CreateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::CreateConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::CreateConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateConnectionResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connection({
+    #     name: "ConnectionName", # required
+    #     description: "ConnectionDescription",
+    #     authorization_type: "BASIC", # required, accepts BASIC, OAUTH_CLIENT_CREDENTIALS, API_KEY
+    #     auth_parameters: { # required
+    #       basic_auth_parameters: {
+    #         username: "AuthHeaderParameters", # required
+    #         password: "AuthHeaderParameters", # required
+    #       },
+    #       o_auth_parameters: {
+    #         client_parameters: { # required
+    #           client_id: "AuthHeaderParameters", # required
+    #           client_secret: "AuthHeaderParameters", # required
+    #         },
+    #         authorization_endpoint: "HttpsEndpoint", # required
+    #         http_method: "GET", # required, accepts GET, POST, PUT
+    #         o_auth_http_parameters: {
+    #           header_parameters: [
+    #             {
+    #               key: "HeaderKey",
+    #               value: "HeaderValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           query_string_parameters: [
+    #             {
+    #               key: "QueryStringKey",
+    #               value: "QueryStringValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           body_parameters: [
+    #             {
+    #               key: "String",
+    #               value: "String",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       api_key_auth_parameters: {
+    #         api_key_name: "AuthHeaderParameters", # required
+    #         api_key_value: "AuthHeaderParameters", # required
+    #       },
+    #       invocation_http_parameters: {
+    #         header_parameters: [
+    #           {
+    #             key: "HeaderKey",
+    #             value: "HeaderValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         query_string_parameters: [
+    #           {
+    #             key: "QueryStringKey",
+    #             value: "QueryStringValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         body_parameters: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateConnection AWS API Documentation
+    #
+    # @overload create_connection(params = {})
+    # @param [Hash] params ({})
+    def create_connection(params = {}, options = {})
+      req = build_request(:create_connection, params)
+      req.send_request(options)
+    end
+
     # Creates a new event bus within your account. This can be a custom
     # event bus which you can use to receive events from your custom
     # applications and services, or it can be a partner event bus which can
@@ -507,6 +765,124 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Removes all authorization parameters from the connection. This lets
+    # you remove the secret from the connection so you can reuse it without
+    # having to create a new connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to remove authorization from.
+    #
+    # @return [Types::DeauthorizeConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeauthorizeConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::DeauthorizeConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::DeauthorizeConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::DeauthorizeConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DeauthorizeConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deauthorize_connection({
+    #     name: "ConnectionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeauthorizeConnection AWS API Documentation
+    #
+    # @overload deauthorize_connection(params = {})
+    # @param [Hash] params ({})
+    def deauthorize_connection(params = {}, options = {})
+      req = build_request(:deauthorize_connection, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified API destination.
+    #
+    # @option params [required, String] :name
+    #   The name of the destination to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_api_destination({
+    #     name: "ApiDestinationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteApiDestination AWS API Documentation
+    #
+    # @overload delete_api_destination(params = {})
+    # @param [Hash] params ({})
+    def delete_api_destination(params = {}, options = {})
+      req = build_request(:delete_api_destination, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_archive({
+    #     archive_name: "ArchiveName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteArchive AWS API Documentation
+    #
+    # @overload delete_archive(params = {})
+    # @param [Hash] params ({})
+    def delete_archive(params = {}, options = {})
+      req = build_request(:delete_archive, params)
+      req.send_request(options)
+    end
+
+    # Deletes a connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to delete.
+    #
+    # @return [Types::DeleteConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::DeleteConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::DeleteConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::DeleteConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DeleteConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection({
+    #     name: "ConnectionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteConnection AWS API Documentation
+    #
+    # @overload delete_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_connection(params = {}, options = {})
+      req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified custom event bus or partner event bus. All rules
     # associated with this event bus need to be deleted. You can't delete
     # your account's default event bus.
@@ -570,6 +946,10 @@ module Aws::EventBridge
     # When you delete a rule, incoming events might continue to match to the
     # deleted rule. Allow a short period of time for changes to take effect.
     #
+    # If you call delete rule multiple times for the same rule, all calls
+    # will succeed. When you call delete rule for a non-existent custom
+    # eventbus, `ResourceNotFoundException` is returned.
+    #
     # Managed rules are rules created and managed by another AWS service on
     # your behalf. These rules are created by those other AWS services to
     # support functionality in those services. You can delete these rules
@@ -580,8 +960,8 @@ module Aws::EventBridge
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [Boolean] :force
     #   If this is a managed rule, created by an AWS service on your behalf,
@@ -596,7 +976,7 @@ module Aws::EventBridge
     #
     #   resp = client.delete_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     force: false,
     #   })
     #
@@ -606,6 +986,176 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def delete_rule(params = {}, options = {})
       req = build_request(:delete_rule, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about an API destination.
+    #
+    # @option params [required, String] :name
+    #   The name of the API destination to retrieve.
+    #
+    # @return [Types::DescribeApiDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApiDestinationResponse#api_destination_arn #api_destination_arn} => String
+    #   * {Types::DescribeApiDestinationResponse#name #name} => String
+    #   * {Types::DescribeApiDestinationResponse#description #description} => String
+    #   * {Types::DescribeApiDestinationResponse#api_destination_state #api_destination_state} => String
+    #   * {Types::DescribeApiDestinationResponse#connection_arn #connection_arn} => String
+    #   * {Types::DescribeApiDestinationResponse#invocation_endpoint #invocation_endpoint} => String
+    #   * {Types::DescribeApiDestinationResponse#http_method #http_method} => String
+    #   * {Types::DescribeApiDestinationResponse#invocation_rate_limit_per_second #invocation_rate_limit_per_second} => Integer
+    #   * {Types::DescribeApiDestinationResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeApiDestinationResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_api_destination({
+    #     name: "ApiDestinationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destination_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.connection_arn #=> String
+    #   resp.invocation_endpoint #=> String
+    #   resp.http_method #=> String, one of "POST", "GET", "HEAD", "OPTIONS", "PUT", "PATCH", "DELETE"
+    #   resp.invocation_rate_limit_per_second #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeApiDestination AWS API Documentation
+    #
+    # @overload describe_api_destination(params = {})
+    # @param [Hash] params ({})
+    def describe_api_destination(params = {}, options = {})
+      req = build_request(:describe_api_destination, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about an archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to retrieve.
+    #
+    # @return [Types::DescribeArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::DescribeArchiveResponse#archive_name #archive_name} => String
+    #   * {Types::DescribeArchiveResponse#event_source_arn #event_source_arn} => String
+    #   * {Types::DescribeArchiveResponse#description #description} => String
+    #   * {Types::DescribeArchiveResponse#event_pattern #event_pattern} => String
+    #   * {Types::DescribeArchiveResponse#state #state} => String
+    #   * {Types::DescribeArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeArchiveResponse#retention_days #retention_days} => Integer
+    #   * {Types::DescribeArchiveResponse#size_bytes #size_bytes} => Integer
+    #   * {Types::DescribeArchiveResponse#event_count #event_count} => Integer
+    #   * {Types::DescribeArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_archive({
+    #     archive_name: "ArchiveName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.archive_name #=> String
+    #   resp.event_source_arn #=> String
+    #   resp.description #=> String
+    #   resp.event_pattern #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.retention_days #=> Integer
+    #   resp.size_bytes #=> Integer
+    #   resp.event_count #=> Integer
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeArchive AWS API Documentation
+    #
+    # @overload describe_archive(params = {})
+    # @param [Hash] params ({})
+    def describe_archive(params = {}, options = {})
+      req = build_request(:describe_archive, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about a connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to retrieve.
+    #
+    # @return [Types::DescribeConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::DescribeConnectionResponse#name #name} => String
+    #   * {Types::DescribeConnectionResponse#description #description} => String
+    #   * {Types::DescribeConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::DescribeConnectionResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeConnectionResponse#authorization_type #authorization_type} => String
+    #   * {Types::DescribeConnectionResponse#secret_arn #secret_arn} => String
+    #   * {Types::DescribeConnectionResponse#auth_parameters #auth_parameters} => Types::ConnectionAuthResponseParameters
+    #   * {Types::DescribeConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_connection({
+    #     name: "ConnectionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.state_reason #=> String
+    #   resp.authorization_type #=> String, one of "BASIC", "OAUTH_CLIENT_CREDENTIALS", "API_KEY"
+    #   resp.secret_arn #=> String
+    #   resp.auth_parameters.basic_auth_parameters.username #=> String
+    #   resp.auth_parameters.o_auth_parameters.client_parameters.client_id #=> String
+    #   resp.auth_parameters.o_auth_parameters.authorization_endpoint #=> String
+    #   resp.auth_parameters.o_auth_parameters.http_method #=> String, one of "GET", "POST", "PUT"
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters #=> Array
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters[0].key #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters[0].value #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters #=> Array
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters[0].key #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters[0].value #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters #=> Array
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters[0].key #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters[0].value #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.api_key_auth_parameters.api_key_name #=> String
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters #=> Array
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters[0].key #=> String
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters[0].value #=> String
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters #=> Array
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters[0].key #=> String
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters[0].value #=> String
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters #=> Array
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters[0].key #=> String
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters[0].value #=> String
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters[0].is_value_secret #=> Boolean
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeConnection AWS API Documentation
+    #
+    # @overload describe_connection(params = {})
+    # @param [Hash] params ({})
+    def describe_connection(params = {}, options = {})
+      req = build_request(:describe_connection, params)
       req.send_request(options)
     end
 
@@ -621,8 +1171,8 @@ module Aws::EventBridge
     # For more information about partner event buses, see CreateEventBus.
     #
     # @option params [String] :name
-    #   The name of the event bus to show details for. If you omit this, the
-    #   default event bus is displayed.
+    #   The name or ARN of the event bus to show details for. If you omit
+    #   this, the default event bus is displayed.
     #
     # @return [Types::DescribeEventBusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -633,7 +1183,7 @@ module Aws::EventBridge
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_bus({
-    #     name: "EventBusName",
+    #     name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -723,6 +1273,67 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Retrieves details about a replay. Use `DescribeReplay` to determine
+    # the progress of a running replay. A replay processes events to replay
+    # based on the time in the event, and replays them using 1 minute
+    # intervals. If you use `StartReplay` and specify an `EventStartTime`
+    # and an `EventEndTime` that covers a 20 minute time range, the events
+    # are replayed from the first minute of that 20 minute range first. Then
+    # the events from the second minute are replayed. You can use
+    # `DescribeReplay` to determine the progress of a replay. The value
+    # returned for `EventLastReplayedTime` indicates the time within the
+    # specified time range associated with the last event replayed.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to retrieve.
+    #
+    # @return [Types::DescribeReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplayResponse#replay_name #replay_name} => String
+    #   * {Types::DescribeReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::DescribeReplayResponse#description #description} => String
+    #   * {Types::DescribeReplayResponse#state #state} => String
+    #   * {Types::DescribeReplayResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeReplayResponse#event_source_arn #event_source_arn} => String
+    #   * {Types::DescribeReplayResponse#destination #destination} => Types::ReplayDestination
+    #   * {Types::DescribeReplayResponse#event_start_time #event_start_time} => Time
+    #   * {Types::DescribeReplayResponse#event_end_time #event_end_time} => Time
+    #   * {Types::DescribeReplayResponse#event_last_replayed_time #event_last_replayed_time} => Time
+    #   * {Types::DescribeReplayResponse#replay_start_time #replay_start_time} => Time
+    #   * {Types::DescribeReplayResponse#replay_end_time #replay_end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replay({
+    #     replay_name: "ReplayName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_name #=> String
+    #   resp.replay_arn #=> String
+    #   resp.description #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #   resp.event_source_arn #=> String
+    #   resp.destination.arn #=> String
+    #   resp.destination.filter_arns #=> Array
+    #   resp.destination.filter_arns[0] #=> String
+    #   resp.event_start_time #=> Time
+    #   resp.event_end_time #=> Time
+    #   resp.event_last_replayed_time #=> Time
+    #   resp.replay_start_time #=> Time
+    #   resp.replay_end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeReplay AWS API Documentation
+    #
+    # @overload describe_replay(params = {})
+    # @param [Hash] params ({})
+    def describe_replay(params = {}, options = {})
+      req = build_request(:describe_replay, params)
+      req.send_request(options)
+    end
+
     # Describes the specified rule.
     #
     # DescribeRule does not list the targets of a rule. To see the targets
@@ -732,8 +1343,8 @@ module Aws::EventBridge
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Types::DescribeRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -746,12 +1357,13 @@ module Aws::EventBridge
     #   * {Types::DescribeRuleResponse#role_arn #role_arn} => String
     #   * {Types::DescribeRuleResponse#managed_by #managed_by} => String
     #   * {Types::DescribeRuleResponse#event_bus_name #event_bus_name} => String
+    #   * {Types::DescribeRuleResponse#created_by #created_by} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -765,6 +1377,7 @@ module Aws::EventBridge
     #   resp.role_arn #=> String
     #   resp.managed_by #=> String
     #   resp.event_bus_name #=> String
+    #   resp.created_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeRule AWS API Documentation
     #
@@ -786,8 +1399,8 @@ module Aws::EventBridge
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -795,7 +1408,7 @@ module Aws::EventBridge
     #
     #   resp = client.disable_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DisableRule AWS API Documentation
@@ -818,8 +1431,8 @@ module Aws::EventBridge
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -827,7 +1440,7 @@ module Aws::EventBridge
     #
     #   resp = client.enable_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EnableRule AWS API Documentation
@@ -836,6 +1449,170 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def enable_rule(params = {}, options = {})
       req = build_request(:enable_rule, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of API destination in the account in the current
+    # Region.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter results returned. Only API destinations with a
+    #   name that starts with the prefix are returned.
+    #
+    # @option params [String] :connection_arn
+    #   The ARN of the connection specified for the API destination.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of API destinations to include in the response.
+    #
+    # @return [Types::ListApiDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApiDestinationsResponse#api_destinations #api_destinations} => Array&lt;Types::ApiDestination&gt;
+    #   * {Types::ListApiDestinationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_api_destinations({
+    #     name_prefix: "ApiDestinationName",
+    #     connection_arn: "ConnectionArn",
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destinations #=> Array
+    #   resp.api_destinations[0].api_destination_arn #=> String
+    #   resp.api_destinations[0].name #=> String
+    #   resp.api_destinations[0].api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.api_destinations[0].connection_arn #=> String
+    #   resp.api_destinations[0].invocation_endpoint #=> String
+    #   resp.api_destinations[0].http_method #=> String, one of "POST", "GET", "HEAD", "OPTIONS", "PUT", "PATCH", "DELETE"
+    #   resp.api_destinations[0].invocation_rate_limit_per_second #=> Integer
+    #   resp.api_destinations[0].creation_time #=> Time
+    #   resp.api_destinations[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListApiDestinations AWS API Documentation
+    #
+    # @overload list_api_destinations(params = {})
+    # @param [Hash] params ({})
+    def list_api_destinations(params = {}, options = {})
+      req = build_request(:list_api_destinations, params)
+      req.send_request(options)
+    end
+
+    # Lists your archives. You can either list all the archives or you can
+    # provide a prefix to match to the archive names. Filter parameters are
+    # exclusive.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter the archives returned. Only archives with name
+    #   that match the prefix are returned.
+    #
+    # @option params [String] :event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #
+    # @option params [String] :state
+    #   The state of the archive.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListArchivesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListArchivesResponse#archives #archives} => Array&lt;Types::Archive&gt;
+    #   * {Types::ListArchivesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_archives({
+    #     name_prefix: "ArchiveName",
+    #     event_source_arn: "Arn",
+    #     state: "ENABLED", # accepts ENABLED, DISABLED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archives #=> Array
+    #   resp.archives[0].archive_name #=> String
+    #   resp.archives[0].event_source_arn #=> String
+    #   resp.archives[0].state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.archives[0].state_reason #=> String
+    #   resp.archives[0].retention_days #=> Integer
+    #   resp.archives[0].size_bytes #=> Integer
+    #   resp.archives[0].event_count #=> Integer
+    #   resp.archives[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListArchives AWS API Documentation
+    #
+    # @overload list_archives(params = {})
+    # @param [Hash] params ({})
+    def list_archives(params = {}, options = {})
+      req = build_request(:list_archives, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of connections from the account.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter results returned. Only connections with a name
+    #   that starts with the prefix are returned.
+    #
+    # @option params [String] :connection_state
+    #   The state of the connection.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of connections to return.
+    #
+    # @return [Types::ListConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectionsResponse#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::ListConnectionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connections({
+    #     name_prefix: "ConnectionName",
+    #     connection_state: "CREATING", # accepts CREATING, UPDATING, DELETING, AUTHORIZED, DEAUTHORIZED, AUTHORIZING, DEAUTHORIZING
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections #=> Array
+    #   resp.connections[0].connection_arn #=> String
+    #   resp.connections[0].name #=> String
+    #   resp.connections[0].connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.connections[0].state_reason #=> String
+    #   resp.connections[0].authorization_type #=> String, one of "BASIC", "OAUTH_CLIENT_CREDENTIALS", "API_KEY"
+    #   resp.connections[0].creation_time #=> Time
+    #   resp.connections[0].last_modified_time #=> Time
+    #   resp.connections[0].last_authorized_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListConnections AWS API Documentation
+    #
+    # @overload list_connections(params = {})
+    # @param [Hash] params ({})
+    def list_connections(params = {}, options = {})
+      req = build_request(:list_connections, params)
       req.send_request(options)
     end
 
@@ -1029,6 +1806,65 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Lists your replays. You can either list all the replays or you can
+    # provide a prefix to match to the replay names. Filter parameters are
+    # exclusive.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter the replays returned. Only replays with name
+    #   that match the prefix are returned.
+    #
+    # @option params [String] :state
+    #   The state of the replay.
+    #
+    # @option params [String] :event_source_arn
+    #   The ARN of the event source associated with the replay.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of replays to retrieve.
+    #
+    # @return [Types::ListReplaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReplaysResponse#replays #replays} => Array&lt;Types::Replay&gt;
+    #   * {Types::ListReplaysResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_replays({
+    #     name_prefix: "ReplayName",
+    #     state: "STARTING", # accepts STARTING, RUNNING, CANCELLING, COMPLETED, CANCELLED, FAILED
+    #     event_source_arn: "Arn",
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replays #=> Array
+    #   resp.replays[0].replay_name #=> String
+    #   resp.replays[0].event_source_arn #=> String
+    #   resp.replays[0].state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.replays[0].state_reason #=> String
+    #   resp.replays[0].event_start_time #=> Time
+    #   resp.replays[0].event_end_time #=> Time
+    #   resp.replays[0].event_last_replayed_time #=> Time
+    #   resp.replays[0].replay_start_time #=> Time
+    #   resp.replays[0].replay_end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListReplays AWS API Documentation
+    #
+    # @overload list_replays(params = {})
+    # @param [Hash] params ({})
+    def list_replays(params = {}, options = {})
+      req = build_request(:list_replays, params)
+      req.send_request(options)
+    end
+
     # Lists the rules for the specified target. You can see which of the
     # rules in Amazon EventBridge can invoke a specific target in your
     # account.
@@ -1037,8 +1873,8 @@ module Aws::EventBridge
     #   The Amazon Resource Name (ARN) of the target resource.
     #
     # @option params [String] :event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list rules for. If you omit this,
+    #   the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1056,7 +1892,7 @@ module Aws::EventBridge
     #
     #   resp = client.list_rule_names_by_target({
     #     target_arn: "TargetArn", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1086,8 +1922,8 @@ module Aws::EventBridge
     #   The prefix matching the rule name.
     #
     # @option params [String] :event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list the rules for. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1105,7 +1941,7 @@ module Aws::EventBridge
     #
     #   resp = client.list_rules({
     #     name_prefix: "RuleName",
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1170,8 +2006,8 @@ module Aws::EventBridge
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1189,7 +2025,7 @@ module Aws::EventBridge
     #
     #   resp = client.list_targets_by_rule({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1220,6 +2056,23 @@ module Aws::EventBridge
     #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.targets[0].ecs_parameters.platform_version #=> String
     #   resp.targets[0].ecs_parameters.group #=> String
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy #=> Array
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy[0].base #=> Integer
+    #   resp.targets[0].ecs_parameters.enable_ecs_managed_tags #=> Boolean
+    #   resp.targets[0].ecs_parameters.enable_execute_command #=> Boolean
+    #   resp.targets[0].ecs_parameters.placement_constraints #=> Array
+    #   resp.targets[0].ecs_parameters.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.targets[0].ecs_parameters.placement_constraints[0].expression #=> String
+    #   resp.targets[0].ecs_parameters.placement_strategy #=> Array
+    #   resp.targets[0].ecs_parameters.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.targets[0].ecs_parameters.placement_strategy[0].field #=> String
+    #   resp.targets[0].ecs_parameters.propagate_tags #=> String, one of "TASK_DEFINITION"
+    #   resp.targets[0].ecs_parameters.reference_id #=> String
+    #   resp.targets[0].ecs_parameters.tags #=> Array
+    #   resp.targets[0].ecs_parameters.tags[0].key #=> String
+    #   resp.targets[0].ecs_parameters.tags[0].value #=> String
     #   resp.targets[0].batch_parameters.job_definition #=> String
     #   resp.targets[0].batch_parameters.job_name #=> String
     #   resp.targets[0].batch_parameters.array_properties.size #=> Integer
@@ -1237,6 +2090,9 @@ module Aws::EventBridge
     #   resp.targets[0].redshift_data_parameters.sql #=> String
     #   resp.targets[0].redshift_data_parameters.statement_name #=> String
     #   resp.targets[0].redshift_data_parameters.with_event #=> Boolean
+    #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list #=> Array
+    #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list[0].name #=> String
+    #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list[0].value #=> String
     #   resp.targets[0].dead_letter_config.arn #=> String
     #   resp.targets[0].retry_policy.maximum_retry_attempts #=> Integer
     #   resp.targets[0].retry_policy.maximum_event_age_in_seconds #=> Integer
@@ -1262,7 +2118,7 @@ module Aws::EventBridge
     # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutEventsResponse#failed_entry_count #failed_entry_count} => Integer
-    #   * {Types::PutEventsResponse#entries #entries} => Array&lt;Types::PutEventsResultEntry&gt;
+    #   * {Types::PutEventsResponse#entries #data.entries} => Array&lt;Types::PutEventsResultEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -1274,7 +2130,8 @@ module Aws::EventBridge
     #         resources: ["EventResource"],
     #         detail_type: "String",
     #         detail: "String",
-    #         event_bus_name: "NonPartnerEventBusName",
+    #         event_bus_name: "NonPartnerEventBusNameOrArn",
+    #         trace_header: "TraceHeader",
     #       },
     #     ],
     #   })
@@ -1282,10 +2139,10 @@ module Aws::EventBridge
     # @example Response structure
     #
     #   resp.failed_entry_count #=> Integer
-    #   resp.entries #=> Array
-    #   resp.entries[0].event_id #=> String
-    #   resp.entries[0].error_code #=> String
-    #   resp.entries[0].error_message #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].event_id #=> String
+    #   resp.data.entries[0].error_code #=> String
+    #   resp.data.entries[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEvents AWS API Documentation
     #
@@ -1305,7 +2162,7 @@ module Aws::EventBridge
     # @return [Types::PutPartnerEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPartnerEventsResponse#failed_entry_count #failed_entry_count} => Integer
-    #   * {Types::PutPartnerEventsResponse#entries #entries} => Array&lt;Types::PutPartnerEventsResultEntry&gt;
+    #   * {Types::PutPartnerEventsResponse#entries #data.entries} => Array&lt;Types::PutPartnerEventsResultEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -1324,10 +2181,10 @@ module Aws::EventBridge
     # @example Response structure
     #
     #   resp.failed_entry_count #=> Integer
-    #   resp.entries #=> Array
-    #   resp.entries[0].event_id #=> String
-    #   resp.entries[0].error_code #=> String
-    #   resp.entries[0].error_message #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].event_id #=> String
+    #   resp.data.entries[0].error_code #=> String
+    #   resp.data.entries[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEvents AWS API Documentation
     #
@@ -1368,14 +2225,14 @@ module Aws::EventBridge
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name of the event bus associated with the rule. If you omit this,
+    #   the default event bus is used.
     #
-    # @option params [required, String] :action
+    # @option params [String] :action
     #   The action that you are enabling the other account to perform.
     #   Currently, this must be `events:PutEvents`.
     #
-    # @option params [required, String] :principal
+    # @option params [String] :principal
     #   The 12-digit AWS account ID that you are permitting to put events to
     #   your default event bus. Specify "*" to permit any account to put
     #   events to your default event bus.
@@ -1387,7 +2244,7 @@ module Aws::EventBridge
     #   with an account field do not match any events sent from other
     #   accounts.
     #
-    # @option params [required, String] :statement_id
+    # @option params [String] :statement_id
     #   An identifier string for the external account that you are granting
     #   permissions to. If you later want to revoke the permission for this
     #   external account, specify this `StatementId` when you run
@@ -1410,20 +2267,26 @@ module Aws::EventBridge
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #
+    # @option params [String] :policy
+    #   A JSON string that describes the permission policy statement. You can
+    #   include a `Policy` parameter in the request instead of using the
+    #   `StatementId`, `Action`, `Principal`, or `Condition` parameters.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_permission({
     #     event_bus_name: "NonPartnerEventBusName",
-    #     action: "Action", # required
-    #     principal: "Principal", # required
-    #     statement_id: "StatementId", # required
+    #     action: "Action",
+    #     principal: "Principal",
+    #     statement_id: "StatementId",
     #     condition: {
     #       type: "String", # required
     #       key: "String", # required
     #       value: "String", # required
     #     },
+    #     policy: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPermission AWS API Documentation
@@ -1529,8 +2392,8 @@ module Aws::EventBridge
     #   The list of key-value pairs to associate with the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus to associate with this rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus to associate with this rule. If you
+    #   omit this, the default event bus is used.
     #
     # @return [Types::PutRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1551,7 +2414,7 @@ module Aws::EventBridge
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -1574,39 +2437,57 @@ module Aws::EventBridge
     #
     # You can configure the following as targets for Events:
     #
-    # * EC2 instances
+    # * [API destination][1]
     #
-    # * SSM Run Command
+    # * Amazon API Gateway REST API endpoints
     #
-    # * SSM Automation
+    # * API Gateway
     #
-    # * AWS Lambda functions
+    # * AWS Batch job queue
     #
-    # * Data streams in Amazon Kinesis Data Streams
+    # * CloudWatch Logs group
     #
-    # * Data delivery streams in Amazon Kinesis Data Firehose
+    # * CodeBuild project
+    #
+    # * CodePineline
+    #
+    # * Amazon EC2 `CreateSnapshot` API call
+    #
+    # * Amazon EC2 `RebootInstances` API call
+    #
+    # * Amazon EC2 `StopInstances` API call
+    #
+    # * Amazon EC2 `TerminateInstances` API call
     #
     # * Amazon ECS tasks
     #
-    # * AWS Step Functions state machines
+    # * Event bus in a different AWS account or Region.
     #
-    # * AWS Batch jobs
+    #   You can use an event bus in the US East (N. Virginia) us-east-1, US
+    #   West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a
+    #   target for a rule.
     #
-    # * AWS CodeBuild projects
+    # * Firehose delivery stream (Kinesis Data Firehose)
     #
-    # * Pipelines in AWS CodePipeline
+    # * Inspector assessment template (Amazon Inspector)
     #
-    # * Amazon Inspector assessment templates
+    # * Kinesis stream (Kinesis Data Stream)
     #
-    # * Amazon SNS topics
+    # * AWS Lambda function
     #
-    # * Amazon SQS queues, including FIFO queues
+    # * Redshift clusters (Data API statement execution)
     #
-    # * The default event bus of another AWS account
+    # * Amazon SNS topic
     #
-    # * Amazon API Gateway REST APIs
+    # * Amazon SQS queues (includes FIFO queues
     #
-    # * Redshift Clusters to invoke Data API ExecuteStatement on
+    # * SSM Automation
+    #
+    # * SSM OpsItem
+    #
+    # * SSM Run Command
+    #
+    # * Step Functions state machines
     #
     # Creating rules with built-in targets is supported only in the AWS
     # Management Console. The built-in targets are `EC2 CreateSnapshot API
@@ -1626,7 +2507,7 @@ module Aws::EventBridge
     # streams, AWS Step Functions state machines and API Gateway REST APIs,
     # EventBridge relies on IAM roles that you specify in the `RoleARN`
     # argument in `PutTargets`. For more information, see [Authentication
-    # and Access Control][1] in the *Amazon EventBridge User Guide*.
+    # and Access Control][2] in the *Amazon EventBridge User Guide*.
     #
     # If another AWS account is in the same region and has granted you
     # permission (using `PutPermission`), you can send events to that
@@ -1637,7 +2518,7 @@ module Aws::EventBridge
     # account is charged for each sent event. Each event sent to another
     # account is charged as a custom event. The account receiving the event
     # is not charged. For more information, see [Amazon EventBridge
-    # (CloudWatch Events) Pricing][2].
+    # (CloudWatch Events) Pricing][3].
     #
     # <note markdown="1"> `Input`, `InputPath`, and `InputTransformer` are not available with
     # `PutTarget` if the target is an event bus of a different AWS account.
@@ -1649,7 +2530,7 @@ module Aws::EventBridge
     # organization instead of directly by the account ID, then you must
     # specify a `RoleArn` with proper permissions in the `Target` structure.
     # For more information, see [Sending and Receiving Events Between AWS
-    # Accounts][3] in the *Amazon EventBridge User Guide*.
+    # Accounts][4] in the *Amazon EventBridge User Guide*.
     #
     # For more information about enabling cross-account events, see
     # PutPermission.
@@ -1689,16 +2570,17 @@ module Aws::EventBridge
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
-    # [2]: https://aws.amazon.com/eventbridge/pricing/
-    # [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
+    # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
+    # [3]: https://aws.amazon.com/eventbridge/pricing/
+    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @option params [required, String] :rule
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The name of the event bus associated with the rule. If you omit this,
-    #   the default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [required, Array<Types::Target>] :targets
     #   The targets to update or add to the rule.
@@ -1712,7 +2594,7 @@ module Aws::EventBridge
     #
     #   resp = client.put_targets({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     targets: [ # required
     #       {
     #         id: "TargetId", # required
@@ -1750,6 +2632,35 @@ module Aws::EventBridge
     #           },
     #           platform_version: "String",
     #           group: "String",
+    #           capacity_provider_strategy: [
+    #             {
+    #               capacity_provider: "CapacityProvider", # required
+    #               weight: 1,
+    #               base: 1,
+    #             },
+    #           ],
+    #           enable_ecs_managed_tags: false,
+    #           enable_execute_command: false,
+    #           placement_constraints: [
+    #             {
+    #               type: "distinctInstance", # accepts distinctInstance, memberOf
+    #               expression: "PlacementConstraintExpression",
+    #             },
+    #           ],
+    #           placement_strategy: [
+    #             {
+    #               type: "random", # accepts random, spread, binpack
+    #               field: "PlacementStrategyField",
+    #             },
+    #           ],
+    #           propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
+    #           reference_id: "ReferenceId",
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
     #         },
     #         batch_parameters: {
     #           job_definition: "String", # required
@@ -1780,6 +2691,14 @@ module Aws::EventBridge
     #           sql: "Sql", # required
     #           statement_name: "StatementName",
     #           with_event: false,
+    #         },
+    #         sage_maker_pipeline_parameters: {
+    #           pipeline_parameter_list: [
+    #             {
+    #               name: "SageMakerPipelineParameterName", # required
+    #               value: "SageMakerPipelineParameterValue", # required
+    #             },
+    #           ],
     #         },
     #         dead_letter_config: {
     #           arn: "ResourceArn",
@@ -1815,9 +2734,12 @@ module Aws::EventBridge
     # granted it permission with `PutPermission`. You can find the
     # `StatementId` by using DescribeEventBus.
     #
-    # @option params [required, String] :statement_id
+    # @option params [String] :statement_id
     #   The statement ID corresponding to the account that is no longer
     #   allowed to put events to the default event bus.
+    #
+    # @option params [Boolean] :remove_all_permissions
+    #   Specifies whether to remove all permissions.
     #
     # @option params [String] :event_bus_name
     #   The name of the event bus to revoke permissions for. If you omit this,
@@ -1828,7 +2750,8 @@ module Aws::EventBridge
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_permission({
-    #     statement_id: "StatementId", # required
+    #     statement_id: "StatementId",
+    #     remove_all_permissions: false,
     #     event_bus_name: "NonPartnerEventBusName",
     #   })
     #
@@ -1857,7 +2780,8 @@ module Aws::EventBridge
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The name of the event bus associated with the rule.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [required, Array<String>] :ids
     #   The IDs of the targets to remove from the rule.
@@ -1878,7 +2802,7 @@ module Aws::EventBridge
     #
     #   resp = client.remove_targets({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     ids: ["TargetId"], # required
     #     force: false,
     #   })
@@ -1897,6 +2821,75 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def remove_targets(params = {}, options = {})
       req = build_request(:remove_targets, params)
+      req.send_request(options)
+    end
+
+    # Starts the specified replay. Events are not necessarily replayed in
+    # the exact same order that they were added to the archive. A replay
+    # processes events to replay based on the time in the event, and replays
+    # them using 1 minute intervals. If you specify an `EventStartTime` and
+    # an `EventEndTime` that covers a 20 minute time range, the events are
+    # replayed from the first minute of that 20 minute range first. Then the
+    # events from the second minute are replayed. You can use
+    # `DescribeReplay` to determine the progress of a replay. The value
+    # returned for `EventLastReplayedTime` indicates the time within the
+    # specified time range associated with the last event replayed.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to start.
+    #
+    # @option params [String] :description
+    #   A description for the replay to start.
+    #
+    # @option params [required, String] :event_source_arn
+    #   The ARN of the archive to replay events from.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :event_start_time
+    #   A time stamp for the time to start replaying events. Only events that
+    #   occurred between the `EventStartTime` and `EventEndTime` are replayed.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :event_end_time
+    #   A time stamp for the time to stop replaying events. Only events that
+    #   occurred between the `EventStartTime` and `EventEndTime` are replayed.
+    #
+    # @option params [required, Types::ReplayDestination] :destination
+    #   A `ReplayDestination` object that includes details about the
+    #   destination for the replay.
+    #
+    # @return [Types::StartReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::StartReplayResponse#state #state} => String
+    #   * {Types::StartReplayResponse#state_reason #state_reason} => String
+    #   * {Types::StartReplayResponse#replay_start_time #replay_start_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replay({
+    #     replay_name: "ReplayName", # required
+    #     description: "ReplayDescription",
+    #     event_source_arn: "Arn", # required
+    #     event_start_time: Time.now, # required
+    #     event_end_time: Time.now, # required
+    #     destination: { # required
+    #       arn: "Arn", # required
+    #       filter_arns: ["Arn"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_arn #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #   resp.replay_start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/StartReplay AWS API Documentation
+    #
+    # @overload start_replay(params = {})
+    # @param [Hash] params ({})
+    def start_replay(params = {}, options = {})
+      req = build_request(:start_replay, params)
       req.send_request(options)
     end
 
@@ -1963,7 +2956,27 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
     #
     # @option params [required, String] :event
-    #   The event, in JSON format, to test against the event pattern.
+    #   The event, in JSON format, to test against the event pattern. The JSON
+    #   must follow the format specified in [AWS Events][1], and the following
+    #   fields are mandatory:
+    #
+    #   * `id`
+    #
+    #   * `account`
+    #
+    #   * `source`
+    #
+    #   * `time`
+    #
+    #   * `region`
+    #
+    #   * `resources`
+    #
+    #   * `detail-type`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html
     #
     # @return [Types::TestEventPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1990,7 +3003,7 @@ module Aws::EventBridge
     end
 
     # Removes one or more tags from the specified EventBridge resource. In
-    # Amazon EventBridge (CloudWatch Events, rules and event buses can be
+    # Amazon EventBridge (CloudWatch Events), rules and event buses can be
     # tagged.
     #
     # @option params [required, String] :resource_arn
@@ -2017,6 +3030,218 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Updates an API destination.
+    #
+    # @option params [required, String] :name
+    #   The name of the API destination to update.
+    #
+    # @option params [String] :description
+    #   The name of the API destination to update.
+    #
+    # @option params [String] :connection_arn
+    #   The ARN of the connection to use for the API destination.
+    #
+    # @option params [String] :invocation_endpoint
+    #   The URL to the endpoint to use for the API destination.
+    #
+    # @option params [String] :http_method
+    #   The method to use for the API destination.
+    #
+    # @option params [Integer] :invocation_rate_limit_per_second
+    #   The maximum number of invocations per second to send to the API
+    #   destination.
+    #
+    # @return [Types::UpdateApiDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApiDestinationResponse#api_destination_arn #api_destination_arn} => String
+    #   * {Types::UpdateApiDestinationResponse#api_destination_state #api_destination_state} => String
+    #   * {Types::UpdateApiDestinationResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateApiDestinationResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_api_destination({
+    #     name: "ApiDestinationName", # required
+    #     description: "ApiDestinationDescription",
+    #     connection_arn: "ConnectionArn",
+    #     invocation_endpoint: "HttpsEndpoint",
+    #     http_method: "POST", # accepts POST, GET, HEAD, OPTIONS, PUT, PATCH, DELETE
+    #     invocation_rate_limit_per_second: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destination_arn #=> String
+    #   resp.api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateApiDestination AWS API Documentation
+    #
+    # @overload update_api_destination(params = {})
+    # @param [Hash] params ({})
+    def update_api_destination(params = {}, options = {})
+      req = build_request(:update_api_destination, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to update.
+    #
+    # @option params [String] :description
+    #   The description for the archive.
+    #
+    # @option params [String] :event_pattern
+    #   The event pattern to use to filter events sent to the archive.
+    #
+    # @option params [Integer] :retention_days
+    #   The number of days to retain events in the archive.
+    #
+    # @return [Types::UpdateArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::UpdateArchiveResponse#state #state} => String
+    #   * {Types::UpdateArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::UpdateArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_archive({
+    #     archive_name: "ArchiveName", # required
+    #     description: "ArchiveDescription",
+    #     event_pattern: "EventPattern",
+    #     retention_days: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateArchive AWS API Documentation
+    #
+    # @overload update_archive(params = {})
+    # @param [Hash] params ({})
+    def update_archive(params = {}, options = {})
+      req = build_request(:update_archive, params)
+      req.send_request(options)
+    end
+
+    # Updates settings for a connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to update.
+    #
+    # @option params [String] :description
+    #   A description for the connection.
+    #
+    # @option params [String] :authorization_type
+    #   The type of authorization to use for the connection.
+    #
+    # @option params [Types::UpdateConnectionAuthRequestParameters] :auth_parameters
+    #   The authorization parameters to use for the connection.
+    #
+    # @return [Types::UpdateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::UpdateConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::UpdateConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connection({
+    #     name: "ConnectionName", # required
+    #     description: "ConnectionDescription",
+    #     authorization_type: "BASIC", # accepts BASIC, OAUTH_CLIENT_CREDENTIALS, API_KEY
+    #     auth_parameters: {
+    #       basic_auth_parameters: {
+    #         username: "AuthHeaderParameters",
+    #         password: "AuthHeaderParameters",
+    #       },
+    #       o_auth_parameters: {
+    #         client_parameters: {
+    #           client_id: "AuthHeaderParameters",
+    #           client_secret: "AuthHeaderParameters",
+    #         },
+    #         authorization_endpoint: "HttpsEndpoint",
+    #         http_method: "GET", # accepts GET, POST, PUT
+    #         o_auth_http_parameters: {
+    #           header_parameters: [
+    #             {
+    #               key: "HeaderKey",
+    #               value: "HeaderValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           query_string_parameters: [
+    #             {
+    #               key: "QueryStringKey",
+    #               value: "QueryStringValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           body_parameters: [
+    #             {
+    #               key: "String",
+    #               value: "String",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       api_key_auth_parameters: {
+    #         api_key_name: "AuthHeaderParameters",
+    #         api_key_value: "AuthHeaderParameters",
+    #       },
+    #       invocation_http_parameters: {
+    #         header_parameters: [
+    #           {
+    #             key: "HeaderKey",
+    #             value: "HeaderValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         query_string_parameters: [
+    #           {
+    #             key: "QueryStringKey",
+    #             value: "QueryStringValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         body_parameters: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateConnection AWS API Documentation
+    #
+    # @overload update_connection(params = {})
+    # @param [Hash] params ({})
+    def update_connection(params = {}, options = {})
+      req = build_request(:update_connection, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2030,7 +3255,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

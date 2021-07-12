@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -393,7 +393,7 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_export_jobs[0].destination.s3.bucket #=> String
     #   resp.recommendation_export_jobs[0].destination.s3.key #=> String
     #   resp.recommendation_export_jobs[0].destination.s3.metadata_key #=> String
-    #   resp.recommendation_export_jobs[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup"
+    #   resp.recommendation_export_jobs[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction"
     #   resp.recommendation_export_jobs[0].status #=> String, one of "Queued", "InProgress", "Complete", "Failed"
     #   resp.recommendation_export_jobs[0].creation_timestamp #=> Time
     #   resp.recommendation_export_jobs[0].last_updated_timestamp #=> Time
@@ -428,8 +428,8 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to export Auto Scaling group
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to export
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to export
     #   recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -478,10 +478,14 @@ module Aws::ComputeOptimizer
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to include recommendations for resources in all
-    #   member accounts of the organization if your account is the master
+    #   member accounts of the organization if your account is the management
     #   account of an organization.
     #
-    #   The member accounts must also be opted in to Compute Optimizer.
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer and
+    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
+    #   User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
@@ -491,6 +495,10 @@ module Aws::ComputeOptimizer
     #
     #   Recommendations for member accounts are not included in the export if
     #   this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
     #
     # @return [Types::ExportAutoScalingGroupRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -503,11 +511,11 @@ module Aws::ComputeOptimizer
     #     account_ids: ["AccountId"],
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
+    #     fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -532,6 +540,137 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
+    # Exports optimization recommendations for Amazon EBS volumes.
+    #
+    # Recommendations are exported in a comma-separated values (.csv) file,
+    # and its metadata in a JavaScript Object Notation (.json) file, to an
+    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
+    # specify. For more information, see [Exporting Recommendations][1] in
+    # the *Compute Optimizer User Guide*.
+    #
+    # You can have only one Amazon EBS volume export job in progress per AWS
+    # Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
+    #
+    # @option params [Array<String>] :account_ids
+    #   The IDs of the AWS accounts for which to export Amazon EBS volume
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to export
+    #   recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the include member accounts parameter, is omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #
+    # @option params [Array<Types::EBSFilter>] :filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of Amazon EBS volume recommendations.
+    #
+    # @option params [Array<String>] :fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #
+    # @option params [required, Types::S3DestinationConfig] :s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create the
+    #   S3 bucket, ensure that it has the required permission policy to allow
+    #   Compute Optimizer to write the export file to it. If you plan to
+    #   specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3 bucket.
+    #   For more information, see [Amazon S3 Bucket Policy for Compute
+    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #
+    # @option params [String] :file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #
+    # @option params [Boolean] :include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the management
+    #   account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer and
+    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
+    #   User Guide*.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #
+    # @return [Types::ExportEBSVolumeRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportEBSVolumeRecommendationsResponse#job_id #job_id} => String
+    #   * {Types::ExportEBSVolumeRecommendationsResponse#s3_destination #s3_destination} => Types::S3Destination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_ebs_volume_recommendations({
+    #     account_ids: ["AccountId"],
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp
+    #     s3_destination_config: { # required
+    #       bucket: "DestinationBucket",
+    #       key_prefix: "DestinationKeyPrefix",
+    #     },
+    #     file_format: "Csv", # accepts Csv
+    #     include_member_accounts: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.s3_destination.bucket #=> String
+    #   resp.s3_destination.key #=> String
+    #   resp.s3_destination.metadata_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEBSVolumeRecommendations AWS API Documentation
+    #
+    # @overload export_ebs_volume_recommendations(params = {})
+    # @param [Hash] params ({})
+    def export_ebs_volume_recommendations(params = {}, options = {})
+      req = build_request(:export_ebs_volume_recommendations, params)
+      req.send_request(options)
+    end
+
     # Exports optimization recommendations for Amazon EC2 instances.
     #
     # Recommendations are exported in a comma-separated values (.csv) file,
@@ -551,8 +690,8 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to export instance
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to export
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to export
     #   recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -601,16 +740,24 @@ module Aws::ComputeOptimizer
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to include recommendations for resources in all
-    #   member accounts of the organization if your account is the master
+    #   member accounts of the organization if your account is the management
     #   account of an organization.
     #
-    #   The member accounts must also be opted in to Compute Optimizer.
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer and
+    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
+    #   User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
     #
     #   Recommendations for member accounts are not included in the export if
     #   this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
     #
     # @return [Types::ExportEC2InstanceRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -623,11 +770,11 @@ module Aws::ComputeOptimizer
     #     account_ids: ["AccountId"],
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
+    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -652,6 +799,137 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
+    # Exports optimization recommendations for AWS Lambda functions.
+    #
+    # Recommendations are exported in a comma-separated values (.csv) file,
+    # and its metadata in a JavaScript Object Notation (.json) file, to an
+    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
+    # specify. For more information, see [Exporting Recommendations][1] in
+    # the *Compute Optimizer User Guide*.
+    #
+    # You can have only one Lambda function export job in progress per AWS
+    # Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
+    #
+    # @option params [Array<String>] :account_ids
+    #   The IDs of the AWS accounts for which to export Lambda function
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to export
+    #   recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the include member accounts parameter, is omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #
+    # @option params [Array<Types::LambdaFunctionRecommendationFilter>] :filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of Lambda function recommendations.
+    #
+    # @option params [Array<String>] :fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #
+    # @option params [required, Types::S3DestinationConfig] :s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create the
+    #   S3 bucket, ensure that it has the required permission policy to allow
+    #   Compute Optimizer to write the export file to it. If you plan to
+    #   specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3 bucket.
+    #   For more information, see [Amazon S3 Bucket Policy for Compute
+    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #
+    # @option params [String] :file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #
+    # @option params [Boolean] :include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the management
+    #   account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer and
+    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
+    #   User Guide*.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #
+    # @return [Types::ExportLambdaFunctionRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportLambdaFunctionRecommendationsResponse#job_id #job_id} => String
+    #   * {Types::ExportLambdaFunctionRecommendationsResponse#s3_destination #s3_destination} => Types::S3Destination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_lambda_function_recommendations({
+    #     account_ids: ["AccountId"],
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding, FindingReasonCode
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     fields_to_export: ["AccountId"], # accepts AccountId, FunctionArn, FunctionVersion, Finding, FindingReasonCodes, NumberOfInvocations, UtilizationMetricsDurationMaximum, UtilizationMetricsDurationAverage, UtilizationMetricsMemoryMaximum, UtilizationMetricsMemoryAverage, LookbackPeriodInDays, CurrentConfigurationMemorySize, CurrentConfigurationTimeout, CurrentCostTotal, CurrentCostAverage, RecommendationOptionsConfigurationMemorySize, RecommendationOptionsCostLow, RecommendationOptionsCostHigh, RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound, RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound, RecommendationOptionsProjectedUtilizationMetricsDurationExpected, LastRefreshTimestamp
+    #     s3_destination_config: { # required
+    #       bucket: "DestinationBucket",
+    #       key_prefix: "DestinationKeyPrefix",
+    #     },
+    #     file_format: "Csv", # accepts Csv
+    #     include_member_accounts: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.s3_destination.bucket #=> String
+    #   resp.s3_destination.key #=> String
+    #   resp.s3_destination.metadata_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportLambdaFunctionRecommendations AWS API Documentation
+    #
+    # @overload export_lambda_function_recommendations(params = {})
+    # @param [Hash] params ({})
+    def export_lambda_function_recommendations(params = {}, options = {})
+      req = build_request(:export_lambda_function_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns Auto Scaling group recommendations.
     #
     # AWS Compute Optimizer generates recommendations for Amazon EC2 Auto
@@ -664,11 +942,11 @@ module Aws::ComputeOptimizer
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return Auto Scaling group
+    #   The ID of the AWS account for which to return Auto Scaling group
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to return
     #   Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -707,7 +985,7 @@ module Aws::ComputeOptimizer
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -722,7 +1000,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].auto_scaling_group_name #=> String
     #   resp.auto_scaling_group_recommendations[0].finding #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics #=> Array
-    #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
+    #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].value #=> Float
     #   resp.auto_scaling_group_recommendations[0].look_back_period_in_days #=> Float
@@ -736,7 +1014,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].configuration.max_size #=> Integer
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].configuration.instance_type #=> String
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics #=> Array
-    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
+    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].value #=> Float
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].performance_risk #=> Float
@@ -753,6 +1031,108 @@ module Aws::ComputeOptimizer
     # @param [Hash] params ({})
     def get_auto_scaling_group_recommendations(params = {}, options = {})
       req = build_request(:get_auto_scaling_group_recommendations, params)
+      req.send_request(options)
+    end
+
+    # Returns Amazon Elastic Block Store (Amazon EBS) volume
+    # recommendations.
+    #
+    # AWS Compute Optimizer generates recommendations for Amazon EBS volumes
+    # that meet a specific set of requirements. For more information, see
+    # the [Supported resources and requirements][1] in the *AWS Compute
+    # Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
+    #
+    # @option params [Array<String>] :volume_arns
+    #   The Amazon Resource Name (ARN) of the volumes for which to return
+    #   recommendations.
+    #
+    # @option params [String] :next_token
+    #   The token to advance to the next page of volume recommendations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of volume recommendations to return with a single
+    #   request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #
+    # @option params [Array<Types::EBSFilter>] :filters
+    #   An array of objects that describe a filter that returns a more
+    #   specific list of volume recommendations.
+    #
+    # @option params [Array<String>] :account_ids
+    #   The ID of the AWS account for which to return volume recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to return
+    #   volume recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #
+    # @return [Types::GetEBSVolumeRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEBSVolumeRecommendationsResponse#next_token #next_token} => String
+    #   * {Types::GetEBSVolumeRecommendationsResponse#volume_recommendations #volume_recommendations} => Array&lt;Types::VolumeRecommendation&gt;
+    #   * {Types::GetEBSVolumeRecommendationsResponse#errors #errors} => Array&lt;Types::GetRecommendationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ebs_volume_recommendations({
+    #     volume_arns: ["VolumeArn"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     account_ids: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.volume_recommendations #=> Array
+    #   resp.volume_recommendations[0].volume_arn #=> String
+    #   resp.volume_recommendations[0].account_id #=> String
+    #   resp.volume_recommendations[0].current_configuration.volume_type #=> String
+    #   resp.volume_recommendations[0].current_configuration.volume_size #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_baseline_iops #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_burst_iops #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_baseline_throughput #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_burst_throughput #=> Integer
+    #   resp.volume_recommendations[0].finding #=> String, one of "Optimized", "NotOptimized"
+    #   resp.volume_recommendations[0].utilization_metrics #=> Array
+    #   resp.volume_recommendations[0].utilization_metrics[0].name #=> String, one of "VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond", "VolumeReadBytesPerSecond", "VolumeWriteBytesPerSecond"
+    #   resp.volume_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
+    #   resp.volume_recommendations[0].utilization_metrics[0].value #=> Float
+    #   resp.volume_recommendations[0].look_back_period_in_days #=> Float
+    #   resp.volume_recommendations[0].volume_recommendation_options #=> Array
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_type #=> String
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_size #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_baseline_iops #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_burst_iops #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_baseline_throughput #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_burst_throughput #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].performance_risk #=> Float
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].rank #=> Integer
+    #   resp.volume_recommendations[0].last_refresh_timestamp #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEBSVolumeRecommendations AWS API Documentation
+    #
+    # @overload get_ebs_volume_recommendations(params = {})
+    # @param [Hash] params ({})
+    def get_ebs_volume_recommendations(params = {}, options = {})
+      req = build_request(:get_ebs_volume_recommendations, params)
       req.send_request(options)
     end
 
@@ -786,11 +1166,11 @@ module Aws::ComputeOptimizer
     #   specific list of instance recommendations.
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return instance
+    #   The ID of the AWS account for which to return instance
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to return
     #   instance recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -809,7 +1189,7 @@ module Aws::ComputeOptimizer
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -825,22 +1205,26 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].instance_name #=> String
     #   resp.instance_recommendations[0].current_instance_type #=> String
     #   resp.instance_recommendations[0].finding #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
+    #   resp.instance_recommendations[0].finding_reason_codes #=> Array
+    #   resp.instance_recommendations[0].finding_reason_codes[0] #=> String, one of "CPUOverprovisioned", "CPUUnderprovisioned", "MemoryOverprovisioned", "MemoryUnderprovisioned", "EBSThroughputOverprovisioned", "EBSThroughputUnderprovisioned", "EBSIOPSOverprovisioned", "EBSIOPSUnderprovisioned", "NetworkBandwidthOverprovisioned", "NetworkBandwidthUnderprovisioned", "NetworkPPSOverprovisioned", "NetworkPPSUnderprovisioned", "DiskIOPSOverprovisioned", "DiskIOPSUnderprovisioned", "DiskThroughputOverprovisioned", "DiskThroughputUnderprovisioned"
     #   resp.instance_recommendations[0].utilization_metrics #=> Array
-    #   resp.instance_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
+    #   resp.instance_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
     #   resp.instance_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.instance_recommendations[0].utilization_metrics[0].value #=> Float
     #   resp.instance_recommendations[0].look_back_period_in_days #=> Float
     #   resp.instance_recommendations[0].recommendation_options #=> Array
     #   resp.instance_recommendations[0].recommendation_options[0].instance_type #=> String
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics #=> Array
-    #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
+    #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].value #=> Float
+    #   resp.instance_recommendations[0].recommendation_options[0].platform_differences #=> Array
+    #   resp.instance_recommendations[0].recommendation_options[0].platform_differences[0] #=> String, one of "Hypervisor", "NetworkInterface", "StorageInterface", "InstanceStoreAvailability", "VirtualizationType"
     #   resp.instance_recommendations[0].recommendation_options[0].performance_risk #=> Float
     #   resp.instance_recommendations[0].recommendation_options[0].rank #=> Integer
     #   resp.instance_recommendations[0].recommendation_sources #=> Array
     #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_arn #=> String
-    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup"
+    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction"
     #   resp.instance_recommendations[0].last_refresh_timestamp #=> Time
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
@@ -907,7 +1291,7 @@ module Aws::ComputeOptimizer
     #   resp.recommended_option_projected_metrics[0].recommended_instance_type #=> String
     #   resp.recommended_option_projected_metrics[0].rank #=> Integer
     #   resp.recommended_option_projected_metrics[0].projected_metrics #=> Array
-    #   resp.recommended_option_projected_metrics[0].projected_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
+    #   resp.recommended_option_projected_metrics[0].projected_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].timestamps #=> Array
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].timestamps[0] #=> Time
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].values #=> Array
@@ -925,9 +1309,9 @@ module Aws::ComputeOptimizer
     # Returns the enrollment (opt in) status of an account to the AWS
     # Compute Optimizer service.
     #
-    # If the account is the master account of an organization, this action
-    # also confirms the enrollment status of member accounts within the
-    # organization.
+    # If the account is the management account of an organization, this
+    # action also confirms the enrollment status of member accounts within
+    # the organization.
     #
     # @return [Types::GetEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -950,19 +1334,134 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Returns the optimization findings for an account.
+    # Returns AWS Lambda function recommendations.
     #
-    # For example, it returns the number of Amazon EC2 instances in an
-    # account that are under-provisioned, over-provisioned, or optimized. It
-    # also returns the number of Auto Scaling groups in an account that are
-    # not optimized, or optimized.
+    # AWS Compute Optimizer generates recommendations for functions that
+    # meet a specific set of requirements. For more information, see the
+    # [Supported resources and requirements][1] in the *AWS Compute
+    # Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
+    #
+    # @option params [Array<String>] :function_arns
+    #   The Amazon Resource Name (ARN) of the functions for which to return
+    #   recommendations.
+    #
+    #   You can specify a qualified or unqualified ARN. If you specify an
+    #   unqualified ARN without a function version suffix, Compute Optimizer
+    #   will return recommendations for the latest (`$LATEST`) version of the
+    #   function. If you specify a qualified ARN with a version suffix,
+    #   Compute Optimizer will return recommendations for the specified
+    #   function version. For more information about using function versions,
+    #   see [Using versions][1] in the *AWS Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return recommendation
+    #   The ID of the AWS account for which to return function
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to return
+    #   function recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #
+    # @option params [Array<Types::LambdaFunctionRecommendationFilter>] :filters
+    #   An array of objects that describe a filter that returns a more
+    #   specific list of function recommendations.
+    #
+    # @option params [String] :next_token
+    #   The token to advance to the next page of function recommendations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of function recommendations to return with a single
+    #   request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #
+    # @return [Types::GetLambdaFunctionRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLambdaFunctionRecommendationsResponse#next_token #next_token} => String
+    #   * {Types::GetLambdaFunctionRecommendationsResponse#lambda_function_recommendations #lambda_function_recommendations} => Array&lt;Types::LambdaFunctionRecommendation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lambda_function_recommendations({
+    #     function_arns: ["FunctionArn"],
+    #     account_ids: ["AccountId"],
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding, FindingReasonCode
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.lambda_function_recommendations #=> Array
+    #   resp.lambda_function_recommendations[0].function_arn #=> String
+    #   resp.lambda_function_recommendations[0].function_version #=> String
+    #   resp.lambda_function_recommendations[0].account_id #=> String
+    #   resp.lambda_function_recommendations[0].current_memory_size #=> Integer
+    #   resp.lambda_function_recommendations[0].number_of_invocations #=> Integer
+    #   resp.lambda_function_recommendations[0].utilization_metrics #=> Array
+    #   resp.lambda_function_recommendations[0].utilization_metrics[0].name #=> String, one of "Duration", "Memory"
+    #   resp.lambda_function_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
+    #   resp.lambda_function_recommendations[0].utilization_metrics[0].value #=> Float
+    #   resp.lambda_function_recommendations[0].lookback_period_in_days #=> Float
+    #   resp.lambda_function_recommendations[0].last_refresh_timestamp #=> Time
+    #   resp.lambda_function_recommendations[0].finding #=> String, one of "Optimized", "NotOptimized", "Unavailable"
+    #   resp.lambda_function_recommendations[0].finding_reason_codes #=> Array
+    #   resp.lambda_function_recommendations[0].finding_reason_codes[0] #=> String, one of "MemoryOverprovisioned", "MemoryUnderprovisioned", "InsufficientData", "Inconclusive"
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options #=> Array
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].rank #=> Integer
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].memory_size #=> Integer
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics #=> Array
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Duration"
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "LowerBound", "UpperBound", "Expected"
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics[0].value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLambdaFunctionRecommendations AWS API Documentation
+    #
+    # @overload get_lambda_function_recommendations(params = {})
+    # @param [Hash] params ({})
+    def get_lambda_function_recommendations(params = {}, options = {})
+      req = build_request(:get_lambda_function_recommendations, params)
+      req.send_request(options)
+    end
+
+    # Returns the optimization findings for an account.
+    #
+    # It returns the number of:
+    #
+    # * Amazon EC2 instances in an account that are `Underprovisioned`,
+    #   `Overprovisioned`, or `Optimized`.
+    #
+    # * Auto Scaling groups in an account that are `NotOptimized`, or
+    #   `Optimized`.
+    #
+    # * Amazon EBS volumes in an account that are `NotOptimized`, or
+    #   `Optimized`.
+    #
+    # * Lambda functions in an account that are `NotOptimized`, or
+    #   `Optimized`.
+    #
+    # @option params [Array<String>] :account_ids
+    #   The ID of the AWS account for which to return recommendation
     #   summaries.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to return
     #   recommendation summaries.
     #
     #   Only one account ID can be specified per request.
@@ -997,7 +1496,10 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_summaries[0].summaries #=> Array
     #   resp.recommendation_summaries[0].summaries[0].name #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.recommendation_summaries[0].summaries[0].value #=> Float
-    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup"
+    #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries #=> Array
+    #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].name #=> String, one of "MemoryOverprovisioned", "MemoryUnderprovisioned"
+    #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].value #=> Float
+    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction"
     #   resp.recommendation_summaries[0].account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRecommendationSummaries AWS API Documentation
@@ -1009,21 +1511,55 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Updates the enrollment (opt in) status of an account to the AWS
-    # Compute Optimizer service.
+    # Updates the enrollment (opt in and opt out) status of an account to
+    # the AWS Compute Optimizer service.
     #
-    # If the account is a master account of an organization, this action can
-    # also be used to enroll member accounts within the organization.
+    # If the account is a management account of an organization, this action
+    # can also be used to enroll member accounts within the organization.
+    #
+    # You must have the appropriate permissions to opt in to Compute
+    # Optimizer, to view its recommendations, and to opt out. For more
+    # information, see [Controlling access with AWS Identity and Access
+    # Management][1] in the *AWS Compute Optimizer User Guide*.
+    #
+    # When you opt in, Compute Optimizer automatically creates a
+    # Service-Linked Role in your account to access its data. For more
+    # information, see [Using Service-Linked Roles for AWS Compute
+    # Optimizer][2] in the *AWS Compute Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html
+    # [2]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/using-service-linked-roles.html
     #
     # @option params [required, String] :status
     #   The new enrollment status of the account.
     #
-    #   Accepted options are `Active` or `Inactive`. You will get an error if
-    #   `Pending` or `Failed` are specified.
+    #   The following status options are available:
+    #
+    #   * `Active` - Opts in your account to the Compute Optimizer service.
+    #     Compute Optimizer begins analyzing the configuration and utilization
+    #     metrics of your AWS resources after you opt in. For more
+    #     information, see [Metrics analyzed by AWS Compute Optimizer][1] in
+    #     the *AWS Compute Optimizer User Guide*.
+    #
+    #   * `Inactive` - Opts out your account from the Compute Optimizer
+    #     service. Your account's recommendations and related metrics data
+    #     will be deleted from Compute Optimizer after you opt out.
+    #
+    #   <note markdown="1"> The `Pending` and `Failed` options cannot be used to update the
+    #   enrollment status of an account. They are returned in the response of
+    #   a request to update the enrollment status of an account.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to enroll member accounts of the organization if the
-    #   your account is the master account of an organization.
+    #   account is the management account of an organization.
     #
     # @return [Types::UpdateEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1064,7 +1600,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-05-21)
+------------------
+
+* Feature - EFS now supports account preferences. Utilizing the new capability, users can customize some aspects of their experience using EFS APIs and the EFS Console. The first preference clients are able to set is whether to start using longer File System and Mount Target IDs before EFS migrates to such IDs.
+
+1.39.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2021-03-09)
+------------------
+
+* Feature - AWS EFS is introducing one-zone file systems.
+
+1.37.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2020-09-30)
 ------------------
 

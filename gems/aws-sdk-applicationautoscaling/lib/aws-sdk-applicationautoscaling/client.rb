@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -344,8 +344,8 @@ module Aws::ApplicationAutoScaling
     # but does not delete the CloudWatch alarm associated with the scaling
     # policy, even if it no longer has an associated action.
     #
-    # For more information, see [Delete a Step Scaling Policy][1] and
-    # [Delete a Target Tracking Scaling Policy][2] in the *Application Auto
+    # For more information, see [Delete a step scaling policy][1] and
+    # [Delete a target tracking scaling policy][2] in the *Application Auto
     # Scaling User Guide*.
     #
     #
@@ -524,12 +524,12 @@ module Aws::ApplicationAutoScaling
     # Deletes the specified scheduled action for an Application Auto Scaling
     # scalable target.
     #
-    # For more information, see [Delete a Scheduled Action][1] in the
+    # For more information, see [Delete a scheduled action][1] in the
     # *Application Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html#delete-scheduled-action
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html#delete-scheduled-action
     #
     # @option params [required, String] :service_namespace
     #   The namespace of the AWS service that provides the resource. For a
@@ -872,8 +872,7 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [Array<String>] :resource_ids
     #   The identifier of the resource associated with the scalable target.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -1091,8 +1090,7 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling activity.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -1305,8 +1303,8 @@ module Aws::ApplicationAutoScaling
     # You can filter the results using `ResourceId`, `ScalableDimension`,
     # and `PolicyNames`.
     #
-    # For more information, see [Target Tracking Scaling Policies][1] and
-    # [Step Scaling Policies][2] in the *Application Auto Scaling User
+    # For more information, see [Target tracking scaling policies][1] and
+    # [Step scaling policies][2] in the *Application Auto Scaling User
     # Guide*.
     #
     #
@@ -1324,8 +1322,7 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling policy.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -1570,12 +1567,13 @@ module Aws::ApplicationAutoScaling
     # You can filter the results using the `ResourceId`,
     # `ScalableDimension`, and `ScheduledActionNames` parameters.
     #
-    # For more information, see [Scheduled Scaling][1] in the *Application
-    # Auto Scaling User Guide*.
+    # For more information, see [Scheduled scaling][1] and [Managing
+    # scheduled scaling][2] in the *Application Auto Scaling User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html
     #
     # @option params [Array<String>] :scheduled_action_names
     #   The names of the scheduled actions to describe.
@@ -1587,8 +1585,7 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scheduled action.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -1748,6 +1745,7 @@ module Aws::ApplicationAutoScaling
     #   resp.scheduled_actions[0].scheduled_action_arn #=> String
     #   resp.scheduled_actions[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda", "cassandra", "kafka"
     #   resp.scheduled_actions[0].schedule #=> String
+    #   resp.scheduled_actions[0].timezone #=> String
     #   resp.scheduled_actions[0].resource_id #=> String
     #   resp.scheduled_actions[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency", "cassandra:table:ReadCapacityUnits", "cassandra:table:WriteCapacityUnits", "kafka:broker-storage:VolumeSize"
     #   resp.scheduled_actions[0].start_time #=> Time
@@ -1795,8 +1793,8 @@ module Aws::ApplicationAutoScaling
     # be blocked. After the scale-in activity completes, the target tracking
     # policy could instruct the scalable target to scale out again.
     #
-    # For more information, see [Target Tracking Scaling Policies][1] and
-    # [Step Scaling Policies][2] in the *Application Auto Scaling User
+    # For more information, see [Target tracking scaling policies][1] and
+    # [Step scaling policies][2] in the *Application Auto Scaling User
     # Guide*.
     #
     # <note markdown="1"> If a scalable target is deregistered, the scalable target is no longer
@@ -1952,8 +1950,8 @@ module Aws::ApplicationAutoScaling
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
     #   Amazon Keyspaces (for Apache Cassandra), or Amazon MSK.
     #
-    #   For more information, see [Target Tracking Scaling Policies][1] and
-    #   [Step Scaling Policies][2] in the *Application Auto Scaling User
+    #   For more information, see [Target tracking scaling policies][1] and
+    #   [Step scaling policies][2] in the *Application Auto Scaling User
     #   Guide*.
     #
     #
@@ -2088,14 +2086,14 @@ module Aws::ApplicationAutoScaling
     # target.
     #
     # When start and end times are specified with a recurring schedule using
-    # a cron expression or rates, they form the boundaries of when the
+    # a cron expression or rates, they form the boundaries for when the
     # recurring action starts and stops.
     #
     # To update a scheduled action, specify the parameters that you want to
     # change. If you don't specify start and end times, the old values are
     # deleted.
     #
-    # For more information, see [Scheduled Scaling][1] in the *Application
+    # For more information, see [Scheduled scaling][1] in the *Application
     # Auto Scaling User Guide*.
     #
     # <note markdown="1"> If a scalable target is deregistered, the scalable target is no longer
@@ -2122,22 +2120,41 @@ module Aws::ApplicationAutoScaling
     #
     #   * Cron expressions - "`cron(fields)`"
     #
-    #   At expressions are useful for one-time schedules. Specify the time in
-    #   UTC.
+    #   At expressions are useful for one-time schedules. Cron expressions are
+    #   useful for scheduled actions that run periodically at a specified date
+    #   and time, and rate expressions are useful for scheduled actions that
+    #   run at a regular interval.
+    #
+    #   At and cron expressions use Universal Coordinated Time (UTC) by
+    #   default.
+    #
+    #   The cron format consists of six fields separated by white spaces:
+    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
+    #   \[Year\].
     #
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information about cron expressions, see [Cron Expressions][1]
-    #   in the *Amazon CloudWatch Events User Guide*.
-    #
-    #   For examples of using these expressions, see [Scheduled Scaling][2] in
-    #   the *Application Auto Scaling User Guide*.
+    #   For more information and examples, see [Example scheduled actions for
+    #   Application Auto Scaling][1] in the *Application Auto Scaling User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
-    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html
+    #
+    # @option params [String] :timezone
+    #   Specifies the time zone used when setting a scheduled action by using
+    #   an at or cron expression. If a time zone is not provided, UTC is used
+    #   by default.
+    #
+    #   Valid values are the canonical names of the IANA time zones supported
+    #   by Joda-Time (such as `Etc/GMT+9` or `Pacific/Tahiti`). For more
+    #   information, see [https://www.joda.org/joda-time/timezones.html][1].
+    #
+    #
+    #
+    #   [1]: https://www.joda.org/joda-time/timezones.html
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action. This name must be unique among all
@@ -2267,10 +2284,10 @@ module Aws::ApplicationAutoScaling
     #     GiB) for brokers in an Amazon MSK cluster.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   The date and time for this scheduled action to start.
+    #   The date and time for this scheduled action to start, in UTC.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time for the recurring schedule to end.
+    #   The date and time for the recurring schedule to end, in UTC.
     #
     # @option params [Types::ScalableTargetAction] :scalable_target_action
     #   The new minimum and maximum capacity. You can set both values or just
@@ -2286,6 +2303,7 @@ module Aws::ApplicationAutoScaling
     #   resp = client.put_scheduled_action({
     #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #     schedule: "ResourceIdMaxLen1600",
+    #     timezone: "ResourceIdMaxLen1600",
     #     scheduled_action_name: "ScheduledActionName", # required
     #     resource_id: "ResourceIdMaxLen1600", # required
     #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
@@ -2469,8 +2487,8 @@ module Aws::ApplicationAutoScaling
     #   The minimum value that you plan to scale in to. When a scaling policy
     #   is in effect, Application Auto Scaling can scale in (contract) as
     #   needed to the minimum capacity limit in response to changing demand.
+    #   This property is required when registering a new scalable target.
     #
-    #   This parameter is required if you are registering a scalable target.
     #   For certain resources, the minimum value allowed is 0. This includes
     #   Lambda provisioned concurrency, Spot Fleet, ECS services, Aurora DB
     #   clusters, EMR clusters, and custom resources. For all other resources,
@@ -2480,8 +2498,7 @@ module Aws::ApplicationAutoScaling
     #   The maximum value that you plan to scale out to. When a scaling policy
     #   is in effect, Application Auto Scaling can scale out (expand) as
     #   needed to the maximum capacity limit in response to changing demand.
-    #
-    #   This parameter is required if you are registering a scalable target.
+    #   This property is required when registering a new scalable target.
     #
     #   Although you can specify a large maximum capacity, note that service
     #   quotas may impose lower limits. Each service has its own default
@@ -2504,7 +2521,7 @@ module Aws::ApplicationAutoScaling
     #
     #   If the service supports service-linked roles, Application Auto Scaling
     #   uses a service-linked role, which it creates if it does not yet exist.
-    #   For more information, see [Application Auto Scaling IAM Roles][1].
+    #   For more information, see [Application Auto Scaling IAM roles][1].
     #
     #
     #
@@ -2530,7 +2547,7 @@ module Aws::ApplicationAutoScaling
     #   * For `ScheduledScalingSuspended`, while a suspension is in effect,
     #     all scaling activities that involve scheduled actions are suspended.
     #
-    #   For more information, see [Suspending and Resuming Scaling][1] in the
+    #   For more information, see [Suspending and resuming scaling][1] in the
     #   *Application Auto Scaling User Guide*.
     #
     #
@@ -2591,7 +2608,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

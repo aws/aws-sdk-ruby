@@ -20,6 +20,9 @@
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
+  "AmplifyBackend": {
+    "models": "amplifybackend/2020-08-11"
+  },
   "ApiGatewayManagementApi": {
     "models": "apigatewaymanagementapi/2018-11-29"
   },
@@ -29,8 +32,17 @@
   "AppConfig": {
     "models": "appconfig/2019-10-09"
   },
+  "AppIntegrationsService": {
+    "models": "appintegrations/2020-07-29"
+  },
   "AppMesh": {
     "models": "appmesh/2019-01-25"
+  },
+  "AppRegistry": {
+    "models": "servicecatalog-appregistry/2020-06-24"
+  },
+  "AppRunner": {
+    "models": "apprunner/2020-05-15"
   },
   "AppStream": {
     "models": "appstream/2016-12-01"
@@ -45,6 +57,9 @@
     "models": "application-autoscaling/2016-02-06",
     "partitionsKey": "application-autoscaling"
   },
+  "ApplicationCostProfiler": {
+    "models": "applicationcostprofiler/2020-09-10"
+  },
   "ApplicationDiscoveryService": {
     "models": "discovery/2015-11-01"
   },
@@ -53,6 +68,9 @@
   },
   "Athena": {
     "models": "athena/2017-05-18"
+  },
+  "AuditManager": {
+    "models": "auditmanager/2017-07-25"
   },
   "AugmentedAIRuntime": {
     "models": "sagemaker-a2i-runtime/2019-11-07"
@@ -178,6 +196,9 @@
   "Connect": {
     "models": "connect/2017-08-08"
   },
+  "ConnectContactLens": {
+    "models": "connect-contact-lens/2020-08-21"
+  },
   "ConnectParticipant": {
     "models": "connectparticipant/2018-09-07"
   },
@@ -186,6 +207,9 @@
   },
   "CostandUsageReportService": {
     "models": "cur/2017-01-06"
+  },
+  "CustomerProfiles": {
+    "models": "customer-profiles/2020-08-15"
   },
   "DAX": {
     "models": "dax/2017-04-19"
@@ -208,6 +232,9 @@
   "Detective": {
     "models": "detective/2018-10-26"
   },
+  "DevOpsGuru": {
+    "models": "devops-guru/2020-12-01"
+  },
   "DeviceFarm": {
     "models": "devicefarm/2015-06-23"
   },
@@ -218,7 +245,10 @@
     "models": "ds/2015-04-16"
   },
   "DocDB": {
-    "models": "docdb/2014-10-31"
+    "models": "docdb/2014-10-31",
+    "addPlugins": [
+      "Aws::DocDB::Plugins::CrossRegionCopying"
+    ]
   },
   "DynamoDB": {
     "models": "dynamodb/2012-08-10",
@@ -229,7 +259,10 @@
     ]
   },
   "DynamoDBStreams": {
-    "models": "streams.dynamodb/2012-08-10"
+    "models": "streams.dynamodb/2012-08-10",
+    "addPlugins": [
+      "Aws::DynamoDBStreams::Plugins::SimpleAttributes"
+    ]
   },
   "EBS": {
     "models": "ebs/2019-11-02"
@@ -250,6 +283,9 @@
   "ECR": {
     "models": "ecr/2015-09-21"
   },
+  "ECRPublic": {
+    "models": "ecr-public/2020-10-30"
+  },
   "ECS": {
     "models": "ecs/2014-11-13"
   },
@@ -261,6 +297,9 @@
   },
   "EMR": {
     "models": "elasticmapreduce/2009-03-31"
+  },
+  "EMRContainers": {
+    "models": "emr-containers/2020-10-01"
   },
   "ElastiCache": {
     "models": "elasticache/2015-02-02"
@@ -286,11 +325,26 @@
   "EventBridge": {
     "models": "eventbridge/2015-10-07"
   },
+  "FIS": {
+    "models": "fis/2020-12-01"
+  },
   "FMS": {
     "models": "fms/2018-01-01"
   },
   "FSx": {
     "models": "fsx/2018-03-01"
+  },
+  "FinSpaceData": {
+    "models": "finspace-data/2020-07-13",
+    "addPlugins": [
+      "Aws::FinSpaceData::Plugins::ContentType"
+    ]
+  },
+  "Finspace": {
+    "models": "finspace/2021-03-12",
+    "addPlugins": [
+      "Aws::Finspace::Plugins::ContentType"
+    ]
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
@@ -321,8 +375,14 @@
   "Glue": {
     "models": "glue/2017-03-31"
   },
+  "GlueDataBrew": {
+    "models": "databrew/2017-07-25"
+  },
   "Greengrass": {
     "models": "greengrass/2017-06-07"
+  },
+  "GreengrassV2": {
+    "models": "greengrassv2/2020-11-30"
   },
   "GroundStation": {
     "models": "groundstation/2019-05-23"
@@ -332,6 +392,9 @@
   },
   "Health": {
     "models": "health/2016-08-04"
+  },
+  "HealthLake": {
+    "models": "healthlake/2017-07-01"
   },
   "Honeycode": {
     "models": "honeycode/2020-03-01"
@@ -370,11 +433,17 @@
     "models": "iot-data/2015-05-28",
     "partitionsKey": null
   },
+  "IoTDeviceAdvisor": {
+    "models": "iotdeviceadvisor/2020-09-18"
+  },
   "IoTEvents": {
     "models": "iotevents/2018-07-27"
   },
   "IoTEventsData": {
     "models": "iotevents-data/2018-10-23"
+  },
+  "IoTFleetHub": {
+    "models": "iotfleethub/2020-11-03"
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
@@ -387,6 +456,9 @@
   },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06"
+  },
+  "IoTWireless": {
+    "models": "iotwireless/2020-11-22"
   },
   "KMS": {
     "models": "kms/2014-11-01"
@@ -433,17 +505,44 @@
   "LexModelBuildingService": {
     "models": "lex-models/2017-04-19"
   },
+  "LexModelsV2": {
+    "models": "models.lex.v2/2020-08-07",
+    "addPlugins": [
+      "Aws::LexModelsV2::Plugins::ContentType"
+    ]
+  },
+  "LexRuntimeV2": {
+    "models": "runtime.lex.v2/2020-08-07"
+  },
   "LicenseManager": {
     "models": "license-manager/2018-08-01"
   },
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
+  "LocationService": {
+    "models": "location/2020-11-19"
+  },
+  "LookoutEquipment": {
+    "models": "lookoutequipment/2020-12-15"
+  },
+  "LookoutMetrics": {
+    "models": "lookoutmetrics/2017-07-25",
+    "addPlugins": [
+      "Aws::LookoutMetrics::Plugins::ContentType"
+    ]
+  },
+  "LookoutforVision": {
+    "models": "lookoutvision/2020-11-20"
+  },
   "MQ": {
     "models": "mq/2017-11-27"
   },
   "MTurk": {
     "models": "mturk-requester/2017-01-17"
+  },
+  "MWAA": {
+    "models": "mwaa/2020-07-01"
   },
   "MachineLearning": {
     "models": "machinelearning/2014-12-12",
@@ -496,6 +595,9 @@
   "MediaTailor": {
     "models": "mediatailor/2018-04-23"
   },
+  "Mgn": {
+    "models": "mgn/2020-02-26"
+  },
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31"
   },
@@ -506,10 +608,22 @@
     "models": "mobile/2017-07-01"
   },
   "Neptune": {
-    "models": "neptune/2014-10-31"
+    "models": "neptune/2014-10-31",
+    "addPlugins": [
+      "Aws::Neptune::Plugins::CrossRegionCopying"
+    ]
+  },
+  "NetworkFirewall": {
+    "models": "network-firewall/2020-11-12"
   },
   "NetworkManager": {
     "models": "networkmanager/2019-07-05"
+  },
+  "NimbleStudio": {
+    "models": "nimble/2020-08-01",
+    "addPlugins": [
+      "Aws::NimbleStudio::Plugins::ContentType"
+    ]
   },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
@@ -549,6 +663,12 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "PrometheusService": {
+    "models": "amp/2020-08-01"
+  },
+  "Proton": {
+    "models": "proton/2020-07-20"
   },
   "QLDB": {
     "models": "qldb/2019-01-02"
@@ -625,6 +745,7 @@
       "Aws::S3::Plugins::IADRegionalEndpoint",
       "Aws::S3::Plugins::LocationConstraint",
       "Aws::S3::Plugins::Md5s",
+      "Aws::S3::Plugins::ObjectLambdaEndpoint",
       "Aws::S3::Plugins::Redirects",
       "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::S3Signer",
@@ -673,6 +794,12 @@
   "SSM": {
     "models": "ssm/2014-11-06"
   },
+  "SSMContacts": {
+    "models": "ssm-contacts/2021-05-03"
+  },
+  "SSMIncidents": {
+    "models": "ssm-incidents/2018-05-10"
+  },
   "SSO": {
     "models": "sso/2019-06-10",
     "addPlugins": [
@@ -702,8 +829,14 @@
   "SageMaker": {
     "models": "sagemaker/2017-07-24"
   },
+  "SageMakerFeatureStoreRuntime": {
+    "models": "sagemaker-featurestore-runtime/2020-07-01"
+  },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
+  },
+  "SagemakerEdgeManager": {
+    "models": "sagemaker-edge/2020-09-23"
   },
   "SavingsPlans": {
     "models": "savingsplans/2019-06-28"
@@ -782,6 +915,9 @@
   },
   "WAFV2": {
     "models": "wafv2/2019-07-29"
+  },
+  "WellArchitected": {
+    "models": "wellarchitected/2020-03-31"
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01"

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-06-24)
+------------------
+
+* Feature - Customers can successfully use legacy clients with Transfer Family endpoints enabled for FTPS and FTP behind routers, firewalls, and load balancers by providing a Custom IP address used for data channel communication.
+
+1.34.0 (2021-06-09)
+------------------
+
+* Feature - Documentation updates for the AWS Transfer Family service.
+
+1.33.0 (2021-05-25)
+------------------
+
+* Feature - AWS Transfer Family customers can now use AWS Managed Active Directory or AD Connector to authenticate their end users, enabling seamless migration of file transfer workflows that rely on AD authentication, without changing end users' credentials or needing a custom authorizer.
+
+1.32.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2021-02-25)
+------------------
+
+* Feature - Corrected the upper limit for TestIdentityProvider input lengths to 1024 characters
+
+1.30.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-01-06)
+------------------
+
+* Feature - This release adds support for Amazon EFS, so customers can transfer files over SFTP, FTPS and FTP in and out of Amazon S3 as well as Amazon EFS.
+
 1.28.0 (2020-10-15)
 ------------------
 

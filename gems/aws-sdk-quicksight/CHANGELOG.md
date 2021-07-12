@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-06-23)
+------------------
+
+* Feature - Releasing new APIs for AWS QuickSight Folders
+
+1.46.0 (2021-05-24)
+------------------
+
+* Feature - Add new parameters on RegisterUser and UpdateUser APIs to assign or update external ID associated to QuickSight users federated through web identity.
+
+1.45.0 (2021-05-20)
+------------------
+
+* Feature - Add ARN based Row Level Security support to CreateDataSet/UpdateDataSet APIs.
+
+1.44.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2021-02-23)
+------------------
+
+* Feature - Documentation updates for QuickSight Row Level Security
+
+1.42.0 (2021-02-09)
+------------------
+
+* Feature - QuickSight now supports Python's paginators for Exploration APIs.
+
+1.41.0 (2021-02-04)
+------------------
+
+* Feature - API release for field folders feature.
+
+1.40.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2020-12-16)
+------------------
+
+* Feature - QuickSight now supports connecting to federated data sources of Athena
+
+1.38.0 (2020-12-08)
+------------------
+
+* Feature - Added new parameters for join optimization.
+
+1.37.0 (2020-11-24)
+------------------
+
+* Feature - Support for embedding without user registration. New enum EmbeddingIdentityType. A potential breaking change. Affects code that refers IdentityType enum type directly instead of literal string value.
+
+1.36.0 (2020-11-16)
+------------------
+
+* Feature - Adding new parameters for dashboard persistence
+
+1.35.0 (2020-11-11)
+------------------
+
+* Feature - QuickSight now supports Column-level security and connecting to Oracle data source.
+
 1.34.0 (2020-10-23)
 ------------------
 

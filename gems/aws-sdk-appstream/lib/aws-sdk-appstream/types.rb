@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -471,6 +471,8 @@ module Aws::AppStream
     #   The instance type to use when launching fleet instances. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -761,6 +763,8 @@ module Aws::AppStream
     #   The instance type to use when launching the image builder. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -992,7 +996,7 @@ module Aws::AppStream
     #         feedback_url: "FeedbackURL",
     #         user_settings: [
     #           {
-    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -1140,6 +1144,9 @@ module Aws::AppStream
     # @!attribute [rw] application_id
     #   The name of the application to launch after the session starts. This
     #   is the name that you specified as **Name** in the Image Assistant.
+    #   If your fleet is enabled for the **Desktop** stream view, you can
+    #   also choose to launch directly to the operating system desktop. To
+    #   do so, specify **Desktop**.
     #   @return [String]
     #
     # @!attribute [rw] validity
@@ -1183,6 +1190,97 @@ module Aws::AppStream
     class CreateStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUpdatedImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         existing_image_name: "Name", # required
+    #         new_image_name: "Name", # required
+    #         new_image_description: "Description",
+    #         new_image_display_name: "DisplayName",
+    #         new_image_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] existing_image_name
+    #   The name of the image to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_name
+    #   The name of the new image. The name must be unique within the AWS
+    #   account and Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_description
+    #   The description to display for the new image.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_display_name
+    #   The name to display for the new image.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_tags
+    #   The tags to associate with the new image. A tag is a key-value pair,
+    #   and the value is optional. For example, Environment=Test. If you do
+    #   not specify a value, Environment=.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Indicates whether to display the status of image update availability
+    #   before AppStream 2.0 initiates the process of creating a new updated
+    #   image. If this value is set to `true`, AppStream 2.0 displays
+    #   whether image updates are available. If this value is set to
+    #   `false`, AppStream 2.0 initiates the process of creating a new
+    #   updated image without displaying whether image updates are
+    #   available.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImageRequest AWS API Documentation
+    #
+    class CreateUpdatedImageRequest < Struct.new(
+      :existing_image_name,
+      :new_image_name,
+      :new_image_description,
+      :new_image_display_name,
+      :new_image_tags,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image
+    #   Describes an image.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] can_update_image
+    #   Indicates whether a new image can be created.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImageResult AWS API Documentation
+    #
+    class CreateUpdatedImageResult < Struct.new(
+      :image,
+      :can_update_image)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2249,6 +2347,8 @@ module Aws::AppStream
     #   The instance type to use when launching fleet instances. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -2557,6 +2657,11 @@ module Aws::AppStream
     #   specified image.
     #   @return [Types::ImagePermissions]
     #
+    # @!attribute [rw] image_errors
+    #   Describes the errors that are returned when a new image can't be
+    #   created.
+    #   @return [Array<Types::ResourceError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -2575,7 +2680,8 @@ module Aws::AppStream
       :created_time,
       :public_base_image_released_date,
       :appstream_agent_version,
-      :image_permissions)
+      :image_permissions,
+      :image_errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2609,6 +2715,8 @@ module Aws::AppStream
     # @!attribute [rw] instance_type
     #   The instance type for the image builder. The following instance
     #   types are available:
+    #
+    #   * stream.standard.small
     #
     #   * stream.standard.medium
     #
@@ -2828,7 +2936,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The image does not support storage connectors.
+    # The image can't be updated because it's not compatible for updates.
     #
     # @!attribute [rw] message
     #   The error message in the exception.
@@ -3707,6 +3815,8 @@ module Aws::AppStream
     #   The instance type to use when launching fleet instances. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -3979,7 +4089,7 @@ module Aws::AppStream
     #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
     #         user_settings: [
     #           {
-    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -4196,7 +4306,7 @@ module Aws::AppStream
     #   data as a hash:
     #
     #       {
-    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #       }
     #

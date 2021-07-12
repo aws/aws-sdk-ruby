@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -22,11 +22,24 @@ module Aws::FSx
     #   which the file system is joined.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify AWS resources. We require an ARN when you need to specify a
+    #   resource unambiguously across all of AWS. For more information, see
+    #   [Amazon Resource Names (ARNs) and AWS Service Namespaces][1] in the
+    #   *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryBackupAttributes AWS API Documentation
     #
     class ActiveDirectoryBackupAttributes < Struct.new(
       :domain_name,
-      :active_directory_id)
+      :active_directory_id,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55,34 +68,52 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Describes a specific Amazon FSx Administrative Action for the current
-    # Windows file system.
+    # Describes a specific Amazon FSx administrative action for the current
+    # Windows or Lustre file system.
     #
     # @!attribute [rw] administrative_action_type
     #   Describes the type of administrative action, as follows:
     #
     #   * `FILE_SYSTEM_UPDATE` - A file system update administrative action
     #     initiated by the user from the Amazon FSx console, API
-    #     (UpdateFileSystem), or CLI (update-file-system). A
+    #     (UpdateFileSystem), or CLI (update-file-system).
     #
     #   * `STORAGE_OPTIMIZATION` - Once the `FILE_SYSTEM_UPDATE` task to
     #     increase a file system's storage capacity completes successfully,
-    #     a `STORAGE_OPTIMIZATION` task starts. Storage optimization is the
-    #     process of migrating the file system data to the new, larger
-    #     disks. You can track the storage migration progress using the
+    #     a `STORAGE_OPTIMIZATION` task starts.
+    #
+    #     * For Windows, storage optimization is the process of migrating
+    #       the file system data to the new, larger disks.
+    #
+    #     * For Lustre, storage optimization consists of rebalancing the
+    #       data across the existing and newly added file servers.
+    #
+    #     You can track the storage optimization progress using the
     #     `ProgressPercent` property. When `STORAGE_OPTIMIZATION` completes
     #     successfully, the parent `FILE_SYSTEM_UPDATE` action status
     #     changes to `COMPLETED`. For more information, see [Managing
-    #     Storage Capacity][1].
+    #     storage capacity][1] in the *Amazon FSx for Windows File Server
+    #     User Guide* and [Managing storage and throughput capacity][2] in
+    #     the *Amazon FSx for Lustre User Guide*.
+    #
+    #   * `FILE_SYSTEM_ALIAS_ASSOCIATION` - A file system update to
+    #     associate a new DNS alias with the file system. For more
+    #     information, see .
+    #
+    #   * `FILE_SYSTEM_ALIAS_DISASSOCIATION` - A file system update to
+    #     disassociate a DNS alias from the file system. For more
+    #     information, see .
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [String]
     #
     # @!attribute [rw] progress_percent
     #   Provides the percent complete of a `STORAGE_OPTIMIZATION`
-    #   administrative action.
+    #   administrative action. Does not apply to any other administrative
+    #   action type.
     #   @return [Integer]
     #
     # @!attribute [rw] request_time
@@ -107,16 +138,20 @@ module Aws::FSx
     #   * `UPDATED_OPTIMIZING` - For a storage capacity increase update,
     #     Amazon FSx has updated the file system with the new storage
     #     capacity, and is now performing the storage optimization process.
-    #     For more information, see [Managing Storage Capacity][1].
+    #     For more information, see [Managing storage capacity][1] in the
+    #     *Amazon FSx for Windows File Server User Guide* and [Managing
+    #     storage and throughput capacity][2] in the *Amazon FSx for Lustre
+    #     User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [String]
     #
     # @!attribute [rw] target_file_system_values
-    #   Describes the target `StorageCapacity` or `ThroughputCapacity` value
-    #   provided in the `UpdateFileSystem` operation. Returned for
+    #   Describes the target value for the administration action, provided
+    #   in the `UpdateFileSystem` operation. Returned for
     #   `FILE_SYSTEM_UPDATE` administrative actions.
     #   @return [Types::FileSystem]
     #
@@ -140,7 +175,8 @@ module Aws::FSx
     # Provides information about a failed administrative action.
     #
     # @!attribute [rw] message
-    #   Error message providing details about the failure.
+    #   Error message providing details about the failed administrative
+    #   action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeActionFailureDetails AWS API Documentation
@@ -151,7 +187,142 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # A backup of an Amazon FSx for file system.
+    # A DNS alias that is associated with the file system. You can use a DNS
+    # alias to access a file system using user-defined DNS names, in
+    # addition to the default DNS name that Amazon FSx assigns to the file
+    # system. For more information, see [DNS aliases][1] in the *FSx for
+    # Windows File Server User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    #
+    # @!attribute [rw] name
+    #   The name of the DNS alias. The alias name has to meet the following
+    #   requirements:
+    #
+    #   * Formatted as a fully-qualified domain name (FQDN),
+    #     `hostname.domain`, for example, `accounting.example.com`.
+    #
+    #   * Can contain alphanumeric characters, the underscore (\_), and the
+    #     hyphen (-).
+    #
+    #   * Cannot start or end with a hyphen.
+    #
+    #   * Can start with a numeric.
+    #
+    #   For DNS names, Amazon FSx stores alphabetic characters as lowercase
+    #   letters (a-z), regardless of how you specify them: as uppercase
+    #   letters, lowercase letters, or the corresponding letters in escape
+    #   codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   Describes the state of the DNS alias.
+    #
+    #   * AVAILABLE - The DNS alias is associated with an Amazon FSx file
+    #     system.
+    #
+    #   * CREATING - Amazon FSx is creating the DNS alias and associating it
+    #     with the file system.
+    #
+    #   * CREATE\_FAILED - Amazon FSx was unable to associate the DNS alias
+    #     with the file system.
+    #
+    #   * DELETING - Amazon FSx is disassociating the DNS alias from the
+    #     file system and deleting it.
+    #
+    #   * DELETE\_FAILED - Amazon FSx was unable to disassocate the DNS
+    #     alias from the file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Alias AWS API Documentation
+    #
+    class Alias < Struct.new(
+      :name,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request object specifying one or more DNS alias names to associate
+    # with an Amazon FSx for Windows File Server file system.
+    #
+    # @note When making an API call, you may pass AssociateFileSystemAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         file_system_id: "FileSystemId", # required
+    #         aliases: ["AlternateDNSName"], # required
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies the file system with which you want to associate one or
+    #   more DNS aliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS alias names to associate with the file
+    #   system. The alias name has to comply with the following formatting
+    #   requirements:
+    #
+    #   * Formatted as a fully-qualified domain name (FQDN), <i>
+    #     <code>hostname.domain</code> </i>, for example,
+    #     `accounting.corp.example.com`.
+    #
+    #   * Can contain alphanumeric characters and the hyphen (-).
+    #
+    #   * Cannot start or end with a hyphen.
+    #
+    #   * Can start with a numeric.
+    #
+    #   For DNS alias names, Amazon FSx stores alphabetic characters as
+    #   lowercase letters (a-z), regardless of how you specify them: as
+    #   uppercase letters, lowercase letters, or the corresponding letters
+    #   in escape codes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AssociateFileSystemAliasesRequest AWS API Documentation
+    #
+    class AssociateFileSystemAliasesRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The system generated response showing the DNS aliases that Amazon FSx
+    # is attempting to associate with the file system. Use the API operation
+    # to monitor the status of the aliases Amazon FSx is associating with
+    # the file system. It can take up to 2.5 minutes for the alias status to
+    # change from `CREATING` to `AVAILABLE`.
+    #
+    # @!attribute [rw] aliases
+    #   An array of the DNS aliases that Amazon FSx is associating with the
+    #   file system.
+    #   @return [Array<Types::Alias>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AssociateFileSystemAliasesResponse AWS API Documentation
+    #
+    class AssociateFileSystemAliasesResponse < Struct.new(
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A backup of an Amazon FSx file system.
     #
     # @!attribute [rw] backup_id
     #   The ID of the backup.
@@ -162,12 +333,18 @@ module Aws::FSx
     #
     #   * `AVAILABLE` - The backup is fully available.
     #
-    #   * `CREATING` - FSx is creating the backup.
+    #   * `PENDING` - For user-initiated backups on Lustre file systems
+    #     only; Amazon FSx has not started creating the backup.
     #
-    #   * `TRANSFERRING` - For Lustre file systems only; FSx is transferring
-    #     the backup to S3.
+    #   * `CREATING` - Amazon FSx is creating the backup.
     #
-    #   * `DELETED` - The backup was deleted is no longer available.
+    #   * `TRANSFERRING` - For user-initiated backups on Lustre file systems
+    #     only; Amazon FSx is transferring the backup to S3.
+    #
+    #   * `COPYING` - Amazon FSx is copying the backup.
+    #
+    #   * `DELETED` - Amazon FSx deleted the backup and it is no longer
+    #     available.
     #
     #   * `FAILED` - Amazon FSx could not complete the backup.
     #   @return [String]
@@ -211,6 +388,20 @@ module Aws::FSx
     #   (AD) to which the Windows File Server instance is joined.
     #   @return [Types::ActiveDirectoryBackupAttributes]
     #
+    # @!attribute [rw] owner_id
+    #   An AWS account ID. This ID is a 12-digit number that you use to
+    #   construct Amazon Resource Names (ARNs) for resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_region
+    #   The source Region of the backup. Specifies the Region from where
+    #   this backup is copied.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup AWS API Documentation
     #
     class Backup < Struct.new(
@@ -224,7 +415,29 @@ module Aws::FSx
       :resource_arn,
       :tags,
       :file_system,
-      :directory_information)
+      :directory_information,
+      :owner_id,
+      :source_backup_id,
+      :source_backup_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You can't delete a backup while it's being copied.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupBeingCopied AWS API Documentation
+    #
+    class BackupBeingCopied < Struct.new(
+      :message,
+      :backup_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -423,6 +636,102 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyBackupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         source_backup_id: "SourceBackupId", # required
+    #         source_region: "Region",
+    #         kms_key_id: "KmsKeyId",
+    #         copy_tags: false,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_id
+    #   The ID of the source backup. Specifies the ID of the backup that is
+    #   being copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source AWS Region of the backup. Specifies the AWS Region from
+    #   which the backup is being copied. The source and destination Regions
+    #   must be in the same AWS partition. If you don't specify a Region,
+    #   it defaults to the Region where the request is sent from (in-Region
+    #   copy).
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
+    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
+    #   Key Management Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags
+    #   A boolean flag indicating whether tags from the source backup should
+    #   be copied to the backup copy. This value defaults to false.
+    #
+    #   If you set `CopyTags` to true and the source backup has existing
+    #   tags, you can use the `Tags` parameter to create new tags, provided
+    #   that the sum of the source backup tags and the new tags doesn't
+    #   exceed 50. Both sets of tags are merged. If there are tag conflicts
+    #   (for example, two tags with the same key but different values), the
+    #   tags created with the `Tags` parameter take precedence.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackupRequest AWS API Documentation
+    #
+    class CopyBackupRequest < Struct.new(
+      :client_request_token,
+      :source_backup_id,
+      :source_region,
+      :kms_key_id,
+      :copy_tags,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup
+    #   A backup of an Amazon FSx file system.
+    #   @return [Types::Backup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackupResponse AWS API Documentation
+    #
+    class CopyBackupResponse < Struct.new(
+      :backup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request object for the `CreateBackup` operation.
     #
     # @note When making an API call, you may pass CreateBackupRequest
@@ -609,6 +918,12 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
+    #           aliases: ["AlternateDNSName"],
+    #           audit_log_configuration: {
+    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             audit_log_destination: "GeneralARN",
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -622,13 +937,14 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #           drive_cache_type: "NONE", # accepts NONE, READ
+    #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
     #         storage_type: "SSD", # accepts SSD, HDD
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] backup_id
-    #   The ID of the backup. Specifies the backup to use if you're
-    #   creating a file system from an existing backup.
+    #   The ID of the source backup. Specifies the backup you are copying.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -698,6 +1014,21 @@ module Aws::FSx
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
+    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
+    #   Key Management Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
     #
     class CreateFileSystemFromBackupRequest < Struct.new(
@@ -708,7 +1039,8 @@ module Aws::FSx
       :tags,
       :windows_configuration,
       :lustre_configuration,
-      :storage_type)
+      :storage_type,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -744,6 +1076,7 @@ module Aws::FSx
     #         automatic_backup_retention_days: 1,
     #         copy_tags_to_backups: false,
     #         drive_cache_type: "NONE", # accepts NONE, READ
+    #         data_compression_type: "NONE", # accepts NONE, LZ4
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -907,6 +1240,22 @@ module Aws::FSx
     #   This parameter is required when `StorageType` is set to HDD.
     #   @return [String]
     #
+    # @!attribute [rw] data_compression_type
+    #   Sets the data compression configuration for the file system.
+    #   `DataCompressionType` can have the following values:
+    #
+    #   * `NONE` - (Default) Data compression is turned off when the file
+    #     system is created.
+    #
+    #   * `LZ4` - Data compression is turned on with the LZ4 algorithm.
+    #
+    #   For more information, see [Lustre data compression][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -920,7 +1269,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
-      :drive_cache_type)
+      :drive_cache_type,
+      :data_compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -961,6 +1311,12 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
+    #           aliases: ["AlternateDNSName"],
+    #           audit_log_configuration: {
+    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             audit_log_destination: "GeneralARN",
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -974,6 +1330,7 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #           drive_cache_type: "NONE", # accepts NONE, READ
+    #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
     #       }
     #
@@ -1043,11 +1400,17 @@ module Aws::FSx
     #   types, provide exactly two subnet IDs, one for the preferred file
     #   server and one for the standby file server. You specify one of these
     #   subnets as the preferred subnet using the `WindowsConfiguration >
-    #   PreferredSubnetID` property.
+    #   PreferredSubnetID` property. For more information, see [
+    #   Availability and durability: Single-AZ and Multi-AZ file
+    #   systems][1].
     #
     #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
     #   types and Lustre file systems, provide exactly one subnet ID. The
     #   file server is launched in that subnet's Availability Zone.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
@@ -1139,6 +1502,12 @@ module Aws::FSx
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
     #         copy_tags_to_backups: false,
+    #         aliases: ["AlternateDNSName"],
+    #         audit_log_configuration: {
+    #           file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           audit_log_destination: "GeneralARN",
+    #         },
     #       }
     #
     # @!attribute [rw] active_directory_id
@@ -1149,7 +1518,13 @@ module Aws::FSx
     # @!attribute [rw] self_managed_active_directory_configuration
     #   The configuration that Amazon FSx uses to join the Windows File
     #   Server instance to your self-managed (including on-premises)
-    #   Microsoft Active Directory (AD) directory.
+    #   Microsoft Active Directory (AD) directory. For more information, see
+    #   [ Using Amazon FSx with your self-managed Microsoft Active
+    #   Directory][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
     #   @return [Types::SelfManagedActiveDirectoryConfiguration]
     #
     # @!attribute [rw] deployment_type
@@ -1221,6 +1596,51 @@ module Aws::FSx
     #   system, regardless of this value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS alias names that you want to associate
+    #   with the Amazon FSx file system. Aliases allow you to use existing
+    #   DNS names to access the data in your Amazon FSx file system. You can
+    #   associate up to 50 aliases with a file system at any time. You can
+    #   associate additional DNS aliases after you create the file system
+    #   using the AssociateFileSystemAliases operation. You can remove DNS
+    #   aliases from the file system after it is created using the
+    #   DisassociateFileSystemAliases operation. You only need to specify
+    #   the alias name in the request payload.
+    #
+    #   For more information, see [Working with DNS Aliases][1] and
+    #   [Walkthrough 5: Using DNS aliases to access your file system][2],
+    #   including additional steps you must take to be able to access your
+    #   file system using a DNS alias.
+    #
+    #   An alias name has to meet the following requirements:
+    #
+    #   * Formatted as a fully-qualified domain name (FQDN),
+    #     `hostname.domain`, for example, `accounting.example.com`.
+    #
+    #   * Can contain alphanumeric characters, the underscore (\_), and the
+    #     hyphen (-).
+    #
+    #   * Cannot start or end with a hyphen.
+    #
+    #   * Can start with a numeric.
+    #
+    #   For DNS alias names, Amazon FSx stores alphabetic characters as
+    #   lowercase letters (a-z), regardless of how you specify them: as
+    #   uppercase letters, lowercase letters, or the corresponding letters
+    #   in escape codes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] audit_log_configuration
+    #   The configuration that Amazon FSx for Windows File Server uses to
+    #   audit and log user accesses of files, folders, and file shares on
+    #   the Amazon FSx for Windows File Server file system.
+    #   @return [Types::WindowsAuditLogCreateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
     #
     class CreateFileSystemWindowsConfiguration < Struct.new(
@@ -1232,7 +1652,9 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :aliases,
+      :audit_log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1930,7 +2352,7 @@ module Aws::FSx
     # Response object for `DescribeBackups` operation.
     #
     # @!attribute [rw] backups
-    #   Any array of backups.
+    #   An array of backups.
     #   @return [Array<Types::Backup>]
     #
     # @!attribute [rw] next_token
@@ -2017,6 +2439,81 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The request object for `DescribeFileSystemAliases` operation.
+    #
+    # @note When making an API call, you may pass DescribeFileSystemAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         file_system_id: "FileSystemId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system to return the associated DNS aliases for
+    #   (String).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of DNS aliases to return in the response (integer).
+    #   This parameter value must be greater than 0. The number of items
+    #   that Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number
+    #   of items per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Opaque pagination token returned from a previous
+    #   `DescribeFileSystemAliases` operation (String). If a token is
+    #   included in the request, the action continues the list from where
+    #   the previous returning call left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystemAliasesRequest AWS API Documentation
+    #
+    class DescribeFileSystemAliasesRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for `DescribeFileSystemAliases` operation.
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS aliases currently associated with the
+    #   specified file system.
+    #   @return [Array<Types::Alias>]
+    #
+    # @!attribute [rw] next_token
+    #   Present if there are more DNS aliases than returned in the response
+    #   (String). You can use the `NextToken` value in a later request to
+    #   fetch additional descriptions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystemAliasesResponse AWS API Documentation
+    #
+    class DescribeFileSystemAliasesResponse < Struct.new(
+      :aliases,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request object for `DescribeFileSystems` operation.
     #
     # @note When making an API call, you may pass DescribeFileSystemsRequest
@@ -2078,6 +2575,66 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The request object of DNS aliases to disassociate from an Amazon FSx
+    # for Windows File Server file system.
+    #
+    # @note When making an API call, you may pass DisassociateFileSystemAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         file_system_id: "FileSystemId", # required
+    #         aliases: ["AlternateDNSName"], # required
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies the file system from which to disassociate the DNS
+    #   aliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS alias names to disassociate, or remove,
+    #   from the file system.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DisassociateFileSystemAliasesRequest AWS API Documentation
+    #
+    class DisassociateFileSystemAliasesRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The system generated response showing the DNS aliases that Amazon FSx
+    # is attempting to disassociate from the file system. Use the API
+    # operation to monitor the status of the aliases Amazon FSx is removing
+    # from the file system.
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS aliases that Amazon FSx is attempting to
+    #   disassociate from the file system.
+    #   @return [Array<Types::Alias>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DisassociateFileSystemAliasesResponse AWS API Documentation
+    #
+    class DisassociateFileSystemAliasesResponse < Struct.new(
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of a specific Amazon FSx file system.
     #
     # @!attribute [rw] owner_id
@@ -2127,7 +2684,7 @@ module Aws::FSx
     #   @return [Types::FileSystemFailureDetails]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system in gigabytes (GB).
+    #   The storage capacity of the file system in gibibytes (GiB).
     #   @return [Integer]
     #
     # @!attribute [rw] storage_type
@@ -2325,6 +2882,21 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Amazon FSx doesn't support Multi-AZ Windows File Server copy backup
+    # in the destination Region, so the copied backup can't be restored.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/IncompatibleRegionForMultiAZ AWS API Documentation
+    #
+    class IncompatibleRegionForMultiAZ < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A generic error indicating a server-side failure.
     #
     # @!attribute [rw] message
@@ -2334,6 +2906,21 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InternalServerError AWS API Documentation
     #
     class InternalServerError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS Key Management Service (AWS KMS) key of the destination backup
+    # is invalid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidDestinationKmsKey AWS API Documentation
+    #
+    class InvalidDestinationKmsKey < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2420,6 +3007,36 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidPerUnitStorageThroughput AWS API Documentation
     #
     class InvalidPerUnitStorageThroughput < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Region provided for `Source Region` is invalid or is in a
+    # different AWS partition.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidRegion AWS API Documentation
+    #
+    class InvalidRegion < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS Key Management Service (AWS KMS) key of the source backup is
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidSourceKmsKey AWS API Documentation
+    #
+    class InvalidSourceKmsKey < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2570,6 +3187,21 @@ module Aws::FSx
     #   This parameter is required when `StorageType` is set to HDD.
     #   @return [String]
     #
+    # @!attribute [rw] data_compression_type
+    #   The data compression configuration for the file system.
+    #   `DataCompressionType` can have the following values:
+    #
+    #   * `NONE` - Data compression is turned off for the file system.
+    #
+    #   * `LZ4` - Data compression is turned on with the LZ4 algorithm.
+    #
+    #   For more information, see [Lustre data compression][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -2581,7 +3213,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
-      :drive_cache_type)
+      :drive_cache_type,
+      :data_compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2703,7 +3336,12 @@ module Aws::FSx
 
     # The configuration that Amazon FSx uses to join the Windows File Server
     # instance to your self-managed (including on-premises) Microsoft Active
-    # Directory (AD) directory.
+    # Directory (AD) directory. For more information, see [ Using Amazon FSx
+    # with your self-managed Microsoft Active Directory][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
     #
     # @note When making an API call, you may pass SelfManagedActiveDirectoryConfiguration
     #   data as a hash:
@@ -2765,20 +3403,7 @@ module Aws::FSx
     #
     # @!attribute [rw] dns_ips
     #   A list of up to two IP addresses of DNS servers or domain
-    #   controllers in the self-managed AD directory. The IP addresses need
-    #   to be either in the same VPC CIDR range as the one in which your
-    #   Amazon FSx file system is being created, or in the private IP
-    #   version 4 (IPv4) address ranges, as specified in [RFC 1918][1]\:
-    #
-    #   * 10\.0.0.0 - 10.255.255.255 (10/8 prefix)
-    #
-    #   * 172\.16.0.0 - 172.31.255.255 (172.16/12 prefix)
-    #
-    #   * 192\.168.0.0 - 192.168.255.255 (192.168/16 prefix)
-    #
-    #
-    #
-    #   [1]: http://www.faqs.org/rfcs/rfc1918.html
+    #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration AWS API Documentation
@@ -2850,6 +3475,26 @@ module Aws::FSx
     class ServiceLimitExceeded < Struct.new(
       :limit,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the lifecycle status of the source
+    # backup is not `AVAILABLE`.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SourceBackupUnavailable AWS API Documentation
+    #
+    class SourceBackupUnavailable < Struct.new(
+      :message,
+      :backup_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2985,6 +3630,7 @@ module Aws::FSx
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
     #         auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #         data_compression_type: "NONE", # accepts NONE, LZ4
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -3034,13 +3680,32 @@ module Aws::FSx
     #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html
     #   @return [String]
     #
+    # @!attribute [rw] data_compression_type
+    #   Sets the data compression configuration for the file system.
+    #   `DataCompressionType` can have the following values:
+    #
+    #   * `NONE` - Data compression is turned off for the file system.
+    #
+    #   * `LZ4` - Data compression is turned on with the LZ4 algorithm.
+    #
+    #   If you don't use `DataCompressionType`, the file system retains its
+    #   current data compression configuration.
+    #
+    #   For more information, see [Lustre data compression][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :auto_import_policy)
+      :auto_import_policy,
+      :data_compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3064,12 +3729,18 @@ module Aws::FSx
     #             password: "DirectoryPassword",
     #             dns_ips: ["IpAddress"],
     #           },
+    #           audit_log_configuration: {
+    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             audit_log_destination: "GeneralARN",
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
     #       }
     #
@@ -3089,18 +3760,40 @@ module Aws::FSx
     #
     # @!attribute [rw] storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server file system. Specifies the storage capacity
-    #   target value, GiB, for the file system you're updating. The storage
-    #   capacity target value must be at least 10 percent (%) greater than
-    #   the current storage capacity value. In order to increase storage
-    #   capacity, the file system needs to have at least 16 MB/s of
-    #   throughput capacity. You cannot make a storage capacity increase
-    #   request if there is an existing storage capacity increase request in
-    #   progress. For more information, see [Managing Storage Capacity][1].
+    #   file system. Specifies the storage capacity target value, GiB, to
+    #   increase the storage capacity for the file system that you're
+    #   updating. You cannot make a storage capacity increase request if
+    #   there is an existing storage capacity increase request in progress.
+    #
+    #   For Windows file systems, the storage capacity target value must be
+    #   at least 10 percent (%) greater than the current storage capacity
+    #   value. In order to increase storage capacity, the file system must
+    #   have at least 16 MB/s of throughput capacity.
+    #
+    #   For Lustre file systems, the storage capacity target value can be
+    #   the following:
+    #
+    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
+    #     values are in multiples of 2400 GiB. The value must be greater
+    #     than the current storage capacity.
+    #
+    #   * For `PERSISTENT HDD` file systems, valid values are multiples of
+    #     6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB
+    #     for 40 MB/s/TiB file systems. The values must be greater than the
+    #     current storage capacity.
+    #
+    #   * For `SCRATCH_1` file systems, you cannot increase the storage
+    #     capacity.
+    #
+    #   For more information, see [Managing storage capacity][1] in the
+    #   *Amazon FSx for Windows File Server User Guide* and [Managing
+    #   storage and throughput capacity][2] in the *Amazon FSx for Lustre
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] windows_configuration
@@ -3156,6 +3849,11 @@ module Aws::FSx
     #           password: "DirectoryPassword",
     #           dns_ips: ["IpAddress"],
     #         },
+    #         audit_log_configuration: {
+    #           file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           audit_log_destination: "GeneralARN",
+    #         },
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -3200,6 +3898,12 @@ module Aws::FSx
     #   self-managed Microsoft AD update request in progress.
     #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
     #
+    # @!attribute [rw] audit_log_configuration
+    #   The configuration that Amazon FSx for Windows File Server uses to
+    #   audit and log user accesses of files, folders, and file shares on
+    #   the Amazon FSx for Windows File Server file system..
+    #   @return [Types::WindowsAuditLogCreateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration AWS API Documentation
     #
     class UpdateFileSystemWindowsConfiguration < Struct.new(
@@ -3207,7 +3911,156 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :throughput_capacity,
-      :self_managed_active_directory_configuration)
+      :self_managed_active_directory_configuration,
+      :audit_log_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that Amazon FSx for Windows File Server uses to
+    # audit and log user accesses of files, folders, and file shares on the
+    # Amazon FSx for Windows File Server file system. For more information,
+    # see [ File access auditing][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html
+    #
+    # @!attribute [rw] file_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file and folder
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access files or
+    #     folders are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access files or folders
+    #     are logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access files or folders are logged.
+    #
+    #   * `DISABLED` - access auditing of files and folders is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file share
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access file shares
+    #     are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access file shares are
+    #     logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access file shares are logged.
+    #
+    #   * `DISABLED` - access auditing of file shares is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_log_destination
+    #   The Amazon Resource Name (ARN) for the destination of the audit
+    #   logs. The destination can be any Amazon CloudWatch Logs log group
+    #   ARN or Amazon Kinesis Data Firehose delivery stream ARN.
+    #
+    #   The name of the Amazon CloudWatch Logs log group must begin with the
+    #   `/aws/fsx` prefix. The name of the Amazon Kinesis Data Firehouse
+    #   delivery stream must begin with the `aws-fsx` prefix.
+    #
+    #   The destination ARN (either CloudWatch Logs log group or Kinesis
+    #   Data Firehose delivery stream) must be in the same AWS partition,
+    #   AWS region, and AWS account as your Amazon FSx file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsAuditLogConfiguration AWS API Documentation
+    #
+    class WindowsAuditLogConfiguration < Struct.new(
+      :file_access_audit_log_level,
+      :file_share_access_audit_log_level,
+      :audit_log_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Windows file access auditing configuration used when creating or
+    # updating an Amazon FSx for Windows File Server file system.
+    #
+    # @note When making an API call, you may pass WindowsAuditLogCreateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       }
+    #
+    # @!attribute [rw] file_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file and folder
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access files or
+    #     folders are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access files or folders
+    #     are logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access files or folders are logged.
+    #
+    #   * `DISABLED` - access auditing of files and folders is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file share
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access file shares
+    #     are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access file shares are
+    #     logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access file shares are logged.
+    #
+    #   * `DISABLED` - access auditing of file shares is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_log_destination
+    #   The Amazon Resource Name (ARN) that specifies the destination of the
+    #   audit logs.
+    #
+    #   The destination can be any Amazon CloudWatch Logs log group ARN or
+    #   Amazon Kinesis Data Firehose delivery stream ARN, with the following
+    #   requirements:
+    #
+    #   * The destination ARN that you provide (either CloudWatch Logs log
+    #     group or Kinesis Data Firehose delivery stream) must be in the
+    #     same AWS partition, AWS region, and AWS account as your Amazon FSx
+    #     file system.
+    #
+    #   * The name of the Amazon CloudWatch Logs log group must begin with
+    #     the `/aws/fsx` prefix. The name of the Amazon Kinesis Data
+    #     Firehouse delivery stream must begin with the `aws-fsx` prefix.
+    #
+    #   * If you do not provide a destination in `AuditLogDestination`,
+    #     Amazon FSx will create and use a log stream in the CloudWatch Logs
+    #     `/aws/fsx/windows` log group.
+    #
+    #   * If `AuditLogDestination` is provided and the resource does not
+    #     exist, the request will fail with a `BadRequest` error.
+    #
+    #   * If `FileAccessAuditLogLevel` and `FileShareAccessAuditLogLevel`
+    #     are both set to `DISABLED`, you cannot specify a destination in
+    #     `AuditLogDestination`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsAuditLogCreateConfiguration AWS API Documentation
+    #
+    class WindowsAuditLogCreateConfiguration < Struct.new(
+      :file_access_audit_log_level,
+      :file_share_access_audit_log_level,
+      :audit_log_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3215,8 +4068,8 @@ module Aws::FSx
     # The configuration for this Microsoft Windows file system.
     #
     # @!attribute [rw] active_directory_id
-    #   The ID for an existing Microsoft Active Directory instance that the
-    #   file system should join when it's created.
+    #   The ID for an existing AWS Managed Microsoft Active Directory
+    #   instance that the file system is joined to.
     #   @return [String]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
@@ -3268,8 +4121,8 @@ module Aws::FSx
     #
     #   For `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types, this value is
     #   the same as that for `SubnetIDs`. For more information, see
-    #   [Availability and Durability: Single-AZ and Multi-AZ File
-    #   Systems][1]
+    #   [Availability and durability: Single-AZ and Multi-AZ file
+    #   systems][1].
     #
     #
     #
@@ -3295,7 +4148,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
-    #   The throughput of an Amazon FSx file system, measured in megabytes
+    #   The throughput of the Amazon FSx file system, measured in megabytes
     #   per second.
     #   @return [Integer]
     #
@@ -3331,6 +4184,29 @@ module Aws::FSx
     #   copied from the file system, regardless of this value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS aliases that are currently associated
+    #   with the Amazon FSx file system. Aliases allow you to use existing
+    #   DNS names to access the data in your Amazon FSx file system. You can
+    #   associate up to 50 aliases with a file system at any time. You can
+    #   associate additional DNS aliases after you create the file system
+    #   using the AssociateFileSystemAliases operation. You can remove DNS
+    #   aliases from the file system after it is created using the
+    #   DisassociateFileSystemAliases operation. You only need to specify
+    #   the alias name in the request payload. For more information, see
+    #   [DNS aliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    #   @return [Array<Types::Alias>]
+    #
+    # @!attribute [rw] audit_log_configuration
+    #   The configuration that Amazon FSx for Windows File Server uses to
+    #   audit and log user accesses of files, folders, and file shares on
+    #   the Amazon FSx for Windows File Server file system.
+    #   @return [Types::WindowsAuditLogConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation
     #
     class WindowsFileSystemConfiguration < Struct.new(
@@ -3345,7 +4221,9 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :aliases,
+      :audit_log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

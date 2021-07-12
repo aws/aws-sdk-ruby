@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -13,6 +13,12 @@ module Aws::SSOAdmin
 
     include Seahorse::Model
 
+    AccessControlAttribute = Shapes::StructureShape.new(name: 'AccessControlAttribute')
+    AccessControlAttributeKey = Shapes::StringShape.new(name: 'AccessControlAttributeKey')
+    AccessControlAttributeList = Shapes::ListShape.new(name: 'AccessControlAttributeList')
+    AccessControlAttributeValue = Shapes::StructureShape.new(name: 'AccessControlAttributeValue')
+    AccessControlAttributeValueSource = Shapes::StringShape.new(name: 'AccessControlAttributeValueSource')
+    AccessControlAttributeValueSourceList = Shapes::ListShape.new(name: 'AccessControlAttributeValueSourceList')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedExceptionMessage = Shapes::StringShape.new(name: 'AccessDeniedExceptionMessage')
     AccountAssignment = Shapes::StructureShape.new(name: 'AccountAssignment')
@@ -30,6 +36,8 @@ module Aws::SSOAdmin
     ConflictExceptionMessage = Shapes::StringShape.new(name: 'ConflictExceptionMessage')
     CreateAccountAssignmentRequest = Shapes::StructureShape.new(name: 'CreateAccountAssignmentRequest')
     CreateAccountAssignmentResponse = Shapes::StructureShape.new(name: 'CreateAccountAssignmentResponse')
+    CreateInstanceAccessControlAttributeConfigurationRequest = Shapes::StructureShape.new(name: 'CreateInstanceAccessControlAttributeConfigurationRequest')
+    CreateInstanceAccessControlAttributeConfigurationResponse = Shapes::StructureShape.new(name: 'CreateInstanceAccessControlAttributeConfigurationResponse')
     CreatePermissionSetRequest = Shapes::StructureShape.new(name: 'CreatePermissionSetRequest')
     CreatePermissionSetResponse = Shapes::StructureShape.new(name: 'CreatePermissionSetResponse')
     Date = Shapes::TimestampShape.new(name: 'Date')
@@ -37,12 +45,16 @@ module Aws::SSOAdmin
     DeleteAccountAssignmentResponse = Shapes::StructureShape.new(name: 'DeleteAccountAssignmentResponse')
     DeleteInlinePolicyFromPermissionSetRequest = Shapes::StructureShape.new(name: 'DeleteInlinePolicyFromPermissionSetRequest')
     DeleteInlinePolicyFromPermissionSetResponse = Shapes::StructureShape.new(name: 'DeleteInlinePolicyFromPermissionSetResponse')
+    DeleteInstanceAccessControlAttributeConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteInstanceAccessControlAttributeConfigurationRequest')
+    DeleteInstanceAccessControlAttributeConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteInstanceAccessControlAttributeConfigurationResponse')
     DeletePermissionSetRequest = Shapes::StructureShape.new(name: 'DeletePermissionSetRequest')
     DeletePermissionSetResponse = Shapes::StructureShape.new(name: 'DeletePermissionSetResponse')
     DescribeAccountAssignmentCreationStatusRequest = Shapes::StructureShape.new(name: 'DescribeAccountAssignmentCreationStatusRequest')
     DescribeAccountAssignmentCreationStatusResponse = Shapes::StructureShape.new(name: 'DescribeAccountAssignmentCreationStatusResponse')
     DescribeAccountAssignmentDeletionStatusRequest = Shapes::StructureShape.new(name: 'DescribeAccountAssignmentDeletionStatusRequest')
     DescribeAccountAssignmentDeletionStatusResponse = Shapes::StructureShape.new(name: 'DescribeAccountAssignmentDeletionStatusResponse')
+    DescribeInstanceAccessControlAttributeConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeInstanceAccessControlAttributeConfigurationRequest')
+    DescribeInstanceAccessControlAttributeConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeInstanceAccessControlAttributeConfigurationResponse')
     DescribePermissionSetProvisioningStatusRequest = Shapes::StructureShape.new(name: 'DescribePermissionSetProvisioningStatusRequest')
     DescribePermissionSetProvisioningStatusResponse = Shapes::StructureShape.new(name: 'DescribePermissionSetProvisioningStatusResponse')
     DescribePermissionSetRequest = Shapes::StructureShape.new(name: 'DescribePermissionSetRequest')
@@ -54,6 +66,9 @@ module Aws::SSOAdmin
     GetInlinePolicyForPermissionSetRequest = Shapes::StructureShape.new(name: 'GetInlinePolicyForPermissionSetRequest')
     GetInlinePolicyForPermissionSetResponse = Shapes::StructureShape.new(name: 'GetInlinePolicyForPermissionSetResponse')
     Id = Shapes::StringShape.new(name: 'Id')
+    InstanceAccessControlAttributeConfiguration = Shapes::StructureShape.new(name: 'InstanceAccessControlAttributeConfiguration')
+    InstanceAccessControlAttributeConfigurationStatus = Shapes::StringShape.new(name: 'InstanceAccessControlAttributeConfigurationStatus')
+    InstanceAccessControlAttributeConfigurationStatusReason = Shapes::StringShape.new(name: 'InstanceAccessControlAttributeConfigurationStatusReason')
     InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     InstanceMetadata = Shapes::StructureShape.new(name: 'InstanceMetadata')
@@ -122,10 +137,23 @@ module Aws::SSOAdmin
     UUId = Shapes::StringShape.new(name: 'UUId')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateInstanceAccessControlAttributeConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateInstanceAccessControlAttributeConfigurationRequest')
+    UpdateInstanceAccessControlAttributeConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateInstanceAccessControlAttributeConfigurationResponse')
     UpdatePermissionSetRequest = Shapes::StructureShape.new(name: 'UpdatePermissionSetRequest')
     UpdatePermissionSetResponse = Shapes::StructureShape.new(name: 'UpdatePermissionSetResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
+
+    AccessControlAttribute.add_member(:key, Shapes::ShapeRef.new(shape: AccessControlAttributeKey, required: true, location_name: "Key"))
+    AccessControlAttribute.add_member(:value, Shapes::ShapeRef.new(shape: AccessControlAttributeValue, required: true, location_name: "Value"))
+    AccessControlAttribute.struct_class = Types::AccessControlAttribute
+
+    AccessControlAttributeList.member = Shapes::ShapeRef.new(shape: AccessControlAttribute)
+
+    AccessControlAttributeValue.add_member(:source, Shapes::ShapeRef.new(shape: AccessControlAttributeValueSourceList, required: true, location_name: "Source"))
+    AccessControlAttributeValue.struct_class = Types::AccessControlAttributeValue
+
+    AccessControlAttributeValueSourceList.member = Shapes::ShapeRef.new(shape: AccessControlAttributeValueSource)
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: AccessDeniedExceptionMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -185,6 +213,12 @@ module Aws::SSOAdmin
     CreateAccountAssignmentResponse.add_member(:account_assignment_creation_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatus, location_name: "AccountAssignmentCreationStatus"))
     CreateAccountAssignmentResponse.struct_class = Types::CreateAccountAssignmentResponse
 
+    CreateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    CreateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_access_control_attribute_configuration, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, required: true, location_name: "InstanceAccessControlAttributeConfiguration"))
+    CreateInstanceAccessControlAttributeConfigurationRequest.struct_class = Types::CreateInstanceAccessControlAttributeConfigurationRequest
+
+    CreateInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::CreateInstanceAccessControlAttributeConfigurationResponse
+
     CreatePermissionSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionSetName, required: true, location_name: "Name"))
     CreatePermissionSetRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionSetDescription, location_name: "Description"))
     CreatePermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
@@ -213,6 +247,11 @@ module Aws::SSOAdmin
 
     DeleteInlinePolicyFromPermissionSetResponse.struct_class = Types::DeleteInlinePolicyFromPermissionSetResponse
 
+    DeleteInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    DeleteInstanceAccessControlAttributeConfigurationRequest.struct_class = Types::DeleteInstanceAccessControlAttributeConfigurationRequest
+
+    DeleteInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::DeleteInstanceAccessControlAttributeConfigurationResponse
+
     DeletePermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DeletePermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     DeletePermissionSetRequest.struct_class = Types::DeletePermissionSetRequest
@@ -232,6 +271,14 @@ module Aws::SSOAdmin
 
     DescribeAccountAssignmentDeletionStatusResponse.add_member(:account_assignment_deletion_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatus, location_name: "AccountAssignmentDeletionStatus"))
     DescribeAccountAssignmentDeletionStatusResponse.struct_class = Types::DescribeAccountAssignmentDeletionStatusResponse
+
+    DescribeInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    DescribeInstanceAccessControlAttributeConfigurationRequest.struct_class = Types::DescribeInstanceAccessControlAttributeConfigurationRequest
+
+    DescribeInstanceAccessControlAttributeConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfigurationStatus, location_name: "Status"))
+    DescribeInstanceAccessControlAttributeConfigurationResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfigurationStatusReason, location_name: "StatusReason"))
+    DescribeInstanceAccessControlAttributeConfigurationResponse.add_member(:instance_access_control_attribute_configuration, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, location_name: "InstanceAccessControlAttributeConfiguration"))
+    DescribeInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::DescribeInstanceAccessControlAttributeConfigurationResponse
 
     DescribePermissionSetProvisioningStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DescribePermissionSetProvisioningStatusRequest.add_member(:provision_permission_set_request_id, Shapes::ShapeRef.new(shape: UUId, required: true, location_name: "ProvisionPermissionSetRequestId"))
@@ -260,6 +307,9 @@ module Aws::SSOAdmin
 
     GetInlinePolicyForPermissionSetResponse.add_member(:inline_policy, Shapes::ShapeRef.new(shape: PermissionSetPolicyDocument, location_name: "InlinePolicy"))
     GetInlinePolicyForPermissionSetResponse.struct_class = Types::GetInlinePolicyForPermissionSetResponse
+
+    InstanceAccessControlAttributeConfiguration.add_member(:access_control_attributes, Shapes::ShapeRef.new(shape: AccessControlAttributeList, required: true, location_name: "AccessControlAttributes"))
+    InstanceAccessControlAttributeConfiguration.struct_class = Types::InstanceAccessControlAttributeConfiguration
 
     InstanceList.member = Shapes::ShapeRef.new(shape: InstanceMetadata)
 
@@ -444,6 +494,12 @@ module Aws::SSOAdmin
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    UpdateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_access_control_attribute_configuration, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, required: true, location_name: "InstanceAccessControlAttributeConfiguration"))
+    UpdateInstanceAccessControlAttributeConfigurationRequest.struct_class = Types::UpdateInstanceAccessControlAttributeConfigurationRequest
+
+    UpdateInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::UpdateInstanceAccessControlAttributeConfigurationResponse
+
     UpdatePermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     UpdatePermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     UpdatePermissionSetRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionSetDescription, location_name: "Description"))
@@ -506,6 +562,20 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_instance_access_control_attribute_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInstanceAccessControlAttributeConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateInstanceAccessControlAttributeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInstanceAccessControlAttributeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_permission_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePermissionSet"
         o.http_method = "POST"
@@ -549,6 +619,20 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_instance_access_control_attribute_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInstanceAccessControlAttributeConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInstanceAccessControlAttributeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInstanceAccessControlAttributeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_permission_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePermissionSet"
         o.http_method = "POST"
@@ -587,6 +671,19 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_instance_access_control_attribute_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceAccessControlAttributeConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceAccessControlAttributeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceAccessControlAttributeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_permission_set, Seahorse::Model::Operation.new.tap do |o|
@@ -885,6 +982,20 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_instance_access_control_attribute_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInstanceAccessControlAttributeConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInstanceAccessControlAttributeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInstanceAccessControlAttributeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 

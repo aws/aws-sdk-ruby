@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -94,6 +94,10 @@ module Aws::Amplify
     #   the Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] custom_headers
+    #   Describes the custom HTTP headers for the Amplify app.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_auto_branch_creation
     #   Enables automated branch creation for the Amplify app.
     #   @return [Boolean]
@@ -130,6 +134,7 @@ module Aws::Amplify
       :custom_rules,
       :production_branch,
       :build_spec,
+      :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
@@ -201,10 +206,12 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
     #   Performance mode optimizes for faster hosting performance by keeping
-    #   content cached at the edge for a longer interval. Enabling
-    #   performance mode will mean that hosting configuration or code
-    #   changes can take up to 10 minutes to roll out.
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
     #   @return [Boolean]
     #
     # @!attribute [rw] build_spec
@@ -212,7 +219,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for the autocreated branch.
+    #   Enables pull request previews for the autocreated branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
@@ -363,10 +370,12 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
     #   Performance mode optimizes for faster hosting performance by keeping
-    #   content cached at the edge for a longer interval. Enabling
-    #   performance mode will mean that hosting configuration or code
-    #   changes can take up to 10 minutes to roll out.
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
     #   @return [Boolean]
     #
     # @!attribute [rw] thumbnail_url
@@ -391,7 +400,7 @@ module Aws::Amplify
     #   @return [Array<String>]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for the branch.
+    #   Enables pull request previews for the branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
@@ -477,6 +486,7 @@ module Aws::Amplify
     #           "TagKey" => "TagValue",
     #         },
     #         build_spec: "BuildSpec",
+    #         custom_headers: "CustomHeaders",
     #         enable_auto_branch_creation: false,
     #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #         auto_branch_creation_config: {
@@ -496,7 +506,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] name
-    #   The name for the Amplify app.
+    #   The name for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -562,16 +572,20 @@ module Aws::Amplify
     #   The build specification (build spec) for an Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] custom_headers
+    #   The custom HTTP headers for an Amplify app.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify app.
+    #   Enables automated branch creation for an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_branch_creation_patterns
-    #   The automated branch creation glob patterns for the Amplify app.
+    #   The automated branch creation glob patterns for an Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   The automated branch creation configuration for the Amplify app.
+    #   The automated branch creation configuration for an Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppRequest AWS API Documentation
@@ -592,6 +606,7 @@ module Aws::Amplify
       :custom_rules,
       :tags,
       :build_spec,
+      :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
@@ -736,10 +751,12 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
     #   Performance mode optimizes for faster hosting performance by keeping
-    #   content cached at the edge for a longer interval. Enabling
-    #   performance mode will mean that hosting configuration or code
-    #   changes can take up to 10 minutes to roll out.
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -760,7 +777,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for this branch.
+    #   Enables pull request previews for this branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
@@ -2720,6 +2737,7 @@ module Aws::Amplify
     #           },
     #         ],
     #         build_spec: "BuildSpec",
+    #         custom_headers: "CustomHeaders",
     #         enable_auto_branch_creation: false,
     #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #         auto_branch_creation_config: {
@@ -2791,17 +2809,21 @@ module Aws::Amplify
     #   The build specification (build spec) for an Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] custom_headers
+    #   The custom HTTP headers for an Amplify app.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify app.
+    #   Enables automated branch creation for an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_branch_creation_patterns
-    #   Describes the automated branch creation glob patterns for the
-    #   Amplify app.
+    #   Describes the automated branch creation glob patterns for an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   The automated branch creation configuration for the Amplify app.
+    #   The automated branch creation configuration for an Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @!attribute [rw] repository
@@ -2835,6 +2857,7 @@ module Aws::Amplify
       :basic_auth_credentials,
       :custom_rules,
       :build_spec,
+      :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config,
@@ -2927,10 +2950,12 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
     #   Performance mode optimizes for faster hosting performance by keeping
-    #   content cached at the edge for a longer interval. Enabling
-    #   performance mode will mean that hosting configuration or code
-    #   changes can take up to 10 minutes to roll out.
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
     #   @return [Boolean]
     #
     # @!attribute [rw] build_spec
@@ -2947,7 +2972,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for this branch.
+    #   Enables pull request previews for this branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name

@@ -42,7 +42,9 @@
       "errors":[
         {"shape":"BaseException"},
         {"shape":"InternalException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ValidationException"}
       ]
     },
     "DefineAnalysisScheme":{
@@ -1325,10 +1327,30 @@
         "search.m3.medium",
         "search.m3.large",
         "search.m3.xlarge",
-        "search.m3.2xlarge"
+        "search.m3.2xlarge",
+        "search.small",
+        "search.medium",
+        "search.large",
+        "search.xlarge",
+        "search.2xlarge",
+        "search.previousgeneration.small",
+        "search.previousgeneration.large",
+        "search.previousgeneration.xlarge",
+        "search.previousgeneration.2xlarge"
       ]
     },
     "PolicyDocument":{"type":"string"},
+    "ResourceAlreadyExistsException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"ResourceAlreadyExists",
+        "httpStatusCode":409,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{

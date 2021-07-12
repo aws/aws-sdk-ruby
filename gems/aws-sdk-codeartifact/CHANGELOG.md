@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-05-10)
+------------------
+
+* Feature - Documentation updates for CodeArtifact
+
+1.9.0 (2021-03-22)
+------------------
+
+* Feature - Documentation updates for CodeArtifact
+
+1.8.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2020-11-23)
+------------------
+
+* Feature - Add support for the NuGet package format.
+
+1.5.0 (2020-10-29)
+------------------
+
+* Feature - Add support for tagging of CodeArtifact domain and repository resources.
+
 1.4.0 (2020-09-30)
 ------------------
 

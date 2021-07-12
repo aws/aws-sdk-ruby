@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -16,8 +16,12 @@ module Aws::CloudHSMV2
     Backup = Shapes::StructureShape.new(name: 'Backup')
     BackupId = Shapes::StringShape.new(name: 'BackupId')
     BackupPolicy = Shapes::StringShape.new(name: 'BackupPolicy')
+    BackupRetentionPolicy = Shapes::StructureShape.new(name: 'BackupRetentionPolicy')
+    BackupRetentionType = Shapes::StringShape.new(name: 'BackupRetentionType')
+    BackupRetentionValue = Shapes::StringShape.new(name: 'BackupRetentionValue')
     BackupState = Shapes::StringShape.new(name: 'BackupState')
     Backups = Shapes::ListShape.new(name: 'Backups')
+    BackupsMaxSize = Shapes::IntegerShape.new(name: 'BackupsMaxSize')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Cert = Shapes::StringShape.new(name: 'Cert')
     Certificates = Shapes::StructureShape.new(name: 'Certificates')
@@ -31,6 +35,7 @@ module Aws::CloudHSMV2
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
     Clusters = Shapes::ListShape.new(name: 'Clusters')
+    ClustersMaxSize = Shapes::IntegerShape.new(name: 'ClustersMaxSize')
     CopyBackupToRegionRequest = Shapes::StructureShape.new(name: 'CopyBackupToRegionRequest')
     CopyBackupToRegionResponse = Shapes::StructureShape.new(name: 'CopyBackupToRegionResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
@@ -64,6 +69,10 @@ module Aws::CloudHSMV2
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     MaxSize = Shapes::IntegerShape.new(name: 'MaxSize')
+    ModifyBackupAttributesRequest = Shapes::StructureShape.new(name: 'ModifyBackupAttributesRequest')
+    ModifyBackupAttributesResponse = Shapes::StructureShape.new(name: 'ModifyBackupAttributesResponse')
+    ModifyClusterRequest = Shapes::StructureShape.new(name: 'ModifyClusterRequest')
+    ModifyClusterResponse = Shapes::StructureShape.new(name: 'ModifyClusterResponse')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PreCoPassword = Shapes::StringShape.new(name: 'PreCoPassword')
     Region = Shapes::StringShape.new(name: 'Region')
@@ -94,12 +103,17 @@ module Aws::CloudHSMV2
     Backup.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     Backup.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
     Backup.add_member(:copy_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CopyTimestamp"))
+    Backup.add_member(:never_expires, Shapes::ShapeRef.new(shape: Boolean, location_name: "NeverExpires"))
     Backup.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceRegion"))
     Backup.add_member(:source_backup, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackup"))
     Backup.add_member(:source_cluster, Shapes::ShapeRef.new(shape: ClusterId, location_name: "SourceCluster"))
     Backup.add_member(:delete_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeleteTimestamp"))
     Backup.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     Backup.struct_class = Types::Backup
+
+    BackupRetentionPolicy.add_member(:type, Shapes::ShapeRef.new(shape: BackupRetentionType, location_name: "Type"))
+    BackupRetentionPolicy.add_member(:value, Shapes::ShapeRef.new(shape: BackupRetentionValue, location_name: "Value"))
+    BackupRetentionPolicy.struct_class = Types::BackupRetentionPolicy
 
     Backups.member = Shapes::ShapeRef.new(shape: Backup)
 
@@ -129,6 +143,7 @@ module Aws::CloudHSMV2
     CloudHsmTagException.struct_class = Types::CloudHsmTagException
 
     Cluster.add_member(:backup_policy, Shapes::ShapeRef.new(shape: BackupPolicy, location_name: "BackupPolicy"))
+    Cluster.add_member(:backup_retention_policy, Shapes::ShapeRef.new(shape: BackupRetentionPolicy, location_name: "BackupRetentionPolicy"))
     Cluster.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     Cluster.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
     Cluster.add_member(:hsms, Shapes::ShapeRef.new(shape: Hsms, location_name: "Hsms"))
@@ -154,9 +169,10 @@ module Aws::CloudHSMV2
     CopyBackupToRegionResponse.add_member(:destination_backup, Shapes::ShapeRef.new(shape: DestinationBackup, location_name: "DestinationBackup"))
     CopyBackupToRegionResponse.struct_class = Types::CopyBackupToRegionResponse
 
-    CreateClusterRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
+    CreateClusterRequest.add_member(:backup_retention_policy, Shapes::ShapeRef.new(shape: BackupRetentionPolicy, location_name: "BackupRetentionPolicy"))
     CreateClusterRequest.add_member(:hsm_type, Shapes::ShapeRef.new(shape: HsmType, required: true, location_name: "HsmType"))
     CreateClusterRequest.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackupId"))
+    CreateClusterRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     CreateClusterRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
@@ -193,7 +209,7 @@ module Aws::CloudHSMV2
     DeleteHsmResponse.struct_class = Types::DeleteHsmResponse
 
     DescribeBackupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeBackupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize, location_name: "MaxResults"))
+    DescribeBackupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BackupsMaxSize, location_name: "MaxResults"))
     DescribeBackupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
     DescribeBackupsRequest.add_member(:sort_ascending, Shapes::ShapeRef.new(shape: Boolean, location_name: "SortAscending"))
     DescribeBackupsRequest.struct_class = Types::DescribeBackupsRequest
@@ -204,7 +220,7 @@ module Aws::CloudHSMV2
 
     DescribeClustersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
     DescribeClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize, location_name: "MaxResults"))
+    DescribeClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ClustersMaxSize, location_name: "MaxResults"))
     DescribeClustersRequest.struct_class = Types::DescribeClustersRequest
 
     DescribeClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: Clusters, location_name: "Clusters"))
@@ -252,6 +268,20 @@ module Aws::CloudHSMV2
     ListTagsResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "TagList"))
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
+
+    ModifyBackupAttributesRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
+    ModifyBackupAttributesRequest.add_member(:never_expires, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "NeverExpires"))
+    ModifyBackupAttributesRequest.struct_class = Types::ModifyBackupAttributesRequest
+
+    ModifyBackupAttributesResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
+    ModifyBackupAttributesResponse.struct_class = Types::ModifyBackupAttributesResponse
+
+    ModifyClusterRequest.add_member(:backup_retention_policy, Shapes::ShapeRef.new(shape: BackupRetentionPolicy, required: true, location_name: "BackupRetentionPolicy"))
+    ModifyClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    ModifyClusterRequest.struct_class = Types::ModifyClusterRequest
+
+    ModifyClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    ModifyClusterResponse.struct_class = Types::ModifyClusterResponse
 
     RestoreBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     RestoreBackupRequest.struct_class = Types::RestoreBackupRequest
@@ -454,6 +484,32 @@ module Aws::CloudHSMV2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:modify_backup_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyBackupAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyBackupAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyBackupAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+      end)
+
+      api.add_operation(:modify_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
       end)
 
       api.add_operation(:restore_backup, Seahorse::Model::Operation.new.tap do |o|

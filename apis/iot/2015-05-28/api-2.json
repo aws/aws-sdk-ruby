@@ -190,6 +190,21 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "CancelDetectMitigationActionsTask":{
+      "name":"CancelDetectMitigationActionsTask",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/detect/mitigationactions/tasks/{taskId}/cancel"
+      },
+      "input":{"shape":"CancelDetectMitigationActionsTaskRequest"},
+      "output":{"shape":"CancelDetectMitigationActionsTaskResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
     "CancelJob":{
       "name":"CancelJob",
       "http":{
@@ -319,6 +334,22 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "CreateCustomMetric":{
+      "name":"CreateCustomMetric",
+      "http":{
+        "method":"POST",
+        "requestUri":"/custom-metric/{metricName}"
+      },
+      "input":{"shape":"CreateCustomMetricRequest"},
+      "output":{"shape":"CreateCustomMetricResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
     "CreateDimension":{
       "name":"CreateDimension",
       "http":{
@@ -387,6 +418,23 @@
         {"shape":"LimitExceededException"},
         {"shape":"ThrottlingException"},
         {"shape":"ServiceUnavailableException"}
+      ]
+    },
+    "CreateJobTemplate":{
+      "name":"CreateJobTemplate",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/job-templates/{jobTemplateId}"
+      },
+      "input":{"shape":"CreateJobTemplateRequest"},
+      "output":{"shape":"CreateJobTemplateResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
       ]
     },
     "CreateKeysAndCertificate":{
@@ -777,6 +825,20 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "DeleteCustomMetric":{
+      "name":"DeleteCustomMetric",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/custom-metric/{metricName}"
+      },
+      "input":{"shape":"DeleteCustomMetricRequest"},
+      "output":{"shape":"DeleteCustomMetricResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
     "DeleteDimension":{
       "name":"DeleteDimension",
       "http":{
@@ -852,6 +914,20 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"ServiceUnavailableException"}
+      ]
+    },
+    "DeleteJobTemplate":{
+      "name":"DeleteJobTemplate",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/job-templates/{jobTemplateId}"
+      },
+      "input":{"shape":"DeleteJobTemplateRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
       ]
     },
     "DeleteMitigationAction":{
@@ -1288,6 +1364,21 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "DescribeCustomMetric":{
+      "name":"DescribeCustomMetric",
+      "http":{
+        "method":"GET",
+        "requestUri":"/custom-metric/{metricName}"
+      },
+      "input":{"shape":"DescribeCustomMetricRequest"},
+      "output":{"shape":"DescribeCustomMetricResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
     "DescribeDefaultAuthorizer":{
       "name":"DescribeDefaultAuthorizer",
       "http":{
@@ -1302,6 +1393,21 @@
         {"shape":"ThrottlingException"},
         {"shape":"UnauthorizedException"},
         {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
+    "DescribeDetectMitigationActionsTask":{
+      "name":"DescribeDetectMitigationActionsTask",
+      "http":{
+        "method":"GET",
+        "requestUri":"/detect/mitigationactions/tasks/{taskId}"
+      },
+      "input":{"shape":"DescribeDetectMitigationActionsTaskRequest"},
+      "output":{"shape":"DescribeDetectMitigationActionsTaskResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
         {"shape":"InternalFailureException"}
       ]
     },
@@ -1410,6 +1516,21 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"ServiceUnavailableException"}
+      ]
+    },
+    "DescribeJobTemplate":{
+      "name":"DescribeJobTemplate",
+      "http":{
+        "method":"GET",
+        "requestUri":"/job-templates/{jobTemplateId}"
+      },
+      "input":{"shape":"DescribeJobTemplateRequest"},
+      "output":{"shape":"DescribeJobTemplateResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
       ]
     },
     "DescribeMitigationAction":{
@@ -1681,6 +1802,21 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"UnauthorizedException"},
         {"shape":"ConflictingResourceUpdateException"}
+      ]
+    },
+    "GetBehaviorModelTrainingSummaries":{
+      "name":"GetBehaviorModelTrainingSummaries",
+      "http":{
+        "method":"GET",
+        "requestUri":"/behavior-model-training/summaries"
+      },
+      "input":{"shape":"GetBehaviorModelTrainingSummariesRequest"},
+      "output":{"shape":"GetBehaviorModelTrainingSummariesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "GetCardinality":{
@@ -2099,6 +2235,48 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "ListCustomMetrics":{
+      "name":"ListCustomMetrics",
+      "http":{
+        "method":"GET",
+        "requestUri":"/custom-metrics"
+      },
+      "input":{"shape":"ListCustomMetricsRequest"},
+      "output":{"shape":"ListCustomMetricsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
+    "ListDetectMitigationActionsExecutions":{
+      "name":"ListDetectMitigationActionsExecutions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/detect/mitigationactions/executions"
+      },
+      "input":{"shape":"ListDetectMitigationActionsExecutionsRequest"},
+      "output":{"shape":"ListDetectMitigationActionsExecutionsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
+    "ListDetectMitigationActionsTasks":{
+      "name":"ListDetectMitigationActionsTasks",
+      "http":{
+        "method":"GET",
+        "requestUri":"/detect/mitigationactions/tasks"
+      },
+      "input":{"shape":"ListDetectMitigationActionsTasksRequest"},
+      "output":{"shape":"ListDetectMitigationActionsTasksResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
     "ListDimensions":{
       "name":"ListDimensions",
       "http":{
@@ -2173,6 +2351,20 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"ServiceUnavailableException"}
+      ]
+    },
+    "ListJobTemplates":{
+      "name":"ListJobTemplates",
+      "http":{
+        "method":"GET",
+        "requestUri":"/job-templates"
+      },
+      "input":{"shape":"ListJobTemplatesRequest"},
+      "output":{"shape":"ListJobTemplatesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
       ]
     },
     "ListJobs":{
@@ -2488,7 +2680,8 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListThingGroupsForThing":{
@@ -2502,7 +2695,8 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListThingPrincipals":{
@@ -2610,7 +2804,8 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListTopicRuleDestinations":{
@@ -2921,6 +3116,22 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "StartDetectMitigationActionsTask":{
+      "name":"StartDetectMitigationActionsTask",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/detect/mitigationactions/tasks/{taskId}"
+      },
+      "input":{"shape":"StartDetectMitigationActionsTaskRequest"},
+      "output":{"shape":"StartDetectMitigationActionsTaskResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"TaskAlreadyExistsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
     "StartOnDemandAuditTask":{
       "name":"StartOnDemandAuditTask",
       "http":{
@@ -3146,6 +3357,21 @@
         {"shape":"ThrottlingException"},
         {"shape":"UnauthorizedException"},
         {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
+    "UpdateCustomMetric":{
+      "name":"UpdateCustomMetric",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/custom-metric/{metricName}"
+      },
+      "input":{"shape":"UpdateCustomMetricRequest"},
+      "output":{"shape":"UpdateCustomMetricResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
         {"shape":"InternalFailureException"}
       ]
     },
@@ -3499,7 +3725,8 @@
         "iotSiteWise":{"shape":"IotSiteWiseAction"},
         "stepFunctions":{"shape":"StepFunctionsAction"},
         "timestream":{"shape":"TimestreamAction"},
-        "http":{"shape":"HttpAction"}
+        "http":{"shape":"HttpAction"},
+        "kafka":{"shape":"KafkaAction"}
       }
     },
     "ActionList":{
@@ -3525,6 +3752,7 @@
         "securityProfileName":{"shape":"SecurityProfileName"},
         "behavior":{"shape":"Behavior"},
         "lastViolationValue":{"shape":"MetricValue"},
+        "violationEventAdditionalInfo":{"shape":"ViolationEventAdditionalInfo"},
         "lastViolationTime":{"shape":"Timestamp"},
         "violationStartTime":{"shape":"Timestamp"}
       }
@@ -3684,7 +3912,12 @@
           "location":"uri",
           "locationName":"jobId"
         },
-        "comment":{"shape":"Comment"}
+        "comment":{"shape":"Comment"},
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
+        }
       }
     },
     "AssociateTargetsWithJobResponse":{
@@ -3901,7 +4134,7 @@
     "AuditMitigationActionExecutionMetadata":{
       "type":"structure",
       "members":{
-        "taskId":{"shape":"AuditMitigationActionsTaskId"},
+        "taskId":{"shape":"MitigationActionsTaskId"},
         "findingId":{"shape":"FindingId"},
         "actionName":{"shape":"MitigationActionName"},
         "actionId":{"shape":"MitigationActionId"},
@@ -3927,16 +4160,10 @@
         "PENDING"
       ]
     },
-    "AuditMitigationActionsTaskId":{
-      "type":"string",
-      "max":128,
-      "min":1,
-      "pattern":"[a-zA-Z0-9_-]+"
-    },
     "AuditMitigationActionsTaskMetadata":{
       "type":"structure",
       "members":{
-        "taskId":{"shape":"AuditMitigationActionsTaskId"},
+        "taskId":{"shape":"MitigationActionsTaskId"},
         "startTime":{"shape":"Timestamp"},
         "taskStatus":{"shape":"AuditMitigationActionsTaskStatus"}
       }
@@ -4244,6 +4471,7 @@
       }
     },
     "AwsJobTimeoutInProgressTimeoutInMinutes":{"type":"long"},
+    "BatchMode":{"type":"boolean"},
     "Behavior":{
       "type":"structure",
       "required":["name"],
@@ -4251,7 +4479,8 @@
         "name":{"shape":"BehaviorName"},
         "metric":{"shape":"BehaviorMetric"},
         "metricDimension":{"shape":"MetricDimension"},
-        "criteria":{"shape":"BehaviorCriteria"}
+        "criteria":{"shape":"BehaviorCriteria"},
+        "suppressAlerts":{"shape":"SuppressAlerts"}
       }
     },
     "BehaviorCriteria":{
@@ -4262,10 +4491,34 @@
         "durationSeconds":{"shape":"DurationSeconds"},
         "consecutiveDatapointsToAlarm":{"shape":"ConsecutiveDatapointsToAlarm"},
         "consecutiveDatapointsToClear":{"shape":"ConsecutiveDatapointsToClear"},
-        "statisticalThreshold":{"shape":"StatisticalThreshold"}
+        "statisticalThreshold":{"shape":"StatisticalThreshold"},
+        "mlDetectionConfig":{"shape":"MachineLearningDetectionConfig"}
       }
     },
+    "BehaviorCriteriaType":{
+      "type":"string",
+      "enum":[
+        "STATIC",
+        "STATISTICAL",
+        "MACHINE_LEARNING"
+      ]
+    },
     "BehaviorMetric":{"type":"string"},
+    "BehaviorModelTrainingSummaries":{
+      "type":"list",
+      "member":{"shape":"BehaviorModelTrainingSummary"}
+    },
+    "BehaviorModelTrainingSummary":{
+      "type":"structure",
+      "members":{
+        "securityProfileName":{"shape":"SecurityProfileName"},
+        "behaviorName":{"shape":"BehaviorName"},
+        "trainingDataCollectionStartDate":{"shape":"Timestamp"},
+        "modelStatus":{"shape":"ModelStatus"},
+        "datapointsCollectionPercentage":{"shape":"DataCollectionPercentage"},
+        "lastModelRefreshDate":{"shape":"Timestamp"}
+      }
+    },
     "BehaviorName":{
       "type":"string",
       "max":128,
@@ -4359,7 +4612,7 @@
       "required":["taskId"],
       "members":{
         "taskId":{
-          "shape":"AuditMitigationActionsTaskId",
+          "shape":"MitigationActionsTaskId",
           "location":"uri",
           "locationName":"taskId"
         }
@@ -4395,6 +4648,22 @@
           "location":"uri",
           "locationName":"certificateId"
         }
+      }
+    },
+    "CancelDetectMitigationActionsTaskRequest":{
+      "type":"structure",
+      "required":["taskId"],
+      "members":{
+        "taskId":{
+          "shape":"MitigationActionsTaskId",
+          "location":"uri",
+          "locationName":"taskId"
+        }
+      }
+    },
+    "CancelDetectMitigationActionsTaskResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "CancelJobExecutionRequest":{
@@ -4588,6 +4857,11 @@
       }
     },
     "ClientId":{"type":"string"},
+    "ClientProperties":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
     "ClientRequestToken":{
       "type":"string",
       "max":64,
@@ -4676,10 +4950,20 @@
         "in-cidr-set",
         "not-in-cidr-set",
         "in-port-set",
-        "not-in-port-set"
+        "not-in-port-set",
+        "in-set",
+        "not-in-set"
       ]
     },
     "CompliantChecksCount":{"type":"integer"},
+    "ConfidenceLevel":{
+      "type":"string",
+      "enum":[
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
     "Configuration":{
       "type":"structure",
       "members":{
@@ -4706,6 +4990,14 @@
       "type":"string",
       "max":2048,
       "min":1
+    },
+    "ConflictException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
     },
     "ConflictingResourceUpdateException":{
       "type":"structure",
@@ -4819,6 +5111,35 @@
         "certificatePem":{"shape":"CertificatePem"}
       }
     },
+    "CreateCustomMetricRequest":{
+      "type":"structure",
+      "required":[
+        "metricName",
+        "metricType",
+        "clientRequestToken"
+      ],
+      "members":{
+        "metricName":{
+          "shape":"MetricName",
+          "location":"uri",
+          "locationName":"metricName"
+        },
+        "displayName":{"shape":"CustomMetricDisplayName"},
+        "metricType":{"shape":"CustomMetricType"},
+        "tags":{"shape":"TagList"},
+        "clientRequestToken":{
+          "shape":"ClientRequestToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateCustomMetricResponse":{
+      "type":"structure",
+      "members":{
+        "metricName":{"shape":"MetricName"},
+        "metricArn":{"shape":"CustomMetricArn"}
+      }
+    },
     "CreateDimensionRequest":{
       "type":"structure",
       "required":[
@@ -4924,7 +5245,9 @@
         "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
         "abortConfig":{"shape":"AbortConfig"},
         "timeoutConfig":{"shape":"TimeoutConfig"},
-        "tags":{"shape":"TagList"}
+        "tags":{"shape":"TagList"},
+        "namespaceId":{"shape":"NamespaceId"},
+        "jobTemplateArn":{"shape":"JobTemplateArn"}
       }
     },
     "CreateJobResponse":{
@@ -4933,6 +5256,36 @@
         "jobArn":{"shape":"JobArn"},
         "jobId":{"shape":"JobId"},
         "description":{"shape":"JobDescription"}
+      }
+    },
+    "CreateJobTemplateRequest":{
+      "type":"structure",
+      "required":[
+        "jobTemplateId",
+        "description"
+      ],
+      "members":{
+        "jobTemplateId":{
+          "shape":"JobTemplateId",
+          "location":"uri",
+          "locationName":"jobTemplateId"
+        },
+        "jobArn":{"shape":"JobArn"},
+        "documentSource":{"shape":"JobDocumentSource"},
+        "document":{"shape":"JobDocument"},
+        "description":{"shape":"JobDescription"},
+        "presignedUrlConfig":{"shape":"PresignedUrlConfig"},
+        "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
+        "abortConfig":{"shape":"AbortConfig"},
+        "timeoutConfig":{"shape":"TimeoutConfig"},
+        "tags":{"shape":"TagList"}
+      }
+    },
+    "CreateJobTemplateResponse":{
+      "type":"structure",
+      "members":{
+        "jobTemplateArn":{"shape":"JobTemplateArn"},
+        "jobTemplateId":{"shape":"JobTemplateId"}
       }
     },
     "CreateKeysAndCertificateRequest":{
@@ -5366,9 +5719,29 @@
         "signatureAlgorithm":{"shape":"SignatureAlgorithm"}
       }
     },
+    "CustomMetricArn":{"type":"string"},
+    "CustomMetricDisplayName":{
+      "type":"string",
+      "max":128,
+      "pattern":"[\\p{Graph}\\x20]*"
+    },
+    "CustomMetricType":{
+      "type":"string",
+      "enum":[
+        "string-list",
+        "ip-address-list",
+        "number-list",
+        "number"
+      ]
+    },
     "CustomerVersion":{
       "type":"integer",
       "min":1
+    },
+    "DataCollectionPercentage":{
+      "type":"double",
+      "max":100,
+      "min":0
     },
     "DateType":{"type":"timestamp"},
     "DayOfMonth":{
@@ -5498,6 +5871,22 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "DeleteCustomMetricRequest":{
+      "type":"structure",
+      "required":["metricName"],
+      "members":{
+        "metricName":{
+          "shape":"MetricName",
+          "location":"uri",
+          "locationName":"metricName"
+        }
+      }
+    },
+    "DeleteCustomMetricResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteDimensionRequest":{
       "type":"structure",
       "required":["name"],
@@ -5578,6 +5967,11 @@
           "shape":"ForceFlag",
           "location":"querystring",
           "locationName":"force"
+        },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
         }
       }
     },
@@ -5594,6 +5988,22 @@
           "shape":"ForceFlag",
           "location":"querystring",
           "locationName":"force"
+        },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
+        }
+      }
+    },
+    "DeleteJobTemplateRequest":{
+      "type":"structure",
+      "required":["jobTemplateId"],
+      "members":{
+        "jobTemplateId":{
+          "shape":"JobTemplateId",
+          "location":"uri",
+          "locationName":"jobTemplateId"
         }
       }
     },
@@ -5955,7 +6365,7 @@
       "required":["taskId"],
       "members":{
         "taskId":{
-          "shape":"AuditMitigationActionsTaskId",
+          "shape":"MitigationActionsTaskId",
           "location":"uri",
           "locationName":"taskId"
         }
@@ -6090,6 +6500,28 @@
         "certificateDescription":{"shape":"CertificateDescription"}
       }
     },
+    "DescribeCustomMetricRequest":{
+      "type":"structure",
+      "required":["metricName"],
+      "members":{
+        "metricName":{
+          "shape":"MetricName",
+          "location":"uri",
+          "locationName":"metricName"
+        }
+      }
+    },
+    "DescribeCustomMetricResponse":{
+      "type":"structure",
+      "members":{
+        "metricName":{"shape":"MetricName"},
+        "metricArn":{"shape":"CustomMetricArn"},
+        "metricType":{"shape":"CustomMetricType"},
+        "displayName":{"shape":"CustomMetricDisplayName"},
+        "creationDate":{"shape":"Timestamp"},
+        "lastModifiedDate":{"shape":"Timestamp"}
+      }
+    },
     "DescribeDefaultAuthorizerRequest":{
       "type":"structure",
       "members":{
@@ -6099,6 +6531,23 @@
       "type":"structure",
       "members":{
         "authorizerDescription":{"shape":"AuthorizerDescription"}
+      }
+    },
+    "DescribeDetectMitigationActionsTaskRequest":{
+      "type":"structure",
+      "required":["taskId"],
+      "members":{
+        "taskId":{
+          "shape":"MitigationActionsTaskId",
+          "location":"uri",
+          "locationName":"taskId"
+        }
+      }
+    },
+    "DescribeDetectMitigationActionsTaskResponse":{
+      "type":"structure",
+      "members":{
+        "taskSummary":{"shape":"DetectMitigationActionsTaskSummary"}
       }
     },
     "DescribeDimensionRequest":{
@@ -6242,6 +6691,32 @@
       "members":{
         "documentSource":{"shape":"JobDocumentSource"},
         "job":{"shape":"Job"}
+      }
+    },
+    "DescribeJobTemplateRequest":{
+      "type":"structure",
+      "required":["jobTemplateId"],
+      "members":{
+        "jobTemplateId":{
+          "shape":"JobTemplateId",
+          "location":"uri",
+          "locationName":"jobTemplateId"
+        }
+      }
+    },
+    "DescribeJobTemplateResponse":{
+      "type":"structure",
+      "members":{
+        "jobTemplateArn":{"shape":"JobTemplateArn"},
+        "jobTemplateId":{"shape":"JobTemplateId"},
+        "description":{"shape":"JobDescription"},
+        "documentSource":{"shape":"JobDocumentSource"},
+        "document":{"shape":"JobDocument"},
+        "createdAt":{"shape":"DateType"},
+        "presignedUrlConfig":{"shape":"PresignedUrlConfig"},
+        "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
+        "abortConfig":{"shape":"AbortConfig"},
+        "timeoutConfig":{"shape":"TimeoutConfig"}
       }
     },
     "DescribeMitigationActionRequest":{
@@ -6609,9 +7084,86 @@
     },
     "DetailsValue":{
       "type":"string",
-      "max":1024,
       "min":1,
-      "pattern":"[^\\p{C}]*+"
+      "pattern":"[^\\p{C}]+"
+    },
+    "DetectMitigationActionExecution":{
+      "type":"structure",
+      "members":{
+        "taskId":{"shape":"MitigationActionsTaskId"},
+        "violationId":{"shape":"ViolationId"},
+        "actionName":{"shape":"MitigationActionName"},
+        "thingName":{"shape":"DeviceDefenderThingName"},
+        "executionStartDate":{"shape":"Timestamp"},
+        "executionEndDate":{"shape":"Timestamp"},
+        "status":{"shape":"DetectMitigationActionExecutionStatus"},
+        "errorCode":{"shape":"DetectMitigationActionExecutionErrorCode"},
+        "message":{"shape":"ErrorMessage"}
+      }
+    },
+    "DetectMitigationActionExecutionErrorCode":{"type":"string"},
+    "DetectMitigationActionExecutionList":{
+      "type":"list",
+      "member":{"shape":"DetectMitigationActionExecution"}
+    },
+    "DetectMitigationActionExecutionStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "SUCCESSFUL",
+        "FAILED",
+        "SKIPPED"
+      ]
+    },
+    "DetectMitigationActionsTaskStatistics":{
+      "type":"structure",
+      "members":{
+        "actionsExecuted":{"shape":"GenericLongValue"},
+        "actionsSkipped":{"shape":"GenericLongValue"},
+        "actionsFailed":{"shape":"GenericLongValue"}
+      }
+    },
+    "DetectMitigationActionsTaskStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "SUCCESSFUL",
+        "FAILED",
+        "CANCELED"
+      ]
+    },
+    "DetectMitigationActionsTaskSummary":{
+      "type":"structure",
+      "members":{
+        "taskId":{"shape":"MitigationActionsTaskId"},
+        "taskStatus":{"shape":"DetectMitigationActionsTaskStatus"},
+        "taskStartTime":{"shape":"Timestamp"},
+        "taskEndTime":{"shape":"Timestamp"},
+        "target":{"shape":"DetectMitigationActionsTaskTarget"},
+        "violationEventOccurrenceRange":{"shape":"ViolationEventOccurrenceRange"},
+        "onlyActiveViolationsIncluded":{"shape":"PrimitiveBoolean"},
+        "suppressedAlertsIncluded":{"shape":"PrimitiveBoolean"},
+        "actionsDefinition":{"shape":"MitigationActionList"},
+        "taskStatistics":{"shape":"DetectMitigationActionsTaskStatistics"}
+      }
+    },
+    "DetectMitigationActionsTaskSummaryList":{
+      "type":"list",
+      "member":{"shape":"DetectMitigationActionsTaskSummary"}
+    },
+    "DetectMitigationActionsTaskTarget":{
+      "type":"structure",
+      "members":{
+        "violationIds":{"shape":"TargetViolationIdsForDetectMitigationActions"},
+        "securityProfileName":{"shape":"SecurityProfileName"},
+        "behaviorName":{"shape":"BehaviorName"}
+      }
+    },
+    "DetectMitigationActionsToExecuteList":{
+      "type":"list",
+      "member":{"shape":"MitigationActionName"},
+      "max":5,
+      "min":1
     },
     "DeviceCertificateUpdateAction":{
       "type":"string",
@@ -6920,6 +7472,11 @@
       }
     },
     "FileName":{"type":"string"},
+    "FileType":{
+      "type":"integer",
+      "max":255,
+      "min":0
+    },
     "FindingId":{
       "type":"string",
       "max":128,
@@ -6941,7 +7498,8 @@
       "members":{
         "roleArn":{"shape":"AwsArn"},
         "deliveryStreamName":{"shape":"DeliveryStreamName"},
-        "separator":{"shape":"FirehoseSeparator"}
+        "separator":{"shape":"FirehoseSeparator"},
+        "batchMode":{"shape":"BatchMode"}
       }
     },
     "FirehoseSeparator":{
@@ -6955,6 +7513,34 @@
     "Forced":{"type":"boolean"},
     "FunctionArn":{"type":"string"},
     "GenerationId":{"type":"string"},
+    "GenericLongValue":{"type":"long"},
+    "GetBehaviorModelTrainingSummariesRequest":{
+      "type":"structure",
+      "members":{
+        "securityProfileName":{
+          "shape":"SecurityProfileName",
+          "location":"querystring",
+          "locationName":"securityProfileName"
+        },
+        "maxResults":{
+          "shape":"TinyMaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "GetBehaviorModelTrainingSummariesResponse":{
+      "type":"structure",
+      "members":{
+        "summaries":{"shape":"BehaviorModelTrainingSummaries"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
     "GetCardinalityRequest":{
       "type":"structure",
       "required":["queryString"],
@@ -7399,6 +7985,7 @@
       "members":{
         "channelArn":{"shape":"AwsArn"},
         "channelName":{"shape":"ChannelName"},
+        "batchMode":{"shape":"BatchMode"},
         "roleArn":{"shape":"AwsArn"}
       }
     },
@@ -7411,6 +7998,7 @@
       "members":{
         "inputName":{"shape":"InputName"},
         "messageId":{"shape":"MessageId"},
+        "batchMode":{"shape":"BatchMode"},
         "roleArn":{"shape":"AwsArn"}
       }
     },
@@ -7448,7 +8036,9 @@
         "lastUpdatedAt":{"shape":"DateType"},
         "completedAt":{"shape":"DateType"},
         "jobProcessDetails":{"shape":"JobProcessDetails"},
-        "timeoutConfig":{"shape":"TimeoutConfig"}
+        "timeoutConfig":{"shape":"TimeoutConfig"},
+        "namespaceId":{"shape":"NamespaceId"},
+        "jobTemplateArn":{"shape":"JobTemplateArn"}
       }
     },
     "JobArn":{"type":"string"},
@@ -7600,7 +8190,47 @@
       "member":{"shape":"TargetArn"},
       "min":1
     },
+    "JobTemplateArn":{
+      "type":"string",
+      "max":1600,
+      "min":1,
+      "pattern":"^arn:[!-~]+$"
+    },
+    "JobTemplateId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
+    "JobTemplateSummary":{
+      "type":"structure",
+      "members":{
+        "jobTemplateArn":{"shape":"JobTemplateArn"},
+        "jobTemplateId":{"shape":"JobTemplateId"},
+        "description":{"shape":"JobDescription"},
+        "createdAt":{"shape":"DateType"}
+      }
+    },
+    "JobTemplateSummaryList":{
+      "type":"list",
+      "member":{"shape":"JobTemplateSummary"}
+    },
     "JsonDocument":{"type":"string"},
+    "KafkaAction":{
+      "type":"structure",
+      "required":[
+        "destinationArn",
+        "topic",
+        "clientProperties"
+      ],
+      "members":{
+        "destinationArn":{"shape":"AwsArn"},
+        "topic":{"shape":"String"},
+        "key":{"shape":"String"},
+        "partition":{"shape":"String"},
+        "clientProperties":{"shape":"ClientProperties"}
+      }
+    },
     "Key":{"type":"string"},
     "KeyName":{
       "type":"string",
@@ -7644,6 +8274,7 @@
       "min":1
     },
     "LastModifiedDate":{"type":"timestamp"},
+    "LastUpdatedAtDate":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -7664,6 +8295,16 @@
           "shape":"SecurityProfileName",
           "location":"querystring",
           "locationName":"securityProfileName"
+        },
+        "behaviorCriteriaType":{
+          "shape":"BehaviorCriteriaType",
+          "location":"querystring",
+          "locationName":"behaviorCriteriaType"
+        },
+        "listSuppressedAlerts":{
+          "shape":"ListSuppressedAlerts",
+          "location":"querystring",
+          "locationName":"listSuppressedAlerts"
         },
         "nextToken":{
           "shape":"NextToken",
@@ -7745,7 +8386,7 @@
       ],
       "members":{
         "taskId":{
-          "shape":"AuditMitigationActionsTaskId",
+          "shape":"MitigationActionsTaskId",
           "location":"querystring",
           "locationName":"taskId"
         },
@@ -8038,6 +8679,111 @@
         "nextMarker":{"shape":"Marker"}
       }
     },
+    "ListCustomMetricsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListCustomMetricsResponse":{
+      "type":"structure",
+      "members":{
+        "metricNames":{"shape":"MetricNames"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListDetectMitigationActionsExecutionsRequest":{
+      "type":"structure",
+      "members":{
+        "taskId":{
+          "shape":"MitigationActionsTaskId",
+          "location":"querystring",
+          "locationName":"taskId"
+        },
+        "violationId":{
+          "shape":"ViolationId",
+          "location":"querystring",
+          "locationName":"violationId"
+        },
+        "thingName":{
+          "shape":"DeviceDefenderThingName",
+          "location":"querystring",
+          "locationName":"thingName"
+        },
+        "startTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"startTime"
+        },
+        "endTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"endTime"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListDetectMitigationActionsExecutionsResponse":{
+      "type":"structure",
+      "members":{
+        "actionsExecutions":{"shape":"DetectMitigationActionExecutionList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListDetectMitigationActionsTasksRequest":{
+      "type":"structure",
+      "required":[
+        "startTime",
+        "endTime"
+      ],
+      "members":{
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "startTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"startTime"
+        },
+        "endTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"endTime"
+        }
+      }
+    },
+    "ListDetectMitigationActionsTasksResponse":{
+      "type":"structure",
+      "members":{
+        "tasks":{"shape":"DetectMitigationActionsTaskSummaryList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
     "ListDimensionsRequest":{
       "type":"structure",
       "members":{
@@ -8156,6 +8902,11 @@
           "location":"querystring",
           "locationName":"status"
         },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
+        },
         "maxResults":{
           "shape":"LaserMaxResults",
           "location":"querystring",
@@ -8172,6 +8923,28 @@
       "type":"structure",
       "members":{
         "executionSummaries":{"shape":"JobExecutionSummaryForThingList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListJobTemplatesRequest":{
+      "type":"structure",
+      "members":{
+        "maxResults":{
+          "shape":"LaserMaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListJobTemplatesResponse":{
+      "type":"structure",
+      "members":{
+        "jobTemplates":{"shape":"JobTemplateSummaryList"},
         "nextToken":{"shape":"NextToken"}
       }
     },
@@ -8207,6 +8980,11 @@
           "shape":"ThingGroupId",
           "location":"querystring",
           "locationName":"thingGroupId"
+        },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
         }
       }
     },
@@ -8585,6 +9363,11 @@
           "shape":"DimensionName",
           "location":"querystring",
           "locationName":"dimensionName"
+        },
+        "metricName":{
+          "shape":"MetricName",
+          "location":"querystring",
+          "locationName":"metricName"
         }
       }
     },
@@ -8622,6 +9405,7 @@
         "nextToken":{"shape":"NextToken"}
       }
     },
+    "ListSuppressedAlerts":{"type":"boolean"},
     "ListSuppressedFindings":{"type":"boolean"},
     "ListTagsForResourceRequest":{
       "type":"structure",
@@ -8771,6 +9555,16 @@
       "type":"structure",
       "required":["thingName"],
       "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"RegistryMaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
         "thingName":{
           "shape":"ThingName",
           "location":"uri",
@@ -8781,7 +9575,8 @@
     "ListThingPrincipalsResponse":{
       "type":"structure",
       "members":{
-        "principals":{"shape":"Principals"}
+        "principals":{"shape":"Principals"},
+        "nextToken":{"shape":"NextToken"}
       }
     },
     "ListThingRegistrationTaskReportsRequest":{
@@ -8963,6 +9758,11 @@
           "shape":"ThingTypeName",
           "location":"querystring",
           "locationName":"thingTypeName"
+        },
+        "usePrefixAttributeValue":{
+          "shape":"usePrefixAttributeValue",
+          "location":"querystring",
+          "locationName":"usePrefixAttributeValue"
         }
       }
     },
@@ -9081,6 +9881,16 @@
           "location":"querystring",
           "locationName":"securityProfileName"
         },
+        "behaviorCriteriaType":{
+          "shape":"BehaviorCriteriaType",
+          "location":"querystring",
+          "locationName":"behaviorCriteriaType"
+        },
+        "listSuppressedAlerts":{
+          "shape":"ListSuppressedAlerts",
+          "location":"querystring",
+          "locationName":"listSuppressedAlerts"
+        },
         "nextToken":{
           "shape":"NextToken",
           "location":"querystring",
@@ -9146,6 +9956,13 @@
         "logLevel":{"shape":"LogLevel"}
       }
     },
+    "MachineLearningDetectionConfig":{
+      "type":"structure",
+      "required":["confidenceLevel"],
+      "members":{
+        "confidenceLevel":{"shape":"ConfidenceLevel"}
+      }
+    },
     "MalformedPolicyException":{
       "type":"structure",
       "members":{
@@ -9161,7 +9978,6 @@
     },
     "MaxJobExecutionsPerMin":{
       "type":"integer",
-      "max":1000,
       "min":1
     },
     "MaxResults":{
@@ -9198,6 +10014,16 @@
         "operator":{"shape":"DimensionValueOperator"}
       }
     },
+    "MetricName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
+    "MetricNames":{
+      "type":"list",
+      "member":{"shape":"MetricName"}
+    },
     "MetricToRetain":{
       "type":"structure",
       "required":["metric"],
@@ -9211,7 +10037,10 @@
       "members":{
         "count":{"shape":"UnsignedLong"},
         "cidrs":{"shape":"Cidrs"},
-        "ports":{"shape":"Ports"}
+        "ports":{"shape":"Ports"},
+        "number":{"shape":"Number"},
+        "numbers":{"shape":"NumberList"},
+        "strings":{"shape":"StringList"}
       }
     },
     "Minimum":{"type":"double"},
@@ -9284,6 +10113,20 @@
         "PUBLISH_FINDING_TO_SNS"
       ]
     },
+    "MitigationActionsTaskId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
+    "ModelStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING_BUILD",
+        "ACTIVE",
+        "EXPIRED"
+      ]
+    },
     "MqttClientId":{
       "type":"string",
       "max":65535,
@@ -9307,6 +10150,12 @@
       "max":65535,
       "min":1
     },
+    "NamespaceId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
     "NextToken":{"type":"string"},
     "NonCompliantChecksCount":{"type":"integer"},
     "NonCompliantResource":{
@@ -9326,6 +10175,12 @@
       "error":{"httpStatusCode":404},
       "exception":true
     },
+    "NullableBoolean":{"type":"boolean"},
+    "Number":{"type":"double"},
+    "NumberList":{
+      "type":"list",
+      "member":{"shape":"Number"}
+    },
     "NumberOfThings":{
       "type":"integer",
       "min":1
@@ -9341,6 +10196,7 @@
       "type":"structure",
       "members":{
         "fileName":{"shape":"FileName"},
+        "fileType":{"shape":"FileType"},
         "fileVersion":{"shape":"OTAUpdateFileVersion"},
         "fileLocation":{"shape":"FileLocation"},
         "codeSigning":{"shape":"CodeSigning"},
@@ -9541,6 +10397,7 @@
         "expiresInSec":{"shape":"ExpiresInSec"}
       }
     },
+    "PrimitiveBoolean":{"type":"boolean"},
     "Principal":{"type":"string"},
     "PrincipalArn":{"type":"string"},
     "PrincipalId":{
@@ -10140,6 +10997,11 @@
       "member":{"shape":"AttributeName"}
     },
     "Seconds":{"type":"integer"},
+    "SecurityGroupId":{"type":"string"},
+    "SecurityGroupList":{
+      "type":"list",
+      "member":{"shape":"SecurityGroupId"}
+    },
     "SecurityProfileArn":{"type":"string"},
     "SecurityProfileDescription":{
       "type":"string",
@@ -10380,7 +11242,7 @@
       ],
       "members":{
         "taskId":{
-          "shape":"AuditMitigationActionsTaskId",
+          "shape":"MitigationActionsTaskId",
           "location":"uri",
           "locationName":"taskId"
         },
@@ -10395,7 +11257,38 @@
     "StartAuditMitigationActionsTaskResponse":{
       "type":"structure",
       "members":{
-        "taskId":{"shape":"AuditMitigationActionsTaskId"}
+        "taskId":{"shape":"MitigationActionsTaskId"}
+      }
+    },
+    "StartDetectMitigationActionsTaskRequest":{
+      "type":"structure",
+      "required":[
+        "taskId",
+        "target",
+        "actions",
+        "clientRequestToken"
+      ],
+      "members":{
+        "taskId":{
+          "shape":"MitigationActionsTaskId",
+          "location":"uri",
+          "locationName":"taskId"
+        },
+        "target":{"shape":"DetectMitigationActionsTaskTarget"},
+        "actions":{"shape":"DetectMitigationActionsToExecuteList"},
+        "violationEventOccurrenceRange":{"shape":"ViolationEventOccurrenceRange"},
+        "includeOnlyActiveViolations":{"shape":"NullableBoolean"},
+        "includeSuppressedAlerts":{"shape":"NullableBoolean"},
+        "clientRequestToken":{
+          "shape":"ClientRequestToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "StartDetectMitigationActionsTaskResponse":{
+      "type":"structure",
+      "members":{
+        "taskId":{"shape":"MitigationActionsTaskId"}
       }
     },
     "StartOnDemandAuditTaskRequest":{
@@ -10587,15 +11480,25 @@
       "member":{"shape":"StreamSummary"}
     },
     "String":{"type":"string"},
+    "StringList":{
+      "type":"list",
+      "member":{"shape":"stringValue"}
+    },
     "StringMap":{
       "type":"map",
       "key":{"shape":"String"},
       "value":{"shape":"String"}
     },
+    "SubnetId":{"type":"string"},
+    "SubnetIdList":{
+      "type":"list",
+      "member":{"shape":"SubnetId"}
+    },
     "SucceededFindingsCount":{"type":"long"},
     "SucceededThings":{"type":"integer"},
     "Sum":{"type":"double"},
     "SumOfSquares":{"type":"double"},
+    "SuppressAlerts":{"type":"boolean"},
     "SuppressIndefinitely":{"type":"boolean"},
     "SuppressedNonCompliantResourcesCount":{"type":"long"},
     "TableName":{"type":"string"},
@@ -10657,6 +11560,12 @@
         "CONTINUOUS",
         "SNAPSHOT"
       ]
+    },
+    "TargetViolationIdsForDetectMitigationActions":{
+      "type":"list",
+      "member":{"shape":"ViolationId"},
+      "max":25,
+      "min":1
     },
     "Targets":{
       "type":"list",
@@ -11026,6 +11935,11 @@
     },
     "TimestreamTimestampUnit":{"type":"string"},
     "TimestreamTimestampValue":{"type":"string"},
+    "TinyMaxResults":{
+      "type":"integer",
+      "max":10,
+      "min":1
+    },
     "TlsContext":{
       "type":"structure",
       "members":{
@@ -11069,14 +11983,18 @@
       "members":{
         "arn":{"shape":"AwsArn"},
         "status":{"shape":"TopicRuleDestinationStatus"},
+        "createdAt":{"shape":"CreatedAtDate"},
+        "lastUpdatedAt":{"shape":"LastUpdatedAtDate"},
         "statusReason":{"shape":"String"},
-        "httpUrlProperties":{"shape":"HttpUrlDestinationProperties"}
+        "httpUrlProperties":{"shape":"HttpUrlDestinationProperties"},
+        "vpcProperties":{"shape":"VpcDestinationProperties"}
       }
     },
     "TopicRuleDestinationConfiguration":{
       "type":"structure",
       "members":{
-        "httpUrlConfiguration":{"shape":"HttpUrlDestinationConfiguration"}
+        "httpUrlConfiguration":{"shape":"HttpUrlDestinationConfiguration"},
+        "vpcConfiguration":{"shape":"VpcDestinationConfiguration"}
       }
     },
     "TopicRuleDestinationMaxResults":{
@@ -11090,7 +12008,8 @@
         "ENABLED",
         "IN_PROGRESS",
         "DISABLED",
-        "ERROR"
+        "ERROR",
+        "DELETING"
       ]
     },
     "TopicRuleDestinationSummaries":{
@@ -11102,8 +12021,11 @@
       "members":{
         "arn":{"shape":"AwsArn"},
         "status":{"shape":"TopicRuleDestinationStatus"},
+        "createdAt":{"shape":"CreatedAtDate"},
+        "lastUpdatedAt":{"shape":"LastUpdatedAtDate"},
         "statusReason":{"shape":"String"},
-        "httpUrlSummary":{"shape":"HttpUrlDestinationSummary"}
+        "httpUrlSummary":{"shape":"HttpUrlDestinationSummary"},
+        "vpcDestinationSummary":{"shape":"VpcDestinationSummary"}
       }
     },
     "TopicRuleList":{
@@ -11349,6 +12271,32 @@
         }
       }
     },
+    "UpdateCustomMetricRequest":{
+      "type":"structure",
+      "required":[
+        "metricName",
+        "displayName"
+      ],
+      "members":{
+        "metricName":{
+          "shape":"MetricName",
+          "location":"uri",
+          "locationName":"metricName"
+        },
+        "displayName":{"shape":"CustomMetricDisplayName"}
+      }
+    },
+    "UpdateCustomMetricResponse":{
+      "type":"structure",
+      "members":{
+        "metricName":{"shape":"MetricName"},
+        "metricArn":{"shape":"CustomMetricArn"},
+        "metricType":{"shape":"CustomMetricType"},
+        "displayName":{"shape":"CustomMetricDisplayName"},
+        "creationDate":{"shape":"Timestamp"},
+        "lastModifiedDate":{"shape":"Timestamp"}
+      }
+    },
     "UpdateDeviceCertificateParams":{
       "type":"structure",
       "required":["action"],
@@ -11464,7 +12412,12 @@
         "presignedUrlConfig":{"shape":"PresignedUrlConfig"},
         "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
         "abortConfig":{"shape":"AbortConfig"},
-        "timeoutConfig":{"shape":"TimeoutConfig"}
+        "timeoutConfig":{"shape":"TimeoutConfig"},
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
+        }
       }
     },
     "UpdateMitigationActionRequest":{
@@ -11750,8 +12703,26 @@
         "securityProfileName":{"shape":"SecurityProfileName"},
         "behavior":{"shape":"Behavior"},
         "metricValue":{"shape":"MetricValue"},
+        "violationEventAdditionalInfo":{"shape":"ViolationEventAdditionalInfo"},
         "violationEventType":{"shape":"ViolationEventType"},
         "violationEventTime":{"shape":"Timestamp"}
+      }
+    },
+    "ViolationEventAdditionalInfo":{
+      "type":"structure",
+      "members":{
+        "confidenceLevel":{"shape":"ConfidenceLevel"}
+      }
+    },
+    "ViolationEventOccurrenceRange":{
+      "type":"structure",
+      "required":[
+        "startTime",
+        "endTime"
+      ],
+      "members":{
+        "startTime":{"shape":"Timestamp"},
+        "endTime":{"shape":"Timestamp"}
       }
     },
     "ViolationEventType":{
@@ -11772,9 +12743,44 @@
       "min":1,
       "pattern":"[a-zA-Z0-9\\-]+"
     },
+    "VpcDestinationConfiguration":{
+      "type":"structure",
+      "required":[
+        "subnetIds",
+        "vpcId",
+        "roleArn"
+      ],
+      "members":{
+        "subnetIds":{"shape":"SubnetIdList"},
+        "securityGroups":{"shape":"SecurityGroupList"},
+        "vpcId":{"shape":"VpcId"},
+        "roleArn":{"shape":"AwsArn"}
+      }
+    },
+    "VpcDestinationProperties":{
+      "type":"structure",
+      "members":{
+        "subnetIds":{"shape":"SubnetIdList"},
+        "securityGroups":{"shape":"SecurityGroupList"},
+        "vpcId":{"shape":"VpcId"},
+        "roleArn":{"shape":"AwsArn"}
+      }
+    },
+    "VpcDestinationSummary":{
+      "type":"structure",
+      "members":{
+        "subnetIds":{"shape":"SubnetIdList"},
+        "securityGroups":{"shape":"SecurityGroupList"},
+        "vpcId":{"shape":"VpcId"},
+        "roleArn":{"shape":"AwsArn"}
+      }
+    },
+    "VpcId":{"type":"string"},
     "WaitingForDataCollectionChecksCount":{"type":"integer"},
     "errorMessage":{"type":"string"},
     "resourceArn":{"type":"string"},
-    "resourceId":{"type":"string"}
+    "resourceId":{"type":"string"},
+    "stringValue":{"type":"string"},
+    "usePrefixAttributeValue":{"type":"boolean"}
   }
 }

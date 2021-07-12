@@ -21,8 +21,7 @@ to default service endpoint when available.
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          if context.config.regional_endpoint &&
-             !context.config.disable_host_prefix_injection
+          if !context.config.disable_host_prefix_injection
             endpoint_trait = context.operation.endpoint_pattern
             if endpoint_trait && !endpoint_trait.empty?
               _apply_endpoint_trait(context, endpoint_trait)

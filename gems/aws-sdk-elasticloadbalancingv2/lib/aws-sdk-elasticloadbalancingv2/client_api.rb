@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -119,6 +119,7 @@ module Aws::ElasticLoadBalancingV2
     FixedResponseActionMessage = Shapes::StringShape.new(name: 'FixedResponseActionMessage')
     FixedResponseActionStatusCode = Shapes::StringShape.new(name: 'FixedResponseActionStatusCode')
     ForwardActionConfig = Shapes::StructureShape.new(name: 'ForwardActionConfig')
+    GrpcCode = Shapes::StringShape.new(name: 'GrpcCode')
     HealthCheckEnabled = Shapes::BooleanShape.new(name: 'HealthCheckEnabled')
     HealthCheckIntervalSeconds = Shapes::IntegerShape.new(name: 'HealthCheckIntervalSeconds')
     HealthCheckPort = Shapes::StringShape.new(name: 'HealthCheckPort')
@@ -130,6 +131,7 @@ module Aws::ElasticLoadBalancingV2
     HttpHeaderConditionConfig = Shapes::StructureShape.new(name: 'HttpHeaderConditionConfig')
     HttpHeaderConditionName = Shapes::StringShape.new(name: 'HttpHeaderConditionName')
     HttpRequestMethodConditionConfig = Shapes::StructureShape.new(name: 'HttpRequestMethodConditionConfig')
+    IPv6Address = Shapes::StringShape.new(name: 'IPv6Address')
     IncompatibleProtocolsException = Shapes::StructureShape.new(name: 'IncompatibleProtocolsException')
     InvalidConfigurationRequestException = Shapes::StructureShape.new(name: 'InvalidConfigurationRequestException')
     InvalidLoadBalancerActionException = Shapes::StructureShape.new(name: 'InvalidLoadBalancerActionException')
@@ -188,6 +190,7 @@ module Aws::ElasticLoadBalancingV2
     PriorityInUseException = Shapes::StructureShape.new(name: 'PriorityInUseException')
     PrivateIPv4Address = Shapes::StringShape.new(name: 'PrivateIPv4Address')
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
+    ProtocolVersion = Shapes::StringShape.new(name: 'ProtocolVersion')
     QueryStringConditionConfig = Shapes::StructureShape.new(name: 'QueryStringConditionConfig')
     QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
     QueryStringKeyValuePairList = Shapes::ListShape.new(name: 'QueryStringKeyValuePairList')
@@ -377,8 +380,8 @@ module Aws::ElasticLoadBalancingV2
     Ciphers.member = Shapes::ShapeRef.new(shape: Cipher)
 
     CreateListenerInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
-    CreateListenerInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, required: true, location_name: "Protocol"))
-    CreateListenerInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    CreateListenerInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "Protocol"))
+    CreateListenerInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
     CreateListenerInput.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     CreateListenerInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     CreateListenerInput.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "DefaultActions"))
@@ -415,6 +418,7 @@ module Aws::ElasticLoadBalancingV2
 
     CreateTargetGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: TargetGroupName, required: true, location_name: "Name"))
     CreateTargetGroupInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "Protocol"))
+    CreateTargetGroupInput.add_member(:protocol_version, Shapes::ShapeRef.new(shape: ProtocolVersion, location_name: "ProtocolVersion"))
     CreateTargetGroupInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
     CreateTargetGroupInput.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateTargetGroupInput.add_member(:health_check_protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "HealthCheckProtocol"))
@@ -636,6 +640,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancerAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
     LoadBalancerAddress.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     LoadBalancerAddress.add_member(:private_i_pv_4_address, Shapes::ShapeRef.new(shape: PrivateIPv4Address, location_name: "PrivateIPv4Address"))
+    LoadBalancerAddress.add_member(:i_pv_6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "IPv6Address"))
     LoadBalancerAddress.struct_class = Types::LoadBalancerAddress
 
     LoadBalancerAddresses.member = Shapes::ShapeRef.new(shape: LoadBalancerAddress)
@@ -658,7 +663,8 @@ module Aws::ElasticLoadBalancingV2
 
     LoadBalancers.member = Shapes::ShapeRef.new(shape: LoadBalancer)
 
-    Matcher.add_member(:http_code, Shapes::ShapeRef.new(shape: HttpCode, required: true, location_name: "HttpCode"))
+    Matcher.add_member(:http_code, Shapes::ShapeRef.new(shape: HttpCode, location_name: "HttpCode"))
+    Matcher.add_member(:grpc_code, Shapes::ShapeRef.new(shape: GrpcCode, location_name: "GrpcCode"))
     Matcher.struct_class = Types::Matcher
 
     ModifyListenerInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
@@ -814,9 +820,11 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
     SetSubnetsInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets"))
     SetSubnetsInput.add_member(:subnet_mappings, Shapes::ShapeRef.new(shape: SubnetMappings, location_name: "SubnetMappings"))
+    SetSubnetsInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     SetSubnetsInput.struct_class = Types::SetSubnetsInput
 
     SetSubnetsOutput.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
+    SetSubnetsOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     SetSubnetsOutput.struct_class = Types::SetSubnetsOutput
 
     SourceIpConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
@@ -836,6 +844,7 @@ module Aws::ElasticLoadBalancingV2
     SubnetMapping.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     SubnetMapping.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     SubnetMapping.add_member(:private_i_pv_4_address, Shapes::ShapeRef.new(shape: PrivateIPv4Address, location_name: "PrivateIPv4Address"))
+    SubnetMapping.add_member(:i_pv_6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "IPv6Address"))
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)
@@ -881,6 +890,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:matcher, Shapes::ShapeRef.new(shape: Matcher, location_name: "Matcher"))
     TargetGroup.add_member(:load_balancer_arns, Shapes::ShapeRef.new(shape: LoadBalancerArns, location_name: "LoadBalancerArns"))
     TargetGroup.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
+    TargetGroup.add_member(:protocol_version, Shapes::ShapeRef.new(shape: ProtocolVersion, location_name: "ProtocolVersion"))
     TargetGroup.struct_class = Types::TargetGroup
 
     TargetGroupArns.member = Shapes::ShapeRef.new(shape: TargetGroupArn)

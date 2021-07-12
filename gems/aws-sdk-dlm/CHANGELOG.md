@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2021-02-04)
+------------------
+
+* Feature - Provide support for EBS Local Snapshots on AWS Outpost in Data Lifecycle Manager (DLM).
+
+1.38.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2020-12-17)
+------------------
+
+* Feature - Provide Cross-account copy event based policy support in DataLifecycleManager (DLM)
+
+1.36.0 (2020-11-06)
+------------------
+
+* Feature - Amazon Data Lifecycle Manager now supports the creation and retention of EBS-backed Amazon Machine Images
+
 1.35.0 (2020-09-30)
 ------------------
 

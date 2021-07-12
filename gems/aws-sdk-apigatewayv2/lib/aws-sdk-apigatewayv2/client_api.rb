@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -180,6 +180,7 @@ module Aws::ApiGatewayV2
     ReimportApiRequest = Shapes::StructureShape.new(name: 'ReimportApiRequest')
     ReimportApiResponse = Shapes::StructureShape.new(name: 'ReimportApiResponse')
     ResetAuthorizersCacheRequest = Shapes::StructureShape.new(name: 'ResetAuthorizersCacheRequest')
+    ResponseParameters = Shapes::MapShape.new(name: 'ResponseParameters')
     Route = Shapes::StructureShape.new(name: 'Route')
     RouteModels = Shapes::MapShape.new(name: 'RouteModels')
     RouteParameters = Shapes::MapShape.new(name: 'RouteParameters')
@@ -506,6 +507,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationInput.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     CreateIntegrationInput.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     CreateIntegrationInput.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    CreateIntegrationInput.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     CreateIntegrationInput.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationInput.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     CreateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
@@ -525,6 +527,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationRequest.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     CreateIntegrationRequest.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     CreateIntegrationRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    CreateIntegrationRequest.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     CreateIntegrationRequest.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationRequest.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     CreateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
@@ -570,6 +573,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationResult.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     CreateIntegrationResult.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     CreateIntegrationResult.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    CreateIntegrationResult.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     CreateIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     CreateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
@@ -993,6 +997,7 @@ module Aws::ApiGatewayV2
     GetIntegrationResult.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     GetIntegrationResult.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     GetIntegrationResult.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    GetIntegrationResult.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     GetIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     GetIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     GetIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
@@ -1185,6 +1190,7 @@ module Aws::ApiGatewayV2
     Integration.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     Integration.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     Integration.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    Integration.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     Integration.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     Integration.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     Integration.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
@@ -1275,6 +1281,9 @@ module Aws::ApiGatewayV2
     ResetAuthorizersCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
     ResetAuthorizersCacheRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
     ResetAuthorizersCacheRequest.struct_class = Types::ResetAuthorizersCacheRequest
+
+    ResponseParameters.key = Shapes::ShapeRef.new(shape: __string)
+    ResponseParameters.value = Shapes::ShapeRef.new(shape: IntegrationParameters)
 
     Route.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     Route.add_member(:api_key_required, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiKeyRequired"))
@@ -1527,6 +1536,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationInput.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     UpdateIntegrationInput.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     UpdateIntegrationInput.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    UpdateIntegrationInput.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     UpdateIntegrationInput.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationInput.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     UpdateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
@@ -1547,6 +1557,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationRequest.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     UpdateIntegrationRequest.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     UpdateIntegrationRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    UpdateIntegrationRequest.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     UpdateIntegrationRequest.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationRequest.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     UpdateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
@@ -1593,6 +1604,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationResult.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
     UpdateIntegrationResult.add_member(:payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "payloadFormatVersion"))
     UpdateIntegrationResult.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
+    UpdateIntegrationResult.add_member(:response_parameters, Shapes::ShapeRef.new(shape: ResponseParameters, location_name: "responseParameters"))
     UpdateIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     UpdateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))

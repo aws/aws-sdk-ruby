@@ -115,6 +115,15 @@
       },
       "input":{"shape":"DeleteBucketEncryptionRequest"}
     },
+    "DeleteBucketIntelligentTieringConfiguration":{
+      "name":"DeleteBucketIntelligentTieringConfiguration",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/{Bucket}?intelligent-tiering",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteBucketIntelligentTieringConfigurationRequest"}
+    },
     "DeleteBucketInventoryConfiguration":{
       "name":"DeleteBucketInventoryConfiguration",
       "http":{
@@ -280,6 +289,15 @@
       "input":{"shape":"GetBucketEncryptionRequest"},
       "output":{"shape":"GetBucketEncryptionOutput"}
     },
+    "GetBucketIntelligentTieringConfiguration":{
+      "name":"GetBucketIntelligentTieringConfiguration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/{Bucket}?intelligent-tiering"
+      },
+      "input":{"shape":"GetBucketIntelligentTieringConfigurationRequest"},
+      "output":{"shape":"GetBucketIntelligentTieringConfigurationOutput"}
+    },
     "GetBucketInventoryConfiguration":{
       "name":"GetBucketInventoryConfiguration",
       "http":{
@@ -444,7 +462,8 @@
       "input":{"shape":"GetObjectRequest"},
       "output":{"shape":"GetObjectOutput"},
       "errors":[
-        {"shape":"NoSuchKey"}
+        {"shape":"NoSuchKey"},
+        {"shape":"InvalidObjectState"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGET.html"
     },
@@ -549,6 +568,15 @@
       },
       "input":{"shape":"ListBucketAnalyticsConfigurationsRequest"},
       "output":{"shape":"ListBucketAnalyticsConfigurationsOutput"}
+    },
+    "ListBucketIntelligentTieringConfigurations":{
+      "name":"ListBucketIntelligentTieringConfigurations",
+      "http":{
+        "method":"GET",
+        "requestUri":"/{Bucket}?intelligent-tiering"
+      },
+      "input":{"shape":"ListBucketIntelligentTieringConfigurationsRequest"},
+      "output":{"shape":"ListBucketIntelligentTieringConfigurationsOutput"}
     },
     "ListBucketInventoryConfigurations":{
       "name":"ListBucketInventoryConfigurations",
@@ -680,6 +708,14 @@
       "input":{"shape":"PutBucketEncryptionRequest"},
       "httpChecksumRequired":true
     },
+    "PutBucketIntelligentTieringConfiguration":{
+      "name":"PutBucketIntelligentTieringConfiguration",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/{Bucket}?intelligent-tiering"
+      },
+      "input":{"shape":"PutBucketIntelligentTieringConfigurationRequest"}
+    },
     "PutBucketInventoryConfiguration":{
       "name":"PutBucketInventoryConfiguration",
       "http":{
@@ -751,7 +787,8 @@
         "method":"PUT",
         "requestUri":"/{Bucket}?ownershipControls"
       },
-      "input":{"shape":"PutBucketOwnershipControlsRequest"}
+      "input":{"shape":"PutBucketOwnershipControlsRequest"},
+      "httpChecksumRequired":true
     },
     "PutBucketPolicy":{
       "name":"PutBucketPolicy",
@@ -931,6 +968,18 @@
       "input":{"shape":"UploadPartCopyRequest"},
       "output":{"shape":"UploadPartCopyOutput"},
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html"
+    },
+    "WriteGetObjectResponse":{
+      "name":"WriteGetObjectResponse",
+      "http":{
+        "method":"POST",
+        "requestUri":"/WriteGetObjectResponse"
+      },
+      "input":{"shape":"WriteGetObjectResponseRequest"},
+      "authtype":"v4-unsigned-body",
+      "endpoint":{
+        "hostPrefix":"{RequestRoute}."
+      }
     }
   },
   "shapes":{
@@ -1092,6 +1141,13 @@
       "type":"string",
       "enum":["CSV"]
     },
+    "ArchiveStatus":{
+      "type":"string",
+      "enum":[
+        "ARCHIVE_ACCESS",
+        "DEEP_ARCHIVE_ACCESS"
+      ]
+    },
     "Body":{"type":"blob"},
     "Bucket":{
       "type":"structure",
@@ -1128,6 +1184,7 @@
         "authenticated-read"
       ]
     },
+    "BucketKeyEnabled":{"type":"boolean"},
     "BucketLifecycleConfiguration":{
       "type":"structure",
       "required":["Rules"],
@@ -1218,6 +1275,7 @@
         "AllowedOrigins"
       ],
       "members":{
+        "ID":{"shape":"ID"},
         "AllowedHeaders":{
           "shape":"AllowedHeaders",
           "locationName":"AllowedHeader"
@@ -1322,6 +1380,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
         },
         "RequestCharged":{
           "shape":"RequestCharged",
@@ -1464,6 +1527,11 @@
           "shape":"SSEKMSEncryptionContext",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-context"
+        },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
         },
         "RequestCharged":{
           "shape":"RequestCharged",
@@ -1625,6 +1693,11 @@
           "shape":"SSEKMSEncryptionContext",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-context"
+        },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
         },
         "CopySourceSSECustomerAlgorithm":{
           "shape":"CopySourceSSECustomerAlgorithm",
@@ -1820,6 +1893,11 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-context"
         },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
+        },
         "RequestCharged":{
           "shape":"RequestCharged",
           "location":"header",
@@ -1944,6 +2022,11 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-context"
         },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
+        },
         "RequestPayer":{
           "shape":"RequestPayer",
           "location":"header",
@@ -2055,6 +2138,25 @@
           "shape":"AccountId",
           "location":"header",
           "locationName":"x-amz-expected-bucket-owner"
+        }
+      }
+    },
+    "DeleteBucketIntelligentTieringConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "Bucket",
+        "Id"
+      ],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "Id":{
+          "shape":"IntelligentTieringId",
+          "location":"querystring",
+          "locationName":"id"
         }
       }
     },
@@ -2490,6 +2592,7 @@
         "Message":{"shape":"Message"}
       }
     },
+    "ErrorCode":{"type":"string"},
     "ErrorDocument":{
       "type":"structure",
       "required":["Key"],
@@ -2497,6 +2600,7 @@
         "Key":{"shape":"ObjectKey"}
       }
     },
+    "ErrorMessage":{"type":"string"},
     "Errors":{
       "type":"list",
       "member":{"shape":"Error"},
@@ -2718,6 +2822,32 @@
           "shape":"AccountId",
           "location":"header",
           "locationName":"x-amz-expected-bucket-owner"
+        }
+      }
+    },
+    "GetBucketIntelligentTieringConfigurationOutput":{
+      "type":"structure",
+      "members":{
+        "IntelligentTieringConfiguration":{"shape":"IntelligentTieringConfiguration"}
+      },
+      "payload":"IntelligentTieringConfiguration"
+    },
+    "GetBucketIntelligentTieringConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "Bucket",
+        "Id"
+      ],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "Id":{
+          "shape":"IntelligentTieringId",
+          "location":"querystring",
+          "locationName":"id"
         }
       }
     },
@@ -3311,6 +3441,11 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
+        },
         "StorageClass":{
           "shape":"StorageClass",
           "location":"header",
@@ -3463,6 +3598,7 @@
         }
       }
     },
+    "GetObjectResponseStatusCode":{"type":"integer"},
     "GetObjectRetentionOutput":{
       "type":"structure",
       "members":{
@@ -3542,6 +3678,11 @@
           "shape":"AccountId",
           "location":"header",
           "locationName":"x-amz-expected-bucket-owner"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -3696,6 +3837,11 @@
           "location":"header",
           "locationName":"x-amz-restore"
         },
+        "ArchiveStatus":{
+          "shape":"ArchiveStatus",
+          "location":"header",
+          "locationName":"x-amz-archive-status"
+        },
         "LastModified":{
           "shape":"LastModified",
           "location":"header",
@@ -3780,6 +3926,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
         },
         "StorageClass":{
           "shape":"StorageClass",
@@ -3929,6 +4080,71 @@
         "Parquet":{"shape":"ParquetInput"}
       }
     },
+    "IntelligentTieringAccessTier":{
+      "type":"string",
+      "enum":[
+        "ARCHIVE_ACCESS",
+        "DEEP_ARCHIVE_ACCESS"
+      ]
+    },
+    "IntelligentTieringAndOperator":{
+      "type":"structure",
+      "members":{
+        "Prefix":{"shape":"Prefix"},
+        "Tags":{
+          "shape":"TagSet",
+          "flattened":true,
+          "locationName":"Tag"
+        }
+      }
+    },
+    "IntelligentTieringConfiguration":{
+      "type":"structure",
+      "required":[
+        "Id",
+        "Status",
+        "Tierings"
+      ],
+      "members":{
+        "Id":{"shape":"IntelligentTieringId"},
+        "Filter":{"shape":"IntelligentTieringFilter"},
+        "Status":{"shape":"IntelligentTieringStatus"},
+        "Tierings":{
+          "shape":"TieringList",
+          "locationName":"Tiering"
+        }
+      }
+    },
+    "IntelligentTieringConfigurationList":{
+      "type":"list",
+      "member":{"shape":"IntelligentTieringConfiguration"},
+      "flattened":true
+    },
+    "IntelligentTieringDays":{"type":"integer"},
+    "IntelligentTieringFilter":{
+      "type":"structure",
+      "members":{
+        "Prefix":{"shape":"Prefix"},
+        "Tag":{"shape":"Tag"},
+        "And":{"shape":"IntelligentTieringAndOperator"}
+      }
+    },
+    "IntelligentTieringId":{"type":"string"},
+    "IntelligentTieringStatus":{
+      "type":"string",
+      "enum":[
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "InvalidObjectState":{
+      "type":"structure",
+      "members":{
+        "StorageClass":{"shape":"StorageClass"},
+        "AccessTier":{"shape":"IntelligentTieringAccessTier"}
+      },
+      "exception":true
+    },
     "InventoryConfiguration":{
       "type":"structure",
       "required":[
@@ -4016,7 +4232,8 @@
         "ObjectLockRetainUntilDate",
         "ObjectLockMode",
         "ObjectLockLegalHoldStatus",
-        "IntelligentTieringAccessTier"
+        "IntelligentTieringAccessTier",
+        "BucketKeyStatus"
       ]
     },
     "InventoryOptionalFields":{
@@ -4196,6 +4413,34 @@
           "shape":"AccountId",
           "location":"header",
           "locationName":"x-amz-expected-bucket-owner"
+        }
+      }
+    },
+    "ListBucketIntelligentTieringConfigurationsOutput":{
+      "type":"structure",
+      "members":{
+        "IsTruncated":{"shape":"IsTruncated"},
+        "ContinuationToken":{"shape":"Token"},
+        "NextContinuationToken":{"shape":"NextToken"},
+        "IntelligentTieringConfigurationList":{
+          "shape":"IntelligentTieringConfigurationList",
+          "locationName":"IntelligentTieringConfiguration"
+        }
+      }
+    },
+    "ListBucketIntelligentTieringConfigurationsRequest":{
+      "type":"structure",
+      "required":["Bucket"],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "ContinuationToken":{
+          "shape":"Token",
+          "location":"querystring",
+          "locationName":"continuation-token"
         }
       }
     },
@@ -4679,10 +4924,7 @@
     "MetadataValue":{"type":"string"},
     "Metrics":{
       "type":"structure",
-      "required":[
-        "Status",
-        "EventThreshold"
-      ],
+      "required":["Status"],
       "members":{
         "Status":{"shape":"MetricsStatus"},
         "EventThreshold":{"shape":"ReplicationTimeValue"}
@@ -5170,8 +5412,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5258,8 +5498,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5285,8 +5523,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5302,6 +5538,32 @@
         }
       },
       "payload":"ServerSideEncryptionConfiguration"
+    },
+    "PutBucketIntelligentTieringConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "Bucket",
+        "Id",
+        "IntelligentTieringConfiguration"
+      ],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "Id":{
+          "shape":"IntelligentTieringId",
+          "location":"querystring",
+          "locationName":"id"
+        },
+        "IntelligentTieringConfiguration":{
+          "shape":"IntelligentTieringConfiguration",
+          "locationName":"IntelligentTieringConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
+        }
+      },
+      "payload":"IntelligentTieringConfiguration"
     },
     "PutBucketInventoryConfigurationRequest":{
       "type":"structure",
@@ -5367,8 +5629,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5404,8 +5664,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5487,8 +5745,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5549,8 +5805,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5582,8 +5836,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5619,8 +5871,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5651,8 +5901,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5683,8 +5931,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5720,8 +5966,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5772,8 +6016,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5869,8 +6111,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5918,8 +6158,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -5973,6 +6211,11 @@
           "shape":"SSEKMSEncryptionContext",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-context"
+        },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
         },
         "RequestCharged":{
           "shape":"RequestCharged",
@@ -6112,6 +6355,11 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-context"
         },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
+        },
         "RequestPayer":{
           "shape":"RequestPayer",
           "location":"header",
@@ -6194,8 +6442,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -6242,8 +6488,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -6256,6 +6500,11 @@
           "shape":"AccountId",
           "location":"header",
           "locationName":"x-amz-expected-bucket-owner"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       },
       "payload":"Tagging"
@@ -6274,8 +6523,6 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
-          "deprecated":true,
-          "deprecatedMessage":"Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -6375,6 +6622,20 @@
     "ReplaceKeyPrefixWith":{"type":"string"},
     "ReplaceKeyWith":{"type":"string"},
     "ReplicaKmsKeyID":{"type":"string"},
+    "ReplicaModifications":{
+      "type":"structure",
+      "required":["Status"],
+      "members":{
+        "Status":{"shape":"ReplicaModificationsStatus"}
+      }
+    },
+    "ReplicaModificationsStatus":{
+      "type":"string",
+      "enum":[
+        "Enabled",
+        "Disabled"
+      ]
+    },
     "ReplicationConfiguration":{
       "type":"structure",
       "required":[
@@ -6495,12 +6756,17 @@
         "Enabled":{"shape":"EnableRequestProgress"}
       }
     },
+    "RequestRoute":{"type":"string"},
+    "RequestToken":{"type":"string"},
     "ResponseCacheControl":{"type":"string"},
     "ResponseContentDisposition":{"type":"string"},
     "ResponseContentEncoding":{"type":"string"},
     "ResponseContentLanguage":{"type":"string"},
     "ResponseContentType":{"type":"string"},
-    "ResponseExpires":{"type":"timestamp"},
+    "ResponseExpires":{
+      "type":"timestamp",
+      "timestampFormat":"rfc822"
+    },
     "Restore":{"type":"string"},
     "RestoreObjectOutput":{
       "type":"structure",
@@ -6783,7 +7049,8 @@
     "ServerSideEncryptionRule":{
       "type":"structure",
       "members":{
-        "ApplyServerSideEncryptionByDefault":{"shape":"ServerSideEncryptionByDefault"}
+        "ApplyServerSideEncryptionByDefault":{"shape":"ServerSideEncryptionByDefault"},
+        "BucketKeyEnabled":{"shape":"BucketKeyEnabled"}
       }
     },
     "ServerSideEncryptionRules":{
@@ -6796,7 +7063,8 @@
     "SourceSelectionCriteria":{
       "type":"structure",
       "members":{
-        "SseKmsEncryptedObjects":{"shape":"SseKmsEncryptedObjects"}
+        "SseKmsEncryptedObjects":{"shape":"SseKmsEncryptedObjects"},
+        "ReplicaModifications":{"shape":"ReplicaModifications"}
       }
     },
     "SseKmsEncryptedObjects":{
@@ -6926,6 +7194,22 @@
         "Expedited"
       ]
     },
+    "Tiering":{
+      "type":"structure",
+      "required":[
+        "Days",
+        "AccessTier"
+      ],
+      "members":{
+        "Days":{"shape":"IntelligentTieringDays"},
+        "AccessTier":{"shape":"IntelligentTieringAccessTier"}
+      }
+    },
+    "TieringList":{
+      "type":"list",
+      "member":{"shape":"Tiering"},
+      "flattened":true
+    },
     "Token":{"type":"string"},
     "TopicArn":{"type":"string"},
     "TopicConfiguration":{
@@ -7028,6 +7312,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
         },
         "RequestCharged":{
           "shape":"RequestCharged",
@@ -7172,6 +7461,11 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-bucket-key-enabled"
+        },
         "RequestCharged":{
           "shape":"RequestCharged",
           "location":"header",
@@ -7279,6 +7573,196 @@
       }
     },
     "WebsiteRedirectLocation":{"type":"string"},
+    "WriteGetObjectResponseRequest":{
+      "type":"structure",
+      "required":[
+        "RequestRoute",
+        "RequestToken"
+      ],
+      "members":{
+        "RequestRoute":{
+          "shape":"RequestRoute",
+          "hostLabel":true,
+          "location":"header",
+          "locationName":"x-amz-request-route"
+        },
+        "RequestToken":{
+          "shape":"RequestToken",
+          "location":"header",
+          "locationName":"x-amz-request-token"
+        },
+        "Body":{
+          "shape":"Body",
+          "streaming":true
+        },
+        "StatusCode":{
+          "shape":"GetObjectResponseStatusCode",
+          "location":"header",
+          "locationName":"x-amz-fwd-status"
+        },
+        "ErrorCode":{
+          "shape":"ErrorCode",
+          "location":"header",
+          "locationName":"x-amz-fwd-error-code"
+        },
+        "ErrorMessage":{
+          "shape":"ErrorMessage",
+          "location":"header",
+          "locationName":"x-amz-fwd-error-message"
+        },
+        "AcceptRanges":{
+          "shape":"AcceptRanges",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-accept-ranges"
+        },
+        "CacheControl":{
+          "shape":"CacheControl",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Cache-Control"
+        },
+        "ContentDisposition":{
+          "shape":"ContentDisposition",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Content-Disposition"
+        },
+        "ContentEncoding":{
+          "shape":"ContentEncoding",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Content-Encoding"
+        },
+        "ContentLanguage":{
+          "shape":"ContentLanguage",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Content-Language"
+        },
+        "ContentLength":{
+          "shape":"ContentLength",
+          "location":"header",
+          "locationName":"Content-Length"
+        },
+        "ContentRange":{
+          "shape":"ContentRange",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Content-Range"
+        },
+        "ContentType":{
+          "shape":"ContentType",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Content-Type"
+        },
+        "DeleteMarker":{
+          "shape":"DeleteMarker",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-delete-marker"
+        },
+        "ETag":{
+          "shape":"ETag",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-ETag"
+        },
+        "Expires":{
+          "shape":"Expires",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Expires"
+        },
+        "Expiration":{
+          "shape":"Expiration",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-expiration"
+        },
+        "LastModified":{
+          "shape":"LastModified",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-Last-Modified"
+        },
+        "MissingMeta":{
+          "shape":"MissingMeta",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-missing-meta"
+        },
+        "Metadata":{
+          "shape":"Metadata",
+          "location":"headers",
+          "locationName":"x-amz-meta-"
+        },
+        "ObjectLockMode":{
+          "shape":"ObjectLockMode",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-object-lock-mode"
+        },
+        "ObjectLockLegalHoldStatus":{
+          "shape":"ObjectLockLegalHoldStatus",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-object-lock-legal-hold"
+        },
+        "ObjectLockRetainUntilDate":{
+          "shape":"ObjectLockRetainUntilDate",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-object-lock-retain-until-date"
+        },
+        "PartsCount":{
+          "shape":"PartsCount",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-mp-parts-count"
+        },
+        "ReplicationStatus":{
+          "shape":"ReplicationStatus",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-replication-status"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-request-charged"
+        },
+        "Restore":{
+          "shape":"Restore",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-restore"
+        },
+        "ServerSideEncryption":{
+          "shape":"ServerSideEncryption",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-server-side-encryption"
+        },
+        "SSECustomerAlgorithm":{
+          "shape":"SSECustomerAlgorithm",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-server-side-encryption-customer-algorithm"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "SSECustomerKeyMD5":{
+          "shape":"SSECustomerKeyMD5",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "StorageClass":{
+          "shape":"StorageClass",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-storage-class"
+        },
+        "TagCount":{
+          "shape":"TagCount",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-tagging-count"
+        },
+        "VersionId":{
+          "shape":"ObjectVersionId",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-version-id"
+        },
+        "BucketKeyEnabled":{
+          "shape":"BucketKeyEnabled",
+          "location":"header",
+          "locationName":"x-amz-fwd-header-x-amz-server-side-encryption-bucket-key-enabled"
+        }
+      },
+      "payload":"Body"
+    },
     "Years":{"type":"integer"}
   }
 }

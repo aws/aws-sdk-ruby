@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -387,7 +387,9 @@ module Aws::RedshiftDataAPIService
     #   * {Types::DescribeStatementResponse#db_user #db_user} => String
     #   * {Types::DescribeStatementResponse#duration #duration} => Integer
     #   * {Types::DescribeStatementResponse#error #error} => String
+    #   * {Types::DescribeStatementResponse#has_result_set #has_result_set} => Boolean
     #   * {Types::DescribeStatementResponse#id #id} => String
+    #   * {Types::DescribeStatementResponse#query_parameters #query_parameters} => Array&lt;Types::SqlParameter&gt;
     #   * {Types::DescribeStatementResponse#query_string #query_string} => String
     #   * {Types::DescribeStatementResponse#redshift_pid #redshift_pid} => Integer
     #   * {Types::DescribeStatementResponse#redshift_query_id #redshift_query_id} => Integer
@@ -411,14 +413,18 @@ module Aws::RedshiftDataAPIService
     #   resp.db_user #=> String
     #   resp.duration #=> Integer
     #   resp.error #=> String
+    #   resp.has_result_set #=> Boolean
     #   resp.id #=> String
+    #   resp.query_parameters #=> Array
+    #   resp.query_parameters[0].name #=> String
+    #   resp.query_parameters[0].value #=> String
     #   resp.query_string #=> String
     #   resp.redshift_pid #=> Integer
     #   resp.redshift_query_id #=> Integer
     #   resp.result_rows #=> Integer
     #   resp.result_size #=> Integer
     #   resp.secret_arn #=> String
-    #   resp.status #=> String, one of "ABORTED", "ALL", "FAILED", "FINISHED", "PICKED", "STARTED", "SUBMITTED"
+    #   resp.status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatement AWS API Documentation
@@ -448,9 +454,14 @@ module Aws::RedshiftDataAPIService
     #   The cluster identifier. This parameter is required when authenticating
     #   using either AWS Secrets Manager or temporary credentials.
     #
-    # @option params [String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
+    # @option params [required, String] :database
+    #   The name of the database that contains the tables to be described. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when authenticating
@@ -495,7 +506,8 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.describe_table({
     #     cluster_identifier: "Location", # required
-    #     database: "String",
+    #     connected_database: "String",
+    #     database: "String", # required
     #     db_user: "String",
     #     max_results: 1,
     #     next_token: "String",
@@ -558,6 +570,9 @@ module Aws::RedshiftDataAPIService
     #   The database user name. This parameter is required when authenticating
     #   using temporary credentials.
     #
+    # @option params [Array<Types::SqlParameter>] :parameters
+    #   The parameters for the SQL statement.
+    #
     # @option params [String] :secret_arn
     #   The name or ARN of the secret that enables access to the database.
     #   This parameter is required when authenticating using AWS Secrets
@@ -589,6 +604,12 @@ module Aws::RedshiftDataAPIService
     #     cluster_identifier: "Location", # required
     #     database: "String",
     #     db_user: "String",
+    #     parameters: [
+    #       {
+    #         name: "ParameterName", # required
+    #         value: "ParameterValue", # required
+    #       },
+    #     ],
     #     secret_arn: "SecretArn",
     #     sql: "StatementString", # required
     #     statement_name: "StatementNameString",
@@ -775,9 +796,14 @@ module Aws::RedshiftDataAPIService
     #   The cluster identifier. This parameter is required when authenticating
     #   using either AWS Secrets Manager or temporary credentials.
     #
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
     # @option params [required, String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The name of the database that contains the schemas to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when authenticating
@@ -818,6 +844,7 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.list_schemas({
     #     cluster_identifier: "Location", # required
+    #     connected_database: "String",
     #     database: "String", # required
     #     db_user: "String",
     #     max_results: 1,
@@ -856,6 +883,12 @@ module Aws::RedshiftDataAPIService
     #   NextToken value in the next NextToken parameter and retrying the
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
+    #
+    # @option params [Boolean] :role_level
+    #   A value that filters which statements to return in the response. If
+    #   true, all statements run by the caller's IAM role are returned. If
+    #   false, only statements run by the caller's IAM role in the current
+    #   IAM session are returned. The default is true.
     #
     # @option params [String] :statement_name
     #   The name of the SQL statement specified as input to `ExecuteStatement`
@@ -896,8 +929,9 @@ module Aws::RedshiftDataAPIService
     #   resp = client.list_statements({
     #     max_results: 1,
     #     next_token: "String",
+    #     role_level: false,
     #     statement_name: "StatementNameString",
-    #     status: "ABORTED", # accepts ABORTED, ALL, FAILED, FINISHED, PICKED, STARTED, SUBMITTED
+    #     status: "SUBMITTED", # accepts SUBMITTED, PICKED, STARTED, FINISHED, ABORTED, FAILED, ALL
     #   })
     #
     # @example Response structure
@@ -906,10 +940,13 @@ module Aws::RedshiftDataAPIService
     #   resp.statements #=> Array
     #   resp.statements[0].created_at #=> Time
     #   resp.statements[0].id #=> String
+    #   resp.statements[0].query_parameters #=> Array
+    #   resp.statements[0].query_parameters[0].name #=> String
+    #   resp.statements[0].query_parameters[0].value #=> String
     #   resp.statements[0].query_string #=> String
     #   resp.statements[0].secret_arn #=> String
     #   resp.statements[0].statement_name #=> String
-    #   resp.statements[0].status #=> String, one of "ABORTED", "ALL", "FAILED", "FINISHED", "PICKED", "STARTED", "SUBMITTED"
+    #   resp.statements[0].status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
     #   resp.statements[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListStatements AWS API Documentation
@@ -940,9 +977,14 @@ module Aws::RedshiftDataAPIService
     #   The cluster identifier. This parameter is required when authenticating
     #   using either AWS Secrets Manager or temporary credentials.
     #
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
     # @option params [required, String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The name of the database that contains the tables to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when authenticating
@@ -995,6 +1037,7 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.list_tables({
     #     cluster_identifier: "Location", # required
+    #     connected_database: "String",
     #     database: "String", # required
     #     db_user: "String",
     #     max_results: 1,
@@ -1034,7 +1077,7 @@ module Aws::RedshiftDataAPIService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

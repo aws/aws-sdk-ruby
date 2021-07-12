@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -337,22 +337,28 @@ module Aws::EC2InstanceConnect
 
     # @!group API Operations
 
-    # Pushes an SSH public key to a particular OS user on a given EC2
-    # instance for 60 seconds.
+    # Pushes an SSH public key to the specified EC2 instance for use by the
+    # specified user. The key remains for 60 seconds. For more information,
+    # see [Connect to your Linux instance using EC2 Instance Connect][1] in
+    # the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect.html
     #
     # @option params [required, String] :instance_id
-    #   The EC2 instance you wish to publish the SSH key to.
+    #   The ID of the EC2 instance.
     #
     # @option params [required, String] :instance_os_user
-    #   The OS user on the EC2 instance whom the key may be used to
-    #   authenticate as.
+    #   The OS user on the EC2 instance for whom the key can be used to
+    #   authenticate.
     #
     # @option params [required, String] :ssh_public_key
-    #   The public key to be published to the instance. To use it after
-    #   publication you must have the matching private key.
+    #   The public key material. To use the public key, you must have the
+    #   matching private key.
     #
     # @option params [required, String] :availability_zone
-    #   The availability zone the EC2 instance was launched in.
+    #   The Availability Zone in which the EC2 instance was launched.
     #
     # @return [Types::SendSSHPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -401,6 +407,62 @@ module Aws::EC2InstanceConnect
       req.send_request(options)
     end
 
+    # Pushes an SSH public key to the specified EC2 instance. The key
+    # remains for 60 seconds, which gives you 60 seconds to establish a
+    # serial console connection to the instance using SSH. For more
+    # information, see [EC2 Serial Console][1] in the *Amazon EC2 User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the EC2 instance.
+    #
+    # @option params [Integer] :serial_port
+    #   The serial port of the EC2 instance. Currently only port 0 is
+    #   supported.
+    #
+    #   Default: 0
+    #
+    # @option params [required, String] :ssh_public_key
+    #   The public key material. To use the public key, you must have the
+    #   matching private key. For information about the supported key formats
+    #   and lengths, see [Requirements for key pairs][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws
+    #
+    # @return [Types::SendSerialConsoleSSHPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendSerialConsoleSSHPublicKeyResponse#request_id #request_id} => String
+    #   * {Types::SendSerialConsoleSSHPublicKeyResponse#success #success} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_serial_console_ssh_public_key({
+    #     instance_id: "InstanceId", # required
+    #     serial_port: 1,
+    #     ssh_public_key: "SSHPublicKey", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.success #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-instance-connect-2018-04-02/SendSerialConsoleSSHPublicKey AWS API Documentation
+    #
+    # @overload send_serial_console_ssh_public_key(params = {})
+    # @param [Hash] params ({})
+    def send_serial_console_ssh_public_key(params = {}, options = {})
+      req = build_request(:send_serial_console_ssh_public_key, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -414,7 +476,7 @@ module Aws::EC2InstanceConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2instanceconnect'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-06-23)
+------------------
+
+* Feature - Added the following parameters to ECS targets: CapacityProviderStrategy, EnableECSManagedTags, EnableExecuteCommand, PlacementConstraints, PlacementStrategy, PropagateTags, ReferenceId, and Tags
+
+1.46.0 (2021-05-14)
+------------------
+
+* Feature - Update InputTransformer variable limit from 10 to 100 variables.
+
+1.45.0 (2021-03-26)
+------------------
+
+* Feature - Add support for SageMaker Model Builder Pipelines Targets to EventBridge
+
+1.44.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2021-03-04)
+------------------
+
+* Feature - Introducing support for EventBridge Api Destinations - any HTTP APIs as Targets, with managed authorization via EventBridge Connections.
+
+1.42.0 (2021-03-03)
+------------------
+
+* Feature - Adds TraceHeader to PutEventsRequestEntry to support AWS X-Ray trace-ids on events generated using the PutEvents operation.
+
+1.41.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-11-19)
+------------------
+
+* Feature - EventBridge now supports Resource-based policy authorization on event buses. This enables cross-account PutEvents API calls, creating cross-account rules, and simplifies permission management.
+
+1.39.0 (2020-11-05)
+------------------
+
+* Feature - With this release, customers can now reprocess past events by storing the events published on event bus in an encrypted archive.
+
 1.38.0 (2020-10-08)
 ------------------
 

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-06-08)
+------------------
+
+* Feature - increase max pagesize for List/Search apis
+
+1.59.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2020-12-31)
+------------------
+
+* Feature - Enhanced Service Catalog DescribeProvisioningParameters API to return new parameter constraints, i.e., MinLength, MaxLength, MinValue, MaxValue, ConstraintDescription and AllowedPattern
+
+1.56.0 (2020-12-17)
+------------------
+
+* Feature - Support TagOptions sharing with Service Catalog portfolio sharing.
+
+1.55.0 (2020-11-16)
+------------------
+
+* Feature - Support import of CloudFormation stacks into Service Catalog provisioned products.
+
+1.54.0 (2020-11-11)
+------------------
+
+* Feature - Adding support to remove a Provisioned Product launch role via UpdateProvisionedProductProperties
+
+1.53.0 (2020-11-04)
+------------------
+
+* Feature - Service Catalog API ListPortfolioAccess can now support a maximum PageSize of 100.
+
 1.52.0 (2020-10-22)
 ------------------
 

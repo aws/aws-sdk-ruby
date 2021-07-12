@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -619,6 +619,12 @@ module Aws::AppSync
     #   The `version` of the request mapping template. Currently the supported
     #   value is 2018-05-29.
     #
+    # @option params [Types::SyncConfig] :sync_config
+    #   Describes a Sync configuration for a resolver.
+    #
+    #   Contains information on which Conflict Detection as well as Resolution
+    #   strategy should be performed when the resolver is invoked.
+    #
     # @return [Types::CreateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFunctionResponse#function_configuration #function_configuration} => Types::FunctionConfiguration
@@ -633,6 +639,13 @@ module Aws::AppSync
     #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     function_version: "String", # required
+    #     sync_config: {
+    #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #       conflict_detection: "VERSION", # accepts VERSION, NONE
+    #       lambda_conflict_handler_config: {
+    #         lambda_conflict_handler_arn: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -645,6 +658,9 @@ module Aws::AppSync
     #   resp.function_configuration.request_mapping_template #=> String
     #   resp.function_configuration.response_mapping_template #=> String
     #   resp.function_configuration.function_version #=> String
+    #   resp.function_configuration.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunction AWS API Documentation
     #
@@ -1248,6 +1264,9 @@ module Aws::AppSync
     #   resp.function_configuration.request_mapping_template #=> String
     #   resp.function_configuration.response_mapping_template #=> String
     #   resp.function_configuration.function_version #=> String
+    #   resp.function_configuration.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunction AWS API Documentation
     #
@@ -1625,6 +1644,9 @@ module Aws::AppSync
     #   resp.functions[0].request_mapping_template #=> String
     #   resp.functions[0].response_mapping_template #=> String
     #   resp.functions[0].function_version #=> String
+    #   resp.functions[0].sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.functions[0].sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.functions[0].sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctions AWS API Documentation
@@ -2269,6 +2291,12 @@ module Aws::AppSync
     #   The `version` of the request mapping template. Currently the supported
     #   value is 2018-05-29.
     #
+    # @option params [Types::SyncConfig] :sync_config
+    #   Describes a Sync configuration for a resolver.
+    #
+    #   Contains information on which Conflict Detection as well as Resolution
+    #   strategy should be performed when the resolver is invoked.
+    #
     # @return [Types::UpdateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFunctionResponse#function_configuration #function_configuration} => Types::FunctionConfiguration
@@ -2284,6 +2312,13 @@ module Aws::AppSync
     #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     function_version: "String", # required
+    #     sync_config: {
+    #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #       conflict_detection: "VERSION", # accepts VERSION, NONE
+    #       lambda_conflict_handler_config: {
+    #         lambda_conflict_handler_arn: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2296,6 +2331,9 @@ module Aws::AppSync
     #   resp.function_configuration.request_mapping_template #=> String
     #   resp.function_configuration.response_mapping_template #=> String
     #   resp.function_configuration.function_version #=> String
+    #   resp.function_configuration.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunction AWS API Documentation
     #
@@ -2586,7 +2624,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

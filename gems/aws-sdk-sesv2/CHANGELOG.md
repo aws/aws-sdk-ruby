@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2021-01-27)
+------------------
+
+* Feature - This release includes the ability to assign a configuration set to an email identity (a domain or email address), which allows the settings from the configuration set to be applied to the identity.
+
+1.14.0 (2020-10-29)
+------------------
+
+* Feature - This release enables customers to manage their own contact lists and end-user subscription preferences.
+
 1.13.0 (2020-09-30)
 ------------------
 

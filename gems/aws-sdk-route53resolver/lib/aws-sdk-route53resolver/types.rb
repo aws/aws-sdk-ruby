@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -20,6 +20,102 @@ module Aws::Route53Resolver
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateFirewallRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creator_request_id: "CreatorRequestId", # required
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         vpc_id: "ResourceId", # required
+    #         priority: 1, # required
+    #         name: "Name", # required
+    #         mutation_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string that identifies the request and that allows failed
+    #   requests to be retried without the risk of running the operation
+    #   twice. `CreatorRequestId` can be any unique string, for example, a
+    #   date/time stamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The unique identifier of the VPC that you want to associate with the
+    #   rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The setting that determines the processing order of the rule group
+    #   among the rule groups that you associate with the specified VPC. DNS
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
+    #
+    #   You must specify a unique priority for each rule group that you
+    #   associate with a single VPC. To make it easier to insert rule groups
+    #   later, leave space between the numbers, for example, use 101, 200,
+    #   and so on. You can change the priority setting for a rule group
+    #   association after you create it.
+    #
+    #   The allowed values for `Priority` are between 100 and 9900.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   A name that lets you identify the association, to manage and use it.
+    #   @return [String]
+    #
+    # @!attribute [rw] mutation_protection
+    #   If enabled, this setting disallows modification or removal of the
+    #   association, to help prevent against accidentally altering DNS
+    #   firewall protections. When you create the association, the default
+    #   setting is `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of the tag keys and values that you want to associate with
+    #   the rule group association.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateFirewallRuleGroupRequest AWS API Documentation
+    #
+    class AssociateFirewallRuleGroupRequest < Struct.new(
+      :creator_request_id,
+      :firewall_rule_group_id,
+      :vpc_id,
+      :priority,
+      :name,
+      :mutation_protection,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group_association
+    #   The association that you just created. The association has an ID
+    #   that you can use to identify it in other requests, like update and
+    #   delete.
+    #   @return [Types::FirewallRuleGroupAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateFirewallRuleGroupResponse AWS API Documentation
+    #
+    class AssociateFirewallRuleGroupResponse < Struct.new(
+      :firewall_rule_group_association)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -163,6 +259,263 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFirewallDomainListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creator_request_id: "CreatorRequestId", # required
+    #         name: "Name", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string that identifies the request and that allows you to
+    #   retry failed requests without the risk of running the operation
+    #   twice. `CreatorRequestId` can be any unique string, for example, a
+    #   date/time stamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name that lets you identify the domain list to manage and use it.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of the tag keys and values that you want to associate with
+    #   the domain list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallDomainListRequest AWS API Documentation
+    #
+    class CreateFirewallDomainListRequest < Struct.new(
+      :creator_request_id,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_domain_list
+    #   The domain list that you just created.
+    #   @return [Types::FirewallDomainList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallDomainListResponse AWS API Documentation
+    #
+    class CreateFirewallDomainListResponse < Struct.new(
+      :firewall_domain_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFirewallRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creator_request_id: "CreatorRequestId", # required
+    #         name: "Name", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of running the
+    #   operation twice. This can be any unique string, for example, a
+    #   timestamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name that lets you identify the rule group, to manage and use it.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of the tag keys and values that you want to associate with
+    #   the rule group.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleGroupRequest AWS API Documentation
+    #
+    class CreateFirewallRuleGroupRequest < Struct.new(
+      :creator_request_id,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group
+    #   A collection of rules used to filter DNS network traffic.
+    #   @return [Types::FirewallRuleGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleGroupResponse AWS API Documentation
+    #
+    class CreateFirewallRuleGroupResponse < Struct.new(
+      :firewall_rule_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFirewallRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creator_request_id: "CreatorRequestId", # required
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         firewall_domain_list_id: "ResourceId", # required
+    #         priority: 1, # required
+    #         action: "ALLOW", # required, accepts ALLOW, BLOCK, ALERT
+    #         block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
+    #         block_override_domain: "BlockOverrideDomain",
+    #         block_override_dns_type: "CNAME", # accepts CNAME
+    #         block_override_ttl: 1,
+    #         name: "Name", # required
+    #       }
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string that identifies the request and that allows you to
+    #   retry failed requests without the risk of running the operation
+    #   twice. `CreatorRequestId` can be any unique string, for example, a
+    #   date/time stamp.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group where you want to
+    #   create the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list that you want to use in the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The setting that determines the processing order of the rule in the
+    #   rule group. DNS Firewall processes the rules in a rule group by
+    #   order of priority, starting from the lowest setting.
+    #
+    #   You must specify a unique priority for each rule in a rule group. To
+    #   make it easier to insert rules later, leave space between the
+    #   numbers, for example, use 100, 200, and so on. You can change the
+    #   priority setting for the rules in a rule group at any time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action that DNS Firewall should take on a DNS query when it
+    #   matches one of the domains in the rule's domain list:
+    #
+    #   * `ALLOW` - Permit the request to go through.
+    #
+    #   * `ALERT` - Permit the request and send metrics and logs to Cloud
+    #     Watch.
+    #
+    #   * `BLOCK` - Disallow the request. This option requires additional
+    #     details in the rule's `BlockResponse`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_response
+    #   The way that you want DNS Firewall to block the request, used with
+    #   the rule action setting `BLOCK`.
+    #
+    #   * `NODATA` - Respond indicating that the query was successful, but
+    #     no response is available for it.
+    #
+    #   * `NXDOMAIN` - Respond indicating that the domain name that's in
+    #     the query doesn't exist.
+    #
+    #   * `OVERRIDE` - Provide a custom override in the response. This
+    #     option requires custom handling details in the rule's
+    #     `BlockOverride*` settings.
+    #
+    #   This setting is required if the rule action setting is `BLOCK`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_domain
+    #   The custom DNS record to send back in response to the query. Used
+    #   for the rule action `BLOCK` with a `BlockResponse` setting of
+    #   `OVERRIDE`.
+    #
+    #   This setting is required if the `BlockResponse` setting is
+    #   `OVERRIDE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_dns_type
+    #   The DNS record's type. This determines the format of the record
+    #   value that you provided in `BlockOverrideDomain`. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    #   This setting is required if the `BlockResponse` setting is
+    #   `OVERRIDE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_ttl
+    #   The recommended amount of time, in seconds, for the DNS resolver or
+    #   web browser to cache the provided override record. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #
+    #   This setting is required if the `BlockResponse` setting is
+    #   `OVERRIDE`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   A name that lets you identify the rule in the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleRequest AWS API Documentation
+    #
+    class CreateFirewallRuleRequest < Struct.new(
+      :creator_request_id,
+      :firewall_rule_group_id,
+      :firewall_domain_list_id,
+      :priority,
+      :action,
+      :block_response,
+      :block_override_domain,
+      :block_override_dns_type,
+      :block_override_ttl,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule
+    #   The firewall rule that you just created.
+    #   @return [Types::FirewallRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleResponse AWS API Documentation
+    #
+    class CreateFirewallRuleResponse < Struct.new(
+      :firewall_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateResolverEndpointRequest
     #   data as a hash:
     #
@@ -187,7 +540,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #   @return [String]
@@ -270,7 +623,7 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] name
-    #   The name that you want to give the query logging configuration
+    #   The name that you want to give the query logging configuration.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
@@ -298,7 +651,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -360,7 +713,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #   @return [String]
@@ -398,7 +751,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] target_ips
     #   The IPs that you want Resolver to forward DNS queries to. You can
-    #   specify only IPv4 addresses. Separate IP addresses with a comma.
+    #   specify only IPv4 addresses. Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
     #   `FORWARD`.
@@ -438,6 +791,107 @@ module Aws::Route53Resolver
     #
     class CreateResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFirewallDomainListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_domain_list_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallDomainListRequest AWS API Documentation
+    #
+    class DeleteFirewallDomainListRequest < Struct.new(
+      :firewall_domain_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_domain_list
+    #   The domain list that you just deleted.
+    #   @return [Types::FirewallDomainList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallDomainListResponse AWS API Documentation
+    #
+    class DeleteFirewallDomainListResponse < Struct.new(
+      :firewall_domain_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFirewallRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleGroupRequest AWS API Documentation
+    #
+    class DeleteFirewallRuleGroupRequest < Struct.new(
+      :firewall_rule_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group
+    #   A collection of rules used to filter DNS network traffic.
+    #   @return [Types::FirewallRuleGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleGroupResponse AWS API Documentation
+    #
+    class DeleteFirewallRuleGroupResponse < Struct.new(
+      :firewall_rule_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFirewallRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         firewall_domain_list_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   delete the rule from.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list that's used in the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleRequest AWS API Documentation
+    #
+    class DeleteFirewallRuleRequest < Struct.new(
+      :firewall_rule_group_id,
+      :firewall_domain_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule
+    #   The specification for the firewall rule that you just deleted.
+    #   @return [Types::FirewallRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleResponse AWS API Documentation
+    #
+    class DeleteFirewallRuleResponse < Struct.new(
+      :firewall_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -534,6 +988,37 @@ module Aws::Route53Resolver
     #
     class DeleteResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateFirewallRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_association_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_association_id
+    #   The identifier of the FirewallRuleGroupAssociation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateFirewallRuleGroupRequest AWS API Documentation
+    #
+    class DisassociateFirewallRuleGroupRequest < Struct.new(
+      :firewall_rule_group_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group_association
+    #   The firewall rule group association that you just removed.
+    #   @return [Types::FirewallRuleGroupAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateFirewallRuleGroupResponse AWS API Documentation
+    #
+    class DisassociateFirewallRuleGroupResponse < Struct.new(
+      :firewall_rule_group_association)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -662,9 +1147,10 @@ module Aws::Route53Resolver
 
     # For Resolver list operations ([ListResolverEndpoints][1],
     # [ListResolverRules][2], [ListResolverRuleAssociations][3],
-    # [ListResolverQueryLogConfigs][4], and
-    # [ListResolverQueryLogConfigAssociations][5]), an optional
-    # specification to return a subset of objects.
+    # [ListResolverQueryLogConfigs][4],
+    # [ListResolverQueryLogConfigAssociations][5]), and
+    # [ListResolverDnssecConfigs][6]), an optional specification to return a
+    # subset of objects.
     #
     # To filter objects, such as Resolver endpoints or Resolver rules, you
     # specify `Name` and `Values`. For example, to list only inbound
@@ -678,6 +1164,7 @@ module Aws::Route53Resolver
     # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html
     # [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html
     # [5]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html
+    # [6]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverDnssecConfigs.html
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -867,7 +1354,7 @@ module Aws::Route53Resolver
     #   [7]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html
     #   [8]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverEndpoint.html
     #   [9]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status
-    #   [10]: https://docs.aws.amazon.com/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status
+    #   [10]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -883,6 +1370,677 @@ module Aws::Route53Resolver
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration of the firewall behavior provided by DNS Firewall for a
+    # single VPC from Amazon Virtual Private Cloud (Amazon VPC).
+    #
+    # @!attribute [rw] id
+    #   The ID of the firewall configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the VPC that this firewall configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the owner of the VPC that this firewall
+    #   configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_fail_open
+    #   Determines how DNS Firewall operates during failures, for example
+    #   when all traffic that is sent to DNS Firewall fails to receive a
+    #   reply.
+    #
+    #   * By default, fail open is disabled, which means the failure mode is
+    #     closed. This approach favors security over availability. DNS
+    #     Firewall returns a failure error when it is unable to properly
+    #     evaluate a query.
+    #
+    #   * If you enable this option, the failure mode is open. This approach
+    #     favors availability over security. DNS Firewall allows queries to
+    #     proceed if it is unable to properly evaluate them.
+    #
+    #   This behavior is only enforced for VPCs that have at least one DNS
+    #   Firewall rule group association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallConfig AWS API Documentation
+    #
+    class FirewallConfig < Struct.new(
+      :id,
+      :resource_id,
+      :owner_id,
+      :firewall_fail_open)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information about a list of firewall domains for use in a
+    # FirewallRule. This is returned by GetFirewallDomainList.
+    #
+    # To retrieve the domains that are defined for this domain list, call
+    # ListFirewallDomains.
+    #
+    # @!attribute [rw] id
+    #   The ID of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the firewall domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_count
+    #   The number of domain names that are specified in the domain list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the status of the list, if available.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_owner_name
+    #   The owner of the list, used only for lists that are not managed by
+    #   you. For example, the managed domain list
+    #   `AWSManagedDomainsMalwareDomainList` has the managed owner name
+    #   `Route 53 Resolver DNS Firewall`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of running the
+    #   operation twice. This can be any unique string, for example, a
+    #   timestamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the domain list was created, in Unix time
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the domain list was last modified, in Unix
+    #   time format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallDomainList AWS API Documentation
+    #
+    class FirewallDomainList < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :domain_count,
+      :status,
+      :status_message,
+      :managed_owner_name,
+      :creator_request_id,
+      :creation_time,
+      :modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Minimal high-level information for a firewall domain list. The action
+    # ListFirewallDomainLists returns an array of these objects.
+    #
+    # To retrieve full information for a firewall domain list, call
+    # GetFirewallDomainList and ListFirewallDomains.
+    #
+    # @!attribute [rw] id
+    #   The ID of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the firewall domain list metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of running the
+    #   operation twice. This can be any unique string, for example, a
+    #   timestamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_owner_name
+    #   The owner of the list, used only for lists that are not managed by
+    #   you. For example, the managed domain list
+    #   `AWSManagedDomainsMalwareDomainList` has the managed owner name
+    #   `Route 53 Resolver DNS Firewall`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallDomainListMetadata AWS API Documentation
+    #
+    class FirewallDomainListMetadata < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :creator_request_id,
+      :managed_owner_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single firewall rule in a rule group.
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list that's used in the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the rule in the rule group. This value must be
+    #   unique within the rule group. DNS Firewall processes the rules in a
+    #   rule group by order of priority, starting from the lowest setting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action that DNS Firewall should take on a DNS query when it
+    #   matches one of the domains in the rule's domain list:
+    #
+    #   * `ALLOW` - Permit the request to go through.
+    #
+    #   * `ALERT` - Permit the request to go through but send an alert to
+    #     the logs.
+    #
+    #   * `BLOCK` - Disallow the request. If this is specified, additional
+    #     handling details are provided in the rule's `BlockResponse`
+    #     setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_response
+    #   The way that you want DNS Firewall to block the request. Used for
+    #   the rule action setting `BLOCK`.
+    #
+    #   * `NODATA` - Respond indicating that the query was successful, but
+    #     no response is available for it.
+    #
+    #   * `NXDOMAIN` - Respond indicating that the domain name that's in
+    #     the query doesn't exist.
+    #
+    #   * `OVERRIDE` - Provide a custom override in the response. This
+    #     option requires custom handling details in the rule's
+    #     `BlockOverride*` settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_domain
+    #   The custom DNS record to send back in response to the query. Used
+    #   for the rule action `BLOCK` with a `BlockResponse` setting of
+    #   `OVERRIDE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_dns_type
+    #   The DNS record's type. This determines the format of the record
+    #   value that you provided in `BlockOverrideDomain`. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_ttl
+    #   The recommended amount of time, in seconds, for the DNS resolver or
+    #   web browser to cache the provided override record. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of executing the
+    #   operation twice. This can be any unique string, for example, a
+    #   timestamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the rule was created, in Unix time format and
+    #   Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the rule was last modified, in Unix time
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRule AWS API Documentation
+    #
+    class FirewallRule < Struct.new(
+      :firewall_rule_group_id,
+      :firewall_domain_list_id,
+      :name,
+      :priority,
+      :action,
+      :block_response,
+      :block_override_domain,
+      :block_override_dns_type,
+      :block_override_ttl,
+      :creator_request_id,
+      :creation_time,
+      :modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information for a firewall rule group. A firewall rule
+    # group is a collection of rules that DNS Firewall uses to filter DNS
+    # network traffic for a VPC. To retrieve the rules for the rule group,
+    # call ListFirewallRules.
+    #
+    # @!attribute [rw] id
+    #   The ID of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_count
+    #   The number of rules in the rule group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the status of the rule group, if
+    #   available.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID for the account that created the rule group. When
+    #   a rule group is shared with your account, this is the account that
+    #   has shared the rule group with you.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of running the
+    #   operation twice. This can be any unique string, for example, a
+    #   timestamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_status
+    #   Whether the rule group is shared with other AWS accounts, or was
+    #   shared with the current account by another AWS account. Sharing is
+    #   configured through AWS Resource Access Manager (AWS RAM).
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the rule group was created, in Unix time
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the rule group was last modified, in Unix
+    #   time format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRuleGroup AWS API Documentation
+    #
+    class FirewallRuleGroup < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :rule_count,
+      :status,
+      :status_message,
+      :owner_id,
+      :creator_request_id,
+      :share_status,
+      :creation_time,
+      :modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An association between a firewall rule group and a VPC, which enables
+    # DNS filtering for the VPC.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the firewall rule group
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The unique identifier of the VPC that is associated with the rule
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The setting that determines the processing order of the rule group
+    #   among the rule groups that are associated with a single VPC. DNS
+    #   Firewall filters VPC traffic starting from rule group with the
+    #   lowest numeric priority setting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mutation_protection
+    #   If enabled, this setting disallows modification or removal of the
+    #   association, to help prevent against accidentally altering DNS
+    #   firewall protections.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_owner_name
+    #   The owner of the association, used only for associations that are
+    #   not managed by you. If you use AWS Firewall Manager to manage your
+    #   DNS Firewalls, then this reports Firewall Manager as the managed
+    #   owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the status of the response, if
+    #   available.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of running the
+    #   operation twice. This can be any unique string, for example, a
+    #   timestamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the association was created, in Unix time
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the association was last modified, in Unix
+    #   time format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRuleGroupAssociation AWS API Documentation
+    #
+    class FirewallRuleGroupAssociation < Struct.new(
+      :id,
+      :arn,
+      :firewall_rule_group_id,
+      :vpc_id,
+      :name,
+      :priority,
+      :mutation_protection,
+      :managed_owner_name,
+      :status,
+      :status_message,
+      :creator_request_id,
+      :creation_time,
+      :modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Minimal high-level information for a firewall rule group. The action
+    # ListFirewallRuleGroups returns an array of these objects.
+    #
+    # To retrieve full information for a firewall rule group, call
+    # GetFirewallRuleGroup and ListFirewallRules.
+    #
+    # @!attribute [rw] id
+    #   The ID of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID for the account that created the rule group. When
+    #   a rule group is shared with your account, this is the account that
+    #   has shared the rule group with you.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string defined by you to identify the request. This allows
+    #   you to retry failed requests without the risk of running the
+    #   operation twice. This can be any unique string, for example, a
+    #   timestamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_status
+    #   Whether the rule group is shared with other AWS accounts, or was
+    #   shared with the current account by another AWS account. Sharing is
+    #   configured through AWS Resource Access Manager (AWS RAM).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRuleGroupMetadata AWS API Documentation
+    #
+    class FirewallRuleGroupMetadata < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :owner_id,
+      :creator_request_id,
+      :share_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFirewallConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the VPC from Amazon VPC that the configuration is for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallConfigRequest AWS API Documentation
+    #
+    class GetFirewallConfigRequest < Struct.new(
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_config
+    #   Configuration of the firewall behavior provided by DNS Firewall for
+    #   a single VPC from AmazonVPC.
+    #   @return [Types::FirewallConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallConfigResponse AWS API Documentation
+    #
+    class GetFirewallConfigResponse < Struct.new(
+      :firewall_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFirewallDomainListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_domain_list_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallDomainListRequest AWS API Documentation
+    #
+    class GetFirewallDomainListRequest < Struct.new(
+      :firewall_domain_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_domain_list
+    #   The domain list that you requested.
+    #   @return [Types::FirewallDomainList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallDomainListResponse AWS API Documentation
+    #
+    class GetFirewallDomainListResponse < Struct.new(
+      :firewall_domain_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFirewallRuleGroupAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_association_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_association_id
+    #   The identifier of the FirewallRuleGroupAssociation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupAssociationRequest AWS API Documentation
+    #
+    class GetFirewallRuleGroupAssociationRequest < Struct.new(
+      :firewall_rule_group_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group_association
+    #   The association that you requested.
+    #   @return [Types::FirewallRuleGroupAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupAssociationResponse AWS API Documentation
+    #
+    class GetFirewallRuleGroupAssociationResponse < Struct.new(
+      :firewall_rule_group_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFirewallRuleGroupPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) for the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupPolicyRequest AWS API Documentation
+    #
+    class GetFirewallRuleGroupPolicyRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group_policy
+    #   The AWS Identity and Access Management (AWS IAM) policy for sharing
+    #   the specified rule group. You can use the policy to share the rule
+    #   group using AWS Resource Access Manager (AWS RAM).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupPolicyResponse AWS API Documentation
+    #
+    class GetFirewallRuleGroupPolicyResponse < Struct.new(
+      :firewall_rule_group_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFirewallRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupRequest AWS API Documentation
+    #
+    class GetFirewallRuleGroupRequest < Struct.new(
+      :firewall_rule_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group
+    #   A collection of rules used to filter DNS network traffic.
+    #   @return [Types::FirewallRuleGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupResponse AWS API Documentation
+    #
+    class GetFirewallRuleGroupResponse < Struct.new(
+      :firewall_rule_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResolverDnssecConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the virtual private cloud (VPC) for the DNSSEC validation
+    #   status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverDnssecConfigRequest AWS API Documentation
+    #
+    class GetResolverDnssecConfigRequest < Struct.new(
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolver_dnssec_config
+    #   The information about a configuration for DNSSEC validation.
+    #   @return [Types::ResolverDnssecConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverDnssecConfigResponse AWS API Documentation
+    #
+    class GetResolverDnssecConfigResponse < Struct.new(
+      :resolver_dnssec_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1062,8 +2220,8 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] arn
-    #   The ID of the Resolver rule policy that you want to get information
-    #   about.
+    #   The ID of the Resolver rule that you want to get the Resolver rule
+    #   policy for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverRulePolicyRequest AWS API Documentation
@@ -1075,7 +2233,7 @@ module Aws::Route53Resolver
     end
 
     # @!attribute [rw] resolver_rule_policy
-    #   Information about the Resolver rule policy that you specified in a
+    #   The Resolver rule policy for the rule that you specified in a
     #   `GetResolverRulePolicy` request.
     #   @return [String]
     #
@@ -1115,6 +2273,72 @@ module Aws::Route53Resolver
     #
     class GetResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportFirewallDomainsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_domain_list_id: "ResourceId", # required
+    #         operation: "REPLACE", # required, accepts REPLACE
+    #         domain_file_url: "DomainListFileUrl", # required
+    #       }
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list that you want to modify with the import
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   What you want DNS Firewall to do with the domains that are listed in
+    #   the file. This must be set to `REPLACE`, which updates the domain
+    #   list to exactly match the list in the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_file_url
+    #   The fully qualified URL or URI of the file stored in Amazon Simple
+    #   Storage Service (Amazon S3) that contains the list of domains to
+    #   import.
+    #
+    #   The file must be in an S3 bucket that's in the same Region as your
+    #   DNS Firewall. The file must be a text file and must contain a single
+    #   domain per line.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ImportFirewallDomainsRequest AWS API Documentation
+    #
+    class ImportFirewallDomainsRequest < Struct.new(
+      :firewall_domain_list_id,
+      :operation,
+      :domain_file_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The Id of the firewall domain list that DNS Firewall just updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the status of the list, if available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ImportFirewallDomainsResponse AWS API Documentation
+    #
+    class ImportFirewallDomainsResponse < Struct.new(
+      :id,
+      :name,
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1355,6 +2579,514 @@ module Aws::Route53Resolver
     class LimitExceededException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFirewallConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response,
+    #   Resolver provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up
+    #   to 100 objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallConfigsRequest AWS API Documentation
+    #
+    class ListFirewallConfigsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If objects are still available for retrieval, Resolver returns this
+    #   token in the response. To retrieve the next batch of objects,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_configs
+    #   The configurations for the firewall behavior provided by DNS
+    #   Firewall for VPCs from Amazon Virtual Private Cloud (Amazon VPC).
+    #   @return [Array<Types::FirewallConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallConfigsResponse AWS API Documentation
+    #
+    class ListFirewallConfigsResponse < Struct.new(
+      :next_token,
+      :firewall_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFirewallDomainListsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response,
+    #   Resolver provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up
+    #   to 100 objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallDomainListsRequest AWS API Documentation
+    #
+    class ListFirewallDomainListsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If objects are still available for retrieval, Resolver returns this
+    #   token in the response. To retrieve the next batch of objects,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_domain_lists
+    #   A list of the domain lists that you have defined.
+    #
+    #   This might be a partial list of the domain lists that you've
+    #   defined. For information, see `MaxResults`.
+    #   @return [Array<Types::FirewallDomainListMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallDomainListsResponse AWS API Documentation
+    #
+    class ListFirewallDomainListsResponse < Struct.new(
+      :next_token,
+      :firewall_domain_lists)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFirewallDomainsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_domain_list_id: "ResourceId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list whose domains you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response,
+    #   Resolver provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up
+    #   to 100 objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallDomainsRequest AWS API Documentation
+    #
+    class ListFirewallDomainsRequest < Struct.new(
+      :firewall_domain_list_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If objects are still available for retrieval, Resolver returns this
+    #   token in the response. To retrieve the next batch of objects,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   A list of the domains in the firewall domain list.
+    #
+    #   This might be a partial list of the domains that you've defined in
+    #   the domain list. For information, see `MaxResults`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallDomainsResponse AWS API Documentation
+    #
+    class ListFirewallDomainsResponse < Struct.new(
+      :next_token,
+      :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFirewallRuleGroupAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_id: "ResourceId",
+    #         vpc_id: "ResourceId",
+    #         priority: 1,
+    #         status: "COMPLETE", # accepts COMPLETE, DELETING, UPDATING
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   retrieve the associations for. Leave this blank to retrieve
+    #   associations for any rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The unique identifier of the VPC that you want to retrieve the
+    #   associations for. Leave this blank to retrieve associations for any
+    #   VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The setting that determines the processing order of the rule group
+    #   among the rule groups that are associated with a single VPC. DNS
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The association `Status` setting that you want DNS Firewall to
+    #   filter on for the list. If you don't specify this, then DNS
+    #   Firewall returns all associations, regardless of status.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response,
+    #   Resolver provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up
+    #   to 100 objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleGroupAssociationsRequest AWS API Documentation
+    #
+    class ListFirewallRuleGroupAssociationsRequest < Struct.new(
+      :firewall_rule_group_id,
+      :vpc_id,
+      :priority,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If objects are still available for retrieval, Resolver returns this
+    #   token in the response. To retrieve the next batch of objects,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rule_group_associations
+    #   A list of your firewall rule group associations.
+    #
+    #   This might be a partial list of the associations that you have
+    #   defined. For information, see `MaxResults`.
+    #   @return [Array<Types::FirewallRuleGroupAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleGroupAssociationsResponse AWS API Documentation
+    #
+    class ListFirewallRuleGroupAssociationsResponse < Struct.new(
+      :next_token,
+      :firewall_rule_group_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFirewallRuleGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response,
+    #   Resolver provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up
+    #   to 100 objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleGroupsRequest AWS API Documentation
+    #
+    class ListFirewallRuleGroupsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If objects are still available for retrieval, Resolver returns this
+    #   token in the response. To retrieve the next batch of objects,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rule_groups
+    #   A list of your firewall rule groups.
+    #
+    #   This might be a partial list of the rule groups that you have
+    #   defined. For information, see `MaxResults`.
+    #   @return [Array<Types::FirewallRuleGroupMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleGroupsResponse AWS API Documentation
+    #
+    class ListFirewallRuleGroupsResponse < Struct.new(
+      :next_token,
+      :firewall_rule_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFirewallRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         priority: 1,
+    #         action: "ALLOW", # accepts ALLOW, BLOCK, ALERT
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that you want to
+    #   retrieve the rules for.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Optional additional filter for the rules to retrieve.
+    #
+    #   The setting that determines the processing order of the rules in a
+    #   rule group. DNS Firewall processes the rules in a rule group by
+    #   order of priority, starting from the lowest setting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   Optional additional filter for the rules to retrieve.
+    #
+    #   The action that DNS Firewall should take on a DNS query when it
+    #   matches one of the domains in the rule's domain list:
+    #
+    #   * `ALLOW` - Permit the request to go through.
+    #
+    #   * `ALERT` - Permit the request to go through but send an alert to
+    #     the logs.
+    #
+    #   * `BLOCK` - Disallow the request. If this is specified, additional
+    #     handling details are provided in the rule's `BlockResponse`
+    #     setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Resolver to return for
+    #   this request. If more objects are available, in the response,
+    #   Resolver provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify a value for `MaxResults`, Resolver returns up
+    #   to 100 objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, Resolver returns at most the
+    #   number of objects specified in `MaxResults`. If more objects are
+    #   available for retrieval, Resolver returns a `NextToken` value in the
+    #   response. To retrieve the next batch of objects, use the token that
+    #   was returned for the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRulesRequest AWS API Documentation
+    #
+    class ListFirewallRulesRequest < Struct.new(
+      :firewall_rule_group_id,
+      :priority,
+      :action,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If objects are still available for retrieval, Resolver returns this
+    #   token in the response. To retrieve the next batch of objects,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rules
+    #   A list of the rules that you have defined.
+    #
+    #   This might be a partial list of the firewall rules that you've
+    #   defined. For information, see `MaxResults`.
+    #   @return [Array<Types::FirewallRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRulesResponse AWS API Documentation
+    #
+    class ListFirewallRulesResponse < Struct.new(
+      :next_token,
+      :firewall_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResolverDnssecConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "FilterName",
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   *Optional*\: An integer that specifies the maximum number of DNSSEC
+    #   configuration results that you want Amazon Route 53 to return. If
+    #   you don't specify a value for `MaxResults`, Route 53 returns up to
+    #   100 configuration per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) If the current AWS account has more than `MaxResults`
+    #   DNSSEC configurations, use `NextToken` to get the second and
+    #   subsequent pages of results.
+    #
+    #   For the first `ListResolverDnssecConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An optional specification to return a subset of objects.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverDnssecConfigsRequest AWS API Documentation
+    #
+    class ListResolverDnssecConfigsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If a response includes the last of the DNSSEC configurations that
+    #   are associated with the current AWS account, `NextToken` doesn't
+    #   appear in the response.
+    #
+    #   If a response doesn't include the last of the configurations, you
+    #   can get more configurations by submitting another
+    #   [ListResolverDnssecConfigs][1] request. Get the value of `NextToken`
+    #   that Amazon Route 53 returned in the previous response and include
+    #   it in `NextToken` in the next request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resolver_dnssec_configs
+    #   An array that contains one [ResolverDnssecConfig][1] element for
+    #   each configuration for DNSSEC validation that is associated with the
+    #   current AWS account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html
+    #   @return [Array<Types::ResolverDnssecConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverDnssecConfigsResponse AWS API Documentation
+    #
+    class ListResolverDnssecConfigsResponse < Struct.new(
+      :next_token,
+      :resolver_dnssec_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2055,6 +3787,44 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutFirewallRuleGroupPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "Arn", # required
+    #         firewall_rule_group_policy: "FirewallRuleGroupPolicy", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) for the rule group that you want to
+    #   share.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rule_group_policy
+    #   The AWS Identity and Access Management (AWS IAM) policy to attach to
+    #   the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutFirewallRuleGroupPolicyRequest AWS API Documentation
+    #
+    class PutFirewallRuleGroupPolicyRequest < Struct.new(
+      :arn,
+      :firewall_rule_group_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutFirewallRuleGroupPolicyResponse AWS API Documentation
+    #
+    class PutFirewallRuleGroupPolicyResponse < Struct.new(
+      :return_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutResolverQueryLogConfigPolicyRequest
     #   data as a hash:
     #
@@ -2121,15 +3891,15 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the account that you want to share
-    #   rules with.
+    #   The Amazon Resource Name (ARN) of the rule that you want to share
+    #   with another account.
     #   @return [String]
     #
     # @!attribute [rw] resolver_rule_policy
     #   An AWS Identity and Access Management policy statement that lists
     #   the rules that you want to share with another AWS account and the
     #   operations that you want the account to be able to perform. You can
-    #   specify the following operations in the `Actions` section of the
+    #   specify the following operations in the `Action` section of the
     #   statement:
     #
     #   * `route53resolver:GetResolverRule`
@@ -2142,9 +3912,9 @@ module Aws::Route53Resolver
     #
     #   * `route53resolver:ListResolverRuleAssociations`
     #
-    #   In the `Resource` section of the statement, you specify the ARNs for
-    #   the rules that you want to share with the account that you specified
-    #   in `Arn`.
+    #   In the `Resource` section of the statement, specify the ARN for the
+    #   rule that you want to share with another account. Specify the same
+    #   ARN that you specified in `Arn`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutResolverRulePolicyRequest AWS API Documentation
@@ -2170,6 +3940,49 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # A complex type that contains information about a configuration for
+    # DNSSEC validation.
+    #
+    # @!attribute [rw] id
+    #   The ID for a configuration for DNSSEC validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The owner account ID of the virtual private cloud (VPC) for a
+    #   configuration for DNSSEC validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the virtual private cloud (VPC) that you're configuring
+    #   the DNSSEC validation status for.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The validation status for a DNSSEC configuration. The status can be
+    #   one of the following:
+    #
+    #   * **ENABLING:** DNSSEC validation is being enabled but is not
+    #     complete.
+    #
+    #   * **ENABLED:** DNSSEC validation is enabled.
+    #
+    #   * **DISABLING:** DNSSEC validation is being disabled but is not
+    #     complete.
+    #
+    #   * **DISABLED** DNSSEC validation is disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverDnssecConfig AWS API Documentation
+    #
+    class ResolverDnssecConfig < Struct.new(
+      :id,
+      :owner_id,
+      :resource_id,
+      :validation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In the response to a [CreateResolverEndpoint][1],
     # [DeleteResolverEndpoint][2], [GetResolverEndpoint][3],
     # [ListResolverEndpoints][4], or [UpdateResolverEndpoint][5] request, a
@@ -2191,7 +4004,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request that created the
     #   Resolver endpoint. The `CreatorRequestId` allows failed requests to
-    #   be retried without the risk of executing the operation twice.
+    #   be retried without the risk of running the operation twice.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2384,7 +4197,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request that created the query
     #   logging configuration. The `CreatorRequestId` allows failed requests
-    #   to be retried without the risk of executing the operation twice.
+    #   to be retried without the risk of running the operation twice.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2516,7 +4329,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] creator_request_id
     #   A unique string that you specified when you created the Resolver
     #   rule. `CreatorRequestId` identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -2581,7 +4394,7 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] share_status
-    #   Whether the rules is shared and, if so, whether the current account
+    #   Whether the rule is shared and, if so, whether the current account
     #   is sharing the rule with another account, or another account is
     #   sharing the rule with the current account.
     #   @return [String]
@@ -2998,6 +4811,348 @@ module Aws::Route53Resolver
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateFirewallConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #         firewall_fail_open: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the VPC that the configuration is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_fail_open
+    #   Determines how Route 53 Resolver handles queries during failures,
+    #   for example when all traffic that is sent to DNS Firewall fails to
+    #   receive a reply.
+    #
+    #   * By default, fail open is disabled, which means the failure mode is
+    #     closed. This approach favors security over availability. DNS
+    #     Firewall blocks queries that it is unable to evaluate properly.
+    #
+    #   * If you enable this option, the failure mode is open. This approach
+    #     favors availability over security. DNS Firewall allows queries to
+    #     proceed if it is unable to properly evaluate them.
+    #
+    #   This behavior is only enforced for VPCs that have at least one DNS
+    #   Firewall rule group association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallConfigRequest AWS API Documentation
+    #
+    class UpdateFirewallConfigRequest < Struct.new(
+      :resource_id,
+      :firewall_fail_open)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_config
+    #   Configuration of the firewall behavior provided by DNS Firewall for
+    #   a single VPC.
+    #   @return [Types::FirewallConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallConfigResponse AWS API Documentation
+    #
+    class UpdateFirewallConfigResponse < Struct.new(
+      :firewall_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFirewallDomainsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_domain_list_id: "ResourceId", # required
+    #         operation: "ADD", # required, accepts ADD, REMOVE, REPLACE
+    #         domains: ["FirewallDomainName"], # required
+    #       }
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list whose domains you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   What you want DNS Firewall to do with the domains that you are
+    #   providing:
+    #
+    #   * `ADD` - Add the domains to the ones that are already in the domain
+    #     list.
+    #
+    #   * `REMOVE` - Search the domain list for the domains and remove them
+    #     from the list.
+    #
+    #   * `REPLACE` - Update the domain list to exactly match the list that
+    #     you are providing.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   A list of domains to use in the update operation.
+    #
+    #   Each domain specification in your domain list must satisfy the
+    #   following requirements:
+    #
+    #   * It can optionally start with `*` (asterisk).
+    #
+    #   * With the exception of the optional starting asterisk, it must only
+    #     contain the following characters: `A-Z`, `a-z`, `0-9`, `-`
+    #     (hyphen).
+    #
+    #   * It must be from 1-255 characters in length.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallDomainsRequest AWS API Documentation
+    #
+    class UpdateFirewallDomainsRequest < Struct.new(
+      :firewall_domain_list_id,
+      :operation,
+      :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the firewall domain list that DNS Firewall just updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the status of the list, if available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallDomainsResponse AWS API Documentation
+    #
+    class UpdateFirewallDomainsResponse < Struct.new(
+      :id,
+      :name,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFirewallRuleGroupAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_association_id: "ResourceId", # required
+    #         priority: 1,
+    #         mutation_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #         name: "Name",
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_association_id
+    #   The identifier of the FirewallRuleGroupAssociation.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The setting that determines the processing order of the rule group
+    #   among the rule groups that you associate with the specified VPC. DNS
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
+    #
+    #   You must specify a unique priority for each rule group that you
+    #   associate with a single VPC. To make it easier to insert rule groups
+    #   later, leave space between the numbers, for example, use 100, 200,
+    #   and so on. You can change the priority setting for a rule group
+    #   association after you create it.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mutation_protection
+    #   If enabled, this setting disallows modification or removal of the
+    #   association, to help prevent against accidentally altering DNS
+    #   firewall protections.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule group association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleGroupAssociationRequest AWS API Documentation
+    #
+    class UpdateFirewallRuleGroupAssociationRequest < Struct.new(
+      :firewall_rule_group_association_id,
+      :priority,
+      :mutation_protection,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group_association
+    #   The association that you just updated.
+    #   @return [Types::FirewallRuleGroupAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleGroupAssociationResponse AWS API Documentation
+    #
+    class UpdateFirewallRuleGroupAssociationResponse < Struct.new(
+      :firewall_rule_group_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFirewallRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         firewall_domain_list_id: "ResourceId", # required
+    #         priority: 1,
+    #         action: "ALLOW", # accepts ALLOW, BLOCK, ALERT
+    #         block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
+    #         block_override_domain: "BlockOverrideDomain",
+    #         block_override_dns_type: "CNAME", # accepts CNAME
+    #         block_override_ttl: 1,
+    #         name: "Name",
+    #       }
+    #
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the domain list to use in the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The setting that determines the processing order of the rule in the
+    #   rule group. DNS Firewall processes the rules in a rule group by
+    #   order of priority, starting from the lowest setting.
+    #
+    #   You must specify a unique priority for each rule in a rule group. To
+    #   make it easier to insert rules later, leave space between the
+    #   numbers, for example, use 100, 200, and so on. You can change the
+    #   priority setting for the rules in a rule group at any time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action that DNS Firewall should take on a DNS query when it
+    #   matches one of the domains in the rule's domain list:
+    #
+    #   * `ALLOW` - Permit the request to go through.
+    #
+    #   * `ALERT` - Permit the request to go through but send an alert to
+    #     the logs.
+    #
+    #   * `BLOCK` - Disallow the request. This option requires additional
+    #     details in the rule's `BlockResponse`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_response
+    #   The way that you want DNS Firewall to block the request. Used for
+    #   the rule action setting `BLOCK`.
+    #
+    #   * `NODATA` - Respond indicating that the query was successful, but
+    #     no response is available for it.
+    #
+    #   * `NXDOMAIN` - Respond indicating that the domain name that's in
+    #     the query doesn't exist.
+    #
+    #   * `OVERRIDE` - Provide a custom override in the response. This
+    #     option requires custom handling details in the rule's
+    #     `BlockOverride*` settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_domain
+    #   The custom DNS record to send back in response to the query. Used
+    #   for the rule action `BLOCK` with a `BlockResponse` setting of
+    #   `OVERRIDE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_dns_type
+    #   The DNS record's type. This determines the format of the record
+    #   value that you provided in `BlockOverrideDomain`. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_override_ttl
+    #   The recommended amount of time, in seconds, for the DNS resolver or
+    #   web browser to cache the provided override record. Used for the rule
+    #   action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleRequest AWS API Documentation
+    #
+    class UpdateFirewallRuleRequest < Struct.new(
+      :firewall_rule_group_id,
+      :firewall_domain_list_id,
+      :priority,
+      :action,
+      :block_response,
+      :block_override_domain,
+      :block_override_dns_type,
+      :block_override_ttl,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule
+    #   The firewall rule that you just updated.
+    #   @return [Types::FirewallRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleResponse AWS API Documentation
+    #
+    class UpdateFirewallRuleResponse < Struct.new(
+      :firewall_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateResolverDnssecConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #         validation: "ENABLE", # required, accepts ENABLE, DISABLE
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the virtual private cloud (VPC) that you're updating the
+    #   DNSSEC validation status for.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation
+    #   The new value that you are specifying for DNSSEC validation for the
+    #   VPC. The value can be `ENABLE` or `DISABLE`. Be aware that it can
+    #   take time for a validation status change to be completed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverDnssecConfigRequest AWS API Documentation
+    #
+    class UpdateResolverDnssecConfigRequest < Struct.new(
+      :resource_id,
+      :validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolver_dnssec_config
+    #   A complex type that contains settings for the specified DNSSEC
+    #   configuration.
+    #   @return [Types::ResolverDnssecConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverDnssecConfigResponse AWS API Documentation
+    #
+    class UpdateResolverDnssecConfigResponse < Struct.new(
+      :resolver_dnssec_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateResolverEndpointRequest
     #   data as a hash:
     #
@@ -3077,6 +5232,17 @@ module Aws::Route53Resolver
     #
     class UpdateResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

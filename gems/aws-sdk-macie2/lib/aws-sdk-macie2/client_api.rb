@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -21,6 +21,7 @@ module Aws::Macie2
     AccountLevelPermissions = Shapes::StructureShape.new(name: 'AccountLevelPermissions')
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
+    AllowsUnencryptedObjectUploads = Shapes::StringShape.new(name: 'AllowsUnencryptedObjectUploads')
     ApiCallDetails = Shapes::StructureShape.new(name: 'ApiCallDetails')
     AssumedRole = Shapes::StructureShape.new(name: 'AssumedRole')
     AwsAccount = Shapes::StructureShape.new(name: 'AwsAccount')
@@ -32,6 +33,7 @@ module Aws::Macie2
     BucketCountByEffectivePermission = Shapes::StructureShape.new(name: 'BucketCountByEffectivePermission')
     BucketCountByEncryptionType = Shapes::StructureShape.new(name: 'BucketCountByEncryptionType')
     BucketCountBySharedAccessType = Shapes::StructureShape.new(name: 'BucketCountBySharedAccessType')
+    BucketCountPolicyAllowsUnencryptedObjectUploads = Shapes::StructureShape.new(name: 'BucketCountPolicyAllowsUnencryptedObjectUploads')
     BucketCriteria = Shapes::MapShape.new(name: 'BucketCriteria')
     BucketCriteriaAdditionalProperties = Shapes::StructureShape.new(name: 'BucketCriteriaAdditionalProperties')
     BucketLevelPermissions = Shapes::StructureShape.new(name: 'BucketLevelPermissions')
@@ -39,6 +41,7 @@ module Aws::Macie2
     BucketPermissionConfiguration = Shapes::StructureShape.new(name: 'BucketPermissionConfiguration')
     BucketPolicy = Shapes::StructureShape.new(name: 'BucketPolicy')
     BucketPublicAccess = Shapes::StructureShape.new(name: 'BucketPublicAccess')
+    BucketServerSideEncryption = Shapes::StructureShape.new(name: 'BucketServerSideEncryption')
     BucketSortCriteria = Shapes::StructureShape.new(name: 'BucketSortCriteria')
     Cell = Shapes::StructureShape.new(name: 'Cell')
     Cells = Shapes::ListShape.new(name: 'Cells')
@@ -59,6 +62,8 @@ module Aws::Macie2
     CreateMemberResponse = Shapes::StructureShape.new(name: 'CreateMemberResponse')
     CreateSampleFindingsRequest = Shapes::StructureShape.new(name: 'CreateSampleFindingsRequest')
     CreateSampleFindingsResponse = Shapes::StructureShape.new(name: 'CreateSampleFindingsResponse')
+    CriteriaBlockForJob = Shapes::StructureShape.new(name: 'CriteriaBlockForJob')
+    CriteriaForJob = Shapes::StructureShape.new(name: 'CriteriaForJob')
     Criterion = Shapes::MapShape.new(name: 'Criterion')
     CriterionAdditionalProperties = Shapes::StructureShape.new(name: 'CriterionAdditionalProperties')
     Currency = Shapes::StringShape.new(name: 'Currency')
@@ -90,6 +95,8 @@ module Aws::Macie2
     DisableMacieResponse = Shapes::StructureShape.new(name: 'DisableMacieResponse')
     DisableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountRequest')
     DisableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountResponse')
+    DisassociateFromAdministratorAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountRequest')
+    DisassociateFromAdministratorAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountResponse')
     DisassociateFromMasterAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountRequest')
     DisassociateFromMasterAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountResponse')
     DisassociateMemberRequest = Shapes::StructureShape.new(name: 'DisassociateMemberRequest')
@@ -116,6 +123,8 @@ module Aws::Macie2
     FindingType = Shapes::StringShape.new(name: 'FindingType')
     FindingsFilterAction = Shapes::StringShape.new(name: 'FindingsFilterAction')
     FindingsFilterListItem = Shapes::StructureShape.new(name: 'FindingsFilterListItem')
+    GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
+    GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
     GetBucketStatisticsRequest = Shapes::StructureShape.new(name: 'GetBucketStatisticsRequest')
     GetBucketStatisticsResponse = Shapes::StructureShape.new(name: 'GetBucketStatisticsResponse')
     GetClassificationExportConfigurationRequest = Shapes::StructureShape.new(name: 'GetClassificationExportConfigurationRequest')
@@ -126,6 +135,8 @@ module Aws::Macie2
     GetFindingStatisticsResponse = Shapes::StructureShape.new(name: 'GetFindingStatisticsResponse')
     GetFindingsFilterRequest = Shapes::StructureShape.new(name: 'GetFindingsFilterRequest')
     GetFindingsFilterResponse = Shapes::StructureShape.new(name: 'GetFindingsFilterResponse')
+    GetFindingsPublicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetFindingsPublicationConfigurationRequest')
+    GetFindingsPublicationConfigurationResponse = Shapes::StructureShape.new(name: 'GetFindingsPublicationConfigurationResponse')
     GetFindingsRequest = Shapes::StructureShape.new(name: 'GetFindingsRequest')
     GetFindingsResponse = Shapes::StructureShape.new(name: 'GetFindingsResponse')
     GetInvitationsCountRequest = Shapes::StructureShape.new(name: 'GetInvitationsCountRequest')
@@ -150,7 +161,10 @@ module Aws::Macie2
     IpCountry = Shapes::StructureShape.new(name: 'IpCountry')
     IpGeoLocation = Shapes::StructureShape.new(name: 'IpGeoLocation')
     IpOwner = Shapes::StructureShape.new(name: 'IpOwner')
+    IsDefinedInJob = Shapes::StringShape.new(name: 'IsDefinedInJob')
+    IsMonitoredByJob = Shapes::StringShape.new(name: 'IsMonitoredByJob')
     JobComparator = Shapes::StringShape.new(name: 'JobComparator')
+    JobDetails = Shapes::StructureShape.new(name: 'JobDetails')
     JobScheduleFrequency = Shapes::StructureShape.new(name: 'JobScheduleFrequency')
     JobScopeTerm = Shapes::StructureShape.new(name: 'JobScopeTerm')
     JobScopingBlock = Shapes::StructureShape.new(name: 'JobScopingBlock')
@@ -159,6 +173,8 @@ module Aws::Macie2
     JobType = Shapes::StringShape.new(name: 'JobType')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     KeyValuePairList = Shapes::ListShape.new(name: 'KeyValuePairList')
+    LastRunErrorStatus = Shapes::StructureShape.new(name: 'LastRunErrorStatus')
+    LastRunErrorStatusCode = Shapes::StringShape.new(name: 'LastRunErrorStatusCode')
     ListClassificationJobsRequest = Shapes::StructureShape.new(name: 'ListClassificationJobsRequest')
     ListClassificationJobsResponse = Shapes::StructureShape.new(name: 'ListClassificationJobsResponse')
     ListCustomDataIdentifiersRequest = Shapes::StructureShape.new(name: 'ListCustomDataIdentifiersRequest')
@@ -181,6 +197,8 @@ module Aws::Macie2
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MacieStatus = Shapes::StringShape.new(name: 'MacieStatus')
+    MatchingBucket = Shapes::StructureShape.new(name: 'MatchingBucket')
+    MatchingResource = Shapes::StructureShape.new(name: 'MatchingResource')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Member = Shapes::StructureShape.new(name: 'Member')
     MonthlySchedule = Shapes::StructureShape.new(name: 'MonthlySchedule')
@@ -193,6 +211,8 @@ module Aws::Macie2
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
     PutClassificationExportConfigurationRequest = Shapes::StructureShape.new(name: 'PutClassificationExportConfigurationRequest')
     PutClassificationExportConfigurationResponse = Shapes::StructureShape.new(name: 'PutClassificationExportConfigurationResponse')
+    PutFindingsPublicationConfigurationRequest = Shapes::StructureShape.new(name: 'PutFindingsPublicationConfigurationRequest')
+    PutFindingsPublicationConfigurationResponse = Shapes::StructureShape.new(name: 'PutFindingsPublicationConfigurationResponse')
     Range = Shapes::StructureShape.new(name: 'Range')
     Ranges = Shapes::ListShape.new(name: 'Ranges')
     Record = Shapes::StructureShape.new(name: 'Record')
@@ -202,6 +222,7 @@ module Aws::Macie2
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcesAffected = Shapes::StructureShape.new(name: 'ResourcesAffected')
     S3Bucket = Shapes::StructureShape.new(name: 'S3Bucket')
+    S3BucketCriteriaForJob = Shapes::StructureShape.new(name: 'S3BucketCriteriaForJob')
     S3BucketDefinitionForJob = Shapes::StructureShape.new(name: 'S3BucketDefinitionForJob')
     S3BucketOwner = Shapes::StructureShape.new(name: 'S3BucketOwner')
     S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
@@ -209,6 +230,19 @@ module Aws::Macie2
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     ScopeFilterKey = Shapes::StringShape.new(name: 'ScopeFilterKey')
     Scoping = Shapes::StructureShape.new(name: 'Scoping')
+    SearchResourcesBucketCriteria = Shapes::StructureShape.new(name: 'SearchResourcesBucketCriteria')
+    SearchResourcesComparator = Shapes::StringShape.new(name: 'SearchResourcesComparator')
+    SearchResourcesCriteria = Shapes::StructureShape.new(name: 'SearchResourcesCriteria')
+    SearchResourcesCriteriaBlock = Shapes::StructureShape.new(name: 'SearchResourcesCriteriaBlock')
+    SearchResourcesRequest = Shapes::StructureShape.new(name: 'SearchResourcesRequest')
+    SearchResourcesResponse = Shapes::StructureShape.new(name: 'SearchResourcesResponse')
+    SearchResourcesSimpleCriterion = Shapes::StructureShape.new(name: 'SearchResourcesSimpleCriterion')
+    SearchResourcesSimpleCriterionKey = Shapes::StringShape.new(name: 'SearchResourcesSimpleCriterionKey')
+    SearchResourcesSortAttributeName = Shapes::StringShape.new(name: 'SearchResourcesSortAttributeName')
+    SearchResourcesSortCriteria = Shapes::StructureShape.new(name: 'SearchResourcesSortCriteria')
+    SearchResourcesTagCriterion = Shapes::StructureShape.new(name: 'SearchResourcesTagCriterion')
+    SearchResourcesTagCriterionPair = Shapes::StructureShape.new(name: 'SearchResourcesTagCriterionPair')
+    SecurityHubConfiguration = Shapes::StructureShape.new(name: 'SecurityHubConfiguration')
     SensitiveData = Shapes::ListShape.new(name: 'SensitiveData')
     SensitiveDataItem = Shapes::StructureShape.new(name: 'SensitiveDataItem')
     SensitiveDataItemCategory = Shapes::StringShape.new(name: 'SensitiveDataItemCategory')
@@ -221,10 +255,14 @@ module Aws::Macie2
     Severity = Shapes::StructureShape.new(name: 'Severity')
     SeverityDescription = Shapes::StringShape.new(name: 'SeverityDescription')
     SharedAccess = Shapes::StringShape.new(name: 'SharedAccess')
+    SimpleCriterionForJob = Shapes::StructureShape.new(name: 'SimpleCriterionForJob')
+    SimpleCriterionKeyForJob = Shapes::StringShape.new(name: 'SimpleCriterionKeyForJob')
     SimpleScopeTerm = Shapes::StructureShape.new(name: 'SimpleScopeTerm')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     Statistics = Shapes::StructureShape.new(name: 'Statistics')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
+    TagCriterionForJob = Shapes::StructureShape.new(name: 'TagCriterionForJob')
+    TagCriterionPairForJob = Shapes::StructureShape.new(name: 'TagCriterionPairForJob')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
@@ -234,6 +272,8 @@ module Aws::Macie2
     TestCustomDataIdentifierRequest = Shapes::StructureShape.new(name: 'TestCustomDataIdentifierRequest')
     TestCustomDataIdentifierResponse = Shapes::StructureShape.new(name: 'TestCustomDataIdentifierResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeRange = Shapes::StringShape.new(name: 'TimeRange')
+    Type = Shapes::StringShape.new(name: 'Type')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -269,6 +309,7 @@ module Aws::Macie2
     __listOfAdminAccount = Shapes::ListShape.new(name: '__listOfAdminAccount')
     __listOfBatchGetCustomDataIdentifierSummary = Shapes::ListShape.new(name: '__listOfBatchGetCustomDataIdentifierSummary')
     __listOfBucketMetadata = Shapes::ListShape.new(name: '__listOfBucketMetadata')
+    __listOfCriteriaForJob = Shapes::ListShape.new(name: '__listOfCriteriaForJob')
     __listOfCustomDataIdentifierSummary = Shapes::ListShape.new(name: '__listOfCustomDataIdentifierSummary')
     __listOfFinding = Shapes::ListShape.new(name: '__listOfFinding')
     __listOfFindingType = Shapes::ListShape.new(name: '__listOfFindingType')
@@ -279,8 +320,12 @@ module Aws::Macie2
     __listOfJobSummary = Shapes::ListShape.new(name: '__listOfJobSummary')
     __listOfKeyValuePair = Shapes::ListShape.new(name: '__listOfKeyValuePair')
     __listOfListJobsFilterTerm = Shapes::ListShape.new(name: '__listOfListJobsFilterTerm')
+    __listOfMatchingResource = Shapes::ListShape.new(name: '__listOfMatchingResource')
     __listOfMember = Shapes::ListShape.new(name: '__listOfMember')
     __listOfS3BucketDefinitionForJob = Shapes::ListShape.new(name: '__listOfS3BucketDefinitionForJob')
+    __listOfSearchResourcesCriteria = Shapes::ListShape.new(name: '__listOfSearchResourcesCriteria')
+    __listOfSearchResourcesTagCriterionPair = Shapes::ListShape.new(name: '__listOfSearchResourcesTagCriterionPair')
+    __listOfTagCriterionPairForJob = Shapes::ListShape.new(name: '__listOfTagCriterionPairForJob')
     __listOfTagValuePair = Shapes::ListShape.new(name: '__listOfTagValuePair')
     __listOfUnprocessedAccount = Shapes::ListShape.new(name: '__listOfUnprocessedAccount')
     __listOfUsageByAccount = Shapes::ListShape.new(name: '__listOfUsageByAccount')
@@ -293,8 +338,9 @@ module Aws::Macie2
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
+    AcceptInvitationRequest.add_member(:administrator_account_id, Shapes::ShapeRef.new(shape: __string, location_name: "administratorAccountId"))
     AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "invitationId"))
-    AcceptInvitationRequest.add_member(:master_account, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "masterAccount"))
+    AcceptInvitationRequest.add_member(:master_account, Shapes::ShapeRef.new(shape: __string, location_name: "masterAccount"))
     AcceptInvitationRequest.struct_class = Types::AcceptInvitationRequest
 
     AcceptInvitationResponse.struct_class = Types::AcceptInvitationResponse
@@ -367,6 +413,7 @@ module Aws::Macie2
     BucketCountByEncryptionType.add_member(:kms_managed, Shapes::ShapeRef.new(shape: __long, location_name: "kmsManaged"))
     BucketCountByEncryptionType.add_member(:s3_managed, Shapes::ShapeRef.new(shape: __long, location_name: "s3Managed"))
     BucketCountByEncryptionType.add_member(:unencrypted, Shapes::ShapeRef.new(shape: __long, location_name: "unencrypted"))
+    BucketCountByEncryptionType.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     BucketCountByEncryptionType.struct_class = Types::BucketCountByEncryptionType
 
     BucketCountBySharedAccessType.add_member(:external, Shapes::ShapeRef.new(shape: __long, location_name: "external"))
@@ -374,6 +421,11 @@ module Aws::Macie2
     BucketCountBySharedAccessType.add_member(:not_shared, Shapes::ShapeRef.new(shape: __long, location_name: "notShared"))
     BucketCountBySharedAccessType.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     BucketCountBySharedAccessType.struct_class = Types::BucketCountBySharedAccessType
+
+    BucketCountPolicyAllowsUnencryptedObjectUploads.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: __long, location_name: "allowsUnencryptedObjectUploads"))
+    BucketCountPolicyAllowsUnencryptedObjectUploads.add_member(:denies_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: __long, location_name: "deniesUnencryptedObjectUploads"))
+    BucketCountPolicyAllowsUnencryptedObjectUploads.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
+    BucketCountPolicyAllowsUnencryptedObjectUploads.struct_class = Types::BucketCountPolicyAllowsUnencryptedObjectUploads
 
     BucketCriteria.key = Shapes::ShapeRef.new(shape: __string)
     BucketCriteria.value = Shapes::ShapeRef.new(shape: BucketCriteriaAdditionalProperties)
@@ -393,17 +445,20 @@ module Aws::Macie2
     BucketLevelPermissions.struct_class = Types::BucketLevelPermissions
 
     BucketMetadata.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    BucketMetadata.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: AllowsUnencryptedObjectUploads, location_name: "allowsUnencryptedObjectUploads"))
     BucketMetadata.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: __string, location_name: "bucketArn"))
     BucketMetadata.add_member(:bucket_created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "bucketCreatedAt"))
     BucketMetadata.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
     BucketMetadata.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
     BucketMetadata.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
+    BucketMetadata.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetails, location_name: "jobDetails"))
     BucketMetadata.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
     BucketMetadata.add_member(:object_count, Shapes::ShapeRef.new(shape: __long, location_name: "objectCount"))
     BucketMetadata.add_member(:object_count_by_encryption_type, Shapes::ShapeRef.new(shape: ObjectCountByEncryptionType, location_name: "objectCountByEncryptionType"))
     BucketMetadata.add_member(:public_access, Shapes::ShapeRef.new(shape: BucketPublicAccess, location_name: "publicAccess"))
     BucketMetadata.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
     BucketMetadata.add_member(:replication_details, Shapes::ShapeRef.new(shape: ReplicationDetails, location_name: "replicationDetails"))
+    BucketMetadata.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: BucketServerSideEncryption, location_name: "serverSideEncryption"))
     BucketMetadata.add_member(:shared_access, Shapes::ShapeRef.new(shape: SharedAccess, location_name: "sharedAccess"))
     BucketMetadata.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytes"))
     BucketMetadata.add_member(:size_in_bytes_compressed, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytesCompressed"))
@@ -424,6 +479,10 @@ module Aws::Macie2
     BucketPublicAccess.add_member(:effective_permission, Shapes::ShapeRef.new(shape: EffectivePermission, location_name: "effectivePermission"))
     BucketPublicAccess.add_member(:permission_configuration, Shapes::ShapeRef.new(shape: BucketPermissionConfiguration, location_name: "permissionConfiguration"))
     BucketPublicAccess.struct_class = Types::BucketPublicAccess
+
+    BucketServerSideEncryption.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "kmsMasterKeyId"))
+    BucketServerSideEncryption.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
+    BucketServerSideEncryption.struct_class = Types::BucketServerSideEncryption
 
     BucketSortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: __string, location_name: "attributeName"))
     BucketSortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
@@ -523,10 +582,18 @@ module Aws::Macie2
 
     CreateSampleFindingsResponse.struct_class = Types::CreateSampleFindingsResponse
 
+    CriteriaBlockForJob.add_member(:and, Shapes::ShapeRef.new(shape: __listOfCriteriaForJob, location_name: "and"))
+    CriteriaBlockForJob.struct_class = Types::CriteriaBlockForJob
+
+    CriteriaForJob.add_member(:simple_criterion, Shapes::ShapeRef.new(shape: SimpleCriterionForJob, location_name: "simpleCriterion"))
+    CriteriaForJob.add_member(:tag_criterion, Shapes::ShapeRef.new(shape: TagCriterionForJob, location_name: "tagCriterion"))
+    CriteriaForJob.struct_class = Types::CriteriaForJob
+
     Criterion.key = Shapes::ShapeRef.new(shape: __string)
     Criterion.value = Shapes::ShapeRef.new(shape: CriterionAdditionalProperties)
 
     CriterionAdditionalProperties.add_member(:eq, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "eq"))
+    CriterionAdditionalProperties.add_member(:eq_exact_match, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "eqExactMatch"))
     CriterionAdditionalProperties.add_member(:gt, Shapes::ShapeRef.new(shape: __long, location_name: "gt"))
     CriterionAdditionalProperties.add_member(:gte, Shapes::ShapeRef.new(shape: __long, location_name: "gte"))
     CriterionAdditionalProperties.add_member(:lt, Shapes::ShapeRef.new(shape: __long, location_name: "lt"))
@@ -611,6 +678,7 @@ module Aws::Macie2
     DescribeClassificationJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
     DescribeClassificationJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     DescribeClassificationJobResponse.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
+    DescribeClassificationJobResponse.add_member(:last_run_error_status, Shapes::ShapeRef.new(shape: LastRunErrorStatus, location_name: "lastRunErrorStatus"))
     DescribeClassificationJobResponse.add_member(:last_run_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastRunTime"))
     DescribeClassificationJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DescribeClassificationJobResponse.add_member(:s3_job_definition, Shapes::ShapeRef.new(shape: S3JobDefinition, location_name: "s3JobDefinition"))
@@ -635,6 +703,10 @@ module Aws::Macie2
     DisableOrganizationAdminAccountRequest.struct_class = Types::DisableOrganizationAdminAccountRequest
 
     DisableOrganizationAdminAccountResponse.struct_class = Types::DisableOrganizationAdminAccountResponse
+
+    DisassociateFromAdministratorAccountRequest.struct_class = Types::DisassociateFromAdministratorAccountRequest
+
+    DisassociateFromAdministratorAccountResponse.struct_class = Types::DisassociateFromAdministratorAccountResponse
 
     DisassociateFromMasterAccountRequest.struct_class = Types::DisassociateFromMasterAccountRequest
 
@@ -713,12 +785,18 @@ module Aws::Macie2
     FindingsFilterListItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     FindingsFilterListItem.struct_class = Types::FindingsFilterListItem
 
+    GetAdministratorAccountRequest.struct_class = Types::GetAdministratorAccountRequest
+
+    GetAdministratorAccountResponse.add_member(:administrator, Shapes::ShapeRef.new(shape: Invitation, location_name: "administrator"))
+    GetAdministratorAccountResponse.struct_class = Types::GetAdministratorAccountResponse
+
     GetBucketStatisticsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     GetBucketStatisticsRequest.struct_class = Types::GetBucketStatisticsRequest
 
     GetBucketStatisticsResponse.add_member(:bucket_count, Shapes::ShapeRef.new(shape: __long, location_name: "bucketCount"))
     GetBucketStatisticsResponse.add_member(:bucket_count_by_effective_permission, Shapes::ShapeRef.new(shape: BucketCountByEffectivePermission, location_name: "bucketCountByEffectivePermission"))
     GetBucketStatisticsResponse.add_member(:bucket_count_by_encryption_type, Shapes::ShapeRef.new(shape: BucketCountByEncryptionType, location_name: "bucketCountByEncryptionType"))
+    GetBucketStatisticsResponse.add_member(:bucket_count_by_object_encryption_requirement, Shapes::ShapeRef.new(shape: BucketCountPolicyAllowsUnencryptedObjectUploads, location_name: "bucketCountByObjectEncryptionRequirement"))
     GetBucketStatisticsResponse.add_member(:bucket_count_by_shared_access_type, Shapes::ShapeRef.new(shape: BucketCountBySharedAccessType, location_name: "bucketCountBySharedAccessType"))
     GetBucketStatisticsResponse.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
     GetBucketStatisticsResponse.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
@@ -773,6 +851,11 @@ module Aws::Macie2
     GetFindingsFilterResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetFindingsFilterResponse.struct_class = Types::GetFindingsFilterResponse
 
+    GetFindingsPublicationConfigurationRequest.struct_class = Types::GetFindingsPublicationConfigurationRequest
+
+    GetFindingsPublicationConfigurationResponse.add_member(:security_hub_configuration, Shapes::ShapeRef.new(shape: SecurityHubConfiguration, location_name: "securityHubConfiguration"))
+    GetFindingsPublicationConfigurationResponse.struct_class = Types::GetFindingsPublicationConfigurationResponse
+
     GetFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "findingIds"))
     GetFindingsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "sortCriteria"))
     GetFindingsRequest.struct_class = Types::GetFindingsRequest
@@ -803,6 +886,7 @@ module Aws::Macie2
     GetMemberRequest.struct_class = Types::GetMemberRequest
 
     GetMemberResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    GetMemberResponse.add_member(:administrator_account_id, Shapes::ShapeRef.new(shape: __string, location_name: "administratorAccountId"))
     GetMemberResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     GetMemberResponse.add_member(:email, Shapes::ShapeRef.new(shape: __string, location_name: "email"))
     GetMemberResponse.add_member(:invited_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "invitedAt"))
@@ -816,14 +900,18 @@ module Aws::Macie2
     GetUsageStatisticsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
     GetUsageStatisticsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     GetUsageStatisticsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: UsageStatisticsSortBy, location_name: "sortBy"))
+    GetUsageStatisticsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     GetUsageStatisticsRequest.struct_class = Types::GetUsageStatisticsRequest
 
     GetUsageStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     GetUsageStatisticsResponse.add_member(:records, Shapes::ShapeRef.new(shape: __listOfUsageRecord, location_name: "records"))
+    GetUsageStatisticsResponse.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     GetUsageStatisticsResponse.struct_class = Types::GetUsageStatisticsResponse
 
+    GetUsageTotalsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "timeRange"))
     GetUsageTotalsRequest.struct_class = Types::GetUsageTotalsRequest
 
+    GetUsageTotalsResponse.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     GetUsageTotalsResponse.add_member(:usage_totals, Shapes::ShapeRef.new(shape: __listOfUsageTotal, location_name: "usageTotals"))
     GetUsageTotalsResponse.struct_class = Types::GetUsageTotalsResponse
 
@@ -870,6 +958,12 @@ module Aws::Macie2
     IpOwner.add_member(:org, Shapes::ShapeRef.new(shape: __string, location_name: "org"))
     IpOwner.struct_class = Types::IpOwner
 
+    JobDetails.add_member(:is_defined_in_job, Shapes::ShapeRef.new(shape: IsDefinedInJob, location_name: "isDefinedInJob"))
+    JobDetails.add_member(:is_monitored_by_job, Shapes::ShapeRef.new(shape: IsMonitoredByJob, location_name: "isMonitoredByJob"))
+    JobDetails.add_member(:last_job_id, Shapes::ShapeRef.new(shape: __string, location_name: "lastJobId"))
+    JobDetails.add_member(:last_job_run_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastJobRunTime"))
+    JobDetails.struct_class = Types::JobDetails
+
     JobScheduleFrequency.add_member(:daily_schedule, Shapes::ShapeRef.new(shape: DailySchedule, location_name: "dailySchedule"))
     JobScheduleFrequency.add_member(:monthly_schedule, Shapes::ShapeRef.new(shape: MonthlySchedule, location_name: "monthlySchedule"))
     JobScheduleFrequency.add_member(:weekly_schedule, Shapes::ShapeRef.new(shape: WeeklySchedule, location_name: "weeklySchedule"))
@@ -887,8 +981,10 @@ module Aws::Macie2
     JobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
     JobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     JobSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
+    JobSummary.add_member(:last_run_error_status, Shapes::ShapeRef.new(shape: LastRunErrorStatus, location_name: "lastRunErrorStatus"))
     JobSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     JobSummary.add_member(:user_paused_details, Shapes::ShapeRef.new(shape: UserPausedDetails, location_name: "userPausedDetails"))
+    JobSummary.add_member(:bucket_criteria, Shapes::ShapeRef.new(shape: S3BucketCriteriaForJob, location_name: "bucketCriteria"))
     JobSummary.struct_class = Types::JobSummary
 
     KeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: __string, location_name: "key"))
@@ -896,6 +992,9 @@ module Aws::Macie2
     KeyValuePair.struct_class = Types::KeyValuePair
 
     KeyValuePairList.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
+    LastRunErrorStatus.add_member(:code, Shapes::ShapeRef.new(shape: LastRunErrorStatusCode, location_name: "code"))
+    LastRunErrorStatus.struct_class = Types::LastRunErrorStatus
 
     ListClassificationJobsRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: ListJobsFilterCriteria, location_name: "filterCriteria"))
     ListClassificationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
@@ -977,7 +1076,24 @@ module Aws::Macie2
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MatchingBucket.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    MatchingBucket.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
+    MatchingBucket.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
+    MatchingBucket.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
+    MatchingBucket.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetails, location_name: "jobDetails"))
+    MatchingBucket.add_member(:object_count, Shapes::ShapeRef.new(shape: __long, location_name: "objectCount"))
+    MatchingBucket.add_member(:object_count_by_encryption_type, Shapes::ShapeRef.new(shape: ObjectCountByEncryptionType, location_name: "objectCountByEncryptionType"))
+    MatchingBucket.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytes"))
+    MatchingBucket.add_member(:size_in_bytes_compressed, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytesCompressed"))
+    MatchingBucket.add_member(:unclassifiable_object_count, Shapes::ShapeRef.new(shape: ObjectLevelStatistics, location_name: "unclassifiableObjectCount"))
+    MatchingBucket.add_member(:unclassifiable_object_size_in_bytes, Shapes::ShapeRef.new(shape: ObjectLevelStatistics, location_name: "unclassifiableObjectSizeInBytes"))
+    MatchingBucket.struct_class = Types::MatchingBucket
+
+    MatchingResource.add_member(:matching_bucket, Shapes::ShapeRef.new(shape: MatchingBucket, location_name: "matchingBucket"))
+    MatchingResource.struct_class = Types::MatchingResource
+
     Member.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    Member.add_member(:administrator_account_id, Shapes::ShapeRef.new(shape: __string, location_name: "administratorAccountId"))
     Member.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Member.add_member(:email, Shapes::ShapeRef.new(shape: __string, location_name: "email"))
     Member.add_member(:invited_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "invitedAt"))
@@ -994,6 +1110,7 @@ module Aws::Macie2
     ObjectCountByEncryptionType.add_member(:kms_managed, Shapes::ShapeRef.new(shape: __long, location_name: "kmsManaged"))
     ObjectCountByEncryptionType.add_member(:s3_managed, Shapes::ShapeRef.new(shape: __long, location_name: "s3Managed"))
     ObjectCountByEncryptionType.add_member(:unencrypted, Shapes::ShapeRef.new(shape: __long, location_name: "unencrypted"))
+    ObjectCountByEncryptionType.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     ObjectCountByEncryptionType.struct_class = Types::ObjectCountByEncryptionType
 
     ObjectLevelStatistics.add_member(:file_type, Shapes::ShapeRef.new(shape: __long, location_name: "fileType"))
@@ -1025,6 +1142,12 @@ module Aws::Macie2
     PutClassificationExportConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ClassificationExportConfiguration, location_name: "configuration"))
     PutClassificationExportConfigurationResponse.struct_class = Types::PutClassificationExportConfigurationResponse
 
+    PutFindingsPublicationConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    PutFindingsPublicationConfigurationRequest.add_member(:security_hub_configuration, Shapes::ShapeRef.new(shape: SecurityHubConfiguration, location_name: "securityHubConfiguration"))
+    PutFindingsPublicationConfigurationRequest.struct_class = Types::PutFindingsPublicationConfigurationRequest
+
+    PutFindingsPublicationConfigurationResponse.struct_class = Types::PutFindingsPublicationConfigurationResponse
+
     Range.add_member(:end, Shapes::ShapeRef.new(shape: __long, location_name: "end"))
     Range.add_member(:start, Shapes::ShapeRef.new(shape: __long, location_name: "start"))
     Range.add_member(:start_column, Shapes::ShapeRef.new(shape: __long, location_name: "startColumn"))
@@ -1032,6 +1155,7 @@ module Aws::Macie2
 
     Ranges.member = Shapes::ShapeRef.new(shape: Range)
 
+    Record.add_member(:json_path, Shapes::ShapeRef.new(shape: __string, location_name: "jsonPath"))
     Record.add_member(:record_index, Shapes::ShapeRef.new(shape: __long, location_name: "recordIndex"))
     Record.struct_class = Types::Record
 
@@ -1049,6 +1173,7 @@ module Aws::Macie2
     ResourcesAffected.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
     ResourcesAffected.struct_class = Types::ResourcesAffected
 
+    S3Bucket.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: AllowsUnencryptedObjectUploads, location_name: "allowsUnencryptedObjectUploads"))
     S3Bucket.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     S3Bucket.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
     S3Bucket.add_member(:default_server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "defaultServerSideEncryption"))
@@ -1058,8 +1183,12 @@ module Aws::Macie2
     S3Bucket.add_member(:tags, Shapes::ShapeRef.new(shape: KeyValuePairList, location_name: "tags"))
     S3Bucket.struct_class = Types::S3Bucket
 
-    S3BucketDefinitionForJob.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
-    S3BucketDefinitionForJob.add_member(:buckets, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "buckets"))
+    S3BucketCriteriaForJob.add_member(:excludes, Shapes::ShapeRef.new(shape: CriteriaBlockForJob, location_name: "excludes"))
+    S3BucketCriteriaForJob.add_member(:includes, Shapes::ShapeRef.new(shape: CriteriaBlockForJob, location_name: "includes"))
+    S3BucketCriteriaForJob.struct_class = Types::S3BucketCriteriaForJob
+
+    S3BucketDefinitionForJob.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "accountId"))
+    S3BucketDefinitionForJob.add_member(:buckets, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "buckets"))
     S3BucketDefinitionForJob.struct_class = Types::S3BucketDefinitionForJob
 
     S3BucketOwner.add_member(:display_name, Shapes::ShapeRef.new(shape: __string, location_name: "displayName"))
@@ -1073,6 +1202,7 @@ module Aws::Macie2
 
     S3JobDefinition.add_member(:bucket_definitions, Shapes::ShapeRef.new(shape: __listOfS3BucketDefinitionForJob, location_name: "bucketDefinitions"))
     S3JobDefinition.add_member(:scoping, Shapes::ShapeRef.new(shape: Scoping, location_name: "scoping"))
+    S3JobDefinition.add_member(:bucket_criteria, Shapes::ShapeRef.new(shape: S3BucketCriteriaForJob, location_name: "bucketCriteria"))
     S3JobDefinition.struct_class = Types::S3JobDefinition
 
     S3Object.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: __string, location_name: "bucketArn"))
@@ -1092,6 +1222,48 @@ module Aws::Macie2
     Scoping.add_member(:excludes, Shapes::ShapeRef.new(shape: JobScopingBlock, location_name: "excludes"))
     Scoping.add_member(:includes, Shapes::ShapeRef.new(shape: JobScopingBlock, location_name: "includes"))
     Scoping.struct_class = Types::Scoping
+
+    SearchResourcesBucketCriteria.add_member(:excludes, Shapes::ShapeRef.new(shape: SearchResourcesCriteriaBlock, location_name: "excludes"))
+    SearchResourcesBucketCriteria.add_member(:includes, Shapes::ShapeRef.new(shape: SearchResourcesCriteriaBlock, location_name: "includes"))
+    SearchResourcesBucketCriteria.struct_class = Types::SearchResourcesBucketCriteria
+
+    SearchResourcesCriteria.add_member(:simple_criterion, Shapes::ShapeRef.new(shape: SearchResourcesSimpleCriterion, location_name: "simpleCriterion"))
+    SearchResourcesCriteria.add_member(:tag_criterion, Shapes::ShapeRef.new(shape: SearchResourcesTagCriterion, location_name: "tagCriterion"))
+    SearchResourcesCriteria.struct_class = Types::SearchResourcesCriteria
+
+    SearchResourcesCriteriaBlock.add_member(:and, Shapes::ShapeRef.new(shape: __listOfSearchResourcesCriteria, location_name: "and"))
+    SearchResourcesCriteriaBlock.struct_class = Types::SearchResourcesCriteriaBlock
+
+    SearchResourcesRequest.add_member(:bucket_criteria, Shapes::ShapeRef.new(shape: SearchResourcesBucketCriteria, location_name: "bucketCriteria"))
+    SearchResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
+    SearchResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    SearchResourcesRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SearchResourcesSortCriteria, location_name: "sortCriteria"))
+    SearchResourcesRequest.struct_class = Types::SearchResourcesRequest
+
+    SearchResourcesResponse.add_member(:matching_resources, Shapes::ShapeRef.new(shape: __listOfMatchingResource, location_name: "matchingResources"))
+    SearchResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    SearchResourcesResponse.struct_class = Types::SearchResourcesResponse
+
+    SearchResourcesSimpleCriterion.add_member(:comparator, Shapes::ShapeRef.new(shape: SearchResourcesComparator, location_name: "comparator"))
+    SearchResourcesSimpleCriterion.add_member(:key, Shapes::ShapeRef.new(shape: SearchResourcesSimpleCriterionKey, location_name: "key"))
+    SearchResourcesSimpleCriterion.add_member(:values, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "values"))
+    SearchResourcesSimpleCriterion.struct_class = Types::SearchResourcesSimpleCriterion
+
+    SearchResourcesSortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: SearchResourcesSortAttributeName, location_name: "attributeName"))
+    SearchResourcesSortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
+    SearchResourcesSortCriteria.struct_class = Types::SearchResourcesSortCriteria
+
+    SearchResourcesTagCriterion.add_member(:comparator, Shapes::ShapeRef.new(shape: SearchResourcesComparator, location_name: "comparator"))
+    SearchResourcesTagCriterion.add_member(:tag_values, Shapes::ShapeRef.new(shape: __listOfSearchResourcesTagCriterionPair, location_name: "tagValues"))
+    SearchResourcesTagCriterion.struct_class = Types::SearchResourcesTagCriterion
+
+    SearchResourcesTagCriterionPair.add_member(:key, Shapes::ShapeRef.new(shape: __string, location_name: "key"))
+    SearchResourcesTagCriterionPair.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "value"))
+    SearchResourcesTagCriterionPair.struct_class = Types::SearchResourcesTagCriterionPair
+
+    SecurityHubConfiguration.add_member(:publish_classification_findings, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "publishClassificationFindings"))
+    SecurityHubConfiguration.add_member(:publish_policy_findings, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "publishPolicyFindings"))
+    SecurityHubConfiguration.struct_class = Types::SecurityHubConfiguration
 
     SensitiveData.member = Shapes::ShapeRef.new(shape: SensitiveDataItem)
 
@@ -1131,6 +1303,11 @@ module Aws::Macie2
     Severity.add_member(:score, Shapes::ShapeRef.new(shape: __long, location_name: "score"))
     Severity.struct_class = Types::Severity
 
+    SimpleCriterionForJob.add_member(:comparator, Shapes::ShapeRef.new(shape: JobComparator, location_name: "comparator"))
+    SimpleCriterionForJob.add_member(:key, Shapes::ShapeRef.new(shape: SimpleCriterionKeyForJob, location_name: "key"))
+    SimpleCriterionForJob.add_member(:values, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "values"))
+    SimpleCriterionForJob.struct_class = Types::SimpleCriterionForJob
+
     SimpleScopeTerm.add_member(:comparator, Shapes::ShapeRef.new(shape: JobComparator, location_name: "comparator"))
     SimpleScopeTerm.add_member(:key, Shapes::ShapeRef.new(shape: ScopeFilterKey, location_name: "key"))
     SimpleScopeTerm.add_member(:values, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "values"))
@@ -1143,6 +1320,14 @@ module Aws::Macie2
     Statistics.add_member(:approximate_number_of_objects_to_process, Shapes::ShapeRef.new(shape: __double, location_name: "approximateNumberOfObjectsToProcess"))
     Statistics.add_member(:number_of_runs, Shapes::ShapeRef.new(shape: __double, location_name: "numberOfRuns"))
     Statistics.struct_class = Types::Statistics
+
+    TagCriterionForJob.add_member(:comparator, Shapes::ShapeRef.new(shape: JobComparator, location_name: "comparator"))
+    TagCriterionForJob.add_member(:tag_values, Shapes::ShapeRef.new(shape: __listOfTagCriterionPairForJob, location_name: "tagValues"))
+    TagCriterionForJob.struct_class = Types::TagCriterionForJob
+
+    TagCriterionPairForJob.add_member(:key, Shapes::ShapeRef.new(shape: __string, location_name: "key"))
+    TagCriterionPairForJob.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "value"))
+    TagCriterionPairForJob.struct_class = Types::TagCriterionPairForJob
 
     TagMap.key = Shapes::ShapeRef.new(shape: __string)
     TagMap.value = Shapes::ShapeRef.new(shape: __string)
@@ -1199,6 +1384,7 @@ module Aws::Macie2
     UpdateFindingsFilterRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
     UpdateFindingsFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateFindingsFilterRequest.add_member(:position, Shapes::ShapeRef.new(shape: __integer, location_name: "position"))
+    UpdateFindingsFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateFindingsFilterRequest.struct_class = Types::UpdateFindingsFilterRequest
 
     UpdateFindingsFilterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -1278,6 +1464,8 @@ module Aws::Macie2
 
     __listOfBucketMetadata.member = Shapes::ShapeRef.new(shape: BucketMetadata)
 
+    __listOfCriteriaForJob.member = Shapes::ShapeRef.new(shape: CriteriaForJob)
+
     __listOfCustomDataIdentifierSummary.member = Shapes::ShapeRef.new(shape: CustomDataIdentifierSummary)
 
     __listOfFinding.member = Shapes::ShapeRef.new(shape: Finding)
@@ -1298,9 +1486,17 @@ module Aws::Macie2
 
     __listOfListJobsFilterTerm.member = Shapes::ShapeRef.new(shape: ListJobsFilterTerm)
 
+    __listOfMatchingResource.member = Shapes::ShapeRef.new(shape: MatchingResource)
+
     __listOfMember.member = Shapes::ShapeRef.new(shape: Member)
 
     __listOfS3BucketDefinitionForJob.member = Shapes::ShapeRef.new(shape: S3BucketDefinitionForJob)
+
+    __listOfSearchResourcesCriteria.member = Shapes::ShapeRef.new(shape: SearchResourcesCriteria)
+
+    __listOfSearchResourcesTagCriterionPair.member = Shapes::ShapeRef.new(shape: SearchResourcesTagCriterionPair)
+
+    __listOfTagCriterionPairForJob.member = Shapes::ShapeRef.new(shape: TagCriterionPairForJob)
 
     __listOfTagValuePair.member = Shapes::ShapeRef.new(shape: TagValuePair)
 
@@ -1610,6 +1806,21 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:disassociate_from_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFromAdministratorAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/administrator/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:disassociate_from_master_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFromMasterAccount"
         o.http_method = "POST"
@@ -1661,6 +1872,21 @@ module Aws::Macie2
         o.http_request_uri = "/admin"
         o.input = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdministratorAccount"
+        o.http_method = "GET"
+        o.http_request_uri = "/administrator"
+        o.input = Shapes::ShapeRef.new(shape: GetAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdministratorAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1751,6 +1977,21 @@ module Aws::Macie2
         o.http_request_uri = "/findingsfilters/{id}"
         o.input = Shapes::ShapeRef.new(shape: GetFindingsFilterRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFindingsFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_findings_publication_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFindingsPublicationConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/findings-publication-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetFindingsPublicationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFindingsPublicationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -2024,6 +2265,42 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_findings_publication_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFindingsPublicationConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/findings-publication-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutFindingsPublicationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFindingsPublicationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:search_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/datasources/search-resources"
+        o.input = Shapes::ShapeRef.new(shape: SearchResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -115,10 +115,14 @@ module Aws::MachineLearning
     #
     #   * `PENDING` - Amazon Machine Learning (Amazon ML) submitted a
     #     request to generate predictions for a batch of observations.
+    #
     #   * `INPROGRESS` - The process is underway.
+    #
     #   * `FAILED` - The request to perform a batch prediction did not run
     #     to completion. It is not usable.
+    #
     #   * `COMPLETED` - The batch prediction process completed successfully.
+    #
     #   * `DELETED` - The `BatchPrediction` is marked as deleted. It is not
     #     usable.
     #   @return [String]
@@ -218,7 +222,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
+    #   [1]: https://docs.aws.amazon.com/machine-learning/latest/dg
     #   @return [String]
     #
     class CreateBatchPredictionInput < Struct.new(
@@ -292,8 +296,10 @@ module Aws::MachineLearning
     # @!attribute [rw] rds_data
     #   The data specification of an Amazon RDS `DataSource`\:
     #
-    #   * DatabaseInformation - * `DatabaseName` - The name of the Amazon
-    #     RDS database.
+    #   * DatabaseInformation -
+    #
+    #     * `DatabaseName` - The name of the Amazon RDS database.
+    #
     #     * `InstanceIdentifier ` - A unique identifier for the Amazon RDS
     #       database instance.
     #
@@ -331,13 +337,12 @@ module Aws::MachineLearning
     #   * DataRearrangement - A JSON string that represents the splitting
     #     and rearrangement requirements for the `Datasource`.
     #
-    #
     #     Sample - `
     #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
     #   @return [Types::RDSDataSpec]
     #
     # @!attribute [rw] role_arn
@@ -350,8 +355,9 @@ module Aws::MachineLearning
     #   The compute statistics for a `DataSource`. The statistics are
     #   generated from the observation data referenced by a `DataSource`.
     #   Amazon ML uses the statistics internally during `MLModel` training.
-    #   This parameter must be set to `true` if the ``DataSource`` needs to
-    #   be used for `MLModel` training.
+    #   This parameter must be set to `true` if the `DataSource needs to be
+    #   used for MLModel training. </p>
+    #   `
     #   @return [Boolean]
     #
     class CreateDataSourceFromRDSInput < Struct.new(
@@ -422,8 +428,10 @@ module Aws::MachineLearning
     # @!attribute [rw] data_spec
     #   The data specification of an Amazon Redshift `DataSource`\:
     #
-    #   * DatabaseInformation - * `DatabaseName` - The name of the Amazon
-    #     Redshift database.
+    #   * DatabaseInformation -
+    #
+    #     * `DatabaseName` - The name of the Amazon Redshift database.
+    #
     #     * ` ClusterIdentifier` - The unique ID for the Amazon Redshift
     #       cluster.
     #
@@ -544,8 +552,9 @@ module Aws::MachineLearning
     #   The compute statistics for a `DataSource`. The statistics are
     #   generated from the observation data referenced by a `DataSource`.
     #   Amazon ML uses the statistics internally during `MLModel` training.
-    #   This parameter must be set to `true` if the ``DataSource`` needs to
-    #   be used for `MLModel` training.
+    #   This parameter must be set to `true` if the `DataSource needs to be
+    #   used for MLModel training.</p>
+    #   `
     #   @return [Boolean]
     #
     class CreateDataSourceFromS3Input < Struct.new(
@@ -663,7 +672,9 @@ module Aws::MachineLearning
     #
     #   * Choose `REGRESSION` if the `MLModel` will be used to predict a
     #     numeric value.
+    #
     #   * Choose `BINARY` if the `MLModel` result has two possible values.
+    #
     #   * Choose `MULTICLASS` if the `MLModel` result has a limited number
     #     of values.
     #
@@ -672,7 +683,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
+    #   [1]: https://docs.aws.amazon.com/machine-learning/latest/dg
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -696,9 +707,8 @@ module Aws::MachineLearning
     #   * `sgd.shuffleType` - Whether Amazon ML shuffles the training data.
     #     Shuffling the data improves a model's ability to find the optimal
     #     solution for a variety of data types. The valid values are `auto`
-    #     and `none`. The default value is `none`. We <?oxy\_insert\_start
-    #     author="laurama" timestamp="20160329T131121-0700">strongly
-    #     recommend that you shuffle your data.<?oxy\_insert\_end>
+    #     and `none`. The default value is `none`. We strongly recommend
+    #     that you shuffle your data.
     #
     #   * `sgd.l1RegularizationAmount` - The coefficient regularization L1
     #     norm. It controls overfitting the data by penalizing large
@@ -791,11 +801,9 @@ module Aws::MachineLearning
     # The result contains the `MLModelId` and the endpoint information for
     # the `MLModel`.
     #
-    # <note markdown="1"> The endpoint information includes the URI of the `MLModel`; that is,
-    # the location to send online prediction requests for the specified
-    # `MLModel`.
-    #
-    #  </note>
+    # **Note:** The endpoint information includes the URI of the `MLModel`;
+    # that is, the location to send online prediction requests for the
+    # specified `MLModel`.
     #
     # @!attribute [rw] ml_model_id
     #   A user-supplied ID that uniquely identifies the `MLModel`. This
@@ -868,10 +876,14 @@ module Aws::MachineLearning
     #
     #   * PENDING - Amazon Machine Learning (Amazon ML) submitted a request
     #     to create a `DataSource`.
+    #
     #   * INPROGRESS - The creation process is underway.
+    #
     #   * FAILED - The request to create a `DataSource` did not run to
     #     completion. It is not usable.
+    #
     #   * COMPLETED - The creation process completed successfully.
+    #
     #   * DELETED - The `DataSource` is marked as deleted. It is not usable.
     #   @return [String]
     #
@@ -894,7 +906,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
     #   @return [String]
     #
     # @!attribute [rw] compute_statistics
@@ -1183,16 +1195,22 @@ module Aws::MachineLearning
     #
     #   * `CreatedAt` - Sets the search criteria to the `BatchPrediction`
     #     creation date.
+    #
     #   * `Status` - Sets the search criteria to the `BatchPrediction`
     #     status.
+    #
     #   * `Name` - Sets the search criteria to the contents of the
-    #     `BatchPrediction`<b> </b> `Name`.
+    #     `BatchPrediction` <b> </b> `Name`.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked the `BatchPrediction` creation.
+    #
     #   * `MLModelId` - Sets the search criteria to the `MLModel` used in
     #     the `BatchPrediction`.
+    #
     #   * `DataSourceId` - Sets the search criteria to the `DataSource` used
     #     in the `BatchPrediction`.
+    #
     #   * `DataURI` - Sets the search criteria to the data file(s) used in
     #     the `BatchPrediction`. The URL can identify either a file or an
     #     Amazon Simple Storage Solution (Amazon S3) bucket or directory.
@@ -1254,6 +1272,7 @@ module Aws::MachineLearning
     #   list of `MLModel`s.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -1327,12 +1346,16 @@ module Aws::MachineLearning
     #
     #   * `CreatedAt` - Sets the search criteria to `DataSource` creation
     #     dates.
+    #
     #   * `Status` - Sets the search criteria to `DataSource` statuses.
+    #
     #   * `Name` - Sets the search criteria to the contents of `DataSource`
-    #     <b> </b> `Name`.
+    #     `Name`.
+    #
     #   * `DataUri` - Sets the search criteria to the URI of data files used
     #     to create the `DataSource`. The URI can identify either a file or
     #     an Amazon Simple Storage Service (Amazon S3) bucket or directory.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked the `DataSource` creation.
     #   @return [String]
@@ -1393,6 +1416,7 @@ module Aws::MachineLearning
     #   list of `DataSource`.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -1464,15 +1488,21 @@ module Aws::MachineLearning
     #
     #   * `CreatedAt` - Sets the search criteria to the `Evaluation`
     #     creation date.
+    #
     #   * `Status` - Sets the search criteria to the `Evaluation` status.
+    #
     #   * `Name` - Sets the search criteria to the contents of `Evaluation`
     #     <b> </b> `Name`.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked an `Evaluation`.
+    #
     #   * `MLModelId` - Sets the search criteria to the `MLModel` that was
     #     evaluated.
+    #
     #   * `DataSourceId` - Sets the search criteria to the `DataSource` used
     #     in `Evaluation`.
+    #
     #   * `DataUri` - Sets the search criteria to the data file(s) used in
     #     `Evaluation`. The URL can identify either a file or an Amazon
     #     Simple Storage Solution (Amazon S3) bucket or directory.
@@ -1534,6 +1564,7 @@ module Aws::MachineLearning
     #   list of `Evaluation`.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -1603,19 +1634,27 @@ module Aws::MachineLearning
     #   Use one of the following variables to filter a list of `MLModel`\:
     #
     #   * `CreatedAt` - Sets the search criteria to `MLModel` creation date.
+    #
     #   * `Status` - Sets the search criteria to `MLModel` status.
-    #   * `Name` - Sets the search criteria to the contents of `MLModel`<b>
+    #
+    #   * `Name` - Sets the search criteria to the contents of `MLModel` <b>
     #     </b> `Name`.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked the `MLModel` creation.
+    #
     #   * `TrainingDataSourceId` - Sets the search criteria to the
     #     `DataSource` used to train one or more `MLModel`.
+    #
     #   * `RealtimeEndpointStatus` - Sets the search criteria to the
     #     `MLModel` real-time endpoint status.
+    #
     #   * `MLModelType` - Sets the search criteria to `MLModel` type:
     #     binary, regression, or multi-class.
+    #
     #   * `Algorithm` - Sets the search criteria to the algorithm that the
     #     `MLModel` uses.
+    #
     #   * `TrainingDataURI` - Sets the search criteria to the data file(s)
     #     used in training a `MLModel`. The URL can identify either a file
     #     or an Amazon Simple Storage Service (Amazon S3) bucket or
@@ -1678,6 +1717,7 @@ module Aws::MachineLearning
     #   list of `MLModel`.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -1821,10 +1861,14 @@ module Aws::MachineLearning
     #
     #   * `PENDING` - Amazon Machine Learning (Amazon ML) submitted a
     #     request to evaluate an `MLModel`.
+    #
     #   * `INPROGRESS` - The evaluation is underway.
+    #
     #   * `FAILED` - The request to evaluate an `MLModel` did not run to
     #     completion. It is not usable.
+    #
     #   * `COMPLETED` - The evaluation process completed successfully.
+    #
     #   * `DELETED` - The `Evaluation` is marked as deleted. It is not
     #     usable.
     #   @return [String]
@@ -1850,7 +1894,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
+    #   [1]: https://docs.aws.amazon.com/machine-learning/latest/dg
     #   @return [Types::PerformanceMetrics]
     #
     # @!attribute [rw] message
@@ -1956,10 +2000,14 @@ module Aws::MachineLearning
     #
     #   * `PENDING` - Amazon Machine Learning (Amazon ML) submitted a
     #     request to generate batch predictions.
+    #
     #   * `INPROGRESS` - The batch predictions are in progress.
+    #
     #   * `FAILED` - The request to perform a batch prediction did not run
     #     to completion. It is not usable.
+    #
     #   * `COMPLETED` - The batch prediction process completed successfully.
+    #
     #   * `DELETED` - The `BatchPrediction` is marked as deleted. It is not
     #     usable.
     #   @return [String]
@@ -2111,10 +2159,14 @@ module Aws::MachineLearning
     #
     #   * `PENDING` - Amazon ML submitted a request to create a
     #     `DataSource`.
+    #
     #   * `INPROGRESS` - The creation process is underway.
+    #
     #   * `FAILED` - The request to create a `DataSource` did not run to
     #     completion. It is not usable.
+    #
     #   * `COMPLETED` - The creation process completed successfully.
+    #
     #   * `DELETED` - The `DataSource` is marked as deleted. It is not
     #     usable.
     #   @return [String]
@@ -2143,7 +2195,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
     #   @return [String]
     #
     # @!attribute [rw] compute_statistics
@@ -2174,9 +2226,7 @@ module Aws::MachineLearning
     # @!attribute [rw] data_source_schema
     #   The schema used by all of the data files of this `DataSource`.
     #
-    #   <note markdown="1"><title>Note</title> This parameter is provided as part of the verbose format.
-    #
-    #   </note>
+    #   **Note:** This parameter is provided as part of the verbose format.
     #   @return [String]
     #
     class GetDataSourceOutput < Struct.new(
@@ -2270,10 +2320,14 @@ module Aws::MachineLearning
     #
     #   * `PENDING` - Amazon Machine Language (Amazon ML) submitted a
     #     request to evaluate an `MLModel`.
+    #
     #   * `INPROGRESS` - The evaluation is underway.
+    #
     #   * `FAILED` - The request to evaluate an `MLModel` did not run to
     #     completion. It is not usable.
+    #
     #   * `COMPLETED` - The evaluation process completed successfully.
+    #
     #   * `DELETED` - The `Evaluation` is marked as deleted. It is not
     #     usable.
     #   @return [String]
@@ -2299,7 +2353,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
+    #   [1]: https://docs.aws.amazon.com/machine-learning/latest/dg
     #   @return [Types::PerformanceMetrics]
     #
     # @!attribute [rw] log_uri
@@ -2382,9 +2436,7 @@ module Aws::MachineLearning
     # detailed information about a `MLModel`.
     #
     # @!attribute [rw] ml_model_id
-    #   The MLModel ID<?oxy\_insert\_start author="annbech"
-    #   timestamp="20160328T151251-0700">,<?oxy\_insert\_end> which is
-    #   same as the `MLModelId` in the request.
+    #   The MLModel ID, which is same as the `MLModelId` in the request.
     #   @return [String]
     #
     # @!attribute [rw] training_data_source_id
@@ -2417,10 +2469,14 @@ module Aws::MachineLearning
     #
     #   * `PENDING` - Amazon Machine Learning (Amazon ML) submitted a
     #     request to describe a `MLModel`.
+    #
     #   * `INPROGRESS` - The request is processing.
+    #
     #   * `FAILED` - The request did not run to completion. The ML model
     #     isn't usable.
+    #
     #   * `COMPLETED` - The request completed successfully.
+    #
     #   * `DELETED` - The `MLModel` is marked as deleted. It isn't usable.
     #   @return [String]
     #
@@ -2488,18 +2544,18 @@ module Aws::MachineLearning
     #
     #   * REGRESSION -- Produces a numeric result. For example, "What price
     #     should a house be listed at?"
+    #
     #   * BINARY -- Produces one of two possible results. For example, "Is
     #     this an e-commerce website?"
+    #
     #   * MULTICLASS -- Produces one of several possible results. For
     #     example, "Is this a HIGH, LOW or MEDIUM risk trade?"
     #   @return [String]
     #
     # @!attribute [rw] score_threshold
-    #   The scoring threshold is used in binary classification
-    #   `MLModel`<?oxy\_insert\_start author="laurama"
-    #   timestamp="20160329T114851-0700"> <?oxy\_insert\_end>models. It
-    #   marks the boundary between a positive prediction and a negative
-    #   prediction.
+    #   The scoring threshold is used in binary classification `MLModel`
+    #   models. It marks the boundary between a positive prediction and a
+    #   negative prediction.
     #
     #   Output values greater than or equal to the threshold receive a
     #   positive result from the MLModel, such as `true`. Output values less
@@ -2547,18 +2603,14 @@ module Aws::MachineLearning
     #   training, and manipulations to perform on the observation data
     #   during training.
     #
-    #   <note markdown="1"><title>Note</title> This parameter is provided as part of the verbose format.
-    #
-    #   </note>
+    #   **Note:** This parameter is provided as part of the verbose format.
     #   @return [String]
     #
     # @!attribute [rw] schema
     #   The schema used by all of the data files referenced by the
     #   `DataSource`.
     #
-    #   <note markdown="1"><title>Note</title> This parameter is provided as part of the verbose format.
-    #
-    #   </note>
+    #   **Note:** This parameter is provided as part of the verbose format.
     #   @return [String]
     #
     class GetMLModelOutput < Struct.new(
@@ -2700,10 +2752,14 @@ module Aws::MachineLearning
     #
     #   * `PENDING` - Amazon Machine Learning (Amazon ML) submitted a
     #     request to create an `MLModel`.
+    #
     #   * `INPROGRESS` - The creation process is underway.
+    #
     #   * `FAILED` - The request to create an `MLModel` didn't run to
     #     completion. The model isn't usable.
+    #
     #   * `COMPLETED` - The creation process completed successfully.
+    #
     #   * `DELETED` - The `MLModel` is marked as deleted. It isn't usable.
     #   @return [String]
     #
@@ -2770,6 +2826,8 @@ module Aws::MachineLearning
     #
     #   * `SGD` -- Stochastic gradient descent. The goal of `SGD` is to
     #     minimize the gradient of the loss function.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] ml_model_type
@@ -2778,14 +2836,12 @@ module Aws::MachineLearning
     #
     #   * `REGRESSION` - Produces a numeric result. For example, "What
     #     price should a house be listed at?"
+    #
     #   * `BINARY` - Produces one of two possible results. For example, "Is
     #     this a child-friendly web site?".
+    #
     #   * `MULTICLASS` - Produces one of several possible results. For
-    #     example, "Is this a HIGH-, LOW-, or MEDIUM<?oxy\_delete
-    #     author="annbech" timestamp="20160328T175050-0700" content="
-    #     "><?oxy\_insert\_start author="annbech"
-    #     timestamp="20160328T175050-0700">-<?oxy\_insert\_end>risk
-    #     trade?".
+    #     example, "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
     #   @return [String]
     #
     # @!attribute [rw] score_threshold
@@ -2857,7 +2913,7 @@ module Aws::MachineLearning
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
+    # [1]: https://docs.aws.amazon.com/machine-learning/latest/dg
     #
     # @!attribute [rw] properties
     #   @return [Hash<String,String>]
@@ -3028,21 +3084,21 @@ module Aws::MachineLearning
     #   There are multiple parameters that control what data is used to
     #   create a datasource:
     #
-    #   * **`percentBegin`**
+    #   * <b> <code>percentBegin</code> </b>
     #
     #     Use `percentBegin` to indicate the beginning of the range of the
     #     data used to create the Datasource. If you do not include
     #     `percentBegin` and `percentEnd`, Amazon ML includes all of the
     #     data when creating the datasource.
     #
-    #   * **`percentEnd`**
+    #   * <b> <code>percentEnd</code> </b>
     #
     #     Use `percentEnd` to indicate the end of the range of the data used
     #     to create the Datasource. If you do not include `percentBegin` and
     #     `percentEnd`, Amazon ML includes all of the data when creating the
     #     datasource.
     #
-    #   * **`complement`**
+    #   * <b> <code>complement</code> </b>
     #
     #     The `complement` parameter instructs Amazon ML to use the data
     #     that is not included in the range of `percentBegin` to
@@ -3063,7 +3119,7 @@ module Aws::MachineLearning
     #     Datasource for training: `\{"splitting":\{"percentBegin":0,
     #     "percentEnd":25, "complement":"true"\}\}`
     #
-    #   * **`strategy`**
+    #   * <b> <code>strategy</code> </b>
     #
     #     To change how Amazon ML splits the data for a datasource, use the
     #     `strategy` parameter.
@@ -3150,8 +3206,6 @@ module Aws::MachineLearning
     #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
     #
     #   "excludedVariableNames": \[ "F6" \] \\}
-    #
-    #    <?oxy\_insert\_end>
     #   @return [String]
     #
     # @!attribute [rw] data_schema_uri
@@ -3166,7 +3220,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] service_role
@@ -3177,7 +3231,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -3289,7 +3343,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] service_role
@@ -3300,7 +3354,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] data_pipeline_id
@@ -3336,10 +3390,8 @@ module Aws::MachineLearning
     #   The URI that specifies where to send real-time prediction requests
     #   for the `MLModel`.
     #
-    #   <note markdown="1"><title>Note</title> The application must wait until the real-time endpoint is ready
-    #   before using this URI.
-    #
-    #    </note>
+    #   **Note:** The application must wait until the real-time endpoint is
+    #   ready before using this URI.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
@@ -3347,7 +3399,9 @@ module Aws::MachineLearning
     #   element can have one of the following values:
     #
     #   * `NONE` - Endpoint does not exist or was previously deleted.
+    #
     #   * `READY` - Endpoint is ready to be used for real-time predictions.
+    #
     #   * `UPDATING` - Updating/creating the endpoint.
     #   @return [String]
     #
@@ -3410,21 +3464,21 @@ module Aws::MachineLearning
     #   There are multiple parameters that control what data is used to
     #   create a datasource:
     #
-    #   * **`percentBegin`**
+    #   * <b> <code>percentBegin</code> </b>
     #
     #     Use `percentBegin` to indicate the beginning of the range of the
     #     data used to create the Datasource. If you do not include
     #     `percentBegin` and `percentEnd`, Amazon ML includes all of the
     #     data when creating the datasource.
     #
-    #   * **`percentEnd`**
+    #   * <b> <code>percentEnd</code> </b>
     #
     #     Use `percentEnd` to indicate the end of the range of the data used
     #     to create the Datasource. If you do not include `percentBegin` and
     #     `percentEnd`, Amazon ML includes all of the data when creating the
     #     datasource.
     #
-    #   * **`complement`**
+    #   * <b> <code>complement</code> </b>
     #
     #     The `complement` parameter instructs Amazon ML to use the data
     #     that is not included in the range of `percentBegin` to
@@ -3445,7 +3499,7 @@ module Aws::MachineLearning
     #     Datasource for training: `\{"splitting":\{"percentBegin":0,
     #     "percentEnd":25, "complement":"true"\}\}`
     #
-    #   * **`strategy`**
+    #   * <b> <code>strategy</code> </b>
     #
     #     To change how Amazon ML splits the data for a datasource, use the
     #     `strategy` parameter.
@@ -3596,7 +3650,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -3607,7 +3661,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
     #   @return [String]
     #
     class RedshiftDatabaseCredentials < Struct.new(
@@ -3633,7 +3687,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
     #   @return [String]
     #
     # @!attribute [rw] select_sql_query
@@ -3691,21 +3745,21 @@ module Aws::MachineLearning
     #   There are multiple parameters that control what data is used to
     #   create a datasource:
     #
-    #   * **`percentBegin`**
+    #   * <b> <code>percentBegin</code> </b>
     #
     #     Use `percentBegin` to indicate the beginning of the range of the
     #     data used to create the Datasource. If you do not include
     #     `percentBegin` and `percentEnd`, Amazon ML includes all of the
     #     data when creating the datasource.
     #
-    #   * **`percentEnd`**
+    #   * <b> <code>percentEnd</code> </b>
     #
     #     Use `percentEnd` to indicate the end of the range of the data used
     #     to create the Datasource. If you do not include `percentBegin` and
     #     `percentEnd`, Amazon ML includes all of the data when creating the
     #     datasource.
     #
-    #   * **`complement`**
+    #   * <b> <code>complement</code> </b>
     #
     #     The `complement` parameter instructs Amazon ML to use the data
     #     that is not included in the range of `percentBegin` to
@@ -3726,7 +3780,7 @@ module Aws::MachineLearning
     #     Datasource for training: `\{"splitting":\{"percentBegin":0,
     #     "percentEnd":25, "complement":"true"\}\}`
     #
-    #   * **`strategy`**
+    #   * <b> <code>strategy</code> </b>
     #
     #     To change how Amazon ML splits the data for a datasource, use the
     #     `strategy` parameter.
@@ -3814,8 +3868,6 @@ module Aws::MachineLearning
     #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
     #
     #   "excludedVariableNames": \[ "F6" \] \\}
-    #
-    #    <?oxy\_insert\_end>
     #   @return [String]
     #
     # @!attribute [rw] data_schema_location_s3

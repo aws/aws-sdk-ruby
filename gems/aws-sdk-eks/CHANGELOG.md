@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-07-12)
+------------------
+
+* Feature - Documentation updates for Wesley to support the parallel node upgrade feature.
+
+1.57.0 (2021-07-08)
+------------------
+
+* Feature - Added waiters for EKS FargateProfiles.
+
+1.56.0 (2021-07-06)
+------------------
+
+* Feature - Adding new error code UnsupportedAddonModification for Addons in EKS
+
+1.55.0 (2021-06-07)
+------------------
+
+* Feature - Added updateConfig option that allows customers to control upgrade velocity in Managed Node Group.
+
+1.54.0 (2021-05-19)
+------------------
+
+* Feature - Update the EKS AddonActive waiter.
+
+1.53.0 (2021-05-10)
+------------------
+
+* Feature - This release updates create-nodegroup and update-nodegroup-config APIs for adding/updating taints on managed nodegroups.
+
+1.52.0 (2021-04-26)
+------------------
+
+* Feature - This release updates existing Amazon EKS input validation so customers will see an InvalidParameterException instead of a ParamValidationError when they enter 0 for minSize and/or desiredSize. It also adds LaunchTemplate information to update responses and a new "CUSTOM" value for AMIType.
+
+1.51.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2021-03-01)
+------------------
+
+* Feature - Adding new error code AdmissionRequestDenied for Addons in EKS
+
+1.49.0 (2021-02-26)
+------------------
+
+* Feature - Amazon EKS now supports adding KMS envelope encryption to existing clusters to enhance security for secrets
+
+1.48.0 (2021-02-12)
+------------------
+
+* Feature - Amazon EKS now supports OpenId Connect (OIDC) compatible identity providers as a user authentication option
+
+1.47.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2020-12-01)
+------------------
+
+* Feature - Amazon EKS now allows you to define and manage the lifecycle for Kubernetes add-ons for your clusters. This release adds support for the AWS VPC CNI (vpc-cni).
+
 1.45.0 (2020-10-09)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -888,8 +888,8 @@ module Aws::CodeDeploy
     #       {
     #         deployment_config_name: "DeploymentConfigName", # required
     #         minimum_healthy_hosts: {
-    #           value: 1,
     #           type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
+    #           value: 1,
     #         },
     #         traffic_routing_config: {
     #           type: "TimeBasedCanary", # accepts TimeBasedCanary, TimeBasedLinear, AllAtOnce
@@ -1012,6 +1012,7 @@ module Aws::CodeDeploy
     #           enabled: false,
     #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
     #         },
+    #         outdated_instances_strategy: "UPDATE", # accepts UPDATE, IGNORE
     #         deployment_style: {
     #           deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
     #           deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
@@ -1161,6 +1162,19 @@ module Aws::CodeDeploy
     #   when a deployment group is created.
     #   @return [Types::AutoRollbackConfiguration]
     #
+    # @!attribute [rw] outdated_instances_strategy
+    #   Indicates what happens when new EC2 instances are launched
+    #   mid-deployment and do not receive the deployed application revision.
+    #
+    #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
+    #   initiates one or more 'auto-update outdated instances' deployments
+    #   to apply the deployed application revision to the new EC2 instances.
+    #
+    #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
+    #   deployment to update the new EC2 instances. This may result in
+    #   instances having different revisions.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_style
     #   Information about the type of deployment, in-place or blue/green,
     #   that you want to run and whether to route deployment traffic behind
@@ -1216,6 +1230,7 @@ module Aws::CodeDeploy
       :trigger_configurations,
       :alarm_configuration,
       :auto_rollback_configuration,
+      :outdated_instances_strategy,
       :deployment_style,
       :blue_green_deployment_configuration,
       :load_balancer_info,
@@ -1750,6 +1765,19 @@ module Aws::CodeDeploy
     #   behind a load balancer.
     #   @return [Types::DeploymentStyle]
     #
+    # @!attribute [rw] outdated_instances_strategy
+    #   Indicates what happens when new EC2 instances are launched
+    #   mid-deployment and do not receive the deployed application revision.
+    #
+    #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
+    #   initiates one or more 'auto-update outdated instances' deployments
+    #   to apply the deployed application revision to the new EC2 instances.
+    #
+    #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
+    #   deployment to update the new EC2 instances. This may result in
+    #   instances having different revisions.
+    #   @return [String]
+    #
     # @!attribute [rw] blue_green_deployment_configuration
     #   Information about blue/green deployment options for a deployment
     #   group.
@@ -1811,6 +1839,7 @@ module Aws::CodeDeploy
       :alarm_configuration,
       :auto_rollback_configuration,
       :deployment_style,
+      :outdated_instances_strategy,
       :blue_green_deployment_configuration,
       :load_balancer_info,
       :last_successful_deployment,
@@ -1912,6 +1941,9 @@ module Aws::CodeDeploy
     #   * `autoscaling`\: Amazon EC2 Auto Scaling created the deployment.
     #
     #   * `codeDeployRollback`\: A rollback process created the deployment.
+    #
+    #   * `CodeDeployAutoUpdate`\: An auto-update process created the
+    #     deployment when it detected outdated EC2 instances.
     #   @return [String]
     #
     # @!attribute [rw] ignore_application_stop_failures
@@ -2019,6 +2051,10 @@ module Aws::CodeDeploy
     #   CloudFormation stack ID) that is linked to this deployment.
     #   @return [String]
     #
+    # @!attribute [rw] related_deployments
+    #   Information about deployments related to the specified deployment.
+    #   @return [Types::RelatedDeployments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
     #
     class DeploymentInfo < Struct.new(
@@ -2049,7 +2085,8 @@ module Aws::CodeDeploy
       :file_exists_behavior,
       :deployment_status_messages,
       :compute_platform,
-      :external_id)
+      :external_id,
+      :related_deployments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3385,12 +3422,6 @@ module Aws::CodeDeploy
     #
     class InvalidDeployedStateFilterException < Aws::EmptyStructure; end
 
-    # The ID of the deployment configuration is invalid.
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentConfigIdException AWS API Documentation
-    #
-    class InvalidDeploymentConfigIdException < Aws::EmptyStructure; end
-
     # The deployment configuration name was specified in an invalid format.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentConfigNameException AWS API Documentation
@@ -4632,13 +4663,9 @@ module Aws::CodeDeploy
     #   data as a hash:
     #
     #       {
-    #         value: 1,
     #         type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
+    #         value: 1,
     #       }
-    #
-    # @!attribute [rw] value
-    #   The minimum healthy instance value.
-    #   @return [Integer]
     #
     # @!attribute [rw] type
     #   The minimum healthy instance type:
@@ -4678,11 +4705,15 @@ module Aws::CodeDeploy
     #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html
     #   @return [String]
     #
+    # @!attribute [rw] value
+    #   The minimum healthy instance value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MinimumHealthyHosts AWS API Documentation
     #
     class MinimumHealthyHosts < Struct.new(
-      :value,
-      :type)
+      :type,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4753,7 +4784,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] status
     #   The result of a Lambda function that validates a deployment
-    #   lifecycle event (`Succeeded` or `Failed`).
+    #   lifecycle event. `Succeeded` and `Failed` are the only valid values
+    #   for `status`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatusInput AWS API Documentation
@@ -4896,6 +4928,27 @@ module Aws::CodeDeploy
       :instance_name,
       :iam_session_arn,
       :iam_user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about deployments related to the specified deployment.
+    #
+    # @!attribute [rw] auto_update_outdated_instances_root_deployment_id
+    #   The deployment ID of the root deployment that triggered this
+    #   deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update_outdated_instances_deployment_ids
+    #   The deployment IDs of 'auto-update outdated instances' deployments
+    #   triggered by this deployment.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RelatedDeployments AWS API Documentation
+    #
+    class RelatedDeployments < Struct.new(
+      :auto_update_outdated_instances_root_deployment_id,
+      :auto_update_outdated_instances_deployment_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5811,6 +5864,7 @@ module Aws::CodeDeploy
     #           enabled: false,
     #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
     #         },
+    #         outdated_instances_strategy: "UPDATE", # accepts UPDATE, IGNORE
     #         deployment_style: {
     #           deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
     #           deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
@@ -5946,6 +6000,19 @@ module Aws::CodeDeploy
     #   changed when a deployment group is updated.
     #   @return [Types::AutoRollbackConfiguration]
     #
+    # @!attribute [rw] outdated_instances_strategy
+    #   Indicates what happens when new EC2 instances are launched
+    #   mid-deployment and do not receive the deployed application revision.
+    #
+    #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
+    #   initiates one or more 'auto-update outdated instances' deployments
+    #   to apply the deployed application revision to the new EC2 instances.
+    #
+    #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
+    #   deployment to update the new EC2 instances. This may result in
+    #   instances having different revisions.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_style
     #   Information about the type of deployment, either in-place or
     #   blue/green, you want to run and whether to route deployment traffic
@@ -5995,6 +6062,7 @@ module Aws::CodeDeploy
       :trigger_configurations,
       :alarm_configuration,
       :auto_rollback_configuration,
+      :outdated_instances_strategy,
       :deployment_style,
       :blue_green_deployment_configuration,
       :load_balancer_info,

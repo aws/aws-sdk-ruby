@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -36,6 +36,7 @@ module Aws::ManagedBlockchain
   # * {ResourceNotFoundException}
   # * {ResourceNotReadyException}
   # * {ThrottlingException}
+  # * {TooManyTagsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -50,6 +51,11 @@ module Aws::ManagedBlockchain
       # @param [Aws::ManagedBlockchain::Types::AccessDeniedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -136,6 +142,11 @@ module Aws::ManagedBlockchain
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
+      end
     end
 
     class ResourceNotReadyException < ServiceError
@@ -160,6 +171,26 @@ module Aws::ManagedBlockchain
       # @param [Aws::ManagedBlockchain::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ManagedBlockchain::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
       end
     end
 

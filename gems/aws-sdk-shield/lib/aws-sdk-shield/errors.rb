@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -135,6 +135,16 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
+
+      # @return [String]
+      def fields
+        @data[:fields]
+      end
     end
 
     class InvalidResourceException < ServiceError
@@ -235,6 +245,11 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -249,6 +264,11 @@ module Aws::Shield
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
       end
     end
 

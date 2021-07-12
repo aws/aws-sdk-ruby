@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2021-02-02)
+------------------
+
+* Feature - With this release, scheduled actions of Application Auto Scaling can be created in the local time zone and automatically adjusted according to daylight saving changes.
+
+1.49.0 (2021-01-05)
+------------------
+
+* Feature - Documentation updates for Application Auto Scaling
+
 1.48.0 (2020-09-30)
 ------------------
 

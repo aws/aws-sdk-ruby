@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -24,6 +24,7 @@ module Aws::TimestreamQuery
     DatumList = Shapes::ListShape.new(name: 'DatumList')
     DescribeEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeEndpointsRequest')
     DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
+    Double = Shapes::FloatShape.new(name: 'Double')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -36,6 +37,7 @@ module Aws::TimestreamQuery
     QueryId = Shapes::StringShape.new(name: 'QueryId')
     QueryRequest = Shapes::StructureShape.new(name: 'QueryRequest')
     QueryResponse = Shapes::StructureShape.new(name: 'QueryResponse')
+    QueryStatus = Shapes::StructureShape.new(name: 'QueryStatus')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     Row = Shapes::StructureShape.new(name: 'Row')
     RowList = Shapes::ListShape.new(name: 'RowList')
@@ -107,7 +109,13 @@ module Aws::TimestreamQuery
     QueryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     QueryResponse.add_member(:rows, Shapes::ShapeRef.new(shape: RowList, required: true, location_name: "Rows"))
     QueryResponse.add_member(:column_info, Shapes::ShapeRef.new(shape: ColumnInfoList, required: true, location_name: "ColumnInfo"))
+    QueryResponse.add_member(:query_status, Shapes::ShapeRef.new(shape: QueryStatus, location_name: "QueryStatus"))
     QueryResponse.struct_class = Types::QueryResponse
+
+    QueryStatus.add_member(:progress_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "ProgressPercentage"))
+    QueryStatus.add_member(:cumulative_bytes_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "CumulativeBytesScanned"))
+    QueryStatus.add_member(:cumulative_bytes_metered, Shapes::ShapeRef.new(shape: Long, location_name: "CumulativeBytesMetered"))
+    QueryStatus.struct_class = Types::QueryStatus
 
     Row.add_member(:data, Shapes::ShapeRef.new(shape: DatumList, required: true, location_name: "Data"))
     Row.struct_class = Types::Row

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -603,7 +603,7 @@ module Aws::Comprehend
     # @!attribute [rw] labels
     #   The labels used the document being analyzed. These are used for
     #   multi-label trained models. Individual labels represent different
-    #   categories that are related in some manner and are not multually
+    #   categories that are related in some manner and are not mutually
     #   exclusive. For example, a movie can be just an action movie, or it
     #   can be an action movie, a science fiction movie, and a comedy, all
     #   at the same time.
@@ -628,6 +628,46 @@ module Aws::Comprehend
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ContainsPiiEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "String", # required
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #       }
+    #
+    # @!attribute [rw] text
+    #   Creates a new document classification request to analyze a single
+    #   document in real-time, returning personally identifiable information
+    #   (PII) entity labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntitiesRequest AWS API Documentation
+    #
+    class ContainsPiiEntitiesRequest < Struct.new(
+      :text,
+      :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] labels
+    #   The labels used in the document being analyzed. Individual labels
+    #   represent personally identifiable information (PII) entity types.
+    #   @return [Array<Types::EntityLabel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntitiesResponse AWS API Documentation
+    #
+    class ContainsPiiEntitiesResponse < Struct.new(
+      :labels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -667,6 +707,7 @@ module Aws::Comprehend
     #           subnets: ["SubnetId"], # required
     #         },
     #         mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
+    #         model_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] document_classifier_name
@@ -743,6 +784,17 @@ module Aws::Comprehend
     #   delimiter. The default delimiter between labels is a pipe (\|).
     #   @return [String]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
     #
     class CreateDocumentClassifierRequest < Struct.new(
@@ -755,7 +807,8 @@ module Aws::Comprehend
       :language_code,
       :volume_kms_key_id,
       :vpc_config,
-      :mode)
+      :mode,
+      :model_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -787,6 +840,7 @@ module Aws::Comprehend
     #             value: "TagValue",
     #           },
     #         ],
+    #         data_access_role_arn: "IamRoleArn",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -821,6 +875,13 @@ module Aws::Comprehend
     #   indicate its use by the sales department.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   trained custom models encrypted with a customer managed key
+    #   (ModelKmsKeyId).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpointRequest AWS API Documentation
     #
     class CreateEndpointRequest < Struct.new(
@@ -828,7 +889,8 @@ module Aws::Comprehend
       :model_arn,
       :desired_inference_units,
       :client_request_token,
-      :tags)
+      :tags,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -887,6 +949,7 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         model_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] recognizer_name
@@ -953,6 +1016,17 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
     #
     class CreateEntityRecognizerRequest < Struct.new(
@@ -963,7 +1037,8 @@ module Aws::Comprehend
       :client_request_token,
       :language_code,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :model_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1243,6 +1318,38 @@ module Aws::Comprehend
     #
     class DescribeEntityRecognizerResponse < Struct.new(
       :entity_recognizer_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEventsDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the events detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEventsDetectionJobRequest AWS API Documentation
+    #
+    class DescribeEventsDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events_detection_job_properties
+    #   An object that contains the properties associated with an event
+    #   detection job.
+    #   @return [Types::EventsDetectionJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEventsDetectionJobResponse AWS API Documentation
+    #
+    class DescribeEventsDetectionJobResponse < Struct.new(
+      :events_detection_job_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2088,6 +2195,17 @@ module Aws::Comprehend
     #   mode and this cannot be changed once the classifier is trained.
     #   @return [String]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
     #
     class DocumentClassifierProperties < Struct.new(
@@ -2105,7 +2223,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      :mode)
+      :mode,
+      :model_kms_key_id)
       SENSITIVE = [:classifier_metadata]
       include Aws::Structure
     end
@@ -2290,7 +2409,7 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The filter used to determine which endpoints are are returned. You can
+    # The filter used to determine which endpoints are returned. You can
     # filter jobs on their name, model, status, or the date and time that
     # they were created. You can only set one filter at a time.
     #
@@ -2375,6 +2494,13 @@ module Aws::Comprehend
     #   The date and time that the endpoint was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   trained custom models encrypted with a customer managed key
+    #   (ModelKmsKeyId).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EndpointProperties AWS API Documentation
     #
     class EndpointProperties < Struct.new(
@@ -2385,7 +2511,8 @@ module Aws::Comprehend
       :desired_inference_units,
       :current_inference_units,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2571,6 +2698,27 @@ module Aws::Comprehend
       :text,
       :begin_offset,
       :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies one of the label or labels that categorize the personally
+    # identifiable information (PII) entity being analyzed.
+    #
+    # @!attribute [rw] name
+    #   The name of the label.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend has in the accuracy
+    #   of the detection.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityLabel AWS API Documentation
+    #
+    class EntityLabel < Struct.new(
+      :name,
+      :score)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2957,6 +3105,17 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
     #
     class EntityRecognizerProperties < Struct.new(
@@ -2972,7 +3131,8 @@ module Aws::Comprehend
       :recognizer_metadata,
       :data_access_role_arn,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :model_kms_key_id)
       SENSITIVE = [:recognizer_metadata]
       include Aws::Structure
     end
@@ -2994,11 +3154,10 @@ module Aws::Comprehend
     #   @return [Float]
     #
     # @!attribute [rw] f1_score
-    #   A measure of how accurate the recognizer results are for for a
-    #   specific entity type in the test data. It is derived from the
-    #   `Precision` and `Recall` values. The `F1Score` is the harmonic
-    #   average of the two scores. The highest score is 1, and the worst
-    #   score is 0.
+    #   A measure of how accurate the recognizer results are for a specific
+    #   entity type in the test data. It is derived from the `Precision` and
+    #   `Recall` values. The `F1Score` is the harmonic average of the two
+    #   scores. The highest score is 1, and the worst score is 0.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesEvaluationMetrics AWS API Documentation
@@ -3035,6 +3194,120 @@ module Aws::Comprehend
     #
     class EntityTypesListItem < Struct.new(
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information for filtering a list of event detection jobs.
+    #
+    # @note When making an API call, you may pass EventsDetectionJobFilter
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "JobName",
+    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   Filters on the name of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Filters the list of jobs based on job status. Returns only jobs with
+    #   the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted before the
+    #   specified time. Jobs are returned in ascending order, oldest to
+    #   newest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted after the
+    #   specified time. Jobs are returned in descending order, newest to
+    #   oldest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EventsDetectionJobFilter AWS API Documentation
+    #
+    class EventsDetectionJobFilter < Struct.new(
+      :job_name,
+      :job_status,
+      :submit_time_before,
+      :submit_time_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an events detection job.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier assigned to the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name you assigned the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the status of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the events detection job was submitted for processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the events detection job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input data configuration that you supplied when you created the
+    #   events detection job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The output data configuration that you supplied when you created the
+    #   events detection job.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identify and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_event_types
+    #   The types of events that are detected by the job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EventsDetectionJobProperties AWS API Documentation
+    #
+    class EventsDetectionJobProperties < Struct.new(
+      :job_id,
+      :job_name,
+      :job_status,
+      :message,
+      :submit_time,
+      :end_time,
+      :input_data_config,
+      :output_data_config,
+      :language_code,
+      :data_access_role_arn,
+      :target_event_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3653,6 +3926,61 @@ module Aws::Comprehend
     #
     class ListEntityRecognizersResponse < Struct.new(
       :entity_recognizer_properties_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEventsDetectionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   name, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #   @return [Types::EventsDetectionJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEventsDetectionJobsRequest AWS API Documentation
+    #
+    class ListEventsDetectionJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events_detection_job_properties_list
+    #   A list containing the properties of each job that is returned.
+    #   @return [Array<Types::EventsDetectionJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEventsDetectionJobsResponse AWS API Documentation
+    #
+    class ListEventsDetectionJobsResponse < Struct.new(
+      :events_detection_job_properties_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4824,6 +5152,91 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartEventsDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         },
+    #         output_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         client_request_token: "ClientRequestTokenString",
+    #         target_event_types: ["EventTypeString"], # required
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Specifies where to send the output files.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   An unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_event_types
+    #   The types of events to detect in the input documents.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEventsDetectionJobRequest AWS API Documentation
+    #
+    class StartEventsDetectionJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :job_name,
+      :language_code,
+      :client_request_token,
+      :target_event_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   An unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the events detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEventsDetectionJobResponse AWS API Documentation
+    #
+    class StartEventsDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartKeyPhrasesDetectionJobRequest
     #   data as a hash:
     #
@@ -5379,6 +5792,42 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopEventsDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the events detection job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopEventsDetectionJobRequest AWS API Documentation
+    #
+    class StopEventsDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the events detection job to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the events detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopEventsDetectionJobResponse AWS API Documentation
+    #
+    class StopEventsDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopKeyPhrasesDetectionJobRequest
     #   data as a hash:
     #
@@ -5846,11 +6295,9 @@ module Aws::Comprehend
     end
 
     # Amazon Comprehend can't process the language of the input text. For
-    # all custom entity recognition APIs (such as `CreateEntityRecognizer`),
-    # only English, Spanish, French, Italian, German, or Portuguese are
-    # accepted. For most other APIs, such as those for Custom
-    # Classification, Amazon Comprehend accepts text in all supported
-    # languages. For a list of supported languages, see supported-languages.
+    # custom entity recognition APIs, only English, Spanish, French,
+    # Italian, German, or Portuguese are accepted. For a list of supported
+    # languages, see supported-languages.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -5929,7 +6376,7 @@ module Aws::Comprehend
     class UpdateEndpointResponse < Aws::EmptyStructure; end
 
     # Configuration parameters for an optional private Virtual Private Cloud
-    # (VPC) containing the resources you are using for the job. For For more
+    # (VPC) containing the resources you are using for the job. For more
     # information, see [Amazon VPC][1].
     #
     #

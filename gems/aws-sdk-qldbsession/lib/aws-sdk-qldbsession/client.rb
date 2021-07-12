@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -339,21 +339,21 @@ module Aws::QLDBSession
 
     # Sends a command to an Amazon QLDB ledger.
     #
-    # <note markdown="1"> Instead of interacting directly with this API, we recommend that you
-    # use the Amazon QLDB Driver or the QLDB Shell to execute data
-    # transactions on a ledger.
+    # <note markdown="1"> Instead of interacting directly with this API, we recommend using the
+    # QLDB driver or the QLDB shell to execute data transactions on a
+    # ledger.
     #
-    #  * If you are working with an AWS SDK, use the QLDB Driver. The driver
-    #   provides a high-level abstraction layer above this `qldbsession`
+    #  * If you are working with an AWS SDK, use the QLDB driver. The driver
+    #   provides a high-level abstraction layer above this *QLDB Session*
     #   data plane and manages `SendCommand` API calls for you. For
     #   information and a list of supported programming languages, see
     #   [Getting started with the driver][1] in the *Amazon QLDB Developer
     #   Guide*.
     #
     # * If you are working with the AWS Command Line Interface (AWS CLI),
-    #   use the QLDB Shell. The shell is a command line interface that uses
-    #   the QLDB Driver to interact with a ledger. For information, see
-    #   [Accessing Amazon QLDB using the QLDB Shell][2].
+    #   use the QLDB shell. The shell is a command line interface that uses
+    #   the QLDB driver to interact with a ledger. For information, see
+    #   [Accessing Amazon QLDB using the QLDB shell][2].
     #
     #  </note>
     #
@@ -438,17 +438,30 @@ module Aws::QLDBSession
     # @example Response structure
     #
     #   resp.start_session.session_token #=> String
+    #   resp.start_session.timing_information.processing_time_milliseconds #=> Integer
     #   resp.start_transaction.transaction_id #=> String
+    #   resp.start_transaction.timing_information.processing_time_milliseconds #=> Integer
+    #   resp.end_session.timing_information.processing_time_milliseconds #=> Integer
     #   resp.commit_transaction.transaction_id #=> String
     #   resp.commit_transaction.commit_digest #=> String
+    #   resp.commit_transaction.timing_information.processing_time_milliseconds #=> Integer
+    #   resp.commit_transaction.consumed_i_os.read_i_os #=> Integer
+    #   resp.commit_transaction.consumed_i_os.write_i_os #=> Integer
+    #   resp.abort_transaction.timing_information.processing_time_milliseconds #=> Integer
     #   resp.execute_statement.first_page.values #=> Array
     #   resp.execute_statement.first_page.values[0].ion_binary #=> String
     #   resp.execute_statement.first_page.values[0].ion_text #=> String
     #   resp.execute_statement.first_page.next_page_token #=> String
+    #   resp.execute_statement.timing_information.processing_time_milliseconds #=> Integer
+    #   resp.execute_statement.consumed_i_os.read_i_os #=> Integer
+    #   resp.execute_statement.consumed_i_os.write_i_os #=> Integer
     #   resp.fetch_page.page.values #=> Array
     #   resp.fetch_page.page.values[0].ion_binary #=> String
     #   resp.fetch_page.page.values[0].ion_text #=> String
     #   resp.fetch_page.page.next_page_token #=> String
+    #   resp.fetch_page.timing_information.processing_time_milliseconds #=> Integer
+    #   resp.fetch_page.consumed_i_os.read_i_os #=> Integer
+    #   resp.fetch_page.consumed_i_os.write_i_os #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/SendCommand AWS API Documentation
     #
@@ -472,7 +485,7 @@ module Aws::QLDBSession
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldbsession'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

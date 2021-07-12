@@ -3,12 +3,292 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EKS
   module Types
+
+    # An Amazon EKS add-on.
+    #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_version
+    #   The version of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] health
+    #   An object that represents the health of the add-on.
+    #   @return [Types::AddonHealth]
+    #
+    # @!attribute [rw] addon_arn
+    #   The Amazon Resource Name (ARN) of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the add-on was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time that the add-on was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_account_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that is bound to the
+    #   Kubernetes service account used by the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the add-on to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Add-on tags do not
+    #   propagate to any other resources associated with the cluster.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Addon AWS API Documentation
+    #
+    class Addon < Struct.new(
+      :addon_name,
+      :cluster_name,
+      :status,
+      :addon_version,
+      :health,
+      :addon_arn,
+      :created_at,
+      :modified_at,
+      :service_account_role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The health of the add-on.
+    #
+    # @!attribute [rw] issues
+    #   An object that represents the add-on's health issues.
+    #   @return [Array<Types::AddonIssue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonHealth AWS API Documentation
+    #
+    class AddonHealth < Struct.new(
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an add-on.
+    #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_versions
+    #   An object that represents information about available add-on
+    #   versions and compatible Kubernetes versions.
+    #   @return [Array<Types::AddonVersionInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonInfo AWS API Documentation
+    #
+    class AddonInfo < Struct.new(
+      :addon_name,
+      :type,
+      :addon_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An issue related to an add-on.
+    #
+    # @!attribute [rw] code
+    #   A code that describes the type of issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides details about the issue and what might cause
+    #   it.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs of the issue.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonIssue AWS API Documentation
+    #
+    class AddonIssue < Struct.new(
+      :code,
+      :message,
+      :resource_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an add-on version.
+    #
+    # @!attribute [rw] addon_version
+    #   The version of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The architectures that the version supports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compatibilities
+    #   An object that represents the compatibilities of a version.
+    #   @return [Array<Types::Compatibility>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonVersionInfo AWS API Documentation
+    #
+    class AddonVersionInfo < Struct.new(
+      :addon_version,
+      :architecture,
+      :compatibilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateEncryptionConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         encryption_config: [ # required
+    #           {
+    #             resources: ["String"],
+    #             provider: {
+    #               key_arn: "String",
+    #             },
+    #           },
+    #         ],
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster that you are associating with encryption
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_config
+    #   The configuration you are using for encryption.
+    #   @return [Array<Types::EncryptionConfig>]
+    #
+    # @!attribute [rw] client_request_token
+    #   The client request token you are using with the encryption
+    #   configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateEncryptionConfigRequest AWS API Documentation
+    #
+    class AssociateEncryptionConfigRequest < Struct.new(
+      :cluster_name,
+      :encryption_config,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateEncryptionConfigResponse AWS API Documentation
+    #
+    class AssociateEncryptionConfigResponse < Struct.new(
+      :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         oidc: { # required
+    #           identity_provider_config_name: "String", # required
+    #           issuer_url: "String", # required
+    #           client_id: "String", # required
+    #           username_claim: "String",
+    #           username_prefix: "String",
+    #           groups_claim: "String",
+    #           groups_prefix: "String",
+    #           required_claims: {
+    #             "requiredClaimsKey" => "requiredClaimsValue",
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to associate the configuration to.
+    #   @return [String]
+    #
+    # @!attribute [rw] oidc
+    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   configuration.
+    #   @return [Types::OidcIdentityProviderConfigRequest]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the configuration to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateIdentityProviderConfigRequest AWS API Documentation
+    #
+    class AssociateIdentityProviderConfigRequest < Struct.new(
+      :cluster_name,
+      :oidc,
+      :tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateIdentityProviderConfigResponse AWS API Documentation
+    #
+    class AssociateIdentityProviderConfigResponse < Struct.new(
+      :update,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An Auto Scaling group that is associated with an Amazon EKS managed
     # node group.
@@ -71,6 +351,9 @@ module Aws::EKS
     #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] addon_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -79,6 +362,7 @@ module Aws::EKS
     class ClientException < Struct.new(
       :cluster_name,
       :nodegroup_name,
+      :addon_name,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -109,8 +393,8 @@ module Aws::EKS
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
-    #   permissions for the Kubernetes control plane to make calls to AWS
-    #   API operations on your behalf.
+    #   permissions for the Kubernetes control plane to make calls to Amazon
+    #   Web Services API operations on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
@@ -127,7 +411,7 @@ module Aws::EKS
     #   @return [Types::VpcConfigResponse]
     #
     # @!attribute [rw] kubernetes_network_config
-    #   Network configuration settings for your cluster.
+    #   The Kubernetes network configuration for the cluster.
     #   @return [Types::KubernetesNetworkConfigResponse]
     #
     # @!attribute [rw] logging
@@ -195,6 +479,133 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Compatibility information.
+    #
+    # @!attribute [rw] cluster_version
+    #   The supported Kubernetes version of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_versions
+    #   The supported compute platform.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_version
+    #   The supported default version.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Compatibility AWS API Documentation
+    #
+    class Compatibility < Struct.new(
+      :cluster_version,
+      :platform_versions,
+      :default_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAddonRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "ClusterName", # required
+    #         addon_name: "String", # required
+    #         addon_version: "String",
+    #         service_account_role_arn: "RoleArn",
+    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE
+    #         client_request_token: "String",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to create the add-on for.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on. The name must match one of the names
+    #   returned by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_version
+    #   The version of the add-on. The version must match one of the
+    #   versions returned by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_role_arn
+    #   The Amazon Resource Name (ARN) of an existing IAM role to bind to
+    #   the add-on's service account. The role must be assigned the IAM
+    #   permissions required by the add-on. If you don't specify an
+    #   existing IAM role, then the add-on uses the permissions assigned to
+    #   the node IAM role. For more information, see [Amazon EKS node IAM
+    #   role][1] in the *Amazon EKS User Guide*.
+    #
+    #   <note markdown="1"> To specify an existing IAM role, you must have an IAM OpenID Connect
+    #   (OIDC) provider created for your cluster. For more information, see
+    #   [Enabling IAM roles for service accounts on your cluster][2] in the
+    #   *Amazon EKS User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_conflicts
+    #   How to resolve parameter value conflicts when migrating an existing
+    #   add-on to an Amazon EKS add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the cluster to assist with categorization
+    #   and organization. Each tag consists of a key and an optional value,
+    #   both of which you define.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddonRequest AWS API Documentation
+    #
+    class CreateAddonRequest < Struct.new(
+      :cluster_name,
+      :addon_name,
+      :addon_version,
+      :service_account_role_arn,
+      :resolve_conflicts,
+      :client_request_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addon
+    #   An Amazon EKS add-on.
+    #   @return [Types::Addon]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddonResponse AWS API Documentation
+    #
+    class CreateAddonResponse < Struct.new(
+      :addon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateClusterRequest
     #   data as a hash:
     #
@@ -246,9 +657,10 @@ module Aws::EKS
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
-    #   permissions for the Kubernetes control plane to make calls to AWS
-    #   API operations on your behalf. For more information, see [Amazon EKS
-    #   Service IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   permissions for the Kubernetes control plane to make calls to Amazon
+    #   Web Services API operations on your behalf. For more information,
+    #   see [Amazon EKS Service IAM Role][1] in the <i> <i>Amazon EKS User
+    #   Guide</i> </i>.
     #
     #
     #
@@ -278,12 +690,12 @@ module Aws::EKS
     #   Enable or disable exporting the Kubernetes control plane logs for
     #   your cluster to CloudWatch Logs. By default, cluster control plane
     #   logs aren't exported to CloudWatch Logs. For more information, see
-    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   [Amazon EKS Cluster control plane logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
-    #   [Amazon CloudWatch Pricing][2].
+    #   [CloudWatch Pricing][2].
     #
     #    </note>
     #
@@ -452,7 +864,7 @@ module Aws::EKS
     #         disk_size: 1,
     #         subnets: ["String"], # required
     #         instance_types: ["String"],
-    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64
+    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM
     #         remote_access: {
     #           ec2_ssh_key: "String",
     #           source_security_groups: ["String"],
@@ -461,6 +873,13 @@ module Aws::EKS
     #         labels: {
     #           "labelKey" => "labelValue",
     #         },
+    #         taints: [
+    #           {
+    #             key: "taintKey",
+    #             value: "taintValue",
+    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #           },
+    #         ],
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -470,6 +889,11 @@ module Aws::EKS
     #           version: "String",
     #           id: "String",
     #         },
+    #         update_config: {
+    #           max_unavailable: 1,
+    #           max_unavailable_percentage: 1,
+    #         },
+    #         capacity_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #         version: "String",
     #         release_version: "String",
     #       }
@@ -501,13 +925,11 @@ module Aws::EKS
     #
     # @!attribute [rw] subnets
     #   The subnets to use for the Auto Scaling group that is created for
-    #   your node group. These subnets must have the tag key
-    #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
-    #   `CLUSTER_NAME` is replaced with the name of your cluster. If you
-    #   specify `launchTemplate`, then don't specify [ `SubnetId` ][1] in
-    #   your launch template, or the node group deployment will fail. For
-    #   more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][2] in the Amazon EKS User Guide.
+    #   your node group. If you specify `launchTemplate`, then don't
+    #   specify [ `SubnetId` ][1] in your launch template, or the node group
+    #   deployment will fail. For more information about using launch
+    #   templates with Amazon EKS, see [Launch template support][2] in the
+    #   Amazon EKS User Guide.
     #
     #
     #
@@ -516,25 +938,31 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_types
-    #   The instance type to use for your node group. You can specify a
-    #   single instance type for a node group. The default value for
-    #   `instanceTypes` is `t3.medium`. If you choose a GPU instance type,
-    #   be sure to specify `AL2_x86_64_GPU` with the `amiType` parameter. If
-    #   you specify `launchTemplate`, then don't specify `instanceTypes`,
-    #   or the node group deployment will fail. For more information about
-    #   using launch templates with Amazon EKS, see [Launch template
-    #   support][1] in the Amazon EKS User Guide.
+    #   Specify the instance types for a node group. If you specify a GPU
+    #   instance type, be sure to specify `AL2_x86_64_GPU` with the
+    #   `amiType` parameter. If you specify `launchTemplate`, then you can
+    #   specify zero or one instance type in your launch template *or* you
+    #   can specify 0-20 instance types for `instanceTypes`. If however, you
+    #   specify an instance type in your launch template *and* specify any
+    #   `instanceTypes`, the node group deployment will fail. If you don't
+    #   specify an instance type in a launch template or for
+    #   `instanceTypes`, then `t3.medium` is used, by default. If you
+    #   specify `Spot` for `capacityType`, then we recommend specifying
+    #   multiple values for `instanceTypes`. For more information, see
+    #   [Managed node group capacity types][1] and [Launch template
+    #   support][2] in the *Amazon EKS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] ami_type
     #   The AMI type for your node group. GPU instance types should use the
     #   `AL2_x86_64_GPU` AMI type. Non-GPU instances should use the
     #   `AL2_x86_64` AMI type. Arm instances should use the `AL2_ARM_64` AMI
-    #   type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI. If
+    #   type. All types use the Amazon EKS optimized Amazon Linux 2 AMI. If
     #   you specify `launchTemplate`, and your launch template uses a custom
     #   AMI, then don't specify `amiType`, or the node group deployment
     #   will fail. For more information about using launch templates with
@@ -561,17 +989,16 @@ module Aws::EKS
     # @!attribute [rw] node_role
     #   The Amazon Resource Name (ARN) of the IAM role to associate with
     #   your node group. The Amazon EKS worker node `kubelet` daemon makes
-    #   calls to AWS APIs on your behalf. Worker nodes receive permissions
-    #   for these API calls through an IAM instance profile and associated
-    #   policies. Before you can launch worker nodes and register them into
-    #   a cluster, you must create an IAM role for those worker nodes to use
-    #   when they are launched. For more information, see [Amazon EKS Worker
-    #   Node IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If
-    #   you specify `launchTemplate`, then don't specify [
-    #   `IamInstanceProfile` ][2] in your launch template, or the node group
-    #   deployment will fail. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][3] in the
-    #   Amazon EKS User Guide.
+    #   calls to Amazon Web Services APIs on your behalf. Nodes receive
+    #   permissions for these API calls through an IAM instance profile and
+    #   associated policies. Before you can launch nodes and register them
+    #   into a cluster, you must create an IAM role for those nodes to use
+    #   when they are launched. For more information, see [Amazon EKS node
+    #   IAM role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If you
+    #   specify `launchTemplate`, then don't specify [ `IamInstanceProfile`
+    #   ][2] in your launch template, or the node group deployment will
+    #   fail. For more information about using launch templates with Amazon
+    #   EKS, see [Launch template support][3] in the Amazon EKS User Guide.
     #
     #
     #
@@ -584,6 +1011,10 @@ module Aws::EKS
     #   The Kubernetes labels to be applied to the nodes in the node group
     #   when they are created.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] taints
+    #   The Kubernetes taints to be applied to the nodes in the node group.
+    #   @return [Array<Types::Taint>]
     #
     # @!attribute [rw] tags
     #   The metadata to apply to the node group to assist with
@@ -608,6 +1039,14 @@ module Aws::EKS
     #   meets the requirements in `launchTemplateSpecification`.
     #   @return [Types::LaunchTemplateSpecification]
     #
+    # @!attribute [rw] update_config
+    #   The node group update configuration.
+    #   @return [Types::NodegroupUpdateConfig]
+    #
+    # @!attribute [rw] capacity_type
+    #   The capacity type for your node group.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The Kubernetes version to use for your managed nodes. By default,
     #   the Kubernetes version of the cluster is used, and this is the only
@@ -623,15 +1062,15 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] release_version
-    #   The AMI version of the Amazon EKS-optimized AMI to use with your
+    #   The AMI version of the Amazon EKS optimized AMI to use with your
     #   node group. By default, the latest available AMI version for the
     #   node group's current Kubernetes version is used. For more
-    #   information, see [Amazon EKS-Optimized Linux AMI Versions][1] in the
-    #   *Amazon EKS User Guide*. If you specify `launchTemplate`, and your
-    #   launch template uses a custom AMI, then don't specify
-    #   `releaseVersion`, or the node group deployment will fail. For more
-    #   information about using launch templates with Amazon EKS, see
-    #   [Launch template support][2] in the Amazon EKS User Guide.
+    #   information, see [Amazon EKS optimized Amazon Linux 2 AMI
+    #   versions][1] in the *Amazon EKS User Guide*. If you specify
+    #   `launchTemplate`, and your launch template uses a custom AMI, then
+    #   don't specify `releaseVersion`, or the node group deployment will
+    #   fail. For more information about using launch templates with Amazon
+    #   EKS, see [Launch template support][2] in the Amazon EKS User Guide.
     #
     #
     #
@@ -652,9 +1091,12 @@ module Aws::EKS
       :remote_access,
       :node_role,
       :labels,
+      :taints,
       :tags,
       :client_request_token,
       :launch_template,
+      :update_config,
+      :capacity_type,
       :version,
       :release_version)
       SENSITIVE = []
@@ -669,6 +1111,48 @@ module Aws::EKS
     #
     class CreateNodegroupResponse < Struct.new(
       :nodegroup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAddonRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "ClusterName", # required
+    #         addon_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to delete the add-on from.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on. The name must match one of the names
+    #   returned by [ `ListAddons` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddonRequest AWS API Documentation
+    #
+    class DeleteAddonRequest < Struct.new(
+      :cluster_name,
+      :addon_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addon
+    #   An Amazon EKS add-on.
+    #   @return [Types::Addon]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddonResponse AWS API Documentation
+    #
+    class DeleteAddonResponse < Struct.new(
+      :addon)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -780,6 +1264,128 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAddonRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "ClusterName", # required
+    #         addon_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on. The name must match one of the names
+    #   returned by [ `ListAddons` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonRequest AWS API Documentation
+    #
+    class DescribeAddonRequest < Struct.new(
+      :cluster_name,
+      :addon_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addon
+    #   An Amazon EKS add-on.
+    #   @return [Types::Addon]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonResponse AWS API Documentation
+    #
+    class DescribeAddonResponse < Struct.new(
+      :addon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAddonVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         kubernetes_version: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #         addon_name: "String",
+    #       }
+    #
+    # @!attribute [rw] kubernetes_version
+    #   The Kubernetes versions that the add-on can be used with.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeAddonVersionsRequest` where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on. The name must match one of the names
+    #   returned by [ `ListAddons` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonVersionsRequest AWS API Documentation
+    #
+    class DescribeAddonVersionsRequest < Struct.new(
+      :kubernetes_version,
+      :max_results,
+      :next_token,
+      :addon_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addons
+    #   The list of available versions with Kubernetes version
+    #   compatibility.
+    #   @return [Array<Types::AddonInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeAddonVersionsResponse` where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonVersionsResponse AWS API Documentation
+    #
+    class DescribeAddonVersionsResponse < Struct.new(
+      :addons,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeClusterRequest
     #   data as a hash:
     #
@@ -849,6 +1455,48 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         identity_provider_config: { # required
+    #           type: "String", # required
+    #           name: "String", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The cluster name that the identity provider configuration is
+    #   associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_config
+    #   An object that represents an identity provider configuration.
+    #   @return [Types::IdentityProviderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeIdentityProviderConfigRequest AWS API Documentation
+    #
+    class DescribeIdentityProviderConfigRequest < Struct.new(
+      :cluster_name,
+      :identity_provider_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_provider_config
+    #   The object that represents an OpenID Connect (OIDC) identity
+    #   provider configuration.
+    #   @return [Types::IdentityProviderConfigResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeIdentityProviderConfigResponse AWS API Documentation
+    #
+    class DescribeIdentityProviderConfigResponse < Struct.new(
+      :identity_provider_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeNodegroupRequest
     #   data as a hash:
     #
@@ -893,6 +1541,7 @@ module Aws::EKS
     #         name: "String", # required
     #         update_id: "String", # required
     #         nodegroup_name: "String",
+    #         addon_name: "String",
     #       }
     #
     # @!attribute [rw] name
@@ -907,12 +1556,22 @@ module Aws::EKS
     #   The name of the Amazon EKS node group associated with the update.
     #   @return [String]
     #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on. The name must match one of the names
+    #   returned by [ `ListAddons` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateRequest AWS API Documentation
     #
     class DescribeUpdateRequest < Struct.new(
       :name,
       :update_id,
-      :nodegroup_name)
+      :nodegroup_name,
+      :addon_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -924,6 +1583,56 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateResponse AWS API Documentation
     #
     class DescribeUpdateResponse < Struct.new(
+      :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         identity_provider_config: { # required
+    #           type: "String", # required
+    #           name: "String", # required
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to disassociate an identity provider from.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_config
+    #   An object that represents an identity provider configuration.
+    #   @return [Types::IdentityProviderConfig]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateIdentityProviderConfigRequest AWS API Documentation
+    #
+    class DisassociateIdentityProviderConfigRequest < Struct.new(
+      :cluster_name,
+      :identity_provider_config,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateIdentityProviderConfigResponse AWS API Documentation
+    #
+    class DisassociateIdentityProviderConfigResponse < Struct.new(
       :update)
       SENSITIVE = []
       include Aws::Structure
@@ -947,8 +1656,8 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] provider
-    #   AWS Key Management Service (AWS KMS) customer master key (CMK).
-    #   Either the ARN or the alias can be used.
+    #   Key Management Service (KMS) key. Either the ARN or the alias can be
+    #   used.
     #   @return [Types::Provider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/EncryptionConfig AWS API Documentation
@@ -1007,7 +1716,7 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an AWS Fargate profile.
+    # An object representing an Fargate profile.
     #
     # @!attribute [rw] fargate_profile_name
     #   The name of the Fargate profile.
@@ -1074,7 +1783,7 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an AWS Fargate profile selector.
+    # An object representing an Fargate profile selector.
     #
     # @note When making an API call, you may pass FargateProfileSelector
     #   data as a hash:
@@ -1105,12 +1814,11 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an identity provider for authentication
-    # credentials.
+    # An object representing an identity provider.
     #
     # @!attribute [rw] oidc
-    #   The [OpenID Connect][1] identity provider information for the
-    #   cluster.
+    #   An object representing the [OpenID Connect][1] identity provider
+    #   information.
     #
     #
     #
@@ -1120,6 +1828,48 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Identity AWS API Documentation
     #
     class Identity < Struct.new(
+      :oidc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing an identity provider configuration.
+    #
+    # @note When making an API call, you may pass IdentityProviderConfig
+    #   data as a hash:
+    #
+    #       {
+    #         type: "String", # required
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of the identity provider configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the identity provider configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/IdentityProviderConfig AWS API Documentation
+    #
+    class IdentityProviderConfig < Struct.new(
+      :type,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents an identity configuration.
+    #
+    # @!attribute [rw] oidc
+    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   configuration.
+    #   @return [Types::OidcIdentityProviderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/IdentityProviderConfigResponse AWS API Documentation
+    #
+    class IdentityProviderConfigResponse < Struct.new(
       :oidc)
       SENSITIVE = []
       include Aws::Structure
@@ -1140,6 +1890,9 @@ module Aws::EKS
     #   The Fargate profile associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] addon_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1149,6 +1902,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :fargate_profile_name,
+      :addon_name,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1165,6 +1919,9 @@ module Aws::EKS
     #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] addon_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1173,6 +1930,7 @@ module Aws::EKS
     class InvalidRequestException < Struct.new(
       :cluster_name,
       :nodegroup_name,
+      :addon_name,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1183,16 +1941,21 @@ module Aws::EKS
     # @!attribute [rw] code
     #   A brief description of the error.
     #
+    #   * **AccessDenied**\: Amazon EKS or one or more of your managed nodes
+    #     is failing to authenticate or authorize with your Kubernetes
+    #     cluster API server.
+    #
+    #   * **AsgInstanceLaunchFailures**\: Your Auto Scaling group is
+    #     experiencing failures while attempting to launch instances.
+    #
     #   * **AutoScalingGroupNotFound**\: We couldn't find the Auto Scaling
     #     group associated with the managed node group. You may be able to
     #     recreate an Auto Scaling group with the same settings to recover.
     #
-    #   * **Ec2SecurityGroupNotFound**\: We couldn't find the cluster
-    #     security group for the cluster. You must recreate your cluster.
-    #
-    #   * **Ec2SecurityGroupDeletionFailure**\: We could not delete the
-    #     remote access security group for your managed node group. Remove
-    #     any dependencies from the security group.
+    #   * **ClusterUnreachable**\: Amazon EKS or one or more of your managed
+    #     nodes is unable to to communicate with your Kubernetes cluster API
+    #     server. This can happen if there are network disruptions or if API
+    #     servers are timing out processing requests.
     #
     #   * **Ec2LaunchTemplateNotFound**\: We couldn't find the Amazon EC2
     #     launch template for your managed node group. You may be able to
@@ -1202,6 +1965,13 @@ module Aws::EKS
     #     template version for your managed node group does not match the
     #     version that Amazon EKS created. You may be able to revert to the
     #     version that Amazon EKS created to recover.
+    #
+    #   * **Ec2SecurityGroupDeletionFailure**\: We could not delete the
+    #     remote access security group for your managed node group. Remove
+    #     any dependencies from the security group.
+    #
+    #   * **Ec2SecurityGroupNotFound**\: We couldn't find the cluster
+    #     security group for the cluster. You must recreate your cluster.
     #
     #   * **Ec2SubnetInvalidConfiguration**\: One or more Amazon EC2 subnets
     #     specified for a node group do not automatically assign public IP
@@ -1219,27 +1989,22 @@ module Aws::EKS
     #     managed node group. You may be able to recreate an IAM role with
     #     the same settings to recover.
     #
-    #   * **AsgInstanceLaunchFailures**\: Your Auto Scaling group is
-    #     experiencing failures while attempting to launch instances.
-    #
-    #   * **NodeCreationFailure**\: Your launched instances are unable to
-    #     register with your Amazon EKS cluster. Common causes of this
-    #     failure are insufficient [worker node IAM role][2] permissions or
-    #     lack of outbound internet access for the nodes.
-    #
-    #   * **InstanceLimitExceeded**\: Your AWS account is unable to launch
-    #     any more instances of the specified instance type. You may be able
-    #     to request an Amazon EC2 instance limit increase to recover.
+    #   * **InstanceLimitExceeded**\: Your Amazon Web Services account is
+    #     unable to launch any more instances of the specified instance
+    #     type. You may be able to request an Amazon EC2 instance limit
+    #     increase to recover.
     #
     #   * **InsufficientFreeAddresses**\: One or more of the subnets
     #     associated with your managed node group does not have enough
     #     available IP addresses for new nodes.
     #
-    #   * **AccessDenied**\: Amazon EKS or one or more of your managed nodes
-    #     is unable to communicate with your cluster API server.
-    #
     #   * **InternalFailure**\: These errors are usually caused by an Amazon
     #     EKS server-side issue.
+    #
+    #   * **NodeCreationFailure**\: Your launched instances are unable to
+    #     register with your Amazon EKS cluster. Common causes of this
+    #     failure are insufficient [node IAM role][2] permissions or lack of
+    #     outbound internet access for the nodes.
     #
     #
     #
@@ -1252,7 +2017,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resource_ids
-    #   The AWS resources that are afflicted by this issue.
+    #   The Amazon Web Services resources that are afflicted by this issue.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Issue AWS API Documentation
@@ -1306,10 +2071,11 @@ module Aws::EKS
     #
     # @!attribute [rw] service_ipv_4_cidr
     #   The CIDR block that Kubernetes service IP addresses are assigned
-    #   from. If you didn't specify a CIDR block, then Kubernetes assigns
-    #   addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR
-    #   blocks. If this was specified, then it was specified when the
-    #   cluster was created and it cannot be changed.
+    #   from. If you didn't specify a CIDR block when you created the
+    #   cluster, then Kubernetes assigns addresses from either the
+    #   10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified,
+    #   then it was specified when the cluster was created and it cannot be
+    #   changed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubernetesNetworkConfigResponse AWS API Documentation
@@ -1370,6 +2136,80 @@ module Aws::EKS
       :name,
       :version,
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAddonsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "ClusterName", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of add-on results returned by `ListAddonsRequest`
+    #   in paginated output. When you use this parameter,
+    #   `ListAddonsRequest` returns only `maxResults` results in a single
+    #   page along with a `nextToken` response element. You can see the
+    #   remaining results of the initial request by sending another
+    #   `ListAddonsRequest` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If you don't use this
+    #   parameter, `ListAddonsRequest` returns up to 100 results and a
+    #   `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListAddonsRequest` where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAddonsRequest AWS API Documentation
+    #
+    class ListAddonsRequest < Struct.new(
+      :cluster_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addons
+    #   A list of available add-ons.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListAddonsResponse` where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAddonsResponse AWS API Documentation
+    #
+    class ListAddonsResponse < Struct.new(
+      :addons,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1446,8 +2286,8 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that you would like to
-    #   listFargate profiles in.
+    #   The name of the Amazon EKS cluster that you would like to list
+    #   Fargate profiles in.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1497,6 +2337,71 @@ module Aws::EKS
     #
     class ListFargateProfilesResponse < Struct.new(
       :fargate_profile_names,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListIdentityProviderConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The cluster name that you want to list identity provider
+    #   configurations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of identity provider configurations returned by
+    #   `ListIdentityProviderConfigs` in paginated output. When you use this
+    #   parameter, `ListIdentityProviderConfigs` returns only `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another `ListIdentityProviderConfigs` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you
+    #   don't use this parameter, `ListIdentityProviderConfigs` returns up
+    #   to 100 results and a `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `IdentityProviderConfigsRequest` where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigsRequest AWS API Documentation
+    #
+    class ListIdentityProviderConfigsRequest < Struct.new(
+      :cluster_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_provider_configs
+    #   The identity provider configurations for the cluster.
+    #   @return [Array<Types::IdentityProviderConfig>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListIdentityProviderConfigsResponse` where `maxResults` was used
+    #   and the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigsResponse AWS API Documentation
+    #
+    class ListIdentityProviderConfigsResponse < Struct.new(
+      :identity_provider_configs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1606,6 +2511,7 @@ module Aws::EKS
     #       {
     #         name: "String", # required
     #         nodegroup_name: "String",
+    #         addon_name: "String",
     #         next_token: "String",
     #         max_results: 1,
     #       }
@@ -1616,6 +2522,10 @@ module Aws::EKS
     #
     # @!attribute [rw] nodegroup_name
     #   The name of the Amazon EKS managed node group to list updates for.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_name
+    #   The names of the installed add-ons that have available updates.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1641,6 +2551,7 @@ module Aws::EKS
     class ListUpdatesRequest < Struct.new(
       :name,
       :nodegroup_name,
+      :addon_name,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -1748,7 +2659,7 @@ module Aws::EKS
     #   If the node group was deployed using a launch template with a custom
     #   AMI, then this is the AMI ID that was specified in the launch
     #   template. For node groups that weren't deployed using a launch
-    #   template, this is the version of the Amazon EKS-optimized AMI that
+    #   template, this is the version of the Amazon EKS optimized AMI that
     #   the node group was deployed with.
     #   @return [String]
     #
@@ -1764,6 +2675,10 @@ module Aws::EKS
     #
     # @!attribute [rw] status
     #   The current status of the managed node group.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_type
+    #   The capacity type of your managed node group.
     #   @return [String]
     #
     # @!attribute [rw] scaling_config
@@ -1797,9 +2712,9 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] node_role
-    #   The IAM role associated with your node group. The Amazon EKS worker
-    #   node `kubelet` daemon makes calls to AWS APIs on your behalf. Worker
-    #   nodes receive permissions for these API calls through an IAM
+    #   The IAM role associated with your node group. The Amazon EKS node
+    #   `kubelet` daemon makes calls to Amazon Web Services APIs on your
+    #   behalf. Nodes receive permissions for these API calls through an IAM
     #   instance profile and associated policies.
     #   @return [String]
     #
@@ -1812,6 +2727,14 @@ module Aws::EKS
     #
     #    </note>
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] taints
+    #   The Kubernetes taints to be applied to the nodes in the node group
+    #   when they are created. Effect is one of `No_Schedule`,
+    #   `Prefer_No_Schedule`, or `No_Execute`. Kubernetes taints can be used
+    #   together with tolerations to control how workloads are scheduled to
+    #   your nodes.
+    #   @return [Array<Types::Taint>]
     #
     # @!attribute [rw] resources
     #   The resources associated with the node group, such as Auto Scaling
@@ -1828,6 +2751,10 @@ module Aws::EKS
     #   The health status of the node group. If there are issues with your
     #   node group's health, they are listed here.
     #   @return [Types::NodegroupHealth]
+    #
+    # @!attribute [rw] update_config
+    #   The node group update configuration.
+    #   @return [Types::NodegroupUpdateConfig]
     #
     # @!attribute [rw] launch_template
     #   If a launch template was used to create the node group, then this is
@@ -1853,6 +2780,7 @@ module Aws::EKS
       :created_at,
       :modified_at,
       :status,
+      :capacity_type,
       :scaling_config,
       :instance_types,
       :subnets,
@@ -1860,9 +2788,11 @@ module Aws::EKS
       :ami_type,
       :node_role,
       :labels,
+      :taints,
       :resources,
       :disk_size,
       :health,
+      :update_config,
       :launch_template,
       :tags)
       SENSITIVE = []
@@ -1892,7 +2822,7 @@ module Aws::EKS
     #
     # @!attribute [rw] remote_access_security_group
     #   The remote access security group associated with the node group.
-    #   This security group controls SSH access to the worker nodes.
+    #   This security group controls SSH access to the nodes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupResources AWS API Documentation
@@ -1905,9 +2835,9 @@ module Aws::EKS
     end
 
     # An object representing the scaling configuration details for the Auto
-    # Scaling group that is associated with your node group. If you specify
-    # a value for any property, then you must specify values for all of the
-    # properties.
+    # Scaling group that is associated with your node group. When creating a
+    # node group, you must specify all or none of the properties. When
+    # updating a node group, you can specify any or none of the properties.
     #
     # @note When making an API call, you may pass NodegroupScalingConfig
     #   data as a hash:
@@ -1919,19 +2849,24 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] min_size
-    #   The minimum number of worker nodes that the managed node group can
-    #   scale in to. This number must be greater than zero.
+    #   The minimum number of nodes that the managed node group can scale in
+    #   to.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
-    #   The maximum number of worker nodes that the managed node group can
-    #   scale out to. Managed node groups can support up to 100 nodes by
-    #   default.
+    #   The maximum number of nodes that the managed node group can scale
+    #   out to. For information about the maximum number that you can
+    #   specify, see [Amazon EKS service quotas][1] in the *Amazon EKS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html
     #   @return [Integer]
     #
     # @!attribute [rw] desired_size
-    #   The current number of worker nodes that the managed node group
-    #   should maintain.
+    #   The current number of nodes that the managed node group should
+    #   maintain.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupScalingConfig AWS API Documentation
@@ -1940,6 +2875,39 @@ module Aws::EKS
       :min_size,
       :max_size,
       :desired_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The node group update configuration.
+    #
+    # @note When making an API call, you may pass NodegroupUpdateConfig
+    #   data as a hash:
+    #
+    #       {
+    #         max_unavailable: 1,
+    #         max_unavailable_percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] max_unavailable
+    #   The maximum number of nodes unavailable at once during a version
+    #   update. Nodes will be updated in parallel. This value or
+    #   `maxUnavailablePercentage` is required to have a value.The maximum
+    #   number is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_unavailable_percentage
+    #   The maximum percentage of nodes unavailable during a version update.
+    #   This percentage of nodes will be updated in parallel, up to 100
+    #   nodes at once. This value or `maxUnavailable` is required to have a
+    #   value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupUpdateConfig AWS API Documentation
+    #
+    class NodegroupUpdateConfig < Struct.new(
+      :max_unavailable,
+      :max_unavailable_percentage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1958,15 +2926,15 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing the [OpenID Connect][1] identity provider
-    # information for the cluster.
+    # An object representing the [OpenID Connect][1] (OIDC) identity
+    # provider information for the cluster.
     #
     #
     #
     # [1]: https://openid.net/connect/
     #
     # @!attribute [rw] issuer
-    #   The issuer URL for the OpenID Connect identity provider.
+    #   The issuer URL for the OIDC identity provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OIDC AWS API Documentation
@@ -1977,8 +2945,189 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # Identifies the AWS Key Management Service (AWS KMS) customer master
-    # key (CMK) used to encrypt the secrets.
+    # An object that represents the configuration for an OpenID Connect
+    # (OIDC) identity provider.
+    #
+    # @!attribute [rw] identity_provider_config_name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_config_arn
+    #   The ARN of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The cluster that the configuration is associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The URL of the OIDC identity provider that allows the API server to
+    #   discover public signing keys for verifying tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   This is also known as *audience*. The ID of the client application
+    #   that makes authentication requests to the OIDC identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_claim
+    #   The JSON Web token (JWT) claim that is used as the username.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_prefix
+    #   The prefix that is prepended to username claims to prevent clashes
+    #   with existing names. The prefix can't contain `system:`
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_claim
+    #   The JSON web token (JWT) claim that the provider uses to return your
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_prefix
+    #   The prefix that is prepended to group claims to prevent clashes with
+    #   existing names (such as `system:` groups). For example, the value`
+    #   oidc:` creates group names like `oidc:engineering` and `oidc:infra`.
+    #   The prefix can't contain `system:`
+    #   @return [String]
+    #
+    # @!attribute [rw] required_claims
+    #   The key-value pairs that describe required claims in the identity
+    #   token. If set, each claim is verified to be present in the token
+    #   with a matching value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the provider configuration to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you defined.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the OIDC identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OidcIdentityProviderConfig AWS API Documentation
+    #
+    class OidcIdentityProviderConfig < Struct.new(
+      :identity_provider_config_name,
+      :identity_provider_config_arn,
+      :cluster_name,
+      :issuer_url,
+      :client_id,
+      :username_claim,
+      :username_prefix,
+      :groups_claim,
+      :groups_prefix,
+      :required_claims,
+      :tags,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing an OpenID Connect (OIDC) configuration. Before
+    # associating an OIDC identity provider to your cluster, review the
+    # considerations in [Authenticating users for your cluster from an
+    # OpenID Connect identity provider][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html
+    #
+    # @note When making an API call, you may pass OidcIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_provider_config_name: "String", # required
+    #         issuer_url: "String", # required
+    #         client_id: "String", # required
+    #         username_claim: "String",
+    #         username_prefix: "String",
+    #         groups_claim: "String",
+    #         groups_prefix: "String",
+    #         required_claims: {
+    #           "requiredClaimsKey" => "requiredClaimsValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identity_provider_config_name
+    #   The name of the OIDC provider configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The URL of the OpenID identity provider that allows the API server
+    #   to discover public signing keys for verifying tokens. The URL must
+    #   begin with `https://` and should correspond to the `iss` claim in
+    #   the provider's OIDC ID tokens. Per the OIDC standard, path
+    #   components are allowed but query parameters are not. Typically the
+    #   URL consists of only a hostname, like `https://server.example.org`
+    #   or `https://example.com`. This URL should point to the level below
+    #   `.well-known/openid-configuration` and must be publicly accessible
+    #   over the internet.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   This is also known as *audience*. The ID for the client application
+    #   that makes authentication requests to the OpenID identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_claim
+    #   The JSON Web Token (JWT) claim to use as the username. The default
+    #   is `sub`, which is expected to be a unique identifier of the end
+    #   user. You can choose other claims, such as `email` or `name`,
+    #   depending on the OpenID identity provider. Claims other than `email`
+    #   are prefixed with the issuer URL to prevent naming clashes with
+    #   other plug-ins.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_prefix
+    #   The prefix that is prepended to username claims to prevent clashes
+    #   with existing names. If you do not provide this field, and
+    #   `username` is a value other than `email`, the prefix defaults to
+    #   `issuerurl#`. You can use the value `-` to disable all prefixing.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_claim
+    #   The JWT claim that the provider uses to return your groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_prefix
+    #   The prefix that is prepended to group claims to prevent clashes with
+    #   existing names (such as `system:` groups). For example, the value`
+    #   oidc:` will create group names like `oidc:engineering` and
+    #   `oidc:infra`.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_claims
+    #   The key value pairs that describe required claims in the identity
+    #   token. If set, each claim is verified to be present in the token
+    #   with a matching value. For the maximum number of claims that you can
+    #   require, see [Amazon EKS service quotas][1] in the *Amazon EKS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OidcIdentityProviderConfigRequest AWS API Documentation
+    #
+    class OidcIdentityProviderConfigRequest < Struct.new(
+      :identity_provider_config_name,
+      :issuer_url,
+      :client_id,
+      :username_claim,
+      :username_prefix,
+      :groups_claim,
+      :groups_prefix,
+      :required_claims)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the Key Management Service (KMS) key used to encrypt the
+    # secrets.
     #
     # @note When making an API call, you may pass Provider
     #   data as a hash:
@@ -1988,12 +3137,12 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] key_arn
-    #   Amazon Resource Name (ARN) or alias of the customer master key
-    #   (CMK). The CMK must be symmetric, created in the same region as the
-    #   cluster, and if the CMK was created in a different account, the user
-    #   must have access to the CMK. For more information, see [Allowing
-    #   Users in Other Accounts to Use a CMK][1] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must
+    #   be symmetric, created in the same region as the cluster, and if the
+    #   KMS key was created in a different account, the user must have
+    #   access to the KMS key. For more information, see [Allowing Users in
+    #   Other Accounts to Use a KMS key][1] in the *Key Management Service
+    #   Developer Guide*.
     #
     #
     #
@@ -2021,8 +3170,8 @@ module Aws::EKS
     #
     # @!attribute [rw] ec2_ssh_key
     #   The Amazon EC2 SSH key that provides access for SSH communication
-    #   with the worker nodes in the managed node group. For more
-    #   information, see [Amazon EC2 Key Pairs][1] in the *Amazon Elastic
+    #   with the nodes in the managed node group. For more information, see
+    #   [Amazon EC2 key pairs and Linux instances][1] in the *Amazon Elastic
     #   Compute Cloud User Guide for Linux Instances*.
     #
     #
@@ -2032,11 +3181,11 @@ module Aws::EKS
     #
     # @!attribute [rw] source_security_groups
     #   The security groups that are allowed SSH access (port 22) to the
-    #   worker nodes. If you specify an Amazon EC2 SSH key but do not
-    #   specify a source security group when you create a managed node
-    #   group, then port 22 on the worker nodes is opened to the internet
-    #   (0.0.0.0/0). For more information, see [Security Groups for Your
-    #   VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
+    #   nodes. If you specify an Amazon EC2 SSH key but do not specify a
+    #   source security group when you create a managed node group, then
+    #   port 22 on the nodes is opened to the internet (0.0.0.0/0). For more
+    #   information, see [Security Groups for Your VPC][1] in the *Amazon
+    #   Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -2062,6 +3211,9 @@ module Aws::EKS
     #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] addon_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2070,6 +3222,7 @@ module Aws::EKS
     class ResourceInUseException < Struct.new(
       :cluster_name,
       :nodegroup_name,
+      :addon_name,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2115,6 +3268,9 @@ module Aws::EKS
     #   The Fargate profile associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] addon_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2124,6 +3280,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :fargate_profile_name,
+      :addon_name,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2139,6 +3296,9 @@ module Aws::EKS
     #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] addon_name
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2147,6 +3307,7 @@ module Aws::EKS
     class ServerException < Struct.new(
       :cluster_name,
       :nodegroup_name,
+      :addon_name,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2198,6 +3359,39 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # A property that allows a node to repel a set of pods.
+    #
+    # @note When making an API call, you may pass Taint
+    #   data as a hash:
+    #
+    #       {
+    #         key: "taintKey",
+    #         value: "taintValue",
+    #         effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the taint.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the taint.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the taint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Taint AWS API Documentation
+    #
+    class Taint < Struct.new(
+      :key,
+      :value,
+      :effect)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # At least one of your specified cluster subnets is in an Availability
     # Zone that does not support Amazon EKS. The exception output specifies
@@ -2302,6 +3496,99 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateAddonRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "ClusterName", # required
+    #         addon_name: "String", # required
+    #         addon_version: "String",
+    #         service_account_role_arn: "RoleArn",
+    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_name
+    #   The name of the add-on. The name must match one of the names
+    #   returned by [ `ListAddons` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_version
+    #   The version of the add-on. The version must match one of the
+    #   versions returned by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_role_arn
+    #   The Amazon Resource Name (ARN) of an existing IAM role to bind to
+    #   the add-on's service account. The role must be assigned the IAM
+    #   permissions required by the add-on. If you don't specify an
+    #   existing IAM role, then the add-on uses the permissions assigned to
+    #   the node IAM role. For more information, see [Amazon EKS node IAM
+    #   role][1] in the *Amazon EKS User Guide*.
+    #
+    #   <note markdown="1"> To specify an existing IAM role, you must have an IAM OpenID Connect
+    #   (OIDC) provider created for your cluster. For more information, see
+    #   [Enabling IAM roles for service accounts on your cluster][2] in the
+    #   *Amazon EKS User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_conflicts
+    #   How to resolve parameter value conflicts when applying the new
+    #   version of the add-on to the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAddonRequest AWS API Documentation
+    #
+    class UpdateAddonRequest < Struct.new(
+      :cluster_name,
+      :addon_name,
+      :addon_version,
+      :service_account_role_arn,
+      :resolve_conflicts,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAddonResponse AWS API Documentation
+    #
+    class UpdateAddonResponse < Struct.new(
+      :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateClusterConfigRequest
     #   data as a hash:
     #
@@ -2338,12 +3625,12 @@ module Aws::EKS
     #   Enable or disable exporting the Kubernetes control plane logs for
     #   your cluster to CloudWatch Logs. By default, cluster control plane
     #   logs aren't exported to CloudWatch Logs. For more information, see
-    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   [Amazon EKS cluster control plane logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
-    #   [Amazon CloudWatch Pricing][2].
+    #   [CloudWatch Pricing][2].
     #
     #    </note>
     #
@@ -2473,10 +3760,30 @@ module Aws::EKS
     #           },
     #           remove_labels: ["String"],
     #         },
+    #         taints: {
+    #           add_or_update_taints: [
+    #             {
+    #               key: "taintKey",
+    #               value: "taintValue",
+    #               effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #             },
+    #           ],
+    #           remove_taints: [
+    #             {
+    #               key: "taintKey",
+    #               value: "taintValue",
+    #               effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #             },
+    #           ],
+    #         },
     #         scaling_config: {
     #           min_size: 1,
     #           max_size: 1,
     #           desired_size: 1,
+    #         },
+    #         update_config: {
+    #           max_unavailable: 1,
+    #           max_unavailable_percentage: 1,
     #         },
     #         client_request_token: "String",
     #       }
@@ -2495,10 +3802,19 @@ module Aws::EKS
     #   after the update.
     #   @return [Types::UpdateLabelsPayload]
     #
+    # @!attribute [rw] taints
+    #   The Kubernetes taints to be applied to the nodes in the node group
+    #   after the update.
+    #   @return [Types::UpdateTaintsPayload]
+    #
     # @!attribute [rw] scaling_config
     #   The scaling configuration details for the Auto Scaling group after
     #   the update.
     #   @return [Types::NodegroupScalingConfig]
+    #
+    # @!attribute [rw] update_config
+    #   The node group update configuration.
+    #   @return [Types::NodegroupUpdateConfig]
     #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -2514,7 +3830,9 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :labels,
+      :taints,
       :scaling_config,
+      :update_config,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2575,15 +3893,15 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] release_version
-    #   The AMI version of the Amazon EKS-optimized AMI to use for the
+    #   The AMI version of the Amazon EKS optimized AMI to use for the
     #   update. By default, the latest available AMI version for the node
     #   group's Kubernetes version is used. For more information, see
-    #   [Amazon EKS-Optimized Linux AMI Versions ][1] in the *Amazon EKS
-    #   User Guide*. If you specify `launchTemplate`, and your launch
-    #   template uses a custom AMI, then don't specify `releaseVersion`, or
-    #   the node group update will fail. For more information about using
-    #   launch templates with Amazon EKS, see [Launch template support][2]
-    #   in the Amazon EKS User Guide.
+    #   [Amazon EKS optimized Amazon Linux 2 AMI versions ][1] in the
+    #   *Amazon EKS User Guide*. If you specify `launchTemplate`, and your
+    #   launch template uses a custom AMI, then don't specify
+    #   `releaseVersion`, or the node group update will fail. For more
+    #   information about using launch templates with Amazon EKS, see
+    #   [Launch template support][2] in the Amazon EKS User Guide.
     #
     #
     #
@@ -2659,6 +3977,45 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing the details of an update to a taints payload.
+    #
+    # @note When making an API call, you may pass UpdateTaintsPayload
+    #   data as a hash:
+    #
+    #       {
+    #         add_or_update_taints: [
+    #           {
+    #             key: "taintKey",
+    #             value: "taintValue",
+    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #           },
+    #         ],
+    #         remove_taints: [
+    #           {
+    #             key: "taintKey",
+    #             value: "taintValue",
+    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] add_or_update_taints
+    #   Kubernetes taints to be added or updated.
+    #   @return [Array<Types::Taint>]
+    #
+    # @!attribute [rw] remove_taints
+    #   Kubernetes taints to be removed.
+    #   @return [Array<Types::Taint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateTaintsPayload AWS API Documentation
+    #
+    class UpdateTaintsPayload < Struct.new(
+      :add_or_update_taints,
+      :remove_taints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing the VPC configuration to use for an Amazon EKS
     # cluster.
     #
@@ -2674,18 +4031,29 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] subnet_ids
-    #   Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates
+    #   Specify subnets for your Amazon EKS nodes. Amazon EKS creates
     #   cross-account elastic network interfaces in these subnets to allow
-    #   communication between your worker nodes and the Kubernetes control
-    #   plane.
+    #   communication between your nodes and the Kubernetes control plane.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   Specify one or more security groups for the cross-account elastic
-    #   network interfaces that Amazon EKS creates to use to allow
-    #   communication between your worker nodes and the Kubernetes control
-    #   plane. If you don't specify a security group, the default security
-    #   group for your VPC is used.
+    #   network interfaces that Amazon EKS creates to use that allow
+    #   communication between your nodes and the Kubernetes control plane.
+    #   If you don't specify any security groups, then familiarize yourself
+    #   with the difference between Amazon EKS defaults for clusters
+    #   deployed with Kubernetes:
+    #
+    #   * 1\.14 Amazon EKS platform version `eks.2` and earlier
+    #
+    #   * 1\.14 Amazon EKS platform version `eks.3` and later
+    #
+    #   For more information, see [Amazon EKS security group
+    #   considerations][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] endpoint_public_access
@@ -2694,8 +4062,8 @@ module Aws::EKS
     #   access, your cluster's Kubernetes API server can only receive
     #   requests from within the cluster VPC. The default value for this
     #   parameter is `true`, which enables public access for your Kubernetes
-    #   API server. For more information, see [Amazon EKS Cluster Endpoint
-    #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   API server. For more information, see [Amazon EKS cluster endpoint
+    #   access control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -2708,12 +4076,11 @@ module Aws::EKS
     #   access, Kubernetes API requests from within your cluster's VPC use
     #   the private VPC endpoint. The default value for this parameter is
     #   `false`, which disables private access for your Kubernetes API
-    #   server. If you disable private access and you have worker nodes or
-    #   AWS Fargate pods in the cluster, then ensure that
-    #   `publicAccessCidrs` includes the necessary CIDR blocks for
-    #   communication with the worker nodes or Fargate pods. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
-    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   server. If you disable private access and you have nodes or Fargate
+    #   pods in the cluster, then ensure that `publicAccessCidrs` includes
+    #   the necessary CIDR blocks for communication with the nodes or
+    #   Fargate pods. For more information, see [Amazon EKS cluster endpoint
+    #   access control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -2725,9 +4092,9 @@ module Aws::EKS
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the CIDR blocks that you specify is denied. The
     #   default value is `0.0.0.0/0`. If you've disabled private endpoint
-    #   access and you have worker nodes or AWS Fargate pods in the cluster,
-    #   then ensure that you specify the necessary CIDR blocks. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
+    #   access and you have nodes or Fargate pods in the cluster, then
+    #   ensure that you specify the necessary CIDR blocks. For more
+    #   information, see [Amazon EKS cluster endpoint access control][1] in
     #   the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
@@ -2757,7 +4124,7 @@ module Aws::EKS
     # @!attribute [rw] security_group_ids
     #   The security groups associated with the cross-account elastic
     #   network interfaces that are used to allow communication between your
-    #   worker nodes and the Kubernetes control plane.
+    #   nodes and the Kubernetes control plane.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cluster_security_group_id
@@ -2782,12 +4149,12 @@ module Aws::EKS
     #   endpoint is enabled. If the Amazon EKS private API server endpoint
     #   is enabled, Kubernetes API requests that originate from within your
     #   cluster's VPC use the private VPC endpoint instead of traversing
-    #   the internet. If this value is disabled and you have worker nodes or
-    #   AWS Fargate pods in the cluster, then ensure that
-    #   `publicAccessCidrs` includes the necessary CIDR blocks for
-    #   communication with the worker nodes or Fargate pods. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
-    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   the internet. If this value is disabled and you have nodes or
+    #   Fargate pods in the cluster, then ensure that `publicAccessCidrs`
+    #   includes the necessary CIDR blocks for communication with the nodes
+    #   or Fargate pods. For more information, see [Amazon EKS cluster
+    #   endpoint access control][1] in the <i> <i>Amazon EKS User Guide</i>
+    #   </i>.
     #
     #
     #
@@ -2799,10 +4166,10 @@ module Aws::EKS
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the listed CIDR blocks is denied. The default
     #   value is `0.0.0.0/0`. If you've disabled private endpoint access
-    #   and you have worker nodes or AWS Fargate pods in the cluster, then
-    #   ensure that the necessary CIDR blocks are listed. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
-    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   and you have nodes or Fargate pods in the cluster, then ensure that
+    #   the necessary CIDR blocks are listed. For more information, see
+    #   [Amazon EKS cluster endpoint access control][1] in the <i> <i>Amazon
+    #   EKS User Guide</i> </i>.
     #
     #
     #

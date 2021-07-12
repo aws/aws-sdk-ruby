@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -62,6 +62,7 @@ module Aws::RAM
     #         permission_arn: "String", # required
     #         replace: false,
     #         client_token: "String",
+    #         permission_version: 1,
     #       }
     #
     # @!attribute [rw] resource_share_arn
@@ -69,8 +70,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_arn
-    #   The ARN of the AWS RAM permission to associate with the resource
-    #   share.
+    #   The Amazon Resource Name (ARN) of the AWS RAM permissions to
+    #   associate with the resource share.
     #   @return [String]
     #
     # @!attribute [rw] replace
@@ -85,13 +86,19 @@ module Aws::RAM
     #   idempotency of the request.
     #   @return [String]
     #
+    # @!attribute [rw] permission_version
+    #   The version of the AWS RAM permissions to associate with the
+    #   resource share.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceSharePermissionRequest AWS API Documentation
     #
     class AssociateResourceSharePermissionRequest < Struct.new(
       :resource_share_arn,
       :permission_arn,
       :replace,
-      :client_token)
+      :client_token,
+      :permission_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -133,7 +140,9 @@ module Aws::RAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
-    #   The principals.
+    #   The principals to associate with the resource share. The possible
+    #   values are IDs of AWS accounts, and the ARNs of organizational units
+    #   (OU) or organizations from AWS Organizations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
@@ -671,10 +680,11 @@ module Aws::RAM
     #         ],
     #         next_token: "String",
     #         max_results: 1,
+    #         permission_arn: "String",
     #       }
     #
     # @!attribute [rw] resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   The ARNs of the resource shares.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_share_status
@@ -703,6 +713,11 @@ module Aws::RAM
     #   `nextToken` value.
     #   @return [Integer]
     #
+    # @!attribute [rw] permission_arn
+    #   The Amazon Resource Name (ARN) of the AWS RAM permission that is
+    #   associated with the resource share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceSharesRequest AWS API Documentation
     #
     class GetResourceSharesRequest < Struct.new(
@@ -712,7 +727,8 @@ module Aws::RAM
       :name,
       :tag_filters,
       :next_token,
-      :max_results)
+      :max_results,
+      :permission_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -960,12 +976,20 @@ module Aws::RAM
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration`
-    #   I `resource-groups:Group` \| `rds:Cluster` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #   @return [String]
     #
@@ -1135,12 +1159,20 @@ module Aws::RAM
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration`
-    #   I `resource-groups:Group` \| `rds:Cluster` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #   @return [String]
     #
@@ -1577,6 +1609,11 @@ module Aws::RAM
     #   [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html
     #   @return [Array<Types::ResourceShareAssociation>]
     #
+    # @!attribute [rw] receiver_arn
+    #   The Amazon Resource Name (ARN) of the IAM user or IAM role that
+    #   received the invitation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareInvitation AWS API Documentation
     #
     class ResourceShareInvitation < Struct.new(
@@ -1587,7 +1624,8 @@ module Aws::RAM
       :receiver_account_id,
       :invitation_timestamp,
       :status,
-      :resource_share_associations)
+      :resource_share_associations,
+      :receiver_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1668,8 +1706,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] default_version
-    #   The identifier for the version of the permission that is set as the
-    #   default version.
+    #   Specifies whether the version of the permission is set to the
+    #   default version for this permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -1695,6 +1733,11 @@ module Aws::RAM
     #   The date and time when the permission was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] is_resource_type_default
+    #   Specifies whether the version of the permission is set to the
+    #   default version for this resource type.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionDetail AWS API Documentation
     #
     class ResourceSharePermissionDetail < Struct.new(
@@ -1705,7 +1748,8 @@ module Aws::RAM
       :resource_type,
       :permission,
       :creation_time,
-      :last_updated_time)
+      :last_updated_time,
+      :is_resource_type_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1722,8 +1766,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] default_version
-    #   The identifier for the version of the permission that is set as the
-    #   default version.
+    #   Specifies whether the version of the permission is set to the
+    #   default version for this permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -1746,6 +1790,11 @@ module Aws::RAM
     #   The date and time when the permission was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] is_resource_type_default
+    #   Specifies whether the version of the permission is set to the
+    #   default version for this resource type.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionSummary AWS API Documentation
     #
     class ResourceSharePermissionSummary < Struct.new(
@@ -1756,7 +1805,8 @@ module Aws::RAM
       :resource_type,
       :status,
       :creation_time,
-      :last_updated_time)
+      :last_updated_time,
+      :is_resource_type_default)
       SENSITIVE = []
       include Aws::Structure
     end

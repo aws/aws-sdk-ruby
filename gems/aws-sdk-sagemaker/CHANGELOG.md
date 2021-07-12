@@ -1,6 +1,116 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2021-07-09)
+------------------
+
+* Feature - Releasing new APIs related to Tuning steps in model building pipelines.
+
+1.92.0 (2021-07-01)
+------------------
+
+* Feature - SageMaker model registry now supports up to 5 containers and associated environment variables.
+
+1.91.0 (2021-06-28)
+------------------
+
+* Feature - Sagemaker Neo now supports running compilation jobs using customer's Amazon VPC
+
+1.90.0 (2021-06-17)
+------------------
+
+* Feature - Enable ml.g4dn instance types for SageMaker Batch Transform and SageMaker Processing
+
+1.89.0 (2021-06-10)
+------------------
+
+* Feature - Using SageMaker Edge Manager with AWS IoT Greengrass v2 simplifies accessing, maintaining, and deploying models to your devices. You can now create deployable IoT Greengrass components during edge packaging jobs. You can choose to create a device fleet with or without creating an AWS IoT role alias.
+
+1.88.0 (2021-06-07)
+------------------
+
+* Feature - AWS SageMaker - Releasing new APIs related to Callback steps in model building pipelines. Adds experiment integration to model building pipelines.
+
+1.87.0 (2021-05-05)
+------------------
+
+* Feature - Amazon SageMaker Autopilot now provides the ability to automatically deploy the best model to an endpoint
+
+1.86.0 (2021-05-04)
+------------------
+
+* Feature - Enable retrying Training and Tuning Jobs that fail with InternalServerError by setting RetryStrategy.
+
+1.85.0 (2021-03-30)
+------------------
+
+* Feature - Amazon SageMaker Autopilot now supports 1) feature importance reports for AutoML jobs and 2) PartialFailures for AutoML jobs
+
+1.84.0 (2021-03-25)
+------------------
+
+* Feature - This feature allows customer to specify the environment variables in their CreateTrainingJob requests.
+
+1.83.0 (2021-03-19)
+------------------
+
+* Feature - Adding authentication support for pulling images stored in private Docker registries to build containers for real-time inference.
+
+1.82.0 (2021-03-17)
+------------------
+
+* Feature - Support new target device ml_eia2 in SageMaker CreateCompilationJob API
+
+1.81.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2021-03-04)
+------------------
+
+* Feature - This release adds the ResolvedOutputS3Uri to the DescribeFeatureGroup API to indicate the S3 prefix where offline data is stored in a feature group
+
+1.79.0 (2021-02-22)
+------------------
+
+* Feature - Amazon SageMaker now supports core dump for SageMaker Endpoints and direct invocation of a single container in a SageMaker Endpoint that hosts multiple containers.
+
+1.78.0 (2021-02-18)
+------------------
+
+* Feature - This release adds expires-in-seconds parameter to the CreatePresignedDomainUrl API for support of a configurable TTL.
+
+1.77.0 (2021-02-09)
+------------------
+
+* Feature - Add a new optional FrameworkVersion field to Sagemaker Neo CreateCompilationJob API
+
+1.76.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2021-01-14)
+------------------
+
+* Feature - This feature allows customers to enable/disable model caching on Multi-Model endpoints.
+
+1.74.0 (2020-12-08)
+------------------
+
+* Feature - This feature helps you monitor model performance characteristics such as accuracy, identify undesired bias in your ML models, and explain model decisions better with explainability drift detection.
+
+1.73.0 (2020-12-01)
+------------------
+
+* Feature - Amazon SageMaker Pipelines for ML workflows. Amazon SageMaker Feature Store, a fully managed repository for ML features.
+
+1.72.0 (2020-11-16)
+------------------
+
+* Feature - This feature enables customers to encrypt their Amazon SageMaker Studio storage volumes with customer master keys (CMKs) managed by them in AWS Key Management Service (KMS).
+
 1.71.0 (2020-10-26)
 ------------------
 

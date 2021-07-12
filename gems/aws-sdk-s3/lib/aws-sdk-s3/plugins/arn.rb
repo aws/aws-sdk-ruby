@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../arn/access_point_arn'
+require_relative '../arn/object_lambda_arn'
 require_relative '../arn/outpost_access_point_arn'
 
 module Aws
@@ -22,11 +23,36 @@ be made. Set to `false` to use the client's region instead.
           resolve_s3_use_arn_region(cfg)
         end
 
+        # param validator is validate:50
+        # endpoint is build:90 (populates the URI for the first time)
+        # endpoint pattern is build:10
         def add_handlers(handlers, _config)
-          handlers.add(Handler)
+          handlers.add(ARNHandler, step: :validate, priority: 75)
+          handlers.add(UrlHandler)
         end
 
-        class Handler < Seahorse::Client::Handler
+        # After extracting out any ARN input, resolve a new URL with it.
+        class UrlHandler < Seahorse::Client::Handler
+          def call(context)
+            if context.metadata[:s3_arn]
+              ARN.resolve_url!(
+                context.http_request.endpoint,
+                context.metadata[:s3_arn][:arn],
+                context.metadata[:s3_arn][:resolved_region],
+                context.metadata[:s3_arn][:fips],
+                context.metadata[:s3_arn][:dualstack],
+                # if regional_endpoint is false, a custom endpoint was provided
+                # in this case, we want to prefix the endpoint using the ARN
+                !context.config.regional_endpoint
+              )
+            end
+            @handler.call(context)
+          end
+        end
+
+        # This plugin will extract out any ARN input and set context for other
+        # plugins to use without having to translate the ARN again.
+        class ARNHandler < Seahorse::Client::Handler
           def call(context)
             bucket_member = _bucket_member(context.operation.input.shape)
             if bucket_member && (bucket = context.params[bucket_member])
@@ -38,12 +64,19 @@ be made. Set to `false` to use the client's region instead.
               if arn
                 validate_config!(context, arn)
 
-                ARN.resolve_url!(
-                  context.http_request.endpoint,
-                  arn,
-                  resolved_region,
-                  extract_dualstack_config!(context)
-                )
+                fips = false
+                if resolved_region.include?('fips')
+                  fips = true
+                  resolved_region = resolved_region.gsub('fips-', '')
+                                                   .gsub('-fips', '')
+                end
+
+                context.metadata[:s3_arn] = {
+                  arn: arn,
+                  resolved_region: resolved_region,
+                  fips: fips,
+                  dualstack: extract_dualstack_config!(context)
+                }
               end
             end
             @handler.call(context)
@@ -66,28 +99,22 @@ be made. Set to `false` to use the client's region instead.
           end
 
           def validate_config!(context, arn)
-            unless context.config.regional_endpoint
-              raise ArgumentError,
-                    'Cannot provide both an Access Point ARN and setting '\
-                    ':endpoint.'
-            end
-
             if context.config.force_path_style
               raise ArgumentError,
-                    'Cannot provide both an Access Point ARN and setting '\
-                    ':force_path_style to true.'
+                    'Cannot provide an Access Point ARN when '\
+                    '`:force_path_style` is set to true.'
             end
 
             if context.config.use_accelerate_endpoint
               raise ArgumentError,
-                    'Cannot provide both an Access Point ARN and setting '\
-                    ':use_accelerate_endpoint to true.'
+                    'Cannot provide an Access Point ARN when '\
+                    '`:use_accelerate_endpoint` is set to true.'
             end
 
             if !arn.support_dualstack? && context[:use_dualstack_endpoint]
               raise ArgumentError,
-                    'Cannot provide both an Outpost Access Point ARN and '\
-                    'setting :use_dualstack_endpoint to true.'
+                    'Cannot provide an Outpost Access Point ARN when '\
+                    '`:use_dualstack_endpoint` is set to true.'
             end
           end
         end
@@ -97,18 +124,10 @@ be made. Set to `false` to use the client's region instead.
           def resolve_arn!(member_value, region, use_arn_region)
             if Aws::ARNParser.arn?(member_value)
               arn = Aws::ARNParser.parse(member_value)
-              if arn.resource.start_with?('accesspoint')
-                s3_arn = Aws::S3::AccessPointARN.new(arn.to_h)
-              elsif arn.resource.start_with?('outpost')
-                s3_arn = Aws::S3::OutpostAccessPointARN.new(arn.to_h)
-              else
-                raise ArgumentError,
-                      'Only Access Point and Outpost Access Point type ARNs '\
-                      'are currently supported.'
-              end
+              s3_arn = resolve_arn_type!(arn)
               s3_arn.validate_arn!
               validate_region_config!(s3_arn, region, use_arn_region)
-              region = s3_arn.region if use_arn_region
+              region = s3_arn.region if use_arn_region && !region.include?('fips')
               [region, s3_arn]
             else
               [region]
@@ -116,13 +135,29 @@ be made. Set to `false` to use the client's region instead.
           end
 
           # @api private
-          def resolve_url!(url, arn, region, dualstack = false)
-            url.host = arn.host_url(region, dualstack)
+          def resolve_url!(url, arn, region, fips = false, dualstack = false, has_custom_endpoint = false)
+            custom_endpoint = url.host if has_custom_endpoint
+            url.host = arn.host_url(region, fips, dualstack, custom_endpoint)
             url.path = url_path(url.path, arn)
             url
           end
 
           private
+
+          def resolve_arn_type!(arn)
+            case arn.service
+            when 's3'
+              Aws::S3::AccessPointARN.new(arn.to_h)
+            when 's3-outposts'
+              Aws::S3::OutpostAccessPointARN.new(arn.to_h)
+            when 's3-object-lambda'
+              Aws::S3::ObjectLambdaARN.new(arn.to_h)
+            else
+              raise ArgumentError,
+                    'Only Access Point, Outposts, and Object Lambdas ARNs '\
+                    'are currently supported.'
+            end
+          end
 
           def resolve_s3_use_arn_region(cfg)
             value = ENV['AWS_S3_USE_ARN_REGION'] ||
@@ -132,15 +167,14 @@ be made. Set to `false` to use the client's region instead.
             # Raise if provided value is not true or false
             if value.nil?
               raise ArgumentError,
-                    'Must provide either `true` or `false` for '\
-                    's3_use_arn_region profile option or for '\
-                    "ENV['AWS_S3_USE_ARN_REGION']"
+                    'Must provide either `true` or `false` for the '\
+                    '`s3_use_arn_region` profile option or for '\
+                    "ENV['AWS_S3_USE_ARN_REGION']."
             end
             value
           end
 
-          # Remove ARN from the path since it was substituted already
-          # This only works because accesspoints care about the URL
+          # Remove ARN from the path because we've already set the new host
           def url_path(path, arn)
             path = path.sub("/#{Seahorse::Util.uri_escape(arn.to_s)}", '')
                        .sub("/#{arn}", '')
@@ -149,33 +183,40 @@ be made. Set to `false` to use the client's region instead.
           end
 
           def validate_region_config!(arn, region, use_arn_region)
-            fips = arn.support_fips?
-
-            # s3-external-1 is specific just to s3 and not part of partitions
-            # aws-global is a partition region
-            unless arn.partition == 'aws' &&
-                   (region == 's3-external-1' || region == 'aws-global')
-              if !fips && arn.region.include?('fips')
-                raise ArgumentError,
-                      'FIPS region ARNs are not supported for this type of ARN.'
+            if ['s3-external-1', 'aws-global'].include?(region)
+              # These "regions" are not regional endpoints
+              unless use_arn_region
+                raise Aws::Errors::InvalidARNRegionError,
+                      'Configured client region is not a regional endpoint.'
               end
-
-              if !fips && !use_arn_region && region.include?('fips')
-                raise ArgumentError,
-                      'FIPS client regions are not supported for this type of '\
-                      'ARN without s3_use_arn_region.'
+              # These "regions" are in the AWS partition
+              # Cannot use ARN region unless it's the same partition
+              unless arn.partition == 'aws'
+                raise Aws::Errors::InvalidARNPartitionError
               end
+            else
+              if region.include?('fips')
+                # If ARN type doesn't support FIPS but the client region is FIPS
+                unless arn.support_fips?
+                  raise ArgumentError,
+                        'FIPS client regions are not supported for this type '\
+                        'of ARN.'
+                end
 
-              # if it's a fips region, attempt to normalize it
-              if fips || use_arn_region
+                fips = true
+                # Normalize the region so we can compare partition and regions
                 region = region.gsub('fips-', '').gsub('-fips', '')
               end
+
+              # Raise if the ARN and client regions are in different partitions
               if use_arn_region &&
                  !Aws::Partitions.partition(arn.partition).region?(region)
                 raise Aws::Errors::InvalidARNPartitionError
               end
 
-              if !use_arn_region && region != arn.region
+              # Raise if regions mismatch
+              # Either when it's a fips client or not using the ARN region
+              if (!use_arn_region || fips) && region != arn.region
                 raise Aws::Errors::InvalidARNRegionError
               end
             end

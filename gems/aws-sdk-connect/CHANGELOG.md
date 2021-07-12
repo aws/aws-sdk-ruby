@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-06-24)
+------------------
+
+* Feature - Released Amazon Connect quick connects management API for general availability (GA). For more information, see https://docs.aws.amazon.com/connect/latest/APIReference/Welcome.html
+
+1.45.0 (2021-06-15)
+------------------
+
+* Feature - This release adds new sets of APIs: AssociateBot, DisassociateBot, and ListBots. You can use it to programmatically add an Amazon Lex bot or Amazon Lex V2 bot on the specified Amazon Connect instance
+
+1.44.0 (2021-05-07)
+------------------
+
+* Feature - Adds tagging support for Connect APIs CreateIntegrationAssociation and CreateUseCase.
+
+1.43.0 (2021-04-28)
+------------------
+
+* Feature - Updated max number of tags that can be attached from 200 to 50. MaxContacts is now an optional parameter for the UpdateQueueMaxContact API.
+
+1.42.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2021-02-23)
+------------------
+
+* Feature - Documentation updates for AWS Connect (MediaConcurrency Limit).
+
+1.40.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2021-01-29)
+------------------
+
+* Feature - Added API to manage queues or get hours of operation for a queue programmatically, which can be used to create new/update queues, or take actions when skills are outside of their hours of operation.
+
+1.38.0 (2020-12-22)
+------------------
+
+* Feature - This release adds support for quick connects. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
+1.37.0 (2020-12-01)
+------------------
+
+* Feature - This release adds an Amazon Connect API that provides the ability to create tasks, and a set of APIs (in preview) to configure AppIntegrations associations with Amazon Connect instances.
+
+1.36.0 (2020-11-20)
+------------------
+
+* Feature - This release adds a set of Amazon Connect APIs to programmatically control instance creation, modification, description and deletion.
+
+1.35.0 (2020-11-17)
+------------------
+
+* Feature - This release adds support for user hierarchy group and user hierarchy structure. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
 1.34.0 (2020-09-30)
 ------------------
 

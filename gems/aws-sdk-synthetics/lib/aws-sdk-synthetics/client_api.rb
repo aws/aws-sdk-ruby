@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -47,6 +47,9 @@ module Aws::Synthetics
     DescribeCanariesResponse = Shapes::StructureShape.new(name: 'DescribeCanariesResponse')
     DescribeRuntimeVersionsRequest = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsRequest')
     DescribeRuntimeVersionsResponse = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsResponse')
+    EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
+    EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    EnvironmentVariablesMap = Shapes::MapShape.new(name: 'EnvironmentVariablesMap')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GetCanaryRequest = Shapes::StructureShape.new(name: 'GetCanaryRequest')
@@ -140,6 +143,7 @@ module Aws::Synthetics
     CanaryRunConfigInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
     CanaryRunConfigInput.add_member(:memory_in_mb, Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
     CanaryRunConfigInput.add_member(:active_tracing, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ActiveTracing"))
+    CanaryRunConfigInput.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "EnvironmentVariables"))
     CanaryRunConfigInput.struct_class = Types::CanaryRunConfigInput
 
     CanaryRunConfigOutput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
@@ -224,6 +228,9 @@ module Aws::Synthetics
     DescribeRuntimeVersionsResponse.add_member(:runtime_versions, Shapes::ShapeRef.new(shape: RuntimeVersionList, location_name: "RuntimeVersions"))
     DescribeRuntimeVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeRuntimeVersionsResponse.struct_class = Types::DescribeRuntimeVersionsResponse
+
+    EnvironmentVariablesMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableName)
+    EnvironmentVariablesMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
     GetCanaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, required: true, location: "uri", location_name: "name"))
     GetCanaryRequest.struct_class = Types::GetCanaryRequest

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-03-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2021-03-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2020-12-21)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway.
+
+1.57.0 (2020-12-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2020-10-29)
+------------------
+
+* Feature - Support disabling the default execute-api endpoint for REST APIs.
+
 1.55.0 (2020-10-01)
 ------------------
 

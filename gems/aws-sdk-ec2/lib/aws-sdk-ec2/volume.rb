@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -91,28 +91,11 @@ module Aws::EC2
       data[:state]
     end
 
-    # The number of I/O operations per second (IOPS) that the volume
-    # supports. For Provisioned IOPS SSD volumes, this represents the number
-    # of IOPS that are provisioned for the volume. For General Purpose SSD
-    # volumes, this represents the baseline performance of the volume and
-    # the rate at which the volume accumulates I/O credits for bursting. For
-    # more information, see [Amazon EBS volume types][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
-    #
-    # Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    # 64,000 IOPS for `io1` and `io2` volumes, in most Regions. The maximum
-    # IOPS for `io1` and `io2` of 64,000 is guaranteed only on [Nitro-based
-    # instances][2]. Other instance families guarantee performance up to
-    # 32,000 IOPS.
-    #
-    # Condition: This parameter is required for requests to create `io1` and
-    # `io2` volumes; it is not used in requests to create `gp2`, `st1`,
-    # `sc1`, or `standard` volumes.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    # The number of I/O operations per second (IOPS). For `gp3`, `io1`, and
+    # `io2` volumes, this represents the number of IOPS that are provisioned
+    # for the volume. For `gp2` volumes, this represents the baseline
+    # performance of the volume and the rate at which the volume accumulates
+    # I/O credits for bursting.
     # @return [Integer]
     def iops
       data[:iops]
@@ -124,9 +107,7 @@ module Aws::EC2
       data[:tags]
     end
 
-    # The volume type. This can be `gp2` for General Purpose SSD, `io1` or
-    # `io2` for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD,
-    # `sc1` for Cold HDD, or `standard` for Magnetic volumes.
+    # The volume type.
     # @return [String]
     def volume_type
       data[:volume_type]
@@ -142,6 +123,12 @@ module Aws::EC2
     # @return [Boolean]
     def multi_attach_enabled
       data[:multi_attach_enabled]
+    end
+
+    # The throughput that the volume supports, in MiB/s.
+    # @return [Integer]
+    def throughput
+      data[:throughput]
     end
 
     # @!endgroup
@@ -306,9 +293,10 @@ module Aws::EC2
     #
     #   snapshot = volume.create_snapshot({
     #     description: "String",
+    #     outpost_arn: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -322,6 +310,27 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :description
     #   A description for the snapshot.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create a
+    #   local snapshot.
+    #
+    #   * To create a snapshot of a volume in a Region, omit this parameter.
+    #     The snapshot is created in the same Region as the volume.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot in the Region, omit this parameter. The snapshot is created
+    #     in the Region for the Outpost.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot on an Outpost, specify the ARN of the destination Outpost.
+    #     The snapshot must be created on the same Outpost as the volume.
+    #
+    #   For more information, see [ Creating local snapshots from volumes on
+    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the snapshot during creation.
     # @option options [Boolean] :dry_run
@@ -513,11 +522,11 @@ module Aws::EC2
     #   used, the request only returns `MaxResults` results in a single page
     #   along with a `NextToken` response element. The remaining results of
     #   the initial request can be seen by sending another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1000; if
-    #   `MaxResults` is given a value larger than 1000, only 1000 results are
-    #   returned. If this parameter is not used, then `DescribeVolumeStatus`
-    #   returns all results. You cannot specify this parameter and the volume
-    #   IDs parameter in the same request.
+    #   returned `NextToken` value. This value can be between 5 and 1,000; if
+    #   `MaxResults` is given a value larger than 1,000, only 1,000 results
+    #   are returned. If this parameter is not used, then
+    #   `DescribeVolumeStatus` returns all results. You cannot specify this
+    #   parameter and the volume IDs parameter in the same request.
     # @option options [String] :next_token
     #   The `NextToken` value to include in a future `DescribeVolumeStatus`
     #   request. When the results of the request exceed `MaxResults`, this

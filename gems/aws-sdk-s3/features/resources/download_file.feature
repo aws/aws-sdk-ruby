@@ -17,11 +17,11 @@ Feature: Managed file download
   # Any object uploaded in parts, is downloaded in parts
   @get-part @large-file
   Scenario: Download a large object using part numbers
-    Given I have a 16M file
+    Given I have a 116M file
     And I upload the file
     When I download the file with mode "auto"
-    Then 4 upload_part requests should have been made
-    And 4 get_object requests should have been made
+    Then 24 upload_part requests should have been made
+    And 24 get_object requests should have been made
     And the downloaded file should match the uploaded file
     And this test file has been cleaned up
 

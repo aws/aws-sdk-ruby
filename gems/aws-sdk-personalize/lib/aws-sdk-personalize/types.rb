@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -240,9 +240,15 @@ module Aws::Personalize
     #       }
     #
     # @!attribute [rw] item_exploration_config
-    #   A string to string map specifying the inference hyperparameters you
-    #   wish to use for hyperparameter optimization. See
-    #   customizing-solution-config-hpo.
+    #   A string to string map specifying the exploration configuration
+    #   hyperparameters, including `explorationWeight` and
+    #   `explorationItemAgeCutOff`, you want to use to configure the amount
+    #   of item exploration Amazon Personalize uses when recommending items.
+    #   See [User-Personalization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/BatchInferenceJobConfig AWS API Documentation
@@ -442,9 +448,16 @@ module Aws::Personalize
     #       }
     #
     # @!attribute [rw] item_exploration_config
-    #   A string to string map specifying the inference hyperparameters you
-    #   wish to use for hyperparameter optimization. See
-    #   customizing-solution-config-hpo.
+    #   A string to string map specifying the exploration configuration
+    #   hyperparameters, including `explorationWeight` and
+    #   `explorationItemAgeCutOff`, you want to use to configure the amount
+    #   of item exploration Amazon Personalize uses when recommending items.
+    #   Provide `itemExplorationConfig` data only if your solution uses the
+    #   [User-Personalization][1] recipe.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignConfig AWS API Documentation
@@ -656,8 +669,12 @@ module Aws::Personalize
     #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to apply to the batch inference job. For more
-    #   information on using filters, see Using Filters with Amazon
-    #   Personalize.
+    #   information on using filters, see [Filtering Batch
+    #   Recommendations][1]..
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html
     #   @return [String]
     #
     # @!attribute [rw] num_results
@@ -676,7 +693,7 @@ module Aws::Personalize
     #
     # @!attribute [rw] role_arn
     #   The ARN of the Amazon Identity and Access Management role that has
-    #   permissions to read and write to your input and out Amazon S3
+    #   permissions to read and write to your input and output Amazon S3
     #   buckets respectively.
     #   @return [String]
     #
@@ -762,6 +779,73 @@ module Aws::Personalize
     #
     class CreateCampaignResponse < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDatasetExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "Name", # required
+    #         dataset_arn: "Arn", # required
+    #         ingestion_mode: "BULK", # accepts BULK, PUT, ALL
+    #         role_arn: "RoleArn", # required
+    #         job_output: { # required
+    #           s3_data_destination: { # required
+    #             path: "S3Location", # required
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name for the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that contains the data
+    #   to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_mode
+    #   The data to export, based on how you imported the data. You can
+    #   choose to export only `BULK` data that you imported using a dataset
+    #   import job, only `PUT` data that you imported incrementally (using
+    #   the console, PutEvents, PutUsers and PutItems operations), or `ALL`
+    #   for both types. The default value is `PUT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management service role that has permissions to add data to your
+    #   output Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_output
+    #   The path to the Amazon S3 bucket where the job's output is stored.
+    #   @return [Types::DatasetExportJobOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetExportJobRequest AWS API Documentation
+    #
+    class CreateDatasetExportJobRequest < Struct.new(
+      :job_name,
+      :dataset_arn,
+      :ingestion_mode,
+      :role_arn,
+      :job_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetExportJobResponse AWS API Documentation
+    #
+    class CreateDatasetExportJobResponse < Struct.new(
+      :dataset_export_job_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -988,20 +1072,10 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] filter_expression
-    #   The filter expression that designates the interaction types that the
-    #   filter will filter out. A filter expression must follow the
-    #   following format:
-    #
-    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
-    #
-    #   Where "EVENT\_TYPE" is the type of event to filter out. To filter
-    #   out all items with any interactions history, set `"*"` as the
-    #   EVENT\_TYPE. For more information, see [Using Filters with Amazon
-    #   Personalize][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    #   The filter expression defines which items are included or excluded
+    #   from recommendations. Filter expression must follow specific format
+    #   rules. For information about filter expression structure and syntax,
+    #   see filter-expressions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateFilterRequest AWS API Documentation
@@ -1118,6 +1192,10 @@ module Aws::Personalize
     #             metric_name: "MetricName",
     #             recipe_list: ["Arn"],
     #           },
+    #           optimization_objective: {
+    #             item_attribute: "ItemAttribute",
+    #             objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #           },
     #         },
     #       }
     #
@@ -1159,12 +1237,20 @@ module Aws::Personalize
     #   When your have multiple event types (using an `EVENT_TYPE` schema
     #   field), this parameter specifies which event type (for example,
     #   'click' or 'like') is used for training the model.
+    #
+    #   If you do not provide an `eventType`, Amazon Personalize will use
+    #   all interactions for training with equal weight regardless of type.
     #   @return [String]
     #
     # @!attribute [rw] solution_config
     #   The configuration to use with the solution. When `performAutoML` is
     #   set to true, Amazon Personalize only evaluates the `autoMLConfig`
     #   section of the solution configuration.
+    #
+    #   <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective`
+    #   at this time.
+    #
+    #    </note>
     #   @return [Types::SolutionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionRequest AWS API Documentation
@@ -1218,7 +1304,12 @@ module Aws::Personalize
     #   The `UPDATE` option can only be used when you already have an active
     #   solution version created from the input solution using the `FULL`
     #   option and the input solution was trained with the
-    #   native-recipe-hrnn-coldstart recipe.
+    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionVersionRequest AWS API Documentation
@@ -1256,7 +1347,7 @@ module Aws::Personalize
     #   The path to the Amazon S3 bucket where the data that you want to
     #   upload to your dataset is stored. For example:
     #
-    #   `s3://bucket-name/training-data.csv`
+    #   `s3://bucket-name/folder-name/`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DataSource AWS API Documentation
@@ -1326,6 +1417,163 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a job that exports a dataset to an Amazon S3 bucket. For
+    # more information, see CreateDatasetExportJob.
+    #
+    # A dataset export job can be in one of the following states:
+    #
+    # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #   FAILED
+    #
+    # ^
+    #
+    # @!attribute [rw] job_name
+    #   The name of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_mode
+    #   The data to export, based on how you imported the data. You can
+    #   choose to export `BULK` data that you imported using a dataset
+    #   import job, `PUT` data that you imported incrementally (using the
+    #   console, PutEvents, PutUsers and PutItems operations), or `ALL` for
+    #   both types. The default value is `PUT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management service role that has permissions to add data to your
+    #   output Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset export job.
+    #
+    #   A dataset export job can be in one of the following states:
+    #
+    #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #     FAILED
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] job_output
+    #   The path to the Amazon S3 bucket where the job's output is stored.
+    #   For example:
+    #
+    #   `s3://bucket-name/folder-name/`
+    #   @return [Types::DatasetExportJobOutput]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time (in Unix time) of the dataset export job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time (in Unix time) the status of the dataset export
+    #   job was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a dataset export job fails, provides the reason why.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetExportJob AWS API Documentation
+    #
+    class DatasetExportJob < Struct.new(
+      :job_name,
+      :dataset_export_job_arn,
+      :dataset_arn,
+      :ingestion_mode,
+      :role_arn,
+      :status,
+      :job_output,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration parameters of a dataset export job.
+    #
+    # @note When making an API call, you may pass DatasetExportJobOutput
+    #   data as a hash:
+    #
+    #       {
+    #         s3_data_destination: { # required
+    #           path: "S3Location", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_data_destination
+    #   The configuration details of an Amazon S3 input or output bucket.
+    #   @return [Types::S3DataConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetExportJobOutput AWS API Documentation
+    #
+    class DatasetExportJobOutput < Struct.new(
+      :s3_data_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the properties of a dataset export job. For a
+    # complete listing, call the DescribeDatasetExportJob API.
+    #
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset export job.
+    #
+    #   A dataset export job can be in one of the following states:
+    #
+    #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #     FAILED
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time (in Unix time) that the dataset export job was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time (in Unix time) that the dataset export job status
+    #   was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a dataset export job fails, the reason behind the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetExportJobSummary AWS API Documentation
+    #
+    class DatasetExportJobSummary < Struct.new(
+      :dataset_export_job_arn,
+      :job_name,
+      :status,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1544,7 +1792,8 @@ module Aws::Personalize
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_date_time
-    #   The date and time (in Unix time) that the dataset was last updated.
+    #   The date and time (in Unix time) that the dataset import job status
+    #   was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -2021,6 +2270,48 @@ module Aws::Personalize
     #
     class DescribeCampaignResponse < Struct.new(
       :campaign)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDatasetExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_export_job_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetExportJobRequest AWS API Documentation
+    #
+    class DescribeDatasetExportJobRequest < Struct.new(
+      :dataset_export_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_export_job
+    #   Information about the dataset export job, including the status.
+    #
+    #   The status is one of the following values:
+    #
+    #   * CREATE PENDING
+    #
+    #   * CREATE IN\_PROGRESS
+    #
+    #   * ACTIVE
+    #
+    #   * CREATE FAILED
+    #   @return [Types::DatasetExportJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetExportJobResponse AWS API Documentation
+    #
+    class DescribeDatasetExportJobResponse < Struct.new(
+      :dataset_export_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2533,17 +2824,9 @@ module Aws::Personalize
     #
     # @!attribute [rw] filter_expression
     #   Specifies the type of item interactions to filter out of
-    #   recommendation results. The filter expression must follow the
-    #   following format:
-    #
-    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
-    #
-    #   Where "EVENT\_TYPE" is the type of event to filter out. For more
-    #   information, see [Using Filters with Amazon Personalize][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    #   recommendation results. The filter expression must follow specific
+    #   format rules. For information about filter expression structure and
+    #   syntax, see filter-expressions.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2646,9 +2929,7 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # Describes the properties for hyperparameter optimization (HPO). For
-    # use with the bring-your-own-recipe feature. Do not use for Amazon
-    # Personalize native recipes.
+    # Describes the properties for hyperparameter optimization (HPO).
     #
     # @note When making an API call, you may pass HPOConfig
     #   data as a hash:
@@ -2689,6 +2970,11 @@ module Aws::Personalize
     #
     # @!attribute [rw] hpo_objective
     #   The metric to optimize during HPO.
+    #
+    #   <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective`
+    #   at this time.
+    #
+    #    </note>
     #   @return [Types::HPOObjective]
     #
     # @!attribute [rw] hpo_resource_config
@@ -2710,6 +2996,11 @@ module Aws::Personalize
     end
 
     # The metric to optimize during hyperparameter optimization (HPO).
+    #
+    # <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective` at
+    # this time.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass HPOObjective
     #   data as a hash:
@@ -2935,7 +3226,7 @@ module Aws::Personalize
     #   @return [Array<Types::BatchInferenceJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retreive the next page of results. The value is
+    #   The token to use to retrieve the next page of results. The value is
     #   `null` when there are no more results to return.
     #   @return [String]
     #
@@ -2994,6 +3285,57 @@ module Aws::Personalize
     #
     class ListCampaignsResponse < Struct.new(
       :campaigns,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDatasetExportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset to list the dataset
+    #   export jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from the previous call to `ListDatasetExportJobs`
+    #   for getting the next set of dataset export jobs (if they exist).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of dataset export jobs to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasetExportJobsRequest AWS API Documentation
+    #
+    class ListDatasetExportJobsRequest < Struct.new(
+      :dataset_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_export_jobs
+    #   The list of dataset export jobs.
+    #   @return [Array<Types::DatasetExportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of dataset export jobs (if they
+    #   exist).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasetExportJobsResponse AWS API Documentation
+    #
+    class ListDatasetExportJobsResponse < Struct.new(
+      :dataset_export_jobs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3433,6 +3775,42 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # Describes the additional objective for the solution, such as
+    # maximizing streaming minutes or increasing revenue. For more
+    # information see [Optimizing a solution][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html
+    #
+    # @note When making an API call, you may pass OptimizationObjective
+    #   data as a hash:
+    #
+    #       {
+    #         item_attribute: "ItemAttribute",
+    #         objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #       }
+    #
+    # @!attribute [rw] item_attribute
+    #   The numerical metadata column in an Items dataset related to the
+    #   optimization objective. For example, VIDEO\_LENGTH (to maximize
+    #   streaming minutes), or PRICE (to maximize revenue).
+    #   @return [String]
+    #
+    # @!attribute [rw] objective_sensitivity
+    #   Specifies how Amazon Personalize balances the importance of your
+    #   optimization objective versus relevance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/OptimizationObjective AWS API Documentation
+    #
+    class OptimizationObjective < Struct.new(
+      :item_attribute,
+      :objective_sensitivity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a recipe. Each recipe provides an algorithm
     # that Amazon Personalize uses in model training when you use the
     # CreateSolution operation.
@@ -3633,7 +4011,9 @@ module Aws::Personalize
     #
     # @!attribute [rw] event_type
     #   The event type (for example, 'click' or 'like') that is used for
-    #   training the model.
+    #   training the model. If no `eventType` is provided, Amazon
+    #   Personalize uses all interactions for training with equal weight
+    #   regardless of type.
     #   @return [String]
     #
     # @!attribute [rw] solution_config
@@ -3738,6 +4118,10 @@ module Aws::Personalize
     #           metric_name: "MetricName",
     #           recipe_list: ["Arn"],
     #         },
+    #         optimization_objective: {
+    #           item_attribute: "ItemAttribute",
+    #           objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #         },
     #       }
     #
     # @!attribute [rw] event_value_threshold
@@ -3762,6 +4146,16 @@ module Aws::Personalize
     #   AutoML is performed.
     #   @return [Types::AutoMLConfig]
     #
+    # @!attribute [rw] optimization_objective
+    #   Describes the additional objective for the solution, such as
+    #   maximizing streaming minutes or increasing revenue. For more
+    #   information see [Optimizing a solution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html
+    #   @return [Types::OptimizationObjective]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionConfig AWS API Documentation
     #
     class SolutionConfig < Struct.new(
@@ -3769,7 +4163,8 @@ module Aws::Personalize
       :hpo_config,
       :algorithm_hyper_parameters,
       :feature_transformation_parameters,
-      :auto_ml_config)
+      :auto_ml_config,
+      :optimization_objective)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3863,17 +4258,23 @@ module Aws::Personalize
     #   @return [Float]
     #
     # @!attribute [rw] training_mode
-    #   The scope of training used to create the solution version. The
-    #   `FULL` option trains the solution version based on the entirety of
-    #   the input solution's training data, while the `UPDATE` option
-    #   processes only the training data that has changed since the creation
-    #   of the last solution version. Choose `UPDATE` when you want to start
-    #   recommending items added to the dataset without retraining the
-    #   model.
+    #   The scope of training to be performed when creating the solution
+    #   version. The `FULL` option trains the solution version based on the
+    #   entirety of the input solution's training data, while the `UPDATE`
+    #   option processes only the data that has changed in comparison to the
+    #   input solution. Choose `UPDATE` when you want to incrementally
+    #   update your solution version instead of creating an entirely new
+    #   one.
     #
-    #   The `UPDATE` option can only be used after you've created a
-    #   solution version with the `FULL` option and the training solution
-    #   uses the native-recipe-hrnn-coldstart.
+    #   The `UPDATE` option can only be used when you already have an active
+    #   solution version created from the input solution using the `FULL`
+    #   option and the input solution was trained with the
+    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #   @return [String]
     #
     # @!attribute [rw] tuned_hpo_params
@@ -3893,6 +4294,10 @@ module Aws::Personalize
     #   * ACTIVE
     #
     #   * CREATE FAILED
+    #
+    #   * CREATE STOPPING
+    #
+    #   * CREATE STOPPED
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -3970,6 +4375,26 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopSolutionVersionCreationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         solution_version_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] solution_version_arn
+    #   The Amazon Resource Name (ARN) of the solution version you want to
+    #   stop creating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopSolutionVersionCreationRequest AWS API Documentation
+    #
+    class StopSolutionVersionCreationRequest < Struct.new(
+      :solution_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end

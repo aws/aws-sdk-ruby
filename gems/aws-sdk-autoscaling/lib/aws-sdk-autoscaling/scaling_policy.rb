@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -55,8 +55,10 @@ module Aws::AutoScaling
     #
     # * `SimpleScaling` (default)
     #
-    # For more information, see [Target Tracking Scaling Policies][1] and
-    # [Step and Simple Scaling Policies][2] in the *Amazon EC2 Auto Scaling
+    # * `PredictiveScaling`
+    #
+    # For more information, see [Target tracking scaling policies][1] and
+    # [Step and simple scaling policies][2] in the *Amazon EC2 Auto Scaling
     # User Guide*.
     #
     #
@@ -142,6 +144,12 @@ module Aws::AutoScaling
     # @return [Boolean]
     def enabled
       data[:enabled]
+    end
+
+    # A predictive scaling policy.
+    # @return [Types::PredictiveScalingConfiguration]
+    def predictive_scaling_configuration
+      data[:predictive_scaling_configuration]
     end
 
     # @!endgroup
@@ -281,7 +289,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   scaling_policy.delete({
-    #     auto_scaling_group_name: "ResourceName",
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :auto_scaling_group_name
@@ -296,7 +304,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   scaling_policy.execute({
-    #     auto_scaling_group_name: "ResourceName",
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     honor_cooldown: false,
     #     metric_value: 1.0,
     #     breach_threshold: 1.0,
@@ -309,7 +317,7 @@ module Aws::AutoScaling
     #   period to complete before executing the policy.
     #
     #   Valid only if the policy type is `SimpleScaling`. For more
-    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1] in
+    #   information, see [Scaling cooldowns for Amazon EC2 Auto Scaling][1] in
     #   the *Amazon EC2 Auto Scaling User Guide*.
     #
     #

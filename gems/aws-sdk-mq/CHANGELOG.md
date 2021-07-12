@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-07-07)
+------------------
+
+* Feature - adds support for modifying the maintenance window for brokers.
+
+1.36.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-11-04)
+------------------
+
+* Feature - Amazon MQ introduces support for RabbitMQ, a popular message-broker with native support for AMQP 0.9.1. You can now create fully-managed RabbitMQ brokers in the cloud.
+
 1.33.0 (2020-09-30)
 ------------------
 

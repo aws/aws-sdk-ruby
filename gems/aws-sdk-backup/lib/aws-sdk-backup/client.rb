@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -385,6 +385,7 @@ module Aws::Backup
     #               destination_backup_vault_arn: "ARN", # required
     #             },
     #           ],
+    #           enable_continuous_backup: false,
     #         },
     #       ],
     #       advanced_backup_settings: [
@@ -518,7 +519,7 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   letters, numbers, and hyphens.
     #
     # @option params [Hash<String,String>] :backup_vault_tags
     #   Metadata that you can assign to help organize the resources that you
@@ -709,6 +710,10 @@ module Aws::Backup
 
     # Deletes the recovery point specified by a recovery point ID.
     #
+    # If the recovery point ID belongs to a continuous backup, calling this
+    # endpoint deletes the existing continuous backup and stops future
+    # continuous backup.
+    #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
@@ -894,6 +899,29 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Describes the global settings of the AWS account, including whether it
+    # is opted in to cross-account backup.
+    #
+    # @return [Types::DescribeGlobalSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalSettingsOutput#global_settings #global_settings} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeGlobalSettingsOutput#last_update_time #last_update_time} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.global_settings #=> Hash
+    #   resp.global_settings["GlobalSettingsName"] #=> String
+    #   resp.last_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettings AWS API Documentation
+    #
+    # @overload describe_global_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_global_settings(params = {}, options = {})
+      req = build_request(:describe_global_settings, params)
+      req.send_request(options)
+    end
+
     # Returns information about a saved resource, including the last time it
     # was backed up, its Amazon Resource Name (ARN), and the AWS service
     # type of the saved resource.
@@ -948,6 +976,7 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#recovery_point_arn #recovery_point_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#backup_vault_name #backup_vault_name} => String
     #   * {Types::DescribeRecoveryPointOutput#backup_vault_arn #backup_vault_arn} => String
+    #   * {Types::DescribeRecoveryPointOutput#source_backup_vault_arn #source_backup_vault_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#resource_arn #resource_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#resource_type #resource_type} => String
     #   * {Types::DescribeRecoveryPointOutput#created_by #created_by} => Types::RecoveryPointCreator
@@ -975,6 +1004,7 @@ module Aws::Backup
     #   resp.recovery_point_arn #=> String
     #   resp.backup_vault_name #=> String
     #   resp.backup_vault_arn #=> String
+    #   resp.source_backup_vault_arn #=> String
     #   resp.resource_arn #=> String
     #   resp.resource_type #=> String
     #   resp.created_by.backup_plan_id #=> String
@@ -1004,11 +1034,12 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns the current service opt-in settings for the Region. If the
-    # service has a value set to `true`, AWS Backup tries to protect that
-    # service's resources in this Region, when included in an on-demand
-    # backup or scheduled backup plan. If the value is set to `false` for a
-    # service, AWS Backup does not try to protect that service's resources
+    # Returns the current service opt-in settings for the Region. If
+    # service-opt-in is enabled for a service, AWS Backup tries to protect
+    # that service's resources in this Region, when the resource is
+    # included in an on-demand backup or scheduled backup plan. Otherwise,
+    # AWS Backup does not try to protect that service's resources in this
+    # Region, AWS Backup does not try to protect that service's resources
     # in this Region.
     #
     # @return [Types::DescribeRegionSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1082,6 +1113,39 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Deletes the specified continuous backup recovery point from AWS Backup
+    # and releases control of that continuous backup to the source service,
+    # such as Amazon RDS. The source service will continue to create and
+    # retain continuous backups using the lifecycle that you specified in
+    # your original backup plan.
+    #
+    # Does not support snapshot backup recovery points.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The unique name of an AWS Backup vault. Required.
+    #
+    # @option params [required, String] :recovery_point_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup
+    #   recovery point. Required.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_recovery_point({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     recovery_point_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DisassociateRecoveryPoint AWS API Documentation
+    #
+    # @overload disassociate_recovery_point(params = {})
+    # @param [Hash] params ({})
+    def disassociate_recovery_point(params = {}, options = {})
+      req = build_request(:disassociate_recovery_point, params)
+      req.send_request(options)
+    end
+
     # Returns the backup plan that is specified by the plan ID as a backup
     # template.
     #
@@ -1111,9 +1175,9 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns `BackupPlan` details for the specified `BackupPlanId`. Returns
-    # the body of a backup plan in JSON format, in addition to plan
-    # metadata.
+    # Returns `BackupPlan` details for the specified `BackupPlanId`. The
+    # details are the body of a backup plan in JSON format, in addition to
+    # plan metadata.
     #
     # @option params [required, String] :backup_plan_id
     #   Uniquely identifies a backup plan.
@@ -1159,6 +1223,7 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
+    #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan.advanced_backup_settings #=> Array
     #   resp.backup_plan.advanced_backup_settings[0].resource_type #=> String
     #   resp.backup_plan.advanced_backup_settings[0].backup_options #=> Hash
@@ -1217,6 +1282,7 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
+    #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan.advanced_backup_settings #=> Array
     #   resp.backup_plan.advanced_backup_settings[0].resource_type #=> String
     #   resp.backup_plan.advanced_backup_settings[0].backup_options #=> Hash
@@ -1264,6 +1330,7 @@ module Aws::Backup
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
+    #   resp.backup_plan_document.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan_document.advanced_backup_settings #=> Array
     #   resp.backup_plan_document.advanced_backup_settings[0].resource_type #=> String
     #   resp.backup_plan_document.advanced_backup_settings[0].backup_options #=> Hash
@@ -1464,7 +1531,13 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns a list of existing backup jobs for an authenticated account.
+    # Returns a list of existing backup jobs for an authenticated account
+    # for the last 30 days. For a longer period of time, consider using
+    # these [monitoring tools][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -1507,11 +1580,16 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Aurora` for Amazon Aurora
+    #
     #   * `Storage Gateway` for AWS Storage Gateway
     #
     # @option params [String] :by_account_id
     #   The account ID to list the jobs from. Returns only backup jobs
     #   associated with the specified account ID.
+    #
+    #   If used from an AWS Organizations management account, passing `*`
+    #   returns all jobs across the organization.
     #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1864,6 +1942,8 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Aurora` for Amazon Aurora
+    #
     #   * `Storage Gateway` for AWS Storage Gateway
     #
     # @option params [String] :by_destination_vault_arn
@@ -2035,6 +2115,7 @@ module Aws::Backup
     #   resp.recovery_points[0].recovery_point_arn #=> String
     #   resp.recovery_points[0].backup_vault_name #=> String
     #   resp.recovery_points[0].backup_vault_arn #=> String
+    #   resp.recovery_points[0].source_backup_vault_arn #=> String
     #   resp.recovery_points[0].resource_arn #=> String
     #   resp.recovery_points[0].resource_type #=> String
     #   resp.recovery_points[0].created_by.backup_plan_id #=> String
@@ -2325,12 +2406,15 @@ module Aws::Backup
     #
     # @option params [Integer] :start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
-    #   canceled if it doesn't start successfully. This value is optional.
+    #   canceled if it doesn't start successfully. This value is optional,
+    #   and the default is 8 hours.
     #
     # @option params [Integer] :complete_window_minutes
-    #   A value in minutes after a backup job is successfully started before
-    #   it must be completed or it will be canceled by AWS Backup. This value
-    #   is optional.
+    #   A value in minutes during which a successfully started backup must
+    #   complete, or else AWS Backup will cancel the job. This value is
+    #   optional. This value begins counting down from when the backup was
+    #   scheduled. It does not add additional time for `StartWindowMinutes`,
+    #   or if the backup started later than scheduled.
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   The lifecycle defines when a protected resource is transitioned to
@@ -2343,6 +2427,9 @@ module Aws::Backup
     #   must be 90 days greater than the “transition to cold after days”
     #   setting. The “transition to cold after days” setting cannot be changed
     #   after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #
     # @option params [Hash<String,String>] :recovery_point_tags
     #   To help organize your resources, you can assign your own metadata to
@@ -2401,6 +2488,8 @@ module Aws::Backup
 
     # Starts a job to create a one-time copy of the specified resource.
     #
+    # Does not support continuous backups.
+    #
     # @option params [required, String] :recovery_point_arn
     #   An ARN that uniquely identifies a recovery point to use for the copy
     #   job; for example,
@@ -2434,6 +2523,9 @@ module Aws::Backup
     #   days” setting must be 90 days greater than the “transition to cold
     #   after days” setting. The “transition to cold after days” setting
     #   cannot be changed after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #
     # @return [Types::StartCopyJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2511,10 +2603,11 @@ module Aws::Backup
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that the
     #     recovery point is restored to a new Amazon EFS file system.
     #
-    #   * `ItemsToRestore `\: A serialized list of up to five strings where
-    #     each string is a file path. Use `ItemsToRestore` to restore specific
+    #   * `ItemsToRestore `\: An array of one to five strings where each
+    #     string is a file path. Use `ItemsToRestore` to restore specific
     #     files or directories rather than the entire file system. This
-    #     parameter is optional.
+    #     parameter is optional. For example,
+    #     `"itemsToRestore":"["/my.test"]"`.
     #
     # @option params [required, String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to
@@ -2538,6 +2631,8 @@ module Aws::Backup
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `Aurora` for Amazon Aurora
     #
     #   * `Storage Gateway` for AWS Storage Gateway
     #
@@ -2700,6 +2795,7 @@ module Aws::Backup
     #               destination_backup_vault_arn: "ARN", # required
     #             },
     #           ],
+    #           enable_continuous_backup: false,
     #         },
     #       ],
     #       advanced_backup_settings: [
@@ -2733,6 +2829,31 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Updates the current global settings for the AWS account. Use the
+    # `DescribeGlobalSettings` API to determine the current settings.
+    #
+    # @option params [Hash<String,String>] :global_settings
+    #   A list of resources along with the opt-in preferences for the account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_settings({
+    #     global_settings: {
+    #       "GlobalSettingsName" => "GlobalSettingsValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettings AWS API Documentation
+    #
+    # @overload update_global_settings(params = {})
+    # @param [Hash] params ({})
+    def update_global_settings(params = {}, options = {})
+      req = build_request(:update_global_settings, params)
+      req.send_request(options)
+    end
+
     # Sets the transition lifecycle of a recovery point.
     #
     # The lifecycle defines when a protected resource is transitioned to
@@ -2744,6 +2865,11 @@ module Aws::Backup
     # must be 90 days greater than the “transition to cold after days”
     # setting. The “transition to cold after days” setting cannot be changed
     # after a backup has been transitioned to cold.
+    #
+    # Only Amazon EFS file system backups can be transitioned to cold
+    # storage.
+    #
+    # Does not support continuous backups.
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
@@ -2803,12 +2929,13 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates the current service opt-in settings for the Region. If the
-    # service has a value set to `true`, AWS Backup tries to protect that
-    # service's resources in this Region, when included in an on-demand
-    # backup or scheduled backup plan. If the value is set to `false` for a
-    # service, AWS Backup does not try to protect that service's resources
-    # in this Region.
+    # Updates the current service opt-in settings for the Region. If
+    # service-opt-in is enabled for a service, AWS Backup tries to protect
+    # that service's resources in this Region, when the resource is
+    # included in an on-demand backup or scheduled backup plan. Otherwise,
+    # AWS Backup does not try to protect that service's resources in this
+    # Region. Use the `DescribeRegionSettings` API to determine the resource
+    # types that are supported.
     #
     # @option params [Hash<String,Boolean>] :resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for the
@@ -2846,7 +2973,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-07-07)
+------------------
+
+* Feature - Amazon CloudFront now provides two new APIs, ListConflictingAliases and AssociateAlias, that help locate and move Alternate Domain Names (CNAMEs) if you encounter the CNAMEAlreadyExists error code.
+
+1.52.0 (2021-06-23)
+------------------
+
+* Feature - Amazon CloudFront adds support for a new security policy, TLSv1.2_2021.
+
+1.51.0 (2021-05-26)
+------------------
+
+* Feature - Documentation fix for CloudFront
+
+1.50.0 (2021-04-30)
+------------------
+
+* Feature - CloudFront now supports CloudFront Functions, a native feature of CloudFront that enables you to write lightweight functions in JavaScript for high-scale, latency-sensitive CDN customizations.
+
+1.49.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2020-12-28)
+------------------
+
+* Feature - Amazon CloudFront has deprecated the CreateStreamingDistribution and CreateStreamingDistributionWithTags APIs as part of discontinuing support for Real-Time Messaging Protocol (RTMP) distributions.
+
 1.46.0 (2020-10-21)
 ------------------
 

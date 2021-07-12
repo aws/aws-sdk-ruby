@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -329,6 +329,23 @@ module Aws::ResourceGroups
 
     # Creates a resource group with the specified name and description. You
     # can optionally include a resource query, or a service configuration.
+    # For more information about constructing a resource query, see [Create
+    # a tag-based group in Resource Groups][1]. For more information about
+    # service configurations, see [Service configurations for resource
+    # groups][2].
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:CreateGroup`
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
+    # [2]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
     # @option params [required, String] :name
     #   The name of the group, which is the identifier of the group in other
@@ -344,12 +361,17 @@ module Aws::ResourceGroups
     #
     # @option params [Types::ResourceQuery] :resource_query
     #   The resource query that determines which AWS resources are members of
-    #   this group.
+    #   this group. For more information about resource queries, see [Create a
+    #   tag-based group in Resource Groups][1].
     #
-    #   <note markdown="1"> You can specify either a `ResourceQuery` or a `Configuration`, but not
-    #   both.
+    #   <note markdown="1"> A resource group can contain either a `ResourceQuery` or a
+    #   `Configuration`, but not both.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the group. A tag is key-value pair string.
@@ -358,11 +380,17 @@ module Aws::ResourceGroups
     #   A configuration associates the resource group with an AWS service and
     #   specifies how the service can interact with the resources in the
     #   group. A configuration is an array of GroupConfigurationItem elements.
+    #   For details about the syntax of service configurations, see [Service
+    #   configurations for resource groups][1].
     #
-    #   <note markdown="1"> You can specify either a `Configuration` or a `ResourceQuery` in a
-    #   group, but not both.
+    #   <note markdown="1"> A resource group can contain either a `Configuration` or a
+    #   `ResourceQuery`, but not both.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
     # @return [Types::CreateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -433,8 +461,16 @@ module Aws::ResourceGroups
     # not delete any resources that are members of the group; it only
     # deletes the group structure.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:DeleteGroup`
+    #
+    # ^
+    #
     # @option params [String] :group_name
-    #   Don't use this parameter. Use `Group` instead.
+    #   Deprecated - don't use this parameter. Use `Group` instead.
     #
     # @option params [String] :group
     #   The name or the ARN of the resource group to delete.
@@ -467,8 +503,16 @@ module Aws::ResourceGroups
 
     # Returns information about a specified resource group.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:GetGroup`
+    #
+    # ^
+    #
     # @option params [String] :group_name
-    #   Don't use this parameter. Use `Group` instead.
+    #   Deprecated - don't use this parameter. Use `Group` instead.
     #
     # @option params [String] :group
     #   The name or the ARN of the resource group to retrieve.
@@ -500,18 +544,20 @@ module Aws::ResourceGroups
     end
 
     # Returns the service configuration associated with the specified
-    # resource group. AWS Resource Groups supports configurations for the
-    # following resource group types:
+    # resource group. For details about the service configuration syntax,
+    # see [Service configurations for resource groups][1].
     #
-    # * `AWS::EC2::CapacityReservationPool` - Amazon EC2 capacity
-    #   reservation pools. For more information, see [Working with capacity
-    #   reservation groups][1] in the *EC2 Users Guide*.
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:GetGroupConfiguration`
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group
+    # [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
     # @option params [String] :group
     #   The name or the ARN of the resource group.
@@ -553,7 +599,20 @@ module Aws::ResourceGroups
     end
 
     # Retrieves the resource query associated with the specified resource
-    # group.
+    # group. For more information about resource queries, see [Create a
+    # tag-based group in Resource Groups][1].
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:GetGroupQuery`
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
     #
     # @option params [String] :group_name
     #   Don't use this parameter. Use `Group` instead.
@@ -590,6 +649,14 @@ module Aws::ResourceGroups
     # Returns a list of tags that are associated with a resource group,
     # specified by an ARN.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:GetTags`
+    #
+    # ^
+    #
     # @option params [required, String] :arn
     #   The ARN of the resource group whose tags you want to retrieve.
     #
@@ -621,6 +688,14 @@ module Aws::ResourceGroups
 
     # Adds the specified resources to the specified group.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:GroupResources`
+    #
+    # ^
+    #
     # @option params [required, String] :group
     #   The name or the ARN of the resource group to add resources to.
     #
@@ -631,6 +706,7 @@ module Aws::ResourceGroups
     #
     #   * {Types::GroupResourcesOutput#succeeded #succeeded} => Array&lt;String&gt;
     #   * {Types::GroupResourcesOutput#failed #failed} => Array&lt;Types::FailedResource&gt;
+    #   * {Types::GroupResourcesOutput#pending #pending} => Array&lt;Types::PendingResource&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -647,6 +723,8 @@ module Aws::ResourceGroups
     #   resp.failed[0].resource_arn #=> String
     #   resp.failed[0].error_message #=> String
     #   resp.failed[0].error_code #=> String
+    #   resp.pending #=> Array
+    #   resp.pending[0].resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResources AWS API Documentation
     #
@@ -660,8 +738,21 @@ module Aws::ResourceGroups
     # Returns a list of ARNs of the resources that are members of a
     # specified resource group.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:ListGroupResources`
+    #
+    # * `cloudformation:DescribeStacks`
+    #
+    # * `cloudformation:ListStackResources`
+    #
+    # * `tag:GetResources`
+    #
     # @option params [String] :group_name
-    #   Don't use this parameter. Use `Group` instead.
+    #   <i> <b>Deprecated - don't use this parameter. Use the
+    #   <code>Group</code> request field instead.</b> </i>
     #
     # @option params [String] :group
     #   The name or the ARN of the resource group
@@ -717,6 +808,7 @@ module Aws::ResourceGroups
     #
     # @return [Types::ListGroupResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListGroupResourcesOutput#resources #resources} => Array&lt;Types::ListGroupResourcesItem&gt;
     #   * {Types::ListGroupResourcesOutput#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::ListGroupResourcesOutput#next_token #next_token} => String
     #   * {Types::ListGroupResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
@@ -740,6 +832,10 @@ module Aws::ResourceGroups
     #
     # @example Response structure
     #
+    #   resp.resources #=> Array
+    #   resp.resources[0].identifier.resource_arn #=> String
+    #   resp.resources[0].identifier.resource_type #=> String
+    #   resp.resources[0].status.name #=> String, one of "PENDING"
     #   resp.resource_identifiers #=> Array
     #   resp.resource_identifiers[0].resource_arn #=> String
     #   resp.resource_identifiers[0].resource_type #=> String
@@ -759,6 +855,14 @@ module Aws::ResourceGroups
 
     # Returns a list of existing resource groups in your account.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:ListGroups`
+    #
+    # ^
+    #
     # @option params [Array<Types::GroupFilter>] :filters
     #   Filters, formatted as GroupFilter objects, that you want to apply to a
     #   `ListGroups` operation.
@@ -772,9 +876,9 @@ module Aws::ResourceGroups
     #     groups that have the specified configuration types attached. The
     #     current supported values are:
     #
-    #     * AWS:EC2::CapacityReservationPool
+    #     * `AWS:EC2::CapacityReservationPool`
     #
-    #     ^
+    #     * `AWS:EC2::HostManagement`
     #
     # @option params [Integer] :max_results
     #   The total number of results that you want included on each page of the
@@ -836,9 +940,83 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
+    # Attaches a service configuration to the specified group. This occurs
+    # asynchronously, and can take time to complete. You can use
+    # GetGroupConfiguration to check the status of the update.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:PutGroupConfiguration`
+    #
+    # ^
+    #
+    # @option params [String] :group
+    #   The name or ARN of the resource group with the configuration that you
+    #   want to update.
+    #
+    # @option params [Array<Types::GroupConfigurationItem>] :configuration
+    #   The new configuration to associate with the specified group. A
+    #   configuration associates the resource group with an AWS service and
+    #   specifies how the service can interact with the resources in the
+    #   group. A configuration is an array of GroupConfigurationItem elements.
+    #
+    #   For information about the syntax of a service configuration, see
+    #   [Service configurations for resource groups][1].
+    #
+    #   <note markdown="1"> A resource group can contain either a `Configuration` or a
+    #   `ResourceQuery`, but not both.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_group_configuration({
+    #     group: "GroupString",
+    #     configuration: [
+    #       {
+    #         type: "GroupConfigurationType", # required
+    #         parameters: [
+    #           {
+    #             name: "GroupConfigurationParameterName", # required
+    #             values: ["GroupConfigurationParameterValue"],
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/PutGroupConfiguration AWS API Documentation
+    #
+    # @overload put_group_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_group_configuration(params = {}, options = {})
+      req = build_request(:put_group_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns a list of AWS resource identifiers that matches the specified
     # query. The query uses the same format as a resource query in a
     # CreateGroup or UpdateGroupQuery operation.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:SearchResources`
+    #
+    # * `cloudformation:DescribeStacks`
+    #
+    # * `cloudformation:ListStackResources`
+    #
+    # * `tag:GetResources`
     #
     # @option params [required, Types::ResourceQuery] :resource_query
     #   The search query, using the same formats that are supported for
@@ -910,6 +1088,14 @@ module Aws::ResourceGroups
     # you with billing and administration services. Tags are not intended to
     # be used for private or sensitive data.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:Tag`
+    #
+    # ^
+    #
     # @option params [required, String] :arn
     #   The ARN of the resource group to which to add tags.
     #
@@ -948,6 +1134,14 @@ module Aws::ResourceGroups
 
     # Removes the specified resources from the specified group.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:UngroupResources`
+    #
+    # ^
+    #
     # @option params [required, String] :group
     #   The name or the ARN of the resource group from which to remove the
     #   resources.
@@ -959,6 +1153,7 @@ module Aws::ResourceGroups
     #
     #   * {Types::UngroupResourcesOutput#succeeded #succeeded} => Array&lt;String&gt;
     #   * {Types::UngroupResourcesOutput#failed #failed} => Array&lt;Types::FailedResource&gt;
+    #   * {Types::UngroupResourcesOutput#pending #pending} => Array&lt;Types::PendingResource&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -975,6 +1170,8 @@ module Aws::ResourceGroups
     #   resp.failed[0].resource_arn #=> String
     #   resp.failed[0].error_message #=> String
     #   resp.failed[0].error_code #=> String
+    #   resp.pending #=> Array
+    #   resp.pending[0].resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UngroupResources AWS API Documentation
     #
@@ -986,6 +1183,14 @@ module Aws::ResourceGroups
     end
 
     # Deletes tags from a specified resource group.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:Untag`
+    #
+    # ^
     #
     # @option params [required, String] :arn
     #   The ARN of the resource group from which to remove tags. The command
@@ -1025,6 +1230,14 @@ module Aws::ResourceGroups
     # Updates the description for an existing group. You cannot update the
     # name of a resource group.
     #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:UpdateGroup`
+    #
+    # ^
+    #
     # @option params [String] :group_name
     #   Don't use this parameter. Use `Group` instead.
     #
@@ -1063,7 +1276,21 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Updates the resource query of a group.
+    # Updates the resource query of a group. For more information about
+    # resource queries, see [Create a tag-based group in Resource
+    # Groups][1].
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:UpdateGroupQuery`
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
     #
     # @option params [String] :group_name
     #   Don't use this parameter. Use `Group` instead.
@@ -1074,6 +1301,11 @@ module Aws::ResourceGroups
     # @option params [required, Types::ResourceQuery] :resource_query
     #   The resource query to determine which AWS resources are members of
     #   this resource group.
+    #
+    #   <note markdown="1"> A resource group can contain either a `Configuration` or a
+    #   `ResourceQuery`, but not both.
+    #
+    #    </note>
     #
     # @return [Types::UpdateGroupQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1118,7 +1350,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

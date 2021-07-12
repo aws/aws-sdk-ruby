@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -322,6 +322,18 @@ module Aws::Appflow
     #   The connector metadata specific to Amazon EventBridge.
     #   @return [Types::EventBridgeMetadata]
     #
+    # @!attribute [rw] upsolver
+    #   The connector metadata specific to Upsolver.
+    #   @return [Types::UpsolverMetadata]
+    #
+    # @!attribute [rw] customer_profiles
+    #   The connector metadata specific to Amazon Connect Customer Profiles.
+    #   @return [Types::CustomerProfilesMetadata]
+    #
+    # @!attribute [rw] honeycode
+    #   The connector metadata specific to Amazon Honeycode.
+    #   @return [Types::HoneycodeMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorMetadata AWS API Documentation
     #
     class ConnectorMetadata < Struct.new(
@@ -341,7 +353,10 @@ module Aws::Appflow
       :trendmicro,
       :veeva,
       :zendesk,
-      :event_bridge)
+      :event_bridge,
+      :upsolver,
+      :customer_profiles,
+      :honeycode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -557,6 +572,8 @@ module Aws::Appflow
     #           },
     #           google_analytics: {
     #           },
+    #           honeycode: {
+    #           },
     #           infor_nexus: {
     #             instance_url: "InstanceUrl", # required
     #           },
@@ -614,6 +631,14 @@ module Aws::Appflow
     #           google_analytics: {
     #             client_id: "ClientId", # required
     #             client_secret: "ClientSecret", # required
+    #             access_token: "AccessToken",
+    #             refresh_token: "RefreshToken",
+    #             o_auth_request: {
+    #               auth_code: "AuthCode",
+    #               redirect_uri: "RedirectUri",
+    #             },
+    #           },
+    #           honeycode: {
     #             access_token: "AccessToken",
     #             refresh_token: "RefreshToken",
     #             o_auth_request: {
@@ -732,6 +757,14 @@ module Aws::Appflow
     #             redirect_uri: "RedirectUri",
     #           },
     #         },
+    #         honeycode: {
+    #           access_token: "AccessToken",
+    #           refresh_token: "RefreshToken",
+    #           o_auth_request: {
+    #             auth_code: "AuthCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
     #         infor_nexus: {
     #           access_key_id: "AccessKeyId", # required
     #           user_id: "Username", # required
@@ -815,6 +848,11 @@ module Aws::Appflow
     #   Analytics.
     #   @return [Types::GoogleAnalyticsConnectorProfileCredentials]
     #
+    # @!attribute [rw] honeycode
+    #   The connector-specific credentials required when using Amazon
+    #   Honeycode.
+    #   @return [Types::HoneycodeConnectorProfileCredentials]
+    #
     # @!attribute [rw] infor_nexus
     #   The connector-specific credentials required when using Infor Nexus.
     #   @return [Types::InforNexusConnectorProfileCredentials]
@@ -867,6 +905,7 @@ module Aws::Appflow
       :datadog,
       :dynatrace,
       :google_analytics,
+      :honeycode,
       :infor_nexus,
       :marketo,
       :redshift,
@@ -897,6 +936,8 @@ module Aws::Appflow
     #           instance_url: "InstanceUrl", # required
     #         },
     #         google_analytics: {
+    #         },
+    #         honeycode: {
     #         },
     #         infor_nexus: {
     #           instance_url: "InstanceUrl", # required
@@ -957,6 +998,10 @@ module Aws::Appflow
     #   The connector-specific properties required Google Analytics.
     #   @return [Types::GoogleAnalyticsConnectorProfileProperties]
     #
+    # @!attribute [rw] honeycode
+    #   The connector-specific properties required by Amazon Honeycode.
+    #   @return [Types::HoneycodeConnectorProfileProperties]
+    #
     # @!attribute [rw] infor_nexus
     #   The connector-specific properties required by Infor Nexus.
     #   @return [Types::InforNexusConnectorProfileProperties]
@@ -1008,6 +1053,7 @@ module Aws::Appflow
       :datadog,
       :dynatrace,
       :google_analytics,
+      :honeycode,
       :infor_nexus,
       :marketo,
       :redshift,
@@ -1042,7 +1088,7 @@ module Aws::Appflow
     #       {
     #         connector_profile_name: "ConnectorProfileName", # required
     #         kms_arn: "KMSArn",
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #         connection_mode: "Public", # required, accepts Public, Private
     #         connector_profile_config: { # required
     #           connector_profile_properties: { # required
@@ -1055,6 +1101,8 @@ module Aws::Appflow
     #               instance_url: "InstanceUrl", # required
     #             },
     #             google_analytics: {
+    #             },
+    #             honeycode: {
     #             },
     #             infor_nexus: {
     #               instance_url: "InstanceUrl", # required
@@ -1113,6 +1161,14 @@ module Aws::Appflow
     #             google_analytics: {
     #               client_id: "ClientId", # required
     #               client_secret: "ClientSecret", # required
+    #               access_token: "AccessToken",
+    #               refresh_token: "RefreshToken",
+    #               o_auth_request: {
+    #                 auth_code: "AuthCode",
+    #                 redirect_uri: "RedirectUri",
+    #               },
+    #             },
+    #             honeycode: {
     #               access_token: "AccessToken",
     #               refresh_token: "RefreshToken",
     #               o_auth_request: {
@@ -1255,11 +1311,13 @@ module Aws::Appflow
     #               schedule_start_time: Time.now,
     #               schedule_end_time: Time.now,
     #               timezone: "Timezone",
+    #               schedule_offset: 1,
+    #               first_execution_from: Time.now,
     #             },
     #           },
     #         },
     #         source_flow_config: { # required
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -1314,7 +1372,7 @@ module Aws::Appflow
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -1369,6 +1427,44 @@ module Aws::Appflow
     #                   bucket_name: "BucketName",
     #                 },
     #               },
+    #               lookout_metrics: {
+    #               },
+    #               upsolver: {
+    #                 bucket_name: "UpsolverBucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #                 s3_output_format_config: { # required
+    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #                   prefix_config: { # required
+    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                   },
+    #                   aggregation_config: {
+    #                     aggregation_type: "None", # accepts None, SingleFile
+    #                   },
+    #                 },
+    #               },
+    #               honeycode: {
+    #                 object: "Object", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #               },
+    #               customer_profiles: {
+    #                 domain_name: "DomainName", # required
+    #                 object_type_name: "ObjectTypeName",
+    #               },
+    #               zendesk: {
+    #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #               },
     #             },
     #           },
     #         ],
@@ -1392,7 +1488,7 @@ module Aws::Appflow
     #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
@@ -1474,6 +1570,41 @@ module Aws::Appflow
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The properties that are applied when Amazon Connect Customer Profiles
+    # is used as a destination.
+    #
+    # @note When making an API call, you may pass CustomerProfilesDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         object_type_name: "ObjectTypeName",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the Amazon Connect Customer Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_type_name
+    #   The object specified in the Amazon Connect Customer Profiles flow
+    #   destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomerProfilesDestinationProperties AWS API Documentation
+    #
+    class CustomerProfilesDestinationProperties < Struct.new(
+      :domain_name,
+      :object_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connector metadata specific to Amazon Connect Customer Profiles.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomerProfilesMetadata AWS API Documentation
+    #
+    class CustomerProfilesMetadata < Aws::EmptyStructure; end
 
     # The connector-specific credentials required by Datadog.
     #
@@ -1622,7 +1753,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_entity_name: "Name", # required
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #         connector_profile_name: "ConnectorProfileName",
     #       }
     #
@@ -1669,7 +1800,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_profile_names: ["ConnectorProfileName"],
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -1727,7 +1858,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #         next_token: "NextToken",
     #       }
     #
@@ -1994,6 +2125,44 @@ module Aws::Appflow
     #             bucket_name: "BucketName",
     #           },
     #         },
+    #         lookout_metrics: {
+    #         },
+    #         upsolver: {
+    #           bucket_name: "UpsolverBucketName", # required
+    #           bucket_prefix: "BucketPrefix",
+    #           s3_output_format_config: { # required
+    #             file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #             prefix_config: { # required
+    #               prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #               prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #             },
+    #             aggregation_config: {
+    #               aggregation_type: "None", # accepts None, SingleFile
+    #             },
+    #           },
+    #         },
+    #         honeycode: {
+    #           object: "Object", # required
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #         },
+    #         customer_profiles: {
+    #           domain_name: "DomainName", # required
+    #           object_type_name: "ObjectTypeName",
+    #         },
+    #         zendesk: {
+    #           object: "Object", # required
+    #           id_field_names: ["Name"],
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #         },
     #       }
     #
     # @!attribute [rw] redshift
@@ -2016,6 +2185,26 @@ module Aws::Appflow
     #   The properties required to query Amazon EventBridge.
     #   @return [Types::EventBridgeDestinationProperties]
     #
+    # @!attribute [rw] lookout_metrics
+    #   The properties required to query Amazon Lookout for Metrics.
+    #   @return [Types::LookoutMetricsDestinationProperties]
+    #
+    # @!attribute [rw] upsolver
+    #   The properties required to query Upsolver.
+    #   @return [Types::UpsolverDestinationProperties]
+    #
+    # @!attribute [rw] honeycode
+    #   The properties required to query Amazon Honeycode.
+    #   @return [Types::HoneycodeDestinationProperties]
+    #
+    # @!attribute [rw] customer_profiles
+    #   The properties required to query Amazon Connect Customer Profiles.
+    #   @return [Types::CustomerProfilesDestinationProperties]
+    #
+    # @!attribute [rw] zendesk
+    #   The properties required to query Zendesk.
+    #   @return [Types::ZendeskDestinationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
     #
     class DestinationConnectorProperties < Struct.new(
@@ -2023,7 +2212,12 @@ module Aws::Appflow
       :s3,
       :salesforce,
       :snowflake,
-      :event_bridge)
+      :event_bridge,
+      :lookout_metrics,
+      :upsolver,
+      :honeycode,
+      :customer_profiles,
+      :zendesk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2076,7 +2270,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #         connector_profile_name: "ConnectorProfileName",
     #         destination_connector_properties: { # required
     #           redshift: {
@@ -2130,6 +2324,44 @@ module Aws::Appflow
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
     #             },
+    #           },
+    #           lookout_metrics: {
+    #           },
+    #           upsolver: {
+    #             bucket_name: "UpsolverBucketName", # required
+    #             bucket_prefix: "BucketPrefix",
+    #             s3_output_format_config: { # required
+    #               file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #               prefix_config: { # required
+    #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #               },
+    #               aggregation_config: {
+    #                 aggregation_type: "None", # accepts None, SingleFile
+    #               },
+    #             },
+    #           },
+    #           honeycode: {
+    #             object: "Object", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #           },
+    #           customer_profiles: {
+    #             domain_name: "DomainName", # required
+    #             object_type_name: "ObjectTypeName",
+    #           },
+    #           zendesk: {
+    #             object: "Object", # required
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #           },
     #         },
     #       }
@@ -2380,6 +2612,16 @@ module Aws::Appflow
     #   Specifies the time of the most recent update.
     #   @return [Time]
     #
+    # @!attribute [rw] data_pull_start_time
+    #   The timestamp that determines the first new or updated record to be
+    #   transferred in the flow run.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_pull_end_time
+    #   The timestamp that indicates the last new or updated record to be
+    #   transferred in the flow run.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ExecutionRecord AWS API Documentation
     #
     class ExecutionRecord < Struct.new(
@@ -2387,7 +2629,9 @@ module Aws::Appflow
       :execution_status,
       :execution_result,
       :started_at,
-      :last_updated_at)
+      :last_updated_at,
+      :data_pull_start_time,
+      :data_pull_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2624,6 +2868,104 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The connector-specific credentials required when using Amazon
+    # Honeycode.
+    #
+    # @note When making an API call, you may pass HoneycodeConnectorProfileCredentials
+    #   data as a hash:
+    #
+    #       {
+    #         access_token: "AccessToken",
+    #         refresh_token: "RefreshToken",
+    #         o_auth_request: {
+    #           auth_code: "AuthCode",
+    #           redirect_uri: "RedirectUri",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] access_token
+    #   The credentials used to access protected Amazon Honeycode resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_token
+    #   The credentials used to acquire new access tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_request
+    #   Used by select connectors for which the OAuth workflow is supported,
+    #   such as Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
+    #   @return [Types::ConnectorOAuthRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeConnectorProfileCredentials AWS API Documentation
+    #
+    class HoneycodeConnectorProfileCredentials < Struct.new(
+      :access_token,
+      :refresh_token,
+      :o_auth_request)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # The connector-specific properties required when using Amazon
+    # Honeycode.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeConnectorProfileProperties AWS API Documentation
+    #
+    class HoneycodeConnectorProfileProperties < Aws::EmptyStructure; end
+
+    # The properties that are applied when Amazon Honeycode is used as a
+    # destination.
+    #
+    # @note When making an API call, you may pass HoneycodeDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] object
+    #   The object specified in the Amazon Honeycode flow destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the destination. For example, this setting would
+    #   determine if the flow should fail after one insertion error, or
+    #   continue and attempt to insert every record regardless of the
+    #   initial failure. `ErrorHandlingConfig` is a part of the destination
+    #   connector details.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeDestinationProperties AWS API Documentation
+    #
+    class HoneycodeDestinationProperties < Struct.new(
+      :object,
+      :error_handling_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connector metadata specific to Amazon Honeycode.
+    #
+    # @!attribute [rw] o_auth_scopes
+    #   The desired authorization scope for the Amazon Honeycode account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeMetadata AWS API Documentation
+    #
+    class HoneycodeMetadata < Struct.new(
+      :o_auth_scopes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the configuration used when importing incremental records
     # from the source.
     #
@@ -2754,7 +3096,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_profile_name: "ConnectorProfileName",
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #         entities_path: "EntitiesPath",
     #       }
     #
@@ -2876,6 +3218,15 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The properties that are applied when Amazon Lookout for Metrics is
+    # used as a destination.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/LookoutMetricsDestinationProperties AWS API Documentation
+    #
+    class LookoutMetricsDestinationProperties < Aws::EmptyStructure; end
+
     # The connector-specific profile credentials required by Marketo.
     #
     # @note When making an API call, you may pass MarketoConnectorProfileCredentials
@@ -2982,12 +3333,12 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] prefix_type
-    #   Determines the level of granularity that's included in the prefix.
+    #   Determines the format of the prefix, and whether it applies to the
+    #   file name, file path, or both.
     #   @return [String]
     #
     # @!attribute [rw] prefix_format
-    #   Determines the format of the prefix, and whether it applies to the
-    #   file name, file path, or both.
+    #   Determines the level of granularity that's included in the prefix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/PrefixConfig AWS API Documentation
@@ -3451,11 +3802,13 @@ module Aws::Appflow
     #         schedule_start_time: Time.now,
     #         schedule_end_time: Time.now,
     #         timezone: "Timezone",
+    #         schedule_offset: 1,
+    #         first_execution_from: Time.now,
     #       }
     #
     # @!attribute [rw] schedule_expression
-    #   The scheduling expression that determines when and how often the
-    #   rule runs.
+    #   The scheduling expression that determines the rate at which the
+    #   schedule will run, for example `rate(5minutes)`.
     #   @return [String]
     #
     # @!attribute [rw] data_pull_mode
@@ -3473,8 +3826,18 @@ module Aws::Appflow
     #
     # @!attribute [rw] timezone
     #   Specifies the time zone used when referring to the date and time of
-    #   a scheduled-triggered flow.
+    #   a scheduled-triggered flow, such as `America/New_York`.
     #   @return [String]
+    #
+    # @!attribute [rw] schedule_offset
+    #   Specifies the optional offset that is added to the time interval for
+    #   a schedule-triggered flow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] first_execution_from
+    #   Specifies the date range for the records to import from the
+    #   connector in the first flow run.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ScheduledTriggerProperties AWS API Documentation
     #
@@ -3483,7 +3846,9 @@ module Aws::Appflow
       :data_pull_mode,
       :schedule_start_time,
       :schedule_end_time,
-      :timezone)
+      :timezone,
+      :schedule_offset,
+      :first_execution_from)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4055,7 +4420,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #         connector_profile_name: "ConnectorProfileName",
     #         source_connector_properties: { # required
     #           amplitude: {
@@ -4293,7 +4658,7 @@ module Aws::Appflow
     #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -4408,6 +4773,8 @@ module Aws::Appflow
     #             schedule_start_time: Time.now,
     #             schedule_end_time: Time.now,
     #             timezone: "Timezone",
+    #             schedule_offset: 1,
+    #             first_execution_from: Time.now,
     #           },
     #         },
     #       }
@@ -4446,6 +4813,8 @@ module Aws::Appflow
     #           schedule_start_time: Time.now,
     #           schedule_end_time: Time.now,
     #           timezone: "Timezone",
+    #           schedule_offset: 1,
+    #           first_execution_from: Time.now,
     #         },
     #       }
     #
@@ -4523,6 +4892,8 @@ module Aws::Appflow
     #             },
     #             google_analytics: {
     #             },
+    #             honeycode: {
+    #             },
     #             infor_nexus: {
     #               instance_url: "InstanceUrl", # required
     #             },
@@ -4580,6 +4951,14 @@ module Aws::Appflow
     #             google_analytics: {
     #               client_id: "ClientId", # required
     #               client_secret: "ClientSecret", # required
+    #               access_token: "AccessToken",
+    #               refresh_token: "RefreshToken",
+    #               o_auth_request: {
+    #                 auth_code: "AuthCode",
+    #                 redirect_uri: "RedirectUri",
+    #               },
+    #             },
+    #             honeycode: {
     #               access_token: "AccessToken",
     #               refresh_token: "RefreshToken",
     #               o_auth_request: {
@@ -4706,11 +5085,13 @@ module Aws::Appflow
     #               schedule_start_time: Time.now,
     #               schedule_end_time: Time.now,
     #               timezone: "Timezone",
+    #               schedule_offset: 1,
+    #               first_execution_from: Time.now,
     #             },
     #           },
     #         },
     #         source_flow_config: {
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -4765,7 +5146,7 @@ module Aws::Appflow
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -4820,6 +5201,44 @@ module Aws::Appflow
     #                   bucket_name: "BucketName",
     #                 },
     #               },
+    #               lookout_metrics: {
+    #               },
+    #               upsolver: {
+    #                 bucket_name: "UpsolverBucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #                 s3_output_format_config: { # required
+    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #                   prefix_config: { # required
+    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                   },
+    #                   aggregation_config: {
+    #                     aggregation_type: "None", # accepts None, SingleFile
+    #                   },
+    #                 },
+    #               },
+    #               honeycode: {
+    #                 object: "Object", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #               },
+    #               customer_profiles: {
+    #                 domain_name: "DomainName", # required
+    #                 object_type_name: "ObjectTypeName",
+    #               },
+    #               zendesk: {
+    #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #               },
     #             },
     #           },
     #         ],
@@ -4843,7 +5262,7 @@ module Aws::Appflow
     #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
@@ -4900,6 +5319,101 @@ module Aws::Appflow
     #
     class UpdateFlowResponse < Struct.new(
       :flow_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that are applied when Upsolver is used as a
+    # destination.
+    #
+    # @note When making an API call, you may pass UpsolverDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "UpsolverBucketName", # required
+    #         bucket_prefix: "BucketPrefix",
+    #         s3_output_format_config: { # required
+    #           file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #           prefix_config: { # required
+    #             prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #             prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #           },
+    #           aggregation_config: {
+    #             aggregation_type: "None", # accepts None, SingleFile
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The Upsolver Amazon S3 bucket name in which Amazon AppFlow places
+    #   the transferred data.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The object key for the destination Upsolver Amazon S3 bucket in
+    #   which Amazon AppFlow places the files.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_format_config
+    #   The configuration that determines how data is formatted when
+    #   Upsolver is used as the flow destination.
+    #   @return [Types::UpsolverS3OutputFormatConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverDestinationProperties AWS API Documentation
+    #
+    class UpsolverDestinationProperties < Struct.new(
+      :bucket_name,
+      :bucket_prefix,
+      :s3_output_format_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connector metadata specific to Upsolver.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverMetadata AWS API Documentation
+    #
+    class UpsolverMetadata < Aws::EmptyStructure; end
+
+    # The configuration that determines how Amazon AppFlow formats the flow
+    # output data when Upsolver is used as the destination.
+    #
+    # @note When making an API call, you may pass UpsolverS3OutputFormatConfig
+    #   data as a hash:
+    #
+    #       {
+    #         file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #         prefix_config: { # required
+    #           prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #           prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #         },
+    #         aggregation_config: {
+    #           aggregation_type: "None", # accepts None, SingleFile
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_type
+    #   Indicates the file type that Amazon AppFlow places in the Upsolver
+    #   Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_config
+    #   Determines the prefix that Amazon AppFlow applies to the destination
+    #   folder name. You can name your destination folders according to the
+    #   flow frequency and date.
+    #   @return [Types::PrefixConfig]
+    #
+    # @!attribute [rw] aggregation_config
+    #   The aggregation settings that you can use to customize the output
+    #   format of your flow data.
+    #   @return [Types::AggregationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverS3OutputFormatConfig AWS API Documentation
+    #
+    class UpsolverS3OutputFormatConfig < Struct.new(
+      :file_type,
+      :prefix_config,
+      :aggregation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5054,6 +5568,56 @@ module Aws::Appflow
     #
     class ZendeskConnectorProfileProperties < Struct.new(
       :instance_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that are applied when Zendesk is used as a destination.
+    #
+    # @note When making an API call, you may pass ZendeskDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #         id_field_names: ["Name"],
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #       }
+    #
+    # @!attribute [rw] object
+    #   The object specified in the Zendesk flow destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_field_names
+    #   A list of field names that can be used as an ID field when
+    #   performing a write operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the destination. For example, this setting would
+    #   determine if the flow should fail after one insertion error, or
+    #   continue and attempt to insert every record regardless of the
+    #   initial failure. `ErrorHandlingConfig` is a part of the destination
+    #   connector details.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @!attribute [rw] write_operation_type
+    #   The possible write operations in the destination connector. When
+    #   this value is not provided, this defaults to the `INSERT` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ZendeskDestinationProperties AWS API Documentation
+    #
+    class ZendeskDestinationProperties < Struct.new(
+      :object,
+      :id_field_names,
+      :error_handling_config,
+      :write_operation_type)
       SENSITIVE = []
       include Aws::Structure
     end

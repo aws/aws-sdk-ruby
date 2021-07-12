@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -50,6 +50,7 @@ module Aws::ComprehendMedical
     ICD10CMEntityCategory = Shapes::StringShape.new(name: 'ICD10CMEntityCategory')
     ICD10CMEntityList = Shapes::ListShape.new(name: 'ICD10CMEntityList')
     ICD10CMEntityType = Shapes::StringShape.new(name: 'ICD10CMEntityType')
+    ICD10CMRelationshipType = Shapes::StringShape.new(name: 'ICD10CMRelationshipType')
     ICD10CMTrait = Shapes::StructureShape.new(name: 'ICD10CMTrait')
     ICD10CMTraitList = Shapes::ListShape.new(name: 'ICD10CMTraitList')
     ICD10CMTraitName = Shapes::StringShape.new(name: 'ICD10CMTraitName')
@@ -233,6 +234,8 @@ module Aws::ComprehendMedical
     ICD10CMAttribute.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
     ICD10CMAttribute.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     ICD10CMAttribute.add_member(:traits, Shapes::ShapeRef.new(shape: ICD10CMTraitList, location_name: "Traits"))
+    ICD10CMAttribute.add_member(:category, Shapes::ShapeRef.new(shape: ICD10CMEntityType, location_name: "Category"))
+    ICD10CMAttribute.add_member(:relationship_type, Shapes::ShapeRef.new(shape: ICD10CMRelationshipType, location_name: "RelationshipType"))
     ICD10CMAttribute.struct_class = Types::ICD10CMAttribute
 
     ICD10CMAttributeList.member = Shapes::ShapeRef.new(shape: ICD10CMAttribute)

@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-07-07)
+------------------
+
+* Feature - Releasing new APIs for AWS Chime MediaCapturePipeline
+
+1.49.0 (2021-06-24)
+------------------
+
+* Feature - Adds EventIngestionUrl field to MediaPlacement
+
+1.48.0 (2021-06-17)
+------------------
+
+* Feature - This release adds a new API UpdateSipMediaApplicationCall, to update an in-progress call for SipMediaApplication.
+
+1.47.0 (2021-06-10)
+------------------
+
+* Feature - This SDK release adds support for UpdateAccount API to allow users to update their default license on Chime account.
+
+1.46.0 (2021-05-04)
+------------------
+
+* Feature - This release adds the ability to search for and order international phone numbers for Amazon Chime SIP media applications.
+
+1.45.0 (2021-05-03)
+------------------
+
+* Feature - Added new BatchCreateChannelMembership API to support multiple membership creation for channels
+
+1.44.0 (2021-05-03)
+------------------
+
+* Feature - Added new BatchCreateChannelMembership API to support multiple membership creation for channels
+
+1.43.0 (2021-04-29)
+------------------
+
+* Feature - Increase AppInstanceUserId length to 64 characters
+
+1.42.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2021-01-19)
+------------------
+
+* Feature - Add support for specifying ChimeBearer header as part of the request for Amazon Chime SDK messaging APIs. Documentation updates.
+
+1.39.0 (2020-11-20)
+------------------
+
+* Feature - The Amazon Chime SDK for messaging provides the building blocks needed to build chat and other real-time collaboration features.
+
+1.38.0 (2020-11-17)
+------------------
+
+* Feature - This release adds CRUD APIs for Amazon Chime SipMediaApplications and SipRules. It also adds the API for creating outbound PSTN calls for Amazon Chime meetings.
+
 1.37.0 (2020-09-30)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -58,10 +58,18 @@ module Aws::RDS
       data[:snapshot_create_time]
     end
 
-    # Specifies the name of the database engine.
+    # Specifies the name of the database engine for this DB cluster
+    # snapshot.
     # @return [String]
     def engine
       data[:engine]
+    end
+
+    # Provides the engine mode of the database engine for this DB cluster
+    # snapshot.
+    # @return [String]
+    def engine_mode
+      data[:engine_mode]
     end
 
     # Specifies the allocated storage size in gibibytes (GiB).
@@ -96,7 +104,7 @@ module Aws::RDS
       data[:cluster_create_time]
     end
 
-    # Provides the master username for the DB cluster snapshot.
+    # Provides the master username for this DB cluster snapshot.
     # @return [String]
     def master_username
       data[:master_username]
@@ -134,8 +142,12 @@ module Aws::RDS
       data[:storage_encrypted]
     end
 
-    # If `StorageEncrypted` is true, the AWS KMS key identifier for the
-    # encrypted DB cluster snapshot.
+    # If `StorageEncrypted` is true, the Amazon Web Services KMS key
+    # identifier for the encrypted DB cluster snapshot.
+    #
+    # The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    # alias ARN, or alias name for the Amazon Web Services KMS customer
+    # master key (CMK).
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -155,8 +167,8 @@ module Aws::RDS
       data[:source_db_cluster_snapshot_arn]
     end
 
-    # True if mapping of AWS Identity and Access Management (IAM) accounts
-    # to database accounts is enabled, and otherwise false.
+    # True if mapping of Amazon Web Services Identity and Access Management
+    # (IAM) accounts to database accounts is enabled, and otherwise false.
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -365,69 +377,77 @@ module Aws::RDS
     #
     #   Example: `my-cluster-snapshot2`
     # @option options [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
-    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
-    #   key alias for the KMS encryption key.
+    #   The Amazon Web Services KMS key identifier for an encrypted DB cluster
+    #   snapshot. The Amazon Web Services KMS key identifier is the key ARN,
+    #   key ID, alias ARN, or alias name for the Amazon Web Services KMS
+    #   customer master key (CMK).
     #
-    #   If you copy an encrypted DB cluster snapshot from your AWS account,
-    #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
-    #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
-    #   the copy of the DB cluster snapshot is encrypted with the same KMS key
-    #   as the source DB cluster snapshot.
+    #   If you copy an encrypted DB cluster snapshot from your Amazon Web
+    #   Services account, you can specify a value for `KmsKeyId` to encrypt
+    #   the copy with a new Amazon Web Services KMS CMK. If you don't specify
+    #   a value for `KmsKeyId`, then the copy of the DB cluster snapshot is
+    #   encrypted with the same Amazon Web Services KMS key as the source DB
+    #   cluster snapshot.
     #
     #   If you copy an encrypted DB cluster snapshot that is shared from
-    #   another AWS account, then you must specify a value for `KmsKeyId`.
+    #   another Amazon Web Services account, then you must specify a value for
+    #   `KmsKeyId`.
     #
-    #   To copy an encrypted DB cluster snapshot to another AWS Region, you
-    #   must set `KmsKeyId` to the KMS key ID you want to use to encrypt the
-    #   copy of the DB cluster snapshot in the destination AWS Region. KMS
-    #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one AWS Region in another
-    #   AWS Region.
+    #   To copy an encrypted DB cluster snapshot to another Amazon Web
+    #   Services Region, you must set `KmsKeyId` to the Amazon Web Services
+    #   KMS key identifier you want to use to encrypt the copy of the DB
+    #   cluster snapshot in the destination Amazon Web Services Region. Amazon
+    #   Web Services KMS CMKs are specific to the Amazon Web Services Region
+    #   that they are created in, and you can't use CMKs from one Amazon Web
+    #   Services Region in another Amazon Web Services Region.
     #
     #   If you copy an unencrypted DB cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
-    #   source DB cluster snapshot to copy. The `PreSignedUrl` parameter must
-    #   be used when copying an encrypted DB cluster snapshot from another AWS
-    #   Region. Don't specify `PreSignedUrl` when you are copying an
-    #   encrypted DB cluster snapshot in the same AWS Region.
+    #   `CopyDBClusterSnapshot` API action in the Amazon Web Services Region
+    #   that contains the source DB cluster snapshot to copy. The
+    #   `PreSignedUrl` parameter must be used when copying an encrypted DB
+    #   cluster snapshot from another Amazon Web Services Region. Don't
+    #   specify `PreSignedUrl` when you are copying an encrypted DB cluster
+    #   snapshot in the same Amazon Web Services Region.
     #
     #   The pre-signed URL must be a valid request for the
     #   `CopyDBClusterSnapshot` API action that can be executed in the source
-    #   AWS Region that contains the encrypted DB cluster snapshot to be
-    #   copied. The pre-signed URL request must contain the following
-    #   parameter values:
+    #   Amazon Web Services Region that contains the encrypted DB cluster
+    #   snapshot to be copied. The pre-signed URL request must contain the
+    #   following parameter values:
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster snapshot in the destination AWS
-    #     Region. This is the same identifier for both the
-    #     `CopyDBClusterSnapshot` action that is called in the destination AWS
-    #     Region, and the action contained in the pre-signed URL.
+    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the
+    #     customer master key (CMK) to use to encrypt the copy of the DB
+    #     cluster snapshot in the destination Amazon Web Services Region. This
+    #     is the same identifier for both the `CopyDBClusterSnapshot` action
+    #     that is called in the destination Amazon Web Services Region, and
+    #     the action contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
-    #     snapshot is to be created in.
+    #   * `DestinationRegion` - The name of the Amazon Web Services Region
+    #     that the DB cluster snapshot is to be created in.
     #
     #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
     #     identifier for the encrypted DB cluster snapshot to be copied. This
     #     identifier must be in the Amazon Resource Name (ARN) format for the
-    #     source AWS Region. For example, if you are copying an encrypted DB
-    #     cluster snapshot from the us-west-2 AWS Region, then your
-    #     `SourceDBClusterSnapshotIdentifier` looks like the following
-    #     example:
+    #     source Amazon Web Services Region. For example, if you are copying
+    #     an encrypted DB cluster snapshot from the us-west-2 Amazon Web
+    #     Services Region, then your `SourceDBClusterSnapshotIdentifier` looks
+    #     like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #   Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][1] and [ Signature Version 4 Signing
+    #   Process][2].
     #
-    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
-    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
+    #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source AWS Region.
+    #   operation that can be executed in the source Amazon Web Services
+    #   Region.
     #
     #    </note>
     #
@@ -446,7 +466,6 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
-    # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -593,28 +612,28 @@ module Aws::RDS
     # @option options [Array<Types::Tag>] :tags
     #   The tags to be assigned to the restored DB cluster.
     # @option options [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
-    #   cluster from a DB snapshot or DB cluster snapshot.
+    #   The Amazon Web Services KMS key identifier to use when restoring an
+    #   encrypted DB cluster from a DB snapshot or DB cluster snapshot.
     #
-    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are restoring a DB cluster with the same AWS
-    #   account that owns the KMS encryption key used to encrypt the new DB
-    #   cluster, then you can use the KMS key alias instead of the ARN for the
-    #   KMS encryption key.
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS customer
+    #   master key (CMK). To use a CMK in a different Amazon Web Services
+    #   account, specify the key ARN or alias ARN.
     #
-    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   When you don't specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
-    #     encrypted, then the restored DB cluster is encrypted using the KMS
-    #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
+    #     encrypted, then the restored DB cluster is encrypted using the
+    #     Amazon Web Services KMS CMK that was used to encrypt the DB snapshot
+    #     or DB cluster snapshot.
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
     #     isn't encrypted, then the restored DB cluster isn't encrypted.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide.*

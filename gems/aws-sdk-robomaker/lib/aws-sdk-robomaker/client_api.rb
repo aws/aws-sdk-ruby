@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -115,6 +115,7 @@ module Aws::RoboMaker
     EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
     EnvironmentVariableMap = Shapes::MapShape.new(name: 'EnvironmentVariableMap')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    ExitBehavior = Shapes::StringShape.new(name: 'ExitBehavior')
     FailedAt = Shapes::TimestampShape.new(name: 'FailedAt')
     FailedCreateSimulationJobRequest = Shapes::StructureShape.new(name: 'FailedCreateSimulationJobRequest')
     FailedCreateSimulationJobRequests = Shapes::ListShape.new(name: 'FailedCreateSimulationJobRequests')
@@ -259,6 +260,9 @@ module Aws::RoboMaker
     TemplateSummaries = Shapes::ListShape.new(name: 'TemplateSummaries')
     TemplateSummary = Shapes::StructureShape.new(name: 'TemplateSummary')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Tool = Shapes::StructureShape.new(name: 'Tool')
+    Tools = Shapes::ListShape.new(name: 'Tools')
+    UnrestrictedCommand = Shapes::StringShape.new(name: 'UnrestrictedCommand')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateRobotApplicationRequest = Shapes::StructureShape.new(name: 'UpdateRobotApplicationRequest')
@@ -267,6 +271,9 @@ module Aws::RoboMaker
     UpdateSimulationApplicationResponse = Shapes::StructureShape.new(name: 'UpdateSimulationApplicationResponse')
     UpdateWorldTemplateRequest = Shapes::StructureShape.new(name: 'UpdateWorldTemplateRequest')
     UpdateWorldTemplateResponse = Shapes::StructureShape.new(name: 'UpdateWorldTemplateResponse')
+    UploadBehavior = Shapes::StringShape.new(name: 'UploadBehavior')
+    UploadConfiguration = Shapes::StructureShape.new(name: 'UploadConfiguration')
+    UploadConfigurations = Shapes::ListShape.new(name: 'UploadConfigurations')
     VPCConfig = Shapes::StructureShape.new(name: 'VPCConfig')
     VPCConfigResponse = Shapes::StructureShape.new(name: 'VPCConfigResponse')
     Version = Shapes::StringShape.new(name: 'Version')
@@ -504,6 +511,7 @@ module Aws::RoboMaker
     CreateWorldGenerationJobRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
     CreateWorldGenerationJobRequest.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, required: true, location_name: "worldCount"))
     CreateWorldGenerationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldGenerationJobRequest.add_member(:world_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "worldTags"))
     CreateWorldGenerationJobRequest.struct_class = Types::CreateWorldGenerationJobRequest
 
     CreateWorldGenerationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -514,6 +522,7 @@ module Aws::RoboMaker
     CreateWorldGenerationJobResponse.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
     CreateWorldGenerationJobResponse.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, location_name: "worldCount"))
     CreateWorldGenerationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldGenerationJobResponse.add_member(:world_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "worldTags"))
     CreateWorldGenerationJobResponse.struct_class = Types::CreateWorldGenerationJobResponse
 
     CreateWorldTemplateRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
@@ -757,6 +766,7 @@ module Aws::RoboMaker
     DescribeWorldGenerationJobResponse.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, location_name: "worldCount"))
     DescribeWorldGenerationJobResponse.add_member(:finished_worlds_summary, Shapes::ShapeRef.new(shape: FinishedWorldsSummary, location_name: "finishedWorldsSummary"))
     DescribeWorldGenerationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldGenerationJobResponse.add_member(:world_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "worldTags"))
     DescribeWorldGenerationJobResponse.struct_class = Types::DescribeWorldGenerationJobResponse
 
     DescribeWorldRequest.add_member(:world, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "world"))
@@ -1015,6 +1025,10 @@ module Aws::RoboMaker
     RobotApplicationConfig.add_member(:application, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "application"))
     RobotApplicationConfig.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, location_name: "applicationVersion"))
     RobotApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
+    RobotApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
+    RobotApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultUploadConfigurations"))
+    RobotApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
+    RobotApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultTools"))
     RobotApplicationConfig.struct_class = Types::RobotApplicationConfig
 
     RobotApplicationConfigs.member = Shapes::ShapeRef.new(shape: RobotApplicationConfig)
@@ -1068,7 +1082,11 @@ module Aws::RoboMaker
     SimulationApplicationConfig.add_member(:application, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "application"))
     SimulationApplicationConfig.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, location_name: "applicationVersion"))
     SimulationApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
+    SimulationApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
     SimulationApplicationConfig.add_member(:world_configs, Shapes::ShapeRef.new(shape: WorldConfigs, location_name: "worldConfigs"))
+    SimulationApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultUploadConfigurations"))
+    SimulationApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
+    SimulationApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultTools"))
     SimulationApplicationConfig.struct_class = Types::SimulationApplicationConfig
 
     SimulationApplicationConfigs.member = Shapes::ShapeRef.new(shape: SimulationApplicationConfig)
@@ -1226,6 +1244,15 @@ module Aws::RoboMaker
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    Tool.add_member(:stream_ui, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "streamUI"))
+    Tool.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    Tool.add_member(:command, Shapes::ShapeRef.new(shape: UnrestrictedCommand, required: true, location_name: "command"))
+    Tool.add_member(:stream_output_to_cloud_watch, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "streamOutputToCloudWatch"))
+    Tool.add_member(:exit_behavior, Shapes::ShapeRef.new(shape: ExitBehavior, location_name: "exitBehavior"))
+    Tool.struct_class = Types::Tool
+
+    Tools.member = Shapes::ShapeRef.new(shape: Tool)
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1277,6 +1304,13 @@ module Aws::RoboMaker
     UpdateWorldTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     UpdateWorldTemplateResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
     UpdateWorldTemplateResponse.struct_class = Types::UpdateWorldTemplateResponse
+
+    UploadConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    UploadConfiguration.add_member(:path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "path"))
+    UploadConfiguration.add_member(:upload_behavior, Shapes::ShapeRef.new(shape: UploadBehavior, required: true, location_name: "uploadBehavior"))
+    UploadConfiguration.struct_class = Types::UploadConfiguration
+
+    UploadConfigurations.member = Shapes::ShapeRef.new(shape: UploadConfiguration)
 
     VPCConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "subnets"))
     VPCConfig.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "securityGroups"))

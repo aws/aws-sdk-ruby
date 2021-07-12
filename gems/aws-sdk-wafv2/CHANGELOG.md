@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-06-24)
+------------------
+
+* Feature - Added support for 15 new text transformation.
+
+1.20.0 (2021-04-01)
+------------------
+
+* Feature - Added support for ScopeDownStatement for ManagedRuleGroups, Labels, LabelMatchStatement, and LoggingFilter. For more information on these features, see the AWS WAF Developer Guide.
+
+1.19.0 (2021-03-29)
+------------------
+
+* Feature - Added custom request handling and custom response support in rule actions and default action; Added the option to inspect the web request body as parsed and filtered JSON.
+
+1.18.0 (2021-03-11)
+------------------
+
+* Feature - Correct the documentation about JSON body parsing behavior and IP set update behavior
+
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2021-02-12)
+------------------
+
+* Feature - Added the option to inspect the web request body as parsed and filtered JSON (new FieldToMatch type JsonBody), in addition to the existing option to inspect the web request body as plain text.
+
+1.15.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2020-10-01)
 ------------------
 

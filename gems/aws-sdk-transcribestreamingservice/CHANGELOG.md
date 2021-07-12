@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-05-11)
+------------------
+
+* Feature - Amazon Transcribe supports partial results stabilization for streaming transcription.
+
+1.28.0 (2021-03-15)
+------------------
+
+* Feature - AWS Transcribe now supports real-time transcription for Chinese (zh-CN) and confidence scores in the transcription output.
+
+1.27.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2021-01-29)
+------------------
+
+* Feature - Amazon Transcribe Streaming Medical now supports Protected Health Information (PHI) identification which enables you to identify PHI entities based on HIPAA Privacy Rule.
+
+1.24.0 (2020-11-24)
+------------------
+
+* Feature - Amazon Transcribe Medical streaming added medical specialties and HTTP/2 support. Amazon Transcribe streaming supports additional languages. Both support OGG/OPUS and FLAC codecs for streaming.
+
+1.23.0 (2020-11-04)
+------------------
+
+* Feature - With this release, Amazon Transcribe now supports real-time transcription from audio sources in Italian (it-IT) and German(de-DE).
+
 1.22.0 (2020-09-30)
 ------------------
 

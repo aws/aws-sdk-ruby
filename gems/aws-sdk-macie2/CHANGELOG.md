@@ -1,6 +1,86 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-07-06)
+------------------
+
+* Feature - Sensitive data findings in Amazon Macie now include enhanced location data for JSON and JSON Lines files
+
+1.29.0 (2021-06-08)
+------------------
+
+* Feature - This release of the Amazon Macie API introduces stricter validation of S3 object criteria for classification jobs.
+
+1.28.0 (2021-05-14)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for defining run-time, S3 bucket criteria for classification jobs. It also adds resources for querying data about AWS resources that Macie monitors.
+
+1.27.0 (2021-04-29)
+------------------
+
+* Feature - The Amazon Macie API now provides S3 bucket metadata that indicates whether a bucket policy requires server-side encryption of objects when objects are uploaded to the bucket.
+
+1.26.0 (2021-03-22)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for publishing sensitive data findings to AWS Security Hub and specifying which categories of findings to publish to Security Hub.
+
+1.25.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2021-03-03)
+------------------
+
+* Feature - This release of the Amazon Macie API includes miscellaneous updates and improvements to the documentation.
+
+1.23.0 (2021-02-12)
+------------------
+
+* Feature - This release of the Amazon Macie API replaces the term master account with the term administrator account, including deprecating APIs that use the previous term and adding APIs that use the new term.
+
+1.22.0 (2021-02-08)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for specifying a time range in queries for usage data.
+
+1.21.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2021-01-29)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for using object prefixes to refine the scope of a classification job.
+
+1.19.0 (2020-12-30)
+------------------
+
+* Feature - This release of the Amazon Macie API includes miscellaneous updates and improvements to the documentation.
+
+1.18.0 (2020-11-20)
+------------------
+
+* Feature - The Amazon Macie API now provides S3 bucket metadata that indicates whether any one-time or recurring classification jobs are configured to analyze data in a bucket.
+
+1.17.0 (2020-11-17)
+------------------
+
+* Feature - The Amazon Macie API now has a lastRunErrorStatus property to indicate if account- or bucket-level errors occurred during the run of a one-time classification job or the latest run of a recurring job.
+
+1.16.0 (2020-11-09)
+------------------
+
+* Feature - Sensitive data findings in Amazon Macie now include enhanced location data for Apache Avro object containers and Apache Parquet files.
+
+1.15.0 (2020-10-30)
+------------------
+
+* Feature - This release of the Amazon Macie API adds an eqExactMatch operator for filtering findings. With this operator you can increase the precision of your finding filters and suppression rules.
+
 1.14.0 (2020-10-23)
 ------------------
 

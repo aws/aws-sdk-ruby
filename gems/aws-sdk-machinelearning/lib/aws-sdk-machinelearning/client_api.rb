@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -712,6 +712,7 @@ module Aws::MachineLearning
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Machine Learning",
+        "serviceId" => "Machine Learning",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonML_20141212",
         "uid" => "machinelearning-2014-12-12",

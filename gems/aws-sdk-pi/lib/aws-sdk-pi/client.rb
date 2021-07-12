@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -340,30 +340,37 @@ module Aws::PI
     # For a specific time period, retrieve the top `N` dimension keys for a
     # metric.
     #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
     # @option params [required, String] :service_type
     #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is: `RDS`
+    #   The only valid value for *ServiceType* is `RDS`.
     #
     # @option params [required, String] :identifier
     #   An immutable, AWS Region-unique identifier for a data source.
     #   Performance Insights gathers metrics from this data source.
     #
     #   To use an Amazon RDS instance as a data source, you specify its
-    #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   `DbiResourceId` value. For example, specify
+    #   `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The date and time specifying the beginning of the requested time
-    #   series data. You can't specify a `StartTime` that's earlier than 7
-    #   days ago. The value specified is *inclusive* - data points equal to or
-    #   greater than `StartTime` will be returned.
+    #   series data. You must specify a `StartTime` within the past 7 days.
+    #   The value specified is *inclusive*, which means that data points equal
+    #   to or greater than `StartTime` are returned.
     #
     #   The value for `StartTime` must be earlier than the value for
     #   `EndTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The date and time specifying the end of the requested time series
-    #   data. The value specified is *exclusive* - data points less than (but
-    #   not equal to) `EndTime` will be returned.
+    #   data. The value specified is *exclusive*, which means that data points
+    #   less than (but not equal to) `EndTime` are returned.
     #
     #   The value for `EndTime` must be later than the value for `StartTime`.
     #
@@ -377,6 +384,14 @@ module Aws::PI
     #
     #   * `db.sampledload.avg` - the raw number of active sessions for the
     #     database engine.
+    #
+    #   If the number of active sessions is less than an internal Performance
+    #   Insights threshold, `db.load.avg` and `db.sampledload.avg` are the
+    #   same value. If the number of active sessions is greater than the
+    #   internal threshold, Performance Insights samples the active sessions,
+    #   with `db.load.avg` showing the scaled values, `db.sampledload.avg`
+    #   showing the raw values, and `db.sampledload.avg` less than
+    #   `db.load.avg`. For most use cases, you can query `db.load.avg` only.
     #
     # @option params [Integer] :period_in_seconds
     #   The granularity, in seconds, of the data points returned from
@@ -394,16 +409,16 @@ module Aws::PI
     #   * `86400` (twenty-four hours)
     #
     #   If you don't specify `PeriodInSeconds`, then Performance Insights
-    #   will choose a value for you, with a goal of returning roughly 100-200
-    #   data points in the response.
+    #   chooses a value for you, with a goal of returning roughly 100-200 data
+    #   points in the response.
     #
     # @option params [required, Types::DimensionGroup] :group_by
     #   A specification for how to aggregate the data points from a query
     #   result. You must specify a valid dimension group. Performance Insights
-    #   will return all of the dimensions within that group, unless you
-    #   provide the names of specific dimensions within that group. You can
-    #   also request that Performance Insights return a limited number of
-    #   values for a dimension.
+    #   returns all dimensions within this group, unless you provide the names
+    #   of specific dimensions within this group. You can also request that
+    #   Performance Insights return a limited number of values for a
+    #   dimension.
     #
     # @option params [Types::DimensionGroup] :partition_by
     #   For each dimension specified in `GroupBy`, specify a secondary
@@ -440,26 +455,26 @@ module Aws::PI
     #
     #   resp = client.describe_dimension_keys({
     #     service_type: "RDS", # required, accepts RDS
-    #     identifier: "String", # required
+    #     identifier: "RequestString", # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
-    #     metric: "String", # required
+    #     metric: "RequestString", # required
     #     period_in_seconds: 1,
     #     group_by: { # required
-    #       group: "String", # required
-    #       dimensions: ["String"],
+    #       group: "RequestString", # required
+    #       dimensions: ["RequestString"],
     #       limit: 1,
     #     },
     #     partition_by: {
-    #       group: "String", # required
-    #       dimensions: ["String"],
+    #       group: "RequestString", # required
+    #       dimensions: ["RequestString"],
     #       limit: 1,
     #     },
     #     filter: {
-    #       "String" => "String",
+    #       "RequestString" => "RequestString",
     #     },
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -468,10 +483,10 @@ module Aws::PI
     #   resp.aligned_end_time #=> Time
     #   resp.partition_keys #=> Array
     #   resp.partition_keys[0].dimensions #=> Hash
-    #   resp.partition_keys[0].dimensions["String"] #=> String
+    #   resp.partition_keys[0].dimensions["RequestString"] #=> String
     #   resp.keys #=> Array
     #   resp.keys[0].dimensions #=> Hash
-    #   resp.keys[0].dimensions["String"] #=> String
+    #   resp.keys[0].dimensions["RequestString"] #=> String
     #   resp.keys[0].total #=> Float
     #   resp.keys[0].partitions #=> Array
     #   resp.keys[0].partitions[0] #=> Float
@@ -486,21 +501,91 @@ module Aws::PI
       req.send_request(options)
     end
 
+    # Get the attributes of the specified dimension group for a DB instance
+    # or data source. For example, if you specify a SQL ID,
+    # `GetDimensionKeyDetails` retrieves the full text of the dimension
+    # `db.sql.statement` associated with this ID. This operation is useful
+    # because `GetResourceMetrics` and `DescribeDimensionKeys` don't
+    # support retrieval of large SQL statement text.
+    #
+    # @option params [required, String] :service_type
+    #   The AWS service for which Performance Insights returns data. The only
+    #   valid value is `RDS`.
+    #
+    # @option params [required, String] :identifier
+    #   The ID for a data source from which to gather dimension data. This ID
+    #   must be immutable and unique within an AWS Region. When a DB instance
+    #   is the data source, specify its `DbiResourceId` value. For example,
+    #   specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #
+    # @option params [required, String] :group
+    #   The name of the dimension group. The only valid value is `db.sql`.
+    #   Performance Insights searches the specified group for the dimension
+    #   group ID.
+    #
+    # @option params [required, String] :group_identifier
+    #   The ID of the dimension group from which to retrieve dimension
+    #   details. For dimension group `db.sql`, the group ID is `db.sql.id`.
+    #
+    # @option params [Array<String>] :requested_dimensions
+    #   A list of dimensions to retrieve the detail data for within the given
+    #   dimension group. For the dimension group `db.sql`, specify either the
+    #   full dimension name `db.sql.statement` or the short dimension name
+    #   `statement`. If you don't specify this parameter, Performance
+    #   Insights returns all dimension data within the specified dimension
+    #   group.
+    #
+    # @return [Types::GetDimensionKeyDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDimensionKeyDetailsResponse#dimensions #dimensions} => Array&lt;Types::DimensionKeyDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dimension_key_details({
+    #     service_type: "RDS", # required, accepts RDS
+    #     identifier: "IdentifierString", # required
+    #     group: "RequestString", # required
+    #     group_identifier: "RequestString", # required
+    #     requested_dimensions: ["RequestString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dimensions #=> Array
+    #   resp.dimensions[0].value #=> String
+    #   resp.dimensions[0].dimension #=> String
+    #   resp.dimensions[0].status #=> String, one of "AVAILABLE", "PROCESSING", "UNAVAILABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetDimensionKeyDetails AWS API Documentation
+    #
+    # @overload get_dimension_key_details(params = {})
+    # @param [Hash] params ({})
+    def get_dimension_key_details(params = {}, options = {})
+      req = build_request(:get_dimension_key_details, params)
+      req.send_request(options)
+    end
+
     # Retrieve Performance Insights metrics for a set of data sources, over
     # a time period. You can provide specific dimension groups and
     # dimensions, and provide aggregation and filtering criteria for each
     # group.
     #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
     # @option params [required, String] :service_type
-    #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is: `RDS`
+    #   The AWS service for which Performance Insights returns metrics. The
+    #   only valid value for *ServiceType* is `RDS`.
     #
     # @option params [required, String] :identifier
     #   An immutable, AWS Region-unique identifier for a data source.
     #   Performance Insights gathers metrics from this data source.
     #
-    #   To use an Amazon RDS instance as a data source, you specify its
-    #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
     #
     # @option params [required, Array<Types::MetricQuery>] :metric_queries
     #   An array of one or more queries to perform. Each query must specify a
@@ -517,7 +602,7 @@ module Aws::PI
     #   `EndTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time specifiying the end of the requested time series
+    #   The date and time specifying the end of the requested time series
     #   data. The value specified is *exclusive* - data points less than (but
     #   not equal to) `EndTime` will be returned.
     #
@@ -565,17 +650,17 @@ module Aws::PI
     #
     #   resp = client.get_resource_metrics({
     #     service_type: "RDS", # required, accepts RDS
-    #     identifier: "String", # required
+    #     identifier: "RequestString", # required
     #     metric_queries: [ # required
     #       {
-    #         metric: "String", # required
+    #         metric: "RequestString", # required
     #         group_by: {
-    #           group: "String", # required
-    #           dimensions: ["String"],
+    #           group: "RequestString", # required
+    #           dimensions: ["RequestString"],
     #           limit: 1,
     #         },
     #         filter: {
-    #           "String" => "String",
+    #           "RequestString" => "RequestString",
     #         },
     #       },
     #     ],
@@ -583,7 +668,7 @@ module Aws::PI
     #     end_time: Time.now, # required
     #     period_in_seconds: 1,
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -594,7 +679,7 @@ module Aws::PI
     #   resp.metric_list #=> Array
     #   resp.metric_list[0].key.metric #=> String
     #   resp.metric_list[0].key.dimensions #=> Hash
-    #   resp.metric_list[0].key.dimensions["String"] #=> String
+    #   resp.metric_list[0].key.dimensions["RequestString"] #=> String
     #   resp.metric_list[0].data_points #=> Array
     #   resp.metric_list[0].data_points[0].timestamp #=> Time
     #   resp.metric_list[0].data_points[0].value #=> Float
@@ -622,7 +707,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

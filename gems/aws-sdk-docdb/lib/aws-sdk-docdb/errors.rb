@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -49,6 +49,10 @@ module Aws::DocDB
   # * {DBSubnetGroupQuotaExceededFault}
   # * {DBSubnetQuotaExceededFault}
   # * {DBUpgradeDependencyFailureFault}
+  # * {EventSubscriptionQuotaExceededFault}
+  # * {GlobalClusterAlreadyExistsFault}
+  # * {GlobalClusterNotFoundFault}
+  # * {GlobalClusterQuotaExceededFault}
   # * {InstanceQuotaExceededFault}
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
@@ -61,16 +65,25 @@ module Aws::DocDB
   # * {InvalidDBSnapshotStateFault}
   # * {InvalidDBSubnetGroupStateFault}
   # * {InvalidDBSubnetStateFault}
+  # * {InvalidEventSubscriptionStateFault}
+  # * {InvalidGlobalClusterStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
   # * {KMSKeyNotAccessibleFault}
   # * {ResourceNotFoundFault}
+  # * {SNSInvalidTopicFault}
+  # * {SNSNoAuthorizationFault}
+  # * {SNSTopicArnNotFoundFault}
   # * {SharedSnapshotQuotaExceededFault}
   # * {SnapshotQuotaExceededFault}
+  # * {SourceNotFoundFault}
   # * {StorageQuotaExceededFault}
   # * {StorageTypeNotSupportedFault}
   # * {SubnetAlreadyInUse}
+  # * {SubscriptionAlreadyExistFault}
+  # * {SubscriptionCategoryNotFoundFault}
+  # * {SubscriptionNotFoundFault}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -298,6 +311,46 @@ module Aws::DocDB
       end
     end
 
+    class EventSubscriptionQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::EventSubscriptionQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalClusterAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::GlobalClusterAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalClusterNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::GlobalClusterNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalClusterQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::GlobalClusterQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InstanceQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -418,6 +471,26 @@ module Aws::DocDB
       end
     end
 
+    class InvalidEventSubscriptionStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::InvalidEventSubscriptionStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidGlobalClusterStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::InvalidGlobalClusterStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidRestoreFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -468,6 +541,36 @@ module Aws::DocDB
       end
     end
 
+    class SNSInvalidTopicFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::SNSInvalidTopicFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SNSNoAuthorizationFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::SNSNoAuthorizationFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SNSTopicArnNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::SNSTopicArnNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class SharedSnapshotQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -483,6 +586,16 @@ module Aws::DocDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DocDB::Types::SnapshotQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SourceNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::SourceNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -513,6 +626,36 @@ module Aws::DocDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DocDB::Types::SubnetAlreadyInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SubscriptionAlreadyExistFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::SubscriptionAlreadyExistFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SubscriptionCategoryNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::SubscriptionCategoryNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SubscriptionNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::SubscriptionNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

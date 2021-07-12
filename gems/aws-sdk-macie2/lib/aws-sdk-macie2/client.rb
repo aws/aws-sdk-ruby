@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -330,17 +330,20 @@ module Aws::Macie2
     # Accepts an Amazon Macie membership invitation that was received from a
     # specific account.
     #
+    # @option params [String] :administrator_account_id
+    #
     # @option params [required, String] :invitation_id
     #
-    # @option params [required, String] :master_account
+    # @option params [String] :master_account
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_invitation({
+    #     administrator_account_id: "__string",
     #     invitation_id: "__string", # required
-    #     master_account: "__string", # required
+    #     master_account: "__string",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AcceptInvitation AWS API Documentation
@@ -407,7 +410,12 @@ module Aws::Macie2
     #
     # @option params [required, Types::S3JobDefinition] :s3_job_definition
     #   Specifies which S3 buckets contain the objects that a classification
-    #   job analyzes, and the scope of that analysis.
+    #   job analyzes, and the scope of that analysis. The bucket specification
+    #   can be static (bucketDefinitions) or dynamic (bucketCriteria). If
+    #   it's static, the job analyzes objects in the same predefined set of
+    #   buckets each time the job runs. If it's dynamic, the job analyzes
+    #   objects in any buckets that match the specified criteria each time the
+    #   job starts to run.
     #
     # @option params [Integer] :sampling_percentage
     #
@@ -436,8 +444,8 @@ module Aws::Macie2
     #     s3_job_definition: { # required
     #       bucket_definitions: [
     #         {
-    #           account_id: "__string",
-    #           buckets: ["__string"],
+    #           account_id: "__string", # required
+    #           buckets: ["__string"], # required
     #         },
     #       ],
     #       scoping: {
@@ -445,12 +453,12 @@ module Aws::Macie2
     #           and: [
     #             {
     #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                 key: "__string",
     #                 tag_values: [
     #                   {
@@ -467,12 +475,12 @@ module Aws::Macie2
     #           and: [
     #             {
     #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                 key: "__string",
     #                 tag_values: [
     #                   {
@@ -481,6 +489,48 @@ module Aws::Macie2
     #                   },
     #                 ],
     #                 target: "S3_OBJECT", # accepts S3_OBJECT
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       bucket_criteria: {
+    #         excludes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         includes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],
@@ -615,6 +665,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -680,11 +731,11 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Associates an account with an Amazon Macie master account.
+    # Associates an account with an Amazon Macie administrator account.
     #
     # @option params [required, Types::AccountDetail] :account
-    #   Specifies details for an account to associate with an Amazon Macie
-    #   master account.
+    #   Specifies the details of an account to associate with an Amazon Macie
+    #   administrator account.
     #
     # @option params [Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
@@ -845,8 +896,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Deletes the association between an Amazon Macie master account and an
-    # account.
+    # Deletes the association between an Amazon Macie administrator account
+    # and an account.
     #
     # @option params [required, String] :id
     #
@@ -871,8 +922,8 @@ module Aws::Macie2
     # or more S3 buckets that Amazon Macie monitors and analyzes.
     #
     # @option params [Hash<String,Types::BucketCriteriaAdditionalProperties>] :criteria
-    #   Specifies, as a map, one or more attribute-based conditions that
-    #   filter the results of a query for information about S3 buckets.
+    #   Specifies, as a map, one or more property-based conditions that filter
+    #   the results of a query for information about S3 buckets.
     #
     # @option params [Integer] :max_results
     #
@@ -915,17 +966,23 @@ module Aws::Macie2
     #
     #   resp.buckets #=> Array
     #   resp.buckets[0].account_id #=> String
+    #   resp.buckets[0].allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.buckets[0].bucket_arn #=> String
     #   resp.buckets[0].bucket_created_at #=> Time
     #   resp.buckets[0].bucket_name #=> String
     #   resp.buckets[0].classifiable_object_count #=> Integer
     #   resp.buckets[0].classifiable_size_in_bytes #=> Integer
+    #   resp.buckets[0].job_details.is_defined_in_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.buckets[0].job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.buckets[0].job_details.last_job_id #=> String
+    #   resp.buckets[0].job_details.last_job_run_time #=> Time
     #   resp.buckets[0].last_updated #=> Time
     #   resp.buckets[0].object_count #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.customer_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.kms_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.s3_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.unencrypted #=> Integer
+    #   resp.buckets[0].object_count_by_encryption_type.unknown #=> Integer
     #   resp.buckets[0].public_access.effective_permission #=> String, one of "PUBLIC", "NOT_PUBLIC", "UNKNOWN"
     #   resp.buckets[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_acls #=> Boolean
     #   resp.buckets[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_policy #=> Boolean
@@ -944,6 +1001,8 @@ module Aws::Macie2
     #   resp.buckets[0].replication_details.replicated_externally #=> Boolean
     #   resp.buckets[0].replication_details.replication_accounts #=> Array
     #   resp.buckets[0].replication_details.replication_accounts[0] #=> String
+    #   resp.buckets[0].server_side_encryption.kms_master_key_id #=> String
+    #   resp.buckets[0].server_side_encryption.type #=> String, one of "NONE", "AES256", "aws:kms"
     #   resp.buckets[0].shared_access #=> String, one of "EXTERNAL", "INTERNAL", "NOT_SHARED", "UNKNOWN"
     #   resp.buckets[0].size_in_bytes #=> Integer
     #   resp.buckets[0].size_in_bytes_compressed #=> Integer
@@ -983,6 +1042,7 @@ module Aws::Macie2
     #   * {Types::DescribeClassificationJobResponse#job_id #job_id} => String
     #   * {Types::DescribeClassificationJobResponse#job_status #job_status} => String
     #   * {Types::DescribeClassificationJobResponse#job_type #job_type} => String
+    #   * {Types::DescribeClassificationJobResponse#last_run_error_status #last_run_error_status} => Types::LastRunErrorStatus
     #   * {Types::DescribeClassificationJobResponse#last_run_time #last_run_time} => Time
     #   * {Types::DescribeClassificationJobResponse#name #name} => String
     #   * {Types::DescribeClassificationJobResponse#s3_job_definition #s3_job_definition} => Types::S3JobDefinition
@@ -1010,6 +1070,7 @@ module Aws::Macie2
     #   resp.job_id #=> String
     #   resp.job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
     #   resp.job_type #=> String, one of "ONE_TIME", "SCHEDULED"
+    #   resp.last_run_error_status.code #=> String, one of "NONE", "ERROR"
     #   resp.last_run_time #=> Time
     #   resp.name #=> String
     #   resp.s3_job_definition.bucket_definitions #=> Array
@@ -1017,27 +1078,45 @@ module Aws::Macie2
     #   resp.s3_job_definition.bucket_definitions[0].buckets #=> Array
     #   resp.s3_job_definition.bucket_definitions[0].buckets[0] #=> String
     #   resp.s3_job_definition.scoping.excludes.and #=> Array
-    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
-    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG"
+    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values[0] #=> String
-    #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
+    #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.key #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.tag_values #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.tag_values[0].key #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.tag_values[0].value #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.target #=> String, one of "S3_OBJECT"
     #   resp.s3_job_definition.scoping.includes.and #=> Array
-    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
-    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG"
+    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values[0] #=> String
-    #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
+    #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.key #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values[0].key #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values[0].value #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.target #=> String, one of "S3_OBJECT"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values[0] #=> String
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].value #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values[0] #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].value #=> String
     #   resp.sampling_percentage #=> Integer
     #   resp.schedule_frequency.monthly_schedule.day_of_month #=> Integer
     #   resp.schedule_frequency.weekly_schedule.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
@@ -1058,8 +1137,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the Amazon Macie configuration settings for an AWS
-    # organization.
+    # Retrieves the Amazon Macie configuration settings for an Amazon Web
+    # Services organization.
     #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1095,7 +1174,7 @@ module Aws::Macie2
     end
 
     # Disables an account as the delegated Amazon Macie administrator
-    # account for an AWS organization.
+    # account for an Amazon Web Services organization.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -1116,7 +1195,25 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Disassociates a member account from its Amazon Macie master account.
+    # Disassociates a member account from its Amazon Macie administrator
+    # account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromAdministratorAccount AWS API Documentation
+    #
+    # @overload disassociate_from_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def disassociate_from_administrator_account(params = {}, options = {})
+      req = build_request(:disassociate_from_administrator_account, params)
+      req.send_request(options)
+    end
+
+    # (Deprecated) Disassociates a member account from its Amazon Macie
+    # administrator account. This operation has been replaced by the <link
+    # linkend="DisassociateFromAdministratorAccount" />
+    #
+    # DisassociateFromAdministratorAccount</link> operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1129,7 +1226,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Disassociates an Amazon Macie master account from a member account.
+    # Disassociates an Amazon Macie administrator account from a member
+    # account.
     #
     # @option params [required, String] :id
     #
@@ -1159,9 +1257,14 @@ module Aws::Macie2
     #
     # @option params [String] :finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
-    #   findings for an account. This includes publishing updates to AWS
-    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
-    #   Events). Valid values are:
+    #   findings for an account. This includes publishing updates to Security
+    #   Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+    #   For more information, see [Monitoring and processing findings][1] in
+    #   the *Amazon Macie User Guide*. Valid values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -1186,7 +1289,7 @@ module Aws::Macie2
     end
 
     # Designates an account as the delegated Amazon Macie administrator
-    # account for an AWS organization.
+    # account for an Amazon Web Services organization.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -1212,6 +1315,29 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Retrieves information about the Amazon Macie administrator account for
+    # an account.
+    #
+    # @return [Types::GetAdministratorAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdministratorAccountResponse#administrator #administrator} => Types::Invitation
+    #
+    # @example Response structure
+    #
+    #   resp.administrator.account_id #=> String
+    #   resp.administrator.invitation_id #=> String
+    #   resp.administrator.invited_at #=> Time
+    #   resp.administrator.relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed", "RegionDisabled", "AccountSuspended"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAdministratorAccount AWS API Documentation
+    #
+    # @overload get_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def get_administrator_account(params = {}, options = {})
+      req = build_request(:get_administrator_account, params)
+      req.send_request(options)
+    end
+
     # Retrieves (queries) aggregated statistical data for all the S3 buckets
     # that Amazon Macie monitors and analyzes.
     #
@@ -1222,6 +1348,7 @@ module Aws::Macie2
     #   * {Types::GetBucketStatisticsResponse#bucket_count #bucket_count} => Integer
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_effective_permission #bucket_count_by_effective_permission} => Types::BucketCountByEffectivePermission
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_encryption_type #bucket_count_by_encryption_type} => Types::BucketCountByEncryptionType
+    #   * {Types::GetBucketStatisticsResponse#bucket_count_by_object_encryption_requirement #bucket_count_by_object_encryption_requirement} => Types::BucketCountPolicyAllowsUnencryptedObjectUploads
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_shared_access_type #bucket_count_by_shared_access_type} => Types::BucketCountBySharedAccessType
     #   * {Types::GetBucketStatisticsResponse#classifiable_object_count #classifiable_object_count} => Integer
     #   * {Types::GetBucketStatisticsResponse#classifiable_size_in_bytes #classifiable_size_in_bytes} => Integer
@@ -1248,6 +1375,10 @@ module Aws::Macie2
     #   resp.bucket_count_by_encryption_type.kms_managed #=> Integer
     #   resp.bucket_count_by_encryption_type.s3_managed #=> Integer
     #   resp.bucket_count_by_encryption_type.unencrypted #=> Integer
+    #   resp.bucket_count_by_encryption_type.unknown #=> Integer
+    #   resp.bucket_count_by_object_encryption_requirement.allows_unencrypted_object_uploads #=> Integer
+    #   resp.bucket_count_by_object_encryption_requirement.denies_unencrypted_object_uploads #=> Integer
+    #   resp.bucket_count_by_object_encryption_requirement.unknown #=> Integer
     #   resp.bucket_count_by_shared_access_type.external #=> Integer
     #   resp.bucket_count_by_shared_access_type.internal #=> Integer
     #   resp.bucket_count_by_shared_access_type.not_shared #=> Integer
@@ -1372,6 +1503,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -1460,6 +1592,7 @@ module Aws::Macie2
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].page_number #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records #=> Array
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records[0].json_path #=> String
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records[0].record_index #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.total_count #=> Integer
     #   resp.findings[0].classification_details.result.mime_type #=> String
@@ -1489,6 +1622,7 @@ module Aws::Macie2
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].page_number #=> Integer
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records #=> Array
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records[0].json_path #=> String
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records[0].record_index #=> Integer
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].type #=> String
     #   resp.findings[0].classification_details.result.sensitive_data[0].total_count #=> Integer
@@ -1550,6 +1684,7 @@ module Aws::Macie2
     #   resp.findings[0].policy_details.actor.user_identity.root.principal_id #=> String
     #   resp.findings[0].policy_details.actor.user_identity.type #=> String, one of "AssumedRole", "IAMUser", "FederatedUser", "Root", "AWSAccount", "AWSService"
     #   resp.findings[0].region #=> String
+    #   resp.findings[0].resources_affected.s3_bucket.allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_bucket.arn #=> String
     #   resp.findings[0].resources_affected.s3_bucket.created_at #=> Time
     #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
@@ -1634,6 +1769,8 @@ module Aws::Macie2
     #   resp.finding_criteria.criterion #=> Hash
     #   resp.finding_criteria.criterion["__string"].eq #=> Array
     #   resp.finding_criteria.criterion["__string"].eq[0] #=> String
+    #   resp.finding_criteria.criterion["__string"].eq_exact_match #=> Array
+    #   resp.finding_criteria.criterion["__string"].eq_exact_match[0] #=> String
     #   resp.finding_criteria.criterion["__string"].gt #=> Integer
     #   resp.finding_criteria.criterion["__string"].gte #=> Integer
     #   resp.finding_criteria.criterion["__string"].lt #=> Integer
@@ -1652,6 +1789,27 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def get_findings_filter(params = {}, options = {})
       req = build_request(:get_findings_filter, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configuration settings for publishing findings to
+    # Security Hub.
+    #
+    # @return [Types::GetFindingsPublicationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFindingsPublicationConfigurationResponse#security_hub_configuration #security_hub_configuration} => Types::SecurityHubConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.security_hub_configuration.publish_classification_findings #=> Boolean
+    #   resp.security_hub_configuration.publish_policy_findings #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsPublicationConfiguration AWS API Documentation
+    #
+    # @overload get_findings_publication_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_findings_publication_configuration(params = {}, options = {})
+      req = build_request(:get_findings_publication_configuration, params)
       req.send_request(options)
     end
 
@@ -1703,8 +1861,11 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the Amazon Macie master account for an
-    # account.
+    # (Deprecated) Retrieves information about the Amazon Macie
+    # administrator account for an account. This operation has been replaced
+    # by the <link linkend="GetAdministratorAccount" />
+    #
+    # GetAdministratorAccount</link> operation.
     #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1726,14 +1887,15 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about a member account that's associated with
-    # an Amazon Macie master account.
+    # Retrieves information about an account that's associated with an
+    # Amazon Macie administrator account.
     #
     # @option params [required, String] :id
     #
     # @return [Types::GetMemberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMemberResponse#account_id #account_id} => String
+    #   * {Types::GetMemberResponse#administrator_account_id #administrator_account_id} => String
     #   * {Types::GetMemberResponse#arn #arn} => String
     #   * {Types::GetMemberResponse#email #email} => String
     #   * {Types::GetMemberResponse#invited_at #invited_at} => Time
@@ -1751,6 +1913,7 @@ module Aws::Macie2
     # @example Response structure
     #
     #   resp.account_id #=> String
+    #   resp.administrator_account_id #=> String
     #   resp.arn #=> String
     #   resp.email #=> String
     #   resp.invited_at #=> Time
@@ -1779,13 +1942,18 @@ module Aws::Macie2
     # @option params [String] :next_token
     #
     # @option params [Types::UsageStatisticsSortBy] :sort_by
-    #   Specifies criteria for sorting the results of a query for account
-    #   quotas and usage data.
+    #   Specifies criteria for sorting the results of a query for Amazon Macie
+    #   account quotas and usage data.
+    #
+    # @option params [String] :time_range
+    #   An inclusive time period that Amazon Macie usage data applies to.
+    #   Possible values are:
     #
     # @return [Types::GetUsageStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetUsageStatisticsResponse#next_token #next_token} => String
     #   * {Types::GetUsageStatisticsResponse#records #records} => Array&lt;Types::UsageRecord&gt;
+    #   * {Types::GetUsageStatisticsResponse#time_range #time_range} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1805,6 +1973,7 @@ module Aws::Macie2
     #       key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #       order_by: "ASC", # accepts ASC, DESC
     #     },
+    #     time_range: "MONTH_TO_DATE", # accepts MONTH_TO_DATE, PAST_30_DAYS
     #   })
     #
     # @example Response structure
@@ -1820,6 +1989,7 @@ module Aws::Macie2
     #   resp.records[0].usage[0].service_limit.unit #=> String, one of "TERABYTES"
     #   resp.records[0].usage[0].service_limit.value #=> Integer
     #   resp.records[0].usage[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY"
+    #   resp.time_range #=> String, one of "MONTH_TO_DATE", "PAST_30_DAYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatistics AWS API Documentation
     #
@@ -1832,12 +2002,22 @@ module Aws::Macie2
 
     # Retrieves (queries) aggregated usage data for an account.
     #
+    # @option params [String] :time_range
+    #
     # @return [Types::GetUsageTotalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetUsageTotalsResponse#time_range #time_range} => String
     #   * {Types::GetUsageTotalsResponse#usage_totals #usage_totals} => Array&lt;Types::UsageTotal&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_totals({
+    #     time_range: "__string",
+    #   })
     #
     # @example Response structure
     #
+    #   resp.time_range #=> String, one of "MONTH_TO_DATE", "PAST_30_DAYS"
     #   resp.usage_totals #=> Array
     #   resp.usage_totals[0].currency #=> String, one of "USD"
     #   resp.usage_totals[0].estimated_cost #=> String
@@ -1880,14 +2060,14 @@ module Aws::Macie2
     #     filter_criteria: {
     #       excludes: [
     #         {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #           key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #           values: ["__string"],
     #         },
     #       ],
     #       includes: [
     #         {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #           key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #           values: ["__string"],
     #         },
@@ -1912,10 +2092,29 @@ module Aws::Macie2
     #   resp.items[0].job_id #=> String
     #   resp.items[0].job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
     #   resp.items[0].job_type #=> String, one of "ONE_TIME", "SCHEDULED"
+    #   resp.items[0].last_run_error_status.code #=> String, one of "NONE", "ERROR"
     #   resp.items[0].name #=> String
     #   resp.items[0].user_paused_details.job_expires_at #=> Time
     #   resp.items[0].user_paused_details.job_imminent_expiration_health_event_arn #=> String
     #   resp.items[0].user_paused_details.job_paused_at #=> Time
+    #   resp.items[0].bucket_criteria.excludes.and #=> Array
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.values #=> Array
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.values[0] #=> String
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].value #=> String
+    #   resp.items[0].bucket_criteria.includes.and #=> Array
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.values #=> Array
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.values[0] #=> String
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationJobs AWS API Documentation
@@ -1994,6 +2193,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -2106,7 +2306,7 @@ module Aws::Macie2
     end
 
     # Retrieves information about the accounts that are associated with an
-    # Amazon Macie master account.
+    # Amazon Macie administrator account.
     #
     # @option params [Integer] :max_results
     #
@@ -2133,6 +2333,7 @@ module Aws::Macie2
     #
     #   resp.members #=> Array
     #   resp.members[0].account_id #=> String
+    #   resp.members[0].administrator_account_id #=> String
     #   resp.members[0].arn #=> String
     #   resp.members[0].email #=> String
     #   resp.members[0].invited_at #=> Time
@@ -2153,7 +2354,7 @@ module Aws::Macie2
     end
 
     # Retrieves information about the delegated Amazon Macie administrator
-    # account for an AWS organization.
+    # account for an Amazon Web Services organization.
     #
     # @option params [Integer] :max_results
     #
@@ -2255,6 +2456,157 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def put_classification_export_configuration(params = {}, options = {})
       req = build_request(:put_classification_export_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration settings for publishing findings to Security
+    # Hub.
+    #
+    # @option params [String] :client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::SecurityHubConfiguration] :security_hub_configuration
+    #   Specifies configuration settings that determine which findings are
+    #   published to Security Hub automatically. For information about how
+    #   Macie publishes findings to Security Hub, see [Amazon Macie
+    #   integration with Security Hub][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_findings_publication_configuration({
+    #     client_token: "__string",
+    #     security_hub_configuration: {
+    #       publish_classification_findings: false, # required
+    #       publish_policy_findings: false, # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PutFindingsPublicationConfiguration AWS API Documentation
+    #
+    # @overload put_findings_publication_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_findings_publication_configuration(params = {}, options = {})
+      req = build_request(:put_findings_publication_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) statistical data and other information about
+    # Amazon Web Services resources that Amazon Macie monitors and analyzes.
+    #
+    # @option params [Types::SearchResourcesBucketCriteria] :bucket_criteria
+    #   Specifies property- and tag-based conditions that define filter
+    #   criteria for including or excluding S3 buckets from the query results.
+    #   Exclude conditions take precedence over include conditions.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Types::SearchResourcesSortCriteria] :sort_criteria
+    #   Specifies criteria for sorting the results of a query for information
+    #   about Amazon Web Services resources that Amazon Macie monitors and
+    #   analyzes.
+    #
+    # @return [Types::SearchResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchResourcesResponse#matching_resources #matching_resources} => Array&lt;Types::MatchingResource&gt;
+    #   * {Types::SearchResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_resources({
+    #     bucket_criteria: {
+    #       excludes: {
+    #         and: [
+    #           {
+    #             simple_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               values: ["__string"],
+    #             },
+    #             tag_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               tag_values: [
+    #                 {
+    #                   key: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       includes: {
+    #         and: [
+    #           {
+    #             simple_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               values: ["__string"],
+    #             },
+    #             tag_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               tag_values: [
+    #                 {
+    #                   key: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     sort_criteria: {
+    #       attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, RESOURCE_NAME, S3_CLASSIFIABLE_OBJECT_COUNT, S3_CLASSIFIABLE_SIZE_IN_BYTES
+    #       order_by: "ASC", # accepts ASC, DESC
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.matching_resources #=> Array
+    #   resp.matching_resources[0].matching_bucket.account_id #=> String
+    #   resp.matching_resources[0].matching_bucket.bucket_name #=> String
+    #   resp.matching_resources[0].matching_bucket.classifiable_object_count #=> Integer
+    #   resp.matching_resources[0].matching_bucket.classifiable_size_in_bytes #=> Integer
+    #   resp.matching_resources[0].matching_bucket.job_details.is_defined_in_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.matching_resources[0].matching_bucket.job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.matching_resources[0].matching_bucket.job_details.last_job_id #=> String
+    #   resp.matching_resources[0].matching_bucket.job_details.last_job_run_time #=> Time
+    #   resp.matching_resources[0].matching_bucket.object_count #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.customer_managed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.kms_managed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.s3_managed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.unencrypted #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.unknown #=> Integer
+    #   resp.matching_resources[0].matching_bucket.size_in_bytes #=> Integer
+    #   resp.matching_resources[0].matching_bucket.size_in_bytes_compressed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_count.file_type #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_count.storage_class #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_count.total #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_size_in_bytes.file_type #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_size_in_bytes.storage_class #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_size_in_bytes.total #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResources AWS API Documentation
+    #
+    # @overload search_resources(params = {})
+    # @param [Hash] params ({})
+    def search_resources(params = {}, options = {})
+      req = build_request(:search_resources, params)
       req.send_request(options)
     end
 
@@ -2397,6 +2749,10 @@ module Aws::Macie2
     #
     # @option params [Integer] :position
     #
+    # @option params [String] :client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::UpdateFindingsFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFindingsFilterResponse#arn #arn} => String
@@ -2411,6 +2767,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -2422,6 +2779,7 @@ module Aws::Macie2
     #     id: "__string", # required
     #     name: "__string",
     #     position: 1,
+    #     client_token: "__string",
     #   })
     #
     # @example Response structure
@@ -2443,9 +2801,14 @@ module Aws::Macie2
     #
     # @option params [String] :finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
-    #   findings for an account. This includes publishing updates to AWS
-    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
-    #   Events). Valid values are:
+    #   findings for an account. This includes publishing updates to Security
+    #   Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+    #   For more information, see [Monitoring and processing findings][1] in
+    #   the *Amazon Macie User Guide*. Valid values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -2468,8 +2831,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Enables an Amazon Macie master account to suspend or re-enable a
-    # member account.
+    # Enables an Amazon Macie administrator to suspend or re-enable a member
+    # account.
     #
     # @option params [required, String] :id
     #
@@ -2494,8 +2857,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Updates the Amazon Macie configuration settings for an AWS
-    # organization.
+    # Updates the Amazon Macie configuration settings for an Amazon Web
+    # Services organization.
     #
     # @option params [required, Boolean] :auto_enable
     #
@@ -2529,7 +2892,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

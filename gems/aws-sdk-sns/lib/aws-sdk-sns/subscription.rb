@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -51,7 +51,7 @@ module Aws::SNS
     #   subscription. For more information, see [Amazon SNS Message
     #   Filtering][1] in the *Amazon SNS Developer Guide*.
     #
-    # * `Owner` – The AWS account ID of the subscription's owner.
+    # * `Owner` – The account ID of the subscription's owner.
     #
     # * `PendingConfirmation` – `true` if the subscription hasn't been
     #   confirmed. To confirm a pending subscription, call the
@@ -72,9 +72,25 @@ module Aws::SNS
     #
     # * `TopicArn` – The topic ARN that the subscription is associated with.
     #
+    # The following attribute applies only to Amazon Kinesis Data Firehose
+    # delivery stream subscriptions:
+    #
+    # * `SubscriptionRoleArn` – The ARN of the IAM role that has the
+    #   following:
+    #
+    #   * Permission to write to the Kinesis Data Firehose delivery stream
+    #
+    #   * Amazon SNS listed as a trusted entity
+    #
+    #   Specifying a valid ARN for this attribute is required for Kinesis
+    #   Data Firehose delivery stream subscriptions. For more information,
+    #   see [Fanout to Kinesis Data Firehose delivery streams][2] in the
+    #   *Amazon SNS Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]
@@ -139,7 +155,7 @@ module Aws::SNS
     #   A map of attributes with their corresponding values.
     #
     #   The following lists the names, descriptions, and values of the special
-    #   request parameters that the `SetTopicAttributes` action uses:
+    #   request parameters that this action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
@@ -159,6 +175,25 @@ module Aws::SNS
     #     endpoint is unreachable) or server errors (for example, when the
     #     service that powers the subscribed endpoint becomes unavailable) are
     #     held in the dead-letter queue for further analysis or reprocessing.
+    #
+    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   delivery stream subscriptions:
+    #
+    #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
+    #     following:
+    #
+    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #
+    #     * Amazon SNS listed as a trusted entity
+    #
+    #     Specifying a valid ARN for this attribute is required for Kinesis
+    #     Data Firehose delivery stream subscriptions. For more information,
+    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
+    #     *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     # @option options [String] :attribute_value
     #   The new value for the attribute in JSON format.
     # @return [EmptyStructure]

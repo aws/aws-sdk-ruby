@@ -9,8 +9,6 @@ module Aws
         @type, @access_point_name, @extra = @resource.split(/[:,\/]/)
       end
 
-      attr_reader :access_point_name
-
       def support_dualstack?
         true
       end
@@ -21,13 +19,18 @@ module Aws
 
       def validate_arn!
         unless @service == 's3'
-          raise ArgumentError, 'Must provide a valid S3 accesspoint ARN.'
+          raise ArgumentError, 'Must provide a valid S3 Access Point ARN.'
         end
 
         if @region.empty? || @account_id.empty?
           raise ArgumentError,
-                'S3 accesspoint ARNs must contain both a region '\
+                'S3 Access Point ARNs must contain both a region '\
                 'and an account id.'
+        end
+
+        if @region.include?('-fips') || @region.include?('fips-')
+          raise ArgumentError,
+                'S3 Access Point ARNs cannot contain a FIPS region'
         end
 
         if @type != 'accesspoint'
@@ -52,10 +55,14 @@ module Aws
         end
       end
 
-      def host_url(region, dualstack = false)
-        sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
-        "#{@access_point_name}-#{@account_id}"\
-        ".s3-accesspoint#{'.dualstack' if dualstack}.#{region}.#{sfx}"
+      def host_url(region, fips = false, dualstack = false, custom_endpoint = nil)
+        pfx = "#{@access_point_name}-#{@account_id}"
+        if custom_endpoint
+          "#{pfx}.#{custom_endpoint}"
+        else
+          sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
+          "#{pfx}.s3-accesspoint#{'-fips' if fips}#{'.dualstack' if dualstack}.#{region}.#{sfx}"
+        end
       end
     end
   end

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -416,10 +416,9 @@ module Aws::Synthetics
     #   is 1 to 455 days.
     #
     # @option params [required, String] :runtime_version
-    #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
-    #   `syn-1.0`. For more information about runtime versions, see [ Canary
-    #   Runtime Versions][1].
+    #   Specifies the runtime version to use for the canary. For a list of
+    #   valid runtime versions and more information about runtime versions,
+    #   see [ Canary Runtime Versions][1].
     #
     #
     #
@@ -467,6 +466,9 @@ module Aws::Synthetics
     #       timeout_in_seconds: 1,
     #       memory_in_mb: 1,
     #       active_tracing: false,
+    #       environment_variables: {
+    #         "EnvironmentVariableName" => "EnvironmentVariableValue",
+    #       },
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -1082,10 +1084,9 @@ module Aws::Synthetics
     #   * `logs:CreateLogStream`
     #
     # @option params [String] :runtime_version
-    #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
-    #   `syn-1.0`. For more information about runtime versions, see [ Canary
-    #   Runtime Versions][1].
+    #   Specifies the runtime version to use for the canary. For a list of
+    #   valid runtime versions and for more information about runtime
+    #   versions, see [ Canary Runtime Versions][1].
     #
     #
     #
@@ -1138,6 +1139,9 @@ module Aws::Synthetics
     #       timeout_in_seconds: 1,
     #       memory_in_mb: 1,
     #       active_tracing: false,
+    #       environment_variables: {
+    #         "EnvironmentVariableName" => "EnvironmentVariableValue",
+    #       },
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -1169,7 +1173,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

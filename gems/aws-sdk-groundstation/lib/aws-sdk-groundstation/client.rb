@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -428,6 +428,11 @@ module Aws::GroundStation
     #         dataflow_endpoint_name: "String", # required
     #         dataflow_endpoint_region: "String",
     #       },
+    #       s3_recording_config: {
+    #         bucket_arn: "BucketArn", # required
+    #         prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
     #       tracking_config: {
     #         autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
     #       },
@@ -446,7 +451,7 @@ module Aws::GroundStation
     #
     #   resp.config_arn #=> String
     #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo", "s3-recording"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateConfig AWS API Documentation
     #
@@ -598,14 +603,14 @@ module Aws::GroundStation
     #
     #   resp = client.delete_config({
     #     config_id: "String", # required
-    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo
+    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #   })
     #
     # @example Response structure
     #
     #   resp.config_arn #=> String
     #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo", "s3-recording"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteConfig AWS API Documentation
     #
@@ -716,8 +721,10 @@ module Aws::GroundStation
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids #=> Array
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
+    #   resp.dataflow_list[0].destination.config_details.s3_recording_details.bucket_arn #=> String
+    #   resp.dataflow_list[0].destination.config_details.s3_recording_details.key_template #=> String
     #   resp.dataflow_list[0].destination.config_id #=> String
-    #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo", "s3-recording"
     #   resp.dataflow_list[0].destination.dataflow_destination_region #=> String
     #   resp.dataflow_list[0].error_message #=> String
     #   resp.dataflow_list[0].source.config_details.antenna_demod_decode_details.output_node #=> String
@@ -731,8 +738,10 @@ module Aws::GroundStation
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids #=> Array
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
+    #   resp.dataflow_list[0].source.config_details.s3_recording_details.bucket_arn #=> String
+    #   resp.dataflow_list[0].source.config_details.s3_recording_details.key_template #=> String
     #   resp.dataflow_list[0].source.config_id #=> String
-    #   resp.dataflow_list[0].source.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.dataflow_list[0].source.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo", "s3-recording"
     #   resp.dataflow_list[0].source.dataflow_source_region #=> String
     #   resp.end_time #=> Time
     #   resp.error_message #=> String
@@ -780,7 +789,7 @@ module Aws::GroundStation
     #
     #   resp = client.get_config({
     #     config_id: "String", # required
-    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo
+    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #   })
     #
     # @example Response structure
@@ -806,11 +815,14 @@ module Aws::GroundStation
     #   resp.config_data.antenna_uplink_config.transmit_disabled #=> Boolean
     #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_name #=> String
     #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_region #=> String
+    #   resp.config_data.s3_recording_config.bucket_arn #=> String
+    #   resp.config_data.s3_recording_config.prefix #=> String
+    #   resp.config_data.s3_recording_config.role_arn #=> String
     #   resp.config_data.tracking_config.autotrack #=> String, one of "PREFERRED", "REMOVED", "REQUIRED"
     #   resp.config_data.uplink_echo_config.antenna_uplink_config_arn #=> String
     #   resp.config_data.uplink_echo_config.enabled #=> Boolean
     #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo", "s3-recording"
     #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -1021,7 +1033,7 @@ module Aws::GroundStation
     #   resp.config_list #=> Array
     #   resp.config_list[0].config_arn #=> String
     #   resp.config_list[0].config_id #=> String
-    #   resp.config_list[0].config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.config_list[0].config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo", "s3-recording"
     #   resp.config_list[0].name #=> String
     #   resp.next_token #=> String
     #
@@ -1490,6 +1502,11 @@ module Aws::GroundStation
     #         dataflow_endpoint_name: "String", # required
     #         dataflow_endpoint_region: "String",
     #       },
+    #       s3_recording_config: {
+    #         bucket_arn: "BucketArn", # required
+    #         prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
     #       tracking_config: {
     #         autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
     #       },
@@ -1499,7 +1516,7 @@ module Aws::GroundStation
     #       },
     #     },
     #     config_id: "String", # required
-    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo
+    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #     name: "SafeName", # required
     #   })
     #
@@ -1507,7 +1524,7 @@ module Aws::GroundStation
     #
     #   resp.config_arn #=> String
     #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo", "s3-recording"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateConfig AWS API Documentation
     #
@@ -1593,7 +1610,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,12 +3,86 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Lex
   module Types
+
+    # A context is a variable that contains information about the current
+    # state of the conversation between a user and Amazon Lex. Context can
+    # be set automatically by Amazon Lex when an intent is fulfilled, or it
+    # can be set at runtime using the `PutContent`, `PutText`, or
+    # `PutSession` operation.
+    #
+    # @note When making an API call, you may pass ActiveContext
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ActiveContextName", # required
+    #         time_to_live: { # required
+    #           time_to_live_in_seconds: 1,
+    #           turns_to_live: 1,
+    #         },
+    #         parameters: { # required
+    #           "ParameterName" => "Text",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_to_live
+    #   The length of time or number of turns that a context remains active.
+    #   @return [Types::ActiveContextTimeToLive]
+    #
+    # @!attribute [rw] parameters
+    #   State variables for the current context. You can use these values as
+    #   default values for slots in subsequent events.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/ActiveContext AWS API Documentation
+    #
+    class ActiveContext < Struct.new(
+      :name,
+      :time_to_live,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The length of time or number of turns that a context remains active.
+    #
+    # @note When making an API call, you may pass ActiveContextTimeToLive
+    #   data as a hash:
+    #
+    #       {
+    #         time_to_live_in_seconds: 1,
+    #         turns_to_live: 1,
+    #       }
+    #
+    # @!attribute [rw] time_to_live_in_seconds
+    #   The number of seconds that the context should be active after it is
+    #   first sent in a `PostContent` or `PostText` response. You can set
+    #   the value between 5 and 86,400 seconds (24 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] turns_to_live
+    #   The number of conversation turns that the context should be active.
+    #   A conversation turn is one `PostContent` or `PostText` request and
+    #   the corresponding response from Amazon Lex.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/ActiveContextTimeToLive AWS API Documentation
+    #
+    class ActiveContextTimeToLive < Struct.new(
+      :time_to_live_in_seconds,
+      :turns_to_live)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Either the Amazon Lex bot is still building, or one of the dependent
     # services (Amazon Polly, AWS Lambda) failed with an internal service
@@ -361,14 +435,24 @@ module Aws::Lex
     #   Describes the current state of the bot.
     #   @return [Types::DialogAction]
     #
+    # @!attribute [rw] active_contexts
+    #   A list of active contexts for the session. A context can be set when
+    #   an intent is fulfilled or by calling the `PostContent`, `PostText`,
+    #   or `PutSession` operation.
+    #
+    #   You can use a context to control the intents that can follow up an
+    #   intent, or to modify the operation of your application.
+    #   @return [Array<Types::ActiveContext>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionResponse AWS API Documentation
     #
     class GetSessionResponse < Struct.new(
       :recent_intent_summary_view,
       :session_attributes,
       :session_id,
-      :dialog_action)
-      SENSITIVE = [:session_attributes]
+      :dialog_action,
+      :active_contexts)
+      SENSITIVE = [:session_attributes, :active_contexts]
       include Aws::Structure
     end
 
@@ -577,6 +661,7 @@ module Aws::Lex
     #         content_type: "HttpContentType", # required
     #         accept: "Accept",
     #         input_stream: "data", # required
+    #         active_contexts: "ActiveContextsString",
     #       }
     #
     # @!attribute [rw] bot_name
@@ -721,6 +806,16 @@ module Aws::Lex
     #   than buffering the data locally.
     #   @return [IO]
     #
+    # @!attribute [rw] active_contexts
+    #   A list of contexts active for the request. A context can be
+    #   activated when a previous intent is fulfilled, or by including the
+    #   context in the request,
+    #
+    #   If you don't specify a list of contexts, Amazon Lex will use the
+    #   current list of contexts for the session. If you specify an empty
+    #   list, all contexts for the session are cleared.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentRequest AWS API Documentation
     #
     class PostContentRequest < Struct.new(
@@ -731,8 +826,9 @@ module Aws::Lex
       :request_attributes,
       :content_type,
       :accept,
-      :input_stream)
-      SENSITIVE = [:session_attributes, :request_attributes]
+      :input_stream,
+      :active_contexts)
+      SENSITIVE = [:session_attributes, :request_attributes, :active_contexts]
       include Aws::Structure
     end
 
@@ -751,7 +847,7 @@ module Aws::Lex
     #   score is between 0.0 and 1.0.
     #
     #   The score is a relative score, not an absolute score. The score may
-    #   change based on improvements to the Amazon Lex NLU.
+    #   change based on improvements to Amazon Lex.
     #   @return [String]
     #
     # @!attribute [rw] alternative_intents
@@ -794,6 +890,11 @@ module Aws::Lex
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   You can only use this field in the de-DE, en-AU, en-GB, en-US,
+    #   es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other
+    #   locales, the `message` field is null. You should use the
+    #   `encodedMessage` field instead.
+    #
     #   The message to convey to the user. The message can come from the
     #   bot's configuration or from a Lambda function.
     #
@@ -813,6 +914,31 @@ module Aws::Lex
     #
     #   If the Lambda function returns a message, Amazon Lex passes it to
     #   the client in its response.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoded_message
+    #   The message to convey to the user. The message can come from the
+    #   bot's configuration or from a Lambda function.
+    #
+    #   If the intent is not configured with a Lambda function, or if the
+    #   Lambda function returned `Delegate` as the `dialogAction.type` in
+    #   its response, Amazon Lex decides on the next course of action and
+    #   selects an appropriate message from the bot's configuration based
+    #   on the current interaction context. For example, if Amazon Lex
+    #   isn't able to understand user input, it uses a clarification prompt
+    #   message.
+    #
+    #   When you create an intent you can assign messages to groups. When
+    #   messages are assigned to groups Amazon Lex returns one message from
+    #   each group in the response. The message field is an escaped JSON
+    #   string containing the messages. For more information about the
+    #   structure of the JSON string returned, see msg-prompts-formats.
+    #
+    #   If the Lambda function returns a message, Amazon Lex passes it to
+    #   the client in its response.
+    #
+    #   The `encodedMessage` field is base-64 encoded. You must decode the
+    #   field before you can use the value.
     #   @return [String]
     #
     # @!attribute [rw] message_format
@@ -885,11 +1011,29 @@ module Aws::Lex
     # @!attribute [rw] input_transcript
     #   The text used to process the request.
     #
+    #   You can use this field only in the de-DE, en-AU, en-GB, en-US,
+    #   es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other
+    #   locales, the `inputTranscript` field is null. You should use the
+    #   `encodedInputTranscript` field instead.
+    #
     #   If the input was an audio stream, the `inputTranscript` field
     #   contains the text extracted from the audio stream. This is the text
     #   that is actually processed to recognize intents and slot values. You
     #   can use this information to determine if Amazon Lex is correctly
     #   processing the audio that you send.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoded_input_transcript
+    #   The text used to process the request.
+    #
+    #   If the input was an audio stream, the `encodedInputTranscript` field
+    #   contains the text extracted from the audio stream. This is the text
+    #   that is actually processed to recognize intents and slot values. You
+    #   can use this information to determine if Amazon Lex is correctly
+    #   processing the audio that you send.
+    #
+    #   The `encodedInputTranscript` field is base-64 encoded. You must
+    #   decode the field before you can use the value.
     #   @return [String]
     #
     # @!attribute [rw] audio_stream
@@ -907,21 +1051,19 @@ module Aws::Lex
     #   The version of the bot that responded to the conversation. You can
     #   use this information to help determine if one version of a bot is
     #   performing better than another version.
-    #
-    #   If you have enabled the new natural language understanding (NLU)
-    #   model, you can use this to determine if the improvement is due to
-    #   changes to the bot or changes to the NLU.
-    #
-    #   For more information about enabling the new NLU, see the
-    #   [enableModelImprovements][1] parameter of the `PutBot` operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements
     #   @return [String]
     #
     # @!attribute [rw] session_id
     #   The unique identifier for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_contexts
+    #   A list of active contexts for the session. A context can be set when
+    #   an intent is fulfilled or by calling the `PostContent`, `PostText`,
+    #   or `PutSession` operation.
+    #
+    #   You can use a context to control the intents that can follow up an
+    #   intent, or to modify the operation of your application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentResponse AWS API Documentation
@@ -935,14 +1077,17 @@ module Aws::Lex
       :session_attributes,
       :sentiment_response,
       :message,
+      :encoded_message,
       :message_format,
       :dialog_state,
       :slot_to_elicit,
       :input_transcript,
+      :encoded_input_transcript,
       :audio_stream,
       :bot_version,
-      :session_id)
-      SENSITIVE = [:message]
+      :session_id,
+      :active_contexts)
+      SENSITIVE = [:message, :encoded_message, :encoded_input_transcript, :active_contexts]
       include Aws::Structure
     end
 
@@ -960,6 +1105,18 @@ module Aws::Lex
     #           "String" => "String",
     #         },
     #         input_text: "Text", # required
+    #         active_contexts: [
+    #           {
+    #             name: "ActiveContextName", # required
+    #             time_to_live: { # required
+    #               time_to_live_in_seconds: 1,
+    #               turns_to_live: 1,
+    #             },
+    #             parameters: { # required
+    #               "ParameterName" => "Text",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] bot_name
@@ -1026,6 +1183,16 @@ module Aws::Lex
     #   The text that the user entered (Amazon Lex interprets this text).
     #   @return [String]
     #
+    # @!attribute [rw] active_contexts
+    #   A list of contexts active for the request. A context can be
+    #   activated when a previous intent is fulfilled, or by including the
+    #   context in the request,
+    #
+    #   If you don't specify a list of contexts, Amazon Lex will use the
+    #   current list of contexts for the session. If you specify an empty
+    #   list, all contexts for the session are cleared.
+    #   @return [Array<Types::ActiveContext>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextRequest AWS API Documentation
     #
     class PostTextRequest < Struct.new(
@@ -1034,8 +1201,9 @@ module Aws::Lex
       :user_id,
       :session_attributes,
       :request_attributes,
-      :input_text)
-      SENSITIVE = [:session_attributes, :request_attributes, :input_text]
+      :input_text,
+      :active_contexts)
+      SENSITIVE = [:session_attributes, :request_attributes, :input_text, :active_contexts]
       include Aws::Structure
     end
 
@@ -1050,8 +1218,7 @@ module Aws::Lex
     #   Scores][1].
     #
     #   The score is a relative score, not an absolute score. The score may
-    #   change based on improvements to the Amazon Lex natural language
-    #   understanding (NLU) model.
+    #   change based on improvements to Amazon Lex.
     #
     #
     #
@@ -1202,18 +1369,16 @@ module Aws::Lex
     #   The version of the bot that responded to the conversation. You can
     #   use this information to help determine if one version of a bot is
     #   performing better than another version.
-    #
-    #   If you have enabled the new natural language understanding (NLU)
-    #   model, you can use this to determine if the improvement is due to
-    #   changes to the bot or changes to the NLU.
-    #
-    #   For more information about enabling the new NLU, see the
-    #   [enableModelImprovements][1] parameter of the `PutBot` operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements
     #   @return [String]
+    #
+    # @!attribute [rw] active_contexts
+    #   A list of active contexts for the session. A context can be set when
+    #   an intent is fulfilled or by calling the `PostContent`, `PostText`,
+    #   or `PutSession` operation.
+    #
+    #   You can use a context to control the intents that can follow up an
+    #   intent, or to modify the operation of your application.
+    #   @return [Array<Types::ActiveContext>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextResponse AWS API Documentation
     #
@@ -1230,8 +1395,9 @@ module Aws::Lex
       :slot_to_elicit,
       :response_card,
       :session_id,
-      :bot_version)
-      SENSITIVE = [:slots, :session_attributes, :message]
+      :bot_version,
+      :active_contexts)
+      SENSITIVE = [:slots, :session_attributes, :message, :active_contexts]
       include Aws::Structure
     end
 
@@ -1299,6 +1465,18 @@ module Aws::Lex
     #           },
     #         ],
     #         accept: "Accept",
+    #         active_contexts: [
+    #           {
+    #             name: "ActiveContextName", # required
+    #             time_to_live: { # required
+    #               time_to_live_in_seconds: 1,
+    #               turns_to_live: 1,
+    #             },
+    #             parameters: { # required
+    #               "ParameterName" => "Text",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] bot_name
@@ -1378,6 +1556,16 @@ module Aws::Lex
     #     * `text/plain; charset=utf-8`
     #   @return [String]
     #
+    # @!attribute [rw] active_contexts
+    #   A list of contexts active for the request. A context can be
+    #   activated when a previous intent is fulfilled, or by including the
+    #   context in the request,
+    #
+    #   If you don't specify a list of contexts, Amazon Lex will use the
+    #   current list of contexts for the session. If you specify an empty
+    #   list, all contexts for the session are cleared.
+    #   @return [Array<Types::ActiveContext>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSessionRequest AWS API Documentation
     #
     class PutSessionRequest < Struct.new(
@@ -1387,8 +1575,9 @@ module Aws::Lex
       :session_attributes,
       :dialog_action,
       :recent_intent_summary_view,
-      :accept)
-      SENSITIVE = [:session_attributes]
+      :accept,
+      :active_contexts)
+      SENSITIVE = [:session_attributes, :active_contexts]
       include Aws::Structure
     end
 
@@ -1424,6 +1613,18 @@ module Aws::Lex
     #
     # @!attribute [rw] message
     #   The next message that should be presented to the user.
+    #
+    #   You can only use this field in the de-DE, en-AU, en-GB, en-US,
+    #   es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other
+    #   locales, the `message` field is null. You should use the
+    #   `encodedMessage` field instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoded_message
+    #   The next message that should be presented to the user.
+    #
+    #   The `encodedMessage` field is base-64 encoded. You must decode the
+    #   field before you can use the value.
     #   @return [String]
     #
     # @!attribute [rw] message_format
@@ -1474,6 +1675,10 @@ module Aws::Lex
     #   A unique identifier for the session.
     #   @return [String]
     #
+    # @!attribute [rw] active_contexts
+    #   A list of active contexts for the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSessionResponse AWS API Documentation
     #
     class PutSessionResponse < Struct.new(
@@ -1482,12 +1687,14 @@ module Aws::Lex
       :slots,
       :session_attributes,
       :message,
+      :encoded_message,
       :message_format,
       :dialog_state,
       :slot_to_elicit,
       :audio_stream,
-      :session_id)
-      SENSITIVE = [:message]
+      :session_id,
+      :active_contexts)
+      SENSITIVE = [:message, :encoded_message, :active_contexts]
       include Aws::Structure
     end
 

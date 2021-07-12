@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-04-08)
+------------------
+
+* Feature - This release provides support for image updates
+
+1.51.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2021-01-12)
+------------------
+
+* Feature - Adds support for the Smart Card Redirection feature
+
 1.48.0 (2020-09-30)
 ------------------
 

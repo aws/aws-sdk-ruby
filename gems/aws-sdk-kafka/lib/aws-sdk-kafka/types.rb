@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -175,10 +175,7 @@ module Aws::Kafka
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_type
-    #   The type of Amazon EC2 instances to use for Kafka brokers. The
-    #   following instance types are allowed: kafka.m5.large,
-    #   kafka.m5.xlarge, kafka.m5.2xlarge, kafka.m5.4xlarge,
-    #   kafka.m5.12xlarge, and kafka.m5.24xlarge.
+    #   The type of broker used in the Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -284,6 +281,9 @@ module Aws::Kafka
     #           scram: {
     #             enabled: false,
     #           },
+    #           iam: {
+    #             enabled: false,
+    #           },
     #         },
     #         tls: {
     #           certificate_authority_arn_list: ["__string"],
@@ -341,7 +341,7 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] broker_node_group_info
-    #   Information about the broker nodes.
+    #   Information about the brokers.
     #   @return [Types::BrokerNodeGroupInfo]
     #
     # @!attribute [rw] client_authentication
@@ -383,9 +383,10 @@ module Aws::Kafka
     #
     # @!attribute [rw] enhanced_monitoring
     #   Specifies which metrics are gathered for the MSK cluster. This
-    #   property has three possible values: DEFAULT, PER\_BROKER, and
-    #   PER\_TOPIC\_PER\_BROKER. For a list of the metrics associated with
-    #   each of these three levels of monitoring, see [Monitoring][1].
+    #   property has the following possible values: DEFAULT, PER\_BROKER,
+    #   PER\_TOPIC\_PER\_BROKER, and PER\_TOPIC\_PER\_PARTITION. For a list
+    #   of the metrics associated with each of these levels of monitoring,
+    #   see [Monitoring][1].
     #
     #
     #
@@ -401,8 +402,9 @@ module Aws::Kafka
     #   @return [Types::OpenMonitoring]
     #
     # @!attribute [rw] state
-    #   The state of the cluster. The possible states are CREATING, ACTIVE,
-    #   and FAILED.
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -694,6 +696,9 @@ module Aws::Kafka
     #             scram: {
     #               enabled: false,
     #             },
+    #             iam: {
+    #               enabled: false,
+    #             },
     #           },
     #           tls: {
     #             certificate_authority_arn_list: ["__string"],
@@ -713,7 +718,7 @@ module Aws::Kafka
     #             in_cluster: false,
     #           },
     #         },
-    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         kafka_version: "__stringMin1Max128", # required
     #         logging_info: {
     #           broker_logs: { # required
@@ -749,7 +754,7 @@ module Aws::Kafka
     #       }
     #
     # @!attribute [rw] broker_node_group_info
-    #   Information about the broker nodes in the cluster.
+    #   Information about the brokers.
     #   @return [Types::BrokerNodeGroupInfo]
     #
     # @!attribute [rw] client_authentication
@@ -771,7 +776,8 @@ module Aws::Kafka
     #
     # @!attribute [rw] enhanced_monitoring
     #   Specifies the level of monitoring for the MSK cluster. The possible
-    #   values are DEFAULT, PER\_BROKER, and PER\_TOPIC\_PER\_BROKER.
+    #   values are DEFAULT, PER\_BROKER, PER\_TOPIC\_PER\_BROKER, and
+    #   PER\_TOPIC\_PER\_PARTITION.
     #   @return [String]
     #
     # @!attribute [rw] kafka_version
@@ -823,8 +829,9 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the cluster. The possible states are CREATING, ACTIVE,
-    #   and FAILED.
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterResponse AWS API Documentation
@@ -943,8 +950,9 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the cluster. The possible states are CREATING, ACTIVE,
-    #   and FAILED.
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterResponse AWS API Documentation
@@ -1470,12 +1478,20 @@ module Aws::Kafka
     #   <programlisting>\{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096" \}</programlisting>
     #   @return [String]
     #
+    # @!attribute [rw] bootstrap_broker_string_sasl_iam
+    #   A string that contains one or more DNS names (or IP addresses) and
+    #   SASL IAM port pairs. The following is an example.
+    #
+    #   <programlisting>\{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098" \}</programlisting>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokersResponse AWS API Documentation
     #
     class GetBootstrapBrokersResponse < Struct.new(
       :bootstrap_broker_string,
       :bootstrap_broker_string_tls,
-      :bootstrap_broker_string_sasl_scram)
+      :bootstrap_broker_string_sasl_scram,
+      :bootstrap_broker_string_sasl_iam)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1984,6 +2000,11 @@ module Aws::Kafka
     #   LoggingInfo details.
     #   @return [Types::LoggingInfo]
     #
+    # @!attribute [rw] instance_type
+    #   The Amazon MSK broker type that you want all of the brokers in this
+    #   cluster to be.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -1993,7 +2014,8 @@ module Aws::Kafka
       :open_monitoring,
       :enhanced_monitoring,
       :kafka_version,
-      :logging_info)
+      :logging_info,
+      :instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2061,15 +2083,22 @@ module Aws::Kafka
     #         scram: {
     #           enabled: false,
     #         },
+    #         iam: {
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] scram
     #   @return [Types::Scram]
     #
+    # @!attribute [rw] iam
+    #   @return [Types::Iam]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Sasl AWS API Documentation
     #
     class Sasl < Struct.new(
-      :scram)
+      :scram,
+      :iam)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2087,6 +2116,24 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Scram AWS API Documentation
     #
     class Scram < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass Iam
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Iam AWS API Documentation
+    #
+    class Iam < Struct.new(
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -2275,6 +2322,58 @@ module Aws::Kafka
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for UpdateBrokerType.
+    #
+    # @note When making an API call, you may pass UpdateBrokerTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         current_version: "__string", # required
+    #         target_instance_type: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type
+    #   The Amazon MSK broker type that you want all of the brokers in this
+    #   cluster to be.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerTypeRequest AWS API Documentation
+    #
+    class UpdateBrokerTypeRequest < Struct.new(
+      :cluster_arn,
+      :current_version,
+      :target_instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateBrokerType.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerTypeResponse AWS API Documentation
+    #
+    class UpdateBrokerTypeResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2569,7 +2668,7 @@ module Aws::Kafka
     #       {
     #         cluster_arn: "__string", # required
     #         current_version: "__string", # required
-    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         open_monitoring: {
     #           prometheus: { # required
     #             jmx_exporter: {

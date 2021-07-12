@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -43,7 +43,7 @@ module Aws::SNS
     # * `DisplayName` – The human-readable name used in the `From` field for
     #   notifications to `email` and `email-json` endpoints.
     #
-    # * `Owner` – The AWS account ID of the topic's owner.
+    # * `Owner` – The account ID of the topic's owner.
     #
     # * `Policy` – The JSON serialization of the topic's access control
     #   policy.
@@ -64,18 +64,40 @@ module Aws::SNS
     #
     # The following attribute applies only to [server-side-encryption][1]\:
     #
-    # * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
-    #   (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
-    #   Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #   Management Service API Reference*.
+    # * `KmsMasterKeyId` - The ID of an Amazon Web Services managed customer
+    #   master key (CMK) for Amazon SNS or a custom CMK. For more
+    #   information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #   in the *Key Management Service API Reference*.
     #
     # ^
+    #
+    # The following attributes apply only to [FIFO topics][4]\:
+    #
+    # * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
+    #
+    # * `ContentBasedDeduplication` – Enables content-based deduplication
+    #   for FIFO topics.
+    #
+    #   * By default, `ContentBasedDeduplication` is set to `false`. If you
+    #     create a FIFO topic and this attribute is `false`, you must
+    #     specify a value for the `MessageDeduplicationId` parameter for the
+    #     [Publish][5] action.
+    #
+    #   * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+    #     uses a SHA-256 hash to generate the `MessageDeduplicationId` using
+    #     the body of the message (but not the attributes of the message).
+    #
+    #     (Optional) To override the generated value, you can specify a
+    #     value for the `MessageDeduplicationId` parameter for the `Publish`
+    #     action.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
     # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
     # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    # [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    # [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]
@@ -129,9 +151,9 @@ module Aws::SNS
     # @option options [required, String] :label
     #   A unique identifier for the new policy statement.
     # @option options [required, Array<String>] :aws_account_id
-    #   The AWS account IDs of the users (principals) who will be given access
-    #   to the specified actions. The users must have AWS accounts, but do not
-    #   need to be signed up for this service.
+    #   The account IDs of the users (principals) who will be given access to
+    #   the specified actions. The users must have account, but do not need to
+    #   be signed up for this service.
     # @option options [required, Array<String>] :action_name
     #   The action you want to allow for the specified principal(s).
     #
@@ -154,10 +176,10 @@ module Aws::SNS
     #   Short-lived token sent to an endpoint during the `Subscribe` action.
     # @option options [String] :authenticate_on_unsubscribe
     #   Disallows unauthenticated unsubscribes of the subscription. If the
-    #   value of this parameter is `true` and the request has an AWS
-    #   signature, then only the topic owner and the subscription owner can
-    #   unsubscribe the endpoint. The unsubscribe action requires AWS
-    #   authentication.
+    #   value of this parameter is `true` and the request has an Amazon Web
+    #   Services signature, then only the topic owner and the subscription
+    #   owner can unsubscribe the endpoint. The unsubscribe action requires
+    #   Amazon Web Services authentication.
     # @return [Subscription]
     def confirm_subscription(options = {})
       options = options.merge(topic_arn: @arn)
@@ -359,32 +381,38 @@ module Aws::SNS
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
-    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
+    #     master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
-    #   The following attribute applies only to FIFO topics:
+    #   The following attribute applies only to [FIFO topics][4]\:
     #
-    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
-    #     Amazon SNS uses a SHA-256 hash to generate the
-    #     `MessageDeduplicationId` using the body of the message (but not the
-    #     attributes of the message).
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication
+    #     for FIFO topics.
     #
-    #   * When `ContentBasedDeduplication` is in effect, messages with
-    #     identical content sent within the deduplication interval are treated
-    #     as duplicates and only one copy of the message is delivered.
+    #     * By default, `ContentBasedDeduplication` is set to `false`. If you
+    #       create a FIFO topic and this attribute is `false`, you must
+    #       specify a value for the `MessageDeduplicationId` parameter for the
+    #       [Publish][5] action.
     #
-    #   * If the queue has `ContentBasedDeduplication` set, your
-    #     `MessageDeduplicationId` overrides the generated one.
+    #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+    #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
+    #       the body of the message (but not the attributes of the message).
+    #
+    #       (Optional) To override the generated value, you can specify a
+    #       value for the `MessageDeduplicationId` parameter for the `Publish`
+    #       action.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
     #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
     # @option options [String] :attribute_value
     #   The new value for the attribute.
     # @return [EmptyStructure]
@@ -406,7 +434,7 @@ module Aws::SNS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :protocol
-    #   The protocol you want to use. Supported protocols include:
+    #   The protocol that you want to use. Supported protocols include:
     #
     #   * `http` – delivery of JSON-encoded message via HTTP POST
     #
@@ -421,40 +449,45 @@ module Aws::SNS
     #   * `sqs` – delivery of JSON-encoded message to an Amazon SQS queue
     #
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
-    #     for a mobile app and device.
+    #     for a mobile app and device
     #
-    #   * `lambda` – delivery of JSON-encoded message to an Amazon Lambda
-    #     function.
+    #   * `lambda` – delivery of JSON-encoded message to an Lambda function
+    #
+    #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
+    #     Data Firehose delivery stream.
     # @option options [String] :endpoint
     #   The endpoint that you want to receive notifications. Endpoints vary by
     #   protocol:
     #
     #   * For the `http` protocol, the (public) endpoint is a URL beginning
-    #     with `http://`
+    #     with `http://`.
     #
     #   * For the `https` protocol, the (public) endpoint is a URL beginning
-    #     with `https://`
+    #     with `https://`.
     #
-    #   * For the `email` protocol, the endpoint is an email address
+    #   * For the `email` protocol, the endpoint is an email address.
     #
-    #   * For the `email-json` protocol, the endpoint is an email address
+    #   * For the `email-json` protocol, the endpoint is an email address.
     #
     #   * For the `sms` protocol, the endpoint is a phone number of an
-    #     SMS-enabled device
+    #     SMS-enabled device.
     #
     #   * For the `sqs` protocol, the endpoint is the ARN of an Amazon SQS
-    #     queue
+    #     queue.
     #
     #   * For the `application` protocol, the endpoint is the EndpointArn of a
     #     mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an Amazon
-    #     Lambda function.
+    #   * For the `lambda` protocol, the endpoint is the ARN of an Lambda
+    #     function.
+    #
+    #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
+    #     Kinesis Data Firehose delivery stream.
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #
     #   The following lists the names, descriptions, and values of the special
-    #   request parameters that the `SetTopicAttributes` action uses:
+    #   request parameters that the `Subscribe` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
@@ -474,19 +507,35 @@ module Aws::SNS
     #     endpoint is unreachable) or server errors (for example, when the
     #     service that powers the subscribed endpoint becomes unavailable) are
     #     held in the dead-letter queue for further analysis or reprocessing.
+    #
+    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   delivery stream subscriptions:
+    #
+    #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
+    #     following:
+    #
+    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #
+    #     * Amazon SNS listed as a trusted entity
+    #
+    #     Specifying a valid ARN for this attribute is required for Kinesis
+    #     Data Firehose delivery stream subscriptions. For more information,
+    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
+    #     *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     # @option options [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   * If you set this parameter to `true`, the response includes the ARN
-    #     in all cases, even if the subscription is not yet confirmed. In
-    #     addition to the ARN for confirmed subscriptions, the response also
-    #     includes the `pending subscription` ARN value for subscriptions that
-    #     aren't yet confirmed. A subscription becomes confirmed when the
-    #     subscriber calls the `ConfirmSubscription` action with a
-    #     confirmation token.
-    #
-    #   ^
+    #   If you set this parameter to `true`, the response includes the ARN in
+    #   all cases, even if the subscription is not yet confirmed. In addition
+    #   to the ARN for confirmed subscriptions, the response also includes the
+    #   `pending subscription` ARN value for subscriptions that aren't yet
+    #   confirmed. A subscription becomes confirmed when the subscriber calls
+    #   the `ConfirmSubscription` action with a confirmation token.
     #
     #
     #

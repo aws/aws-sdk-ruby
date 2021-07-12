@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -30,7 +30,7 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # structure.
 #
 #     dynamo_db = Aws::DynamoDB::Client.new
-#     resp = dynamo_db.batch_get_item(params)
+#     resp = dynamo_db.batch_execute_statement(params)
 #
 # See {Client} for more information.
 #
@@ -50,6 +50,6 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # @!group service
 module Aws::DynamoDB
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.60.0'
 
 end

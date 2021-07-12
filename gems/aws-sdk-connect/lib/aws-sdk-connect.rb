@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -28,7 +28,7 @@ require_relative 'aws-sdk-connect/customizations'
 # structure.
 #
 #     connect = Aws::Connect::Client.new
-#     resp = connect.associate_routing_profile_queues(params)
+#     resp = connect.associate_approved_origin(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-connect/customizations'
 # @!group service
 module Aws::Connect
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.46.0'
 
 end

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-05-19)
+------------------
+
+* Feature - Amazon Rekognition Custom Labels adds support for customer managed encryption, using AWS Key Management Service, of image files copied into the service and files written back to the customer.
+
+1.50.0 (2021-03-25)
+------------------
+
+* Feature - This release introduces AWS tagging support for Amazon Rekognition collections, stream processors, and Custom Label models.
+
+1.49.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.47.0 (2020-10-15)
 ------------------
 

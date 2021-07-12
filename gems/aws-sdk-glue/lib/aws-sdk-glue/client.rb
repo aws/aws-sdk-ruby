@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -341,7 +341,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the catalog in which the partition is to be created.
-    #   Currently, this should be the AWS account ID.
+    #   Currently, this should be the Amazon Web Services account ID.
     #
     # @option params [required, String] :database_name
     #   The name of the metadata database in which the partition is to be
@@ -410,6 +410,15 @@ module Aws::Glue
     #             },
     #           },
     #           stored_as_sub_directories: false,
+    #           schema_reference: {
+    #             schema_id: {
+    #               schema_arn: "GlueResourceArn",
+    #               schema_name: "SchemaRegistryNameString",
+    #               registry_name: "SchemaRegistryNameString",
+    #             },
+    #             schema_version_id: "SchemaVersionIdString",
+    #             schema_version_number: 1,
+    #           },
     #         },
     #         parameters: {
     #           "KeyString" => "ParametersMapValue",
@@ -440,7 +449,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, Array<String>] :connection_name_list
     #   A list of names of the connections to delete.
@@ -478,7 +487,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be deleted resides.
-    #   If none is provided, the AWS account ID is used by default.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
@@ -528,8 +538,8 @@ module Aws::Glue
     # Deletes multiple tables at once.
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
-    # table versions and partitions that belong to the deleted table. AWS
-    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # table versions and partitions that belong to the deleted table. Glue
+    # deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
     #  To ensure the immediate deletion of all related resources, before
@@ -542,7 +552,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the tables to delete reside.
@@ -583,7 +593,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -658,6 +668,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -682,6 +693,7 @@ module Aws::Glue
     #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
+    #   resp.crawlers[0].lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
     #   resp.crawlers[0].state #=> String, one of "READY", "RUNNING", "STOPPING"
     #   resp.crawlers[0].table_prefix #=> String
     #   resp.crawlers[0].schedule.schedule_expression #=> String
@@ -839,7 +851,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -906,6 +919,11 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.partitions[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.partitions[0].parameters #=> Hash
     #   resp.partitions[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].last_analyzed_time #=> Time
@@ -1213,7 +1231,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the catalog in which the partition is to be updated.
-    #   Currently, this should be the AWS account ID.
+    #   Currently, this should be the Amazon Web Services account ID.
     #
     # @option params [required, String] :database_name
     #   The name of the metadata database in which the partition is to be
@@ -1284,6 +1302,15 @@ module Aws::Glue
     #               },
     #             },
     #             stored_as_sub_directories: false,
+    #             schema_reference: {
+    #               schema_id: {
+    #                 schema_arn: "GlueResourceArn",
+    #                 schema_name: "SchemaRegistryNameString",
+    #                 registry_name: "SchemaRegistryNameString",
+    #               },
+    #               schema_version_id: "SchemaVersionIdString",
+    #               schema_version_number: 1,
+    #             },
     #           },
     #           parameters: {
     #             "KeyString" => "ParametersMapValue",
@@ -1312,10 +1339,10 @@ module Aws::Glue
     end
 
     # Cancels (stops) a task run. Machine learning task runs are
-    # asynchronous tasks that AWS Glue runs on your behalf as part of
-    # various machine learning workflows. You can cancel a machine learning
-    # task run at any time by calling `CancelMLTaskRun` with a task run's
-    # parent transform's `TransformID` and the task run's `TaskRunId`.
+    # asynchronous tasks that Glue runs on your behalf as part of various
+    # machine learning workflows. You can cancel a machine learning task run
+    # at any time by calling `CancelMLTaskRun` with a task run's parent
+    # transform's `TransformID` and the task run's `TaskRunId`.
     #
     # @option params [required, String] :transform_id
     #   The unique identifier of the machine learning transform.
@@ -1348,6 +1375,44 @@ module Aws::Glue
     # @param [Hash] params ({})
     def cancel_ml_task_run(params = {}, options = {})
       req = build_request(:cancel_ml_task_run, params)
+      req.send_request(options)
+    end
+
+    # Validates the supplied schema. This call has no side effects, it
+    # simply validates using the supplied schema using `DataFormat` as the
+    # format. Since it does not take a schema set name, no compatibility
+    # checks are performed.
+    #
+    # @option params [required, String] :data_format
+    #   The data format of the schema definition. Currently `AVRO` and `JSON`
+    #   are supported.
+    #
+    # @option params [required, String] :schema_definition
+    #   The definition of the schema that has to be validated.
+    #
+    # @return [Types::CheckSchemaVersionValidityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CheckSchemaVersionValidityResponse#valid #valid} => Boolean
+    #   * {Types::CheckSchemaVersionValidityResponse#error #error} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.check_schema_version_validity({
+    #     data_format: "AVRO", # required, accepts AVRO, JSON
+    #     schema_definition: "SchemaDefinitionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.valid #=> Boolean
+    #   resp.error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CheckSchemaVersionValidity AWS API Documentation
+    #
+    # @overload check_schema_version_validity(params = {})
+    # @param [Hash] params ({})
+    def check_schema_version_validity(params = {}, options = {})
+      req = build_request(:check_schema_version_validity, params)
       req.send_request(options)
     end
 
@@ -1411,7 +1476,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the connection. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, Types::ConnectionInput] :connection_input
     #   A `ConnectionInput` object defining the connection to create.
@@ -1425,7 +1490,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -1460,7 +1525,7 @@ module Aws::Glue
     #   new crawler to access customer resources.
     #
     # @option params [String] :database_name
-    #   The AWS Glue database where results are written, such as:
+    #   The Glue database where results are written, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #
     # @option params [String] :description
@@ -1494,6 +1559,9 @@ module Aws::Glue
     #   A policy that specifies whether to crawl the entire dataset again, or
     #   to crawl only folders that were added since the last crawler run.
     #
+    # @option params [Types::LineageConfiguration] :lineage_configuration
+    #   Specifies data lineage configuration settings for the crawler.
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -1509,8 +1577,8 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this crawler request. You may use tags to limit
-    #   access to the crawler. For more information about tags in AWS Glue,
-    #   see [AWS Tags in AWS Glue][1] in the developer guide.
+    #   access to the crawler. For more information about tags in Glue, see
+    #   [Amazon Web Services Tags in Glue][1] in the developer guide.
     #
     #
     #
@@ -1531,6 +1599,7 @@ module Aws::Glue
     #           path: "Path",
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
+    #           sample_size: 1,
     #         },
     #       ],
     #       jdbc_targets: [
@@ -1571,6 +1640,9 @@ module Aws::Glue
     #     recrawl_policy: {
     #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
     #     },
+    #     lineage_configuration: {
+    #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
     #     tags: {
@@ -1591,7 +1663,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the database. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, Types::DatabaseInput] :database_input
     #   The metadata for the database.
@@ -1668,8 +1740,8 @@ module Aws::Glue
     #    </note>
     #
     # @option params [Integer] :number_of_nodes
-    #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
-    #   this `DevEndpoint`.
+    #   The number of Glue Data Processing Units (DPUs) to allocate to this
+    #   `DevEndpoint`.
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated to the development
@@ -1692,10 +1764,10 @@ module Aws::Glue
     #
     # @option params [String] :glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version supported
-    #   for running your ETL scripts on development endpoints.
+    #   Glue supports. The Python version indicates the version supported for
+    #   running your ETL scripts on development endpoints.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in the
     #   developer guide.
     #
@@ -1743,8 +1815,8 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this DevEndpoint. You may use tags to limit
-    #   access to the DevEndpoint. For more information about tags in AWS
-    #   Glue, see [AWS Tags in AWS Glue][1] in the developer guide.
+    #   access to the DevEndpoint. For more information about tags in Glue,
+    #   see [Amazon Web Services Tags in Glue][1] in the developer guide.
     #
     #
     #
@@ -1853,21 +1925,21 @@ module Aws::Glue
     #   runs allowed for this job.
     #
     # @option params [required, Types::JobCommand] :command
-    #   The `JobCommand` that executes this job.
+    #   The `JobCommand` that runs this job.
     #
     # @option params [Hash<String,String>] :default_arguments
     #   The default arguments for this job.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set up
+    #   your job, see the [Special Parameters Used by Glue][2] topic in the
+    #   developer guide.
     #
     #
     #
@@ -1886,11 +1958,11 @@ module Aws::Glue
     # @option params [Integer] :allocated_capacity
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this Job. You can allocate from 2 to 100 DPUs; the default is 10. A
-    #   DPU is a relative measure of processing power that consists of 4 vCPUs
-    #   of compute capacity and 16 GB of memory. For more information, see the
-    #   [AWS Glue pricing page][1].
+    #   The number of Glue data processing units (DPUs) to allocate to this
+    #   Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is
+    #   a relative measure of processing power that consists of 4 vCPUs of
+    #   compute capacity and 16 GB of memory. For more information, see the
+    #   [Glue pricing page][1].
     #
     #
     #
@@ -1902,11 +1974,11 @@ module Aws::Glue
     #   status. The default is 2,880 minutes (48 hours).
     #
     # @option params [Float] :max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
-    #   allocated when this job runs. A DPU is a relative measure of
-    #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   For Glue version 1.0 or earlier jobs, using the standard worker type,
+    #   the number of Glue data processing units (DPUs) that can be allocated
+    #   when this job runs. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
+    #   more information, see the [Glue pricing page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
     #
@@ -1923,6 +1995,10 @@ module Aws::Glue
     #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
+    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
+    #   capacity`. Instead, you should specify a `Worker type` and the `Number
+    #   of workers`.
+    #
     #
     #
     #   [1]: https://aws.amazon.com/glue/pricing/
@@ -1933,8 +2009,8 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this job. You may use tags to limit access to the
-    #   job. For more information about tags in AWS Glue, see [AWS Tags in AWS
-    #   Glue][1] in the developer guide.
+    #   job. For more information about tags in Glue, see [Amazon Web Services
+    #   Tags in Glue][1] in the developer guide.
     #
     #
     #
@@ -1945,10 +2021,10 @@ module Aws::Glue
     #
     # @option params [String] :glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version supported
-    #   for jobs of type Spark.
+    #   Glue supports. The Python version indicates the version supported for
+    #   jobs of type Spark.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in the
     #   developer guide.
     #
@@ -2038,16 +2114,16 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates an AWS Glue machine learning transform. This operation creates
-    # the transform and all the necessary parameters to train it.
+    # Creates an Glue machine learning transform. This operation creates the
+    # transform and all the necessary parameters to train it.
     #
     # Call this operation as the first step in the process of using a
     # machine learning transform (such as the `FindMatches` transform) for
     # deduplicating data. You can provide an optional `Description`, in
     # addition to the parameters that you want to use for your algorithm.
     #
-    # You must also specify certain parameters for the tasks that AWS Glue
-    # runs on your behalf as part of learning from your data and creating a
+    # You must also specify certain parameters for the tasks that Glue runs
+    # on your behalf as part of learning from your data and creating a
     # high-quality machine learning transform. These parameters include
     # `Role`, and optionally, `AllocatedCapacity`, `Timeout`, and
     # `MaxRetries`. For more information, see [Jobs][1].
@@ -2064,7 +2140,7 @@ module Aws::Glue
     #   The default is an empty string.
     #
     # @option params [required, Array<Types::GlueTable>] :input_record_tables
-    #   A list of AWS Glue table definitions used by the transform.
+    #   A list of Glue table definitions used by the transform.
     #
     # @option params [required, Types::TransformParameters] :parameters
     #   The algorithmic parameters that are specific to the transform type
@@ -2072,13 +2148,13 @@ module Aws::Glue
     #
     # @option params [required, String] :role
     #   The name or Amazon Resource Name (ARN) of the IAM role with the
-    #   required permissions. The required permissions include both AWS Glue
-    #   service role permissions to AWS Glue resources, and Amazon S3
-    #   permissions required by the transform.
+    #   required permissions. The required permissions include both Glue
+    #   service role permissions to Glue resources, and Amazon S3 permissions
+    #   required by the transform.
     #
-    #   * This role needs AWS Glue service role permissions to allow access to
-    #     resources in AWS Glue. See [Attach a Policy to IAM Users That Access
-    #     AWS Glue][1].
+    #   * This role needs Glue service role permissions to allow access to
+    #     resources in Glue. See [Attach a Policy to IAM Users That Access
+    #     Glue][1].
     #
     #   * This role needs permission to your Amazon Simple Storage Service
     #     (Amazon S3) sources, targets, temporary directory, scripts, and any
@@ -2089,10 +2165,10 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html
     #
     # @option params [String] :glue_version
-    #   This value determines which version of AWS Glue this machine learning
+    #   This value determines which version of Glue this machine learning
     #   transform is compatible with. Glue 1.0 is recommended for most
     #   customers. If the value is not set, the Glue compatibility defaults to
-    #   Glue 0.9. For more information, see [AWS Glue Versions][1] in the
+    #   Glue 0.9. For more information, see [Glue Versions][1] in the
     #   developer guide.
     #
     #
@@ -2100,11 +2176,11 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #
     # @option params [Float] :max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that are allocated
-    #   to task runs for this transform. You can allocate from 2 to 100 DPUs;
-    #   the default is 10. A DPU is a relative measure of processing power
-    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
-    #   more information, see the [AWS Glue pricing page][1].
+    #   The number of Glue data processing units (DPUs) that are allocated to
+    #   task runs for this transform. You can allocate from 2 to 100 DPUs; the
+    #   default is 10. A DPU is a relative measure of processing power that
+    #   consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+    #   information, see the [Glue pricing page][1].
     #
     #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
     #   and `WorkerType`.
@@ -2177,12 +2253,17 @@ module Aws::Glue
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this machine learning transform. You may use tags
     #   to limit access to the machine learning transform. For more
-    #   information about tags in AWS Glue, see [AWS Tags in AWS Glue][1] in
-    #   the developer guide.
+    #   information about tags in Glue, see [Amazon Web Services Tags in
+    #   Glue][1] in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #
+    # @option params [Types::TransformEncryption] :transform_encryption
+    #   The encryption-at-rest settings of the transform that apply to
+    #   accessing user data. Machine learning transforms can access user data
+    #   encrypted in Amazon S3 using KMS.
     #
     # @return [Types::CreateMLTransformResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2220,6 +2301,13 @@ module Aws::Glue
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     transform_encryption: {
+    #       ml_user_data_encryption: {
+    #         ml_user_data_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         kms_key_id: "NameString",
+    #       },
+    #       task_run_security_configuration_name: "NameString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2238,8 +2326,8 @@ module Aws::Glue
     # Creates a new partition.
     #
     # @option params [String] :catalog_id
-    #   The AWS account ID of the catalog in which the partition is to be
-    #   created.
+    #   The Amazon Web Services account ID of the catalog in which the
+    #   partition is to be created.
     #
     # @option params [required, String] :database_name
     #   The name of the metadata database in which the partition is to be
@@ -2304,6 +2392,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
@@ -2318,6 +2415,245 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_partition(params = {}, options = {})
       req = build_request(:create_partition, params)
+      req.send_request(options)
+    end
+
+    # Creates a specified partition index in an existing table.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog ID where the table resides.
+    #
+    # @option params [required, String] :database_name
+    #   Specifies the name of a database in which you want to create a
+    #   partition index.
+    #
+    # @option params [required, String] :table_name
+    #   Specifies the name of a table in which you want to create a partition
+    #   index.
+    #
+    # @option params [required, Types::PartitionIndex] :partition_index
+    #   Specifies a `PartitionIndex` structure to create a partition index in
+    #   an existing table.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_partition_index({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     partition_index: { # required
+    #       keys: ["NameString"], # required
+    #       index_name: "NameString", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartitionIndex AWS API Documentation
+    #
+    # @overload create_partition_index(params = {})
+    # @param [Hash] params ({})
+    def create_partition_index(params = {}, options = {})
+      req = build_request(:create_partition_index, params)
+      req.send_request(options)
+    end
+
+    # Creates a new registry which may be used to hold a collection of
+    # schemas.
+    #
+    # @option params [required, String] :registry_name
+    #   Name of the registry to be created of max length of 255, and may only
+    #   contain letters, numbers, hyphen, underscore, dollar sign, or hash
+    #   mark. No whitespace.
+    #
+    # @option params [String] :description
+    #   A description of the registry. If description is not provided, there
+    #   will not be any default value for this.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Amazon Web Services tags that contain a key value pair and may be
+    #   searched by console, command line, or API.
+    #
+    # @return [Types::CreateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::CreateRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::CreateRegistryResponse#description #description} => String
+    #   * {Types::CreateRegistryResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registry({
+    #     registry_name: "SchemaRegistryNameString", # required
+    #     description: "DescriptionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_arn #=> String
+    #   resp.registry_name #=> String
+    #   resp.description #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateRegistry AWS API Documentation
+    #
+    # @overload create_registry(params = {})
+    # @param [Hash] params ({})
+    def create_registry(params = {}, options = {})
+      req = build_request(:create_registry, params)
+      req.send_request(options)
+    end
+
+    # Creates a new schema set and registers the schema definition. Returns
+    # an error if the schema set already exists without actually registering
+    # the version.
+    #
+    # When the schema set is created, a version checkpoint will be set to
+    # the first version. Compatibility mode "DISABLED" restricts any
+    # additional schema versions from being added after the first schema
+    # version. For all other compatibility modes, validation of
+    # compatibility settings will be applied only from the second version
+    # onwards when the `RegisterSchemaVersion` API is used.
+    #
+    # When this API is called without a `RegistryId`, this will create an
+    # entry for a "default-registry" in the registry database tables, if
+    # it is not already present.
+    #
+    # @option params [Types::RegistryId] :registry_id
+    #   This is a wrapper shape to contain the registry identity fields. If
+    #   this is not provided, the default registry will be used. The ARN
+    #   format for the same will be: `arn:aws:glue:us-east-2:<customer
+    #   id>:registry/default-registry:random-5-letter-id`.
+    #
+    # @option params [required, String] :schema_name
+    #   Name of the schema to be created of max length of 255, and may only
+    #   contain letters, numbers, hyphen, underscore, dollar sign, or hash
+    #   mark. No whitespace.
+    #
+    # @option params [required, String] :data_format
+    #   The data format of the schema definition. Currently `AVRO` and `JSON`
+    #   are supported.
+    #
+    # @option params [String] :compatibility
+    #   The compatibility mode of the schema. The possible values are:
+    #
+    #   * *NONE*\: No compatibility mode applies. You can use this choice in
+    #     development scenarios or if you do not know the compatibility mode
+    #     that you want to apply to schemas. Any new version added will be
+    #     accepted without undergoing a compatibility check.
+    #
+    #   * *DISABLED*\: This compatibility choice prevents versioning for a
+    #     particular schema. You can use this choice to prevent future
+    #     versioning of a schema.
+    #
+    #   * *BACKWARD*\: This compatibility choice is recommended as it allows
+    #     data receivers to read both the current and one previous schema
+    #     version. This means that for instance, a new schema version cannot
+    #     drop data fields or change the type of these fields, so they can't
+    #     be read by readers using the previous version.
+    #
+    #   * *BACKWARD\_ALL*\: This compatibility choice allows data receivers to
+    #     read both the current and all previous schema versions. You can use
+    #     this choice when you need to delete fields or add optional fields,
+    #     and check compatibility against all previous schema versions.
+    #
+    #   * *FORWARD*\: This compatibility choice allows data receivers to read
+    #     both the current and one next schema version, but not necessarily
+    #     later versions. You can use this choice when you need to add fields
+    #     or delete optional fields, but only check compatibility against the
+    #     last schema version.
+    #
+    #   * *FORWARD\_ALL*\: This compatibility choice allows data receivers to
+    #     read written by producers of any new registered schema. You can use
+    #     this choice when you need to add fields or delete optional fields,
+    #     and check compatibility against all previous schema versions.
+    #
+    #   * *FULL*\: This compatibility choice allows data receivers to read
+    #     data written by producers using the previous or next version of the
+    #     schema, but not necessarily earlier or later versions. You can use
+    #     this choice when you need to add or remove optional fields, but only
+    #     check compatibility against the last schema version.
+    #
+    #   * *FULL\_ALL*\: This compatibility choice allows data receivers to
+    #     read data written by producers using all previous schema versions.
+    #     You can use this choice when you need to add or remove optional
+    #     fields, and check compatibility against all previous schema
+    #     versions.
+    #
+    # @option params [String] :description
+    #   An optional description of the schema. If description is not provided,
+    #   there will not be any automatic default value for this.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Amazon Web Services tags that contain a key value pair and may be
+    #   searched by console, command line, or API. If specified, follows the
+    #   Amazon Web Services tags-on-create pattern.
+    #
+    # @option params [String] :schema_definition
+    #   The schema definition using the `DataFormat` setting for `SchemaName`.
+    #
+    # @return [Types::CreateSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSchemaResponse#registry_name #registry_name} => String
+    #   * {Types::CreateSchemaResponse#registry_arn #registry_arn} => String
+    #   * {Types::CreateSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::CreateSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::CreateSchemaResponse#description #description} => String
+    #   * {Types::CreateSchemaResponse#data_format #data_format} => String
+    #   * {Types::CreateSchemaResponse#compatibility #compatibility} => String
+    #   * {Types::CreateSchemaResponse#schema_checkpoint #schema_checkpoint} => Integer
+    #   * {Types::CreateSchemaResponse#latest_schema_version #latest_schema_version} => Integer
+    #   * {Types::CreateSchemaResponse#next_schema_version #next_schema_version} => Integer
+    #   * {Types::CreateSchemaResponse#schema_status #schema_status} => String
+    #   * {Types::CreateSchemaResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateSchemaResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::CreateSchemaResponse#schema_version_status #schema_version_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_schema({
+    #     registry_id: {
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #     schema_name: "SchemaRegistryNameString", # required
+    #     data_format: "AVRO", # required, accepts AVRO, JSON
+    #     compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
+    #     description: "DescriptionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     schema_definition: "SchemaDefinitionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.schema_arn #=> String
+    #   resp.description #=> String
+    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
+    #   resp.schema_checkpoint #=> Integer
+    #   resp.latest_schema_version #=> Integer
+    #   resp.next_schema_version #=> Integer
+    #   resp.schema_status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.schema_version_id #=> String
+    #   resp.schema_version_status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSchema AWS API Documentation
+    #
+    # @overload create_schema(params = {})
+    # @param [Hash] params ({})
+    def create_schema(params = {}, options = {})
+      req = build_request(:create_schema, params)
       req.send_request(options)
     end
 
@@ -2379,10 +2715,10 @@ module Aws::Glue
     end
 
     # Creates a new security configuration. A security configuration is a
-    # set of security properties that can be used by AWS Glue. You can use a
+    # set of security properties that can be used by Glue. You can use a
     # security configuration to encrypt data at rest. For information about
-    # using security configurations in AWS Glue, see [Encrypting Data
-    # Written by Crawlers, Jobs, and Development Endpoints][1].
+    # using security configurations in Glue, see [Encrypting Data Written by
+    # Crawlers, Jobs, and Development Endpoints][1].
     #
     #
     #
@@ -2439,7 +2775,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the `Table`. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   supplied, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The catalog database in which to create the new table. For Hive
@@ -2508,6 +2844,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       partition_keys: [
     #         {
@@ -2587,8 +2932,8 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this trigger. You may use tags to limit access to
-    #   the trigger. For more information about tags in AWS Glue, see [AWS
-    #   Tags in AWS Glue][1] in the developer guide.
+    #   the trigger. For more information about tags in Glue, see [Amazon Web
+    #   Services Tags in Glue][1] in the developer guide.
     #
     #
     #
@@ -2655,7 +3000,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the function. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which to create the function.
@@ -2772,9 +3117,13 @@ module Aws::Glue
 
     # Delete the partition column statistics of a column.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `DeletePartition`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -2811,9 +3160,13 @@ module Aws::Glue
 
     # Retrieves table statistics of columns.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `DeleteTable`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -2848,7 +3201,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :connection_name
     #   The name of the connection to delete.
@@ -2871,7 +3224,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Removes a specified crawler from the AWS Glue Data Catalog, unless the
+    # Removes a specified crawler from the Glue Data Catalog, unless the
     # crawler state is `RUNNING`.
     #
     # @option params [required, String] :name
@@ -2898,8 +3251,8 @@ module Aws::Glue
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
     # tables (and all table versions and partitions that might belong to the
-    # tables) and the user-defined functions in the deleted database. AWS
-    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # tables) and the user-defined functions in the deleted database. Glue
+    # deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
     #  To ensure the immediate deletion of all related resources, before
@@ -2913,7 +3266,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the database to delete. For Hive compatibility, this must
@@ -2988,12 +3341,12 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes an AWS Glue machine learning transform. Machine learning
+    # Deletes an Glue machine learning transform. Machine learning
     # transforms are a special type of transform that use machine learning
     # to learn the details of the transformation to be performed by learning
     # from examples provided by humans. These transformations are then saved
-    # by AWS Glue. If you no longer need a transform, you can delete it by
-    # calling `DeleteMLTransforms`. However, any AWS Glue jobs that still
+    # by Glue. If you no longer need a transform, you can delete it by
+    # calling `DeleteMLTransforms`. However, any Glue jobs that still
     # reference the deleted transform will no longer succeed.
     #
     # @option params [required, String] :transform_id
@@ -3026,7 +3379,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be deleted resides.
-    #   If none is provided, the AWS account ID is used by default.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
@@ -3058,14 +3412,90 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a specified partition index from an existing table.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog ID where the table resides.
+    #
+    # @option params [required, String] :database_name
+    #   Specifies the name of a database from which you want to delete a
+    #   partition index.
+    #
+    # @option params [required, String] :table_name
+    #   Specifies the name of a table from which you want to delete a
+    #   partition index.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the partition index to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_partition_index({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     index_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartitionIndex AWS API Documentation
+    #
+    # @overload delete_partition_index(params = {})
+    # @param [Hash] params ({})
+    def delete_partition_index(params = {}, options = {})
+      req = build_request(:delete_partition_index, params)
+      req.send_request(options)
+    end
+
+    # Delete the entire registry including schema and all of its versions.
+    # To get the status of the delete operation, you can call the
+    # `GetRegistry` API after the asynchronous call. Deleting a registry
+    # will deactivate all online operations for the registry such as the
+    # `UpdateRegistry`, `CreateSchema`, `UpdateSchema`, and
+    # `RegisterSchemaVersion` APIs.
+    #
+    # @option params [required, Types::RegistryId] :registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @return [Types::DeleteRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::DeleteRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::DeleteRegistryResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_registry({
+    #     registry_id: { # required
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteRegistry AWS API Documentation
+    #
+    # @overload delete_registry(params = {})
+    # @param [Hash] params ({})
+    def delete_registry(params = {}, options = {})
+      req = build_request(:delete_registry, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified policy.
     #
     # @option params [String] :policy_hash_condition
     #   The hash value returned when this policy was set.
     #
     # @option params [String] :resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be
-    #   deleted.
+    #   The ARN of the Glue resource for the resource policy to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3082,6 +3512,109 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_resource_policy(params = {}, options = {})
       req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes the entire schema set, including the schema set and all of its
+    # versions. To get the status of the delete operation, you can call
+    # `GetSchema` API after the asynchronous call. Deleting a registry will
+    # deactivate all online operations for the schema, such as the
+    # `GetSchemaByDefinition`, and `RegisterSchemaVersion` APIs.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure that may contain the schema name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @return [Types::DeleteSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::DeleteSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::DeleteSchemaResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_schema({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchema AWS API Documentation
+    #
+    # @overload delete_schema(params = {})
+    # @param [Hash] params ({})
+    def delete_schema(params = {}, options = {})
+      req = build_request(:delete_schema, params)
+      req.send_request(options)
+    end
+
+    # Remove versions from the specified schema. A version number or range
+    # may be supplied. If the compatibility mode forbids deleting of a
+    # version that is necessary, such as BACKWARDS\_FULL, an error is
+    # returned. Calling the `GetSchemaVersions` API after this call will
+    # list the status of the deleted versions.
+    #
+    # When the range of version numbers contain check pointed version, the
+    # API will return a 409 conflict and will not proceed with the deletion.
+    # You have to remove the checkpoint first using the
+    # `DeleteSchemaCheckpoint` API before using this API.
+    #
+    # You cannot use the `DeleteSchemaVersions` API to delete the first
+    # schema version in the schema set. The first schema version can only be
+    # deleted by the `DeleteSchema` API. This operation will also delete the
+    # attached `SchemaVersionMetadata` under the schema versions. Hard
+    # deletes will be enforced on the database.
+    #
+    # If the compatibility mode forbids deleting of a version that is
+    # necessary, such as BACKWARDS\_FULL, an error is returned.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure that may contain the schema name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :versions
+    #   A version range may be supplied which may be of the format:
+    #
+    #   * a single version number, 5
+    #
+    #   * a range, 5-8 : deletes versions 5, 6, 7, 8
+    #
+    # @return [Types::DeleteSchemaVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSchemaVersionsResponse#schema_version_errors #schema_version_errors} => Array&lt;Types::SchemaVersionErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_schema_versions({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     versions: "VersionsString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_errors #=> Array
+    #   resp.schema_version_errors[0].version_number #=> Integer
+    #   resp.schema_version_errors[0].error_details.error_code #=> String
+    #   resp.schema_version_errors[0].error_details.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchemaVersions AWS API Documentation
+    #
+    # @overload delete_schema_versions(params = {})
+    # @param [Hash] params ({})
+    def delete_schema_versions(params = {}, options = {})
+      req = build_request(:delete_schema_versions, params)
       req.send_request(options)
     end
 
@@ -3110,8 +3643,8 @@ module Aws::Glue
     # Removes a table definition from the Data Catalog.
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
-    # table versions and partitions that belong to the deleted table. AWS
-    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # table versions and partitions that belong to the deleted table. Glue
+    # deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
     #  To ensure the immediate deletion of all related resources, before
@@ -3124,7 +3657,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table resides. For Hive
@@ -3157,7 +3690,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -3224,7 +3757,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be deleted is
-    #   located. If none is supplied, the AWS account ID is used by default.
+    #   located. If none is supplied, the Amazon Web Services account ID is
+    #   used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function is located.
@@ -3282,8 +3816,8 @@ module Aws::Glue
     # Retrieves the status of a migration operation.
     #
     # @option params [String] :catalog_id
-    #   The ID of the catalog to migrate. Currently, this should be the AWS
-    #   account ID.
+    #   The ID of the catalog to migrate. Currently, this should be the Amazon
+    #   Web Services account ID.
     #
     # @return [Types::GetCatalogImportStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3433,9 +3967,13 @@ module Aws::Glue
 
     # Retrieves partition statistics of columns.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `GetPartition`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -3515,9 +4053,13 @@ module Aws::Glue
 
     # Retrieves table statistics of columns.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `GetTable`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -3595,7 +4137,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the connection definition to retrieve.
@@ -3604,8 +4146,8 @@ module Aws::Glue
     #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the AWS KMS
-    #   key to decrypt the password, but it does have permission to access the
+    #   parameter when the caller might not have permission to use the KMS key
+    #   to decrypt the password, but it does have permission to access the
     #   rest of the connection properties.
     #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3624,7 +4166,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -3650,7 +4192,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [Types::GetConnectionsFilter] :filter
     #   A filter that controls which connections are returned.
@@ -3659,8 +4201,8 @@ module Aws::Glue
     #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the AWS KMS
-    #   key to decrypt the password, but it does have permission to access the
+    #   parameter when the caller might not have permission to use the KMS key
+    #   to decrypt the password, but it does have permission to access the
     #   rest of the connection properties.
     #
     # @option params [String] :next_token
@@ -3682,7 +4224,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -3694,7 +4236,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -3741,6 +4283,7 @@ module Aws::Glue
     #   resp.crawler.targets.s3_targets[0].exclusions #=> Array
     #   resp.crawler.targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawler.targets.s3_targets[0].connection_name #=> String
+    #   resp.crawler.targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawler.targets.jdbc_targets #=> Array
     #   resp.crawler.targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
@@ -3765,6 +4308,7 @@ module Aws::Glue
     #   resp.crawler.recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawler.schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawler.schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
+    #   resp.crawler.lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
     #   resp.crawler.state #=> String, one of "READY", "RUNNING", "STOPPING"
     #   resp.crawler.table_prefix #=> String
     #   resp.crawler.schedule.schedule_expression #=> String
@@ -3871,6 +4415,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -3895,6 +4440,7 @@ module Aws::Glue
     #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
+    #   resp.crawlers[0].lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
     #   resp.crawlers[0].state #=> String, one of "READY", "RUNNING", "STOPPING"
     #   resp.crawlers[0].table_prefix #=> String
     #   resp.crawlers[0].schedule.schedule_expression #=> String
@@ -3926,7 +4472,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog to retrieve the security configuration for.
-    #   If none is provided, the AWS account ID is used by default.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @return [Types::GetDataCatalogEncryptionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3958,7 +4505,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the database to retrieve. For Hive compatibility, this
@@ -4004,7 +4551,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog from which to retrieve `Databases`. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -4108,9 +4655,9 @@ module Aws::Glue
     # Retrieves information about a specified development endpoint.
     #
     # <note markdown="1"> When you create a development endpoint in a virtual private cloud
-    # (VPC), AWS Glue returns only a private IP address, and the public IP
+    # (VPC), Glue returns only a private IP address, and the public IP
     # address field is not populated. When you create a non-VPC development
-    # endpoint, AWS Glue returns only a public IP address.
+    # endpoint, Glue returns only a public IP address.
     #
     #  </note>
     #
@@ -4170,9 +4717,9 @@ module Aws::Glue
     # Retrieves all the development endpoints in this AWS account.
     #
     # <note markdown="1"> When you create a development endpoint in a virtual private cloud
-    # (VPC), AWS Glue returns only a private IP address and the public IP
+    # (VPC), Glue returns only a private IP address and the public IP
     # address field is not populated. When you create a non-VPC development
-    # endpoint, AWS Glue returns only a public IP address.
+    # endpoint, Glue returns only a public IP address.
     #
     #  </note>
     #
@@ -4515,8 +5062,8 @@ module Aws::Glue
     end
 
     # Gets details for a specific task run on a machine learning transform.
-    # Machine learning task runs are asynchronous tasks that AWS Glue runs
-    # on your behalf as part of various machine learning workflows. You can
+    # Machine learning task runs are asynchronous tasks that Glue runs on
+    # your behalf as part of various machine learning workflows. You can
     # check the stats of any task run by calling `GetMLTaskRun` with the
     # `TaskRunID` and its parent transform's `TransformID`.
     #
@@ -4576,8 +5123,8 @@ module Aws::Glue
     end
 
     # Gets a list of runs for a machine learning transform. Machine learning
-    # task runs are asynchronous tasks that AWS Glue runs on your behalf as
-    # part of various machine learning workflows. You can get a sortable,
+    # task runs are asynchronous tasks that Glue runs on your behalf as part
+    # of various machine learning workflows. You can get a sortable,
     # filterable list of machine learning task runs by calling
     # `GetMLTaskRuns` with their parent transform's `TransformID` and other
     # optional parameters as documented in this section.
@@ -4657,12 +5204,12 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Gets an AWS Glue machine learning transform artifact and all its
+    # Gets an Glue machine learning transform artifact and all its
     # corresponding metadata. Machine learning transforms are a special type
     # of transform that use machine learning to learn the details of the
     # transformation to be performed by learning from examples provided by
-    # humans. These transformations are then saved by AWS Glue. You can
-    # retrieve their metadata by calling `GetMLTransform`.
+    # humans. These transformations are then saved by Glue. You can retrieve
+    # their metadata by calling `GetMLTransform`.
     #
     # @option params [required, String] :transform_id
     #   The unique identifier of the transform, generated at the time that the
@@ -4688,6 +5235,7 @@ module Aws::Glue
     #   * {Types::GetMLTransformResponse#number_of_workers #number_of_workers} => Integer
     #   * {Types::GetMLTransformResponse#timeout #timeout} => Integer
     #   * {Types::GetMLTransformResponse#max_retries #max_retries} => Integer
+    #   * {Types::GetMLTransformResponse#transform_encryption #transform_encryption} => Types::TransformEncryption
     #
     # @example Request syntax with placeholder values
     #
@@ -4722,6 +5270,9 @@ module Aws::Glue
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances #=> Array
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances[0].column_name #=> String
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances[0].importance #=> Float
     #   resp.label_count #=> Integer
     #   resp.schema #=> Array
     #   resp.schema[0].name #=> String
@@ -4733,6 +5284,9 @@ module Aws::Glue
     #   resp.number_of_workers #=> Integer
     #   resp.timeout #=> Integer
     #   resp.max_retries #=> Integer
+    #   resp.transform_encryption.ml_user_data_encryption.ml_user_data_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.transform_encryption.ml_user_data_encryption.kms_key_id #=> String
+    #   resp.transform_encryption.task_run_security_configuration_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransform AWS API Documentation
     #
@@ -4743,11 +5297,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Gets a sortable, filterable list of existing AWS Glue machine learning
+    # Gets a sortable, filterable list of existing Glue machine learning
     # transforms. Machine learning transforms are a special type of
     # transform that use machine learning to learn the details of the
     # transformation to be performed by learning from examples provided by
-    # humans. These transformations are then saved by AWS Glue, and you can
+    # humans. These transformations are then saved by Glue, and you can
     # retrieve their metadata by calling `GetMLTransforms`.
     #
     # @option params [String] :next_token
@@ -4824,6 +5378,9 @@ module Aws::Glue
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances #=> Array
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances[0].column_name #=> String
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances[0].importance #=> Float
     #   resp.transforms[0].label_count #=> Integer
     #   resp.transforms[0].schema #=> Array
     #   resp.transforms[0].schema[0].name #=> String
@@ -4835,6 +5392,9 @@ module Aws::Glue
     #   resp.transforms[0].number_of_workers #=> Integer
     #   resp.transforms[0].timeout #=> Integer
     #   resp.transforms[0].max_retries #=> Integer
+    #   resp.transforms[0].transform_encryption.ml_user_data_encryption.ml_user_data_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.transforms[0].transform_encryption.ml_user_data_encryption.kms_key_id #=> String
+    #   resp.transforms[0].transform_encryption.task_run_security_configuration_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransforms AWS API Documentation
@@ -4922,7 +5482,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition in question resides. If
-    #   none is provided, the AWS account ID is used by default.
+    #   none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partition resides.
@@ -4935,7 +5496,7 @@ module Aws::Glue
     #
     # @return [Types::GetPartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetPartitionResponse#partition #partition} => Types::Partition
+    #   * {Types::GetPartitionResponse#partition #data.partition} => Types::Partition (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -4948,45 +5509,50 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.partition.values #=> Array
-    #   resp.partition.values[0] #=> String
-    #   resp.partition.database_name #=> String
-    #   resp.partition.table_name #=> String
-    #   resp.partition.creation_time #=> Time
-    #   resp.partition.last_access_time #=> Time
-    #   resp.partition.storage_descriptor.columns #=> Array
-    #   resp.partition.storage_descriptor.columns[0].name #=> String
-    #   resp.partition.storage_descriptor.columns[0].type #=> String
-    #   resp.partition.storage_descriptor.columns[0].comment #=> String
-    #   resp.partition.storage_descriptor.columns[0].parameters #=> Hash
-    #   resp.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
-    #   resp.partition.storage_descriptor.location #=> String
-    #   resp.partition.storage_descriptor.input_format #=> String
-    #   resp.partition.storage_descriptor.output_format #=> String
-    #   resp.partition.storage_descriptor.compressed #=> Boolean
-    #   resp.partition.storage_descriptor.number_of_buckets #=> Integer
-    #   resp.partition.storage_descriptor.serde_info.name #=> String
-    #   resp.partition.storage_descriptor.serde_info.serialization_library #=> String
-    #   resp.partition.storage_descriptor.serde_info.parameters #=> Hash
-    #   resp.partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
-    #   resp.partition.storage_descriptor.bucket_columns #=> Array
-    #   resp.partition.storage_descriptor.bucket_columns[0] #=> String
-    #   resp.partition.storage_descriptor.sort_columns #=> Array
-    #   resp.partition.storage_descriptor.sort_columns[0].column #=> String
-    #   resp.partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
-    #   resp.partition.storage_descriptor.parameters #=> Hash
-    #   resp.partition.storage_descriptor.parameters["KeyString"] #=> String
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
-    #   resp.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
-    #   resp.partition.parameters #=> Hash
-    #   resp.partition.parameters["KeyString"] #=> String
-    #   resp.partition.last_analyzed_time #=> Time
-    #   resp.partition.catalog_id #=> String
+    #   resp.data.partition.values #=> Array
+    #   resp.data.partition.values[0] #=> String
+    #   resp.data.partition.database_name #=> String
+    #   resp.data.partition.table_name #=> String
+    #   resp.data.partition.creation_time #=> Time
+    #   resp.data.partition.last_access_time #=> Time
+    #   resp.data.partition.storage_descriptor.columns #=> Array
+    #   resp.data.partition.storage_descriptor.columns[0].name #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].type #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].comment #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.location #=> String
+    #   resp.data.partition.storage_descriptor.input_format #=> String
+    #   resp.data.partition.storage_descriptor.output_format #=> String
+    #   resp.data.partition.storage_descriptor.compressed #=> Boolean
+    #   resp.data.partition.storage_descriptor.number_of_buckets #=> Integer
+    #   resp.data.partition.storage_descriptor.serde_info.name #=> String
+    #   resp.data.partition.storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.data.partition.storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.bucket_columns #=> Array
+    #   resp.data.partition.storage_descriptor.bucket_columns[0] #=> String
+    #   resp.data.partition.storage_descriptor.sort_columns #=> Array
+    #   resp.data.partition.storage_descriptor.sort_columns[0].column #=> String
+    #   resp.data.partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.data.partition.storage_descriptor.parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.data.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
+    #   resp.data.partition.parameters #=> Hash
+    #   resp.data.partition.parameters["KeyString"] #=> String
+    #   resp.data.partition.last_analyzed_time #=> Time
+    #   resp.data.partition.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartition AWS API Documentation
     #
@@ -5036,7 +5602,12 @@ module Aws::Glue
     #   resp.partition_index_descriptor_list[0].keys #=> Array
     #   resp.partition_index_descriptor_list[0].keys[0].name #=> String
     #   resp.partition_index_descriptor_list[0].keys[0].type #=> String
-    #   resp.partition_index_descriptor_list[0].index_status #=> String, one of "ACTIVE"
+    #   resp.partition_index_descriptor_list[0].index_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.partition_index_descriptor_list[0].backfill_errors #=> Array
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].code #=> String, one of "ENCRYPTED_PARTITION_ERROR", "INTERNAL_ERROR", "INVALID_PARTITION_TYPE_DATA_ERROR", "MISSING_PARTITION_VALUE_ERROR", "UNSUPPORTED_PARTITION_CHARACTER_ERROR"
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].partitions #=> Array
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].partitions[0].values #=> Array
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].partitions[0].values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionIndexes AWS API Documentation
@@ -5052,7 +5623,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is provided, the AWS account ID is used by default.
+    #   none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -5141,7 +5713,7 @@ module Aws::Glue
     #
     #   * `decimal`
     #
-    #   If an invalid type is encountered, an exception is thrown.
+    #   If an type is encountered that is not valid, an exception is thrown.
     #
     #   The following list shows the valid operators on each type. When you
     #   define a crawler, the `partitionKey` type is created as a `STRING`, to
@@ -5163,6 +5735,8 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of partitions to return in a single response.
     #
+    # @option params [Boolean] :exclude_column_schema
+    #
     # @return [Types::GetPartitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPartitionsResponse#partitions #partitions} => Array&lt;Types::Partition&gt;
@@ -5183,6 +5757,7 @@ module Aws::Glue
     #       total_segments: 1, # required
     #     },
     #     max_results: 1,
+    #     exclude_column_schema: false,
     #   })
     #
     # @example Response structure
@@ -5223,6 +5798,11 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.partitions[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.partitions[0].parameters #=> Hash
     #   resp.partitions[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].last_analyzed_time #=> Time
@@ -5261,9 +5841,8 @@ module Aws::Glue
     #   Currently, these key-value pairs are supported:
     #
     #   * `inferSchema`  —  Specifies whether to set `inferSchema` to true or
-    #     false for the default script generated by an AWS Glue job. For
-    #     example, to set `inferSchema` to true, pass the following key value
-    #     pair:
+    #     false for the default script generated by an Glue job. For example,
+    #     to set `inferSchema` to true, pass the following key value pair:
     #
     #     `--additional-plan-options-map '\{"inferSchema":"true"\}'`
     #
@@ -5338,13 +5917,55 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the security configurations for the resource policies set on
-    # individual resources, and also the account-level policy.
+    # Describes the specified registry in detail.
     #
-    # This operation also returns the Data Catalog resource policy. However,
-    # if you enabled metadata encryption in Data Catalog settings, and you
-    # do not have permission on the AWS KMS key, the operation can't return
-    # the Data Catalog resource policy.
+    # @option params [required, Types::RegistryId] :registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::GetRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::GetRegistryResponse#description #description} => String
+    #   * {Types::GetRegistryResponse#status #status} => String
+    #   * {Types::GetRegistryResponse#created_time #created_time} => String
+    #   * {Types::GetRegistryResponse#updated_time #updated_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_registry({
+    #     registry_id: { # required
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.created_time #=> String
+    #   resp.updated_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetRegistry AWS API Documentation
+    #
+    # @overload get_registry(params = {})
+    # @param [Hash] params ({})
+    def get_registry(params = {}, options = {})
+      req = build_request(:get_registry, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the resource policies set on individual resources by
+    # Resource Access Manager during cross-account permission grants. Also
+    # retrieves the Data Catalog resource policy.
+    #
+    # If you enabled metadata encryption in Data Catalog settings, and you
+    # do not have permission on the KMS key, the operation can't return the
+    # Data Catalog resource policy.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
@@ -5356,6 +5977,8 @@ module Aws::Glue
     #
     #   * {Types::GetResourcePoliciesResponse#get_resource_policies_response_list #get_resource_policies_response_list} => Array&lt;Types::GluePolicy&gt;
     #   * {Types::GetResourcePoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5385,13 +6008,14 @@ module Aws::Glue
     # Retrieves a specified resource policy.
     #
     # @option params [String] :resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be
-    #   retrieved. For more information about AWS Glue resource ARNs, see the
-    #   [AWS Glue ARN string pattern][1]
+    #   The ARN of the Glue resource for which to retrieve the resource
+    #   policy. If not supplied, the Data Catalog resource policy is returned.
+    #   Use `GetResourcePolicies` to view all existing resource policies. For
+    #   more information see [Specifying Glue Resource ARNs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5419,6 +6043,254 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified schema in detail.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @return [Types::GetSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaResponse#registry_name #registry_name} => String
+    #   * {Types::GetSchemaResponse#registry_arn #registry_arn} => String
+    #   * {Types::GetSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::GetSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::GetSchemaResponse#description #description} => String
+    #   * {Types::GetSchemaResponse#data_format #data_format} => String
+    #   * {Types::GetSchemaResponse#compatibility #compatibility} => String
+    #   * {Types::GetSchemaResponse#schema_checkpoint #schema_checkpoint} => Integer
+    #   * {Types::GetSchemaResponse#latest_schema_version #latest_schema_version} => Integer
+    #   * {Types::GetSchemaResponse#next_schema_version #next_schema_version} => Integer
+    #   * {Types::GetSchemaResponse#schema_status #schema_status} => String
+    #   * {Types::GetSchemaResponse#created_time #created_time} => String
+    #   * {Types::GetSchemaResponse#updated_time #updated_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.schema_arn #=> String
+    #   resp.description #=> String
+    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
+    #   resp.schema_checkpoint #=> Integer
+    #   resp.latest_schema_version #=> Integer
+    #   resp.next_schema_version #=> Integer
+    #   resp.schema_status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #   resp.created_time #=> String
+    #   resp.updated_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchema AWS API Documentation
+    #
+    # @overload get_schema(params = {})
+    # @param [Hash] params ({})
+    def get_schema(params = {}, options = {})
+      req = build_request(:get_schema, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a schema by the `SchemaDefinition`. The schema definition is
+    # sent to the Schema Registry, canonicalized, and hashed. If the hash is
+    # matched within the scope of the `SchemaName` or ARN (or the default
+    # registry, if none is supplied), that schema’s metadata is returned.
+    # Otherwise, a 404 or NotFound error is returned. Schema versions in
+    # `Deleted` statuses will not be included in the results.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #
+    # @option params [required, String] :schema_definition
+    #   The definition of the schema for which schema details are required.
+    #
+    # @return [Types::GetSchemaByDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaByDefinitionResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::GetSchemaByDefinitionResponse#schema_arn #schema_arn} => String
+    #   * {Types::GetSchemaByDefinitionResponse#data_format #data_format} => String
+    #   * {Types::GetSchemaByDefinitionResponse#status #status} => String
+    #   * {Types::GetSchemaByDefinitionResponse#created_time #created_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema_by_definition({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_definition: "SchemaDefinitionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_id #=> String
+    #   resp.schema_arn #=> String
+    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #   resp.created_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaByDefinition AWS API Documentation
+    #
+    # @overload get_schema_by_definition(params = {})
+    # @param [Hash] params ({})
+    def get_schema_by_definition(params = {}, options = {})
+      req = build_request(:get_schema_by_definition, params)
+      req.send_request(options)
+    end
+
+    # Get the specified schema by its unique ID assigned when a version of
+    # the schema is created or registered. Schema versions in Deleted status
+    # will not be included in the results.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @option params [String] :schema_version_id
+    #   The `SchemaVersionId` of the schema version. This field is required
+    #   for fetching by schema ID. Either this or the `SchemaId` wrapper has
+    #   to be provided.
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @return [Types::GetSchemaVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaVersionResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::GetSchemaVersionResponse#schema_definition #schema_definition} => String
+    #   * {Types::GetSchemaVersionResponse#data_format #data_format} => String
+    #   * {Types::GetSchemaVersionResponse#schema_arn #schema_arn} => String
+    #   * {Types::GetSchemaVersionResponse#version_number #version_number} => Integer
+    #   * {Types::GetSchemaVersionResponse#status #status} => String
+    #   * {Types::GetSchemaVersionResponse#created_time #created_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema_version({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_id #=> String
+    #   resp.schema_definition #=> String
+    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.schema_arn #=> String
+    #   resp.version_number #=> Integer
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #   resp.created_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersion AWS API Documentation
+    #
+    # @overload get_schema_version(params = {})
+    # @param [Hash] params ({})
+    def get_schema_version(params = {}, options = {})
+      req = build_request(:get_schema_version, params)
+      req.send_request(options)
+    end
+
+    # Fetches the schema version difference in the specified difference type
+    # between two stored schema versions in the Schema Registry.
+    #
+    # This API allows you to compare two schema versions between two schema
+    # definitions under the same schema.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #
+    # @option params [required, Types::SchemaVersionNumber] :first_schema_version_number
+    #   The first of the two schema versions to be compared.
+    #
+    # @option params [required, Types::SchemaVersionNumber] :second_schema_version_number
+    #   The second of the two schema versions to be compared.
+    #
+    # @option params [required, String] :schema_diff_type
+    #   Refers to `SYNTAX_DIFF`, which is the currently supported diff type.
+    #
+    # @return [Types::GetSchemaVersionsDiffResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaVersionsDiffResponse#diff #diff} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema_versions_diff({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     first_schema_version_number: { # required
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     second_schema_version_number: { # required
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_diff_type: "SYNTAX_DIFF", # required, accepts SYNTAX_DIFF
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.diff #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersionsDiff AWS API Documentation
+    #
+    # @overload get_schema_versions_diff(params = {})
+    # @param [Hash] params ({})
+    def get_schema_versions_diff(params = {}, options = {})
+      req = build_request(:get_schema_versions_diff, params)
       req.send_request(options)
     end
 
@@ -5508,7 +6380,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the database in the catalog in which the table resides.
@@ -5570,6 +6442,11 @@ module Aws::Glue
     #   resp.table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table.partition_keys #=> Array
     #   resp.table.partition_keys[0].name #=> String
     #   resp.table.partition_keys[0].type #=> String
@@ -5601,7 +6478,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -5668,6 +6545,11 @@ module Aws::Glue
     #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_version.table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_version.table.partition_keys #=> Array
     #   resp.table_version.table.partition_keys[0].name #=> String
     #   resp.table_version.table.partition_keys[0].type #=> String
@@ -5701,7 +6583,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -5775,6 +6657,11 @@ module Aws::Glue
     #   resp.table_versions[0].table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_versions[0].table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_versions[0].table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_versions[0].table.partition_keys #=> Array
     #   resp.table_versions[0].table.partition_keys[0].name #=> String
     #   resp.table_versions[0].table.partition_keys[0].type #=> String
@@ -5809,7 +6696,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog whose tables to list. For Hive
@@ -5883,6 +6770,11 @@ module Aws::Glue
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_list[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_list[0].partition_keys #=> Array
     #   resp.table_list[0].partition_keys[0].name #=> String
     #   resp.table_list[0].partition_keys[0].type #=> String
@@ -6058,7 +6950,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be retrieved is
-    #   located. If none is provided, the AWS account ID is used by default.
+    #   located. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function is located.
@@ -6104,7 +6997,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the functions to be retrieved are
-    #   located. If none is provided, the AWS account ID is used by default.
+    #   located. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #
     # @option params [String] :database_name
     #   The name of the catalog database where the functions are located. If
@@ -6606,11 +7500,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Imports an existing Amazon Athena Data Catalog to AWS Glue
+    # Imports an existing Amazon Athena Data Catalog to Glue.
     #
     # @option params [String] :catalog_id
-    #   The ID of the catalog to import. Currently, this should be the AWS
-    #   account ID.
+    #   The ID of the catalog to import. Currently, this should be the Amazon
+    #   Web Services account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6629,9 +7523,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all crawler resources in this AWS account, or
-    # the resources with the specified tag. This operation allows you to see
-    # which resources are available in your account, and their names.
+    # Retrieves the names of all crawler resources in this Amazon Web
+    # Services account, or the resources with the specified tag. This
+    # operation allows you to see which resources are available in your
+    # account, and their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -6679,10 +7574,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all `DevEndpoint` resources in this AWS
-    # account, or the resources with the specified tag. This operation
-    # allows you to see which resources are available in your account, and
-    # their names.
+    # Retrieves the names of all `DevEndpoint` resources in this Amazon Web
+    # Services account, or the resources with the specified tag. This
+    # operation allows you to see which resources are available in your
+    # account, and their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -6730,9 +7625,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all job resources in this AWS account, or the
-    # resources with the specified tag. This operation allows you to see
-    # which resources are available in your account, and their names.
+    # Retrieves the names of all job resources in this Amazon Web Services
+    # account, or the resources with the specified tag. This operation
+    # allows you to see which resources are available in your account, and
+    # their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -6780,12 +7676,12 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves a sortable, filterable list of existing AWS Glue machine
-    # learning transforms in this AWS account, or the resources with the
-    # specified tag. This operation takes the optional `Tags` field, which
-    # you can use as a filter of the responses so that tagged resources can
-    # be retrieved as a group. If you choose to use tag filtering, only
-    # resources with the tags are retrieved.
+    # Retrieves a sortable, filterable list of existing Glue machine
+    # learning transforms in this Amazon Web Services account, or the
+    # resources with the specified tag. This operation takes the optional
+    # `Tags` field, which you can use as a filter of the responses so that
+    # tagged resources can be retrieved as a group. If you choose to use tag
+    # filtering, only resources with the tags are retrieved.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
@@ -6856,9 +7752,174 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all trigger resources in this AWS account, or
-    # the resources with the specified tag. This operation allows you to see
-    # which resources are available in your account, and their names.
+    # Returns a list of registries that you have created, with minimal
+    # registry information. Registries in the `Deleting` status will not be
+    # included in the results. Empty results will be returned if there are
+    # no registries available.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListRegistriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegistriesResponse#registries #registries} => Array&lt;Types::RegistryListItem&gt;
+    #   * {Types::ListRegistriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_registries({
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registries #=> Array
+    #   resp.registries[0].registry_name #=> String
+    #   resp.registries[0].registry_arn #=> String
+    #   resp.registries[0].description #=> String
+    #   resp.registries[0].status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.registries[0].created_time #=> String
+    #   resp.registries[0].updated_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListRegistries AWS API Documentation
+    #
+    # @overload list_registries(params = {})
+    # @param [Hash] params ({})
+    def list_registries(params = {}, options = {})
+      req = build_request(:list_registries, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of schema versions that you have created, with minimal
+    # information. Schema versions in Deleted status will not be included in
+    # the results. Empty results will be returned if there are no schema
+    # versions available.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListSchemaVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSchemaVersionsResponse#schemas #schemas} => Array&lt;Types::SchemaVersionListItem&gt;
+    #   * {Types::ListSchemaVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_schema_versions({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schemas #=> Array
+    #   resp.schemas[0].schema_arn #=> String
+    #   resp.schemas[0].schema_version_id #=> String
+    #   resp.schemas[0].version_number #=> Integer
+    #   resp.schemas[0].status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #   resp.schemas[0].created_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemaVersions AWS API Documentation
+    #
+    # @overload list_schema_versions(params = {})
+    # @param [Hash] params ({})
+    def list_schema_versions(params = {}, options = {})
+      req = build_request(:list_schema_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of schemas with minimal details. Schemas in Deleting
+    # status will not be included in the results. Empty results will be
+    # returned if there are no schemas available.
+    #
+    # When the `RegistryId` is not provided, all the schemas across
+    # registries will be part of the API response.
+    #
+    # @option params [Types::RegistryId] :registry_id
+    #   A wrapper structure that may contain the registry name and Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListSchemasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSchemasResponse#schemas #schemas} => Array&lt;Types::SchemaListItem&gt;
+    #   * {Types::ListSchemasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_schemas({
+    #     registry_id: {
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schemas #=> Array
+    #   resp.schemas[0].registry_name #=> String
+    #   resp.schemas[0].schema_name #=> String
+    #   resp.schemas[0].schema_arn #=> String
+    #   resp.schemas[0].description #=> String
+    #   resp.schemas[0].schema_status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #   resp.schemas[0].created_time #=> String
+    #   resp.schemas[0].updated_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemas AWS API Documentation
+    #
+    # @overload list_schemas(params = {})
+    # @param [Hash] params ({})
+    def list_schemas(params = {}, options = {})
+      req = build_request(:list_schemas, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the names of all trigger resources in this Amazon Web
+    # Services account, or the resources with the specified tag. This
+    # operation allows you to see which resources are available in your
+    # account, and their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -6955,7 +8016,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog to set the security configuration for. If
-    #   none is provided, the AWS account ID is used by default.
+    #   none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, Types::DataCatalogEncryptionSettings] :data_catalog_encryption_settings
     #   The security configuration to set.
@@ -6993,13 +8055,7 @@ module Aws::Glue
     #   Contains the policy document to set, in JSON format.
     #
     # @option params [String] :resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be set.
-    #   For more information about AWS Glue resource ARNs, see the [AWS Glue
-    #   ARN string pattern][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   Do not use. For internal use only.
     #
     # @option params [String] :policy_hash_condition
     #   The hash value returned when the previous policy was set using
@@ -7010,19 +8066,21 @@ module Aws::Glue
     # @option params [String] :policy_exists_condition
     #   A value of `MUST_EXIST` is used to update a policy. A value of
     #   `NOT_EXIST` is used to create a new policy. If a value of `NONE` or a
-    #   null value is used, the call will not depend on the existence of a
+    #   null value is used, the call does not depend on the existence of a
     #   policy.
     #
     # @option params [String] :enable_hybrid
-    #   Allows you to specify if you want to use both resource-level and
-    #   account/catalog-level resource policies. A resource-level policy is a
-    #   policy attached to an individual resource such as a database or a
-    #   table.
+    #   If `'TRUE'`, indicates that you are using both methods to grant
+    #   cross-account access to Data Catalog resources:
     #
-    #   The default value of `NO` indicates that resource-level policies
-    #   cannot co-exist with an account-level policy. A value of `YES` means
-    #   the use of both resource-level and account/catalog-level resource
-    #   policies is allowed.
+    #   * By directly updating the resource policy with `PutResourePolicy`
+    #
+    #   * By using the **Grant permissions** command on the Management
+    #     Console.
+    #
+    #   Must be set to `'TRUE'` if you have already used the Management
+    #   Console to grant cross-account access, otherwise the call fails.
+    #   Default is 'FALSE'.
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7048,6 +8106,72 @@ module Aws::Glue
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Puts the metadata key value pair for a specified schema version ID. A
+    # maximum of 10 key value pairs will be allowed per schema version. They
+    # can be added over one or more calls.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   The unique ID for the schema.
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @option params [String] :schema_version_id
+    #   The unique version ID of the schema version.
+    #
+    # @option params [required, Types::MetadataKeyValuePair] :metadata_key_value
+    #   The metadata key's corresponding value.
+    #
+    # @return [Types::PutSchemaVersionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutSchemaVersionMetadataResponse#schema_arn #schema_arn} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#schema_name #schema_name} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#registry_name #registry_name} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#latest_version #latest_version} => Boolean
+    #   * {Types::PutSchemaVersionMetadataResponse#version_number #version_number} => Integer
+    #   * {Types::PutSchemaVersionMetadataResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#metadata_key #metadata_key} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#metadata_value #metadata_value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_schema_version_metadata({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     metadata_key_value: { # required
+    #       metadata_key: "MetadataKeyString",
+    #       metadata_value: "MetadataValueString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.registry_name #=> String
+    #   resp.latest_version #=> Boolean
+    #   resp.version_number #=> Integer
+    #   resp.schema_version_id #=> String
+    #   resp.metadata_key #=> String
+    #   resp.metadata_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutSchemaVersionMetadata AWS API Documentation
+    #
+    # @overload put_schema_version_metadata(params = {})
+    # @param [Hash] params ({})
+    def put_schema_version_metadata(params = {}, options = {})
+      req = build_request(:put_schema_version_metadata, params)
       req.send_request(options)
     end
 
@@ -7083,6 +8207,208 @@ module Aws::Glue
     # @param [Hash] params ({})
     def put_workflow_run_properties(params = {}, options = {})
       req = build_request(:put_workflow_run_properties, params)
+      req.send_request(options)
+    end
+
+    # Queries for the schema version metadata information.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   A wrapper structure that may contain the schema name and Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @option params [String] :schema_version_id
+    #   The unique version ID of the schema version.
+    #
+    # @option params [Array<Types::MetadataKeyValuePair>] :metadata_list
+    #   Search key-value pairs for metadata, if they are not provided all the
+    #   metadata information will be fetched.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::QuerySchemaVersionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::QuerySchemaVersionMetadataResponse#metadata_info_map #metadata_info_map} => Hash&lt;String,Types::MetadataInfo&gt;
+    #   * {Types::QuerySchemaVersionMetadataResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::QuerySchemaVersionMetadataResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.query_schema_version_metadata({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     metadata_list: [
+    #       {
+    #         metadata_key: "MetadataKeyString",
+    #         metadata_value: "MetadataValueString",
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metadata_info_map #=> Hash
+    #   resp.metadata_info_map["MetadataKeyString"].metadata_value #=> String
+    #   resp.metadata_info_map["MetadataKeyString"].created_time #=> String
+    #   resp.metadata_info_map["MetadataKeyString"].other_metadata_value_list #=> Array
+    #   resp.metadata_info_map["MetadataKeyString"].other_metadata_value_list[0].metadata_value #=> String
+    #   resp.metadata_info_map["MetadataKeyString"].other_metadata_value_list[0].created_time #=> String
+    #   resp.schema_version_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/QuerySchemaVersionMetadata AWS API Documentation
+    #
+    # @overload query_schema_version_metadata(params = {})
+    # @param [Hash] params ({})
+    def query_schema_version_metadata(params = {}, options = {})
+      req = build_request(:query_schema_version_metadata, params)
+      req.send_request(options)
+    end
+
+    # Adds a new version to the existing schema. Returns an error if new
+    # version of schema does not meet the compatibility requirements of the
+    # schema set. This API will not create a new schema set and will return
+    # a 404 error if the schema set is not already present in the Schema
+    # Registry.
+    #
+    # If this is the first schema definition to be registered in the Schema
+    # Registry, this API will store the schema version and return
+    # immediately. Otherwise, this call has the potential to run longer than
+    # other operations due to compatibility modes. You can call the
+    # `GetSchemaVersion` API with the `SchemaVersionId` to check
+    # compatibility modes.
+    #
+    # If the same schema definition is already stored in Schema Registry as
+    # a version, the schema ID of the existing schema is returned to the
+    # caller.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @option params [required, String] :schema_definition
+    #   The schema definition using the `DataFormat` setting for the
+    #   `SchemaName`.
+    #
+    # @return [Types::RegisterSchemaVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterSchemaVersionResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::RegisterSchemaVersionResponse#version_number #version_number} => Integer
+    #   * {Types::RegisterSchemaVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_schema_version({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_definition: "SchemaDefinitionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegisterSchemaVersion AWS API Documentation
+    #
+    # @overload register_schema_version(params = {})
+    # @param [Hash] params ({})
+    def register_schema_version(params = {}, options = {})
+      req = build_request(:register_schema_version, params)
+      req.send_request(options)
+    end
+
+    # Removes a key value pair from the schema version metadata for the
+    # specified schema version ID.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   A wrapper structure that may contain the schema name and Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @option params [String] :schema_version_id
+    #   The unique version ID of the schema version.
+    #
+    # @option params [required, Types::MetadataKeyValuePair] :metadata_key_value
+    #   The value of the metadata key.
+    #
+    # @return [Types::RemoveSchemaVersionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveSchemaVersionMetadataResponse#schema_arn #schema_arn} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#schema_name #schema_name} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#registry_name #registry_name} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#latest_version #latest_version} => Boolean
+    #   * {Types::RemoveSchemaVersionMetadataResponse#version_number #version_number} => Integer
+    #   * {Types::RemoveSchemaVersionMetadataResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#metadata_key #metadata_key} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#metadata_value #metadata_value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_schema_version_metadata({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     metadata_key_value: { # required
+    #       metadata_key: "MetadataKeyString",
+    #       metadata_value: "MetadataValueString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.registry_name #=> String
+    #   resp.latest_version #=> Boolean
+    #   resp.version_number #=> Integer
+    #   resp.schema_version_id #=> String
+    #   resp.metadata_key #=> String
+    #   resp.metadata_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RemoveSchemaVersionMetadata AWS API Documentation
+    #
+    # @overload remove_schema_version_metadata(params = {})
+    # @param [Hash] params ({})
+    def remove_schema_version_metadata(params = {}, options = {})
+      req = build_request(:remove_schema_version_metadata, params)
       req.send_request(options)
     end
 
@@ -7294,6 +8620,11 @@ module Aws::Glue
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_list[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_list[0].partition_keys #=> Array
     #   resp.table_list[0].partition_keys[0].name #=> String
     #   resp.table_list[0].partition_keys[0].type #=> String
@@ -7421,10 +8752,10 @@ module Aws::Glue
     # call and that ultimately results in improving the quality of your
     # machine learning transform.
     #
-    # After the `StartMLLabelingSetGenerationTaskRun` finishes, AWS Glue
-    # machine learning will have generated a series of questions for humans
-    # to answer. (Answering these questions is often called 'labeling' in
-    # the machine learning workflows). In the case of the `FindMatches`
+    # After the `StartMLLabelingSetGenerationTaskRun` finishes, Glue machine
+    # learning will have generated a series of questions for humans to
+    # answer. (Answering these questions is often called 'labeling' in the
+    # machine learning workflows). In the case of the `FindMatches`
     # transform, these questions are of the form, “What is the correct way
     # to group these rows together into groups composed entirely of matching
     # records?” After the labeling process is finished, users upload their
@@ -7493,15 +8824,15 @@ module Aws::Glue
     #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set up
+    #   your job, see the [Special Parameters Used by Glue][2] topic in the
+    #   developer guide.
     #
     #
     #
@@ -7511,15 +8842,15 @@ module Aws::Glue
     # @option params [Integer] :allocated_capacity
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A
-    #   DPU is a relative measure of processing power that consists of 4 vCPUs
-    #   of compute capacity and 16 GB of memory. For more information, see the
-    #   [AWS Glue pricing page][1].
+    #   The number of Glue data processing units (DPUs) to allocate to this
+    #   JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU
+    #   is a relative measure of processing power that consists of 4 vCPUs of
+    #   compute capacity and 16 GB of memory. For more information, see the
+    #   [Glue pricing page][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [Integer] :timeout
     #   The `JobRun` timeout in minutes. This is the maximum time that a job
@@ -7528,11 +8859,10 @@ module Aws::Glue
     #   timeout value set in the parent job.
     #
     # @option params [Float] :max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
-    #   allocated when this job runs. A DPU is a relative measure of
-    #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   The number of Glue data processing units (DPUs) that can be allocated
+    #   when this job runs. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
+    #   more information, see the [Glue pricing page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
     #
@@ -7550,7 +8880,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [String] :security_configuration
     #   The name of the `SecurityConfiguration` structure to be used with this
@@ -7617,7 +8947,7 @@ module Aws::Glue
 
     # Starts a task to estimate the quality of the transform.
     #
-    # When you provide label sets as examples of truth, AWS Glue machine
+    # When you provide label sets as examples of truth, Glue machine
     # learning uses some of those examples to learn from them. The rest of
     # the labels are used as a test to estimate quality.
     #
@@ -7654,7 +8984,7 @@ module Aws::Glue
     # transform to improve the transform's quality by generating label sets
     # and adding labels.
     #
-    # When the `StartMLLabelingSetGenerationTaskRun` finishes, AWS Glue will
+    # When the `StartMLLabelingSetGenerationTaskRun` finishes, Glue will
     # have generated a "labeling set" or a set of questions for humans to
     # answer.
     #
@@ -7859,18 +9189,18 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Adds tags to a resource. A tag is a label you can assign to an AWS
-    # resource. In AWS Glue, you can tag only certain resources. For
-    # information about what resources you can tag, see [AWS Tags in AWS
-    # Glue][1].
+    # Adds tags to a resource. A tag is a label you can assign to an Amazon
+    # Web Services resource. In Glue, you can tag only certain resources.
+    # For information about what resources you can tag, see [Amazon Web
+    # Services Tags in Glue][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the AWS Glue resource to which to add the tags. For more
-    #   information about AWS Glue resource ARNs, see the [AWS Glue ARN string
+    #   The ARN of the Glue resource to which to add the tags. For more
+    #   information about Glue resource ARNs, see the [Glue ARN string
     #   pattern][1].
     #
     #
@@ -7985,9 +9315,13 @@ module Aws::Glue
 
     # Creates or updates partition statistics of columns.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `UpdatePartition`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -8119,9 +9453,13 @@ module Aws::Glue
 
     # Creates or updates table statistics of columns.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `UpdateTable`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -8251,7 +9589,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the connection definition to update.
@@ -8269,7 +9607,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -8302,7 +9640,7 @@ module Aws::Glue
     #   by the new crawler to access customer resources.
     #
     # @option params [String] :database_name
-    #   The AWS Glue database where results are stored, such as:
+    #   The Glue database where results are stored, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #
     # @option params [String] :description
@@ -8336,6 +9674,9 @@ module Aws::Glue
     #   A policy that specifies whether to crawl the entire dataset again, or
     #   to crawl only folders that were added since the last crawler run.
     #
+    # @option params [Types::LineageConfiguration] :lineage_configuration
+    #   Specifies data lineage configuration settings for the crawler.
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -8364,6 +9705,7 @@ module Aws::Glue
     #           path: "Path",
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
+    #           sample_size: 1,
     #         },
     #       ],
     #       jdbc_targets: [
@@ -8403,6 +9745,9 @@ module Aws::Glue
     #     },
     #     recrawl_policy: {
     #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #     },
+    #     lineage_configuration: {
+    #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -8454,7 +9799,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the metadata database resides. If
-    #   none is provided, the AWS account ID is used by default.
+    #   none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :name
     #   The name of the database to update in the catalog. For Hive
@@ -8535,9 +9881,7 @@ module Aws::Glue
     #
     #   * `"--enable-glue-datacatalog": ""`
     #
-    #   * `"GLUE_PYTHON_VERSION": "3"`
-    #
-    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #   ^
     #
     #   You can specify a version of Python support for development endpoints
     #   by using the `Arguments` parameter in the `CreateDevEndpoint` or
@@ -8663,10 +10007,10 @@ module Aws::Glue
     #   required permissions.
     #
     # @option params [String] :glue_version
-    #   This value determines which version of AWS Glue this machine learning
+    #   This value determines which version of Glue this machine learning
     #   transform is compatible with. Glue 1.0 is recommended for most
     #   customers. If the value is not set, the Glue compatibility defaults to
-    #   Glue 0.9. For more information, see [AWS Glue Versions][1] in the
+    #   Glue 0.9. For more information, see [Glue Versions][1] in the
     #   developer guide.
     #
     #
@@ -8674,11 +10018,11 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #
     # @option params [Float] :max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that are allocated
-    #   to task runs for this transform. You can allocate from 2 to 100 DPUs;
-    #   the default is 10. A DPU is a relative measure of processing power
-    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
-    #   more information, see the [AWS Glue pricing page][1].
+    #   The number of Glue data processing units (DPUs) that are allocated to
+    #   task runs for this transform. You can allocate from 2 to 100 DPUs; the
+    #   default is 10. A DPU is a relative measure of processing power that
+    #   consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+    #   information, see the [Glue pricing page][1].
     #
     #   When the `WorkerType` field is set to a value other than `Standard`,
     #   the `MaxCapacity` field is set automatically and becomes read-only.
@@ -8759,7 +10103,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be updated resides.
-    #   If none is provided, the AWS account ID is used by default.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
@@ -8831,6 +10176,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
@@ -8848,11 +10202,124 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates an existing registry which is used to hold a collection of
+    # schemas. The updated properties relate to the registry, and do not
+    # modify any of the schemas within the registry.
+    #
+    # @option params [required, Types::RegistryId] :registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :description
+    #   A description of the registry. If description is not provided, this
+    #   field will not be updated.
+    #
+    # @return [Types::UpdateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::UpdateRegistryResponse#registry_arn #registry_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_registry({
+    #     registry_id: { # required
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #     description: "DescriptionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateRegistry AWS API Documentation
+    #
+    # @overload update_registry(params = {})
+    # @param [Hash] params ({})
+    def update_registry(params = {}, options = {})
+      req = build_request(:update_registry, params)
+      req.send_request(options)
+    end
+
+    # Updates the description, compatibility setting, or version checkpoint
+    # for a schema set.
+    #
+    # For updating the compatibility setting, the call will not validate
+    # compatibility for the entire set of schema versions with the new
+    # compatibility setting. If the value for `Compatibility` is provided,
+    # the `VersionNumber` (a checkpoint) is also required. The API will
+    # validate the checkpoint version number for consistency.
+    #
+    # If the value for the `VersionNumber` (checkpoint) is provided,
+    # `Compatibility` is optional and this can be used to set/reset a
+    # checkpoint for the schema.
+    #
+    # This update will happen only if the schema is in the AVAILABLE state.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   Version number required for check pointing. One of `VersionNumber` or
+    #   `Compatibility` has to be provided.
+    #
+    # @option params [String] :compatibility
+    #   The new compatibility setting for the schema.
+    #
+    # @option params [String] :description
+    #   The new description for the schema.
+    #
+    # @return [Types::UpdateSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::UpdateSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::UpdateSchemaResponse#registry_name #registry_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_schema({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
+    #     description: "DescriptionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.registry_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateSchema AWS API Documentation
+    #
+    # @overload update_schema(params = {})
+    # @param [Hash] params ({})
+    def update_schema(params = {}, options = {})
+      req = build_request(:update_schema, params)
+      req.send_request(options)
+    end
+
     # Updates a metadata table in the Data Catalog.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table resides. For Hive
@@ -8922,6 +10389,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       partition_keys: [
     #         {
@@ -9044,7 +10520,8 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be updated is
-    #   located. If none is provided, the AWS account ID is used by default.
+    #   located. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function to be updated is
@@ -9148,7 +10625,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-05-24)
+------------------
+
+* Feature - This release provides dimensions and unit support for metric filters.
+
+1.40.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2020-09-30)
 ------------------
 

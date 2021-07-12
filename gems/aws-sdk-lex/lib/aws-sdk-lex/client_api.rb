@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -14,6 +14,14 @@ module Aws::Lex
     include Seahorse::Model
 
     Accept = Shapes::StringShape.new(name: 'Accept')
+    ActiveContext = Shapes::StructureShape.new(name: 'ActiveContext')
+    ActiveContextName = Shapes::StringShape.new(name: 'ActiveContextName')
+    ActiveContextParametersMap = Shapes::MapShape.new(name: 'ActiveContextParametersMap')
+    ActiveContextTimeToLive = Shapes::StructureShape.new(name: 'ActiveContextTimeToLive')
+    ActiveContextTimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'ActiveContextTimeToLiveInSeconds')
+    ActiveContextTurnsToLive = Shapes::IntegerShape.new(name: 'ActiveContextTurnsToLive')
+    ActiveContextsList = Shapes::ListShape.new(name: 'ActiveContextsList')
+    ActiveContextsString = Shapes::StringShape.new(name: 'ActiveContextsString')
     AttributesString = Shapes::StringShape.new(name: 'AttributesString')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -52,6 +60,7 @@ module Aws::Lex
     MessageFormatType = Shapes::StringShape.new(name: 'MessageFormatType')
     NotAcceptableException = Shapes::StructureShape.new(name: 'NotAcceptableException')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     PostContentRequest = Shapes::StructureShape.new(name: 'PostContentRequest')
     PostContentResponse = Shapes::StructureShape.new(name: 'PostContentResponse')
     PostTextRequest = Shapes::StructureShape.new(name: 'PostTextRequest')
@@ -61,6 +70,8 @@ module Aws::Lex
     PutSessionResponse = Shapes::StructureShape.new(name: 'PutSessionResponse')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
     ResponseCard = Shapes::StructureShape.new(name: 'ResponseCard')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
+    SensitiveStringUnbounded = Shapes::StringShape.new(name: 'SensitiveStringUnbounded')
     SentimentLabel = Shapes::StringShape.new(name: 'SentimentLabel')
     SentimentResponse = Shapes::StructureShape.new(name: 'SentimentResponse')
     SentimentScore = Shapes::StringShape.new(name: 'SentimentScore')
@@ -73,6 +84,20 @@ module Aws::Lex
     UserId = Shapes::StringShape.new(name: 'UserId')
     genericAttachmentList = Shapes::ListShape.new(name: 'genericAttachmentList')
     listOfButtons = Shapes::ListShape.new(name: 'listOfButtons')
+
+    ActiveContext.add_member(:name, Shapes::ShapeRef.new(shape: ActiveContextName, required: true, location_name: "name"))
+    ActiveContext.add_member(:time_to_live, Shapes::ShapeRef.new(shape: ActiveContextTimeToLive, required: true, location_name: "timeToLive"))
+    ActiveContext.add_member(:parameters, Shapes::ShapeRef.new(shape: ActiveContextParametersMap, required: true, location_name: "parameters"))
+    ActiveContext.struct_class = Types::ActiveContext
+
+    ActiveContextParametersMap.key = Shapes::ShapeRef.new(shape: ParameterName)
+    ActiveContextParametersMap.value = Shapes::ShapeRef.new(shape: Text)
+
+    ActiveContextTimeToLive.add_member(:time_to_live_in_seconds, Shapes::ShapeRef.new(shape: ActiveContextTimeToLiveInSeconds, location_name: "timeToLiveInSeconds"))
+    ActiveContextTimeToLive.add_member(:turns_to_live, Shapes::ShapeRef.new(shape: ActiveContextTurnsToLive, location_name: "turnsToLive"))
+    ActiveContextTimeToLive.struct_class = Types::ActiveContextTimeToLive
+
+    ActiveContextsList.member = Shapes::ShapeRef.new(shape: ActiveContext)
 
     BadGatewayException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BadGatewayException.struct_class = Types::BadGatewayException
@@ -127,6 +152,7 @@ module Aws::Lex
     GetSessionResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
     GetSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
     GetSessionResponse.add_member(:dialog_action, Shapes::ShapeRef.new(shape: DialogAction, location_name: "dialogAction"))
+    GetSessionResponse.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsList, location_name: "activeContexts"))
     GetSessionResponse.struct_class = Types::GetSessionResponse
 
     IntentConfidence.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
@@ -169,6 +195,7 @@ module Aws::Lex
     PostContentRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: HttpContentType, required: true, location: "header", location_name: "Content-Type"))
     PostContentRequest.add_member(:accept, Shapes::ShapeRef.new(shape: Accept, location: "header", location_name: "Accept"))
     PostContentRequest.add_member(:input_stream, Shapes::ShapeRef.new(shape: BlobStream, required: true, location_name: "inputStream"))
+    PostContentRequest.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsString, location: "header", location_name: "x-amz-lex-active-contexts", metadata: {"jsonvalue"=>true}))
     PostContentRequest.struct_class = Types::PostContentRequest
     PostContentRequest[:payload] = :input_stream
     PostContentRequest[:payload_member] = PostContentRequest.member(:input_stream)
@@ -180,14 +207,17 @@ module Aws::Lex
     PostContentResponse.add_member(:slots, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slots", metadata: {"jsonvalue"=>true}))
     PostContentResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
     PostContentResponse.add_member(:sentiment_response, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-sentiment"))
-    PostContentResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, location: "header", location_name: "x-amz-lex-message"))
+    PostContentResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, deprecated: true, location: "header", location_name: "x-amz-lex-message", metadata: {"deprecatedMessage"=>"The message field is deprecated, use the encodedMessage field instead. The message field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales."}))
+    PostContentResponse.add_member(:encoded_message, Shapes::ShapeRef.new(shape: SensitiveString, location: "header", location_name: "x-amz-lex-encoded-message"))
     PostContentResponse.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormatType, location: "header", location_name: "x-amz-lex-message-format"))
     PostContentResponse.add_member(:dialog_state, Shapes::ShapeRef.new(shape: DialogState, location: "header", location_name: "x-amz-lex-dialog-state"))
     PostContentResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slot-to-elicit"))
-    PostContentResponse.add_member(:input_transcript, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-input-transcript"))
+    PostContentResponse.add_member(:input_transcript, Shapes::ShapeRef.new(shape: String, deprecated: true, location: "header", location_name: "x-amz-lex-input-transcript", metadata: {"deprecatedMessage"=>"The inputTranscript field is deprecated, use the encodedInputTranscript field instead. The inputTranscript field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales."}))
+    PostContentResponse.add_member(:encoded_input_transcript, Shapes::ShapeRef.new(shape: SensitiveStringUnbounded, location: "header", location_name: "x-amz-lex-encoded-input-transcript"))
     PostContentResponse.add_member(:audio_stream, Shapes::ShapeRef.new(shape: BlobStream, location_name: "audioStream"))
     PostContentResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location: "header", location_name: "x-amz-lex-bot-version"))
     PostContentResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-id"))
+    PostContentResponse.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsString, location: "header", location_name: "x-amz-lex-active-contexts", metadata: {"jsonvalue"=>true}))
     PostContentResponse.struct_class = Types::PostContentResponse
     PostContentResponse[:payload] = :audio_stream
     PostContentResponse[:payload_member] = PostContentResponse.member(:audio_stream)
@@ -198,6 +228,7 @@ module Aws::Lex
     PostTextRequest.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
     PostTextRequest.add_member(:request_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "requestAttributes"))
     PostTextRequest.add_member(:input_text, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "inputText"))
+    PostTextRequest.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsList, location_name: "activeContexts"))
     PostTextRequest.struct_class = Types::PostTextRequest
 
     PostTextResponse.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location_name: "intentName"))
@@ -213,6 +244,7 @@ module Aws::Lex
     PostTextResponse.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
     PostTextResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
     PostTextResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    PostTextResponse.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsList, location_name: "activeContexts"))
     PostTextResponse.struct_class = Types::PostTextResponse
 
     PredictedIntent.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location_name: "intentName"))
@@ -227,18 +259,21 @@ module Aws::Lex
     PutSessionRequest.add_member(:dialog_action, Shapes::ShapeRef.new(shape: DialogAction, location_name: "dialogAction"))
     PutSessionRequest.add_member(:recent_intent_summary_view, Shapes::ShapeRef.new(shape: IntentSummaryList, location_name: "recentIntentSummaryView"))
     PutSessionRequest.add_member(:accept, Shapes::ShapeRef.new(shape: Accept, location: "header", location_name: "Accept"))
+    PutSessionRequest.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsList, location_name: "activeContexts"))
     PutSessionRequest.struct_class = Types::PutSessionRequest
 
     PutSessionResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: HttpContentType, location: "header", location_name: "Content-Type"))
     PutSessionResponse.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location: "header", location_name: "x-amz-lex-intent-name"))
     PutSessionResponse.add_member(:slots, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slots", metadata: {"jsonvalue"=>true}))
     PutSessionResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
-    PutSessionResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, location: "header", location_name: "x-amz-lex-message"))
+    PutSessionResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, deprecated: true, location: "header", location_name: "x-amz-lex-message", metadata: {"deprecatedMessage"=>"The message field is deprecated, use the encodedMessage field instead. The message field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales."}))
+    PutSessionResponse.add_member(:encoded_message, Shapes::ShapeRef.new(shape: SensitiveString, location: "header", location_name: "x-amz-lex-encoded-message"))
     PutSessionResponse.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormatType, location: "header", location_name: "x-amz-lex-message-format"))
     PutSessionResponse.add_member(:dialog_state, Shapes::ShapeRef.new(shape: DialogState, location: "header", location_name: "x-amz-lex-dialog-state"))
     PutSessionResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slot-to-elicit"))
     PutSessionResponse.add_member(:audio_stream, Shapes::ShapeRef.new(shape: BlobStream, location_name: "audioStream"))
     PutSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-id"))
+    PutSessionResponse.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsString, location: "header", location_name: "x-amz-lex-active-contexts", metadata: {"jsonvalue"=>true}))
     PutSessionResponse.struct_class = Types::PutSessionResponse
     PutSessionResponse[:payload] = :audio_stream
     PutSessionResponse[:payload_member] = PutSessionResponse.member(:audio_stream)

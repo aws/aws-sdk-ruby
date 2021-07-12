@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -11,11 +11,12 @@ module Aws::CloudHSMV2
   module Types
 
     # Contains information about a backup of an AWS CloudHSM cluster. All
-    # backup objects contain the BackupId, BackupState, ClusterId, and
-    # CreateTimestamp parameters. Backups that were copied into a
-    # destination region additionally contain the CopyTimestamp,
-    # SourceBackup, SourceCluster, and SourceRegion paramters. A backup that
-    # is pending deletion will include the DeleteTimestamp parameter.
+    # backup objects contain the `BackupId`, `BackupState`, `ClusterId`, and
+    # `CreateTimestamp` parameters. Backups that were copied into a
+    # destination region additionally contain the `CopyTimestamp`,
+    # `SourceBackup`, `SourceCluster`, and `SourceRegion` parameters. A
+    # backup that is pending deletion will include the `DeleteTimestamp`
+    # parameter.
     #
     # @!attribute [rw] backup_id
     #   The identifier (ID) of the backup.
@@ -36,6 +37,13 @@ module Aws::CloudHSMV2
     # @!attribute [rw] copy_timestamp
     #   The date and time when the backup was copied from a source backup.
     #   @return [Time]
+    #
+    # @!attribute [rw] never_expires
+    #   Specifies whether the service should exempt a backup from the
+    #   retention policy for the cluster. `True` exempts a backup from the
+    #   retention policy. `False` means the service applies the backup
+    #   retention policy defined at the cluster.
+    #   @return [Boolean]
     #
     # @!attribute [rw] source_region
     #   The AWS Region that contains the source backup from which the new
@@ -68,11 +76,40 @@ module Aws::CloudHSMV2
       :cluster_id,
       :create_timestamp,
       :copy_timestamp,
+      :never_expires,
       :source_region,
       :source_backup,
       :source_cluster,
       :delete_timestamp,
       :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A policy that defines the number of days to retain backups.
+    #
+    # @note When making an API call, you may pass BackupRetentionPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         type: "DAYS", # accepts DAYS
+    #         value: "BackupRetentionValue",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of backup retention policy. For the `DAYS` type, the value
+    #   is the number of days to retain backups.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Use a value between 7 - 379.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/BackupRetentionPolicy AWS API Documentation
+    #
+    class BackupRetentionPolicy < Struct.new(
+      :type,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -203,6 +240,10 @@ module Aws::CloudHSMV2
     #   The cluster's backup policy.
     #   @return [String]
     #
+    # @!attribute [rw] backup_retention_policy
+    #   A policy that defines how the service retains backups.
+    #   @return [Types::BackupRetentionPolicy]
+    #
     # @!attribute [rw] cluster_id
     #   The cluster's identifier (ID).
     #   @return [String]
@@ -264,6 +305,7 @@ module Aws::CloudHSMV2
     #
     class Cluster < Struct.new(
       :backup_policy,
+      :backup_retention_policy,
       :cluster_id,
       :create_timestamp,
       :hsms,
@@ -344,9 +386,13 @@ module Aws::CloudHSMV2
     #   data as a hash:
     #
     #       {
-    #         subnet_ids: ["SubnetId"], # required
+    #         backup_retention_policy: {
+    #           type: "DAYS", # accepts DAYS
+    #           value: "BackupRetentionValue",
+    #         },
     #         hsm_type: "HsmType", # required
     #         source_backup_id: "BackupId",
+    #         subnet_ids: ["SubnetId"], # required
     #         tag_list: [
     #           {
     #             key: "TagKey", # required
@@ -355,15 +401,9 @@ module Aws::CloudHSMV2
     #         ],
     #       }
     #
-    # @!attribute [rw] subnet_ids
-    #   The identifiers (IDs) of the subnets where you are creating the
-    #   cluster. You must specify at least one subnet. If you specify
-    #   multiple subnets, they must meet the following criteria:
-    #
-    #   * All subnets must be in the same virtual private cloud (VPC).
-    #
-    #   * You can specify only one subnet per Availability Zone.
-    #   @return [Array<String>]
+    # @!attribute [rw] backup_retention_policy
+    #   A policy that defines how the service retains backups.
+    #   @return [Types::BackupRetentionPolicy]
     #
     # @!attribute [rw] hsm_type
     #   The type of HSM to use in the cluster. Currently the only allowed
@@ -376,6 +416,16 @@ module Aws::CloudHSMV2
     #   cluster. To find the backup ID, use DescribeBackups.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_ids
+    #   The identifiers (IDs) of the subnets where you are creating the
+    #   cluster. You must specify at least one subnet. If you specify
+    #   multiple subnets, they must meet the following criteria:
+    #
+    #   * All subnets must be in the same virtual private cloud (VPC).
+    #
+    #   * You can specify only one subnet per Availability Zone.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tag_list
     #   Tags to apply to the CloudHSM cluster during creation.
     #   @return [Array<Types::Tag>]
@@ -383,9 +433,10 @@ module Aws::CloudHSMV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
-      :subnet_ids,
+      :backup_retention_policy,
       :hsm_type,
       :source_backup_id,
+      :subnet_ids,
       :tag_list)
       SENSITIVE = []
       include Aws::Structure
@@ -606,6 +657,11 @@ module Aws::CloudHSMV2
     #
     #   Use the `states` filter to return only backups that match the
     #   specified state.
+    #
+    #   Use the `neverExpires` filter to return backups filtered by the
+    #   value in the `neverExpires` parameter. `True` returns all backups
+    #   exempt from the backup retention policy. `False` returns all backups
+    #   with a backup retention policy defined at the cluster.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] sort_ascending
@@ -897,6 +953,94 @@ module Aws::CloudHSMV2
     class ListTagsResponse < Struct.new(
       :tag_list,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyBackupAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_id: "BackupId", # required
+    #         never_expires: false, # required
+    #       }
+    #
+    # @!attribute [rw] backup_id
+    #   The identifier (ID) of the backup to modify. To find the ID of a
+    #   backup, use the DescribeBackups operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] never_expires
+    #   Specifies whether the service should exempt a backup from the
+    #   retention policy for the cluster. `True` exempts a backup from the
+    #   retention policy. `False` means the service applies the backup
+    #   retention policy defined at the cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyBackupAttributesRequest AWS API Documentation
+    #
+    class ModifyBackupAttributesRequest < Struct.new(
+      :backup_id,
+      :never_expires)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup
+    #   Contains information about a backup of an AWS CloudHSM cluster. All
+    #   backup objects contain the `BackupId`, `BackupState`, `ClusterId`,
+    #   and `CreateTimestamp` parameters. Backups that were copied into a
+    #   destination region additionally contain the `CopyTimestamp`,
+    #   `SourceBackup`, `SourceCluster`, and `SourceRegion` parameters. A
+    #   backup that is pending deletion will include the `DeleteTimestamp`
+    #   parameter.
+    #   @return [Types::Backup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyBackupAttributesResponse AWS API Documentation
+    #
+    class ModifyBackupAttributesResponse < Struct.new(
+      :backup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyClusterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_retention_policy: { # required
+    #           type: "DAYS", # accepts DAYS
+    #           value: "BackupRetentionValue",
+    #         },
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] backup_retention_policy
+    #   A policy that defines how the service retains backups.
+    #   @return [Types::BackupRetentionPolicy]
+    #
+    # @!attribute [rw] cluster_id
+    #   The identifier (ID) of the cluster that you want to modify. To find
+    #   the cluster ID, use DescribeClusters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyClusterRequest AWS API Documentation
+    #
+    class ModifyClusterRequest < Struct.new(
+      :backup_retention_policy,
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Contains information about an AWS CloudHSM cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyClusterResponse AWS API Documentation
+    #
+    class ModifyClusterResponse < Struct.new(
+      :cluster)
       SENSITIVE = []
       include Aws::Structure
     end

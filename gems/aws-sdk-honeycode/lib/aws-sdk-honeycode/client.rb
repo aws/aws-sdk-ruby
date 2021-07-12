@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -327,6 +327,396 @@ module Aws::Honeycode
 
     # @!group API Operations
 
+    # The BatchCreateTableRows API allows you to create one or more rows at
+    # the end of a table in a workbook. The API allows you to specify the
+    # values to set in some or all of the columns in the new rows.
+    #
+    # If a column is not explicitly set in a specific row, then the column
+    # level formula specified in the table will be applied to the new row.
+    # If there is no column level formula but the last row of the table has
+    # a formula, then that formula will be copied down to the new row. If
+    # there is no column level formula and no formula in the last row of the
+    # table, then that column will be left blank for the new rows.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook where the new rows are being added.
+    #
+    #   If a workbook with the specified ID could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table where the new rows are being added.
+    #
+    #   If a table with the specified ID could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [required, Array<Types::CreateRowData>] :rows_to_create
+    #   The list of rows to create at the end of the table. Each item in this
+    #   list needs to have a batch item id to uniquely identify the element in
+    #   the request and the cells to create for that row. You need to specify
+    #   at least one item in this list.
+    #
+    #   Note that if one of the column ids in any of the rows in the request
+    #   does not exist in the table, then the request fails and no updates are
+    #   made to the table.
+    #
+    # @option params [String] :client_request_token
+    #   The request token for performing the batch create operation. Request
+    #   tokens help to identify duplicate requests. If a call times out or
+    #   fails due to a transient error like a failed network connection, you
+    #   can retry the call with the same request token. The service ensures
+    #   that if the first call using that request token is successfully
+    #   performed, the second call will not perform the operation again.
+    #
+    #   Note that request tokens are valid only for a few minutes. You cannot
+    #   use request tokens to dedupe requests spanning hours or days.
+    #
+    # @return [Types::BatchCreateTableRowsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateTableRowsResult#workbook_cursor #workbook_cursor} => Integer
+    #   * {Types::BatchCreateTableRowsResult#created_rows #created_rows} => Hash&lt;String,String&gt;
+    #   * {Types::BatchCreateTableRowsResult#failed_batch_items #failed_batch_items} => Array&lt;Types::FailedBatchItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_table_rows({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     rows_to_create: [ # required
+    #       {
+    #         batch_item_id: "BatchItemId", # required
+    #         cells_to_create: { # required
+    #           "ResourceId" => {
+    #             fact: "Fact",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workbook_cursor #=> Integer
+    #   resp.created_rows #=> Hash
+    #   resp.created_rows["BatchItemId"] #=> String
+    #   resp.failed_batch_items #=> Array
+    #   resp.failed_batch_items[0].id #=> String
+    #   resp.failed_batch_items[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchCreateTableRows AWS API Documentation
+    #
+    # @overload batch_create_table_rows(params = {})
+    # @param [Hash] params ({})
+    def batch_create_table_rows(params = {}, options = {})
+      req = build_request(:batch_create_table_rows, params)
+      req.send_request(options)
+    end
+
+    # The BatchDeleteTableRows API allows you to delete one or more rows
+    # from a table in a workbook. You need to specify the ids of the rows
+    # that you want to delete from the table.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook where the rows are being deleted.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table where the rows are being deleted.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [required, Array<String>] :row_ids
+    #   The list of row ids to delete from the table. You need to specify at
+    #   least one row id in this list.
+    #
+    #   Note that if one of the row ids provided in the request does not exist
+    #   in the table, then the request fails and no rows are deleted from the
+    #   table.
+    #
+    # @option params [String] :client_request_token
+    #   The request token for performing the delete action. Request tokens
+    #   help to identify duplicate requests. If a call times out or fails due
+    #   to a transient error like a failed network connection, you can retry
+    #   the call with the same request token. The service ensures that if the
+    #   first call using that request token is successfully performed, the
+    #   second call will not perform the action again.
+    #
+    #   Note that request tokens are valid only for a few minutes. You cannot
+    #   use request tokens to dedupe requests spanning hours or days.
+    #
+    # @return [Types::BatchDeleteTableRowsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteTableRowsResult#workbook_cursor #workbook_cursor} => Integer
+    #   * {Types::BatchDeleteTableRowsResult#failed_batch_items #failed_batch_items} => Array&lt;Types::FailedBatchItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_table_rows({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     row_ids: ["RowId"], # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workbook_cursor #=> Integer
+    #   resp.failed_batch_items #=> Array
+    #   resp.failed_batch_items[0].id #=> String
+    #   resp.failed_batch_items[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchDeleteTableRows AWS API Documentation
+    #
+    # @overload batch_delete_table_rows(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_table_rows(params = {}, options = {})
+      req = build_request(:batch_delete_table_rows, params)
+      req.send_request(options)
+    end
+
+    # The BatchUpdateTableRows API allows you to update one or more rows in
+    # a table in a workbook.
+    #
+    # You can specify the values to set in some or all of the columns in the
+    # table for the specified rows. If a column is not explicitly specified
+    # in a particular row, then that column will not be updated for that
+    # row. To clear out the data in a specific cell, you need to set the
+    # value as an empty string ("").
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook where the rows are being updated.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table where the rows are being updated.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [required, Array<Types::UpdateRowData>] :rows_to_update
+    #   The list of rows to update in the table. Each item in this list needs
+    #   to contain the row id to update along with the map of column id to
+    #   cell values for each column in that row that needs to be updated. You
+    #   need to specify at least one row in this list, and for each row, you
+    #   need to specify at least one column to update.
+    #
+    #   Note that if one of the row or column ids in the request does not
+    #   exist in the table, then the request fails and no updates are made to
+    #   the table.
+    #
+    # @option params [String] :client_request_token
+    #   The request token for performing the update action. Request tokens
+    #   help to identify duplicate requests. If a call times out or fails due
+    #   to a transient error like a failed network connection, you can retry
+    #   the call with the same request token. The service ensures that if the
+    #   first call using that request token is successfully performed, the
+    #   second call will not perform the action again.
+    #
+    #   Note that request tokens are valid only for a few minutes. You cannot
+    #   use request tokens to dedupe requests spanning hours or days.
+    #
+    # @return [Types::BatchUpdateTableRowsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateTableRowsResult#workbook_cursor #workbook_cursor} => Integer
+    #   * {Types::BatchUpdateTableRowsResult#failed_batch_items #failed_batch_items} => Array&lt;Types::FailedBatchItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_table_rows({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     rows_to_update: [ # required
+    #       {
+    #         row_id: "RowId", # required
+    #         cells_to_update: { # required
+    #           "ResourceId" => {
+    #             fact: "Fact",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workbook_cursor #=> Integer
+    #   resp.failed_batch_items #=> Array
+    #   resp.failed_batch_items[0].id #=> String
+    #   resp.failed_batch_items[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchUpdateTableRows AWS API Documentation
+    #
+    # @overload batch_update_table_rows(params = {})
+    # @param [Hash] params ({})
+    def batch_update_table_rows(params = {}, options = {})
+      req = build_request(:batch_update_table_rows, params)
+      req.send_request(options)
+    end
+
+    # The BatchUpsertTableRows API allows you to upsert one or more rows in
+    # a table. The upsert operation takes a filter expression as input and
+    # evaluates it to find matching rows on the destination table. If
+    # matching rows are found, it will update the cells in the matching rows
+    # to new values specified in the request. If no matching rows are found,
+    # a new row is added at the end of the table and the cells in that row
+    # are set to the new values specified in the request.
+    #
+    # You can specify the values to set in some or all of the columns in the
+    # table for the matching or newly appended rows. If a column is not
+    # explicitly specified for a particular row, then that column will not
+    # be updated for that row. To clear out the data in a specific cell, you
+    # need to set the value as an empty string ("").
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook where the rows are being upserted.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table where the rows are being upserted.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [required, Array<Types::UpsertRowData>] :rows_to_upsert
+    #   The list of rows to upsert in the table. Each item in this list needs
+    #   to have a batch item id to uniquely identify the element in the
+    #   request, a filter expression to find the rows to update for that
+    #   element and the cell values to set for each column in the upserted
+    #   rows. You need to specify at least one item in this list.
+    #
+    #   Note that if one of the filter formulas in the request fails to
+    #   evaluate because of an error or one of the column ids in any of the
+    #   rows does not exist in the table, then the request fails and no
+    #   updates are made to the table.
+    #
+    # @option params [String] :client_request_token
+    #   The request token for performing the update action. Request tokens
+    #   help to identify duplicate requests. If a call times out or fails due
+    #   to a transient error like a failed network connection, you can retry
+    #   the call with the same request token. The service ensures that if the
+    #   first call using that request token is successfully performed, the
+    #   second call will not perform the action again.
+    #
+    #   Note that request tokens are valid only for a few minutes. You cannot
+    #   use request tokens to dedupe requests spanning hours or days.
+    #
+    # @return [Types::BatchUpsertTableRowsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpsertTableRowsResult#rows #rows} => Hash&lt;String,Types::UpsertRowsResult&gt;
+    #   * {Types::BatchUpsertTableRowsResult#workbook_cursor #workbook_cursor} => Integer
+    #   * {Types::BatchUpsertTableRowsResult#failed_batch_items #failed_batch_items} => Array&lt;Types::FailedBatchItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_upsert_table_rows({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     rows_to_upsert: [ # required
+    #       {
+    #         batch_item_id: "BatchItemId", # required
+    #         filter: { # required
+    #           formula: "Formula", # required
+    #           context_row_id: "RowId",
+    #         },
+    #         cells_to_update: { # required
+    #           "ResourceId" => {
+    #             fact: "Fact",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rows #=> Hash
+    #   resp.rows["BatchItemId"].row_ids #=> Array
+    #   resp.rows["BatchItemId"].row_ids[0] #=> String
+    #   resp.rows["BatchItemId"].upsert_action #=> String, one of "UPDATED", "APPENDED"
+    #   resp.workbook_cursor #=> Integer
+    #   resp.failed_batch_items #=> Array
+    #   resp.failed_batch_items[0].id #=> String
+    #   resp.failed_batch_items[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchUpsertTableRows AWS API Documentation
+    #
+    # @overload batch_upsert_table_rows(params = {})
+    # @param [Hash] params ({})
+    def batch_upsert_table_rows(params = {}, options = {})
+      req = build_request(:batch_upsert_table_rows, params)
+      req.send_request(options)
+    end
+
+    # The DescribeTableDataImportJob API allows you to retrieve the status
+    # and details of a table data import job.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook into which data was imported.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table into which data was imported.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job that was returned by the StartTableDataImportJob
+    #   request.
+    #
+    #   If a job with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @return [Types::DescribeTableDataImportJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTableDataImportJobResult#job_status #job_status} => String
+    #   * {Types::DescribeTableDataImportJobResult#message #message} => String
+    #   * {Types::DescribeTableDataImportJobResult#job_metadata #job_metadata} => Types::TableDataImportJobMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_table_data_import_job({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.message #=> String
+    #   resp.job_metadata.submitter.email #=> String
+    #   resp.job_metadata.submitter.user_arn #=> String
+    #   resp.job_metadata.submit_time #=> Time
+    #   resp.job_metadata.import_options.destination_options.column_map #=> Hash
+    #   resp.job_metadata.import_options.destination_options.column_map["ResourceId"].column_index #=> Integer
+    #   resp.job_metadata.import_options.delimited_text_options.delimiter #=> String
+    #   resp.job_metadata.import_options.delimited_text_options.has_header_row #=> Boolean
+    #   resp.job_metadata.import_options.delimited_text_options.ignore_empty_rows #=> Boolean
+    #   resp.job_metadata.import_options.delimited_text_options.data_character_encoding #=> String, one of "UTF-8", "US-ASCII", "ISO-8859-1", "UTF-16BE", "UTF-16LE", "UTF-16"
+    #   resp.job_metadata.data_source.data_source_config.data_source_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/DescribeTableDataImportJob AWS API Documentation
+    #
+    # @overload describe_table_data_import_job(params = {})
+    # @param [Hash] params ({})
+    def describe_table_data_import_job(params = {}, options = {})
+      req = build_request(:describe_table_data_import_job, params)
+      req.send_request(options)
+    end
+
     # The GetScreenData API allows retrieval of data from a screen in a
     # Honeycode app. The API allows setting local variables in the screen to
     # filter, sort or otherwise affect what will be displayed on the screen.
@@ -426,11 +816,11 @@ module Aws::Honeycode
     #   The ID of the automation action to be performed.
     #
     # @option params [Hash<String,Types::VariableValue>] :variables
-    #   Variables are optional and are needed only if the screen requires them
-    #   to render correctly. Variables are specified as a map where the key is
-    #   the name of the variable as defined on the screen. The value is an
-    #   object which currently has only one property, rawValue, which holds
-    #   the value of the variable to be passed to the screen.
+    #   Variables are specified as a map where the key is the name of the
+    #   variable as defined on the screen. The value is an object which
+    #   currently has only one property, rawValue, which holds the value of
+    #   the variable to be passed to the screen. Any variables defined in a
+    #   screen are required to be passed in the call.
     #
     # @option params [String] :row_id
     #   The row ID for the automation if the automation is defined inside a
@@ -481,6 +871,358 @@ module Aws::Honeycode
       req.send_request(options)
     end
 
+    # The ListTableColumns API allows you to retrieve a list of all the
+    # columns in a table in a workbook.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook that contains the table whose columns are being
+    #   retrieved.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table whose columns are being retrieved.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [String] :next_token
+    #   This parameter is optional. If a nextToken is not specified, the API
+    #   returns the first page of data.
+    #
+    #   Pagination tokens expire after 1 hour. If you use a token that was
+    #   returned more than an hour back, the API will throw
+    #   ValidationException.
+    #
+    # @return [Types::ListTableColumnsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableColumnsResult#table_columns #table_columns} => Array&lt;Types::TableColumn&gt;
+    #   * {Types::ListTableColumnsResult#next_token #next_token} => String
+    #   * {Types::ListTableColumnsResult#workbook_cursor #workbook_cursor} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_columns({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_columns #=> Array
+    #   resp.table_columns[0].table_column_id #=> String
+    #   resp.table_columns[0].table_column_name #=> String
+    #   resp.table_columns[0].format #=> String, one of "AUTO", "NUMBER", "CURRENCY", "DATE", "TIME", "DATE_TIME", "PERCENTAGE", "TEXT", "ACCOUNTING", "CONTACT", "ROWLINK"
+    #   resp.next_token #=> String
+    #   resp.workbook_cursor #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTableColumns AWS API Documentation
+    #
+    # @overload list_table_columns(params = {})
+    # @param [Hash] params ({})
+    def list_table_columns(params = {}, options = {})
+      req = build_request(:list_table_columns, params)
+      req.send_request(options)
+    end
+
+    # The ListTableRows API allows you to retrieve a list of all the rows in
+    # a table in a workbook.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook that contains the table whose rows are being
+    #   retrieved.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table whose rows are being retrieved.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [Array<String>] :row_ids
+    #   This parameter is optional. If one or more row ids are specified in
+    #   this list, then only the specified row ids are returned in the result.
+    #   If no row ids are specified here, then all the rows in the table are
+    #   returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of rows to return in each page of the results.
+    #
+    # @option params [String] :next_token
+    #   This parameter is optional. If a nextToken is not specified, the API
+    #   returns the first page of data.
+    #
+    #   Pagination tokens expire after 1 hour. If you use a token that was
+    #   returned more than an hour back, the API will throw
+    #   ValidationException.
+    #
+    # @return [Types::ListTableRowsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableRowsResult#column_ids #column_ids} => Array&lt;String&gt;
+    #   * {Types::ListTableRowsResult#rows #rows} => Array&lt;Types::TableRow&gt;
+    #   * {Types::ListTableRowsResult#row_ids_not_found #row_ids_not_found} => Array&lt;String&gt;
+    #   * {Types::ListTableRowsResult#next_token #next_token} => String
+    #   * {Types::ListTableRowsResult#workbook_cursor #workbook_cursor} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_rows({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     row_ids: ["RowId"],
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_ids #=> Array
+    #   resp.column_ids[0] #=> String
+    #   resp.rows #=> Array
+    #   resp.rows[0].row_id #=> String
+    #   resp.rows[0].cells #=> Array
+    #   resp.rows[0].cells[0].formula #=> String
+    #   resp.rows[0].cells[0].format #=> String, one of "AUTO", "NUMBER", "CURRENCY", "DATE", "TIME", "DATE_TIME", "PERCENTAGE", "TEXT", "ACCOUNTING", "CONTACT", "ROWLINK"
+    #   resp.rows[0].cells[0].raw_value #=> String
+    #   resp.rows[0].cells[0].formatted_value #=> String
+    #   resp.row_ids_not_found #=> Array
+    #   resp.row_ids_not_found[0] #=> String
+    #   resp.next_token #=> String
+    #   resp.workbook_cursor #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTableRows AWS API Documentation
+    #
+    # @overload list_table_rows(params = {})
+    # @param [Hash] params ({})
+    def list_table_rows(params = {}, options = {})
+      req = build_request(:list_table_rows, params)
+      req.send_request(options)
+    end
+
+    # The ListTables API allows you to retrieve a list of all the tables in
+    # a workbook.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook whose tables are being retrieved.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of tables to return in each page of the results.
+    #
+    # @option params [String] :next_token
+    #   This parameter is optional. If a nextToken is not specified, the API
+    #   returns the first page of data.
+    #
+    #   Pagination tokens expire after 1 hour. If you use a token that was
+    #   returned more than an hour back, the API will throw
+    #   ValidationException.
+    #
+    # @return [Types::ListTablesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTablesResult#tables #tables} => Array&lt;Types::Table&gt;
+    #   * {Types::ListTablesResult#next_token #next_token} => String
+    #   * {Types::ListTablesResult#workbook_cursor #workbook_cursor} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tables({
+    #     workbook_id: "ResourceId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tables #=> Array
+    #   resp.tables[0].table_id #=> String
+    #   resp.tables[0].table_name #=> String
+    #   resp.next_token #=> String
+    #   resp.workbook_cursor #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTables AWS API Documentation
+    #
+    # @overload list_tables(params = {})
+    # @param [Hash] params ({})
+    def list_tables(params = {}, options = {})
+      req = build_request(:list_tables, params)
+      req.send_request(options)
+    end
+
+    # The QueryTableRows API allows you to use a filter formula to query for
+    # specific rows in a table.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook whose table rows are being queried.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, String] :table_id
+    #   The ID of the table whose rows are being queried.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [required, Types::Filter] :filter_formula
+    #   An object that represents a filter formula along with the id of the
+    #   context row under which the filter function needs to evaluate.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of rows to return in each page of the results.
+    #
+    # @option params [String] :next_token
+    #   This parameter is optional. If a nextToken is not specified, the API
+    #   returns the first page of data.
+    #
+    #   Pagination tokens expire after 1 hour. If you use a token that was
+    #   returned more than an hour back, the API will throw
+    #   ValidationException.
+    #
+    # @return [Types::QueryTableRowsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::QueryTableRowsResult#column_ids #column_ids} => Array&lt;String&gt;
+    #   * {Types::QueryTableRowsResult#rows #rows} => Array&lt;Types::TableRow&gt;
+    #   * {Types::QueryTableRowsResult#next_token #next_token} => String
+    #   * {Types::QueryTableRowsResult#workbook_cursor #workbook_cursor} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.query_table_rows({
+    #     workbook_id: "ResourceId", # required
+    #     table_id: "ResourceId", # required
+    #     filter_formula: { # required
+    #       formula: "Formula", # required
+    #       context_row_id: "RowId",
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_ids #=> Array
+    #   resp.column_ids[0] #=> String
+    #   resp.rows #=> Array
+    #   resp.rows[0].row_id #=> String
+    #   resp.rows[0].cells #=> Array
+    #   resp.rows[0].cells[0].formula #=> String
+    #   resp.rows[0].cells[0].format #=> String, one of "AUTO", "NUMBER", "CURRENCY", "DATE", "TIME", "DATE_TIME", "PERCENTAGE", "TEXT", "ACCOUNTING", "CONTACT", "ROWLINK"
+    #   resp.rows[0].cells[0].raw_value #=> String
+    #   resp.rows[0].cells[0].formatted_value #=> String
+    #   resp.next_token #=> String
+    #   resp.workbook_cursor #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/QueryTableRows AWS API Documentation
+    #
+    # @overload query_table_rows(params = {})
+    # @param [Hash] params ({})
+    def query_table_rows(params = {}, options = {})
+      req = build_request(:query_table_rows, params)
+      req.send_request(options)
+    end
+
+    # The StartTableDataImportJob API allows you to start an import job on a
+    # table. This API will only return the id of the job that was started.
+    # To find out the status of the import request, you need to call the
+    # DescribeTableDataImportJob API.
+    #
+    # @option params [required, String] :workbook_id
+    #   The ID of the workbook where the rows are being imported.
+    #
+    #   If a workbook with the specified id could not be found, this API
+    #   throws ResourceNotFoundException.
+    #
+    # @option params [required, Types::ImportDataSource] :data_source
+    #   The source of the data that is being imported. The size of source must
+    #   be no larger than 100 MB. Source must have no more than 100,000 cells
+    #   and no more than 1,000 rows.
+    #
+    # @option params [required, String] :data_format
+    #   The format of the data that is being imported. Currently the only
+    #   option supported is "DELIMITED\_TEXT".
+    #
+    # @option params [required, String] :destination_table_id
+    #   The ID of the table where the rows are being imported.
+    #
+    #   If a table with the specified id could not be found, this API throws
+    #   ResourceNotFoundException.
+    #
+    # @option params [required, Types::ImportOptions] :import_options
+    #   The options for customizing this import request.
+    #
+    # @option params [required, String] :client_request_token
+    #   The request token for performing the update action. Request tokens
+    #   help to identify duplicate requests. If a call times out or fails due
+    #   to a transient error like a failed network connection, you can retry
+    #   the call with the same request token. The service ensures that if the
+    #   first call using that request token is successfully performed, the
+    #   second call will not perform the action again.
+    #
+    #   Note that request tokens are valid only for a few minutes. You cannot
+    #   use request tokens to dedupe requests spanning hours or days.
+    #
+    # @return [Types::StartTableDataImportJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTableDataImportJobResult#job_id #job_id} => String
+    #   * {Types::StartTableDataImportJobResult#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_table_data_import_job({
+    #     workbook_id: "ResourceId", # required
+    #     data_source: { # required
+    #       data_source_config: { # required
+    #         data_source_url: "SecureURL",
+    #       },
+    #     },
+    #     data_format: "DELIMITED_TEXT", # required, accepts DELIMITED_TEXT
+    #     destination_table_id: "ResourceId", # required
+    #     import_options: { # required
+    #       destination_options: {
+    #         column_map: {
+    #           "ResourceId" => {
+    #             column_index: 1,
+    #           },
+    #         },
+    #       },
+    #       delimited_text_options: {
+    #         delimiter: "DelimitedTextDelimiter", # required
+    #         has_header_row: false,
+    #         ignore_empty_rows: false,
+    #         data_character_encoding: "UTF-8", # accepts UTF-8, US-ASCII, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-16
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/StartTableDataImportJob AWS API Documentation
+    #
+    # @overload start_table_data_import_job(params = {})
+    # @param [Hash] params ({})
+    def start_table_data_import_job(params = {}, options = {})
+      req = build_request(:start_table_data_import_job, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -494,7 +1236,7 @@ module Aws::Honeycode
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-honeycode'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

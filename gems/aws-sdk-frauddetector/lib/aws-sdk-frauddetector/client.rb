@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -428,6 +428,83 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Cancels the specified batch prediction job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch prediction job to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_batch_prediction_job({
+    #     job_id: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchPredictionJob AWS API Documentation
+    #
+    # @overload cancel_batch_prediction_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_batch_prediction_job(params = {}, options = {})
+      req = build_request(:cancel_batch_prediction_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a batch prediction job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch prediction job.
+    #
+    # @option params [required, String] :input_path
+    #   The Amazon S3 location of your training file.
+    #
+    # @option params [required, String] :output_path
+    #   The Amazon S3 location of your output file.
+    #
+    # @option params [required, String] :event_type_name
+    #   The name of the event type.
+    #
+    # @option params [required, String] :detector_name
+    #   The name of the detector.
+    #
+    # @option params [String] :detector_version
+    #   The detector version.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The ARN of the IAM role to use for this job request.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A collection of key and value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_batch_prediction_job({
+    #     job_id: "identifier", # required
+    #     input_path: "s3BucketLocation", # required
+    #     output_path: "s3BucketLocation", # required
+    #     event_type_name: "identifier", # required
+    #     detector_name: "identifier", # required
+    #     detector_version: "wholeNumberVersionString",
+    #     iam_role_arn: "iamRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "tagKey", # required
+    #         value: "tagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchPredictionJob AWS API Documentation
+    #
+    # @overload create_batch_prediction_job(params = {})
+    # @param [Hash] params ({})
+    def create_batch_prediction_job(params = {}, options = {})
+      req = build_request(:create_batch_prediction_job, params)
+      req.send_request(options)
+    end
+
     # Creates a detector version. The detector version starts in a `DRAFT`
     # status.
     #
@@ -755,9 +832,35 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Deletes a batch prediction job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch prediction job to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_batch_prediction_job({
+    #     job_id: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchPredictionJob AWS API Documentation
+    #
+    # @overload delete_batch_prediction_job(params = {})
+    # @param [Hash] params ({})
+    def delete_batch_prediction_job(params = {}, options = {})
+      req = build_request(:delete_batch_prediction_job, params)
+      req.send_request(options)
+    end
+
     # Deletes the detector. Before deleting a detector, you must first
     # delete all detector versions and rule versions associated with the
     # detector.
+    #
+    # When you delete a detector, Amazon Fraud Detector permanently deletes
+    # the detector and the data is no longer stored in Amazon Fraud
+    # Detector.
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector to delete.
@@ -781,6 +884,10 @@ module Aws::FraudDetector
 
     # Deletes the detector version. You cannot delete detector versions that
     # are in `ACTIVE` status.
+    #
+    # When you delete a detector version, Amazon Fraud Detector permanently
+    # deletes the detector and the data is no longer stored in Amazon Fraud
+    # Detector.
     #
     # @option params [required, String] :detector_id
     #   The ID of the parent detector for the detector version to delete.
@@ -806,7 +913,39 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Deletes an entity type.
+    #
+    # You cannot delete an entity type that is included in an event type.
+    #
+    # When you delete an entity type, Amazon Fraud Detector permanently
+    # deletes that entity type and the data is no longer stored in Amazon
+    # Fraud Detector.
+    #
+    # @option params [required, String] :name
+    #   The name of the entity type to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_entity_type({
+    #     name: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEntityType AWS API Documentation
+    #
+    # @overload delete_entity_type(params = {})
+    # @param [Hash] params ({})
+    def delete_entity_type(params = {}, options = {})
+      req = build_request(:delete_entity_type, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified event.
+    #
+    # When you delete an event, Amazon Fraud Detector permanently deletes
+    # that event and the event data is no longer stored in Amazon Fraud
+    # Detector.
     #
     # @option params [required, String] :event_id
     #   The ID of the event to delete.
@@ -819,8 +958,8 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_event({
-    #     event_id: "string", # required
-    #     event_type_name: "string", # required
+    #     event_id: "identifier", # required
+    #     event_type_name: "identifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEvent AWS API Documentation
@@ -832,8 +971,193 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Deletes an event type.
+    #
+    # You cannot delete an event type that is used in a detector or a model.
+    #
+    # When you delete an entity type, Amazon Fraud Detector permanently
+    # deletes that entity type and the data is no longer stored in Amazon
+    # Fraud Detector.
+    #
+    # @option params [required, String] :name
+    #   The name of the event type to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_type({
+    #     name: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventType AWS API Documentation
+    #
+    # @overload delete_event_type(params = {})
+    # @param [Hash] params ({})
+    def delete_event_type(params = {}, options = {})
+      req = build_request(:delete_event_type, params)
+      req.send_request(options)
+    end
+
+    # Removes a SageMaker model from Amazon Fraud Detector.
+    #
+    # You can remove an Amazon SageMaker model if it is not associated with
+    # a detector version. Removing a SageMaker model disconnects it from
+    # Amazon Fraud Detector, but the model remains available in SageMaker.
+    #
+    # @option params [required, String] :model_endpoint
+    #   The endpoint of the Amazon Sagemaker model to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_external_model({
+    #     model_endpoint: "sageMakerEndpointIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteExternalModel AWS API Documentation
+    #
+    # @overload delete_external_model(params = {})
+    # @param [Hash] params ({})
+    def delete_external_model(params = {}, options = {})
+      req = build_request(:delete_external_model, params)
+      req.send_request(options)
+    end
+
+    # Deletes a label.
+    #
+    # You cannot delete labels that are included in an event type in Amazon
+    # Fraud Detector.
+    #
+    # You cannot delete a label assigned to an event ID. You must first
+    # delete the relevant event ID.
+    #
+    # When you delete a label, Amazon Fraud Detector permanently deletes
+    # that label and the data is no longer stored in Amazon Fraud Detector.
+    #
+    # @option params [required, String] :name
+    #   The name of the label to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_label({
+    #     name: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteLabel AWS API Documentation
+    #
+    # @overload delete_label(params = {})
+    # @param [Hash] params ({})
+    def delete_label(params = {}, options = {})
+      req = build_request(:delete_label, params)
+      req.send_request(options)
+    end
+
+    # Deletes a model.
+    #
+    # You can delete models and model versions in Amazon Fraud Detector,
+    # provided that they are not associated with a detector version.
+    #
+    # When you delete a model, Amazon Fraud Detector permanently deletes
+    # that model and the data is no longer stored in Amazon Fraud Detector.
+    #
+    # @option params [required, String] :model_id
+    #   The model ID of the model to delete.
+    #
+    # @option params [required, String] :model_type
+    #   The model type of the model to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_model({
+    #     model_id: "modelIdentifier", # required
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModel AWS API Documentation
+    #
+    # @overload delete_model(params = {})
+    # @param [Hash] params ({})
+    def delete_model(params = {}, options = {})
+      req = build_request(:delete_model, params)
+      req.send_request(options)
+    end
+
+    # Deletes a model version.
+    #
+    # You can delete models and model versions in Amazon Fraud Detector,
+    # provided that they are not associated with a detector version.
+    #
+    # When you delete a model version, Amazon Fraud Detector permanently
+    # deletes that model version and the data is no longer stored in Amazon
+    # Fraud Detector.
+    #
+    # @option params [required, String] :model_id
+    #   The model ID of the model version to delete.
+    #
+    # @option params [required, String] :model_type
+    #   The model type of the model version to delete.
+    #
+    # @option params [required, String] :model_version_number
+    #   The model version number of the model version to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_model_version({
+    #     model_id: "modelIdentifier", # required
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_version_number: "floatVersionString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelVersion AWS API Documentation
+    #
+    # @overload delete_model_version(params = {})
+    # @param [Hash] params ({})
+    def delete_model_version(params = {}, options = {})
+      req = build_request(:delete_model_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes an outcome.
+    #
+    # You cannot delete an outcome that is used in a rule version.
+    #
+    # When you delete an outcome, Amazon Fraud Detector permanently deletes
+    # that outcome and the data is no longer stored in Amazon Fraud
+    # Detector.
+    #
+    # @option params [required, String] :name
+    #   The name of the outcome to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_outcome({
+    #     name: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteOutcome AWS API Documentation
+    #
+    # @overload delete_outcome(params = {})
+    # @param [Hash] params ({})
+    def delete_outcome(params = {}, options = {})
+      req = build_request(:delete_outcome, params)
+      req.send_request(options)
+    end
+
     # Deletes the rule. You cannot delete a rule if it is used by an
     # `ACTIVE` or `INACTIVE` detector version.
+    #
+    # When you delete a rule, Amazon Fraud Detector permanently deletes that
+    # rule and the data is no longer stored in Amazon Fraud Detector.
     #
     # @option params [required, Types::Rule] :rule
     #   A rule.
@@ -856,6 +1180,39 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def delete_rule(params = {}, options = {})
       req = build_request(:delete_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes a variable.
+    #
+    # You can't delete variables that are included in an event type in
+    # Amazon Fraud Detector.
+    #
+    # Amazon Fraud Detector automatically deletes model output variables and
+    # SageMaker model output variables when you delete the model. You can't
+    # delete these variables manually.
+    #
+    # When you delete a variable, Amazon Fraud Detector permanently deletes
+    # that variable and the data is no longer stored in Amazon Fraud
+    # Detector.
+    #
+    # @option params [required, String] :name
+    #   The name of the variable to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_variable({
+    #     name: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteVariable AWS API Documentation
+    #
+    # @overload delete_variable(params = {})
+    # @param [Hash] params ({})
+    def delete_variable(params = {}, options = {})
+      req = build_request(:delete_variable, params)
       req.send_request(options)
     end
 
@@ -972,6 +1329,10 @@ module Aws::FraudDetector
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].precision #=> Float
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].tpr #=> Float
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].threshold #=> Float
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics #=> Array
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_name #=> String
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_type #=> String
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_importance #=> Float
     #   resp.model_version_details[0].last_updated_time #=> String
     #   resp.model_version_details[0].created_time #=> String
     #   resp.model_version_details[0].arn #=> String
@@ -983,6 +1344,67 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def describe_model_versions(params = {}, options = {})
       req = build_request(:describe_model_versions, params)
+      req.send_request(options)
+    end
+
+    # Gets all batch prediction jobs or a specific job if you specify a job
+    # ID. This is a paginated API. If you provide a null maxResults, this
+    # action retrieves a maximum of 50 records per page. If you provide a
+    # maxResults, the value must be between 1 and 50. To get the next page
+    # results, provide the pagination token from the
+    # GetBatchPredictionJobsResponse as part of your request. A null
+    # pagination token fetches the records from the beginning.
+    #
+    # @option params [String] :job_id
+    #   The batch prediction job for which to get the details.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects to return for the request.
+    #
+    # @option params [String] :next_token
+    #   The next token from the previous request.
+    #
+    # @return [Types::GetBatchPredictionJobsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBatchPredictionJobsResult#batch_predictions #batch_predictions} => Array&lt;Types::BatchPrediction&gt;
+    #   * {Types::GetBatchPredictionJobsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_batch_prediction_jobs({
+    #     job_id: "identifier",
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_predictions #=> Array
+    #   resp.batch_predictions[0].job_id #=> String
+    #   resp.batch_predictions[0].status #=> String, one of "IN_PROGRESS_INITIALIZING", "IN_PROGRESS", "CANCEL_IN_PROGRESS", "CANCELED", "COMPLETE", "FAILED"
+    #   resp.batch_predictions[0].failure_reason #=> String
+    #   resp.batch_predictions[0].start_time #=> String
+    #   resp.batch_predictions[0].completion_time #=> String
+    #   resp.batch_predictions[0].last_heartbeat_time #=> String
+    #   resp.batch_predictions[0].input_path #=> String
+    #   resp.batch_predictions[0].output_path #=> String
+    #   resp.batch_predictions[0].event_type_name #=> String
+    #   resp.batch_predictions[0].detector_name #=> String
+    #   resp.batch_predictions[0].detector_version #=> String
+    #   resp.batch_predictions[0].iam_role_arn #=> String
+    #   resp.batch_predictions[0].arn #=> String
+    #   resp.batch_predictions[0].processed_records_count #=> Integer
+    #   resp.batch_predictions[0].total_records_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchPredictionJobs AWS API Documentation
+    #
+    # @overload get_batch_prediction_jobs(params = {})
+    # @param [Hash] params ({})
+    def get_batch_prediction_jobs(params = {}, options = {})
+      req = build_request(:get_batch_prediction_jobs, params)
       req.send_request(options)
     end
 
@@ -1177,6 +1599,30 @@ module Aws::FraudDetector
     #   Names of the event type's variables you defined in Amazon Fraud
     #   Detector to represent data elements and their corresponding values for
     #   the event you are sending for evaluation.
+    #
+    #   * You must provide at least one eventVariable
+    #
+    #   * If detectorVersion is associated with a modelVersion, you must
+    #     provide at least one associated eventVariable
+    #
+    #   To ensure highest possible fraud prediction and to simplify your data
+    #   preparation, Amazon Fraud Detector will replace all missing variables
+    #   or values as follows:
+    #
+    #   **For Amazon Fraud Detector trained models:**
+    #
+    #   If a null value is provided explicitly for a variable or if a variable
+    #   is missing, model will replace the null value or the missing variable
+    #   (no variable name in the eventVariables map) with calculated default
+    #   mean/medians for numeric variables and with special values for
+    #   categorical variables.
+    #
+    #   **For External models ( for example, imported SageMaker):**
+    #
+    #   If a null value is provided explicitly for a variable, the model and
+    #   rules will use “null” as the value. If a variable is not provided (no
+    #   variable name in the eventVariables map), model and rules will use the
+    #   default value that is provided for the variable.
     #
     # @option params [Hash<String,Types::ModelEndpointDataBlob>] :external_model_endpoint_data_blobs
     #   The Amazon SageMaker model endpoint input data blobs.
@@ -2371,7 +2817,7 @@ module Aws::FraudDetector
     #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
-    #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateModelVersionStatus AWS API Documentation
@@ -2524,7 +2970,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

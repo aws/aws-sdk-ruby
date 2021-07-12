@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -21,6 +21,20 @@ module Aws::Chime
     AccountType = Shapes::StringShape.new(name: 'AccountType')
     AlexaForBusinessMetadata = Shapes::StructureShape.new(name: 'AlexaForBusinessMetadata')
     Alpha2CountryCode = Shapes::StringShape.new(name: 'Alpha2CountryCode')
+    AppInstance = Shapes::StructureShape.new(name: 'AppInstance')
+    AppInstanceAdmin = Shapes::StructureShape.new(name: 'AppInstanceAdmin')
+    AppInstanceAdminList = Shapes::ListShape.new(name: 'AppInstanceAdminList')
+    AppInstanceAdminSummary = Shapes::StructureShape.new(name: 'AppInstanceAdminSummary')
+    AppInstanceDataType = Shapes::StringShape.new(name: 'AppInstanceDataType')
+    AppInstanceList = Shapes::ListShape.new(name: 'AppInstanceList')
+    AppInstanceRetentionSettings = Shapes::StructureShape.new(name: 'AppInstanceRetentionSettings')
+    AppInstanceStreamingConfiguration = Shapes::StructureShape.new(name: 'AppInstanceStreamingConfiguration')
+    AppInstanceStreamingConfigurationList = Shapes::ListShape.new(name: 'AppInstanceStreamingConfigurationList')
+    AppInstanceSummary = Shapes::StructureShape.new(name: 'AppInstanceSummary')
+    AppInstanceUser = Shapes::StructureShape.new(name: 'AppInstanceUser')
+    AppInstanceUserList = Shapes::ListShape.new(name: 'AppInstanceUserList')
+    AppInstanceUserMembershipSummary = Shapes::StructureShape.new(name: 'AppInstanceUserMembershipSummary')
+    AppInstanceUserSummary = Shapes::StructureShape.new(name: 'AppInstanceUserSummary')
     AreaCode = Shapes::StringShape.new(name: 'AreaCode')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociatePhoneNumberWithUserRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumberWithUserRequest')
@@ -36,9 +50,14 @@ module Aws::Chime
     AttendeeTagKeyList = Shapes::ListShape.new(name: 'AttendeeTagKeyList')
     AttendeeTagList = Shapes::ListShape.new(name: 'AttendeeTagList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchChannelMemberships = Shapes::StructureShape.new(name: 'BatchChannelMemberships')
     BatchCreateAttendeeErrorList = Shapes::ListShape.new(name: 'BatchCreateAttendeeErrorList')
     BatchCreateAttendeeRequest = Shapes::StructureShape.new(name: 'BatchCreateAttendeeRequest')
     BatchCreateAttendeeResponse = Shapes::StructureShape.new(name: 'BatchCreateAttendeeResponse')
+    BatchCreateChannelMembershipError = Shapes::StructureShape.new(name: 'BatchCreateChannelMembershipError')
+    BatchCreateChannelMembershipErrors = Shapes::ListShape.new(name: 'BatchCreateChannelMembershipErrors')
+    BatchCreateChannelMembershipRequest = Shapes::StructureShape.new(name: 'BatchCreateChannelMembershipRequest')
+    BatchCreateChannelMembershipResponse = Shapes::StructureShape.new(name: 'BatchCreateChannelMembershipResponse')
     BatchCreateRoomMembershipRequest = Shapes::StructureShape.new(name: 'BatchCreateRoomMembershipRequest')
     BatchCreateRoomMembershipResponse = Shapes::StructureShape.new(name: 'BatchCreateRoomMembershipResponse')
     BatchDeletePhoneNumberRequest = Shapes::StructureShape.new(name: 'BatchDeletePhoneNumberRequest')
@@ -62,14 +81,47 @@ module Aws::Chime
     CallingRegionList = Shapes::ListShape.new(name: 'CallingRegionList')
     Capability = Shapes::StringShape.new(name: 'Capability')
     CapabilityList = Shapes::ListShape.new(name: 'CapabilityList')
+    Channel = Shapes::StructureShape.new(name: 'Channel')
+    ChannelBan = Shapes::StructureShape.new(name: 'ChannelBan')
+    ChannelBanSummary = Shapes::StructureShape.new(name: 'ChannelBanSummary')
+    ChannelBanSummaryList = Shapes::ListShape.new(name: 'ChannelBanSummaryList')
+    ChannelMembership = Shapes::StructureShape.new(name: 'ChannelMembership')
+    ChannelMembershipForAppInstanceUserSummary = Shapes::StructureShape.new(name: 'ChannelMembershipForAppInstanceUserSummary')
+    ChannelMembershipForAppInstanceUserSummaryList = Shapes::ListShape.new(name: 'ChannelMembershipForAppInstanceUserSummaryList')
+    ChannelMembershipSummary = Shapes::StructureShape.new(name: 'ChannelMembershipSummary')
+    ChannelMembershipSummaryList = Shapes::ListShape.new(name: 'ChannelMembershipSummaryList')
+    ChannelMembershipType = Shapes::StringShape.new(name: 'ChannelMembershipType')
+    ChannelMessage = Shapes::StructureShape.new(name: 'ChannelMessage')
+    ChannelMessagePersistenceType = Shapes::StringShape.new(name: 'ChannelMessagePersistenceType')
+    ChannelMessageSummary = Shapes::StructureShape.new(name: 'ChannelMessageSummary')
+    ChannelMessageSummaryList = Shapes::ListShape.new(name: 'ChannelMessageSummaryList')
+    ChannelMessageType = Shapes::StringShape.new(name: 'ChannelMessageType')
+    ChannelMode = Shapes::StringShape.new(name: 'ChannelMode')
+    ChannelModeratedByAppInstanceUserSummary = Shapes::StructureShape.new(name: 'ChannelModeratedByAppInstanceUserSummary')
+    ChannelModeratedByAppInstanceUserSummaryList = Shapes::ListShape.new(name: 'ChannelModeratedByAppInstanceUserSummaryList')
+    ChannelModerator = Shapes::StructureShape.new(name: 'ChannelModerator')
+    ChannelModeratorSummary = Shapes::StructureShape.new(name: 'ChannelModeratorSummary')
+    ChannelModeratorSummaryList = Shapes::ListShape.new(name: 'ChannelModeratorSummaryList')
+    ChannelPrivacy = Shapes::StringShape.new(name: 'ChannelPrivacy')
+    ChannelRetentionSettings = Shapes::StructureShape.new(name: 'ChannelRetentionSettings')
+    ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
+    ChannelSummaryList = Shapes::ListShape.new(name: 'ChannelSummaryList')
+    ChimeArn = Shapes::StringShape.new(name: 'ChimeArn')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    Content = Shapes::StringShape.new(name: 'Content')
     ConversationRetentionSettings = Shapes::StructureShape.new(name: 'ConversationRetentionSettings')
     Country = Shapes::StringShape.new(name: 'Country')
     CountryList = Shapes::ListShape.new(name: 'CountryList')
     CpsLimit = Shapes::IntegerShape.new(name: 'CpsLimit')
     CreateAccountRequest = Shapes::StructureShape.new(name: 'CreateAccountRequest')
     CreateAccountResponse = Shapes::StructureShape.new(name: 'CreateAccountResponse')
+    CreateAppInstanceAdminRequest = Shapes::StructureShape.new(name: 'CreateAppInstanceAdminRequest')
+    CreateAppInstanceAdminResponse = Shapes::StructureShape.new(name: 'CreateAppInstanceAdminResponse')
+    CreateAppInstanceRequest = Shapes::StructureShape.new(name: 'CreateAppInstanceRequest')
+    CreateAppInstanceResponse = Shapes::StructureShape.new(name: 'CreateAppInstanceResponse')
+    CreateAppInstanceUserRequest = Shapes::StructureShape.new(name: 'CreateAppInstanceUserRequest')
+    CreateAppInstanceUserResponse = Shapes::StructureShape.new(name: 'CreateAppInstanceUserResponse')
     CreateAttendeeError = Shapes::StructureShape.new(name: 'CreateAttendeeError')
     CreateAttendeeRequest = Shapes::StructureShape.new(name: 'CreateAttendeeRequest')
     CreateAttendeeRequestItem = Shapes::StructureShape.new(name: 'CreateAttendeeRequestItem')
@@ -77,6 +129,18 @@ module Aws::Chime
     CreateAttendeeResponse = Shapes::StructureShape.new(name: 'CreateAttendeeResponse')
     CreateBotRequest = Shapes::StructureShape.new(name: 'CreateBotRequest')
     CreateBotResponse = Shapes::StructureShape.new(name: 'CreateBotResponse')
+    CreateChannelBanRequest = Shapes::StructureShape.new(name: 'CreateChannelBanRequest')
+    CreateChannelBanResponse = Shapes::StructureShape.new(name: 'CreateChannelBanResponse')
+    CreateChannelMembershipRequest = Shapes::StructureShape.new(name: 'CreateChannelMembershipRequest')
+    CreateChannelMembershipResponse = Shapes::StructureShape.new(name: 'CreateChannelMembershipResponse')
+    CreateChannelModeratorRequest = Shapes::StructureShape.new(name: 'CreateChannelModeratorRequest')
+    CreateChannelModeratorResponse = Shapes::StructureShape.new(name: 'CreateChannelModeratorResponse')
+    CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
+    CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
+    CreateMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineRequest')
+    CreateMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineResponse')
+    CreateMeetingDialOutRequest = Shapes::StructureShape.new(name: 'CreateMeetingDialOutRequest')
+    CreateMeetingDialOutResponse = Shapes::StructureShape.new(name: 'CreateMeetingDialOutResponse')
     CreateMeetingRequest = Shapes::StructureShape.new(name: 'CreateMeetingRequest')
     CreateMeetingResponse = Shapes::StructureShape.new(name: 'CreateMeetingResponse')
     CreateMeetingWithAttendeesRequest = Shapes::StructureShape.new(name: 'CreateMeetingWithAttendeesRequest')
@@ -90,6 +154,12 @@ module Aws::Chime
     CreateRoomMembershipResponse = Shapes::StructureShape.new(name: 'CreateRoomMembershipResponse')
     CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
     CreateRoomResponse = Shapes::StructureShape.new(name: 'CreateRoomResponse')
+    CreateSipMediaApplicationCallRequest = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationCallRequest')
+    CreateSipMediaApplicationCallResponse = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationCallResponse')
+    CreateSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationRequest')
+    CreateSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationResponse')
+    CreateSipRuleRequest = Shapes::StructureShape.new(name: 'CreateSipRuleRequest')
+    CreateSipRuleResponse = Shapes::StructureShape.new(name: 'CreateSipRuleResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     CreateVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorGroupRequest')
@@ -103,13 +173,25 @@ module Aws::Chime
     DataRetentionInHours = Shapes::IntegerShape.new(name: 'DataRetentionInHours')
     DeleteAccountRequest = Shapes::StructureShape.new(name: 'DeleteAccountRequest')
     DeleteAccountResponse = Shapes::StructureShape.new(name: 'DeleteAccountResponse')
+    DeleteAppInstanceAdminRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceAdminRequest')
+    DeleteAppInstanceRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceRequest')
+    DeleteAppInstanceStreamingConfigurationsRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceStreamingConfigurationsRequest')
+    DeleteAppInstanceUserRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceUserRequest')
     DeleteAttendeeRequest = Shapes::StructureShape.new(name: 'DeleteAttendeeRequest')
+    DeleteChannelBanRequest = Shapes::StructureShape.new(name: 'DeleteChannelBanRequest')
+    DeleteChannelMembershipRequest = Shapes::StructureShape.new(name: 'DeleteChannelMembershipRequest')
+    DeleteChannelMessageRequest = Shapes::StructureShape.new(name: 'DeleteChannelMessageRequest')
+    DeleteChannelModeratorRequest = Shapes::StructureShape.new(name: 'DeleteChannelModeratorRequest')
+    DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteEventsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEventsConfigurationRequest')
+    DeleteMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'DeleteMediaCapturePipelineRequest')
     DeleteMeetingRequest = Shapes::StructureShape.new(name: 'DeleteMeetingRequest')
     DeletePhoneNumberRequest = Shapes::StructureShape.new(name: 'DeletePhoneNumberRequest')
     DeleteProxySessionRequest = Shapes::StructureShape.new(name: 'DeleteProxySessionRequest')
     DeleteRoomMembershipRequest = Shapes::StructureShape.new(name: 'DeleteRoomMembershipRequest')
     DeleteRoomRequest = Shapes::StructureShape.new(name: 'DeleteRoomRequest')
+    DeleteSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'DeleteSipMediaApplicationRequest')
+    DeleteSipRuleRequest = Shapes::StructureShape.new(name: 'DeleteSipRuleRequest')
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorEmergencyCallingConfigurationRequest')
     DeleteVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorGroupRequest')
     DeleteVoiceConnectorOriginationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorOriginationRequest')
@@ -118,6 +200,24 @@ module Aws::Chime
     DeleteVoiceConnectorStreamingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorStreamingConfigurationRequest')
     DeleteVoiceConnectorTerminationCredentialsRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorTerminationCredentialsRequest')
     DeleteVoiceConnectorTerminationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorTerminationRequest')
+    DescribeAppInstanceAdminRequest = Shapes::StructureShape.new(name: 'DescribeAppInstanceAdminRequest')
+    DescribeAppInstanceAdminResponse = Shapes::StructureShape.new(name: 'DescribeAppInstanceAdminResponse')
+    DescribeAppInstanceRequest = Shapes::StructureShape.new(name: 'DescribeAppInstanceRequest')
+    DescribeAppInstanceResponse = Shapes::StructureShape.new(name: 'DescribeAppInstanceResponse')
+    DescribeAppInstanceUserRequest = Shapes::StructureShape.new(name: 'DescribeAppInstanceUserRequest')
+    DescribeAppInstanceUserResponse = Shapes::StructureShape.new(name: 'DescribeAppInstanceUserResponse')
+    DescribeChannelBanRequest = Shapes::StructureShape.new(name: 'DescribeChannelBanRequest')
+    DescribeChannelBanResponse = Shapes::StructureShape.new(name: 'DescribeChannelBanResponse')
+    DescribeChannelMembershipForAppInstanceUserRequest = Shapes::StructureShape.new(name: 'DescribeChannelMembershipForAppInstanceUserRequest')
+    DescribeChannelMembershipForAppInstanceUserResponse = Shapes::StructureShape.new(name: 'DescribeChannelMembershipForAppInstanceUserResponse')
+    DescribeChannelMembershipRequest = Shapes::StructureShape.new(name: 'DescribeChannelMembershipRequest')
+    DescribeChannelMembershipResponse = Shapes::StructureShape.new(name: 'DescribeChannelMembershipResponse')
+    DescribeChannelModeratedByAppInstanceUserRequest = Shapes::StructureShape.new(name: 'DescribeChannelModeratedByAppInstanceUserRequest')
+    DescribeChannelModeratedByAppInstanceUserResponse = Shapes::StructureShape.new(name: 'DescribeChannelModeratedByAppInstanceUserResponse')
+    DescribeChannelModeratorRequest = Shapes::StructureShape.new(name: 'DescribeChannelModeratorRequest')
+    DescribeChannelModeratorResponse = Shapes::StructureShape.new(name: 'DescribeChannelModeratorResponse')
+    DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
+    DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DisassociatePhoneNumberFromUserRequest = Shapes::StructureShape.new(name: 'DisassociatePhoneNumberFromUserRequest')
     DisassociatePhoneNumberFromUserResponse = Shapes::StructureShape.new(name: 'DisassociatePhoneNumberFromUserResponse')
     DisassociatePhoneNumbersFromVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'DisassociatePhoneNumbersFromVoiceConnectorGroupRequest')
@@ -136,21 +236,32 @@ module Aws::Chime
     ExternalMeetingIdType = Shapes::StringShape.new(name: 'ExternalMeetingIdType')
     ExternalUserIdType = Shapes::StringShape.new(name: 'ExternalUserIdType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GeoMatchLevel = Shapes::StringShape.new(name: 'GeoMatchLevel')
     GeoMatchParams = Shapes::StructureShape.new(name: 'GeoMatchParams')
     GetAccountRequest = Shapes::StructureShape.new(name: 'GetAccountRequest')
     GetAccountResponse = Shapes::StructureShape.new(name: 'GetAccountResponse')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
+    GetAppInstanceRetentionSettingsRequest = Shapes::StructureShape.new(name: 'GetAppInstanceRetentionSettingsRequest')
+    GetAppInstanceRetentionSettingsResponse = Shapes::StructureShape.new(name: 'GetAppInstanceRetentionSettingsResponse')
+    GetAppInstanceStreamingConfigurationsRequest = Shapes::StructureShape.new(name: 'GetAppInstanceStreamingConfigurationsRequest')
+    GetAppInstanceStreamingConfigurationsResponse = Shapes::StructureShape.new(name: 'GetAppInstanceStreamingConfigurationsResponse')
     GetAttendeeRequest = Shapes::StructureShape.new(name: 'GetAttendeeRequest')
     GetAttendeeResponse = Shapes::StructureShape.new(name: 'GetAttendeeResponse')
     GetBotRequest = Shapes::StructureShape.new(name: 'GetBotRequest')
     GetBotResponse = Shapes::StructureShape.new(name: 'GetBotResponse')
+    GetChannelMessageRequest = Shapes::StructureShape.new(name: 'GetChannelMessageRequest')
+    GetChannelMessageResponse = Shapes::StructureShape.new(name: 'GetChannelMessageResponse')
     GetEventsConfigurationRequest = Shapes::StructureShape.new(name: 'GetEventsConfigurationRequest')
     GetEventsConfigurationResponse = Shapes::StructureShape.new(name: 'GetEventsConfigurationResponse')
     GetGlobalSettingsResponse = Shapes::StructureShape.new(name: 'GetGlobalSettingsResponse')
+    GetMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'GetMediaCapturePipelineRequest')
+    GetMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'GetMediaCapturePipelineResponse')
     GetMeetingRequest = Shapes::StructureShape.new(name: 'GetMeetingRequest')
     GetMeetingResponse = Shapes::StructureShape.new(name: 'GetMeetingResponse')
+    GetMessagingSessionEndpointRequest = Shapes::StructureShape.new(name: 'GetMessagingSessionEndpointRequest')
+    GetMessagingSessionEndpointResponse = Shapes::StructureShape.new(name: 'GetMessagingSessionEndpointResponse')
     GetPhoneNumberOrderRequest = Shapes::StructureShape.new(name: 'GetPhoneNumberOrderRequest')
     GetPhoneNumberOrderResponse = Shapes::StructureShape.new(name: 'GetPhoneNumberOrderResponse')
     GetPhoneNumberRequest = Shapes::StructureShape.new(name: 'GetPhoneNumberRequest')
@@ -162,6 +273,12 @@ module Aws::Chime
     GetRetentionSettingsResponse = Shapes::StructureShape.new(name: 'GetRetentionSettingsResponse')
     GetRoomRequest = Shapes::StructureShape.new(name: 'GetRoomRequest')
     GetRoomResponse = Shapes::StructureShape.new(name: 'GetRoomResponse')
+    GetSipMediaApplicationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetSipMediaApplicationLoggingConfigurationRequest')
+    GetSipMediaApplicationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetSipMediaApplicationLoggingConfigurationResponse')
+    GetSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'GetSipMediaApplicationRequest')
+    GetSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'GetSipMediaApplicationResponse')
+    GetSipRuleRequest = Shapes::StructureShape.new(name: 'GetSipRuleRequest')
+    GetSipRuleResponse = Shapes::StructureShape.new(name: 'GetSipRuleResponse')
     GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
     GetUserResponse = Shapes::StructureShape.new(name: 'GetUserResponse')
     GetUserSettingsRequest = Shapes::StructureShape.new(name: 'GetUserSettingsRequest')
@@ -185,6 +302,7 @@ module Aws::Chime
     GetVoiceConnectorTerminationRequest = Shapes::StructureShape.new(name: 'GetVoiceConnectorTerminationRequest')
     GetVoiceConnectorTerminationResponse = Shapes::StructureShape.new(name: 'GetVoiceConnectorTerminationResponse')
     GuidString = Shapes::StringShape.new(name: 'GuidString')
+    Identity = Shapes::StructureShape.new(name: 'Identity')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     Invite = Shapes::StructureShape.new(name: 'Invite')
     InviteList = Shapes::ListShape.new(name: 'InviteList')
@@ -197,12 +315,34 @@ module Aws::Chime
     LicenseList = Shapes::ListShape.new(name: 'LicenseList')
     ListAccountsRequest = Shapes::StructureShape.new(name: 'ListAccountsRequest')
     ListAccountsResponse = Shapes::StructureShape.new(name: 'ListAccountsResponse')
+    ListAppInstanceAdminsRequest = Shapes::StructureShape.new(name: 'ListAppInstanceAdminsRequest')
+    ListAppInstanceAdminsResponse = Shapes::StructureShape.new(name: 'ListAppInstanceAdminsResponse')
+    ListAppInstanceUsersRequest = Shapes::StructureShape.new(name: 'ListAppInstanceUsersRequest')
+    ListAppInstanceUsersResponse = Shapes::StructureShape.new(name: 'ListAppInstanceUsersResponse')
+    ListAppInstancesRequest = Shapes::StructureShape.new(name: 'ListAppInstancesRequest')
+    ListAppInstancesResponse = Shapes::StructureShape.new(name: 'ListAppInstancesResponse')
     ListAttendeeTagsRequest = Shapes::StructureShape.new(name: 'ListAttendeeTagsRequest')
     ListAttendeeTagsResponse = Shapes::StructureShape.new(name: 'ListAttendeeTagsResponse')
     ListAttendeesRequest = Shapes::StructureShape.new(name: 'ListAttendeesRequest')
     ListAttendeesResponse = Shapes::StructureShape.new(name: 'ListAttendeesResponse')
     ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
     ListBotsResponse = Shapes::StructureShape.new(name: 'ListBotsResponse')
+    ListChannelBansRequest = Shapes::StructureShape.new(name: 'ListChannelBansRequest')
+    ListChannelBansResponse = Shapes::StructureShape.new(name: 'ListChannelBansResponse')
+    ListChannelMembershipsForAppInstanceUserRequest = Shapes::StructureShape.new(name: 'ListChannelMembershipsForAppInstanceUserRequest')
+    ListChannelMembershipsForAppInstanceUserResponse = Shapes::StructureShape.new(name: 'ListChannelMembershipsForAppInstanceUserResponse')
+    ListChannelMembershipsRequest = Shapes::StructureShape.new(name: 'ListChannelMembershipsRequest')
+    ListChannelMembershipsResponse = Shapes::StructureShape.new(name: 'ListChannelMembershipsResponse')
+    ListChannelMessagesRequest = Shapes::StructureShape.new(name: 'ListChannelMessagesRequest')
+    ListChannelMessagesResponse = Shapes::StructureShape.new(name: 'ListChannelMessagesResponse')
+    ListChannelModeratorsRequest = Shapes::StructureShape.new(name: 'ListChannelModeratorsRequest')
+    ListChannelModeratorsResponse = Shapes::StructureShape.new(name: 'ListChannelModeratorsResponse')
+    ListChannelsModeratedByAppInstanceUserRequest = Shapes::StructureShape.new(name: 'ListChannelsModeratedByAppInstanceUserRequest')
+    ListChannelsModeratedByAppInstanceUserResponse = Shapes::StructureShape.new(name: 'ListChannelsModeratedByAppInstanceUserResponse')
+    ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
+    ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
+    ListMediaCapturePipelinesRequest = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesRequest')
+    ListMediaCapturePipelinesResponse = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesResponse')
     ListMeetingTagsRequest = Shapes::StructureShape.new(name: 'ListMeetingTagsRequest')
     ListMeetingTagsResponse = Shapes::StructureShape.new(name: 'ListMeetingTagsResponse')
     ListMeetingsRequest = Shapes::StructureShape.new(name: 'ListMeetingsRequest')
@@ -217,6 +357,12 @@ module Aws::Chime
     ListRoomMembershipsResponse = Shapes::StructureShape.new(name: 'ListRoomMembershipsResponse')
     ListRoomsRequest = Shapes::StructureShape.new(name: 'ListRoomsRequest')
     ListRoomsResponse = Shapes::StructureShape.new(name: 'ListRoomsResponse')
+    ListSipMediaApplicationsRequest = Shapes::StructureShape.new(name: 'ListSipMediaApplicationsRequest')
+    ListSipMediaApplicationsResponse = Shapes::StructureShape.new(name: 'ListSipMediaApplicationsResponse')
+    ListSipRulesRequest = Shapes::StructureShape.new(name: 'ListSipRulesRequest')
+    ListSipRulesResponse = Shapes::StructureShape.new(name: 'ListSipRulesResponse')
+    ListSupportedPhoneNumberCountriesRequest = Shapes::StructureShape.new(name: 'ListSupportedPhoneNumberCountriesRequest')
+    ListSupportedPhoneNumberCountriesResponse = Shapes::StructureShape.new(name: 'ListSupportedPhoneNumberCountriesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
@@ -230,6 +376,12 @@ module Aws::Chime
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     LogoutUserRequest = Shapes::StructureShape.new(name: 'LogoutUserRequest')
     LogoutUserResponse = Shapes::StructureShape.new(name: 'LogoutUserResponse')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MediaCapturePipeline = Shapes::StructureShape.new(name: 'MediaCapturePipeline')
+    MediaCapturePipelineList = Shapes::ListShape.new(name: 'MediaCapturePipelineList')
+    MediaPipelineSinkType = Shapes::StringShape.new(name: 'MediaPipelineSinkType')
+    MediaPipelineSourceType = Shapes::StringShape.new(name: 'MediaPipelineSourceType')
+    MediaPipelineStatus = Shapes::StringShape.new(name: 'MediaPipelineStatus')
     MediaPlacement = Shapes::StructureShape.new(name: 'MediaPlacement')
     Meeting = Shapes::StructureShape.new(name: 'Meeting')
     MeetingList = Shapes::ListShape.new(name: 'MeetingList')
@@ -237,15 +389,24 @@ module Aws::Chime
     MeetingTagKeyList = Shapes::ListShape.new(name: 'MeetingTagKeyList')
     MeetingTagList = Shapes::ListShape.new(name: 'MeetingTagList')
     Member = Shapes::StructureShape.new(name: 'Member')
+    MemberArns = Shapes::ListShape.new(name: 'MemberArns')
     MemberError = Shapes::StructureShape.new(name: 'MemberError')
     MemberErrorList = Shapes::ListShape.new(name: 'MemberErrorList')
     MemberType = Shapes::StringShape.new(name: 'MemberType')
+    Members = Shapes::ListShape.new(name: 'Members')
     MembershipItem = Shapes::StructureShape.new(name: 'MembershipItem')
     MembershipItemList = Shapes::ListShape.new(name: 'MembershipItemList')
+    MessageId = Shapes::StringShape.new(name: 'MessageId')
+    MessagingSessionEndpoint = Shapes::StructureShape.new(name: 'MessagingSessionEndpoint')
+    Metadata = Shapes::StringShape.new(name: 'Metadata')
+    NextToken = Shapes::StringShape.new(name: 'NextToken')
     NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
+    NonEmptyContent = Shapes::StringShape.new(name: 'NonEmptyContent')
+    NonEmptyResourceName = Shapes::StringShape.new(name: 'NonEmptyResourceName')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonEmptyString128 = Shapes::StringShape.new(name: 'NonEmptyString128')
     NonEmptyStringList = Shapes::ListShape.new(name: 'NonEmptyStringList')
+    NonNullableBoolean = Shapes::BooleanShape.new(name: 'NonNullableBoolean')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotificationTarget = Shapes::StringShape.new(name: 'NotificationTarget')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
@@ -267,6 +428,8 @@ module Aws::Chime
     PhoneNumberAssociationList = Shapes::ListShape.new(name: 'PhoneNumberAssociationList')
     PhoneNumberAssociationName = Shapes::StringShape.new(name: 'PhoneNumberAssociationName')
     PhoneNumberCapabilities = Shapes::StructureShape.new(name: 'PhoneNumberCapabilities')
+    PhoneNumberCountriesList = Shapes::ListShape.new(name: 'PhoneNumberCountriesList')
+    PhoneNumberCountry = Shapes::StructureShape.new(name: 'PhoneNumberCountry')
     PhoneNumberError = Shapes::StructureShape.new(name: 'PhoneNumberError')
     PhoneNumberErrorList = Shapes::ListShape.new(name: 'PhoneNumberErrorList')
     PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
@@ -277,6 +440,7 @@ module Aws::Chime
     PhoneNumberProductType = Shapes::StringShape.new(name: 'PhoneNumberProductType')
     PhoneNumberStatus = Shapes::StringShape.new(name: 'PhoneNumberStatus')
     PhoneNumberType = Shapes::StringShape.new(name: 'PhoneNumberType')
+    PhoneNumberTypeList = Shapes::ListShape.new(name: 'PhoneNumberTypeList')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     ProfileServiceMaxResults = Shapes::IntegerShape.new(name: 'ProfileServiceMaxResults')
@@ -285,10 +449,16 @@ module Aws::Chime
     ProxySessionNameString = Shapes::StringShape.new(name: 'ProxySessionNameString')
     ProxySessionStatus = Shapes::StringShape.new(name: 'ProxySessionStatus')
     ProxySessions = Shapes::ListShape.new(name: 'ProxySessions')
+    PutAppInstanceRetentionSettingsRequest = Shapes::StructureShape.new(name: 'PutAppInstanceRetentionSettingsRequest')
+    PutAppInstanceRetentionSettingsResponse = Shapes::StructureShape.new(name: 'PutAppInstanceRetentionSettingsResponse')
+    PutAppInstanceStreamingConfigurationsRequest = Shapes::StructureShape.new(name: 'PutAppInstanceStreamingConfigurationsRequest')
+    PutAppInstanceStreamingConfigurationsResponse = Shapes::StructureShape.new(name: 'PutAppInstanceStreamingConfigurationsResponse')
     PutEventsConfigurationRequest = Shapes::StructureShape.new(name: 'PutEventsConfigurationRequest')
     PutEventsConfigurationResponse = Shapes::StructureShape.new(name: 'PutEventsConfigurationResponse')
     PutRetentionSettingsRequest = Shapes::StructureShape.new(name: 'PutRetentionSettingsRequest')
     PutRetentionSettingsResponse = Shapes::StructureShape.new(name: 'PutRetentionSettingsResponse')
+    PutSipMediaApplicationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutSipMediaApplicationLoggingConfigurationRequest')
+    PutSipMediaApplicationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutSipMediaApplicationLoggingConfigurationResponse')
     PutVoiceConnectorEmergencyCallingConfigurationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorEmergencyCallingConfigurationRequest')
     PutVoiceConnectorEmergencyCallingConfigurationResponse = Shapes::StructureShape.new(name: 'PutVoiceConnectorEmergencyCallingConfigurationResponse')
     PutVoiceConnectorLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorLoggingConfigurationRequest')
@@ -302,6 +472,8 @@ module Aws::Chime
     PutVoiceConnectorTerminationCredentialsRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationCredentialsRequest')
     PutVoiceConnectorTerminationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationRequest')
     PutVoiceConnectorTerminationResponse = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationResponse')
+    RedactChannelMessageRequest = Shapes::StructureShape.new(name: 'RedactChannelMessageRequest')
+    RedactChannelMessageResponse = Shapes::StructureShape.new(name: 'RedactChannelMessageResponse')
     RedactConversationMessageRequest = Shapes::StructureShape.new(name: 'RedactConversationMessageRequest')
     RedactConversationMessageResponse = Shapes::StructureShape.new(name: 'RedactConversationMessageResponse')
     RedactRoomMessageRequest = Shapes::StructureShape.new(name: 'RedactRoomMessageRequest')
@@ -312,6 +484,7 @@ module Aws::Chime
     ResetPersonalPINRequest = Shapes::StructureShape.new(name: 'ResetPersonalPINRequest')
     ResetPersonalPINResponse = Shapes::StructureShape.new(name: 'ResetPersonalPINResponse')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
+    ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     RestorePhoneNumberRequest = Shapes::StructureShape.new(name: 'RestorePhoneNumberRequest')
     RestorePhoneNumberResponse = Shapes::StructureShape.new(name: 'RestorePhoneNumberResponse')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
@@ -323,14 +496,32 @@ module Aws::Chime
     RoomMembershipList = Shapes::ListShape.new(name: 'RoomMembershipList')
     RoomMembershipRole = Shapes::StringShape.new(name: 'RoomMembershipRole')
     RoomRetentionSettings = Shapes::StructureShape.new(name: 'RoomRetentionSettings')
+    SMAUpdateCallArgumentsMap = Shapes::MapShape.new(name: 'SMAUpdateCallArgumentsMap')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
+    SendChannelMessageRequest = Shapes::StructureShape.new(name: 'SendChannelMessageRequest')
+    SendChannelMessageResponse = Shapes::StructureShape.new(name: 'SendChannelMessageResponse')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SigninDelegateGroup = Shapes::StructureShape.new(name: 'SigninDelegateGroup')
     SigninDelegateGroupList = Shapes::ListShape.new(name: 'SigninDelegateGroupList')
+    SipApplicationPriority = Shapes::IntegerShape.new(name: 'SipApplicationPriority')
+    SipMediaApplication = Shapes::StructureShape.new(name: 'SipMediaApplication')
+    SipMediaApplicationCall = Shapes::StructureShape.new(name: 'SipMediaApplicationCall')
+    SipMediaApplicationEndpoint = Shapes::StructureShape.new(name: 'SipMediaApplicationEndpoint')
+    SipMediaApplicationEndpointList = Shapes::ListShape.new(name: 'SipMediaApplicationEndpointList')
+    SipMediaApplicationList = Shapes::ListShape.new(name: 'SipMediaApplicationList')
+    SipMediaApplicationLoggingConfiguration = Shapes::StructureShape.new(name: 'SipMediaApplicationLoggingConfiguration')
+    SipMediaApplicationName = Shapes::StringShape.new(name: 'SipMediaApplicationName')
+    SipRule = Shapes::StructureShape.new(name: 'SipRule')
+    SipRuleList = Shapes::ListShape.new(name: 'SipRuleList')
+    SipRuleName = Shapes::StringShape.new(name: 'SipRuleName')
+    SipRuleTargetApplication = Shapes::StructureShape.new(name: 'SipRuleTargetApplication')
+    SipRuleTargetApplicationList = Shapes::ListShape.new(name: 'SipRuleTargetApplicationList')
+    SipRuleTriggerType = Shapes::StringShape.new(name: 'SipRuleTriggerType')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
     StreamingNotificationTarget = Shapes::StructureShape.new(name: 'StreamingNotificationTarget')
     StreamingNotificationTargetList = Shapes::ListShape.new(name: 'StreamingNotificationTargetList')
@@ -349,6 +540,7 @@ module Aws::Chime
     Termination = Shapes::StructureShape.new(name: 'Termination')
     TerminationHealth = Shapes::StructureShape.new(name: 'TerminationHealth')
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TollFreePrefix = Shapes::StringShape.new(name: 'TollFreePrefix')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
@@ -359,8 +551,18 @@ module Aws::Chime
     UpdateAccountResponse = Shapes::StructureShape.new(name: 'UpdateAccountResponse')
     UpdateAccountSettingsRequest = Shapes::StructureShape.new(name: 'UpdateAccountSettingsRequest')
     UpdateAccountSettingsResponse = Shapes::StructureShape.new(name: 'UpdateAccountSettingsResponse')
+    UpdateAppInstanceRequest = Shapes::StructureShape.new(name: 'UpdateAppInstanceRequest')
+    UpdateAppInstanceResponse = Shapes::StructureShape.new(name: 'UpdateAppInstanceResponse')
+    UpdateAppInstanceUserRequest = Shapes::StructureShape.new(name: 'UpdateAppInstanceUserRequest')
+    UpdateAppInstanceUserResponse = Shapes::StructureShape.new(name: 'UpdateAppInstanceUserResponse')
     UpdateBotRequest = Shapes::StructureShape.new(name: 'UpdateBotRequest')
     UpdateBotResponse = Shapes::StructureShape.new(name: 'UpdateBotResponse')
+    UpdateChannelMessageRequest = Shapes::StructureShape.new(name: 'UpdateChannelMessageRequest')
+    UpdateChannelMessageResponse = Shapes::StructureShape.new(name: 'UpdateChannelMessageResponse')
+    UpdateChannelReadMarkerRequest = Shapes::StructureShape.new(name: 'UpdateChannelReadMarkerRequest')
+    UpdateChannelReadMarkerResponse = Shapes::StructureShape.new(name: 'UpdateChannelReadMarkerResponse')
+    UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
+    UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateGlobalSettingsRequest = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsRequest')
     UpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequest')
     UpdatePhoneNumberRequestItem = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequestItem')
@@ -373,6 +575,12 @@ module Aws::Chime
     UpdateRoomMembershipResponse = Shapes::StructureShape.new(name: 'UpdateRoomMembershipResponse')
     UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
     UpdateRoomResponse = Shapes::StructureShape.new(name: 'UpdateRoomResponse')
+    UpdateSipMediaApplicationCallRequest = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationCallRequest')
+    UpdateSipMediaApplicationCallResponse = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationCallResponse')
+    UpdateSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationRequest')
+    UpdateSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationResponse')
+    UpdateSipRuleRequest = Shapes::StructureShape.new(name: 'UpdateSipRuleRequest')
+    UpdateSipRuleResponse = Shapes::StructureShape.new(name: 'UpdateSipRuleResponse')
     UpdateUserRequest = Shapes::StructureShape.new(name: 'UpdateUserRequest')
     UpdateUserRequestItem = Shapes::StructureShape.new(name: 'UpdateUserRequestItem')
     UpdateUserRequestItemList = Shapes::ListShape.new(name: 'UpdateUserRequestItemList')
@@ -383,12 +591,15 @@ module Aws::Chime
     UpdateVoiceConnectorRequest = Shapes::StructureShape.new(name: 'UpdateVoiceConnectorRequest')
     UpdateVoiceConnectorResponse = Shapes::StructureShape.new(name: 'UpdateVoiceConnectorResponse')
     UriType = Shapes::StringShape.new(name: 'UriType')
+    UrlType = Shapes::StringShape.new(name: 'UrlType')
     User = Shapes::StructureShape.new(name: 'User')
     UserEmailList = Shapes::ListShape.new(name: 'UserEmailList')
     UserError = Shapes::StructureShape.new(name: 'UserError')
     UserErrorList = Shapes::ListShape.new(name: 'UserErrorList')
+    UserId = Shapes::StringShape.new(name: 'UserId')
     UserIdList = Shapes::ListShape.new(name: 'UserIdList')
     UserList = Shapes::ListShape.new(name: 'UserList')
+    UserName = Shapes::StringShape.new(name: 'UserName')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     UserType = Shapes::StringShape.new(name: 'UserType')
     VoiceConnector = Shapes::StructureShape.new(name: 'VoiceConnector')
@@ -426,6 +637,57 @@ module Aws::Chime
     AlexaForBusinessMetadata.add_member(:is_alexa_for_business_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsAlexaForBusinessEnabled"))
     AlexaForBusinessMetadata.add_member(:alexa_for_business_room_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "AlexaForBusinessRoomArn"))
     AlexaForBusinessMetadata.struct_class = Types::AlexaForBusinessMetadata
+
+    AppInstance.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    AppInstance.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
+    AppInstance.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstance.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstance.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstance.struct_class = Types::AppInstance
+
+    AppInstanceAdmin.add_member(:admin, Shapes::ShapeRef.new(shape: Identity, location_name: "Admin"))
+    AppInstanceAdmin.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    AppInstanceAdmin.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstanceAdmin.struct_class = Types::AppInstanceAdmin
+
+    AppInstanceAdminList.member = Shapes::ShapeRef.new(shape: AppInstanceAdminSummary)
+
+    AppInstanceAdminSummary.add_member(:admin, Shapes::ShapeRef.new(shape: Identity, location_name: "Admin"))
+    AppInstanceAdminSummary.struct_class = Types::AppInstanceAdminSummary
+
+    AppInstanceList.member = Shapes::ShapeRef.new(shape: AppInstanceSummary)
+
+    AppInstanceRetentionSettings.add_member(:channel_retention_settings, Shapes::ShapeRef.new(shape: ChannelRetentionSettings, location_name: "ChannelRetentionSettings"))
+    AppInstanceRetentionSettings.struct_class = Types::AppInstanceRetentionSettings
+
+    AppInstanceStreamingConfiguration.add_member(:app_instance_data_type, Shapes::ShapeRef.new(shape: AppInstanceDataType, required: true, location_name: "AppInstanceDataType"))
+    AppInstanceStreamingConfiguration.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    AppInstanceStreamingConfiguration.struct_class = Types::AppInstanceStreamingConfiguration
+
+    AppInstanceStreamingConfigurationList.member = Shapes::ShapeRef.new(shape: AppInstanceStreamingConfiguration)
+
+    AppInstanceSummary.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    AppInstanceSummary.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
+    AppInstanceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceSummary.struct_class = Types::AppInstanceSummary
+
+    AppInstanceUser.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUser.add_member(:name, Shapes::ShapeRef.new(shape: UserName, location_name: "Name"))
+    AppInstanceUser.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstanceUser.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceUser.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstanceUser.struct_class = Types::AppInstanceUser
+
+    AppInstanceUserList.member = Shapes::ShapeRef.new(shape: AppInstanceUserSummary)
+
+    AppInstanceUserMembershipSummary.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location_name: "Type"))
+    AppInstanceUserMembershipSummary.add_member(:read_marker_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReadMarkerTimestamp"))
+    AppInstanceUserMembershipSummary.struct_class = Types::AppInstanceUserMembershipSummary
+
+    AppInstanceUserSummary.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUserSummary.add_member(:name, Shapes::ShapeRef.new(shape: UserName, location_name: "Name"))
+    AppInstanceUserSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceUserSummary.struct_class = Types::AppInstanceUserSummary
 
     AssociatePhoneNumberWithUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "accountId"))
     AssociatePhoneNumberWithUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "userId"))
@@ -471,6 +733,12 @@ module Aws::Chime
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
 
+    BatchChannelMemberships.add_member(:invited_by, Shapes::ShapeRef.new(shape: Identity, location_name: "InvitedBy"))
+    BatchChannelMemberships.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location_name: "Type"))
+    BatchChannelMemberships.add_member(:members, Shapes::ShapeRef.new(shape: Members, location_name: "Members"))
+    BatchChannelMemberships.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    BatchChannelMemberships.struct_class = Types::BatchChannelMemberships
+
     BatchCreateAttendeeErrorList.member = Shapes::ShapeRef.new(shape: CreateAttendeeError)
 
     BatchCreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
@@ -480,6 +748,23 @@ module Aws::Chime
     BatchCreateAttendeeResponse.add_member(:attendees, Shapes::ShapeRef.new(shape: AttendeeList, location_name: "Attendees"))
     BatchCreateAttendeeResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateAttendeeErrorList, location_name: "Errors"))
     BatchCreateAttendeeResponse.struct_class = Types::BatchCreateAttendeeResponse
+
+    BatchCreateChannelMembershipError.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "MemberArn"))
+    BatchCreateChannelMembershipError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    BatchCreateChannelMembershipError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    BatchCreateChannelMembershipError.struct_class = Types::BatchCreateChannelMembershipError
+
+    BatchCreateChannelMembershipErrors.member = Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipError)
+
+    BatchCreateChannelMembershipRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    BatchCreateChannelMembershipRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location_name: "Type"))
+    BatchCreateChannelMembershipRequest.add_member(:member_arns, Shapes::ShapeRef.new(shape: MemberArns, required: true, location_name: "MemberArns"))
+    BatchCreateChannelMembershipRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    BatchCreateChannelMembershipRequest.struct_class = Types::BatchCreateChannelMembershipRequest
+
+    BatchCreateChannelMembershipResponse.add_member(:batch_channel_memberships, Shapes::ShapeRef.new(shape: BatchChannelMemberships, location_name: "BatchChannelMemberships"))
+    BatchCreateChannelMembershipResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipErrors, location_name: "Errors"))
+    BatchCreateChannelMembershipResponse.struct_class = Types::BatchCreateChannelMembershipResponse
 
     BatchCreateRoomMembershipRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     BatchCreateRoomMembershipRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
@@ -542,6 +827,102 @@ module Aws::Chime
 
     CapabilityList.member = Shapes::ShapeRef.new(shape: Capability)
 
+    Channel.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
+    Channel.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    Channel.add_member(:mode, Shapes::ShapeRef.new(shape: ChannelMode, location_name: "Mode"))
+    Channel.add_member(:privacy, Shapes::ShapeRef.new(shape: ChannelPrivacy, location_name: "Privacy"))
+    Channel.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    Channel.add_member(:created_by, Shapes::ShapeRef.new(shape: Identity, location_name: "CreatedBy"))
+    Channel.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    Channel.add_member(:last_message_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastMessageTimestamp"))
+    Channel.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    Channel.struct_class = Types::Channel
+
+    ChannelBan.add_member(:member, Shapes::ShapeRef.new(shape: Identity, location_name: "Member"))
+    ChannelBan.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ChannelBan.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    ChannelBan.add_member(:created_by, Shapes::ShapeRef.new(shape: Identity, location_name: "CreatedBy"))
+    ChannelBan.struct_class = Types::ChannelBan
+
+    ChannelBanSummary.add_member(:member, Shapes::ShapeRef.new(shape: Identity, location_name: "Member"))
+    ChannelBanSummary.struct_class = Types::ChannelBanSummary
+
+    ChannelBanSummaryList.member = Shapes::ShapeRef.new(shape: ChannelBanSummary)
+
+    ChannelMembership.add_member(:invited_by, Shapes::ShapeRef.new(shape: Identity, location_name: "InvitedBy"))
+    ChannelMembership.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location_name: "Type"))
+    ChannelMembership.add_member(:member, Shapes::ShapeRef.new(shape: Identity, location_name: "Member"))
+    ChannelMembership.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ChannelMembership.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    ChannelMembership.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    ChannelMembership.struct_class = Types::ChannelMembership
+
+    ChannelMembershipForAppInstanceUserSummary.add_member(:channel_summary, Shapes::ShapeRef.new(shape: ChannelSummary, location_name: "ChannelSummary"))
+    ChannelMembershipForAppInstanceUserSummary.add_member(:app_instance_user_membership_summary, Shapes::ShapeRef.new(shape: AppInstanceUserMembershipSummary, location_name: "AppInstanceUserMembershipSummary"))
+    ChannelMembershipForAppInstanceUserSummary.struct_class = Types::ChannelMembershipForAppInstanceUserSummary
+
+    ChannelMembershipForAppInstanceUserSummaryList.member = Shapes::ShapeRef.new(shape: ChannelMembershipForAppInstanceUserSummary)
+
+    ChannelMembershipSummary.add_member(:member, Shapes::ShapeRef.new(shape: Identity, location_name: "Member"))
+    ChannelMembershipSummary.struct_class = Types::ChannelMembershipSummary
+
+    ChannelMembershipSummaryList.member = Shapes::ShapeRef.new(shape: ChannelMembershipSummary)
+
+    ChannelMessage.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ChannelMessage.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    ChannelMessage.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "Content"))
+    ChannelMessage.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    ChannelMessage.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMessageType, location_name: "Type"))
+    ChannelMessage.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    ChannelMessage.add_member(:last_edited_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastEditedTimestamp"))
+    ChannelMessage.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    ChannelMessage.add_member(:sender, Shapes::ShapeRef.new(shape: Identity, location_name: "Sender"))
+    ChannelMessage.add_member(:redacted, Shapes::ShapeRef.new(shape: NonNullableBoolean, location_name: "Redacted"))
+    ChannelMessage.add_member(:persistence, Shapes::ShapeRef.new(shape: ChannelMessagePersistenceType, location_name: "Persistence"))
+    ChannelMessage.struct_class = Types::ChannelMessage
+
+    ChannelMessageSummary.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    ChannelMessageSummary.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "Content"))
+    ChannelMessageSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    ChannelMessageSummary.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMessageType, location_name: "Type"))
+    ChannelMessageSummary.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    ChannelMessageSummary.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    ChannelMessageSummary.add_member(:last_edited_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastEditedTimestamp"))
+    ChannelMessageSummary.add_member(:sender, Shapes::ShapeRef.new(shape: Identity, location_name: "Sender"))
+    ChannelMessageSummary.add_member(:redacted, Shapes::ShapeRef.new(shape: NonNullableBoolean, location_name: "Redacted"))
+    ChannelMessageSummary.struct_class = Types::ChannelMessageSummary
+
+    ChannelMessageSummaryList.member = Shapes::ShapeRef.new(shape: ChannelMessageSummary)
+
+    ChannelModeratedByAppInstanceUserSummary.add_member(:channel_summary, Shapes::ShapeRef.new(shape: ChannelSummary, location_name: "ChannelSummary"))
+    ChannelModeratedByAppInstanceUserSummary.struct_class = Types::ChannelModeratedByAppInstanceUserSummary
+
+    ChannelModeratedByAppInstanceUserSummaryList.member = Shapes::ShapeRef.new(shape: ChannelModeratedByAppInstanceUserSummary)
+
+    ChannelModerator.add_member(:moderator, Shapes::ShapeRef.new(shape: Identity, location_name: "Moderator"))
+    ChannelModerator.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ChannelModerator.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    ChannelModerator.add_member(:created_by, Shapes::ShapeRef.new(shape: Identity, location_name: "CreatedBy"))
+    ChannelModerator.struct_class = Types::ChannelModerator
+
+    ChannelModeratorSummary.add_member(:moderator, Shapes::ShapeRef.new(shape: Identity, location_name: "Moderator"))
+    ChannelModeratorSummary.struct_class = Types::ChannelModeratorSummary
+
+    ChannelModeratorSummaryList.member = Shapes::ShapeRef.new(shape: ChannelModeratorSummary)
+
+    ChannelRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    ChannelRetentionSettings.struct_class = Types::ChannelRetentionSettings
+
+    ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
+    ChannelSummary.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ChannelSummary.add_member(:mode, Shapes::ShapeRef.new(shape: ChannelMode, location_name: "Mode"))
+    ChannelSummary.add_member(:privacy, Shapes::ShapeRef.new(shape: ChannelPrivacy, location_name: "Privacy"))
+    ChannelSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    ChannelSummary.add_member(:last_message_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastMessageTimestamp"))
+    ChannelSummary.struct_class = Types::ChannelSummary
+
+    ChannelSummaryList.member = Shapes::ShapeRef.new(shape: ChannelSummary)
+
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -556,6 +937,34 @@ module Aws::Chime
 
     CreateAccountResponse.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))
     CreateAccountResponse.struct_class = Types::CreateAccountResponse
+
+    CreateAppInstanceAdminRequest.add_member(:app_instance_admin_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "AppInstanceAdminArn"))
+    CreateAppInstanceAdminRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    CreateAppInstanceAdminRequest.struct_class = Types::CreateAppInstanceAdminRequest
+
+    CreateAppInstanceAdminResponse.add_member(:app_instance_admin, Shapes::ShapeRef.new(shape: Identity, location_name: "AppInstanceAdmin"))
+    CreateAppInstanceAdminResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    CreateAppInstanceAdminResponse.struct_class = Types::CreateAppInstanceAdminResponse
+
+    CreateAppInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
+    CreateAppInstanceRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    CreateAppInstanceRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAppInstanceRequest.struct_class = Types::CreateAppInstanceRequest
+
+    CreateAppInstanceResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    CreateAppInstanceResponse.struct_class = Types::CreateAppInstanceResponse
+
+    CreateAppInstanceUserRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "AppInstanceArn"))
+    CreateAppInstanceUserRequest.add_member(:app_instance_user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "AppInstanceUserId"))
+    CreateAppInstanceUserRequest.add_member(:name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "Name"))
+    CreateAppInstanceUserRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    CreateAppInstanceUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppInstanceUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAppInstanceUserRequest.struct_class = Types::CreateAppInstanceUserRequest
+
+    CreateAppInstanceUserResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    CreateAppInstanceUserResponse.struct_class = Types::CreateAppInstanceUserResponse
 
     CreateAttendeeError.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserIdType, location_name: "ExternalUserId"))
     CreateAttendeeError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
@@ -583,6 +992,66 @@ module Aws::Chime
 
     CreateBotResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
     CreateBotResponse.struct_class = Types::CreateBotResponse
+
+    CreateChannelBanRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    CreateChannelBanRequest.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "MemberArn"))
+    CreateChannelBanRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    CreateChannelBanRequest.struct_class = Types::CreateChannelBanRequest
+
+    CreateChannelBanResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    CreateChannelBanResponse.add_member(:member, Shapes::ShapeRef.new(shape: Identity, location_name: "Member"))
+    CreateChannelBanResponse.struct_class = Types::CreateChannelBanResponse
+
+    CreateChannelMembershipRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    CreateChannelMembershipRequest.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "MemberArn"))
+    CreateChannelMembershipRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, required: true, location_name: "Type"))
+    CreateChannelMembershipRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    CreateChannelMembershipRequest.struct_class = Types::CreateChannelMembershipRequest
+
+    CreateChannelMembershipResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    CreateChannelMembershipResponse.add_member(:member, Shapes::ShapeRef.new(shape: Identity, location_name: "Member"))
+    CreateChannelMembershipResponse.struct_class = Types::CreateChannelMembershipResponse
+
+    CreateChannelModeratorRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    CreateChannelModeratorRequest.add_member(:channel_moderator_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "ChannelModeratorArn"))
+    CreateChannelModeratorRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    CreateChannelModeratorRequest.struct_class = Types::CreateChannelModeratorRequest
+
+    CreateChannelModeratorResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    CreateChannelModeratorResponse.add_member(:channel_moderator, Shapes::ShapeRef.new(shape: Identity, location_name: "ChannelModerator"))
+    CreateChannelModeratorResponse.struct_class = Types::CreateChannelModeratorResponse
+
+    CreateChannelRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "AppInstanceArn"))
+    CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
+    CreateChannelRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ChannelMode, location_name: "Mode"))
+    CreateChannelRequest.add_member(:privacy, Shapes::ShapeRef.new(shape: ChannelPrivacy, location_name: "Privacy"))
+    CreateChannelRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    CreateChannelRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    CreateChannelRequest.struct_class = Types::CreateChannelRequest
+
+    CreateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    CreateChannelResponse.struct_class = Types::CreateChannelResponse
+
+    CreateMediaCapturePipelineRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: MediaPipelineSourceType, required: true, location_name: "SourceType"))
+    CreateMediaCapturePipelineRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SourceArn"))
+    CreateMediaCapturePipelineRequest.add_member(:sink_type, Shapes::ShapeRef.new(shape: MediaPipelineSinkType, required: true, location_name: "SinkType"))
+    CreateMediaCapturePipelineRequest.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SinkArn"))
+    CreateMediaCapturePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaCapturePipelineRequest.struct_class = Types::CreateMediaCapturePipelineRequest
+
+    CreateMediaCapturePipelineResponse.add_member(:media_capture_pipeline, Shapes::ShapeRef.new(shape: MediaCapturePipeline, location_name: "MediaCapturePipeline"))
+    CreateMediaCapturePipelineResponse.struct_class = Types::CreateMediaCapturePipelineResponse
+
+    CreateMeetingDialOutRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    CreateMeetingDialOutRequest.add_member(:from_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "FromPhoneNumber"))
+    CreateMeetingDialOutRequest.add_member(:to_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "ToPhoneNumber"))
+    CreateMeetingDialOutRequest.add_member(:join_token, Shapes::ShapeRef.new(shape: JoinTokenString, required: true, location_name: "JoinToken"))
+    CreateMeetingDialOutRequest.struct_class = Types::CreateMeetingDialOutRequest
+
+    CreateMeetingDialOutResponse.add_member(:transaction_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "TransactionId"))
+    CreateMeetingDialOutResponse.struct_class = Types::CreateMeetingDialOutResponse
 
     CreateMeetingRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateMeetingRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingIdType, location_name: "ExternalMeetingId"))
@@ -648,6 +1117,32 @@ module Aws::Chime
     CreateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     CreateRoomResponse.struct_class = Types::CreateRoomResponse
 
+    CreateSipMediaApplicationCallRequest.add_member(:from_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "FromPhoneNumber"))
+    CreateSipMediaApplicationCallRequest.add_member(:to_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "ToPhoneNumber"))
+    CreateSipMediaApplicationCallRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    CreateSipMediaApplicationCallRequest.struct_class = Types::CreateSipMediaApplicationCallRequest
+
+    CreateSipMediaApplicationCallResponse.add_member(:sip_media_application_call, Shapes::ShapeRef.new(shape: SipMediaApplicationCall, location_name: "SipMediaApplicationCall"))
+    CreateSipMediaApplicationCallResponse.struct_class = Types::CreateSipMediaApplicationCallResponse
+
+    CreateSipMediaApplicationRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AwsRegion"))
+    CreateSipMediaApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, required: true, location_name: "Name"))
+    CreateSipMediaApplicationRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, required: true, location_name: "Endpoints"))
+    CreateSipMediaApplicationRequest.struct_class = Types::CreateSipMediaApplicationRequest
+
+    CreateSipMediaApplicationResponse.add_member(:sip_media_application, Shapes::ShapeRef.new(shape: SipMediaApplication, location_name: "SipMediaApplication"))
+    CreateSipMediaApplicationResponse.struct_class = Types::CreateSipMediaApplicationResponse
+
+    CreateSipRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipRuleName, required: true, location_name: "Name"))
+    CreateSipRuleRequest.add_member(:trigger_type, Shapes::ShapeRef.new(shape: SipRuleTriggerType, required: true, location_name: "TriggerType"))
+    CreateSipRuleRequest.add_member(:trigger_value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TriggerValue"))
+    CreateSipRuleRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
+    CreateSipRuleRequest.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, required: true, location_name: "TargetApplications"))
+    CreateSipRuleRequest.struct_class = Types::CreateSipRuleRequest
+
+    CreateSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
+    CreateSipRuleResponse.struct_class = Types::CreateSipRuleResponse
+
     CreateUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     CreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     CreateUserRequest.add_member(:email, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
@@ -690,13 +1185,53 @@ module Aws::Chime
 
     DeleteAccountResponse.struct_class = Types::DeleteAccountResponse
 
+    DeleteAppInstanceAdminRequest.add_member(:app_instance_admin_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceAdminArn"))
+    DeleteAppInstanceAdminRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    DeleteAppInstanceAdminRequest.struct_class = Types::DeleteAppInstanceAdminRequest
+
+    DeleteAppInstanceRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    DeleteAppInstanceRequest.struct_class = Types::DeleteAppInstanceRequest
+
+    DeleteAppInstanceStreamingConfigurationsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    DeleteAppInstanceStreamingConfigurationsRequest.struct_class = Types::DeleteAppInstanceStreamingConfigurationsRequest
+
+    DeleteAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
+    DeleteAppInstanceUserRequest.struct_class = Types::DeleteAppInstanceUserRequest
+
     DeleteAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     DeleteAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "attendeeId"))
     DeleteAttendeeRequest.struct_class = Types::DeleteAttendeeRequest
 
+    DeleteChannelBanRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DeleteChannelBanRequest.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "memberArn"))
+    DeleteChannelBanRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DeleteChannelBanRequest.struct_class = Types::DeleteChannelBanRequest
+
+    DeleteChannelMembershipRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DeleteChannelMembershipRequest.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "memberArn"))
+    DeleteChannelMembershipRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DeleteChannelMembershipRequest.struct_class = Types::DeleteChannelMembershipRequest
+
+    DeleteChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DeleteChannelMessageRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location: "uri", location_name: "messageId"))
+    DeleteChannelMessageRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DeleteChannelMessageRequest.struct_class = Types::DeleteChannelMessageRequest
+
+    DeleteChannelModeratorRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DeleteChannelModeratorRequest.add_member(:channel_moderator_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelModeratorArn"))
+    DeleteChannelModeratorRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DeleteChannelModeratorRequest.struct_class = Types::DeleteChannelModeratorRequest
+
+    DeleteChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DeleteChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
+
     DeleteEventsConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     DeleteEventsConfigurationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
     DeleteEventsConfigurationRequest.struct_class = Types::DeleteEventsConfigurationRequest
+
+    DeleteMediaCapturePipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
+    DeleteMediaCapturePipelineRequest.struct_class = Types::DeleteMediaCapturePipelineRequest
 
     DeleteMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     DeleteMeetingRequest.struct_class = Types::DeleteMeetingRequest
@@ -716,6 +1251,12 @@ module Aws::Chime
     DeleteRoomRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     DeleteRoomRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
     DeleteRoomRequest.struct_class = Types::DeleteRoomRequest
+
+    DeleteSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    DeleteSipMediaApplicationRequest.struct_class = Types::DeleteSipMediaApplicationRequest
+
+    DeleteSipRuleRequest.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipRuleId"))
+    DeleteSipRuleRequest.struct_class = Types::DeleteSipRuleRequest
 
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest.struct_class = Types::DeleteVoiceConnectorEmergencyCallingConfigurationRequest
@@ -741,6 +1282,72 @@ module Aws::Chime
 
     DeleteVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorTerminationRequest.struct_class = Types::DeleteVoiceConnectorTerminationRequest
+
+    DescribeAppInstanceAdminRequest.add_member(:app_instance_admin_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceAdminArn"))
+    DescribeAppInstanceAdminRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    DescribeAppInstanceAdminRequest.struct_class = Types::DescribeAppInstanceAdminRequest
+
+    DescribeAppInstanceAdminResponse.add_member(:app_instance_admin, Shapes::ShapeRef.new(shape: AppInstanceAdmin, location_name: "AppInstanceAdmin"))
+    DescribeAppInstanceAdminResponse.struct_class = Types::DescribeAppInstanceAdminResponse
+
+    DescribeAppInstanceRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    DescribeAppInstanceRequest.struct_class = Types::DescribeAppInstanceRequest
+
+    DescribeAppInstanceResponse.add_member(:app_instance, Shapes::ShapeRef.new(shape: AppInstance, location_name: "AppInstance"))
+    DescribeAppInstanceResponse.struct_class = Types::DescribeAppInstanceResponse
+
+    DescribeAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
+    DescribeAppInstanceUserRequest.struct_class = Types::DescribeAppInstanceUserRequest
+
+    DescribeAppInstanceUserResponse.add_member(:app_instance_user, Shapes::ShapeRef.new(shape: AppInstanceUser, location_name: "AppInstanceUser"))
+    DescribeAppInstanceUserResponse.struct_class = Types::DescribeAppInstanceUserResponse
+
+    DescribeChannelBanRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DescribeChannelBanRequest.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "memberArn"))
+    DescribeChannelBanRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DescribeChannelBanRequest.struct_class = Types::DescribeChannelBanRequest
+
+    DescribeChannelBanResponse.add_member(:channel_ban, Shapes::ShapeRef.new(shape: ChannelBan, location_name: "ChannelBan"))
+    DescribeChannelBanResponse.struct_class = Types::DescribeChannelBanResponse
+
+    DescribeChannelMembershipForAppInstanceUserRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DescribeChannelMembershipForAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "querystring", location_name: "app-instance-user-arn"))
+    DescribeChannelMembershipForAppInstanceUserRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DescribeChannelMembershipForAppInstanceUserRequest.struct_class = Types::DescribeChannelMembershipForAppInstanceUserRequest
+
+    DescribeChannelMembershipForAppInstanceUserResponse.add_member(:channel_membership, Shapes::ShapeRef.new(shape: ChannelMembershipForAppInstanceUserSummary, location_name: "ChannelMembership"))
+    DescribeChannelMembershipForAppInstanceUserResponse.struct_class = Types::DescribeChannelMembershipForAppInstanceUserResponse
+
+    DescribeChannelMembershipRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DescribeChannelMembershipRequest.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "memberArn"))
+    DescribeChannelMembershipRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DescribeChannelMembershipRequest.struct_class = Types::DescribeChannelMembershipRequest
+
+    DescribeChannelMembershipResponse.add_member(:channel_membership, Shapes::ShapeRef.new(shape: ChannelMembership, location_name: "ChannelMembership"))
+    DescribeChannelMembershipResponse.struct_class = Types::DescribeChannelMembershipResponse
+
+    DescribeChannelModeratedByAppInstanceUserRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DescribeChannelModeratedByAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "querystring", location_name: "app-instance-user-arn"))
+    DescribeChannelModeratedByAppInstanceUserRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DescribeChannelModeratedByAppInstanceUserRequest.struct_class = Types::DescribeChannelModeratedByAppInstanceUserRequest
+
+    DescribeChannelModeratedByAppInstanceUserResponse.add_member(:channel, Shapes::ShapeRef.new(shape: ChannelModeratedByAppInstanceUserSummary, location_name: "Channel"))
+    DescribeChannelModeratedByAppInstanceUserResponse.struct_class = Types::DescribeChannelModeratedByAppInstanceUserResponse
+
+    DescribeChannelModeratorRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DescribeChannelModeratorRequest.add_member(:channel_moderator_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelModeratorArn"))
+    DescribeChannelModeratorRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DescribeChannelModeratorRequest.struct_class = Types::DescribeChannelModeratorRequest
+
+    DescribeChannelModeratorResponse.add_member(:channel_moderator, Shapes::ShapeRef.new(shape: ChannelModerator, location_name: "ChannelModerator"))
+    DescribeChannelModeratorResponse.struct_class = Types::DescribeChannelModeratorResponse
+
+    DescribeChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    DescribeChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
+
+    DescribeChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
+    DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DisassociatePhoneNumberFromUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "accountId"))
     DisassociatePhoneNumberFromUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "userId"))
@@ -798,6 +1405,19 @@ module Aws::Chime
     GetAccountSettingsResponse.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "AccountSettings"))
     GetAccountSettingsResponse.struct_class = Types::GetAccountSettingsResponse
 
+    GetAppInstanceRetentionSettingsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    GetAppInstanceRetentionSettingsRequest.struct_class = Types::GetAppInstanceRetentionSettingsRequest
+
+    GetAppInstanceRetentionSettingsResponse.add_member(:app_instance_retention_settings, Shapes::ShapeRef.new(shape: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings"))
+    GetAppInstanceRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InitiateDeletionTimestamp"))
+    GetAppInstanceRetentionSettingsResponse.struct_class = Types::GetAppInstanceRetentionSettingsResponse
+
+    GetAppInstanceStreamingConfigurationsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    GetAppInstanceStreamingConfigurationsRequest.struct_class = Types::GetAppInstanceStreamingConfigurationsRequest
+
+    GetAppInstanceStreamingConfigurationsResponse.add_member(:app_instance_streaming_configurations, Shapes::ShapeRef.new(shape: AppInstanceStreamingConfigurationList, location_name: "AppInstanceStreamingConfigurations"))
+    GetAppInstanceStreamingConfigurationsResponse.struct_class = Types::GetAppInstanceStreamingConfigurationsResponse
+
     GetAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     GetAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "attendeeId"))
     GetAttendeeRequest.struct_class = Types::GetAttendeeRequest
@@ -812,6 +1432,14 @@ module Aws::Chime
     GetBotResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
     GetBotResponse.struct_class = Types::GetBotResponse
 
+    GetChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    GetChannelMessageRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location: "uri", location_name: "messageId"))
+    GetChannelMessageRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    GetChannelMessageRequest.struct_class = Types::GetChannelMessageRequest
+
+    GetChannelMessageResponse.add_member(:channel_message, Shapes::ShapeRef.new(shape: ChannelMessage, location_name: "ChannelMessage"))
+    GetChannelMessageResponse.struct_class = Types::GetChannelMessageResponse
+
     GetEventsConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     GetEventsConfigurationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
     GetEventsConfigurationRequest.struct_class = Types::GetEventsConfigurationRequest
@@ -823,11 +1451,22 @@ module Aws::Chime
     GetGlobalSettingsResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, location_name: "VoiceConnector"))
     GetGlobalSettingsResponse.struct_class = Types::GetGlobalSettingsResponse
 
+    GetMediaCapturePipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
+    GetMediaCapturePipelineRequest.struct_class = Types::GetMediaCapturePipelineRequest
+
+    GetMediaCapturePipelineResponse.add_member(:media_capture_pipeline, Shapes::ShapeRef.new(shape: MediaCapturePipeline, location_name: "MediaCapturePipeline"))
+    GetMediaCapturePipelineResponse.struct_class = Types::GetMediaCapturePipelineResponse
+
     GetMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     GetMeetingRequest.struct_class = Types::GetMeetingRequest
 
     GetMeetingResponse.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
     GetMeetingResponse.struct_class = Types::GetMeetingResponse
+
+    GetMessagingSessionEndpointRequest.struct_class = Types::GetMessagingSessionEndpointRequest
+
+    GetMessagingSessionEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: MessagingSessionEndpoint, location_name: "Endpoint"))
+    GetMessagingSessionEndpointResponse.struct_class = Types::GetMessagingSessionEndpointResponse
 
     GetPhoneNumberOrderRequest.add_member(:phone_number_order_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "phoneNumberOrderId"))
     GetPhoneNumberOrderRequest.struct_class = Types::GetPhoneNumberOrderRequest
@@ -865,6 +1504,24 @@ module Aws::Chime
 
     GetRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     GetRoomResponse.struct_class = Types::GetRoomResponse
+
+    GetSipMediaApplicationLoggingConfigurationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    GetSipMediaApplicationLoggingConfigurationRequest.struct_class = Types::GetSipMediaApplicationLoggingConfigurationRequest
+
+    GetSipMediaApplicationLoggingConfigurationResponse.add_member(:sip_media_application_logging_configuration, Shapes::ShapeRef.new(shape: SipMediaApplicationLoggingConfiguration, location_name: "SipMediaApplicationLoggingConfiguration"))
+    GetSipMediaApplicationLoggingConfigurationResponse.struct_class = Types::GetSipMediaApplicationLoggingConfigurationResponse
+
+    GetSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    GetSipMediaApplicationRequest.struct_class = Types::GetSipMediaApplicationRequest
+
+    GetSipMediaApplicationResponse.add_member(:sip_media_application, Shapes::ShapeRef.new(shape: SipMediaApplication, location_name: "SipMediaApplication"))
+    GetSipMediaApplicationResponse.struct_class = Types::GetSipMediaApplicationResponse
+
+    GetSipRuleRequest.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipRuleId"))
+    GetSipRuleRequest.struct_class = Types::GetSipRuleRequest
+
+    GetSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
+    GetSipRuleResponse.struct_class = Types::GetSipRuleResponse
 
     GetUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     GetUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
@@ -934,6 +1591,10 @@ module Aws::Chime
     GetVoiceConnectorTerminationResponse.add_member(:termination, Shapes::ShapeRef.new(shape: Termination, location_name: "Termination"))
     GetVoiceConnectorTerminationResponse.struct_class = Types::GetVoiceConnectorTerminationResponse
 
+    Identity.add_member(:arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "Arn"))
+    Identity.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    Identity.struct_class = Types::Identity
+
     Invite.add_member(:invite_id, Shapes::ShapeRef.new(shape: String, location_name: "InviteId"))
     Invite.add_member(:status, Shapes::ShapeRef.new(shape: InviteStatus, location_name: "Status"))
     Invite.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
@@ -962,6 +1623,34 @@ module Aws::Chime
     ListAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAccountsResponse.struct_class = Types::ListAccountsResponse
 
+    ListAppInstanceAdminsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    ListAppInstanceAdminsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListAppInstanceAdminsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListAppInstanceAdminsRequest.struct_class = Types::ListAppInstanceAdminsRequest
+
+    ListAppInstanceAdminsResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    ListAppInstanceAdminsResponse.add_member(:app_instance_admins, Shapes::ShapeRef.new(shape: AppInstanceAdminList, location_name: "AppInstanceAdmins"))
+    ListAppInstanceAdminsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstanceAdminsResponse.struct_class = Types::ListAppInstanceAdminsResponse
+
+    ListAppInstanceUsersRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "querystring", location_name: "app-instance-arn"))
+    ListAppInstanceUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListAppInstanceUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListAppInstanceUsersRequest.struct_class = Types::ListAppInstanceUsersRequest
+
+    ListAppInstanceUsersResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    ListAppInstanceUsersResponse.add_member(:app_instance_users, Shapes::ShapeRef.new(shape: AppInstanceUserList, location_name: "AppInstanceUsers"))
+    ListAppInstanceUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstanceUsersResponse.struct_class = Types::ListAppInstanceUsersResponse
+
+    ListAppInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListAppInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListAppInstancesRequest.struct_class = Types::ListAppInstancesRequest
+
+    ListAppInstancesResponse.add_member(:app_instances, Shapes::ShapeRef.new(shape: AppInstanceList, location_name: "AppInstances"))
+    ListAppInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstancesResponse.struct_class = Types::ListAppInstancesResponse
+
     ListAttendeeTagsRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     ListAttendeeTagsRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "attendeeId"))
     ListAttendeeTagsRequest.struct_class = Types::ListAttendeeTagsRequest
@@ -986,6 +1675,93 @@ module Aws::Chime
     ListBotsResponse.add_member(:bots, Shapes::ShapeRef.new(shape: BotList, location_name: "Bots"))
     ListBotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListBotsResponse.struct_class = Types::ListBotsResponse
+
+    ListChannelBansRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    ListChannelBansRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListChannelBansRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListChannelBansRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    ListChannelBansRequest.struct_class = Types::ListChannelBansRequest
+
+    ListChannelBansResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ListChannelBansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelBansResponse.add_member(:channel_bans, Shapes::ShapeRef.new(shape: ChannelBanSummaryList, location_name: "ChannelBans"))
+    ListChannelBansResponse.struct_class = Types::ListChannelBansResponse
+
+    ListChannelMembershipsForAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location: "querystring", location_name: "app-instance-user-arn"))
+    ListChannelMembershipsForAppInstanceUserRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListChannelMembershipsForAppInstanceUserRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListChannelMembershipsForAppInstanceUserRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    ListChannelMembershipsForAppInstanceUserRequest.struct_class = Types::ListChannelMembershipsForAppInstanceUserRequest
+
+    ListChannelMembershipsForAppInstanceUserResponse.add_member(:channel_memberships, Shapes::ShapeRef.new(shape: ChannelMembershipForAppInstanceUserSummaryList, location_name: "ChannelMemberships"))
+    ListChannelMembershipsForAppInstanceUserResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelMembershipsForAppInstanceUserResponse.struct_class = Types::ListChannelMembershipsForAppInstanceUserResponse
+
+    ListChannelMembershipsRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    ListChannelMembershipsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location: "querystring", location_name: "type"))
+    ListChannelMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListChannelMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListChannelMembershipsRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    ListChannelMembershipsRequest.struct_class = Types::ListChannelMembershipsRequest
+
+    ListChannelMembershipsResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ListChannelMembershipsResponse.add_member(:channel_memberships, Shapes::ShapeRef.new(shape: ChannelMembershipSummaryList, location_name: "ChannelMemberships"))
+    ListChannelMembershipsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelMembershipsResponse.struct_class = Types::ListChannelMembershipsResponse
+
+    ListChannelMessagesRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    ListChannelMessagesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sort-order"))
+    ListChannelMessagesRequest.add_member(:not_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "not-before"))
+    ListChannelMessagesRequest.add_member(:not_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "not-after"))
+    ListChannelMessagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListChannelMessagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListChannelMessagesRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    ListChannelMessagesRequest.struct_class = Types::ListChannelMessagesRequest
+
+    ListChannelMessagesResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ListChannelMessagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelMessagesResponse.add_member(:channel_messages, Shapes::ShapeRef.new(shape: ChannelMessageSummaryList, location_name: "ChannelMessages"))
+    ListChannelMessagesResponse.struct_class = Types::ListChannelMessagesResponse
+
+    ListChannelModeratorsRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    ListChannelModeratorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListChannelModeratorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListChannelModeratorsRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    ListChannelModeratorsRequest.struct_class = Types::ListChannelModeratorsRequest
+
+    ListChannelModeratorsResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    ListChannelModeratorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelModeratorsResponse.add_member(:channel_moderators, Shapes::ShapeRef.new(shape: ChannelModeratorSummaryList, location_name: "ChannelModerators"))
+    ListChannelModeratorsResponse.struct_class = Types::ListChannelModeratorsResponse
+
+    ListChannelsModeratedByAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location: "querystring", location_name: "app-instance-user-arn"))
+    ListChannelsModeratedByAppInstanceUserRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListChannelsModeratedByAppInstanceUserRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListChannelsModeratedByAppInstanceUserRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    ListChannelsModeratedByAppInstanceUserRequest.struct_class = Types::ListChannelsModeratedByAppInstanceUserRequest
+
+    ListChannelsModeratedByAppInstanceUserResponse.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelModeratedByAppInstanceUserSummaryList, location_name: "Channels"))
+    ListChannelsModeratedByAppInstanceUserResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelsModeratedByAppInstanceUserResponse.struct_class = Types::ListChannelsModeratedByAppInstanceUserResponse
+
+    ListChannelsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "querystring", location_name: "app-instance-arn"))
+    ListChannelsRequest.add_member(:privacy, Shapes::ShapeRef.new(shape: ChannelPrivacy, location: "querystring", location_name: "privacy"))
+    ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListChannelsRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    ListChannelsRequest.struct_class = Types::ListChannelsRequest
+
+    ListChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelSummaryList, location_name: "Channels"))
+    ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelsResponse.struct_class = Types::ListChannelsResponse
+
+    ListMediaCapturePipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListMediaCapturePipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListMediaCapturePipelinesRequest.struct_class = Types::ListMediaCapturePipelinesRequest
+
+    ListMediaCapturePipelinesResponse.add_member(:media_capture_pipelines, Shapes::ShapeRef.new(shape: MediaCapturePipelineList, location_name: "MediaCapturePipelines"))
+    ListMediaCapturePipelinesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListMediaCapturePipelinesResponse.struct_class = Types::ListMediaCapturePipelinesResponse
 
     ListMeetingTagsRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     ListMeetingTagsRequest.struct_class = Types::ListMeetingTagsRequest
@@ -1051,6 +1827,29 @@ module Aws::Chime
     ListRoomsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListRoomsResponse.struct_class = Types::ListRoomsResponse
 
+    ListSipMediaApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListSipMediaApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "next-token"))
+    ListSipMediaApplicationsRequest.struct_class = Types::ListSipMediaApplicationsRequest
+
+    ListSipMediaApplicationsResponse.add_member(:sip_media_applications, Shapes::ShapeRef.new(shape: SipMediaApplicationList, location_name: "SipMediaApplications"))
+    ListSipMediaApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListSipMediaApplicationsResponse.struct_class = Types::ListSipMediaApplicationsResponse
+
+    ListSipRulesRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "sip-media-application"))
+    ListSipRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListSipRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "next-token"))
+    ListSipRulesRequest.struct_class = Types::ListSipRulesRequest
+
+    ListSipRulesResponse.add_member(:sip_rules, Shapes::ShapeRef.new(shape: SipRuleList, location_name: "SipRules"))
+    ListSipRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListSipRulesResponse.struct_class = Types::ListSipRulesResponse
+
+    ListSupportedPhoneNumberCountriesRequest.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, required: true, location: "querystring", location_name: "product-type"))
+    ListSupportedPhoneNumberCountriesRequest.struct_class = Types::ListSupportedPhoneNumberCountriesRequest
+
+    ListSupportedPhoneNumberCountriesResponse.add_member(:phone_number_countries, Shapes::ShapeRef.new(shape: PhoneNumberCountriesList, location_name: "PhoneNumberCountries"))
+    ListSupportedPhoneNumberCountriesResponse.struct_class = Types::ListSupportedPhoneNumberCountriesResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "arn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1099,6 +1898,18 @@ module Aws::Chime
 
     LogoutUserResponse.struct_class = Types::LogoutUserResponse
 
+    MediaCapturePipeline.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaPipelineId"))
+    MediaCapturePipeline.add_member(:source_type, Shapes::ShapeRef.new(shape: MediaPipelineSourceType, location_name: "SourceType"))
+    MediaCapturePipeline.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceArn"))
+    MediaCapturePipeline.add_member(:status, Shapes::ShapeRef.new(shape: MediaPipelineStatus, location_name: "Status"))
+    MediaCapturePipeline.add_member(:sink_type, Shapes::ShapeRef.new(shape: MediaPipelineSinkType, location_name: "SinkType"))
+    MediaCapturePipeline.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SinkArn"))
+    MediaCapturePipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    MediaCapturePipeline.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    MediaCapturePipeline.struct_class = Types::MediaCapturePipeline
+
+    MediaCapturePipelineList.member = Shapes::ShapeRef.new(shape: MediaCapturePipeline)
+
     MediaPlacement.add_member(:audio_host_url, Shapes::ShapeRef.new(shape: UriType, location_name: "AudioHostUrl"))
     MediaPlacement.add_member(:audio_fallback_url, Shapes::ShapeRef.new(shape: UriType, location_name: "AudioFallbackUrl"))
     MediaPlacement.add_member(:screen_data_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenDataUrl"))
@@ -1106,6 +1917,7 @@ module Aws::Chime
     MediaPlacement.add_member(:screen_viewing_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenViewingUrl"))
     MediaPlacement.add_member(:signaling_url, Shapes::ShapeRef.new(shape: UriType, location_name: "SignalingUrl"))
     MediaPlacement.add_member(:turn_control_url, Shapes::ShapeRef.new(shape: UriType, location_name: "TurnControlUrl"))
+    MediaPlacement.add_member(:event_ingestion_url, Shapes::ShapeRef.new(shape: UriType, location_name: "EventIngestionUrl"))
     MediaPlacement.struct_class = Types::MediaPlacement
 
     Meeting.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MeetingId"))
@@ -1131,6 +1943,8 @@ module Aws::Chime
     Member.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
     Member.struct_class = Types::Member
 
+    MemberArns.member = Shapes::ShapeRef.new(shape: ChimeArn)
+
     MemberError.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
     MemberError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     MemberError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -1138,11 +1952,16 @@ module Aws::Chime
 
     MemberErrorList.member = Shapes::ShapeRef.new(shape: MemberError)
 
+    Members.member = Shapes::ShapeRef.new(shape: Identity)
+
     MembershipItem.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
     MembershipItem.add_member(:role, Shapes::ShapeRef.new(shape: RoomMembershipRole, location_name: "Role"))
     MembershipItem.struct_class = Types::MembershipItem
 
     MembershipItemList.member = Shapes::ShapeRef.new(shape: MembershipItem)
+
+    MessagingSessionEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: UrlType, location_name: "Url"))
+    MessagingSessionEndpoint.struct_class = Types::MessagingSessionEndpoint
 
     NonEmptyStringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1179,6 +1998,7 @@ module Aws::Chime
 
     PhoneNumber.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumberId"))
     PhoneNumber.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "E164PhoneNumber"))
+    PhoneNumber.add_member(:country, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location_name: "Country"))
     PhoneNumber.add_member(:type, Shapes::ShapeRef.new(shape: PhoneNumberType, location_name: "Type"))
     PhoneNumber.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, location_name: "ProductType"))
     PhoneNumber.add_member(:status, Shapes::ShapeRef.new(shape: PhoneNumberStatus, location_name: "Status"))
@@ -1206,6 +2026,12 @@ module Aws::Chime
     PhoneNumberCapabilities.add_member(:outbound_mms, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "OutboundMMS"))
     PhoneNumberCapabilities.struct_class = Types::PhoneNumberCapabilities
 
+    PhoneNumberCountriesList.member = Shapes::ShapeRef.new(shape: PhoneNumberCountry)
+
+    PhoneNumberCountry.add_member(:country_code, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location_name: "CountryCode"))
+    PhoneNumberCountry.add_member(:supported_phone_number_types, Shapes::ShapeRef.new(shape: PhoneNumberTypeList, location_name: "SupportedPhoneNumberTypes"))
+    PhoneNumberCountry.struct_class = Types::PhoneNumberCountry
+
     PhoneNumberError.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PhoneNumberId"))
     PhoneNumberError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     PhoneNumberError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -1224,6 +2050,8 @@ module Aws::Chime
     PhoneNumberOrder.struct_class = Types::PhoneNumberOrder
 
     PhoneNumberOrderList.member = Shapes::ShapeRef.new(shape: PhoneNumberOrder)
+
+    PhoneNumberTypeList.member = Shapes::ShapeRef.new(shape: PhoneNumberType)
 
     Proxy.add_member(:default_session_expiry_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "DefaultSessionExpiryMinutes"))
     Proxy.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
@@ -1248,6 +2076,21 @@ module Aws::Chime
 
     ProxySessions.member = Shapes::ShapeRef.new(shape: ProxySession)
 
+    PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_retention_settings, Shapes::ShapeRef.new(shape: AppInstanceRetentionSettings, required: true, location_name: "AppInstanceRetentionSettings"))
+    PutAppInstanceRetentionSettingsRequest.struct_class = Types::PutAppInstanceRetentionSettingsRequest
+
+    PutAppInstanceRetentionSettingsResponse.add_member(:app_instance_retention_settings, Shapes::ShapeRef.new(shape: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings"))
+    PutAppInstanceRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InitiateDeletionTimestamp"))
+    PutAppInstanceRetentionSettingsResponse.struct_class = Types::PutAppInstanceRetentionSettingsResponse
+
+    PutAppInstanceStreamingConfigurationsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    PutAppInstanceStreamingConfigurationsRequest.add_member(:app_instance_streaming_configurations, Shapes::ShapeRef.new(shape: AppInstanceStreamingConfigurationList, required: true, location_name: "AppInstanceStreamingConfigurations"))
+    PutAppInstanceStreamingConfigurationsRequest.struct_class = Types::PutAppInstanceStreamingConfigurationsRequest
+
+    PutAppInstanceStreamingConfigurationsResponse.add_member(:app_instance_streaming_configurations, Shapes::ShapeRef.new(shape: AppInstanceStreamingConfigurationList, location_name: "AppInstanceStreamingConfigurations"))
+    PutAppInstanceStreamingConfigurationsResponse.struct_class = Types::PutAppInstanceStreamingConfigurationsResponse
+
     PutEventsConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     PutEventsConfigurationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
     PutEventsConfigurationRequest.add_member(:outbound_events_https_endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "OutboundEventsHTTPSEndpoint"))
@@ -1264,6 +2107,13 @@ module Aws::Chime
     PutRetentionSettingsResponse.add_member(:retention_settings, Shapes::ShapeRef.new(shape: RetentionSettings, location_name: "RetentionSettings"))
     PutRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "InitiateDeletionTimestamp"))
     PutRetentionSettingsResponse.struct_class = Types::PutRetentionSettingsResponse
+
+    PutSipMediaApplicationLoggingConfigurationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    PutSipMediaApplicationLoggingConfigurationRequest.add_member(:sip_media_application_logging_configuration, Shapes::ShapeRef.new(shape: SipMediaApplicationLoggingConfiguration, location_name: "SipMediaApplicationLoggingConfiguration"))
+    PutSipMediaApplicationLoggingConfigurationRequest.struct_class = Types::PutSipMediaApplicationLoggingConfigurationRequest
+
+    PutSipMediaApplicationLoggingConfigurationResponse.add_member(:sip_media_application_logging_configuration, Shapes::ShapeRef.new(shape: SipMediaApplicationLoggingConfiguration, location_name: "SipMediaApplicationLoggingConfiguration"))
+    PutSipMediaApplicationLoggingConfigurationResponse.struct_class = Types::PutSipMediaApplicationLoggingConfigurationResponse
 
     PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:emergency_calling_configuration, Shapes::ShapeRef.new(shape: EmergencyCallingConfiguration, required: true, location_name: "EmergencyCallingConfiguration"))
@@ -1313,6 +2163,15 @@ module Aws::Chime
 
     PutVoiceConnectorTerminationResponse.add_member(:termination, Shapes::ShapeRef.new(shape: Termination, location_name: "Termination"))
     PutVoiceConnectorTerminationResponse.struct_class = Types::PutVoiceConnectorTerminationResponse
+
+    RedactChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    RedactChannelMessageRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location: "uri", location_name: "messageId"))
+    RedactChannelMessageRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    RedactChannelMessageRequest.struct_class = Types::RedactChannelMessageRequest
+
+    RedactChannelMessageResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    RedactChannelMessageResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    RedactChannelMessageResponse.struct_class = Types::RedactChannelMessageResponse
 
     RedactConversationMessageRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     RedactConversationMessageRequest.add_member(:conversation_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "conversationId"))
@@ -1378,17 +2237,35 @@ module Aws::Chime
     RoomRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
     RoomRetentionSettings.struct_class = Types::RoomRetentionSettings
 
+    SMAUpdateCallArgumentsMap.key = Shapes::ShapeRef.new(shape: SensitiveString)
+    SMAUpdateCallArgumentsMap.value = Shapes::ShapeRef.new(shape: SensitiveString)
+
     SearchAvailablePhoneNumbersRequest.add_member(:area_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "area-code"))
     SearchAvailablePhoneNumbersRequest.add_member(:city, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "city"))
-    SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "country"))
+    SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location: "querystring", location_name: "country"))
     SearchAvailablePhoneNumbersRequest.add_member(:state, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "state"))
     SearchAvailablePhoneNumbersRequest.add_member(:toll_free_prefix, Shapes::ShapeRef.new(shape: TollFreePrefix, location: "querystring", location_name: "toll-free-prefix"))
+    SearchAvailablePhoneNumbersRequest.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, location: "querystring", location_name: "phone-number-type"))
     SearchAvailablePhoneNumbersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PhoneNumberMaxResults, location: "querystring", location_name: "max-results"))
     SearchAvailablePhoneNumbersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     SearchAvailablePhoneNumbersRequest.struct_class = Types::SearchAvailablePhoneNumbersRequest
 
     SearchAvailablePhoneNumbersResponse.add_member(:e164_phone_numbers, Shapes::ShapeRef.new(shape: E164PhoneNumberList, location_name: "E164PhoneNumbers"))
+    SearchAvailablePhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
+
+    SendChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    SendChannelMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: NonEmptyContent, required: true, location_name: "Content"))
+    SendChannelMessageRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMessageType, required: true, location_name: "Type"))
+    SendChannelMessageRequest.add_member(:persistence, Shapes::ShapeRef.new(shape: ChannelMessagePersistenceType, required: true, location_name: "Persistence"))
+    SendChannelMessageRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    SendChannelMessageRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendChannelMessageRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    SendChannelMessageRequest.struct_class = Types::SendChannelMessageRequest
+
+    SendChannelMessageResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    SendChannelMessageResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    SendChannelMessageResponse.struct_class = Types::SendChannelMessageResponse
 
     SensitiveStringList.member = Shapes::ShapeRef.new(shape: SensitiveString)
 
@@ -1404,6 +2281,46 @@ module Aws::Chime
     SigninDelegateGroup.struct_class = Types::SigninDelegateGroup
 
     SigninDelegateGroupList.member = Shapes::ShapeRef.new(shape: SigninDelegateGroup)
+
+    SipMediaApplication.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipMediaApplicationId"))
+    SipMediaApplication.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
+    SipMediaApplication.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
+    SipMediaApplication.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, location_name: "Endpoints"))
+    SipMediaApplication.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    SipMediaApplication.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    SipMediaApplication.struct_class = Types::SipMediaApplication
+
+    SipMediaApplicationCall.add_member(:transaction_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "TransactionId"))
+    SipMediaApplicationCall.struct_class = Types::SipMediaApplicationCall
+
+    SipMediaApplicationEndpoint.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "LambdaArn"))
+    SipMediaApplicationEndpoint.struct_class = Types::SipMediaApplicationEndpoint
+
+    SipMediaApplicationEndpointList.member = Shapes::ShapeRef.new(shape: SipMediaApplicationEndpoint)
+
+    SipMediaApplicationList.member = Shapes::ShapeRef.new(shape: SipMediaApplication)
+
+    SipMediaApplicationLoggingConfiguration.add_member(:enable_sip_media_application_message_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableSipMediaApplicationMessageLogs"))
+    SipMediaApplicationLoggingConfiguration.struct_class = Types::SipMediaApplicationLoggingConfiguration
+
+    SipRule.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipRuleId"))
+    SipRule.add_member(:name, Shapes::ShapeRef.new(shape: SipRuleName, location_name: "Name"))
+    SipRule.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
+    SipRule.add_member(:trigger_type, Shapes::ShapeRef.new(shape: SipRuleTriggerType, location_name: "TriggerType"))
+    SipRule.add_member(:trigger_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TriggerValue"))
+    SipRule.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, location_name: "TargetApplications"))
+    SipRule.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    SipRule.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    SipRule.struct_class = Types::SipRule
+
+    SipRuleList.member = Shapes::ShapeRef.new(shape: SipRule)
+
+    SipRuleTargetApplication.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipMediaApplicationId"))
+    SipRuleTargetApplication.add_member(:priority, Shapes::ShapeRef.new(shape: SipApplicationPriority, location_name: "Priority"))
+    SipRuleTargetApplication.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
+    SipRuleTargetApplication.struct_class = Types::SipRuleTargetApplication
+
+    SipRuleTargetApplicationList.member = Shapes::ShapeRef.new(shape: SipRuleTargetApplication)
 
     StreamingConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, required: true, location_name: "DataRetentionInHours"))
     StreamingConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
@@ -1481,6 +2398,7 @@ module Aws::Chime
 
     UpdateAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateAccountRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
+    UpdateAccountRequest.add_member(:default_license, Shapes::ShapeRef.new(shape: License, location_name: "DefaultLicense"))
     UpdateAccountRequest.struct_class = Types::UpdateAccountRequest
 
     UpdateAccountResponse.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))
@@ -1492,6 +2410,22 @@ module Aws::Chime
 
     UpdateAccountSettingsResponse.struct_class = Types::UpdateAccountSettingsResponse
 
+    UpdateAppInstanceRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
+    UpdateAppInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
+    UpdateAppInstanceRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    UpdateAppInstanceRequest.struct_class = Types::UpdateAppInstanceRequest
+
+    UpdateAppInstanceResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    UpdateAppInstanceResponse.struct_class = Types::UpdateAppInstanceResponse
+
+    UpdateAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
+    UpdateAppInstanceUserRequest.add_member(:name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "Name"))
+    UpdateAppInstanceUserRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    UpdateAppInstanceUserRequest.struct_class = Types::UpdateAppInstanceUserRequest
+
+    UpdateAppInstanceUserResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    UpdateAppInstanceUserResponse.struct_class = Types::UpdateAppInstanceUserResponse
+
     UpdateBotRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateBotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
     UpdateBotRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
@@ -1499,6 +2433,34 @@ module Aws::Chime
 
     UpdateBotResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
     UpdateBotResponse.struct_class = Types::UpdateBotResponse
+
+    UpdateChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    UpdateChannelMessageRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location: "uri", location_name: "messageId"))
+    UpdateChannelMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "Content"))
+    UpdateChannelMessageRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    UpdateChannelMessageRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    UpdateChannelMessageRequest.struct_class = Types::UpdateChannelMessageRequest
+
+    UpdateChannelMessageResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    UpdateChannelMessageResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    UpdateChannelMessageResponse.struct_class = Types::UpdateChannelMessageResponse
+
+    UpdateChannelReadMarkerRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    UpdateChannelReadMarkerRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    UpdateChannelReadMarkerRequest.struct_class = Types::UpdateChannelReadMarkerRequest
+
+    UpdateChannelReadMarkerResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    UpdateChannelReadMarkerResponse.struct_class = Types::UpdateChannelReadMarkerResponse
+
+    UpdateChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
+    UpdateChannelRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ChannelMode, required: true, location_name: "Mode"))
+    UpdateChannelRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    UpdateChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
+
+    UpdateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
     UpdateGlobalSettingsRequest.add_member(:business_calling, Shapes::ShapeRef.new(shape: BusinessCallingSettings, required: true, location_name: "BusinessCalling"))
     UpdateGlobalSettingsRequest.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, required: true, location_name: "VoiceConnector"))
@@ -1547,6 +2509,31 @@ module Aws::Chime
 
     UpdateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     UpdateRoomResponse.struct_class = Types::UpdateRoomResponse
+
+    UpdateSipMediaApplicationCallRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    UpdateSipMediaApplicationCallRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "transactionId"))
+    UpdateSipMediaApplicationCallRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: SMAUpdateCallArgumentsMap, required: true, location_name: "Arguments"))
+    UpdateSipMediaApplicationCallRequest.struct_class = Types::UpdateSipMediaApplicationCallRequest
+
+    UpdateSipMediaApplicationCallResponse.add_member(:sip_media_application_call, Shapes::ShapeRef.new(shape: SipMediaApplicationCall, location_name: "SipMediaApplicationCall"))
+    UpdateSipMediaApplicationCallResponse.struct_class = Types::UpdateSipMediaApplicationCallResponse
+
+    UpdateSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    UpdateSipMediaApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
+    UpdateSipMediaApplicationRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, location_name: "Endpoints"))
+    UpdateSipMediaApplicationRequest.struct_class = Types::UpdateSipMediaApplicationRequest
+
+    UpdateSipMediaApplicationResponse.add_member(:sip_media_application, Shapes::ShapeRef.new(shape: SipMediaApplication, location_name: "SipMediaApplication"))
+    UpdateSipMediaApplicationResponse.struct_class = Types::UpdateSipMediaApplicationResponse
+
+    UpdateSipRuleRequest.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipRuleId"))
+    UpdateSipRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipRuleName, required: true, location_name: "Name"))
+    UpdateSipRuleRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
+    UpdateSipRuleRequest.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, location_name: "TargetApplications"))
+    UpdateSipRuleRequest.struct_class = Types::UpdateSipRuleRequest
+
+    UpdateSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
+    UpdateSipRuleResponse.struct_class = Types::UpdateSipRuleResponse
 
     UpdateUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
@@ -1742,6 +2729,23 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:batch_create_channel_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateChannelMembership"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels/{channelArn}/memberships?operation=batch-create"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+      end)
+
       api.add_operation(:batch_create_room_membership, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchCreateRoomMembership"
         o.http_method = "POST"
@@ -1847,6 +2851,63 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_app_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/app-instances"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateAppInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_app_instance_admin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppInstanceAdmin"
+        o.http_method = "POST"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/admins"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateAppInstanceAdminRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppInstanceAdminResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppInstanceUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/app-instance-users"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppInstanceUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:create_attendee, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAttendee"
         o.http_method = "POST"
@@ -1879,12 +2940,118 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
       end)
 
+      api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_channel_ban, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannelBan"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels/{channelArn}/bans"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelBanRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelBanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_channel_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannelMembership"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels/{channelArn}/memberships"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_channel_moderator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannelModerator"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels/{channelArn}/moderators"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelModeratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelModeratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_media_capture_pipeline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMediaCapturePipeline"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-capture-pipelines"
+        o.input = Shapes::ShapeRef.new(shape: CreateMediaCapturePipelineRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMediaCapturePipelineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:create_meeting, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMeeting"
         o.http_method = "POST"
         o.http_request_uri = "/meetings"
         o.input = Shapes::ShapeRef.new(shape: CreateMeetingRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMeetingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_meeting_dial_out, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMeetingDialOut"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/dial-outs"
+        o.input = Shapes::ShapeRef.new(shape: CreateMeetingDialOutRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMeetingDialOutResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
@@ -1973,6 +3140,55 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSipMediaApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-media-applications"
+        o.input = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_sip_media_application_call, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSipMediaApplicationCall"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/calls"
+        o.input = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationCallRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationCallResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSipRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-rules"
+        o.input = Shapes::ShapeRef.new(shape: CreateSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSipRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUser"
         o.http_method = "POST"
@@ -2037,6 +3253,73 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:delete_app_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppInstance"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/app-instances/{appInstanceArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_app_instance_admin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppInstanceAdmin"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppInstanceAdminRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_app_instance_streaming_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppInstanceStreamingConfigurations"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/streaming-configurations"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppInstanceStreamingConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppInstanceUser"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/app-instance-users/{appInstanceUserArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:delete_attendee, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAttendee"
         o.http_method = "DELETE"
@@ -2048,6 +3331,92 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannel"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/channels/{channelArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_channel_ban, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannelBan"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/channels/{channelArn}/bans/{memberArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelBanRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_channel_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannelMembership"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/channels/{channelArn}/memberships/{memberArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_channel_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannelMessage"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/channels/{channelArn}/messages/{messageId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_channel_moderator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannelModerator"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/channels/{channelArn}/moderators/{channelModeratorArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelModeratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -2064,6 +3433,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+      end)
+
+      api.add_operation(:delete_media_capture_pipeline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMediaCapturePipeline"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/media-capture-pipelines/{mediaPipelineId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMediaCapturePipelineRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:delete_meeting, Seahorse::Model::Operation.new.tap do |o|
@@ -2136,6 +3520,38 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSipMediaApplication"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSipRule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2263,6 +3679,162 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:describe_app_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppInstance"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instances/{appInstanceArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_app_instance_admin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppInstanceAdmin"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppInstanceAdminRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppInstanceAdminResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppInstanceUser"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instance-users/{appInstanceUserArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppInstanceUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannel"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_channel_ban, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannelBan"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/bans/{memberArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelBanRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelBanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_channel_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannelMembership"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/memberships/{memberArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_channel_membership_for_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannelMembershipForAppInstanceUser"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}?scope=app-instance-user-membership"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelMembershipForAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelMembershipForAppInstanceUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_channel_moderated_by_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannelModeratedByAppInstanceUser"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}?scope=app-instance-user-moderated-channel"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelModeratedByAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelModeratedByAppInstanceUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:describe_channel_moderator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannelModerator"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/moderators/{channelModeratorArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelModeratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelModeratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:disassociate_phone_number_from_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociatePhoneNumberFromUser"
         o.http_method = "POST"
@@ -2353,6 +3925,39 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_app_instance_retention_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAppInstanceRetentionSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/retention-settings"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetAppInstanceRetentionSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAppInstanceRetentionSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_app_instance_streaming_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAppInstanceStreamingConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/streaming-configurations"
+        o.input = Shapes::ShapeRef.new(shape: GetAppInstanceStreamingConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAppInstanceStreamingConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:get_attendee, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAttendee"
         o.http_method = "GET"
@@ -2381,6 +3986,24 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+      end)
+
+      api.add_operation(:get_channel_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetChannelMessage"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/messages/{messageId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetChannelMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetChannelMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:get_events_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -2412,6 +4035,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_media_capture_pipeline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMediaCapturePipeline"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-capture-pipelines/{mediaPipelineId}"
+        o.input = Shapes::ShapeRef.new(shape: GetMediaCapturePipelineRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMediaCapturePipelineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:get_meeting, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMeeting"
         o.http_method = "GET"
@@ -2423,6 +4061,22 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_messaging_session_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMessagingSessionEndpoint"
+        o.http_method = "GET"
+        o.http_request_uri = "/endpoints/messaging-session"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetMessagingSessionEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMessagingSessionEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -2511,6 +4165,51 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSipMediaApplication"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSipMediaApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_sip_media_application_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSipMediaApplicationLoggingConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/logging-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetSipMediaApplicationLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSipMediaApplicationLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSipRule"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSipRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2717,6 +4416,75 @@ module Aws::Chime
         )
       end)
 
+      api.add_operation(:list_app_instance_admins, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppInstanceAdmins"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/admins"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListAppInstanceAdminsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppInstanceAdminsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_app_instance_users, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppInstanceUsers"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instance-users"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListAppInstanceUsersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppInstanceUsersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_app_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppInstances"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instances"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListAppInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppInstancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_attendee_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAttendeeTags"
         o.http_method = "GET"
@@ -2766,6 +4534,187 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channel_bans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelBans"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/bans"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListChannelBansRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelBansResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channel_memberships, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelMemberships"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/memberships"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListChannelMembershipsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelMembershipsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channel_memberships_for_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelMembershipsForAppInstanceUser"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels?scope=app-instance-user-memberships"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListChannelMembershipsForAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelMembershipsForAppInstanceUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channel_messages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelMessages"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/messages"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListChannelMessagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelMessagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channel_moderators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelModerators"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels/{channelArn}/moderators"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListChannelModeratorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelModeratorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannels"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channels_moderated_by_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelsModeratedByAppInstanceUser"
+        o.http_method = "GET"
+        o.http_request_uri = "/channels?scope=app-instance-user-moderated-channels"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListChannelsModeratedByAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelsModeratedByAppInstanceUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_media_capture_pipelines, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMediaCapturePipelines"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-capture-pipelines"
+        o.input = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2838,6 +4787,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2910,6 +4860,61 @@ module Aws::Chime
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_sip_media_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSipMediaApplications"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-media-applications"
+        o.input = Shapes::ShapeRef.new(shape: ListSipMediaApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSipMediaApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sip_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSipRules"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-rules"
+        o.input = Shapes::ShapeRef.new(shape: ListSipRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSipRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_supported_phone_number_countries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSupportedPhoneNumberCountries"
+        o.http_method = "GET"
+        o.http_request_uri = "/phone-number-countries"
+        o.input = Shapes::ShapeRef.new(shape: ListSupportedPhoneNumberCountriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSupportedPhoneNumberCountriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -3017,6 +5022,40 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:put_app_instance_retention_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAppInstanceRetentionSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/retention-settings"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: PutAppInstanceRetentionSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAppInstanceRetentionSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:put_app_instance_streaming_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAppInstanceStreamingConfigurations"
+        o.http_method = "PUT"
+        o.http_request_uri = "/app-instances/{appInstanceArn}/streaming-configurations"
+        o.input = Shapes::ShapeRef.new(shape: PutAppInstanceStreamingConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAppInstanceStreamingConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:put_events_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutEventsConfiguration"
         o.http_method = "PUT"
@@ -3043,6 +5082,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:put_sip_media_application_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSipMediaApplicationLoggingConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/logging-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutSipMediaApplicationLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutSipMediaApplicationLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -3155,6 +5209,23 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:redact_channel_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RedactChannelMessage"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels/{channelArn}/messages/{messageId}?operation=redact"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: RedactChannelMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: RedactChannelMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:redact_conversation_message, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RedactConversationMessage"
         o.http_method = "POST"
@@ -3240,6 +5311,30 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:send_channel_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendChannelMessage"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels/{channelArn}/messages"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: SendChannelMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendChannelMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -3367,6 +5462,42 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:update_app_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppInstance"
+        o.http_method = "PUT"
+        o.http_request_uri = "/app-instances/{appInstanceArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppInstanceUser"
+        o.http_method = "PUT"
+        o.http_request_uri = "/app-instance-users/{appInstanceUserArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "identity-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppInstanceUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppInstanceUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:update_bot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateBot"
         o.http_method = "POST"
@@ -3380,6 +5511,60 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+      end)
+
+      api.add_operation(:update_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannel"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channels/{channelArn}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_channel_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannelMessage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channels/{channelArn}/messages/{messageId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_channel_read_marker, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannelReadMarker"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channels/{channelArn}/readMarker"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelReadMarkerRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelReadMarkerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -3466,6 +5651,55 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSipMediaApplication"
+        o.http_method = "PUT"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_sip_media_application_call, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSipMediaApplicationCall"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSipRule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSipRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

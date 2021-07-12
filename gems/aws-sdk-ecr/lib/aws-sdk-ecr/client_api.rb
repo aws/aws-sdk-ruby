@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -36,6 +36,8 @@ module Aws::ECR
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
     DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
+    DeleteRegistryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRegistryPolicyRequest')
+    DeleteRegistryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRegistryPolicyResponse')
     DeleteRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyRequest')
     DeleteRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyResponse')
     DeleteRepositoryRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryRequest')
@@ -45,6 +47,8 @@ module Aws::ECR
     DescribeImagesFilter = Shapes::StructureShape.new(name: 'DescribeImagesFilter')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
     DescribeImagesResponse = Shapes::StructureShape.new(name: 'DescribeImagesResponse')
+    DescribeRegistryRequest = Shapes::StructureShape.new(name: 'DescribeRegistryRequest')
+    DescribeRegistryResponse = Shapes::StructureShape.new(name: 'DescribeRegistryResponse')
     DescribeRepositoriesRequest = Shapes::StructureShape.new(name: 'DescribeRepositoriesRequest')
     DescribeRepositoriesResponse = Shapes::StructureShape.new(name: 'DescribeRepositoriesResponse')
     EmptyUploadException = Shapes::StructureShape.new(name: 'EmptyUploadException')
@@ -67,6 +71,8 @@ module Aws::ECR
     GetLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'GetLifecyclePolicyPreviewResponse')
     GetLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'GetLifecyclePolicyRequest')
     GetLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'GetLifecyclePolicyResponse')
+    GetRegistryPolicyRequest = Shapes::StructureShape.new(name: 'GetRegistryPolicyRequest')
+    GetRegistryPolicyResponse = Shapes::StructureShape.new(name: 'GetRegistryPolicyResponse')
     GetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'GetRepositoryPolicyRequest')
     GetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'GetRepositoryPolicyResponse')
     Image = Shapes::StructureShape.new(name: 'Image')
@@ -154,8 +160,20 @@ module Aws::ECR
     PutImageTagMutabilityResponse = Shapes::StructureShape.new(name: 'PutImageTagMutabilityResponse')
     PutLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'PutLifecyclePolicyRequest')
     PutLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'PutLifecyclePolicyResponse')
+    PutRegistryPolicyRequest = Shapes::StructureShape.new(name: 'PutRegistryPolicyRequest')
+    PutRegistryPolicyResponse = Shapes::StructureShape.new(name: 'PutRegistryPolicyResponse')
+    PutReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'PutReplicationConfigurationRequest')
+    PutReplicationConfigurationResponse = Shapes::StructureShape.new(name: 'PutReplicationConfigurationResponse')
     ReferencedImagesNotFoundException = Shapes::StructureShape.new(name: 'ReferencedImagesNotFoundException')
+    Region = Shapes::StringShape.new(name: 'Region')
     RegistryId = Shapes::StringShape.new(name: 'RegistryId')
+    RegistryPolicyNotFoundException = Shapes::StructureShape.new(name: 'RegistryPolicyNotFoundException')
+    RegistryPolicyText = Shapes::StringShape.new(name: 'RegistryPolicyText')
+    ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
+    ReplicationDestination = Shapes::StructureShape.new(name: 'ReplicationDestination')
+    ReplicationDestinationList = Shapes::ListShape.new(name: 'ReplicationDestinationList')
+    ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
+    ReplicationRuleList = Shapes::ListShape.new(name: 'ReplicationRuleList')
     Repository = Shapes::StructureShape.new(name: 'Repository')
     RepositoryAlreadyExistsException = Shapes::StructureShape.new(name: 'RepositoryAlreadyExistsException')
     RepositoryList = Shapes::ListShape.new(name: 'RepositoryList')
@@ -195,6 +213,7 @@ module Aws::ECR
     UploadLayerPartResponse = Shapes::StructureShape.new(name: 'UploadLayerPartResponse')
     UploadNotFoundException = Shapes::StructureShape.new(name: 'UploadNotFoundException')
     Url = Shapes::StringShape.new(name: 'Url')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VulnerabilitySourceUpdateTimestamp = Shapes::TimestampShape.new(name: 'VulnerabilitySourceUpdateTimestamp')
 
     Attribute.add_member(:key, Shapes::ShapeRef.new(shape: AttributeKey, required: true, location_name: "key"))
@@ -272,6 +291,12 @@ module Aws::ECR
     DeleteLifecyclePolicyResponse.add_member(:last_evaluated_at, Shapes::ShapeRef.new(shape: EvaluationTimestamp, location_name: "lastEvaluatedAt"))
     DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
 
+    DeleteRegistryPolicyRequest.struct_class = Types::DeleteRegistryPolicyRequest
+
+    DeleteRegistryPolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DeleteRegistryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RegistryPolicyText, location_name: "policyText"))
+    DeleteRegistryPolicyResponse.struct_class = Types::DeleteRegistryPolicyResponse
+
     DeleteRepositoryPolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DeleteRepositoryPolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DeleteRepositoryPolicyRequest.struct_class = Types::DeleteRepositoryPolicyRequest
@@ -319,6 +344,12 @@ module Aws::ECR
     DescribeImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeImagesResponse.struct_class = Types::DescribeImagesResponse
 
+    DescribeRegistryRequest.struct_class = Types::DescribeRegistryRequest
+
+    DescribeRegistryResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeRegistryResponse.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "replicationConfiguration"))
+    DescribeRegistryResponse.struct_class = Types::DescribeRegistryResponse
+
     DescribeRepositoriesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DescribeRepositoriesRequest.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames"))
     DescribeRepositoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -341,7 +372,7 @@ module Aws::ECR
 
     GetAuthorizationTokenRegistryIdList.member = Shapes::ShapeRef.new(shape: RegistryId)
 
-    GetAuthorizationTokenRequest.add_member(:registry_ids, Shapes::ShapeRef.new(shape: GetAuthorizationTokenRegistryIdList, location_name: "registryIds"))
+    GetAuthorizationTokenRequest.add_member(:registry_ids, Shapes::ShapeRef.new(shape: GetAuthorizationTokenRegistryIdList, deprecated: true, location_name: "registryIds", metadata: {"deprecatedMessage"=>"This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."}))
     GetAuthorizationTokenRequest.struct_class = Types::GetAuthorizationTokenRequest
 
     GetAuthorizationTokenResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationDataList, location_name: "authorizationData"))
@@ -382,6 +413,12 @@ module Aws::ECR
     GetLifecyclePolicyResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
     GetLifecyclePolicyResponse.add_member(:last_evaluated_at, Shapes::ShapeRef.new(shape: EvaluationTimestamp, location_name: "lastEvaluatedAt"))
     GetLifecyclePolicyResponse.struct_class = Types::GetLifecyclePolicyResponse
+
+    GetRegistryPolicyRequest.struct_class = Types::GetRegistryPolicyRequest
+
+    GetRegistryPolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    GetRegistryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RegistryPolicyText, location_name: "policyText"))
+    GetRegistryPolicyResponse.struct_class = Types::GetRegistryPolicyResponse
 
     GetRepositoryPolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     GetRepositoryPolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -619,8 +656,38 @@ module Aws::ECR
     PutLifecyclePolicyResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
     PutLifecyclePolicyResponse.struct_class = Types::PutLifecyclePolicyResponse
 
+    PutRegistryPolicyRequest.add_member(:policy_text, Shapes::ShapeRef.new(shape: RegistryPolicyText, required: true, location_name: "policyText"))
+    PutRegistryPolicyRequest.struct_class = Types::PutRegistryPolicyRequest
+
+    PutRegistryPolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PutRegistryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RegistryPolicyText, location_name: "policyText"))
+    PutRegistryPolicyResponse.struct_class = Types::PutRegistryPolicyResponse
+
+    PutReplicationConfigurationRequest.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, required: true, location_name: "replicationConfiguration"))
+    PutReplicationConfigurationRequest.struct_class = Types::PutReplicationConfigurationRequest
+
+    PutReplicationConfigurationResponse.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "replicationConfiguration"))
+    PutReplicationConfigurationResponse.struct_class = Types::PutReplicationConfigurationResponse
+
     ReferencedImagesNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ReferencedImagesNotFoundException.struct_class = Types::ReferencedImagesNotFoundException
+
+    RegistryPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RegistryPolicyNotFoundException.struct_class = Types::RegistryPolicyNotFoundException
+
+    ReplicationConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ReplicationRuleList, required: true, location_name: "rules"))
+    ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
+
+    ReplicationDestination.add_member(:region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "region"))
+    ReplicationDestination.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, required: true, location_name: "registryId"))
+    ReplicationDestination.struct_class = Types::ReplicationDestination
+
+    ReplicationDestinationList.member = Shapes::ShapeRef.new(shape: ReplicationDestination)
+
+    ReplicationRule.add_member(:destinations, Shapes::ShapeRef.new(shape: ReplicationDestinationList, required: true, location_name: "destinations"))
+    ReplicationRule.struct_class = Types::ReplicationRule
+
+    ReplicationRuleList.member = Shapes::ShapeRef.new(shape: ReplicationRule)
 
     Repository.add_member(:repository_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "repositoryArn"))
     Repository.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -730,6 +797,9 @@ module Aws::ECR
     UploadNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UploadNotFoundException.struct_class = Types::UploadNotFoundException
 
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -827,6 +897,17 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
       end)
 
+      api.add_operation(:delete_registry_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRegistryPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRegistryPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRegistryPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RegistryPolicyNotFoundException)
+      end)
+
       api.add_operation(:delete_repository, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRepository"
         o.http_method = "POST"
@@ -887,6 +968,17 @@ module Aws::ECR
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_registry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistry"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_repositories, Seahorse::Model::Operation.new.tap do |o|
@@ -957,6 +1049,17 @@ module Aws::ECR
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_registry_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRegistryPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRegistryPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRegistryPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RegistryPolicyNotFoundException)
       end)
 
       api.add_operation(:get_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1060,6 +1163,27 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+      end)
+
+      api.add_operation(:put_registry_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRegistryPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutRegistryPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRegistryPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:put_replication_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutReplicationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutReplicationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutReplicationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:set_repository_policy, Seahorse::Model::Operation.new.tap do |o|

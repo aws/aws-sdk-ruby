@@ -1,6 +1,130 @@
 Unreleased Changes
 ------------------
 
+1.96.1 (2021-06-10)
+------------------
+
+* Issue - fix GetBucketLocation location_constraint XML parsing (#2536)
+
+1.96.0 (2021-06-03)
+------------------
+
+* Feature - S3 Inventory now supports Bucket Key Status
+
+1.95.1 (2021-05-24)
+------------------
+
+* Issue - Raise an error when FIPS is in the ARN's region for Access Point and Object Lambda.
+
+1.95.0 (2021-05-21)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
+1.94.1 (2021-05-05)
+------------------
+
+* Issue - Expose presigned request status to the request handler stack #2513
+
+1.94.0 (2021-04-27)
+------------------
+
+* Feature - Allow S3 Presigner to sign non http verbs like (upload_part, multipart_upload_abort, etc.) #2511
+
+1.93.1 (2021-04-12)
+------------------
+
+* Issue - Fix FIPS and global endpoint behavior for S3 ARNs.
+
+* Issue - Increases `multipart_threshold` default from 15 megabytes to 100 megabytes.
+
+1.93.0 (2021-03-24)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
+1.92.0 (2021-03-18)
+------------------
+
+* Feature - S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request
+
+* Feature - Support S3 Object Lambda ARNs in the `bucket:` parameter.
+
+1.91.0 (2021-03-10)
+------------------
+
+* Feature - Adding ID element to the CORSRule schema
+
+1.90.0 (2021-03-08)
+------------------
+
+* Feature - Amazon S3 Documentation updates
+
+1.89.0 (2021-02-26)
+------------------
+
+* Feature - Add RequestPayer to GetObjectTagging and PutObjectTagging.
+
+1.88.2 (2021-02-25)
+------------------
+
+* Issue - Support https in `Object#public_url` for `virtual_host`. (#1389)
+
+* Issue - Fix an issue with the IAD regional endpoint plugin removing `us-east-1` from custom endpoints.
+
+
+1.88.1 (2021-02-12)
+------------------
+
+* Issue - Fixed an issue with some plugins expecting `#size` to exist on a request body for streaming IO.
+
+1.88.0 (2021-02-02)
+------------------
+
+* Feature - Support PrivateLink using the client `:endpoint` option. This patch has a minor behavioral change: a client constructed using `:use_dualstack_endpoint` or `:use_accelerate_endpoint` and `:endpoint` will now raise an `ArgumentError`.
+
+* Issue - Fix a bug where bucket region detection did not work correctly with ARNs.
+
+1.87.0 (2020-12-21)
+------------------
+
+* Feature - Format GetObject's Expires header to be an http-date instead of iso8601
+
+1.86.2 (2020-12-14)
+------------------
+
+* Issue - Use `URI::DEFAULT_PARSER.escape` (an alias for `URI.escape`) in the legacy signer because Ruby 3 removes WEBrick from stdlib.
+
+1.86.1 (2020-12-11)
+------------------
+
+* Issue - Bump minimum KMS dependency. (#2449)
+
+1.86.0 (2020-12-01)
+------------------
+
+* Feature - S3 adds support for multiple-destination replication, option to sync replica modifications;  S3 Bucket Keys to reduce cost of S3 SSE with AWS KMS
+
+1.85.0 (2020-11-20)
+------------------
+
+* Feature - Add new documentation regarding automatically generated Content-MD5 headers when using the SDK or CLI.
+
+1.84.1 (2020-11-10)
+------------------
+
+* Issue - Fix presigned urls for Outpost ARNs.
+
+1.84.0 (2020-11-09)
+------------------
+
+* Feature - S3 Intelligent-Tiering adds support for Archive and Deep Archive Access tiers; S3 Replication adds replication metrics and failure notifications, brings feature parity for delete marker replication
+
+1.83.2 (2020-11-06)
+------------------
+
+* Issue - Fix bug with clients not resolving the correct endpoint in `us-east-1` using access point ARNs.
+
 1.83.1 (2020-10-19)
 ------------------
 

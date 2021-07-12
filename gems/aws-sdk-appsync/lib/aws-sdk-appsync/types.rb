@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -721,6 +721,13 @@ module Aws::AppSync
     #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         function_version: "String", # required
+    #         sync_config: {
+    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #           conflict_detection: "VERSION", # accepts VERSION, NONE
+    #           lambda_conflict_handler_config: {
+    #             lambda_conflict_handler_arn: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -753,6 +760,14 @@ module Aws::AppSync
     #   supported value is 2018-05-29.
     #   @return [String]
     #
+    # @!attribute [rw] sync_config
+    #   Describes a Sync configuration for a resolver.
+    #
+    #   Contains information on which Conflict Detection as well as
+    #   Resolution strategy should be performed when the resolver is
+    #   invoked.
+    #   @return [Types::SyncConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -762,7 +777,8 @@ module Aws::AppSync
       :data_source_name,
       :request_mapping_template,
       :response_mapping_template,
-      :function_version)
+      :function_version,
+      :sync_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1503,6 +1519,14 @@ module Aws::AppSync
     #   2018-05-29 version of the template is supported.
     #   @return [String]
     #
+    # @!attribute [rw] sync_config
+    #   Describes a Sync configuration for a resolver.
+    #
+    #   Contains information on which Conflict Detection as well as
+    #   Resolution strategy should be performed when the resolver is
+    #   invoked.
+    #   @return [Types::SyncConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -1513,7 +1537,8 @@ module Aws::AppSync
       :data_source_name,
       :request_mapping_template,
       :response_mapping_template,
-      :function_version)
+      :function_version,
+      :sync_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3192,6 +3217,13 @@ module Aws::AppSync
     #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         function_version: "String", # required
+    #         sync_config: {
+    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #           conflict_detection: "VERSION", # accepts VERSION, NONE
+    #           lambda_conflict_handler_config: {
+    #             lambda_conflict_handler_arn: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -3228,6 +3260,14 @@ module Aws::AppSync
     #   supported value is 2018-05-29.
     #   @return [String]
     #
+    # @!attribute [rw] sync_config
+    #   Describes a Sync configuration for a resolver.
+    #
+    #   Contains information on which Conflict Detection as well as
+    #   Resolution strategy should be performed when the resolver is
+    #   invoked.
+    #   @return [Types::SyncConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunctionRequest AWS API Documentation
     #
     class UpdateFunctionRequest < Struct.new(
@@ -3238,7 +3278,8 @@ module Aws::AppSync
       :data_source_name,
       :request_mapping_template,
       :response_mapping_template,
-      :function_version)
+      :function_version,
+      :sync_config)
       SENSITIVE = []
       include Aws::Structure
     end

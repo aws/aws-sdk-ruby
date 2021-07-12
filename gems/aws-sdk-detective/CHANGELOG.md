@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-05-14)
+------------------
+
+* Feature - Updated descriptions of array parameters to add the restrictions on the array and value lengths.
+
+1.17.0 (2021-04-21)
+------------------
+
+* Feature - Added parameters to track the data volume in bytes for a member account. Deprecated the existing parameters that tracked the volume as a percentage of the allowed volume for a behavior graph. Changes reflected in MemberDetails object.
+
+1.16.0 (2021-03-31)
+------------------
+
+* Feature - Added the ability to assign tag values to Detective behavior graphs. Tag values can be used for attribute-based access control, and for cost allocation for billing.
+
+1.15.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2021-02-25)
+------------------
+
+* Feature - Changed "master account" to "administrator account." A new AdministratorId field replaces the deprecated MasterId field. Added an option to disable email notifications for member account invitations.
+
+1.13.0 (2021-02-12)
+------------------
+
+* Feature - The API definition now indicates that the format for timestamps is an ISO 8601 date-time string
+
+1.12.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.11.0 (2020-09-30)
 ------------------
 

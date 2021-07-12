@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-05-27)
+------------------
+
+* Feature - Documentation updates for Resource Groups.
+
+1.35.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-12-23)
+------------------
+
+* Feature - Add operation `PutGroupConfiguration`. Support dedicated hosts and add `Pending` in operations `Un/GroupResources`. Add `Resources` in `ListGroupResources` and deprecate `ResourceIdentifiers`.
+
 1.32.0 (2020-09-30)
 ------------------
 

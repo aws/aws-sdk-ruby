@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-06-02)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.50.0 (2021-05-27)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.49.0 (2021-05-19)
+------------------
+
+* Feature - Documentation updates for Amazon Lightsail.
+
+1.48.0 (2021-04-13)
+------------------
+
+* Feature - Documentation updates for Amazon Lightsail.
+
+1.47.0 (2021-04-01)
+------------------
+
+* Feature - This release adds support for state detail for Amazon Lightsail container services.
+
+1.46.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2021-02-25)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.44.0 (2021-02-15)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.43.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2021-01-27)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.41.0 (2021-01-12)
+------------------
+
+* Feature - This release adds IPv6 support for Amazon Lightsail instances, container services, CDN distributions, and load balancers.
+
+1.40.0 (2020-11-12)
+------------------
+
+* Feature - This release adds support for Amazon Lightsail container services. You can now create a Lightsail container service, and deploy Docker images to it.
+
 1.39.0 (2020-09-30)
 ------------------
 

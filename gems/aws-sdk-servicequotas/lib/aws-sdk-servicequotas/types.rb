@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -11,8 +11,7 @@ module Aws::ServiceQuotas
   module Types
 
     # The action you attempted is not allowed unless Service Access with
-    # Service Quotas is enabled in your organization. To enable, call
-    # AssociateServiceQuotaTemplate.
+    # Service Quotas is enabled in your organization.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -25,7 +24,7 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # You do not have sufficient access to perform this action.
+    # You do not have sufficient permission to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -58,15 +57,15 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the code for the service that you want to delete.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Specifies the code for the quota that you want to delete.
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   Specifies the AWS Region for the quota that you want to delete.
+    #   The AWS Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DeleteServiceQuotaIncreaseRequestFromTemplateRequest AWS API Documentation
@@ -107,28 +106,26 @@ module Aws::ServiceQuotas
     #
     class DisassociateServiceQuotaTemplateResponse < Aws::EmptyStructure; end
 
-    # Returns an error that explains why the action did not succeed.
+    # An error that explains why an action did not succeed.
     #
     # @!attribute [rw] error_code
-    #   Service Quotas returns the following error values.
+    #   Service Quotas returns the following error values:
     #
-    #   `DEPENDENCY_ACCESS_DENIED_ERROR` is returned when the caller does
-    #   not have permission to call the service or service quota. To resolve
-    #   the error, you need permission to access the service or service
-    #   quota.
+    #   * `DEPENDENCY_ACCESS_DENIED_ERROR` - The caller does not have the
+    #     required permissions to complete the action. To resolve the error,
+    #     you must have permission to access the service or quota.
     #
-    #   `DEPENDENCY_THROTTLING_ERROR` is returned when the service being
-    #   called is throttling Service Quotas.
+    #   * `DEPENDENCY_THROTTLING_ERROR` - The service is throttling Service
+    #     Quotas.
     #
-    #   `DEPENDENCY_SERVICE_ERROR` is returned when the service being called
-    #   has availability issues.
+    #   * `DEPENDENCY_SERVICE_ERROR` - The service is not available.
     #
-    #   `SERVICE_QUOTA_NOT_AVAILABLE_ERROR` is returned when there was an
-    #   error in Service Quotas.
+    #   * `SERVICE_QUOTA_NOT_AVAILABLE_ERROR` - There was an error in
+    #     Service Quotas.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message that provides more detail.
+    #   The error message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ErrorReason AWS API Documentation
@@ -149,11 +146,11 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Identifies the service quota you want to select.
+    #   The quota identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAWSDefaultServiceQuotaRequest AWS API Documentation
@@ -166,8 +163,7 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] quota
-    #   Returns the ServiceQuota object which contains all values for a
-    #   quota.
+    #   Information about the quota.
     #   @return [Types::ServiceQuota]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAWSDefaultServiceQuotaResponse AWS API Documentation
@@ -185,9 +181,9 @@ module Aws::ServiceQuotas
     class GetAssociationForServiceQuotaTemplateRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_quota_template_association_status
-    #   Specifies whether the template is `ASSOCIATED` or `DISASSOCIATED`.
-    #   If the template is `ASSOCIATED`, then it requests service quota
-    #   increases for all new accounts created in your organization.
+    #   The association status. If the status is `ASSOCIATED`, the quota
+    #   increase requests in the template are automatically applied to new
+    #   accounts in your organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAssociationForServiceQuotaTemplateResponse AWS API Documentation
@@ -206,7 +202,7 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] request_id
-    #   Identifies the quota increase request.
+    #   The ID of the quota increase request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetRequestedServiceQuotaChangeRequest AWS API Documentation
@@ -218,8 +214,7 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] requested_quota
-    #   Returns the `RequestedServiceQuotaChange` object for the specific
-    #   increase request.
+    #   Information about the quota increase request.
     #   @return [Types::RequestedServiceQuotaChange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetRequestedServiceQuotaChangeResponse AWS API Documentation
@@ -240,15 +235,15 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Specifies the quota you want.
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   Specifies the AWS Region for the quota that you want to use.
+    #   The AWS Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuotaIncreaseRequestFromTemplateRequest AWS API Documentation
@@ -262,7 +257,7 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] service_quota_increase_request_in_template
-    #   This object contains the details about the quota increase request.
+    #   Information about the quota increase request.
     #   @return [Types::ServiceQuotaIncreaseRequestInTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuotaIncreaseRequestFromTemplateResponse AWS API Documentation
@@ -282,11 +277,11 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Identifies the service quota you want to select.
+    #   The quota identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuotaRequest AWS API Documentation
@@ -299,8 +294,7 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] quota
-    #   Returns the ServiceQuota object which contains all values for a
-    #   quota.
+    #   Information about the quota.
     #   @return [Types::ServiceQuota]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuotaResponse AWS API Documentation
@@ -337,7 +331,7 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # Invalid input was provided for the .
+    # The resource is in an invalid state.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -360,31 +354,17 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from. If additional items exist beyond
-    #   the specified maximum, the `NextToken` element is present and has a
-    #   value (isn't null). Include that value as the `NextToken` request
-    #   parameter in the call to the operation to get the next part of the
-    #   results. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, the response
-    #   defaults to a value that's specific to the operation. If additional
-    #   items exist beyond the specified maximum, the `NextToken` element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the call to the operation to get
-    #   the next part of the results. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, if any, make another call with the
+    #   token returned from this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListAWSDefaultServiceQuotasRequest AWS API Documentation
@@ -398,15 +378,12 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] next_token
-    #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] quotas
-    #   A list of the quotas in the account with the AWS default values.
+    #   Information about the quotas.
     #   @return [Array<Types::ServiceQuota>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListAWSDefaultServiceQuotasResponse AWS API Documentation
@@ -430,34 +407,25 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Specifies the service quota that you want to use
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Specifies the status value of the quota increase request.
+    #   The status value of the quota increase request.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, the response
-    #   defaults to a value that's specific to the operation. If additional
-    #   items exist beyond the specified maximum, the `NextToken` element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the call to the operation to get
-    #   the next part of the results. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, if any, make another call with the
+    #   token returned from this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryByQuotaRequest AWS API Documentation
@@ -473,18 +441,12 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] next_token
-    #   If present in the response, this value indicates there's more
-    #   output available that what's included in the current response. This
-    #   can occur even when the response includes no values at all, such as
-    #   when you ask for a filtered view of a very long list. Use this value
-    #   in the `NextToken` request parameter in a subsequent call to the
-    #   operation to continue processing and get the next part of the
-    #   output. You should repeat this until the `NextToken` response
-    #   element comes back empty (as `null`).
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] requested_quotas
-    #   Returns a list of service quota requests.
+    #   Information about the quota increase requests.
     #   @return [Array<Types::RequestedServiceQuotaChange>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryByQuotaResponse AWS API Documentation
@@ -507,30 +469,21 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Specifies the status value of the quota increase request.
+    #   The status of the quota increase request.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, the response
-    #   defaults to a value that's specific to the operation. If additional
-    #   items exist beyond the specified maximum, the `NextToken` element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the call to the operation to get
-    #   the next part of the results. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, if any, make another call with the
+    #   token returned from this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryRequest AWS API Documentation
@@ -545,18 +498,12 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] next_token
-    #   If present in the response, this value indicates there's more
-    #   output available that what's included in the current response. This
-    #   can occur even when the response includes no values at all, such as
-    #   when you ask for a filtered view of a very long list. Use this value
-    #   in the `NextToken` request parameter in a subsequent call to the
-    #   operation to continue processing and get the next part of the
-    #   output. You should repeat this until the `NextToken` response
-    #   element comes back empty (as `null`).
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] requested_quotas
-    #   Returns a list of service quota requests.
+    #   Information about the quota increase requests.
     #   @return [Array<Types::RequestedServiceQuotaChange>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryResponse AWS API Documentation
@@ -579,31 +526,21 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   The identifier for a service. When performing an operation, use the
-    #   `ServiceCode` to specify a particular service.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   Specifies the AWS Region for the quota that you want to use.
+    #   The AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, the response
-    #   defaults to a value that's specific to the operation. If additional
-    #   items exist beyond the specified maximum, the `NextToken` element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the call to the operation to get
-    #   the next part of the results. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, if any, make another call with the
+    #   token returned from this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotaIncreaseRequestsInTemplateRequest AWS API Documentation
@@ -618,19 +555,12 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] service_quota_increase_request_in_template_list
-    #   Returns the list of values of the quota increase request in the
-    #   template.
+    #   Information about the quota increase requests.
     #   @return [Array<Types::ServiceQuotaIncreaseRequestInTemplate>]
     #
     # @!attribute [rw] next_token
-    #   If present in the response, this value indicates there's more
-    #   output available that what's included in the current response. This
-    #   can occur even when the response includes no values at all, such as
-    #   when you ask for a filtered view of a very long list. Use this value
-    #   in the `NextToken` request parameter in a subsequent call to the
-    #   operation to continue processing and get the next part of the
-    #   output. You should repeat this until the `NextToken` response
-    #   element comes back empty (as `null`).
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotaIncreaseRequestsInTemplateResponse AWS API Documentation
@@ -652,27 +582,17 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   The identifier for a service. When performing an operation, use the
-    #   `ServiceCode` to specify a particular service.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, the response
-    #   defaults to a value that's specific to the operation. If additional
-    #   items exist beyond the specified maximum, the `NextToken` element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the call to the operation to get
-    #   the next part of the results. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, if any, make another call with the
+    #   token returned from this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotasRequest AWS API Documentation
@@ -686,19 +606,12 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] next_token
-    #   If present in the response, this value indicates there's more
-    #   output available that what's included in the current response. This
-    #   can occur even when the response includes no values at all, such as
-    #   when you ask for a filtered view of a very long list. Use this value
-    #   in the `NextToken` request parameter in a subsequent call to the
-    #   operation to continue processing and get the next part of the
-    #   output. You should repeat this until the `NextToken` response
-    #   element comes back empty (as `null`).
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] quotas
-    #   The response information for a quota lists all attribute information
-    #   for the quota.
+    #   Information about the quotas.
     #   @return [Array<Types::ServiceQuota>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotasResponse AWS API Documentation
@@ -719,22 +632,13 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] next_token
-    #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, the response
-    #   defaults to a value that's specific to the operation. If additional
-    #   items exist beyond the specified maximum, the `NextToken` element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the call to the operation to get
-    #   the next part of the results. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, if any, make another call with the
+    #   token returned from this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServicesRequest AWS API Documentation
@@ -747,18 +651,12 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] next_token
-    #   If present in the response, this value indicates there's more
-    #   output available that what's included in the current response. This
-    #   can occur even when the response includes no values at all, such as
-    #   when you ask for a filtered view of a very long list. Use this value
-    #   in the `NextToken` request parameter in a subsequent call to the
-    #   operation to continue processing and get the next part of the
-    #   output. You should repeat this until the `NextToken` response
-    #   element comes back empty (as `null`).
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] services
-    #   Returns a list of services.
+    #   Information about the services.
     #   @return [Array<Types::ServiceInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServicesResponse AWS API Documentation
@@ -770,32 +668,64 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # A structure that uses CloudWatch metrics to gather data about the
-    # service quota.
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the applied quota for which you
+    #   want to list tags. You can get this information by using the Service
+    #   Quotas console, or by listing the quotas using the
+    #   [list-service-quotas][1] AWS CLI command or the
+    #   [ListServiceQuotas][2] AWS API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html
+    #   [2]: https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A complex data type that contains zero or more tag elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the CloudWatch metric that reflects quota usage.
     #
     # @!attribute [rw] metric_namespace
-    #   The namespace of the metric. The namespace is a container for
-    #   CloudWatch metrics. You can specify a name for the namespace when
-    #   you create a metric.
+    #   The namespace of the metric.
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The name of the CloudWatch metric that measures usage of a service
-    #   quota. This is a required field.
+    #   The name of the metric.
     #   @return [String]
     #
     # @!attribute [rw] metric_dimensions
-    #   A dimension is a name/value pair that is part of the identity of a
-    #   metric. Every metric has specific characteristics that describe it,
-    #   and you can think of dimensions as categories for those
-    #   characteristics. These dimensions are part of the CloudWatch Metric
-    #   Identity that measures usage against a particular service quota.
+    #   The metric dimension. This is a name/value pair that is part of the
+    #   identity of a metric.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] metric_statistic_recommendation
-    #   Statistics are metric data aggregations over specified periods of
-    #   time. This is the recommended statistic to use when comparing usage
-    #   in the CloudWatch Metric against your Service Quota.
+    #   The metric statistic that we recommend you use when determining
+    #   quota usage.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/MetricInfo AWS API Documentation
@@ -835,12 +765,8 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # The organization that your account belongs to, is not in All Features
-    # mode. To enable all features mode, see [EnableAllFeatures][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAllFeatures.html
+    # The organization that your account belongs to is not in All Features
+    # mode.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -864,19 +790,19 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] quota_code
-    #   Specifies the service quota that you want to use.
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   Specifies the AWS Region for the quota.
+    #   The AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] desired_value
-    #   Specifies the new, increased value for the quota.
+    #   The new, increased value for the quota.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/PutServiceQuotaIncreaseRequestIntoTemplateRequest AWS API Documentation
@@ -891,8 +817,7 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] service_quota_increase_request_in_template
-    #   A structure that contains information about one service quota
-    #   increase request.
+    #   Information about the quota increase request.
     #   @return [Types::ServiceQuotaIncreaseRequestInTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/PutServiceQuotaIncreaseRequestIntoTemplateResponse AWS API Documentation
@@ -918,14 +843,14 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # A structure that contains information about the quota period.
+    # Information about the quota period.
     #
     # @!attribute [rw] period_value
-    #   The value of a period.
+    #   The value.
     #   @return [Integer]
     #
     # @!attribute [rw] period_unit
-    #   The time unit of a period.
+    #   The time unit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/QuotaPeriod AWS API Documentation
@@ -947,15 +872,15 @@ module Aws::ServiceQuotas
     #       }
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Specifies the service quota that you want to use.
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] desired_value
-    #   Specifies the value submitted in the service quota increase request.
+    #   The new, increased value for the quota.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/RequestServiceQuotaIncreaseRequest AWS API Documentation
@@ -969,7 +894,7 @@ module Aws::ServiceQuotas
     end
 
     # @!attribute [rw] requested_quota
-    #   Returns a list of service quota requests.
+    #   Information about the quota increase request.
     #   @return [Types::RequestedServiceQuotaChange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/RequestServiceQuotaIncreaseResponse AWS API Documentation
@@ -980,65 +905,63 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # A structure that contains information about a requested change for a
-    # quota.
+    # Information about a quota increase request.
     #
     # @!attribute [rw] id
-    #   The unique identifier of a requested service quota change.
+    #   The unique identifier.
     #   @return [String]
     #
     # @!attribute [rw] case_id
-    #   The case Id for the service quota increase request.
+    #   The case ID.
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service specified in the increase request.
+    #   The service name.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Specifies the service quota that you want to use.
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_name
-    #   Name of the service quota.
+    #   The quota name.
     #   @return [String]
     #
     # @!attribute [rw] desired_value
-    #   New increased value for the service quota.
+    #   The new, increased value for the quota.
     #   @return [Float]
     #
     # @!attribute [rw] status
-    #   State of the service quota increase request.
+    #   The state of the quota increase request.
     #   @return [String]
     #
     # @!attribute [rw] created
-    #   The date and time when the service quota increase request was
-    #   received and the case Id was created.
+    #   The date and time when the quota increase request was received and
+    #   the case ID was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated
-    #   The date and time of the most recent change in the service quota
-    #   increase request.
+    #   The date and time of the most recent change.
     #   @return [Time]
     #
     # @!attribute [rw] requester
-    #   The IAM identity who submitted the service quota increase request.
+    #   The IAM identity of the requester.
     #   @return [String]
     #
     # @!attribute [rw] quota_arn
-    #   The Amazon Resource Name (ARN) of the service quota.
+    #   The Amazon Resource Name (ARN) of the quota.
     #   @return [String]
     #
     # @!attribute [rw] global_quota
-    #   Identifies if the quota is global.
+    #   Indicates whether the quota is global.
     #   @return [Boolean]
     #
     # @!attribute [rw] unit
-    #   Specifies the unit used for the quota.
+    #   The unit of measurement.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/RequestedServiceQuotaChange AWS API Documentation
@@ -1088,16 +1011,14 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # A structure that contains the `ServiceName` and `ServiceCode`. It does
-    # not include all details of the service quota. To get those values, use
-    # the ListServiceQuotas operation.
+    # Information about a service.
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service specified in the increase request.
+    #   The service name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ServiceInfo AWS API Documentation
@@ -1109,56 +1030,54 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # A structure that contains the full set of details that define the
-    # service quota.
+    # Information about a quota.
     #
     # @!attribute [rw] service_code
-    #   Specifies the service that you want to use.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service specified in the increase request.
+    #   The service name.
     #   @return [String]
     #
     # @!attribute [rw] quota_arn
-    #   The Amazon Resource Name (ARN) of the service quota.
+    #   The Amazon Resource Name (ARN) of the quota.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   The code identifier for the service quota specified.
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_name
-    #   The name identifier of the service quota.
+    #   The quota name.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of service quota.
+    #   The quota value.
     #   @return [Float]
     #
     # @!attribute [rw] unit
-    #   The unit of measurement for the value of the service quota.
+    #   The unit of measurement.
     #   @return [String]
     #
     # @!attribute [rw] adjustable
-    #   Specifies if the quota value can be increased.
+    #   Indicates whether the quota value can be increased.
     #   @return [Boolean]
     #
     # @!attribute [rw] global_quota
-    #   Specifies if the quota is global.
+    #   Indicates whether the quota is global.
     #   @return [Boolean]
     #
     # @!attribute [rw] usage_metric
-    #   Specifies the details about the measurement.
+    #   Information about the measurement.
     #   @return [Types::MetricInfo]
     #
     # @!attribute [rw] period
-    #   Identifies the unit and value of how time is measured.
+    #   The period of time.
     #   @return [Types::QuotaPeriod]
     #
     # @!attribute [rw] error_reason
-    #   Specifies the `ErrorCode` and `ErrorMessage` when success isn't
-    #   achieved.
+    #   The error code and error reason.
     #   @return [Types::ErrorReason]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ServiceQuota AWS API Documentation
@@ -1180,42 +1099,38 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # A structure that contains information about one service quota increase
-    # request.
+    # Information about a quota increase request.
     #
     # @!attribute [rw] service_code
-    #   The code identifier for the AWS service specified in the increase
-    #   request.
+    #   The service identifier.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service specified in the increase request.
+    #   The service name.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   The code identifier for the service quota specified in the increase
-    #   request.
+    #   The quota identifier.
     #   @return [String]
     #
     # @!attribute [rw] quota_name
-    #   The name of the service quota in the increase request.
+    #   The quota name.
     #   @return [String]
     #
     # @!attribute [rw] desired_value
-    #   Identifies the new, increased value of the service quota in the
-    #   increase request.
+    #   The new, increased value of the quota.
     #   @return [Float]
     #
     # @!attribute [rw] aws_region
-    #   The AWS Region where the increase request occurs.
+    #   The AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   The unit of measure for the increase request.
+    #   The unit of measurement.
     #   @return [String]
     #
     # @!attribute [rw] global_quota
-    #   Specifies if the quota is a global quota.
+    #   Indicates whether the quota is global.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ServiceQuotaIncreaseRequestInTemplate AWS API Documentation
@@ -1235,8 +1150,6 @@ module Aws::ServiceQuotas
 
     # The quota request template is not associated with your organization.
     #
-    # To use the template, call AssociateServiceQuotaTemplate.
-    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1248,8 +1161,93 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # The Service Quotas template is not available in the Region where you
-    # are making the request. Please make the request in us-east-1.
+    # A complex data type that contains a tag key and tag value.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A string that contains a tag key. The string length should be
+    #   between 1 and 128 characters. Valid characters include a-z, A-Z,
+    #   0-9, space, and the special characters \_ - . : / = + @.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A string that contains an optional tag value. The string length
+    #   should be between 0 and 256 characters. Valid characters include
+    #   a-z, A-Z, 0-9, space, and the special characters \_ - . : / = + @.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified tag is a reserved word and cannot be used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/TagPolicyViolationException AWS API Documentation
+    #
+    class TagPolicyViolationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the applied quota. You can get
+    #   this information by using the Service Quotas console, or by listing
+    #   the quotas using the [list-service-quotas][1] AWS CLI command or the
+    #   [ListServiceQuotas][2] AWS API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html
+    #   [2]: https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The Service Quotas template is not available in this AWS Region.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1275,6 +1273,62 @@ module Aws::ServiceQuotas
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # You've exceeded the number of tags allowed for a resource. For more
+    # information, see [Tag restrictions][1] in the *Service Quotas User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the applied quota that you want
+    #   to untag. You can get this information by using the Service Quotas
+    #   console, or by listing the quotas using the [list-service-quotas][1]
+    #   AWS CLI command or the [ListServiceQuotas][2] AWS API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html
+    #   [2]: https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags that you want to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

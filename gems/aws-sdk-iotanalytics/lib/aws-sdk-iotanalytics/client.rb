@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -333,13 +333,13 @@ module Aws::IoTAnalytics
     #   The name of the channel where the messages are sent.
     #
     # @option params [required, Array<Types::Message>] :messages
-    #   The list of messages to be sent. Each message has format: '\\\{
-    #   "messageId": "string", "payload": "string"\\}'.
+    #   The list of messages to be sent. Each message has the format: \\\{
+    #   "messageId": "string", "payload": "string"\\}.
     #
-    #   Note that the field names of message payloads (data) that you send to
-    #   AWS IoT Analytics:
+    #   The field names of message payloads (data) that you send to AWS IoT
+    #   Analytics:
     #
-    #   * Must contain only alphanumeric characters and undescores (\_); no
+    #   * Must contain only alphanumeric characters and undescores (\_). No
     #     other special characters are allowed.
     #
     #   * Must begin with an alphabetic character or single underscore (\_).
@@ -349,10 +349,10 @@ module Aws::IoTAnalytics
     #   * In regular expression terms:
     #     "^\[A-Za-z\_\](\[A-Za-z0-9\]*\|\[A-Za-z0-9\]\[A-Za-z0-9\_\]*)$".
     #
-    #   * Cannot be greater than 255 characters.
+    #   * Cannot be more than 255 characters.
     #
-    #   * Are case-insensitive. (Fields named "foo" and "FOO" in the same
-    #     payload are considered duplicates.)
+    #   * Are case insensitive. (Fields named foo and FOO in the same payload
+    #     are considered duplicates.)
     #
     #   For example, \\\{"temp\_01": 29\\} or \\\{"\_temp\_01": 29\\} are
     #   valid, but \\\{"temp-01": 29\\}, \\\{"01\_temp": 29\\} or
@@ -395,7 +395,7 @@ module Aws::IoTAnalytics
     #
     # @option params [required, String] :reprocessing_id
     #   The ID of the reprocessing task (returned by
-    #   "StartPipelineReprocessing").
+    #   `StartPipelineReprocessing`).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -421,14 +421,14 @@ module Aws::IoTAnalytics
     #   The name of the channel.
     #
     # @option params [Types::ChannelStorage] :channel_storage
-    #   Where channel data is stored. You may choose one of
-    #   "serviceManagedS3" or "customerManagedS3" storage. If not
-    #   specified, the default is "serviceManagedS3". This cannot be changed
-    #   after creation of the channel.
+    #   Where channel data is stored. You can choose one of `serviceManagedS3`
+    #   or `customerManagedS3` storage. If not specified, the default is
+    #   `serviceManagedS3`. You cannot change this storage option after the
+    #   channel is created.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel. When
-    #   "customerManagedS3" storage is selected, this parameter is ignored.
+    #   `customerManagedS3` storage is selected, this parameter is ignored.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the channel.
@@ -478,12 +478,12 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates a data set. A data set stores data retrieved from a data store
-    # by applying a "queryAction" (a SQL query) or a "containerAction"
+    # Creates a dataset. A dataset stores data retrieved from a data store
+    # by applying a `queryAction` (a SQL query) or a `containerAction`
     # (executing a containerized application). This operation creates the
-    # skeleton of a data set. The data set can be populated manually by
-    # calling "CreateDatasetContent" or automatically according to a
-    # "trigger" you specify.
+    # skeleton of a dataset. The dataset can be populated manually by
+    # calling `CreateDatasetContent` or automatically according to a trigger
+    # you specify.
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set.
@@ -495,30 +495,48 @@ module Aws::IoTAnalytics
     #   A list of triggers. A trigger causes data set contents to be populated
     #   at a specified time interval or when another data set's contents are
     #   created. The list of triggers can be empty or contain up to five
-    #   **DataSetTrigger** objects.
+    #   `DataSetTrigger` objects.
     #
     # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
-    #   When data set contents are created they are delivered to destinations
+    #   When dataset contents are created, they are delivered to destinations
     #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   \[Optional\] How long, in days, versions of data set contents are kept
-    #   for the data set. If not specified or set to null, versions of data
-    #   set contents are retained for at most 90 days. The number of versions
-    #   of data set contents retained is determined by the
-    #   `versioningConfiguration` parameter. (For more information, see
-    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #   Optional. How long, in days, versions of dataset contents are kept for
+    #   the dataset. If not specified or set to `null`, versions of dataset
+    #   contents are retained for at most 90 days. The number of versions of
+    #   dataset contents retained is determined by the
+    #   `versioningConfiguration` parameter. For more information, see
+    #   [Keeping Multiple Versions of AWS IoT Analytics Data Sets][1] in the
+    #   *AWS IoT Analytics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
     #
     # @option params [Types::VersioningConfiguration] :versioning_configuration
-    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   Optional. How many versions of dataset contents are kept. If not
     #   specified or set to null, only the latest version plus the latest
     #   succeeded version (if they are different) are kept for the time period
-    #   specified by the "retentionPeriod" parameter. (For more information,
-    #   see
-    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #   specified by the `retentionPeriod` parameter. For more information,
+    #   see [Keeping Multiple Versions of AWS IoT Analytics Data Sets][1] in
+    #   the *AWS IoT Analytics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the data set.
+    #
+    # @option params [Array<Types::LateDataRule>] :late_data_rules
+    #   A list of data rules that send notifications to Amazon CloudWatch,
+    #   when data arrives late. To specify `lateDataRules`, the dataset must
+    #   use a [DeltaTimer][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
     #
     # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -611,6 +629,16 @@ module Aws::IoTAnalytics
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     late_data_rules: [
+    #       {
+    #         rule_name: "LateDataRuleName",
+    #         rule_configuration: { # required
+    #           delta_time_session_window_configuration: {
+    #             timeout_in_minutes: 1, # required
+    #           },
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -627,12 +655,19 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates the content of a data set by applying a "queryAction" (a SQL
-    # query) or a "containerAction" (executing a containerized
-    # application).
+    # Creates the content of a data set by applying a `queryAction` (a SQL
+    # query) or a `containerAction` (executing a containerized application).
     #
     # @option params [required, String] :dataset_name
-    #   The name of the data set.
+    #   The name of the dataset.
+    #
+    # @option params [String] :version_id
+    #   The version ID of the dataset content. To specify `versionId` for a
+    #   dataset content, the dataset must use a [DeltaTimer][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
     #
     # @return [Types::CreateDatasetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -642,6 +677,7 @@ module Aws::IoTAnalytics
     #
     #   resp = client.create_dataset_content({
     #     dataset_name: "DatasetName", # required
+    #     version_id: "DatasetContentVersion",
     #   })
     #
     # @example Response structure
@@ -655,23 +691,40 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates a data store, which is a repository for messages.
+    # Creates a data store, which is a repository for messages. Only data
+    # stores that are used to save pipeline data can be configured with
+    # `ParquetConfiguration`.
     #
     # @option params [required, String] :datastore_name
     #   The name of the data store.
     #
     # @option params [Types::DatastoreStorage] :datastore_storage
-    #   Where data store data is stored. You may choose one of
-    #   "serviceManagedS3" or "customerManagedS3" storage. If not
-    #   specified, the default is "serviceManagedS3". This cannot be changed
-    #   after the data store is created.
+    #   Where data store data is stored. You can choose one of
+    #   `serviceManagedS3` or `customerManagedS3` storage. If not specified,
+    #   the default is `serviceManagedS3`. You cannot change this storage
+    #   option after the data store is created.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store. When
-    #   "customerManagedS3" storage is selected, this parameter is ignored.
+    #   `customerManagedS3` storage is selected, this parameter is ignored.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the data store.
+    #
+    # @option params [Types::FileFormatConfiguration] :file_format_configuration
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
+    #
+    #   The default file format is JSON. You can specify only one format.
+    #
+    #   You can't change the file format after you create the data store.
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/
+    #
+    # @option params [Types::DatastorePartitions] :datastore_partitions
+    #   Contains information about the partitions in a data store.
     #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -702,6 +755,33 @@ module Aws::IoTAnalytics
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     file_format_configuration: {
+    #       json_configuration: {
+    #       },
+    #       parquet_configuration: {
+    #         schema_definition: {
+    #           columns: [
+    #             {
+    #               name: "ColumnName", # required
+    #               type: "ColumnDataType", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     datastore_partitions: {
+    #       partitions: [
+    #         {
+    #           attribute_partition: {
+    #             attribute_name: "PartitionAttributeName", # required
+    #           },
+    #           timestamp_partition: {
+    #             attribute_name: "PartitionAttributeName", # required
+    #             timestamp_format: "TimestampFormat",
+    #           },
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -728,15 +808,15 @@ module Aws::IoTAnalytics
     #   The name of the pipeline.
     #
     # @option params [required, Array<Types::PipelineActivity>] :pipeline_activities
-    #   A list of "PipelineActivity" objects. Activities perform
+    #   A list of `PipelineActivity` objects. Activities perform
     #   transformations on your messages, such as removing, renaming or adding
     #   message attributes; filtering messages based on attribute values;
     #   invoking your Lambda functions on messages for advanced processing; or
     #   performing mathematical transformations to normalize device data.
     #
-    #   The list can be 2-25 **PipelineActivity** objects and must contain
-    #   both a `channel` and a `datastore` activity. Each entry in the list
-    #   must contain only one activity, for example:
+    #   The list can be 2-25 `PipelineActivity` objects and must contain both
+    #   a `channel` and a `datastore` activity. Each entry in the list must
+    #   contain only one activity. For example:
     #
     #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
     #   ... \} \}, ... ]`
@@ -854,9 +934,9 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Deletes the specified data set.
+    # Deletes the specified dataset.
     #
-    # You do not have to delete the content of the data set before you
+    # You do not have to delete the content of the dataset before you
     # perform this operation.
     #
     # @option params [required, String] :dataset_name
@@ -877,13 +957,13 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Deletes the content of the specified data set.
+    # Deletes the content of the specified dataset.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the data set whose content is deleted.
+    #   The name of the dataset whose content is deleted.
     #
     # @option params [String] :version_id
-    #   The version of the data set whose content is deleted. You can also use
+    #   The version of the dataset whose content is deleted. You can also use
     #   the strings "$LATEST" or "$LATEST\_SUCCEEDED" to delete the latest
     #   or latest successfully completed data set. If not specified,
     #   "$LATEST\_SUCCEEDED" is the default.
@@ -978,6 +1058,7 @@ module Aws::IoTAnalytics
     #   resp.channel.retention_period.number_of_days #=> Integer
     #   resp.channel.creation_time #=> Time
     #   resp.channel.last_update_time #=> Time
+    #   resp.channel.last_message_arrival_time #=> Time
     #   resp.statistics.size.estimated_size_in_bytes #=> Float
     #   resp.statistics.size.estimated_on #=> Time
     #
@@ -988,7 +1069,7 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Retrieves information about a data set.
+    # Retrieves information about a dataset.
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set whose information is retrieved.
@@ -1042,6 +1123,9 @@ module Aws::IoTAnalytics
     #   resp.dataset.retention_period.number_of_days #=> Integer
     #   resp.dataset.versioning_configuration.unlimited #=> Boolean
     #   resp.dataset.versioning_configuration.max_versions #=> Integer
+    #   resp.dataset.late_data_rules #=> Array
+    #   resp.dataset.late_data_rules[0].rule_name #=> String
+    #   resp.dataset.late_data_rules[0].rule_configuration.delta_time_session_window_configuration.timeout_in_minutes #=> Integer
     #
     # @overload describe_dataset(params = {})
     # @param [Hash] params ({})
@@ -1084,6 +1168,14 @@ module Aws::IoTAnalytics
     #   resp.datastore.retention_period.number_of_days #=> Integer
     #   resp.datastore.creation_time #=> Time
     #   resp.datastore.last_update_time #=> Time
+    #   resp.datastore.last_message_arrival_time #=> Time
+    #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns #=> Array
+    #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns[0].name #=> String
+    #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns[0].type #=> String
+    #   resp.datastore.datastore_partitions.partitions #=> Array
+    #   resp.datastore.datastore_partitions.partitions[0].attribute_partition.attribute_name #=> String
+    #   resp.datastore.datastore_partitions.partitions[0].timestamp_partition.attribute_name #=> String
+    #   resp.datastore.datastore_partitions.partitions[0].timestamp_partition.timestamp_format #=> String
     #   resp.statistics.size.estimated_size_in_bytes #=> Float
     #   resp.statistics.size.estimated_on #=> Time
     #
@@ -1186,7 +1278,7 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Retrieves the contents of a data set as pre-signed URIs.
+    # Retrieves the contents of a data set as presigned URIs.
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set whose contents are retrieved.
@@ -1199,7 +1291,7 @@ module Aws::IoTAnalytics
     #
     # @return [Types::GetDatasetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetDatasetContentResponse#entries #entries} => Array&lt;Types::DatasetEntry&gt;
+    #   * {Types::GetDatasetContentResponse#entries #data.entries} => Array&lt;Types::DatasetEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::GetDatasetContentResponse#timestamp #timestamp} => Time
     #   * {Types::GetDatasetContentResponse#status #status} => Types::DatasetContentStatus
     #
@@ -1212,9 +1304,9 @@ module Aws::IoTAnalytics
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].entry_name #=> String
-    #   resp.entries[0].data_uri #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].entry_name #=> String
+    #   resp.data.entries[0].data_uri #=> String
     #   resp.timestamp #=> Time
     #   resp.status.state #=> String, one of "CREATING", "SUCCEEDED", "FAILED"
     #   resp.status.reason #=> String
@@ -1260,6 +1352,7 @@ module Aws::IoTAnalytics
     #   resp.channel_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.channel_summaries[0].creation_time #=> Time
     #   resp.channel_summaries[0].last_update_time #=> Time
+    #   resp.channel_summaries[0].last_message_arrival_time #=> Time
     #   resp.next_token #=> String
     #
     # @overload list_channels(params = {})
@@ -1283,12 +1376,12 @@ module Aws::IoTAnalytics
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_on_or_after
     #   A filter to limit results to those data set contents whose creation is
     #   scheduled on or after the given time. See the field
-    #   `triggers.schedule` in the CreateDataset request. (timestamp)
+    #   `triggers.schedule` in the `CreateDataset` request. (timestamp)
     #
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_before
     #   A filter to limit results to those data set contents whose creation is
     #   scheduled before the given time. See the field `triggers.schedule` in
-    #   the CreateDataset request. (timestamp)
+    #   the `CreateDataset` request. (timestamp)
     #
     # @return [Types::ListDatasetContentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1405,6 +1498,12 @@ module Aws::IoTAnalytics
     #   resp.datastore_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.datastore_summaries[0].creation_time #=> Time
     #   resp.datastore_summaries[0].last_update_time #=> Time
+    #   resp.datastore_summaries[0].last_message_arrival_time #=> Time
+    #   resp.datastore_summaries[0].file_format_type #=> String, one of "JSON", "PARQUET"
+    #   resp.datastore_summaries[0].datastore_partitions.partitions #=> Array
+    #   resp.datastore_summaries[0].datastore_partitions.partitions[0].attribute_partition.attribute_name #=> String
+    #   resp.datastore_summaries[0].datastore_partitions.partitions[0].timestamp_partition.attribute_name #=> String
+    #   resp.datastore_summaries[0].datastore_partitions.partitions[0].timestamp_partition.timestamp_format #=> String
     #   resp.next_token #=> String
     #
     # @overload list_datastores(params = {})
@@ -1457,7 +1556,7 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Lists the tags (metadata) which you have assigned to the resource.
+    # Lists the tags (metadata) that you have assigned to the resource.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource whose tags you want to list.
@@ -1487,11 +1586,11 @@ module Aws::IoTAnalytics
 
     # Sets or updates the AWS IoT Analytics logging options.
     #
-    # Note that if you update the value of any `loggingOptions` field, it
-    # takes up to one minute for the change to take effect. Also, if you
-    # change the policy attached to the role you specified in the roleArn
-    # field (for example, to correct an invalid policy) it takes up to 5
-    # minutes for that change to take effect.
+    # If you update the value of any `loggingOptions` field, it takes up to
+    # one minute for the change to take effect. Also, if you change the
+    # policy attached to the role you specified in the `roleArn` field (for
+    # example, to correct an invalid policy), it takes up to five minutes
+    # for that change to take effect.
     #
     # @option params [required, Types::LoggingOptions] :logging_options
     #   The new values of the AWS IoT Analytics logging options.
@@ -1519,12 +1618,12 @@ module Aws::IoTAnalytics
     # payload.
     #
     # @option params [required, Types::PipelineActivity] :pipeline_activity
-    #   The pipeline activity that is run. This must not be a 'channel'
-    #   activity or a 'datastore' activity because these activities are used
-    #   in a pipeline only to load the original message and to store the
-    #   (possibly) transformed message. If a 'lambda' activity is specified,
-    #   only short-running Lambda functions (those with a timeout of less than
-    #   30 seconds or less) can be used.
+    #   The pipeline activity that is run. This must not be a channel activity
+    #   or a datastore activity because these activities are used in a
+    #   pipeline only to load the original message and to store the (possibly)
+    #   transformed message. If a lambda activity is specified, only
+    #   short-running Lambda functions (those with a timeout of less than 30
+    #   seconds or less) can be used.
     #
     # @option params [required, Array<String, StringIO, File>] :payloads
     #   The sample message payloads on which the pipeline activity is run.
@@ -1619,7 +1718,7 @@ module Aws::IoTAnalytics
     #   The name of the channel whose message samples are retrieved.
     #
     # @option params [Integer] :max_messages
-    #   The number of sample messages to be retrieved. The limit is 10, the
+    #   The number of sample messages to be retrieved. The limit is 10. The
     #   default is also 10.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
@@ -1661,8 +1760,21 @@ module Aws::IoTAnalytics
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time (inclusive) of raw message data that is reprocessed.
     #
+    #   If you specify a value for the `startTime` parameter, you must not use
+    #   the `channelMessages` object.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
     #   The end time (exclusive) of raw message data that is reprocessed.
+    #
+    #   If you specify a value for the `endTime` parameter, you must not use
+    #   the `channelMessages` object.
+    #
+    # @option params [Types::ChannelMessages] :channel_messages
+    #   Specifies one or more sets of channel messages that you want to
+    #   reprocess.
+    #
+    #   If you use the `channelMessages` object, you must not specify a value
+    #   for `startTime` and `endTime`.
     #
     # @return [Types::StartPipelineReprocessingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1674,6 +1786,9 @@ module Aws::IoTAnalytics
     #     pipeline_name: "PipelineName", # required
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     channel_messages: {
+    #       s3_paths: ["S3PathChannelMessage"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1688,7 +1803,7 @@ module Aws::IoTAnalytics
     end
 
     # Adds to or modifies the tags of the given resource. Tags are metadata
-    # which can be used to manage a resource.
+    # that can be used to manage a resource.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource whose tags you want to modify.
@@ -1747,10 +1862,10 @@ module Aws::IoTAnalytics
     #   The name of the channel to be updated.
     #
     # @option params [Types::ChannelStorage] :channel_storage
-    #   Where channel data is stored. You may choose one of
-    #   "serviceManagedS3" or "customerManagedS3" storage. If not
-    #   specified, the default is "serviceManagedS3". This cannot be changed
-    #   after creation of the channel.
+    #   Where channel data is stored. You can choose one of `serviceManagedS3`
+    #   or `customerManagedS3` storage. If not specified, the default is
+    #   `serviceManagedS3`. You cannot change this storage option after the
+    #   channel is created.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel. The retention
@@ -1791,26 +1906,39 @@ module Aws::IoTAnalytics
     #   The name of the data set to update.
     #
     # @option params [required, Array<Types::DatasetAction>] :actions
-    #   A list of "DatasetAction" objects.
+    #   A list of `DatasetAction` objects.
     #
     # @option params [Array<Types::DatasetTrigger>] :triggers
-    #   A list of "DatasetTrigger" objects. The list can be empty or can
-    #   contain up to five **DataSetTrigger** objects.
+    #   A list of `DatasetTrigger` objects. The list can be empty or can
+    #   contain up to five `DatasetTrigger` objects.
     #
     # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
-    #   When data set contents are created they are delivered to destinations
+    #   When dataset contents are created, they are delivered to destinations
     #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How long, in days, data set contents are kept for the data set.
+    #   How long, in days, dataset contents are kept for the dataset.
     #
     # @option params [Types::VersioningConfiguration] :versioning_configuration
-    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   Optional. How many versions of dataset contents are kept. If not
     #   specified or set to null, only the latest version plus the latest
     #   succeeded version (if they are different) are kept for the time period
-    #   specified by the "retentionPeriod" parameter. (For more information,
-    #   see
-    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #   specified by the `retentionPeriod` parameter. For more information,
+    #   see [Keeping Multiple Versions of AWS IoT Analytics Data Sets][1] in
+    #   the *AWS IoT Analytics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
+    #
+    # @option params [Array<Types::LateDataRule>] :late_data_rules
+    #   A list of data rules that send notifications to Amazon CloudWatch,
+    #   when data arrives late. To specify `lateDataRules`, the dataset must
+    #   use a [DeltaTimer][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1893,6 +2021,16 @@ module Aws::IoTAnalytics
     #       unlimited: false,
     #       max_versions: 1,
     #     },
+    #     late_data_rules: [
+    #       {
+    #         rule_name: "LateDataRuleName",
+    #         rule_configuration: { # required
+    #           delta_time_session_window_configuration: {
+    #             timeout_in_minutes: 1, # required
+    #           },
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @overload update_dataset(params = {})
@@ -1913,10 +2051,22 @@ module Aws::IoTAnalytics
     #   customer-managed.
     #
     # @option params [Types::DatastoreStorage] :datastore_storage
-    #   Where data store data is stored. You may choose one of
-    #   "serviceManagedS3" or "customerManagedS3" storage. If not
-    #   specified, the default is "serviceManagedS3". This cannot be changed
-    #   after the data store is created.
+    #   Where data store data is stored. You can choose one of
+    #   `serviceManagedS3` or `customerManagedS3` storage. If not specified,
+    #   the default is`serviceManagedS3`. You cannot change this storage
+    #   option after the data store is created.
+    #
+    # @option params [Types::FileFormatConfiguration] :file_format_configuration
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
+    #
+    #   The default file format is JSON. You can specify only one format.
+    #
+    #   You can't change the file format after you create the data store.
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1937,6 +2087,20 @@ module Aws::IoTAnalytics
     #         role_arn: "RoleArn", # required
     #       },
     #     },
+    #     file_format_configuration: {
+    #       json_configuration: {
+    #       },
+    #       parquet_configuration: {
+    #         schema_definition: {
+    #           columns: [
+    #             {
+    #               name: "ColumnName", # required
+    #               type: "ColumnDataType", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @overload update_datastore(params = {})
@@ -1954,15 +2118,15 @@ module Aws::IoTAnalytics
     #   The name of the pipeline to update.
     #
     # @option params [required, Array<Types::PipelineActivity>] :pipeline_activities
-    #   A list of "PipelineActivity" objects. Activities perform
+    #   A list of `PipelineActivity` objects. Activities perform
     #   transformations on your messages, such as removing, renaming or adding
     #   message attributes; filtering messages based on attribute values;
     #   invoking your Lambda functions on messages for advanced processing; or
     #   performing mathematical transformations to normalize device data.
     #
-    #   The list can be 2-25 **PipelineActivity** objects and must contain
-    #   both a `channel` and a `datastore` activity. Each entry in the list
-    #   must contain only one activity, for example:
+    #   The list can be 2-25 `PipelineActivity` objects and must contain both
+    #   a `channel` and a `datastore` activity. Each entry in the list must
+    #   contain only one activity. For example:
     #
     #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
     #   ... \} \}, ... ]`
@@ -2056,7 +2220,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

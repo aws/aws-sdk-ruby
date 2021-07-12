@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -554,6 +554,7 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].auto_rollback_configuration.events[0] #=> String, one of "DEPLOYMENT_FAILURE", "DEPLOYMENT_STOP_ON_ALARM", "DEPLOYMENT_STOP_ON_REQUEST"
     #   resp.deployment_groups_info[0].deployment_style.deployment_type #=> String, one of "IN_PLACE", "BLUE_GREEN"
     #   resp.deployment_groups_info[0].deployment_style.deployment_option #=> String, one of "WITH_TRAFFIC_CONTROL", "WITHOUT_TRAFFIC_CONTROL"
+    #   resp.deployment_groups_info[0].outdated_instances_strategy #=> String, one of "UPDATE", "IGNORE"
     #   resp.deployment_groups_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
     #   resp.deployment_groups_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
     #   resp.deployment_groups_info[0].blue_green_deployment_configuration.deployment_ready_option.action_on_timeout #=> String, one of "CONTINUE_DEPLOYMENT", "STOP_DEPLOYMENT"
@@ -861,7 +862,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].deployment_overview.skipped #=> Integer
     #   resp.deployments_info[0].deployment_overview.ready #=> Integer
     #   resp.deployments_info[0].description #=> String
-    #   resp.deployments_info[0].creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CloudFormation", "CloudFormationRollback"
+    #   resp.deployments_info[0].creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CodeDeployAutoUpdate", "CloudFormation", "CloudFormationRollback"
     #   resp.deployments_info[0].ignore_application_stop_failures #=> Boolean
     #   resp.deployments_info[0].auto_rollback_configuration.enabled #=> Boolean
     #   resp.deployments_info[0].auto_rollback_configuration.events #=> Array
@@ -906,6 +907,9 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].deployment_status_messages[0] #=> String
     #   resp.deployments_info[0].compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #   resp.deployments_info[0].external_id #=> String
+    #   resp.deployments_info[0].related_deployments.auto_update_outdated_instances_root_deployment_id #=> String
+    #   resp.deployments_info[0].related_deployments.auto_update_outdated_instances_deployment_ids #=> Array
+    #   resp.deployments_info[0].related_deployments.auto_update_outdated_instances_deployment_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments AWS API Documentation
     #
@@ -1235,8 +1239,8 @@ module Aws::CodeDeploy
     #   resp = client.create_deployment_config({
     #     deployment_config_name: "DeploymentConfigName", # required
     #     minimum_healthy_hosts: {
-    #       value: 1,
     #       type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
+    #       value: 1,
     #     },
     #     traffic_routing_config: {
     #       type: "TimeBasedCanary", # accepts TimeBasedCanary, TimeBasedLinear, AllAtOnce
@@ -1327,6 +1331,18 @@ module Aws::CodeDeploy
     #   Configuration information for an automatic rollback that is added when
     #   a deployment group is created.
     #
+    # @option params [String] :outdated_instances_strategy
+    #   Indicates what happens when new EC2 instances are launched
+    #   mid-deployment and do not receive the deployed application revision.
+    #
+    #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
+    #   initiates one or more 'auto-update outdated instances' deployments
+    #   to apply the deployed application revision to the new EC2 instances.
+    #
+    #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
+    #   deployment to update the new EC2 instances. This may result in
+    #   instances having different revisions.
+    #
     # @option params [Types::DeploymentStyle] :deployment_style
     #   Information about the type of deployment, in-place or blue/green, that
     #   you want to run and whether to route deployment traffic behind a load
@@ -1407,6 +1423,7 @@ module Aws::CodeDeploy
     #       enabled: false,
     #       events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
     #     },
+    #     outdated_instances_strategy: "UPDATE", # accepts UPDATE, IGNORE
     #     deployment_style: {
     #       deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
     #       deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
@@ -1833,7 +1850,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_overview.skipped #=> Integer
     #   resp.deployment_info.deployment_overview.ready #=> Integer
     #   resp.deployment_info.description #=> String
-    #   resp.deployment_info.creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CloudFormation", "CloudFormationRollback"
+    #   resp.deployment_info.creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CodeDeployAutoUpdate", "CloudFormation", "CloudFormationRollback"
     #   resp.deployment_info.ignore_application_stop_failures #=> Boolean
     #   resp.deployment_info.auto_rollback_configuration.enabled #=> Boolean
     #   resp.deployment_info.auto_rollback_configuration.events #=> Array
@@ -1878,6 +1895,9 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_status_messages[0] #=> String
     #   resp.deployment_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #   resp.deployment_info.external_id #=> String
+    #   resp.deployment_info.related_deployments.auto_update_outdated_instances_root_deployment_id #=> String
+    #   resp.deployment_info.related_deployments.auto_update_outdated_instances_deployment_ids #=> Array
+    #   resp.deployment_info.related_deployments.auto_update_outdated_instances_deployment_ids[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1913,8 +1933,8 @@ module Aws::CodeDeploy
     #
     #   resp.deployment_config_info.deployment_config_id #=> String
     #   resp.deployment_config_info.deployment_config_name #=> String
-    #   resp.deployment_config_info.minimum_healthy_hosts.value #=> Integer
     #   resp.deployment_config_info.minimum_healthy_hosts.type #=> String, one of "HOST_COUNT", "FLEET_PERCENT"
+    #   resp.deployment_config_info.minimum_healthy_hosts.value #=> Integer
     #   resp.deployment_config_info.create_time #=> Time
     #   resp.deployment_config_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #   resp.deployment_config_info.traffic_routing_config.type #=> String, one of "TimeBasedCanary", "TimeBasedLinear", "AllAtOnce"
@@ -1996,6 +2016,7 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.auto_rollback_configuration.events[0] #=> String, one of "DEPLOYMENT_FAILURE", "DEPLOYMENT_STOP_ON_ALARM", "DEPLOYMENT_STOP_ON_REQUEST"
     #   resp.deployment_group_info.deployment_style.deployment_type #=> String, one of "IN_PLACE", "BLUE_GREEN"
     #   resp.deployment_group_info.deployment_style.deployment_option #=> String, one of "WITH_TRAFFIC_CONTROL", "WITHOUT_TRAFFIC_CONTROL"
+    #   resp.deployment_group_info.outdated_instances_strategy #=> String, one of "UPDATE", "IGNORE"
     #   resp.deployment_group_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
     #   resp.deployment_group_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
     #   resp.deployment_group_info.blue_green_deployment_configuration.deployment_ready_option.action_on_timeout #=> String, one of "CONTINUE_DEPLOYMENT", "STOP_DEPLOYMENT"
@@ -2812,7 +2833,8 @@ module Aws::CodeDeploy
     #
     # @option params [String] :status
     #   The result of a Lambda function that validates a deployment lifecycle
-    #   event (`Succeeded` or `Failed`).
+    #   event. `Succeeded` and `Failed` are the only valid values for
+    #   `status`.
     #
     # @return [Types::PutLifecycleEventHookExecutionStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3163,6 +3185,18 @@ module Aws::CodeDeploy
     #   Information for an automatic rollback configuration that is added or
     #   changed when a deployment group is updated.
     #
+    # @option params [String] :outdated_instances_strategy
+    #   Indicates what happens when new EC2 instances are launched
+    #   mid-deployment and do not receive the deployed application revision.
+    #
+    #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
+    #   initiates one or more 'auto-update outdated instances' deployments
+    #   to apply the deployed application revision to the new EC2 instances.
+    #
+    #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
+    #   deployment to update the new EC2 instances. This may result in
+    #   instances having different revisions.
+    #
     # @option params [Types::DeploymentStyle] :deployment_style
     #   Information about the type of deployment, either in-place or
     #   blue/green, you want to run and whether to route deployment traffic
@@ -3238,6 +3272,7 @@ module Aws::CodeDeploy
     #       enabled: false,
     #       events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
     #     },
+    #     outdated_instances_strategy: "UPDATE", # accepts UPDATE, IGNORE
     #     deployment_style: {
     #       deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
     #       deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
@@ -3340,7 +3375,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-05-14)
+------------------
+
+* Feature - Transcribe Medical now supports identification of PHI entities within transcripts
+
+1.54.0 (2021-03-31)
+------------------
+
+* Feature - Amazon Transcribe now supports creating custom language models in the following languages: British English (en-GB), Australian English (en-AU), Indian Hindi (hi-IN), and US Spanish (es-US).
+
+1.53.0 (2021-03-26)
+------------------
+
+* Feature - Amazon Transcribe now supports tagging words that match your vocabulary filter for batch transcription.
+
+1.52.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2020-09-30)
 ------------------
 

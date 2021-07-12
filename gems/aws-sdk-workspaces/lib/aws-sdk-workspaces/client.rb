@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -448,6 +448,14 @@ module Aws::WorkSpaces
     # Region. For more information about copying images, see [ Copy a Custom
     # WorkSpaces Image][1].
     #
+    # <note markdown="1"> In the China (Ningxia) Region, you can copy images only within the
+    # same Region.
+    #
+    #  In the AWS GovCloud (US-West) Region, to copy images to and from other
+    # AWS Regions, contact AWS Support.
+    #
+    #  </note>
+    #
     # Before copying a shared image, be sure to verify that it has been
     # shared from the correct AWS account. To determine if an image has been
     # shared and to see the AWS account ID that owns an image, use the
@@ -654,6 +662,90 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates the specified WorkSpace bundle. For more information about
+    # creating WorkSpace bundles, see [ Create a Custom WorkSpaces Image and
+    # Bundle][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html
+    #
+    # @option params [required, String] :bundle_name
+    #   The name of the bundle.
+    #
+    # @option params [required, String] :bundle_description
+    #   The description of the bundle.
+    #
+    # @option params [required, String] :image_id
+    #   The identifier of the image that is used to create the bundle.
+    #
+    # @option params [required, Types::ComputeType] :compute_type
+    #   Describes the compute type of the bundle.
+    #
+    # @option params [required, Types::UserStorage] :user_storage
+    #   Describes the user volume for a WorkSpace bundle.
+    #
+    # @option params [Types::RootStorage] :root_storage
+    #   Describes the root volume for a WorkSpace bundle.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the bundle.
+    #
+    #   <note markdown="1"> To add tags at the same time when you're creating the bundle, you
+    #   must create an IAM policy that grants your IAM user permissions to use
+    #   `workspaces:CreateTags`.
+    #
+    #    </note>
+    #
+    # @return [Types::CreateWorkspaceBundleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceBundleResult#workspace_bundle #workspace_bundle} => Types::WorkspaceBundle
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_bundle({
+    #     bundle_name: "WorkspaceBundleName", # required
+    #     bundle_description: "WorkspaceBundleDescription", # required
+    #     image_id: "WorkspaceImageId", # required
+    #     compute_type: { # required
+    #       name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #     },
+    #     user_storage: { # required
+    #       capacity: "NonEmptyString",
+    #     },
+    #     root_storage: {
+    #       capacity: "NonEmptyString",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspace_bundle.bundle_id #=> String
+    #   resp.workspace_bundle.name #=> String
+    #   resp.workspace_bundle.owner #=> String
+    #   resp.workspace_bundle.description #=> String
+    #   resp.workspace_bundle.image_id #=> String
+    #   resp.workspace_bundle.root_storage.capacity #=> String
+    #   resp.workspace_bundle.user_storage.capacity #=> String
+    #   resp.workspace_bundle.compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.workspace_bundle.last_updated_time #=> Time
+    #   resp.workspace_bundle.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceBundle AWS API Documentation
+    #
+    # @overload create_workspace_bundle(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_bundle(params = {}, options = {})
+      req = build_request(:create_workspace_bundle, params)
+      req.send_request(options)
+    end
+
     # Creates one or more WorkSpaces.
     #
     # This operation is asynchronous and returns before the WorkSpaces are
@@ -842,6 +934,34 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Deletes the specified WorkSpace bundle. For more information about
+    # deleting WorkSpace bundles, see [ Delete a Custom WorkSpaces Bundle or
+    # Image][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html
+    #
+    # @option params [String] :bundle_id
+    #   The identifier of the bundle.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_bundle({
+    #     bundle_id: "BundleId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceBundle AWS API Documentation
+    #
+    # @overload delete_workspace_bundle(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_bundle(params = {}, options = {})
+      req = build_request(:delete_workspace_bundle, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified image from your account. To delete an image, you
     # must first delete any bundles that are associated with the image and
     # unshare the image if it is shared with other accounts.
@@ -870,6 +990,25 @@ module Aws::WorkSpaces
     # and returns before the WorkSpace directory is deregistered. If any
     # WorkSpaces are registered to this directory, you must remove them
     # before you can deregister the directory.
+    #
+    # <note markdown="1"> Simple AD and AD Connector are made available to you free of charge to
+    # use with WorkSpaces. If there are no WorkSpaces being used with your
+    # Simple AD or AD Connector directory for 30 consecutive days, this
+    # directory will be automatically deregistered for use with Amazon
+    # WorkSpaces, and you will be charged for this directory as per the [AWS
+    # Directory Services pricing terms][1].
+    #
+    #  To delete empty directories, see [ Delete the Directory for Your
+    # WorkSpaces][2]. If you delete your Simple AD or AD Connector
+    # directory, you can always create a new one when you want to start
+    # using WorkSpaces again.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/directoryservice/pricing/
+    # [2]: https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory. If any WorkSpaces are registered to
@@ -1183,8 +1322,8 @@ module Aws::WorkSpaces
     #   The owner of the bundles. You cannot combine this parameter with any
     #   other filter.
     #
-    #   Specify `AMAZON` to describe the bundles provided by AWS or null to
-    #   describe the bundles that belong to your account.
+    #   To describe the bundles provided by AWS, specify `AMAZON`. To describe
+    #   the bundles that belong to your account, don't specify a value.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. (You received this token from a
@@ -1217,6 +1356,7 @@ module Aws::WorkSpaces
     #   resp.bundles[0].user_storage.capacity #=> String
     #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
     #   resp.bundles[0].last_updated_time #=> Time
+    #   resp.bundles[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles AWS API Documentation
@@ -1288,6 +1428,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_access_properties.device_type_android #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_chrome_os #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_zero_client #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_linux #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].tenancy #=> String, one of "DEDICATED", "SHARED"
     #   resp.directories[0].selfservice_permissions.restart_workspace #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.increase_volume_size #=> String, one of "ENABLED", "DISABLED"
@@ -1639,9 +1780,15 @@ module Aws::WorkSpaces
     #   The identifier of the EC2 image.
     #
     # @option params [required, String] :ingestion_process
-    #   The ingestion process to be used when importing the image. For
-    #   non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro),
-    #   specify `BYOL_REGULAR`.
+    #   The ingestion process to be used when importing the image, depending
+    #   on which protocol you want to use for your BYOL Workspace image,
+    #   either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP,
+    #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
+    #   that does not end in `_WSP`.
+    #
+    #   For non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`, depending
+    #   on the protocol.
     #
     # @option params [required, String] :image_name
     #   The name of the WorkSpace image.
@@ -1675,7 +1822,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.import_workspace_image({
     #     ec2_image_id: "Ec2ImageId", # required
-    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
+    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_REGULAR_WSP
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
     #     tags: [
@@ -1930,6 +2077,7 @@ module Aws::WorkSpaces
     #       device_type_android: "ALLOW", # accepts ALLOW, DENY
     #       device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
     #       device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #     },
     #   })
     #
@@ -2367,9 +2515,25 @@ module Aws::WorkSpaces
     # using [ DescribeWorkSpaces][1]. If the WorkSpace ID isn't returned,
     # then the WorkSpace has been successfully terminated.
     #
+    # <note markdown="1"> Simple AD and AD Connector are made available to you free of charge to
+    # use with WorkSpaces. If there are no WorkSpaces being used with your
+    # Simple AD or AD Connector directory for 30 consecutive days, this
+    # directory will be automatically deregistered for use with Amazon
+    # WorkSpaces, and you will be charged for this directory as per the [AWS
+    # Directory Services pricing terms][2].
+    #
+    #  To delete empty directories, see [ Delete the Directory for Your
+    # WorkSpaces][3]. If you delete your Simple AD or AD Connector
+    # directory, you can always create a new one when you want to start
+    # using WorkSpaces again.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html
+    # [2]: http://aws.amazon.com/directoryservice/pricing/
+    # [3]: https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html
     #
     # @option params [required, Array<Types::TerminateRequest>] :terminate_workspace_requests
     #   The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
@@ -2491,12 +2655,62 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Shares or unshares an image with one account by specifying whether
-    # that account has permission to copy the image. If the copy image
-    # permission is granted, the image is shared with that account. If the
-    # copy image permission is revoked, the image is unshared with the
-    # account. For more information about sharing images, see [ Share or
-    # Unshare a Custom WorkSpaces Image][1].
+    # Updates a WorkSpace bundle with a new image. For more information
+    # about updating WorkSpace bundles, see [ Update a Custom WorkSpaces
+    # Bundle][1].
+    #
+    # Existing WorkSpaces aren't automatically updated when you update the
+    # bundle that they're based on. To update existing WorkSpaces that are
+    # based on a bundle that you've updated, you must either rebuild the
+    # WorkSpaces or delete and recreate them.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html
+    #
+    # @option params [String] :bundle_id
+    #   The identifier of the bundle.
+    #
+    # @option params [String] :image_id
+    #   The identifier of the image.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_bundle({
+    #     bundle_id: "BundleId",
+    #     image_id: "WorkspaceImageId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceBundle AWS API Documentation
+    #
+    # @overload update_workspace_bundle(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_bundle(params = {}, options = {})
+      req = build_request(:update_workspace_bundle, params)
+      req.send_request(options)
+    end
+
+    # Shares or unshares an image with one account in the same AWS Region by
+    # specifying whether that account has permission to copy the image. If
+    # the copy image permission is granted, the image is shared with that
+    # account. If the copy image permission is revoked, the image is
+    # unshared with the account.
+    #
+    # After an image has been shared, the recipient account can copy the
+    # image to other AWS Regions as needed.
+    #
+    # <note markdown="1"> In the China (Ningxia) Region, you can copy images only within the
+    # same Region.
+    #
+    #  In the AWS GovCloud (US-West) Region, to copy images to and from other
+    # AWS Regions, contact AWS Support.
+    #
+    #  </note>
+    #
+    # For more information about sharing images, see [ Share or Unshare a
+    # Custom WorkSpaces Image][1].
     #
     # <note markdown="1"> * To delete an image that has been shared, you must unshare the image
     #   before you delete it.
@@ -2557,7 +2771,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

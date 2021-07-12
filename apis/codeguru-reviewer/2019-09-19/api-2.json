@@ -172,6 +172,20 @@
         {"shape":"ThrottlingException"}
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/tags/{resourceArn}"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "PutRecommendationFeedback":{
       "name":"PutRecommendationFeedback",
       "http":{
@@ -187,6 +201,34 @@
         {"shape":"AccessDeniedException"},
         {"shape":"ThrottlingException"}
       ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/tags/{resourceArn}"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/tags/{resourceArn}"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
     }
   },
   "shapes":{
@@ -197,6 +239,17 @@
       },
       "error":{"httpStatusCode":403},
       "exception":true
+    },
+    "AnalysisType":{
+      "type":"string",
+      "enum":[
+        "Security",
+        "CodeQuality"
+      ]
+    },
+    "AnalysisTypes":{
+      "type":"list",
+      "member":{"shape":"AnalysisType"}
     },
     "Arn":{
       "type":"string",
@@ -212,30 +265,64 @@
         "ClientRequestToken":{
           "shape":"ClientRequestToken",
           "idempotencyToken":true
-        }
+        },
+        "Tags":{"shape":"TagMap"},
+        "KMSKeyDetails":{"shape":"KMSKeyDetails"}
       }
     },
     "AssociateRepositoryResponse":{
       "type":"structure",
       "members":{
-        "RepositoryAssociation":{"shape":"RepositoryAssociation"}
+        "RepositoryAssociation":{"shape":"RepositoryAssociation"},
+        "Tags":{"shape":"TagMap"}
       }
+    },
+    "AssociationArn":{
+      "type":"string",
+      "max":1600,
+      "min":1,
+      "pattern":"^arn:aws[^:\\s]*:codeguru-reviewer:[^:\\s]+:[\\d]{12}:association:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
     },
     "AssociationId":{
       "type":"string",
       "max":64,
       "min":1
     },
+    "BranchDiffSourceCodeType":{
+      "type":"structure",
+      "required":[
+        "SourceBranchName",
+        "DestinationBranchName"
+      ],
+      "members":{
+        "SourceBranchName":{"shape":"BranchName"},
+        "DestinationBranchName":{"shape":"BranchName"}
+      }
+    },
     "BranchName":{
       "type":"string",
       "max":256,
       "min":1
+    },
+    "BuildArtifactsObjectKey":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^\\S(.*\\S)?$"
     },
     "ClientRequestToken":{
       "type":"string",
       "max":64,
       "min":1,
       "pattern":"^[\\w-]+$"
+    },
+    "CodeArtifacts":{
+      "type":"structure",
+      "required":["SourceCodeArtifactsObjectKey"],
+      "members":{
+        "SourceCodeArtifactsObjectKey":{"shape":"SourceCodeArtifactsObjectKey"},
+        "BuildArtifactsObjectKey":{"shape":"BuildArtifactsObjectKey"}
+      }
     },
     "CodeCommitRepository":{
       "type":"structure",
@@ -259,7 +346,9 @@
         "Type":{"shape":"Type"},
         "PullRequestId":{"shape":"PullRequestId"},
         "SourceCodeType":{"shape":"SourceCodeType"},
-        "Metrics":{"shape":"Metrics"}
+        "AssociationArn":{"shape":"AssociationArn"},
+        "Metrics":{"shape":"Metrics"},
+        "AnalysisTypes":{"shape":"AnalysisTypes"}
       }
     },
     "CodeReviewName":{
@@ -285,21 +374,24 @@
         "LastUpdatedTimeStamp":{"shape":"TimeStamp"},
         "Type":{"shape":"Type"},
         "PullRequestId":{"shape":"PullRequestId"},
-        "MetricsSummary":{"shape":"MetricsSummary"}
+        "MetricsSummary":{"shape":"MetricsSummary"},
+        "SourceCodeType":{"shape":"SourceCodeType"}
       }
     },
     "CodeReviewType":{
       "type":"structure",
       "required":["RepositoryAnalysis"],
       "members":{
-        "RepositoryAnalysis":{"shape":"RepositoryAnalysis"}
+        "RepositoryAnalysis":{"shape":"RepositoryAnalysis"},
+        "AnalysisTypes":{"shape":"AnalysisTypes"}
       }
     },
     "CommitDiffSourceCodeType":{
       "type":"structure",
       "members":{
         "SourceCommit":{"shape":"CommitId"},
-        "DestinationCommit":{"shape":"CommitId"}
+        "DestinationCommit":{"shape":"CommitId"},
+        "MergeBaseCommit":{"shape":"CommitId"}
       }
     },
     "CommitId":{
@@ -330,7 +422,7 @@
       ],
       "members":{
         "Name":{"shape":"CodeReviewName"},
-        "RepositoryAssociationArn":{"shape":"Arn"},
+        "RepositoryAssociationArn":{"shape":"AssociationArn"},
         "Type":{"shape":"CodeReviewType"},
         "ClientRequestToken":{
           "shape":"ClientRequestToken",
@@ -396,7 +488,7 @@
       "required":["AssociationArn"],
       "members":{
         "AssociationArn":{
-          "shape":"Arn",
+          "shape":"AssociationArn",
           "location":"uri",
           "locationName":"AssociationArn"
         }
@@ -405,7 +497,8 @@
     "DescribeRepositoryAssociationResponse":{
       "type":"structure",
       "members":{
-        "RepositoryAssociation":{"shape":"RepositoryAssociation"}
+        "RepositoryAssociation":{"shape":"RepositoryAssociation"},
+        "Tags":{"shape":"TagMap"}
       }
     },
     "DisassociateRepositoryRequest":{
@@ -413,7 +506,7 @@
       "required":["AssociationArn"],
       "members":{
         "AssociationArn":{
-          "shape":"Arn",
+          "shape":"AssociationArn",
           "location":"uri",
           "locationName":"AssociationArn"
         }
@@ -422,10 +515,37 @@
     "DisassociateRepositoryResponse":{
       "type":"structure",
       "members":{
-        "RepositoryAssociation":{"shape":"RepositoryAssociation"}
+        "RepositoryAssociation":{"shape":"RepositoryAssociation"},
+        "Tags":{"shape":"TagMap"}
       }
     },
+    "EncryptionOption":{
+      "type":"string",
+      "enum":[
+        "AWS_OWNED_CMK",
+        "CUSTOMER_MANAGED_CMK"
+      ]
+    },
     "ErrorMessage":{"type":"string"},
+    "EventInfo":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"EventName"},
+        "State":{"shape":"EventState"}
+      }
+    },
+    "EventName":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"^[ \\-A-Z_a-z]+$"
+    },
+    "EventState":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"^[ \\-A-Z_a-z]+$"
+    },
     "FilePath":{
       "type":"string",
       "max":1024,
@@ -455,6 +575,19 @@
       "member":{"shape":"JobState"},
       "max":3,
       "min":1
+    },
+    "KMSKeyDetails":{
+      "type":"structure",
+      "members":{
+        "KMSKeyId":{"shape":"KMSKeyId"},
+        "EncryptionOption":{"shape":"EncryptionOption"}
+      }
+    },
+    "KMSKeyId":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"[a-zA-Z0-9-]+"
     },
     "LineNumber":{"type":"integer"},
     "ListCodeReviewsMaxResults":{
@@ -613,6 +746,23 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["resourceArn"],
+      "members":{
+        "resourceArn":{
+          "shape":"AssociationArn",
+          "location":"uri",
+          "locationName":"resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagMap"}
+      }
+    },
     "MaxResults":{
       "type":"integer",
       "max":100,
@@ -676,7 +826,8 @@
         "CodeCommit",
         "GitHub",
         "Bitbucket",
-        "GitHubEnterpriseServer"
+        "GitHubEnterpriseServer",
+        "S3Bucket"
       ]
     },
     "ProviderTypes":{
@@ -720,6 +871,21 @@
       "member":{"shape":"Reaction"},
       "max":1,
       "min":0
+    },
+    "RecommendationCategory":{
+      "type":"string",
+      "enum":[
+        "AWSBestPractices",
+        "AWSCloudFormationIssues",
+        "DuplicateCode",
+        "CodeMaintenanceIssues",
+        "ConcurrencyIssues",
+        "InputValidations",
+        "PythonBestPractices",
+        "JavaBestPractices",
+        "ResourceLeaks",
+        "SecurityIssues"
+      ]
     },
     "RecommendationFeedback":{
       "type":"structure",
@@ -766,7 +932,8 @@
         "RecommendationId":{"shape":"RecommendationId"},
         "StartLine":{"shape":"LineNumber"},
         "EndLine":{"shape":"LineNumber"},
-        "Description":{"shape":"Text"}
+        "Description":{"shape":"Text"},
+        "RecommendationCategory":{"shape":"RecommendationCategory"}
       }
     },
     "Repository":{
@@ -774,14 +941,15 @@
       "members":{
         "CodeCommit":{"shape":"CodeCommitRepository"},
         "Bitbucket":{"shape":"ThirdPartySourceRepository"},
-        "GitHubEnterpriseServer":{"shape":"ThirdPartySourceRepository"}
+        "GitHubEnterpriseServer":{"shape":"ThirdPartySourceRepository"},
+        "S3Bucket":{"shape":"S3Repository"}
       }
     },
     "RepositoryAnalysis":{
       "type":"structure",
-      "required":["RepositoryHead"],
       "members":{
-        "RepositoryHead":{"shape":"RepositoryHeadSourceCodeType"}
+        "RepositoryHead":{"shape":"RepositoryHeadSourceCodeType"},
+        "SourceCodeType":{"shape":"SourceCodeType"}
       }
     },
     "RepositoryAssociation":{
@@ -796,7 +964,9 @@
         "State":{"shape":"RepositoryAssociationState"},
         "StateReason":{"shape":"StateReason"},
         "LastUpdatedTimeStamp":{"shape":"TimeStamp"},
-        "CreatedTimeStamp":{"shape":"TimeStamp"}
+        "CreatedTimeStamp":{"shape":"TimeStamp"},
+        "KMSKeyDetails":{"shape":"KMSKeyDetails"},
+        "S3RepositoryDetails":{"shape":"S3RepositoryDetails"}
       }
     },
     "RepositoryAssociationState":{
@@ -805,13 +975,14 @@
         "Associated",
         "Associating",
         "Failed",
-        "Disassociating"
+        "Disassociating",
+        "Disassociated"
       ]
     },
     "RepositoryAssociationStates":{
       "type":"list",
       "member":{"shape":"RepositoryAssociationState"},
-      "max":3,
+      "max":5,
       "min":1
     },
     "RepositoryAssociationSummaries":{
@@ -844,6 +1015,26 @@
       "max":100,
       "min":1
     },
+    "RequestId":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
+    "RequestMetadata":{
+      "type":"structure",
+      "members":{
+        "RequestId":{"shape":"RequestId"},
+        "Requester":{"shape":"Requester"},
+        "EventInfo":{"shape":"EventInfo"},
+        "VendorName":{"shape":"VendorName"}
+      }
+    },
+    "Requester":{
+      "type":"string",
+      "max":100,
+      "min":1,
+      "pattern":"^\\S(.*\\S)?$"
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
@@ -852,17 +1043,100 @@
       "error":{"httpStatusCode":404},
       "exception":true
     },
+    "S3BucketName":{
+      "type":"string",
+      "max":63,
+      "min":3,
+      "pattern":"^\\S(.*\\S)?$"
+    },
+    "S3BucketRepository":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"Name"},
+        "Details":{"shape":"S3RepositoryDetails"}
+      }
+    },
+    "S3Repository":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "BucketName"
+      ],
+      "members":{
+        "Name":{"shape":"Name"},
+        "BucketName":{"shape":"S3BucketName"}
+      }
+    },
+    "S3RepositoryDetails":{
+      "type":"structure",
+      "members":{
+        "BucketName":{"shape":"S3BucketName"},
+        "CodeArtifacts":{"shape":"CodeArtifacts"}
+      }
+    },
+    "SourceCodeArtifactsObjectKey":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^\\S(.*\\S)?$"
+    },
     "SourceCodeType":{
       "type":"structure",
       "members":{
         "CommitDiff":{"shape":"CommitDiffSourceCodeType"},
-        "RepositoryHead":{"shape":"RepositoryHeadSourceCodeType"}
+        "RepositoryHead":{"shape":"RepositoryHeadSourceCodeType"},
+        "BranchDiff":{"shape":"BranchDiffSourceCodeType"},
+        "S3BucketRepository":{"shape":"S3BucketRepository"},
+        "RequestMetadata":{"shape":"RequestMetadata"}
       }
     },
     "StateReason":{
       "type":"string",
       "max":256,
       "min":0
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":50,
+      "min":1
+    },
+    "TagMap":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"},
+      "max":50,
+      "min":1
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "resourceArn",
+        "Tags"
+      ],
+      "members":{
+        "resourceArn":{
+          "shape":"AssociationArn",
+          "location":"uri",
+          "locationName":"resourceArn"
+        },
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256
     },
     "Text":{
       "type":"string",
@@ -898,6 +1172,30 @@
         "RepositoryAnalysis"
       ]
     },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "resourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "resourceArn":{
+          "shape":"AssociationArn",
+          "location":"uri",
+          "locationName":"resourceArn"
+        },
+        "TagKeys":{
+          "shape":"TagKeyList",
+          "location":"querystring",
+          "locationName":"tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "UserId":{
       "type":"string",
       "max":256,
@@ -916,6 +1214,14 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "VendorName":{
+      "type":"string",
+      "enum":[
+        "GitHub",
+        "GitLab",
+        "NativeS3"
+      ]
     }
   }
 }

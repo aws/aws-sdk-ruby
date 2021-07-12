@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -35,31 +35,31 @@ module Aws::PI
     #
     #       {
     #         service_type: "RDS", # required, accepts RDS
-    #         identifier: "String", # required
+    #         identifier: "RequestString", # required
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
-    #         metric: "String", # required
+    #         metric: "RequestString", # required
     #         period_in_seconds: 1,
     #         group_by: { # required
-    #           group: "String", # required
-    #           dimensions: ["String"],
+    #           group: "RequestString", # required
+    #           dimensions: ["RequestString"],
     #           limit: 1,
     #         },
     #         partition_by: {
-    #           group: "String", # required
-    #           dimensions: ["String"],
+    #           group: "RequestString", # required
+    #           dimensions: ["RequestString"],
     #           limit: 1,
     #         },
     #         filter: {
-    #           "String" => "String",
+    #           "RequestString" => "RequestString",
     #         },
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] service_type
     #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is: `RDS`
+    #   The only valid value for *ServiceType* is `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] identifier
@@ -67,14 +67,15 @@ module Aws::PI
     #   Performance Insights gathers metrics from this data source.
     #
     #   To use an Amazon RDS instance as a data source, you specify its
-    #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   `DbiResourceId` value. For example, specify
+    #   `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
     #   @return [String]
     #
     # @!attribute [rw] start_time
     #   The date and time specifying the beginning of the requested time
-    #   series data. You can't specify a `StartTime` that's earlier than 7
-    #   days ago. The value specified is *inclusive* - data points equal to
-    #   or greater than `StartTime` will be returned.
+    #   series data. You must specify a `StartTime` within the past 7 days.
+    #   The value specified is *inclusive*, which means that data points
+    #   equal to or greater than `StartTime` are returned.
     #
     #   The value for `StartTime` must be earlier than the value for
     #   `EndTime`.
@@ -82,8 +83,8 @@ module Aws::PI
     #
     # @!attribute [rw] end_time
     #   The date and time specifying the end of the requested time series
-    #   data. The value specified is *exclusive* - data points less than
-    #   (but not equal to) `EndTime` will be returned.
+    #   data. The value specified is *exclusive*, which means that data
+    #   points less than (but not equal to) `EndTime` are returned.
     #
     #   The value for `EndTime` must be later than the value for
     #   `StartTime`.
@@ -99,6 +100,15 @@ module Aws::PI
     #
     #   * `db.sampledload.avg` - the raw number of active sessions for the
     #     database engine.
+    #
+    #   If the number of active sessions is less than an internal
+    #   Performance Insights threshold, `db.load.avg` and
+    #   `db.sampledload.avg` are the same value. If the number of active
+    #   sessions is greater than the internal threshold, Performance
+    #   Insights samples the active sessions, with `db.load.avg` showing the
+    #   scaled values, `db.sampledload.avg` showing the raw values, and
+    #   `db.sampledload.avg` less than `db.load.avg`. For most use cases,
+    #   you can query `db.load.avg` only.
     #   @return [String]
     #
     # @!attribute [rw] period_in_seconds
@@ -117,17 +127,17 @@ module Aws::PI
     #   * `86400` (twenty-four hours)
     #
     #   If you don't specify `PeriodInSeconds`, then Performance Insights
-    #   will choose a value for you, with a goal of returning roughly
-    #   100-200 data points in the response.
+    #   chooses a value for you, with a goal of returning roughly 100-200
+    #   data points in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] group_by
     #   A specification for how to aggregate the data points from a query
     #   result. You must specify a valid dimension group. Performance
-    #   Insights will return all of the dimensions within that group, unless
-    #   you provide the names of specific dimensions within that group. You
-    #   can also request that Performance Insights return a limited number
-    #   of values for a dimension.
+    #   Insights returns all dimensions within this group, unless you
+    #   provide the names of specific dimensions within this group. You can
+    #   also request that Performance Insights return a limited number of
+    #   values for a dimension.
     #   @return [Types::DimensionGroup]
     #
     # @!attribute [rw] partition_by
@@ -222,29 +232,47 @@ module Aws::PI
     # the following dimensions: `db.sql.id`, `db.sql.db_id`,
     # `db.sql.statement`, and `db.sql.tokenized_id`.
     #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass DimensionGroup
     #   data as a hash:
     #
     #       {
-    #         group: "String", # required
-    #         dimensions: ["String"],
+    #         group: "RequestString", # required
+    #         dimensions: ["RequestString"],
     #         limit: 1,
     #       }
     #
     # @!attribute [rw] group
     #   The name of the dimension group. Valid values are:
     #
-    #   * `db.user`
+    #   * `db` - The name of the database to which the client is connected
+    #     (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL,
+    #     and MariaDB)
     #
-    #   * `db.host`
+    #   * `db.application` - The name of the application that is connected
+    #     to the database (only Aurora PostgreSQL and RDS PostgreSQL)
     #
-    #   * `db.sql`
+    #   * `db.host` - The host name of the connected client (all engines)
     #
-    #   * `db.sql_tokenized`
+    #   * `db.session_type` - The type of the current session (only Aurora
+    #     PostgreSQL and RDS PostgreSQL)
     #
-    #   * `db.wait_event`
+    #   * `db.sql` - The SQL that is currently executing (all engines)
     #
-    #   * `db.wait_event_type`
+    #   * `db.sql_tokenized` - The SQL digest (all engines)
+    #
+    #   * `db.wait_event` - The event for which the database backend is
+    #     waiting (all engines)
+    #
+    #   * `db.wait_event_type` - The type of event for which the database
+    #     backend is waiting (all engines)
+    #
+    #   * `db.user` - The user logged in to the database (all engines)
     #   @return [String]
     #
     # @!attribute [rw] dimensions
@@ -255,33 +283,55 @@ module Aws::PI
     #
     #   Valid values for elements in the `Dimensions` array are:
     #
-    #   * db.user.id
+    #   * `db.application.name` - The name of the application that is
+    #     connected to the database (only Aurora PostgreSQL and RDS
+    #     PostgreSQL)
     #
-    #   * db.user.name
+    #   * `db.host.id` - The host ID of the connected client (all engines)
     #
-    #   * db.host.id
+    #   * `db.host.name` - The host name of the connected client (all
+    #     engines)
     #
-    #   * db.host.name
+    #   * `db.name` - The name of the database to which the client is
+    #     connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL,
+    #     RDS MySQL, and MariaDB)
     #
-    #   * db.sql.id
+    #   * `db.session_type.name` - The type of the current session (only
+    #     Aurora PostgreSQL and RDS PostgreSQL)
     #
-    #   * db.sql.db\_id
+    #   * `db.sql.id` - The SQL ID generated by Performance Insights (all
+    #     engines)
     #
-    #   * db.sql.statement
+    #   * `db.sql.db_id` - The SQL ID generated by the database (all
+    #     engines)
     #
-    #   * db.sql.tokenized\_id
+    #   * `db.sql.statement` - The SQL text that is being executed (all
+    #     engines)
     #
-    #   * db.sql\_tokenized.id
+    #   * `db.sql.tokenized_id`
     #
-    #   * db.sql\_tokenized.db\_id
+    #   * `db.sql_tokenized.id` - The SQL digest ID generated by Performance
+    #     Insights (all engines)
     #
-    #   * db.sql\_tokenized.statement
+    #   * `db.sql_tokenized.db_id` - SQL digest ID generated by the database
+    #     (all engines)
     #
-    #   * db.wait\_event.name
+    #   * `db.sql_tokenized.statement` - The SQL digest text (all engines)
     #
-    #   * db.wait\_event.type
+    #   * `db.user.id` - The ID of the user logged in to the database (all
+    #     engines)
     #
-    #   * db.wait\_event\_type.name
+    #   * `db.user.name` - The name of the user logged in to the database
+    #     (all engines)
+    #
+    #   * `db.wait_event.name` - The event for which the backend is waiting
+    #     (all engines)
+    #
+    #   * `db.wait_event.type` - The type of event for which the backend is
+    #     waiting (all engines)
+    #
+    #   * `db.wait_event_type.name` - The name of the event type for which
+    #     the backend is waiting (all engines)
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -325,22 +375,127 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # An object that describes the details for a specified dimension.
+    #
+    # @!attribute [rw] value
+    #   The value of the dimension detail data. For the `db.sql.statement`
+    #   dimension, this value is either the full or truncated SQL query,
+    #   depending on the return status.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension
+    #   The full name of the dimension. The full name includes the group
+    #   name and key name. The only valid value is `db.sql.statement`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dimension detail data. Possible values include the
+    #   following:
+    #
+    #   * `AVAILABLE` - The dimension detail data is ready to be retrieved.
+    #
+    #   * `PROCESSING` - The dimension detail data isn't ready to be
+    #     retrieved because more processing time is required. If the
+    #     requested detail data for `db.sql.statement` has the status
+    #     `PROCESSING`, Performance Insights returns the truncated query.
+    #
+    #   * `UNAVAILABLE` - The dimension detail data could not be collected
+    #     successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DimensionKeyDetail AWS API Documentation
+    #
+    class DimensionKeyDetail < Struct.new(
+      :value,
+      :dimension,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDimensionKeyDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_type: "RDS", # required, accepts RDS
+    #         identifier: "IdentifierString", # required
+    #         group: "RequestString", # required
+    #         group_identifier: "RequestString", # required
+    #         requested_dimensions: ["RequestString"],
+    #       }
+    #
+    # @!attribute [rw] service_type
+    #   The AWS service for which Performance Insights returns data. The
+    #   only valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID for a data source from which to gather dimension data. This
+    #   ID must be immutable and unique within an AWS Region. When a DB
+    #   instance is the data source, specify its `DbiResourceId` value. For
+    #   example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group
+    #   The name of the dimension group. The only valid value is `db.sql`.
+    #   Performance Insights searches the specified group for the dimension
+    #   group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_identifier
+    #   The ID of the dimension group from which to retrieve dimension
+    #   details. For dimension group `db.sql`, the group ID is `db.sql.id`.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_dimensions
+    #   A list of dimensions to retrieve the detail data for within the
+    #   given dimension group. For the dimension group `db.sql`, specify
+    #   either the full dimension name `db.sql.statement` or the short
+    #   dimension name `statement`. If you don't specify this parameter,
+    #   Performance Insights returns all dimension data within the specified
+    #   dimension group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetDimensionKeyDetailsRequest AWS API Documentation
+    #
+    class GetDimensionKeyDetailsRequest < Struct.new(
+      :service_type,
+      :identifier,
+      :group,
+      :group_identifier,
+      :requested_dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dimensions
+    #   The details for the requested dimensions.
+    #   @return [Array<Types::DimensionKeyDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetDimensionKeyDetailsResponse AWS API Documentation
+    #
+    class GetDimensionKeyDetailsResponse < Struct.new(
+      :dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetResourceMetricsRequest
     #   data as a hash:
     #
     #       {
     #         service_type: "RDS", # required, accepts RDS
-    #         identifier: "String", # required
+    #         identifier: "RequestString", # required
     #         metric_queries: [ # required
     #           {
-    #             metric: "String", # required
+    #             metric: "RequestString", # required
     #             group_by: {
-    #               group: "String", # required
-    #               dimensions: ["String"],
+    #               group: "RequestString", # required
+    #               dimensions: ["RequestString"],
     #               limit: 1,
     #             },
     #             filter: {
-    #               "String" => "String",
+    #               "RequestString" => "RequestString",
     #             },
     #           },
     #         ],
@@ -348,20 +503,20 @@ module Aws::PI
     #         end_time: Time.now, # required
     #         period_in_seconds: 1,
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] service_type
-    #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is: `RDS`
+    #   The AWS service for which Performance Insights returns metrics. The
+    #   only valid value for *ServiceType* is `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] identifier
     #   An immutable, AWS Region-unique identifier for a data source.
     #   Performance Insights gathers metrics from this data source.
     #
-    #   To use an Amazon RDS instance as a data source, you specify its
-    #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
     #   @return [String]
     #
     # @!attribute [rw] metric_queries
@@ -381,7 +536,7 @@ module Aws::PI
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The date and time specifiying the end of the requested time series
+    #   The date and time specifying the end of the requested time series
     #   data. The value specified is *exclusive* - data points less than
     #   (but not equal to) `EndTime` will be returned.
     #
@@ -455,7 +610,7 @@ module Aws::PI
     #   An immutable, AWS Region-unique identifier for a data source.
     #   Performance Insights gathers metrics from this data source.
     #
-    #   To use an Amazon RDS instance as a data source, you specify its
+    #   To use a DB instance as a data source, you specify its
     #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
     #   @return [String]
     #
@@ -508,7 +663,7 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # A time-ordered series of data points, correpsonding to a dimension of
+    # A time-ordered series of data points, corresponding to a dimension of
     # a Performance Insights metric.
     #
     # @!attribute [rw] key
@@ -539,14 +694,14 @@ module Aws::PI
     #   data as a hash:
     #
     #       {
-    #         metric: "String", # required
+    #         metric: "RequestString", # required
     #         group_by: {
-    #           group: "String", # required
-    #           dimensions: ["String"],
+    #           group: "RequestString", # required
+    #           dimensions: ["RequestString"],
     #           limit: 1,
     #         },
     #         filter: {
-    #           "String" => "String",
+    #           "RequestString" => "RequestString",
     #         },
     #       }
     #
@@ -560,6 +715,15 @@ module Aws::PI
     #
     #   * `db.sampledload.avg` - the raw number of active sessions for the
     #     database engine.
+    #
+    #   If the number of active sessions is less than an internal
+    #   Performance Insights threshold, `db.load.avg` and
+    #   `db.sampledload.avg` are the same value. If the number of active
+    #   sessions is greater than the internal threshold, Performance
+    #   Insights samples the active sessions, with `db.load.avg` showing the
+    #   scaled values, `db.sampledload.avg` showing the raw values, and
+    #   `db.sampledload.avg` less than `db.load.avg`. For most use cases,
+    #   you can query `db.load.avg` only.
     #   @return [String]
     #
     # @!attribute [rw] group_by
@@ -632,6 +796,15 @@ module Aws::PI
     #
     #   * `db.sampledload.avg` - the raw number of active sessions for the
     #     database engine.
+    #
+    #   If the number of active sessions is less than an internal
+    #   Performance Insights threshold, `db.load.avg` and
+    #   `db.sampledload.avg` are the same value. If the number of active
+    #   sessions is greater than the internal threshold, Performance
+    #   Insights samples the active sessions, with `db.load.avg` showing the
+    #   scaled values, `db.sampledload.avg` showing the raw values, and
+    #   `db.sampledload.avg` less than `db.load.avg`. For most use cases,
+    #   you can query `db.load.avg` only.
     #   @return [String]
     #
     # @!attribute [rw] dimensions

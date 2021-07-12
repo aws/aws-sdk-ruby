@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2021-06-28)
+------------------
+
+* Feature - Add JSON Support for Glue Schema Registry
+
+1.88.0 (2021-06-07)
+------------------
+
+* Feature - Add SampleSize variable to S3Target to enable s3-sampling feature through API.
+
+1.87.0 (2021-04-26)
+------------------
+
+* Feature - Adding Kafka Client Auth Related Parameters
+
+1.86.0 (2021-03-29)
+------------------
+
+* Feature - Allow Dots in Registry and Schema Names for CreateRegistry, CreateSchema; Fixed issue when duplicate keys are present and not returned as part of QuerySchemaVersionMetadata.
+
+1.85.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2021-02-23)
+------------------
+
+* Feature - Updating the page size for Glue catalog getter APIs.
+
+1.83.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2020-12-22)
+------------------
+
+* Feature - AWS Glue Find Matches machine learning transforms now support column importance scores.
+
+1.81.0 (2020-12-21)
+------------------
+
+* Feature - Add 4 connection properties: SECRET_ID, CONNECTOR_URL, CONNECTOR_TYPE, CONNECTOR_CLASS_NAME. Add two connection types: MARKETPLACE, CUSTOM
+
+1.80.0 (2020-11-23)
+------------------
+
+* Feature - Feature1 - Glue crawler adds data lineage configuration option. Feature2 - AWS Glue Data Catalog adds APIs for PartitionIndex creation and deletion as part of Enhancement Partition Management feature.
+
+1.79.0 (2020-11-19)
+------------------
+
+* Feature - Adding support for Glue Schema Registry. The AWS Glue Schema Registry is a new feature that allows you to centrally discover, control, and evolve data stream schemas.
+
+1.78.0 (2020-10-27)
+------------------
+
+* Feature - AWS Glue machine learning transforms now support encryption-at-rest for labels and trained models.
+
 1.77.0 (2020-10-21)
 ------------------
 

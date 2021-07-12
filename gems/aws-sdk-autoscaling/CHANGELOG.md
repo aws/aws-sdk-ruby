@@ -1,6 +1,91 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2021-06-30)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling infrastructure improvements and optimizations.
+
+1.63.0 (2021-06-04)
+------------------
+
+* Feature - Documentation updates for Amazon EC2 Auto Scaling
+
+1.62.0 (2021-06-02)
+------------------
+
+* Feature - You can now launch EC2 instances with GP3 volumes when using Auto Scaling groups with Launch Configurations
+
+1.61.0 (2021-05-19)
+------------------
+
+* Feature - With this release, customers can easily use Predictive Scaling as a policy directly through Amazon EC2 Auto Scaling configurations to proactively scale their applications ahead of predicted demand.
+
+1.60.0 (2021-04-08)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling announces Warm Pools that help applications to scale out faster by pre-initializing EC2 instances and save money by requiring fewer continuously running instances
+
+1.59.0 (2021-03-18)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling Instance Refresh now supports phased deployments.
+
+1.58.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2021-03-09)
+------------------
+
+* Feature - EC2 Auto Scaling now supports setting a local time zone for cron expressions in scheduled actions, removing the need to adjust for Daylight Saving Time (DST)
+
+1.56.0 (2021-03-08)
+------------------
+
+* Feature - Documentation updates for autoscaling for capacity-optimized-prioritized SpotAllocationStrategy
+
+1.55.0 (2021-02-23)
+------------------
+
+* Feature - Adds a new optional IncludeDeletedGroups parameter to the DescribeScalingActivities API.
+
+1.54.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2021-01-06)
+------------------
+
+* Feature - This update increases the number of instance types that can be added to the overrides within an mixed instances group configuration.
+
+1.52.0 (2020-12-11)
+------------------
+
+* Feature - Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
+
+1.51.0 (2020-11-23)
+------------------
+
+* Feature - Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
+
+1.50.0 (2020-11-19)
+------------------
+
+* Feature - You can now create Auto Scaling groups with multiple launch templates using a mixed instances policy, making it easy to deploy an AMI with an architecture that is different from the rest of the group.
+
+1.49.0 (2020-11-10)
+------------------
+
+* Feature - Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
+
+1.48.0 (2020-11-04)
+------------------
+
+* Feature - Capacity Rebalance helps you manage and maintain workload availability during Spot interruptions by proactively augmenting your Auto Scaling group with a new instance before interrupting an old one.
+
 1.47.0 (2020-09-30)
 ------------------
 

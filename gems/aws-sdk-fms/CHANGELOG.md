@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-07-08)
+------------------
+
+* Feature - AWS Firewall Manager now supports route table monitoring, and provides remediation action recommendations to security administrators for AWS Network Firewall policies with misconfigured routes.
+
+1.36.0 (2021-04-01)
+------------------
+
+* Feature - Added Firewall Manager policy support for AWS Route 53 Resolver DNS Firewall.
+
+1.35.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-11-17)
+------------------
+
+* Feature - Added Firewall Manager policy support for AWS Network Firewall resources.
+
 1.32.0 (2020-09-30)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -50,6 +50,11 @@ module Aws::S3Control
     # @!attribute [rw] vpc_configuration
     #   The virtual private cloud (VPC) configuration for this access point,
     #   if one exists.
+    #
+    #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
+    #   Outposts access point that is used by other AWS services.
+    #
+    #    </note>
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] bucket
@@ -68,6 +73,100 @@ module Aws::S3Control
       :vpc_configuration,
       :bucket,
       :access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the account level Amazon S3 Storage Lens
+    # configuration.
+    #
+    # @note When making an API call, you may pass AccountLevel
+    #   data as a hash:
+    #
+    #       {
+    #         activity_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         bucket_level: { # required
+    #           activity_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           prefix_level: {
+    #             storage_metrics: { # required
+    #               is_enabled: false,
+    #               selection_criteria: {
+    #                 delimiter: "StorageLensPrefixLevelDelimiter",
+    #                 max_depth: 1,
+    #                 min_storage_bytes_percentage: 1.0,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] activity_metrics
+    #   A container for the S3 Storage Lens activity metrics.
+    #   @return [Types::ActivityMetrics]
+    #
+    # @!attribute [rw] bucket_level
+    #   A container for the S3 Storage Lens bucket-level configuration.
+    #   @return [Types::BucketLevel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccountLevel AWS API Documentation
+    #
+    class AccountLevel < Struct.new(
+      :activity_metrics,
+      :bucket_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the activity metrics.
+    #
+    # @note When making an API call, you may pass ActivityMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether the activity metrics are enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ActivityMetrics AWS API Documentation
+    #
+    class ActivityMetrics < Struct.new(
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS Lambda function used to transform objects through an Object Lambda
+    # Access Point.
+    #
+    # @note When making an API call, you may pass AwsLambdaTransformation
+    #   data as a hash:
+    #
+    #       {
+    #         function_arn: "FunctionArnString", # required
+    #         function_payload: "AwsLambdaTransformationPayload",
+    #       }
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_payload
+    #   Additional JSON that provides supplemental data to the Lambda
+    #   function used to transform objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AwsLambdaTransformation AWS API Documentation
+    #
+    class AwsLambdaTransformation < Struct.new(
+      :function_arn,
+      :function_payload)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -97,6 +196,105 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketAlreadyOwnedByYou AWS API Documentation
     #
     class BucketAlreadyOwnedByYou < Aws::EmptyStructure; end
+
+    # A container for the bucket-level configuration.
+    #
+    # @note When making an API call, you may pass BucketLevel
+    #   data as a hash:
+    #
+    #       {
+    #         activity_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         prefix_level: {
+    #           storage_metrics: { # required
+    #             is_enabled: false,
+    #             selection_criteria: {
+    #               delimiter: "StorageLensPrefixLevelDelimiter",
+    #               max_depth: 1,
+    #               min_storage_bytes_percentage: 1.0,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] activity_metrics
+    #   A container for the bucket-level activity metrics for Amazon S3
+    #   Storage Lens
+    #   @return [Types::ActivityMetrics]
+    #
+    # @!attribute [rw] prefix_level
+    #   A container for the bucket-level prefix-level metrics for S3 Storage
+    #   Lens
+    #   @return [Types::PrefixLevel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketLevel AWS API Documentation
+    #
+    class BucketLevel < Struct.new(
+      :activity_metrics,
+      :prefix_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAccessPointForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #         configuration: { # required
+    #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #           cloud_watch_metrics_enabled: false,
+    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #           transformation_configurations: [ # required
+    #             {
+    #               actions: ["GetObject"], # required, accepts GetObject
+    #               content_transformation: { # required
+    #                 aws_lambda: {
+    #                   function_arn: "FunctionArnString", # required
+    #                   function_payload: "AwsLambdaTransformationPayload",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID for owner of the specified Object Lambda Access
+    #   Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name you want to assign to this Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Object Lambda Access Point configuration as a JSON document.
+    #   @return [Types::ObjectLambdaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambdaRequest AWS API Documentation
+    #
+    class CreateAccessPointForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_lambda_access_point_arn
+    #   Specifies the ARN for the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambdaResult AWS API Documentation
+    #
+    class CreateAccessPointForObjectLambdaResult < Struct.new(
+      :object_lambda_access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateAccessPointRequest
     #   data as a hash:
@@ -129,8 +327,11 @@ module Aws::S3Control
     #   The name of the bucket that you want to associate this access point
     #   with.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -150,17 +351,8 @@ module Aws::S3Control
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] public_access_block_configuration
-    #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 bucket. You can enable the configuration options in any
-    #   combination. For more information about when Amazon S3 considers a
-    #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
-    #
-    #   This is not supported for Amazon S3 on Outposts.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   The `PublicAccessBlock` configuration that you want to apply to the
+    #   access point.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointRequest AWS API Documentation
@@ -177,6 +369,10 @@ module Aws::S3Control
 
     # @!attribute [rw] access_point_arn
     #   The ARN of the access point.
+    #
+    #   <note markdown="1"> This is only supported by Amazon S3 on Outposts.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointResult AWS API Documentation
@@ -339,8 +535,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -413,6 +612,7 @@ module Aws::S3Control
     #             object_lock_legal_hold_status: "OFF", # accepts OFF, ON
     #             object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #             object_lock_retain_until_date: Time.now,
+    #             bucket_key_enabled: false,
     #           },
     #           s3_put_object_acl: {
     #             access_control_policy: {
@@ -442,6 +642,8 @@ module Aws::S3Control
     #                 value: "TagValueString", # required
     #               },
     #             ],
+    #           },
+    #           s3_delete_object_tagging: {
     #           },
     #           s3_initiate_restore_object: {
     #             expiration_in_days: 1,
@@ -501,14 +703,13 @@ module Aws::S3Control
     #   @return [Boolean]
     #
     # @!attribute [rw] operation
-    #   The operation that you want this job to perform on each object
-    #   listed in the manifest. For more information about the available
-    #   operations, see [Operations][1] in the *Amazon Simple Storage
-    #   Service Developer Guide*.
+    #   The action that you want this job to perform on every object listed
+    #   in the manifest. For more information about the available actions,
+    #   see [Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html
     #   @return [Types::JobOperation]
     #
     # @!attribute [rw] report
@@ -542,7 +743,7 @@ module Aws::S3Control
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) for the AWS Identity and Access
     #   Management (IAM) role that Batch Operations will use to run this
-    #   job's operation on each object in the manifest.
+    #   job's action on every object in the manifest.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -580,6 +781,59 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAccessPointForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointForObjectLambdaRequest AWS API Documentation
+    #
+    class DeleteAccessPointForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAccessPointPolicyForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point you want to delete the
+    #   policy for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointPolicyForObjectLambdaRequest AWS API Documentation
+    #
+    class DeleteAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAccessPointPolicyRequest
     #   data as a hash:
     #
@@ -595,8 +849,12 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point whose policy you want to delete.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -629,8 +887,12 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point you want to delete.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -661,10 +923,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The bucket ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -695,10 +960,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -731,8 +999,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   Specifies the bucket being deleted.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -765,8 +1036,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The bucket ARN that has the tag set to be removed.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -834,6 +1108,60 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteStorageLensConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationRequest AWS API Documentation
+    #
+    class DeleteStorageLensConfigurationRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteStorageLensConfigurationTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTaggingRequest AWS API Documentation
+    #
+    class DeleteStorageLensConfigurationTaggingRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTaggingResult AWS API Documentation
+    #
+    class DeleteStorageLensConfigurationTaggingResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeJobRequest
     #   data as a hash:
     #
@@ -843,6 +1171,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -871,6 +1200,160 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for what Amazon S3 Storage Lens will exclude.
+    #
+    # @note When making an API call, you may pass Exclude
+    #   data as a hash:
+    #
+    #       {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       }
+    #
+    # @!attribute [rw] buckets
+    #   A container for the S3 Storage Lens bucket excludes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   A container for the S3 Storage Lens Region excludes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Exclude AWS API Documentation
+    #
+    class Exclude < Struct.new(
+      :buckets,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointConfigurationForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point you want to return the
+    #   configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointConfigurationForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointConfigurationForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   Object Lambda Access Point configuration document.
+    #   @return [Types::ObjectLambdaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointConfigurationForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointConfigurationForObjectLambdaResult < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   Configuration to block all public access. This setting is turned on
+    #   and can not be edited.
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the specified Object Lambda Access Point was
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointForObjectLambdaResult < Struct.new(
+      :name,
+      :public_access_block_configuration,
+      :creation_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointPolicyForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   Object Lambda Access Point resource policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointPolicyForObjectLambdaResult < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAccessPointPolicyRequest
     #   data as a hash:
     #
@@ -886,8 +1369,12 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point whose policy you want to retrieve.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -913,6 +1400,51 @@ module Aws::S3Control
     #
     class GetAccessPointPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointPolicyStatusForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatusForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointPolicyStatusForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_status
+    #   Indicates whether this access point policy is public. For more
+    #   information about how Amazon S3 evaluates policies to determine
+    #   whether they are public, see [The Meaning of "Public"][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   @return [Types::PolicyStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatusForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointPolicyStatusForObjectLambdaResult < Struct.new(
+      :policy_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -971,8 +1503,12 @@ module Aws::S3Control
     #   The name of the access point whose configuration information you
     #   want to retrieve.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1012,14 +1548,19 @@ module Aws::S3Control
     # @!attribute [rw] vpc_configuration
     #   Contains the virtual private cloud (VPC) configuration for the
     #   specified access point.
+    #
+    #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
+    #   Outposts access point that is used by other AWS services.
+    #
+    #    </note>
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   Amazon S3 account. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #   This is not supported for Amazon S3 on Outposts.
     #
@@ -1060,8 +1601,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1104,10 +1648,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1150,10 +1697,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1205,10 +1755,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1309,6 +1862,80 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetStorageLensConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationRequest AWS API Documentation
+    #
+    class GetStorageLensConfigurationRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_lens_configuration
+    #   The S3 Storage Lens configuration requested.
+    #   @return [Types::StorageLensConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationResult AWS API Documentation
+    #
+    class GetStorageLensConfigurationResult < Struct.new(
+      :storage_lens_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetStorageLensConfigurationTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationTaggingRequest AWS API Documentation
+    #
+    class GetStorageLensConfigurationTaggingRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags of S3 Storage Lens configuration requested.
+    #   @return [Array<Types::StorageLensTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationTaggingResult AWS API Documentation
+    #
+    class GetStorageLensConfigurationTaggingResult < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1316,6 +1943,33 @@ module Aws::S3Control
     #
     class IdempotencyException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for what Amazon S3 Storage Lens configuration includes.
+    #
+    # @note When making an API call, you may pass Include
+    #   data as a hash:
+    #
+    #       {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       }
+    #
+    # @!attribute [rw] buckets
+    #   A container for the S3 Storage Lens bucket includes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   A container for the S3 Storage Lens Region includes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Include AWS API Documentation
+    #
+    class Include < Struct.new(
+      :buckets,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1496,7 +2150,7 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   The operation that the specified job is configured to run on each
+    #   The operation that the specified job is configured to run on every
     #   object listed in the manifest.
     #   @return [String]
     #
@@ -1589,6 +2243,14 @@ module Aws::S3Control
     #
     # @!attribute [rw] object_arn
     #   The Amazon Resource Name (ARN) for a manifest object.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] object_version_id
@@ -1641,10 +2303,9 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # The operation that you want this job to perform on each object listed
+    # The operation that you want this job to perform on every object listed
     # in the manifest. For more information about the available operations,
-    # see [Operations][1] in the *Amazon Simple Storage Service Developer
-    # Guide*.
+    # see [Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1702,6 +2363,7 @@ module Aws::S3Control
     #           object_lock_legal_hold_status: "OFF", # accepts OFF, ON
     #           object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #           object_lock_retain_until_date: Time.now,
+    #           bucket_key_enabled: false,
     #         },
     #         s3_put_object_acl: {
     #           access_control_policy: {
@@ -1732,6 +2394,8 @@ module Aws::S3Control
     #             },
     #           ],
     #         },
+    #         s3_delete_object_tagging: {
+    #         },
     #         s3_initiate_restore_object: {
     #           expiration_in_days: 1,
     #           glacier_job_tier: "BULK", # accepts BULK, STANDARD
@@ -1751,36 +2415,41 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] lambda_invoke
-    #   Directs the specified job to invoke an AWS Lambda function on each
+    #   Directs the specified job to invoke an AWS Lambda function on every
     #   object in the manifest.
     #   @return [Types::LambdaInvokeOperation]
     #
     # @!attribute [rw] s3_put_object_copy
-    #   Directs the specified job to run a PUT Copy object call on each
+    #   Directs the specified job to run a PUT Copy object call on every
     #   object in the manifest.
     #   @return [Types::S3CopyObjectOperation]
     #
     # @!attribute [rw] s3_put_object_acl
-    #   Directs the specified job to run a PUT Object acl call on each
+    #   Directs the specified job to run a PUT Object acl call on every
     #   object in the manifest.
     #   @return [Types::S3SetObjectAclOperation]
     #
     # @!attribute [rw] s3_put_object_tagging
-    #   Directs the specified job to run a PUT Object tagging call on each
+    #   Directs the specified job to run a PUT Object tagging call on every
     #   object in the manifest.
     #   @return [Types::S3SetObjectTaggingOperation]
     #
+    # @!attribute [rw] s3_delete_object_tagging
+    #   Directs the specified job to execute a DELETE Object tagging call on
+    #   every object in the manifest.
+    #   @return [Types::S3DeleteObjectTaggingOperation]
+    #
     # @!attribute [rw] s3_initiate_restore_object
-    #   Directs the specified job to run an Initiate Glacier Restore call on
-    #   each object in the manifest.
+    #   Directs the specified job to initiate restore requests for every
+    #   archived object in the manifest.
     #   @return [Types::S3InitiateRestoreObjectOperation]
     #
     # @!attribute [rw] s3_put_object_legal_hold
     #   Contains the configuration for an S3 Object Lock legal hold
-    #   operation that an S3 Batch Operations job passes each object through
-    #   to the underlying `PutObjectLegalHold` API. For more information,
-    #   see [Using S3 Object Lock legal hold with S3 Batch Operations][1] in
-    #   the *Amazon Simple Storage Service Developer Guide*.
+    #   operation that an S3 Batch Operations job passes every object to the
+    #   underlying `PutObjectLegalHold` API. For more information, see
+    #   [Using S3 Object Lock legal hold with S3 Batch Operations][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -1789,11 +2458,10 @@ module Aws::S3Control
     #
     # @!attribute [rw] s3_put_object_retention
     #   Contains the configuration parameters for the Object Lock retention
-    #   action for an S3 Batch Operations job. Batch Operations passes each
-    #   value through to the underlying `PutObjectRetention` API. For more
+    #   action for an S3 Batch Operations job. Batch Operations passes every
+    #   object to the underlying `PutObjectRetention` API. For more
     #   information, see [Using S3 Object Lock retention with S3 Batch
-    #   Operations][1] in the *Amazon Simple Storage Service Developer
-    #   Guide*.
+    #   Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1807,6 +2475,7 @@ module Aws::S3Control
       :s3_put_object_copy,
       :s3_put_object_acl,
       :s3_put_object_tagging,
+      :s3_delete_object_tagging,
       :s3_initiate_restore_object,
       :s3_put_object_legal_hold,
       :s3_put_object_retention)
@@ -1909,7 +2578,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] function_arn
     #   The Amazon Resource Name (ARN) for the AWS Lambda function that the
-    #   specified job will invoke for each object in the manifest.
+    #   specified job will invoke on every object in the manifest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LambdaInvokeOperation AWS API Documentation
@@ -2128,7 +2797,7 @@ module Aws::S3Control
     #   upload that Amazon S3 waits before permanently removing all parts of
     #   the upload. For more information, see [ Aborting Incomplete
     #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   S3 User Guide*.
     #
     #
     #
@@ -2207,6 +2876,14 @@ module Aws::S3Control
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] tag
@@ -2222,6 +2899,64 @@ module Aws::S3Control
       :prefix,
       :tag,
       :and)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAccessPointsForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         next_token: "NonEmptyMaxLength1024String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the list has more access points than can be returned in one call
+    #   to this API, this field contains a continuation token that you can
+    #   provide in subsequent calls to this API to retrieve additional
+    #   access points.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access points that you want to include in the
+    #   list. If there are more than this number of access points, then the
+    #   response will include a continuation token in the `NextToken` field
+    #   that you can use to retrieve the next page of access points.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambdaRequest AWS API Documentation
+    #
+    class ListAccessPointsForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_lambda_access_point_list
+    #   Returns list of Object Lambda Access Points.
+    #   @return [Array<Types::ObjectLambdaAccessPoint>]
+    #
+    # @!attribute [rw] next_token
+    #   If the list has more access points than can be returned in one call
+    #   to this API, this field contains a continuation token that you can
+    #   provide in subsequent calls to this API to retrieve additional
+    #   access points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambdaResult AWS API Documentation
+    #
+    class ListAccessPointsForObjectLambdaResult < Struct.new(
+      :object_lambda_access_point_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2245,8 +2980,11 @@ module Aws::S3Control
     #   The name of the bucket whose associated access points you want to
     #   list.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2313,6 +3051,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_statuses
@@ -2422,6 +3161,85 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Part of `ListStorageLensConfigurationResult`. Each entry includes the
+    # description of the S3 Storage Lens configuration, its home Region,
+    # whether it is enabled, its Amazon Resource Name (ARN), and config ID.
+    #
+    # @!attribute [rw] id
+    #   A container for the S3 Storage Lens configuration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_arn
+    #   The ARN of the S3 Storage Lens configuration. This property is
+    #   read-only.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_region
+    #   A container for the S3 Storage Lens home Region. Your metrics data
+    #   is stored and retained in your designated S3 Storage Lens home
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether the S3 Storage Lens configuration is
+    #   enabled. This property is required.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurationEntry AWS API Documentation
+    #
+    class ListStorageLensConfigurationEntry < Struct.new(
+      :id,
+      :storage_lens_arn,
+      :home_region,
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStorageLensConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         next_token: "ContinuationToken",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurationsRequest AWS API Documentation
+    #
+    class ListStorageLensConfigurationsRequest < Struct.new(
+      :account_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the request produced more than the maximum number of S3 Storage
+    #   Lens configuration results, you can pass this value into a
+    #   subsequent request to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_configuration_list
+    #   A list of S3 Storage Lens configurations.
+    #   @return [Array<Types::ListStorageLensConfigurationEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurationsResult AWS API Documentation
+    #
+    class ListStorageLensConfigurationsResult < Struct.new(
+      :next_token,
+      :storage_lens_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon S3 throws this exception if you make a `GetPublicAccessBlock`
     # request against an account that doesn't have a
     # `PublicAccessBlockConfiguration` set.
@@ -2450,8 +3268,7 @@ module Aws::S3Control
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [How Amazon S3 Calculates When an
-    #   Object Became Noncurrent][1] in the *Amazon Simple Storage Service
-    #   Developer Guide*.
+    #   Object Became Noncurrent][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2480,8 +3297,8 @@ module Aws::S3Control
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [ How Amazon S3 Calculates How
-    #   Long an Object Has Been Noncurrent][1] in the *Amazon Simple Storage
-    #   Service Developer Guide*.
+    #   Long an Object Has Been Noncurrent][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -2512,10 +3329,142 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # An access point with an attached AWS Lambda function used to access
+    # transformed data from an Amazon S3 bucket.
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lambda_access_point_arn
+    #   Specifies the ARN for the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaAccessPoint AWS API Documentation
+    #
+    class ObjectLambdaAccessPoint < Struct.new(
+      :name,
+      :object_lambda_access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration used when creating an Object Lambda Access Point.
+    #
+    # @note When making an API call, you may pass ObjectLambdaConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #         cloud_watch_metrics_enabled: false,
+    #         allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #         transformation_configurations: [ # required
+    #           {
+    #             actions: ["GetObject"], # required, accepts GetObject
+    #             content_transformation: { # required
+    #               aws_lambda: {
+    #                 function_arn: "FunctionArnString", # required
+    #                 function_payload: "AwsLambdaTransformationPayload",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] supporting_access_point
+    #   Standard access point associated with the Object Lambda Access
+    #   Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_metrics_enabled
+    #   A container for whether the CloudWatch metrics configuration is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allowed_features
+    #   A container for allowed features. Valid inputs are `GetObject-Range`
+    #   and `GetObject-PartNumber`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transformation_configurations
+    #   A container for transformation configurations for an Object Lambda
+    #   Access Point.
+    #   @return [Array<Types::ObjectLambdaTransformationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaConfiguration AWS API Documentation
+    #
+    class ObjectLambdaConfiguration < Struct.new(
+      :supporting_access_point,
+      :cloud_watch_metrics_enabled,
+      :allowed_features,
+      :transformation_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for AwsLambdaTransformation.
+    #
+    # @note When making an API call, you may pass ObjectLambdaContentTransformation
+    #   data as a hash:
+    #
+    #       {
+    #         aws_lambda: {
+    #           function_arn: "FunctionArnString", # required
+    #           function_payload: "AwsLambdaTransformationPayload",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_lambda
+    #   A container for an AWS Lambda function.
+    #   @return [Types::AwsLambdaTransformation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaContentTransformation AWS API Documentation
+    #
+    class ObjectLambdaContentTransformation < Struct.new(
+      :aws_lambda)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration used when creating an Object Lambda Access Point
+    # transformation.
+    #
+    # @note When making an API call, you may pass ObjectLambdaTransformationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         actions: ["GetObject"], # required, accepts GetObject
+    #         content_transformation: { # required
+    #           aws_lambda: {
+    #             function_arn: "FunctionArnString", # required
+    #             function_payload: "AwsLambdaTransformationPayload",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] actions
+    #   A container for the action of an Object Lambda Access Point
+    #   configuration. Valid input is `GetObject`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content_transformation
+    #   A container for the content transformation of an Object Lambda
+    #   Access Point configuration.
+    #   @return [Types::ObjectLambdaContentTransformation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaTransformationConfiguration AWS API Documentation
+    #
+    class ObjectLambdaTransformationConfiguration < Struct.new(
+      :actions,
+      :content_transformation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates whether this access point policy is public. For more
     # information about how Amazon S3 evaluates policies to determine
     # whether they are public, see [The Meaning of "Public"][1] in the
-    # *Amazon Simple Storage Service Developer Guide*.
+    # *Amazon S3 User Guide*.
     #
     #
     #
@@ -2532,11 +3481,70 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for the prefix-level configuration.
+    #
+    # @note When making an API call, you may pass PrefixLevel
+    #   data as a hash:
+    #
+    #       {
+    #         storage_metrics: { # required
+    #           is_enabled: false,
+    #           selection_criteria: {
+    #             delimiter: "StorageLensPrefixLevelDelimiter",
+    #             max_depth: 1,
+    #             min_storage_bytes_percentage: 1.0,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] storage_metrics
+    #   A container for the prefix-level storage metrics for S3 Storage
+    #   Lens.
+    #   @return [Types::PrefixLevelStorageMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PrefixLevel AWS API Documentation
+    #
+    class PrefixLevel < Struct.new(
+      :storage_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the prefix-level storage metrics for S3 Storage Lens.
+    #
+    # @note When making an API call, you may pass PrefixLevelStorageMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false,
+    #         selection_criteria: {
+    #           delimiter: "StorageLensPrefixLevelDelimiter",
+    #           max_depth: 1,
+    #           min_storage_bytes_percentage: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether prefix-level storage metrics are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] selection_criteria
+    #   @return [Types::SelectionCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PrefixLevelStorageMetrics AWS API Documentation
+    #
+    class PrefixLevelStorageMetrics < Struct.new(
+      :is_enabled,
+      :selection_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `PublicAccessBlock` configuration that you want to apply to this
-    # Amazon S3 bucket. You can enable the configuration options in any
+    # Amazon S3 account. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
     # bucket or object public, see [The Meaning of "Public"][1] in the
-    # *Amazon Simple Storage Service Developer Guide*.
+    # *Amazon S3 User Guide*.
     #
     # This is not supported for Amazon S3 on Outposts.
     #
@@ -2597,8 +3605,8 @@ module Aws::S3Control
     # @!attribute [rw] restrict_public_buckets
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for buckets in this account. Setting this element to `TRUE`
-    #   restricts access to buckets with public policies to only AWS
-    #   services and authorized users within this account.
+    #   restricts access to buckets with public policies to only AWS service
+    #   principals and authorized users within this account.
     #
     #   Enabling this setting doesn't affect previously stored bucket
     #   policies, except that public and cross-account access within any
@@ -2615,6 +3623,85 @@ module Aws::S3Control
       :ignore_public_acls,
       :block_public_policy,
       :restrict_public_buckets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAccessPointConfigurationForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #         configuration: { # required
+    #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #           cloud_watch_metrics_enabled: false,
+    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #           transformation_configurations: [ # required
+    #             {
+    #               actions: ["GetObject"], # required, accepts GetObject
+    #               content_transformation: { # required
+    #                 aws_lambda: {
+    #                   function_arn: "FunctionArnString", # required
+    #                   function_payload: "AwsLambdaTransformationPayload",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Object Lambda Access Point configuration document.
+    #   @return [Types::ObjectLambdaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointConfigurationForObjectLambdaRequest AWS API Documentation
+    #
+    class PutAccessPointConfigurationForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAccessPointPolicyForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #         policy: "ObjectLambdaPolicy", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   Object Lambda Access Point resource policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicyForObjectLambdaRequest AWS API Documentation
+    #
+    class PutAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2637,8 +3724,12 @@ module Aws::S3Control
     #   The name of the access point that you want to associate with the
     #   specified policy.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2649,13 +3740,13 @@ module Aws::S3Control
     #
     # @!attribute [rw] policy
     #   The policy that you want to apply to the specified access point. For
-    #   more information about access point policies, see [Managing Data
-    #   Access with Amazon S3 Access Points][1] in the *Amazon Simple
-    #   Storage Service Developer Guide*.
+    #   more information about access point policies, see [Managing data
+    #   access with Amazon S3 access points][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicyRequest AWS API Documentation
@@ -2761,10 +3852,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2820,8 +3914,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2915,6 +4012,147 @@ module Aws::S3Control
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutStorageLensConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #         storage_lens_configuration: { # required
+    #           id: "ConfigId", # required
+    #           account_level: { # required
+    #             activity_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             bucket_level: { # required
+    #               activity_metrics: {
+    #                 is_enabled: false,
+    #               },
+    #               prefix_level: {
+    #                 storage_metrics: { # required
+    #                   is_enabled: false,
+    #                   selection_criteria: {
+    #                     delimiter: "StorageLensPrefixLevelDelimiter",
+    #                     max_depth: 1,
+    #                     min_storage_bytes_percentage: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           include: {
+    #             buckets: ["S3BucketArnString"],
+    #             regions: ["S3AWSRegion"],
+    #           },
+    #           exclude: {
+    #             buckets: ["S3BucketArnString"],
+    #             regions: ["S3AWSRegion"],
+    #           },
+    #           data_export: {
+    #             s3_bucket_destination: { # required
+    #               format: "CSV", # required, accepts CSV, Parquet
+    #               output_schema_version: "V_1", # required, accepts V_1
+    #               account_id: "AccountId", # required
+    #               arn: "S3BucketArnString", # required
+    #               prefix: "Prefix",
+    #               encryption: {
+    #                 sses3: {
+    #                 },
+    #                 ssekms: {
+    #                   key_id: "SSEKMSKeyId", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           is_enabled: false, # required
+    #           aws_org: {
+    #             arn: "AwsOrgArn", # required
+    #           },
+    #           storage_lens_arn: "StorageLensArn",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_configuration
+    #   The S3 Storage Lens configuration.
+    #   @return [Types::StorageLensConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #   @return [Array<Types::StorageLensTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationRequest AWS API Documentation
+    #
+    class PutStorageLensConfigurationRequest < Struct.new(
+      :config_id,
+      :account_id,
+      :storage_lens_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutStorageLensConfigurationTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #   @return [Array<Types::StorageLensTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationTaggingRequest AWS API Documentation
+    #
+    class PutStorageLensConfigurationTaggingRequest < Struct.new(
+      :config_id,
+      :account_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationTaggingResult AWS API Documentation
+    #
+    class PutStorageLensConfigurationTaggingResult < Aws::EmptyStructure; end
 
     # The container for the regional bucket.
     #
@@ -3021,9 +4259,72 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for the bucket where the Amazon S3 Storage Lens metrics
+    # export files are located.
+    #
+    # @note When making an API call, you may pass S3BucketDestination
+    #   data as a hash:
+    #
+    #       {
+    #         format: "CSV", # required, accepts CSV, Parquet
+    #         output_schema_version: "V_1", # required, accepts V_1
+    #         account_id: "AccountId", # required
+    #         arn: "S3BucketArnString", # required
+    #         prefix: "Prefix",
+    #         encryption: {
+    #           sses3: {
+    #           },
+    #           ssekms: {
+    #             key_id: "SSEKMSKeyId", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] format
+    #   @return [String]
+    #
+    # @!attribute [rw] output_schema_version
+    #   The schema version of the export file.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the owner of the S3 Storage Lens metrics export
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the bucket. This property is
+    #   read-only and follows the following format: `
+    #   arn:aws:s3:us-east-1:example-account-id:bucket/your-destination-bucket-name
+    #   `
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix of the destination bucket where the metrics export will
+    #   be delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   The container for the type encryption of the metrics exports in this
+    #   bucket.
+    #   @return [Types::StorageLensDataExportEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3BucketDestination AWS API Documentation
+    #
+    class S3BucketDestination < Struct.new(
+      :format,
+      :output_schema_version,
+      :account_id,
+      :arn,
+      :prefix,
+      :encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration parameters for a PUT Copy object operation.
-    # S3 Batch Operations passes each value through to the underlying PUT
-    # Copy object API. For more information about the parameters for this
+    # S3 Batch Operations passes every object to the underlying PUT Copy
+    # object API. For more information about the parameters for this
     # operation, see [PUT Object - Copy][1].
     #
     #
@@ -3078,9 +4379,14 @@ module Aws::S3Control
     #         object_lock_legal_hold_status: "OFF", # accepts OFF, ON
     #         object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #         object_lock_retain_until_date: Time.now,
+    #         bucket_key_enabled: false,
     #       }
     #
     # @!attribute [rw] target_resource
+    #   Specifies the destination bucket ARN for the batch copy operation.
+    #   For example, to copy objects to a bucket named
+    #   "destinationBucket", set the TargetResource to
+    #   "arn:aws:s3:::destinationBucket".
     #   @return [String]
     #
     # @!attribute [rw] canned_access_control_list
@@ -3102,6 +4408,9 @@ module Aws::S3Control
     #   @return [Array<Types::S3Tag>]
     #
     # @!attribute [rw] redirect_location
+    #   Specifies an optional metadata property for website redirects,
+    #   `x-amz-website-redirect-location`. Allows webpage redirects if the
+    #   object is accessed through a website endpoint.
     #   @return [String]
     #
     # @!attribute [rw] requester_pays
@@ -3117,6 +4426,10 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] target_key_prefix
+    #   Specifies the folder prefix into which you would like the objects to
+    #   be copied. For example, to copy objects into a folder named
+    #   "Folder1" in the destination bucket, set the TargetKeyPrefix to
+    #   "Folder1/".
     #   @return [String]
     #
     # @!attribute [rw] object_lock_legal_hold_status
@@ -3133,6 +4446,16 @@ module Aws::S3Control
     #   The date when the applied object retention configuration expires on
     #   all objects in the Batch Operations job.
     #   @return [Time]
+    #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
+    #   Key for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an *object* action doesn’t affect
+    #   *bucket-level* settings for S3 Bucket Key.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
     #
@@ -3152,10 +4475,21 @@ module Aws::S3Control
       :target_key_prefix,
       :object_lock_legal_hold_status,
       :object_lock_mode,
-      :object_lock_retain_until_date)
+      :object_lock_retain_until_date,
+      :bucket_key_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Contains no configuration parameters because the DELETE Object tagging
+    # API only accepts the bucket name and key name as parameters, which are
+    # defined in the job's manifest.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3DeleteObjectTaggingOperation AWS API Documentation
+    #
+    class S3DeleteObjectTaggingOperation < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass S3Grant
     #   data as a hash:
@@ -3212,8 +4546,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # Contains the configuration parameters for an Initiate Glacier Restore
-    # job. S3 Batch Operations passes each value through to the underlying
+    # Contains the configuration parameters for an S3 Initiate Restore
+    # Object job. S3 Batch Operations passes every object to the underlying
     # POST Object restore API. For more information about the parameters for
     # this operation, see [RestoreObject][1].
     #
@@ -3230,9 +4564,29 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] expiration_in_days
+    #   This argument specifies how long the S3 Glacier or S3 Glacier Deep
+    #   Archive object remains available in Amazon S3. S3 Initiate Restore
+    #   Object jobs that target S3 Glacier and S3 Glacier Deep Archive
+    #   objects require `ExpirationInDays` set to 1 or greater.
+    #
+    #   Conversely, do *not* set `ExpirationInDays` when creating S3
+    #   Initiate Restore Object jobs that target S3 Intelligent-Tiering
+    #   Archive Access and Deep Archive Access tier objects. Objects in S3
+    #   Intelligent-Tiering archive access tiers are not subject to restore
+    #   expiry, so specifying `ExpirationInDays` results in restore request
+    #   failure.
+    #
+    #   S3 Batch Operations jobs can operate either on S3 Glacier and S3
+    #   Glacier Deep Archive storage class objects or on S3
+    #   Intelligent-Tiering Archive Access and Deep Archive Access storage
+    #   tier objects, but not both types in the same job. If you need to
+    #   restore objects of both types you *must* create separate Batch
+    #   Operations jobs.
     #   @return [Integer]
     #
     # @!attribute [rw] glacier_job_tier
+    #   S3 Batch Operations supports `STANDARD` and `BULK` retrieval tiers,
+    #   but not the `EXPEDITED` retrieval tier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3InitiateRestoreObjectOperation AWS API Documentation
@@ -3364,8 +4718,8 @@ module Aws::S3Control
     # objects in the S3 Batch Operations job. If you don't provide `Mode`
     # and `RetainUntilDate` data types in your operation, you will remove
     # the retention from your objects. For more information, see [Using S3
-    # Object Lock retention with S3 Batch Operations][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # Object Lock retention with S3 Batch Operations][1] in the *Amazon S3
+    # User Guide*.
     #
     #
     #
@@ -3399,9 +4753,9 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a Set Object ACL operation.
-    # S3 Batch Operations passes each value through to the underlying PUT
-    # Object acl API. For more information about the parameters for this
-    # operation, see [PUT Object acl][1].
+    # S3 Batch Operations passes every object to the underlying PUT Object
+    # acl API. For more information about the parameters for this operation,
+    # see [PUT Object acl][1].
     #
     #
     #
@@ -3444,10 +4798,10 @@ module Aws::S3Control
     end
 
     # Contains the configuration for an S3 Object Lock legal hold operation
-    # that an S3 Batch Operations job passes each object through to the
-    # underlying `PutObjectLegalHold` API. For more information, see [Using
-    # S3 Object Lock legal hold with S3 Batch Operations][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # that an S3 Batch Operations job passes every object to the underlying
+    # `PutObjectLegalHold` API. For more information, see [Using S3 Object
+    # Lock legal hold with S3 Batch Operations][1] in the *Amazon S3 User
+    # Guide*.
     #
     #
     #
@@ -3476,10 +4830,10 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for the Object Lock retention
-    # action for an S3 Batch Operations job. Batch Operations passes each
-    # value through to the underlying `PutObjectRetention` API. For more
+    # action for an S3 Batch Operations job. Batch Operations passes every
+    # object to the underlying `PutObjectRetention` API. For more
     # information, see [Using S3 Object Lock retention with S3 Batch
-    # Operations][1] in the *Amazon Simple Storage Service Developer Guide*.
+    # Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3505,8 +4859,8 @@ module Aws::S3Control
     # @!attribute [rw] retention
     #   Contains the Object Lock retention mode to be applied to all objects
     #   in the Batch Operations job. For more information, see [Using S3
-    #   Object Lock retention with S3 Batch Operations][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   Object Lock retention with S3 Batch Operations][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
@@ -3523,9 +4877,9 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a Set Object Tagging
-    # operation. S3 Batch Operations passes each value through to the
-    # underlying PUT Object tagging API. For more information about the
-    # parameters for this operation, see [PUT Object tagging][1].
+    # operation. S3 Batch Operations passes every object to the underlying
+    # PUT Object tagging API. For more information about the parameters for
+    # this operation, see [PUT Object tagging][1].
     #
     #
     #
@@ -3571,6 +4925,303 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Tag AWS API Documentation
     #
     class S3Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SSEKMS
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "SSEKMSKeyId", # required
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   A container for the ARN of the SSE-KMS encryption. This property is
+    #   read-only and follows the following format: `
+    #   arn:aws:kms:us-east-1:example-account-id:key/example-9a73-4afc-8d29-8f5900cef44e
+    #   `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSEKMS AWS API Documentation
+    #
+    class SSEKMS < Struct.new(
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3 AWS API Documentation
+    #
+    class SSES3 < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass SelectionCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         delimiter: "StorageLensPrefixLevelDelimiter",
+    #         max_depth: 1,
+    #         min_storage_bytes_percentage: 1.0,
+    #       }
+    #
+    # @!attribute [rw] delimiter
+    #   A container for the delimiter of the selection criteria being used.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_depth
+    #   The max depth of the selection criteria
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_storage_bytes_percentage
+    #   The minimum number of storage bytes percentage whose metrics will be
+    #   selected.
+    #
+    #   <note markdown="1"> You must choose a value greater than or equal to `1.0`.
+    #
+    #    </note>
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SelectionCriteria AWS API Documentation
+    #
+    class SelectionCriteria < Struct.new(
+      :delimiter,
+      :max_depth,
+      :min_storage_bytes_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS organization for your S3 Storage Lens.
+    #
+    # @note When making an API call, you may pass StorageLensAwsOrg
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AwsOrgArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   A container for the Amazon Resource Name (ARN) of the AWS
+    #   organization. This property is read-only and follows the following
+    #   format: `
+    #   arn:aws:organizations:us-east-1:example-account-id:organization/o-ex2l495dck
+    #   `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensAwsOrg AWS API Documentation
+    #
+    class StorageLensAwsOrg < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the Amazon S3 Storage Lens configuration.
+    #
+    # @note When making an API call, you may pass StorageLensConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ConfigId", # required
+    #         account_level: { # required
+    #           activity_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           bucket_level: { # required
+    #             activity_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             prefix_level: {
+    #               storage_metrics: { # required
+    #                 is_enabled: false,
+    #                 selection_criteria: {
+    #                   delimiter: "StorageLensPrefixLevelDelimiter",
+    #                   max_depth: 1,
+    #                   min_storage_bytes_percentage: 1.0,
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #         include: {
+    #           buckets: ["S3BucketArnString"],
+    #           regions: ["S3AWSRegion"],
+    #         },
+    #         exclude: {
+    #           buckets: ["S3BucketArnString"],
+    #           regions: ["S3AWSRegion"],
+    #         },
+    #         data_export: {
+    #           s3_bucket_destination: { # required
+    #             format: "CSV", # required, accepts CSV, Parquet
+    #             output_schema_version: "V_1", # required, accepts V_1
+    #             account_id: "AccountId", # required
+    #             arn: "S3BucketArnString", # required
+    #             prefix: "Prefix",
+    #             encryption: {
+    #               sses3: {
+    #               },
+    #               ssekms: {
+    #                 key_id: "SSEKMSKeyId", # required
+    #               },
+    #             },
+    #           },
+    #         },
+    #         is_enabled: false, # required
+    #         aws_org: {
+    #           arn: "AwsOrgArn", # required
+    #         },
+    #         storage_lens_arn: "StorageLensArn",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   A container for the Amazon S3 Storage Lens configuration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_level
+    #   A container for all the account-level configurations of your S3
+    #   Storage Lens configuration.
+    #   @return [Types::AccountLevel]
+    #
+    # @!attribute [rw] include
+    #   A container for what is included in this configuration. This
+    #   container can only be valid if there is no `Exclude` container
+    #   submitted, and it's not empty.
+    #   @return [Types::Include]
+    #
+    # @!attribute [rw] exclude
+    #   A container for what is excluded in this configuration. This
+    #   container can only be valid if there is no `Include` container
+    #   submitted, and it's not empty.
+    #   @return [Types::Exclude]
+    #
+    # @!attribute [rw] data_export
+    #   A container to specify the properties of your S3 Storage Lens
+    #   metrics export including, the destination, schema and format.
+    #   @return [Types::StorageLensDataExport]
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether the S3 Storage Lens configuration is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] aws_org
+    #   A container for the AWS organization for this S3 Storage Lens
+    #   configuration.
+    #   @return [Types::StorageLensAwsOrg]
+    #
+    # @!attribute [rw] storage_lens_arn
+    #   The Amazon Resource Name (ARN) of the S3 Storage Lens configuration.
+    #   This property is read-only and follows the following format: `
+    #   arn:aws:s3:us-east-1:example-account-id:storage-lens/your-dashboard-name
+    #   `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensConfiguration AWS API Documentation
+    #
+    class StorageLensConfiguration < Struct.new(
+      :id,
+      :account_level,
+      :include,
+      :exclude,
+      :data_export,
+      :is_enabled,
+      :aws_org,
+      :storage_lens_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container to specify the properties of your S3 Storage Lens metrics
+    # export, including the destination, schema, and format.
+    #
+    # @note When making an API call, you may pass StorageLensDataExport
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_destination: { # required
+    #           format: "CSV", # required, accepts CSV, Parquet
+    #           output_schema_version: "V_1", # required, accepts V_1
+    #           account_id: "AccountId", # required
+    #           arn: "S3BucketArnString", # required
+    #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_destination
+    #   A container for the bucket where the S3 Storage Lens metrics export
+    #   will be located.
+    #
+    #   <note markdown="1"> This bucket must be located in the same Region as the storage lens
+    #   configuration.
+    #
+    #    </note>
+    #   @return [Types::S3BucketDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensDataExport AWS API Documentation
+    #
+    class StorageLensDataExport < Struct.new(
+      :s3_bucket_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the encryption of the S3 Storage Lens metrics exports.
+    #
+    # @note When making an API call, you may pass StorageLensDataExportEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         sses3: {
+    #         },
+    #         ssekms: {
+    #           key_id: "SSEKMSKeyId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sses3
+    #   @return [Types::SSES3]
+    #
+    # @!attribute [rw] ssekms
+    #   @return [Types::SSEKMS]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensDataExportEncryption AWS API Documentation
+    #
+    class StorageLensDataExportEncryption < Struct.new(
+      :sses3,
+      :ssekms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StorageLensTag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensTag AWS API Documentation
+    #
+    class StorageLensTag < Struct.new(
       :key,
       :value)
       SENSITIVE = []
@@ -3628,8 +5279,8 @@ module Aws::S3Control
 
     # Specifies when an object transitions to a specified storage class. For
     # more information about Amazon S3 Lifecycle configuration rules, see [
-    # Transitioning Objects Using Amazon S3 Lifecycle][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # Transitioning objects using Amazon S3 Lifecycle][1] in the *Amazon S3
+    # User Guide*.
     #
     #
     #
@@ -3680,6 +5331,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -3728,6 +5380,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id

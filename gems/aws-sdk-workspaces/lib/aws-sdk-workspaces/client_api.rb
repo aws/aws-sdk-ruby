@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -60,6 +60,8 @@ module Aws::WorkSpaces
     CreateIpGroupResult = Shapes::StructureShape.new(name: 'CreateIpGroupResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     CreateTagsResult = Shapes::StructureShape.new(name: 'CreateTagsResult')
+    CreateWorkspaceBundleRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleRequest')
+    CreateWorkspaceBundleResult = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleResult')
     CreateWorkspacesRequest = Shapes::StructureShape.new(name: 'CreateWorkspacesRequest')
     CreateWorkspacesResult = Shapes::StructureShape.new(name: 'CreateWorkspacesResult')
     DedicatedTenancyCidrRangeList = Shapes::ListShape.new(name: 'DedicatedTenancyCidrRangeList')
@@ -75,6 +77,8 @@ module Aws::WorkSpaces
     DeleteIpGroupResult = Shapes::StructureShape.new(name: 'DeleteIpGroupResult')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DeleteTagsResult = Shapes::StructureShape.new(name: 'DeleteTagsResult')
+    DeleteWorkspaceBundleRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceBundleRequest')
+    DeleteWorkspaceBundleResult = Shapes::StructureShape.new(name: 'DeleteWorkspaceBundleResult')
     DeleteWorkspaceImageRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceImageRequest')
     DeleteWorkspaceImageResult = Shapes::StructureShape.new(name: 'DeleteWorkspaceImageResult')
     DeregisterWorkspaceDirectoryRequest = Shapes::StructureShape.new(name: 'DeregisterWorkspaceDirectoryRequest')
@@ -236,6 +240,8 @@ module Aws::WorkSpaces
     UpdateConnectionAliasPermissionResult = Shapes::StructureShape.new(name: 'UpdateConnectionAliasPermissionResult')
     UpdateRulesOfIpGroupRequest = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupRequest')
     UpdateRulesOfIpGroupResult = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupResult')
+    UpdateWorkspaceBundleRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceBundleRequest')
+    UpdateWorkspaceBundleResult = Shapes::StructureShape.new(name: 'UpdateWorkspaceBundleResult')
     UpdateWorkspaceImagePermissionRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceImagePermissionRequest')
     UpdateWorkspaceImagePermissionResult = Shapes::StructureShape.new(name: 'UpdateWorkspaceImagePermissionResult')
     UserName = Shapes::StringShape.new(name: 'UserName')
@@ -245,6 +251,8 @@ module Aws::WorkSpaces
     Workspace = Shapes::StructureShape.new(name: 'Workspace')
     WorkspaceAccessProperties = Shapes::StructureShape.new(name: 'WorkspaceAccessProperties')
     WorkspaceBundle = Shapes::StructureShape.new(name: 'WorkspaceBundle')
+    WorkspaceBundleDescription = Shapes::StringShape.new(name: 'WorkspaceBundleDescription')
+    WorkspaceBundleName = Shapes::StringShape.new(name: 'WorkspaceBundleName')
     WorkspaceConnectionStatus = Shapes::StructureShape.new(name: 'WorkspaceConnectionStatus')
     WorkspaceConnectionStatusList = Shapes::ListShape.new(name: 'WorkspaceConnectionStatusList')
     WorkspaceCreationProperties = Shapes::StructureShape.new(name: 'WorkspaceCreationProperties')
@@ -380,6 +388,18 @@ module Aws::WorkSpaces
 
     CreateTagsResult.struct_class = Types::CreateTagsResult
 
+    CreateWorkspaceBundleRequest.add_member(:bundle_name, Shapes::ShapeRef.new(shape: WorkspaceBundleName, required: true, location_name: "BundleName"))
+    CreateWorkspaceBundleRequest.add_member(:bundle_description, Shapes::ShapeRef.new(shape: WorkspaceBundleDescription, required: true, location_name: "BundleDescription"))
+    CreateWorkspaceBundleRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "ImageId"))
+    CreateWorkspaceBundleRequest.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "ComputeType"))
+    CreateWorkspaceBundleRequest.add_member(:user_storage, Shapes::ShapeRef.new(shape: UserStorage, required: true, location_name: "UserStorage"))
+    CreateWorkspaceBundleRequest.add_member(:root_storage, Shapes::ShapeRef.new(shape: RootStorage, location_name: "RootStorage"))
+    CreateWorkspaceBundleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateWorkspaceBundleRequest.struct_class = Types::CreateWorkspaceBundleRequest
+
+    CreateWorkspaceBundleResult.add_member(:workspace_bundle, Shapes::ShapeRef.new(shape: WorkspaceBundle, location_name: "WorkspaceBundle"))
+    CreateWorkspaceBundleResult.struct_class = Types::CreateWorkspaceBundleResult
+
     CreateWorkspacesRequest.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceRequestList, required: true, location_name: "Workspaces"))
     CreateWorkspacesRequest.struct_class = Types::CreateWorkspacesRequest
 
@@ -412,6 +432,11 @@ module Aws::WorkSpaces
     DeleteTagsRequest.struct_class = Types::DeleteTagsRequest
 
     DeleteTagsResult.struct_class = Types::DeleteTagsResult
+
+    DeleteWorkspaceBundleRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
+    DeleteWorkspaceBundleRequest.struct_class = Types::DeleteWorkspaceBundleRequest
+
+    DeleteWorkspaceBundleResult.struct_class = Types::DeleteWorkspaceBundleResult
 
     DeleteWorkspaceImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "ImageId"))
     DeleteWorkspaceImageRequest.struct_class = Types::DeleteWorkspaceImageRequest
@@ -828,6 +853,12 @@ module Aws::WorkSpaces
 
     UpdateRulesOfIpGroupResult.struct_class = Types::UpdateRulesOfIpGroupResult
 
+    UpdateWorkspaceBundleRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
+    UpdateWorkspaceBundleRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    UpdateWorkspaceBundleRequest.struct_class = Types::UpdateWorkspaceBundleRequest
+
+    UpdateWorkspaceBundleResult.struct_class = Types::UpdateWorkspaceBundleResult
+
     UpdateWorkspaceImagePermissionRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "ImageId"))
     UpdateWorkspaceImagePermissionRequest.add_member(:allow_copy_image, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "AllowCopyImage"))
     UpdateWorkspaceImagePermissionRequest.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccount, required: true, location_name: "SharedAccountId"))
@@ -862,6 +893,7 @@ module Aws::WorkSpaces
     WorkspaceAccessProperties.add_member(:device_type_android, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeAndroid"))
     WorkspaceAccessProperties.add_member(:device_type_chrome_os, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeChromeOs"))
     WorkspaceAccessProperties.add_member(:device_type_zero_client, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeZeroClient"))
+    WorkspaceAccessProperties.add_member(:device_type_linux, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeLinux"))
     WorkspaceAccessProperties.struct_class = Types::WorkspaceAccessProperties
 
     WorkspaceBundle.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
@@ -873,6 +905,7 @@ module Aws::WorkSpaces
     WorkspaceBundle.add_member(:user_storage, Shapes::ShapeRef.new(shape: UserStorage, location_name: "UserStorage"))
     WorkspaceBundle.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "ComputeType"))
     WorkspaceBundle.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    WorkspaceBundle.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     WorkspaceBundle.struct_class = Types::WorkspaceBundle
 
     WorkspaceConnectionStatus.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
@@ -1071,6 +1104,20 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
       end)
 
+      api.add_operation(:create_workspace_bundle, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorkspaceBundle"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorkspaceBundleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorkspaceBundleResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_workspaces, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkspaces"
         o.http_method = "POST"
@@ -1115,6 +1162,18 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: DeleteTagsResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
+      api.add_operation(:delete_workspace_bundle, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkspaceBundle"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkspaceBundleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorkspaceBundleResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAssociatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_workspace_image, Seahorse::Model::Operation.new.tap do |o|
@@ -1547,6 +1606,18 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_workspace_bundle, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWorkspaceBundle"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWorkspaceBundleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateWorkspaceBundleResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:update_workspace_image_permission, Seahorse::Model::Operation.new.tap do |o|

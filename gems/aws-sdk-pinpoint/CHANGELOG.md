@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-03-30)
+------------------
+
+* Feature - Added support for journey pause/resume, journey updatable import segment and journey quiet time wait.
+
+1.52.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2021-02-23)
+------------------
+
+* Feature - Enables AWS Pinpoint customers to use Entity Id and Template Id when sending SMS message. These parameters can be obtained from the regulatory body of the country where you are trying to send the SMS.
+
+1.50.0 (2021-02-15)
+------------------
+
+* Feature - Lets customers use origination number when specifying SMS message configuration for Campaigns and Journeys.
+
+1.49.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-01-14)
+------------------
+
+* Feature - Customers can create segments using 5 new filters. Filters can check for the presence of a substring in attributes and can perform time-based comparisons formatted as ISO_INSTANT datetimes.
+
 1.47.0 (2020-09-30)
 ------------------
 

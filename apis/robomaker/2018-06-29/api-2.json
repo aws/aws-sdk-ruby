@@ -1304,7 +1304,8 @@
         },
         "template":{"shape":"Arn"},
         "worldCount":{"shape":"WorldCount"},
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "worldTags":{"shape":"TagMap"}
       }
     },
     "CreateWorldGenerationJobResponse":{
@@ -1317,7 +1318,8 @@
         "clientRequestToken":{"shape":"ClientRequestToken"},
         "template":{"shape":"Arn"},
         "worldCount":{"shape":"WorldCount"},
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "worldTags":{"shape":"TagMap"}
       }
     },
     "CreateWorldTemplateRequest":{
@@ -1501,7 +1503,11 @@
         "PostLaunchFileFailure",
         "BadPermissionError",
         "DownloadConditionFailed",
-        "InternalServerError"
+        "BadLambdaAssociated",
+        "InternalServerError",
+        "RobotApplicationDoesNotExist",
+        "DeploymentFleetDoesNotExist",
+        "FleetDeploymentTimeout"
       ]
     },
     "DeploymentJobs":{
@@ -1766,7 +1772,8 @@
         "template":{"shape":"Arn"},
         "worldCount":{"shape":"WorldCount"},
         "finishedWorldsSummary":{"shape":"FinishedWorldsSummary"},
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "worldTags":{"shape":"TagMap"}
       }
     },
     "DescribeWorldRequest":{
@@ -1822,6 +1829,13 @@
       "max":1024,
       "min":1,
       "pattern":".*"
+    },
+    "ExitBehavior":{
+      "type":"string",
+      "enum":[
+        "FAIL",
+        "RESTART"
+      ]
     },
     "FailedAt":{"type":"timestamp"},
     "FailedCreateSimulationJobRequest":{
@@ -2364,7 +2378,11 @@
       "members":{
         "application":{"shape":"Arn"},
         "applicationVersion":{"shape":"Version"},
-        "launchConfig":{"shape":"LaunchConfig"}
+        "launchConfig":{"shape":"LaunchConfig"},
+        "uploadConfigurations":{"shape":"UploadConfigurations"},
+        "useDefaultUploadConfigurations":{"shape":"BoxedBoolean"},
+        "tools":{"shape":"Tools"},
+        "useDefaultTools":{"shape":"BoxedBoolean"}
       }
     },
     "RobotApplicationConfigs":{
@@ -2440,7 +2458,8 @@
       "enum":[
         "Kinetic",
         "Melodic",
-        "Dashing"
+        "Dashing",
+        "Foxy"
       ]
     },
     "RobotStatus":{
@@ -2527,7 +2546,11 @@
         "application":{"shape":"Arn"},
         "applicationVersion":{"shape":"Version"},
         "launchConfig":{"shape":"LaunchConfig"},
-        "worldConfigs":{"shape":"WorldConfigs"}
+        "uploadConfigurations":{"shape":"UploadConfigurations"},
+        "worldConfigs":{"shape":"WorldConfigs"},
+        "useDefaultUploadConfigurations":{"shape":"BoxedBoolean"},
+        "tools":{"shape":"Tools"},
+        "useDefaultTools":{"shape":"BoxedBoolean"}
       }
     },
     "SimulationApplicationConfigs":{
@@ -2623,6 +2646,8 @@
         "InternalServiceError",
         "RobotApplicationCrash",
         "SimulationApplicationCrash",
+        "RobotApplicationHealthCheckFailure",
+        "SimulationApplicationHealthCheckFailure",
         "BadPermissionsRobotApplication",
         "BadPermissionsSimulationApplication",
         "BadPermissionsS3Object",
@@ -2634,6 +2659,7 @@
         "InvalidBundleRobotApplication",
         "InvalidBundleSimulationApplication",
         "InvalidS3Resource",
+        "ThrottlingError",
         "LimitExceeded",
         "MismatchedEtag",
         "RobotApplicationVersionMismatchedEtag",
@@ -2646,7 +2672,8 @@
         "WrongRegionS3Bucket",
         "WrongRegionS3Output",
         "WrongRegionRobotApplication",
-        "WrongRegionSimulationApplication"
+        "WrongRegionSimulationApplication",
+        "UploadContentMismatchError"
       ]
     },
     "SimulationJobRequest":{
@@ -2722,7 +2749,7 @@
       "type":"string",
       "max":1024,
       "min":0,
-      "pattern":"7|9|Kinetic|Melodic|Dashing"
+      "pattern":"7|9|11|Kinetic|Melodic|Dashing|Foxy"
     },
     "SimulationTimeMillis":{"type":"long"},
     "SimulationUnit":{
@@ -2898,6 +2925,32 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "Tool":{
+      "type":"structure",
+      "required":[
+        "name",
+        "command"
+      ],
+      "members":{
+        "streamUI":{"shape":"BoxedBoolean"},
+        "name":{"shape":"Name"},
+        "command":{"shape":"UnrestrictedCommand"},
+        "streamOutputToCloudWatch":{"shape":"BoxedBoolean"},
+        "exitBehavior":{"shape":"ExitBehavior"}
+      }
+    },
+    "Tools":{
+      "type":"list",
+      "member":{"shape":"Tool"},
+      "max":10,
+      "min":0
+    },
+    "UnrestrictedCommand":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":".*"
+    },
     "UntagResourceRequest":{
       "type":"structure",
       "required":[
@@ -2997,6 +3050,32 @@
         "createdAt":{"shape":"CreatedAt"},
         "lastUpdatedAt":{"shape":"LastUpdatedAt"}
       }
+    },
+    "UploadBehavior":{
+      "type":"string",
+      "enum":[
+        "UPLOAD_ON_TERMINATE",
+        "UPLOAD_ROLLING_AUTO_REMOVE"
+      ]
+    },
+    "UploadConfiguration":{
+      "type":"structure",
+      "required":[
+        "name",
+        "path",
+        "uploadBehavior"
+      ],
+      "members":{
+        "name":{"shape":"Name"},
+        "path":{"shape":"Path"},
+        "uploadBehavior":{"shape":"UploadBehavior"}
+      }
+    },
+    "UploadConfigurations":{
+      "type":"list",
+      "member":{"shape":"UploadConfiguration"},
+      "max":10,
+      "min":0
     },
     "VPCConfig":{
       "type":"structure",

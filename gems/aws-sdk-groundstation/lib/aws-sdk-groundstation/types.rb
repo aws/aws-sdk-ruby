@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -175,11 +175,16 @@ module Aws::GroundStation
     #   Information about the endpoint details.
     #   @return [Types::EndpointDetails]
     #
+    # @!attribute [rw] s3_recording_details
+    #   Details for an S3 recording `Config` in a contact.
+    #   @return [Types::S3RecordingDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ConfigDetails AWS API Documentation
     #
     class ConfigDetails < Struct.new(
       :antenna_demod_decode_details,
-      :endpoint_details)
+      :endpoint_details,
+      :s3_recording_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -293,6 +298,11 @@ module Aws::GroundStation
     #           dataflow_endpoint_name: "String", # required
     #           dataflow_endpoint_region: "String",
     #         },
+    #         s3_recording_config: {
+    #           bucket_arn: "BucketArn", # required
+    #           prefix: "S3KeyPrefix",
+    #           role_arn: "RoleArn", # required
+    #         },
     #         tracking_config: {
     #           autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
     #         },
@@ -321,6 +331,10 @@ module Aws::GroundStation
     #   Information about the dataflow endpoint `Config`.
     #   @return [Types::DataflowEndpointConfig]
     #
+    # @!attribute [rw] s3_recording_config
+    #   Information about an S3 recording `Config`.
+    #   @return [Types::S3RecordingConfig]
+    #
     # @!attribute [rw] tracking_config
     #   Object that determines whether tracking should be used during a
     #   contact executed with this `Config` in the mission profile.
@@ -341,6 +355,7 @@ module Aws::GroundStation
       :antenna_downlink_demod_decode_config,
       :antenna_uplink_config,
       :dataflow_endpoint_config,
+      :s3_recording_config,
       :tracking_config,
       :uplink_echo_config)
       SENSITIVE = []
@@ -489,6 +504,11 @@ module Aws::GroundStation
     #           dataflow_endpoint_config: {
     #             dataflow_endpoint_name: "String", # required
     #             dataflow_endpoint_region: "String",
+    #           },
+    #           s3_recording_config: {
+    #             bucket_arn: "BucketArn", # required
+    #             prefix: "S3KeyPrefix",
+    #             role_arn: "RoleArn", # required
     #           },
     #           tracking_config: {
     #             autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
@@ -785,7 +805,7 @@ module Aws::GroundStation
     #
     #       {
     #         config_id: "String", # required
-    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo
+    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #       }
     #
     # @!attribute [rw] config_id
@@ -1165,7 +1185,7 @@ module Aws::GroundStation
     #
     #       {
     #         config_id: "String", # required
-    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo
+    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #       }
     #
     # @!attribute [rw] config_id
@@ -1959,6 +1979,58 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Information about an S3 recording `Config`.
+    #
+    # @note When making an API call, you may pass S3RecordingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_arn: "BucketArn", # required
+    #         prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] bucket_arn
+    #   ARN of the bucket to record to.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   S3 Key prefix to prefice data files.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   ARN of the role Ground Station assumes to write data to the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/S3RecordingConfig AWS API Documentation
+    #
+    class S3RecordingConfig < Struct.new(
+      :bucket_arn,
+      :prefix,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an S3 recording `Config` used in a contact.
+    #
+    # @!attribute [rw] bucket_arn
+    #   ARN of the bucket used.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_template
+    #   Template of the S3 key used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/S3RecordingDetails AWS API Documentation
+    #
+    class S3RecordingDetails < Struct.new(
+      :bucket_arn,
+      :key_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Item in a list of satellites.
     #
     # @!attribute [rw] ground_stations
@@ -2268,6 +2340,11 @@ module Aws::GroundStation
     #             dataflow_endpoint_name: "String", # required
     #             dataflow_endpoint_region: "String",
     #           },
+    #           s3_recording_config: {
+    #             bucket_arn: "BucketArn", # required
+    #             prefix: "S3KeyPrefix",
+    #             role_arn: "RoleArn", # required
+    #           },
     #           tracking_config: {
     #             autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
     #           },
@@ -2277,7 +2354,7 @@ module Aws::GroundStation
     #           },
     #         },
     #         config_id: "String", # required
-    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo
+    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #         name: "SafeName", # required
     #       }
     #

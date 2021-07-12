@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -35,8 +35,8 @@ module Aws::RDS
     end
     alias :cust_subscription_id :name
 
-    # The AWS customer account associated with the RDS event notification
-    # subscription.
+    # The Amazon Web Services customer account associated with the RDS event
+    # notification subscription.
     # @return [String]
     def customer_aws_id
       data[:customer_aws_id]
@@ -321,8 +321,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If a `SourceIds` value is supplied, `SourceType` must also be
-    #     provided.
+    #   * If `SourceIds` are supplied, `SourceType` must also be provided.
     #
     #   * If the source type is a DB instance, a `DBInstanceIdentifier` value
     #     must be supplied.

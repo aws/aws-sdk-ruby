@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-04-13)
+------------------
+
+* Feature - The InferICD10CM API now returns TIME_EXPRESSION entities that refer to medical conditions.
+
+1.25.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.23.0 (2020-09-30)
 ------------------
 

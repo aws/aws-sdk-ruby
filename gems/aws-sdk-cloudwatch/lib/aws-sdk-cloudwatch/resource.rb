@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -257,11 +257,14 @@ module Aws::CloudWatch
     #   })
     # @param [Hash] options ({})
     # @option options [String] :namespace
-    #   The namespace to filter against.
+    #   The metric namespace to filter against. Only the namespace that
+    #   matches exactly will be returned.
     # @option options [String] :metric_name
-    #   The name of the metric to filter against.
+    #   The name of the metric to filter against. Only the metrics with names
+    #   that match exactly will be returned.
     # @option options [Array<Types::DimensionFilter>] :dimensions
-    #   The dimensions to filter against.
+    #   The dimensions to filter against. Only the dimensions that match
+    #   exactly will be returned.
     # @option options [String] :recently_active
     #   To filter the results to show only metrics that have had data points
     #   published in the past three hours, specify this parameter with a value

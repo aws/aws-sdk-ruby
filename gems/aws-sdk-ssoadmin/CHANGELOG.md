@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2021-02-26)
+------------------
+
+* Feature - Relax constraint on List* API pagination tokens to include underscore character
+
+1.5.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.4.0 (2020-11-23)
+------------------
+
+* Feature - AWS Single Sign-On now enables attribute-based access control for workforce identities to simplify permissions in AWS
+
 1.3.0 (2020-09-30)
 ------------------
 

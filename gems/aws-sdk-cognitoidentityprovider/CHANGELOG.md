@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-06-10)
+------------------
+
+* Feature - Amazon Cognito now supports targeted sign out through refresh token revocation
+
+1.52.0 (2021-06-08)
+------------------
+
+* Feature - Documentation updates for cognito-idp
+
+1.51.0 (2021-04-22)
+------------------
+
+* Feature - Documentation updates for cognito-idp
+
+1.50.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2020-11-24)
+------------------
+
+* Feature - This release adds ability to configure Cognito User Pools with third party sms and email providers for sending notifications to users.
+
 1.47.0 (2020-09-30)
 ------------------
 

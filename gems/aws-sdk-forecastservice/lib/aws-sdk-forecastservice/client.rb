@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -459,7 +459,7 @@ module Aws::ForecastService
     #       attributes: [
     #         {
     #           attribute_name: "Name",
-    #           attribute_type: "string", # accepts string, integer, float, timestamp
+    #           attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
     #         },
     #       ],
     #     },
@@ -499,9 +499,9 @@ module Aws::ForecastService
     # To get a list of all your datasets groups, use the ListDatasetGroups
     # operation.
     #
-    # <note markdown="1"> The `Status` of a dataset group must be `ACTIVE` before you can create
-    # use the dataset group to create a predictor. To get the status, use
-    # the DescribeDatasetGroup operation.
+    # <note markdown="1"> The `Status` of a dataset group must be `ACTIVE` before you can use
+    # the dataset group to create a predictor. To get the status, use the
+    # DescribeDatasetGroup operation.
     #
     #  </note>
     #
@@ -652,6 +652,34 @@ module Aws::ForecastService
     #   If the format isn't specified, Amazon Forecast expects the format to
     #   be "yyyy-MM-dd HH:mm:ss".
     #
+    # @option params [String] :time_zone
+    #   A single time zone for every item in your dataset. This option is
+    #   ideal for datasets with all timestamps within a single time zone, or
+    #   if all timestamps are normalized to a single time zone.
+    #
+    #   Refer to the [Joda-Time API][1] for a complete list of valid time zone
+    #   names.
+    #
+    #
+    #
+    #   [1]: http://joda-time.sourceforge.net/timezones.html
+    #
+    # @option params [Boolean] :use_geolocation_for_time_zone
+    #   Automatically derive time zone information from the geolocation
+    #   attribute. This option is ideal for datasets that contain timestamps
+    #   in multiple time zones and those timestamps are expressed in local
+    #   time.
+    #
+    # @option params [String] :geolocation_format
+    #   The format of the geolocation attribute. The geolocation attribute can
+    #   be formatted in one of two ways:
+    #
+    #   * `LAT_LONG` - the latitude and longitude in decimal format (Example:
+    #     47.61\_-122.33).
+    #
+    #   * `CC_POSTALCODE` (US Only) - the country code (US), followed by the
+    #     5-digit ZIP code (Example: US\_98121).
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The optional metadata that you apply to the dataset import job to help
     #   you categorize and organize them. Each tag consists of a key and an
@@ -701,6 +729,9 @@ module Aws::ForecastService
     #       },
     #     },
     #     timestamp_format: "TimestampFormat",
+    #     time_zone: "TimeZone",
+    #     use_geolocation_for_time_zone: false,
+    #     geolocation_format: "GeolocationFormat",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -940,24 +971,20 @@ module Aws::ForecastService
 
     # Creates an Amazon Forecast predictor.
     #
-    # In the request, you provide a dataset group and either specify an
-    # algorithm or let Amazon Forecast choose the algorithm for you using
+    # In the request, provide a dataset group and either specify an
+    # algorithm or let Amazon Forecast choose an algorithm for you using
     # AutoML. If you specify an algorithm, you also can override
     # algorithm-specific hyperparameters.
     #
-    # Amazon Forecast uses the chosen algorithm to train a model using the
-    # latest version of the datasets in the specified dataset group. The
-    # result is called a predictor. You then generate a forecast using the
-    # CreateForecast operation.
+    # Amazon Forecast uses the algorithm to train a predictor using the
+    # latest version of the datasets in the specified dataset group. You can
+    # then generate a forecast using the CreateForecast operation.
     #
-    # After training a model, the `CreatePredictor` operation also evaluates
-    # it. To see the evaluation metrics, use the GetAccuracyMetrics
-    # operation. Always review the evaluation metrics before deciding to use
-    # the predictor to generate a forecast.
+    # To see the evaluation metrics, use the GetAccuracyMetrics operation.
     #
-    # Optionally, you can specify a featurization configuration to fill and
-    # aggregate the data fields in the `TARGET_TIME_SERIES` dataset to
-    # improve model training. For more information, see FeaturizationConfig.
+    # You can specify a featurization configuration to fill and aggregate
+    # the data fields in the `TARGET_TIME_SERIES` dataset to improve model
+    # training. For more information, see FeaturizationConfig.
     #
     # For RELATED\_TIME\_SERIES datasets, `CreatePredictor` verifies that
     # the `DataFrequency` specified when the dataset was created matches the
@@ -965,12 +992,17 @@ module Aws::ForecastService
     # restriction. Amazon Forecast also verifies the delimiter and timestamp
     # format. For more information, see howitworks-datasets-groups.
     #
+    # By default, predictors are trained and evaluated at the 0.1 (P10), 0.5
+    # (P50), and 0.9 (P90) quantiles. You can choose custom forecast types
+    # to train and evaluate your predictor by setting the `ForecastTypes`.
+    #
     # **AutoML**
     #
     # If you want Amazon Forecast to evaluate each algorithm and choose the
     # one that minimizes the `objective function`, set `PerformAutoML` to
     # `true`. The `objective function` is defined as the mean of the
-    # weighted p10, p50, and p90 quantile losses. For more information, see
+    # weighted losses over the forecast types. By default, these are the
+    # p10, p50, and p90 quantile losses. For more information, see
     # EvaluationResult.
     #
     # When AutoML is enabled, the following properties are disallowed:
@@ -1003,9 +1035,9 @@ module Aws::ForecastService
     #
     #   * `arn:aws:forecast:::algorithm/ARIMA`
     #
-    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
+    #   * `arn:aws:forecast:::algorithm/CNN-QR`
     #
-    #     Supports hyperparameter optimization (HPO)
+    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
     #
     #   * `arn:aws:forecast:::algorithm/ETS`
     #
@@ -1025,6 +1057,14 @@ module Aws::ForecastService
     #   The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of
     #   the TARGET\_TIME\_SERIES dataset length.
     #
+    # @option params [Array<String>] :forecast_types
+    #   Specifies the forecast types used to train a predictor. You can
+    #   specify up to five forecast types. Forecast types can be quantiles
+    #   from 0.01 to 0.99, by increments of 0.01 or higher. You can also
+    #   specify the mean forecast with `mean`.
+    #
+    #   The default value is `["0.10", "0.50", "0.9"]`.
+    #
     # @option params [Boolean] :perform_auto_ml
     #   Whether to perform AutoML. When Amazon Forecast performs AutoML, it
     #   evaluates the algorithms it provides and chooses the best algorithm
@@ -1036,6 +1076,13 @@ module Aws::ForecastService
     #   Set `PerformAutoML` to `true` to have Amazon Forecast perform AutoML.
     #   This is a good option if you aren't sure which algorithm is suitable
     #   for your training data. In this case, `PerformHPO` must be false.
+    #
+    # @option params [String] :auto_ml_override_strategy
+    #   Used to overide the default AutoML strategy, which is to optimize
+    #   predictor accuracy. To apply an AutoML strategy that minimizes
+    #   training time, use `LatencyOptimized`.
+    #
+    #   This parameter is only valid for predictors trained using AutoML.
     #
     # @option params [Boolean] :perform_hpo
     #   Whether to perform hyperparameter optimization (HPO). HPO finds
@@ -1052,11 +1099,11 @@ module Aws::ForecastService
     #   hyperparameter. In this case, you are required to specify an algorithm
     #   and `PerformAutoML` must be false.
     #
-    #   The following algorithm supports HPO:
+    #   The following algorithms support HPO:
     #
     #   * DeepAR+
     #
-    #   ^
+    #   * CNN-QR
     #
     # @option params [Hash<String,String>] :training_parameters
     #   The hyperparameters to override for model training. The
@@ -1134,7 +1181,9 @@ module Aws::ForecastService
     #     predictor_name: "Name", # required
     #     algorithm_arn: "Arn",
     #     forecast_horizon: 1, # required
+    #     forecast_types: ["ForecastType"],
     #     perform_auto_ml: false,
+    #     auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized
     #     perform_hpo: false,
     #     training_parameters: {
     #       "ParameterKey" => "ParameterValue",
@@ -1217,6 +1266,105 @@ module Aws::ForecastService
     # @param [Hash] params ({})
     def create_predictor(params = {}, options = {})
       req = build_request(:create_predictor, params)
+      req.send_request(options)
+    end
+
+    # Exports backtest forecasts and accuracy metrics generated by the
+    # CreatePredictor operation. Two folders containing CSV files are
+    # exported to your specified S3 bucket.
+    #
+    # The export file names will match the following conventions:
+    #
+    # `<ExportJobName>_<ExportTimestamp>_<PartNumber>.csv`
+    #
+    # The &lt;ExportTimestamp&gt; component is in Java SimpleDate format
+    # (yyyy-MM-ddTHH-mm-ssZ).
+    #
+    # You must specify a DataDestination object that includes an Amazon S3
+    # bucket and an AWS Identity and Access Management (IAM) role that
+    # Amazon Forecast can assume to access the Amazon S3 bucket. For more
+    # information, see aws-forecast-iam-roles.
+    #
+    # <note markdown="1"> The `Status` of the export job must be `ACTIVE` before you can access
+    # the export in your Amazon S3 bucket. To get the status, use the
+    # DescribePredictorBacktestExportJob operation.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :predictor_backtest_export_job_name
+    #   The name for the backtest export job.
+    #
+    # @option params [required, String] :predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor that you want to
+    #   export.
+    #
+    # @option params [required, Types::DataDestination] :destination
+    #   The destination for an export job. Provide an S3 path, an AWS Identity
+    #   and Access Management (IAM) role that allows Amazon Forecast to access
+    #   the location, and an AWS Key Management Service (KMS) key (optional).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata to help you categorize and organize your backtests.
+    #   Each tag consists of a key and an optional value, both of which you
+    #   define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key must
+    #     have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags with
+    #     only the key prefix of `aws` do not count against your tags per
+    #     resource limit. You cannot edit or delete tag keys with this prefix.
+    #
+    # @return [Types::CreatePredictorBacktestExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePredictorBacktestExportJobResponse#predictor_backtest_export_job_arn #predictor_backtest_export_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_predictor_backtest_export_job({
+    #     predictor_backtest_export_job_name: "Name", # required
+    #     predictor_arn: "Arn", # required
+    #     destination: { # required
+    #       s3_config: { # required
+    #         path: "S3Path", # required
+    #         role_arn: "Arn", # required
+    #         kms_key_arn: "KMSKeyArn",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predictor_backtest_export_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreatePredictorBacktestExportJob AWS API Documentation
+    #
+    # @overload create_predictor_backtest_export_job(params = {})
+    # @param [Hash] params ({})
+    def create_predictor_backtest_export_job(params = {}, options = {})
+      req = build_request(:create_predictor_backtest_export_job, params)
       req.send_request(options)
     end
 
@@ -1382,6 +1530,76 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Deletes a predictor backtest export job.
+    #
+    # @option params [required, String] :predictor_backtest_export_job_arn
+    #   The Amazon Resource Name (ARN) of the predictor backtest export job to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_predictor_backtest_export_job({
+    #     predictor_backtest_export_job_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeletePredictorBacktestExportJob AWS API Documentation
+    #
+    # @overload delete_predictor_backtest_export_job(params = {})
+    # @param [Hash] params ({})
+    def delete_predictor_backtest_export_job(params = {}, options = {})
+      req = build_request(:delete_predictor_backtest_export_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes an entire resource tree. This operation will delete the parent
+    # resource and its child resources.
+    #
+    # Child resources are resources that were created from another resource.
+    # For example, when a forecast is generated from a predictor, the
+    # forecast is the child resource and the predictor is the parent
+    # resource.
+    #
+    # Amazon Forecast resources possess the following parent-child resource
+    # hierarchies:
+    #
+    # * **Dataset**\: dataset import jobs
+    #
+    # * **Dataset Group**\: predictors, predictor backtest export jobs,
+    #   forecasts, forecast export jobs
+    #
+    # * **Predictor**\: predictor backtest export jobs, forecasts, forecast
+    #   export jobs
+    #
+    # * **Forecast**\: forecast export jobs
+    #
+    # <note markdown="1"> `DeleteResourceTree` will only delete Amazon Forecast resources, and
+    # will not delete datasets or exported files stored in Amazon S3.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the parent resource to delete. All
+    #   child resources of the parent resource will also be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_tree({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteResourceTree AWS API Documentation
+    #
+    # @overload delete_resource_tree(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_tree(params = {}, options = {})
+      req = build_request(:delete_resource_tree, params)
+      req.send_request(options)
+    end
+
     # Describes an Amazon Forecast dataset created using the CreateDataset
     # operation.
     #
@@ -1425,7 +1643,7 @@ module Aws::ForecastService
     #   resp.data_frequency #=> String
     #   resp.schema.attributes #=> Array
     #   resp.schema.attributes[0].attribute_name #=> String
-    #   resp.schema.attributes[0].attribute_type #=> String, one of "string", "integer", "float", "timestamp"
+    #   resp.schema.attributes[0].attribute_type #=> String, one of "string", "integer", "float", "timestamp", "geolocation"
     #   resp.encryption_config.role_arn #=> String
     #   resp.encryption_config.kms_key_arn #=> String
     #   resp.status #=> String
@@ -1523,7 +1741,11 @@ module Aws::ForecastService
     #   * {Types::DescribeDatasetImportJobResponse#dataset_import_job_arn #dataset_import_job_arn} => String
     #   * {Types::DescribeDatasetImportJobResponse#dataset_arn #dataset_arn} => String
     #   * {Types::DescribeDatasetImportJobResponse#timestamp_format #timestamp_format} => String
+    #   * {Types::DescribeDatasetImportJobResponse#time_zone #time_zone} => String
+    #   * {Types::DescribeDatasetImportJobResponse#use_geolocation_for_time_zone #use_geolocation_for_time_zone} => Boolean
+    #   * {Types::DescribeDatasetImportJobResponse#geolocation_format #geolocation_format} => String
     #   * {Types::DescribeDatasetImportJobResponse#data_source #data_source} => Types::DataSource
+    #   * {Types::DescribeDatasetImportJobResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
     #   * {Types::DescribeDatasetImportJobResponse#field_statistics #field_statistics} => Hash&lt;String,Types::Statistics&gt;
     #   * {Types::DescribeDatasetImportJobResponse#data_size #data_size} => Float
     #   * {Types::DescribeDatasetImportJobResponse#status #status} => String
@@ -1543,9 +1765,13 @@ module Aws::ForecastService
     #   resp.dataset_import_job_arn #=> String
     #   resp.dataset_arn #=> String
     #   resp.timestamp_format #=> String
+    #   resp.time_zone #=> String
+    #   resp.use_geolocation_for_time_zone #=> Boolean
+    #   resp.geolocation_format #=> String
     #   resp.data_source.s3_config.path #=> String
     #   resp.data_source.s3_config.role_arn #=> String
     #   resp.data_source.s3_config.kms_key_arn #=> String
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
     #   resp.field_statistics #=> Hash
     #   resp.field_statistics["String"].count #=> Integer
     #   resp.field_statistics["String"].count_distinct #=> Integer
@@ -1555,6 +1781,10 @@ module Aws::ForecastService
     #   resp.field_statistics["String"].max #=> String
     #   resp.field_statistics["String"].avg #=> Float
     #   resp.field_statistics["String"].stddev #=> Float
+    #   resp.field_statistics["String"].count_long #=> Integer
+    #   resp.field_statistics["String"].count_distinct_long #=> Integer
+    #   resp.field_statistics["String"].count_null_long #=> Integer
+    #   resp.field_statistics["String"].count_nan_long #=> Integer
     #   resp.data_size #=> Float
     #   resp.status #=> String
     #   resp.message #=> String
@@ -1596,6 +1826,7 @@ module Aws::ForecastService
     #   * {Types::DescribeForecastResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribeForecastResponse#predictor_arn #predictor_arn} => String
     #   * {Types::DescribeForecastResponse#dataset_group_arn #dataset_group_arn} => String
+    #   * {Types::DescribeForecastResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
     #   * {Types::DescribeForecastResponse#status #status} => String
     #   * {Types::DescribeForecastResponse#message #message} => String
     #   * {Types::DescribeForecastResponse#creation_time #creation_time} => Time
@@ -1615,6 +1846,7 @@ module Aws::ForecastService
     #   resp.forecast_types[0] #=> String
     #   resp.predictor_arn #=> String
     #   resp.dataset_group_arn #=> String
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
     #   resp.status #=> String
     #   resp.message #=> String
     #   resp.creation_time #=> Time
@@ -1716,7 +1948,9 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#predictor_name #predictor_name} => String
     #   * {Types::DescribePredictorResponse#algorithm_arn #algorithm_arn} => String
     #   * {Types::DescribePredictorResponse#forecast_horizon #forecast_horizon} => Integer
+    #   * {Types::DescribePredictorResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#perform_auto_ml #perform_auto_ml} => Boolean
+    #   * {Types::DescribePredictorResponse#auto_ml_override_strategy #auto_ml_override_strategy} => String
     #   * {Types::DescribePredictorResponse#perform_hpo #perform_hpo} => Boolean
     #   * {Types::DescribePredictorResponse#training_parameters #training_parameters} => Hash&lt;String,String&gt;
     #   * {Types::DescribePredictorResponse#evaluation_parameters #evaluation_parameters} => Types::EvaluationParameters
@@ -1725,6 +1959,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#featurization_config #featurization_config} => Types::FeaturizationConfig
     #   * {Types::DescribePredictorResponse#encryption_config #encryption_config} => Types::EncryptionConfig
     #   * {Types::DescribePredictorResponse#predictor_execution_details #predictor_execution_details} => Types::PredictorExecutionDetails
+    #   * {Types::DescribePredictorResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
     #   * {Types::DescribePredictorResponse#dataset_import_job_arns #dataset_import_job_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#auto_ml_algorithm_arns #auto_ml_algorithm_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#status #status} => String
@@ -1744,7 +1979,10 @@ module Aws::ForecastService
     #   resp.predictor_name #=> String
     #   resp.algorithm_arn #=> String
     #   resp.forecast_horizon #=> Integer
+    #   resp.forecast_types #=> Array
+    #   resp.forecast_types[0] #=> String
     #   resp.perform_auto_ml #=> Boolean
+    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized"
     #   resp.perform_hpo #=> Boolean
     #   resp.training_parameters #=> Hash
     #   resp.training_parameters["ParameterKey"] #=> String
@@ -1786,6 +2024,7 @@ module Aws::ForecastService
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].test_window_end #=> Time
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].status #=> String
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].message #=> String
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
     #   resp.dataset_import_job_arns #=> Array
     #   resp.dataset_import_job_arns[0] #=> String
     #   resp.auto_ml_algorithm_arns #=> Array
@@ -1804,10 +2043,67 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Describes a predictor backtest export job created using the
+    # CreatePredictorBacktestExportJob operation.
+    #
+    # In addition to listing the properties provided by the user in the
+    # `CreatePredictorBacktestExportJob` request, this operation lists the
+    # following properties:
+    #
+    # * `CreationTime`
+    #
+    # * `LastModificationTime`
+    #
+    # * `Status`
+    #
+    # * `Message` (if an error occurred)
+    #
+    # @option params [required, String] :predictor_backtest_export_job_arn
+    #   The Amazon Resource Name (ARN) of the predictor backtest export job.
+    #
+    # @return [Types::DescribePredictorBacktestExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePredictorBacktestExportJobResponse#predictor_backtest_export_job_arn #predictor_backtest_export_job_arn} => String
+    #   * {Types::DescribePredictorBacktestExportJobResponse#predictor_backtest_export_job_name #predictor_backtest_export_job_name} => String
+    #   * {Types::DescribePredictorBacktestExportJobResponse#predictor_arn #predictor_arn} => String
+    #   * {Types::DescribePredictorBacktestExportJobResponse#destination #destination} => Types::DataDestination
+    #   * {Types::DescribePredictorBacktestExportJobResponse#message #message} => String
+    #   * {Types::DescribePredictorBacktestExportJobResponse#status #status} => String
+    #   * {Types::DescribePredictorBacktestExportJobResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribePredictorBacktestExportJobResponse#last_modification_time #last_modification_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_predictor_backtest_export_job({
+    #     predictor_backtest_export_job_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predictor_backtest_export_job_arn #=> String
+    #   resp.predictor_backtest_export_job_name #=> String
+    #   resp.predictor_arn #=> String
+    #   resp.destination.s3_config.path #=> String
+    #   resp.destination.s3_config.role_arn #=> String
+    #   resp.destination.s3_config.kms_key_arn #=> String
+    #   resp.message #=> String
+    #   resp.status #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modification_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorBacktestExportJob AWS API Documentation
+    #
+    # @overload describe_predictor_backtest_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_predictor_backtest_export_job(params = {}, options = {})
+      req = build_request(:describe_predictor_backtest_export_job, params)
+      req.send_request(options)
+    end
+
     # Provides metrics on the accuracy of the models that were trained by
     # the CreatePredictor operation. Use metrics to see how well the model
     # performed and to decide whether to use the predictor to generate a
-    # forecast. For more information, see metrics.
+    # forecast. For more information, see [Predictor Metrics][1].
     #
     # This operation generates metrics for each backtest window that was
     # evaluated. The number of backtest windows (`NumberOfBacktestWindows`)
@@ -1828,12 +2124,17 @@ module Aws::ForecastService
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/metrics.html
+    #
     # @option params [required, String] :predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to get metrics for.
     #
     # @return [Types::GetAccuracyMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAccuracyMetricsResponse#predictor_evaluation_results #predictor_evaluation_results} => Array&lt;Types::EvaluationResult&gt;
+    #   * {Types::GetAccuracyMetricsResponse#auto_ml_override_strategy #auto_ml_override_strategy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1854,6 +2155,11 @@ module Aws::ForecastService
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.weighted_quantile_losses #=> Array
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.weighted_quantile_losses[0].quantile #=> Float
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.weighted_quantile_losses[0].loss_value #=> Float
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics #=> Array
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].forecast_type #=> String
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].wape #=> Float
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].rmse #=> Float
+    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetrics AWS API Documentation
     #
@@ -2206,6 +2512,86 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Returns a list of predictor backtest export jobs created using the
+    # CreatePredictorBacktestExportJob operation. This operation returns a
+    # summary for each backtest export job. You can filter the list using an
+    # array of Filter objects.
+    #
+    # To retrieve the complete set of properties for a particular backtest
+    # export job, use the ARN with the DescribePredictorBacktestExportJob
+    # operation.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a NextToken. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #
+    # @option params [Integer] :max_results
+    #   The number of items to return in the response.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An array of filters. For each filter, provide a condition and a match
+    #   statement. The condition is either `IS` or `IS_NOT`, which specifies
+    #   whether to include or exclude the predictor backtest export jobs that
+    #   match the statement from the list. The match statement consists of a
+    #   key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the predictor backtest export jobs that match
+    #     the statement, specify `IS`. To exclude matching predictor backtest
+    #     export jobs, specify `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `PredictorArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    # @return [Types::ListPredictorBacktestExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPredictorBacktestExportJobsResponse#predictor_backtest_export_jobs #predictor_backtest_export_jobs} => Array&lt;Types::PredictorBacktestExportJobSummary&gt;
+    #   * {Types::ListPredictorBacktestExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_predictor_backtest_export_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         key: "String", # required
+    #         value: "Arn", # required
+    #         condition: "IS", # required, accepts IS, IS_NOT
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predictor_backtest_export_jobs #=> Array
+    #   resp.predictor_backtest_export_jobs[0].predictor_backtest_export_job_arn #=> String
+    #   resp.predictor_backtest_export_jobs[0].predictor_backtest_export_job_name #=> String
+    #   resp.predictor_backtest_export_jobs[0].destination.s3_config.path #=> String
+    #   resp.predictor_backtest_export_jobs[0].destination.s3_config.role_arn #=> String
+    #   resp.predictor_backtest_export_jobs[0].destination.s3_config.kms_key_arn #=> String
+    #   resp.predictor_backtest_export_jobs[0].status #=> String
+    #   resp.predictor_backtest_export_jobs[0].message #=> String
+    #   resp.predictor_backtest_export_jobs[0].creation_time #=> Time
+    #   resp.predictor_backtest_export_jobs[0].last_modification_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListPredictorBacktestExportJobs AWS API Documentation
+    #
+    # @overload list_predictor_backtest_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_predictor_backtest_export_jobs(params = {}, options = {})
+      req = build_request(:list_predictor_backtest_export_jobs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of predictors created using the CreatePredictor
     # operation. For each predictor, this operation returns a summary of its
     # properties, including its Amazon Resource Name (ARN). You can retrieve
@@ -2317,6 +2703,48 @@ module Aws::ForecastService
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Stops a resource.
+    #
+    # The resource undergoes the following states: `CREATE_STOPPING` and
+    # `CREATE_STOPPED`. You cannot resume a resource once it has been
+    # stopped.
+    #
+    # This operation can be applied to the following resources (and their
+    # corresponding child resources):
+    #
+    # * Dataset Import Job
+    #
+    # * Predictor Job
+    #
+    # * Forecast Job
+    #
+    # * Forecast Export Job
+    #
+    # * Predictor Backtest Export Job
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource to stop.
+    #   The supported ARNs are `DatasetImportJobArn`, `PredictorArn`,
+    #   `PredictorBacktestExportJobArn`, `ForecastArn`, and
+    #   `ForecastExportJobArn`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/StopResource AWS API Documentation
+    #
+    # @overload stop_resource(params = {})
+    # @param [Hash] params ({})
+    def stop_resource(params = {}, options = {})
+      req = build_request(:stop_resource, params)
       req.send_request(options)
     end
 
@@ -2459,7 +2887,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

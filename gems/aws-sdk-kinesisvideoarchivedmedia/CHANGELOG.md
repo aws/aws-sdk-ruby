@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-04-08)
+------------------
+
+* Feature - Documentation updates for archived.kinesisvideo
+
+1.33.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2021-03-08)
+------------------
+
+* Feature - Increase the maximum HLS and MPEG-DASH manifest size from 1,000 to 5,000 fragments.
+
+1.31.0 (2021-02-15)
+------------------
+
+* Feature - The ListFragments and GetMediaForFragmentList APIs now support StreamName or StreamARN as input parameters.
+
+1.30.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.29.0 (2020-09-30)
 ------------------
 

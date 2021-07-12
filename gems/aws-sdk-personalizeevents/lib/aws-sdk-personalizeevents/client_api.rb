@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -30,6 +30,7 @@ module Aws::PersonalizeEvents
     PutItemsRequest = Shapes::StructureShape.new(name: 'PutItemsRequest')
     PutUsersRequest = Shapes::StructureShape.new(name: 'PutUsersRequest')
     RecommendationId = Shapes::StringShape.new(name: 'RecommendationId')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     StringType = Shapes::StringShape.new(name: 'StringType')
     User = Shapes::StructureShape.new(name: 'User')
@@ -73,6 +74,9 @@ module Aws::PersonalizeEvents
     PutUsersRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetArn"))
     PutUsersRequest.add_member(:users, Shapes::ShapeRef.new(shape: UserList, required: true, location_name: "users"))
     PutUsersRequest.struct_class = Types::PutUsersRequest
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -118,6 +122,7 @@ module Aws::PersonalizeEvents
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:put_users, Seahorse::Model::Operation.new.tap do |o|
@@ -128,6 +133,7 @@ module Aws::PersonalizeEvents
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
     end
 

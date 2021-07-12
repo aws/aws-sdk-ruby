@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -40,6 +40,8 @@ module Aws::DataExchange
     ExportAssetToSignedUrlResponseDetails = Shapes::StructureShape.new(name: 'ExportAssetToSignedUrlResponseDetails')
     ExportAssetsToS3RequestDetails = Shapes::StructureShape.new(name: 'ExportAssetsToS3RequestDetails')
     ExportAssetsToS3ResponseDetails = Shapes::StructureShape.new(name: 'ExportAssetsToS3ResponseDetails')
+    ExportRevisionsToS3RequestDetails = Shapes::StructureShape.new(name: 'ExportRevisionsToS3RequestDetails')
+    ExportRevisionsToS3ResponseDetails = Shapes::StructureShape.new(name: 'ExportRevisionsToS3ResponseDetails')
     ExportServerSideEncryption = Shapes::StructureShape.new(name: 'ExportServerSideEncryption')
     GetAssetRequest = Shapes::StructureShape.new(name: 'GetAssetRequest')
     GetAssetResponse = Shapes::StructureShape.new(name: 'GetAssetResponse')
@@ -73,6 +75,7 @@ module Aws::DataExchange
     ListOfDataSetEntry = Shapes::ListShape.new(name: 'ListOfDataSetEntry')
     ListOfJobEntry = Shapes::ListShape.new(name: 'ListOfJobEntry')
     ListOfJobError = Shapes::ListShape.new(name: 'ListOfJobError')
+    ListOfRevisionDestinationEntry = Shapes::ListShape.new(name: 'ListOfRevisionDestinationEntry')
     ListOfRevisionEntry = Shapes::ListShape.new(name: 'ListOfRevisionEntry')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListRevisionAssetsRequest = Shapes::StructureShape.new(name: 'ListRevisionAssetsRequest')
@@ -89,6 +92,7 @@ module Aws::DataExchange
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseDetails = Shapes::StructureShape.new(name: 'ResponseDetails')
+    RevisionDestinationEntry = Shapes::StructureShape.new(name: 'RevisionDestinationEntry')
     RevisionEntry = Shapes::StructureShape.new(name: 'RevisionEntry')
     S3SnapshotAsset = Shapes::StructureShape.new(name: 'S3SnapshotAsset')
     ServerSideEncryptionTypes = Shapes::StringShape.new(name: 'ServerSideEncryptionTypes')
@@ -251,6 +255,16 @@ module Aws::DataExchange
     ExportAssetsToS3ResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
     ExportAssetsToS3ResponseDetails.struct_class = Types::ExportAssetsToS3ResponseDetails
 
+    ExportRevisionsToS3RequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ExportRevisionsToS3RequestDetails.add_member(:encryption, Shapes::ShapeRef.new(shape: ExportServerSideEncryption, location_name: "Encryption"))
+    ExportRevisionsToS3RequestDetails.add_member(:revision_destinations, Shapes::ShapeRef.new(shape: ListOfRevisionDestinationEntry, required: true, location_name: "RevisionDestinations"))
+    ExportRevisionsToS3RequestDetails.struct_class = Types::ExportRevisionsToS3RequestDetails
+
+    ExportRevisionsToS3ResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ExportRevisionsToS3ResponseDetails.add_member(:encryption, Shapes::ShapeRef.new(shape: ExportServerSideEncryption, location_name: "Encryption"))
+    ExportRevisionsToS3ResponseDetails.add_member(:revision_destinations, Shapes::ShapeRef.new(shape: ListOfRevisionDestinationEntry, required: true, location_name: "RevisionDestinations"))
+    ExportRevisionsToS3ResponseDetails.struct_class = Types::ExportRevisionsToS3ResponseDetails
+
     ExportServerSideEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: __string, location_name: "KmsKeyArn"))
     ExportServerSideEncryption.add_member(:type, Shapes::ShapeRef.new(shape: ServerSideEncryptionTypes, required: true, location_name: "Type"))
     ExportServerSideEncryption.struct_class = Types::ExportServerSideEncryption
@@ -405,6 +419,8 @@ module Aws::DataExchange
 
     ListOfJobError.member = Shapes::ShapeRef.new(shape: JobError)
 
+    ListOfRevisionDestinationEntry.member = Shapes::ShapeRef.new(shape: RevisionDestinationEntry)
+
     ListOfRevisionEntry.member = Shapes::ShapeRef.new(shape: RevisionEntry)
 
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
@@ -433,6 +449,7 @@ module Aws::DataExchange
 
     RequestDetails.add_member(:export_asset_to_signed_url, Shapes::ShapeRef.new(shape: ExportAssetToSignedUrlRequestDetails, location_name: "ExportAssetToSignedUrl"))
     RequestDetails.add_member(:export_assets_to_s3, Shapes::ShapeRef.new(shape: ExportAssetsToS3RequestDetails, location_name: "ExportAssetsToS3"))
+    RequestDetails.add_member(:export_revisions_to_s3, Shapes::ShapeRef.new(shape: ExportRevisionsToS3RequestDetails, location_name: "ExportRevisionsToS3"))
     RequestDetails.add_member(:import_asset_from_signed_url, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlRequestDetails, location_name: "ImportAssetFromSignedUrl"))
     RequestDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3RequestDetails, location_name: "ImportAssetsFromS3"))
     RequestDetails.struct_class = Types::RequestDetails
@@ -444,9 +461,15 @@ module Aws::DataExchange
 
     ResponseDetails.add_member(:export_asset_to_signed_url, Shapes::ShapeRef.new(shape: ExportAssetToSignedUrlResponseDetails, location_name: "ExportAssetToSignedUrl"))
     ResponseDetails.add_member(:export_assets_to_s3, Shapes::ShapeRef.new(shape: ExportAssetsToS3ResponseDetails, location_name: "ExportAssetsToS3"))
+    ResponseDetails.add_member(:export_revisions_to_s3, Shapes::ShapeRef.new(shape: ExportRevisionsToS3ResponseDetails, location_name: "ExportRevisionsToS3"))
     ResponseDetails.add_member(:import_asset_from_signed_url, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlResponseDetails, location_name: "ImportAssetFromSignedUrl"))
     ResponseDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3ResponseDetails, location_name: "ImportAssetsFromS3"))
     ResponseDetails.struct_class = Types::ResponseDetails
+
+    RevisionDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
+    RevisionDestinationEntry.add_member(:key_pattern, Shapes::ShapeRef.new(shape: __string, location_name: "KeyPattern"))
+    RevisionDestinationEntry.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    RevisionDestinationEntry.struct_class = Types::RevisionDestinationEntry
 
     RevisionEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     RevisionEntry.add_member(:comment, Shapes::ShapeRef.new(shape: __stringMin0Max16384, location_name: "Comment"))

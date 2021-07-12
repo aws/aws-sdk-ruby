@@ -11,7 +11,7 @@ module Aws
       def initialize(rules, options = {})
         @rules = rules
         @xml = options[:target] || []
-        indent = options[:indent] || '  '
+        indent = options[:indent] || ''
         pad = options[:pad] || ''
         @builder = DocBuilder.new(target: @xml, indent: indent, pad: pad)
       end
@@ -48,7 +48,7 @@ module Aws
       end
 
       def list(name, ref, values)
-        if ref.shape.flattened
+        if ref[:flattened] || ref.shape.flattened
           values.each do |value|
             member(ref.shape.member.location_name || name, ref.shape.member, value)
           end

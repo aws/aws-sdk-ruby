@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -20,10 +20,13 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] event_arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] entity_value
@@ -139,10 +142,13 @@ module Aws::Health
     #       }
     #
     # @!attribute [rw] event_arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -869,10 +875,13 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html
     #
     # @!attribute [rw] event_arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] count
@@ -986,10 +995,13 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode
     #
     # @!attribute [rw] arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] service
@@ -1009,7 +1021,7 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region name of the event.
+    #   The AWS Region name of the event.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -1086,10 +1098,13 @@ module Aws::Health
     #       }
     #
     # @!attribute [rw] event_arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -1182,17 +1197,20 @@ module Aws::Health
     end
 
     # Error information returned when a [DescribeEventDetails][1] operation
-    # cannot find a specified event.
+    # can't find a specified event.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html
     #
     # @!attribute [rw] event_arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] error_name
@@ -1276,11 +1294,11 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] regions
-    #   A list of AWS regions.
+    #   A list of AWS Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zones
-    #   A list of AWS availability zones.
+    #   A list of AWS Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_times
@@ -1341,10 +1359,25 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # Metadata about a type of event that is reported by AWS Health. Data
-    # consists of the category (for example, `issue`), the service (for
-    # example, `EC2`), and the event type code (for example,
-    # `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`).
+    # Contains the metadata about a type of event that is reported by AWS
+    # Health. The `EventType` shows the category, service, and the event
+    # type code of the event. For example, an `issue` might be the category,
+    # `EC2` the service, and `AWS_EC2_SYSTEM_MAINTENANCE_EVENT` the event
+    # type code.
+    #
+    # You can use the [DescribeEventTypes][1] API operation to return this
+    # information about an event.
+    #
+    # You can also use the Amazon CloudWatch Events console to create a rule
+    # so that you can get notified or take action when AWS Health delivers a
+    # specific event to your AWS account. For more information, see [Monitor
+    # for AWS Health events with Amazon CloudWatch Events][2] in the *AWS
+    # Health User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html
+    # [2]: https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html
     #
     # @!attribute [rw] service
     #   The AWS service that is affected by the event. For example, `EC2`,
@@ -1426,7 +1459,7 @@ module Aws::Health
     end
 
     # Error information returned when a
-    # [DescribeAffectedEntitiesForOrganization][1] operation cannot find or
+    # [DescribeAffectedEntitiesForOrganization][1] operation can't find or
     # process a specific entity.
     #
     #
@@ -1439,10 +1472,13 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] event_arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] error_name
@@ -1474,15 +1510,17 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
     #
     # @!attribute [rw] arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   The AWS service that is affected by the event. For example, EC2,
-    #   RDS.
+    #   The AWS service that is affected by the event, such as EC2 and RDS.
     #   @return [String]
     #
     # @!attribute [rw] event_type_code
@@ -1616,7 +1654,7 @@ module Aws::Health
     end
 
     # Error information returned when a
-    # [DescribeEventDetailsForOrganization][1] operation cannot find a
+    # [DescribeEventDetailsForOrganization][1] operation can't find a
     # specified event.
     #
     #
@@ -1625,7 +1663,7 @@ module Aws::Health
     #
     # @!attribute [rw] aws_account_id
     #   Error information returned when a
-    #   [DescribeEventDetailsForOrganization][1] operation cannot find a
+    #   [DescribeEventDetailsForOrganization][1] operation can't find a
     #   specified event.
     #
     #
@@ -1634,10 +1672,13 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] event_arn
-    #   The unique identifier for the event. Format:
+    #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-    #   `. Example: `Example:
-    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
     #   @return [String]
     #
     # @!attribute [rw] error_name
@@ -1646,6 +1687,22 @@ module Aws::Health
     #
     # @!attribute [rw] error_message
     #   A message that describes the error.
+    #
+    #   If you call the `DescribeEventDetailsForOrganization` operation and
+    #   receive one of the following errors, follow the recommendations in
+    #   the message:
+    #
+    #   * We couldn't find a public event that matches your request. To
+    #     find an event that is account specific, you must enter an AWS
+    #     account ID in the request.
+    #
+    #   * We couldn't find an account specific event for the specified AWS
+    #     account. To find an event that is public, you must enter a null
+    #     value for the AWS account ID in the request.
+    #
+    #   * Your AWS account doesn't include the AWS Support plan required to
+    #     use the AWS Health API. You must have either a Business or
+    #     Enterprise Support plan.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventDetailsErrorItem AWS API Documentation

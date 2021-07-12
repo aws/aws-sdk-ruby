@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-05-10)
+------------------
+
+* Feature - Adds paginator to multiple APIs: By default, the paginator allows user to iterate over the results and allows the CLI to return up to 1000 results.
+
+1.61.0 (2021-04-14)
+------------------
+
+* Feature - Add exception for DeleteRemediationConfiguration and DescribeRemediationExecutionStatus
+
+1.60.0 (2021-03-30)
+------------------
+
+* Feature - Adding new APIs to support ConformancePack Compliance CI in Aggregators
+
+1.59.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2021-02-17)
+------------------
+
+* Feature - Added INSUFFICIENT_DATA in ConformancePackComplianceType.
+
+1.57.0 (2021-02-15)
+------------------
+
+* Feature - Added option to provide KMS key to AWS Config DeliveryChannel
+
+1.56.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2020-12-21)
+------------------
+
+* Feature - AWS Config adds support to save advanced queries. New API operations - GetStoredQuery, PutStoredQuery, ListStoredQueries, DeleteStoredQuery
+
+1.54.0 (2020-12-17)
+------------------
+
+* Feature - Adding PutExternalEvaluation API which grants permission to deliver evaluation result to AWS Config
+
 1.53.0 (2020-09-30)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -14,14 +14,17 @@ module Aws::Signer
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AddProfilePermissionRequest = Shapes::StructureShape.new(name: 'AddProfilePermissionRequest')
+    AddProfilePermissionResponse = Shapes::StructureShape.new(name: 'AddProfilePermissionResponse')
+    Arn = Shapes::StringShape.new(name: 'Arn')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     CancelSigningProfileRequest = Shapes::StructureShape.new(name: 'CancelSigningProfileRequest')
     Category = Shapes::StringShape.new(name: 'Category')
     CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
-    CompletedAt = Shapes::TimestampShape.new(name: 'CompletedAt')
-    CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     DescribeSigningJobRequest = Shapes::StructureShape.new(name: 'DescribeSigningJobRequest')
     DescribeSigningJobResponse = Shapes::StructureShape.new(name: 'DescribeSigningJobResponse')
     Destination = Shapes::StructureShape.new(name: 'Destination')
@@ -29,6 +32,7 @@ module Aws::Signer
     EncryptionAlgorithm = Shapes::StringShape.new(name: 'EncryptionAlgorithm')
     EncryptionAlgorithmOptions = Shapes::StructureShape.new(name: 'EncryptionAlgorithmOptions')
     EncryptionAlgorithms = Shapes::ListShape.new(name: 'EncryptionAlgorithms')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GetSigningPlatformRequest = Shapes::StructureShape.new(name: 'GetSigningPlatformRequest')
     GetSigningPlatformResponse = Shapes::StructureShape.new(name: 'GetSigningPlatformResponse')
@@ -39,9 +43,12 @@ module Aws::Signer
     HashAlgorithms = Shapes::ListShape.new(name: 'HashAlgorithms')
     ImageFormat = Shapes::StringShape.new(name: 'ImageFormat')
     ImageFormats = Shapes::ListShape.new(name: 'ImageFormats')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     JobId = Shapes::StringShape.new(name: 'JobId')
     Key = Shapes::StringShape.new(name: 'Key')
+    ListProfilePermissionsRequest = Shapes::StructureShape.new(name: 'ListProfilePermissionsRequest')
+    ListProfilePermissionsResponse = Shapes::StructureShape.new(name: 'ListProfilePermissionsResponse')
     ListSigningJobsRequest = Shapes::StructureShape.new(name: 'ListSigningJobsRequest')
     ListSigningJobsResponse = Shapes::StructureShape.new(name: 'ListSigningJobsResponse')
     ListSigningPlatformsRequest = Shapes::StructureShape.new(name: 'ListSigningPlatformsRequest')
@@ -54,21 +61,33 @@ module Aws::Signer
     MaxSizeInMB = Shapes::IntegerShape.new(name: 'MaxSizeInMB')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    Permission = Shapes::StructureShape.new(name: 'Permission')
+    Permissions = Shapes::ListShape.new(name: 'Permissions')
     PlatformId = Shapes::StringShape.new(name: 'PlatformId')
+    PolicySizeBytes = Shapes::IntegerShape.new(name: 'PolicySizeBytes')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     ProfileName = Shapes::StringShape.new(name: 'ProfileName')
+    ProfileVersion = Shapes::StringShape.new(name: 'ProfileVersion')
     PutSigningProfileRequest = Shapes::StructureShape.new(name: 'PutSigningProfileRequest')
     PutSigningProfileResponse = Shapes::StructureShape.new(name: 'PutSigningProfileResponse')
+    RemoveProfilePermissionRequest = Shapes::StructureShape.new(name: 'RemoveProfilePermissionRequest')
+    RemoveProfilePermissionResponse = Shapes::StructureShape.new(name: 'RemoveProfilePermissionResponse')
     RequestedBy = Shapes::StringShape.new(name: 'RequestedBy')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RevocationReasonString = Shapes::StringShape.new(name: 'RevocationReasonString')
+    RevokeSignatureRequest = Shapes::StructureShape.new(name: 'RevokeSignatureRequest')
+    RevokeSigningProfileRequest = Shapes::StructureShape.new(name: 'RevokeSigningProfileRequest')
     S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     S3SignedObject = Shapes::StructureShape.new(name: 'S3SignedObject')
     S3Source = Shapes::StructureShape.new(name: 'S3Source')
+    ServiceLimitExceededException = Shapes::StructureShape.new(name: 'ServiceLimitExceededException')
+    SignatureValidityPeriod = Shapes::StructureShape.new(name: 'SignatureValidityPeriod')
     SignedObject = Shapes::StructureShape.new(name: 'SignedObject')
     SigningConfiguration = Shapes::StructureShape.new(name: 'SigningConfiguration')
     SigningConfigurationOverrides = Shapes::StructureShape.new(name: 'SigningConfigurationOverrides')
     SigningImageFormat = Shapes::StructureShape.new(name: 'SigningImageFormat')
     SigningJob = Shapes::StructureShape.new(name: 'SigningJob')
+    SigningJobRevocationRecord = Shapes::StructureShape.new(name: 'SigningJobRevocationRecord')
     SigningJobs = Shapes::ListShape.new(name: 'SigningJobs')
     SigningMaterial = Shapes::StructureShape.new(name: 'SigningMaterial')
     SigningParameterKey = Shapes::StringShape.new(name: 'SigningParameterKey')
@@ -78,6 +97,7 @@ module Aws::Signer
     SigningPlatformOverrides = Shapes::StructureShape.new(name: 'SigningPlatformOverrides')
     SigningPlatforms = Shapes::ListShape.new(name: 'SigningPlatforms')
     SigningProfile = Shapes::StructureShape.new(name: 'SigningProfile')
+    SigningProfileRevocationRecord = Shapes::StructureShape.new(name: 'SigningProfileRevocationRecord')
     SigningProfileStatus = Shapes::StringShape.new(name: 'SigningProfileStatus')
     SigningProfiles = Shapes::ListShape.new(name: 'SigningProfiles')
     SigningStatus = Shapes::StringShape.new(name: 'SigningStatus')
@@ -85,6 +105,7 @@ module Aws::Signer
     StartSigningJobRequest = Shapes::StructureShape.new(name: 'StartSigningJobRequest')
     StartSigningJobResponse = Shapes::StructureShape.new(name: 'StartSigningJobResponse')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
+    Statuses = Shapes::ListShape.new(name: 'Statuses')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -93,22 +114,41 @@ module Aws::Signer
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidityType = Shapes::StringShape.new(name: 'ValidityType')
     Version = Shapes::StringShape.new(name: 'Version')
     bool = Shapes::BooleanShape.new(name: 'bool')
-    key = Shapes::StringShape.new(name: 'key')
     string = Shapes::StringShape.new(name: 'string')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AddProfilePermissionRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
+    AddProfilePermissionRequest.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "profileVersion"))
+    AddProfilePermissionRequest.add_member(:action, Shapes::ShapeRef.new(shape: String, required: true, location_name: "action"))
+    AddProfilePermissionRequest.add_member(:principal, Shapes::ShapeRef.new(shape: String, required: true, location_name: "principal"))
+    AddProfilePermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "revisionId"))
+    AddProfilePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "statementId"))
+    AddProfilePermissionRequest.struct_class = Types::AddProfilePermissionRequest
+
+    AddProfilePermissionResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "revisionId"))
+    AddProfilePermissionResponse.struct_class = Types::AddProfilePermissionResponse
+
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     BadRequestException.struct_class = Types::BadRequestException
 
     CancelSigningProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
     CancelSigningProfileRequest.struct_class = Types::CancelSigningProfileRequest
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    ConflictException.struct_class = Types::ConflictException
 
     DescribeSigningJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     DescribeSigningJobRequest.struct_class = Types::DescribeSigningJobRequest
@@ -117,15 +157,21 @@ module Aws::Signer
     DescribeSigningJobResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     DescribeSigningJobResponse.add_member(:signing_material, Shapes::ShapeRef.new(shape: SigningMaterial, location_name: "signingMaterial"))
     DescribeSigningJobResponse.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location_name: "platformId"))
+    DescribeSigningJobResponse.add_member(:platform_display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "platformDisplayName"))
     DescribeSigningJobResponse.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "profileName"))
+    DescribeSigningJobResponse.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "profileVersion"))
     DescribeSigningJobResponse.add_member(:overrides, Shapes::ShapeRef.new(shape: SigningPlatformOverrides, location_name: "overrides"))
     DescribeSigningJobResponse.add_member(:signing_parameters, Shapes::ShapeRef.new(shape: SigningParameters, location_name: "signingParameters"))
-    DescribeSigningJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
-    DescribeSigningJobResponse.add_member(:completed_at, Shapes::ShapeRef.new(shape: CompletedAt, location_name: "completedAt"))
+    DescribeSigningJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    DescribeSigningJobResponse.add_member(:completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedAt"))
+    DescribeSigningJobResponse.add_member(:signature_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "signatureExpiresAt"))
     DescribeSigningJobResponse.add_member(:requested_by, Shapes::ShapeRef.new(shape: RequestedBy, location_name: "requestedBy"))
     DescribeSigningJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: SigningStatus, location_name: "status"))
     DescribeSigningJobResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    DescribeSigningJobResponse.add_member(:revocation_record, Shapes::ShapeRef.new(shape: SigningJobRevocationRecord, location_name: "revocationRecord"))
     DescribeSigningJobResponse.add_member(:signed_object, Shapes::ShapeRef.new(shape: SignedObject, location_name: "signedObject"))
+    DescribeSigningJobResponse.add_member(:job_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "jobOwner"))
+    DescribeSigningJobResponse.add_member(:job_invoker, Shapes::ShapeRef.new(shape: AccountId, location_name: "jobInvoker"))
     DescribeSigningJobResponse.struct_class = Types::DescribeSigningJobResponse
 
     Destination.add_member(:s3, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3"))
@@ -148,17 +194,25 @@ module Aws::Signer
     GetSigningPlatformResponse.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfiguration, location_name: "signingConfiguration"))
     GetSigningPlatformResponse.add_member(:signing_image_format, Shapes::ShapeRef.new(shape: SigningImageFormat, location_name: "signingImageFormat"))
     GetSigningPlatformResponse.add_member(:max_size_in_mb, Shapes::ShapeRef.new(shape: MaxSizeInMB, location_name: "maxSizeInMB"))
+    GetSigningPlatformResponse.add_member(:revocation_supported, Shapes::ShapeRef.new(shape: bool, location_name: "revocationSupported"))
     GetSigningPlatformResponse.struct_class = Types::GetSigningPlatformResponse
 
     GetSigningProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
+    GetSigningProfileRequest.add_member(:profile_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "profileOwner"))
     GetSigningProfileRequest.struct_class = Types::GetSigningProfileRequest
 
     GetSigningProfileResponse.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "profileName"))
+    GetSigningProfileResponse.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "profileVersion"))
+    GetSigningProfileResponse.add_member(:profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "profileVersionArn"))
+    GetSigningProfileResponse.add_member(:revocation_record, Shapes::ShapeRef.new(shape: SigningProfileRevocationRecord, location_name: "revocationRecord"))
     GetSigningProfileResponse.add_member(:signing_material, Shapes::ShapeRef.new(shape: SigningMaterial, location_name: "signingMaterial"))
     GetSigningProfileResponse.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location_name: "platformId"))
+    GetSigningProfileResponse.add_member(:platform_display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "platformDisplayName"))
+    GetSigningProfileResponse.add_member(:signature_validity_period, Shapes::ShapeRef.new(shape: SignatureValidityPeriod, location_name: "signatureValidityPeriod"))
     GetSigningProfileResponse.add_member(:overrides, Shapes::ShapeRef.new(shape: SigningPlatformOverrides, location_name: "overrides"))
     GetSigningProfileResponse.add_member(:signing_parameters, Shapes::ShapeRef.new(shape: SigningParameters, location_name: "signingParameters"))
     GetSigningProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: SigningProfileStatus, location_name: "status"))
+    GetSigningProfileResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     GetSigningProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "arn"))
     GetSigningProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetSigningProfileResponse.struct_class = Types::GetSigningProfileResponse
@@ -172,13 +226,28 @@ module Aws::Signer
     ImageFormats.member = Shapes::ShapeRef.new(shape: ImageFormat)
 
     InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServiceErrorException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
+    ListProfilePermissionsRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
+    ListProfilePermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListProfilePermissionsRequest.struct_class = Types::ListProfilePermissionsRequest
+
+    ListProfilePermissionsResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "revisionId"))
+    ListProfilePermissionsResponse.add_member(:policy_size_bytes, Shapes::ShapeRef.new(shape: PolicySizeBytes, location_name: "policySizeBytes"))
+    ListProfilePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: Permissions, location_name: "permissions"))
+    ListProfilePermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListProfilePermissionsResponse.struct_class = Types::ListProfilePermissionsResponse
 
     ListSigningJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: SigningStatus, location: "querystring", location_name: "status"))
     ListSigningJobsRequest.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location: "querystring", location_name: "platformId"))
     ListSigningJobsRequest.add_member(:requested_by, Shapes::ShapeRef.new(shape: RequestedBy, location: "querystring", location_name: "requestedBy"))
     ListSigningJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSigningJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSigningJobsRequest.add_member(:is_revoked, Shapes::ShapeRef.new(shape: bool, location: "querystring", location_name: "isRevoked"))
+    ListSigningJobsRequest.add_member(:signature_expires_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "signatureExpiresBefore"))
+    ListSigningJobsRequest.add_member(:signature_expires_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "signatureExpiresAfter"))
+    ListSigningJobsRequest.add_member(:job_invoker, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "jobInvoker"))
     ListSigningJobsRequest.struct_class = Types::ListSigningJobsRequest
 
     ListSigningJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: SigningJobs, location_name: "jobs"))
@@ -199,6 +268,8 @@ module Aws::Signer
     ListSigningProfilesRequest.add_member(:include_canceled, Shapes::ShapeRef.new(shape: bool, location: "querystring", location_name: "includeCanceled"))
     ListSigningProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSigningProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSigningProfilesRequest.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location: "querystring", location_name: "platformId"))
+    ListSigningProfilesRequest.add_member(:statuses, Shapes::ShapeRef.new(shape: Statuses, location: "querystring", location_name: "statuses"))
     ListSigningProfilesRequest.struct_class = Types::ListSigningProfilesRequest
 
     ListSigningProfilesResponse.add_member(:profiles, Shapes::ShapeRef.new(shape: SigningProfiles, location_name: "profiles"))
@@ -212,10 +283,20 @@ module Aws::Signer
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    Permission.add_member(:action, Shapes::ShapeRef.new(shape: String, location_name: "action"))
+    Permission.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
+    Permission.add_member(:statement_id, Shapes::ShapeRef.new(shape: String, location_name: "statementId"))
+    Permission.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "profileVersion"))
+    Permission.struct_class = Types::Permission
+
+    Permissions.member = Shapes::ShapeRef.new(shape: Permission)
+
     PutSigningProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
-    PutSigningProfileRequest.add_member(:signing_material, Shapes::ShapeRef.new(shape: SigningMaterial, required: true, location_name: "signingMaterial"))
+    PutSigningProfileRequest.add_member(:signing_material, Shapes::ShapeRef.new(shape: SigningMaterial, location_name: "signingMaterial"))
+    PutSigningProfileRequest.add_member(:signature_validity_period, Shapes::ShapeRef.new(shape: SignatureValidityPeriod, location_name: "signatureValidityPeriod"))
     PutSigningProfileRequest.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, required: true, location_name: "platformId"))
     PutSigningProfileRequest.add_member(:overrides, Shapes::ShapeRef.new(shape: SigningPlatformOverrides, location_name: "overrides"))
     PutSigningProfileRequest.add_member(:signing_parameters, Shapes::ShapeRef.new(shape: SigningParameters, location_name: "signingParameters"))
@@ -223,23 +304,53 @@ module Aws::Signer
     PutSigningProfileRequest.struct_class = Types::PutSigningProfileRequest
 
     PutSigningProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "arn"))
+    PutSigningProfileResponse.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "profileVersion"))
+    PutSigningProfileResponse.add_member(:profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "profileVersionArn"))
     PutSigningProfileResponse.struct_class = Types::PutSigningProfileResponse
 
+    RemoveProfilePermissionRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
+    RemoveProfilePermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "revisionId"))
+    RemoveProfilePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "statementId"))
+    RemoveProfilePermissionRequest.struct_class = Types::RemoveProfilePermissionRequest
+
+    RemoveProfilePermissionResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "revisionId"))
+    RemoveProfilePermissionResponse.struct_class = Types::RemoveProfilePermissionResponse
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RevokeSignatureRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    RevokeSignatureRequest.add_member(:job_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "jobOwner"))
+    RevokeSignatureRequest.add_member(:reason, Shapes::ShapeRef.new(shape: RevocationReasonString, required: true, location_name: "reason"))
+    RevokeSignatureRequest.struct_class = Types::RevokeSignatureRequest
+
+    RevokeSigningProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
+    RevokeSigningProfileRequest.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, required: true, location_name: "profileVersion"))
+    RevokeSigningProfileRequest.add_member(:reason, Shapes::ShapeRef.new(shape: RevocationReasonString, required: true, location_name: "reason"))
+    RevokeSigningProfileRequest.add_member(:effective_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "effectiveTime"))
+    RevokeSigningProfileRequest.struct_class = Types::RevokeSigningProfileRequest
 
     S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
     S3Destination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "prefix"))
     S3Destination.struct_class = Types::S3Destination
 
     S3SignedObject.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
-    S3SignedObject.add_member(:key, Shapes::ShapeRef.new(shape: key, location_name: "key"))
+    S3SignedObject.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "key"))
     S3SignedObject.struct_class = Types::S3SignedObject
 
     S3Source.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
     S3Source.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "key"))
     S3Source.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
     S3Source.struct_class = Types::S3Source
+
+    ServiceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceLimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    ServiceLimitExceededException.struct_class = Types::ServiceLimitExceededException
+
+    SignatureValidityPeriod.add_member(:value, Shapes::ShapeRef.new(shape: Integer, location_name: "value"))
+    SignatureValidityPeriod.add_member(:type, Shapes::ShapeRef.new(shape: ValidityType, location_name: "type"))
+    SignatureValidityPeriod.struct_class = Types::SignatureValidityPeriod
 
     SignedObject.add_member(:s3, Shapes::ShapeRef.new(shape: S3SignedObject, location_name: "s3"))
     SignedObject.struct_class = Types::SignedObject
@@ -260,9 +371,22 @@ module Aws::Signer
     SigningJob.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     SigningJob.add_member(:signed_object, Shapes::ShapeRef.new(shape: SignedObject, location_name: "signedObject"))
     SigningJob.add_member(:signing_material, Shapes::ShapeRef.new(shape: SigningMaterial, location_name: "signingMaterial"))
-    SigningJob.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    SigningJob.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     SigningJob.add_member(:status, Shapes::ShapeRef.new(shape: SigningStatus, location_name: "status"))
+    SigningJob.add_member(:is_revoked, Shapes::ShapeRef.new(shape: bool, location_name: "isRevoked"))
+    SigningJob.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "profileName"))
+    SigningJob.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "profileVersion"))
+    SigningJob.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location_name: "platformId"))
+    SigningJob.add_member(:platform_display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "platformDisplayName"))
+    SigningJob.add_member(:signature_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "signatureExpiresAt"))
+    SigningJob.add_member(:job_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "jobOwner"))
+    SigningJob.add_member(:job_invoker, Shapes::ShapeRef.new(shape: AccountId, location_name: "jobInvoker"))
     SigningJob.struct_class = Types::SigningJob
+
+    SigningJobRevocationRecord.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    SigningJobRevocationRecord.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "revokedAt"))
+    SigningJobRevocationRecord.add_member(:revoked_by, Shapes::ShapeRef.new(shape: String, location_name: "revokedBy"))
+    SigningJobRevocationRecord.struct_class = Types::SigningJobRevocationRecord
 
     SigningJobs.member = Shapes::ShapeRef.new(shape: SigningJob)
 
@@ -280,6 +404,7 @@ module Aws::Signer
     SigningPlatform.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfiguration, location_name: "signingConfiguration"))
     SigningPlatform.add_member(:signing_image_format, Shapes::ShapeRef.new(shape: SigningImageFormat, location_name: "signingImageFormat"))
     SigningPlatform.add_member(:max_size_in_mb, Shapes::ShapeRef.new(shape: MaxSizeInMB, location_name: "maxSizeInMB"))
+    SigningPlatform.add_member(:revocation_supported, Shapes::ShapeRef.new(shape: bool, location_name: "revocationSupported"))
     SigningPlatform.struct_class = Types::SigningPlatform
 
     SigningPlatformOverrides.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfigurationOverrides, location_name: "signingConfiguration"))
@@ -289,13 +414,22 @@ module Aws::Signer
     SigningPlatforms.member = Shapes::ShapeRef.new(shape: SigningPlatform)
 
     SigningProfile.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "profileName"))
+    SigningProfile.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "profileVersion"))
+    SigningProfile.add_member(:profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "profileVersionArn"))
     SigningProfile.add_member(:signing_material, Shapes::ShapeRef.new(shape: SigningMaterial, location_name: "signingMaterial"))
+    SigningProfile.add_member(:signature_validity_period, Shapes::ShapeRef.new(shape: SignatureValidityPeriod, location_name: "signatureValidityPeriod"))
     SigningProfile.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location_name: "platformId"))
+    SigningProfile.add_member(:platform_display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "platformDisplayName"))
     SigningProfile.add_member(:signing_parameters, Shapes::ShapeRef.new(shape: SigningParameters, location_name: "signingParameters"))
     SigningProfile.add_member(:status, Shapes::ShapeRef.new(shape: SigningProfileStatus, location_name: "status"))
     SigningProfile.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "arn"))
     SigningProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     SigningProfile.struct_class = Types::SigningProfile
+
+    SigningProfileRevocationRecord.add_member(:revocation_effective_from, Shapes::ShapeRef.new(shape: Timestamp, location_name: "revocationEffectiveFrom"))
+    SigningProfileRevocationRecord.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "revokedAt"))
+    SigningProfileRevocationRecord.add_member(:revoked_by, Shapes::ShapeRef.new(shape: String, location_name: "revokedBy"))
+    SigningProfileRevocationRecord.struct_class = Types::SigningProfileRevocationRecord
 
     SigningProfiles.member = Shapes::ShapeRef.new(shape: SigningProfile)
 
@@ -304,12 +438,16 @@ module Aws::Signer
 
     StartSigningJobRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     StartSigningJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
-    StartSigningJobRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "profileName"))
+    StartSigningJobRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location_name: "profileName"))
     StartSigningJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartSigningJobRequest.add_member(:profile_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "profileOwner"))
     StartSigningJobRequest.struct_class = Types::StartSigningJobRequest
 
     StartSigningJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    StartSigningJobResponse.add_member(:job_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "jobOwner"))
     StartSigningJobResponse.struct_class = Types::StartSigningJobResponse
+
+    Statuses.member = Shapes::ShapeRef.new(shape: SigningProfileStatus)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -323,7 +461,12 @@ module Aws::Signer
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyRequestsException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -332,6 +475,7 @@ module Aws::Signer
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     ValidationException.struct_class = Types::ValidationException
 
 
@@ -353,6 +497,21 @@ module Aws::Signer
         "uid" => "signer-2017-08-25",
       }
 
+      api.add_operation(:add_profile_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddProfilePermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/signing-profiles/{profileName}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: AddProfilePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddProfilePermissionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
       api.add_operation(:cancel_signing_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelSigningProfile"
         o.http_method = "DELETE"
@@ -361,7 +520,7 @@ module Aws::Signer
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
 
@@ -373,6 +532,7 @@ module Aws::Signer
         o.output = Shapes::ShapeRef.new(shape: DescribeSigningJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
 
@@ -384,6 +544,7 @@ module Aws::Signer
         o.output = Shapes::ShapeRef.new(shape: GetSigningPlatformResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
 
@@ -395,7 +556,20 @@ module Aws::Signer
         o.output = Shapes::ShapeRef.new(shape: GetSigningProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:list_profile_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProfilePermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/signing-profiles/{profileName}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: ListProfilePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProfilePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
 
@@ -407,7 +581,7 @@ module Aws::Signer
         o.output = Shapes::ShapeRef.new(shape: ListSigningJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -425,7 +599,7 @@ module Aws::Signer
         o.output = Shapes::ShapeRef.new(shape: ListSigningPlatformsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -442,7 +616,7 @@ module Aws::Signer
         o.input = Shapes::ShapeRef.new(shape: ListSigningProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSigningProfilesResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -461,6 +635,7 @@ module Aws::Signer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:put_signing_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -472,7 +647,47 @@ module Aws::Signer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:remove_profile_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveProfilePermission"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/signing-profiles/{profileName}/permissions/{statementId}"
+        o.input = Shapes::ShapeRef.new(shape: RemoveProfilePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveProfilePermissionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:revoke_signature, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeSignature"
+        o.http_method = "PUT"
+        o.http_request_uri = "/signing-jobs/{jobId}/revoke"
+        o.input = Shapes::ShapeRef.new(shape: RevokeSignatureRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:revoke_signing_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeSigningProfile"
+        o.http_method = "PUT"
+        o.http_request_uri = "/signing-profiles/{profileName}/revoke"
+        o.input = Shapes::ShapeRef.new(shape: RevokeSigningProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
 
@@ -486,6 +701,7 @@ module Aws::Signer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
 
@@ -498,6 +714,7 @@ module Aws::Signer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -509,6 +726,7 @@ module Aws::Signer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end
 

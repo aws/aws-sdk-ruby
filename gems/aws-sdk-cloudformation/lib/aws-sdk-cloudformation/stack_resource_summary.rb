@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -91,6 +91,14 @@ module Aws::CloudFormation
     # @return [Types::StackResourceDriftInformationSummary]
     def drift_information
       data[:drift_information]
+    end
+
+    # Contains information about the module from which the resource was
+    # created, if the resource was created from a module included in the
+    # stack template.
+    # @return [Types::ModuleInfo]
+    def module_info
+      data[:module_info]
     end
 
     # @!endgroup

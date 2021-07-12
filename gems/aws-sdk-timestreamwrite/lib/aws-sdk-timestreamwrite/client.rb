@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -472,6 +472,10 @@ module Aws::TimestreamWrite
     # All tables in the database must be deleted first, or a
     # ValidationException error will be thrown.
     #
+    # Due to the nature of distributed retries, the operation can return
+    # either success or a ResourceNotFoundException. Clients should consider
+    # them equivalent.
+    #
     # @option params [required, String] :database_name
     #   The name of the Timestream database to be deleted.
     #
@@ -495,6 +499,10 @@ module Aws::TimestreamWrite
     # Deletes a given Timestream table. This is an irreversible operation.
     # After a Timestream database table is deleted, the time series data
     # stored in the table cannot be recovered.
+    #
+    # Due to the nature of distributed retries, the operation can return
+    # either success or a ResourceNotFoundException. Clients should consider
+    # them equivalent.
     #
     # @option params [required, String] :database_name
     #   The name of the database where the Timestream database is to be
@@ -1015,6 +1023,7 @@ module Aws::TimestreamWrite
     #       measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
     #       time: "StringValue256",
     #       time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
+    #       version: 1,
     #     },
     #     records: [ # required
     #       {
@@ -1030,6 +1039,7 @@ module Aws::TimestreamWrite
     #         measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
     #         time: "StringValue256",
     #         time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
+    #         version: 1,
     #       },
     #     ],
     #   })
@@ -1056,7 +1066,7 @@ module Aws::TimestreamWrite
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamwrite'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

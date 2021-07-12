@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -28,7 +28,7 @@ require_relative 'aws-sdk-fsx/customizations'
 # structure.
 #
 #     f_sx = Aws::FSx::Client.new
-#     resp = f_sx.cancel_data_repository_task(params)
+#     resp = f_sx.associate_file_system_aliases(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-fsx/customizations'
 # @!group service
 module Aws::FSx
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.38.0'
 
 end

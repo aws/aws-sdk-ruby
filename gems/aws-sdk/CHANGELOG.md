@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.0.2 (2021-03-04)
+------------------
+
+* Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
+
 3.0.1 (2017-08-31)
 ------------------
 
@@ -93,4 +98,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk` gem.
-

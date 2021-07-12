@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -87,6 +87,19 @@ module Aws::AutoScaling
     # @return [String]
     def details
       data[:details]
+    end
+
+    # The state of the Auto Scaling group, which is either `InService` or
+    # `Deleted`.
+    # @return [String]
+    def auto_scaling_group_state
+      data[:auto_scaling_group_state]
+    end
+
+    # The Amazon Resource Name (ARN) of the Auto Scaling group.
+    # @return [String]
+    def auto_scaling_group_arn
+      data[:auto_scaling_group_arn]
     end
 
     # @!endgroup

@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-07-12)
+------------------
+
+* Feature - Amazon Kendra now supports Principal Store
+
+1.29.0 (2021-06-30)
+------------------
+
+* Feature - Amazon Kendra Enterprise Edition now offered in smaller more granular units to enable customers with smaller workloads. Virtual Storage Capacity units now offer scaling in increments of 100,000 documents (up to 30GB) per unit and Virtual Query Units offer scaling increments of 8,000 queries per day.
+
+1.28.0 (2021-06-24)
+------------------
+
+* Feature - Amazon Kendra now supports SharePoint 2013 and SharePoint 2016 when using a SharePoint data source.
+
+1.27.0 (2021-06-17)
+------------------
+
+* Feature - Amazon Kendra now supports the indexing of web documents for search through the web crawler.
+
+1.26.0 (2021-06-09)
+------------------
+
+* Feature - AWS Kendra now supports checking document status.
+
+1.25.0 (2021-05-27)
+------------------
+
+* Feature - Amazon Kendra now suggests popular queries in order to help guide query typing and help overall accuracy.
+
+1.24.0 (2021-04-21)
+------------------
+
+* Feature - Amazon Kendra now enables users to override index-level boosting configurations for each query.
+
+1.23.0 (2021-04-01)
+------------------
+
+* Feature - AWS Kendra's ServiceNow data source now supports OAuth 2.0 authentication and knowledge article filtering via a ServiceNow query.
+
+1.22.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2020-12-10)
+------------------
+
+* Feature - Amazon Kendra now supports adding synonyms to an index through the new Thesaurus resource.
+
+1.19.0 (2020-12-08)
+------------------
+
+* Feature - 1. Amazon Kendra connector for Google Drive repositories 2. Amazon Kendra's relevance ranking models are regularly tuned for each customer by capturing end-user search patterns and feedback.
+
+1.18.0 (2020-11-05)
+------------------
+
+* Feature - Amazon Kendra now supports providing user context in your query requests, Tokens can be JSON or JWT format. This release also introduces support for Confluence cloud datasources.
+
 1.17.0 (2020-10-26)
 ------------------
 

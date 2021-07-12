@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-06-16)
+------------------
+
+* Feature - Adds support for multi-Region keys
+
+1.43.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2021-01-11)
+------------------
+
+* Feature - Adds support for filtering grants by grant ID and grantee principal in ListGrants requests to AWS KMS.
+
+1.40.0 (2020-12-17)
+------------------
+
+* Feature - Added CreationDate and LastUpdatedDate timestamps to ListAliases API response
+
 1.39.0 (2020-09-30)
 ------------------
 

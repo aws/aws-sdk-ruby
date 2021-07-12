@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -64,6 +64,8 @@ module Aws::Appflow
     CreateFlowRequest = Shapes::StructureShape.new(name: 'CreateFlowRequest')
     CreateFlowResponse = Shapes::StructureShape.new(name: 'CreateFlowResponse')
     CreatedBy = Shapes::StringShape.new(name: 'CreatedBy')
+    CustomerProfilesDestinationProperties = Shapes::StructureShape.new(name: 'CustomerProfilesDestinationProperties')
+    CustomerProfilesMetadata = Shapes::StructureShape.new(name: 'CustomerProfilesMetadata')
     DataPullMode = Shapes::StringShape.new(name: 'DataPullMode')
     DatabaseUrl = Shapes::StringShape.new(name: 'DatabaseUrl')
     DatadogConnectorOperator = Shapes::StringShape.new(name: 'DatadogConnectorOperator')
@@ -93,6 +95,7 @@ module Aws::Appflow
     DestinationFieldProperties = Shapes::StructureShape.new(name: 'DestinationFieldProperties')
     DestinationFlowConfig = Shapes::StructureShape.new(name: 'DestinationFlowConfig')
     DestinationFlowConfigList = Shapes::ListShape.new(name: 'DestinationFlowConfigList')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
     DynatraceConnectorOperator = Shapes::StringShape.new(name: 'DynatraceConnectorOperator')
     DynatraceConnectorProfileCredentials = Shapes::StructureShape.new(name: 'DynatraceConnectorProfileCredentials')
     DynatraceConnectorProfileProperties = Shapes::StructureShape.new(name: 'DynatraceConnectorProfileProperties')
@@ -128,6 +131,10 @@ module Aws::Appflow
     GoogleAnalyticsMetadata = Shapes::StructureShape.new(name: 'GoogleAnalyticsMetadata')
     GoogleAnalyticsSourceProperties = Shapes::StructureShape.new(name: 'GoogleAnalyticsSourceProperties')
     Group = Shapes::StringShape.new(name: 'Group')
+    HoneycodeConnectorProfileCredentials = Shapes::StructureShape.new(name: 'HoneycodeConnectorProfileCredentials')
+    HoneycodeConnectorProfileProperties = Shapes::StructureShape.new(name: 'HoneycodeConnectorProfileProperties')
+    HoneycodeDestinationProperties = Shapes::StructureShape.new(name: 'HoneycodeDestinationProperties')
+    HoneycodeMetadata = Shapes::StructureShape.new(name: 'HoneycodeMetadata')
     IdFieldNameList = Shapes::ListShape.new(name: 'IdFieldNameList')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IncrementalPullConfig = Shapes::StructureShape.new(name: 'IncrementalPullConfig')
@@ -148,6 +155,7 @@ module Aws::Appflow
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    LookoutMetricsDestinationProperties = Shapes::StructureShape.new(name: 'LookoutMetricsDestinationProperties')
     MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
     MarketoConnectorProfileCredentials = Shapes::StructureShape.new(name: 'MarketoConnectorProfileCredentials')
     MarketoConnectorProfileProperties = Shapes::StructureShape.new(name: 'MarketoConnectorProfileProperties')
@@ -160,6 +168,7 @@ module Aws::Appflow
     OAuthScope = Shapes::StringShape.new(name: 'OAuthScope')
     OAuthScopeList = Shapes::ListShape.new(name: 'OAuthScopeList')
     Object = Shapes::StringShape.new(name: 'Object')
+    ObjectTypeName = Shapes::StringShape.new(name: 'ObjectTypeName')
     Operator = Shapes::StringShape.new(name: 'Operator')
     OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     Password = Shapes::StringShape.new(name: 'Password')
@@ -191,6 +200,7 @@ module Aws::Appflow
     SalesforceSourceProperties = Shapes::StructureShape.new(name: 'SalesforceSourceProperties')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     ScheduleFrequencyType = Shapes::StringShape.new(name: 'ScheduleFrequencyType')
+    ScheduleOffset = Shapes::IntegerShape.new(name: 'ScheduleOffset')
     ScheduledTriggerProperties = Shapes::StructureShape.new(name: 'ScheduledTriggerProperties')
     SchedulingFrequencyTypeList = Shapes::ListShape.new(name: 'SchedulingFrequencyTypeList')
     SecretKey = Shapes::StringShape.new(name: 'SecretKey')
@@ -255,6 +265,10 @@ module Aws::Appflow
     UpdateFlowRequest = Shapes::StructureShape.new(name: 'UpdateFlowRequest')
     UpdateFlowResponse = Shapes::StructureShape.new(name: 'UpdateFlowResponse')
     UpdatedBy = Shapes::StringShape.new(name: 'UpdatedBy')
+    UpsolverBucketName = Shapes::StringShape.new(name: 'UpsolverBucketName')
+    UpsolverDestinationProperties = Shapes::StructureShape.new(name: 'UpsolverDestinationProperties')
+    UpsolverMetadata = Shapes::StructureShape.new(name: 'UpsolverMetadata')
+    UpsolverS3OutputFormatConfig = Shapes::StructureShape.new(name: 'UpsolverS3OutputFormatConfig')
     Username = Shapes::StringShape.new(name: 'Username')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
@@ -268,6 +282,7 @@ module Aws::Appflow
     ZendeskConnectorOperator = Shapes::StringShape.new(name: 'ZendeskConnectorOperator')
     ZendeskConnectorProfileCredentials = Shapes::StructureShape.new(name: 'ZendeskConnectorProfileCredentials')
     ZendeskConnectorProfileProperties = Shapes::StructureShape.new(name: 'ZendeskConnectorProfileProperties')
+    ZendeskDestinationProperties = Shapes::StructureShape.new(name: 'ZendeskDestinationProperties')
     ZendeskMetadata = Shapes::StructureShape.new(name: 'ZendeskMetadata')
     ZendeskSourceProperties = Shapes::StructureShape.new(name: 'ZendeskSourceProperties')
 
@@ -341,6 +356,9 @@ module Aws::Appflow
     ConnectorMetadata.add_member(:veeva, Shapes::ShapeRef.new(shape: VeevaMetadata, location_name: "Veeva"))
     ConnectorMetadata.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskMetadata, location_name: "Zendesk"))
     ConnectorMetadata.add_member(:event_bridge, Shapes::ShapeRef.new(shape: EventBridgeMetadata, location_name: "EventBridge"))
+    ConnectorMetadata.add_member(:upsolver, Shapes::ShapeRef.new(shape: UpsolverMetadata, location_name: "Upsolver"))
+    ConnectorMetadata.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesMetadata, location_name: "CustomerProfiles"))
+    ConnectorMetadata.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeMetadata, location_name: "Honeycode"))
     ConnectorMetadata.struct_class = Types::ConnectorMetadata
 
     ConnectorOAuthRequest.add_member(:auth_code, Shapes::ShapeRef.new(shape: AuthCode, location_name: "authCode"))
@@ -381,6 +399,7 @@ module Aws::Appflow
     ConnectorProfileCredentials.add_member(:datadog, Shapes::ShapeRef.new(shape: DatadogConnectorProfileCredentials, location_name: "Datadog"))
     ConnectorProfileCredentials.add_member(:dynatrace, Shapes::ShapeRef.new(shape: DynatraceConnectorProfileCredentials, location_name: "Dynatrace"))
     ConnectorProfileCredentials.add_member(:google_analytics, Shapes::ShapeRef.new(shape: GoogleAnalyticsConnectorProfileCredentials, location_name: "GoogleAnalytics"))
+    ConnectorProfileCredentials.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeConnectorProfileCredentials, location_name: "Honeycode"))
     ConnectorProfileCredentials.add_member(:infor_nexus, Shapes::ShapeRef.new(shape: InforNexusConnectorProfileCredentials, location_name: "InforNexus"))
     ConnectorProfileCredentials.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoConnectorProfileCredentials, location_name: "Marketo"))
     ConnectorProfileCredentials.add_member(:redshift, Shapes::ShapeRef.new(shape: RedshiftConnectorProfileCredentials, location_name: "Redshift"))
@@ -402,6 +421,7 @@ module Aws::Appflow
     ConnectorProfileProperties.add_member(:datadog, Shapes::ShapeRef.new(shape: DatadogConnectorProfileProperties, location_name: "Datadog"))
     ConnectorProfileProperties.add_member(:dynatrace, Shapes::ShapeRef.new(shape: DynatraceConnectorProfileProperties, location_name: "Dynatrace"))
     ConnectorProfileProperties.add_member(:google_analytics, Shapes::ShapeRef.new(shape: GoogleAnalyticsConnectorProfileProperties, location_name: "GoogleAnalytics"))
+    ConnectorProfileProperties.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeConnectorProfileProperties, location_name: "Honeycode"))
     ConnectorProfileProperties.add_member(:infor_nexus, Shapes::ShapeRef.new(shape: InforNexusConnectorProfileProperties, location_name: "InforNexus"))
     ConnectorProfileProperties.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoConnectorProfileProperties, location_name: "Marketo"))
     ConnectorProfileProperties.add_member(:redshift, Shapes::ShapeRef.new(shape: RedshiftConnectorProfileProperties, location_name: "Redshift"))
@@ -443,6 +463,12 @@ module Aws::Appflow
     CreateFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
     CreateFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))
     CreateFlowResponse.struct_class = Types::CreateFlowResponse
+
+    CustomerProfilesDestinationProperties.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
+    CustomerProfilesDestinationProperties.add_member(:object_type_name, Shapes::ShapeRef.new(shape: ObjectTypeName, location_name: "objectTypeName"))
+    CustomerProfilesDestinationProperties.struct_class = Types::CustomerProfilesDestinationProperties
+
+    CustomerProfilesMetadata.struct_class = Types::CustomerProfilesMetadata
 
     DatadogConnectorProfileCredentials.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKey, required: true, location_name: "apiKey"))
     DatadogConnectorProfileCredentials.add_member(:application_key, Shapes::ShapeRef.new(shape: ApplicationKey, required: true, location_name: "applicationKey"))
@@ -529,6 +555,11 @@ module Aws::Appflow
     DestinationConnectorProperties.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceDestinationProperties, location_name: "Salesforce"))
     DestinationConnectorProperties.add_member(:snowflake, Shapes::ShapeRef.new(shape: SnowflakeDestinationProperties, location_name: "Snowflake"))
     DestinationConnectorProperties.add_member(:event_bridge, Shapes::ShapeRef.new(shape: EventBridgeDestinationProperties, location_name: "EventBridge"))
+    DestinationConnectorProperties.add_member(:lookout_metrics, Shapes::ShapeRef.new(shape: LookoutMetricsDestinationProperties, location_name: "LookoutMetrics"))
+    DestinationConnectorProperties.add_member(:upsolver, Shapes::ShapeRef.new(shape: UpsolverDestinationProperties, location_name: "Upsolver"))
+    DestinationConnectorProperties.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeDestinationProperties, location_name: "Honeycode"))
+    DestinationConnectorProperties.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesDestinationProperties, location_name: "CustomerProfiles"))
+    DestinationConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskDestinationProperties, location_name: "Zendesk"))
     DestinationConnectorProperties.struct_class = Types::DestinationConnectorProperties
 
     DestinationFieldProperties.add_member(:is_creatable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCreatable"))
@@ -581,6 +612,8 @@ module Aws::Appflow
     ExecutionRecord.add_member(:execution_result, Shapes::ShapeRef.new(shape: ExecutionResult, location_name: "executionResult"))
     ExecutionRecord.add_member(:started_at, Shapes::ShapeRef.new(shape: Date, location_name: "startedAt"))
     ExecutionRecord.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedAt"))
+    ExecutionRecord.add_member(:data_pull_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "dataPullStartTime"))
+    ExecutionRecord.add_member(:data_pull_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "dataPullEndTime"))
     ExecutionRecord.struct_class = Types::ExecutionRecord
 
     ExecutionResult.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfo, location_name: "errorInfo"))
@@ -630,6 +663,20 @@ module Aws::Appflow
     GoogleAnalyticsSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
     GoogleAnalyticsSourceProperties.struct_class = Types::GoogleAnalyticsSourceProperties
 
+    HoneycodeConnectorProfileCredentials.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
+    HoneycodeConnectorProfileCredentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
+    HoneycodeConnectorProfileCredentials.add_member(:o_auth_request, Shapes::ShapeRef.new(shape: ConnectorOAuthRequest, location_name: "oAuthRequest"))
+    HoneycodeConnectorProfileCredentials.struct_class = Types::HoneycodeConnectorProfileCredentials
+
+    HoneycodeConnectorProfileProperties.struct_class = Types::HoneycodeConnectorProfileProperties
+
+    HoneycodeDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    HoneycodeDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    HoneycodeDestinationProperties.struct_class = Types::HoneycodeDestinationProperties
+
+    HoneycodeMetadata.add_member(:o_auth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oAuthScopes"))
+    HoneycodeMetadata.struct_class = Types::HoneycodeMetadata
+
     IdFieldNameList.member = Shapes::ShapeRef.new(shape: Name)
 
     IncrementalPullConfig.add_member(:datetime_type_field_name, Shapes::ShapeRef.new(shape: DatetimeTypeFieldName, location_name: "datetimeTypeFieldName"))
@@ -673,6 +720,8 @@ module Aws::Appflow
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    LookoutMetricsDestinationProperties.struct_class = Types::LookoutMetricsDestinationProperties
 
     MarketoConnectorProfileCredentials.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
     MarketoConnectorProfileCredentials.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, required: true, location_name: "clientSecret"))
@@ -762,6 +811,8 @@ module Aws::Appflow
     ScheduledTriggerProperties.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "scheduleStartTime"))
     ScheduledTriggerProperties.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "scheduleEndTime"))
     ScheduledTriggerProperties.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
+    ScheduledTriggerProperties.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "scheduleOffset", metadata: {"box"=>true}))
+    ScheduledTriggerProperties.add_member(:first_execution_from, Shapes::ShapeRef.new(shape: Date, location_name: "firstExecutionFrom"))
     ScheduledTriggerProperties.struct_class = Types::ScheduledTriggerProperties
 
     SchedulingFrequencyTypeList.member = Shapes::ShapeRef.new(shape: ScheduleFrequencyType)
@@ -948,6 +999,18 @@ module Aws::Appflow
     UpdateFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))
     UpdateFlowResponse.struct_class = Types::UpdateFlowResponse
 
+    UpsolverDestinationProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: UpsolverBucketName, required: true, location_name: "bucketName"))
+    UpsolverDestinationProperties.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "bucketPrefix"))
+    UpsolverDestinationProperties.add_member(:s3_output_format_config, Shapes::ShapeRef.new(shape: UpsolverS3OutputFormatConfig, required: true, location_name: "s3OutputFormatConfig"))
+    UpsolverDestinationProperties.struct_class = Types::UpsolverDestinationProperties
+
+    UpsolverMetadata.struct_class = Types::UpsolverMetadata
+
+    UpsolverS3OutputFormatConfig.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
+    UpsolverS3OutputFormatConfig.add_member(:prefix_config, Shapes::ShapeRef.new(shape: PrefixConfig, required: true, location_name: "prefixConfig"))
+    UpsolverS3OutputFormatConfig.add_member(:aggregation_config, Shapes::ShapeRef.new(shape: AggregationConfig, location_name: "aggregationConfig"))
+    UpsolverS3OutputFormatConfig.struct_class = Types::UpsolverS3OutputFormatConfig
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
@@ -971,6 +1034,12 @@ module Aws::Appflow
 
     ZendeskConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
     ZendeskConnectorProfileProperties.struct_class = Types::ZendeskConnectorProfileProperties
+
+    ZendeskDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    ZendeskDestinationProperties.add_member(:id_field_names, Shapes::ShapeRef.new(shape: IdFieldNameList, location_name: "idFieldNames"))
+    ZendeskDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    ZendeskDestinationProperties.add_member(:write_operation_type, Shapes::ShapeRef.new(shape: WriteOperationType, location_name: "writeOperationType"))
+    ZendeskDestinationProperties.struct_class = Types::ZendeskDestinationProperties
 
     ZendeskMetadata.add_member(:o_auth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oAuthScopes"))
     ZendeskMetadata.struct_class = Types::ZendeskMetadata

@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-06-03)
+------------------
+
+* Feature - Added optional field AutoMLOverrideStrategy to CreatePredictor API that allows users to customize AutoML strategy. If provided in CreatePredictor request, this field is visible in DescribePredictor and GetAccuracyMetrics responses.
+
+1.20.0 (2021-05-21)
+------------------
+
+* Feature - Updated attribute statistics in DescribeDatasetImportJob response to support Long values
+
+1.19.0 (2021-04-30)
+------------------
+
+* Feature - Added new DeleteResourceTree operation that helps in deleting all the child resources of a given resource including the given resource.
+
+1.18.0 (2021-04-22)
+------------------
+
+* Feature - This release adds EstimatedTimeRemaining minutes field to the DescribeDatasetImportJob, DescribePredictor, DescribeForecast API response which denotes the time remaining to complete the job IN_PROGRESS.
+
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2021-03-03)
+------------------
+
+* Feature - Added new StopResource operation that stops Amazon Forecast resource jobs that are in progress.
+
+1.15.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2020-12-08)
+------------------
+
+* Feature - This release adds support for the Amazon Forecast Weather Index which can increase forecasting accuracy by automatically including weather forecasts in demand forecasts.
+
+1.13.0 (2020-11-23)
+------------------
+
+* Feature - Releasing the set of PredictorBacktestExportJob APIs which allow customers to export backtest values and item-level metrics data from Predictor training.
+
+1.12.0 (2020-11-11)
+------------------
+
+* Feature - Providing support of custom quantiles in CreatePredictor API.
+
 1.11.0 (2020-09-30)
 ------------------
 

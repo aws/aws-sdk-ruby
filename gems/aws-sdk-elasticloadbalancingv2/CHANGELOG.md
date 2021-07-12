@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-07-02)
+------------------
+
+* Feature - Documentation updates for elasticloadbalancingv2
+
+1.61.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2021-02-12)
+------------------
+
+* Feature - Adds a target group attribute for application-based stickiness for Application Load Balancers and an update to the client IP preservation attribute for Network Load Balancers.
+
+1.59.0 (2021-02-08)
+------------------
+
+* Feature - Adds a target group attribute for application-based stickiness for Application Load Balancers.
+
+1.58.0 (2021-02-05)
+------------------
+
+* Feature - Adds a target group attribute for client IP preservation for Network Load Balancers.
+
+1.57.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2020-11-13)
+------------------
+
+* Feature - Adds dualstack support for Network Load Balancers (TCP/TLS only), an attribute for WAF fail open for Application Load Balancers, and an attribute for connection draining for Network Load Balancers.
+
+1.55.0 (2020-11-10)
+------------------
+
+* Feature - Added support for Gateway Load Balancers, which make it easy to deploy, scale, and run third-party virtual networking appliances.
+
+1.54.0 (2020-10-29)
+------------------
+
+* Feature - Application Load Balancer (ALB) now supports the gRPC protocol-version. With this release, customers can use ALB to route and load balance gRPC traffic between gRPC enabled clients and microservices.
+
 1.53.0 (2020-10-02)
 ------------------
 

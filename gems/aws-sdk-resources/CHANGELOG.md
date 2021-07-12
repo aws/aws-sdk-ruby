@@ -1,6 +1,155 @@
 Unreleased Changes
 ------------------
 
+3.105.0 (2021-06-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-proton` gem.
+
+3.104.0 (2021-05-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-apprunner` gem.
+
+3.103.0 (2021-05-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-applicationcostprofiler` gem.
+
+3.102.0 (2021-05-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssmincidents` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ssmcontacts` gem.
+
+3.101.0 (2021-05-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-finspacedata` gem.
+
+3.100.0 (2021-05-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-finspace` gem.
+
+3.99.0 (2021-04-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-nimblestudio` gem.
+
+3.98.0 (2021-04-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lookoutequipment` gem.
+
+3.97.0 (2021-04-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mgn` gem.
+
+3.96.0 (2021-03-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lookoutmetrics` gem.
+
+3.95.0 (2021-03-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-fis` gem.
+
+3.94.1 (2021-03-04)
+------------------
+
+* Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
+
+3.94.0 (2021-01-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lexruntimev2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lexmodelsv2` gem.
+
+3.93.0 (2020-12-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-wellarchitected` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-locationservice` gem.
+
+3.92.0 (2020-12-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-prometheusservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotwireless` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotfleethub` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotdeviceadvisor` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-greengrassv2` gem.
+
+3.91.0 (2020-12-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakeredgemanager` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-healthlake` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-emrcontainers` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-auditmanager` gem.
+
+3.90.0 (2020-12-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-customerprofiles` gem.
+
+3.89.1 (2020-12-01)
+------------------
+
+* Issue - Remove dependency on the `aws-sdk-profile` gem. This gem will be republished under a different name.
+
+3.89.0 (2020-12-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerfeaturestoreruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-profile` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lookoutforvision` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ecrpublic` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-devopsguru` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-connectcontactlens` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appintegrationsservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-amplifybackend` gem.
+
+3.88.0 (2020-11-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mwaa` gem.
+
+3.87.0 (2020-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-networkfirewall` gem.
+
+3.86.0 (2020-11-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-appregistry` gem.
+
+3.85.0 (2020-11-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-gluedatabrew` gem.
+
 3.84.0 (2020-09-30)
 ------------------
 

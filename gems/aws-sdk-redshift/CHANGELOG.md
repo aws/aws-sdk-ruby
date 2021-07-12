@@ -1,6 +1,76 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2021-06-28)
+------------------
+
+* Feature - Added InvalidClusterStateFault to the DisableLogging API, thrown when calling the API on a non available cluster.
+
+1.63.0 (2021-06-10)
+------------------
+
+* Feature - Added InvalidClusterStateFault to the ModifyAquaConfiguration API, thrown when calling the API on a non available cluster.
+
+1.62.0 (2021-04-21)
+------------------
+
+* Feature - Add operations: AddPartner, DescribePartners, DeletePartner, and UpdatePartnerStatus to support tracking integration status with data partners.
+
+1.61.0 (2021-04-13)
+------------------
+
+* Feature - Added support to enable AQUA in Amazon Redshift clusters.
+
+1.60.0 (2021-04-09)
+------------------
+
+* Feature - Add support for case sensitive table level restore
+
+1.59.0 (2021-03-31)
+------------------
+
+* Feature - Enable customers to share access to their Redshift clusters from other VPCs (including VPCs from other accounts).
+
+1.58.0 (2021-03-23)
+------------------
+
+* Feature - Removed APIs to control AQUA on clusters.
+
+1.57.0 (2021-03-22)
+------------------
+
+* Feature - Added support to enable AQUA in Amazon Redshift clusters.
+
+1.56.0 (2021-03-18)
+------------------
+
+* Feature - Add new fields for additional information about VPC endpoint for clusters with reallocation enabled, and a new field for total storage capacity for all clusters.
+
+1.55.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2021-01-22)
+------------------
+
+* Feature - Update VPC endpoint field names.
+
+1.52.0 (2020-12-09)
+------------------
+
+* Feature - Add support for availability zone relocation feature.
+
+1.51.0 (2020-11-19)
+------------------
+
+* Feature - Amazon Redshift support for returning ClusterNamespaceArn in describeClusters
+
 1.50.0 (2020-09-30)
 ------------------
 

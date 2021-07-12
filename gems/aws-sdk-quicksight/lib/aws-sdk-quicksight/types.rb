@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -706,6 +706,38 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A rule defined to grant access on one or more restricted columns. Each
+    # dataset can have multiple rules. To create a restricted column, you
+    # add it to one or more rules. Each rule must contain at least one
+    # column and at least one user or group. To be able to see a restricted
+    # column, a user or group needs to be added to a rule for that column.
+    #
+    # @note When making an API call, you may pass ColumnLevelPermissionRule
+    #   data as a hash:
+    #
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       }
+    #
+    # @!attribute [rw] principals
+    #   An array of Amazon Resource Names (ARNs) for QuickSight users or
+    #   groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_names
+    #   An array of column names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnLevelPermissionRule AWS API Documentation
+    #
+    class ColumnLevelPermissionRule < Struct.new(
+      :principals,
+      :column_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The column schema.
     #
     # @!attribute [rw] name
@@ -1288,6 +1320,7 @@ module Aws::QuickSight
     #           "PhysicalTableId" => {
     #             relational_table: {
     #               data_source_arn: "Arn", # required
+    #               catalog: "RelationalTableCatalog",
     #               schema: "RelationalTableSchema",
     #               name: "RelationalTableName", # required
     #               input_columns: [ # required
@@ -1372,6 +1405,12 @@ module Aws::QuickSight
     #               join_instruction: {
     #                 left_operand: "LogicalTableId", # required
     #                 right_operand: "LogicalTableId", # required
+    #                 left_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
+    #                 right_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
     #                 type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #                 on_clause: "OnClause", # required
     #               },
@@ -1389,6 +1428,12 @@ module Aws::QuickSight
     #             },
     #           },
     #         ],
+    #         field_folders: {
+    #           "FieldFolderPath" => {
+    #             description: "FieldFolderDescription",
+    #             columns: ["String"],
+    #           },
+    #         },
     #         permissions: [
     #           {
     #             principal: "Principal", # required
@@ -1399,7 +1444,14 @@ module Aws::QuickSight
     #           namespace: "Namespace",
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #           format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #         },
+    #         column_level_permission_rules: [
+    #           {
+    #             principals: ["String"],
+    #             column_names: ["String"],
+    #           },
+    #         ],
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1440,6 +1492,11 @@ module Aws::QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #   @return [Array<Types::ColumnGroup>]
     #
+    # @!attribute [rw] field_folders
+    #   The folder that contains fields and nested subfolders for your
+    #   dataset.
+    #   @return [Hash<String,Types::FieldFolder>]
+    #
     # @!attribute [rw] permissions
     #   A list of resource permissions on the dataset.
     #   @return [Array<Types::ResourcePermission>]
@@ -1448,6 +1505,10 @@ module Aws::QuickSight
     #   The row-level security configuration for the data that you want to
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
+    #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
     #
     # @!attribute [rw] tags
     #   Contains a map of the key-value pairs for the resource tag or tags
@@ -1464,8 +1525,10 @@ module Aws::QuickSight
       :logical_table_map,
       :import_mode,
       :column_groups,
+      :field_folders,
       :permissions,
       :row_level_permission_data_set,
+      :column_level_permission_rules,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1518,7 +1581,7 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         data_source_id: "ResourceId", # required
     #         name: "ResourceName", # required
-    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
+    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
     #         data_source_parameters: {
     #           amazon_elasticsearch_parameters: {
     #             domain: "Domain", # required
@@ -1548,6 +1611,11 @@ module Aws::QuickSight
     #             database: "Database", # required
     #           },
     #           my_sql_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             database: "Database", # required
+    #           },
+    #           oracle_parameters: {
     #             host: "Host", # required
     #             port: 1, # required
     #             database: "Database", # required
@@ -1639,6 +1707,11 @@ module Aws::QuickSight
     #                   database: "Database", # required
     #                 },
     #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 oracle_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
     #                   database: "Database", # required
@@ -1735,10 +1808,12 @@ module Aws::QuickSight
     #
     # @!attribute [rw] type
     #   The type of the data source. Currently, the supported types for this
-    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL,
-    #   POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER,
-    #   TERADATA`. Use `ListDataSources` to return a list of all data
-    #   sources.
+    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL,
+    #   AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT,
+    #   S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA`. Use `ListDataSources` to
+    #   return a list of all data sources.
+    #
+    #   `AMAZON_ELASTICSEARCH` is for Amazon managed Elasticsearch Service.
     #   @return [String]
     #
     # @!attribute [rw] data_source_parameters
@@ -1817,6 +1892,166 @@ module Aws::QuickSight
       :creation_status,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFolderMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         member_id: "RestrictiveResourceId", # required
+    #         member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the asset (the dashboard, analysis, or dataset).
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
+    #   `DATASET`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembershipRequest AWS API Documentation
+    #
+    class CreateFolderMembershipRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :member_id,
+      :member_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the folder membership. If succeeded, the status is
+    #   `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_member
+    #   Information about the member in the folder.
+    #   @return [Types::FolderMember]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembershipResponse AWS API Documentation
+    #
+    class CreateFolderMembershipResponse < Struct.new(
+      :status,
+      :folder_member,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         name: "FolderName",
+    #         folder_type: "SHARED", # accepts SHARED
+    #         parent_folder_arn: "Arn",
+    #         permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_type
+    #   The type of folder. By default, `folderType` is `SHARED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_arn
+    #   The Amazon Resource Name (ARN) for the parent folder.
+    #
+    #   `ParentFolderArn` can be null. An empty `parentFolderArn` creates a
+    #   root-level folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A structure that describes the principals and the resource-level
+    #   permissions of a folder.
+    #
+    #   To specify no permissions, omit `Permissions`.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] tags
+    #   Tags for the folder.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderRequest AWS API Documentation
+    #
+    class CreateFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :name,
+      :folder_type,
+      :parent_folder_arn,
+      :permissions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the newly created folder. If succeeded, the status is
+    #   `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the newly created folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID for the newly created folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID for the newly created folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderResponse AWS API Documentation
+    #
+    class CreateFolderResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1967,7 +2202,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment, also called a rule. It must be unique
+    #   within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
@@ -2680,6 +2916,11 @@ module Aws::QuickSight
     #               port: 1, # required
     #               database: "Database", # required
     #             },
+    #             oracle_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
     #             postgre_sql_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
@@ -3231,7 +3472,8 @@ module Aws::QuickSight
     #   @return [Array<Types::OutputColumn>]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether you want to import the data into SPICE.
+    #   A value that indicates whether you want to import the data into
+    #   SPICE.
     #   @return [String]
     #
     # @!attribute [rw] consumed_spice_capacity_in_bytes
@@ -3244,9 +3486,18 @@ module Aws::QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #   @return [Array<Types::ColumnGroup>]
     #
+    # @!attribute [rw] field_folders
+    #   The folder that contains fields and nested subfolders for your
+    #   dataset.
+    #   @return [Hash<String,Types::FieldFolder>]
+    #
     # @!attribute [rw] row_level_permission_data_set
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
+    #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
     #
@@ -3262,7 +3513,9 @@ module Aws::QuickSight
       :import_mode,
       :consumed_spice_capacity_in_bytes,
       :column_groups,
-      :row_level_permission_data_set)
+      :field_folders,
+      :row_level_permission_data_set,
+      :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3355,12 +3608,18 @@ module Aws::QuickSight
     #   @return [Time]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether you want to import the data into SPICE.
+    #   A value that indicates whether you want to import the data into
+    #   SPICE.
     #   @return [String]
     #
     # @!attribute [rw] row_level_permission_data_set
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
+    #
+    # @!attribute [rw] column_level_permission_rules_applied
+    #   A value that indicates if the dataset has column level permission
+    #   configured.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSummary AWS API Documentation
     #
@@ -3371,7 +3630,8 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :import_mode,
-      :row_level_permission_data_set)
+      :row_level_permission_data_set,
+      :column_level_permission_rules_applied)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3503,6 +3763,11 @@ module Aws::QuickSight
     #                 database: "Database", # required
     #               },
     #               my_sql_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               oracle_parameters: {
     #                 host: "Host", # required
     #                 port: 1, # required
     #                 database: "Database", # required
@@ -3644,6 +3909,11 @@ module Aws::QuickSight
     #           port: 1, # required
     #           database: "Database", # required
     #         },
+    #         oracle_parameters: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           database: "Database", # required
+    #         },
     #         postgre_sql_parameters: {
     #           host: "Host", # required
     #           port: 1, # required
@@ -3730,6 +4000,10 @@ module Aws::QuickSight
     #   MySQL parameters.
     #   @return [Types::MySqlParameters]
     #
+    # @!attribute [rw] oracle_parameters
+    #   Oracle parameters.
+    #   @return [Types::OracleParameters]
+    #
     # @!attribute [rw] postgre_sql_parameters
     #   PostgreSQL parameters.
     #   @return [Types::PostgreSqlParameters]
@@ -3785,6 +4059,7 @@ module Aws::QuickSight
       :jira_parameters,
       :maria_db_parameters,
       :my_sql_parameters,
+      :oracle_parameters,
       :postgre_sql_parameters,
       :presto_parameters,
       :rds_parameters,
@@ -4138,6 +4413,116 @@ module Aws::QuickSight
       :data_source_id,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFolderMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         member_id: "RestrictiveResourceId", # required
+    #         member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The Folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the asset (the dashboard, analysis, or dataset) that you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
+    #   `DATASET`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderMembershipRequest AWS API Documentation
+    #
+    class DeleteFolderMembershipRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :member_id,
+      :member_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of deleting the asset. If succeeded, the status is `SC_OK
+    #   (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderMembershipResponse AWS API Documentation
+    #
+    class DeleteFolderMembershipResponse < Struct.new(
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID for the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderRequest AWS API Documentation
+    #
+    class DeleteFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of deleting the folder. If succeeded, the status is
+    #   `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the deleted folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderResponse AWS API Documentation
+    #
+    class DeleteFolderResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5270,6 +5655,167 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeFolderPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsRequest AWS API Documentation
+    #
+    class DescribeFolderPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Information about the permissions on the folder.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsResponse AWS API Documentation
+    #
+    class DescribeFolderPermissionsResponse < Struct.new(
+      :status,
+      :folder_id,
+      :arn,
+      :permissions,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderRequest AWS API Documentation
+    #
+    class DescribeFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFolderResolvedPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsRequest AWS API Documentation
+    #
+    class DescribeFolderResolvedPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Information about the permissions on the dashboard.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsResponse AWS API Documentation
+    #
+    class DescribeFolderResolvedPermissionsResponse < Struct.new(
+      :status,
+      :folder_id,
+      :arn,
+      :permissions,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder
+    #   Information about the folder.
+    #   @return [Types::Folder]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResponse AWS API Documentation
+    #
+    class DescribeFolderResponse < Struct.new(
+      :status,
+      :folder,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGroupRequest
     #   data as a hash:
     #
@@ -5340,7 +5886,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment, also called a rule.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -5960,6 +6506,34 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A FieldFolder element is a folder that contains fields and nested
+    # subfolders.
+    #
+    # @note When making an API call, you may pass FieldFolder
+    #   data as a hash:
+    #
+    #       {
+    #         description: "FieldFolderDescription",
+    #         columns: ["String"],
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description for a field folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] columns
+    #   A folder has a list of columns. A column can only be in one folder.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldFolder AWS API Documentation
+    #
+    class FieldFolder < Struct.new(
+      :description,
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A transform operation that filters rows based on a condition.
     #
     # @note When making an API call, you may pass FilterOperation
@@ -5978,6 +6552,145 @@ module Aws::QuickSight
     #
     class FilterOperation < Struct.new(
       :condition_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A folder.
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The folder Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A display name for the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_type
+    #   The type of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_path
+    #   An array of ancestor folder ARN strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the folder was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the folder was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Folder AWS API Documentation
+    #
+    class Folder < Struct.new(
+      :folder_id,
+      :arn,
+      :name,
+      :folder_type,
+      :folder_path,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An asset in a folder, such as a dashboard, analysis, or dataset.
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The type of the asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderMember AWS API Documentation
+    #
+    class FolderMember < Struct.new(
+      :member_id,
+      :member_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Searches a folder by a filter.
+    #
+    # @note When making an API call, you may pass FolderSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StringEquals", # accepts StringEquals
+    #         name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter. For
+    #   example, `"Operator": "StringEquals"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter. For example,
+    #   `"Name": "PARENT_FOLDER_ARN"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item (in this example, `PARENT_FOLDER_ARN`),
+    #   that you want to use as a filter. For example, `"Value":
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderSearchFilter AWS API Documentation
+    #
+    class FolderSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the folder.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_type
+    #   The type of folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the folder was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the folder was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderSummary AWS API Documentation
+    #
+    class FolderSummary < Struct.new(
+      :arn,
+      :folder_id,
+      :name,
+      :folder_type,
+      :created_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6021,11 +6734,14 @@ module Aws::QuickSight
     #       {
     #         aws_account_id: "AwsAccountId", # required
     #         dashboard_id: "RestrictiveResourceId", # required
-    #         identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #         identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, ANONYMOUS
     #         session_lifetime_in_minutes: 1,
     #         undo_redo_disabled: false,
     #         reset_disabled: false,
+    #         state_persistence_enabled: false,
     #         user_arn: "Arn",
+    #         namespace: "Namespace",
+    #         additional_dashboard_ids: ["RestrictiveResourceId"],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -6034,7 +6750,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to the IAM policy.
+    #   The ID for the dashboard, also added to the AWS Identity and Access
+    #   Management (IAM) policy.
     #   @return [String]
     #
     # @!attribute [rw] identity_type
@@ -6056,6 +6773,17 @@ module Aws::QuickSight
     #   FALSE, which enables the reset button.
     #   @return [Boolean]
     #
+    # @!attribute [rw] state_persistence_enabled
+    #   Adds persistence of state for the user session in an embedded
+    #   dashboard. Persistence applies to the sheet and the parameter
+    #   settings. These are control settings that the dashboard subscriber
+    #   (QuickSight reader) chooses while viewing the dashboard. If this is
+    #   set to `TRUE`, the settings are the same when the subscriber reopens
+    #   the same dashboard URL. The state is stored in QuickSight, not in a
+    #   browser cookie. If this is set to FALSE, the state of the user
+    #   session is not persisted. The default is `FALSE`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use
     #   with `QUICKSIGHT` identity type. You can use this for any Amazon
@@ -6074,6 +6802,22 @@ module Aws::QuickSight
     #   role-based sessions.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The QuickSight namespace that contains the dashboard IDs in this
+    #   request. If you're not using a custom namespace, set this to
+    #   "`default`".
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_dashboard_ids
+    #   A list of one or more dashboard IDs that you want to add to a
+    #   session that includes anonymous users. The `IdentityType` parameter
+    #   must be set to `ANONYMOUS` for this to work, because other identity
+    #   types authenticate as QuickSight or IAM users. For example, if you
+    #   set "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
     #
     class GetDashboardEmbedUrlRequest < Struct.new(
@@ -6083,11 +6827,16 @@ module Aws::QuickSight
       :session_lifetime_in_minutes,
       :undo_redo_disabled,
       :reset_disabled,
-      :user_arn)
+      :state_persistence_enabled,
+      :user_arn,
+      :namespace,
+      :additional_dashboard_ids)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Output returned from the `GetDashboardEmbedUrl` operation.
+    #
     # @!attribute [rw] embed_url
     #   A single-use URL that you can put into your server-side webpage to
     #   embed your dashboard. This URL is valid for 5 minutes. The API
@@ -6163,11 +6912,11 @@ module Aws::QuickSight
     #
     #   2.  Invited nonfederated users
     #
-    #   3.  IAM users and IAM role-based sessions authenticated through
-    #       Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #       federation
+    #   3.  AWS Identity and Access Management (IAM) users and IAM
+    #       role-based sessions authenticated through Federated Single
+    #       Sign-On using SAML, OpenID Connect, or IAM federation
     #
-    #   Omit this parameter for users in the third group – IAM users and IAM
+    #   Omit this parameter for users in the third group, IAM users and IAM
     #   role-based sessions.
     #   @return [String]
     #
@@ -6551,7 +7300,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Join instruction.
+    # The instructions associated with a join.
     #
     # @note When making an API call, you may pass JoinInstruction
     #   data as a hash:
@@ -6559,24 +7308,38 @@ module Aws::QuickSight
     #       {
     #         left_operand: "LogicalTableId", # required
     #         right_operand: "LogicalTableId", # required
+    #         left_join_key_properties: {
+    #           unique_key: false,
+    #         },
+    #         right_join_key_properties: {
+    #           unique_key: false,
+    #         },
     #         type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #         on_clause: "OnClause", # required
     #       }
     #
     # @!attribute [rw] left_operand
-    #   Left operand.
+    #   The operand on the left side of a join.
     #   @return [String]
     #
     # @!attribute [rw] right_operand
-    #   Right operand.
+    #   The operand on the right side of a join.
     #   @return [String]
     #
+    # @!attribute [rw] left_join_key_properties
+    #   Join key properties of the left operand.
+    #   @return [Types::JoinKeyProperties]
+    #
+    # @!attribute [rw] right_join_key_properties
+    #   Join key properties of the right operand.
+    #   @return [Types::JoinKeyProperties]
+    #
     # @!attribute [rw] type
-    #   Type.
+    #   The type of join that it is.
     #   @return [String]
     #
     # @!attribute [rw] on_clause
-    #   On Clause.
+    #   The join instructions provided in the `ON` clause of a join.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/JoinInstruction AWS API Documentation
@@ -6584,8 +7347,33 @@ module Aws::QuickSight
     class JoinInstruction < Struct.new(
       :left_operand,
       :right_operand,
+      :left_join_key_properties,
+      :right_join_key_properties,
       :type,
       :on_clause)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties associated with the columns participating in a join.
+    #
+    # @note When making an API call, you may pass JoinKeyProperties
+    #   data as a hash:
+    #
+    #       {
+    #         unique_key: false,
+    #       }
+    #
+    # @!attribute [rw] unique_key
+    #   A value that indicates that a row in a table is uniquely identified
+    #   by the columns in a join key. This is used by QuickSight to optimize
+    #   query performance.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/JoinKeyProperties AWS API Documentation
+    #
+    class JoinKeyProperties < Struct.new(
+      :unique_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6917,6 +7705,134 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFolderMembersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFolderMembersRequest AWS API Documentation
+    #
+    class ListFolderMembersRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_member_list
+    #   A structure that contains all of the folder members (dashboards,
+    #   analyses, and datasets) in the folder.
+    #   @return [Array<Types::MemberIdArnPair>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFolderMembersResponse AWS API Documentation
+    #
+    class ListFolderMembersResponse < Struct.new(
+      :status,
+      :folder_member_list,
+      :next_token,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFoldersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFoldersRequest AWS API Documentation
+    #
+    class ListFoldersRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_summary_list
+    #   A structure that contains all of the folders in your AWS account.
+    #   This structure provides basic information about the folders.
+    #   @return [Array<Types::FolderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFoldersResponse AWS API Documentation
+    #
+    class ListFoldersResponse < Struct.new(
+      :status,
+      :folder_summary_list,
+      :next_token,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7973,6 +8889,12 @@ module Aws::QuickSight
     #           join_instruction: {
     #             left_operand: "LogicalTableId", # required
     #             right_operand: "LogicalTableId", # required
+    #             left_join_key_properties: {
+    #               unique_key: false,
+    #             },
+    #             right_join_key_properties: {
+    #               unique_key: false,
+    #             },
     #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #             on_clause: "OnClause", # required
     #           },
@@ -8013,6 +8935,12 @@ module Aws::QuickSight
     #         join_instruction: {
     #           left_operand: "LogicalTableId", # required
     #           right_operand: "LogicalTableId", # required
+    #           left_join_key_properties: {
+    #             unique_key: false,
+    #           },
+    #           right_join_key_properties: {
+    #             unique_key: false,
+    #           },
     #           type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #           on_clause: "OnClause", # required
     #         },
@@ -8117,6 +9045,26 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that consists of the member Amazon Resource Name (ARN) and
+    # member ID.
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the member.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The Amazon Resource Name (ARN) of the member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/MemberIdArnPair AWS API Documentation
+    #
+    class MemberIdArnPair < Struct.new(
+      :member_id,
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # MySQL parameters.
     #
     # @note When making an API call, you may pass MySqlParameters
@@ -8205,6 +9153,39 @@ module Aws::QuickSight
       :creation_status,
       :identity_store,
       :namespace_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Oracle parameters.
+    #
+    # @note When making an API call, you may pass OracleParameters
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       }
+    #
+    # @!attribute [rw] host
+    #   An Oracle host.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database
+    #   Database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OracleParameters AWS API Documentation
+    #
+    class OracleParameters < Struct.new(
+      :host,
+      :port,
+      :database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8303,6 +9284,7 @@ module Aws::QuickSight
     #       {
     #         relational_table: {
     #           data_source_arn: "Arn", # required
+    #           catalog: "RelationalTableCatalog",
     #           schema: "RelationalTableSchema",
     #           name: "RelationalTableName", # required
     #           input_columns: [ # required
@@ -8592,6 +9574,9 @@ module Aws::QuickSight
     #         namespace: "Namespace", # required
     #         user_name: "UserName",
     #         custom_permissions_name: "RoleName",
+    #         external_login_federation_provider_type: "String",
+    #         custom_federation_provider_url: "String",
+    #         external_login_id: "String",
     #       }
     #
     # @!attribute [rw] identity_type
@@ -8644,7 +9629,7 @@ module Aws::QuickSight
     #
     #
     #
-    #   [1]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -8695,6 +9680,35 @@ module Aws::QuickSight
     #   (SSO).
     #   @return [String]
     #
+    # @!attribute [rw] external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into Amazon QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. The type of supported
+    #   external login provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO`
+    #     provider type, don’t use the "CustomFederationProviderUrl"
+    #     parameter which is only needed when the external provider is
+    #     custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When
+    #     choosing `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl`
+    #     parameter to provide the custom OIDC provider URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated
+    #   AWS Identity and Access Management (IAM) role. This parameter should
+    #   only be used when `ExternalLoginFederationProviderType` parameter is
+    #   set to `CUSTOM_OIDC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_id
+    #   The identity ID for a user in the external login provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisterUserRequest AWS API Documentation
     #
     class RegisterUserRequest < Struct.new(
@@ -8706,7 +9720,10 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :user_name,
-      :custom_permissions_name)
+      :custom_permissions_name,
+      :external_login_federation_provider_type,
+      :custom_federation_provider_url,
+      :external_login_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8747,6 +9764,7 @@ module Aws::QuickSight
     #
     #       {
     #         data_source_arn: "Arn", # required
+    #         catalog: "RelationalTableCatalog",
     #         schema: "RelationalTableSchema",
     #         name: "RelationalTableName", # required
     #         input_columns: [ # required
@@ -8759,6 +9777,10 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_source_arn
     #   The Amazon Resource Name (ARN) for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog associated with a table.
     #   @return [String]
     #
     # @!attribute [rw] schema
@@ -8778,6 +9800,7 @@ module Aws::QuickSight
     #
     class RelationalTable < Struct.new(
       :data_source_arn,
+      :catalog,
       :schema,
       :name,
       :input_columns)
@@ -8885,8 +9908,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The IAM action to grant or revoke permissions on, for example
-    #   `"quicksight:DescribeDashboard"`.
+    #   The IAM action to grant or revoke permissions on.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourcePermission AWS API Documentation
@@ -8993,7 +10015,18 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The row-level security configuration for the dataset.
+    # Information about a dataset that contains permissions for row-level
+    # security (RLS). The permissions dataset maps fields to users or
+    # groups. For more information, see [Using Row-Level Security (RLS) to
+    # Restrict Access to a Dataset][1] in the *Amazon QuickSight User
+    # Guide*.
+    #
+    # The option to deny permissions by setting `PermissionPolicy` to
+    # `DENY_ACCESS` is not supported for new RLS datasets.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html
     #
     # @note When making an API call, you may pass RowLevelPermissionDataSet
     #   data as a hash:
@@ -9002,18 +10035,32 @@ module Aws::QuickSight
     #         namespace: "Namespace",
     #         arn: "Arn", # required
     #         permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #         format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #       }
     #
     # @!attribute [rw] namespace
-    #   The namespace associated with the row-level permissions dataset.
+    #   The namespace associated with the dataset that contains permissions
+    #   for RLS.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the permission dataset.
+    #   The Amazon Resource Name (ARN) of the dataset that contains
+    #   permissions for RLS.
     #   @return [String]
     #
     # @!attribute [rw] permission_policy
-    #   Permission policy.
+    #   The type of permissions to use when interpretting the permissions
+    #   for RLS. `DENY_ACCESS` is included for backward compatibility only.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_version
+    #   The user or group rules associated with the dataset that contains
+    #   permissions for RLS.
+    #
+    #   By default, `FormatVersion` is `VERSION_1`. When `FormatVersion` is
+    #   `VERSION_1`, `UserName` and `GroupName` are required. When
+    #   `FormatVersion` is `VERSION_2`, `UserARN` and `GroupARN` are
+    #   required, and `Namespace` must not exist.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionDataSet AWS API Documentation
@@ -9021,7 +10068,8 @@ module Aws::QuickSight
     class RowLevelPermissionDataSet < Struct.new(
       :namespace,
       :arn,
-      :permission_policy)
+      :permission_policy,
+      :format_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9051,7 +10099,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A physical table type for as S3 data source.
+    # A physical table type for an S3 data source.
     #
     # @note When making an API call, you may pass S3Source
     #   data as a hash:
@@ -9074,7 +10122,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] data_source_arn
-    #   The amazon Resource Name (ARN) for the data source.
+    #   The Amazon Resource Name (ARN) for the data source.
     #   @return [String]
     #
     # @!attribute [rw] upload_settings
@@ -9082,7 +10130,12 @@ module Aws::QuickSight
     #   @return [Types::UploadSettings]
     #
     # @!attribute [rw] input_columns
-    #   A physical table type for as S3 data source.
+    #   A physical table type for an S3 data source.
+    #
+    #   <note markdown="1"> For non-JSON files, only `STRING` data types are supported in input
+    #   columns.
+    #
+    #    </note>
     #   @return [Array<Types::InputColumn>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/S3Source AWS API Documentation
@@ -9239,6 +10292,82 @@ module Aws::QuickSight
       :dashboard_summary_list,
       :next_token,
       :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchFoldersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StringEquals", # accepts StringEquals
+    #             name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #             value: "String",
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the search. Currently, you can search only
+    #   by the parent folder ARN. For example, `"Filters": [ \{ "Name":
+    #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
+    #   @return [Array<Types::FolderSearchFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchFoldersRequest AWS API Documentation
+    #
+    class SearchFoldersRequest < Struct.new(
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_summary_list
+    #   A structure that contains all of the folders in your AWS account.
+    #   This structure provides basic information about the folders.
+    #   @return [Array<Types::FolderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchFoldersResponse AWS API Documentation
+    #
+    class SearchFoldersResponse < Struct.new(
+      :status,
+      :folder_summary_list,
+      :next_token,
       :request_id)
       SENSITIVE = []
       include Aws::Structure
@@ -10576,6 +11705,31 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # This error indicates that you are calling an embedding operation in
+    # Amazon QuickSight without the required pricing plan on your AWS
+    # account. Before you can use embedding for anonymous users, a
+    # QuickSight administrator needs to add capacity pricing to QuickSight.
+    # You can do this on the **Manage QuickSight** page.
+    #
+    # After capacity pricing is added, you can use the GetDashboardEmbedUrl
+    # API operation with the `--identity-type ANONYMOUS` option.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnsupportedPricingPlanException AWS API Documentation
+    #
+    class UnsupportedPricingPlanException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This error indicates that you are calling an operation on an Amazon
     # QuickSight subscription where the edition doesn't include support for
     # that operation. Amazon QuickSight currently has Standard Edition and
@@ -11383,6 +12537,7 @@ module Aws::QuickSight
     #           "PhysicalTableId" => {
     #             relational_table: {
     #               data_source_arn: "Arn", # required
+    #               catalog: "RelationalTableCatalog",
     #               schema: "RelationalTableSchema",
     #               name: "RelationalTableName", # required
     #               input_columns: [ # required
@@ -11467,6 +12622,12 @@ module Aws::QuickSight
     #               join_instruction: {
     #                 left_operand: "LogicalTableId", # required
     #                 right_operand: "LogicalTableId", # required
+    #                 left_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
+    #                 right_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
     #                 type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #                 on_clause: "OnClause", # required
     #               },
@@ -11484,11 +12645,24 @@ module Aws::QuickSight
     #             },
     #           },
     #         ],
+    #         field_folders: {
+    #           "FieldFolderPath" => {
+    #             description: "FieldFolderDescription",
+    #             columns: ["String"],
+    #           },
+    #         },
     #         row_level_permission_data_set: {
     #           namespace: "Namespace",
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #           format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #         },
+    #         column_level_permission_rules: [
+    #           {
+    #             principals: ["String"],
+    #             column_names: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -11523,10 +12697,19 @@ module Aws::QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #   @return [Array<Types::ColumnGroup>]
     #
+    # @!attribute [rw] field_folders
+    #   The folder that contains fields and nested subfolders for your
+    #   dataset.
+    #   @return [Hash<String,Types::FieldFolder>]
+    #
     # @!attribute [rw] row_level_permission_data_set
     #   The row-level security configuration for the data you want to
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
+    #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDataSetRequest AWS API Documentation
     #
@@ -11538,7 +12721,9 @@ module Aws::QuickSight
       :logical_table_map,
       :import_mode,
       :column_groups,
-      :row_level_permission_data_set)
+      :field_folders,
+      :row_level_permission_data_set,
+      :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11701,6 +12886,11 @@ module Aws::QuickSight
     #             port: 1, # required
     #             database: "Database", # required
     #           },
+    #           oracle_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             database: "Database", # required
+    #           },
     #           postgre_sql_parameters: {
     #             host: "Host", # required
     #             port: 1, # required
@@ -11788,6 +12978,11 @@ module Aws::QuickSight
     #                   database: "Database", # required
     #                 },
     #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 oracle_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
     #                   database: "Database", # required
@@ -11938,6 +13133,143 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateFolderPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         grant_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         revoke_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_permissions
+    #   The permissions that you want to grant on a resource.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] revoke_permissions
+    #   The permissions that you want to revoke from a resource.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissionsRequest AWS API Documentation
+    #
+    class UpdateFolderPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :grant_permissions,
+      :revoke_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Information about the permissions on the dashboard.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissionsResponse AWS API Documentation
+    #
+    class UpdateFolderPermissionsResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :permissions,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         name: "FolderName", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderRequest AWS API Documentation
+    #
+    class UpdateFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderResponse AWS API Documentation
+    #
+    class UpdateFolderResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateGroupRequest
     #   data as a hash:
     #
@@ -12018,8 +13350,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. This name must be unique within an AWS
-    #   account.
+    #   The name of the assignment, also called a rule. This name must be
+    #   unique within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -12063,7 +13395,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment or rule.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id
@@ -12650,6 +13982,9 @@ module Aws::QuickSight
     #         role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #         custom_permissions_name: "RoleName",
     #         unapply_custom_permissions: false,
+    #         external_login_federation_provider_type: "String",
+    #         custom_federation_provider_url: "String",
+    #         external_login_id: "String",
     #       }
     #
     # @!attribute [rw] user_name
@@ -12724,6 +14059,39 @@ module Aws::QuickSight
     #   value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. The type of supported
+    #   external login provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO`
+    #     provider type, don’t use the "CustomFederationProviderUrl"
+    #     parameter which is only needed when the external provider is
+    #     custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When
+    #     choosing `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl`
+    #     parameter to provide the custom OIDC provider URL.
+    #
+    #   * `NONE`\: This clears all the previously saved external login
+    #     information for a user. Use ` DescribeUser ` API to check the
+    #     external login information.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated
+    #   AWS Identity and Access Management (IAM) role. This parameter should
+    #   only be used when `ExternalLoginFederationProviderType` parameter is
+    #   set to `CUSTOM_OIDC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_id
+    #   The identity ID for a user in the external login provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateUserRequest AWS API Documentation
     #
     class UpdateUserRequest < Struct.new(
@@ -12733,7 +14101,10 @@ module Aws::QuickSight
       :email,
       :role,
       :custom_permissions_name,
-      :unapply_custom_permissions)
+      :unapply_custom_permissions,
+      :external_login_federation_provider_type,
+      :custom_federation_provider_url,
+      :external_login_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12857,6 +14228,25 @@ module Aws::QuickSight
     #   The custom permissions profile associated with this user.
     #   @return [String]
     #
+    # @!attribute [rw] external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let the user federate into Amazon QuickSight with an associated
+    #   IAM role. The type can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_federation_provider_url
+    #   The URL of the external login provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_id
+    #   The identity ID for the user in the external login provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/User AWS API Documentation
     #
     class User < Struct.new(
@@ -12867,7 +14257,10 @@ module Aws::QuickSight
       :identity_type,
       :active,
       :principal_id,
-      :custom_permissions_name)
+      :custom_permissions_name,
+      :external_login_federation_provider_type,
+      :external_login_federation_provider_url,
+      :external_login_id)
       SENSITIVE = []
       include Aws::Structure
     end

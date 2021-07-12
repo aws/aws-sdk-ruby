@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -20,6 +20,7 @@ module Aws::GroundStation
     AntennaUplinkConfig = Shapes::StructureShape.new(name: 'AntennaUplinkConfig')
     BandwidthUnits = Shapes::StringShape.new(name: 'BandwidthUnits')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketArn = Shapes::StringShape.new(name: 'BucketArn')
     CancelContactRequest = Shapes::StructureShape.new(name: 'CancelContactRequest')
     ConfigArn = Shapes::StringShape.new(name: 'ConfigArn')
     ConfigCapabilityType = Shapes::StringShape.new(name: 'ConfigCapabilityType')
@@ -45,7 +46,7 @@ module Aws::GroundStation
     DataflowEndpointGroupIdResponse = Shapes::StructureShape.new(name: 'DataflowEndpointGroupIdResponse')
     DataflowEndpointGroupList = Shapes::ListShape.new(name: 'DataflowEndpointGroupList')
     DataflowEndpointListItem = Shapes::StructureShape.new(name: 'DataflowEndpointListItem')
-    DataflowEndpointmtuInteger = Shapes::IntegerShape.new(name: 'DataflowEndpointmtuInteger')
+    DataflowEndpointMtuInteger = Shapes::IntegerShape.new(name: 'DataflowEndpointMtuInteger')
     DataflowList = Shapes::ListShape.new(name: 'DataflowList')
     DecodeConfig = Shapes::StructureShape.new(name: 'DecodeConfig')
     DeleteConfigRequest = Shapes::StructureShape.new(name: 'DeleteConfigRequest')
@@ -106,6 +107,9 @@ module Aws::GroundStation
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
+    S3RecordingConfig = Shapes::StructureShape.new(name: 'S3RecordingConfig')
+    S3RecordingDetails = Shapes::StructureShape.new(name: 'S3RecordingDetails')
     SafeName = Shapes::StringShape.new(name: 'SafeName')
     SatelliteList = Shapes::ListShape.new(name: 'SatelliteList')
     SatelliteListItem = Shapes::StructureShape.new(name: 'SatelliteListItem')
@@ -154,6 +158,7 @@ module Aws::GroundStation
 
     ConfigDetails.add_member(:antenna_demod_decode_details, Shapes::ShapeRef.new(shape: AntennaDemodDecodeDetails, location_name: "antennaDemodDecodeDetails"))
     ConfigDetails.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "endpointDetails"))
+    ConfigDetails.add_member(:s3_recording_details, Shapes::ShapeRef.new(shape: S3RecordingDetails, location_name: "s3RecordingDetails"))
     ConfigDetails.struct_class = Types::ConfigDetails
 
     ConfigIdResponse.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "configArn"))
@@ -173,6 +178,7 @@ module Aws::GroundStation
     ConfigTypeData.add_member(:antenna_downlink_demod_decode_config, Shapes::ShapeRef.new(shape: AntennaDownlinkDemodDecodeConfig, location_name: "antennaDownlinkDemodDecodeConfig"))
     ConfigTypeData.add_member(:antenna_uplink_config, Shapes::ShapeRef.new(shape: AntennaUplinkConfig, location_name: "antennaUplinkConfig"))
     ConfigTypeData.add_member(:dataflow_endpoint_config, Shapes::ShapeRef.new(shape: DataflowEndpointConfig, location_name: "dataflowEndpointConfig"))
+    ConfigTypeData.add_member(:s3_recording_config, Shapes::ShapeRef.new(shape: S3RecordingConfig, location_name: "s3RecordingConfig"))
     ConfigTypeData.add_member(:tracking_config, Shapes::ShapeRef.new(shape: TrackingConfig, location_name: "trackingConfig"))
     ConfigTypeData.add_member(:uplink_echo_config, Shapes::ShapeRef.new(shape: UplinkEchoConfig, location_name: "uplinkEchoConfig"))
     ConfigTypeData.struct_class = Types::ConfigTypeData
@@ -225,7 +231,7 @@ module Aws::GroundStation
     DataflowEdgeList.member = Shapes::ShapeRef.new(shape: DataflowEdge)
 
     DataflowEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: SocketAddress, location_name: "address"))
-    DataflowEndpoint.add_member(:mtu, Shapes::ShapeRef.new(shape: DataflowEndpointmtuInteger, location_name: "mtu"))
+    DataflowEndpoint.add_member(:mtu, Shapes::ShapeRef.new(shape: DataflowEndpointMtuInteger, location_name: "mtu"))
     DataflowEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
     DataflowEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "status"))
     DataflowEndpoint.struct_class = Types::DataflowEndpoint
@@ -467,6 +473,15 @@ module Aws::GroundStation
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3RecordingConfig.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketArn, required: true, location_name: "bucketArn"))
+    S3RecordingConfig.add_member(:prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "prefix"))
+    S3RecordingConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    S3RecordingConfig.struct_class = Types::S3RecordingConfig
+
+    S3RecordingDetails.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketArn, location_name: "bucketArn"))
+    S3RecordingDetails.add_member(:key_template, Shapes::ShapeRef.new(shape: String, location_name: "keyTemplate"))
+    S3RecordingDetails.struct_class = Types::S3RecordingDetails
 
     SatelliteList.member = Shapes::ShapeRef.new(shape: SatelliteListItem)
 

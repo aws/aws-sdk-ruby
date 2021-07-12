@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -455,6 +455,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -487,6 +491,14 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -551,6 +563,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -589,6 +605,14 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -985,6 +1009,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1014,6 +1042,14 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -1059,6 +1095,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1088,6 +1128,14 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -1095,6 +1143,92 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def associate_hosted_connection(params = {}, options = {})
       req = build_request(:associate_hosted_connection, params)
+      req.send_request(options)
+    end
+
+    # Associates a MAC Security (MACsec) Connection Key Name (CKN)/
+    # Connectivity Association Key (CAK) pair with an AWS Direct Connect
+    # dedicated connection.
+    #
+    # You must supply either the `secretARN,` or the CKN/CAK (`ckn` and
+    # `cak`) pair in the request.
+    #
+    # For information about MAC Security (MACsec) key considerations, see
+    # [MACsec pre-shared CKN/CAK key considerations ][1] in the *AWS Direct
+    # Connect User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
+    #   (dxlag-xxxx).
+    #
+    #   You can use DescribeConnections or DescribeLags to retrieve connection
+    #   ID.
+    #
+    # @option params [String] :secret_arn
+    #   The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key
+    #   to associate with the dedicated connection.
+    #
+    #   You can use DescribeConnections or DescribeLags to retrieve the MAC
+    #   Security (MACsec) secret key.
+    #
+    #   If you use this request parameter, you do not use the `ckn` and `cak`
+    #   request parameters.
+    #
+    # @option params [String] :ckn
+    #   The MAC Security (MACsec) CKN to associate with the dedicated
+    #   connection.
+    #
+    #   You can create the CKN/CAK pair using an industry standard tool.
+    #
+    #   The valid values are 64 hexadecimal characters (0-9, A-E).
+    #
+    #   If you use this request parameter, you must use the `cak` request
+    #   parameter and not use the `secretARN` request parameter.
+    #
+    # @option params [String] :cak
+    #   The MAC Security (MACsec) CAK to associate with the dedicated
+    #   connection.
+    #
+    #   You can create the CKN/CAK pair using an industry standard tool.
+    #
+    #   The valid values are 64 hexadecimal characters (0-9, A-E).
+    #
+    #   If you use this request parameter, you must use the `ckn` request
+    #   parameter and not use the `secretARN` request parameter.
+    #
+    # @return [Types::AssociateMacSecKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateMacSecKeyResponse#connection_id #connection_id} => String
+    #   * {Types::AssociateMacSecKeyResponse#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_mac_sec_key({
+    #     connection_id: "ConnectionId", # required
+    #     secret_arn: "SecretARN",
+    #     ckn: "Ckn",
+    #     cak: "Cak",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_id #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateMacSecKey AWS API Documentation
+    #
+    # @overload associate_mac_sec_key(params = {})
+    # @param [Hash] params ({})
+    def associate_mac_sec_key(params = {}, options = {})
+      req = build_request(:associate_mac_sec_key, params)
       req.send_request(options)
     end
 
@@ -1361,7 +1495,8 @@ module Aws::DirectConnect
     # pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
     #
     # For a public virtual interface, the Autonomous System Number (ASN)
-    # must be private or already whitelisted for the virtual interface.
+    # must be private or already on the allow list for the virtual
+    # interface.
     #
     # @option params [String] :virtual_interface_id
     #   The ID of the virtual interface.
@@ -1469,6 +1604,18 @@ module Aws::DirectConnect
     #   The name of the service provider associated with the requested
     #   connection.
     #
+    # @option params [Boolean] :request_mac_sec
+    #   Indicates whether you want the connection to support MAC Security
+    #   (MACsec).
+    #
+    #   MAC Security (MACsec) is only available on dedicated connections. For
+    #   information about MAC Security (MACsec) prerequisties, see [MACsec
+    #   prerequisties][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
+    #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connection#owner_account #owner_account} => String
@@ -1488,6 +1635,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1503,6 +1654,7 @@ module Aws::DirectConnect
     #       },
     #     ],
     #     provider_name: "ProviderName",
+    #     request_mac_sec: false,
     #   })
     #
     # @example Response structure
@@ -1526,6 +1678,14 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -1882,6 +2042,19 @@ module Aws::DirectConnect
     # @option params [String] :provider_name
     #   The name of the service provider associated with the LAG.
     #
+    # @option params [Boolean] :request_mac_sec
+    #   Indicates whether the connection will support MAC Security (MACsec).
+    #
+    #   <note markdown="1"> All connections in the LAG must be capable of supporting MAC Security
+    #   (MACsec). For information about MAC Security (MACsec) prerequisties,
+    #   see [MACsec prerequisties][1] in the *AWS Direct Connect User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
+    #
     # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Lag#connections_bandwidth #connections_bandwidth} => String
@@ -1901,6 +2074,9 @@ module Aws::DirectConnect
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Lag#provider_name #provider_name} => String
+    #   * {Types::Lag#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Lag#encryption_mode #encryption_mode} => String
+    #   * {Types::Lag#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1923,6 +2099,7 @@ module Aws::DirectConnect
     #       },
     #     ],
     #     provider_name: "ProviderName",
+    #     request_mac_sec: false,
     #   })
     #
     # @example Response structure
@@ -1958,6 +2135,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
     #   resp.connections[0].provider_name #=> String
+    #   resp.connections[0].mac_sec_capable #=> Boolean
+    #   resp.connections[0].port_encryption_status #=> String
+    #   resp.connections[0].encryption_mode #=> String
+    #   resp.connections[0].mac_sec_keys #=> Array
+    #   resp.connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.connections[0].mac_sec_keys[0].state #=> String
+    #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -1965,6 +2150,13 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
     #
@@ -2423,6 +2615,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2451,6 +2647,14 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -2649,6 +2853,9 @@ module Aws::DirectConnect
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Lag#provider_name #provider_name} => String
+    #   * {Types::Lag#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Lag#encryption_mode #encryption_mode} => String
+    #   * {Types::Lag#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2689,6 +2896,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
     #   resp.connections[0].provider_name #=> String
+    #   resp.connections[0].mac_sec_capable #=> Boolean
+    #   resp.connections[0].port_encryption_status #=> String
+    #   resp.connections[0].encryption_mode #=> String
+    #   resp.connections[0].mac_sec_keys #=> Array
+    #   resp.connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.connections[0].mac_sec_keys[0].state #=> String
+    #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -2696,6 +2911,13 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
     #
@@ -2824,6 +3046,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
     #   resp.connections[0].provider_name #=> String
+    #   resp.connections[0].mac_sec_capable #=> Boolean
+    #   resp.connections[0].port_encryption_status #=> String
+    #   resp.connections[0].encryption_mode #=> String
+    #   resp.connections[0].mac_sec_keys #=> Array
+    #   resp.connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.connections[0].mac_sec_keys[0].state #=> String
+    #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -2878,6 +3108,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
     #   resp.connections[0].provider_name #=> String
+    #   resp.connections[0].mac_sec_capable #=> Boolean
+    #   resp.connections[0].port_encryption_status #=> String
+    #   resp.connections[0].encryption_mode #=> String
+    #   resp.connections[0].mac_sec_keys #=> Array
+    #   resp.connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.connections[0].mac_sec_keys[0].state #=> String
+    #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -2954,14 +3192,31 @@ module Aws::DirectConnect
     end
 
     # Lists the associations between your Direct Connect gateways and
-    # virtual private gateways. You must specify a Direct Connect gateway, a
-    # virtual private gateway, or both. If you specify a Direct Connect
-    # gateway, the response contains all virtual private gateways associated
-    # with the Direct Connect gateway. If you specify a virtual private
-    # gateway, the response contains all Direct Connect gateways associated
-    # with the virtual private gateway. If you specify both, the response
-    # contains the association between the Direct Connect gateway and the
-    # virtual private gateway.
+    # virtual private gateways and transit gateways. You must specify one of
+    # the following:
+    #
+    # * A Direct Connect gateway
+    #
+    #   The response contains all virtual private gateways and transit
+    #   gateways associated with the Direct Connect gateway.
+    #
+    # * A virtual private gateway
+    #
+    #   The response contains the Direct Connect gateway.
+    #
+    # * A transit gateway
+    #
+    #   The response contains the Direct Connect gateway.
+    #
+    # * A Direct Connect gateway and a virtual private gateway
+    #
+    #   The response contains the association between the Direct Connect
+    #   gateway and virtual private gateway.
+    #
+    # * A Direct Connect gateway and a transit gateway
+    #
+    #   The response contains the association between the Direct Connect
+    #   gateway and transit gateway.
     #
     # @option params [String] :association_id
     #   The ID of the Direct Connect gateway association.
@@ -2984,7 +3239,7 @@ module Aws::DirectConnect
     #   The token provided in the previous call to retrieve the next page.
     #
     # @option params [String] :virtual_gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway or transit gateway.
     #
     # @return [Types::DescribeDirectConnectGatewayAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3183,6 +3438,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
     #   resp.connections[0].provider_name #=> String
+    #   resp.connections[0].mac_sec_capable #=> Boolean
+    #   resp.connections[0].port_encryption_status #=> String
+    #   resp.connections[0].encryption_mode #=> String
+    #   resp.connections[0].mac_sec_keys #=> Array
+    #   resp.connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.connections[0].mac_sec_keys[0].state #=> String
+    #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
     #
@@ -3340,6 +3603,14 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].tags[0].key #=> String
     #   resp.lags[0].connections[0].tags[0].value #=> String
     #   resp.lags[0].connections[0].provider_name #=> String
+    #   resp.lags[0].connections[0].mac_sec_capable #=> Boolean
+    #   resp.lags[0].connections[0].port_encryption_status #=> String
+    #   resp.lags[0].connections[0].encryption_mode #=> String
+    #   resp.lags[0].connections[0].mac_sec_keys #=> Array
+    #   resp.lags[0].connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.lags[0].connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.lags[0].connections[0].mac_sec_keys[0].state #=> String
+    #   resp.lags[0].connections[0].mac_sec_keys[0].start_on #=> String
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #   resp.lags[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -3347,6 +3618,13 @@ module Aws::DirectConnect
     #   resp.lags[0].tags[0].key #=> String
     #   resp.lags[0].tags[0].value #=> String
     #   resp.lags[0].provider_name #=> String
+    #   resp.lags[0].mac_sec_capable #=> Boolean
+    #   resp.lags[0].encryption_mode #=> String
+    #   resp.lags[0].mac_sec_keys #=> Array
+    #   resp.lags[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.lags[0].mac_sec_keys[0].ckn #=> String
+    #   resp.lags[0].mac_sec_keys[0].state #=> String
+    #   resp.lags[0].mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
     #
@@ -3428,6 +3706,8 @@ module Aws::DirectConnect
     #   resp.locations[0].available_port_speeds[0] #=> String
     #   resp.locations[0].available_providers #=> Array
     #   resp.locations[0].available_providers[0] #=> String
+    #   resp.locations[0].available_mac_sec_port_speeds #=> Array
+    #   resp.locations[0].available_mac_sec_port_speeds[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
@@ -3609,6 +3889,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3638,6 +3922,14 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -3645,6 +3937,53 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def disassociate_connection_from_lag(params = {}, options = {})
       req = build_request(:disassociate_connection_from_lag, params)
+      req.send_request(options)
+    end
+
+    # Removes the association between a MAC Security (MACsec) security key
+    # and an AWS Direct Connect dedicated connection.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
+    #   (dxlag-xxxx).
+    #
+    #   You can use DescribeConnections or DescribeLags to retrieve connection
+    #   ID.
+    #
+    # @option params [required, String] :secret_arn
+    #   The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret
+    #   key.
+    #
+    #   You can use DescribeConnections to retrieve the ARN of the MAC
+    #   Security (MACsec) secret key.
+    #
+    # @return [Types::DisassociateMacSecKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateMacSecKeyResponse#connection_id #connection_id} => String
+    #   * {Types::DisassociateMacSecKeyResponse#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_mac_sec_key({
+    #     connection_id: "ConnectionId", # required
+    #     secret_arn: "SecretARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_id #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateMacSecKey AWS API Documentation
+    #
+    # @overload disassociate_mac_sec_key(params = {})
+    # @param [Hash] params ({})
+    def disassociate_mac_sec_key(params = {}, options = {})
+      req = build_request(:disassociate_mac_sec_key, params)
       req.send_request(options)
     end
 
@@ -3878,6 +4217,99 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Updates the AWS Direct Connect dedicated connection configuration.
+    #
+    # You can update the following parameters for a connection:
+    #
+    # * The connection name
+    #
+    # * The connection's MAC Security (MACsec) encryption mode.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the dedicated connection.
+    #
+    #   You can use DescribeConnections to retrieve the connection ID.
+    #
+    # @option params [String] :connection_name
+    #   The name of the connection.
+    #
+    # @option params [String] :encryption_mode
+    #   The connection MAC Security (MACsec) encryption mode.
+    #
+    #   The valid values are `no_encrypt`, `should_encrypt`, and
+    #   `must_encrypt`.
+    #
+    # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connection#owner_account #owner_account} => String
+    #   * {Types::Connection#connection_id #connection_id} => String
+    #   * {Types::Connection#connection_name #connection_name} => String
+    #   * {Types::Connection#connection_state #connection_state} => String
+    #   * {Types::Connection#region #region} => String
+    #   * {Types::Connection#location #location} => String
+    #   * {Types::Connection#bandwidth #bandwidth} => String
+    #   * {Types::Connection#vlan #vlan} => Integer
+    #   * {Types::Connection#partner_name #partner_name} => String
+    #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
+    #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
+    #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
+    #   * {Types::Connection#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Connection#port_encryption_status #port_encryption_status} => String
+    #   * {Types::Connection#encryption_mode #encryption_mode} => String
+    #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connection({
+    #     connection_id: "ConnectionId", # required
+    #     connection_name: "ConnectionName",
+    #     encryption_mode: "EncryptionMode",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.owner_account #=> String
+    #   resp.connection_id #=> String
+    #   resp.connection_name #=> String
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
+    #   resp.region #=> String
+    #   resp.location #=> String
+    #   resp.bandwidth #=> String
+    #   resp.vlan #=> Integer
+    #   resp.partner_name #=> String
+    #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
+    #   resp.jumbo_frame_capable #=> Boolean
+    #   resp.aws_device_v2 #=> String
+    #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.port_encryption_status #=> String
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateConnection AWS API Documentation
+    #
+    # @overload update_connection(params = {})
+    # @param [Hash] params ({})
+    def update_connection(params = {}, options = {})
+      req = build_request(:update_connection, params)
+      req.send_request(options)
+    end
+
     # Updates the specified attributes of the Direct Connect gateway
     # association.
     #
@@ -3941,20 +4373,24 @@ module Aws::DirectConnect
 
     # Updates the attributes of the specified link aggregation group (LAG).
     #
-    # You can update the following attributes:
+    # You can update the following LAG attributes:
     #
     # * The name of the LAG.
     #
     # * The value for the minimum number of connections that must be
     #   operational for the LAG itself to be operational.
     #
-    # When you create a LAG, the default value for the minimum number of
-    # operational connections is zero (0). If you update this value and the
-    # number of operational connections falls below the specified value, the
-    # LAG automatically goes down to avoid over-utilization of the remaining
-    # connections. Adjust this value with care, as it could force the LAG
-    # down if it is set higher than the current number of operational
-    # connections.
+    # * The LAG's MACsec encryption mode.
+    #
+    #   AWS assigns this value to each connection which is part of the LAG.
+    #
+    # * The tags
+    #
+    # <note markdown="1"> If you adjust the threshold value for the minimum number of
+    # operational connections, ensure that the new value does not cause the
+    # LAG to fall below the threshold and become non-operational.
+    #
+    #  </note>
     #
     # @option params [required, String] :lag_id
     #   The ID of the LAG.
@@ -3965,6 +4401,11 @@ module Aws::DirectConnect
     # @option params [Integer] :minimum_links
     #   The minimum number of physical connections that must be operational
     #   for the LAG itself to be operational.
+    #
+    # @option params [String] :encryption_mode
+    #   The LAG MAC Security (MACsec) encryption mode.
+    #
+    #   AWS applies the value to all connections which are part of the LAG.
     #
     # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3985,6 +4426,9 @@ module Aws::DirectConnect
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
     #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Lag#provider_name #provider_name} => String
+    #   * {Types::Lag#mac_sec_capable #mac_sec_capable} => Boolean
+    #   * {Types::Lag#encryption_mode #encryption_mode} => String
+    #   * {Types::Lag#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3992,6 +4436,7 @@ module Aws::DirectConnect
     #     lag_id: "LagId", # required
     #     lag_name: "LagName",
     #     minimum_links: 1,
+    #     encryption_mode: "EncryptionMode",
     #   })
     #
     # @example Response structure
@@ -4027,6 +4472,14 @@ module Aws::DirectConnect
     #   resp.connections[0].tags[0].key #=> String
     #   resp.connections[0].tags[0].value #=> String
     #   resp.connections[0].provider_name #=> String
+    #   resp.connections[0].mac_sec_capable #=> Boolean
+    #   resp.connections[0].port_encryption_status #=> String
+    #   resp.connections[0].encryption_mode #=> String
+    #   resp.connections[0].mac_sec_keys #=> Array
+    #   resp.connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.connections[0].mac_sec_keys[0].state #=> String
+    #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -4034,6 +4487,13 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.provider_name #=> String
+    #   resp.mac_sec_capable #=> Boolean
+    #   resp.encryption_mode #=> String
+    #   resp.mac_sec_keys #=> Array
+    #   resp.mac_sec_keys[0].secret_arn #=> String
+    #   resp.mac_sec_keys[0].ckn #=> String
+    #   resp.mac_sec_keys[0].state #=> String
+    #   resp.mac_sec_keys[0].start_on #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
     #
@@ -4158,7 +4618,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

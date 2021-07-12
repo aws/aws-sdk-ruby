@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -126,13 +126,17 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] latency_mode
-    #   Channel latency mode. Default: `LOW`.
+    #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
+    #   video up to Full HD. Use `LOW` for near-real-time interaction with
+    #   viewers. Default: `LOW`. (Note: In the Amazon IVS console, `LOW` and
+    #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
     #   @return [String]
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
     #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Valid values:
+    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
+    #   values:
     #
     #   * `STANDARD`\: Multiple qualities are generated from the original
     #     input, to automatically give viewers the best experience for their
@@ -143,8 +147,12 @@ module Aws::IVS
     #     viewer’s video-quality choice is limited to the original input.
     #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
     #     Mbps.
+    #   @return [String]
     #
-    #   Default: `STANDARD`.
+    # @!attribute [rw] recording_configuration_arn
+    #   Recording-configuration ARN. A value other than an empty string
+    #   indicates that recording is enabled. Default: "" (empty string,
+    #   recording is disabled).
     #   @return [String]
     #
     # @!attribute [rw] ingest_endpoint
@@ -157,7 +165,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] authorized
-    #   Whether the channel is authorized.
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -171,6 +180,7 @@ module Aws::IVS
       :name,
       :latency_mode,
       :type,
+      :recording_configuration_arn,
       :ingest_endpoint,
       :playback_url,
       :authorized,
@@ -202,12 +212,22 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] latency_mode
-    #   Channel latency mode. Default: `LOW`.
+    #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
+    #   video up to Full HD. Use `LOW` for near-real-time interaction with
+    #   viewers. Default: `LOW`. (Note: In the Amazon IVS console, `LOW` and
+    #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
     #   @return [String]
     #
     # @!attribute [rw] authorized
-    #   Whether the channel is authorized.
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] recording_configuration_arn
+    #   Recording-configuration ARN. A value other than an empty string
+    #   indicates that recording is enabled. Default: "" (empty string,
+    #   recording is disabled).
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
@@ -220,6 +240,7 @@ module Aws::IVS
       :name,
       :latency_mode,
       :authorized,
+      :recording_configuration_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -245,6 +266,7 @@ module Aws::IVS
     #         latency_mode: "NORMAL", # accepts NORMAL, LOW
     #         type: "BASIC", # accepts BASIC, STANDARD
     #         authorized: false,
+    #         recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -255,13 +277,17 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] latency_mode
-    #   Channel latency mode. Default: `LOW`.
+    #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
+    #   video up to Full HD. Use `LOW` for near-real-time interaction with
+    #   viewers. (Note: In the Amazon IVS console, `LOW` and `NORMAL`
+    #   correspond to Ultra-low and Standard, respectively.) Default: `LOW`.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
     #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Valid values:
+    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
+    #   values:
     #
     #   * `STANDARD`\: Multiple qualities are generated from the original
     #     input, to automatically give viewers the best experience for their
@@ -272,16 +298,20 @@ module Aws::IVS
     #     viewer’s video-quality choice is limited to the original input.
     #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
     #     Mbps.
-    #
-    #   Default: `STANDARD`.
     #   @return [String]
     #
     # @!attribute [rw] authorized
-    #   Whether the channel is authorized. Default: `false`.
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] recording_configuration_arn
+    #   Recording-configuration ARN. Default: "" (empty string, recording
+    #   is disabled).
+    #   @return [String]
+    #
     # @!attribute [rw] tags
-    #   See Channel$tags.
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannelRequest AWS API Documentation
@@ -291,6 +321,7 @@ module Aws::IVS
       :latency_mode,
       :type,
       :authorized,
+      :recording_configuration_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -313,6 +344,57 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateRecordingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RecordingConfigurationName",
+    #         destination_configuration: { # required
+    #           s3: {
+    #             bucket_name: "S3DestinationBucketName", # required
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   An arbitrary string (a nickname) that helps the customer identify
+    #   that resource. The value does not need to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_configuration
+    #   A complex type that contains a destination configuration for where
+    #   recorded video will be stored.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfigurationRequest AWS API Documentation
+    #
+    class CreateRecordingConfigurationRequest < Struct.new(
+      :name,
+      :destination_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recording_configuration
+    #   An object representing a configuration to record a channel stream.
+    #   @return [Types::RecordingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfigurationResponse AWS API Documentation
+    #
+    class CreateRecordingConfigurationResponse < Struct.new(
+      :recording_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateStreamKeyRequest
     #   data as a hash:
     #
@@ -328,7 +410,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   See Channel$tags.
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateStreamKeyRequest AWS API Documentation
@@ -394,6 +476,25 @@ module Aws::IVS
     #
     class DeletePlaybackKeyPairResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteRecordingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "RecordingConfigurationArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   ARN of the recording configuration to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeleteRecordingConfigurationRequest AWS API Documentation
+    #
+    class DeleteRecordingConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteStreamKeyRequest
     #   data as a hash:
     #
@@ -409,6 +510,33 @@ module Aws::IVS
     #
     class DeleteStreamKeyRequest < Struct.new(
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that describes a location where recorded videos will be
+    # stored. Each member represents a type of destination configuration.
+    # For recording, you define one and only one type of destination
+    # configuration.
+    #
+    # @note When making an API call, you may pass DestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         s3: {
+    #           bucket_name: "S3DestinationBucketName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3
+    #   An S3 destination configuration where recorded videos will be
+    #   stored.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DestinationConfiguration AWS API Documentation
+    #
+    class DestinationConfiguration < Struct.new(
+      :s3)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -471,6 +599,37 @@ module Aws::IVS
     #
     class GetPlaybackKeyPairResponse < Struct.new(
       :key_pair)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRecordingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "RecordingConfigurationArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   ARN of the recording configuration to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetRecordingConfigurationRequest AWS API Documentation
+    #
+    class GetRecordingConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recording_configuration
+    #   An object representing a configuration to record a channel stream.
+    #   @return [Types::RecordingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetRecordingConfigurationResponse AWS API Documentation
+    #
+    class GetRecordingConfigurationResponse < Struct.new(
+      :recording_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -603,6 +762,7 @@ module Aws::IVS
     #
     #       {
     #         filter_by_name: "ChannelName",
+    #         filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #         next_token: "PaginationToken",
     #         max_results: 1,
     #       }
@@ -611,19 +771,25 @@ module Aws::IVS
     #   Filters the channel list to match the specified name.
     #   @return [String]
     #
+    # @!attribute [rw] filter_by_recording_configuration_arn
+    #   Filters the channel list to match the specified
+    #   recording-configuration ARN.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The first channel to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of channels to return.
+    #   Maximum number of channels to return. Default: 50.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListChannelsRequest AWS API Documentation
     #
     class ListChannelsRequest < Struct.new(
       :filter_by_name,
+      :filter_by_recording_configuration_arn,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -662,7 +828,7 @@ module Aws::IVS
     #
     # @!attribute [rw] max_results
     #   The first key pair to retrieve. This is used for pagination; see the
-    #   `nextToken` response field.
+    #   `nextToken` response field. Default: 50.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairsRequest AWS API Documentation
@@ -692,6 +858,50 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRecordingConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The first recording configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of recording configurations to return. Default: 50.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurationsRequest AWS API Documentation
+    #
+    class ListRecordingConfigurationsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recording_configurations
+    #   List of the matching recording configurations.
+    #   @return [Array<Types::RecordingConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more recording configurations than `maxResults`, use
+    #   `nextToken` in the request to get the next set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurationsResponse AWS API Documentation
+    #
+    class ListRecordingConfigurationsResponse < Struct.new(
+      :recording_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListStreamKeysRequest
     #   data as a hash:
     #
@@ -711,7 +921,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of streamKeys to return.
+    #   Maximum number of streamKeys to return. Default: 50.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamKeysRequest AWS API Documentation
@@ -756,7 +966,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of streams to return.
+    #   Maximum number of streams to return. Default: 50.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamsRequest AWS API Documentation
@@ -805,7 +1015,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of tags to return.
+    #   Maximum number of tags to return. Default: 50.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListTagsForResourceRequest AWS API Documentation
@@ -854,7 +1064,9 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Key-pair name.
+    #   An arbitrary string (a nickname) assigned to a playback key pair
+    #   that helps the customer identify that resource. The value does not
+    #   need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] fingerprint
@@ -883,11 +1095,13 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Key-pair name.
+    #   An arbitrary string (a nickname) assigned to a playback key pair
+    #   that helps the customer identify that resource. The value does not
+    #   need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackKeyPairSummary AWS API Documentation
@@ -926,6 +1140,84 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # An object representing a configuration to record a channel stream.
+    #
+    # @!attribute [rw] arn
+    #   Recording-configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   An arbitrary string (a nickname) assigned to a recording
+    #   configuration that helps the customer identify that resource. The
+    #   value does not need to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_configuration
+    #   A complex type that contains information about where recorded video
+    #   will be stored.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] state
+    #   Indicates the current state of the recording configuration. When the
+    #   state is `ACTIVE`, the configuration is ready for recording a
+    #   channel stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/RecordingConfiguration AWS API Documentation
+    #
+    class RecordingConfiguration < Struct.new(
+      :arn,
+      :name,
+      :destination_configuration,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a RecordingConfiguration.
+    #
+    # @!attribute [rw] arn
+    #   Recording-configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   An arbitrary string (a nickname) assigned to a recording
+    #   configuration that helps the customer identify that resource. The
+    #   value does not need to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_configuration
+    #   A complex type that contains information about where recorded video
+    #   will be stored.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] state
+    #   Indicates the current state of the recording configuration. When the
+    #   state is `ACTIVE`, the configuration is ready for recording a
+    #   channel stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/RecordingConfigurationSummary AWS API Documentation
+    #
+    class RecordingConfigurationSummary < Struct.new(
+      :arn,
+      :name,
+      :destination_configuration,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] exception_message
     #   Request references a resource which does not exist.
     #   @return [String]
@@ -934,6 +1226,28 @@ module Aws::IVS
     #
     class ResourceNotFoundException < Struct.new(
       :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that describes an S3 location where recorded videos
+    # will be stored.
+    #
+    # @note When making an API call, you may pass S3DestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "S3DestinationBucketName", # required
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   Location (S3 bucket name) where recorded videos will be stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/S3DestinationConfiguration AWS API Documentation
+    #
+    class S3DestinationConfiguration < Struct.new(
+      :bucket_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -980,8 +1294,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] playback_url
-    #   URL of the video master manifest, required by the video player to
-    #   play the HLS stream.
+    #   URL of the master playlist, required by the video player to play the
+    #   HLS stream.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -997,7 +1311,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] viewer_count
-    #   Number of current viewers of the stream.
+    #   Number of current viewers of the stream. A value of -1 indicates
+    #   that the request timed out; in this case, retry.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Stream AWS API Documentation
@@ -1081,7 +1396,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] viewer_count
-    #   Number of current viewers of the stream.
+    #   Number of current viewers of the stream. A value of -1 indicates
+    #   that the request timed out; in this case, retry.
     #   @return [Integer]
     #
     # @!attribute [rw] start_time
@@ -1193,6 +1509,7 @@ module Aws::IVS
     #         latency_mode: "NORMAL", # accepts NORMAL, LOW
     #         type: "BASIC", # accepts BASIC, STANDARD
     #         authorized: false,
+    #         recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #       }
     #
     # @!attribute [rw] arn
@@ -1204,13 +1521,16 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] latency_mode
-    #   Channel latency mode. Default: `LOW`.
+    #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
+    #   video up to Full HD. Use `LOW` for near-real-time interaction with
+    #   viewers. (Note: In the Amazon IVS console, `LOW` and `NORMAL`
+    #   correspond to Ultra-low and Standard, respectively.)
     #   @return [String]
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
     #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Valid values:
+    #   probably will disconnect immediately*. Valid values:
     #
     #   * `STANDARD`\: Multiple qualities are generated from the original
     #     input, to automatically give viewers the best experience for their
@@ -1221,13 +1541,17 @@ module Aws::IVS
     #     viewer’s video-quality choice is limited to the original input.
     #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
     #     Mbps.
-    #
-    #   Default: `STANDARD`.
     #   @return [String]
     #
     # @!attribute [rw] authorized
-    #   Whether the channel is authorized. Default: `false`.
+    #   Whether the channel is private (enabled for playback authorization).
     #   @return [Boolean]
+    #
+    # @!attribute [rw] recording_configuration_arn
+    #   Recording-configuration ARN. If this is set to an empty string,
+    #   recording is disabled. A value other than an empty string indicates
+    #   that recording is enabled
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelRequest AWS API Documentation
     #
@@ -1236,7 +1560,8 @@ module Aws::IVS
       :name,
       :latency_mode,
       :type,
-      :authorized)
+      :authorized,
+      :recording_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end

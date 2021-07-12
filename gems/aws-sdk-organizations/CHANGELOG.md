@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-04-29)
+------------------
+
+* Feature - Minor text updates for AWS Organizations API Reference
+
+1.58.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2021-02-05)
+------------------
+
+* Feature - Added support for a few additional exception codes for some AWS Organizations APIs.
+
+1.56.0 (2021-02-02)
+------------------
+
+* Feature - Documentation updates for AWS Organizations.
+
 1.55.0 (2020-10-21)
 ------------------
 

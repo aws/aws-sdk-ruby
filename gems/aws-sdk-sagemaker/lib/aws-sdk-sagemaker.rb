@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,7 +29,7 @@ require_relative 'aws-sdk-sagemaker/customizations'
 # structure.
 #
 #     sage_maker = Aws::SageMaker::Client.new
-#     resp = sage_maker.add_tags(params)
+#     resp = sage_maker.add_association(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-sagemaker/customizations'
 # @!group service
 module Aws::SageMaker
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.93.0'
 
 end

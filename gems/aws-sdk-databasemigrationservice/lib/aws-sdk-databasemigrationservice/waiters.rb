@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -517,12 +517,6 @@ module Aws::DatabaseMigrationService
               {
                 "argument" => "replication_tasks[].status",
                 "expected" => "starting",
-                "matcher" => "pathAny",
-                "state" => "failure"
-              },
-              {
-                "argument" => "replication_tasks[].status",
-                "expected" => "running",
                 "matcher" => "pathAny",
                 "state" => "failure"
               },

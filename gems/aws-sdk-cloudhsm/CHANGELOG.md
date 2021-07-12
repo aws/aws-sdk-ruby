@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-03-31)
+------------------
+
+* Feature - Minor documentation and link updates.
+
+1.29.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.27.0 (2020-09-30)
 ------------------
 

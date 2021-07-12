@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -121,12 +121,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the account.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] email
@@ -424,7 +424,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # * ACCOUNT\_CANNOT\_LEAVE\_ORGANIZAION: You attempted to remove the
+    # * ACCOUNT\_CANNOT\_LEAVE\_ORGANIZATION: You attempted to remove the
     #   management account from the organization. You can't remove the
     #   management account. Instead, after you remove all member accounts,
     #   delete the organization itself.
@@ -503,7 +503,7 @@ module Aws::Organizations
     #   the same marketplace.
     #
     # * MASTER\_ACCOUNT\_MISSING\_BUSINESS\_LICENSE: Applies only to the AWS
-    #   Regions in China. To create an organization, the master must have an
+    #   Regions in China. To create an organization, the master must have a
     #   valid business license. For more information, contact customer
     #   support.
     #
@@ -744,7 +744,7 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The status of the request.
+    #   The status of the asynchronous request to create an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] requested_timestamp
@@ -777,8 +777,8 @@ module Aws::Organizations
     # @!attribute [rw] failure_reason
     #   If the request failed, a description of the reason for the failure.
     #
-    #   * ACCOUNT\_LIMIT\_EXCEEDED: The account could not be created because
-    #     you have reached the limit on the number of accounts in your
+    #   * ACCOUNT\_LIMIT\_EXCEEDED: The account couldn't be created because
+    #     you reached the limit on the number of accounts in your
     #     organization.
     #
     #   * CONCURRENT\_ACCOUNT\_MODIFICATION: You already submitted a request
@@ -787,9 +787,16 @@ module Aws::Organizations
     #   * EMAIL\_ALREADY\_EXISTS: The account could not be created because
     #     another AWS account with that email address already exists.
     #
+    #   * FAILED\_BUSINESS\_VALIDATION: The AWS account that owns your
+    #     organization failed to receive business license validation.
+    #
     #   * GOVCLOUD\_ACCOUNT\_ALREADY\_EXISTS: The account in the AWS
     #     GovCloud (US) Region could not be created because this Region
     #     already includes an account with that email address.
+    #
+    #   * IDENTITY\_INVALID\_BUSINESS\_VALIDATION: The AWS account that owns
+    #     your organization can't complete business license validation
+    #     because it doesn't have valid identity data.
     #
     #   * INVALID\_ADDRESS: The account could not be created because the
     #     address you provided is not valid.
@@ -799,13 +806,21 @@ module Aws::Organizations
     #
     #   * INTERNAL\_FAILURE: The account could not be created because of an
     #     internal failure. Try again later. If the problem persists,
-    #     contact Customer Support.
+    #     contact AWS Customer Support.
     #
     #   * MISSING\_BUSINESS\_VALIDATION: The AWS account that owns your
     #     organization has not received Business Validation.
     #
     #   * MISSING\_PAYMENT\_INSTRUMENT: You must configure the management
     #     account with a valid payment method, such as a credit card.
+    #
+    #   * PENDING\_BUSINESS\_VALIDATION: The AWS account that owns your
+    #     organization is still in the process of completing business
+    #     license validation.
+    #
+    #   * UNKNOWN\_BUSINESS\_VALIDATION: The AWS account that owns your
+    #     organization has an unknown issue with business license
+    #     validation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus AWS API Documentation
@@ -1297,7 +1312,7 @@ module Aws::Organizations
     # delegated administrator.
     #
     # @!attribute [rw] service_principal
-    #   The name of a service that can request an operation for the
+    #   The name of an AWS service that can request an operation for the
     #   specified service. This is typically in the form of a URL, such as:
     #   ` servicename.amazonaws.com`.
     #   @return [String]
@@ -2109,9 +2124,9 @@ module Aws::Organizations
     # accounts exchange information as a series of handshake requests and
     # responses.
     #
-    # **Note:** Handshakes that are CANCELED, ACCEPTED, or DECLINED show up
-    # in lists for only 30 days after entering that state After that they
-    # are deleted.
+    # **Note:** Handshakes that are `CANCELED`, `ACCEPTED`, or `DECLINED`
+    # show up in lists for only 30 days after entering that state After that
+    # they are deleted.
     #
     # @!attribute [rw] id
     #   The unique identifier (ID) of a handshake. The originating account
@@ -2129,12 +2144,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of a handshake.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] parties
@@ -2266,6 +2281,10 @@ module Aws::Organizations
     #
     # * ORGANIZATION\_ALREADY\_HAS\_ALL\_FEATURES: The handshake request is
     #   invalid because the organization has already enabled all features.
+    #
+    # * ORGANIZATION\_IS\_ALREADY\_PENDING\_ALL\_FEATURES\_MIGRATION: The
+    #   handshake request is invalid because the organization has already
+    #   started the process to enable all features.
     #
     # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: The request
     #   failed because the account is from a different marketplace than the
@@ -2465,6 +2484,9 @@ module Aws::Organizations
     #
     # * INPUT\_REQUIRED: You must include a value for all required
     #   parameters.
+    #
+    # * INVALID\_EMAIL\_ADDRESS\_TARGET: You specified an invalid email
+    #   address for the invited account owner.
     #
     # * INVALID\_ENUM: You specified an invalid value.
     #
@@ -3941,12 +3963,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of an organization.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] feature_set
@@ -3968,12 +3990,12 @@ module Aws::Organizations
     #   the management account for the organization.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] master_account_id
@@ -4053,12 +4075,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of this OU.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4254,12 +4276,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the policy.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4329,12 +4351,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the policy target.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4515,12 +4537,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the root.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name

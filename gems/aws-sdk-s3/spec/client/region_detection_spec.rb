@@ -15,10 +15,10 @@ module Aws
 
       let(:client) { Client.new(client_opts) }
 
-      let(:auth_header_malformed_body) do 
+      let(:auth_header_malformed_body) do
        '<?xml version="1.0" encoding="UTF-8"?>\n<Error><Code>'\
        'AuthorizationHeaderMalformed</Code><Message>The '\
-       "authorization header is malformed; the region 'us-west-2' is"\
+       "authorization header is malformed; the region 'us-west-2' is "\
        "wrong; expecting 'eu-central-1'</Message><Region>"\
        'eu-central-1</Region><RequestId>531B68B3613F5C96</RequestId>'\
        '<HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oek'\
@@ -83,6 +83,46 @@ module Aws
           expect do
             client.put_object(bucket: 'bucket', key: 'keya', body: 'body')
           end.to raise_error(Aws::S3::Errors::AuthorizationHeaderMalformed)
+        end
+      end
+
+      context 'using an access point ARN' do
+        before(:each) do
+          stub_request(:put, 'https://myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com/key')
+            .to_return(status: [400, 'Bad Request'], body: auth_header_malformed_body)
+
+          stub_request(:put, 'https://myendpoint-123456789012.s3-accesspoint.eu-central-1.amazonaws.com/key')
+            .to_return(status: [200, 'Ok'])
+        end
+
+        it 'detects the moved permanently and redirects' do
+          client = S3::Client.new(client_opts.merge(region: 'us-west-2'))
+          expect_any_instance_of(Plugins::S3Signer::BucketRegionErrorHandler).to receive(:warn)
+          bucket = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
+          resp = client.put_object(bucket: bucket, key: 'key', body: 'body')
+          host = resp.context.http_request.endpoint.host
+          expect(host).to eq('myendpoint-123456789012.s3-accesspoint.eu-central-1.amazonaws.com')
+        end
+      end
+
+      context 'using an outpost access point ARN' do
+        before(:each) do
+          stub_request(:put, 'https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com/key')
+            .to_return(status: [400, 'Bad Request'], body: auth_header_malformed_body)
+
+          stub_request(:put, 'https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.eu-central-1.amazonaws.com/key')
+            .to_return(status: [200, 'Ok'])
+        end
+
+        it 'detects the moved permanently and redirects' do
+          client = S3::Client.new(client_opts.merge(region: 'us-west-2'))
+          expect_any_instance_of(Plugins::S3Signer::BucketRegionErrorHandler).to receive(:warn)
+          bucket = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/myaccesspoint'
+          expect_sigv4_service('s3-outposts')
+          resp = client.put_object(bucket: bucket, key: 'key', body: 'body')
+          host = resp.context.http_request.endpoint.host
+          expect(host).to eq('myaccesspoint-123456789012.op-01234567890123456.s3-outposts.eu-central-1.amazonaws.com')
         end
       end
 

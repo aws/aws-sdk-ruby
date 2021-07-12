@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-06-02)
+------------------
+
+* Feature - Introduction of a RETIRED status for devices.
+
+1.7.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.5.0 (2020-10-30)
+------------------
+
+* Feature - This release supports tagging for Amazon Braket quantum-task resources. It also supports tag-based access control for quantum-task APIs.
+
 1.4.0 (2020-09-30)
 ------------------
 

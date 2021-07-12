@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-06-11)
+------------------
+
+* Feature - When you enable source failover, you can now designate one of two sources as the primary source. You can choose between two failover modes to prevent any disruption to the video stream. Merge combines the sources into a single stream. Failover allows switching between a primary and a backup stream.
+
+1.33.0 (2021-05-17)
+------------------
+
+* Feature - MediaConnect now supports JPEG XS for AWS Cloud Digital Interface (AWS CDI) uncompressed workflows, allowing you to establish a bridge between your on-premises live video network and the AWS Cloud.
+
+1.32.0 (2021-04-14)
+------------------
+
+* Feature - For flows that use Listener protocols, you can now easily locate an output's outbound IP address for a private internet. Additionally, MediaConnect now supports the Waiters feature that makes it easier to poll for the status of a flow until it reaches its desired state.
+
+1.31.0 (2021-03-16)
+------------------
+
+* Feature - This release adds support for the SRT-listener protocol on sources and outputs.
+
+1.30.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2020-09-30)
 ------------------
 

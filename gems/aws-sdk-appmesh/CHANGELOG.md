@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-06-10)
+------------------
+
+* Feature - AppMesh now supports additional routing capabilities in match and rewrites for Gateway Routes and Routes. Additionally, App Mesh also supports specifying DNS Response Types in Virtual Nodes.
+
+1.35.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-02-02)
+------------------
+
+* Feature - App Mesh now supports mutual TLS with two-way peer authentication. You can specify client certificates, server-side TLS validation, and matching of Subject Alternative Names.
+
+1.33.0 (2020-11-20)
+------------------
+
+* Feature - This release makes tag value a required attribute of the tag's key-value pair.
+
+1.32.0 (2020-11-05)
+------------------
+
+* Feature - This release adds circuit breaking capabilities to your mesh with connection pooling and outlier detection support.
+
 1.31.0 (2020-09-30)
 ------------------
 

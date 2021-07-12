@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -44,6 +44,8 @@ module Aws::LexModelBuildingService
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentString = Shapes::StringShape.new(name: 'ContentString')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    ContextTimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'ContextTimeToLiveInSeconds')
+    ContextTurnsToLive = Shapes::IntegerShape.new(name: 'ContextTurnsToLive')
     ConversationLogsRequest = Shapes::StructureShape.new(name: 'ConversationLogsRequest')
     ConversationLogsResponse = Shapes::StructureShape.new(name: 'ConversationLogsResponse')
     Count = Shapes::IntegerShape.new(name: 'Count')
@@ -113,6 +115,9 @@ module Aws::LexModelBuildingService
     GroupNumber = Shapes::IntegerShape.new(name: 'GroupNumber')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
+    InputContext = Shapes::StructureShape.new(name: 'InputContext')
+    InputContextList = Shapes::ListShape.new(name: 'InputContextList')
+    InputContextName = Shapes::StringShape.new(name: 'InputContextName')
     Intent = Shapes::StructureShape.new(name: 'Intent')
     IntentList = Shapes::ListShape.new(name: 'IntentList')
     IntentMetadata = Shapes::StructureShape.new(name: 'IntentMetadata')
@@ -146,6 +151,9 @@ module Aws::LexModelBuildingService
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NumericalVersion = Shapes::StringShape.new(name: 'NumericalVersion')
     ObfuscationSetting = Shapes::StringShape.new(name: 'ObfuscationSetting')
+    OutputContext = Shapes::StructureShape.new(name: 'OutputContext')
+    OutputContextList = Shapes::ListShape.new(name: 'OutputContextList')
+    OutputContextName = Shapes::StringShape.new(name: 'OutputContextName')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
     ProcessBehavior = Shapes::StringShape.new(name: 'ProcessBehavior')
@@ -171,6 +179,10 @@ module Aws::LexModelBuildingService
     SessionTTL = Shapes::IntegerShape.new(name: 'SessionTTL')
     Slot = Shapes::StructureShape.new(name: 'Slot')
     SlotConstraint = Shapes::StringShape.new(name: 'SlotConstraint')
+    SlotDefaultValue = Shapes::StructureShape.new(name: 'SlotDefaultValue')
+    SlotDefaultValueList = Shapes::ListShape.new(name: 'SlotDefaultValueList')
+    SlotDefaultValueSpec = Shapes::StructureShape.new(name: 'SlotDefaultValueSpec')
+    SlotDefaultValueString = Shapes::StringShape.new(name: 'SlotDefaultValueString')
     SlotList = Shapes::ListShape.new(name: 'SlotList')
     SlotName = Shapes::StringShape.new(name: 'SlotName')
     SlotTypeConfiguration = Shapes::StructureShape.new(name: 'SlotTypeConfiguration')
@@ -326,6 +338,8 @@ module Aws::LexModelBuildingService
     CreateIntentVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateIntentVersionResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     CreateIntentVersionResponse.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
+    CreateIntentVersionResponse.add_member(:input_contexts, Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
+    CreateIntentVersionResponse.add_member(:output_contexts, Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
     CreateIntentVersionResponse.struct_class = Types::CreateIntentVersionResponse
 
     CreateSlotTypeVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
@@ -560,6 +574,8 @@ module Aws::LexModelBuildingService
     GetIntentResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetIntentResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     GetIntentResponse.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
+    GetIntentResponse.add_member(:input_contexts, Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
+    GetIntentResponse.add_member(:output_contexts, Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
     GetIntentResponse.struct_class = Types::GetIntentResponse
 
     GetIntentVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -622,6 +638,11 @@ module Aws::LexModelBuildingService
     GetUtterancesViewResponse.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, location_name: "botName"))
     GetUtterancesViewResponse.add_member(:utterances, Shapes::ShapeRef.new(shape: ListsOfUtterances, location_name: "utterances"))
     GetUtterancesViewResponse.struct_class = Types::GetUtterancesViewResponse
+
+    InputContext.add_member(:name, Shapes::ShapeRef.new(shape: InputContextName, required: true, location_name: "name"))
+    InputContext.struct_class = Types::InputContext
+
+    InputContextList.member = Shapes::ShapeRef.new(shape: InputContext)
 
     Intent.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, required: true, location_name: "intentName"))
     Intent.add_member(:intent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "intentVersion"))
@@ -690,6 +711,13 @@ module Aws::LexModelBuildingService
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
+
+    OutputContext.add_member(:name, Shapes::ShapeRef.new(shape: OutputContextName, required: true, location_name: "name"))
+    OutputContext.add_member(:time_to_live_in_seconds, Shapes::ShapeRef.new(shape: ContextTimeToLiveInSeconds, required: true, location_name: "timeToLiveInSeconds"))
+    OutputContext.add_member(:turns_to_live, Shapes::ShapeRef.new(shape: ContextTurnsToLive, required: true, location_name: "turnsToLive"))
+    OutputContext.struct_class = Types::OutputContext
+
+    OutputContextList.member = Shapes::ShapeRef.new(shape: OutputContext)
 
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
@@ -773,6 +801,8 @@ module Aws::LexModelBuildingService
     PutIntentRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutIntentRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutIntentRequest.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
+    PutIntentRequest.add_member(:input_contexts, Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
+    PutIntentRequest.add_member(:output_contexts, Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
     PutIntentRequest.struct_class = Types::PutIntentRequest
 
     PutIntentResponse.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, location_name: "name"))
@@ -792,6 +822,8 @@ module Aws::LexModelBuildingService
     PutIntentResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutIntentResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutIntentResponse.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
+    PutIntentResponse.add_member(:input_contexts, Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
+    PutIntentResponse.add_member(:output_contexts, Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
     PutIntentResponse.struct_class = Types::PutIntentResponse
 
     PutSlotTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
@@ -835,7 +867,16 @@ module Aws::LexModelBuildingService
     Slot.add_member(:sample_utterances, Shapes::ShapeRef.new(shape: SlotUtteranceList, location_name: "sampleUtterances"))
     Slot.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
     Slot.add_member(:obfuscation_setting, Shapes::ShapeRef.new(shape: ObfuscationSetting, location_name: "obfuscationSetting"))
+    Slot.add_member(:default_value_spec, Shapes::ShapeRef.new(shape: SlotDefaultValueSpec, location_name: "defaultValueSpec"))
     Slot.struct_class = Types::Slot
+
+    SlotDefaultValue.add_member(:default_value, Shapes::ShapeRef.new(shape: SlotDefaultValueString, required: true, location_name: "defaultValue"))
+    SlotDefaultValue.struct_class = Types::SlotDefaultValue
+
+    SlotDefaultValueList.member = Shapes::ShapeRef.new(shape: SlotDefaultValue)
+
+    SlotDefaultValueSpec.add_member(:default_value_list, Shapes::ShapeRef.new(shape: SlotDefaultValueList, required: true, location_name: "defaultValueList"))
+    SlotDefaultValueSpec.struct_class = Types::SlotDefaultValueSpec
 
     SlotList.member = Shapes::ShapeRef.new(shape: Slot)
 

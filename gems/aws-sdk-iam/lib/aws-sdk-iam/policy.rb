@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -42,7 +42,7 @@ module Aws::IAM
 
     # The stable and unique string identifying the policy.
     #
-    # For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    # For more information about IDs, see [IAM identifiers][1] in the *IAM
     # User Guide*.
     #
     #
@@ -55,7 +55,7 @@ module Aws::IAM
 
     # The path to the policy.
     #
-    # For more information about paths, see [IAM Identifiers][1] in the *IAM
+    # For more information about paths, see [IAM identifiers][1] in the *IAM
     # User Guide*.
     #
     #
@@ -84,7 +84,7 @@ module Aws::IAM
     # to set the permissions boundary.
     #
     # For more information about permissions boundaries, see [Permissions
-    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    # boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -135,6 +135,18 @@ module Aws::IAM
     # @return [Time]
     def update_date
       data[:update_date]
+    end
+
+    # A list of tags that are attached to the instance profile. For more
+    # information about tagging, see [Tagging IAM resources][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -356,12 +368,17 @@ module Aws::IAM
     #   The JSON policy document that you want to use as the content for this
     #   new version of the policy.
     #
-    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   You must provide policies in JSON format in IAM. However, for
     #   CloudFormation templates formatted in YAML, you can provide the policy
-    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
-    #   policy to JSON format before submitting it to IAM.
+    #   in JSON or YAML format. CloudFormation always converts a YAML policy
+    #   to JSON format before submitting it to IAM.
     #
-    #   The [regex pattern][1] used to validate this parameter is a string of
+    #   The maximum length of the policy document that you can pass in this
+    #   operation, including whitespace, is listed below. To view the maximum
+    #   character counts of a managed policy with no whitespaces, see [IAM and
+    #   STS character quotas][1].
+    #
+    #   The [regex pattern][2] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
@@ -375,7 +392,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length
+    #   [2]: http://wikipedia.org/wiki/regex
     # @option options [Boolean] :set_as_default
     #   Specifies whether to set this version as the policy's default
     #   version.
@@ -385,7 +403,7 @@ module Aws::IAM
     #   for the IAM users, groups, and roles that the policy is attached to.
     #
     #   For more information about managed policy versions, see [Versioning
-    #   for Managed Policies][1] in the *IAM User Guide*.
+    #   for managed policies][1] in the *IAM User Guide*.
     #
     #
     #

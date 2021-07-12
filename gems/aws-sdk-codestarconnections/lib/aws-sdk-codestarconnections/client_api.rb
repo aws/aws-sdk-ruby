@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -15,6 +15,7 @@ module Aws::CodeStarconnections
 
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
@@ -63,11 +64,17 @@ module Aws::CodeStarconnections
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TlsCertificate = Shapes::StringShape.new(name: 'TlsCertificate')
+    UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateHostInput = Shapes::StructureShape.new(name: 'UpdateHostInput')
+    UpdateHostOutput = Shapes::StructureShape.new(name: 'UpdateHostOutput')
     Url = Shapes::StringShape.new(name: 'Url')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     Connection.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     Connection.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn"))
@@ -93,9 +100,11 @@ module Aws::CodeStarconnections
     CreateHostInput.add_member(:provider_type, Shapes::ShapeRef.new(shape: ProviderType, required: true, location_name: "ProviderType"))
     CreateHostInput.add_member(:provider_endpoint, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "ProviderEndpoint"))
     CreateHostInput.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    CreateHostInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateHostInput.struct_class = Types::CreateHostInput
 
     CreateHostOutput.add_member(:host_arn, Shapes::ShapeRef.new(shape: HostArn, location_name: "HostArn"))
+    CreateHostOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateHostOutput.struct_class = Types::CreateHostOutput
 
     DeleteConnectionInput.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, required: true, location_name: "ConnectionArn"))
@@ -186,11 +195,21 @@ module Aws::CodeStarconnections
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
+
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    UpdateHostInput.add_member(:host_arn, Shapes::ShapeRef.new(shape: HostArn, required: true, location_name: "HostArn"))
+    UpdateHostInput.add_member(:provider_endpoint, Shapes::ShapeRef.new(shape: Url, location_name: "ProviderEndpoint"))
+    UpdateHostInput.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    UpdateHostInput.struct_class = Types::UpdateHostInput
+
+    UpdateHostOutput.struct_class = Types::UpdateHostOutput
 
     VpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     VpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
@@ -273,6 +292,7 @@ module Aws::CodeStarconnections
         o.input = Shapes::ShapeRef.new(shape: GetHostInput)
         o.output = Shapes::ShapeRef.new(shape: GetHostOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:list_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -329,6 +349,18 @@ module Aws::CodeStarconnections
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_host, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateHost"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateHostInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateHostOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
     end
 

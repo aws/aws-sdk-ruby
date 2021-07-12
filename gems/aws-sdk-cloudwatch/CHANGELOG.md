@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-03-30)
+------------------
+
+* Feature - SDK update for new Metric Streams feature
+
+1.50.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-01-28)
+------------------
+
+* Feature - Update to SDK to support label time zones in CloudWatch GetMetricData
+
+1.47.0 (2020-12-11)
+------------------
+
+* Feature - Documentation updates for monitoring
+
+1.46.0 (2020-11-04)
+------------------
+
+* Feature - Documentation updates for monitoring
+
 1.45.0 (2020-09-30)
 ------------------
 

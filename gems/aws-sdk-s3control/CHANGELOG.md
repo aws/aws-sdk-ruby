@@ -1,6 +1,58 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-06-03)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports S3 Bucket Keys.
+
+1.33.0 (2021-05-11)
+------------------
+
+* Feature - Documentation updates for Amazon S3-control
+
+1.32.0 (2021-03-24)
+------------------
+
+* Feature - Documentation updates for s3-control
+
+1.31.0 (2021-03-18)
+------------------
+
+* Feature - S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request
+
+1.30.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-03-08)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
+1.28.0 (2021-02-23)
+------------------
+
+* Feature - Documentation updates for s3-control
+
+1.27.0 (2021-02-02)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports Delete Object Tagging
+
+* Feature - Support PrivateLink using the client `:endpoint` option. This patch has several minor behavioral changes. 1) Any operation using the `outpost_id` parameter with a client configured with `:use_dualstack_endpoint` will now raise an `ArgumentError` as dualstack is not supported by S3 Outposts. 2) Fix a bug where clients configured with `:use_dualstack_endpoint` resolved to the wrong endpoint by not prefixing the account id to the host. 3) A client constructed using both `:use_dualstack_endpoint` and `:endpoint` will now raise an `ArgumentError`.
+
+1.26.0 (2021-01-14)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports restoring objects from the S3 Intelligent-Tiering Archive Access and Deep Archive Access tiers.
+
+1.25.0 (2020-11-18)
+------------------
+
+* Feature - AWS S3 Storage Lens provides visibility into your storage usage and activity trends at the organization or account level, with aggregations by Region, storage class, bucket, and prefix.
+
 1.24.0 (2020-09-30)
 ------------------
 

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -655,8 +655,8 @@ module Aws::CloudTrail
     #
     # * If your event selector includes management events.
     #
-    # * If your event selector includes data events, the Amazon S3 objects
-    #   or AWS Lambda functions that you are logging for data events.
+    # * If your event selector includes data events, the resources on which
+    #   you are logging data events.
     #
     # For more information, see [Logging Data and Management Events for
     # Trails ][1] in the *AWS CloudTrail User Guide*.
@@ -689,6 +689,7 @@ module Aws::CloudTrail
     #
     #   * {Types::GetEventSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::GetEventSelectorsResponse#event_selectors #event_selectors} => Array&lt;Types::EventSelector&gt;
+    #   * {Types::GetEventSelectorsResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -708,6 +709,22 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
     #   resp.event_selectors[0].exclude_management_event_sources #=> Array
     #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors AWS API Documentation
     #
@@ -1065,8 +1082,8 @@ module Aws::CloudTrail
     # 50, with a maximum of 50 possible. The response includes a token that
     # you can use to get the next page of results.
     #
-    # The rate of lookup requests is limited to two per second per account.
-    # If this limit is exceeded, a throttling error occurs.
+    # The rate of lookup requests is limited to two per second, per account,
+    # per region. If this limit is exceeded, a throttling error occurs.
     #
     #
     #
@@ -1152,16 +1169,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Configures an event selector for your trail. Use event selectors to
-    # further specify the management and data event settings for your trail.
-    # By default, trails created without specific event selectors will be
-    # configured to log all read and write management events, and no data
-    # events.
+    # Configures an event selector or advanced event selectors for your
+    # trail. Use event selectors or advanced event selectors to specify
+    # management and data event settings for your trail. By default, trails
+    # created without specific event selectors are configured to log all
+    # read and write management events, and no data events.
     #
     # When an event occurs in your account, CloudTrail evaluates the event
-    # selectors in all trails. For each trail, if the event matches any
-    # event selector, the trail processes and logs the event. If the event
-    # doesn't match any event selector, the trail doesn't log the event.
+    # selectors or advanced event selectors in all trails. For each trail,
+    # if the event matches any event selector, the trail processes and logs
+    # the event. If the event doesn't match any event selector, the trail
+    # doesn't log the event.
     #
     # Example
     #
@@ -1177,21 +1195,30 @@ module Aws::CloudTrail
     # 4.  The `RunInstances` is a write-only event and it matches your event
     #     selector. The trail logs the event.
     #
-    # 5.  The `GetConsoleOutput` is a read-only event but it doesn't match
+    # 5.  The `GetConsoleOutput` is a read-only event that doesn't match
     #     your event selector. The trail doesn't log the event.
     #
     # The `PutEventSelectors` operation must be called from the region in
     # which the trail was created; otherwise, an
-    # `InvalidHomeRegionException` is thrown.
+    # `InvalidHomeRegionException` exception is thrown.
     #
     # You can configure up to five event selectors for each trail. For more
-    # information, see [Logging Data and Management Events for Trails ][1]
-    # and [Limits in AWS CloudTrail][2] in the *AWS CloudTrail User Guide*.
+    # information, see [Logging data and management events for trails ][1]
+    # and [Quotas in AWS CloudTrail][2] in the *AWS CloudTrail User Guide*.
+    #
+    # You can add advanced event selectors, and conditions for your advanced
+    # event selectors, up to a maximum of 500 values for all conditions and
+    # selectors on a trail. You can use either `AdvancedEventSelectors` or
+    # `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
+    # to a trail, any existing `EventSelectors` are overwritten. For more
+    # information about advanced event selectors, see [Logging data events
+    # for trails][3] in the *AWS CloudTrail User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -1213,20 +1240,38 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
-    # @option params [required, Array<Types::EventSelector>] :event_selectors
+    # @option params [Array<Types::EventSelector>] :event_selectors
     #   Specifies the settings for your event selectors. You can configure up
-    #   to five event selectors for a trail.
+    #   to five event selectors for a trail. You can use either
+    #   `EventSelectors` or `AdvancedEventSelectors` in a `PutEventSelectors`
+    #   request, but not both. If you apply `EventSelectors` to a trail, any
+    #   existing `AdvancedEventSelectors` are overwritten.
+    #
+    # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
+    #   Specifies the settings for advanced event selectors. You can add
+    #   advanced event selectors, and conditions for your advanced event
+    #   selectors, up to a maximum of 500 values for all conditions and
+    #   selectors on a trail. You can use either `AdvancedEventSelectors` or
+    #   `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
+    #   to a trail, any existing `EventSelectors` are overwritten. For more
+    #   information about advanced event selectors, see [Logging data events
+    #   for trails][1] in the *AWS CloudTrail User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #
     # @return [Types::PutEventSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutEventSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::PutEventSelectorsResponse#event_selectors #event_selectors} => Array&lt;Types::EventSelector&gt;
+    #   * {Types::PutEventSelectorsResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_event_selectors({
     #     trail_name: "String", # required
-    #     event_selectors: [ # required
+    #     event_selectors: [
     #       {
     #         read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
     #         include_management_events: false,
@@ -1237,6 +1282,22 @@ module Aws::CloudTrail
     #           },
     #         ],
     #         exclude_management_event_sources: ["String"],
+    #       },
+    #     ],
+    #     advanced_event_selectors: [
+    #       {
+    #         name: "SelectorName",
+    #         field_selectors: [ # required
+    #           {
+    #             field: "SelectorField", # required
+    #             equals: ["OperatorValue"],
+    #             starts_with: ["OperatorValue"],
+    #             ends_with: ["OperatorValue"],
+    #             not_equals: ["OperatorValue"],
+    #             not_starts_with: ["OperatorValue"],
+    #             not_ends_with: ["OperatorValue"],
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1253,6 +1314,22 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
     #   resp.event_selectors[0].exclude_management_event_sources #=> Array
     #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors AWS API Documentation
     #
@@ -1593,7 +1670,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

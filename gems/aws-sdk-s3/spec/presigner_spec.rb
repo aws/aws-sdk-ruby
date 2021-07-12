@@ -47,6 +47,14 @@ module Aws
           expect(client.api_requests.size).to eq(1)
         end
 
+        it 'labels context as a presigned request before handlers are invoked' do
+          expect do |block|
+            client.handle_request(&block)
+
+            subject.presigned_url(:get_object, bucket: 'bkt', key: 'k')
+          end.to yield_with_args { |c| c[:presigned_url] == true }
+        end
+
         it 'can be excluded from being tracked as an api request' do
           subject.presigned_url(:get_object, bucket: 'bkt', key: 'k')
           expect(client.api_requests(exclude_presign: true)).to be_empty
@@ -162,6 +170,14 @@ module Aws
           expect(client.api_requests.size).to eq(1)
         end
 
+        it 'labels context as a presigned request before handlers are invoked' do
+          expect do |block|
+            client.handle_request(&block)
+
+            subject.presigned_request(:get_object, bucket: 'bkt', key: 'k')
+          end.to yield_with_args { |c| c[:presigned_url] == true }
+        end
+
         it 'can be excluded from being tracked as an api request' do
           subject.presigned_request(:get_object, bucket: 'bkt', key: 'k')
           expect(client.api_requests(exclude_presign: true)).to be_empty
@@ -267,6 +283,38 @@ module Aws
           )
           expect(url).to match(/X-Amz-SignedHeaders=host%3Bx-amz-acl/)
           expect(headers).to eq('x-amz-acl' => 'public-read')
+        end
+      end
+
+      context 'outpost access point ARNs' do
+        it 'uses s3-outposts as the service' do
+          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          expected_service = 's3-outposts'
+          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2Fus-west-2%2F#{expected_service}%2Faws4_request")
+        end
+
+        it 'uses the resolved-region' do
+          arn_region = 'us-east-1'
+          arn = "arn:aws:s3-outposts:#{arn_region}:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F#{arn_region}%2Fs3-outposts%2Faws4_request")
+        end
+      end
+
+      context 'access point ARN' do
+        it 'uses s3as the service' do
+          arn = 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
+          url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          expected_service = 's3'
+          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2Fus-west-2%2F#{expected_service}%2Faws4_request")
+        end
+
+        it 'uses the resolved-region' do
+          arn_region = 'us-east-1'
+          arn = "arn:aws:s3:#{arn_region}:123456789012:accesspoint/myendpoint"
+          url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F#{arn_region}%2Fs3%2Faws4_request")
         end
       end
     end

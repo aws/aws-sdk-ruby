@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -192,6 +192,7 @@ module Aws::ElasticBeanstalk
     ManagedAction = Shapes::StructureShape.new(name: 'ManagedAction')
     ManagedActionHistoryItem = Shapes::StructureShape.new(name: 'ManagedActionHistoryItem')
     ManagedActionHistoryItems = Shapes::ListShape.new(name: 'ManagedActionHistoryItems')
+    ManagedActionHistoryMaxItems = Shapes::IntegerShape.new(name: 'ManagedActionHistoryMaxItems')
     ManagedActionInvalidStateException = Shapes::StructureShape.new(name: 'ManagedActionInvalidStateException')
     ManagedActions = Shapes::ListShape.new(name: 'ManagedActions')
     MaxAgeRule = Shapes::StructureShape.new(name: 'MaxAgeRule')
@@ -642,7 +643,7 @@ module Aws::ElasticBeanstalk
     DescribeEnvironmentManagedActionHistoryRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     DescribeEnvironmentManagedActionHistoryRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     DescribeEnvironmentManagedActionHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeEnvironmentManagedActionHistoryRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxItems"))
+    DescribeEnvironmentManagedActionHistoryRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: ManagedActionHistoryMaxItems, location_name: "MaxItems"))
     DescribeEnvironmentManagedActionHistoryRequest.struct_class = Types::DescribeEnvironmentManagedActionHistoryRequest
 
     DescribeEnvironmentManagedActionHistoryResult.add_member(:managed_action_history_items, Shapes::ShapeRef.new(shape: ManagedActionHistoryItems, location_name: "ManagedActionHistoryItems"))

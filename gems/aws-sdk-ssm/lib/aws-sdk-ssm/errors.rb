@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -34,6 +34,7 @@ module Aws::SSM
   # * {AssociationExecutionDoesNotExist}
   # * {AssociationLimitExceeded}
   # * {AssociationVersionLimitExceeded}
+  # * {AutomationDefinitionNotApprovedException}
   # * {AutomationDefinitionNotFoundException}
   # * {AutomationDefinitionVersionNotFoundException}
   # * {AutomationExecutionLimitExceededException}
@@ -110,6 +111,14 @@ module Aws::SSM
   # * {OpsItemInvalidParameterException}
   # * {OpsItemLimitExceededException}
   # * {OpsItemNotFoundException}
+  # * {OpsItemRelatedItemAlreadyExistsException}
+  # * {OpsItemRelatedItemAssociationNotFoundException}
+  # * {OpsMetadataAlreadyExistsException}
+  # * {OpsMetadataInvalidArgumentException}
+  # * {OpsMetadataKeyLimitExceededException}
+  # * {OpsMetadataLimitExceededException}
+  # * {OpsMetadataNotFoundException}
+  # * {OpsMetadataTooManyUpdatesException}
   # * {ParameterAlreadyExists}
   # * {ParameterLimitExceeded}
   # * {ParameterMaxVersionLimitExceeded}
@@ -227,6 +236,21 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::AssociationVersionLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class AutomationDefinitionNotApprovedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AutomationDefinitionNotApprovedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1362,6 +1386,136 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::OpsItemNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpsItemRelatedItemAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsItemRelatedItemAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_uri
+        @data[:resource_uri]
+      end
+
+      # @return [String]
+      def ops_item_id
+        @data[:ops_item_id]
+      end
+    end
+
+    class OpsItemRelatedItemAssociationNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsItemRelatedItemAssociationNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpsMetadataAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsMetadataAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpsMetadataInvalidArgumentException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsMetadataInvalidArgumentException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpsMetadataKeyLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsMetadataKeyLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpsMetadataLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsMetadataLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpsMetadataNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsMetadataNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpsMetadataTooManyUpdatesException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsMetadataTooManyUpdatesException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

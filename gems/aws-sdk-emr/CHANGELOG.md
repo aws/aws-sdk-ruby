@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-03-15)
+------------------
+
+* Feature - Amazon EMR customers can now specify Resource Group to target Capacity Reservations in their EMR clusters with instance fleets using allocation strategy.
+
+1.44.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2021-03-08)
+------------------
+
+* Feature - Amazon EMR customers can now specify how EC2 On-Demand Capacity Reservations are used in their EMR clusters with instance fleets using allocation strategy.
+
+1.42.0 (2021-02-26)
+------------------
+
+* Feature - Added UpdateStudio API that allows updating a few attributes of an EMR Studio.
+
+1.41.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-11-23)
+------------------
+
+* Feature - Add API support for EMR Studio, a new notebook-first IDE for data scientists and data engineers with single sign-on, Jupyter notebooks, automated infrastructure provisioning, and job diagnosis.
+
 1.39.0 (2020-10-01)
 ------------------
 

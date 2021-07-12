@@ -73,6 +73,8 @@ group :test do
     gem 'cucumber', '2.99.0'
     # hashdiff drop support for Ruby under 2.0 since 0.3.9
     gem 'hashdiff', '0.3.8'
+    # crack added a dependency on rexml in 0.4.5
+    gem 'crack', '0.4.4'
   elsif RUBY_VERSION == '2.0.0'
     # public_suffix released 3.0.3 which support ruby >= 2.1
     gem 'public_suffix', '2.0.5'
@@ -81,6 +83,8 @@ group :test do
     gem 'webmock'
     # cucumber drop support for Ruby under 2.2 after 3.0.0
     gem 'cucumber', '2.99.0'
+    # Versions of rexml above 3.2.4 introduce breaking changes for ruby 2.0.0
+    gem 'rexml', '3.2.4'
   elsif RUBY_VERSION < '2.2'
     gem 'addressable'
     gem 'webmock'

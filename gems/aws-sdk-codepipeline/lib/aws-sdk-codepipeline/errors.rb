@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -28,9 +28,11 @@ module Aws::CodePipeline
   #
   # ## Error Classes
   # * {ActionNotFoundException}
+  # * {ActionTypeAlreadyExistsException}
   # * {ActionTypeNotFoundException}
   # * {ApprovalAlreadyCompletedException}
   # * {ConcurrentModificationException}
+  # * {ConflictException}
   # * {DuplicatedStopRequestException}
   # * {InvalidActionDeclarationException}
   # * {InvalidApprovalTokenException}
@@ -55,6 +57,7 @@ module Aws::CodePipeline
   # * {PipelineNameInUseException}
   # * {PipelineNotFoundException}
   # * {PipelineVersionNotFoundException}
+  # * {RequestFailedException}
   # * {ResourceNotFoundException}
   # * {StageNotFoundException}
   # * {StageNotRetryableException}
@@ -73,6 +76,16 @@ module Aws::CodePipeline
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodePipeline::Types::ActionNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ActionTypeAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::ActionTypeAlreadyExistsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -103,6 +116,21 @@ module Aws::CodePipeline
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodePipeline::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -375,6 +403,21 @@ module Aws::CodePipeline
       # @param [Aws::CodePipeline::Types::PipelineVersionNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class RequestFailedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::RequestFailedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

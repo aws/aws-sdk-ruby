@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -30,7 +30,7 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 # structure.
 #
 #     transcribe_streaming_service = Aws::TranscribeStreamingService::Client.new
-#     resp = transcribe_streaming_service.start_stream_transcription(params)
+#     resp = transcribe_streaming_service.start_medical_stream_transcription(params)
 #
 # See {Client} for more information.
 #
@@ -50,6 +50,6 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 # @!group service
 module Aws::TranscribeStreamingService
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.29.0'
 
 end

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -32,6 +32,8 @@ module Aws::Athena
     CreateDataCatalogOutput = Shapes::StructureShape.new(name: 'CreateDataCatalogOutput')
     CreateNamedQueryInput = Shapes::StructureShape.new(name: 'CreateNamedQueryInput')
     CreateNamedQueryOutput = Shapes::StructureShape.new(name: 'CreateNamedQueryOutput')
+    CreatePreparedStatementInput = Shapes::StructureShape.new(name: 'CreatePreparedStatementInput')
+    CreatePreparedStatementOutput = Shapes::StructureShape.new(name: 'CreatePreparedStatementOutput')
     CreateWorkGroupInput = Shapes::StructureShape.new(name: 'CreateWorkGroupInput')
     CreateWorkGroupOutput = Shapes::StructureShape.new(name: 'CreateWorkGroupOutput')
     DataCatalog = Shapes::StructureShape.new(name: 'DataCatalog')
@@ -47,11 +49,15 @@ module Aws::Athena
     DeleteDataCatalogOutput = Shapes::StructureShape.new(name: 'DeleteDataCatalogOutput')
     DeleteNamedQueryInput = Shapes::StructureShape.new(name: 'DeleteNamedQueryInput')
     DeleteNamedQueryOutput = Shapes::StructureShape.new(name: 'DeleteNamedQueryOutput')
+    DeletePreparedStatementInput = Shapes::StructureShape.new(name: 'DeletePreparedStatementInput')
+    DeletePreparedStatementOutput = Shapes::StructureShape.new(name: 'DeletePreparedStatementOutput')
     DeleteWorkGroupInput = Shapes::StructureShape.new(name: 'DeleteWorkGroupInput')
     DeleteWorkGroupOutput = Shapes::StructureShape.new(name: 'DeleteWorkGroupOutput')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionOption = Shapes::StringShape.new(name: 'EncryptionOption')
+    EngineVersion = Shapes::StructureShape.new(name: 'EngineVersion')
+    EngineVersionsList = Shapes::ListShape.new(name: 'EngineVersionsList')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpressionString = Shapes::StringShape.new(name: 'ExpressionString')
@@ -61,6 +67,8 @@ module Aws::Athena
     GetDatabaseOutput = Shapes::StructureShape.new(name: 'GetDatabaseOutput')
     GetNamedQueryInput = Shapes::StructureShape.new(name: 'GetNamedQueryInput')
     GetNamedQueryOutput = Shapes::StructureShape.new(name: 'GetNamedQueryOutput')
+    GetPreparedStatementInput = Shapes::StructureShape.new(name: 'GetPreparedStatementInput')
+    GetPreparedStatementOutput = Shapes::StructureShape.new(name: 'GetPreparedStatementOutput')
     GetQueryExecutionInput = Shapes::StructureShape.new(name: 'GetQueryExecutionInput')
     GetQueryExecutionOutput = Shapes::StructureShape.new(name: 'GetQueryExecutionOutput')
     GetQueryResultsInput = Shapes::StructureShape.new(name: 'GetQueryResultsInput')
@@ -78,8 +86,12 @@ module Aws::Athena
     ListDataCatalogsOutput = Shapes::StructureShape.new(name: 'ListDataCatalogsOutput')
     ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
     ListDatabasesOutput = Shapes::StructureShape.new(name: 'ListDatabasesOutput')
+    ListEngineVersionsInput = Shapes::StructureShape.new(name: 'ListEngineVersionsInput')
+    ListEngineVersionsOutput = Shapes::StructureShape.new(name: 'ListEngineVersionsOutput')
     ListNamedQueriesInput = Shapes::StructureShape.new(name: 'ListNamedQueriesInput')
     ListNamedQueriesOutput = Shapes::StructureShape.new(name: 'ListNamedQueriesOutput')
+    ListPreparedStatementsInput = Shapes::StructureShape.new(name: 'ListPreparedStatementsInput')
+    ListPreparedStatementsOutput = Shapes::StructureShape.new(name: 'ListPreparedStatementsOutput')
     ListQueryExecutionsInput = Shapes::StructureShape.new(name: 'ListQueryExecutionsInput')
     ListQueryExecutionsOutput = Shapes::StructureShape.new(name: 'ListQueryExecutionsOutput')
     ListTableMetadataInput = Shapes::StructureShape.new(name: 'ListTableMetadataInput')
@@ -91,7 +103,9 @@ module Aws::Athena
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxDataCatalogsCount = Shapes::IntegerShape.new(name: 'MaxDataCatalogsCount')
     MaxDatabasesCount = Shapes::IntegerShape.new(name: 'MaxDatabasesCount')
+    MaxEngineVersionsCount = Shapes::IntegerShape.new(name: 'MaxEngineVersionsCount')
     MaxNamedQueriesCount = Shapes::IntegerShape.new(name: 'MaxNamedQueriesCount')
+    MaxPreparedStatementsCount = Shapes::IntegerShape.new(name: 'MaxPreparedStatementsCount')
     MaxQueryExecutionsCount = Shapes::IntegerShape.new(name: 'MaxQueryExecutionsCount')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
     MaxTableMetadataCount = Shapes::IntegerShape.new(name: 'MaxTableMetadataCount')
@@ -105,6 +119,9 @@ module Aws::Athena
     NamedQueryList = Shapes::ListShape.new(name: 'NamedQueryList')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
+    PreparedStatement = Shapes::StructureShape.new(name: 'PreparedStatement')
+    PreparedStatementSummary = Shapes::StructureShape.new(name: 'PreparedStatementSummary')
+    PreparedStatementsList = Shapes::ListShape.new(name: 'PreparedStatementsList')
     QueryExecution = Shapes::StructureShape.new(name: 'QueryExecution')
     QueryExecutionContext = Shapes::StructureShape.new(name: 'QueryExecutionContext')
     QueryExecutionId = Shapes::StringShape.new(name: 'QueryExecutionId')
@@ -123,6 +140,7 @@ module Aws::Athena
     RowList = Shapes::ListShape.new(name: 'RowList')
     StartQueryExecutionInput = Shapes::StructureShape.new(name: 'StartQueryExecutionInput')
     StartQueryExecutionOutput = Shapes::StructureShape.new(name: 'StartQueryExecutionOutput')
+    StatementName = Shapes::StringShape.new(name: 'StatementName')
     StatementType = Shapes::StringShape.new(name: 'StatementType')
     StopQueryExecutionInput = Shapes::StructureShape.new(name: 'StopQueryExecutionInput')
     StopQueryExecutionOutput = Shapes::StructureShape.new(name: 'StopQueryExecutionOutput')
@@ -150,6 +168,8 @@ module Aws::Athena
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateDataCatalogInput = Shapes::StructureShape.new(name: 'UpdateDataCatalogInput')
     UpdateDataCatalogOutput = Shapes::StructureShape.new(name: 'UpdateDataCatalogOutput')
+    UpdatePreparedStatementInput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementInput')
+    UpdatePreparedStatementOutput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementOutput')
     UpdateWorkGroupInput = Shapes::StructureShape.new(name: 'UpdateWorkGroupInput')
     UpdateWorkGroupOutput = Shapes::StructureShape.new(name: 'UpdateWorkGroupOutput')
     WorkGroup = Shapes::StructureShape.new(name: 'WorkGroup')
@@ -218,6 +238,14 @@ module Aws::Athena
     CreateNamedQueryOutput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, location_name: "NamedQueryId"))
     CreateNamedQueryOutput.struct_class = Types::CreateNamedQueryOutput
 
+    CreatePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
+    CreatePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    CreatePreparedStatementInput.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryStatement"))
+    CreatePreparedStatementInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreatePreparedStatementInput.struct_class = Types::CreatePreparedStatementInput
+
+    CreatePreparedStatementOutput.struct_class = Types::CreatePreparedStatementOutput
+
     CreateWorkGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "Name"))
     CreateWorkGroupInput.add_member(:configuration, Shapes::ShapeRef.new(shape: WorkGroupConfiguration, location_name: "Configuration"))
     CreateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
@@ -258,6 +286,12 @@ module Aws::Athena
 
     DeleteNamedQueryOutput.struct_class = Types::DeleteNamedQueryOutput
 
+    DeletePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
+    DeletePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    DeletePreparedStatementInput.struct_class = Types::DeletePreparedStatementInput
+
+    DeletePreparedStatementOutput.struct_class = Types::DeletePreparedStatementOutput
+
     DeleteWorkGroupInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     DeleteWorkGroupInput.add_member(:recursive_delete_option, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RecursiveDeleteOption"))
     DeleteWorkGroupInput.struct_class = Types::DeleteWorkGroupInput
@@ -267,6 +301,12 @@ module Aws::Athena
     EncryptionConfiguration.add_member(:encryption_option, Shapes::ShapeRef.new(shape: EncryptionOption, required: true, location_name: "EncryptionOption"))
     EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: String, location_name: "KmsKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    EngineVersion.add_member(:selected_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "SelectedEngineVersion"))
+    EngineVersion.add_member(:effective_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "EffectiveEngineVersion"))
+    EngineVersion.struct_class = Types::EngineVersion
+
+    EngineVersionsList.member = Shapes::ShapeRef.new(shape: EngineVersion)
 
     GetDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     GetDataCatalogInput.struct_class = Types::GetDataCatalogInput
@@ -286,6 +326,13 @@ module Aws::Athena
 
     GetNamedQueryOutput.add_member(:named_query, Shapes::ShapeRef.new(shape: NamedQuery, location_name: "NamedQuery"))
     GetNamedQueryOutput.struct_class = Types::GetNamedQueryOutput
+
+    GetPreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
+    GetPreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    GetPreparedStatementInput.struct_class = Types::GetPreparedStatementInput
+
+    GetPreparedStatementOutput.add_member(:prepared_statement, Shapes::ShapeRef.new(shape: PreparedStatement, location_name: "PreparedStatement"))
+    GetPreparedStatementOutput.struct_class = Types::GetPreparedStatementOutput
 
     GetQueryExecutionInput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, required: true, location_name: "QueryExecutionId"))
     GetQueryExecutionInput.struct_class = Types::GetQueryExecutionInput
@@ -341,6 +388,14 @@ module Aws::Athena
     ListDatabasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDatabasesOutput.struct_class = Types::ListDatabasesOutput
 
+    ListEngineVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListEngineVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEngineVersionsCount, location_name: "MaxResults"))
+    ListEngineVersionsInput.struct_class = Types::ListEngineVersionsInput
+
+    ListEngineVersionsOutput.add_member(:engine_versions, Shapes::ShapeRef.new(shape: EngineVersionsList, location_name: "EngineVersions"))
+    ListEngineVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListEngineVersionsOutput.struct_class = Types::ListEngineVersionsOutput
+
     ListNamedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxNamedQueriesCount, location_name: "MaxResults"))
     ListNamedQueriesInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
@@ -349,6 +404,15 @@ module Aws::Athena
     ListNamedQueriesOutput.add_member(:named_query_ids, Shapes::ShapeRef.new(shape: NamedQueryIdList, location_name: "NamedQueryIds"))
     ListNamedQueriesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesOutput.struct_class = Types::ListNamedQueriesOutput
+
+    ListPreparedStatementsInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    ListPreparedStatementsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPreparedStatementsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPreparedStatementsCount, location_name: "MaxResults"))
+    ListPreparedStatementsInput.struct_class = Types::ListPreparedStatementsInput
+
+    ListPreparedStatementsOutput.add_member(:prepared_statements, Shapes::ShapeRef.new(shape: PreparedStatementsList, location_name: "PreparedStatements"))
+    ListPreparedStatementsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPreparedStatementsOutput.struct_class = Types::ListPreparedStatementsOutput
 
     ListQueryExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListQueryExecutionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxQueryExecutionsCount, location_name: "MaxResults"))
@@ -405,6 +469,19 @@ module Aws::Athena
     ParametersMap.key = Shapes::ShapeRef.new(shape: KeyString)
     ParametersMap.value = Shapes::ShapeRef.new(shape: ParametersMapValue)
 
+    PreparedStatement.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, location_name: "StatementName"))
+    PreparedStatement.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryString, location_name: "QueryStatement"))
+    PreparedStatement.add_member(:work_group_name, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroupName"))
+    PreparedStatement.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    PreparedStatement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedTime"))
+    PreparedStatement.struct_class = Types::PreparedStatement
+
+    PreparedStatementSummary.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, location_name: "StatementName"))
+    PreparedStatementSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedTime"))
+    PreparedStatementSummary.struct_class = Types::PreparedStatementSummary
+
+    PreparedStatementsList.member = Shapes::ShapeRef.new(shape: PreparedStatementSummary)
+
     QueryExecution.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
     QueryExecution.add_member(:query, Shapes::ShapeRef.new(shape: QueryString, location_name: "Query"))
     QueryExecution.add_member(:statement_type, Shapes::ShapeRef.new(shape: StatementType, location_name: "StatementType"))
@@ -413,6 +490,7 @@ module Aws::Athena
     QueryExecution.add_member(:status, Shapes::ShapeRef.new(shape: QueryExecutionStatus, location_name: "Status"))
     QueryExecution.add_member(:statistics, Shapes::ShapeRef.new(shape: QueryExecutionStatistics, location_name: "Statistics"))
     QueryExecution.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
+    QueryExecution.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     QueryExecution.struct_class = Types::QueryExecution
 
     QueryExecutionContext.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseString, location_name: "Database"))
@@ -536,6 +614,14 @@ module Aws::Athena
 
     UpdateDataCatalogOutput.struct_class = Types::UpdateDataCatalogOutput
 
+    UpdatePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
+    UpdatePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    UpdatePreparedStatementInput.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryStatement"))
+    UpdatePreparedStatementInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdatePreparedStatementInput.struct_class = Types::UpdatePreparedStatementInput
+
+    UpdatePreparedStatementOutput.struct_class = Types::UpdatePreparedStatementOutput
+
     UpdateWorkGroupInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     UpdateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
     UpdateWorkGroupInput.add_member(:configuration_updates, Shapes::ShapeRef.new(shape: WorkGroupConfigurationUpdates, location_name: "ConfigurationUpdates"))
@@ -556,6 +642,7 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:publish_cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "PublishCloudWatchMetricsEnabled"))
     WorkGroupConfiguration.add_member(:bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BytesScannedCutoffValue, location_name: "BytesScannedCutoffPerQuery"))
     WorkGroupConfiguration.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
+    WorkGroupConfiguration.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     WorkGroupConfiguration.struct_class = Types::WorkGroupConfiguration
 
     WorkGroupConfigurationUpdates.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
@@ -564,12 +651,14 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BytesScannedCutoffValue, location_name: "BytesScannedCutoffPerQuery"))
     WorkGroupConfigurationUpdates.add_member(:remove_bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveBytesScannedCutoffPerQuery"))
     WorkGroupConfigurationUpdates.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
+    WorkGroupConfigurationUpdates.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     WorkGroupConfigurationUpdates.struct_class = Types::WorkGroupConfigurationUpdates
 
     WorkGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "Name"))
     WorkGroupSummary.add_member(:state, Shapes::ShapeRef.new(shape: WorkGroupState, location_name: "State"))
     WorkGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
     WorkGroupSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    WorkGroupSummary.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     WorkGroupSummary.struct_class = Types::WorkGroupSummary
 
     WorkGroupsList.member = Shapes::ShapeRef.new(shape: WorkGroupSummary)
@@ -634,6 +723,16 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:create_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePreparedStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePreparedStatementInput)
+        o.output = Shapes::ShapeRef.new(shape: CreatePreparedStatementOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:create_work_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkGroup"
         o.http_method = "POST"
@@ -662,6 +761,17 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: DeleteNamedQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:delete_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePreparedStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePreparedStatementInput)
+        o.output = Shapes::ShapeRef.new(shape: DeletePreparedStatementOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_work_group, Seahorse::Model::Operation.new.tap do |o|
@@ -703,6 +813,17 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: GetNamedQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPreparedStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPreparedStatementInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPreparedStatementOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_query_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -785,12 +906,38 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:list_engine_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEngineVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEngineVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListEngineVersionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:list_named_queries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNamedQueries"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListNamedQueriesInput)
         o.output = Shapes::ShapeRef.new(shape: ListNamedQueriesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_prepared_statements, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPreparedStatements"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPreparedStatementsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListPreparedStatementsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(
@@ -918,6 +1065,17 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: UpdateDataCatalogOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePreparedStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePreparedStatementInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePreparedStatementOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_work_group, Seahorse::Model::Operation.new.tap do |o|

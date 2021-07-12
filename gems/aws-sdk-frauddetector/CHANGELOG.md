@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-07-09)
+------------------
+
+* Feature - This release adds support for ML Explainability to display model variable importance value in Amazon Fraud Detector.
+
+1.18.0 (2021-03-30)
+------------------
+
+* Feature - This release adds support for Batch Predictions in Amazon Fraud Detector.
+
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2021-01-13)
+------------------
+
+* Feature - Added support for cancelling a model version that is TRAINING_IN_PROGRESS.
+
+1.14.0 (2020-11-05)
+------------------
+
+* Feature - Added support for deleting resources like Variables, ExternalModels, Outcomes, Models, ModelVersions, Labels, EventTypes and EntityTypes. Updated DeleteEvent operation to catch missing exceptions.
+
 1.13.0 (2020-09-30)
 ------------------
 

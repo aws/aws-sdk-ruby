@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -79,6 +79,7 @@ module Aws::MarketplaceCatalog
     #           identifier: "Identifier",
     #         },
     #         details: "Json", # required
+    #         change_name: "ChangeName",
     #       }
     #
     # @!attribute [rw] change_type
@@ -96,12 +97,17 @@ module Aws::MarketplaceCatalog
     #   requested change.
     #   @return [String]
     #
+    # @!attribute [rw] change_name
+    #   Optional name for the change.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/Change AWS API Documentation
     #
     class Change < Struct.new(
       :change_type,
       :entity,
-      :details)
+      :details,
+      :change_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -185,13 +191,18 @@ module Aws::MarketplaceCatalog
     #   An array of `ErrorDetail` objects associated with the change.
     #   @return [Array<Types::ErrorDetail>]
     #
+    # @!attribute [rw] change_name
+    #   Optional name for the change.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ChangeSummary AWS API Documentation
     #
     class ChangeSummary < Struct.new(
       :change_type,
       :entity,
       :details,
-      :error_detail_list)
+      :error_detail_list,
+      :change_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -347,9 +358,8 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # A product entity contains data that describes your product, its
-    # supported features, and how it can be used or launched by your
-    # customer.
+    # An entity contains data that describes your product, its supported
+    # features, and how it can be used or launched by your customer.
     #
     # @note When making an API call, you may pass Entity
     #   data as a hash:
@@ -450,7 +460,7 @@ module Aws::MarketplaceCatalog
     #
     #       {
     #         name: "FilterName",
-    #         value_list: ["StringValue"],
+    #         value_list: ["FilterValueContent"],
     #       }
     #
     # @!attribute [rw] name
@@ -518,7 +528,7 @@ module Aws::MarketplaceCatalog
     #         filter_list: [
     #           {
     #             name: "FilterName",
-    #             value_list: ["StringValue"],
+    #             value_list: ["FilterValueContent"],
     #           },
     #         ],
     #         sort: {
@@ -591,7 +601,7 @@ module Aws::MarketplaceCatalog
     #         filter_list: [
     #           {
     #             name: "FilterName",
-    #             value_list: ["StringValue"],
+    #             value_list: ["FilterValueContent"],
     #           },
     #         ],
     #         sort: {
@@ -757,6 +767,7 @@ module Aws::MarketplaceCatalog
     #               identifier: "Identifier",
     #             },
     #             details: "Json", # required
+    #             change_name: "ChangeName",
     #           },
     #         ],
     #         change_set_name: "ChangeSetName",

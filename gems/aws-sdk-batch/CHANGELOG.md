@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-03-31)
+------------------
+
+* Feature - AWS Batch adds support for Amazon EFS File System
+
+1.46.0 (2021-03-17)
+------------------
+
+* Feature - Making serviceRole an optional parameter when creating a compute environment. If serviceRole is not provided then Service Linked Role will be created (or reused if it already exists).
+
+1.45.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2020-12-21)
+------------------
+
+* Feature - Documentation updates for batch
+
+1.42.0 (2020-12-03)
+------------------
+
+* Feature - This release adds support for customer to run Batch Jobs on ECS Fargate, the serverless compute engine built for containers on AWS. Customer can also propagate Job and Job Definition Tags to ECS Task.
+
+1.41.0 (2020-11-24)
+------------------
+
+* Feature - Add Ec2Configuration in ComputeEnvironment.ComputeResources. Use in CreateComputeEnvironment API to enable AmazonLinux2 support.
+
 1.40.0 (2020-10-20)
 ------------------
 

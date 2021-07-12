@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -771,12 +771,12 @@ module Aws::ComprehendMedical
     #   resp.entities[0].id #=> Integer
     #   resp.entities[0].text #=> String
     #   resp.entities[0].category #=> String, one of "MEDICAL_CONDITION"
-    #   resp.entities[0].type #=> String, one of "DX_NAME"
+    #   resp.entities[0].type #=> String, one of "DX_NAME", "TIME_EXPRESSION"
     #   resp.entities[0].score #=> Float
     #   resp.entities[0].begin_offset #=> Integer
     #   resp.entities[0].end_offset #=> Integer
     #   resp.entities[0].attributes #=> Array
-    #   resp.entities[0].attributes[0].type #=> String, one of "ACUITY", "DIRECTION", "SYSTEM_ORGAN_SITE", "QUALITY", "QUANTITY"
+    #   resp.entities[0].attributes[0].type #=> String, one of "ACUITY", "DIRECTION", "SYSTEM_ORGAN_SITE", "QUALITY", "QUANTITY", "TIME_TO_DX_NAME", "TIME_EXPRESSION"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
     #   resp.entities[0].attributes[0].id #=> Integer
@@ -786,6 +786,8 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].traits #=> Array
     #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM"
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
+    #   resp.entities[0].attributes[0].category #=> String, one of "DX_NAME", "TIME_EXPRESSION"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "OVERLAP", "SYSTEM_ORGAN_SITE"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM"
     #   resp.entities[0].traits[0].score #=> Float
@@ -1531,7 +1533,7 @@ module Aws::ComprehendMedical
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

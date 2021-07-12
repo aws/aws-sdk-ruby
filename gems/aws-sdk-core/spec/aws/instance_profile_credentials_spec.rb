@@ -8,6 +8,136 @@ module Aws
 
     let(:token_path) { '/latest/api/token' }
 
+    let(:ipv4_endpoint) { 'http://169.254.169.254' }
+    let(:ipv6_endpoint) { 'http://[fd00:ec2::254]' }
+
+    describe 'endpoint mode resolution' do
+      before do
+        allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
+      end
+
+      it 'mode is ipv4 by default' do
+        subject = InstanceProfileCredentials.new
+        expect(subject.instance_variable_get(:@endpoint)).to eq ipv4_endpoint
+      end
+
+      it 'can be configured with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv6')
+        subject = InstanceProfileCredentials.new
+        expect(subject.instance_variable_get(:@endpoint)).to eq ipv6_endpoint
+      end
+
+      it 'can be configured using env variable with precedence' do
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv6')
+        subject = InstanceProfileCredentials.new
+        expect(subject.instance_variable_get(:@endpoint)).to eq ipv4_endpoint
+      end
+
+      it 'can be configure through code with precedence' do
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
+        subject = InstanceProfileCredentials.new(endpoint_mode: 'IPv6')
+        expect(subject.instance_variable_get(:@endpoint)).to eq ipv6_endpoint
+      end
+
+      it 'raises ArgumentError when endpoint mode is unexpected' do
+        expect { InstanceProfileCredentials.new(endpoint_mode: 'IPv69') }
+          .to raise_error(ArgumentError)
+      end
+    end
+
+    describe 'endpoint configuration' do
+      before do
+        allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
+      end
+
+      it 'can be configured without a scheme' do
+        subject = InstanceProfileCredentials.new(
+          endpoint: '123.123.123.123'
+        )
+        expect(subject.instance_variable_get(:@endpoint))
+          .to eq '123.123.123.123'
+      end
+
+      it 'can be configured with a scheme' do
+        subject = InstanceProfileCredentials.new(
+          endpoint: 'http://123.123.123.123'
+        )
+        expect(subject.instance_variable_get(:@endpoint))
+          .to eq 'http://123.123.123.123'
+      end
+
+      it 'still supports ip_address' do
+        subject = InstanceProfileCredentials.new(
+          ip_address: '123.123.123.123'
+        )
+        expect(subject.instance_variable_get(:@endpoint))
+          .to eq '123.123.123.123'
+      end
+    end
+
+    describe 'endpoint resolution' do
+      let(:endpoint) { 'http://123.123.123.123' }
+
+      before do
+        allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
+      end
+
+      it 'can be configured with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint).and_return(endpoint)
+        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+      end
+
+      it 'can be configured using env variable with precedence' do
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] = endpoint
+        subject = InstanceProfileCredentials.new
+        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+      end
+
+      it 'can be configured through code with precedence' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint)
+          .and_return('bar-example.com')
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] = 'foo-example.com'
+        subject = InstanceProfileCredentials.new(ip_address: endpoint)
+        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+      end
+
+      it 'overrides endpoint mode configuration with ENV' do
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] = endpoint
+        subject = InstanceProfileCredentials.new(endpoint_mode: 'IPv4')
+        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+      end
+
+      it 'overrides endpoint mode configuration with shared config' do
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint).and_return(endpoint)
+        subject = InstanceProfileCredentials.new(endpoint_mode: 'IPv4')
+        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+      end
+
+      it 'overrides endpoint mode configuration with code' do
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
+        subject = InstanceProfileCredentials.new(
+          endpoint_mode: 'IPv4', endpoint: endpoint
+        )
+        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+      end
+    end
+
     describe 'without instance metadata service present' do
       [
         Errno::EHOSTUNREACH,

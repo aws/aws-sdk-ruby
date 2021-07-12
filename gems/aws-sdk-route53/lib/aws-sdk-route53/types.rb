@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -52,6 +52,46 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ActivateKeySigningKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId", # required
+    #         name: "SigningKeyName", # required
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A string used to identify a key-signing key (KSK). `Name` can
+    #   include numbers, letters, and underscores (\_). `Name` must be
+    #   unique for each key-signing key in the same hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ActivateKeySigningKeyRequest AWS API Documentation
+    #
+    class ActivateKeySigningKeyRequest < Struct.new(
+      :hosted_zone_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_info
+    #   A complex type that describes change information about changes made
+    #   to your hosted zone.
+    #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ActivateKeySigningKeyResponse AWS API Documentation
+    #
+    class ActivateKeySigningKeyResponse < Struct.new(
+      :change_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that identifies the CloudWatch alarm that you want
     # Amazon Route 53 health checkers to use to determine whether the
     # specified health check is healthy.
@@ -69,13 +109,13 @@ module Aws::Route53
     #   use to determine whether this health check is healthy, the region
     #   that the alarm was created in.
     #
-    #   For the current list of CloudWatch regions, see [Amazon
-    #   CloudWatch][1] in the *AWS Service Endpoints* chapter of the *Amazon
-    #   Web Services General Reference*.
+    #   For the current list of CloudWatch regions, see [Amazon CloudWatch
+    #   endpoints and quotas][1] in the *Amazon Web Services General
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#cw_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/cw_region.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -169,21 +209,19 @@ module Aws::Route53
     #   : Specify the hosted zone ID for the region that you created the
     #     environment in. The environment must have a regionalized
     #     subdomain. For a list of regions and the corresponding hosted zone
-    #     IDs, see [AWS Elastic Beanstalk][3] in the "AWS Service
-    #     Endpoints" chapter of the *Amazon Web Services General
-    #     Reference*.
+    #     IDs, see [AWS Elastic Beanstalk endpoints and quotas][3] in the
+    #     the *Amazon Web Services General Reference*.
     #
     #   ELB load balancer
     #
     #   : Specify the value of the hosted zone ID for the load balancer. Use
     #     the following methods to get the hosted zone ID:
     #
-    #     * [Service Endpoints][4] table in the "Elastic Load Balancing
-    #       Endpoints and Quotas" topic in the *Amazon Web Services General
-    #       Reference*\: Use the value that corresponds with the region that
-    #       you created your load balancer in. Note that there are separate
-    #       columns for Application and Classic Load Balancers and for
-    #       Network Load Balancers.
+    #     * [Elastic Load Balancing endpoints and quotas][4] topic in the
+    #       *Amazon Web Services General Reference*\: Use the value that
+    #       corresponds with the region that you created your load balancer
+    #       in. Note that there are separate columns for Application and
+    #       Classic Load Balancers and for Network Load Balancers.
     #
     #     * **AWS Management Console**\: Go to the Amazon EC2 page, choose
     #       **Load Balancers** in the navigation pane, select the load
@@ -233,7 +271,7 @@ module Aws::Route53
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html
     #   [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html
-    #   [3]: https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html
     #   [4]: https://docs.aws.amazon.com/general/latest/gr/elb.html
     #   [5]: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
     #   [6]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
@@ -583,7 +621,7 @@ module Aws::Route53
     #         action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #         resource_record_set: { # required
     #           name: "DNSName", # required
-    #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #           set_identifier: "ResourceRecordSetIdentifier",
     #           weight: 1,
     #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
@@ -661,7 +699,7 @@ module Aws::Route53
     #             action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #             resource_record_set: { # required
     #               name: "DNSName", # required
-    #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #               set_identifier: "ResourceRecordSetIdentifier",
     #               weight: 1,
     #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
@@ -769,7 +807,7 @@ module Aws::Route53
     #               action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #               resource_record_set: { # required
     #                 name: "DNSName", # required
-    #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #                 set_identifier: "ResourceRecordSetIdentifier",
     #                 weight: 1,
     #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
@@ -975,7 +1013,6 @@ module Aws::Route53
     # object at the same time that you did. Retry the request.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ConcurrentModification AWS API Documentation
@@ -1027,7 +1064,6 @@ module Aws::Route53
     # `CreateTrafficPolicy` or `CreateTrafficPolicyVersion`request.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ConflictingTypes AWS API Documentation
@@ -1251,6 +1287,118 @@ module Aws::Route53
       :change_info,
       :delegation_set,
       :vpc,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateKeySigningKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         caller_reference: "Nonce", # required
+    #         hosted_zone_id: "ResourceId", # required
+    #         key_management_service_arn: "SigningKeyString", # required
+    #         name: "SigningKeyName", # required
+    #         status: "SigningKeyStatus", # required
+    #       }
+    #
+    # @!attribute [rw] caller_reference
+    #   A unique string that identifies the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The unique string (ID) used to identify a hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_management_service_arn
+    #   The Amazon resource name (ARN) for a customer managed customer
+    #   master key (CMK) in AWS Key Management Service (AWS KMS). The
+    #   `KeyManagementServiceArn` must be unique for each key-signing key
+    #   (KSK) in a single hosted zone. To see an example of
+    #   `KeyManagementServiceArn` that grants the correct permissions for
+    #   DNSSEC, scroll down to **Example**.
+    #
+    #   You must configure the customer managed CMK as follows:
+    #
+    #   Status
+    #
+    #   : Enabled
+    #
+    #   Key spec
+    #
+    #   : ECC\_NIST\_P256
+    #
+    #   Key usage
+    #
+    #   : Sign and verify
+    #
+    #   Key policy
+    #
+    #   : The key policy must give permission for the following actions:
+    #
+    #     * DescribeKey
+    #
+    #     * GetPublicKey
+    #
+    #     * Sign
+    #
+    #     The key policy must also include the Amazon Route 53 service in
+    #     the principal for your account. Specify the following:
+    #
+    #     * `"Service": "dnssec.route53.aws.amazonaws.com"`
+    #
+    #     ^
+    #
+    #   For more information about working with a customer managed CMK in
+    #   AWS KMS, see [AWS Key Management Service concepts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A string used to identify a key-signing key (KSK). `Name` can
+    #   include numbers, letters, and underscores (\_). `Name` must be
+    #   unique for each key-signing key in the same hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A string specifying the initial status of the key-signing key (KSK).
+    #   You can set the value to `ACTIVE` or `INACTIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateKeySigningKeyRequest AWS API Documentation
+    #
+    class CreateKeySigningKeyRequest < Struct.new(
+      :caller_reference,
+      :hosted_zone_id,
+      :key_management_service_arn,
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_info
+    #   A complex type that describes change information about changes made
+    #   to your hosted zone.
+    #   @return [Types::ChangeInfo]
+    #
+    # @!attribute [rw] key_signing_key
+    #   The key-signing key (KSK) that the request creates.
+    #   @return [Types::KeySigningKey]
+    #
+    # @!attribute [rw] location
+    #   The unique URL representing the new key-signing key (KSK).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateKeySigningKeyResponse AWS API Documentation
+    #
+    class CreateKeySigningKeyResponse < Struct.new(
+      :change_info,
+      :key_signing_key,
       :location)
       SENSITIVE = []
       include Aws::Structure
@@ -1619,6 +1767,108 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # The hosted zone doesn't have any DNSSEC resources.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DNSSECNotFound AWS API Documentation
+    #
+    class DNSSECNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A string repesenting the status of DNSSEC signing.
+    #
+    # @!attribute [rw] serve_signature
+    #   A string that represents the current hosted zone signing status.
+    #
+    #   Status can have one of the following values:
+    #
+    #   SIGNING
+    #
+    #   : DNSSEC signing is enabled for the hosted zone.
+    #
+    #   NOT\_SIGNING
+    #
+    #   : DNSSEC signing is not enabled for the hosted zone.
+    #
+    #   DELETING
+    #
+    #   : DNSSEC signing is in the process of being removed for the hosted
+    #     zone.
+    #
+    #   ACTION\_NEEDED
+    #
+    #   : There is a problem with signing in the hosted zone that requires
+    #     you to take action to resolve. For example, the customer managed
+    #     customer master key (CMK) might have been deleted, or the
+    #     permissions for the customer managed CMK might have been changed.
+    #
+    #   INTERNAL\_FAILURE
+    #
+    #   : There was an error during a request. Before you can continue to
+    #     work with DNSSEC signing, including with key-signing keys (KSKs),
+    #     you must correct the problem by enabling or disabling DNSSEC
+    #     signing for the hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message provided for the following DNSSEC signing status:
+    #   `INTERNAL_FAILURE`. The status message includes information about
+    #   what the problem might be and steps that you can take to correct the
+    #   issue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DNSSECStatus AWS API Documentation
+    #
+    class DNSSECStatus < Struct.new(
+      :serve_signature,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeactivateKeySigningKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId", # required
+    #         name: "SigningKeyName", # required
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A string used to identify a key-signing key (KSK).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeactivateKeySigningKeyRequest AWS API Documentation
+    #
+    class DeactivateKeySigningKeyRequest < Struct.new(
+      :hosted_zone_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_info
+    #   A complex type that describes change information about changes made
+    #   to your hosted zone.
+    #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeactivateKeySigningKeyResponse AWS API Documentation
+    #
+    class DeactivateKeySigningKeyResponse < Struct.new(
+      :change_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that lists the name servers in a delegation set, as
     # well as the `CallerReference` and the `ID` for the delegation set.
     #
@@ -1650,7 +1900,6 @@ module Aws::Route53
     # has already been created.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetAlreadyCreated AWS API Documentation
@@ -1664,7 +1913,6 @@ module Aws::Route53
     # The specified delegation set has already been marked as reusable.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetAlreadyReusable AWS API Documentation
@@ -1679,7 +1927,6 @@ module Aws::Route53
     # be deleted before the reusable delegation set can be deleted.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetInUse AWS API Documentation
@@ -1697,7 +1944,6 @@ module Aws::Route53
     # Route 53 generates this error, contact Customer Support.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetNotAvailable AWS API Documentation
@@ -1711,7 +1957,6 @@ module Aws::Route53
     # A reusable delegation set with the specified ID does not exist.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetNotReusable AWS API Documentation
@@ -1781,6 +2026,44 @@ module Aws::Route53
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZoneResponse AWS API Documentation
     #
     class DeleteHostedZoneResponse < Struct.new(
+      :change_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteKeySigningKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId", # required
+    #         name: "SigningKeyName", # required
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A string used to identify a key-signing key (KSK).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteKeySigningKeyRequest AWS API Documentation
+    #
+    class DeleteKeySigningKeyRequest < Struct.new(
+      :hosted_zone_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_info
+    #   A complex type that describes change information about changes made
+    #   to your hosted zone.
+    #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteKeySigningKeyResponse AWS API Documentation
+    #
+    class DeleteKeySigningKeyResponse < Struct.new(
       :change_info)
       SENSITIVE = []
       include Aws::Structure
@@ -1965,6 +2248,38 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableHostedZoneDNSSECRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisableHostedZoneDNSSECRequest AWS API Documentation
+    #
+    class DisableHostedZoneDNSSECRequest < Struct.new(
+      :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_info
+    #   A complex type that describes change information about changes made
+    #   to your hosted zone.
+    #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisableHostedZoneDNSSECResponse AWS API Documentation
+    #
+    class DisableHostedZoneDNSSECResponse < Struct.new(
+      :change_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that contains information about the VPC that you want
     # to disassociate from a specified private hosted zone.
     #
@@ -2015,6 +2330,38 @@ module Aws::Route53
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZoneResponse AWS API Documentation
     #
     class DisassociateVPCFromHostedZoneResponse < Struct.new(
+      :change_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableHostedZoneDNSSECRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/EnableHostedZoneDNSSECRequest AWS API Documentation
+    #
+    class EnableHostedZoneDNSSECRequest < Struct.new(
+      :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_info
+    #   A complex type that describes change information about changes made
+    #   to your hosted zone.
+    #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/EnableHostedZoneDNSSECResponse AWS API Documentation
+    #
+    class EnableHostedZoneDNSSECResponse < Struct.new(
       :change_info)
       SENSITIVE = []
       include Aws::Structure
@@ -2111,8 +2458,16 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] subdivision_code
-    #   The code for the subdivision. Route 53 currently supports only
-    #   states in the United States.
+    #   The code for the subdivision, such as a particular state within the
+    #   United States. For a list of US state abbreviations, see [Appendix
+    #   B: Two–Letter State and Possession Abbreviations][1] on the United
+    #   States Postal Service website. For a list of all supported
+    #   subdivision codes, use the [ListGeoLocations][2] API.
+    #
+    #
+    #
+    #   [1]: https://pe.usps.com/text/pub28/28apb.htm
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html
     #   @return [String]
     #
     # @!attribute [rw] subdivision_name
@@ -2260,6 +2615,42 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDNSSECRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetDNSSECRequest AWS API Documentation
+    #
+    class GetDNSSECRequest < Struct.new(
+      :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   A string repesenting the status of DNSSEC.
+    #   @return [Types::DNSSECStatus]
+    #
+    # @!attribute [rw] key_signing_keys
+    #   The key-signing keys (KSKs) in your account.
+    #   @return [Array<Types::KeySigningKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetDNSSECResponse AWS API Documentation
+    #
+    class GetDNSSECResponse < Struct.new(
+      :status,
+      :key_signing_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request for information about whether a specified geographic
     # location is supported for Amazon Route 53 geolocation resource record
     # sets.
@@ -2303,17 +2694,16 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] subdivision_code
-    #   For `SubdivisionCode`, Amazon Route 53 supports only states of the
-    #   United States. For a list of state abbreviations, see [Appendix B:
-    #   Two–Letter State and Possession Abbreviations][1] on the United
-    #   States Postal Service website.
-    #
-    #   If you specify `subdivisioncode`, you must also specify `US` for
-    #   `CountryCode`.
+    #   The code for the subdivision, such as a particular state within the
+    #   United States. For a list of US state abbreviations, see [Appendix
+    #   B: Two–Letter State and Possession Abbreviations][1] on the United
+    #   States Postal Service website. For a list of all supported
+    #   subdivision codes, use the [ListGeoLocations][2] API.
     #
     #
     #
     #   [1]: https://pe.usps.com/text/pub28/28apb.htm
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocationRequest AWS API Documentation
@@ -2871,10 +3261,10 @@ module Aws::Route53
     # is associated with the current AWS account.
     #
     # @!attribute [rw] id
-    #   The identifier that Amazon Route 53assigned to the health check when
-    #   you created it. When you add or update a resource record set, you
-    #   use this value to specify which health check to use. The value can
-    #   be up to 64 characters long.
+    #   The identifier that Amazon Route 53 assigned to the health check
+    #   when you created it. When you add or update a resource record set,
+    #   you use this value to specify which health check to use. The value
+    #   can be up to 64 characters long.
     #   @return [String]
     #
     # @!attribute [rw] caller_reference
@@ -2930,7 +3320,6 @@ module Aws::Route53
     #   request.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckAlreadyExists AWS API Documentation
@@ -3357,7 +3746,6 @@ module Aws::Route53
     # This error code is not in use.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckInUse AWS API Documentation
@@ -3472,7 +3860,6 @@ module Aws::Route53
     # the specified `CallerReference`.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneAlreadyExists AWS API Documentation
@@ -3543,7 +3930,6 @@ module Aws::Route53
     # records.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneNotEmpty AWS API Documentation
@@ -3557,7 +3943,6 @@ module Aws::Route53
     # The specified HostedZone can't be found.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneNotFound AWS API Documentation
@@ -3572,7 +3957,6 @@ module Aws::Route53
     # hosted zone.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneNotPrivate AWS API Documentation
@@ -3610,6 +3994,20 @@ module Aws::Route53
     class HostedZoneOwner < Struct.new(
       :owning_account,
       :owning_service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The hosted zone nameservers don't match the parent nameservers. The
+    # hosted zone and parent must have the same nameservers.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZonePartiallyDelegated AWS API Documentation
+    #
+    class HostedZonePartiallyDelegated < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3682,10 +4080,9 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # Parameter name is invalid.
+    # Parameter name is not valid.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidArgument AWS API Documentation
@@ -3701,7 +4098,6 @@ module Aws::Route53
     # change batch.
     #
     # @!attribute [rw] messages
-    #   Descriptive message for the error response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] message
@@ -3719,7 +4115,6 @@ module Aws::Route53
     # The specified domain name is not valid.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidDomainName AWS API Documentation
@@ -3733,12 +4128,52 @@ module Aws::Route53
     # The input is not valid.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidInput AWS API Documentation
     #
     class InvalidInput < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The KeyManagementServiceArn that you specified isn't valid to use
+    # with DNSSEC signing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidKMSArn AWS API Documentation
+    #
+    class InvalidKMSArn < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The key-signing key (KSK) name that you specified isn't a valid name.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidKeySigningKeyName AWS API Documentation
+    #
+    class InvalidKeySigningKeyName < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The key-signing key (KSK) status isn't valid or another KSK has the
+    # status `INTERNAL_FAILURE`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidKeySigningKeyStatus AWS API Documentation
+    #
+    class InvalidKeySigningKeyStatus < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3758,11 +4193,24 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # The format of the traffic policy document that you specified in the
-    # `Document` element is invalid.
+    # Your hosted zone status isn't valid for this operation. In the hosted
+    # zone, change the status to enable `DNSSEC` or disable `DNSSEC`.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidSigningStatus AWS API Documentation
+    #
+    class InvalidSigningStatus < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The format of the traffic policy document that you specified in the
+    # `Document` element is not valid.
+    #
+    # @!attribute [rw] message
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidTrafficPolicyDocument AWS API Documentation
@@ -3777,12 +4225,270 @@ module Aws::Route53
     # account is not authorized to access this VPC.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidVPCId AWS API Documentation
     #
     class InvalidVPCId < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-signing key (KSK) is a complex type that represents a
+    # public/private key pair. The private key is used to generate a digital
+    # signature for the zone signing key (ZSK). The public key is stored in
+    # the DNS and is used to authenticate the ZSK. A KSK is always
+    # associated with a hosted zone; it cannot exist by itself.
+    #
+    # @!attribute [rw] name
+    #   A string used to identify a key-signing key (KSK). `Name` can
+    #   include numbers, letters, and underscores (\_). `Name` must be
+    #   unique for each key-signing key in the same hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_arn
+    #   The Amazon resource name (ARN) used to identify the customer managed
+    #   customer master key (CMK) in AWS Key Management Service (AWS KMS).
+    #   The `KmsArn` must be unique for each key-signing key (KSK) in a
+    #   single hosted zone.
+    #
+    #   You must configure the CMK as follows:
+    #
+    #   Status
+    #
+    #   : Enabled
+    #
+    #   Key spec
+    #
+    #   : ECC\_NIST\_P256
+    #
+    #   Key usage
+    #
+    #   : Sign and verify
+    #
+    #   Key policy
+    #
+    #   : The key policy must give permission for the following actions:
+    #
+    #     * DescribeKey
+    #
+    #     * GetPublicKey
+    #
+    #     * Sign
+    #
+    #     The key policy must also include the Amazon Route 53 service in
+    #     the principal for your account. Specify the following:
+    #
+    #     * `"Service": "api-service.dnssec.route53.aws.internal"`
+    #
+    #     ^
+    #
+    #   For more information about working with the customer managed CMK in
+    #   AWS KMS, see [AWS Key Management Service concepts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
+    #   @return [String]
+    #
+    # @!attribute [rw] flag
+    #   An integer that specifies how the key is used. For key-signing key
+    #   (KSK), this value is always 257.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] signing_algorithm_mnemonic
+    #   A string used to represent the signing algorithm. This value must
+    #   follow the guidelines provided by [RFC-8624 Section 3.1][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc8624#section-3.1
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_algorithm_type
+    #   An integer used to represent the signing algorithm. This value must
+    #   follow the guidelines provided by [RFC-8624 Section 3.1][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc8624#section-3.1
+    #   @return [Integer]
+    #
+    # @!attribute [rw] digest_algorithm_mnemonic
+    #   A string used to represent the delegation signer digest algorithm.
+    #   This value must follow the guidelines provided by [RFC-8624 Section
+    #   3.3][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc8624#section-3.3
+    #   @return [String]
+    #
+    # @!attribute [rw] digest_algorithm_type
+    #   An integer used to represent the delegation signer digest algorithm.
+    #   This value must follow the guidelines provided by [RFC-8624 Section
+    #   3.3][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc8624#section-3.3
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_tag
+    #   An integer used to identify the DNSSEC record for the domain name.
+    #   The process used to calculate the value is described in [RFC-4034
+    #   Appendix B][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/rfc/rfc4034.txt
+    #   @return [Integer]
+    #
+    # @!attribute [rw] digest_value
+    #   A cryptographic digest of a DNSKEY resource record (RR). DNSKEY
+    #   records are used to publish the public key that resolvers can use to
+    #   verify DNSSEC signatures that are used to secure certain kinds of
+    #   information provided by the DNS system.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The public key, represented as a Base64 encoding, as required by [
+    #   RFC-4034 Page 5][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/rfc/rfc4034.txt
+    #   @return [String]
+    #
+    # @!attribute [rw] ds_record
+    #   A string that represents a delegation signer (DS) record.
+    #   @return [String]
+    #
+    # @!attribute [rw] dnskey_record
+    #   A string that represents a DNSKEY record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A string that represents the current key-signing key (KSK) status.
+    #
+    #   Status can have one of the following values:
+    #
+    #   ACTIVE
+    #
+    #   : The KSK is being used for signing.
+    #
+    #   INACTIVE
+    #
+    #   : The KSK is not being used for signing.
+    #
+    #   DELETING
+    #
+    #   : The KSK is in the process of being deleted.
+    #
+    #   ACTION\_NEEDED
+    #
+    #   : There is a problem with the KSK that requires you to take action
+    #     to resolve. For example, the customer managed customer master key
+    #     (CMK) might have been deleted, or the permissions for the customer
+    #     managed CMK might have been changed.
+    #
+    #   INTERNAL\_FAILURE
+    #
+    #   : There was an error during a request. Before you can continue to
+    #     work with DNSSEC signing, including actions that involve this KSK,
+    #     you must correct the problem. For example, you may need to
+    #     activate or deactivate the KSK.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message provided for the following key-signing key (KSK)
+    #   statuses: `ACTION_NEEDED` or `INTERNAL_FAILURE`. The status message
+    #   includes information about what the problem might be and steps that
+    #   you can take to correct the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date when the key-signing key (KSK) was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The last time that the key-signing key (KSK) was changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/KeySigningKey AWS API Documentation
+    #
+    class KeySigningKey < Struct.new(
+      :name,
+      :kms_arn,
+      :flag,
+      :signing_algorithm_mnemonic,
+      :signing_algorithm_type,
+      :digest_algorithm_mnemonic,
+      :digest_algorithm_type,
+      :key_tag,
+      :digest_value,
+      :public_key,
+      :ds_record,
+      :dnskey_record,
+      :status,
+      :status_message,
+      :created_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You've already created a key-signing key (KSK) with this name or with
+    # the same customer managed customer master key (CMK) ARN.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/KeySigningKeyAlreadyExists AWS API Documentation
+    #
+    class KeySigningKeyAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The key-signing key (KSK) is specified in a parent DS record.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/KeySigningKeyInParentDSRecord AWS API Documentation
+    #
+    class KeySigningKeyInParentDSRecord < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The key-signing key (KSK) that you specified can't be deactivated
+    # because it's the only KSK for a currently-enabled DNSSEC. Disable
+    # DNSSEC signing, or add or enable another KSK.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/KeySigningKeyInUse AWS API Documentation
+    #
+    class KeySigningKeyInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-signing key (KSK) with `ACTIVE` status wasn't found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/KeySigningKeyWithActiveStatusNotFound AWS API Documentation
+    #
+    class KeySigningKeyWithActiveStatusNotFound < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3794,7 +4500,6 @@ module Aws::Route53
     # zone.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LastVPCAssociation AWS API Documentation
@@ -3822,7 +4527,6 @@ module Aws::Route53
     # [3]: http://aws.amazon.com/route53-request
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LimitsExceeded AWS API Documentation
@@ -4456,7 +5160,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         start_record_name: "DNSName",
-    #         start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #         start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         start_record_identifier: "ResourceRecordSetIdentifier",
     #         max_items: 1,
     #       }
@@ -4861,7 +5565,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         max_items: 1,
     #       }
     #
@@ -4977,7 +5681,7 @@ module Aws::Route53
     #         traffic_policy_version: 1, # required
     #         hosted_zone_id_marker: "ResourceId",
     #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         max_items: 1,
     #       }
     #
@@ -5125,7 +5829,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id_marker: "ResourceId",
     #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         max_items: 1,
     #       }
     #
@@ -5437,7 +6141,6 @@ module Aws::Route53
     # A reusable delegation set with the specified ID does not exist.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchDelegationSet AWS API Documentation
@@ -5457,7 +6160,6 @@ module Aws::Route53
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchGeoLocation AWS API Documentation
@@ -5471,7 +6173,6 @@ module Aws::Route53
     # No health check exists with the specified ID.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchHealthCheck AWS API Documentation
@@ -5485,12 +6186,24 @@ module Aws::Route53
     # No hosted zone exists with the ID that you specified.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchHostedZone AWS API Documentation
     #
     class NoSuchHostedZone < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified key-signing key (KSK) doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchKeySigningKey AWS API Documentation
+    #
+    class NoSuchKeySigningKey < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -5512,7 +6225,6 @@ module Aws::Route53
     # No traffic policy exists with the specified ID.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchTrafficPolicy AWS API Documentation
@@ -5526,7 +6238,6 @@ module Aws::Route53
     # No traffic policy instance exists with the specified ID.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchTrafficPolicyInstance AWS API Documentation
@@ -5541,7 +6252,6 @@ module Aws::Route53
     # been authorized.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NotAuthorizedException AWS API Documentation
@@ -5574,7 +6284,6 @@ module Aws::Route53
     # Route 53 doesn't support associating a VPC with a public hosted zone.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/PublicZoneVPCAssociation AWS API Documentation
@@ -5674,7 +6383,7 @@ module Aws::Route53
     #
     #       {
     #         name: "DNSName", # required
-    #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         set_identifier: "ResourceRecordSetIdentifier",
     #         weight: 1,
     #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
@@ -5752,8 +6461,8 @@ module Aws::Route53
     #   Types][1] in the *Amazon Route 53 Developer Guide*.
     #
     #   Valid values for basic resource record sets: `A` \| `AAAA` \| `CAA`
-    #   \| `CNAME` \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \|
-    #   `SRV` \| `TXT`
+    #   \| `CNAME` \| `DS` \|`MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \|
+    #   `SPF` \| `SRV` \| `TXT`
     #
     #   Values for weighted, latency, geolocation, and failover resource
     #   record sets: `A` \| `AAAA` \| `CAA` \| `CNAME` \| `MX` \| `NAPTR` \|
@@ -6404,7 +7113,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         record_name: "DNSName", # required
-    #         record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #         record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         resolver_ip: "IPAddress",
     #         edns0_client_subnet_ip: "IPAddress",
     #         edns0_client_subnet_mask: "SubnetMask",
@@ -6589,12 +7298,25 @@ module Aws::Route53
     # [4]: http://aws.amazon.com/route53-request
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyHostedZones AWS API Documentation
     #
     class TooManyHostedZones < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You've reached the limit for the number of key-signing keys (KSKs).
+    # Remove at least one KSK, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyKeySigningKeys AWS API Documentation
+    #
+    class TooManyKeySigningKeys < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -6618,7 +7340,6 @@ module Aws::Route53
     # [3]: http://aws.amazon.com/route53-request
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyTrafficPolicies AWS API Documentation
@@ -6649,7 +7370,6 @@ module Aws::Route53
     # [3]: http://aws.amazon.com/route53-request
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyTrafficPolicyInstances AWS API Documentation
@@ -6676,7 +7396,6 @@ module Aws::Route53
     # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateTrafficPolicy.html
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyTrafficPolicyVersionsForCurrentPolicy AWS API Documentation
@@ -6695,7 +7414,6 @@ module Aws::Route53
     # `ListVPCAssociationAuthorizations` request.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyVPCAssociationAuthorizations AWS API Documentation
@@ -6760,7 +7478,6 @@ module Aws::Route53
     # A traffic policy that has the same value for `Name` already exists.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyAlreadyExists AWS API Documentation
@@ -6775,7 +7492,6 @@ module Aws::Route53
     # specified traffic policy.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyInUse AWS API Documentation
@@ -6870,7 +7586,6 @@ module Aws::Route53
     # There is already a traffic policy instance with the specified ID.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyInstanceAlreadyExists AWS API Documentation
@@ -7524,7 +8239,6 @@ module Aws::Route53
     # hosted zone.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/VPCAssociationAuthorizationNotFound AWS API Documentation
@@ -7538,7 +8252,7 @@ module Aws::Route53
     # The specified VPC and hosted zone are not currently associated.
     #
     # @!attribute [rw] message
-    #   Descriptive message for the error response.
+    #   The specified VPC or hosted zone weren't found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/VPCAssociationNotFound AWS API Documentation

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -13,6 +13,7 @@ module Aws::MarketplaceMetering
 
     include Seahorse::Model
 
+    AllocatedUsageQuantity = Shapes::IntegerShape.new(name: 'AllocatedUsageQuantity')
     BatchMeterUsageRequest = Shapes::StructureShape.new(name: 'BatchMeterUsageRequest')
     BatchMeterUsageResult = Shapes::StructureShape.new(name: 'BatchMeterUsageResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -27,7 +28,9 @@ module Aws::MarketplaceMetering
     InvalidProductCodeException = Shapes::StructureShape.new(name: 'InvalidProductCodeException')
     InvalidPublicKeyVersionException = Shapes::StructureShape.new(name: 'InvalidPublicKeyVersionException')
     InvalidRegionException = Shapes::StructureShape.new(name: 'InvalidRegionException')
+    InvalidTagException = Shapes::StructureShape.new(name: 'InvalidTagException')
     InvalidTokenException = Shapes::StructureShape.new(name: 'InvalidTokenException')
+    InvalidUsageAllocationsException = Shapes::StructureShape.new(name: 'InvalidUsageAllocationsException')
     InvalidUsageDimensionException = Shapes::StructureShape.new(name: 'InvalidUsageDimensionException')
     MeterUsageRequest = Shapes::StructureShape.new(name: 'MeterUsageRequest')
     MeterUsageResult = Shapes::StructureShape.new(name: 'MeterUsageResult')
@@ -40,9 +43,15 @@ module Aws::MarketplaceMetering
     ResolveCustomerRequest = Shapes::StructureShape.new(name: 'ResolveCustomerRequest')
     ResolveCustomerResult = Shapes::StructureShape.new(name: 'ResolveCustomerResult')
     String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampOutOfBoundsException = Shapes::StructureShape.new(name: 'TimestampOutOfBoundsException')
+    UsageAllocation = Shapes::StructureShape.new(name: 'UsageAllocation')
+    UsageAllocations = Shapes::ListShape.new(name: 'UsageAllocations')
     UsageDimension = Shapes::StringShape.new(name: 'UsageDimension')
     UsageQuantity = Shapes::IntegerShape.new(name: 'UsageQuantity')
     UsageRecord = Shapes::StructureShape.new(name: 'UsageRecord')
@@ -91,8 +100,14 @@ module Aws::MarketplaceMetering
     InvalidRegionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InvalidRegionException.struct_class = Types::InvalidRegionException
 
+    InvalidTagException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidTagException.struct_class = Types::InvalidTagException
+
     InvalidTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InvalidTokenException.struct_class = Types::InvalidTokenException
+
+    InvalidUsageAllocationsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidUsageAllocationsException.struct_class = Types::InvalidUsageAllocationsException
 
     InvalidUsageDimensionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InvalidUsageDimensionException.struct_class = Types::InvalidUsageDimensionException
@@ -102,6 +117,7 @@ module Aws::MarketplaceMetering
     MeterUsageRequest.add_member(:usage_dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "UsageDimension"))
     MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "UsageQuantity"))
     MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    MeterUsageRequest.add_member(:usage_allocations, Shapes::ShapeRef.new(shape: UsageAllocations, location_name: "UsageAllocations"))
     MeterUsageRequest.struct_class = Types::MeterUsageRequest
 
     MeterUsageResult.add_member(:metering_record_id, Shapes::ShapeRef.new(shape: String, location_name: "MeteringRecordId"))
@@ -126,16 +142,29 @@ module Aws::MarketplaceMetering
     ResolveCustomerResult.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode"))
     ResolveCustomerResult.struct_class = Types::ResolveCustomerResult
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     TimestampOutOfBoundsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     TimestampOutOfBoundsException.struct_class = Types::TimestampOutOfBoundsException
 
+    UsageAllocation.add_member(:allocated_usage_quantity, Shapes::ShapeRef.new(shape: AllocatedUsageQuantity, required: true, location_name: "AllocatedUsageQuantity"))
+    UsageAllocation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    UsageAllocation.struct_class = Types::UsageAllocation
+
+    UsageAllocations.member = Shapes::ShapeRef.new(shape: UsageAllocation)
+
     UsageRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     UsageRecord.add_member(:customer_identifier, Shapes::ShapeRef.new(shape: CustomerIdentifier, required: true, location_name: "CustomerIdentifier"))
     UsageRecord.add_member(:dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "Dimension"))
     UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "Quantity"))
+    UsageRecord.add_member(:usage_allocations, Shapes::ShapeRef.new(shape: UsageAllocations, location_name: "UsageAllocations"))
     UsageRecord.struct_class = Types::UsageRecord
 
     UsageRecordList.member = Shapes::ShapeRef.new(shape: UsageRecord)
@@ -175,6 +204,8 @@ module Aws::MarketplaceMetering
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidProductCodeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUsageDimensionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUsageAllocationsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCustomerIdentifierException)
         o.errors << Shapes::ShapeRef.new(shape: TimestampOutOfBoundsException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -190,6 +221,8 @@ module Aws::MarketplaceMetering
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidProductCodeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUsageDimensionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUsageAllocationsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointRegionException)
         o.errors << Shapes::ShapeRef.new(shape: TimestampOutOfBoundsException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequestException)

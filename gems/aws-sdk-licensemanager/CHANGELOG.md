@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-06-23)
+------------------
+
+* Feature - AWS License Manager now allows license administrators and end users to communicate to each other by setting custom status reasons when updating the status on a granted license.
+
+1.27.0 (2021-05-18)
+------------------
+
+* Feature - AWS License Manager now supports periodic report generation.
+
+1.26.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2021-03-05)
+------------------
+
+* Feature - License Manager Automated Discovery now supports Exclusion Filters.
+
+1.24.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2020-12-04)
+------------------
+
+* Feature - Automated Discovery now has support for custom tags, and detects software uninstalls.
+
+1.22.0 (2020-12-03)
+------------------
+
+* Feature - AWS License Manager enables managed entitlements for AWS customers and Software Vendors (ISV). You can track and distribute license entitlements from AWS Marketplace and supported ISVs.
+
+1.21.0 (2020-11-23)
+------------------
+
+* Feature - AWS License Manager now provides the ability for license administrators to be able to associate license configurations to AMIs shared with their AWS account
+
 1.20.0 (2020-09-30)
 ------------------
 

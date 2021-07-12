@@ -1,6 +1,81 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2021-06-11)
+------------------
+
+* Feature - AWS MediaLive now supports OCR-based conversion of DVB-Sub and SCTE-27 image-based source captions to WebVTT, and supports ingest of ad avail decorations in HLS input manifests.
+
+1.71.0 (2021-06-04)
+------------------
+
+* Feature - Add support for automatically setting the H.264 adaptive quantization and GOP B-frame fields.
+
+1.70.0 (2021-04-06)
+------------------
+
+* Feature - MediaLive VPC outputs update to include Availability Zones, Security groups, Elastic Network Interfaces, and Subnet Ids in channel response
+
+1.69.0 (2021-04-05)
+------------------
+
+* Feature - MediaLive now support HTML5 Motion Graphics overlay
+
+1.68.0 (2021-03-25)
+------------------
+
+* Feature - EML now supports handling HDR10 and HLG 2020 color space from a Link input.
+
+1.67.0 (2021-03-11)
+------------------
+
+* Feature - MediaLive supports the ability to apply a canned ACL to output sent to an AWS S3 bucket; supports ability to specify position for EBU-TT and TTML output captions converted from Teletext source.
+
+1.66.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2021-03-05)
+------------------
+
+* Feature - Medialive now supports the ability to transfer AWS Elemental Link devices to another region.
+
+1.64.0 (2021-02-15)
+------------------
+
+* Feature - AWS MediaLive now supports Automatic-Input-Failover for CDI Inputs.
+
+1.63.0 (2021-02-02)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports Image Media Playlists on HLS outputs, version 0.4 (trick-mode).
+
+1.62.0 (2021-01-29)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports output to a private VPC. When this property is specified, the output will egress from a user specified VPC.
+
+1.61.0 (2020-12-04)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports black video and audio silence as new conditions to trigger automatic input failover.
+
+1.60.0 (2020-11-19)
+------------------
+
+* Feature - The AWS Elemental MediaLive APIs and SDKs now support the ability to see the software update status on Link devices
+
+1.59.0 (2020-11-06)
+------------------
+
+* Feature - Support for SCTE35 ad markers in OnCuePoint style in RTMP outputs.
+
+1.58.0 (2020-10-30)
+------------------
+
+* Feature - Support for HLS discontinuity tags in the child manifests. Support for incomplete segment behavior in the media output. Support for automatic input failover condition settings.
+
 1.57.0 (2020-10-16)
 ------------------
 

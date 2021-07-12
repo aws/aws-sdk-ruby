@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -358,8 +358,9 @@ module Aws::DLM
     #     description: "PolicyDescription", # required
     #     state: "ENABLED", # required, accepts ENABLED, DISABLED
     #     policy_details: { # required
-    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #       resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #       target_tags: [
     #         {
     #           key: "String", # required
@@ -383,6 +384,7 @@ module Aws::DLM
     #             },
     #           ],
     #           create_rule: {
+    #             location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #             interval: 1,
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
@@ -401,7 +403,8 @@ module Aws::DLM
     #           },
     #           cross_region_copy_rules: [
     #             {
-    #               target_region: "TargetRegion", # required
+    #               target_region: "TargetRegion",
+    #               target: "Target",
     #               encrypted: false, # required
     #               cmk_arn: "CmkArn",
     #               copy_tags: false,
@@ -411,11 +414,45 @@ module Aws::DLM
     #               },
     #             },
     #           ],
+    #           share_rules: [
+    #             {
+    #               target_accounts: ["AwsAccountId"], # required
+    #               unshare_interval: 1,
+    #               unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
+    #           ],
     #         },
     #       ],
     #       parameters: {
     #         exclude_boot_volume: false,
+    #         no_reboot: false,
     #       },
+    #       event_source: {
+    #         type: "MANAGED_CWE", # required, accepts MANAGED_CWE
+    #         parameters: {
+    #           event_type: "shareSnapshot", # required, accepts shareSnapshot
+    #           snapshot_owner: ["AwsAccountId"], # required
+    #           description_regex: "DescriptionRegex", # required
+    #         },
+    #       },
+    #       actions: [
+    #         {
+    #           name: "ActionName", # required
+    #           cross_region_copy: [ # required
+    #             {
+    #               target: "Target", # required
+    #               encryption_configuration: { # required
+    #                 encrypted: false, # required
+    #                 cmk_arn: "CmkArn",
+    #               },
+    #               retain_rule: {
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -507,6 +544,7 @@ module Aws::DLM
     #   resp.policies[0].state #=> String, one of "ENABLED", "DISABLED", "ERROR"
     #   resp.policies[0].tags #=> Hash
     #   resp.policies[0].tags["TagKey"] #=> String
+    #   resp.policies[0].policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT", "IMAGE_MANAGEMENT", "EVENT_BASED_POLICY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePolicies AWS API Documentation
     #
@@ -541,9 +579,11 @@ module Aws::DLM
     #   resp.policy.execution_role_arn #=> String
     #   resp.policy.date_created #=> Time
     #   resp.policy.date_modified #=> Time
-    #   resp.policy.policy_details.policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT"
+    #   resp.policy.policy_details.policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT", "IMAGE_MANAGEMENT", "EVENT_BASED_POLICY"
     #   resp.policy.policy_details.resource_types #=> Array
     #   resp.policy.policy_details.resource_types[0] #=> String, one of "VOLUME", "INSTANCE"
+    #   resp.policy.policy_details.resource_locations #=> Array
+    #   resp.policy.policy_details.resource_locations[0] #=> String, one of "CLOUD", "OUTPOST"
     #   resp.policy.policy_details.target_tags #=> Array
     #   resp.policy.policy_details.target_tags[0].key #=> String
     #   resp.policy.policy_details.target_tags[0].value #=> String
@@ -556,6 +596,7 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].variable_tags #=> Array
     #   resp.policy.policy_details.schedules[0].variable_tags[0].key #=> String
     #   resp.policy.policy_details.schedules[0].variable_tags[0].value #=> String
+    #   resp.policy.policy_details.schedules[0].create_rule.location #=> String, one of "CLOUD", "OUTPOST_LOCAL"
     #   resp.policy.policy_details.schedules[0].create_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].create_rule.interval_unit #=> String, one of "HOURS"
     #   resp.policy.policy_details.schedules[0].create_rule.times #=> Array
@@ -571,12 +612,32 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones[0] #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules #=> Array
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].target_region #=> String
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].target #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].encrypted #=> Boolean
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].cmk_arn #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].copy_tags #=> Boolean
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
+    #   resp.policy.policy_details.schedules[0].share_rules #=> Array
+    #   resp.policy.policy_details.schedules[0].share_rules[0].target_accounts #=> Array
+    #   resp.policy.policy_details.schedules[0].share_rules[0].target_accounts[0] #=> String
+    #   resp.policy.policy_details.schedules[0].share_rules[0].unshare_interval #=> Integer
+    #   resp.policy.policy_details.schedules[0].share_rules[0].unshare_interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
+    #   resp.policy.policy_details.parameters.no_reboot #=> Boolean
+    #   resp.policy.policy_details.event_source.type #=> String, one of "MANAGED_CWE"
+    #   resp.policy.policy_details.event_source.parameters.event_type #=> String, one of "shareSnapshot"
+    #   resp.policy.policy_details.event_source.parameters.snapshot_owner #=> Array
+    #   resp.policy.policy_details.event_source.parameters.snapshot_owner[0] #=> String
+    #   resp.policy.policy_details.event_source.parameters.description_regex #=> String
+    #   resp.policy.policy_details.actions #=> Array
+    #   resp.policy.policy_details.actions[0].name #=> String
+    #   resp.policy.policy_details.actions[0].cross_region_copy #=> Array
+    #   resp.policy.policy_details.actions[0].cross_region_copy[0].target #=> String
+    #   resp.policy.policy_details.actions[0].cross_region_copy[0].encryption_configuration.encrypted #=> Boolean
+    #   resp.policy.policy_details.actions[0].cross_region_copy[0].encryption_configuration.cmk_arn #=> String
+    #   resp.policy.policy_details.actions[0].cross_region_copy[0].retain_rule.interval #=> Integer
+    #   resp.policy.policy_details.actions[0].cross_region_copy[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
     #   resp.policy.policy_arn #=> String
@@ -702,8 +763,9 @@ module Aws::DLM
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     description: "PolicyDescription",
     #     policy_details: {
-    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #       resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #       target_tags: [
     #         {
     #           key: "String", # required
@@ -727,6 +789,7 @@ module Aws::DLM
     #             },
     #           ],
     #           create_rule: {
+    #             location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #             interval: 1,
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
@@ -745,7 +808,8 @@ module Aws::DLM
     #           },
     #           cross_region_copy_rules: [
     #             {
-    #               target_region: "TargetRegion", # required
+    #               target_region: "TargetRegion",
+    #               target: "Target",
     #               encrypted: false, # required
     #               cmk_arn: "CmkArn",
     #               copy_tags: false,
@@ -755,11 +819,45 @@ module Aws::DLM
     #               },
     #             },
     #           ],
+    #           share_rules: [
+    #             {
+    #               target_accounts: ["AwsAccountId"], # required
+    #               unshare_interval: 1,
+    #               unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
+    #           ],
     #         },
     #       ],
     #       parameters: {
     #         exclude_boot_volume: false,
+    #         no_reboot: false,
     #       },
+    #       event_source: {
+    #         type: "MANAGED_CWE", # required, accepts MANAGED_CWE
+    #         parameters: {
+    #           event_type: "shareSnapshot", # required, accepts shareSnapshot
+    #           snapshot_owner: ["AwsAccountId"], # required
+    #           description_regex: "DescriptionRegex", # required
+    #         },
+    #       },
+    #       actions: [
+    #         {
+    #           name: "ActionName", # required
+    #           cross_region_copy: [ # required
+    #             {
+    #               target: "Target", # required
+    #               encryption_configuration: { # required
+    #                 encrypted: false, # required
+    #                 cmk_arn: "CmkArn",
+    #               },
+    #               retain_rule: {
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -785,7 +883,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

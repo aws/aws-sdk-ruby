@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -73,7 +73,7 @@ module Aws::S3
     # If an archive copy is already restored, the header value indicates
     # when Amazon S3 is scheduled to delete the object copy. For example:
     #
-    # `x-amz-restore: ongoing-request="false", expiry-date="Fri, 23 Dec 2012
+    # `x-amz-restore: ongoing-request="false", expiry-date="Fri, 21 Dec 2012
     # 00:00:00 GMT"`
     #
     # If the object restoration is in progress, the header returns the value
@@ -91,7 +91,13 @@ module Aws::S3
       data[:restore]
     end
 
-    # Last modified date of the object
+    # The archive state of the head object.
+    # @return [String]
+    def archive_status
+      data[:archive_status]
+    end
+
+    # Creation date of the object.
     # @return [Time]
     def last_modified
       data[:last_modified]
@@ -218,6 +224,13 @@ module Aws::S3
       data[:ssekms_key_id]
     end
 
+    # Indicates whether the object uses an S3 Bucket Key for server-side
+    # encryption with AWS KMS (SSE-KMS).
+    # @return [Boolean]
+    def bucket_key_enabled
+      data[:bucket_key_enabled]
+    end
+
     # Provides storage class information of the object. Amazon S3 returns
     # this header for all objects except for S3 Standard storage class
     # objects.
@@ -240,12 +253,12 @@ module Aws::S3
     end
 
     # Amazon S3 can return this header if your request involves a bucket
-    # that is either a source or destination in a replication rule.
+    # that is either a source or a destination in a replication rule.
     #
     # In replication, you have a source bucket on which you configure
-    # replication and destination bucket where Amazon S3 stores object
-    # replicas. When you request an object (`GetObject`) or object metadata
-    # (`HeadObject`) from these buckets, Amazon S3 will return the
+    # replication and destination bucket or buckets where Amazon S3 stores
+    # object replicas. When you request an object (`GetObject`) or object
+    # metadata (`HeadObject`) from these buckets, Amazon S3 will return the
     # `x-amz-replication-status` header in the response as follows:
     #
     # * If requesting an object from the source bucket — Amazon S3 will
@@ -261,9 +274,18 @@ module Aws::S3
     #   value PENDING, COMPLETED or FAILED indicating object replication
     #   status.
     #
-    # * If requesting an object from the destination bucket — Amazon S3 will
+    # * If requesting an object from a destination bucket — Amazon S3 will
     #   return the `x-amz-replication-status` header with value REPLICA if
-    #   the object in your request is a replica that Amazon S3 created.
+    #   the object in your request is a replica that Amazon S3 created and
+    #   there is no replica modification replication in progress.
+    #
+    # * When replicating objects to multiple destination buckets the
+    #   `x-amz-replication-status` header acts differently. The header of
+    #   the source object will only return a value of COMPLETED when
+    #   replication is successful to all destinations. The header will
+    #   remain at value PENDING until replication has completed for all
+    #   destinations. If one or more destinations fails replication the
+    #   header will return FAILED.
     #
     # For more information, see [Replication][1].
     #
@@ -537,6 +559,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -609,7 +632,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     # @option options [String] :copy_source_if_match
     #   Copies the object if its entity tag (ETag) matches the specified tag.
     # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_modified_since
@@ -656,7 +679,7 @@ module Aws::S3
     #   and high availability. Depending on performance needs, you can specify
     #   a different Storage Class. Amazon S3 on Outposts only uses the
     #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
-    #   in the *Amazon S3 Service Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -683,8 +706,8 @@ module Aws::S3
     #   PUT requests for an object protected by AWS KMS will fail if not made
     #   via SSL or using SigV4. For information about configuring using any of
     #   the officially supported AWS SDKs and AWS CLI, see [Specifying the
-    #   Signature Version in Request Authentication][1] in the *Amazon S3
-    #   Developer Guide*.
+    #   Signature Version in Request Authentication][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -693,6 +716,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a COPY action doesn’t affect bucket-level
+    #   settings for S3 Bucket Key.
     # @option options [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
     #   example, AES256).
@@ -709,7 +740,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -726,11 +757,11 @@ module Aws::S3
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the copied object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected destination bucket owner. If the
+    #   The account ID of the expected destination bucket owner. If the
     #   destination bucket is owned by a different account, the request will
     #   fail with an HTTP `403 (Access Denied)` error.
     # @option options [String] :expected_source_bucket_owner
-    #   The account id of the expected source bucket owner. If the source
+    #   The account ID of the expected source bucket owner. If the source
     #   bucket is owned by a different account, the request will fail with an
     #   HTTP `403 (Access Denied)` error.
     # @return [Types::CopyObjectOutput]
@@ -765,7 +796,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -774,7 +805,7 @@ module Aws::S3
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::DeleteObjectOutput]
@@ -850,13 +881,13 @@ module Aws::S3
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (for
+    #   Specifies the algorithm to use to when decrypting the object (for
     #   example, AES256).
     # @option options [String] :sse_customer_key
-    #   Specifies the customer-provided encryption key for Amazon S3 to use in
-    #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon S3 does not store the encryption key. The key must
-    #   be appropriate for use with the algorithm specified in the
+    #   Specifies the customer-provided encryption key for Amazon S3 used to
+    #   encrypt the data. This value is used to decrypt the object when
+    #   recovering it and must match the one used when storing the data. The
+    #   key must be appropriate for use with the algorithm specified in the
     #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -867,7 +898,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -878,7 +909,7 @@ module Aws::S3
     #   for the part specified. Useful for downloading just a part of an
     #   object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::GetObjectOutput]
@@ -916,6 +947,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -970,7 +1002,7 @@ module Aws::S3
     #   and high availability. Depending on performance needs, you can specify
     #   a different Storage Class. Amazon S3 on Outposts only uses the
     #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
-    #   in the *Amazon S3 Service Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -998,21 +1030,29 @@ module Aws::S3
     #   protected by AWS KMS will fail if not made via SSL or using SigV4. For
     #   information about configuring using any of the officially supported
     #   AWS SDKs and AWS CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 Developer Guide*.
+    #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     # @option options [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an object action doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1029,7 +1069,7 @@ module Aws::S3
     #   Specifies whether you want to apply a Legal Hold to the uploaded
     #   object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [MultipartUpload]
@@ -1075,6 +1115,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1185,7 +1226,7 @@ module Aws::S3
     #   and high availability. Depending on performance needs, you can specify
     #   a different Storage Class. Amazon S3 on Outposts only uses the
     #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
-    #   in the *Amazon S3 Service Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1232,24 +1273,30 @@ module Aws::S3
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the AWS Key Management
     #   Service (AWS KMS) symmetrical customer managed customer master key
-    #   (CMK) that was used for the object.
-    #
-    #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
-    #   header specifies the ID of the symmetric customer managed AWS KMS CMK
-    #   that will be used for the object. If you specify
+    #   (CMK) that was used for the object. If you specify
     #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
-    #   managed CMK in AWS to protect the data.
+    #   managed CMK in AWS to protect the data. If the KMS key does not exist
+    #   in the same account issuing the command, you must use the full ARN and
+    #   not just the ID.
     # @option options [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a PUT action doesn’t affect bucket-level
+    #   settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1261,6 +1308,7 @@ module Aws::S3
     #   The Object Lock mode that you want to apply to this object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
     #   The date and time when you want this object's Object Lock to expire.
+    #   Must be formatted as a timestamp parameter.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether a legal hold will be applied to this object. For
     #   more information about S3 Object Lock, see [Object Lock][1].
@@ -1269,7 +1317,7 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::PutObjectOutput]
@@ -1380,13 +1428,13 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::RestoreObjectOutput]
@@ -1396,6 +1444,92 @@ module Aws::S3
         key: @key
       )
       resp = @client.restore_object(options)
+      resp.data
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   object.head({
+    #     if_match: "IfMatch",
+    #     if_modified_since: Time.now,
+    #     if_none_match: "IfNoneMatch",
+    #     if_unmodified_since: Time.now,
+    #     range: "Range",
+    #     version_id: "ObjectVersionId",
+    #     sse_customer_algorithm: "SSECustomerAlgorithm",
+    #     sse_customer_key: "SSECustomerKey",
+    #     sse_customer_key_md5: "SSECustomerKeyMD5",
+    #     request_payer: "requester", # accepts requester
+    #     part_number: 1,
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    # @param [Hash] options ({})
+    # @option options [String] :if_match
+    #   Return the object only if its entity tag (ETag) is the same as the one
+    #   specified, otherwise return a 412 (precondition failed).
+    # @option options [Time,DateTime,Date,Integer,String] :if_modified_since
+    #   Return the object only if it has been modified since the specified
+    #   time, otherwise return a 304 (not modified).
+    # @option options [String] :if_none_match
+    #   Return the object only if its entity tag (ETag) is different from the
+    #   one specified, otherwise return a 304 (not modified).
+    # @option options [Time,DateTime,Date,Integer,String] :if_unmodified_since
+    #   Return the object only if it has not been modified since the specified
+    #   time, otherwise return a 412 (precondition failed).
+    # @option options [String] :range
+    #   Downloads the specified range bytes of an object. For more information
+    #   about the HTTP Range header, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+    # @option options [String] :version_id
+    #   VersionId used to reference a specific version of the object.
+    # @option options [String] :sse_customer_algorithm
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
+    # @option options [String] :sse_customer_key
+    #   Specifies the customer-provided encryption key for Amazon S3 to use in
+    #   encrypting data. This value is used to store the object and then it is
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
+    # @option options [String] :sse_customer_key_md5
+    #   Specifies the 128-bit MD5 digest of the encryption key according to
+    #   RFC 1321. Amazon S3 uses this header for a message integrity check to
+    #   ensure that the encryption key was transmitted without error.
+    # @option options [String] :request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [Integer] :part_number
+    #   Part number of the object being read. This is a positive integer
+    #   between 1 and 10,000. Effectively performs a 'ranged' HEAD request
+    #   for the part specified. Useful querying about the size of the part and
+    #   the number of parts in this object.
+    # @option options [String] :expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
+    # @return [Types::HeadObjectOutput]
+    def head(options = {})
+      options = options.merge(
+        bucket: @bucket_name,
+        key: @key
+      )
+      resp = @client.head_object(options)
       resp.data
     end
 
@@ -1524,7 +1658,7 @@ module Aws::S3
       #   request. Bucket owners need not specify this parameter in their
       #   requests. For information about downloading objects from requester
       #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-      #   in the *Amazon S3 Developer Guide*.
+      #   in the *Amazon S3 User Guide*.
       #
       #
       #
@@ -1534,7 +1668,7 @@ module Aws::S3
       #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @option options [String] :expected_bucket_owner
-      #   The account id of the expected bucket owner. If the bucket is owned by
+      #   The account ID of the expected bucket owner. If the bucket is owned by
       #   a different account, the request will fail with an HTTP `403 (Access
       #   Denied)` error.
       # @return [void]

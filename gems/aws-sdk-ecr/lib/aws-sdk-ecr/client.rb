@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -786,6 +786,27 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Deletes the registry permissions policy.
+    #
+    # @return [Types::DeleteRegistryPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRegistryPolicyResponse#registry_id #registry_id} => String
+    #   * {Types::DeleteRegistryPolicyResponse#policy_text #policy_text} => String
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.policy_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRegistryPolicy AWS API Documentation
+    #
+    # @overload delete_registry_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_registry_policy(params = {}, options = {})
+      req = build_request(:delete_registry_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a repository. If the repository contains images, you must
     # either delete all images in the repository or use the `force` option
     # to delete the repository.
@@ -1096,6 +1117,32 @@ module Aws::ECR
     # @param [Hash] params ({})
     def describe_images(params = {}, options = {})
       req = build_request(:describe_images, params)
+      req.send_request(options)
+    end
+
+    # Describes the settings for a registry. The replication configuration
+    # for a repository can be created or updated with the
+    # PutReplicationConfiguration API action.
+    #
+    # @return [Types::DescribeRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistryResponse#registry_id #registry_id} => String
+    #   * {Types::DescribeRegistryResponse#replication_configuration #replication_configuration} => Types::ReplicationConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.replication_configuration.rules #=> Array
+    #   resp.replication_configuration.rules[0].destinations #=> Array
+    #   resp.replication_configuration.rules[0].destinations[0].region #=> String
+    #   resp.replication_configuration.rules[0].destinations[0].registry_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistry AWS API Documentation
+    #
+    # @overload describe_registry(params = {})
+    # @param [Hash] params ({})
+    def describe_registry(params = {}, options = {})
+      req = build_request(:describe_registry, params)
       req.send_request(options)
     end
 
@@ -1456,6 +1503,27 @@ module Aws::ECR
     # @param [Hash] params ({})
     def get_lifecycle_policy_preview(params = {}, options = {})
       req = build_request(:get_lifecycle_policy_preview, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the permissions policy for a registry.
+    #
+    # @return [Types::GetRegistryPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegistryPolicyResponse#registry_id #registry_id} => String
+    #   * {Types::GetRegistryPolicyResponse#policy_text #policy_text} => String
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.policy_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryPolicy AWS API Documentation
+    #
+    # @overload get_registry_policy(params = {})
+    # @param [Hash] params ({})
+    def get_registry_policy(params = {}, options = {})
+      req = build_request(:get_registry_policy, params)
       req.send_request(options)
     end
 
@@ -1907,6 +1975,111 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Creates or updates the permissions policy for your registry.
+    #
+    # A registry policy is used to specify permissions for another AWS
+    # account and is used when configuring cross-account replication. For
+    # more information, see [Registry permissions][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html
+    #
+    # @option params [required, String] :policy_text
+    #   The JSON policy text to apply to your registry. The policy text
+    #   follows the same format as IAM policy text. For more information, see
+    #   [Registry permissions][1] in the *Amazon Elastic Container Registry
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html
+    #
+    # @return [Types::PutRegistryPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRegistryPolicyResponse#registry_id #registry_id} => String
+    #   * {Types::PutRegistryPolicyResponse#policy_text #policy_text} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_registry_policy({
+    #     policy_text: "RegistryPolicyText", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.policy_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutRegistryPolicy AWS API Documentation
+    #
+    # @overload put_registry_policy(params = {})
+    # @param [Hash] params ({})
+    def put_registry_policy(params = {}, options = {})
+      req = build_request(:put_registry_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates the replication configuration for a registry. The
+    # existing replication configuration for a repository can be retrieved
+    # with the DescribeRegistry API action. The first time the
+    # PutReplicationConfiguration API is called, a service-linked IAM role
+    # is created in your account for the replication process. For more
+    # information, see [Using Service-Linked Roles for Amazon ECR][1] in the
+    # *Amazon Elastic Container Registry User Guide*.
+    #
+    # <note markdown="1"> When configuring cross-account replication, the destination account
+    # must grant the source account permission to replicate. This permission
+    # is controlled using a registry permissions policy. For more
+    # information, see PutRegistryPolicy.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html
+    #
+    # @option params [required, Types::ReplicationConfiguration] :replication_configuration
+    #   An object representing the replication configuration for a registry.
+    #
+    # @return [Types::PutReplicationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutReplicationConfigurationResponse#replication_configuration #replication_configuration} => Types::ReplicationConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_replication_configuration({
+    #     replication_configuration: { # required
+    #       rules: [ # required
+    #         {
+    #           destinations: [ # required
+    #             {
+    #               region: "Region", # required
+    #               registry_id: "RegistryId", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_configuration.rules #=> Array
+    #   resp.replication_configuration.rules[0].destinations #=> Array
+    #   resp.replication_configuration.rules[0].destinations[0].region #=> String
+    #   resp.replication_configuration.rules[0].destinations[0].registry_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutReplicationConfiguration AWS API Documentation
+    #
+    # @overload put_replication_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_replication_configuration(params = {}, options = {})
+      req = build_request(:put_replication_configuration, params)
+      req.send_request(options)
+    end
+
     # Applies a repository policy to the specified repository to control
     # access permissions. For more information, see [Amazon ECR Repository
     # Policies][1] in the *Amazon Elastic Container Registry User Guide*.
@@ -2219,7 +2392,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

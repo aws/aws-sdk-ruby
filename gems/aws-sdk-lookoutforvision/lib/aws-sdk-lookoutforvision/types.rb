@@ -1,0 +1,1721 @@
+# frozen_string_literal: true
+
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LookoutforVision
+  module Types
+
+    # You are not authorized to perform the action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The update or deletion of a resource caused an inconsistent state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDatasetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         dataset_type: "DatasetType", # required
+    #         dataset_source: {
+    #           ground_truth_manifest: {
+    #             s3_object: {
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #               version_id: "S3ObjectVersion",
+    #             },
+    #           },
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in which you want to create a dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset. Specify `train` for a training dataset.
+    #   Specify `test` for a test dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_source
+    #   The location of the manifest file that Amazon Lookout for Vision
+    #   uses to create the dataset.
+    #
+    #   If you don't specify `DatasetSource`, an empty dataset is created
+    #   and the operation synchronously returns. Later, you can add JSON
+    #   Lines by calling UpdateDatasetEntries.
+    #
+    #   If you specify a value for `DataSource`, the manifest at the S3
+    #   location is validated and used to create the dataset. The call to
+    #   `CreateDataset` is asynchronous and might take a while to complete.
+    #   To find out the current status, Check the value of `Status` returned
+    #   in a call to DescribeDataset.
+    #   @return [Types::DatasetSource]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `CreateDataset` completes only once. You choose the value to pass.
+    #   For example, An issue, such as an network outage, might prevent you
+    #   from getting a response from `CreateDataset`. In this case, safely
+    #   retry your call to `CreateDataset` by using the same `ClientToken`
+    #   parameter value. An error occurs if the other input parameters are
+    #   not the same as in the first request. Using a different value for
+    #   `ClientToken` is considered a new call to `CreateDataset`. An
+    #   idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateDatasetRequest AWS API Documentation
+    #
+    class CreateDatasetRequest < Struct.new(
+      :project_name,
+      :dataset_type,
+      :dataset_source,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_metadata
+    #   Information about the dataset.
+    #   @return [Types::DatasetMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateDatasetResponse AWS API Documentation
+    #
+    class CreateDatasetResponse < Struct.new(
+      :dataset_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         description: "ModelDescriptionMessage",
+    #         client_token: "ClientToken",
+    #         output_config: { # required
+    #           s3_location: { # required
+    #             bucket: "S3BucketName", # required
+    #             prefix: "S3KeyPrefix",
+    #           },
+    #         },
+    #         kms_key_id: "KmsKeyId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in which you want to create a model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the version of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `CreateModel` completes only once. You choose the value to pass. For
+    #   example, An issue, such as an network outage, might prevent you from
+    #   getting a response from `CreateModel`. In this case, safely retry
+    #   your call to `CreateModel` by using the same `ClientToken` parameter
+    #   value. An error occurs if the other input parameters are not the
+    #   same as in the first request. Using a different value for
+    #   `ClientToken` is considered a new call to `CreateModel`. An
+    #   idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   The location where Amazon Lookout for Vision saves the training
+    #   results.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK). The key is used to encrypt training and
+    #   test images copied into the service for model training. Your source
+    #   images are unaffected. If this parameter is not specified, the
+    #   copied images are encrypted by a key that AWS owns and manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateModelRequest AWS API Documentation
+    #
+    class CreateModelRequest < Struct.new(
+      :project_name,
+      :description,
+      :client_token,
+      :output_config,
+      :kms_key_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_metadata
+    #   The response from a call to `CreateModel`.
+    #   @return [Types::ModelMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateModelResponse AWS API Documentation
+    #
+    class CreateModelResponse < Struct.new(
+      :model_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name for the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `CreateProject` completes only once. You choose the value to pass.
+    #   For example, An issue, such as an network outage, might prevent you
+    #   from getting a response from `CreateProject`. In this case, safely
+    #   retry your call to `CreateProject` by using the same `ClientToken`
+    #   parameter value. An error occurs if the other input parameters are
+    #   not the same as in the first request. Using a different value for
+    #   `ClientToken` is considered a new call to `CreateProject`. An
+    #   idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateProjectRequest AWS API Documentation
+    #
+    class CreateProjectRequest < Struct.new(
+      :project_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_metadata
+    #   Information about the project.
+    #   @return [Types::ProjectMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateProjectResponse AWS API Documentation
+    #
+    class CreateProjectResponse < Struct.new(
+      :project_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The description for a dataset. For more information, see
+    # DescribeDataset.
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset. The value `train` represents a training
+    #   dataset or single dataset project. The value `test` represents a
+    #   test dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix timestamp for the time and date that the dataset was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The Unix timestamp for the date and time that the dataset was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_stats
+    #   @return [Types::DatasetImageStats]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DatasetDescription AWS API Documentation
+    #
+    class DatasetDescription < Struct.new(
+      :project_name,
+      :dataset_type,
+      :creation_timestamp,
+      :last_updated_timestamp,
+      :status,
+      :status_message,
+      :image_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Location information about a manifest file. You can use a manifest
+    # file to create a dataset.
+    #
+    # @note When making an API call, you may pass DatasetGroundTruthManifest
+    #   data as a hash:
+    #
+    #       {
+    #         s3_object: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #           version_id: "S3ObjectVersion",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_object
+    #   The S3 bucket location for the manifest file.
+    #   @return [Types::InputS3Object]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DatasetGroundTruthManifest AWS API Documentation
+    #
+    class DatasetGroundTruthManifest < Struct.new(
+      :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about the images in a dataset.
+    #
+    # @!attribute [rw] total
+    #   The total number of images in the dataset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] labeled
+    #   The total number of labeled images.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] normal
+    #   The total number of images labeled as normal.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] anomaly
+    #   the total number of images labeled as an anomaly.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DatasetImageStats AWS API Documentation
+    #
+    class DatasetImageStats < Struct.new(
+      :total,
+      :labeled,
+      :normal,
+      :anomaly)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sumary information for an Amazon Lookout for Vision dataset.
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix timestamp for the date and time that the dataset was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DatasetMetadata AWS API Documentation
+    #
+    class DatasetMetadata < Struct.new(
+      :dataset_type,
+      :creation_timestamp,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the location of a manifest file that Amazon Lookout
+    # for Vision uses to to create a dataset.
+    #
+    # @note When making an API call, you may pass DatasetSource
+    #   data as a hash:
+    #
+    #       {
+    #         ground_truth_manifest: {
+    #           s3_object: {
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #             version_id: "S3ObjectVersion",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ground_truth_manifest
+    #   Location information for the manifest file.
+    #   @return [Types::DatasetGroundTruthManifest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DatasetSource AWS API Documentation
+    #
+    class DatasetSource < Struct.new(
+      :ground_truth_manifest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDatasetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         dataset_type: "DatasetType", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the dataset that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset to delete. Specify `train` to delete the
+    #   training dataset. Specify `test` to delete the test dataset. To
+    #   delete the dataset in a single dataset project, specify `train`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `DeleteDataset` completes only once. You choose the value to pass.
+    #   For example, An issue, such as an network outage, might prevent you
+    #   from getting a response from `DeleteDataset`. In this case, safely
+    #   retry your call to `DeleteDataset` by using the same `ClientToken`
+    #   parameter value. An error occurs if the other input parameters are
+    #   not the same as in the first request. Using a different value for
+    #   `ClientToken` is considered a new call to `DeleteDataset`. An
+    #   idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteDatasetRequest AWS API Documentation
+    #
+    class DeleteDatasetRequest < Struct.new(
+      :project_name,
+      :dataset_type,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteDatasetResponse AWS API Documentation
+    #
+    class DeleteDatasetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         model_version: "ModelVersion", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the model that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `DeleteModel` completes only once. You choose the value to pass. For
+    #   example, An issue, such as an network outage, might prevent you from
+    #   getting a response from `DeleteModel`. In this case, safely retry
+    #   your call to `DeleteModel` by using the same `ClientToken` parameter
+    #   value. An error occurs if the other input parameters are not the
+    #   same as in the first request. Using a different value for
+    #   `ClientToken` is considered a new call to `DeleteModel`. An
+    #   idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteModelRequest AWS API Documentation
+    #
+    class DeleteModelRequest < Struct.new(
+      :project_name,
+      :model_version,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the model that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteModelResponse AWS API Documentation
+    #
+    class DeleteModelResponse < Struct.new(
+      :model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `DeleteProject` completes only once. You choose the value to pass.
+    #   For example, An issue, such as an network outage, might prevent you
+    #   from getting a response from `DeleteProject`. In this case, safely
+    #   retry your call to `DeleteProject` by using the same `ClientToken`
+    #   parameter value. An error occurs if the other input parameters are
+    #   not the same as in the first request. Using a different value for
+    #   `ClientToken` is considered a new call to `DeleteProject`. An
+    #   idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteProjectRequest AWS API Documentation
+    #
+    class DeleteProjectRequest < Struct.new(
+      :project_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteProjectResponse AWS API Documentation
+    #
+    class DeleteProjectResponse < Struct.new(
+      :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDatasetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         dataset_type: "DatasetType", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the dataset that you want to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset to describe. Specify `train` to describe the
+    #   training dataset. Specify `test` to describe the test dataset. If
+    #   you have a single dataset project, specify `train`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeDatasetRequest AWS API Documentation
+    #
+    class DescribeDatasetRequest < Struct.new(
+      :project_name,
+      :dataset_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_description
+    #   The description of the requested dataset.
+    #   @return [Types::DatasetDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeDatasetResponse AWS API Documentation
+    #
+    class DescribeDatasetResponse < Struct.new(
+      :dataset_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         model_version: "ModelVersion", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The project that contains the version of a model that you want to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeModelRequest AWS API Documentation
+    #
+    class DescribeModelRequest < Struct.new(
+      :project_name,
+      :model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_description
+    #   Contains the description of the model.
+    #   @return [Types::ModelDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeModelResponse AWS API Documentation
+    #
+    class DescribeModelResponse < Struct.new(
+      :model_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeProjectRequest AWS API Documentation
+    #
+    class DescribeProjectRequest < Struct.new(
+      :project_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_description
+    #   The description of the project.
+    #   @return [Types::ProjectDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeProjectResponse AWS API Documentation
+    #
+    class DescribeProjectResponse < Struct.new(
+      :project_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectAnomaliesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         model_version: "ModelVersion", # required
+    #         body: "data", # required
+    #         content_type: "ContentType", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the model version that you
+    #   want to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model that you want to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The unencrypted image bytes that you want to analyze.
+    #   @return [IO]
+    #
+    # @!attribute [rw] content_type
+    #   The type of the image passed in `Body`. Valid values are `image/png`
+    #   (PNG format images) and `image/jpeg` (JPG format images).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DetectAnomaliesRequest AWS API Documentation
+    #
+    class DetectAnomaliesRequest < Struct.new(
+      :project_name,
+      :model_version,
+      :body,
+      :content_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] detect_anomaly_result
+    #   The results of the `DetectAnomalies` operation.
+    #   @return [Types::DetectAnomalyResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DetectAnomaliesResponse AWS API Documentation
+    #
+    class DetectAnomaliesResponse < Struct.new(
+      :detect_anomaly_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The prediction results from a call to DetectAnomalies.
+    #
+    # @!attribute [rw] source
+    #   The source of the image that was analyzed. `direct` means that the
+    #   images was supplied from the local computer. No other values are
+    #   supported.
+    #   @return [Types::ImageSource]
+    #
+    # @!attribute [rw] is_anomalous
+    #   True if the image contains an anomaly, otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Lookout for Vision has in the accuracy of
+    #   the prediction.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DetectAnomalyResult AWS API Documentation
+    #
+    class DetectAnomalyResult < Struct.new(
+      :source,
+      :is_anomalous,
+      :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source for an image.
+    #
+    # @!attribute [rw] type
+    #   The type of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ImageSource AWS API Documentation
+    #
+    class ImageSource < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon S3 Location information for an input manifest file.
+    #
+    # @note When making an API call, you may pass InputS3Object
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3BucketName", # required
+    #         key: "S3ObjectKey", # required
+    #         version_id: "S3ObjectVersion",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket that contains the manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The name and location of the manifest file withiin the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/InputS3Object AWS API Documentation
+    #
+    class InputS3Object < Struct.new(
+      :bucket,
+      :key,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Lookout for Vision experienced a service issue. Try your call
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The period of time, in seconds, before the operation can be retried.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message,
+      :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDatasetEntriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         dataset_type: "DatasetType", # required
+    #         labeled: false,
+    #         anomaly_class: "AnomalyClassFilter",
+    #         before_creation_date: Time.now,
+    #         after_creation_date: Time.now,
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         source_ref_contains: "QueryString",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the dataset that you want to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset that you want to list. Specify `train` to
+    #   list the training dataset. Specify `test` to list the test dataset.
+    #   If you have a single dataset project, specify `train`.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeled
+    #   Specify `true` to include labeled entries, otherwise specify
+    #   `false`. If you don't specify a value, Lookout for Vision returns
+    #   all entries.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] anomaly_class
+    #   Specify `normal` to include only normal images. Specify `anomaly` to
+    #   only include anomalous entries. If you don't specify a value,
+    #   Amazon Lookout for Vision returns normal and anomalous images.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_creation_date
+    #   Only includes entries before the specified date in the response. For
+    #   example, `2020-06-23T00:00:00`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] after_creation_date
+    #   Only includes entries after the specified date in the response. For
+    #   example, `2020-06-23T00:00:00`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Lookout for Vision returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of dataset entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_ref_contains
+    #   Perform a "contains" search on the values of the `source-ref` key
+    #   within the dataset. For example a value of "IMG\_17" returns all
+    #   JSON Lines where the `source-ref` key value matches **IMG\_17**.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListDatasetEntriesRequest AWS API Documentation
+    #
+    class ListDatasetEntriesRequest < Struct.new(
+      :project_name,
+      :dataset_type,
+      :labeled,
+      :anomaly_class,
+      :before_creation_date,
+      :after_creation_date,
+      :next_token,
+      :max_results,
+      :source_ref_contains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_entries
+    #   A list of the entries (JSON Lines) within the dataset.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Lookout for Vision returns this
+    #   token that you can use in the subsequent request to retrieve the
+    #   next set ofdataset entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListDatasetEntriesResponse AWS API Documentation
+    #
+    class ListDatasetEntriesResponse < Struct.new(
+      :dataset_entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListModelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the model versions that you
+    #   want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Lookout for Vision returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of models.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListModelsRequest AWS API Documentation
+    #
+    class ListModelsRequest < Struct.new(
+      :project_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] models
+    #   A list of model versions in the specified project.
+    #   @return [Array<Types::ModelMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Lookout for Vision returns this
+    #   token that you can use in the subsequent request to retrieve the
+    #   next set of models.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListModelsResponse AWS API Documentation
+    #
+    class ListModelsResponse < Struct.new(
+      :models,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListProjectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Lookout for Vision returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of projects.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListProjectsRequest AWS API Documentation
+    #
+    class ListProjectsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] projects
+    #   A list of projects in your AWS account.
+    #   @return [Array<Types::ProjectMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Lookout for Vision returns this
+    #   token that you can use in the subsequent request to retrieve the
+    #   next set of projects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListProjectsResponse AWS API Documentation
+    #
+    class ListProjectsResponse < Struct.new(
+      :projects,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TagArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the model for which you want to
+    #   list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A map of tag keys and values attached to the specified model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Lookout for Vision model.
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The unix timestamp for the date and time that the model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description for the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] performance
+    #   Performance metrics for the model. Created during training.
+    #   @return [Types::ModelPerformance]
+    #
+    # @!attribute [rw] output_config
+    #   The S3 location where Amazon Lookout for Vision saves model training
+    #   files.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] evaluation_manifest
+    #   The S3 location where Amazon Lookout for Vision saves the manifest
+    #   file that was used to test the trained model and generate the
+    #   performance scores.
+    #   @return [Types::OutputS3Object]
+    #
+    # @!attribute [rw] evaluation_result
+    #   The S3 location where Amazon Lookout for Vision saves the
+    #   performance metrics.
+    #   @return [Types::OutputS3Object]
+    #
+    # @!attribute [rw] evaluation_end_timestamp
+    #   The unix timestamp for the date and time that the evaluation ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifer for the AWS Key Management Service (AWS KMS) key that
+    #   was used to encrypt the model during training.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ModelDescription AWS API Documentation
+    #
+    class ModelDescription < Struct.new(
+      :model_version,
+      :model_arn,
+      :creation_timestamp,
+      :description,
+      :status,
+      :status_message,
+      :performance,
+      :output_config,
+      :evaluation_manifest,
+      :evaluation_result,
+      :evaluation_end_timestamp,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Lookout for Vision model.
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The unix timestamp for the date and time that the model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] performance
+    #   Performance metrics for the model. Not available until training has
+    #   successfully completed.
+    #   @return [Types::ModelPerformance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ModelMetadata AWS API Documentation
+    #
+    class ModelMetadata < Struct.new(
+      :creation_timestamp,
+      :model_version,
+      :model_arn,
+      :description,
+      :status,
+      :status_message,
+      :performance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the evaluation performance of a trained model.
+    #
+    # @!attribute [rw] f1_score
+    #   The overall F1 score metric for the trained model.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recall
+    #   The overall recall metric value for the trained model.
+    #   @return [Float]
+    #
+    # @!attribute [rw] precision
+    #   The overall precision metric value for the trained model.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ModelPerformance AWS API Documentation
+    #
+    class ModelPerformance < Struct.new(
+      :f1_score,
+      :recall,
+      :precision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 location where Amazon Lookout for Vision saves model training
+    # files.
+    #
+    # @note When making an API call, you may pass OutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_location: { # required
+    #           bucket: "S3BucketName", # required
+    #           prefix: "S3KeyPrefix",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_location
+    #   The S3 location for the output.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/OutputConfig AWS API Documentation
+    #
+    class OutputConfig < Struct.new(
+      :s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 location where Amazon Lookout for Vision saves training output.
+    #
+    # @!attribute [rw] bucket
+    #   The bucket that contains the training output.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The location of the training output in the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/OutputS3Object AWS API Documentation
+    #
+    class OutputS3Object < Struct.new(
+      :bucket,
+      :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describe an Amazon Lookout for Vision project. For more information,
+    # see DescribeProject.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The unix timestamp for the date and time that the project was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] datasets
+    #   A list of datasets in the project.
+    #   @return [Array<Types::DatasetMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ProjectDescription AWS API Documentation
+    #
+    class ProjectDescription < Struct.new(
+      :project_arn,
+      :project_name,
+      :creation_timestamp,
+      :datasets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata about an Amazon Lookout for Vision project.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The unix timestamp for the date and time that the project was
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ProjectMetadata AWS API Documentation
+    #
+    class ProjectMetadata < Struct.new(
+      :project_arn,
+      :project_name,
+      :creation_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the location training output.
+    #
+    # @note When making an API call, you may pass S3Location
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3BucketName", # required
+    #         prefix: "S3KeyPrefix",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket that contains the training output.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The path of the folder, within the S3 bucket, that contains the
+    #   training output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A service quota was exceeded the allowed limit. For more information,
+    # see Limits in Amazon Lookout for Vision in the Amazon Lookout for
+    # Vision Developer Guide.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The quota code.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The service code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type,
+      :quota_code,
+      :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         model_version: "ModelVersion", # required
+    #         min_inference_units: 1, # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the model that you want to
+    #   start.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model that you want to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_inference_units
+    #   The minimum number of inference units to use. A single inference
+    #   unit represents 1 hour of processing and can support up to 5
+    #   Transaction Pers Second (TPS). Use a higher number to increase the
+    #   TPS throughput of your model. You are charged for the number of
+    #   inference units that you use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `StartModel` completes only once. You choose the value to pass. For
+    #   example, An issue, such as an network outage, might prevent you from
+    #   getting a response from `StartModel`. In this case, safely retry
+    #   your call to `StartModel` by using the same `ClientToken` parameter
+    #   value. An error occurs if the other input parameters are not the
+    #   same as in the first request. Using a different value for
+    #   `ClientToken` is considered a new call to `StartModel`. An
+    #   idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StartModelRequest AWS API Documentation
+    #
+    class StartModelRequest < Struct.new(
+      :project_name,
+      :model_version,
+      :min_inference_units,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current running status of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StartModelResponse AWS API Documentation
+    #
+    class StartModelResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         model_version: "ModelVersion", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the model that you want to
+    #   stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model that you want to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `StopModel` completes only once. You choose the value to pass. For
+    #   example, An issue, such as an network outage, might prevent you from
+    #   getting a response from `StopModel`. In this case, safely retry your
+    #   call to `StopModel` by using the same `ClientToken` parameter value.
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
+    #   considered a new call to `StopModel`. An idempotency token is active
+    #   for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StopModelRequest AWS API Documentation
+    #
+    class StopModelRequest < Struct.new(
+      :project_name,
+      :model_version,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StopModelResponse AWS API Documentation
+    #
+    class StopModelResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key and value pair that is attached to the specified Amazon Lookout
+    # for Vision model.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the tag that is attached to the specified model.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag that is attached to the specified model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TagArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the model to assign the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags to assign to the model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Amazon Lookout for Vision is temporarily unable to process the
+    # request. Try your call again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The quota code.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The service code.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The period of time, in seconds, before the operation can be retried.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :quota_code,
+      :service_code,
+      :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TagArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the model from which you want to
+    #   remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of the keys of the tags that you want to remove.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateDatasetEntriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         dataset_type: "DatasetType", # required
+    #         changes: "data", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project that contains the dataset that you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset that you want to update. Specify `train` to
+    #   update the training dataset. Specify `test` to update the test
+    #   dataset. If you have a single dataset project, specify `train`.
+    #   @return [String]
+    #
+    # @!attribute [rw] changes
+    #   The entries to add to the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `UpdateDatasetEntries` completes only once. You choose the value to
+    #   pass. For example, An issue, such as an network outage, might
+    #   prevent you from getting a response from `UpdateDatasetEntries`. In
+    #   this case, safely retry your call to `UpdateDatasetEntries` by using
+    #   the same `ClientToken` parameter value. An error occurs if the other
+    #   input parameters are not the same as in the first request. Using a
+    #   different value for `ClientToken` is considered a new call to
+    #   `UpdateDatasetEntries`. An idempotency token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UpdateDatasetEntriesRequest AWS API Documentation
+    #
+    class UpdateDatasetEntriesRequest < Struct.new(
+      :project_name,
+      :dataset_type,
+      :changes,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the dataset update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UpdateDatasetEntriesResponse AWS API Documentation
+    #
+    class UpdateDatasetEntriesResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An input validation error occured. For example, invalid characters in
+    # a project name, or if a pagination token is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+  end
+end

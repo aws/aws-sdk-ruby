@@ -1,14 +1,15 @@
 # AWS SDK for Ruby - Version 3
 
-[![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Github forks](https://img.shields.io/github/forks/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/network)
+[![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core)
+[![Build Status](https://github.com/aws/aws-sdk-ruby/workflows/CI/badge.svg)](https://github.com/aws/aws-sdk-ruby/actions)
+[![Github forks](https://img.shields.io/github/forks/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/network)
 [![Github stars](https://img.shields.io/github/stars/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/stargazers)
-[![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Links of Interest
 
 * [API Documentation](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/index.html)
 * [Developer Guide](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/welcome.html)
-* [V3 Upgrading Guide](https://github.com/aws/aws-sdk-ruby/blob/master/V3_UPGRADING_GUIDE.md)
+* [V3 Upgrading Guide](https://github.com/aws/aws-sdk-ruby/blob/version-3/V3_UPGRADING_GUIDE.md)
 * [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/ruby/)
 
 ## Installation
@@ -68,7 +69,7 @@ You can also configure default credentials and the region via the `Aws.config`
 hash. The `Aws.config` hash takes precedence over environment variables.
 
 ```ruby
-require 'aws-sdk'
+require 'aws-sdk-core'
 
 Aws.config.update(
   region: 'us-west-2',
@@ -256,8 +257,14 @@ Simply downcase the service module name for the helper:
 Please use any of these resources for getting help:
 
 * Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`.
-* Join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby).
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
+
+## Maintenance and support for SDK major versions
+
+For information about maintenance and support for SDK major versions and their underlying dependencies, see the following in the [AWS SDKs and Tools Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html):
+
+* [AWS SDKs and Tools Maintenance Policy](https://docs.aws.amazon.com/credref/latest/refdocs/maint-policy.html)
+* [AWS SDKs and Tools Version Support Matrix](https://docs.aws.amazon.com/credref/latest/refdocs/version-support-matrix.html)
 
 ## Opening Issues
 
@@ -285,8 +292,11 @@ RubyGems.org page under "LINKS" section.
 | ----------------------------------------------------- | ------------------------------------ | --------------------------------------- | ----------- |
 | AWS Amplify                                           | Aws::Amplify                         | aws-sdk-amplify                         | 2017-07-25  |
 | AWS App Mesh                                          | Aws::AppMesh                         | aws-sdk-appmesh                         | 2019-01-25  |
+| AWS App Runner                                        | Aws::AppRunner                       | aws-sdk-apprunner                       | 2020-05-15  |
 | AWS AppSync                                           | Aws::AppSync                         | aws-sdk-appsync                         | 2017-07-25  |
+| AWS Application Cost Profiler                         | Aws::ApplicationCostProfiler         | aws-sdk-applicationcostprofiler         | 2020-09-10  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService     | aws-sdk-applicationdiscoveryservice     | 2015-11-01  |
+| AWS Audit Manager                                     | Aws::AuditManager                    | aws-sdk-auditmanager                    | 2017-07-25  |
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                | aws-sdk-autoscalingplans                | 2018-01-06  |
 | AWS Backup                                            | Aws::Backup                          | aws-sdk-backup                          | 2018-11-15  |
 | AWS Batch                                             | Aws::Batch                           | aws-sdk-batch                           | 2016-08-10  |
@@ -325,8 +335,10 @@ RubyGems.org page under "LINKS" section.
 | AWS Elemental MediaPackage VOD                        | Aws::MediaPackageVod                 | aws-sdk-mediapackagevod                 | 2018-11-07  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                      | aws-sdk-mediastore                      | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                  | aws-sdk-mediastoredata                  | 2017-09-01  |
+| AWS Fault Injection Simulator                         | Aws::FIS                             | aws-sdk-fis                             | 2020-12-01  |
 | AWS Global Accelerator                                | Aws::GlobalAccelerator               | aws-sdk-globalaccelerator               | 2018-08-08  |
 | AWS Glue                                              | Aws::Glue                            | aws-sdk-glue                            | 2017-03-31  |
+| AWS Glue DataBrew                                     | Aws::GlueDataBrew                    | aws-sdk-gluedatabrew                    | 2017-07-25  |
 | AWS Greengrass                                        | Aws::Greengrass                      | aws-sdk-greengrass                      | 2017-06-07  |
 | AWS Ground Station                                    | Aws::GroundStation                   | aws-sdk-groundstation                   | 2019-05-23  |
 | AWS Health APIs and Notifications                     | Aws::Health                          | aws-sdk-health                          | 2016-08-04  |
@@ -336,13 +348,17 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT 1-Click Devices Service                       | Aws::IoT1ClickDevicesService         | aws-sdk-iot1clickdevicesservice         | 2018-05-14  |
 | AWS IoT 1-Click Projects Service                      | Aws::IoT1ClickProjects               | aws-sdk-iot1clickprojects               | 2018-05-14  |
 | AWS IoT Analytics                                     | Aws::IoTAnalytics                    | aws-sdk-iotanalytics                    | 2017-11-27  |
+| AWS IoT Core Device Advisor                           | Aws::IoTDeviceAdvisor                | aws-sdk-iotdeviceadvisor                | 2020-09-18  |
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Events                                        | Aws::IoTEvents                       | aws-sdk-iotevents                       | 2018-07-27  |
 | AWS IoT Events Data                                   | Aws::IoTEventsData                   | aws-sdk-ioteventsdata                   | 2018-10-23  |
+| AWS IoT Fleet Hub                                     | Aws::IoTFleetHub                     | aws-sdk-iotfleethub                     | 2020-11-03  |
+| AWS IoT Greengrass V2                                 | Aws::GreengrassV2                    | aws-sdk-greengrassv2                    | 2020-11-30  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling              | aws-sdk-iotsecuretunneling              | 2018-10-05  |
 | AWS IoT SiteWise                                      | Aws::IoTSiteWise                     | aws-sdk-iotsitewise                     | 2019-12-02  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
+| AWS IoT Wireless                                      | Aws::IoTWireless                     | aws-sdk-iotwireless                     | 2020-11-22  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
@@ -356,6 +372,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Migration Hub                                     | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
 | AWS Migration Hub Config                              | Aws::MigrationHubConfig              | aws-sdk-migrationhubconfig              | 2019-06-30  |
 | AWS Mobile                                            | Aws::Mobile                          | aws-sdk-mobile                          | 2017-07-01  |
+| AWS Network Firewall                                  | Aws::NetworkFirewall                 | aws-sdk-networkfirewall                 | 2020-11-12  |
 | AWS Network Manager                                   | Aws::NetworkManager                  | aws-sdk-networkmanager                  | 2019-07-05  |
 | AWS OpsWorks                                          | Aws::OpsWorks                        | aws-sdk-opsworks                        | 2013-02-18  |
 | AWS OpsWorks CM                                       | Aws::OpsWorksCM                      | aws-sdk-opsworkscm                      | 2016-11-01  |
@@ -363,6 +380,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Outposts                                          | Aws::Outposts                        | aws-sdk-outposts                        | 2019-12-03  |
 | AWS Performance Insights                              | Aws::PI                              | aws-sdk-pi                              | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                         | aws-sdk-pricing                         | 2017-10-15  |
+| AWS Proton                                            | Aws::Proton                          | aws-sdk-proton                          | 2020-07-20  |
 | AWS RDS DataService                                   | Aws::RDSDataService                  | aws-sdk-rdsdataservice                  | 2018-08-01  |
 | AWS Resource Access Manager                           | Aws::RAM                             | aws-sdk-ram                             | 2018-01-04  |
 | AWS Resource Groups                                   | Aws::ResourceGroups                  | aws-sdk-resourcegroups                  | 2017-11-27  |
@@ -377,6 +395,7 @@ RubyGems.org page under "LINKS" section.
 | AWS SecurityHub                                       | Aws::SecurityHub                     | aws-sdk-securityhub                     | 2018-10-26  |
 | AWS Server Migration Service                          | Aws::SMS                             | aws-sdk-sms                             | 2016-10-24  |
 | AWS Service Catalog                                   | Aws::ServiceCatalog                  | aws-sdk-servicecatalog                  | 2015-12-10  |
+| AWS Service Catalog App Registry                      | Aws::AppRegistry                     | aws-sdk-appregistry                     | 2020-06-24  |
 | AWS Shield                                            | Aws::Shield                          | aws-sdk-shield                          | 2016-06-02  |
 | AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
 | AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-core                            | 2019-06-10  |
@@ -384,10 +403,13 @@ RubyGems.org page under "LINKS" section.
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
+| AWS Systems Manager Incident Manager                  | Aws::SSMIncidents                    | aws-sdk-ssmincidents                    | 2018-05-10  |
+| AWS Systems Manager Incident Manager Contacts         | Aws::SSMContacts                     | aws-sdk-ssmcontacts                     | 2021-05-03  |
 | AWS Transfer Family                                   | Aws::Transfer                        | aws-sdk-transfer                        | 2018-11-05  |
 | AWS WAF                                               | Aws::WAF                             | aws-sdk-waf                             | 2015-08-24  |
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |
 | AWS WAFV2                                             | Aws::WAFV2                           | aws-sdk-wafv2                           | 2019-07-29  |
+| AWS Well-Architected Tool                             | Aws::WellArchitected                 | aws-sdk-wellarchitected                 | 2020-03-31  |
 | AWS X-Ray                                             | Aws::XRay                            | aws-sdk-xray                            | 2016-04-12  |
 | AWSKendraFrontendService                              | Aws::Kendra                          | aws-sdk-kendra                          | 2019-02-03  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering             | aws-sdk-marketplacemetering             | 2016-01-14  |
@@ -396,6 +418,7 @@ RubyGems.org page under "LINKS" section.
 | Alexa For Business                                    | Aws::AlexaForBusiness                | aws-sdk-alexaforbusiness                | 2017-11-09  |
 | Amazon API Gateway                                    | Aws::APIGateway                      | aws-sdk-apigateway                      | 2015-07-09  |
 | Amazon AppConfig                                      | Aws::AppConfig                       | aws-sdk-appconfig                       | 2019-10-09  |
+| Amazon AppIntegrations Service                        | Aws::AppIntegrationsService          | aws-sdk-appintegrationsservice          | 2020-07-29  |
 | Amazon AppStream                                      | Aws::AppStream                       | aws-sdk-appstream                       | 2016-12-01  |
 | Amazon Appflow                                        | Aws::Appflow                         | aws-sdk-appflow                         | 2020-08-23  |
 | Amazon Athena                                         | Aws::Athena                          | aws-sdk-athena                          | 2017-05-18  |
@@ -416,20 +439,25 @@ RubyGems.org page under "LINKS" section.
 | Amazon Cognito Identity Provider                      | Aws::CognitoIdentityProvider         | aws-sdk-cognitoidentityprovider         | 2016-04-18  |
 | Amazon Cognito Sync                                   | Aws::CognitoSync                     | aws-sdk-cognitosync                     | 2014-06-30  |
 | Amazon Comprehend                                     | Aws::Comprehend                      | aws-sdk-comprehend                      | 2017-11-27  |
+| Amazon Connect Contact Lens                           | Aws::ConnectContactLens              | aws-sdk-connectcontactlens              | 2020-08-21  |
+| Amazon Connect Customer Profiles                      | Aws::CustomerProfiles                | aws-sdk-customerprofiles                | 2020-08-15  |
 | Amazon Connect Participant Service                    | Aws::ConnectParticipant              | aws-sdk-connectparticipant              | 2018-09-07  |
 | Amazon Connect Service                                | Aws::Connect                         | aws-sdk-connect                         | 2017-08-08  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                             | aws-sdk-dlm                             | 2018-01-12  |
 | Amazon Detective                                      | Aws::Detective                       | aws-sdk-detective                       | 2018-10-26  |
+| Amazon DevOps Guru                                    | Aws::DevOpsGuru                      | aws-sdk-devopsguru                      | 2020-12-01  |
 | Amazon DocumentDB with MongoDB compatibility          | Aws::DocDB                           | aws-sdk-docdb                           | 2014-10-31  |
 | Amazon DynamoDB                                       | Aws::DynamoDB                        | aws-sdk-dynamodb                        | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | Aws::DAX                             | aws-sdk-dax                             | 2017-04-19  |
 | Amazon DynamoDB Streams                               | Aws::DynamoDBStreams                 | aws-sdk-dynamodbstreams                 | 2012-08-10  |
 | Amazon EC2 Container Registry                         | Aws::ECR                             | aws-sdk-ecr                             | 2015-09-21  |
 | Amazon EC2 Container Service                          | Aws::ECS                             | aws-sdk-ecs                             | 2014-11-13  |
+| Amazon EMR Containers                                 | Aws::EMRContainers                   | aws-sdk-emrcontainers                   | 2020-10-01  |
 | Amazon ElastiCache                                    | Aws::ElastiCache                     | aws-sdk-elasticache                     | 2015-02-02  |
 | Amazon Elastic  Inference                             | Aws::ElasticInference                | aws-sdk-elasticinference                | 2017-07-25  |
 | Amazon Elastic Block Store                            | Aws::EBS                             | aws-sdk-ebs                             | 2019-11-02  |
 | Amazon Elastic Compute Cloud                          | Aws::EC2                             | aws-sdk-ec2                             | 2016-11-15  |
+| Amazon Elastic Container Registry Public              | Aws::ECRPublic                       | aws-sdk-ecrpublic                       | 2020-10-30  |
 | Amazon Elastic File System                            | Aws::EFS                             | aws-sdk-efs                             | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | Aws::EKS                             | aws-sdk-eks                             | 2017-11-01  |
 | Amazon Elastic MapReduce                              | Aws::EMR                             | aws-sdk-emr                             | 2009-03-31  |
@@ -443,6 +471,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon GameLift                                       | Aws::GameLift                        | aws-sdk-gamelift                        | 2015-10-01  |
 | Amazon Glacier                                        | Aws::Glacier                         | aws-sdk-glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | Aws::GuardDuty                       | aws-sdk-guardduty                       | 2017-11-28  |
+| Amazon HealthLake                                     | Aws::HealthLake                      | aws-sdk-healthlake                      | 2017-07-01  |
 | Amazon Honeycode                                      | Aws::Honeycode                       | aws-sdk-honeycode                       | 2020-03-01  |
 | Amazon Import/Export Snowball                         | Aws::Snowball                        | aws-sdk-snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
@@ -456,8 +485,14 @@ RubyGems.org page under "LINKS" section.
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |
 | Amazon Kinesis Video Streams Media                    | Aws::KinesisVideoMedia               | aws-sdk-kinesisvideomedia               | 2017-09-30  |
 | Amazon Lex Model Building Service                     | Aws::LexModelBuildingService         | aws-sdk-lexmodelbuildingservice         | 2017-04-19  |
+| Amazon Lex Model Building V2                          | Aws::LexModelsV2                     | aws-sdk-lexmodelsv2                     | 2020-08-07  |
 | Amazon Lex Runtime Service                            | Aws::Lex                             | aws-sdk-lex                             | 2016-11-28  |
+| Amazon Lex Runtime V2                                 | Aws::LexRuntimeV2                    | aws-sdk-lexruntimev2                    | 2020-08-07  |
 | Amazon Lightsail                                      | Aws::Lightsail                       | aws-sdk-lightsail                       | 2016-11-28  |
+| Amazon Location Service                               | Aws::LocationService                 | aws-sdk-locationservice                 | 2020-11-19  |
+| Amazon Lookout for Equipment                          | Aws::LookoutEquipment                | aws-sdk-lookoutequipment                | 2020-12-15  |
+| Amazon Lookout for Metrics                            | Aws::LookoutMetrics                  | aws-sdk-lookoutmetrics                  | 2017-07-25  |
+| Amazon Lookout for Vision                             | Aws::LookoutforVision                | aws-sdk-lookoutforvision                | 2020-11-20  |
 | Amazon Machine Learning                               | Aws::MachineLearning                 | aws-sdk-machinelearning                 | 2014-12-12  |
 | Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |
 | Amazon Macie 2                                        | Aws::Macie2                          | aws-sdk-macie2                          | 2020-01-01  |
@@ -471,6 +506,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Pinpoint Email Service                         | Aws::PinpointEmail                   | aws-sdk-pinpointemail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | Aws::PinpointSMSVoice                | aws-sdk-pinpointsmsvoice                | 2018-09-05  |
 | Amazon Polly                                          | Aws::Polly                           | aws-sdk-polly                           | 2016-06-10  |
+| Amazon Prometheus Service                             | Aws::PrometheusService               | aws-sdk-prometheusservice               | 2020-08-01  |
 | Amazon QLDB                                           | Aws::QLDB                            | aws-sdk-qldb                            | 2019-01-02  |
 | Amazon QLDB Session                                   | Aws::QLDBSession                     | aws-sdk-qldbsession                     | 2019-07-11  |
 | Amazon QuickSight                                     | Aws::QuickSight                      | aws-sdk-quicksight                      | 2018-04-01  |
@@ -481,8 +517,10 @@ RubyGems.org page under "LINKS" section.
 | Amazon Route 53 Domains                               | Aws::Route53Domains                  | aws-sdk-route53domains                  | 2014-05-15  |
 | Amazon Route 53 Resolver                              | Aws::Route53Resolver                 | aws-sdk-route53resolver                 | 2018-04-01  |
 | Amazon S3 on Outposts                                 | Aws::S3Outposts                      | aws-sdk-s3outposts                      | 2017-07-25  |
+| Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime    | aws-sdk-sagemakerfeaturestoreruntime    | 2020-07-01  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                | aws-sdk-sagemakerruntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                       | aws-sdk-sagemaker                       | 2017-07-24  |
+| Amazon Sagemaker Edge Manager                         | Aws::SagemakerEdgeManager            | aws-sdk-sagemakeredgemanager            | 2020-09-23  |
 | Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
 | Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | Aws::SNS                             | aws-sdk-sns                             | 2010-03-31  |
@@ -505,13 +543,19 @@ RubyGems.org page under "LINKS" section.
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi         | aws-sdk-apigatewaymanagementapi         | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                    | aws-sdk-apigatewayv2                    | 2018-11-29  |
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
+| AmazonMWAA                                            | Aws::MWAA                            | aws-sdk-mwaa                            | 2020-07-01  |
+| AmazonNimbleStudio                                    | Aws::NimbleStudio                    | aws-sdk-nimblestudio                    | 2020-08-01  |
+| AmplifyBackend                                        | Aws::AmplifyBackend                  | aws-sdk-amplifybackend                  | 2020-08-11  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
+| Application Migration Service                         | Aws::Mgn                             | aws-sdk-mgn                             | 2020-02-26  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
 | Braket                                                | Aws::Braket                          | aws-sdk-braket                          | 2019-09-01  |
 | CodeArtifact                                          | Aws::CodeArtifact                    | aws-sdk-codeartifact                    | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
+| FinSpace Public API                                   | Aws::FinSpaceData                    | aws-sdk-finspacedata                    | 2020-07-13  |
+| FinSpace User Environment Management service          | Aws::Finspace                        | aws-sdk-finspace                        | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |

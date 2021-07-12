@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -840,7 +840,10 @@ module Aws::Pinpoint
 
     CampaignSmsMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     CampaignSmsMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    CampaignSmsMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     CampaignSmsMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
+    CampaignSmsMessage.add_member(:entity_id, Shapes::ShapeRef.new(shape: __string, location_name: "EntityId"))
+    CampaignSmsMessage.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateId"))
     CampaignSmsMessage.struct_class = Types::CampaignSmsMessage
 
     CampaignState.add_member(:campaign_status, Shapes::ShapeRef.new(shape: CampaignStatus, location_name: "CampaignStatus"))
@@ -2028,6 +2031,7 @@ module Aws::Pinpoint
     JourneyLimits.add_member(:daily_cap, Shapes::ShapeRef.new(shape: __integer, location_name: "DailyCap"))
     JourneyLimits.add_member(:endpoint_reentry_cap, Shapes::ShapeRef.new(shape: __integer, location_name: "EndpointReentryCap"))
     JourneyLimits.add_member(:messages_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "MessagesPerSecond"))
+    JourneyLimits.add_member(:endpoint_reentry_interval, Shapes::ShapeRef.new(shape: __string, location_name: "EndpointReentryInterval"))
     JourneyLimits.struct_class = Types::JourneyLimits
 
     JourneyPushMessage.add_member(:time_to_live, Shapes::ShapeRef.new(shape: __string, location_name: "TimeToLive"))
@@ -2051,7 +2055,10 @@ module Aws::Pinpoint
     JourneyResponse.struct_class = Types::JourneyResponse
 
     JourneySMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    JourneySMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     JourneySMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
+    JourneySMSMessage.add_member(:entity_id, Shapes::ShapeRef.new(shape: __string, location_name: "EntityId"))
+    JourneySMSMessage.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateId"))
     JourneySMSMessage.struct_class = Types::JourneySMSMessage
 
     JourneySchedule.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "EndTime"))
@@ -2463,6 +2470,8 @@ module Aws::Pinpoint
     SMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     SMSMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
+    SMSMessage.add_member(:entity_id, Shapes::ShapeRef.new(shape: __string, location_name: "EntityId"))
+    SMSMessage.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateId"))
     SMSMessage.struct_class = Types::SMSMessage
 
     SMSMessageActivity.add_member(:message_config, Shapes::ShapeRef.new(shape: JourneySMSMessage, location_name: "MessageConfig"))
@@ -3073,6 +3082,8 @@ module Aws::Pinpoint
     WriteJourneyRequest.add_member(:start_activity, Shapes::ShapeRef.new(shape: __string, location_name: "StartActivity"))
     WriteJourneyRequest.add_member(:start_condition, Shapes::ShapeRef.new(shape: StartCondition, location_name: "StartCondition"))
     WriteJourneyRequest.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
+    WriteJourneyRequest.add_member(:wait_for_quiet_time, Shapes::ShapeRef.new(shape: __boolean, location_name: "WaitForQuietTime"))
+    WriteJourneyRequest.add_member(:refresh_on_segment_update, Shapes::ShapeRef.new(shape: __boolean, location_name: "RefreshOnSegmentUpdate"))
     WriteJourneyRequest.struct_class = Types::WriteJourneyRequest
 
     WriteSegmentRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))

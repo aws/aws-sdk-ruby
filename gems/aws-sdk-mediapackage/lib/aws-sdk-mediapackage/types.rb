@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -149,15 +149,27 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         constant_initialization_vector: "__string",
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
     #           url: "__string", # required
     #         },
     #       }
+    #
+    # @!attribute [rw] constant_initialization_vector
+    #   An optional 128-bit, 16-byte hex value represented by a 32-character
+    #   string, used in conjunction with the key for encrypting blocks. If
+    #   you don't specify a value, then MediaPackage creates the constant
+    #   initialization vector (IV).
+    #   @return [String]
     #
     # @!attribute [rw] key_rotation_interval_seconds
     #   Time (in seconds) between each encryption key rotation.
@@ -172,6 +184,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafEncryption AWS API Documentation
     #
     class CmafEncryption < Struct.new(
+      :constant_initialization_vector,
       :key_rotation_interval_seconds,
       :speke_key_provider)
       SENSITIVE = []
@@ -221,9 +234,14 @@ module Aws::MediaPackage
     #
     #       {
     #         encryption: {
+    #           constant_initialization_vector: "__string",
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -548,9 +566,14 @@ module Aws::MediaPackage
     #         channel_id: "__string", # required
     #         cmaf_package: {
     #           encryption: {
+    #             constant_initialization_vector: "__string",
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -585,6 +608,10 @@ module Aws::MediaPackage
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -620,6 +647,10 @@ module Aws::MediaPackage
     #             repeat_ext_x_key: false,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -644,6 +675,10 @@ module Aws::MediaPackage
     #           encryption: {
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -825,6 +860,10 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -863,6 +902,10 @@ module Aws::MediaPackage
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -1285,6 +1328,42 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # Use encryptionContractConfiguration to configure one or more content
+    # encryption keys for your endpoints that use SPEKE 2.0. The encryption
+    # contract defines which content keys are used to encrypt the audio and
+    # video tracks in your stream. To configure the encryption contract,
+    # specify which audio and video encryption presets to use. Note the
+    # following considerations when using encryptionContractConfiguration:
+    # encryptionContractConfiguration can be used for DASH endpoints that
+    # use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification. You
+    # must disable key rotation for this endpoint by setting
+    # keyRotationIntervalSeconds to 0.
+    #
+    # @note When making an API call, you may pass EncryptionContractConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #         preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #       }
+    #
+    # @!attribute [rw] preset_speke_20_audio
+    #   A collection of audio encryption presets.
+    #   @return [String]
+    #
+    # @!attribute [rw] preset_speke_20_video
+    #   A collection of video encryption presets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/EncryptionContractConfiguration AWS API Documentation
+    #
+    class EncryptionContractConfiguration < Struct.new(
+      :preset_speke_20_audio,
+      :preset_speke_20_video)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1425,6 +1504,10 @@ module Aws::MediaPackage
     #         repeat_ext_x_key: false,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1672,6 +1755,10 @@ module Aws::MediaPackage
     #           repeat_ext_x_key: false,
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -2013,6 +2100,10 @@ module Aws::MediaPackage
     #       {
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -2043,6 +2134,10 @@ module Aws::MediaPackage
     #         encryption: {
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #             },
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -2555,6 +2650,10 @@ module Aws::MediaPackage
     #
     #       {
     #         certificate_arn: "__string",
+    #         encryption_contract_configuration: {
+    #           preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #           preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #         },
     #         resource_id: "__string", # required
     #         role_arn: "__string", # required
     #         system_ids: ["__string"], # required
@@ -2566,6 +2665,19 @@ module Aws::MediaPackage
     #   that MediaPackage will use for enforcing secure end-to-end data
     #   transfer with the key provider service.
     #   @return [String]
+    #
+    # @!attribute [rw] encryption_contract_configuration
+    #   Use encryptionContractConfiguration to configure one or more content
+    #   encryption keys for your endpoints that use SPEKE 2.0. The
+    #   encryption contract defines which content keys are used to encrypt
+    #   the audio and video tracks in your stream. To configure the
+    #   encryption contract, specify which audio and video encryption
+    #   presets to use. Note the following considerations when using
+    #   encryptionContractConfiguration: encryptionContractConfiguration can
+    #   be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on
+    #   the CPIX 2.3 specification. You must disable key rotation for this
+    #   endpoint by setting keyRotationIntervalSeconds to 0.
+    #   @return [Types::EncryptionContractConfiguration]
     #
     # @!attribute [rw] resource_id
     #   The resource ID to include in key requests.
@@ -2588,6 +2700,7 @@ module Aws::MediaPackage
     #
     class SpekeKeyProvider < Struct.new(
       :certificate_arn,
+      :encryption_contract_configuration,
       :resource_id,
       :role_arn,
       :system_ids,
@@ -2782,9 +2895,14 @@ module Aws::MediaPackage
     #         },
     #         cmaf_package: {
     #           encryption: {
+    #             constant_initialization_vector: "__string",
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -2819,6 +2937,10 @@ module Aws::MediaPackage
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -2854,6 +2976,10 @@ module Aws::MediaPackage
     #             repeat_ext_x_key: false,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -2878,6 +3004,10 @@ module Aws::MediaPackage
     #           encryption: {
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #               },
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required

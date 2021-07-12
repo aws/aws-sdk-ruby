@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -386,7 +386,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/AssociateExternalConnection AWS API Documentation
@@ -492,7 +492,7 @@ module Aws::CodeArtifact
     #     domain_owner: "AccountId",
     #     source_repository: "RepositoryName", # required
     #     destination_repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"],
@@ -560,6 +560,9 @@ module Aws::CodeArtifact
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the domain.
+    #
     # @return [Types::CreateDomainResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResult#domain #domain} => Types::DomainDescription
@@ -569,6 +572,12 @@ module Aws::CodeArtifact
     #   resp = client.create_domain({
     #     domain: "DomainName", # required
     #     encryption_key: "Arn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -581,6 +590,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateDomain AWS API Documentation
     #
@@ -594,7 +604,7 @@ module Aws::CodeArtifact
     # Creates a repository.
     #
     # @option params [required, String] :domain
-    #   The domain that contains the created repository.
+    #   The name of the domain that contains the created repository.
     #
     # @option params [String] :domain_owner
     #   The 12-digit account number of the AWS account that owns the domain.
@@ -617,6 +627,9 @@ module Aws::CodeArtifact
     #
     #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the repository.
+    #
     # @return [Types::CreateRepositoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryResult#repository #repository} => Types::RepositoryDescription
@@ -633,6 +646,12 @@ module Aws::CodeArtifact
     #         repository_name: "RepositoryName", # required
     #       },
     #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -647,7 +666,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateRepository AWS API Documentation
@@ -691,6 +710,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeleteDomain AWS API Documentation
     #
@@ -747,9 +767,14 @@ module Aws::CodeArtifact
     # cannot be restored in your repository. If you want to remove a package
     # version from your repository and be able to restore it later, set its
     # status to `Archived`. Archived packages cannot be downloaded from a
-    # repository and don't show up with list package APIs (for example, `
-    # ListackageVersions `), but you can restore them using `
-    # UpdatePackageVersionsStatus `.
+    # repository and don't show up with list package APIs (for example,
+    # [ListackageVersions][1]), but you can restore them using
+    # [UpdatePackageVersionsStatus][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html
+    # [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the package to delete.
@@ -814,7 +839,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -875,7 +900,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeleteRepository AWS API Documentation
@@ -942,7 +967,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a [ `DomainDescription` ][1] object that contains information
+    # Returns a [DomainDescription][1] object that contains information
     # about the requested domain.
     #
     #
@@ -977,6 +1002,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribeDomain AWS API Documentation
     #
@@ -987,7 +1013,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a [ `PackageVersionDescription` ][1] object that contains
+    # Returns a [PackageVersionDescription][1] object that contains
     # information about the requested package version.
     #
     #
@@ -1042,7 +1068,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1050,7 +1076,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.package_version.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.package_version.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.package_version.namespace #=> String
     #   resp.package_version.package_name #=> String
     #   resp.package_version.display_name #=> String
@@ -1111,7 +1137,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribeRepository AWS API Documentation
@@ -1165,7 +1191,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DisassociateExternalConnection AWS API Documentation
@@ -1181,11 +1207,18 @@ module Aws::CodeArtifact
     # status to `Disposed`. A disposed package version cannot be restored in
     # your repository because its assets are deleted.
     #
-    # To view all disposed package versions in a repository, use `
-    # ListackageVersions ` and set the ` status ` parameter to `Disposed`.
+    # To view all disposed package versions in a repository, use
+    # [ListPackageVersions][1] and set the [status][2] parameter to
+    # `Disposed`.
     #
-    # To view information about a disposed package version, use `
-    # ListPackageVersions ` and set the ` status ` parameter to `Disposed`.
+    # To view information about a disposed package version, use
+    # [DescribePackageVersion][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html
+    # [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax
+    # [3]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the repository you want to
@@ -1254,7 +1287,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -1282,10 +1315,11 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Generates a temporary authentication token for accessing repositories
+    # Generates a temporary authorization token for accessing repositories
     # in the domain. This API requires the
     # `codeartifact:GetAuthorizationToken` and `sts:GetServiceBearerToken`
-    # permissions.
+    # permissions. For more information about authorization tokens, see [AWS
+    # CodeArtifact authentication and tokens][1].
     #
     # <note markdown="1"> CodeArtifact authorization tokens are valid for a period of 12 hours
     # when created with the `login` command. You can call `login`
@@ -1303,14 +1337,15 @@ module Aws::CodeArtifact
     # token, the token will be valid for the full authorization period even
     # though this is longer than the 15-minute session duration.
     #
-    #  See [Using IAM Roles][1] for more information on controlling session
+    #  See [Using IAM Roles][2] for more information on controlling session
     # duration.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that is in scope for the generated
@@ -1322,6 +1357,10 @@ module Aws::CodeArtifact
     #
     # @option params [Integer] :duration_seconds
     #   The time, in seconds, that the generated authorization token is valid.
+    #   Valid values are `0` and any number between `900` (15 minutes) and
+    #   `43200` (12 hours). A value of `0` will set the expiration of the
+    #   authorization token to the same expiration of the user's role's
+    #   temporary credentials.
     #
     # @return [Types::GetAuthorizationTokenResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1400,8 +1439,8 @@ module Aws::CodeArtifact
     # `JAR` file, a `POM` file, or any other assets in the package version.
     #
     # @option params [required, String] :domain
-    #   The domain that contains the repository that contains the package
-    #   version with the requested asset.
+    #   The name of the domain that contains the repository that contains the
+    #   package version with the requested asset.
     #
     # @option params [String] :domain_owner
     #   The 12-digit account number of the AWS account that owns the domain.
@@ -1458,7 +1497,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1545,7 +1584,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1553,7 +1592,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -1608,7 +1647,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #   })
     #
     # @example Response structure
@@ -1665,9 +1704,13 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of ` DomainSummary ` objects for all domains owned by
+    # Returns a list of [DomainSummary][1] objects for all domains owned by
     # the AWS account that makes this call. Each returned `DomainSummary`
     # object contains information about a domain.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1711,8 +1754,8 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `AssetSummary` ][1] objects for assets in a
-    # package version.
+    # Returns a list of [AssetSummary][1] objects for assets in a package
+    # version.
     #
     #
     #
@@ -1785,7 +1828,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1795,7 +1838,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -1817,7 +1860,7 @@ module Aws::CodeArtifact
     end
 
     # Returns the direct dependencies for a package version. The
-    # dependencies are returned as [ `PackageDependency` ][1] objects.
+    # dependencies are returned as [PackageDependency][1] objects.
     # CodeArtifact extracts the dependencies for a package version from the
     # metadata file for the package format (for example, the `package.json`
     # file for npm packages and the `pom.xml` file for Maven). Any package
@@ -1829,8 +1872,8 @@ module Aws::CodeArtifact
     # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html
     #
     # @option params [required, String] :domain
-    #   The domain that contains the repository that contains the requested
-    #   package version dependencies.
+    #   The name of the domain that contains the repository that contains the
+    #   requested package version dependencies.
     #
     # @option params [String] :domain_owner
     #   The 12-digit account number of the AWS account that owns the domain.
@@ -1889,7 +1932,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1898,7 +1941,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -1919,7 +1962,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `PackageVersionSummary` ][1] objects for package
+    # Returns a list of [PackageVersionSummary][1] objects for package
     # versions in a repository that match the request parameters.
     #
     #
@@ -2004,7 +2047,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
@@ -2016,7 +2059,7 @@ module Aws::CodeArtifact
     # @example Response structure
     #
     #   resp.default_display_version #=> String
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.versions #=> Array
@@ -2034,7 +2077,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `PackageSummary` ][1] objects for packages in a
+    # Returns a list of [PackageSummary][1] objects for packages in a
     # repository that match the request parameters.
     #
     #
@@ -2042,8 +2085,8 @@ module Aws::CodeArtifact
     # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html
     #
     # @option params [required, String] :domain
-    #   The domain that contains the repository that contains the requested
-    #   list of packages.
+    #   The name of the domain that contains the repository that contains the
+    #   requested list of packages.
     #
     # @option params [String] :domain_owner
     #   The 12-digit account number of the AWS account that owns the domain.
@@ -2074,8 +2117,8 @@ module Aws::CodeArtifact
     #     Python packages do not have a namespace.
     #
     # @option params [String] :package_prefix
-    #   A prefix used to filter returned repositories. Only repositories with
-    #   names that start with `repositoryPrefix` are returned.
+    #   A prefix used to filter returned packages. Only packages with names
+    #   that start with `packagePrefix` are returned.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -2098,7 +2141,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # accepts npm, pypi, maven
+    #     format: "npm", # accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package_prefix: "PackageName",
     #     max_results: 1,
@@ -2108,7 +2151,7 @@ module Aws::CodeArtifact
     # @example Response structure
     #
     #   resp.packages #=> Array
-    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven"
+    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.packages[0].namespace #=> String
     #   resp.packages[0].package #=> String
     #   resp.next_token #=> String
@@ -2122,7 +2165,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `RepositorySummary` ][1] objects. Each
+    # Returns a list of [RepositorySummary][1] objects. Each
     # `RepositorySummary` contains information about a repository in the
     # specified AWS account and that matches the input parameters.
     #
@@ -2177,7 +2220,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `RepositorySummary` ][1] objects. Each
+    # Returns a list of [RepositorySummary][1] objects. Each
     # `RepositorySummary` contains information about a repository in the
     # specified domain and that matches the input parameters.
     #
@@ -2247,8 +2290,44 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Gets information about AWS tags for a specified Amazon Resource Name
+    # (ARN) in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #
+    # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Sets a resource policy on a domain that specifies permissions to
     # access it.
+    #
+    # When you call `PutDomainPermissionsPolicy`, the resource policy on the
+    # domain is ignored when evaluting permissions. This ensures that the
+    # owner of a domain cannot lock themselves out of the domain, which
+    # would prevent them from being able to update the resource policy.
     #
     # @option params [required, String] :domain
     #   The name of the domain on which to set the resource policy.
@@ -2296,6 +2375,12 @@ module Aws::CodeArtifact
 
     # Sets the resource policy on a repository that specifies permissions to
     # access it.
+    #
+    # When you call `PutRepositoryPermissionsPolicy`, the resource policy on
+    # the repository is ignored when evaluting permissions. This ensures
+    # that the owner of a repository cannot lock themselves out of the
+    # repository, which would prevent them from being able to update the
+    # resource policy.
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the repository to set the resource
@@ -2347,11 +2432,70 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Adds or updates tags for a resource in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add or
+    #   update tags for.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you want to modify or add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to remove
+    #   tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the status of one or more versions of a package.
     #
     # @option params [required, String] :domain
-    #   The domain that contains the repository that contains the package
-    #   versions with a status to be updated.
+    #   The name of the domain that contains the repository that contains the
+    #   package versions with a status to be updated.
     #
     # @option params [String] :domain_owner
     #   The 12-digit account number of the AWS account that owns the domain.
@@ -2414,7 +2558,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -2499,7 +2643,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UpdateRepository AWS API Documentation
@@ -2524,7 +2668,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

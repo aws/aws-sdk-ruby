@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -80,6 +80,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def addon_name
+        @data[:addon_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -110,6 +115,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def addon_name
+        @data[:addon_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -132,6 +142,11 @@ module Aws::EKS
       # @return [String]
       def nodegroup_name
         @data[:nodegroup_name]
+      end
+
+      # @return [String]
+      def addon_name
+        @data[:addon_name]
       end
 
       # @return [String]
@@ -172,6 +187,11 @@ module Aws::EKS
       # @return [String]
       def nodegroup_name
         @data[:nodegroup_name]
+      end
+
+      # @return [String]
+      def addon_name
+        @data[:addon_name]
       end
 
       # @return [String]
@@ -230,6 +250,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def addon_name
+        @data[:addon_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -252,6 +277,11 @@ module Aws::EKS
       # @return [String]
       def nodegroup_name
         @data[:nodegroup_name]
+      end
+
+      # @return [String]
+      def addon_name
+        @data[:addon_name]
       end
 
       # @return [String]

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -329,11 +329,13 @@ module Aws::Outposts
 
     # Creates an Outpost.
     #
-    # @option params [String] :name
+    # You can specify `AvailabilityZone` or `AvailabilityZoneId`.
+    #
+    # @option params [required, String] :name
     #   The name of the Outpost.
     #
     # @option params [String] :description
-    #   The Outpost description.
+    #   The description of the Outpost.
     #
     # @option params [required, String] :site_id
     #   The ID of the site.
@@ -341,12 +343,11 @@ module Aws::Outposts
     # @option params [String] :availability_zone
     #   The Availability Zone.
     #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
-    #
     # @option params [String] :availability_zone_id
     #   The ID of the Availability Zone.
     #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the Outpost.
     #
     # @return [Types::CreateOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -355,11 +356,14 @@ module Aws::Outposts
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_outpost({
-    #     name: "OutpostName",
+    #     name: "OutpostName", # required
     #     description: "OutpostDescription",
     #     site_id: "SiteId", # required
     #     availability_zone: "AvailabilityZone",
     #     availability_zone_id: "AvailabilityZoneId",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -373,6 +377,9 @@ module Aws::Outposts
     #   resp.outpost.life_cycle_status #=> String
     #   resp.outpost.availability_zone #=> String
     #   resp.outpost.availability_zone_id #=> String
+    #   resp.outpost.tags #=> Hash
+    #   resp.outpost.tags["TagKey"] #=> String
+    #   resp.outpost.site_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpost AWS API Documentation
     #
@@ -453,6 +460,9 @@ module Aws::Outposts
     #   resp.outpost.life_cycle_status #=> String
     #   resp.outpost.availability_zone #=> String
     #   resp.outpost.availability_zone_id #=> String
+    #   resp.outpost.tags #=> Hash
+    #   resp.outpost.tags["TagKey"] #=> String
+    #   resp.outpost.site_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpost AWS API Documentation
     #
@@ -506,13 +516,41 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # List the Outposts for your AWS account.
+    # Create a list of the Outposts for your AWS account. Add filters to
+    # your request to return a more specific list of results. Use filters to
+    # match an Outpost lifecycle status, Availibility Zone (`us-east-1a`),
+    # and AZ ID (`use1-az1`).
+    #
+    # If you specify multiple filters, the filters are joined with an `AND`,
+    # and the request returns only results that match all of the specified
+    # filters.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   The maximum page size.
+    #
+    # @option params [Array<String>] :life_cycle_status_filter
+    #   A filter for the lifecycle status of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :availability_zone_filter
+    #   A filter for the Availibility Zone (`us-east-1a`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :availability_zone_id_filter
+    #   A filter for the AZ IDs (`use1-az1`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
     #
     # @return [Types::ListOutpostsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -526,6 +564,9 @@ module Aws::Outposts
     #   resp = client.list_outposts({
     #     next_token: "Token",
     #     max_results: 1,
+    #     life_cycle_status_filter: ["LifeCycleStatus"],
+    #     availability_zone_filter: ["AvailabilityZone"],
+    #     availability_zone_id_filter: ["AvailabilityZoneId"],
     #   })
     #
     # @example Response structure
@@ -540,6 +581,9 @@ module Aws::Outposts
     #   resp.outposts[0].life_cycle_status #=> String
     #   resp.outposts[0].availability_zone #=> String
     #   resp.outposts[0].availability_zone_id #=> String
+    #   resp.outposts[0].tags #=> Hash
+    #   resp.outposts[0].tags["TagKey"] #=> String
+    #   resp.outposts[0].site_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutposts AWS API Documentation
@@ -580,6 +624,9 @@ module Aws::Outposts
     #   resp.sites[0].account_id #=> String
     #   resp.sites[0].name #=> String
     #   resp.sites[0].description #=> String
+    #   resp.sites[0].tags #=> Hash
+    #   resp.sites[0].tags["TagKey"] #=> String
+    #   resp.sites[0].site_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListSites AWS API Documentation
@@ -588,6 +635,89 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def list_sites(params = {}, options = {})
       req = build_request(:list_sites, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds tags to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -604,7 +734,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

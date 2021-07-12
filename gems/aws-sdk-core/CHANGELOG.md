@@ -1,6 +1,100 @@
 Unreleased Changes
 ------------------
 
+3.117.0 (2021-07-12)
+------------------
+
+* Feature - Support IPv6 endpoints for `Aws::InstanceProfileCredentials`. It supports two shared configuration options (`ec2_metadata_service_endpoint` & `ec2_metadata_service_endpoint_mode`), two ENV variables (`AWS_EC2_METADATA_SERVICE_ENDPOINT` & `AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE`), and two constructor options (`:endpoint` & `:endpoint_mode`).
+
+* Feature - Support IPv6 endpoint for `Aws::EC2Metadata` client. It can be configured with `:endpoint` or `:endpoint_mode`.
+
+3.116.0 (2021-07-07)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.115.0 (2021-06-23)
+------------------
+
+* Feature - Add support for Assume Role Chaining in profiles. (#2531)
+* Issue - Fixed an issue with `Seahorse::Client::H2::Connection` for non-https endpoints. (#2542)
+
+3.114.3 (2021-06-15)
+------------------
+
+* Issue - Fixed an issue with `Aws::PageableResponse` where it was modifying original params hash, causing frozen hashes to fail.
+
+3.114.2 (2021-06-09)
+------------------
+
+* Issue - Fixed an issue with `Aws::PageableResponse` where intentionally nil tokens were not merged into the params for the next call.
+
+3.114.1 (2021-06-02)
+------------------
+
+* Issue - Change XML Builder to not indent by default
+
+3.114.0 (2021-04-13)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.113.1 (2021-03-29)
+------------------
+
+* Issue - Ensure end of line characters are correctly encoded in XML.
+
+3.113.0 (2021-03-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.112.1 (2021-03-04)
+------------------
+
+* Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
+
+3.112.0 (2021-02-02)
+------------------
+
+* Feature - The `hostPrefix` trait will now be applied to any customer provided `:endpoint`. This bug fix is a minor behavioral change for clients using custom endpoints for `s3control`, `iotsitewise`, and `servicediscovery`. This behavior can be disabled by configuring `:disable_host_prefix_injection` to `true`.
+
+3.111.2 (2021-01-19)
+------------------
+
+* Issue - Fix a loading issue with SSO and STS gem aliases using `require_relative` instead of `require`.
+
+3.111.1 (2021-01-15)
+------------------
+
+* Issue - Fix an issue with `max_attempts` validation raising incorrectly.
+
+3.111.0 (2021-01-11)
+------------------
+
+* Feature - Adds an IMDSv2 client as `Aws::EC2Metadata`.
+
+3.110.0 (2020-12-03)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Issue - Support `aws-sdk-sts` alias gem.
+
+* Issue - Retry when `Net:HTTPFatalError` is thrown by the `Net::HTTP` library. This can occur when proxy connections are configured. (#2439)
+
+3.109.3 (2020-11-17)
+------------------
+
+* Issue - Use full namespace for SSO Client when creating `SSOCredentials`
+
+3.109.2 (2020-11-04)
+------------------
+
+* Issue - Check for flattened on ref for lists when serializing.
+
 3.109.1 (2020-10-05)
 ------------------
 

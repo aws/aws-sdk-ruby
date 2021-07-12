@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-06-01)
+------------------
+
+* Feature - Amazon Polly adds new Canadian French voice - Gabrielle. Gabrielle is available as Neural voice only.
+
+1.40.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2020-11-12)
+------------------
+
+* Feature - Amazon Polly adds new Australian English female voice - Olivia. Olivia is available as Neural voice only.
+
 1.37.0 (2020-09-30)
 ------------------
 

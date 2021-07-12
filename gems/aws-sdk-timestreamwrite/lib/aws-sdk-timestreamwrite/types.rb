@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -341,8 +341,12 @@ module Aws::TimestreamWrite
     #   Dimension represents the meta data attributes of the time series.
     #   For example, the name and availability zone of an EC2 instance or
     #   the name of the manufacturer of a wind turbine are dimensions.
-    #   *Dimension names can only contain alphanumeric characters and
-    #   underscores. Dimension names cannot end with an underscore.*
+    #
+    #   For constraints on Dimension names, see [Naming Constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -569,6 +573,7 @@ module Aws::TimestreamWrite
     #         measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
     #         time: "StringValue256",
     #         time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
+    #         version: 1,
     #       }
     #
     # @!attribute [rw] dimensions
@@ -592,7 +597,9 @@ module Aws::TimestreamWrite
     #
     # @!attribute [rw] time
     #   Contains the time at which the measure value for the data point was
-    #   collected.
+    #   collected. The time value plus the unit provides the time elapsed
+    #   since the epoch. For example, if the time value is `12345` and the
+    #   unit is `ms`, then `12345 ms` have elapsed since the epoch.
     #   @return [String]
     #
     # @!attribute [rw] time_unit
@@ -600,6 +607,13 @@ module Aws::TimestreamWrite
     #   value is in seconds, milliseconds, nanoseconds or other supported
     #   values.
     #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   64-bit attribute used for record updates. Write requests for
+    #   duplicate data with a higher version number will update the existing
+    #   measure value and version. In cases where the measure value is the
+    #   same, `Version` will still be updated . Default value is to 1.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/Record AWS API Documentation
     #
@@ -609,7 +623,8 @@ module Aws::TimestreamWrite
       :measure_value,
       :measure_value_type,
       :time,
-      :time_unit)
+      :time_unit,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -634,22 +649,41 @@ module Aws::TimestreamWrite
     #   * Records with timestamps that lie outside the retention duration of
     #     the memory store
     #
+    #     <note markdown="1"> When the retention window is updated, you will receive a
+    #     `RejectedRecords` exception if you immediately try to ingest data
+    #     within the new window. To avoid a `RejectedRecords` exception,
+    #     wait until the duration of the new window to ingest new data. For
+    #     further information, see [ Best Practices for Configuring
+    #     Timestream][1] and [the explanation of how storage works in
+    #     Timestream][2].
+    #
+    #      </note>
+    #
     #   * Records with dimensions or measures that exceed the Timestream
     #     defined limits.
     #
-    #   For more information, see [Access Management][1] in the Timestream
+    #   For more information, see [Access Management][3] in the Timestream
     #   Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/best-practices.html#configuration
+    #   [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html
+    #   [3]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
     #   @return [String]
+    #
+    # @!attribute [rw] existing_version
+    #   The existing version of the record. This value is populated in
+    #   scenarios where an identical record exists with a higher version
+    #   than the version in the write request.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/RejectedRecord AWS API Documentation
     #
     class RejectedRecord < Struct.new(
       :record_index,
-      :reason)
+      :reason,
+      :existing_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1034,6 +1068,7 @@ module Aws::TimestreamWrite
     #           measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
     #           time: "StringValue256",
     #           time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
+    #           version: 1,
     #         },
     #         records: [ # required
     #           {
@@ -1049,6 +1084,7 @@ module Aws::TimestreamWrite
     #             measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
     #             time: "StringValue256",
     #             time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
+    #             version: 1,
     #           },
     #         ],
     #       }

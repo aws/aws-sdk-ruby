@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -386,14 +386,8 @@ module Aws::CloudHSMV2
 
     # Creates a new AWS CloudHSM cluster.
     #
-    # @option params [required, Array<String>] :subnet_ids
-    #   The identifiers (IDs) of the subnets where you are creating the
-    #   cluster. You must specify at least one subnet. If you specify multiple
-    #   subnets, they must meet the following criteria:
-    #
-    #   * All subnets must be in the same virtual private cloud (VPC).
-    #
-    #   * You can specify only one subnet per Availability Zone.
+    # @option params [Types::BackupRetentionPolicy] :backup_retention_policy
+    #   A policy that defines how the service retains backups.
     #
     # @option params [required, String] :hsm_type
     #   The type of HSM to use in the cluster. Currently the only allowed
@@ -403,6 +397,15 @@ module Aws::CloudHSMV2
     #   The identifier (ID) of the cluster backup to restore. Use this value
     #   to restore the cluster from a backup instead of creating a new
     #   cluster. To find the backup ID, use DescribeBackups.
+    #
+    # @option params [required, Array<String>] :subnet_ids
+    #   The identifiers (IDs) of the subnets where you are creating the
+    #   cluster. You must specify at least one subnet. If you specify multiple
+    #   subnets, they must meet the following criteria:
+    #
+    #   * All subnets must be in the same virtual private cloud (VPC).
+    #
+    #   * You can specify only one subnet per Availability Zone.
     #
     # @option params [Array<Types::Tag>] :tag_list
     #   Tags to apply to the CloudHSM cluster during creation.
@@ -414,9 +417,13 @@ module Aws::CloudHSMV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_cluster({
-    #     subnet_ids: ["SubnetId"], # required
+    #     backup_retention_policy: {
+    #       type: "DAYS", # accepts DAYS
+    #       value: "BackupRetentionValue",
+    #     },
     #     hsm_type: "HsmType", # required
     #     source_backup_id: "BackupId",
+    #     subnet_ids: ["SubnetId"], # required
     #     tag_list: [
     #       {
     #         key: "TagKey", # required
@@ -428,6 +435,8 @@ module Aws::CloudHSMV2
     # @example Response structure
     #
     #   resp.cluster.backup_policy #=> String, one of "DEFAULT"
+    #   resp.cluster.backup_retention_policy.type #=> String, one of "DAYS"
+    #   resp.cluster.backup_retention_policy.value #=> String
     #   resp.cluster.cluster_id #=> String
     #   resp.cluster.create_timestamp #=> Time
     #   resp.cluster.hsms #=> Array
@@ -540,6 +549,7 @@ module Aws::CloudHSMV2
     #   resp.backup.cluster_id #=> String
     #   resp.backup.create_timestamp #=> Time
     #   resp.backup.copy_timestamp #=> Time
+    #   resp.backup.never_expires #=> Boolean
     #   resp.backup.source_region #=> String
     #   resp.backup.source_backup #=> String
     #   resp.backup.source_cluster #=> String
@@ -579,6 +589,8 @@ module Aws::CloudHSMV2
     # @example Response structure
     #
     #   resp.cluster.backup_policy #=> String, one of "DEFAULT"
+    #   resp.cluster.backup_retention_policy.type #=> String, one of "DAYS"
+    #   resp.cluster.backup_retention_policy.value #=> String
     #   resp.cluster.cluster_id #=> String
     #   resp.cluster.create_timestamp #=> Time
     #   resp.cluster.hsms #=> Array
@@ -697,6 +709,11 @@ module Aws::CloudHSMV2
     #   Use the `states` filter to return only backups that match the
     #   specified state.
     #
+    #   Use the `neverExpires` filter to return backups filtered by the value
+    #   in the `neverExpires` parameter. `True` returns all backups exempt
+    #   from the backup retention policy. `False` returns all backups with a
+    #   backup retention policy defined at the cluster.
+    #
     # @option params [Boolean] :sort_ascending
     #   Designates whether or not to sort the return backups by ascending
     #   chronological order of generation.
@@ -727,6 +744,7 @@ module Aws::CloudHSMV2
     #   resp.backups[0].cluster_id #=> String
     #   resp.backups[0].create_timestamp #=> Time
     #   resp.backups[0].copy_timestamp #=> Time
+    #   resp.backups[0].never_expires #=> Boolean
     #   resp.backups[0].source_region #=> String
     #   resp.backups[0].source_backup #=> String
     #   resp.backups[0].source_cluster #=> String
@@ -797,6 +815,8 @@ module Aws::CloudHSMV2
     #
     #   resp.clusters #=> Array
     #   resp.clusters[0].backup_policy #=> String, one of "DEFAULT"
+    #   resp.clusters[0].backup_retention_policy.type #=> String, one of "DAYS"
+    #   resp.clusters[0].backup_retention_policy.value #=> String
     #   resp.clusters[0].cluster_id #=> String
     #   resp.clusters[0].create_timestamp #=> Time
     #   resp.clusters[0].hsms #=> Array
@@ -938,6 +958,120 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
+    # Modifies attributes for AWS CloudHSM backup.
+    #
+    # @option params [required, String] :backup_id
+    #   The identifier (ID) of the backup to modify. To find the ID of a
+    #   backup, use the DescribeBackups operation.
+    #
+    # @option params [required, Boolean] :never_expires
+    #   Specifies whether the service should exempt a backup from the
+    #   retention policy for the cluster. `True` exempts a backup from the
+    #   retention policy. `False` means the service applies the backup
+    #   retention policy defined at the cluster.
+    #
+    # @return [Types::ModifyBackupAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyBackupAttributesResponse#backup #backup} => Types::Backup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_backup_attributes({
+    #     backup_id: "BackupId", # required
+    #     never_expires: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup.backup_id #=> String
+    #   resp.backup.backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
+    #   resp.backup.cluster_id #=> String
+    #   resp.backup.create_timestamp #=> Time
+    #   resp.backup.copy_timestamp #=> Time
+    #   resp.backup.never_expires #=> Boolean
+    #   resp.backup.source_region #=> String
+    #   resp.backup.source_backup #=> String
+    #   resp.backup.source_cluster #=> String
+    #   resp.backup.delete_timestamp #=> Time
+    #   resp.backup.tag_list #=> Array
+    #   resp.backup.tag_list[0].key #=> String
+    #   resp.backup.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyBackupAttributes AWS API Documentation
+    #
+    # @overload modify_backup_attributes(params = {})
+    # @param [Hash] params ({})
+    def modify_backup_attributes(params = {}, options = {})
+      req = build_request(:modify_backup_attributes, params)
+      req.send_request(options)
+    end
+
+    # Modifies AWS CloudHSM cluster.
+    #
+    # @option params [required, Types::BackupRetentionPolicy] :backup_retention_policy
+    #   A policy that defines how the service retains backups.
+    #
+    # @option params [required, String] :cluster_id
+    #   The identifier (ID) of the cluster that you want to modify. To find
+    #   the cluster ID, use DescribeClusters.
+    #
+    # @return [Types::ModifyClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClusterResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_cluster({
+    #     backup_retention_policy: { # required
+    #       type: "DAYS", # accepts DAYS
+    #       value: "BackupRetentionValue",
+    #     },
+    #     cluster_id: "ClusterId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.backup_policy #=> String, one of "DEFAULT"
+    #   resp.cluster.backup_retention_policy.type #=> String, one of "DAYS"
+    #   resp.cluster.backup_retention_policy.value #=> String
+    #   resp.cluster.cluster_id #=> String
+    #   resp.cluster.create_timestamp #=> Time
+    #   resp.cluster.hsms #=> Array
+    #   resp.cluster.hsms[0].availability_zone #=> String
+    #   resp.cluster.hsms[0].cluster_id #=> String
+    #   resp.cluster.hsms[0].subnet_id #=> String
+    #   resp.cluster.hsms[0].eni_id #=> String
+    #   resp.cluster.hsms[0].eni_ip #=> String
+    #   resp.cluster.hsms[0].hsm_id #=> String
+    #   resp.cluster.hsms[0].state #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DEGRADED", "DELETE_IN_PROGRESS", "DELETED"
+    #   resp.cluster.hsms[0].state_message #=> String
+    #   resp.cluster.hsm_type #=> String
+    #   resp.cluster.pre_co_password #=> String
+    #   resp.cluster.security_group #=> String
+    #   resp.cluster.source_backup_id #=> String
+    #   resp.cluster.state #=> String, one of "CREATE_IN_PROGRESS", "UNINITIALIZED", "INITIALIZE_IN_PROGRESS", "INITIALIZED", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DEGRADED"
+    #   resp.cluster.state_message #=> String
+    #   resp.cluster.subnet_mapping #=> Hash
+    #   resp.cluster.subnet_mapping["ExternalAz"] #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.certificates.cluster_csr #=> String
+    #   resp.cluster.certificates.hsm_certificate #=> String
+    #   resp.cluster.certificates.aws_hardware_certificate #=> String
+    #   resp.cluster.certificates.manufacturer_hardware_certificate #=> String
+    #   resp.cluster.certificates.cluster_certificate #=> String
+    #   resp.cluster.tag_list #=> Array
+    #   resp.cluster.tag_list[0].key #=> String
+    #   resp.cluster.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyCluster AWS API Documentation
+    #
+    # @overload modify_cluster(params = {})
+    # @param [Hash] params ({})
+    def modify_cluster(params = {}, options = {})
+      req = build_request(:modify_cluster, params)
+      req.send_request(options)
+    end
+
     # Restores a specified AWS CloudHSM backup that is in the
     # `PENDING_DELETION` state. For mor information on deleting a backup,
     # see DeleteBackup.
@@ -963,6 +1097,7 @@ module Aws::CloudHSMV2
     #   resp.backup.cluster_id #=> String
     #   resp.backup.create_timestamp #=> Time
     #   resp.backup.copy_timestamp #=> Time
+    #   resp.backup.never_expires #=> Boolean
     #   resp.backup.source_region #=> String
     #   resp.backup.source_backup #=> String
     #   resp.backup.source_cluster #=> String
@@ -1055,7 +1190,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

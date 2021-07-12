@@ -9,7 +9,8 @@ module Aws
       let(:options) {
         {
           :key_pair_id => "CF_KEYPAIR_ID",
-          :private_key_path =>"#{File.dirname(__FILE__)}/cf_private_key.pem"
+          # private key is a .pem file
+          :private_key_path =>"#{File.dirname(__FILE__)}/unit_test_dummy_key"
         }
       }
       let(:signer) { Aws::CloudFront::CookieSigner.new(options) }

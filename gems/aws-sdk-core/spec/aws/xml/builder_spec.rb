@@ -19,7 +19,7 @@ module Aws
       let(:rules) { operation.input }
 
       def xml(params)
-        Builder.new(rules).to_xml(params)
+        Builder.new(rules, indent: '  ').to_xml(params)
       end
 
       it 'serializes empty values as empty elements' do
@@ -245,8 +245,7 @@ module Aws
       it 'correctly serializes newlines' do
         expect(xml(string:"\n")).to eq(<<-XML)
 <xml>
-  <String>
-</String>
+  <String>&#xA;</String>
 </xml>
         XML
       end

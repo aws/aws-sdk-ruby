@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -115,13 +115,24 @@ module Aws::EC2
       data[:volume_size]
     end
 
-    # The AWS owner alias, as maintained by Amazon. The possible values are:
-    # `amazon` \| `self` \| `all` \| `aws-marketplace` \| `microsoft`. This
-    # AWS owner alias is not to be confused with the user-configured AWS
-    # account alias, which is set from the IAM console.
+    # The AWS owner alias, from an Amazon-maintained list (`amazon`). This
+    # is not the user-configured AWS account alias set using the IAM
+    # console.
     # @return [String]
     def owner_alias
       data[:owner_alias]
+    end
+
+    # The ARN of the AWS Outpost on which the snapshot is stored. For more
+    # information, see [EBS Local Snapshot on Outposts][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    # @return [String]
+    def outpost_arn
+      data[:outpost_arn]
     end
 
     # Any tags assigned to the snapshot.
@@ -286,6 +297,7 @@ module Aws::EC2
     #
     #   snapshot.copy({
     #     description: "String",
+    #     destination_outpost_arn: "String",
     #     destination_region: "String",
     #     encrypted: false,
     #     kms_key_id: "KmsKeyId",
@@ -293,7 +305,7 @@ module Aws::EC2
     #     source_region: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -307,6 +319,19 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :description
     #   A description for the EBS snapshot.
+    # @option options [String] :destination_outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
+    #   snapshot. Only specify this parameter when copying a snapshot from an
+    #   AWS Region to an Outpost. The snapshot must be in the Region for the
+    #   destination Outpost. You cannot copy a snapshot from an Outpost to a
+    #   Region, from one Outpost to another, or within the same Outpost.
+    #
+    #   For more information, see [ Copying snapshots from an AWS Region to an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
     # @option options [String] :destination_region
     #   The destination Region to use in the `PresignedUrl` parameter of a
     #   snapshot copy operation. This parameter is only valid for specifying
@@ -323,7 +348,7 @@ module Aws::EC2
     #   omit this parameter. Encrypted snapshots are encrypted, even if you
     #   omit this parameter and encryption by default is not enabled. You
     #   cannot set this parameter to false. For more information, see [Amazon
-    #   EBS Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   EBS encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -336,15 +361,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to
@@ -352,7 +377,7 @@ module Aws::EC2
     # @option options [String] :presigned_url
     #   When you copy an encrypted source snapshot using the Amazon EC2 Query
     #   API, you must supply a pre-signed URL. This parameter is optional for
-    #   unencrypted snapshots. For more information, see [Query Requests][1].
+    #   unencrypted snapshots. For more information, see [Query requests][1].
     #
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,
@@ -360,8 +385,8 @@ module Aws::EC2
     #   `PresignedUrl` must be signed using AWS Signature Version 4. Because
     #   EBS snapshots are stored in Amazon S3, the signing algorithm for this
     #   parameter uses the same logic that is described in [Authenticating
-    #   Requests by Using Query Parameters (AWS Signature Version 4)][2] in
-    #   the *Amazon Simple Storage Service API Reference*. An invalid or
+    #   Requests: Using Query Parameters (AWS Signature Version 4)][2] in the
+    #   *Amazon Simple Storage Service API Reference*. An invalid or
     #   improperly signed `PresignedUrl` will cause the copy operation to fail
     #   asynchronously, and the snapshot will move to an `error` state.
     #

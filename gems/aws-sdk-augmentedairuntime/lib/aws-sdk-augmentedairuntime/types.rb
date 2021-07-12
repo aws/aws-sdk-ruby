@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -78,6 +78,8 @@ module Aws::AugmentedAIRuntime
     #
     # @!attribute [rw] failure_code
     #   A failure code that identifies the type of failure.
+    #
+    #   Possible values: `ValidationError`, `Expired`, `InternalError`
     #   @return [String]
     #
     # @!attribute [rw] human_loop_status
@@ -303,7 +305,9 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # We couldn't find the requested resource.
+    # We couldn't find the requested resource. Check that your resources
+    # exists and were created in the same AWS Region as your request, and
+    # try your request again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -316,8 +320,18 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # You exceeded your service quota. Delete some resources or request an
-    # increase in your service quota.
+    # You exceeded your service quota. Service quotas, also referred to as
+    # limits, are the maximum number of service resources or operations for
+    # your AWS account. For a list of Amazon A2I service quotes, see [Amazon
+    # Augmented AI Service Quotes][1]. Delete some resources or request an
+    # increase in your service quota. You can request a quota increase using
+    # Service Quotas or the AWS Support Center. To request an increase, see
+    # [AWS Service Quotas][2] in the *AWS General Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/a2i.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
     #
     # @!attribute [rw] message
     #   @return [String]

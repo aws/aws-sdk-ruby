@@ -3,11 +3,15 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
 
+unless Module.const_defined?(:Aws)
+  require 'aws-sdk-core'
+  require 'aws-sigv4'
+end
 
 require_relative 'aws-sdk-sts/types'
 require_relative 'aws-sdk-sts/client_api'
@@ -46,6 +50,6 @@ require_relative 'aws-sdk-sts/customizations'
 # @!group service
 module Aws::STS
 
-  GEM_VERSION = '3.109.1'
+  GEM_VERSION = '3.117.0'
 
 end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2021-02-02)
+------------------
+
+* Feature - With the Data API, you can now use UUID and JSON data types as input to your database. Also with the Data API, you can now have a LONG type value returned from your database as a STRING value.
+
 1.23.0 (2020-09-30)
 ------------------
 

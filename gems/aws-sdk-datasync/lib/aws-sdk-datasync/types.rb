@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -11,8 +11,12 @@ module Aws::DataSync
   module Types
 
     # Represents a single entry in a list of agents. `AgentListEntry`
-    # returns an array that contains a list of agents when the ListAgents
-    # operation is called.
+    # returns an array that contains a list of agents when the
+    # [ListAgents][1] operation is called.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html
     #
     # @!attribute [rw] agent_arn
     #   The Amazon Resource Name (ARN) of the agent.
@@ -141,7 +145,11 @@ module Aws::DataSync
     #
     # @!attribute [rw] security_group_arns
     #   The ARNs of the security groups used to protect your data transfer
-    #   task subnets. See CreateAgentRequest$SubnetArns.
+    #   task subnets. See [SecurityGroupArns][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateAgentRequest AWS API Documentation
@@ -287,18 +295,19 @@ module Aws::DataSync
     #
     # @!attribute [rw] subdirectory
     #   A subdirectory in the location’s path. This subdirectory in the
-    #   Amazon FSx for Windows file system is used to read data from the
-    #   Amazon FSx for Windows source location or write data to the FSx for
-    #   Windows destination.
+    #   Amazon FSx for Windows File Server file system is used to read data
+    #   from the Amazon FSx for Windows File Server source location or write
+    #   data to the FSx for Windows File Server destination.
     #   @return [String]
     #
     # @!attribute [rw] fsx_filesystem_arn
-    #   The Amazon Resource Name (ARN) for the FSx for Windows file system.
+    #   The Amazon Resource Name (ARN) for the FSx for Windows File Server
+    #   file system.
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
     #   The Amazon Resource Names (ARNs) of the security groups that are to
-    #   use to configure the FSx for Windows file system.
+    #   use to configure the FSx for Windows File Server file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -310,17 +319,21 @@ module Aws::DataSync
     #
     # @!attribute [rw] user
     #   The user who has the permissions to access files and folders in the
-    #   FSx for Windows file system.
+    #   FSx for Windows File Server file system.
+    #
+    #   For information about choosing a user name that ensures sufficient
+    #   permissions to files, folders, and metadata, see
+    #   [user](create-fsx-location.html#FSxWuser).
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Windows domain that the FSx for Windows server
+    #   The name of the Windows domain that the FSx for Windows File Server
     #   belongs to.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   The password of the user who has the permissions to access files and
-    #   folders in the FSx for Windows file system.
+    #   folders in the FSx for Windows File Server file system.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsRequest AWS API Documentation
@@ -338,8 +351,8 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the FSx for Windows file system
-    #   location that is created.
+    #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
+    #   file system location that is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsResponse AWS API Documentation
@@ -379,7 +392,7 @@ module Aws::DataSync
     #   a subdirectory of that path. The path should be such that it can be
     #   mounted by other NFS clients in your network.
     #
-    #   To see all the paths exported by your NFS server. run "`showmount
+    #   To see all the paths exported by your NFS server, run "`showmount
     #   -e nfs-server-name`" from an NFS client that has access to your
     #   server. You can specify any directory that appears in the results,
     #   and any subdirectory of that directory. Ensure that the NFS export
@@ -610,8 +623,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the
-    #   bucket is on an AWS Outpost, this must be an access point ARN.
+    #   The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost,
+    #   this must be an access point ARN.
     #   @return [String]
     #
     # @!attribute [rw] s3_storage_class
@@ -621,13 +634,15 @@ module Aws::DataSync
     #   Outposts, the storage class defaults to AWS S3 Outposts.
     #
     #   For more information about S3 storage classes, see [Amazon S3
-    #   Storage Classes][1] in the *Amazon Simple Storage Service Developer
-    #   Guide*. Some storage classes have behaviors that can affect your S3
-    #   storage cost. For detailed information, see using-storage-classes.
+    #   Storage Classes][1]. Some storage classes have behaviors that can
+    #   affect your S3 storage cost. For detailed information, see
+    #   [Considerations when working with S3 storage classes in
+    #   DataSync][2].
     #
     #
     #
-    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   [1]: http://aws.amazon.com/s3/storage-classes/
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #   @return [String]
     #
     # @!attribute [rw] s3_config
@@ -640,9 +655,13 @@ module Aws::DataSync
     #
     # @!attribute [rw] agent_arns
     #   If you are using DataSync on an AWS Outpost, specify the Amazon
-    #   Resource Names (ARNs) of the DataSync agents deployed on your AWS
+    #   Resource Names (ARNs) of the DataSync agents deployed on your
     #   Outpost. For more information about launching a DataSync agent on an
-    #   Amazon Outpost, see outposts-agent.
+    #   AWS Outpost, see [Deploy your DataSync agent on AWS Outposts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -740,6 +759,10 @@ module Aws::DataSync
     # @!attribute [rw] user
     #   The user who can mount the share, has the permissions to access
     #   files and folders in the SMB share.
+    #
+    #   For information about choosing a user name that ensures sufficient
+    #   permissions to files, folders, and metadata, see
+    #   [user](create-smb-location.html#SMBuser).
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -820,6 +843,7 @@ module Aws::DataSync
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #         },
     #         excludes: [
     #           {
@@ -866,20 +890,29 @@ module Aws::DataSync
     #
     #   For each individual task execution, you can override these options
     #   by specifying the `OverrideOptions` before starting the task
-    #   execution. For more information, see the operation.
+    #   execution. For more information, see the [StartTaskExecution][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
     #   A list of filter rules that determines which files to exclude from a
     #   task. The list should contain a single filter string that consists
     #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example, `"/folder1|/folder2"`
+    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
     #   Specifies a schedule used to periodically transfer files from a
     #   source to a destination location. The schedule should be specified
-    #   in UTC time. For more information, see task-scheduling.
+    #   in UTC time. For more information, see [Scheduling your task][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #   @return [Types::TaskSchedule]
     #
     # @!attribute [rw] tags
@@ -1034,7 +1067,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] last_connection_time
-    #   The time that the agent last connected to DataSyc.
+    #   The time that the agent last connected to DataSync.
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
@@ -1130,8 +1163,8 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the FSx for Windows location to
-    #   describe.
+    #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
+    #   location to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxWindowsRequest AWS API Documentation
@@ -1143,30 +1176,31 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the FSx for Windows location that
-    #   was described.
+    #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
+    #   location that was described.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the FSx for Windows location that was described.
+    #   The URL of the FSx for Windows File Server location that was
+    #   described.
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
     #   The Amazon Resource Names (ARNs) of the security groups that are
-    #   configured for the FSx for Windows file system.
+    #   configured for the FSx for Windows File Server file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
-    #   The time that the FSx for Windows location was created.
+    #   The time that the FSx for Windows File Server location was created.
     #   @return [Time]
     #
     # @!attribute [rw] user
     #   The user who has the permissions to access files and folders in the
-    #   FSx for Windows file system.
+    #   FSx for Windows File Server file system.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Windows domain that the FSx for Windows server
+    #   The name of the Windows domain that the FSx for Windows File Server
     #   belongs to.
     #   @return [String]
     #
@@ -1354,13 +1388,14 @@ module Aws::DataSync
     #   The Amazon S3 storage class that you chose to store your files in
     #   when this location is used as a task destination. For more
     #   information about S3 storage classes, see [Amazon S3 Storage
-    #   Classes][1] in the *Amazon Simple Storage Service Developer Guide*.
-    #   Some storage classes have behaviors that can affect your S3 storage
-    #   cost. For detailed information, see using-storage-classes.
+    #   Classes][1]. Some storage classes have behaviors that can affect
+    #   your S3 storage cost. For detailed information, see [Considerations
+    #   when working with S3 storage classes in DataSync][2].
     #
     #
     #
-    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   [1]: http://aws.amazon.com/s3/storage-classes/
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #   @return [String]
     #
     # @!attribute [rw] s3_config
@@ -1372,10 +1407,14 @@ module Aws::DataSync
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] agent_arns
-    #   If you are using DataSync on an Amazon Outpost, the Amazon Resource
-    #   Name (ARNs) of the EC2 agents deployed on your AWS Outpost. For more
-    #   information about launching a DataSync agent on an Amazon Outpost,
-    #   see outposts-agent.
+    #   If you are using DataSync on an AWS Outpost, the Amazon Resource
+    #   Name (ARNs) of the EC2 agents deployed on your Outpost. For more
+    #   information about launching a DataSync agent on an AWS Outpost, see
+    #   [Deploy your DataSync agent on AWS Outposts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
@@ -1424,7 +1463,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the source SBM location that was described.
+    #   The URL of the source SMB location that was described.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -1507,15 +1546,20 @@ module Aws::DataSync
     #
     # @!attribute [rw] options
     #   Represents the options that are available to control the behavior of
-    #   a StartTaskExecution operation. Behavior includes preserving
+    #   a [StartTaskExecution][1] operation. Behavior includes preserving
     #   metadata such as user ID (UID), group ID (GID), and file
     #   permissions, and also overwriting files in the destination, data
     #   integrity verification, and so on.
     #
     #   A task has a set of default options associated with it. If you
-    #   don't specify an option in StartTaskExecution, the default value is
-    #   used. You can override the defaults options on each task execution
-    #   by specifying an overriding `Options` value to StartTaskExecution.
+    #   don't specify an option in [StartTaskExecution][1], the default
+    #   value is used. You can override the defaults options on each task
+    #   execution by specifying an overriding `Options` value to
+    #   [StartTaskExecution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
@@ -1627,7 +1671,7 @@ module Aws::DataSync
     #   The status of the task that was described.
     #
     #   For detailed information about task execution statuses, see
-    #   Understanding Task Statuses in the *AWS DataSync User Guide.*
+    #   Understanding Task Statuses in the *AWS DataSync User Guide*.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1675,7 +1719,12 @@ module Aws::DataSync
     #   data integrity verification, and so on.
     #
     #   For each individual task execution, you can override these options
-    #   by specifying the overriding `OverrideOptions` value to operation.
+    #   by specifying the overriding `OverrideOptions` value to
+    #   [StartTaskExecution][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
@@ -1760,7 +1809,7 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Specifies which files, folders and objects to include or exclude when
+    # Specifies which files, folders, and objects to include or exclude when
     # transferring files from source to destination.
     #
     # @note When making an API call, you may pass FilterRule
@@ -2137,7 +2186,11 @@ module Aws::DataSync
     # @!attribute [rw] operator
     #   The operator that is used to compare filter values (for example,
     #   `Equals` or `Contains`). For more about API filtering operators, see
-    #   query-resources.
+    #   [API filters for ListTasks and ListLocations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/LocationFilter AWS API Documentation
@@ -2152,7 +2205,11 @@ module Aws::DataSync
 
     # Represents a single entry in a list of locations. `LocationListEntry`
     # returns an array that contains a list of locations when the
-    # ListLocations operation is called.
+    # [ListLocations][1] operation is called.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html
     #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the location. For Network File
@@ -2163,7 +2220,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] location_uri
     #   Represents a list of URLs of a location. `LocationUri` returns an
-    #   array that contains a list of locations when the ListLocations
+    #   array that contains a list of locations when the [ListLocations][1]
     #   operation is called.
     #
     #   Format: `TYPE://GLOBAL_ID/SUBDIR`.
@@ -2181,6 +2238,12 @@ module Aws::DataSync
     #   is the *nix convention. For NFS and Amazon EFS, it's the export
     #   path to mount the location. For Amazon S3, it's the prefix path
     #   that you mount to and treat as the root of the location.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/LocationListEntry AWS API Documentation
@@ -2256,15 +2319,19 @@ module Aws::DataSync
     end
 
     # Represents the options that are available to control the behavior of a
-    # StartTaskExecution operation. Behavior includes preserving metadata
-    # such as user ID (UID), group ID (GID), and file permissions, and also
-    # overwriting files in the destination, data integrity verification, and
-    # so on.
+    # [StartTaskExecution][1] operation. Behavior includes preserving
+    # metadata such as user ID (UID), group ID (GID), and file permissions,
+    # and also overwriting files in the destination, data integrity
+    # verification, and so on.
     #
     # A task has a set of default options associated with it. If you don't
-    # specify an option in StartTaskExecution, the default value is used.
-    # You can override the defaults options on each task execution by
-    # specifying an overriding `Options` value to StartTaskExecution.
+    # specify an option in [StartTaskExecution][1], the default value is
+    # used. You can override the defaults options on each task execution by
+    # specifying an overriding `Options` value to [StartTaskExecution][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @note When making an API call, you may pass Options
     #   data as a hash:
@@ -2283,13 +2350,14 @@ module Aws::DataSync
     #         task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #         transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #         security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #       }
     #
     # @!attribute [rw] verify_mode
     #   A value that determines whether a data integrity verification should
     #   be performed at the end of a task execution after all data and
-    #   metadata have been transferred. For more information, see
-    #   create-task
+    #   metadata have been transferred. For more information, see [Configure
+    #   task settings][1].
     #
     #   Default value: POINT\_IN\_TIME\_CONSISTENT.
     #
@@ -2305,6 +2373,10 @@ module Aws::DataSync
     #   NONE: No additional verification is done at the end of the transfer,
     #   but all data transmissions are integrity-checked with checksum
     #   verification during the transfer.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html
     #   @return [String]
     #
     # @!attribute [rw] overwrite_mode
@@ -2316,8 +2388,13 @@ module Aws::DataSync
     #   protect against overwriting those changes.
     #
     #   Some storage classes have specific behaviors that can affect your S3
-    #   storage cost. For detailed information, see using-storage-classes in
-    #   the *AWS DataSync User Guide*.
+    #   storage cost. For detailed information, see [Considerations when
+    #   working with Amazon S3 storage classes in DataSync ][1] in the *AWS
+    #   DataSync User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #   @return [String]
     #
     # @!attribute [rw] atime
@@ -2345,7 +2422,9 @@ module Aws::DataSync
     #
     # @!attribute [rw] mtime
     #   A value that indicates the last time that a file was modified (that
-    #   is, a file was written to) before the PREPARING phase.
+    #   is, a file was written to) before the PREPARING phase. This option
+    #   is required for cases when you need to run the same task more than
+    #   one time.
     #
     #   Default value: PRESERVE.
     #
@@ -2361,7 +2440,10 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] uid
-    #   The user ID (UID) of the file's owner.
+    #   The POSIX user ID (UID) of the file's owner. This option should
+    #   only be set for NFS, EFS, and S3 locations. To learn more about what
+    #   metadata is copied by DataSync, see [Metadata Copied by
+    #   DataSync][1].
     #
     #   Default value: INT\_VALUE. This preserves the integer value of the
     #   ID.
@@ -2370,10 +2452,17 @@ module Aws::DataSync
     #   (recommended).
     #
     #   NONE: Ignore UID and GID.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
     #   @return [String]
     #
     # @!attribute [rw] gid
-    #   The group ID (GID) of the file's owners.
+    #   The POSIX group ID (GID) of the file's owners. This option should
+    #   only be set for NFS, EFS, and S3 locations. For more information
+    #   about what metadata is copied by DataSync, see [Metadata Copied by
+    #   DataSync][1].
     #
     #   Default value: INT\_VALUE. This preserves the integer value of the
     #   ID.
@@ -2382,6 +2471,10 @@ module Aws::DataSync
     #   (recommended).
     #
     #   NONE: Ignore UID and GID.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
     #   @return [String]
     #
     # @!attribute [rw] preserve_deleted_files
@@ -2389,21 +2482,27 @@ module Aws::DataSync
     #   exist in the source file system should be preserved. This option can
     #   affect your storage cost. If your task deletes objects, you might
     #   incur minimum storage duration charges for certain storage classes.
-    #   For detailed information, see using-storage-classes in the *AWS
-    #   DataSync User Guide*.
+    #   For detailed information, see [Considerations when working with
+    #   Amazon S3 storage classes in DataSync ][1] in the *AWS DataSync User
+    #   Guide*.
     #
     #   Default value: PRESERVE.
     #
     #   PRESERVE: Ignore such destination files (recommended).
     #
     #   REMOVE: Delete destination files that aren’t present in the source.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #   @return [String]
     #
     # @!attribute [rw] preserve_devices
     #   A value that determines whether AWS DataSync should preserve the
     #   metadata of block and character devices in the source file system,
-    #   and recreate the files with that device name and metadata on the
-    #   destination.
+    #   and re-create the files with that device name and metadata on the
+    #   destination. DataSync does not copy the contents of such devices,
+    #   only the name and metadata.
     #
     #   <note markdown="1"> AWS DataSync can't sync the actual contents of such devices,
     #   because they are nonterminal and don't return an end-of-file (EOF)
@@ -2422,7 +2521,9 @@ module Aws::DataSync
     # @!attribute [rw] posix_permissions
     #   A value that determines which users or groups can access a file for
     #   a specific purpose such as reading, writing, or execution of the
-    #   file.
+    #   file. This option should only be set for NFS, EFS, and S3 locations.
+    #   For more information about what metadata is copied by DataSync, see
+    #   [Metadata Copied by DataSync][1].
     #
     #   Default value: PRESERVE.
     #
@@ -2433,6 +2534,10 @@ module Aws::DataSync
     #   <note markdown="1"> AWS DataSync can preserve extant permissions of a source location.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
     #   @return [String]
     #
     # @!attribute [rw] bytes_per_second
@@ -2447,8 +2552,12 @@ module Aws::DataSync
     #   The default is `ENABLED`.
     #
     #   If you use the same agent to run multiple tasks, you can enable the
-    #   tasks to run in series. For more information, see
-    #   queue-task-execution.
+    #   tasks to run in series. For more information, see [Queueing task
+    #   executions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution
     #   @return [String]
     #
     # @!attribute [rw] log_level
@@ -2479,6 +2588,57 @@ module Aws::DataSync
     #   without comparing to existing content on the destination.
     #   @return [String]
     #
+    # @!attribute [rw] security_descriptor_copy_flags
+    #   A value that determines which components of the SMB security
+    #   descriptor are copied from source to destination objects.
+    #
+    #   This value is only used for transfers between SMB and Amazon FSx for
+    #   Windows File Server locations, or between two Amazon FSx for Windows
+    #   File Server locations. For more information about how DataSync
+    #   handles metadata, see [How DataSync Handles Metadata and Special
+    #   Files][1].
+    #
+    #   Default value: OWNER\_DACL.
+    #
+    #   **OWNER\_DACL**\: For each copied object, DataSync copies the
+    #   following metadata:
+    #
+    #   * Object owner.
+    #
+    #   * NTFS discretionary access control lists (DACLs), which determine
+    #     whether to grant access to an object.
+    #
+    #   When choosing this option, DataSync does NOT copy the NTFS system
+    #   access control lists (SACLs), which are used by administrators to
+    #   log attempts to access a secured object.
+    #
+    #   **OWNER\_DACL\_SACL**\: For each copied object, DataSync copies the
+    #   following metadata:
+    #
+    #   * Object owner.
+    #
+    #   * NTFS discretionary access control lists (DACLs), which determine
+    #     whether to grant access to an object.
+    #
+    #   * NTFS system access control lists (SACLs), which are used by
+    #     administrators to log attempts to access a secured object.
+    #
+    #   Copying SACLs requires granting additional permissions to the
+    #   Windows user that DataSync uses to access your SMB location. For
+    #   information about choosing a user that ensures sufficient
+    #   permissions to files, folders, and metadata, see
+    #   [user](create-smb-location.html#SMBuser).
+    #
+    #   **NONE**\: None of the SMB security descriptor components are
+    #   copied. Destination objects are owned by the user that was provided
+    #   for accessing the destination location. DACLs and SACLs are set
+    #   based on the destination server’s configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
     #
     class Options < Struct.new(
@@ -2494,7 +2654,8 @@ module Aws::DataSync
       :bytes_per_second,
       :task_queueing,
       :log_level,
-      :transfer_mode)
+      :transfer_mode,
+      :security_descriptor_copy_flags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2556,7 +2717,11 @@ module Aws::DataSync
     #
     # @!attribute [rw] bucket_access_role_arn
     #   The Amazon S3 bucket to access. This bucket is used as a parameter
-    #   in the CreateLocationS3 operation.
+    #   in the [CreateLocationS3][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/S3Config AWS API Documentation
@@ -2613,6 +2778,7 @@ module Aws::DataSync
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #         },
     #         includes: [
     #           {
@@ -2628,15 +2794,20 @@ module Aws::DataSync
     #
     # @!attribute [rw] override_options
     #   Represents the options that are available to control the behavior of
-    #   a StartTaskExecution operation. Behavior includes preserving
+    #   a [StartTaskExecution][1] operation. Behavior includes preserving
     #   metadata such as user ID (UID), group ID (GID), and file
     #   permissions, and also overwriting files in the destination, data
     #   integrity verification, and so on.
     #
     #   A task has a set of default options associated with it. If you
-    #   don't specify an option in StartTaskExecution, the default value is
-    #   used. You can override the defaults options on each task execution
-    #   by specifying an overriding `Options` value to StartTaskExecution.
+    #   don't specify an option in [StartTaskExecution][1], the default
+    #   value is used. You can override the defaults options on each task
+    #   execution by specifying an overriding `Options` value to
+    #   [StartTaskExecution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] includes
@@ -2673,7 +2844,11 @@ module Aws::DataSync
 
     # Represents a single entry in a list of AWS resource tags.
     # `TagListEntry` returns an array that contains a list of tasks when the
-    # ListTagsForResource operation is called.
+    # [ListTagsForResource][1] operation is called.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html
     #
     # @note When making an API call, you may pass TagListEntry
     #   data as a hash:
@@ -2738,8 +2913,12 @@ module Aws::DataSync
 
     # Represents a single entry in a list of task executions.
     # `TaskExecutionListEntry` returns an array that contains a list of
-    # specific invocations of a task when ListTaskExecutions operation is
-    # called.
+    # specific invocations of a task when the [ListTaskExecutions][1]
+    # operation is called.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTaskExecutions.html
     #
     # @!attribute [rw] task_execution_arn
     #   The Amazon Resource Name (ARN) of the task that was executed.
@@ -2782,7 +2961,7 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] transfer_status
-    #   The status of the TRANSFERRING Phase.
+    #   The status of the TRANSFERRING phase.
     #   @return [String]
     #
     # @!attribute [rw] verify_duration
@@ -2791,7 +2970,7 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] verify_status
-    #   The status of the VERIFYING Phase.
+    #   The status of the VERIFYING phase.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -2849,7 +3028,11 @@ module Aws::DataSync
     # @!attribute [rw] operator
     #   The operator that is used to compare filter values (for example,
     #   `Equals` or `Contains`). For more about API filtering operators, see
-    #   query-resources.
+    #   [API filters for ListTasks and ListLocations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskFilter AWS API Documentation
@@ -2863,9 +3046,13 @@ module Aws::DataSync
     end
 
     # Represents a single entry in a list of tasks. `TaskListEntry` returns
-    # an array that contains a list of tasks when the ListTasks operation is
-    # called. A task includes the source and destination file systems to
-    # sync and the options to use for the tasks.
+    # an array that contains a list of tasks when the [ListTasks][1]
+    # operation is called. A task includes the source and destination file
+    # systems to sync and the options to use for the tasks.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTasks.html
     #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the task.
@@ -2980,6 +3167,304 @@ module Aws::DataSync
     #
     class UpdateAgentResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateLocationNfsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #         subdirectory: "NfsSubdirectory",
+    #         on_prem_config: {
+    #           agent_arns: ["AgentArn"], # required
+    #         },
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #         },
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the NFS location to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   The subdirectory in the NFS file system that is used to read data
+    #   from the NFS source location or write data to the NFS destination.
+    #   The NFS path should be a path that's exported by the NFS server, or
+    #   a subdirectory of that path. The path should be such that it can be
+    #   mounted by other NFS clients in your network.
+    #
+    #   To see all the paths exported by your NFS server, run "`showmount
+    #   -e nfs-server-name`" from an NFS client that has access to your
+    #   server. You can specify any directory that appears in the results,
+    #   and any subdirectory of that directory. Ensure that the NFS export
+    #   is accessible without Kerberos authentication.
+    #
+    #   To transfer all the data in the folder that you specified, DataSync
+    #   must have permissions to read all the data. To ensure this, either
+    #   configure the NFS export with `no_root_squash`, or ensure that the
+    #   files you want DataSync to access have permissions that allow read
+    #   access for all users. Doing either option enables the agent to read
+    #   the files. For the agent to access directories, you must
+    #   additionally enable all execute access.
+    #
+    #   If you are copying data to or from your AWS Snowcone device, see
+    #   [NFS Server on AWS Snowcone][1] for more information.
+    #
+    #   For information about NFS export configuration, see 18.7. The
+    #   /etc/exports Configuration File in the Red Hat Enterprise Linux
+    #   documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
+    #   @return [String]
+    #
+    # @!attribute [rw] on_prem_config
+    #   A list of Amazon Resource Names (ARNs) of agents to use for a
+    #   Network File System (NFS) location.
+    #   @return [Types::OnPremConfig]
+    #
+    # @!attribute [rw] mount_options
+    #   Represents the mount options that are available for DataSync to
+    #   access an NFS location.
+    #   @return [Types::NfsMountOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationNfsRequest AWS API Documentation
+    #
+    class UpdateLocationNfsRequest < Struct.new(
+      :location_arn,
+      :subdirectory,
+      :on_prem_config,
+      :mount_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationNfsResponse AWS API Documentation
+    #
+    class UpdateLocationNfsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateLocationObjectStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #         server_port: 1,
+    #         server_protocol: "HTTPS", # accepts HTTPS, HTTP
+    #         subdirectory: "S3Subdirectory",
+    #         access_key: "ObjectStorageAccessKey",
+    #         secret_key: "ObjectStorageSecretKey",
+    #         agent_arns: ["AgentArn"],
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the self-managed object storage
+    #   server location to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_port
+    #   The port that your self-managed object storage server accepts
+    #   inbound network traffic on. The server port is set by default to TCP
+    #   80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your
+    #   self-managed object storage server requires one.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_protocol
+    #   The protocol that the object storage server uses to communicate.
+    #   Valid values are `HTTP` or `HTTPS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   The subdirectory in the self-managed object storage server that is
+    #   used to read data from.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_key
+    #   Optional. The access key is used if credentials are required to
+    #   access the self-managed object storage server. If your object
+    #   storage requires a user name and password to authenticate, use
+    #   `AccessKey` and `SecretKey` to provide the user name and password,
+    #   respectively.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_key
+    #   Optional. The secret key is used if credentials are required to
+    #   access the self-managed object storage server. If your object
+    #   storage requires a user name and password to authenticate, use
+    #   `AccessKey` and `SecretKey` to provide the user name and password,
+    #   respectively.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The Amazon Resource Name (ARN) of the agents associated with the
+    #   self-managed object storage server location.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationObjectStorageRequest AWS API Documentation
+    #
+    class UpdateLocationObjectStorageRequest < Struct.new(
+      :location_arn,
+      :server_port,
+      :server_protocol,
+      :subdirectory,
+      :access_key,
+      :secret_key,
+      :agent_arns)
+      SENSITIVE = [:secret_key]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationObjectStorageResponse AWS API Documentation
+    #
+    class UpdateLocationObjectStorageResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateLocationSmbRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #         subdirectory: "SmbSubdirectory",
+    #         user: "SmbUser",
+    #         domain: "SmbDomain",
+    #         password: "SmbPassword",
+    #         agent_arns: ["AgentArn"],
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #         },
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the SMB location to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   The subdirectory in the SMB file system that is used to read data
+    #   from the SMB source location or write data to the SMB destination.
+    #   The SMB path should be a path that's exported by the SMB server, or
+    #   a subdirectory of that path. The path should be such that it can be
+    #   mounted by other SMB clients in your network.
+    #
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
+    #   `/path/to/folder`.
+    #
+    #    </note>
+    #
+    #   To transfer all the data in the folder that you specified, DataSync
+    #   must have permissions to mount the SMB share and to access all the
+    #   data in that share. To ensure this, do either of the following:
+    #
+    #   * Ensure that the user/password specified belongs to the user who
+    #     can mount the share and who has the appropriate permissions for
+    #     all of the files and directories that you want DataSync to access.
+    #
+    #   * Use credentials of a member of the Backup Operators group to mount
+    #     the share.
+    #
+    #   Doing either of these options enables the agent to access the data.
+    #   For the agent to access directories, you must also enable all
+    #   execute access.
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   The user who can mount the share has the permissions to access files
+    #   and folders in the SMB share.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The name of the Windows domain that the SMB server belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password of the user who can mount the share has the permissions
+    #   to access files and folders in the SMB share.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The Amazon Resource Names (ARNs) of agents to use for a Simple
+    #   Message Block (SMB) location.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mount_options
+    #   Represents the mount options that are available for DataSync to
+    #   access an SMB location.
+    #   @return [Types::SmbMountOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationSmbRequest AWS API Documentation
+    #
+    class UpdateLocationSmbRequest < Struct.new(
+      :location_arn,
+      :subdirectory,
+      :user,
+      :domain,
+      :password,
+      :agent_arns,
+      :mount_options)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationSmbResponse AWS API Documentation
+    #
+    class UpdateLocationSmbResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateTaskExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_execution_arn: "TaskExecutionArn", # required
+    #         options: { # required
+    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
+    #           atime: "NONE", # accepts NONE, BEST_EFFORT
+    #           mtime: "NONE", # accepts NONE, PRESERVE
+    #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
+    #           preserve_devices: "NONE", # accepts NONE, PRESERVE
+    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
+    #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #         },
+    #       }
+    #
+    # @!attribute [rw] task_execution_arn
+    #   The Amazon Resource Name (ARN) of the specific task execution that
+    #   is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Represents the options that are available to control the behavior of
+    #   a [StartTaskExecution][1] operation. Behavior includes preserving
+    #   metadata such as user ID (UID), group ID (GID), and file
+    #   permissions, and also overwriting files in the destination, data
+    #   integrity verification, and so on.
+    #
+    #   A task has a set of default options associated with it. If you
+    #   don't specify an option in [StartTaskExecution][1], the default
+    #   value is used. You can override the defaults options on each task
+    #   execution by specifying an overriding `Options` value to
+    #   [StartTaskExecution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   @return [Types::Options]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecutionRequest AWS API Documentation
+    #
+    class UpdateTaskExecutionRequest < Struct.new(
+      :task_execution_arn,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecutionResponse AWS API Documentation
+    #
+    class UpdateTaskExecutionResponse < Aws::EmptyStructure; end
+
     # UpdateTaskResponse
     #
     # @note When making an API call, you may pass UpdateTaskRequest
@@ -3001,6 +3486,7 @@ module Aws::DataSync
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #         },
     #         excludes: [
     #           {
@@ -3022,15 +3508,20 @@ module Aws::DataSync
     #
     # @!attribute [rw] options
     #   Represents the options that are available to control the behavior of
-    #   a StartTaskExecution operation. Behavior includes preserving
+    #   a [StartTaskExecution][1] operation. Behavior includes preserving
     #   metadata such as user ID (UID), group ID (GID), and file
     #   permissions, and also overwriting files in the destination, data
     #   integrity verification, and so on.
     #
     #   A task has a set of default options associated with it. If you
-    #   don't specify an option in StartTaskExecution, the default value is
-    #   used. You can override the defaults options on each task execution
-    #   by specifying an overriding `Options` value to StartTaskExecution.
+    #   don't specify an option in [StartTaskExecution][1], the default
+    #   value is used. You can override the defaults options on each task
+    #   execution by specifying an overriding `Options` value to
+    #   [StartTaskExecution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
@@ -3045,8 +3536,12 @@ module Aws::DataSync
     #   source to a destination location. You can configure your task to
     #   execute hourly, daily, weekly or on specific days of the week. You
     #   control when in the day or hour you want the task to execute. The
-    #   time you specify is UTC time. For more information, see
-    #   task-scheduling.
+    #   time you specify is UTC time. For more information, see [Scheduling
+    #   your task][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #   @return [Types::TaskSchedule]
     #
     # @!attribute [rw] name

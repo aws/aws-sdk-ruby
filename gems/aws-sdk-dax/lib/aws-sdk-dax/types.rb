@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -43,11 +43,9 @@ module Aws::DAX
     #   @return [String]
     #
     # @!attribute [rw] cluster_discovery_endpoint
-    #   The configuration endpoint for this DAX cluster, consisting of a DNS
-    #   name and a port number. Client applications can specify this
-    #   endpoint, rather than an individual node endpoint, and allow the DAX
-    #   client software to intelligently route requests and responses to
-    #   nodes in the DAX cluster.
+    #   The endpoint for this DAX cluster, consisting of a DNS name, a port
+    #   number, and a URL. Applications should use the URL to configure the
+    #   DAX client to find their cluster.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] node_ids_to_remove
@@ -95,6 +93,15 @@ module Aws::DAX
     #   specified DAX cluster.
     #   @return [Types::SSEDescription]
     #
+    # @!attribute [rw] cluster_endpoint_encryption_type
+    #   The type of encryption supported by the cluster's endpoint. Values
+    #   are:
+    #
+    #   * `NONE` for no encryption
+    #
+    #     `TLS` for Transport Layer Security
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -114,7 +121,8 @@ module Aws::DAX
       :security_groups,
       :iam_role_arn,
       :parameter_group,
-      :sse_description)
+      :sse_description,
+      :cluster_endpoint_encryption_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -162,6 +170,7 @@ module Aws::DAX
     #         sse_specification: {
     #           enabled: false, # required
     #         },
+    #         cluster_endpoint_encryption_type: "NONE", # accepts NONE, TLS
     #       }
     #
     # @!attribute [rw] cluster_name
@@ -283,6 +292,15 @@ module Aws::DAX
     #   cluster.
     #   @return [Types::SSESpecification]
     #
+    # @!attribute [rw] cluster_endpoint_encryption_type
+    #   The type of encryption the cluster's endpoint should support.
+    #   Values are:
+    #
+    #   * `NONE` for no encryption
+    #
+    #   * `TLS` for Transport Layer Security
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -298,7 +316,8 @@ module Aws::DAX
       :iam_role_arn,
       :parameter_group_name,
       :tags,
-      :sse_specification)
+      :sse_specification,
+      :cluster_endpoint_encryption_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -914,8 +933,7 @@ module Aws::DAX
     end
 
     # Represents the information required for client programs to connect to
-    # the configuration endpoint for a DAX cluster, or to an individual node
-    # within the cluster.
+    # the endpoint for a DAX cluster.
     #
     # @!attribute [rw] address
     #   The DNS hostname of the endpoint.
@@ -926,11 +944,18 @@ module Aws::DAX
     #   endpoint.
     #   @return [Integer]
     #
+    # @!attribute [rw] url
+    #   The URL that applications should use to connect to the endpoint. The
+    #   default ports are 8111 for the "dax" protocol and 9111 for the
+    #   "daxs" protocol.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
       :address,
-      :port)
+      :port,
+      :url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1216,7 +1241,9 @@ module Aws::DAX
     #   @return [String]
     #
     # @!attribute [rw] topic_status
-    #   The current state of the topic.
+    #   The current state of the topic. A value of “active” means that
+    #   notifications will be sent to the topic. A value of “inactive” means
+    #   that notifications will not be sent to the topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NotificationConfiguration AWS API Documentation
@@ -1488,6 +1515,15 @@ module Aws::DAX
     #
     class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure; end
 
+    # You have reached the maximum number of x509 certificates that can be
+    # created for encrypted clusters in a 30 day period. Contact AWS
+    # customer support to discuss options for continuing to create encrypted
+    # clusters.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Aws::EmptyStructure; end
+
     # Represents the subnet associated with a DAX cluster. This parameter
     # refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC)
     # and used with DAX.
@@ -1745,7 +1781,9 @@ module Aws::DAX
     #   @return [String]
     #
     # @!attribute [rw] notification_topic_status
-    #   The current state of the topic.
+    #   The current state of the topic. A value of “active” means that
+    #   notifications will be sent to the topic. A value of “inactive” means
+    #   that notifications will not be sent to the topic.
     #   @return [String]
     #
     # @!attribute [rw] parameter_group_name
@@ -1804,6 +1842,16 @@ module Aws::DAX
     # @!attribute [rw] parameter_name_values
     #   An array of name-value pairs for the parameters in the group. Each
     #   element in the array represents a single parameter.
+    #
+    #   <note markdown="1"> `record-ttl-millis` and `query-ttl-millis` are the only supported
+    #   parameter names. For more details, see [Configuring TTL
+    #   Settings][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl
     #   @return [Array<Types::ParameterNameValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateParameterGroupRequest AWS API Documentation

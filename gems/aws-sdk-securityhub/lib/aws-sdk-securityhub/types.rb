@@ -3,12 +3,43 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SecurityHub
   module Types
+
+    # @note When making an API call, you may pass AcceptAdministratorInvitationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         administrator_id: "NonEmptyString", # required
+    #         invitation_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] administrator_id
+    #   The account ID of the Security Hub administrator account that sent
+    #   the invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] invitation_id
+    #   The identifier of the invitation sent from the Security Hub
+    #   administrator account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptAdministratorInvitationRequest AWS API Documentation
+    #
+    class AcceptAdministratorInvitationRequest < Struct.new(
+      :administrator_id,
+      :invitation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptAdministratorInvitationResponse AWS API Documentation
+    #
+    class AcceptAdministratorInvitationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AcceptInvitationRequest
     #   data as a hash:
@@ -19,12 +50,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] master_id
-    #   The account ID of the Security Hub master account that sent the
-    #   invitation.
+    #   The account ID of the Security Hub administrator account that sent
+    #   the invitation.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   The ID of the invitation sent from the Security Hub master account.
+    #   The identifier of the invitation sent from the Security Hub
+    #   administrator account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptInvitationRequest AWS API Documentation
@@ -64,7 +96,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId",
+    #         account_id: "AccountId", # required
     #         email: "NonEmptyString",
     #       }
     #
@@ -81,6 +113,313 @@ module Aws::SecurityHub
     class AccountDetails < Struct.new(
       :account_id,
       :email)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about one of the following actions that affects or
+    # that was taken on a resource:
+    #
+    # * A remote IP address issued an AWS API call
+    #
+    # * A DNS request was received
+    #
+    # * A remote IP address attempted to connect to an EC2 instance
+    #
+    # * A remote IP address attempted a port probe on an EC2 instance
+    #
+    # @note When making an API call, you may pass Action
+    #   data as a hash:
+    #
+    #       {
+    #         action_type: "NonEmptyString",
+    #         network_connection_action: {
+    #           connection_direction: "NonEmptyString",
+    #           remote_ip_details: {
+    #             ip_address_v4: "NonEmptyString",
+    #             organization: {
+    #               asn: 1,
+    #               asn_org: "NonEmptyString",
+    #               isp: "NonEmptyString",
+    #               org: "NonEmptyString",
+    #             },
+    #             country: {
+    #               country_code: "NonEmptyString",
+    #               country_name: "NonEmptyString",
+    #             },
+    #             city: {
+    #               city_name: "NonEmptyString",
+    #             },
+    #             geo_location: {
+    #               lon: 1.0,
+    #               lat: 1.0,
+    #             },
+    #           },
+    #           remote_port_details: {
+    #             port: 1,
+    #             port_name: "NonEmptyString",
+    #           },
+    #           local_port_details: {
+    #             port: 1,
+    #             port_name: "NonEmptyString",
+    #           },
+    #           protocol: "NonEmptyString",
+    #           blocked: false,
+    #         },
+    #         aws_api_call_action: {
+    #           api: "NonEmptyString",
+    #           service_name: "NonEmptyString",
+    #           caller_type: "NonEmptyString",
+    #           remote_ip_details: {
+    #             ip_address_v4: "NonEmptyString",
+    #             organization: {
+    #               asn: 1,
+    #               asn_org: "NonEmptyString",
+    #               isp: "NonEmptyString",
+    #               org: "NonEmptyString",
+    #             },
+    #             country: {
+    #               country_code: "NonEmptyString",
+    #               country_name: "NonEmptyString",
+    #             },
+    #             city: {
+    #               city_name: "NonEmptyString",
+    #             },
+    #             geo_location: {
+    #               lon: 1.0,
+    #               lat: 1.0,
+    #             },
+    #           },
+    #           domain_details: {
+    #             domain: "NonEmptyString",
+    #           },
+    #           affected_resources: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           first_seen: "NonEmptyString",
+    #           last_seen: "NonEmptyString",
+    #         },
+    #         dns_request_action: {
+    #           domain: "NonEmptyString",
+    #           protocol: "NonEmptyString",
+    #           blocked: false,
+    #         },
+    #         port_probe_action: {
+    #           port_probe_details: [
+    #             {
+    #               local_port_details: {
+    #                 port: 1,
+    #                 port_name: "NonEmptyString",
+    #               },
+    #               local_ip_details: {
+    #                 ip_address_v4: "NonEmptyString",
+    #               },
+    #               remote_ip_details: {
+    #                 ip_address_v4: "NonEmptyString",
+    #                 organization: {
+    #                   asn: 1,
+    #                   asn_org: "NonEmptyString",
+    #                   isp: "NonEmptyString",
+    #                   org: "NonEmptyString",
+    #                 },
+    #                 country: {
+    #                   country_code: "NonEmptyString",
+    #                   country_name: "NonEmptyString",
+    #                 },
+    #                 city: {
+    #                   city_name: "NonEmptyString",
+    #                 },
+    #                 geo_location: {
+    #                   lon: 1.0,
+    #                   lat: 1.0,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           blocked: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action_type
+    #   The type of action that was detected. The possible action types are:
+    #
+    #   * `NETWORK_CONNECTION`
+    #
+    #   * `AWS_API_CALL`
+    #
+    #   * `DNS_REQUEST`
+    #
+    #   * `PORT_PROBE`
+    #   @return [String]
+    #
+    # @!attribute [rw] network_connection_action
+    #   Included if `ActionType` is `NETWORK_CONNECTION`. Provides details
+    #   about the network connection that was detected.
+    #   @return [Types::NetworkConnectionAction]
+    #
+    # @!attribute [rw] aws_api_call_action
+    #   Included if `ActionType` is `AWS_API_CALL`. Provides details about
+    #   the API call that was detected.
+    #   @return [Types::AwsApiCallAction]
+    #
+    # @!attribute [rw] dns_request_action
+    #   Included if `ActionType` is `DNS_REQUEST`. Provides details about
+    #   the DNS request that was detected.
+    #   @return [Types::DnsRequestAction]
+    #
+    # @!attribute [rw] port_probe_action
+    #   Included if `ActionType` is `PORT_PROBE`. Provides details about the
+    #   port probe that was detected.
+    #   @return [Types::PortProbeAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Action AWS API Documentation
+    #
+    class Action < Struct.new(
+      :action_type,
+      :network_connection_action,
+      :aws_api_call_action,
+      :dns_request_action,
+      :port_probe_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the IP address where the scanned port is
+    # located.
+    #
+    # @note When making an API call, you may pass ActionLocalIpDetails
+    #   data as a hash:
+    #
+    #       {
+    #         ip_address_v4: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] ip_address_v4
+    #   The IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionLocalIpDetails AWS API Documentation
+    #
+    class ActionLocalIpDetails < Struct.new(
+      :ip_address_v4)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For `NetworkConnectionAction` and `PortProbeDetails`,
+    # `LocalPortDetails` provides information about the local port that was
+    # involved in the action.
+    #
+    # @note When making an API call, you may pass ActionLocalPortDetails
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1,
+    #         port_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The number of the port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port_name
+    #   The port name of the local connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionLocalPortDetails AWS API Documentation
+    #
+    class ActionLocalPortDetails < Struct.new(
+      :port,
+      :port_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For `AwsApiAction`, `NetworkConnectionAction`, and `PortProbeAction`,
+    # `RemoteIpDetails` provides information about the remote IP address
+    # that was involved in the action.
+    #
+    # @note When making an API call, you may pass ActionRemoteIpDetails
+    #   data as a hash:
+    #
+    #       {
+    #         ip_address_v4: "NonEmptyString",
+    #         organization: {
+    #           asn: 1,
+    #           asn_org: "NonEmptyString",
+    #           isp: "NonEmptyString",
+    #           org: "NonEmptyString",
+    #         },
+    #         country: {
+    #           country_code: "NonEmptyString",
+    #           country_name: "NonEmptyString",
+    #         },
+    #         city: {
+    #           city_name: "NonEmptyString",
+    #         },
+    #         geo_location: {
+    #           lon: 1.0,
+    #           lat: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ip_address_v4
+    #   The IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The internet service provider (ISP) organization associated with the
+    #   remote IP address.
+    #   @return [Types::IpOrganizationDetails]
+    #
+    # @!attribute [rw] country
+    #   The country where the remote IP address is located.
+    #   @return [Types::Country]
+    #
+    # @!attribute [rw] city
+    #   The city where the remote IP address is located.
+    #   @return [Types::City]
+    #
+    # @!attribute [rw] geo_location
+    #   The coordinates of the location of the remote IP address.
+    #   @return [Types::GeoLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionRemoteIpDetails AWS API Documentation
+    #
+    class ActionRemoteIpDetails < Struct.new(
+      :ip_address_v4,
+      :organization,
+      :country,
+      :city,
+      :geo_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the remote port that was involved in an
+    # attempted network connection.
+    #
+    # @note When making an API call, you may pass ActionRemotePortDetails
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1,
+    #         port_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The number of the port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port_name
+    #   The port name of the remote connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionRemotePortDetails AWS API Documentation
+    #
+    class ActionRemotePortDetails < Struct.new(
+      :port,
+      :port_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -109,6 +448,29 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Represents a Security Hub administrator account designated by an
+    # organization management account.
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account identifier of the Security Hub administrator
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Security Hub administrator account.
+    #   Indicates whether the account is currently enabled as a Security Hub
+    #   administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AdminAccount AWS API Documentation
+    #
+    class AdminAccount < Struct.new(
+      :account_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Availability Zone.
     #
     # @note When making an API call, you may pass AvailabilityZone
@@ -133,6 +495,120 @@ module Aws::SecurityHub
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provided if `ActionType` is `AWS_API_CALL`. It provides details about
+    # the API call that was detected.
+    #
+    # @note When making an API call, you may pass AwsApiCallAction
+    #   data as a hash:
+    #
+    #       {
+    #         api: "NonEmptyString",
+    #         service_name: "NonEmptyString",
+    #         caller_type: "NonEmptyString",
+    #         remote_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #           organization: {
+    #             asn: 1,
+    #             asn_org: "NonEmptyString",
+    #             isp: "NonEmptyString",
+    #             org: "NonEmptyString",
+    #           },
+    #           country: {
+    #             country_code: "NonEmptyString",
+    #             country_name: "NonEmptyString",
+    #           },
+    #           city: {
+    #             city_name: "NonEmptyString",
+    #           },
+    #           geo_location: {
+    #             lon: 1.0,
+    #             lat: 1.0,
+    #           },
+    #         },
+    #         domain_details: {
+    #           domain: "NonEmptyString",
+    #         },
+    #         affected_resources: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         first_seen: "NonEmptyString",
+    #         last_seen: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] api
+    #   The name of the API method that was issued.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS service that the API method belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] caller_type
+    #   Indicates whether the API call originated from a remote IP address
+    #   (`remoteip`) or from a DNS domain (`domain`).
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Provided if `CallerType` is `remoteIp`. Provides information about
+    #   the remote IP address that the API call originated from.
+    #   @return [Types::ActionRemoteIpDetails]
+    #
+    # @!attribute [rw] domain_details
+    #   Provided if `CallerType` is `domain`. Provides information about the
+    #   DNS domain that the API call originated from.
+    #   @return [Types::AwsApiCallActionDomainDetails]
+    #
+    # @!attribute [rw] affected_resources
+    #   Identifies the resources that were affected by the API call.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] first_seen
+    #   An ISO8601-formatted timestamp that indicates when the API call was
+    #   first observed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_seen
+    #   An ISO8601-formatted timestamp that indicates when the API call was
+    #   most recently observed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallAction AWS API Documentation
+    #
+    class AwsApiCallAction < Struct.new(
+      :api,
+      :service_name,
+      :caller_type,
+      :remote_ip_details,
+      :domain_details,
+      :affected_resources,
+      :first_seen,
+      :last_seen)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provided if `CallerType` is `domain`. It provides information about
+    # the DNS domain that issued the API call.
+    #
+    # @note When making an API call, you may pass AwsApiCallActionDomainDetails
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The name of the DNS domain that issued the API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallActionDomainDetails AWS API Documentation
+    #
+    class AwsApiCallActionDomainDetails < Struct.new(
+      :domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -354,7 +830,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # contains information about a REST API in version 1 of Amazon API
+    # Contains information about a REST API in version 1 of Amazon API
     # Gateway.
     #
     # @note When making an API call, you may pass AwsApiGatewayRestApiDetails
@@ -777,6 +1253,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
+    #         client_certificate_id: "NonEmptyString",
     #         created_date: "NonEmptyString",
     #         description: "NonEmptyString",
     #         default_route_settings: {
@@ -807,6 +1284,11 @@ module Aws::SecurityHub
     #         last_deployment_status_message: "NonEmptyString",
     #         api_gateway_managed: false,
     #       }
+    #
+    # @!attribute [rw] client_certificate_id
+    #   The identifier of a client certificate for a stage. Supported only
+    #   for WebSocket API calls.
+    #   @return [String]
     #
     # @!attribute [rw] created_date
     #   Indicates when the stage was created.
@@ -887,6 +1369,7 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayV2StageDetails AWS API Documentation
     #
     class AwsApiGatewayV2StageDetails < Struct.new(
+      :client_certificate_id,
       :created_date,
       :description,
       :default_route_settings,
@@ -2103,8 +2586,8 @@ module Aws::SecurityHub
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   used to encrypt the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK alias (using the format alias/alias-name).
+    #   You can specify either the ARN of the CMK or, if available, the CMK
+    #   alias (using the format alias/alias-name).
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -2232,8 +2715,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] credential
-    #   The Amazon Resource Name (ARN) or name of credentials created using
-    #   AWS Secrets Manager.
+    #   The ARN or name of credentials created using AWS Secrets Manager.
     #
     #   <note markdown="1"> The credential can use the name of the credentials only if they
     #   exist in your current AWS Region.
@@ -3296,7 +3778,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details of an Amazon EC2 instance.
+    # The details of an EC2 instance.
     #
     # @note When making an API call, you may pass AwsEc2InstanceDetails
     #   data as a hash:
@@ -3311,6 +3793,11 @@ module Aws::SecurityHub
     #         vpc_id: "NonEmptyString",
     #         subnet_id: "NonEmptyString",
     #         launched_at: "NonEmptyString",
+    #         network_interfaces: [
+    #           {
+    #             network_interface_id: "NonEmptyString",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] type
@@ -3357,6 +3844,12 @@ module Aws::SecurityHub
     #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
+    # @!attribute [rw] network_interfaces
+    #   The identifiers of the network interfaces for the EC2 instance. The
+    #   details for each network interface are in a corresponding
+    #   `AwsEc2NetworkInterfacesDetails` object.
+    #   @return [Array<Types::AwsEc2InstanceNetworkInterfacesDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceDetails AWS API Documentation
     #
     class AwsEc2InstanceDetails < Struct.new(
@@ -3368,7 +3861,213 @@ module Aws::SecurityHub
       :iam_instance_profile_arn,
       :vpc_id,
       :subnet_id,
-      :launched_at)
+      :launched_at,
+      :network_interfaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a network interface for the EC2 instance.
+    #
+    # @note When making an API call, you may pass AwsEc2InstanceNetworkInterfacesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] network_interface_id
+    #   The identifier of the network interface. The details are in a
+    #   corresponding `AwsEc2NetworkInterfacesDetails` object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceNetworkInterfacesDetails AWS API Documentation
+    #
+    class AwsEc2InstanceNetworkInterfacesDetails < Struct.new(
+      :network_interface_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An association between the network ACL and a subnet.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkAclAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         network_acl_association_id: "NonEmptyString",
+    #         network_acl_id: "NonEmptyString",
+    #         subnet_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] network_acl_association_id
+    #   The identifier of the association between the network ACL and the
+    #   subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_acl_id
+    #   The identifier of the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The identifier of the subnet that is associated with the network
+    #   ACL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkAclAssociation AWS API Documentation
+    #
+    class AwsEc2NetworkAclAssociation < Struct.new(
+      :network_acl_association_id,
+      :network_acl_id,
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an EC2 network access control list (ACL).
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkAclDetails
+    #   data as a hash:
+    #
+    #       {
+    #         is_default: false,
+    #         network_acl_id: "NonEmptyString",
+    #         owner_id: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #         associations: [
+    #           {
+    #             network_acl_association_id: "NonEmptyString",
+    #             network_acl_id: "NonEmptyString",
+    #             subnet_id: "NonEmptyString",
+    #           },
+    #         ],
+    #         entries: [
+    #           {
+    #             cidr_block: "NonEmptyString",
+    #             egress: false,
+    #             icmp_type_code: {
+    #               code: 1,
+    #               type: 1,
+    #             },
+    #             ipv_6_cidr_block: "NonEmptyString",
+    #             port_range: {
+    #               from: 1,
+    #               to: 1,
+    #             },
+    #             protocol: "NonEmptyString",
+    #             rule_action: "NonEmptyString",
+    #             rule_number: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] is_default
+    #   Whether this is the default network ACL for the VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_acl_id
+    #   The identifier of the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The identifier of the AWS account that owns the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC for the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] associations
+    #   Associations between the network ACL and subnets.
+    #   @return [Array<Types::AwsEc2NetworkAclAssociation>]
+    #
+    # @!attribute [rw] entries
+    #   The set of rules in the network ACL.
+    #   @return [Array<Types::AwsEc2NetworkAclEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkAclDetails AWS API Documentation
+    #
+    class AwsEc2NetworkAclDetails < Struct.new(
+      :is_default,
+      :network_acl_id,
+      :owner_id,
+      :vpc_id,
+      :associations,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule for the network ACL. Each rule allows or denies access based on
+    # the IP address, traffic direction, port, and protocol.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkAclEntry
+    #   data as a hash:
+    #
+    #       {
+    #         cidr_block: "NonEmptyString",
+    #         egress: false,
+    #         icmp_type_code: {
+    #           code: 1,
+    #           type: 1,
+    #         },
+    #         ipv_6_cidr_block: "NonEmptyString",
+    #         port_range: {
+    #           from: 1,
+    #           to: 1,
+    #         },
+    #         protocol: "NonEmptyString",
+    #         rule_action: "NonEmptyString",
+    #         rule_number: 1,
+    #       }
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPV4 network range for which to deny or allow access.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress
+    #   Whether the rule is an egress rule. An egress rule is a rule that
+    #   applies to traffic that leaves the subnet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] icmp_type_code
+    #   The Internet Control Message Protocol (ICMP) type and code for which
+    #   to deny or allow access.
+    #   @return [Types::IcmpTypeCode]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   The IPV6 network range for which to deny or allow access.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_range
+    #   For TCP or UDP protocols, the range of ports that the rule applies
+    #   to.
+    #   @return [Types::PortRangeFromTo]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol that the rule applies to. To deny or allow access to
+    #   all protocols, use the value -1.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_action
+    #   Whether the rule is used to allow access or deny access.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number. The rules are processed in order by their number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkAclEntry AWS API Documentation
+    #
+    class AwsEc2NetworkAclEntry < Struct.new(
+      :cidr_block,
+      :egress,
+      :icmp_type_code,
+      :ipv_6_cidr_block,
+      :port_range,
+      :protocol,
+      :rule_action,
+      :rule_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3465,6 +4164,19 @@ module Aws::SecurityHub
     #           },
     #         ],
     #         source_dest_check: false,
+    #         ip_v6_addresses: [
+    #           {
+    #             ip_v6_address: "NonEmptyString",
+    #           },
+    #         ],
+    #         private_ip_addresses: [
+    #           {
+    #             private_ip_address: "NonEmptyString",
+    #             private_dns_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         public_dns_name: "NonEmptyString",
+    #         public_ip: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] attachment
@@ -3483,13 +4195,84 @@ module Aws::SecurityHub
     #   Indicates whether traffic to or from the instance is validated.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_v6_addresses
+    #   The IPv6 addresses associated with the network interface.
+    #   @return [Array<Types::AwsEc2NetworkInterfaceIpV6AddressDetail>]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses associated with the network interface.
+    #   @return [Array<Types::AwsEc2NetworkInterfacePrivateIpAddressDetail>]
+    #
+    # @!attribute [rw] public_dns_name
+    #   The public DNS name of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   The address of the Elastic IP address bound to the network
+    #   interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkInterfaceDetails AWS API Documentation
     #
     class AwsEc2NetworkInterfaceDetails < Struct.new(
       :attachment,
       :network_interface_id,
       :security_groups,
-      :source_dest_check)
+      :source_dest_check,
+      :ip_v6_addresses,
+      :private_ip_addresses,
+      :public_dns_name,
+      :public_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an IPV6 address that is associated with the
+    # network interface.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkInterfaceIpV6AddressDetail
+    #   data as a hash:
+    #
+    #       {
+    #         ip_v6_address: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] ip_v6_address
+    #   The IPV6 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkInterfaceIpV6AddressDetail AWS API Documentation
+    #
+    class AwsEc2NetworkInterfaceIpV6AddressDetail < Struct.new(
+      :ip_v6_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a private IPv4 address that is with the
+    # network interface.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkInterfacePrivateIpAddressDetail
+    #   data as a hash:
+    #
+    #       {
+    #         private_ip_address: "NonEmptyString",
+    #         private_dns_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name for the IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkInterfacePrivateIpAddressDetail AWS API Documentation
+    #
+    class AwsEc2NetworkInterfacePrivateIpAddressDetail < Struct.new(
+      :private_ip_address,
+      :private_dns_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3834,7 +4617,7 @@ module Aws::SecurityHub
     #   referenced security group is deleted, this value is not returned.
     #
     #   \[EC2-Classic\] Required when adding or removing rules that
-    #   reference a security group in another AWS.
+    #   reference a security group in another VPC.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -3854,6 +4637,107 @@ module Aws::SecurityHub
       :user_id,
       :vpc_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a subnet in EC2.
+    #
+    # @note When making an API call, you may pass AwsEc2SubnetDetails
+    #   data as a hash:
+    #
+    #       {
+    #         assign_ipv_6_address_on_creation: false,
+    #         availability_zone: "NonEmptyString",
+    #         availability_zone_id: "NonEmptyString",
+    #         available_ip_address_count: 1,
+    #         cidr_block: "NonEmptyString",
+    #         default_for_az: false,
+    #         map_public_ip_on_launch: false,
+    #         owner_id: "NonEmptyString",
+    #         state: "NonEmptyString",
+    #         subnet_arn: "NonEmptyString",
+    #         subnet_id: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #         ipv_6_cidr_block_association_set: [
+    #           {
+    #             association_id: "NonEmptyString",
+    #             ipv_6_cidr_block: "NonEmptyString",
+    #             cidr_block_state: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] assign_ipv_6_address_on_creation
+    #   Whether to assign an IPV6 address to a network interface that is
+    #   created in this subnet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the Availability Zone for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_ip_address_count
+    #   The number of available IPV4 addresses in the subnet. Does not
+    #   include addresses for stopped instances.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPV4 CIDR block that is assigned to the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_for_az
+    #   Whether this subnet is the default subnet for the Availability Zone.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] map_public_ip_on_launch
+    #   Whether instances in this subnet receive a public IP address.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] owner_id
+    #   The identifier of the AWS account that owns the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_arn
+    #   The ARN of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The identifier of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that contains the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_cidr_block_association_set
+    #   The IPV6 CIDR blocks that are associated with the subnet.
+    #   @return [Array<Types::Ipv6CidrBlockAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2SubnetDetails AWS API Documentation
+    #
+    class AwsEc2SubnetDetails < Struct.new(
+      :assign_ipv_6_address_on_creation,
+      :availability_zone,
+      :availability_zone_id,
+      :available_ip_address_count,
+      :cidr_block,
+      :default_for_az,
+      :map_public_ip_on_launch,
+      :owner_id,
+      :state,
+      :subnet_arn,
+      :subnet_id,
+      :vpc_id,
+      :ipv_6_cidr_block_association_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4025,6 +4909,2209 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Indicates whether to enable CloudWatch Container Insights for the ECS
+    # cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterClusterSettingsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterClusterSettingsDetails AWS API Documentation
+    #
+    class AwsEcsClusterClusterSettingsDetails < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The run command configuration for the cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         execute_command_configuration: {
+    #           kms_key_id: "NonEmptyString",
+    #           log_configuration: {
+    #             cloud_watch_encryption_enabled: false,
+    #             cloud_watch_log_group_name: "NonEmptyString",
+    #             s3_bucket_name: "NonEmptyString",
+    #             s3_encryption_enabled: false,
+    #             s3_key_prefix: "NonEmptyString",
+    #           },
+    #           logging: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] execute_command_configuration
+    #   Contains the run command configuration for the cluster.
+    #   @return [Types::AwsEcsClusterConfigurationExecuteCommandConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsClusterConfigurationDetails < Struct.new(
+      :execute_command_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the run command configuration for the cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterConfigurationExecuteCommandConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "NonEmptyString",
+    #         log_configuration: {
+    #           cloud_watch_encryption_enabled: false,
+    #           cloud_watch_log_group_name: "NonEmptyString",
+    #           s3_bucket_name: "NonEmptyString",
+    #           s3_encryption_enabled: false,
+    #           s3_key_prefix: "NonEmptyString",
+    #         },
+    #         logging: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the KMS key that is used to encrypt the data
+    #   between the local client and the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_configuration
+    #   The log configuration for the results of the run command actions.
+    #   Required if `Logging` is `NONE`.
+    #   @return [Types::AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails]
+    #
+    # @!attribute [rw] logging
+    #   The log setting to use for redirecting logs for run command results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterConfigurationExecuteCommandConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsClusterConfigurationExecuteCommandConfigurationDetails < Struct.new(
+      :kms_key_id,
+      :log_configuration,
+      :logging)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log configuration for the results of the run command actions.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_encryption_enabled: false,
+    #         cloud_watch_log_group_name: "NonEmptyString",
+    #         s3_bucket_name: "NonEmptyString",
+    #         s3_encryption_enabled: false,
+    #         s3_key_prefix: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_encryption_enabled
+    #   Whether to enable encryption on the CloudWatch logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloud_watch_log_group_name
+    #   The name of the CloudWatch log group to send the logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket to send logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_encryption_enabled
+    #   Whether to encrypt the logs that are sent to the S3 bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   Identifies the folder in the S3 bucket to send the logs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails < Struct.new(
+      :cloud_watch_encryption_enabled,
+      :cloud_watch_log_group_name,
+      :s3_bucket_name,
+      :s3_encryption_enabled,
+      :s3_key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default capacity provider strategy for the cluster. The default
+    # capacity provider strategy is used when services or tasks are run
+    # without a specified launch type or capacity provider strategy.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterDefaultCapacityProviderStrategyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         base: 1,
+    #         capacity_provider: "NonEmptyString",
+    #         weight: 1,
+    #       }
+    #
+    # @!attribute [rw] base
+    #   The minimum number of tasks to run on the specified capacity
+    #   provider.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_provider
+    #   The name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The relative percentage of the total number of tasks launched that
+    #   should use the capacity provider.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterDefaultCapacityProviderStrategyDetails AWS API Documentation
+    #
+    class AwsEcsClusterDefaultCapacityProviderStrategyDetails < Struct.new(
+      :base,
+      :capacity_provider,
+      :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # provides details about an ECS cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterDetails
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_providers: ["NonEmptyString"],
+    #         cluster_settings: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         configuration: {
+    #           execute_command_configuration: {
+    #             kms_key_id: "NonEmptyString",
+    #             log_configuration: {
+    #               cloud_watch_encryption_enabled: false,
+    #               cloud_watch_log_group_name: "NonEmptyString",
+    #               s3_bucket_name: "NonEmptyString",
+    #               s3_encryption_enabled: false,
+    #               s3_key_prefix: "NonEmptyString",
+    #             },
+    #             logging: "NonEmptyString",
+    #           },
+    #         },
+    #         default_capacity_provider_strategy: [
+    #           {
+    #             base: 1,
+    #             capacity_provider: "NonEmptyString",
+    #             weight: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] capacity_providers
+    #   The short name of one or more capacity providers to associate with
+    #   the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_settings
+    #   The setting to use to create the cluster. Specifically used to
+    #   configure whether to enable CloudWatch Container Insights for the
+    #   cluster.
+    #   @return [Array<Types::AwsEcsClusterClusterSettingsDetails>]
+    #
+    # @!attribute [rw] configuration
+    #   The run command configuration for the cluster.
+    #   @return [Types::AwsEcsClusterConfigurationDetails]
+    #
+    # @!attribute [rw] default_capacity_provider_strategy
+    #   The default capacity provider strategy for the cluster. The default
+    #   capacity provider strategy is used when services or tasks are run
+    #   without a specified launch type or capacity provider strategy.
+    #   @return [Array<Types::AwsEcsClusterDefaultCapacityProviderStrategyDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterDetails AWS API Documentation
+    #
+    class AwsEcsClusterDetails < Struct.new(
+      :capacity_providers,
+      :cluster_settings,
+      :configuration,
+      :default_capacity_provider_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dependency that is defined for container startup and shutdown.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails
+    #   data as a hash:
+    #
+    #       {
+    #         condition: "NonEmptyString",
+    #         container_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] condition
+    #   The dependency condition of the dependent container. Indicates the
+    #   required status of the dependent container before the current
+    #   container can start.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_name
+    #   The name of the dependent container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails < Struct.new(
+      :condition,
+      :container_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container definition that describes a container in the task.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         command: ["NonEmptyString"],
+    #         cpu: 1,
+    #         depends_on: [
+    #           {
+    #             condition: "NonEmptyString",
+    #             container_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         disable_networking: false,
+    #         dns_search_domains: ["NonEmptyString"],
+    #         dns_servers: ["NonEmptyString"],
+    #         docker_labels: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         docker_security_options: ["NonEmptyString"],
+    #         entry_point: ["NonEmptyString"],
+    #         environment: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         environment_files: [
+    #           {
+    #             type: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         essential: false,
+    #         extra_hosts: [
+    #           {
+    #             hostname: "NonEmptyString",
+    #             ip_address: "NonEmptyString",
+    #           },
+    #         ],
+    #         firelens_configuration: {
+    #           options: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           type: "NonEmptyString",
+    #         },
+    #         health_check: {
+    #           command: ["NonEmptyString"],
+    #           interval: 1,
+    #           retries: 1,
+    #           start_period: 1,
+    #           timeout: 1,
+    #         },
+    #         hostname: "NonEmptyString",
+    #         image: "NonEmptyString",
+    #         interactive: false,
+    #         links: ["NonEmptyString"],
+    #         linux_parameters: {
+    #           capabilities: {
+    #             add: ["NonEmptyString"],
+    #             drop: ["NonEmptyString"],
+    #           },
+    #           devices: [
+    #             {
+    #               container_path: "NonEmptyString",
+    #               host_path: "NonEmptyString",
+    #               permissions: ["NonEmptyString"],
+    #             },
+    #           ],
+    #           init_process_enabled: false,
+    #           max_swap: 1,
+    #           shared_memory_size: 1,
+    #           swappiness: 1,
+    #           tmpfs: [
+    #             {
+    #               container_path: "NonEmptyString",
+    #               mount_options: ["NonEmptyString"],
+    #               size: 1,
+    #             },
+    #           ],
+    #         },
+    #         log_configuration: {
+    #           log_driver: "NonEmptyString",
+    #           options: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           secret_options: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value_from: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         memory: 1,
+    #         memory_reservation: 1,
+    #         mount_points: [
+    #           {
+    #             container_path: "NonEmptyString",
+    #             read_only: false,
+    #             source_volume: "NonEmptyString",
+    #           },
+    #         ],
+    #         name: "NonEmptyString",
+    #         port_mappings: [
+    #           {
+    #             container_port: 1,
+    #             host_port: 1,
+    #             protocol: "NonEmptyString",
+    #           },
+    #         ],
+    #         privileged: false,
+    #         pseudo_terminal: false,
+    #         readonly_root_filesystem: false,
+    #         repository_credentials: {
+    #           credentials_parameter: "NonEmptyString",
+    #         },
+    #         resource_requirements: [
+    #           {
+    #             type: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         secrets: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value_from: "NonEmptyString",
+    #           },
+    #         ],
+    #         start_timeout: 1,
+    #         stop_timeout: 1,
+    #         system_controls: [
+    #           {
+    #             namespace: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         ulimits: [
+    #           {
+    #             hard_limit: 1,
+    #             name: "NonEmptyString",
+    #             soft_limit: 1,
+    #           },
+    #         ],
+    #         user: "NonEmptyString",
+    #         volumes_from: [
+    #           {
+    #             read_only: false,
+    #             source_container: "NonEmptyString",
+    #           },
+    #         ],
+    #         working_directory: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] command
+    #   The command that is passed to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units reserved for the container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] depends_on
+    #   The dependencies that are defined for container startup and
+    #   shutdown.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails>]
+    #
+    # @!attribute [rw] disable_networking
+    #   Whether to disable networking within the container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_search_domains
+    #   A list of DNS search domains that are presented to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_servers
+    #   A list of DNS servers that are presented to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] docker_labels
+    #   A key-value map of labels to add to the container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] docker_security_options
+    #   A list of strings to provide custom labels for SELinux and AppArmor
+    #   multi-level security systems.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entry_point
+    #   The entry point that is passed to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to pass to a container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails>]
+    #
+    # @!attribute [rw] environment_files
+    #   A list of files containing the environment variables to pass to a
+    #   container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails>]
+    #
+    # @!attribute [rw] essential
+    #   Whether the container is essential. All tasks must have at least one
+    #   essential container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] extra_hosts
+    #   A list of hostnames and IP address mappings to append to the
+    #   **/etc/hosts** file on the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails>]
+    #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container. Specifies and
+    #   configures a log router for container logs.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails]
+    #
+    # @!attribute [rw] health_check
+    #   The container health check command and associated configuration
+    #   parameters for the container.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails]
+    #
+    # @!attribute [rw] hostname
+    #   The hostname to use for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   The image used to start the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] interactive
+    #   If set to true, then containerized applications can be deployed that
+    #   require `stdin` or a `tty` to be allocated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] links
+    #   A list of links for the container in the form ` container_name:alias
+    #   `. Allows containers to communicate with each other without the need
+    #   for port mappings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] linux_parameters
+    #   Linux-specific modifications that are applied to the container, such
+    #   as Linux kernel capabilities.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails]
+    #
+    # @!attribute [rw] log_configuration
+    #   The log configuration specification for the container.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails]
+    #
+    # @!attribute [rw] memory
+    #   The amount (in MiB) of memory to present to the container. If the
+    #   container attempts to exceed the memory specified here, the
+    #   container is shut down. The total amount of memory reserved for all
+    #   containers within a task must be lower than the task memory value,
+    #   if one is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_reservation
+    #   The soft limit (in MiB) of memory to reserve for the container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_points
+    #   The mount points for the data volumes in the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails>]
+    #
+    # @!attribute [rw] name
+    #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_mappings
+    #   The list of port mappings for the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails>]
+    #
+    # @!attribute [rw] privileged
+    #   Whether the container is given elevated privileges on the host
+    #   container instance. The elevated privileges are similar to the root
+    #   user.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pseudo_terminal
+    #   Whether to allocate a TTY to the container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] readonly_root_filesystem
+    #   Whether the container is given read-only access to its root file
+    #   system.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] repository_credentials
+    #   The private repository authentication credentials to use.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails]
+    #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container. The only
+    #   supported resource is a GPU.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails>]
+    #
+    # @!attribute [rw] secrets
+    #   The secrets to pass to the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails>]
+    #
+    # @!attribute [rw] start_timeout
+    #   The number of seconds to wait before giving up on resolving
+    #   dependencies for a container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stop_timeout
+    #   The number of seconds to wait before the container is stopped if it
+    #   doesn't shut down normally on its own.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] system_controls
+    #   A list of namespaced kernel parameters to set in the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails>]
+    #
+    # @!attribute [rw] ulimits
+    #   A list of ulimits to set in the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails>]
+    #
+    # @!attribute [rw] user
+    #   The user to use inside the container.
+    #
+    #   The value can use one of the following formats.
+    #
+    #   * ` user `
+    #
+    #   * ` user `\:` group `
+    #
+    #   * ` uid `
+    #
+    #   * ` uid `\:` gid `
+    #
+    #   * ` user `\:` gid `
+    #
+    #   * ` uid `\:` group `
+    #   @return [String]
+    #
+    # @!attribute [rw] volumes_from
+    #   Data volumes to mount from another container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails>]
+    #
+    # @!attribute [rw] working_directory
+    #   The working directory in which to run commands inside the container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsDetails < Struct.new(
+      :command,
+      :cpu,
+      :depends_on,
+      :disable_networking,
+      :dns_search_domains,
+      :dns_servers,
+      :docker_labels,
+      :docker_security_options,
+      :entry_point,
+      :environment,
+      :environment_files,
+      :essential,
+      :extra_hosts,
+      :firelens_configuration,
+      :health_check,
+      :hostname,
+      :image,
+      :interactive,
+      :links,
+      :linux_parameters,
+      :log_configuration,
+      :memory,
+      :memory_reservation,
+      :mount_points,
+      :name,
+      :port_mappings,
+      :privileged,
+      :pseudo_terminal,
+      :readonly_root_filesystem,
+      :repository_credentials,
+      :resource_requirements,
+      :secrets,
+      :start_timeout,
+      :stop_timeout,
+      :system_controls,
+      :ulimits,
+      :user,
+      :volumes_from,
+      :working_directory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An environment variable to pass to the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the environment variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the environment variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A file that contain environment variables to pass to a container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of environment file.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The ARN of the S3 object that contains the environment variable
+    #   file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A hostname and IP address mapping to append to the **/etc/hosts** file
+    # on the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         hostname: "NonEmptyString",
+    #         ip_address: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] hostname
+    #   The hostname to use in the **/etc/hosts** entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address to use in the **/etc/hosts** entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails < Struct.new(
+      :hostname,
+      :ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FireLens configuration for the container. The configuration
+    # specifies and configures a log router for container logs.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         options: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] options
+    #   The options to use to configure the log router.
+    #
+    #   The valid option keys are as follows:
+    #
+    #   * `enable-ecs-log-metadata`. The value can be `true` or `false`.
+    #
+    #   * `config-file-type`. The value can be `s3` or `file`.
+    #
+    #   * `config-file-value`. The value is either an S3 ARN or a file path.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] type
+    #   The log router to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails < Struct.new(
+      :options,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container health check command and associated configuration
+    # parameters for the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails
+    #   data as a hash:
+    #
+    #       {
+    #         command: ["NonEmptyString"],
+    #         interval: 1,
+    #         retries: 1,
+    #         start_period: 1,
+    #         timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] command
+    #   The command that the container runs to determine whether it is
+    #   healthy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] interval
+    #   The time period in seconds between each health check execution. The
+    #   default value is 30 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retries
+    #   The number of times to retry a failed health check before the
+    #   container is considered unhealthy. The default value is 3.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_period
+    #   The optional grace period in seconds that allows containers time to
+    #   bootstrap before failed health checks count towards the maximum
+    #   number of retries.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The time period in seconds to wait for a health check to succeed
+    #   before it is considered a failure. The default value is 5.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails < Struct.new(
+      :command,
+      :interval,
+      :retries,
+      :start_period,
+      :timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Linux capabilities for the container that are added to or dropped
+    # from the default configuration provided by Docker.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         add: ["NonEmptyString"],
+    #         drop: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] add
+    #   The Linux capabilities for the container that are added to the
+    #   default configuration provided by Docker.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] drop
+    #   The Linux capabilities for the container that are dropped from the
+    #   default configuration provided by Docker.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails < Struct.new(
+      :add,
+      :drop)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # &gt;Linux-specific modifications that are applied to the container,
+    # such as Linux kernel capabilities.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails
+    #   data as a hash:
+    #
+    #       {
+    #         capabilities: {
+    #           add: ["NonEmptyString"],
+    #           drop: ["NonEmptyString"],
+    #         },
+    #         devices: [
+    #           {
+    #             container_path: "NonEmptyString",
+    #             host_path: "NonEmptyString",
+    #             permissions: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         init_process_enabled: false,
+    #         max_swap: 1,
+    #         shared_memory_size: 1,
+    #         swappiness: 1,
+    #         tmpfs: [
+    #           {
+    #             container_path: "NonEmptyString",
+    #             mount_options: ["NonEmptyString"],
+    #             size: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] capabilities
+    #   The Linux capabilities for the container that are added to or
+    #   dropped from the default configuration provided by Docker.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails]
+    #
+    # @!attribute [rw] devices
+    #   The host devices to expose to the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails>]
+    #
+    # @!attribute [rw] init_process_enabled
+    #   Whether to run an `init` process inside the container that forwards
+    #   signals and reaps processes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_swap
+    #   The total amount of swap memory (in MiB) that a container can use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shared_memory_size
+    #   The value for the size (in MiB) of the **/dev/shm** volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] swappiness
+    #   Configures the container's memory swappiness behavior. Determines
+    #   how aggressively pages are swapped. The higher the value, the more
+    #   aggressive the swappiness. The default is 60.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tmpfs
+    #   The container path, mount options, and size (in MiB) of the tmpfs
+    #   mount.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails < Struct.new(
+      :capabilities,
+      :devices,
+      :init_process_enabled,
+      :max_swap,
+      :shared_memory_size,
+      :swappiness,
+      :tmpfs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A host device to expose to the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "NonEmptyString",
+    #         host_path: "NonEmptyString",
+    #         permissions: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The path inside the container at which to expose the host device.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_path
+    #   The path for the device on the host container instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The explicit permissions to provide to the container for the device.
+    #   By default, the container has permissions for read, write, and
+    #   `mknod` for the device.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails < Struct.new(
+      :container_path,
+      :host_path,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container path, mount options, and size (in MiB) of a tmpfs mount.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "NonEmptyString",
+    #         mount_options: ["NonEmptyString"],
+    #         size: 1,
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The absolute file path where the tmpfs volume is to be mounted.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_options
+    #   The list of tmpfs volume mount options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] size
+    #   The maximum size (in MiB) of the tmpfs volume.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails < Struct.new(
+      :container_path,
+      :mount_options,
+      :size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log configuration specification for the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         log_driver: "NonEmptyString",
+    #         options: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         secret_options: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value_from: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] log_driver
+    #   The log driver to use for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The configuration options to send to the log driver. Requires
+    #   version 1.19 of the Docker Remote API or greater on your container
+    #   instance.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] secret_options
+    #   The secrets to pass to the log configuration.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails < Struct.new(
+      :log_driver,
+      :options,
+      :secret_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A secret to pass to the log configuration.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value_from: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_from
+    #   The secret to expose to the container.
+    #
+    #   The value is either the full ARN of the Secrets Manager secret or
+    #   the full ARN of the parameter in the Systems Manager Parameter
+    #   Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails < Struct.new(
+      :name,
+      :value_from)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A mount point for the data volumes in the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "NonEmptyString",
+    #         read_only: false,
+    #         source_volume: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The path on the container to mount the host volume at.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Whether the container has read-only access to the volume.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_volume
+    #   The name of the volume to mount. Must match the name of a volume
+    #   listed in `VolumeDetails` for the task definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails < Struct.new(
+      :container_path,
+      :read_only,
+      :source_volume)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A port mapping for the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_port: 1,
+    #         host_port: 1,
+    #         protocol: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_port
+    #   The port number on the container that is bound to the user-specified
+    #   or automatically assigned host port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] host_port
+    #   The port number on the container instance to reserve for the
+    #   container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used for the port mapping. The default is `tcp`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails < Struct.new(
+      :container_port,
+      :host_port,
+      :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The private repository authentication credentials to use.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         credentials_parameter: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] credentials_parameter
+    #   The ARN of the secret that contains the private repository
+    #   credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails < Struct.new(
+      :credentials_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource to assign to a container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of resource to assign to a container.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the specified resource type.
+    #
+    #   For `GPU`, the value is the number of physical GPUs the Amazon ECS
+    #   container agent reserves for the container.
+    #
+    #   For `InferenceAccelerator`, the value should match the `DeviceName`
+    #   attribute of an entry in `InferenceAccelerators`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A secret to pass to the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value_from: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_from
+    #   The secret to expose to the container. The value is either the full
+    #   ARN of the Secrets Manager secret or the full ARN of the parameter
+    #   in the Systems Manager Parameter Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails < Struct.new(
+      :name,
+      :value_from)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A namespaced kernel parameter to set in the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespaced kernel parameter for which to set a value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails < Struct.new(
+      :namespace,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A ulimit to set in the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         hard_limit: 1,
+    #         name: "NonEmptyString",
+    #         soft_limit: 1,
+    #       }
+    #
+    # @!attribute [rw] hard_limit
+    #   The hard limit for the ulimit type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The type of the ulimit.
+    #   @return [String]
+    #
+    # @!attribute [rw] soft_limit
+    #   The soft limit for the ulimit type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails < Struct.new(
+      :hard_limit,
+      :name,
+      :soft_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data volume to mount from another container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails
+    #   data as a hash:
+    #
+    #       {
+    #         read_only: false,
+    #         source_container: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] read_only
+    #   Whether the container has read-only access to the volume.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_container
+    #   The name of another container within the same task definition from
+    #   which to mount volumes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails < Struct.new(
+      :read_only,
+      :source_container)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # details about a task definition. A task definition describes the
+    # container and volume definitions of an Amazon Elastic Container
+    # Service task.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_definitions: [
+    #           {
+    #             command: ["NonEmptyString"],
+    #             cpu: 1,
+    #             depends_on: [
+    #               {
+    #                 condition: "NonEmptyString",
+    #                 container_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             disable_networking: false,
+    #             dns_search_domains: ["NonEmptyString"],
+    #             dns_servers: ["NonEmptyString"],
+    #             docker_labels: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             docker_security_options: ["NonEmptyString"],
+    #             entry_point: ["NonEmptyString"],
+    #             environment: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             environment_files: [
+    #               {
+    #                 type: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             essential: false,
+    #             extra_hosts: [
+    #               {
+    #                 hostname: "NonEmptyString",
+    #                 ip_address: "NonEmptyString",
+    #               },
+    #             ],
+    #             firelens_configuration: {
+    #               options: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               type: "NonEmptyString",
+    #             },
+    #             health_check: {
+    #               command: ["NonEmptyString"],
+    #               interval: 1,
+    #               retries: 1,
+    #               start_period: 1,
+    #               timeout: 1,
+    #             },
+    #             hostname: "NonEmptyString",
+    #             image: "NonEmptyString",
+    #             interactive: false,
+    #             links: ["NonEmptyString"],
+    #             linux_parameters: {
+    #               capabilities: {
+    #                 add: ["NonEmptyString"],
+    #                 drop: ["NonEmptyString"],
+    #               },
+    #               devices: [
+    #                 {
+    #                   container_path: "NonEmptyString",
+    #                   host_path: "NonEmptyString",
+    #                   permissions: ["NonEmptyString"],
+    #                 },
+    #               ],
+    #               init_process_enabled: false,
+    #               max_swap: 1,
+    #               shared_memory_size: 1,
+    #               swappiness: 1,
+    #               tmpfs: [
+    #                 {
+    #                   container_path: "NonEmptyString",
+    #                   mount_options: ["NonEmptyString"],
+    #                   size: 1,
+    #                 },
+    #               ],
+    #             },
+    #             log_configuration: {
+    #               log_driver: "NonEmptyString",
+    #               options: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               secret_options: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value_from: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #             memory: 1,
+    #             memory_reservation: 1,
+    #             mount_points: [
+    #               {
+    #                 container_path: "NonEmptyString",
+    #                 read_only: false,
+    #                 source_volume: "NonEmptyString",
+    #               },
+    #             ],
+    #             name: "NonEmptyString",
+    #             port_mappings: [
+    #               {
+    #                 container_port: 1,
+    #                 host_port: 1,
+    #                 protocol: "NonEmptyString",
+    #               },
+    #             ],
+    #             privileged: false,
+    #             pseudo_terminal: false,
+    #             readonly_root_filesystem: false,
+    #             repository_credentials: {
+    #               credentials_parameter: "NonEmptyString",
+    #             },
+    #             resource_requirements: [
+    #               {
+    #                 type: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             secrets: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value_from: "NonEmptyString",
+    #               },
+    #             ],
+    #             start_timeout: 1,
+    #             stop_timeout: 1,
+    #             system_controls: [
+    #               {
+    #                 namespace: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             ulimits: [
+    #               {
+    #                 hard_limit: 1,
+    #                 name: "NonEmptyString",
+    #                 soft_limit: 1,
+    #               },
+    #             ],
+    #             user: "NonEmptyString",
+    #             volumes_from: [
+    #               {
+    #                 read_only: false,
+    #                 source_container: "NonEmptyString",
+    #               },
+    #             ],
+    #             working_directory: "NonEmptyString",
+    #           },
+    #         ],
+    #         cpu: "NonEmptyString",
+    #         execution_role_arn: "NonEmptyString",
+    #         family: "NonEmptyString",
+    #         inference_accelerators: [
+    #           {
+    #             device_name: "NonEmptyString",
+    #             device_type: "NonEmptyString",
+    #           },
+    #         ],
+    #         ipc_mode: "NonEmptyString",
+    #         memory: "NonEmptyString",
+    #         network_mode: "NonEmptyString",
+    #         pid_mode: "NonEmptyString",
+    #         placement_constraints: [
+    #           {
+    #             expression: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #           },
+    #         ],
+    #         proxy_configuration: {
+    #           container_name: "NonEmptyString",
+    #           proxy_configuration_properties: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           type: "NonEmptyString",
+    #         },
+    #         requires_compatibilities: ["NonEmptyString"],
+    #         task_role_arn: "NonEmptyString",
+    #         volumes: [
+    #           {
+    #             docker_volume_configuration: {
+    #               autoprovision: false,
+    #               driver: "NonEmptyString",
+    #               driver_opts: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               labels: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               scope: "NonEmptyString",
+    #             },
+    #             efs_volume_configuration: {
+    #               authorization_config: {
+    #                 access_point_id: "NonEmptyString",
+    #                 iam: "NonEmptyString",
+    #               },
+    #               filesystem_id: "NonEmptyString",
+    #               root_directory: "NonEmptyString",
+    #               transit_encryption: "NonEmptyString",
+    #               transit_encryption_port: 1,
+    #             },
+    #             host: {
+    #               source_path: "NonEmptyString",
+    #             },
+    #             name: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] container_definitions
+    #   The container definitions that describe the containers that make up
+    #   the task.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsDetails>]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units used by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the task execution role that grants the container agent
+    #   permission to make API calls on behalf of the container user.
+    #   @return [String]
+    #
+    # @!attribute [rw] family
+    #   The name of a family that this task definition is registered to.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerators to use for the containers in the
+    #   task.
+    #   @return [Array<Types::AwsEcsTaskDefinitionInferenceAcceleratorsDetails>]
+    #
+    # @!attribute [rw] ipc_mode
+    #   The IPC resource namespace to use for the containers in the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   The amount (in MiB) of memory used by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_mode
+    #   The Docker networking mode to use for the containers in the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] pid_mode
+    #   The process namespace to use for the containers in the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] placement_constraints
+    #   The placement constraint objects to use for tasks.
+    #   @return [Array<Types::AwsEcsTaskDefinitionPlacementConstraintsDetails>]
+    #
+    # @!attribute [rw] proxy_configuration
+    #   The configuration details for the App Mesh proxy.
+    #   @return [Types::AwsEcsTaskDefinitionProxyConfigurationDetails]
+    #
+    # @!attribute [rw] requires_compatibilities
+    #   The task launch types that the task definition was validated
+    #   against.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] task_role_arn
+    #   The short name or ARN of the IAM role that grants containers in the
+    #   task permission to call AWS API operations on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] volumes
+    #   The data volume definitions for the task.
+    #   @return [Array<Types::AwsEcsTaskDefinitionVolumesDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionDetails < Struct.new(
+      :container_definitions,
+      :cpu,
+      :execution_role_arn,
+      :family,
+      :inference_accelerators,
+      :ipc_mode,
+      :memory,
+      :network_mode,
+      :pid_mode,
+      :placement_constraints,
+      :proxy_configuration,
+      :requires_compatibilities,
+      :task_role_arn,
+      :volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Elastic Inference accelerator to use for the containers in the
+    # task.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionInferenceAcceleratorsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "NonEmptyString",
+    #         device_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The Elastic Inference accelerator device name.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type
+    #   The Elastic Inference accelerator type to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionInferenceAcceleratorsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionInferenceAcceleratorsDetails < Struct.new(
+      :device_name,
+      :device_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A placement constraint object to use for tasks.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionPlacementConstraintsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         expression: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] expression
+    #   A cluster query language expression to apply to the constraint.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of constraint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionPlacementConstraintsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionPlacementConstraintsDetails < Struct.new(
+      :expression,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details for the App Mesh proxy.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionProxyConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "NonEmptyString",
+    #         proxy_configuration_properties: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that will serve as the App Mesh proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_configuration_properties
+    #   The set of network configuration parameters to provide to the
+    #   Container Network Interface (CNI) plugin, specified as key-value
+    #   pairs.
+    #   @return [Array<Types::AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails>]
+    #
+    # @!attribute [rw] type
+    #   The proxy type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionProxyConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionProxyConfigurationDetails < Struct.new(
+      :container_name,
+      :proxy_configuration_properties,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A network configuration parameter to provide to the Container Network
+    # Interface (CNI) plugin.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the property.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data volume to mount from another container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         docker_volume_configuration: {
+    #           autoprovision: false,
+    #           driver: "NonEmptyString",
+    #           driver_opts: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           labels: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           scope: "NonEmptyString",
+    #         },
+    #         efs_volume_configuration: {
+    #           authorization_config: {
+    #             access_point_id: "NonEmptyString",
+    #             iam: "NonEmptyString",
+    #           },
+    #           filesystem_id: "NonEmptyString",
+    #           root_directory: "NonEmptyString",
+    #           transit_encryption: "NonEmptyString",
+    #           transit_encryption_port: 1,
+    #         },
+    #         host: {
+    #           source_path: "NonEmptyString",
+    #         },
+    #         name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] docker_volume_configuration
+    #   Information about a Docker volume.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails]
+    #
+    # @!attribute [rw] efs_volume_configuration
+    #   Information about the Amazon Elastic File System file system that is
+    #   used for task storage.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails]
+    #
+    # @!attribute [rw] host
+    #   Information about a bind mount host volume.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesHostDetails]
+    #
+    # @!attribute [rw] name
+    #   The name of the data volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesDetails < Struct.new(
+      :docker_volume_configuration,
+      :efs_volume_configuration,
+      :host,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a Docker volume.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         autoprovision: false,
+    #         driver: "NonEmptyString",
+    #         driver_opts: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         labels: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         scope: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] autoprovision
+    #   Whether to create the Docker volume automatically if it does not
+    #   already exist.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] driver
+    #   The Docker volume driver to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] driver_opts
+    #   A map of Docker driver-specific options that are passed through.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] labels
+    #   Custom metadata to add to the Docker volume.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] scope
+    #   The scope for the Docker volume that determines its lifecycle.
+    #   Docker volumes that are scoped to a task are provisioned
+    #   automatically when the task starts and destroyed when the task
+    #   stops. Docker volumes that are shared persist after the task stops.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails < Struct.new(
+      :autoprovision,
+      :driver,
+      :driver_opts,
+      :labels,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails
+    #   data as a hash:
+    #
+    #       {
+    #         access_point_id: "NonEmptyString",
+    #         iam: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] access_point_id
+    #   The Amazon EFS access point identifier to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam
+    #   Whether to use the Amazon ECS task IAM role defined in a task
+    #   definition when mounting the Amazon EFS file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails < Struct.new(
+      :access_point_id,
+      :iam)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Amazon Elastic File System file system that is
+    # used for task storage.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         authorization_config: {
+    #           access_point_id: "NonEmptyString",
+    #           iam: "NonEmptyString",
+    #         },
+    #         filesystem_id: "NonEmptyString",
+    #         root_directory: "NonEmptyString",
+    #         transit_encryption: "NonEmptyString",
+    #         transit_encryption_port: 1,
+    #       }
+    #
+    # @!attribute [rw] authorization_config
+    #   The authorization configuration details for the Amazon EFS file
+    #   system.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails]
+    #
+    # @!attribute [rw] filesystem_id
+    #   The Amazon EFS file system identifier to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_directory
+    #   The directory within the Amazon EFS file system to mount as the root
+    #   directory inside the host.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption
+    #   Whether to enable encryption for Amazon EFS data in transit between
+    #   the Amazon ECS host and the Amazon EFS server.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption_port
+    #   The port to use when sending encrypted data between the Amazon ECS
+    #   host and the Amazon EFS server.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails < Struct.new(
+      :authorization_config,
+      :filesystem_id,
+      :root_directory,
+      :transit_encryption,
+      :transit_encryption_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a bind mount host volume.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesHostDetails
+    #   data as a hash:
+    #
+    #       {
+    #         source_path: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] source_path
+    #   The path on the host container instance that is presented to the
+    #   container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesHostDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesHostDetails < Struct.new(
+      :source_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an Elastic Beanstalk environment.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentDetails
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "NonEmptyString",
+    #         cname: "NonEmptyString",
+    #         date_created: "NonEmptyString",
+    #         date_updated: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         endpoint_url: "NonEmptyString",
+    #         environment_arn: "NonEmptyString",
+    #         environment_id: "NonEmptyString",
+    #         environment_links: [
+    #           {
+    #             environment_name: "NonEmptyString",
+    #             link_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         environment_name: "NonEmptyString",
+    #         option_settings: [
+    #           {
+    #             namespace: "NonEmptyString",
+    #             option_name: "NonEmptyString",
+    #             resource_name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         platform_arn: "NonEmptyString",
+    #         solution_stack_name: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         tier: {
+    #           name: "NonEmptyString",
+    #           type: "NonEmptyString",
+    #           version: "NonEmptyString",
+    #         },
+    #         version_label: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application that is associated with the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cname
+    #   The URL to the CNAME for this environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The creation date for this environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_updated
+    #   The date when this environment was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   For load-balanced, autoscaling environments, the URL to the load
+    #   balancer. For single-instance environments, the IP address of the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_arn
+    #   The ARN of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The identifier of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_links
+    #   Links to other environments in the same group.
+    #   @return [Array<Types::AwsElasticBeanstalkEnvironmentEnvironmentLink>]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] option_settings
+    #   The configuration setting for the environment.
+    #   @return [Array<Types::AwsElasticBeanstalkEnvironmentOptionSetting>]
+    #
+    # @!attribute [rw] platform_arn
+    #   The ARN of the platform version for the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] solution_stack_name
+    #   The name of the solution stack that is deployed with the
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current operational status of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier
+    #   The tier of the environment.
+    #   @return [Types::AwsElasticBeanstalkEnvironmentTier]
+    #
+    # @!attribute [rw] version_label
+    #   The application version of the environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentDetails AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentDetails < Struct.new(
+      :application_name,
+      :cname,
+      :date_created,
+      :date_updated,
+      :description,
+      :endpoint_url,
+      :environment_arn,
+      :environment_id,
+      :environment_links,
+      :environment_name,
+      :option_settings,
+      :platform_arn,
+      :solution_stack_name,
+      :status,
+      :tier,
+      :version_label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a link to another environment that is in
+    # the same group.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentEnvironmentLink
+    #   data as a hash:
+    #
+    #       {
+    #         environment_name: "NonEmptyString",
+    #         link_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the linked environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_name
+    #   The name of the environment link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentEnvironmentLink AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentEnvironmentLink < Struct.new(
+      :environment_name,
+      :link_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration option setting for the environment.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentOptionSetting
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "NonEmptyString",
+    #         option_name: "NonEmptyString",
+    #         resource_name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The type of resource that the configuration option is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] option_name
+    #   The name of the option.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the configuration setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentOptionSetting AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentOptionSetting < Struct.new(
+      :namespace,
+      :option_name,
+      :resource_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the tier of the environment.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentTier
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #         version: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the environment tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of environment tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the environment tier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentTier AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentTier < Struct.new(
+      :name,
+      :type,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Elasticsearch domain.
     #
     # @note When making an API call, you may pass AwsElasticsearchDomainDetails
@@ -4047,8 +7134,27 @@ module Aws::SecurityHub
     #           enabled: false,
     #           kms_key_id: "NonEmptyString",
     #         },
+    #         log_publishing_options: {
+    #           index_slow_logs: {
+    #             cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #             enabled: false,
+    #           },
+    #           search_slow_logs: {
+    #             cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #             enabled: false,
+    #           },
+    #         },
     #         node_to_node_encryption_options: {
     #           enabled: false,
+    #         },
+    #         service_software_options: {
+    #           automated_update_date: "NonEmptyString",
+    #           cancellable: false,
+    #           current_version: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           new_version: "NonEmptyString",
+    #           update_available: false,
+    #           update_status: "NonEmptyString",
     #         },
     #         vpc_options: {
     #           availability_zones: ["NonEmptyString"],
@@ -4103,9 +7209,19 @@ module Aws::SecurityHub
     #   Details about the configuration for encryption at rest.
     #   @return [Types::AwsElasticsearchDomainEncryptionAtRestOptions]
     #
+    # @!attribute [rw] log_publishing_options
+    #   Configures the CloudWatch Logs to publish for the Elasticsearch
+    #   domain.
+    #   @return [Types::AwsElasticsearchDomainLogPublishingOptions]
+    #
     # @!attribute [rw] node_to_node_encryption_options
     #   Details about the configuration for node-to-node encryption.
     #   @return [Types::AwsElasticsearchDomainNodeToNodeEncryptionOptions]
+    #
+    # @!attribute [rw] service_software_options
+    #   Information about the status of a domain relative to the latest
+    #   service software.
+    #   @return [Types::AwsElasticsearchDomainServiceSoftwareOptions]
     #
     # @!attribute [rw] vpc_options
     #   Information that Amazon ES derives based on `VPCOptions` for the
@@ -4123,7 +7239,9 @@ module Aws::SecurityHub
       :endpoints,
       :elasticsearch_version,
       :encryption_at_rest_options,
+      :log_publishing_options,
       :node_to_node_encryption_options,
+      :service_software_options,
       :vpc_options)
       SENSITIVE = []
       include Aws::Structure
@@ -4191,6 +7309,67 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # configures the CloudWatch Logs to publish for the Elasticsearch
+    # domain.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainLogPublishingOptions
+    #   data as a hash:
+    #
+    #       {
+    #         index_slow_logs: {
+    #           cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #           enabled: false,
+    #         },
+    #         search_slow_logs: {
+    #           cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_slow_logs
+    #   Configures the Elasticsearch index logs publishing.
+    #   @return [Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig]
+    #
+    # @!attribute [rw] search_slow_logs
+    #   Configures the Elasticsearch search slow log publishing.
+    #   @return [Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainLogPublishingOptions AWS API Documentation
+    #
+    class AwsElasticsearchDomainLogPublishingOptions < Struct.new(
+      :index_slow_logs,
+      :search_slow_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log configuration.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainLogPublishingOptionsLogConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The ARN of the CloudWatch Logs group to publish the logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the log publishing is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainLogPublishingOptionsLogConfig AWS API Documentation
+    #
+    class AwsElasticsearchDomainLogPublishingOptionsLogConfig < Struct.new(
+      :cloud_watch_logs_log_group_arn,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the configuration for node-to-node encryption.
     #
     # @note When making an API call, you may pass AwsElasticsearchDomainNodeToNodeEncryptionOptions
@@ -4208,6 +7387,67 @@ module Aws::SecurityHub
     #
     class AwsElasticsearchDomainNodeToNodeEncryptionOptions < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the state of the domain relative to the latest
+    # service software.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainServiceSoftwareOptions
+    #   data as a hash:
+    #
+    #       {
+    #         automated_update_date: "NonEmptyString",
+    #         cancellable: false,
+    #         current_version: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         new_version: "NonEmptyString",
+    #         update_available: false,
+    #         update_status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] automated_update_date
+    #   The epoch time when the deployment window closes for required
+    #   updates. After this time, Amazon Elasticsearch Service schedules the
+    #   software upgrade automatically.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancellable
+    #   Whether a request to update the domain can be canceled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] current_version
+    #   The version of the service software that is currently installed on
+    #   the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A more detailed description of the service software status.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_version
+    #   The most recent version of the service software.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_available
+    #   Whether a service software update is available for the domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] update_status
+    #   The status of the service software update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainServiceSoftwareOptions AWS API Documentation
+    #
+    class AwsElasticsearchDomainServiceSoftwareOptions < Struct.new(
+      :automated_update_date,
+      :cancellable,
+      :current_version,
+      :description,
+      :new_version,
+      :update_available,
+      :update_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6061,8 +9301,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
-    #   topic.
+    #   The ARN of an Amazon SQS queue or Amazon SNS topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionDeadLetterConfig AWS API Documentation
@@ -6176,7 +9415,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] memory_size
-    #   The memory that's allocated to the function.
+    #   The memory that is allocated to the function.
     #   @return [Integer]
     #
     # @!attribute [rw] revision_id
@@ -6265,7 +9504,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Error messages for environment variables that couldn't be applied.
+    # Error messages for environment variables that could not be applied.
     #
     # @note When making an API call, you may pass AwsLambdaFunctionEnvironmentError
     #   data as a hash:
@@ -6303,7 +9542,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the function layer.
+    #   The ARN of the function layer.
     #   @return [String]
     #
     # @!attribute [rw] code_size
@@ -6341,7 +9580,7 @@ module Aws::SecurityHub
     end
 
     # The VPC security groups and subnets that are attached to a Lambda
-    # function. For more information, see VPC Settings.
+    # function.
     #
     # @note When making an API call, you may pass AwsLambdaFunctionVpcConfig
     #   data as a hash:
@@ -6861,6 +10100,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] engine
+    #   The name of the database engine that you want to use for this DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -7015,8 +10256,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that is associated
-    #   with the DB instance.
+    #   The ARN of the IAM role that is associated with the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] feature_name
@@ -7644,6 +10884,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An option group membership.
+    #
     # @note When making an API call, you may pass AwsRdsDbOptionGroupMembership
     #   data as a hash:
     #
@@ -7653,9 +10895,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] option_group_name
+    #   The name of the option group.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the option group membership.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbOptionGroupMembership AWS API Documentation
@@ -7667,6 +10911,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about a parameter group for a DB instance.
+    #
     # @note When making an API call, you may pass AwsRdsDbParameterGroup
     #   data as a hash:
     #
@@ -7676,9 +10922,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] db_parameter_group_name
+    #   The name of the parameter group.
     #   @return [String]
     #
     # @!attribute [rw] parameter_apply_status
+    #   The status of parameter updates.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbParameterGroup AWS API Documentation
@@ -7690,6 +10938,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Changes to a DB instance that are currently pending.
+    #
     # @note When making an API call, you may pass AwsRdsDbPendingModifiedValues
     #   data as a hash:
     #
@@ -7720,48 +10970,64 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] db_instance_class
+    #   The new DB instance class for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
+    #   The new value of the allocated storage for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
+    #   The new master user password for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] port
+    #   The new port for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] backup_retention_period
+    #   The new backup retention period for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
+    #   Indicates that a single Availability Zone DB instance is changing to
+    #   a multiple Availability Zone deployment.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
+    #   The new engine version for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] license_model
+    #   The new license model value for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] iops
+    #   The new provisioned IOPS value for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_identifier
+    #   The new DB instance identifier for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
+    #   The new storage type for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
+    #   The new CA certificate identifier for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
+    #   The name of the new subnet group for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] pending_cloud_watch_logs_exports
+    #   A list of log types that are being enabled or disabled.
     #   @return [Types::AwsRdsPendingCloudWatchLogsExports]
     #
     # @!attribute [rw] processor_features
+    #   Processor features that are being updated.
     #   @return [Array<Types::AwsRdsDbProcessorFeature>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbPendingModifiedValues AWS API Documentation
@@ -7786,6 +11052,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A processor feature.
+    #
     # @note When making an API call, you may pass AwsRdsDbProcessorFeature
     #   data as a hash:
     #
@@ -7795,9 +11063,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the processor feature.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The value of the processor feature.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbProcessorFeature AWS API Documentation
@@ -7809,6 +11079,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Amazon RDS DB cluster snapshot.
+    #
     # @note When making an API call, you may pass AwsRdsDbSnapshotDetails
     #   data as a hash:
     #
@@ -7848,84 +11120,120 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] db_snapshot_identifier
+    #   The name or ARN of the DB snapshot that is used to restore the DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
+    #   A name for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_create_time
+    #   When the snapshot was taken in Coordinated Universal Time (UTC).
     #   @return [String]
     #
     # @!attribute [rw] engine
+    #   The name of the database engine to use for this DB instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gigabytes) to be initially allocated for
+    #   the database instance.
     #   @return [Integer]
     #
     # @!attribute [rw] status
+    #   The status of this DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] port
+    #   The port that the database engine was listening on at the time of
+    #   the snapshot.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
+    #   Specifies the name of the Availability Zone in which the DB instance
+    #   was located at the time of the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
+    #   The VPC ID associated with the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] instance_create_time
+    #   Specifies the time in Coordinated Universal Time (UTC) when the DB
+    #   instance, from which the snapshot was taken, was created.
     #   @return [String]
     #
     # @!attribute [rw] master_username
+    #   The master user name for the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
+    #   The version of the database engine.
     #   @return [String]
     #
     # @!attribute [rw] license_model
+    #   License model information for the restored DB instance.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_type
+    #   The type of the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] iops
+    #   The provisioned IOPS (I/O operations per second) value of the DB
+    #   instance at the time of the snapshot.
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
+    #   The option group name for the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] percent_progress
+    #   The percentage of the estimated data that has been transferred.
     #   @return [Integer]
     #
     # @!attribute [rw] source_region
+    #   The AWS Region that the DB snapshot was created in or copied from.
     #   @return [String]
     #
     # @!attribute [rw] source_db_snapshot_identifier
+    #   The DB snapshot ARN that the DB snapshot was copied from.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
+    #   The storage type associated with the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
+    #   The ARN from the key store with which to associate the instance for
+    #   TDE encryption.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
+    #   Whether the DB snapshot is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
+    #   If `Encrypted` is `true`, the AWS KMS key identifier for the
+    #   encrypted DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] timezone
+    #   The time zone of the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
+    #   Whether mapping of IAM accounts to database accounts is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
     #   @return [Array<Types::AwsRdsDbProcessorFeature>]
     #
     # @!attribute [rw] dbi_resource_id
+    #   The identifier for the source DB instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSnapshotDetails AWS API Documentation
@@ -9167,6 +12475,528 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # provides information about the Amazon S3 Public Access Block
+    # configuration for accounts.
+    #
+    # @note When making an API call, you may pass AwsS3AccountPublicAccessBlockDetails
+    #   data as a hash:
+    #
+    #       {
+    #         block_public_acls: false,
+    #         block_public_policy: false,
+    #         ignore_public_acls: false,
+    #         restrict_public_buckets: false,
+    #       }
+    #
+    # @!attribute [rw] block_public_acls
+    #   Indicates whether to reject calls to update an S3 bucket if the
+    #   calls include a public access control list (ACL).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] block_public_policy
+    #   Indicates whether to reject calls to update the access policy for an
+    #   S3 bucket or access point if the policy allows public access.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ignore_public_acls
+    #   Indicates whether Amazon S3 ignores public ACLs that are associated
+    #   with an S3 bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrict_public_buckets
+    #   Indicates whether to restrict access to an access point or S3 bucket
+    #   that has a public policy to only AWS service principals and
+    #   authorized users within the S3 bucket owner's account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccountPublicAccessBlockDetails AWS API Documentation
+    #
+    class AwsS3AccountPublicAccessBlockDetails < Struct.new(
+      :block_public_acls,
+      :block_public_policy,
+      :ignore_public_acls,
+      :restrict_public_buckets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The lifecycle configuration for the objects in the S3 bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [
+    #           {
+    #             abort_incomplete_multipart_upload: {
+    #               days_after_initiation: 1,
+    #             },
+    #             expiration_date: "NonEmptyString",
+    #             expiration_in_days: 1,
+    #             expired_object_delete_marker: false,
+    #             filter: {
+    #               predicate: {
+    #                 operands: [
+    #                   {
+    #                     prefix: "NonEmptyString",
+    #                     tag: {
+    #                       key: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 prefix: "NonEmptyString",
+    #                 tag: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #               },
+    #             },
+    #             id: "NonEmptyString",
+    #             noncurrent_version_expiration_in_days: 1,
+    #             noncurrent_version_transitions: [
+    #               {
+    #                 days: 1,
+    #                 storage_class: "NonEmptyString",
+    #               },
+    #             ],
+    #             prefix: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             transitions: [
+    #               {
+    #                 date: "NonEmptyString",
+    #                 days: 1,
+    #                 storage_class: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   The lifecycle rules.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationDetails < Struct.new(
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about what Amazon S3 does when a multipart upload is
+    # incomplete.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails
+    #   data as a hash:
+    #
+    #       {
+    #         days_after_initiation: 1,
+    #       }
+    #
+    # @!attribute [rw] days_after_initiation
+    #   The number of days after which Amazon S3 cancels an incomplete
+    #   multipart upload.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails < Struct.new(
+      :days_after_initiation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a lifecycle rule.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         abort_incomplete_multipart_upload: {
+    #           days_after_initiation: 1,
+    #         },
+    #         expiration_date: "NonEmptyString",
+    #         expiration_in_days: 1,
+    #         expired_object_delete_marker: false,
+    #         filter: {
+    #           predicate: {
+    #             operands: [
+    #               {
+    #                 prefix: "NonEmptyString",
+    #                 tag: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #               },
+    #             ],
+    #             prefix: "NonEmptyString",
+    #             tag: {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #             type: "NonEmptyString",
+    #           },
+    #         },
+    #         id: "NonEmptyString",
+    #         noncurrent_version_expiration_in_days: 1,
+    #         noncurrent_version_transitions: [
+    #           {
+    #             days: 1,
+    #             storage_class: "NonEmptyString",
+    #           },
+    #         ],
+    #         prefix: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         transitions: [
+    #           {
+    #             date: "NonEmptyString",
+    #             days: 1,
+    #             storage_class: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] abort_incomplete_multipart_upload
+    #   How Amazon S3 responds when a multipart upload is incomplete.
+    #   Specifically, provides a number of days before Amazon S3 cancels the
+    #   entire upload.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails]
+    #
+    # @!attribute [rw] expiration_date
+    #   The date when objects are moved or deleted.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_in_days
+    #   The length in days of the lifetime for objects that are subject to
+    #   the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expired_object_delete_marker
+    #   Whether Amazon S3 removes a delete marker that has no noncurrent
+    #   versions. If set to `true`, the delete marker is expired. If set to
+    #   `false`, the policy takes no action.
+    #
+    #   If you provide `ExpiredObjectDeleteMarker`, you cannot provide
+    #   `ExpirationInDays` or `ExpirationDate`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filter
+    #   Identifies the objects that a rule applies to.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] noncurrent_version_expiration_in_days
+    #   The number of days that an object is noncurrent before Amazon S3 can
+    #   perform the associated action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] noncurrent_version_transitions
+    #   Transition rules that describe when noncurrent objects transition to
+    #   a specified storage class.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails>]
+    #
+    # @!attribute [rw] prefix
+    #   A prefix that identifies one or more objects that the rule applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rule. Indicates whether the rule is
+    #   currently being applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] transitions
+    #   Transition rules that indicate when objects transition to a
+    #   specified storage class.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesDetails < Struct.new(
+      :abort_incomplete_multipart_upload,
+      :expiration_date,
+      :expiration_in_days,
+      :expired_object_delete_marker,
+      :filter,
+      :id,
+      :noncurrent_version_expiration_in_days,
+      :noncurrent_version_transitions,
+      :prefix,
+      :status,
+      :transitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the objects that a rule applies to.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails
+    #   data as a hash:
+    #
+    #       {
+    #         predicate: {
+    #           operands: [
+    #             {
+    #               prefix: "NonEmptyString",
+    #               tag: {
+    #                 key: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #               type: "NonEmptyString",
+    #             },
+    #           ],
+    #           prefix: "NonEmptyString",
+    #           tag: {
+    #             key: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #           type: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] predicate
+    #   The configuration for the filter.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails < Struct.new(
+      :predicate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the filter.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails
+    #   data as a hash:
+    #
+    #       {
+    #         operands: [
+    #           {
+    #             prefix: "NonEmptyString",
+    #             tag: {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #             type: "NonEmptyString",
+    #           },
+    #         ],
+    #         prefix: "NonEmptyString",
+    #         tag: {
+    #           key: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #         },
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] operands
+    #   The values to use for the filter.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails>]
+    #
+    # @!attribute [rw] prefix
+    #   A prefix filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A tag filter.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails]
+    #
+    # @!attribute [rw] type
+    #   Whether to use `AND` or `OR` to join the operands.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails < Struct.new(
+      :operands,
+      :prefix,
+      :tag,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A value to use for the filter.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "NonEmptyString",
+    #         tag: {
+    #           key: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #         },
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   Prefix text for matching objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A tag that is assigned to matching objects.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails]
+    #
+    # @!attribute [rw] type
+    #   The type of filter value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails < Struct.new(
+      :prefix,
+      :tag,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag that is assigned to matching objects.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails
+    #   data as a hash:
+    #
+    #       {
+    #         key: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag filter.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails
+    #   data as a hash:
+    #
+    #       {
+    #         key: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transition rule that describes when noncurrent objects transition to
+    # a specified storage class.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         days: 1,
+    #         storage_class: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] days
+    #   The number of days that an object is noncurrent before Amazon S3 can
+    #   perform the associated action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_class
+    #   The class of storage to change the object to after the object is
+    #   noncurrent for the specified number of days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails < Struct.new(
+      :days,
+      :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule for when objects transition to specific storage classes.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         date: "NonEmptyString",
+    #         days: 1,
+    #         storage_class: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] date
+    #   A date on which to transition objects to the specified storage
+    #   class. If you provide `Date`, you cannot provide `Days`.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] days
+    #   The number of days after which to transition the object to the
+    #   specified storage class. If you provide `Days`, you cannot provide
+    #   `Date`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_class
+    #   The storage class to transition the object to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails < Struct.new(
+      :date,
+      :days,
+      :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Amazon S3 bucket.
     #
     # @note When making an API call, you may pass AwsS3BucketDetails
@@ -9185,6 +13015,61 @@ module Aws::SecurityHub
     #               },
     #             },
     #           ],
+    #         },
+    #         bucket_lifecycle_configuration: {
+    #           rules: [
+    #             {
+    #               abort_incomplete_multipart_upload: {
+    #                 days_after_initiation: 1,
+    #               },
+    #               expiration_date: "NonEmptyString",
+    #               expiration_in_days: 1,
+    #               expired_object_delete_marker: false,
+    #               filter: {
+    #                 predicate: {
+    #                   operands: [
+    #                     {
+    #                       prefix: "NonEmptyString",
+    #                       tag: {
+    #                         key: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   prefix: "NonEmptyString",
+    #                   tag: {
+    #                     key: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                   type: "NonEmptyString",
+    #                 },
+    #               },
+    #               id: "NonEmptyString",
+    #               noncurrent_version_expiration_in_days: 1,
+    #               noncurrent_version_transitions: [
+    #                 {
+    #                   days: 1,
+    #                   storage_class: "NonEmptyString",
+    #                 },
+    #               ],
+    #               prefix: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #               transitions: [
+    #                 {
+    #                   date: "NonEmptyString",
+    #                   days: 1,
+    #                   storage_class: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         public_access_block_configuration: {
+    #           block_public_acls: false,
+    #           block_public_policy: false,
+    #           ignore_public_acls: false,
+    #           restrict_public_buckets: false,
     #         },
     #       }
     #
@@ -9212,13 +13097,24 @@ module Aws::SecurityHub
     #   The encryption rules that are applied to the S3 bucket.
     #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
     #
+    # @!attribute [rw] bucket_lifecycle_configuration
+    #   The lifecycle configuration for objects in the S3 bucket.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationDetails]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   Provides information about the Amazon S3 Public Access Block
+    #   configuration for the S3 bucket.
+    #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
     class AwsS3BucketDetails < Struct.new(
       :owner_id,
       :owner_name,
       :created_at,
-      :server_side_encryption_configuration)
+      :server_side_encryption_configuration,
+      :bucket_lifecycle_configuration,
+      :public_access_block_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9479,12 +13375,12 @@ module Aws::SecurityHub
     #         product_arn: "NonEmptyString", # required
     #         generator_id: "NonEmptyString", # required
     #         aws_account_id: "NonEmptyString", # required
-    #         types: ["NonEmptyString"], # required
+    #         types: ["NonEmptyString"],
     #         first_observed_at: "NonEmptyString",
     #         last_observed_at: "NonEmptyString",
     #         created_at: "NonEmptyString", # required
     #         updated_at: "NonEmptyString", # required
-    #         severity: { # required
+    #         severity: {
     #           product: 1.0,
     #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #           normalized: 1,
@@ -9608,6 +13504,130 @@ module Aws::SecurityHub
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString",
     #             },
+    #             data_classification: {
+    #               detailed_results_location: "NonEmptyString",
+    #               result: {
+    #                 mime_type: "NonEmptyString",
+    #                 size_classified: 1,
+    #                 additional_occurrences: false,
+    #                 status: {
+    #                   code: "NonEmptyString",
+    #                   reason: "NonEmptyString",
+    #                 },
+    #                 sensitive_data: [
+    #                   {
+    #                     category: "NonEmptyString",
+    #                     detections: [
+    #                       {
+    #                         count: 1,
+    #                         type: "NonEmptyString",
+    #                         occurrences: {
+    #                           line_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           offset_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           pages: [
+    #                             {
+    #                               page_number: 1,
+    #                               line_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                               offset_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             },
+    #                           ],
+    #                           records: [
+    #                             {
+    #                               json_path: "NonEmptyString",
+    #                               record_index: 1,
+    #                             },
+    #                           ],
+    #                           cells: [
+    #                             {
+    #                               column: 1,
+    #                               row: 1,
+    #                               column_name: "NonEmptyString",
+    #                               cell_reference: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                     total_count: 1,
+    #                   },
+    #                 ],
+    #                 custom_data_identifiers: {
+    #                   detections: [
+    #                     {
+    #                       count: 1,
+    #                       arn: "NonEmptyString",
+    #                       name: "NonEmptyString",
+    #                       occurrences: {
+    #                         line_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         offset_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         pages: [
+    #                           {
+    #                             page_number: 1,
+    #                             line_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                             offset_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           },
+    #                         ],
+    #                         records: [
+    #                           {
+    #                             json_path: "NonEmptyString",
+    #                             record_index: 1,
+    #                           },
+    #                         ],
+    #                         cells: [
+    #                           {
+    #                             column: 1,
+    #                             row: 1,
+    #                             column_name: "NonEmptyString",
+    #                             cell_reference: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                   total_count: 1,
+    #                 },
+    #               },
+    #             },
     #             details: {
     #               aws_auto_scaling_auto_scaling_group: {
     #                 launch_configuration_name: "NonEmptyString",
@@ -9699,6 +13719,11 @@ module Aws::SecurityHub
     #                 vpc_id: "NonEmptyString",
     #                 subnet_id: "NonEmptyString",
     #                 launched_at: "NonEmptyString",
+    #                 network_interfaces: [
+    #                   {
+    #                     network_interface_id: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_ec2_network_interface: {
     #                 attachment: {
@@ -9718,6 +13743,19 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 source_dest_check: false,
+    #                 ip_v6_addresses: [
+    #                   {
+    #                     ip_v6_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 private_ip_addresses: [
+    #                   {
+    #                     private_ip_address: "NonEmptyString",
+    #                     private_dns_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 public_dns_name: "NonEmptyString",
+    #                 public_ip: "NonEmptyString",
     #               },
     #               aws_ec2_security_group: {
     #                 group_name: "NonEmptyString",
@@ -9835,6 +13873,58 @@ module Aws::SecurityHub
     #                 network_interface_owner_id: "NonEmptyString",
     #                 private_ip_address: "NonEmptyString",
     #               },
+    #               aws_ec2_subnet: {
+    #                 assign_ipv_6_address_on_creation: false,
+    #                 availability_zone: "NonEmptyString",
+    #                 availability_zone_id: "NonEmptyString",
+    #                 available_ip_address_count: 1,
+    #                 cidr_block: "NonEmptyString",
+    #                 default_for_az: false,
+    #                 map_public_ip_on_launch: false,
+    #                 owner_id: "NonEmptyString",
+    #                 state: "NonEmptyString",
+    #                 subnet_arn: "NonEmptyString",
+    #                 subnet_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 ipv_6_cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ec2_network_acl: {
+    #                 is_default: false,
+    #                 network_acl_id: "NonEmptyString",
+    #                 owner_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 associations: [
+    #                   {
+    #                     network_acl_association_id: "NonEmptyString",
+    #                     network_acl_id: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 entries: [
+    #                   {
+    #                     cidr_block: "NonEmptyString",
+    #                     egress: false,
+    #                     icmp_type_code: {
+    #                       code: 1,
+    #                       type: 1,
+    #                     },
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     port_range: {
+    #                       from: 1,
+    #                       to: 1,
+    #                     },
+    #                     protocol: "NonEmptyString",
+    #                     rule_action: "NonEmptyString",
+    #                     rule_number: 1,
+    #                   },
+    #                 ],
+    #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
     #                   {
@@ -9855,6 +13945,40 @@ module Aws::SecurityHub
     #                 type: "NonEmptyString",
     #                 vpc_id: "NonEmptyString",
     #               },
+    #               aws_elastic_beanstalk_environment: {
+    #                 application_name: "NonEmptyString",
+    #                 cname: "NonEmptyString",
+    #                 date_created: "NonEmptyString",
+    #                 date_updated: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 endpoint_url: "NonEmptyString",
+    #                 environment_arn: "NonEmptyString",
+    #                 environment_id: "NonEmptyString",
+    #                 environment_links: [
+    #                   {
+    #                     environment_name: "NonEmptyString",
+    #                     link_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 environment_name: "NonEmptyString",
+    #                 option_settings: [
+    #                   {
+    #                     namespace: "NonEmptyString",
+    #                     option_name: "NonEmptyString",
+    #                     resource_name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 platform_arn: "NonEmptyString",
+    #                 solution_stack_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 tier: {
+    #                   name: "NonEmptyString",
+    #                   type: "NonEmptyString",
+    #                   version: "NonEmptyString",
+    #                 },
+    #                 version_label: "NonEmptyString",
+    #               },
     #               aws_elasticsearch_domain: {
     #                 access_policies: "NonEmptyString",
     #                 domain_endpoint_options: {
@@ -9872,8 +13996,27 @@ module Aws::SecurityHub
     #                   enabled: false,
     #                   kms_key_id: "NonEmptyString",
     #                 },
+    #                 log_publishing_options: {
+    #                   index_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   search_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                 },
     #                 node_to_node_encryption_options: {
     #                   enabled: false,
+    #                 },
+    #                 service_software_options: {
+    #                   automated_update_date: "NonEmptyString",
+    #                   cancellable: false,
+    #                   current_version: "NonEmptyString",
+    #                   description: "NonEmptyString",
+    #                   new_version: "NonEmptyString",
+    #                   update_available: false,
+    #                   update_status: "NonEmptyString",
     #                 },
     #                 vpc_options: {
     #                   availability_zones: ["NonEmptyString"],
@@ -9896,6 +14039,67 @@ module Aws::SecurityHub
     #                     },
     #                   ],
     #                 },
+    #                 bucket_lifecycle_configuration: {
+    #                   rules: [
+    #                     {
+    #                       abort_incomplete_multipart_upload: {
+    #                         days_after_initiation: 1,
+    #                       },
+    #                       expiration_date: "NonEmptyString",
+    #                       expiration_in_days: 1,
+    #                       expired_object_delete_marker: false,
+    #                       filter: {
+    #                         predicate: {
+    #                           operands: [
+    #                             {
+    #                               prefix: "NonEmptyString",
+    #                               tag: {
+    #                                 key: "NonEmptyString",
+    #                                 value: "NonEmptyString",
+    #                               },
+    #                               type: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           prefix: "NonEmptyString",
+    #                           tag: {
+    #                             key: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                       },
+    #                       id: "NonEmptyString",
+    #                       noncurrent_version_expiration_in_days: 1,
+    #                       noncurrent_version_transitions: [
+    #                         {
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       prefix: "NonEmptyString",
+    #                       status: "NonEmptyString",
+    #                       transitions: [
+    #                         {
+    #                           date: "NonEmptyString",
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                 },
+    #                 public_access_block_configuration: {
+    #                   block_public_acls: false,
+    #                   block_public_policy: false,
+    #                   ignore_public_acls: false,
+    #                   restrict_public_buckets: false,
+    #                 },
+    #               },
+    #               aws_s3_account_public_access_block: {
+    #                 block_public_acls: false,
+    #                 block_public_policy: false,
+    #                 ignore_public_acls: false,
+    #                 restrict_public_buckets: false,
     #               },
     #               aws_s3_object: {
     #                 last_modified: "NonEmptyString",
@@ -9982,6 +14186,7 @@ module Aws::SecurityHub
     #                 update_date: "NonEmptyString",
     #               },
     #               aws_api_gateway_v2_stage: {
+    #                 client_certificate_id: "NonEmptyString",
     #                 created_date: "NonEmptyString",
     #                 description: "NonEmptyString",
     #                 default_route_settings: {
@@ -10217,6 +14422,30 @@ module Aws::SecurityHub
     #                 sns_topic_arn: "NonEmptyString",
     #                 sns_topic_name: "NonEmptyString",
     #                 trail_arn: "NonEmptyString",
+    #               },
+    #               aws_ssm_patch_compliance: {
+    #                 patch: {
+    #                   compliance_summary: {
+    #                     status: "NonEmptyString",
+    #                     compliant_critical_count: 1,
+    #                     compliant_high_count: 1,
+    #                     compliant_medium_count: 1,
+    #                     execution_type: "NonEmptyString",
+    #                     non_compliant_critical_count: 1,
+    #                     compliant_informational_count: 1,
+    #                     non_compliant_informational_count: 1,
+    #                     compliant_unspecified_count: 1,
+    #                     non_compliant_low_count: 1,
+    #                     non_compliant_high_count: 1,
+    #                     compliant_low_count: 1,
+    #                     compliance_type: "NonEmptyString",
+    #                     patch_baseline_id: "NonEmptyString",
+    #                     overall_severity: "NonEmptyString",
+    #                     non_compliant_medium_count: 1,
+    #                     non_compliant_unspecified_count: 1,
+    #                     patch_group: "NonEmptyString",
+    #                   },
+    #                 },
     #               },
     #               aws_certificate_manager_certificate: {
     #                 certificate_authority_arn: "NonEmptyString",
@@ -10912,6 +15141,247 @@ module Aws::SecurityHub
     #                 ],
     #                 iam_database_authentication_enabled: false,
     #               },
+    #               aws_ecs_cluster: {
+    #                 capacity_providers: ["NonEmptyString"],
+    #                 cluster_settings: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 configuration: {
+    #                   execute_command_configuration: {
+    #                     kms_key_id: "NonEmptyString",
+    #                     log_configuration: {
+    #                       cloud_watch_encryption_enabled: false,
+    #                       cloud_watch_log_group_name: "NonEmptyString",
+    #                       s3_bucket_name: "NonEmptyString",
+    #                       s3_encryption_enabled: false,
+    #                       s3_key_prefix: "NonEmptyString",
+    #                     },
+    #                     logging: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 default_capacity_provider_strategy: [
+    #                   {
+    #                     base: 1,
+    #                     capacity_provider: "NonEmptyString",
+    #                     weight: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ecs_task_definition: {
+    #                 container_definitions: [
+    #                   {
+    #                     command: ["NonEmptyString"],
+    #                     cpu: 1,
+    #                     depends_on: [
+    #                       {
+    #                         condition: "NonEmptyString",
+    #                         container_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     disable_networking: false,
+    #                     dns_search_domains: ["NonEmptyString"],
+    #                     dns_servers: ["NonEmptyString"],
+    #                     docker_labels: {
+    #                       "NonEmptyString" => "NonEmptyString",
+    #                     },
+    #                     docker_security_options: ["NonEmptyString"],
+    #                     entry_point: ["NonEmptyString"],
+    #                     environment: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     environment_files: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     essential: false,
+    #                     extra_hosts: [
+    #                       {
+    #                         hostname: "NonEmptyString",
+    #                         ip_address: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     firelens_configuration: {
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     health_check: {
+    #                       command: ["NonEmptyString"],
+    #                       interval: 1,
+    #                       retries: 1,
+    #                       start_period: 1,
+    #                       timeout: 1,
+    #                     },
+    #                     hostname: "NonEmptyString",
+    #                     image: "NonEmptyString",
+    #                     interactive: false,
+    #                     links: ["NonEmptyString"],
+    #                     linux_parameters: {
+    #                       capabilities: {
+    #                         add: ["NonEmptyString"],
+    #                         drop: ["NonEmptyString"],
+    #                       },
+    #                       devices: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           host_path: "NonEmptyString",
+    #                           permissions: ["NonEmptyString"],
+    #                         },
+    #                       ],
+    #                       init_process_enabled: false,
+    #                       max_swap: 1,
+    #                       shared_memory_size: 1,
+    #                       swappiness: 1,
+    #                       tmpfs: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           mount_options: ["NonEmptyString"],
+    #                           size: 1,
+    #                         },
+    #                       ],
+    #                     },
+    #                     log_configuration: {
+    #                       log_driver: "NonEmptyString",
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       secret_options: [
+    #                         {
+    #                           name: "NonEmptyString",
+    #                           value_from: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     memory: 1,
+    #                     memory_reservation: 1,
+    #                     mount_points: [
+    #                       {
+    #                         container_path: "NonEmptyString",
+    #                         read_only: false,
+    #                         source_volume: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     name: "NonEmptyString",
+    #                     port_mappings: [
+    #                       {
+    #                         container_port: 1,
+    #                         host_port: 1,
+    #                         protocol: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     privileged: false,
+    #                     pseudo_terminal: false,
+    #                     readonly_root_filesystem: false,
+    #                     repository_credentials: {
+    #                       credentials_parameter: "NonEmptyString",
+    #                     },
+    #                     resource_requirements: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     secrets: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value_from: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     start_timeout: 1,
+    #                     stop_timeout: 1,
+    #                     system_controls: [
+    #                       {
+    #                         namespace: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ulimits: [
+    #                       {
+    #                         hard_limit: 1,
+    #                         name: "NonEmptyString",
+    #                         soft_limit: 1,
+    #                       },
+    #                     ],
+    #                     user: "NonEmptyString",
+    #                     volumes_from: [
+    #                       {
+    #                         read_only: false,
+    #                         source_container: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     working_directory: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cpu: "NonEmptyString",
+    #                 execution_role_arn: "NonEmptyString",
+    #                 family: "NonEmptyString",
+    #                 inference_accelerators: [
+    #                   {
+    #                     device_name: "NonEmptyString",
+    #                     device_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ipc_mode: "NonEmptyString",
+    #                 memory: "NonEmptyString",
+    #                 network_mode: "NonEmptyString",
+    #                 pid_mode: "NonEmptyString",
+    #                 placement_constraints: [
+    #                   {
+    #                     expression: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 proxy_configuration: {
+    #                   container_name: "NonEmptyString",
+    #                   proxy_configuration_properties: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 requires_compatibilities: ["NonEmptyString"],
+    #                 task_role_arn: "NonEmptyString",
+    #                 volumes: [
+    #                   {
+    #                     docker_volume_configuration: {
+    #                       autoprovision: false,
+    #                       driver: "NonEmptyString",
+    #                       driver_opts: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       labels: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       scope: "NonEmptyString",
+    #                     },
+    #                     efs_volume_configuration: {
+    #                       authorization_config: {
+    #                         access_point_id: "NonEmptyString",
+    #                         iam: "NonEmptyString",
+    #                       },
+    #                       filesystem_id: "NonEmptyString",
+    #                       root_directory: "NonEmptyString",
+    #                       transit_encryption: "NonEmptyString",
+    #                       transit_encryption_port: 1,
+    #                     },
+    #                     host: {
+    #                       source_path: "NonEmptyString",
+    #                     },
+    #                     name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
     #               container: {
     #                 name: "NonEmptyString",
     #                 image_id: "NonEmptyString",
@@ -10993,6 +15463,129 @@ module Aws::SecurityHub
     #           operation_end_time: "NonEmptyString",
     #           reboot_option: "NonEmptyString",
     #           operation: "NonEmptyString",
+    #         },
+    #         action: {
+    #           action_type: "NonEmptyString",
+    #           network_connection_action: {
+    #             connection_direction: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             remote_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             local_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           aws_api_call_action: {
+    #             api: "NonEmptyString",
+    #             service_name: "NonEmptyString",
+    #             caller_type: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             domain_details: {
+    #               domain: "NonEmptyString",
+    #             },
+    #             affected_resources: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             first_seen: "NonEmptyString",
+    #             last_seen: "NonEmptyString",
+    #           },
+    #           dns_request_action: {
+    #             domain: "NonEmptyString",
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           port_probe_action: {
+    #             port_probe_details: [
+    #               {
+    #                 local_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 local_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                 },
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             blocked: false,
+    #           },
+    #         },
+    #         finding_provider_fields: {
+    #           confidence: 1,
+    #           criticality: 1,
+    #           related_findings: [
+    #             {
+    #               product_arn: "NonEmptyString", # required
+    #               id: "NonEmptyString", # required
+    #             },
+    #           ],
+    #           severity: {
+    #             label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #             original: "NonEmptyString",
+    #           },
+    #           types: ["NonEmptyString"],
     #         },
     #       }
     #
@@ -11209,6 +15802,17 @@ module Aws::SecurityHub
     #   against a selected compliance standard.
     #   @return [Types::PatchSummary]
     #
+    # @!attribute [rw] action
+    #   Provides details about an action that affects or that was taken on a
+    #   resource.
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] finding_provider_fields
+    #   In a `BatchImportFindings` request, finding providers use
+    #   `FindingProviderFields` to provide and update their own values for
+    #   confidence, criticality, related findings, severity, and types.
+    #   @return [Types::FindingProviderFields]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -11245,7 +15849,9 @@ module Aws::SecurityHub
       :related_findings,
       :note,
       :vulnerabilities,
-      :patch_summary)
+      :patch_summary,
+      :action,
+      :finding_provider_fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11814,6 +16420,50 @@ module Aws::SecurityHub
     #             value: "NonEmptyString",
     #           },
     #         ],
+    #         finding_provider_fields_confidence: [
+    #           {
+    #             gte: 1.0,
+    #             lte: 1.0,
+    #             eq: 1.0,
+    #           },
+    #         ],
+    #         finding_provider_fields_criticality: [
+    #           {
+    #             gte: 1.0,
+    #             lte: 1.0,
+    #             eq: 1.0,
+    #           },
+    #         ],
+    #         finding_provider_fields_related_findings_id: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_related_findings_product_arn: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_severity_label: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_severity_original: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_types: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] product_arn
@@ -12173,6 +16823,14 @@ module Aws::SecurityHub
     #
     #   * `NEW` - The initial state of a finding, before it is reviewed.
     #
+    #     Security Hub also resets the workflow status from `NOTIFIED` or
+    #     `RESOLVED` to `NEW` in the following cases:
+    #
+    #     * The record state changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * The compliance status changes from `PASSED` to either `WARNING`,
+    #       `FAILED`, or `NOT_AVAILABLE`.
+    #
     #   * `NOTIFIED` - Indicates that the resource owner has been notified
     #     about the security issue. Used when the initial reviewer is not
     #     the resource owner, and needs intervention from the resource
@@ -12212,6 +16870,52 @@ module Aws::SecurityHub
     # @!attribute [rw] keyword
     #   A keyword for a finding.
     #   @return [Array<Types::KeywordFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_confidence
+    #   The finding provider value for the finding confidence. Confidence is
+    #   defined as the likelihood that a finding accurately identifies the
+    #   behavior or issue that it was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_criticality
+    #   The finding provider value for the level of importance assigned to
+    #   the resources associated with the findings.
+    #
+    #   A score of 0 means that the underlying resources have no
+    #   criticality, and a score of 100 is reserved for the most critical
+    #   resources.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_related_findings_id
+    #   The finding identifier of a related finding that is identified by
+    #   the finding provider.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_related_findings_product_arn
+    #   The ARN of the solution that generated a related finding that is
+    #   identified by the finding provider.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_severity_label
+    #   The finding provider value for the severity label.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_severity_original
+    #   The finding provider's original value for the severity.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_types
+    #   One or more finding types that the finding provider assigned to the
+    #   finding. Uses the format of `namespace/category/classifier` that
+    #   classify a finding.
+    #
+    #   Valid namespace values are: Software and Configuration Checks \|
+    #   TTPs \| Effects \| Unusual Behaviors \| Sensitive Data
+    #   Identifications
+    #   @return [Array<Types::StringFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters AWS API Documentation
     #
@@ -12299,7 +17003,14 @@ module Aws::SecurityHub
       :note_text,
       :note_updated_at,
       :note_updated_by,
-      :keyword)
+      :keyword,
+      :finding_provider_fields_confidence,
+      :finding_provider_fields_criticality,
+      :finding_provider_fields_related_findings_id,
+      :finding_provider_fields_related_findings_product_arn,
+      :finding_provider_fields_severity_label,
+      :finding_provider_fields_severity_original,
+      :finding_provider_fields_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12335,7 +17046,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A wrapper type for the topic's Amazon Resource Name (ARN).
+    # A wrapper type for the topic's ARN.
     #
     # @note When making an API call, you may pass AwsSnsTopicDetails
     #   data as a hash:
@@ -12436,9 +17147,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_target_arn
-    #   The Amazon Resource Name (ARN) of the dead-letter queue to which
-    #   Amazon SQS moves messages after the value of `maxReceiveCount` is
-    #   exceeded.
+    #   The ARN of the dead-letter queue to which Amazon SQS moves messages
+    #   after the value of `maxReceiveCount` is exceeded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSqsQueueDetails AWS API Documentation
@@ -12448,6 +17158,236 @@ module Aws::SecurityHub
       :kms_master_key_id,
       :queue_name,
       :dead_letter_target_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the details about the compliance status for a patch.
+    #
+    # @note When making an API call, you may pass AwsSsmComplianceSummary
+    #   data as a hash:
+    #
+    #       {
+    #         status: "NonEmptyString",
+    #         compliant_critical_count: 1,
+    #         compliant_high_count: 1,
+    #         compliant_medium_count: 1,
+    #         execution_type: "NonEmptyString",
+    #         non_compliant_critical_count: 1,
+    #         compliant_informational_count: 1,
+    #         non_compliant_informational_count: 1,
+    #         compliant_unspecified_count: 1,
+    #         non_compliant_low_count: 1,
+    #         non_compliant_high_count: 1,
+    #         compliant_low_count: 1,
+    #         compliance_type: "NonEmptyString",
+    #         patch_baseline_id: "NonEmptyString",
+    #         overall_severity: "NonEmptyString",
+    #         non_compliant_medium_count: 1,
+    #         non_compliant_unspecified_count: 1,
+    #         patch_group: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The current patch compliance status.
+    #
+    #   The possible status values are:
+    #
+    #   * `COMPLIANT`
+    #
+    #   * `NON_COMPLIANT`
+    #
+    #   * `UNSPECIFIED_DATA`
+    #   @return [String]
+    #
+    # @!attribute [rw] compliant_critical_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `CRITICAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_high_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `HIGH`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_medium_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `MEDIUM`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_type
+    #   The type of execution that was used determine compliance.
+    #   @return [String]
+    #
+    # @!attribute [rw] non_compliant_critical_count
+    #   For the patch items that are noncompliant, the number of items that
+    #   have a severity of `CRITICAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_informational_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `INFORMATIONAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_informational_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `INFORMATIONAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_unspecified_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `UNSPECIFIED`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_low_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `LOW`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_high_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `HIGH`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_low_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `LOW`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliance_type
+    #   The type of resource for which the compliance was determined. For
+    #   `AwsSsmPatchCompliance`, `ComplianceType` is `Patch`.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_baseline_id
+    #   The identifier of the patch baseline. The patch baseline lists the
+    #   patches that are approved for installation.
+    #   @return [String]
+    #
+    # @!attribute [rw] overall_severity
+    #   The highest severity for the patches.
+    #   @return [String]
+    #
+    # @!attribute [rw] non_compliant_medium_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `MEDIUM`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_unspecified_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `UNSPECIFIED`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] patch_group
+    #   The identifier of the patch group for which compliance was
+    #   determined. A patch group uses tags to group EC2 instances that
+    #   should have the same patch compliance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSsmComplianceSummary AWS API Documentation
+    #
+    class AwsSsmComplianceSummary < Struct.new(
+      :status,
+      :compliant_critical_count,
+      :compliant_high_count,
+      :compliant_medium_count,
+      :execution_type,
+      :non_compliant_critical_count,
+      :compliant_informational_count,
+      :non_compliant_informational_count,
+      :compliant_unspecified_count,
+      :non_compliant_low_count,
+      :non_compliant_high_count,
+      :compliant_low_count,
+      :compliance_type,
+      :patch_baseline_id,
+      :overall_severity,
+      :non_compliant_medium_count,
+      :non_compliant_unspecified_count,
+      :patch_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the compliance for a patch.
+    #
+    # @note When making an API call, you may pass AwsSsmPatch
+    #   data as a hash:
+    #
+    #       {
+    #         compliance_summary: {
+    #           status: "NonEmptyString",
+    #           compliant_critical_count: 1,
+    #           compliant_high_count: 1,
+    #           compliant_medium_count: 1,
+    #           execution_type: "NonEmptyString",
+    #           non_compliant_critical_count: 1,
+    #           compliant_informational_count: 1,
+    #           non_compliant_informational_count: 1,
+    #           compliant_unspecified_count: 1,
+    #           non_compliant_low_count: 1,
+    #           non_compliant_high_count: 1,
+    #           compliant_low_count: 1,
+    #           compliance_type: "NonEmptyString",
+    #           patch_baseline_id: "NonEmptyString",
+    #           overall_severity: "NonEmptyString",
+    #           non_compliant_medium_count: 1,
+    #           non_compliant_unspecified_count: 1,
+    #           patch_group: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] compliance_summary
+    #   The compliance status details for the patch.
+    #   @return [Types::AwsSsmComplianceSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSsmPatch AWS API Documentation
+    #
+    class AwsSsmPatch < Struct.new(
+      :compliance_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the state of a patch on an instance based
+    # on the patch baseline that was used to patch the instance.
+    #
+    # @note When making an API call, you may pass AwsSsmPatchComplianceDetails
+    #   data as a hash:
+    #
+    #       {
+    #         patch: {
+    #           compliance_summary: {
+    #             status: "NonEmptyString",
+    #             compliant_critical_count: 1,
+    #             compliant_high_count: 1,
+    #             compliant_medium_count: 1,
+    #             execution_type: "NonEmptyString",
+    #             non_compliant_critical_count: 1,
+    #             compliant_informational_count: 1,
+    #             non_compliant_informational_count: 1,
+    #             compliant_unspecified_count: 1,
+    #             non_compliant_low_count: 1,
+    #             non_compliant_high_count: 1,
+    #             compliant_low_count: 1,
+    #             compliance_type: "NonEmptyString",
+    #             patch_baseline_id: "NonEmptyString",
+    #             overall_severity: "NonEmptyString",
+    #             non_compliant_medium_count: 1,
+    #             non_compliant_unspecified_count: 1,
+    #             patch_group: "NonEmptyString",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] patch
+    #   Information about the status of a patch.
+    #   @return [Types::AwsSsmPatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSsmPatchComplianceDetails AWS API Documentation
+    #
+    class AwsSsmPatchComplianceDetails < Struct.new(
+      :patch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12675,12 +17615,12 @@ module Aws::SecurityHub
     #             product_arn: "NonEmptyString", # required
     #             generator_id: "NonEmptyString", # required
     #             aws_account_id: "NonEmptyString", # required
-    #             types: ["NonEmptyString"], # required
+    #             types: ["NonEmptyString"],
     #             first_observed_at: "NonEmptyString",
     #             last_observed_at: "NonEmptyString",
     #             created_at: "NonEmptyString", # required
     #             updated_at: "NonEmptyString", # required
-    #             severity: { # required
+    #             severity: {
     #               product: 1.0,
     #               label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #               normalized: 1,
@@ -12804,6 +17744,130 @@ module Aws::SecurityHub
     #                 tags: {
     #                   "NonEmptyString" => "NonEmptyString",
     #                 },
+    #                 data_classification: {
+    #                   detailed_results_location: "NonEmptyString",
+    #                   result: {
+    #                     mime_type: "NonEmptyString",
+    #                     size_classified: 1,
+    #                     additional_occurrences: false,
+    #                     status: {
+    #                       code: "NonEmptyString",
+    #                       reason: "NonEmptyString",
+    #                     },
+    #                     sensitive_data: [
+    #                       {
+    #                         category: "NonEmptyString",
+    #                         detections: [
+    #                           {
+    #                             count: 1,
+    #                             type: "NonEmptyString",
+    #                             occurrences: {
+    #                               line_ranges: [
+    #                                 {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                               ],
+    #                               offset_ranges: [
+    #                                 {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                               ],
+    #                               pages: [
+    #                                 {
+    #                                   page_number: 1,
+    #                                   line_range: {
+    #                                     start: 1,
+    #                                     end: 1,
+    #                                     start_column: 1,
+    #                                   },
+    #                                   offset_range: {
+    #                                     start: 1,
+    #                                     end: 1,
+    #                                     start_column: 1,
+    #                                   },
+    #                                 },
+    #                               ],
+    #                               records: [
+    #                                 {
+    #                                   json_path: "NonEmptyString",
+    #                                   record_index: 1,
+    #                                 },
+    #                               ],
+    #                               cells: [
+    #                                 {
+    #                                   column: 1,
+    #                                   row: 1,
+    #                                   column_name: "NonEmptyString",
+    #                                   cell_reference: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                         total_count: 1,
+    #                       },
+    #                     ],
+    #                     custom_data_identifiers: {
+    #                       detections: [
+    #                         {
+    #                           count: 1,
+    #                           arn: "NonEmptyString",
+    #                           name: "NonEmptyString",
+    #                           occurrences: {
+    #                             line_ranges: [
+    #                               {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             ],
+    #                             offset_ranges: [
+    #                               {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             ],
+    #                             pages: [
+    #                               {
+    #                                 page_number: 1,
+    #                                 line_range: {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                                 offset_range: {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                               },
+    #                             ],
+    #                             records: [
+    #                               {
+    #                                 json_path: "NonEmptyString",
+    #                                 record_index: 1,
+    #                               },
+    #                             ],
+    #                             cells: [
+    #                               {
+    #                                 column: 1,
+    #                                 row: 1,
+    #                                 column_name: "NonEmptyString",
+    #                                 cell_reference: "NonEmptyString",
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                       total_count: 1,
+    #                     },
+    #                   },
+    #                 },
     #                 details: {
     #                   aws_auto_scaling_auto_scaling_group: {
     #                     launch_configuration_name: "NonEmptyString",
@@ -12895,6 +17959,11 @@ module Aws::SecurityHub
     #                     vpc_id: "NonEmptyString",
     #                     subnet_id: "NonEmptyString",
     #                     launched_at: "NonEmptyString",
+    #                     network_interfaces: [
+    #                       {
+    #                         network_interface_id: "NonEmptyString",
+    #                       },
+    #                     ],
     #                   },
     #                   aws_ec2_network_interface: {
     #                     attachment: {
@@ -12914,6 +17983,19 @@ module Aws::SecurityHub
     #                       },
     #                     ],
     #                     source_dest_check: false,
+    #                     ip_v6_addresses: [
+    #                       {
+    #                         ip_v6_address: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     private_ip_addresses: [
+    #                       {
+    #                         private_ip_address: "NonEmptyString",
+    #                         private_dns_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     public_dns_name: "NonEmptyString",
+    #                     public_ip: "NonEmptyString",
     #                   },
     #                   aws_ec2_security_group: {
     #                     group_name: "NonEmptyString",
@@ -13031,6 +18113,58 @@ module Aws::SecurityHub
     #                     network_interface_owner_id: "NonEmptyString",
     #                     private_ip_address: "NonEmptyString",
     #                   },
+    #                   aws_ec2_subnet: {
+    #                     assign_ipv_6_address_on_creation: false,
+    #                     availability_zone: "NonEmptyString",
+    #                     availability_zone_id: "NonEmptyString",
+    #                     available_ip_address_count: 1,
+    #                     cidr_block: "NonEmptyString",
+    #                     default_for_az: false,
+    #                     map_public_ip_on_launch: false,
+    #                     owner_id: "NonEmptyString",
+    #                     state: "NonEmptyString",
+    #                     subnet_arn: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
+    #                     ipv_6_cidr_block_association_set: [
+    #                       {
+    #                         association_id: "NonEmptyString",
+    #                         ipv_6_cidr_block: "NonEmptyString",
+    #                         cidr_block_state: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   aws_ec2_network_acl: {
+    #                     is_default: false,
+    #                     network_acl_id: "NonEmptyString",
+    #                     owner_id: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
+    #                     associations: [
+    #                       {
+    #                         network_acl_association_id: "NonEmptyString",
+    #                         network_acl_id: "NonEmptyString",
+    #                         subnet_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     entries: [
+    #                       {
+    #                         cidr_block: "NonEmptyString",
+    #                         egress: false,
+    #                         icmp_type_code: {
+    #                           code: 1,
+    #                           type: 1,
+    #                         },
+    #                         ipv_6_cidr_block: "NonEmptyString",
+    #                         port_range: {
+    #                           from: 1,
+    #                           to: 1,
+    #                         },
+    #                         protocol: "NonEmptyString",
+    #                         rule_action: "NonEmptyString",
+    #                         rule_number: 1,
+    #                       },
+    #                     ],
+    #                   },
     #                   aws_elbv_2_load_balancer: {
     #                     availability_zones: [
     #                       {
@@ -13051,6 +18185,40 @@ module Aws::SecurityHub
     #                     type: "NonEmptyString",
     #                     vpc_id: "NonEmptyString",
     #                   },
+    #                   aws_elastic_beanstalk_environment: {
+    #                     application_name: "NonEmptyString",
+    #                     cname: "NonEmptyString",
+    #                     date_created: "NonEmptyString",
+    #                     date_updated: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                     endpoint_url: "NonEmptyString",
+    #                     environment_arn: "NonEmptyString",
+    #                     environment_id: "NonEmptyString",
+    #                     environment_links: [
+    #                       {
+    #                         environment_name: "NonEmptyString",
+    #                         link_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     environment_name: "NonEmptyString",
+    #                     option_settings: [
+    #                       {
+    #                         namespace: "NonEmptyString",
+    #                         option_name: "NonEmptyString",
+    #                         resource_name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     platform_arn: "NonEmptyString",
+    #                     solution_stack_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     tier: {
+    #                       name: "NonEmptyString",
+    #                       type: "NonEmptyString",
+    #                       version: "NonEmptyString",
+    #                     },
+    #                     version_label: "NonEmptyString",
+    #                   },
     #                   aws_elasticsearch_domain: {
     #                     access_policies: "NonEmptyString",
     #                     domain_endpoint_options: {
@@ -13068,8 +18236,27 @@ module Aws::SecurityHub
     #                       enabled: false,
     #                       kms_key_id: "NonEmptyString",
     #                     },
+    #                     log_publishing_options: {
+    #                       index_slow_logs: {
+    #                         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                         enabled: false,
+    #                       },
+    #                       search_slow_logs: {
+    #                         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                         enabled: false,
+    #                       },
+    #                     },
     #                     node_to_node_encryption_options: {
     #                       enabled: false,
+    #                     },
+    #                     service_software_options: {
+    #                       automated_update_date: "NonEmptyString",
+    #                       cancellable: false,
+    #                       current_version: "NonEmptyString",
+    #                       description: "NonEmptyString",
+    #                       new_version: "NonEmptyString",
+    #                       update_available: false,
+    #                       update_status: "NonEmptyString",
     #                     },
     #                     vpc_options: {
     #                       availability_zones: ["NonEmptyString"],
@@ -13092,6 +18279,67 @@ module Aws::SecurityHub
     #                         },
     #                       ],
     #                     },
+    #                     bucket_lifecycle_configuration: {
+    #                       rules: [
+    #                         {
+    #                           abort_incomplete_multipart_upload: {
+    #                             days_after_initiation: 1,
+    #                           },
+    #                           expiration_date: "NonEmptyString",
+    #                           expiration_in_days: 1,
+    #                           expired_object_delete_marker: false,
+    #                           filter: {
+    #                             predicate: {
+    #                               operands: [
+    #                                 {
+    #                                   prefix: "NonEmptyString",
+    #                                   tag: {
+    #                                     key: "NonEmptyString",
+    #                                     value: "NonEmptyString",
+    #                                   },
+    #                                   type: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                               prefix: "NonEmptyString",
+    #                               tag: {
+    #                                 key: "NonEmptyString",
+    #                                 value: "NonEmptyString",
+    #                               },
+    #                               type: "NonEmptyString",
+    #                             },
+    #                           },
+    #                           id: "NonEmptyString",
+    #                           noncurrent_version_expiration_in_days: 1,
+    #                           noncurrent_version_transitions: [
+    #                             {
+    #                               days: 1,
+    #                               storage_class: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           prefix: "NonEmptyString",
+    #                           status: "NonEmptyString",
+    #                           transitions: [
+    #                             {
+    #                               date: "NonEmptyString",
+    #                               days: 1,
+    #                               storage_class: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                       ],
+    #                     },
+    #                     public_access_block_configuration: {
+    #                       block_public_acls: false,
+    #                       block_public_policy: false,
+    #                       ignore_public_acls: false,
+    #                       restrict_public_buckets: false,
+    #                     },
+    #                   },
+    #                   aws_s3_account_public_access_block: {
+    #                     block_public_acls: false,
+    #                     block_public_policy: false,
+    #                     ignore_public_acls: false,
+    #                     restrict_public_buckets: false,
     #                   },
     #                   aws_s3_object: {
     #                     last_modified: "NonEmptyString",
@@ -13178,6 +18426,7 @@ module Aws::SecurityHub
     #                     update_date: "NonEmptyString",
     #                   },
     #                   aws_api_gateway_v2_stage: {
+    #                     client_certificate_id: "NonEmptyString",
     #                     created_date: "NonEmptyString",
     #                     description: "NonEmptyString",
     #                     default_route_settings: {
@@ -13413,6 +18662,30 @@ module Aws::SecurityHub
     #                     sns_topic_arn: "NonEmptyString",
     #                     sns_topic_name: "NonEmptyString",
     #                     trail_arn: "NonEmptyString",
+    #                   },
+    #                   aws_ssm_patch_compliance: {
+    #                     patch: {
+    #                       compliance_summary: {
+    #                         status: "NonEmptyString",
+    #                         compliant_critical_count: 1,
+    #                         compliant_high_count: 1,
+    #                         compliant_medium_count: 1,
+    #                         execution_type: "NonEmptyString",
+    #                         non_compliant_critical_count: 1,
+    #                         compliant_informational_count: 1,
+    #                         non_compliant_informational_count: 1,
+    #                         compliant_unspecified_count: 1,
+    #                         non_compliant_low_count: 1,
+    #                         non_compliant_high_count: 1,
+    #                         compliant_low_count: 1,
+    #                         compliance_type: "NonEmptyString",
+    #                         patch_baseline_id: "NonEmptyString",
+    #                         overall_severity: "NonEmptyString",
+    #                         non_compliant_medium_count: 1,
+    #                         non_compliant_unspecified_count: 1,
+    #                         patch_group: "NonEmptyString",
+    #                       },
+    #                     },
     #                   },
     #                   aws_certificate_manager_certificate: {
     #                     certificate_authority_arn: "NonEmptyString",
@@ -14108,6 +19381,247 @@ module Aws::SecurityHub
     #                     ],
     #                     iam_database_authentication_enabled: false,
     #                   },
+    #                   aws_ecs_cluster: {
+    #                     capacity_providers: ["NonEmptyString"],
+    #                     cluster_settings: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     configuration: {
+    #                       execute_command_configuration: {
+    #                         kms_key_id: "NonEmptyString",
+    #                         log_configuration: {
+    #                           cloud_watch_encryption_enabled: false,
+    #                           cloud_watch_log_group_name: "NonEmptyString",
+    #                           s3_bucket_name: "NonEmptyString",
+    #                           s3_encryption_enabled: false,
+    #                           s3_key_prefix: "NonEmptyString",
+    #                         },
+    #                         logging: "NonEmptyString",
+    #                       },
+    #                     },
+    #                     default_capacity_provider_strategy: [
+    #                       {
+    #                         base: 1,
+    #                         capacity_provider: "NonEmptyString",
+    #                         weight: 1,
+    #                       },
+    #                     ],
+    #                   },
+    #                   aws_ecs_task_definition: {
+    #                     container_definitions: [
+    #                       {
+    #                         command: ["NonEmptyString"],
+    #                         cpu: 1,
+    #                         depends_on: [
+    #                           {
+    #                             condition: "NonEmptyString",
+    #                             container_name: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         disable_networking: false,
+    #                         dns_search_domains: ["NonEmptyString"],
+    #                         dns_servers: ["NonEmptyString"],
+    #                         docker_labels: {
+    #                           "NonEmptyString" => "NonEmptyString",
+    #                         },
+    #                         docker_security_options: ["NonEmptyString"],
+    #                         entry_point: ["NonEmptyString"],
+    #                         environment: [
+    #                           {
+    #                             name: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         environment_files: [
+    #                           {
+    #                             type: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         essential: false,
+    #                         extra_hosts: [
+    #                           {
+    #                             hostname: "NonEmptyString",
+    #                             ip_address: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         firelens_configuration: {
+    #                           options: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                         health_check: {
+    #                           command: ["NonEmptyString"],
+    #                           interval: 1,
+    #                           retries: 1,
+    #                           start_period: 1,
+    #                           timeout: 1,
+    #                         },
+    #                         hostname: "NonEmptyString",
+    #                         image: "NonEmptyString",
+    #                         interactive: false,
+    #                         links: ["NonEmptyString"],
+    #                         linux_parameters: {
+    #                           capabilities: {
+    #                             add: ["NonEmptyString"],
+    #                             drop: ["NonEmptyString"],
+    #                           },
+    #                           devices: [
+    #                             {
+    #                               container_path: "NonEmptyString",
+    #                               host_path: "NonEmptyString",
+    #                               permissions: ["NonEmptyString"],
+    #                             },
+    #                           ],
+    #                           init_process_enabled: false,
+    #                           max_swap: 1,
+    #                           shared_memory_size: 1,
+    #                           swappiness: 1,
+    #                           tmpfs: [
+    #                             {
+    #                               container_path: "NonEmptyString",
+    #                               mount_options: ["NonEmptyString"],
+    #                               size: 1,
+    #                             },
+    #                           ],
+    #                         },
+    #                         log_configuration: {
+    #                           log_driver: "NonEmptyString",
+    #                           options: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           secret_options: [
+    #                             {
+    #                               name: "NonEmptyString",
+    #                               value_from: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                         memory: 1,
+    #                         memory_reservation: 1,
+    #                         mount_points: [
+    #                           {
+    #                             container_path: "NonEmptyString",
+    #                             read_only: false,
+    #                             source_volume: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         name: "NonEmptyString",
+    #                         port_mappings: [
+    #                           {
+    #                             container_port: 1,
+    #                             host_port: 1,
+    #                             protocol: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         privileged: false,
+    #                         pseudo_terminal: false,
+    #                         readonly_root_filesystem: false,
+    #                         repository_credentials: {
+    #                           credentials_parameter: "NonEmptyString",
+    #                         },
+    #                         resource_requirements: [
+    #                           {
+    #                             type: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         secrets: [
+    #                           {
+    #                             name: "NonEmptyString",
+    #                             value_from: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         start_timeout: 1,
+    #                         stop_timeout: 1,
+    #                         system_controls: [
+    #                           {
+    #                             namespace: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         ulimits: [
+    #                           {
+    #                             hard_limit: 1,
+    #                             name: "NonEmptyString",
+    #                             soft_limit: 1,
+    #                           },
+    #                         ],
+    #                         user: "NonEmptyString",
+    #                         volumes_from: [
+    #                           {
+    #                             read_only: false,
+    #                             source_container: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         working_directory: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     cpu: "NonEmptyString",
+    #                     execution_role_arn: "NonEmptyString",
+    #                     family: "NonEmptyString",
+    #                     inference_accelerators: [
+    #                       {
+    #                         device_name: "NonEmptyString",
+    #                         device_type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ipc_mode: "NonEmptyString",
+    #                     memory: "NonEmptyString",
+    #                     network_mode: "NonEmptyString",
+    #                     pid_mode: "NonEmptyString",
+    #                     placement_constraints: [
+    #                       {
+    #                         expression: "NonEmptyString",
+    #                         type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     proxy_configuration: {
+    #                       container_name: "NonEmptyString",
+    #                       proxy_configuration_properties: [
+    #                         {
+    #                           name: "NonEmptyString",
+    #                           value: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     requires_compatibilities: ["NonEmptyString"],
+    #                     task_role_arn: "NonEmptyString",
+    #                     volumes: [
+    #                       {
+    #                         docker_volume_configuration: {
+    #                           autoprovision: false,
+    #                           driver: "NonEmptyString",
+    #                           driver_opts: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           labels: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           scope: "NonEmptyString",
+    #                         },
+    #                         efs_volume_configuration: {
+    #                           authorization_config: {
+    #                             access_point_id: "NonEmptyString",
+    #                             iam: "NonEmptyString",
+    #                           },
+    #                           filesystem_id: "NonEmptyString",
+    #                           root_directory: "NonEmptyString",
+    #                           transit_encryption: "NonEmptyString",
+    #                           transit_encryption_port: 1,
+    #                         },
+    #                         host: {
+    #                           source_path: "NonEmptyString",
+    #                         },
+    #                         name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
     #                   container: {
     #                     name: "NonEmptyString",
     #                     image_id: "NonEmptyString",
@@ -14189,6 +19703,129 @@ module Aws::SecurityHub
     #               operation_end_time: "NonEmptyString",
     #               reboot_option: "NonEmptyString",
     #               operation: "NonEmptyString",
+    #             },
+    #             action: {
+    #               action_type: "NonEmptyString",
+    #               network_connection_action: {
+    #                 connection_direction: "NonEmptyString",
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #                 remote_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 local_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 protocol: "NonEmptyString",
+    #                 blocked: false,
+    #               },
+    #               aws_api_call_action: {
+    #                 api: "NonEmptyString",
+    #                 service_name: "NonEmptyString",
+    #                 caller_type: "NonEmptyString",
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #                 domain_details: {
+    #                   domain: "NonEmptyString",
+    #                 },
+    #                 affected_resources: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 first_seen: "NonEmptyString",
+    #                 last_seen: "NonEmptyString",
+    #               },
+    #               dns_request_action: {
+    #                 domain: "NonEmptyString",
+    #                 protocol: "NonEmptyString",
+    #                 blocked: false,
+    #               },
+    #               port_probe_action: {
+    #                 port_probe_details: [
+    #                   {
+    #                     local_port_details: {
+    #                       port: 1,
+    #                       port_name: "NonEmptyString",
+    #                     },
+    #                     local_ip_details: {
+    #                       ip_address_v4: "NonEmptyString",
+    #                     },
+    #                     remote_ip_details: {
+    #                       ip_address_v4: "NonEmptyString",
+    #                       organization: {
+    #                         asn: 1,
+    #                         asn_org: "NonEmptyString",
+    #                         isp: "NonEmptyString",
+    #                         org: "NonEmptyString",
+    #                       },
+    #                       country: {
+    #                         country_code: "NonEmptyString",
+    #                         country_name: "NonEmptyString",
+    #                       },
+    #                       city: {
+    #                         city_name: "NonEmptyString",
+    #                       },
+    #                       geo_location: {
+    #                         lon: 1.0,
+    #                         lat: 1.0,
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #                 blocked: false,
+    #               },
+    #             },
+    #             finding_provider_fields: {
+    #               confidence: 1,
+    #               criticality: 1,
+    #               related_findings: [
+    #                 {
+    #                   product_arn: "NonEmptyString", # required
+    #                   id: "NonEmptyString", # required
+    #                 },
+    #               ],
+    #               severity: {
+    #                 label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #                 original: "NonEmptyString",
+    #               },
+    #               types: ["NonEmptyString"],
     #             },
     #           },
     #         ],
@@ -14413,6 +20050,52 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An occurrence of sensitive data detected in a Microsoft Excel
+    # workbook, comma-separated value (CSV) file, or tab-separated value
+    # (TSV) file.
+    #
+    # @note When making an API call, you may pass Cell
+    #   data as a hash:
+    #
+    #       {
+    #         column: 1,
+    #         row: 1,
+    #         column_name: "NonEmptyString",
+    #         cell_reference: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] column
+    #   The column number of the column that contains the data. For a
+    #   Microsoft Excel workbook, the column number corresponds to the
+    #   alphabetical column identifiers. For example, a value of 1 for
+    #   Column corresponds to the A column in the workbook.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] row
+    #   The row number of the row that contains the data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column that contains the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] cell_reference
+    #   For a Microsoft Excel workbook, provides the location of the cell,
+    #   as an absolute cell reference, that contains the data. For example,
+    #   Sheet2!C5 for cell C5 on Sheet2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Cell AWS API Documentation
+    #
+    class Cell < Struct.new(
+      :column,
+      :row,
+      :column_name,
+      :cell_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An IPv4 CIDR block association.
     #
     # @note When making an API call, you may pass CidrBlockAssociation
@@ -14442,6 +20125,224 @@ module Aws::SecurityHub
       :association_id,
       :cidr_block,
       :cidr_block_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a city.
+    #
+    # @note When making an API call, you may pass City
+    #   data as a hash:
+    #
+    #       {
+    #         city_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] city_name
+    #   The name of the city.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/City AWS API Documentation
+    #
+    class City < Struct.new(
+      :city_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the sensitive data that was detected on the resource.
+    #
+    # @note When making an API call, you may pass ClassificationResult
+    #   data as a hash:
+    #
+    #       {
+    #         mime_type: "NonEmptyString",
+    #         size_classified: 1,
+    #         additional_occurrences: false,
+    #         status: {
+    #           code: "NonEmptyString",
+    #           reason: "NonEmptyString",
+    #         },
+    #         sensitive_data: [
+    #           {
+    #             category: "NonEmptyString",
+    #             detections: [
+    #               {
+    #                 count: 1,
+    #                 type: "NonEmptyString",
+    #                 occurrences: {
+    #                   line_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   offset_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   pages: [
+    #                     {
+    #                       page_number: 1,
+    #                       line_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                       offset_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     },
+    #                   ],
+    #                   records: [
+    #                     {
+    #                       json_path: "NonEmptyString",
+    #                       record_index: 1,
+    #                     },
+    #                   ],
+    #                   cells: [
+    #                     {
+    #                       column: 1,
+    #                       row: 1,
+    #                       column_name: "NonEmptyString",
+    #                       cell_reference: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             total_count: 1,
+    #           },
+    #         ],
+    #         custom_data_identifiers: {
+    #           detections: [
+    #             {
+    #               count: 1,
+    #               arn: "NonEmptyString",
+    #               name: "NonEmptyString",
+    #               occurrences: {
+    #                 line_ranges: [
+    #                   {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 ],
+    #                 offset_ranges: [
+    #                   {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 ],
+    #                 pages: [
+    #                   {
+    #                     page_number: 1,
+    #                     line_range: {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                     offset_range: {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   },
+    #                 ],
+    #                 records: [
+    #                   {
+    #                     json_path: "NonEmptyString",
+    #                     record_index: 1,
+    #                   },
+    #                 ],
+    #                 cells: [
+    #                   {
+    #                     column: 1,
+    #                     row: 1,
+    #                     column_name: "NonEmptyString",
+    #                     cell_reference: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #           total_count: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] mime_type
+    #   The type of content that the finding applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_classified
+    #   The total size in bytes of the affected data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_occurrences
+    #   Indicates whether there are additional occurrences of sensitive data
+    #   that are not included in the finding. This occurs when the number of
+    #   occurrences exceeds the maximum that can be included.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The current status of the sensitive data detection.
+    #   @return [Types::ClassificationStatus]
+    #
+    # @!attribute [rw] sensitive_data
+    #   Provides details about sensitive data that was identified based on
+    #   built-in configuration.
+    #   @return [Array<Types::SensitiveDataResult>]
+    #
+    # @!attribute [rw] custom_data_identifiers
+    #   Provides details about sensitive data that was identified based on
+    #   customer-defined configuration.
+    #   @return [Types::CustomDataIdentifiersResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ClassificationResult AWS API Documentation
+    #
+    class ClassificationResult < Struct.new(
+      :mime_type,
+      :size_classified,
+      :additional_occurrences,
+      :status,
+      :sensitive_data,
+      :custom_data_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the current status of the sensitive data
+    # detection.
+    #
+    # @note When making an API call, you may pass ClassificationStatus
+    #   data as a hash:
+    #
+    #       {
+    #         code: "NonEmptyString",
+    #         reason: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] code
+    #   The code that represents the status of the sensitive data detection.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A longer description of the current status of the sensitive data
+    #   detection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ClassificationStatus AWS API Documentation
+    #
+    class ClassificationStatus < Struct.new(
+      :code,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14557,6 +20458,33 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about a country.
+    #
+    # @note When making an API call, you may pass Country
+    #   data as a hash:
+    #
+    #       {
+    #         country_code: "NonEmptyString",
+    #         country_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] country_code
+    #   The 2-letter ISO 3166 country code for the country.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_name
+    #   The name of the country.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Country AWS API Documentation
+    #
+    class Country < Struct.new(
+      :country_code,
+      :country_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateActionTargetRequest
     #   data as a hash:
     #
@@ -14567,7 +20495,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the custom action target.
+    #   The name of the custom action target. Can contain up to 20
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -14575,7 +20504,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID for the custom action target.
+    #   The ID for the custom action target. Can contain up to 20
+    #   alphanumeric characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTargetRequest AWS API Documentation
@@ -15159,6 +21089,50 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #             },
     #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #         },
     #         group_by_attribute: "NonEmptyString", # required
     #       }
@@ -15207,18 +21181,18 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_details: [
+    #         account_details: [ # required
     #           {
-    #             account_id: "AccountId",
+    #             account_id: "AccountId", # required
     #             email: "NonEmptyString",
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] account_details
-    #   The list of accounts to associate with the Security Hub master
-    #   account. For each account, the list includes the account ID and the
-    #   email address.
+    #   The list of accounts to associate with the Security Hub
+    #   administrator account. For each account, the list includes the
+    #   account ID and optionally the email address.
     #   @return [Array<Types::AccountDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateMembersRequest AWS API Documentation
@@ -15238,6 +21212,170 @@ module Aws::SecurityHub
     #
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of detected instances of sensitive data.
+    #
+    # @note When making an API call, you may pass CustomDataIdentifiersDetections
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1,
+    #         arn: "NonEmptyString",
+    #         name: "NonEmptyString",
+    #         occurrences: {
+    #           line_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           offset_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           pages: [
+    #             {
+    #               page_number: 1,
+    #               line_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #               offset_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #             },
+    #           ],
+    #           records: [
+    #             {
+    #               json_path: "NonEmptyString",
+    #               record_index: 1,
+    #             },
+    #           ],
+    #           cells: [
+    #             {
+    #               column: 1,
+    #               row: 1,
+    #               column_name: "NonEmptyString",
+    #               cell_reference: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] count
+    #   The total number of occurrences of sensitive data that were
+    #   detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the custom identifier that was used to detect the
+    #   sensitive data.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   he name of the custom identifier that detected the sensitive data.
+    #   @return [String]
+    #
+    # @!attribute [rw] occurrences
+    #   Details about the sensitive data that was detected.
+    #   @return [Types::Occurrences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CustomDataIdentifiersDetections AWS API Documentation
+    #
+    class CustomDataIdentifiersDetections < Struct.new(
+      :count,
+      :arn,
+      :name,
+      :occurrences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an instance of sensitive data that was detected by a
+    # customer-defined identifier.
+    #
+    # @note When making an API call, you may pass CustomDataIdentifiersResult
+    #   data as a hash:
+    #
+    #       {
+    #         detections: [
+    #           {
+    #             count: 1,
+    #             arn: "NonEmptyString",
+    #             name: "NonEmptyString",
+    #             occurrences: {
+    #               line_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               offset_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               pages: [
+    #                 {
+    #                   page_number: 1,
+    #                   line_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                   offset_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               records: [
+    #                 {
+    #                   json_path: "NonEmptyString",
+    #                   record_index: 1,
+    #                 },
+    #               ],
+    #               cells: [
+    #                 {
+    #                   column: 1,
+    #                   row: 1,
+    #                   column_name: "NonEmptyString",
+    #                   cell_reference: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #         total_count: 1,
+    #       }
+    #
+    # @!attribute [rw] detections
+    #   The list of detected instances of sensitive data.
+    #   @return [Array<Types::CustomDataIdentifiersDetections>]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of occurrences of sensitive data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CustomDataIdentifiersResult AWS API Documentation
+    #
+    class CustomDataIdentifiersResult < Struct.new(
+      :detections,
+      :total_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15271,6 +21409,154 @@ module Aws::SecurityHub
       :version,
       :base_score,
       :base_vector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about sensitive data that was detected on a resource.
+    #
+    # @note When making an API call, you may pass DataClassificationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         detailed_results_location: "NonEmptyString",
+    #         result: {
+    #           mime_type: "NonEmptyString",
+    #           size_classified: 1,
+    #           additional_occurrences: false,
+    #           status: {
+    #             code: "NonEmptyString",
+    #             reason: "NonEmptyString",
+    #           },
+    #           sensitive_data: [
+    #             {
+    #               category: "NonEmptyString",
+    #               detections: [
+    #                 {
+    #                   count: 1,
+    #                   type: "NonEmptyString",
+    #                   occurrences: {
+    #                     line_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     offset_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     pages: [
+    #                       {
+    #                         page_number: 1,
+    #                         line_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                         offset_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       },
+    #                     ],
+    #                     records: [
+    #                       {
+    #                         json_path: "NonEmptyString",
+    #                         record_index: 1,
+    #                       },
+    #                     ],
+    #                     cells: [
+    #                       {
+    #                         column: 1,
+    #                         row: 1,
+    #                         column_name: "NonEmptyString",
+    #                         cell_reference: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #               total_count: 1,
+    #             },
+    #           ],
+    #           custom_data_identifiers: {
+    #             detections: [
+    #               {
+    #                 count: 1,
+    #                 arn: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 occurrences: {
+    #                   line_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   offset_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   pages: [
+    #                     {
+    #                       page_number: 1,
+    #                       line_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                       offset_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     },
+    #                   ],
+    #                   records: [
+    #                     {
+    #                       json_path: "NonEmptyString",
+    #                       record_index: 1,
+    #                     },
+    #                   ],
+    #                   cells: [
+    #                     {
+    #                       column: 1,
+    #                       row: 1,
+    #                       column_name: "NonEmptyString",
+    #                       cell_reference: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             total_count: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] detailed_results_location
+    #   The path to the folder or file that contains the sensitive data.
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   The details about the sensitive data that was detected on the
+    #   resource.
+    #   @return [Types::ClassificationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DataClassificationDetails AWS API Documentation
+    #
+    class DataClassificationDetails < Struct.new(
+      :detailed_results_location,
+      :result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15470,7 +21756,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -15601,12 +21887,41 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   If set to `true`, then Security Hub is enabled for new accounts. If
+    #   set to false, then new accounts are not added automatically.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] member_account_limit_reached
+    #   Whether the maximum number of allowed member accounts are already
+    #   associated with the Security Hub administrator account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationResponse < Struct.new(
+      :auto_enable,
+      :member_account_limit_reached)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProductsRequest
     #   data as a hash:
     #
     #       {
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         product_arn: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] next_token
@@ -15623,11 +21938,16 @@ module Aws::SecurityHub
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] product_arn
+    #   The ARN of the integration to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProductsRequest AWS API Documentation
     #
     class DescribeProductsRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :product_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15660,7 +21980,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a
-    #   supported standard.
+    #   supported standard. To get the subscription ARNs of the standards
+    #   you have enabled, use the ` GetEnabledStandards ` operation.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -15775,6 +22096,30 @@ module Aws::SecurityHub
     #
     class DisableImportFindingsForProductResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS account identifier of the Security Hub administrator
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubRequest AWS API Documentation
@@ -15784,6 +22129,16 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubResponse AWS API Documentation
     #
     class DisableSecurityHubResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromAdministratorAccountRequest AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromAdministratorAccountResponse AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -15799,12 +22154,12 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
     #   The account IDs of the member accounts to disassociate from the
-    #   master account.
+    #   administrator account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembersRequest AWS API Documentation
@@ -15818,6 +22173,40 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembersResponse AWS API Documentation
     #
     class DisassociateMembersResponse < Aws::EmptyStructure; end
+
+    # Provided if `ActionType` is `DNS_REQUEST`. It provides details about
+    # the DNS request that was detected.
+    #
+    # @note When making an API call, you may pass DnsRequestAction
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "NonEmptyString",
+    #         protocol: "NonEmptyString",
+    #         blocked: false,
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The DNS domain that is associated with the DNS request.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol that was used for the DNS request.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the DNS request was blocked.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DnsRequestAction AWS API Documentation
+    #
+    class DnsRequestAction < Struct.new(
+      :domain,
+      :protocol,
+      :blocked)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass EnableImportFindingsForProductRequest
     #   data as a hash:
@@ -15850,6 +22239,30 @@ module Aws::SecurityHub
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS account identifier of the account to designate as the
+    #   Security Hub administrator account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass EnableSecurityHubRequest
     #   data as a hash:
@@ -15885,6 +22298,148 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubResponse AWS API Documentation
     #
     class EnableSecurityHubResponse < Aws::EmptyStructure; end
+
+    # In a `BatchImportFindings` request, finding providers use
+    # `FindingProviderFields` to provide and update values for confidence,
+    # criticality, related findings, severity, and types.
+    #
+    # @note When making an API call, you may pass FindingProviderFields
+    #   data as a hash:
+    #
+    #       {
+    #         confidence: 1,
+    #         criticality: 1,
+    #         related_findings: [
+    #           {
+    #             product_arn: "NonEmptyString", # required
+    #             id: "NonEmptyString", # required
+    #           },
+    #         ],
+    #         severity: {
+    #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #           original: "NonEmptyString",
+    #         },
+    #         types: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] confidence
+    #   A finding's confidence. Confidence is defined as the likelihood
+    #   that a finding accurately identifies the behavior or issue that it
+    #   was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] criticality
+    #   The level of importance assigned to the resources associated with
+    #   the finding.
+    #
+    #   A score of 0 means that the underlying resources have no
+    #   criticality, and a score of 100 is reserved for the most critical
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_findings
+    #   A list of findings that are related to the current finding.
+    #   @return [Array<Types::RelatedFinding>]
+    #
+    # @!attribute [rw] severity
+    #   The severity of a finding.
+    #   @return [Types::FindingProviderSeverity]
+    #
+    # @!attribute [rw] types
+    #   One or more finding types in the format of
+    #   `namespace/category/classifier` that classify a finding.
+    #
+    #   Valid namespace values are: Software and Configuration Checks \|
+    #   TTPs \| Effects \| Unusual Behaviors \| Sensitive Data
+    #   Identifications
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingProviderFields AWS API Documentation
+    #
+    class FindingProviderFields < Struct.new(
+      :confidence,
+      :criticality,
+      :related_findings,
+      :severity,
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The severity assigned to the finding by the finding provider.
+    #
+    # @note When making an API call, you may pass FindingProviderSeverity
+    #   data as a hash:
+    #
+    #       {
+    #         label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #         original: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] label
+    #   The severity label assigned to the finding by the finding provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] original
+    #   The finding provider's original value for the severity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingProviderSeverity AWS API Documentation
+    #
+    class FindingProviderSeverity < Struct.new(
+      :label,
+      :original)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the latitude and longitude coordinates of a location.
+    #
+    # @note When making an API call, you may pass GeoLocation
+    #   data as a hash:
+    #
+    #       {
+    #         lon: 1.0,
+    #         lat: 1.0,
+    #       }
+    #
+    # @!attribute [rw] lon
+    #   The longitude of the location.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lat
+    #   The latitude of the location.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GeoLocation AWS API Documentation
+    #
+    class GeoLocation < Struct.new(
+      :lon,
+      :lat)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAdministratorAccountRequest AWS API Documentation
+    #
+    class GetAdministratorAccountRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] administrator
+    #   Details about an invitation.
+    #   @return [Types::Invitation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAdministratorAccountResponse AWS API Documentation
+    #
+    class GetAdministratorAccountResponse < Struct.new(
+      :administrator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass GetEnabledStandardsRequest
     #   data as a hash:
@@ -16500,6 +23055,50 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #             },
     #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #         },
     #         sort_criteria: [
     #           {
@@ -16680,8 +23279,8 @@ module Aws::SecurityHub
     class GetMasterAccountRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] master
-    #   A list of details about the Security Hub master account for the
-    #   current member account.
+    #   A list of details about the Security Hub administrator account for
+    #   the current member account.
     #   @return [Types::Invitation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetMasterAccountResponse AWS API Documentation
@@ -16726,6 +23325,35 @@ module Aws::SecurityHub
     class GetMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Internet Control Message Protocol (ICMP) type and code.
+    #
+    # @note When making an API call, you may pass IcmpTypeCode
+    #   data as a hash:
+    #
+    #       {
+    #         code: 1,
+    #         type: 1,
+    #       }
+    #
+    # @!attribute [rw] code
+    #   The ICMP code for which to deny or allow access. To deny or allow
+    #   all codes, use the value -1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The ICMP type for which to deny or allow access. To deny or allow
+    #   all types, use the value -1.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IcmpTypeCode AWS API Documentation
+    #
+    class IcmpTypeCode < Struct.new(
+      :code,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16858,8 +23486,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # AWS Security Hub isn't enabled for the account used to make this
-    # request.
+    # There is an issue with the account used to make the request. Either
+    # Security Hub is not enabled for the account, or the account does not
+    # have permission to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -16897,7 +23526,7 @@ module Aws::SecurityHub
     # Details about an invitation.
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Security Hub master account that the
+    #   The account ID of the Security Hub administrator account that the
     #   invitation was sent from.
     #   @return [String]
     #
@@ -16910,8 +23539,8 @@ module Aws::SecurityHub
     #   @return [Time]
     #
     # @!attribute [rw] member_status
-    #   The current status of the association between the member and master
-    #   accounts.
+    #   The current status of the association between the member and
+    #   administrator accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Invitation AWS API Documentation
@@ -16929,7 +23558,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -16975,6 +23604,45 @@ module Aws::SecurityHub
     #
     class IpFilter < Struct.new(
       :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an internet provider.
+    #
+    # @note When making an API call, you may pass IpOrganizationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         asn: 1,
+    #         asn_org: "NonEmptyString",
+    #         isp: "NonEmptyString",
+    #         org: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] asn
+    #   The Autonomous System Number (ASN) of the internet provider
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_org
+    #   The name of the organization that registered the ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] isp
+    #   The ISP information for the internet provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] org
+    #   The name of the internet provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IpOrganizationDetails AWS API Documentation
+    #
+    class IpOrganizationDetails < Struct.new(
+      :asn,
+      :asn_org,
+      :isp,
+      :org)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17034,8 +23702,8 @@ module Aws::SecurityHub
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS account limits. The error code describes the
-    # limit exceeded.
+    # beyond the current AWS account or throttling limits. The error code
+    # describes the limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -17160,12 +23828,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] only_associated
     #   Specifies which member accounts to include in the response based on
-    #   their relationship status with the master account. The default value
-    #   is `TRUE`.
+    #   their relationship status with the administrator account. The
+    #   default value is `TRUE`.
     #
     #   If `OnlyAssociated` is set to `TRUE`, the response includes member
-    #   accounts whose relationship status with the master is set to
-    #   `ENABLED` or `DISABLED`.
+    #   accounts whose relationship status with the administrator account is
+    #   set to `ENABLED`.
     #
     #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
@@ -17206,6 +23874,52 @@ module Aws::SecurityHub
     #
     class ListMembersResponse < Struct.new(
       :members,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOrganizationAdminAccountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `ListOrganizationAdminAccounts` operation, set the value of this
+    #   parameter to `NULL`. For subsequent calls to the operation, to
+    #   continue listing data, set the value of this parameter to the value
+    #   returned from the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsRequest AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_accounts
+    #   The list of Security Hub administrator accounts.
+    #   @return [Array<Types::AdminAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsResponse AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsResponse < Struct.new(
+      :admin_accounts,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -17384,34 +24098,42 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   The AWS account ID of the Security Hub master account associated
-    #   with this member account.
+    #   This is replaced by `AdministratorID`.
+    #
+    #   The AWS account ID of the Security Hub administrator account
+    #   associated with this member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] administrator_id
+    #   The AWS account ID of the Security Hub administrator account
+    #   associated with this member account.
     #   @return [String]
     #
     # @!attribute [rw] member_status
     #   The status of the relationship between the member account and its
-    #   master account.
+    #   administrator account.
     #
     #   The status can have one of the following values:
     #
-    #   * `CREATED` - Indicates that the master account added the member
-    #     account, but has not yet invited the member account.
+    #   * `CREATED` - Indicates that the administrator account added the
+    #     member account, but has not yet invited the member account.
     #
-    #   * `INVITED` - Indicates that the master account invited the member
-    #     account. The member account has not yet responded to the
+    #   * `INVITED` - Indicates that the administrator account invited the
+    #     member account. The member account has not yet responded to the
     #     invitation.
     #
-    #   * `ASSOCIATED` - Indicates that the member account accepted the
-    #     invitation.
+    #   * `ENABLED` - Indicates that the member account is currently active.
+    #     For manually invited member accounts, indicates that the member
+    #     account accepted the invitation.
     #
-    #   * `REMOVED` - Indicates that the master account disassociated the
-    #     member account.
+    #   * `REMOVED` - Indicates that the administrator account disassociated
+    #     the member account.
     #
     #   * `RESIGNED` - Indicates that the member account disassociated
-    #     themselves from the master account.
+    #     themselves from the administrator account.
     #
-    #   * `DELETED` - Indicates that the master account deleted the member
-    #     account.
+    #   * `DELETED` - Indicates that the administrator account deleted the
+    #     member account.
     #   @return [String]
     #
     # @!attribute [rw] invited_at
@@ -17430,6 +24152,7 @@ module Aws::SecurityHub
       :account_id,
       :email,
       :master_id,
+      :administrator_id,
       :member_status,
       :invited_at,
       :updated_at)
@@ -17529,6 +24252,84 @@ module Aws::SecurityHub
       :destination_ip_v6,
       :destination_port,
       :destination_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provided if `ActionType` is `NETWORK_CONNECTION`. It provides details
+    # about the attempted network connection that was detected.
+    #
+    # @note When making an API call, you may pass NetworkConnectionAction
+    #   data as a hash:
+    #
+    #       {
+    #         connection_direction: "NonEmptyString",
+    #         remote_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #           organization: {
+    #             asn: 1,
+    #             asn_org: "NonEmptyString",
+    #             isp: "NonEmptyString",
+    #             org: "NonEmptyString",
+    #           },
+    #           country: {
+    #             country_code: "NonEmptyString",
+    #             country_name: "NonEmptyString",
+    #           },
+    #           city: {
+    #             city_name: "NonEmptyString",
+    #           },
+    #           geo_location: {
+    #             lon: 1.0,
+    #             lat: 1.0,
+    #           },
+    #         },
+    #         remote_port_details: {
+    #           port: 1,
+    #           port_name: "NonEmptyString",
+    #         },
+    #         local_port_details: {
+    #           port: 1,
+    #           port_name: "NonEmptyString",
+    #         },
+    #         protocol: "NonEmptyString",
+    #         blocked: false,
+    #       }
+    #
+    # @!attribute [rw] connection_direction
+    #   The direction of the network connection request (`IN` or `OUT`).
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Information about the remote IP address that issued the network
+    #   connection request.
+    #   @return [Types::ActionRemoteIpDetails]
+    #
+    # @!attribute [rw] remote_port_details
+    #   Information about the port on the remote IP address.
+    #   @return [Types::ActionRemotePortDetails]
+    #
+    # @!attribute [rw] local_port_details
+    #   Information about the port on the EC2 instance.
+    #   @return [Types::ActionLocalPortDetails]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to make the network connection request.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the network connection attempt was blocked.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NetworkConnectionAction AWS API Documentation
+    #
+    class NetworkConnectionAction < Struct.new(
+      :connection_direction,
+      :remote_ip_details,
+      :remote_port_details,
+      :local_port_details,
+      :protocol,
+      :blocked)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17801,6 +24602,139 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The detected occurrences of sensitive data.
+    #
+    # @note When making an API call, you may pass Occurrences
+    #   data as a hash:
+    #
+    #       {
+    #         line_ranges: [
+    #           {
+    #             start: 1,
+    #             end: 1,
+    #             start_column: 1,
+    #           },
+    #         ],
+    #         offset_ranges: [
+    #           {
+    #             start: 1,
+    #             end: 1,
+    #             start_column: 1,
+    #           },
+    #         ],
+    #         pages: [
+    #           {
+    #             page_number: 1,
+    #             line_range: {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #             offset_range: {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           },
+    #         ],
+    #         records: [
+    #           {
+    #             json_path: "NonEmptyString",
+    #             record_index: 1,
+    #           },
+    #         ],
+    #         cells: [
+    #           {
+    #             column: 1,
+    #             row: 1,
+    #             column_name: "NonEmptyString",
+    #             cell_reference: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] line_ranges
+    #   Occurrences of sensitive data detected in a non-binary text file or
+    #   a Microsoft Word file. Non-binary text files include files such as
+    #   HTML, XML, JSON, and TXT files.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] offset_ranges
+    #   Occurrences of sensitive data detected in a binary text file.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] pages
+    #   Occurrences of sensitive data in an Adobe Portable Document Format
+    #   (PDF) file.
+    #   @return [Array<Types::Page>]
+    #
+    # @!attribute [rw] records
+    #   Occurrences of sensitive data in an Apache Avro object container or
+    #   an Apache Parquet file.
+    #   @return [Array<Types::Record>]
+    #
+    # @!attribute [rw] cells
+    #   Occurrences of sensitive data detected in Microsoft Excel workbooks,
+    #   comma-separated value (CSV) files, or tab-separated value (TSV)
+    #   files.
+    #   @return [Array<Types::Cell>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Occurrences AWS API Documentation
+    #
+    class Occurrences < Struct.new(
+      :line_ranges,
+      :offset_ranges,
+      :pages,
+      :records,
+      :cells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An occurrence of sensitive data in an Adobe Portable Document Format
+    # (PDF) file.
+    #
+    # @note When making an API call, you may pass Page
+    #   data as a hash:
+    #
+    #       {
+    #         page_number: 1,
+    #         line_range: {
+    #           start: 1,
+    #           end: 1,
+    #           start_column: 1,
+    #         },
+    #         offset_range: {
+    #           start: 1,
+    #           end: 1,
+    #           start_column: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] page_number
+    #   The page number of the page that contains the sensitive data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] line_range
+    #   An occurrence of sensitive data detected in a non-binary text file
+    #   or a Microsoft Word file. Non-binary text files include files such
+    #   as HTML, XML, JSON, and TXT files.
+    #   @return [Types::Range]
+    #
+    # @!attribute [rw] offset_range
+    #   An occurrence of sensitive data detected in a binary text file.
+    #   @return [Types::Range]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Page AWS API Documentation
+    #
+    class Page < Struct.new(
+      :page_number,
+      :line_range,
+      :offset_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides an overview of the patch compliance status for an instance
     # against a selected compliance standard.
     #
@@ -17908,6 +24842,126 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provided if `ActionType` is `PORT_PROBE`. It provides details about
+    # the attempted port probe that was detected.
+    #
+    # @note When making an API call, you may pass PortProbeAction
+    #   data as a hash:
+    #
+    #       {
+    #         port_probe_details: [
+    #           {
+    #             local_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             local_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #             },
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         blocked: false,
+    #       }
+    #
+    # @!attribute [rw] port_probe_details
+    #   Information about the ports affected by the port probe.
+    #   @return [Array<Types::PortProbeDetail>]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the port probe was blocked.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PortProbeAction AWS API Documentation
+    #
+    class PortProbeAction < Struct.new(
+      :port_probe_details,
+      :blocked)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A port scan that was part of the port probe. For each scan,
+    # PortProbeDetails provides information about the local IP address and
+    # port that were scanned, and the remote IP address that the scan
+    # originated from.
+    #
+    # @note When making an API call, you may pass PortProbeDetail
+    #   data as a hash:
+    #
+    #       {
+    #         local_port_details: {
+    #           port: 1,
+    #           port_name: "NonEmptyString",
+    #         },
+    #         local_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #         },
+    #         remote_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #           organization: {
+    #             asn: 1,
+    #             asn_org: "NonEmptyString",
+    #             isp: "NonEmptyString",
+    #             org: "NonEmptyString",
+    #           },
+    #           country: {
+    #             country_code: "NonEmptyString",
+    #             country_name: "NonEmptyString",
+    #           },
+    #           city: {
+    #             city_name: "NonEmptyString",
+    #           },
+    #           geo_location: {
+    #             lon: 1.0,
+    #             lat: 1.0,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] local_port_details
+    #   Provides information about the port that was scanned.
+    #   @return [Types::ActionLocalPortDetails]
+    #
+    # @!attribute [rw] local_ip_details
+    #   Provides information about the IP address where the scanned port is
+    #   located.
+    #   @return [Types::ActionLocalIpDetails]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Provides information about the remote IP address that performed the
+    #   scan.
+    #   @return [Types::ActionRemoteIpDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PortProbeDetail AWS API Documentation
+    #
+    class PortProbeDetail < Struct.new(
+      :local_port_details,
+      :local_ip_details,
+      :remote_ip_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A range of ports.
     #
     # @note When making an API call, you may pass PortRange
@@ -17931,6 +24985,33 @@ module Aws::SecurityHub
     class PortRange < Struct.new(
       :begin,
       :end)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A range of ports.
+    #
+    # @note When making an API call, you may pass PortRangeFromTo
+    #   data as a hash:
+    #
+    #       {
+    #         from: 1,
+    #         to: 1,
+    #       }
+    #
+    # @!attribute [rw] from
+    #   The first port in the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to
+    #   The last port in the port range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PortRangeFromTo AWS API Documentation
+    #
+    class PortRangeFromTo < Struct.new(
+      :from,
+      :to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18028,20 +25109,29 @@ module Aws::SecurityHub
     #   The types of integration that the product supports. Available values
     #   are the following.
     #
-    #   * `SEND_FINDINGS_TO_SECURITY_HUB` - Indicates that the integration
-    #     sends findings to Security Hub.
+    #   * `SEND_FINDINGS_TO_SECURITY_HUB` - The integration sends findings
+    #     to Security Hub.
     #
-    #   * `RECEIVE_FINDINGS_FROM_SECURITY_HUB` - Indicates that the
-    #     integration receives findings from Security Hub.
+    #   * `RECEIVE_FINDINGS_FROM_SECURITY_HUB` - The integration receives
+    #     findings from Security Hub.
+    #
+    #   * `UPDATE_FINDINGS_IN_SECURITY_HUB` - The integration does not send
+    #     new findings to Security Hub, but does make updates to the
+    #     findings that it receives from Security Hub.
     #   @return [Array<String>]
     #
     # @!attribute [rw] marketplace_url
-    #   The URL for the page that contains more information about the
-    #   product.
+    #   For integrations with AWS services, the AWS Console URL from which
+    #   to activate the service.
+    #
+    #   For integrations with third-party products, the AWS Marketplace URL
+    #   from which to subscribe to or purchase the product.
     #   @return [String]
     #
     # @!attribute [rw] activation_url
-    #   The URL used to activate the product.
+    #   The URL to the service or product documentation about the
+    #   integration with Security Hub, including how to activate the
+    #   integration.
     #   @return [String]
     #
     # @!attribute [rw] product_subscription_resource_policy
@@ -18060,6 +25150,44 @@ module Aws::SecurityHub
       :marketplace_url,
       :activation_url,
       :product_subscription_resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies where the sensitive data begins and ends.
+    #
+    # @note When making an API call, you may pass Range
+    #   data as a hash:
+    #
+    #       {
+    #         start: 1,
+    #         end: 1,
+    #         start_column: 1,
+    #       }
+    #
+    # @!attribute [rw] start
+    #   The number of lines (for a line range) or characters (for an offset
+    #   range) from the beginning of the file to the end of the sensitive
+    #   data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   The number of lines (for a line range) or characters (for an offset
+    #   range) from the beginning of the file to the end of the sensitive
+    #   data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_column
+    #   In the line where the sensitive data starts, the column within the
+    #   line where the sensitive data starts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Range AWS API Documentation
+    #
+    class Range < Struct.new(
+      :start,
+      :end,
+      :start_column)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18090,6 +25218,38 @@ module Aws::SecurityHub
     class Recommendation < Struct.new(
       :text,
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An occurrence of sensitive data in an Apache Avro object container or
+    # an Apache Parquet file.
+    #
+    # @note When making an API call, you may pass Record
+    #   data as a hash:
+    #
+    #       {
+    #         json_path: "NonEmptyString",
+    #         record_index: 1,
+    #       }
+    #
+    # @!attribute [rw] json_path
+    #   The path, as a JSONPath expression, to the field in the record that
+    #   contains the data. If the field name is longer than 20 characters,
+    #   it is truncated. If the path is longer than 250 characters, it is
+    #   truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_index
+    #   The record index, starting from 0, for the record that contains the
+    #   data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Record AWS API Documentation
+    #
+    class Record < Struct.new(
+      :json_path,
+      :record_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18159,6 +25319,130 @@ module Aws::SecurityHub
     #         resource_role: "NonEmptyString",
     #         tags: {
     #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         data_classification: {
+    #           detailed_results_location: "NonEmptyString",
+    #           result: {
+    #             mime_type: "NonEmptyString",
+    #             size_classified: 1,
+    #             additional_occurrences: false,
+    #             status: {
+    #               code: "NonEmptyString",
+    #               reason: "NonEmptyString",
+    #             },
+    #             sensitive_data: [
+    #               {
+    #                 category: "NonEmptyString",
+    #                 detections: [
+    #                   {
+    #                     count: 1,
+    #                     type: "NonEmptyString",
+    #                     occurrences: {
+    #                       line_ranges: [
+    #                         {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       ],
+    #                       offset_ranges: [
+    #                         {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       ],
+    #                       pages: [
+    #                         {
+    #                           page_number: 1,
+    #                           line_range: {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                           offset_range: {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         },
+    #                       ],
+    #                       records: [
+    #                         {
+    #                           json_path: "NonEmptyString",
+    #                           record_index: 1,
+    #                         },
+    #                       ],
+    #                       cells: [
+    #                         {
+    #                           column: 1,
+    #                           row: 1,
+    #                           column_name: "NonEmptyString",
+    #                           cell_reference: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #                 total_count: 1,
+    #               },
+    #             ],
+    #             custom_data_identifiers: {
+    #               detections: [
+    #                 {
+    #                   count: 1,
+    #                   arn: "NonEmptyString",
+    #                   name: "NonEmptyString",
+    #                   occurrences: {
+    #                     line_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     offset_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     pages: [
+    #                       {
+    #                         page_number: 1,
+    #                         line_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                         offset_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       },
+    #                     ],
+    #                     records: [
+    #                       {
+    #                         json_path: "NonEmptyString",
+    #                         record_index: 1,
+    #                       },
+    #                     ],
+    #                     cells: [
+    #                       {
+    #                         column: 1,
+    #                         row: 1,
+    #                         column_name: "NonEmptyString",
+    #                         cell_reference: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #               total_count: 1,
+    #             },
+    #           },
     #         },
     #         details: {
     #           aws_auto_scaling_auto_scaling_group: {
@@ -18251,6 +25535,11 @@ module Aws::SecurityHub
     #             vpc_id: "NonEmptyString",
     #             subnet_id: "NonEmptyString",
     #             launched_at: "NonEmptyString",
+    #             network_interfaces: [
+    #               {
+    #                 network_interface_id: "NonEmptyString",
+    #               },
+    #             ],
     #           },
     #           aws_ec2_network_interface: {
     #             attachment: {
@@ -18270,6 +25559,19 @@ module Aws::SecurityHub
     #               },
     #             ],
     #             source_dest_check: false,
+    #             ip_v6_addresses: [
+    #               {
+    #                 ip_v6_address: "NonEmptyString",
+    #               },
+    #             ],
+    #             private_ip_addresses: [
+    #               {
+    #                 private_ip_address: "NonEmptyString",
+    #                 private_dns_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             public_dns_name: "NonEmptyString",
+    #             public_ip: "NonEmptyString",
     #           },
     #           aws_ec2_security_group: {
     #             group_name: "NonEmptyString",
@@ -18387,6 +25689,58 @@ module Aws::SecurityHub
     #             network_interface_owner_id: "NonEmptyString",
     #             private_ip_address: "NonEmptyString",
     #           },
+    #           aws_ec2_subnet: {
+    #             assign_ipv_6_address_on_creation: false,
+    #             availability_zone: "NonEmptyString",
+    #             availability_zone_id: "NonEmptyString",
+    #             available_ip_address_count: 1,
+    #             cidr_block: "NonEmptyString",
+    #             default_for_az: false,
+    #             map_public_ip_on_launch: false,
+    #             owner_id: "NonEmptyString",
+    #             state: "NonEmptyString",
+    #             subnet_arn: "NonEmptyString",
+    #             subnet_id: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #             ipv_6_cidr_block_association_set: [
+    #               {
+    #                 association_id: "NonEmptyString",
+    #                 ipv_6_cidr_block: "NonEmptyString",
+    #                 cidr_block_state: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           aws_ec2_network_acl: {
+    #             is_default: false,
+    #             network_acl_id: "NonEmptyString",
+    #             owner_id: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #             associations: [
+    #               {
+    #                 network_acl_association_id: "NonEmptyString",
+    #                 network_acl_id: "NonEmptyString",
+    #                 subnet_id: "NonEmptyString",
+    #               },
+    #             ],
+    #             entries: [
+    #               {
+    #                 cidr_block: "NonEmptyString",
+    #                 egress: false,
+    #                 icmp_type_code: {
+    #                   code: 1,
+    #                   type: 1,
+    #                 },
+    #                 ipv_6_cidr_block: "NonEmptyString",
+    #                 port_range: {
+    #                   from: 1,
+    #                   to: 1,
+    #                 },
+    #                 protocol: "NonEmptyString",
+    #                 rule_action: "NonEmptyString",
+    #                 rule_number: 1,
+    #               },
+    #             ],
+    #           },
     #           aws_elbv_2_load_balancer: {
     #             availability_zones: [
     #               {
@@ -18407,6 +25761,40 @@ module Aws::SecurityHub
     #             type: "NonEmptyString",
     #             vpc_id: "NonEmptyString",
     #           },
+    #           aws_elastic_beanstalk_environment: {
+    #             application_name: "NonEmptyString",
+    #             cname: "NonEmptyString",
+    #             date_created: "NonEmptyString",
+    #             date_updated: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             endpoint_url: "NonEmptyString",
+    #             environment_arn: "NonEmptyString",
+    #             environment_id: "NonEmptyString",
+    #             environment_links: [
+    #               {
+    #                 environment_name: "NonEmptyString",
+    #                 link_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             environment_name: "NonEmptyString",
+    #             option_settings: [
+    #               {
+    #                 namespace: "NonEmptyString",
+    #                 option_name: "NonEmptyString",
+    #                 resource_name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             platform_arn: "NonEmptyString",
+    #             solution_stack_name: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             tier: {
+    #               name: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #               version: "NonEmptyString",
+    #             },
+    #             version_label: "NonEmptyString",
+    #           },
     #           aws_elasticsearch_domain: {
     #             access_policies: "NonEmptyString",
     #             domain_endpoint_options: {
@@ -18424,8 +25812,27 @@ module Aws::SecurityHub
     #               enabled: false,
     #               kms_key_id: "NonEmptyString",
     #             },
+    #             log_publishing_options: {
+    #               index_slow_logs: {
+    #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                 enabled: false,
+    #               },
+    #               search_slow_logs: {
+    #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                 enabled: false,
+    #               },
+    #             },
     #             node_to_node_encryption_options: {
     #               enabled: false,
+    #             },
+    #             service_software_options: {
+    #               automated_update_date: "NonEmptyString",
+    #               cancellable: false,
+    #               current_version: "NonEmptyString",
+    #               description: "NonEmptyString",
+    #               new_version: "NonEmptyString",
+    #               update_available: false,
+    #               update_status: "NonEmptyString",
     #             },
     #             vpc_options: {
     #               availability_zones: ["NonEmptyString"],
@@ -18448,6 +25855,67 @@ module Aws::SecurityHub
     #                 },
     #               ],
     #             },
+    #             bucket_lifecycle_configuration: {
+    #               rules: [
+    #                 {
+    #                   abort_incomplete_multipart_upload: {
+    #                     days_after_initiation: 1,
+    #                   },
+    #                   expiration_date: "NonEmptyString",
+    #                   expiration_in_days: 1,
+    #                   expired_object_delete_marker: false,
+    #                   filter: {
+    #                     predicate: {
+    #                       operands: [
+    #                         {
+    #                           prefix: "NonEmptyString",
+    #                           tag: {
+    #                             key: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       prefix: "NonEmptyString",
+    #                       tag: {
+    #                         key: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                   },
+    #                   id: "NonEmptyString",
+    #                   noncurrent_version_expiration_in_days: 1,
+    #                   noncurrent_version_transitions: [
+    #                     {
+    #                       days: 1,
+    #                       storage_class: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   prefix: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                   transitions: [
+    #                     {
+    #                       date: "NonEmptyString",
+    #                       days: 1,
+    #                       storage_class: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             public_access_block_configuration: {
+    #               block_public_acls: false,
+    #               block_public_policy: false,
+    #               ignore_public_acls: false,
+    #               restrict_public_buckets: false,
+    #             },
+    #           },
+    #           aws_s3_account_public_access_block: {
+    #             block_public_acls: false,
+    #             block_public_policy: false,
+    #             ignore_public_acls: false,
+    #             restrict_public_buckets: false,
     #           },
     #           aws_s3_object: {
     #             last_modified: "NonEmptyString",
@@ -18534,6 +26002,7 @@ module Aws::SecurityHub
     #             update_date: "NonEmptyString",
     #           },
     #           aws_api_gateway_v2_stage: {
+    #             client_certificate_id: "NonEmptyString",
     #             created_date: "NonEmptyString",
     #             description: "NonEmptyString",
     #             default_route_settings: {
@@ -18769,6 +26238,30 @@ module Aws::SecurityHub
     #             sns_topic_arn: "NonEmptyString",
     #             sns_topic_name: "NonEmptyString",
     #             trail_arn: "NonEmptyString",
+    #           },
+    #           aws_ssm_patch_compliance: {
+    #             patch: {
+    #               compliance_summary: {
+    #                 status: "NonEmptyString",
+    #                 compliant_critical_count: 1,
+    #                 compliant_high_count: 1,
+    #                 compliant_medium_count: 1,
+    #                 execution_type: "NonEmptyString",
+    #                 non_compliant_critical_count: 1,
+    #                 compliant_informational_count: 1,
+    #                 non_compliant_informational_count: 1,
+    #                 compliant_unspecified_count: 1,
+    #                 non_compliant_low_count: 1,
+    #                 non_compliant_high_count: 1,
+    #                 compliant_low_count: 1,
+    #                 compliance_type: "NonEmptyString",
+    #                 patch_baseline_id: "NonEmptyString",
+    #                 overall_severity: "NonEmptyString",
+    #                 non_compliant_medium_count: 1,
+    #                 non_compliant_unspecified_count: 1,
+    #                 patch_group: "NonEmptyString",
+    #               },
+    #             },
     #           },
     #           aws_certificate_manager_certificate: {
     #             certificate_authority_arn: "NonEmptyString",
@@ -19464,6 +26957,247 @@ module Aws::SecurityHub
     #             ],
     #             iam_database_authentication_enabled: false,
     #           },
+    #           aws_ecs_cluster: {
+    #             capacity_providers: ["NonEmptyString"],
+    #             cluster_settings: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             configuration: {
+    #               execute_command_configuration: {
+    #                 kms_key_id: "NonEmptyString",
+    #                 log_configuration: {
+    #                   cloud_watch_encryption_enabled: false,
+    #                   cloud_watch_log_group_name: "NonEmptyString",
+    #                   s3_bucket_name: "NonEmptyString",
+    #                   s3_encryption_enabled: false,
+    #                   s3_key_prefix: "NonEmptyString",
+    #                 },
+    #                 logging: "NonEmptyString",
+    #               },
+    #             },
+    #             default_capacity_provider_strategy: [
+    #               {
+    #                 base: 1,
+    #                 capacity_provider: "NonEmptyString",
+    #                 weight: 1,
+    #               },
+    #             ],
+    #           },
+    #           aws_ecs_task_definition: {
+    #             container_definitions: [
+    #               {
+    #                 command: ["NonEmptyString"],
+    #                 cpu: 1,
+    #                 depends_on: [
+    #                   {
+    #                     condition: "NonEmptyString",
+    #                     container_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 disable_networking: false,
+    #                 dns_search_domains: ["NonEmptyString"],
+    #                 dns_servers: ["NonEmptyString"],
+    #                 docker_labels: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 docker_security_options: ["NonEmptyString"],
+    #                 entry_point: ["NonEmptyString"],
+    #                 environment: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 environment_files: [
+    #                   {
+    #                     type: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 essential: false,
+    #                 extra_hosts: [
+    #                   {
+    #                     hostname: "NonEmptyString",
+    #                     ip_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 firelens_configuration: {
+    #                   options: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 health_check: {
+    #                   command: ["NonEmptyString"],
+    #                   interval: 1,
+    #                   retries: 1,
+    #                   start_period: 1,
+    #                   timeout: 1,
+    #                 },
+    #                 hostname: "NonEmptyString",
+    #                 image: "NonEmptyString",
+    #                 interactive: false,
+    #                 links: ["NonEmptyString"],
+    #                 linux_parameters: {
+    #                   capabilities: {
+    #                     add: ["NonEmptyString"],
+    #                     drop: ["NonEmptyString"],
+    #                   },
+    #                   devices: [
+    #                     {
+    #                       container_path: "NonEmptyString",
+    #                       host_path: "NonEmptyString",
+    #                       permissions: ["NonEmptyString"],
+    #                     },
+    #                   ],
+    #                   init_process_enabled: false,
+    #                   max_swap: 1,
+    #                   shared_memory_size: 1,
+    #                   swappiness: 1,
+    #                   tmpfs: [
+    #                     {
+    #                       container_path: "NonEmptyString",
+    #                       mount_options: ["NonEmptyString"],
+    #                       size: 1,
+    #                     },
+    #                   ],
+    #                 },
+    #                 log_configuration: {
+    #                   log_driver: "NonEmptyString",
+    #                   options: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   secret_options: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       value_from: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 memory: 1,
+    #                 memory_reservation: 1,
+    #                 mount_points: [
+    #                   {
+    #                     container_path: "NonEmptyString",
+    #                     read_only: false,
+    #                     source_volume: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 name: "NonEmptyString",
+    #                 port_mappings: [
+    #                   {
+    #                     container_port: 1,
+    #                     host_port: 1,
+    #                     protocol: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 privileged: false,
+    #                 pseudo_terminal: false,
+    #                 readonly_root_filesystem: false,
+    #                 repository_credentials: {
+    #                   credentials_parameter: "NonEmptyString",
+    #                 },
+    #                 resource_requirements: [
+    #                   {
+    #                     type: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 secrets: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value_from: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 start_timeout: 1,
+    #                 stop_timeout: 1,
+    #                 system_controls: [
+    #                   {
+    #                     namespace: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ulimits: [
+    #                   {
+    #                     hard_limit: 1,
+    #                     name: "NonEmptyString",
+    #                     soft_limit: 1,
+    #                   },
+    #                 ],
+    #                 user: "NonEmptyString",
+    #                 volumes_from: [
+    #                   {
+    #                     read_only: false,
+    #                     source_container: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 working_directory: "NonEmptyString",
+    #               },
+    #             ],
+    #             cpu: "NonEmptyString",
+    #             execution_role_arn: "NonEmptyString",
+    #             family: "NonEmptyString",
+    #             inference_accelerators: [
+    #               {
+    #                 device_name: "NonEmptyString",
+    #                 device_type: "NonEmptyString",
+    #               },
+    #             ],
+    #             ipc_mode: "NonEmptyString",
+    #             memory: "NonEmptyString",
+    #             network_mode: "NonEmptyString",
+    #             pid_mode: "NonEmptyString",
+    #             placement_constraints: [
+    #               {
+    #                 expression: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #               },
+    #             ],
+    #             proxy_configuration: {
+    #               container_name: "NonEmptyString",
+    #               proxy_configuration_properties: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               type: "NonEmptyString",
+    #             },
+    #             requires_compatibilities: ["NonEmptyString"],
+    #             task_role_arn: "NonEmptyString",
+    #             volumes: [
+    #               {
+    #                 docker_volume_configuration: {
+    #                   autoprovision: false,
+    #                   driver: "NonEmptyString",
+    #                   driver_opts: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   labels: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   scope: "NonEmptyString",
+    #                 },
+    #                 efs_volume_configuration: {
+    #                   authorization_config: {
+    #                     access_point_id: "NonEmptyString",
+    #                     iam: "NonEmptyString",
+    #                   },
+    #                   filesystem_id: "NonEmptyString",
+    #                   root_directory: "NonEmptyString",
+    #                   transit_encryption: "NonEmptyString",
+    #                   transit_encryption_port: 1,
+    #                 },
+    #                 host: {
+    #                   source_path: "NonEmptyString",
+    #                 },
+    #                 name: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
     #           container: {
     #             name: "NonEmptyString",
     #             image_id: "NonEmptyString",
@@ -19500,12 +27234,19 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] resource_role
+    #   Identifies the role of the resource in the finding. A resource is
+    #   either the actor or target of the finding activity,
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   A list of AWS tags associated with a resource at the time the
     #   finding was processed.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] data_classification
+    #   Contains information about sensitive data that was detected on the
+    #   resource.
+    #   @return [Types::DataClassificationDetails]
     #
     # @!attribute [rw] details
     #   Additional details about the resource related to a finding.
@@ -19520,6 +27261,7 @@ module Aws::SecurityHub
       :region,
       :resource_role,
       :tags,
+      :data_classification,
       :details)
       SENSITIVE = []
       include Aws::Structure
@@ -19650,6 +27392,11 @@ module Aws::SecurityHub
     #           vpc_id: "NonEmptyString",
     #           subnet_id: "NonEmptyString",
     #           launched_at: "NonEmptyString",
+    #           network_interfaces: [
+    #             {
+    #               network_interface_id: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         aws_ec2_network_interface: {
     #           attachment: {
@@ -19669,6 +27416,19 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           source_dest_check: false,
+    #           ip_v6_addresses: [
+    #             {
+    #               ip_v6_address: "NonEmptyString",
+    #             },
+    #           ],
+    #           private_ip_addresses: [
+    #             {
+    #               private_ip_address: "NonEmptyString",
+    #               private_dns_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           public_dns_name: "NonEmptyString",
+    #           public_ip: "NonEmptyString",
     #         },
     #         aws_ec2_security_group: {
     #           group_name: "NonEmptyString",
@@ -19786,6 +27546,58 @@ module Aws::SecurityHub
     #           network_interface_owner_id: "NonEmptyString",
     #           private_ip_address: "NonEmptyString",
     #         },
+    #         aws_ec2_subnet: {
+    #           assign_ipv_6_address_on_creation: false,
+    #           availability_zone: "NonEmptyString",
+    #           availability_zone_id: "NonEmptyString",
+    #           available_ip_address_count: 1,
+    #           cidr_block: "NonEmptyString",
+    #           default_for_az: false,
+    #           map_public_ip_on_launch: false,
+    #           owner_id: "NonEmptyString",
+    #           state: "NonEmptyString",
+    #           subnet_arn: "NonEmptyString",
+    #           subnet_id: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #           ipv_6_cidr_block_association_set: [
+    #             {
+    #               association_id: "NonEmptyString",
+    #               ipv_6_cidr_block: "NonEmptyString",
+    #               cidr_block_state: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         aws_ec2_network_acl: {
+    #           is_default: false,
+    #           network_acl_id: "NonEmptyString",
+    #           owner_id: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #           associations: [
+    #             {
+    #               network_acl_association_id: "NonEmptyString",
+    #               network_acl_id: "NonEmptyString",
+    #               subnet_id: "NonEmptyString",
+    #             },
+    #           ],
+    #           entries: [
+    #             {
+    #               cidr_block: "NonEmptyString",
+    #               egress: false,
+    #               icmp_type_code: {
+    #                 code: 1,
+    #                 type: 1,
+    #               },
+    #               ipv_6_cidr_block: "NonEmptyString",
+    #               port_range: {
+    #                 from: 1,
+    #                 to: 1,
+    #               },
+    #               protocol: "NonEmptyString",
+    #               rule_action: "NonEmptyString",
+    #               rule_number: 1,
+    #             },
+    #           ],
+    #         },
     #         aws_elbv_2_load_balancer: {
     #           availability_zones: [
     #             {
@@ -19806,6 +27618,40 @@ module Aws::SecurityHub
     #           type: "NonEmptyString",
     #           vpc_id: "NonEmptyString",
     #         },
+    #         aws_elastic_beanstalk_environment: {
+    #           application_name: "NonEmptyString",
+    #           cname: "NonEmptyString",
+    #           date_created: "NonEmptyString",
+    #           date_updated: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           endpoint_url: "NonEmptyString",
+    #           environment_arn: "NonEmptyString",
+    #           environment_id: "NonEmptyString",
+    #           environment_links: [
+    #             {
+    #               environment_name: "NonEmptyString",
+    #               link_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           environment_name: "NonEmptyString",
+    #           option_settings: [
+    #             {
+    #               namespace: "NonEmptyString",
+    #               option_name: "NonEmptyString",
+    #               resource_name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           platform_arn: "NonEmptyString",
+    #           solution_stack_name: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           tier: {
+    #             name: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #             version: "NonEmptyString",
+    #           },
+    #           version_label: "NonEmptyString",
+    #         },
     #         aws_elasticsearch_domain: {
     #           access_policies: "NonEmptyString",
     #           domain_endpoint_options: {
@@ -19823,8 +27669,27 @@ module Aws::SecurityHub
     #             enabled: false,
     #             kms_key_id: "NonEmptyString",
     #           },
+    #           log_publishing_options: {
+    #             index_slow_logs: {
+    #               cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #               enabled: false,
+    #             },
+    #             search_slow_logs: {
+    #               cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #               enabled: false,
+    #             },
+    #           },
     #           node_to_node_encryption_options: {
     #             enabled: false,
+    #           },
+    #           service_software_options: {
+    #             automated_update_date: "NonEmptyString",
+    #             cancellable: false,
+    #             current_version: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             new_version: "NonEmptyString",
+    #             update_available: false,
+    #             update_status: "NonEmptyString",
     #           },
     #           vpc_options: {
     #             availability_zones: ["NonEmptyString"],
@@ -19847,6 +27712,67 @@ module Aws::SecurityHub
     #               },
     #             ],
     #           },
+    #           bucket_lifecycle_configuration: {
+    #             rules: [
+    #               {
+    #                 abort_incomplete_multipart_upload: {
+    #                   days_after_initiation: 1,
+    #                 },
+    #                 expiration_date: "NonEmptyString",
+    #                 expiration_in_days: 1,
+    #                 expired_object_delete_marker: false,
+    #                 filter: {
+    #                   predicate: {
+    #                     operands: [
+    #                       {
+    #                         prefix: "NonEmptyString",
+    #                         tag: {
+    #                           key: "NonEmptyString",
+    #                           value: "NonEmptyString",
+    #                         },
+    #                         type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     prefix: "NonEmptyString",
+    #                     tag: {
+    #                       key: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 id: "NonEmptyString",
+    #                 noncurrent_version_expiration_in_days: 1,
+    #                 noncurrent_version_transitions: [
+    #                   {
+    #                     days: 1,
+    #                     storage_class: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 prefix: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 transitions: [
+    #                   {
+    #                     date: "NonEmptyString",
+    #                     days: 1,
+    #                     storage_class: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           public_access_block_configuration: {
+    #             block_public_acls: false,
+    #             block_public_policy: false,
+    #             ignore_public_acls: false,
+    #             restrict_public_buckets: false,
+    #           },
+    #         },
+    #         aws_s3_account_public_access_block: {
+    #           block_public_acls: false,
+    #           block_public_policy: false,
+    #           ignore_public_acls: false,
+    #           restrict_public_buckets: false,
     #         },
     #         aws_s3_object: {
     #           last_modified: "NonEmptyString",
@@ -19933,6 +27859,7 @@ module Aws::SecurityHub
     #           update_date: "NonEmptyString",
     #         },
     #         aws_api_gateway_v2_stage: {
+    #           client_certificate_id: "NonEmptyString",
     #           created_date: "NonEmptyString",
     #           description: "NonEmptyString",
     #           default_route_settings: {
@@ -20168,6 +28095,30 @@ module Aws::SecurityHub
     #           sns_topic_arn: "NonEmptyString",
     #           sns_topic_name: "NonEmptyString",
     #           trail_arn: "NonEmptyString",
+    #         },
+    #         aws_ssm_patch_compliance: {
+    #           patch: {
+    #             compliance_summary: {
+    #               status: "NonEmptyString",
+    #               compliant_critical_count: 1,
+    #               compliant_high_count: 1,
+    #               compliant_medium_count: 1,
+    #               execution_type: "NonEmptyString",
+    #               non_compliant_critical_count: 1,
+    #               compliant_informational_count: 1,
+    #               non_compliant_informational_count: 1,
+    #               compliant_unspecified_count: 1,
+    #               non_compliant_low_count: 1,
+    #               non_compliant_high_count: 1,
+    #               compliant_low_count: 1,
+    #               compliance_type: "NonEmptyString",
+    #               patch_baseline_id: "NonEmptyString",
+    #               overall_severity: "NonEmptyString",
+    #               non_compliant_medium_count: 1,
+    #               non_compliant_unspecified_count: 1,
+    #               patch_group: "NonEmptyString",
+    #             },
+    #           },
     #         },
     #         aws_certificate_manager_certificate: {
     #           certificate_authority_arn: "NonEmptyString",
@@ -20863,6 +28814,247 @@ module Aws::SecurityHub
     #           ],
     #           iam_database_authentication_enabled: false,
     #         },
+    #         aws_ecs_cluster: {
+    #           capacity_providers: ["NonEmptyString"],
+    #           cluster_settings: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           configuration: {
+    #             execute_command_configuration: {
+    #               kms_key_id: "NonEmptyString",
+    #               log_configuration: {
+    #                 cloud_watch_encryption_enabled: false,
+    #                 cloud_watch_log_group_name: "NonEmptyString",
+    #                 s3_bucket_name: "NonEmptyString",
+    #                 s3_encryption_enabled: false,
+    #                 s3_key_prefix: "NonEmptyString",
+    #               },
+    #               logging: "NonEmptyString",
+    #             },
+    #           },
+    #           default_capacity_provider_strategy: [
+    #             {
+    #               base: 1,
+    #               capacity_provider: "NonEmptyString",
+    #               weight: 1,
+    #             },
+    #           ],
+    #         },
+    #         aws_ecs_task_definition: {
+    #           container_definitions: [
+    #             {
+    #               command: ["NonEmptyString"],
+    #               cpu: 1,
+    #               depends_on: [
+    #                 {
+    #                   condition: "NonEmptyString",
+    #                   container_name: "NonEmptyString",
+    #                 },
+    #               ],
+    #               disable_networking: false,
+    #               dns_search_domains: ["NonEmptyString"],
+    #               dns_servers: ["NonEmptyString"],
+    #               docker_labels: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               docker_security_options: ["NonEmptyString"],
+    #               entry_point: ["NonEmptyString"],
+    #               environment: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               environment_files: [
+    #                 {
+    #                   type: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               essential: false,
+    #               extra_hosts: [
+    #                 {
+    #                   hostname: "NonEmptyString",
+    #                   ip_address: "NonEmptyString",
+    #                 },
+    #               ],
+    #               firelens_configuration: {
+    #                 options: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #               },
+    #               health_check: {
+    #                 command: ["NonEmptyString"],
+    #                 interval: 1,
+    #                 retries: 1,
+    #                 start_period: 1,
+    #                 timeout: 1,
+    #               },
+    #               hostname: "NonEmptyString",
+    #               image: "NonEmptyString",
+    #               interactive: false,
+    #               links: ["NonEmptyString"],
+    #               linux_parameters: {
+    #                 capabilities: {
+    #                   add: ["NonEmptyString"],
+    #                   drop: ["NonEmptyString"],
+    #                 },
+    #                 devices: [
+    #                   {
+    #                     container_path: "NonEmptyString",
+    #                     host_path: "NonEmptyString",
+    #                     permissions: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #                 init_process_enabled: false,
+    #                 max_swap: 1,
+    #                 shared_memory_size: 1,
+    #                 swappiness: 1,
+    #                 tmpfs: [
+    #                   {
+    #                     container_path: "NonEmptyString",
+    #                     mount_options: ["NonEmptyString"],
+    #                     size: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               log_configuration: {
+    #                 log_driver: "NonEmptyString",
+    #                 options: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 secret_options: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value_from: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               memory: 1,
+    #               memory_reservation: 1,
+    #               mount_points: [
+    #                 {
+    #                   container_path: "NonEmptyString",
+    #                   read_only: false,
+    #                   source_volume: "NonEmptyString",
+    #                 },
+    #               ],
+    #               name: "NonEmptyString",
+    #               port_mappings: [
+    #                 {
+    #                   container_port: 1,
+    #                   host_port: 1,
+    #                   protocol: "NonEmptyString",
+    #                 },
+    #               ],
+    #               privileged: false,
+    #               pseudo_terminal: false,
+    #               readonly_root_filesystem: false,
+    #               repository_credentials: {
+    #                 credentials_parameter: "NonEmptyString",
+    #               },
+    #               resource_requirements: [
+    #                 {
+    #                   type: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               secrets: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value_from: "NonEmptyString",
+    #                 },
+    #               ],
+    #               start_timeout: 1,
+    #               stop_timeout: 1,
+    #               system_controls: [
+    #                 {
+    #                   namespace: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               ulimits: [
+    #                 {
+    #                   hard_limit: 1,
+    #                   name: "NonEmptyString",
+    #                   soft_limit: 1,
+    #                 },
+    #               ],
+    #               user: "NonEmptyString",
+    #               volumes_from: [
+    #                 {
+    #                   read_only: false,
+    #                   source_container: "NonEmptyString",
+    #                 },
+    #               ],
+    #               working_directory: "NonEmptyString",
+    #             },
+    #           ],
+    #           cpu: "NonEmptyString",
+    #           execution_role_arn: "NonEmptyString",
+    #           family: "NonEmptyString",
+    #           inference_accelerators: [
+    #             {
+    #               device_name: "NonEmptyString",
+    #               device_type: "NonEmptyString",
+    #             },
+    #           ],
+    #           ipc_mode: "NonEmptyString",
+    #           memory: "NonEmptyString",
+    #           network_mode: "NonEmptyString",
+    #           pid_mode: "NonEmptyString",
+    #           placement_constraints: [
+    #             {
+    #               expression: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #             },
+    #           ],
+    #           proxy_configuration: {
+    #             container_name: "NonEmptyString",
+    #             proxy_configuration_properties: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             type: "NonEmptyString",
+    #           },
+    #           requires_compatibilities: ["NonEmptyString"],
+    #           task_role_arn: "NonEmptyString",
+    #           volumes: [
+    #             {
+    #               docker_volume_configuration: {
+    #                 autoprovision: false,
+    #                 driver: "NonEmptyString",
+    #                 driver_opts: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 labels: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 scope: "NonEmptyString",
+    #               },
+    #               efs_volume_configuration: {
+    #                 authorization_config: {
+    #                   access_point_id: "NonEmptyString",
+    #                   iam: "NonEmptyString",
+    #                 },
+    #                 filesystem_id: "NonEmptyString",
+    #                 root_directory: "NonEmptyString",
+    #                 transit_encryption: "NonEmptyString",
+    #                 transit_encryption_port: 1,
+    #               },
+    #               host: {
+    #                 source_path: "NonEmptyString",
+    #               },
+    #               name: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
     #         container: {
     #           name: "NonEmptyString",
     #           image_id: "NonEmptyString",
@@ -20887,7 +29079,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsCloudFrontDistributionDetails]
     #
     # @!attribute [rw] aws_ec2_instance
-    #   Details about an Amazon EC2 instance related to a finding.
+    #   Details about an EC2 instance related to a finding.
     #   @return [Types::AwsEc2InstanceDetails]
     #
     # @!attribute [rw] aws_ec2_network_interface
@@ -20910,9 +29102,21 @@ module Aws::SecurityHub
     #   Details about an Elastic IP address.
     #   @return [Types::AwsEc2EipDetails]
     #
+    # @!attribute [rw] aws_ec2_subnet
+    #   Details about a subnet in EC2.
+    #   @return [Types::AwsEc2SubnetDetails]
+    #
+    # @!attribute [rw] aws_ec2_network_acl
+    #   Details about an EC2 network access control list (ACL).
+    #   @return [Types::AwsEc2NetworkAclDetails]
+    #
     # @!attribute [rw] aws_elbv_2_load_balancer
     #   Details about a load balancer.
     #   @return [Types::AwsElbv2LoadBalancerDetails]
+    #
+    # @!attribute [rw] aws_elastic_beanstalk_environment
+    #   Details about an Elastic Beanstalk environment.
+    #   @return [Types::AwsElasticBeanstalkEnvironmentDetails]
     #
     # @!attribute [rw] aws_elasticsearch_domain
     #   Details for an Elasticsearch domain.
@@ -20921,6 +29125,11 @@ module Aws::SecurityHub
     # @!attribute [rw] aws_s3_bucket
     #   Details about an Amazon S3 bucket related to a finding.
     #   @return [Types::AwsS3BucketDetails]
+    #
+    # @!attribute [rw] aws_s3_account_public_access_block
+    #   Details about the Amazon S3 Public Access Block configuration for an
+    #   account.
+    #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
     #
     # @!attribute [rw] aws_s3_object
     #   Details about an Amazon S3 object related to a finding.
@@ -20943,9 +29152,11 @@ module Aws::SecurityHub
     #   @return [Types::AwsIamPolicyDetails]
     #
     # @!attribute [rw] aws_api_gateway_v2_stage
+    #   Provides information about a version 2 stage for Amazon API Gateway.
     #   @return [Types::AwsApiGatewayV2StageDetails]
     #
     # @!attribute [rw] aws_api_gateway_v2_api
+    #   Provides information about a version 2 API in Amazon API Gateway.
     #   @return [Types::AwsApiGatewayV2ApiDetails]
     #
     # @!attribute [rw] aws_dynamo_db_table
@@ -20953,24 +29164,37 @@ module Aws::SecurityHub
     #   @return [Types::AwsDynamoDbTableDetails]
     #
     # @!attribute [rw] aws_api_gateway_stage
+    #   Provides information about a version 1 Amazon API Gateway stage.
     #   @return [Types::AwsApiGatewayStageDetails]
     #
     # @!attribute [rw] aws_api_gateway_rest_api
+    #   Provides information about a REST API in version 1 of Amazon API
+    #   Gateway.
     #   @return [Types::AwsApiGatewayRestApiDetails]
     #
     # @!attribute [rw] aws_cloud_trail_trail
+    #   Provides details about a CloudTrail trail.
     #   @return [Types::AwsCloudTrailTrailDetails]
     #
+    # @!attribute [rw] aws_ssm_patch_compliance
+    #   Provides information about the state of a patch on an instance based
+    #   on the patch baseline that was used to patch the instance.
+    #   @return [Types::AwsSsmPatchComplianceDetails]
+    #
     # @!attribute [rw] aws_certificate_manager_certificate
+    #   Provides details about an AWS Certificate Manager (ACM) certificate.
     #   @return [Types::AwsCertificateManagerCertificateDetails]
     #
     # @!attribute [rw] aws_redshift_cluster
+    #   Contains details about an Amazon Redshift cluster.
     #   @return [Types::AwsRedshiftClusterDetails]
     #
     # @!attribute [rw] aws_elb_load_balancer
+    #   contains details about a Classic Load Balancer.
     #   @return [Types::AwsElbLoadBalancerDetails]
     #
     # @!attribute [rw] aws_iam_group
+    #   Contains details about an IAM group.
     #   @return [Types::AwsIamGroupDetails]
     #
     # @!attribute [rw] aws_iam_role
@@ -21017,6 +29241,16 @@ module Aws::SecurityHub
     #   Details about an Amazon RDS database cluster.
     #   @return [Types::AwsRdsDbClusterDetails]
     #
+    # @!attribute [rw] aws_ecs_cluster
+    #   Details about an ECS cluster.
+    #   @return [Types::AwsEcsClusterDetails]
+    #
+    # @!attribute [rw] aws_ecs_task_definition
+    #   Details about a task definition. A task definition describes the
+    #   container and volume definitions of an Amazon Elastic Container
+    #   Service task.
+    #   @return [Types::AwsEcsTaskDefinitionDetails]
+    #
     # @!attribute [rw] container
     #   Details about a container resource related to a finding.
     #   @return [Types::ContainerDetails]
@@ -21047,9 +29281,13 @@ module Aws::SecurityHub
       :aws_ec2_volume,
       :aws_ec2_vpc,
       :aws_ec2_eip,
+      :aws_ec2_subnet,
+      :aws_ec2_network_acl,
       :aws_elbv_2_load_balancer,
+      :aws_elastic_beanstalk_environment,
       :aws_elasticsearch_domain,
       :aws_s3_bucket,
+      :aws_s3_account_public_access_block,
       :aws_s3_object,
       :aws_secrets_manager_secret,
       :aws_iam_access_key,
@@ -21061,6 +29299,7 @@ module Aws::SecurityHub
       :aws_api_gateway_stage,
       :aws_api_gateway_rest_api,
       :aws_cloud_trail_trail,
+      :aws_ssm_patch_compliance,
       :aws_certificate_manager_certificate,
       :aws_redshift_cluster,
       :aws_elb_load_balancer,
@@ -21076,6 +29315,8 @@ module Aws::SecurityHub
       :aws_rds_db_snapshot,
       :aws_rds_db_cluster_snapshot,
       :aws_rds_db_cluster,
+      :aws_ecs_cluster,
+      :aws_ecs_task_definition,
       :container,
       :other)
       SENSITIVE = []
@@ -21119,11 +29360,176 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The list of detected instances of sensitive data.
+    #
+    # @note When making an API call, you may pass SensitiveDataDetections
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1,
+    #         type: "NonEmptyString",
+    #         occurrences: {
+    #           line_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           offset_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           pages: [
+    #             {
+    #               page_number: 1,
+    #               line_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #               offset_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #             },
+    #           ],
+    #           records: [
+    #             {
+    #               json_path: "NonEmptyString",
+    #               record_index: 1,
+    #             },
+    #           ],
+    #           cells: [
+    #             {
+    #               column: 1,
+    #               row: 1,
+    #               column_name: "NonEmptyString",
+    #               cell_reference: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] count
+    #   The total number of occurrences of sensitive data that were
+    #   detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of sensitive data that was detected. For example, the type
+    #   might indicate that the data is an email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] occurrences
+    #   Details about the sensitive data that was detected.
+    #   @return [Types::Occurrences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SensitiveDataDetections AWS API Documentation
+    #
+    class SensitiveDataDetections < Struct.new(
+      :count,
+      :type,
+      :occurrences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a detected instance of sensitive data that are based on
+    # built-in identifiers.
+    #
+    # @note When making an API call, you may pass SensitiveDataResult
+    #   data as a hash:
+    #
+    #       {
+    #         category: "NonEmptyString",
+    #         detections: [
+    #           {
+    #             count: 1,
+    #             type: "NonEmptyString",
+    #             occurrences: {
+    #               line_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               offset_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               pages: [
+    #                 {
+    #                   page_number: 1,
+    #                   line_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                   offset_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               records: [
+    #                 {
+    #                   json_path: "NonEmptyString",
+    #                   record_index: 1,
+    #                 },
+    #               ],
+    #               cells: [
+    #                 {
+    #                   column: 1,
+    #                   row: 1,
+    #                   column_name: "NonEmptyString",
+    #                   cell_reference: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #         total_count: 1,
+    #       }
+    #
+    # @!attribute [rw] category
+    #   The category of sensitive data that was detected. For example, the
+    #   category can indicate that the sensitive data involved credentials,
+    #   financial information, or personal information.
+    #   @return [String]
+    #
+    # @!attribute [rw] detections
+    #   The list of detected instances of sensitive data.
+    #   @return [Array<Types::SensitiveDataDetections>]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of occurrences of sensitive data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SensitiveDataResult AWS API Documentation
+    #
+    class SensitiveDataResult < Struct.new(
+      :category,
+      :detections,
+      :total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The severity of the finding.
     #
-    # The finding provider can provide the initial severity, but cannot
-    # update it after that. The severity can only be updated by a master
-    # account. It cannot be updated by a member account.
+    # The finding provider can provide the initial severity. The finding
+    # provider can only update the severity if it has not been updated using
+    # `BatchUpdateFindings`.
     #
     # The finding must have either `Label` or `Normalized` populated. If
     # only one of these attributes is populated, then Security Hub
@@ -21465,7 +29871,20 @@ module Aws::SecurityHub
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] standards_status
-    #   The status of the standards subscription.
+    #   The status of the standard subscription.
+    #
+    #   The status values are as follows:
+    #
+    #   * `PENDING` - Standard is in the process of being enabled.
+    #
+    #   * `READY` - Standard is enabled.
+    #
+    #   * `INCOMPLETE` - Standard could not be enabled completely. Some
+    #     controls may not be available.
+    #
+    #   * `DELETING` - Standard is in the process of being disabled.
+    #
+    #   * `FAILED` - Standard could not be disabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription AWS API Documentation
@@ -21655,7 +30074,9 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to add to the resource.
+    #   The tags to add to the resource. You can add up to 50 tags at a
+    #   time. The tag keys can be no longer than 128 characters. The tag
+    #   values can be no longer than 256 characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TagResourceRequest AWS API Documentation
@@ -21746,6 +30167,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] tag_keys
     #   The tag keys associated with the tags to remove from the resource.
+    #   You can remove up to 50 tags at a time.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UntagResourceRequest AWS API Documentation
@@ -22354,6 +30776,50 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #             },
     #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #         },
     #         note: {
     #           text: "NonEmptyString", # required
@@ -22949,6 +31415,50 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #             },
     #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #         },
     #         group_by_attribute: "NonEmptyString",
     #       }
@@ -22983,6 +31493,36 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateInsightResponse AWS API Documentation
     #
     class UpdateInsightResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   By default, this is `false`, and new accounts are not added
+    #   automatically.
+    #
+    #   To automatically enable Security Hub for new accounts, set this to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationRequest AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationRequest < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationResponse AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateSecurityHubConfigurationRequest
     #   data as a hash:
@@ -23279,6 +31819,14 @@ module Aws::SecurityHub
     #
     #   * `NEW` - The initial state of a finding, before it is reviewed.
     #
+    #     Security Hub also resets the workflow status from `NOTIFIED` or
+    #     `RESOLVED` to `NEW` in the following cases:
+    #
+    #     * `RecordState` changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * `ComplianceStatus` changes from `PASSED` to either `WARNING`,
+    #       `FAILED`, or `NOT_AVAILABLE`.
+    #
     #   * `NOTIFIED` - Indicates that you notified the resource owner about
     #     the security issue. Used when the initial reviewer is not the
     #     resource owner, and needs intervention from the resource owner.
@@ -23312,6 +31860,14 @@ module Aws::SecurityHub
     #   are the following.
     #
     #   * `NEW` - The initial state of a finding, before it is reviewed.
+    #
+    #     Security Hub also resets `WorkFlowStatus` from `NOTIFIED` or
+    #     `RESOLVED` to `NEW` in the following cases:
+    #
+    #     * The record state changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * The compliance status changes from `PASSED` to either `WARNING`,
+    #       `FAILED`, or `NOT_AVAILABLE`.
     #
     #   * `NOTIFIED` - Indicates that you notified the resource owner about
     #     the security issue. Used when the initial reviewer is not the

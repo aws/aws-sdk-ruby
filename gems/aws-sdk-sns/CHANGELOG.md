@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-07-06)
+------------------
+
+* Feature - Documentation updates for Amazon SNS.
+
+1.41.0 (2021-06-01)
+------------------
+
+* Feature - This release adds SMS sandbox in Amazon SNS and the ability to view all configured origination numbers. The SMS sandbox provides a safe environment for sending SMS messages, without risking your reputation as an SMS sender.
+
+1.40.0 (2021-04-23)
+------------------
+
+* Feature - Amazon SNS adds two new attributes, TemplateId and EntityId, for using sender IDs to send SMS messages to destinations in India.
+
+1.39.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2021-01-15)
+------------------
+
+* Feature - Documentation updates for Amazon SNS.
+
+1.36.0 (2020-11-16)
+------------------
+
+* Feature - Documentation updates for Amazon SNS.
+
+1.35.0 (2020-10-30)
+------------------
+
+* Feature - Documentation updates for Amazon SNS
+
 1.34.0 (2020-10-22)
 ------------------
 

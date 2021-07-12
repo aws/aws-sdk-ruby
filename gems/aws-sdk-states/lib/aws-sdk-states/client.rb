@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -1487,6 +1487,85 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Starts a Synchronous Express state machine execution.
+    #
+    # @option params [required, String] :state_machine_arn
+    #   The Amazon Resource Name (ARN) of the state machine to execute.
+    #
+    # @option params [String] :name
+    #   The name of the execution.
+    #
+    # @option params [String] :input
+    #   The string that contains the JSON input data for the execution, for
+    #   example:
+    #
+    #   `"input": "\{"first_name" : "test"\}"`
+    #
+    #   <note markdown="1"> If you don't include any JSON input data, you still must include the
+    #   two braces, for example: `"input": "\{\}"`
+    #
+    #    </note>
+    #
+    #   Length constraints apply to the payload size, and are expressed as
+    #   bytes in UTF-8 encoding.
+    #
+    # @option params [String] :trace_header
+    #   Passes the AWS X-Ray trace header. The trace header can also be passed
+    #   in the request payload.
+    #
+    # @return [Types::StartSyncExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSyncExecutionOutput#execution_arn #execution_arn} => String
+    #   * {Types::StartSyncExecutionOutput#state_machine_arn #state_machine_arn} => String
+    #   * {Types::StartSyncExecutionOutput#name #name} => String
+    #   * {Types::StartSyncExecutionOutput#start_date #start_date} => Time
+    #   * {Types::StartSyncExecutionOutput#stop_date #stop_date} => Time
+    #   * {Types::StartSyncExecutionOutput#status #status} => String
+    #   * {Types::StartSyncExecutionOutput#error #error} => String
+    #   * {Types::StartSyncExecutionOutput#cause #cause} => String
+    #   * {Types::StartSyncExecutionOutput#input #input} => String
+    #   * {Types::StartSyncExecutionOutput#input_details #input_details} => Types::CloudWatchEventsExecutionDataDetails
+    #   * {Types::StartSyncExecutionOutput#output #output} => String
+    #   * {Types::StartSyncExecutionOutput#output_details #output_details} => Types::CloudWatchEventsExecutionDataDetails
+    #   * {Types::StartSyncExecutionOutput#trace_header #trace_header} => String
+    #   * {Types::StartSyncExecutionOutput#billing_details #billing_details} => Types::BillingDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_sync_execution({
+    #     state_machine_arn: "Arn", # required
+    #     name: "Name",
+    #     input: "SensitiveData",
+    #     trace_header: "TraceHeader",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_arn #=> String
+    #   resp.state_machine_arn #=> String
+    #   resp.name #=> String
+    #   resp.start_date #=> Time
+    #   resp.stop_date #=> Time
+    #   resp.status #=> String, one of "SUCCEEDED", "FAILED", "TIMED_OUT"
+    #   resp.error #=> String
+    #   resp.cause #=> String
+    #   resp.input #=> String
+    #   resp.input_details.included #=> Boolean
+    #   resp.output #=> String
+    #   resp.output_details.included #=> Boolean
+    #   resp.trace_header #=> String
+    #   resp.billing_details.billed_memory_used_in_mb #=> Integer
+    #   resp.billing_details.billed_duration_in_milliseconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartSyncExecution AWS API Documentation
+    #
+    # @overload start_sync_execution(params = {})
+    # @param [Hash] params ({})
+    def start_sync_execution(params = {}, options = {})
+      req = build_request(:start_sync_execution, params)
+      req.send_request(options)
+    end
+
     # Stops an execution.
     #
     # This API action is not supported by `EXPRESS` state machines.
@@ -1685,7 +1764,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

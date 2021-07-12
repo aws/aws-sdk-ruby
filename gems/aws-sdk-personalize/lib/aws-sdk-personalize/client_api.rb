@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -45,6 +45,8 @@ module Aws::Personalize
     CreateBatchInferenceJobResponse = Shapes::StructureShape.new(name: 'CreateBatchInferenceJobResponse')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
+    CreateDatasetExportJobRequest = Shapes::StructureShape.new(name: 'CreateDatasetExportJobRequest')
+    CreateDatasetExportJobResponse = Shapes::StructureShape.new(name: 'CreateDatasetExportJobResponse')
     CreateDatasetGroupRequest = Shapes::StructureShape.new(name: 'CreateDatasetGroupRequest')
     CreateDatasetGroupResponse = Shapes::StructureShape.new(name: 'CreateDatasetGroupResponse')
     CreateDatasetImportJobRequest = Shapes::StructureShape.new(name: 'CreateDatasetImportJobRequest')
@@ -63,6 +65,10 @@ module Aws::Personalize
     CreateSolutionVersionResponse = Shapes::StructureShape.new(name: 'CreateSolutionVersionResponse')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     Dataset = Shapes::StructureShape.new(name: 'Dataset')
+    DatasetExportJob = Shapes::StructureShape.new(name: 'DatasetExportJob')
+    DatasetExportJobOutput = Shapes::StructureShape.new(name: 'DatasetExportJobOutput')
+    DatasetExportJobSummary = Shapes::StructureShape.new(name: 'DatasetExportJobSummary')
+    DatasetExportJobs = Shapes::ListShape.new(name: 'DatasetExportJobs')
     DatasetGroup = Shapes::StructureShape.new(name: 'DatasetGroup')
     DatasetGroupSummary = Shapes::StructureShape.new(name: 'DatasetGroupSummary')
     DatasetGroups = Shapes::ListShape.new(name: 'DatasetGroups')
@@ -95,6 +101,8 @@ module Aws::Personalize
     DescribeBatchInferenceJobResponse = Shapes::StructureShape.new(name: 'DescribeBatchInferenceJobResponse')
     DescribeCampaignRequest = Shapes::StructureShape.new(name: 'DescribeCampaignRequest')
     DescribeCampaignResponse = Shapes::StructureShape.new(name: 'DescribeCampaignResponse')
+    DescribeDatasetExportJobRequest = Shapes::StructureShape.new(name: 'DescribeDatasetExportJobRequest')
+    DescribeDatasetExportJobResponse = Shapes::StructureShape.new(name: 'DescribeDatasetExportJobResponse')
     DescribeDatasetGroupRequest = Shapes::StructureShape.new(name: 'DescribeDatasetGroupRequest')
     DescribeDatasetGroupResponse = Shapes::StructureShape.new(name: 'DescribeDatasetGroupResponse')
     DescribeDatasetImportJobRequest = Shapes::StructureShape.new(name: 'DescribeDatasetImportJobRequest')
@@ -140,18 +148,22 @@ module Aws::Personalize
     HPOResourceConfig = Shapes::StructureShape.new(name: 'HPOResourceConfig')
     HyperParameterRanges = Shapes::StructureShape.new(name: 'HyperParameterRanges')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
+    IngestionMode = Shapes::StringShape.new(name: 'IngestionMode')
     IntegerHyperParameterRange = Shapes::StructureShape.new(name: 'IntegerHyperParameterRange')
     IntegerHyperParameterRanges = Shapes::ListShape.new(name: 'IntegerHyperParameterRanges')
     IntegerMaxValue = Shapes::IntegerShape.new(name: 'IntegerMaxValue')
     IntegerMinValue = Shapes::IntegerShape.new(name: 'IntegerMinValue')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
+    ItemAttribute = Shapes::StringShape.new(name: 'ItemAttribute')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBatchInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsRequest')
     ListBatchInferenceJobsResponse = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsResponse')
     ListCampaignsRequest = Shapes::StructureShape.new(name: 'ListCampaignsRequest')
     ListCampaignsResponse = Shapes::StructureShape.new(name: 'ListCampaignsResponse')
+    ListDatasetExportJobsRequest = Shapes::StructureShape.new(name: 'ListDatasetExportJobsRequest')
+    ListDatasetExportJobsResponse = Shapes::StructureShape.new(name: 'ListDatasetExportJobsResponse')
     ListDatasetGroupsRequest = Shapes::StructureShape.new(name: 'ListDatasetGroupsRequest')
     ListDatasetGroupsResponse = Shapes::StructureShape.new(name: 'ListDatasetGroupsResponse')
     ListDatasetImportJobsRequest = Shapes::StructureShape.new(name: 'ListDatasetImportJobsRequest')
@@ -178,6 +190,8 @@ module Aws::Personalize
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumBatchResults = Shapes::IntegerShape.new(name: 'NumBatchResults')
+    ObjectiveSensitivity = Shapes::StringShape.new(name: 'ObjectiveSensitivity')
+    OptimizationObjective = Shapes::StructureShape.new(name: 'OptimizationObjective')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PerformAutoML = Shapes::BooleanShape.new(name: 'PerformAutoML')
@@ -203,6 +217,7 @@ module Aws::Personalize
     SolutionVersions = Shapes::ListShape.new(name: 'SolutionVersions')
     Solutions = Shapes::ListShape.new(name: 'Solutions')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopSolutionVersionCreationRequest = Shapes::StructureShape.new(name: 'StopSolutionVersionCreationRequest')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
     TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
@@ -344,6 +359,16 @@ module Aws::Personalize
     CreateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     CreateCampaignResponse.struct_class = Types::CreateCampaignResponse
 
+    CreateDatasetExportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    CreateDatasetExportJobRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetArn"))
+    CreateDatasetExportJobRequest.add_member(:ingestion_mode, Shapes::ShapeRef.new(shape: IngestionMode, location_name: "ingestionMode"))
+    CreateDatasetExportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateDatasetExportJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: DatasetExportJobOutput, required: true, location_name: "jobOutput"))
+    CreateDatasetExportJobRequest.struct_class = Types::CreateDatasetExportJobRequest
+
+    CreateDatasetExportJobResponse.add_member(:dataset_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetExportJobArn"))
+    CreateDatasetExportJobResponse.struct_class = Types::CreateDatasetExportJobResponse
+
     CreateDatasetGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateDatasetGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateDatasetGroupRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
@@ -424,6 +449,31 @@ module Aws::Personalize
     Dataset.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     Dataset.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     Dataset.struct_class = Types::Dataset
+
+    DatasetExportJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    DatasetExportJob.add_member(:dataset_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetExportJobArn"))
+    DatasetExportJob.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn"))
+    DatasetExportJob.add_member(:ingestion_mode, Shapes::ShapeRef.new(shape: IngestionMode, location_name: "ingestionMode"))
+    DatasetExportJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
+    DatasetExportJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DatasetExportJob.add_member(:job_output, Shapes::ShapeRef.new(shape: DatasetExportJobOutput, location_name: "jobOutput"))
+    DatasetExportJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    DatasetExportJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DatasetExportJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DatasetExportJob.struct_class = Types::DatasetExportJob
+
+    DatasetExportJobOutput.add_member(:s3_data_destination, Shapes::ShapeRef.new(shape: S3DataConfig, required: true, location_name: "s3DataDestination"))
+    DatasetExportJobOutput.struct_class = Types::DatasetExportJobOutput
+
+    DatasetExportJobSummary.add_member(:dataset_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetExportJobArn"))
+    DatasetExportJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    DatasetExportJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DatasetExportJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    DatasetExportJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DatasetExportJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DatasetExportJobSummary.struct_class = Types::DatasetExportJobSummary
+
+    DatasetExportJobs.member = Shapes::ShapeRef.new(shape: DatasetExportJobSummary)
 
     DatasetGroup.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     DatasetGroup.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
@@ -555,6 +605,12 @@ module Aws::Personalize
 
     DescribeCampaignResponse.add_member(:campaign, Shapes::ShapeRef.new(shape: Campaign, location_name: "campaign"))
     DescribeCampaignResponse.struct_class = Types::DescribeCampaignResponse
+
+    DescribeDatasetExportJobRequest.add_member(:dataset_export_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetExportJobArn"))
+    DescribeDatasetExportJobRequest.struct_class = Types::DescribeDatasetExportJobRequest
+
+    DescribeDatasetExportJobResponse.add_member(:dataset_export_job, Shapes::ShapeRef.new(shape: DatasetExportJob, location_name: "datasetExportJob"))
+    DescribeDatasetExportJobResponse.struct_class = Types::DescribeDatasetExportJobResponse
 
     DescribeDatasetGroupRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
     DescribeDatasetGroupRequest.struct_class = Types::DescribeDatasetGroupRequest
@@ -733,6 +789,15 @@ module Aws::Personalize
     ListCampaignsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCampaignsResponse.struct_class = Types::ListCampaignsResponse
 
+    ListDatasetExportJobsRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn"))
+    ListDatasetExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDatasetExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListDatasetExportJobsRequest.struct_class = Types::ListDatasetExportJobsRequest
+
+    ListDatasetExportJobsResponse.add_member(:dataset_export_jobs, Shapes::ShapeRef.new(shape: DatasetExportJobs, location_name: "datasetExportJobs"))
+    ListDatasetExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDatasetExportJobsResponse.struct_class = Types::ListDatasetExportJobsResponse
+
     ListDatasetGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDatasetGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListDatasetGroupsRequest.struct_class = Types::ListDatasetGroupsRequest
@@ -815,6 +880,10 @@ module Aws::Personalize
     Metrics.key = Shapes::ShapeRef.new(shape: MetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: MetricValue)
 
+    OptimizationObjective.add_member(:item_attribute, Shapes::ShapeRef.new(shape: ItemAttribute, location_name: "itemAttribute"))
+    OptimizationObjective.add_member(:objective_sensitivity, Shapes::ShapeRef.new(shape: ObjectiveSensitivity, location_name: "objectiveSensitivity"))
+    OptimizationObjective.struct_class = Types::OptimizationObjective
+
     Recipe.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Recipe.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     Recipe.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "algorithmArn"))
@@ -873,6 +942,7 @@ module Aws::Personalize
     SolutionConfig.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     SolutionConfig.add_member(:feature_transformation_parameters, Shapes::ShapeRef.new(shape: FeatureTransformationParameters, location_name: "featureTransformationParameters"))
     SolutionConfig.add_member(:auto_ml_config, Shapes::ShapeRef.new(shape: AutoMLConfig, location_name: "autoMLConfig"))
+    SolutionConfig.add_member(:optimization_objective, Shapes::ShapeRef.new(shape: OptimizationObjective, location_name: "optimizationObjective"))
     SolutionConfig.struct_class = Types::SolutionConfig
 
     SolutionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -909,6 +979,9 @@ module Aws::Personalize
     SolutionVersions.member = Shapes::ShapeRef.new(shape: SolutionVersionSummary)
 
     Solutions.member = Shapes::ShapeRef.new(shape: SolutionSummary)
+
+    StopSolutionVersionCreationRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
+    StopSolutionVersionCreationRequest.struct_class = Types::StopSolutionVersionCreationRequest
 
     TunedHPOParams.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     TunedHPOParams.struct_class = Types::TunedHPOParams
@@ -973,6 +1046,19 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDatasetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:create_dataset_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDatasetExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDatasetExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDatasetExportJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
@@ -1182,6 +1268,16 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_dataset_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDatasetExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDatasetExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDatasetExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_dataset_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDatasetGroup"
         o.http_method = "POST"
@@ -1315,6 +1411,22 @@ module Aws::Personalize
         )
       end)
 
+      api.add_operation(:list_dataset_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDatasetExportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDatasetExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDatasetExportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_dataset_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDatasetGroups"
         o.http_method = "POST"
@@ -1386,6 +1498,12 @@ module Aws::Personalize
         o.output = Shapes::ShapeRef.new(shape: ListFiltersResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_recipes, Seahorse::Model::Operation.new.tap do |o|
@@ -1449,6 +1567,17 @@ module Aws::Personalize
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:stop_solution_version_creation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSolutionVersionCreation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopSolutionVersionCreationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:update_campaign, Seahorse::Model::Operation.new.tap do |o|

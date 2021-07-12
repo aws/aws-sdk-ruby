@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -61,6 +61,11 @@ module Aws::EMR
     #             },
     #             on_demand_specification: {
     #               allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #               capacity_reservation_options: {
+    #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                 capacity_reservation_preference: "open", # accepts open, none
+    #                 capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #               },
     #             },
     #           },
     #         },
@@ -307,7 +312,7 @@ module Aws::EMR
     #
     # @!attribute [rw] tags
     #   A list of tags to associate with a cluster and propagate to EC2
-    #   instances. Tags are user-defined key/value pairs that consist of a
+    #   instances. Tags are user-defined key-value pairs that consist of a
     #   required key string with a maximum of 128 characters, and an
     #   optional value string with a maximum of 256 characters.
     #   @return [Array<Types::Tag>]
@@ -547,8 +552,8 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] block_public_security_group_rules
-    #   Indicates whether EMR block public access is enabled (`true`) or
-    #   disabled (`false`). By default, the value is `false` for accounts
+    #   Indicates whether Amazon EMR block public access is enabled (`true`)
+    #   or disabled (`false`). By default, the value is `false` for accounts
     #   that have created EMR clusters before July 2019. For accounts
     #   created after this, the default is `true`.
     #   @return [Boolean]
@@ -683,7 +688,7 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] cluster_id
-    #   The `ClusterID` for which specified steps will be canceled. Use
+    #   The `ClusterID` for the specified steps that will be canceled. Use
     #   RunJobFlow and ListClusters to get ClusterIDs.
     #   @return [String]
     #
@@ -693,7 +698,7 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] step_cancellation_option
-    #   The option to choose for cancelling `RUNNING` steps. By default, the
+    #   The option to choose to cancel `RUNNING` steps. By default, the
     #   value is `SEND_INTERRUPT`.
     #   @return [String]
     #
@@ -951,13 +956,13 @@ module Aws::EMR
     #   to terminate the instance was submitted. This option is only
     #   available with Amazon EMR 5.1.0 and later and is the default for
     #   clusters created using that version. `TERMINATE_AT_TASK_COMPLETION`
-    #   indicates that Amazon EMR blacklists and drains tasks from nodes
-    #   before terminating the Amazon EC2 instances, regardless of the
-    #   instance-hour boundary. With either behavior, Amazon EMR removes the
-    #   least active nodes first and blocks instance termination if it could
-    #   lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION` is available
-    #   only in Amazon EMR version 4.1.0 and later, and is the default for
-    #   versions of Amazon EMR earlier than 5.1.0.
+    #   indicates that Amazon EMR adds nodes to a deny list and drains tasks
+    #   from nodes before terminating the Amazon EC2 instances, regardless
+    #   of the instance-hour boundary. With either behavior, Amazon EMR
+    #   removes the least active nodes first and blocks instance termination
+    #   if it could lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION`
+    #   is available only in Amazon EMR version 4.1.0 and later, and is the
+    #   default for versions of Amazon EMR earlier than 5.1.0.
     #   @return [String]
     #
     # @!attribute [rw] custom_ami_id
@@ -966,9 +971,9 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ebs_root_volume_size
-    #   The size, in GiB, of the EBS root device volume of the Linux AMI
-    #   that is used for each EC2 instance. Available in Amazon EMR version
-    #   4.x and later.
+    #   The size, in GiB, of the Amazon EBS root device volume of the Linux
+    #   AMI that is used for each EC2 instance. Available in Amazon EMR
+    #   version 4.x and later.
     #   @return [Integer]
     #
     # @!attribute [rw] repo_upgrade_on_boot
@@ -980,7 +985,8 @@ module Aws::EMR
     # @!attribute [rw] kerberos_attributes
     #   Attributes for Kerberos configuration when Kerberos authentication
     #   is enabled using a security configuration. For more information see
-    #   [Use Kerberos Authentication][1] in the *EMR Management Guide*.
+    #   [Use Kerberos Authentication][1] in the *Amazon EMR Management
+    #   Guide*.
     #
     #
     #
@@ -1138,7 +1144,7 @@ module Aws::EMR
     #   @return [Time]
     #
     # @!attribute [rw] ready_date_time
-    #   The date and time when the cluster was ready to execute steps.
+    #   The date and time when the cluster was ready to run steps.
     #   @return [Time]
     #
     # @!attribute [rw] end_date_time
@@ -1200,7 +1206,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] minimum_capacity_units
-    #   The lower boundary of EC2 units. It is measured through VCPU cores
+    #   The lower boundary of EC2 units. It is measured through vCPU cores
     #   or instances for instance groups and measured through units for
     #   instance fleets. Managed scaling activities are not allowed beyond
     #   this boundary. The limit only applies to the core and task nodes.
@@ -1208,7 +1214,7 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_capacity_units
-    #   The upper boundary of EC2 units. It is measured through VCPU cores
+    #   The upper boundary of EC2 units. It is measured through vCPU cores
     #   or instances for instance groups and measured through units for
     #   instance fleets. Managed scaling activities are not allowed beyond
     #   this boundary. The limit only applies to the core and task nodes.
@@ -1217,15 +1223,15 @@ module Aws::EMR
     #
     # @!attribute [rw] maximum_on_demand_capacity_units
     #   The upper boundary of On-Demand EC2 units. It is measured through
-    #   VCPU cores or instances for instance groups and measured through
+    #   vCPU cores or instances for instance groups and measured through
     #   units for instance fleets. The On-Demand units are not allowed to
     #   scale beyond this boundary. The parameter is used to split capacity
-    #   allocation between On-Demand and Spot instances.
+    #   allocation between On-Demand and Spot Instances.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_core_capacity_units
     #   The upper boundary of EC2 units for core node type in a cluster. It
-    #   is measured through VCPU cores or instances for instance groups and
+    #   is measured through vCPU cores or instances for instance groups and
     #   measured through units for instance fleets. The core units are not
     #   allowed to scale beyond this boundary. The parameter is used to
     #   split capacity allocation between core and task nodes.
@@ -1351,6 +1357,189 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateStudioInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "XmlStringMaxLen256", # required
+    #         description: "XmlStringMaxLen256",
+    #         auth_mode: "SSO", # required, accepts SSO, IAM
+    #         vpc_id: "XmlStringMaxLen256", # required
+    #         subnet_ids: ["String"], # required
+    #         service_role: "XmlString", # required
+    #         user_role: "XmlString", # required
+    #         workspace_security_group_id: "XmlStringMaxLen256", # required
+    #         engine_security_group_id: "XmlStringMaxLen256", # required
+    #         default_s3_location: "XmlString", # required
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_mode
+    #   Specifies whether the Studio authenticates users using single
+    #   sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO
+    #   authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate
+    #   with the Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to associate with the Amazon EMR Studio. A
+    #   Studio can have a maximum of 5 subnets. The subnets must belong to
+    #   the VPC specified by `VpcId`. Studio users can create a Workspace in
+    #   any of the specified subnets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_role
+    #   The IAM role that will be assumed by the Amazon EMR Studio. The
+    #   service role provides a way for Amazon EMR Studio to interoperate
+    #   with other AWS services.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_role
+    #   The IAM user role that will be assumed by users and groups logged in
+    #   to an Amazon EMR Studio. The permissions attached to this IAM role
+    #   can be scoped down for each user or group using session policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_security_group_id
+    #   The ID of the Amazon EMR Studio Workspace security group. The
+    #   Workspace security group allows outbound network traffic to
+    #   resources in the Engine security group, and it must be in the same
+    #   VPC specified by `VpcId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_security_group_id
+    #   The ID of the Amazon EMR Studio Engine security group. The Engine
+    #   security group allows inbound network traffic from the Workspace
+    #   security group, and it must be in the same VPC specified by `VpcId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_s3_location
+    #   The Amazon S3 location to back up Amazon EMR Studio Workspaces and
+    #   notebook files.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to associate with the Amazon EMR Studio. Tags are
+    #   user-defined key-value pairs that consist of a required key string
+    #   with a maximum of 128 characters, and an optional value string with
+    #   a maximum of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateStudioInput AWS API Documentation
+    #
+    class CreateStudioInput < Struct.new(
+      :name,
+      :description,
+      :auth_mode,
+      :vpc_id,
+      :subnet_ids,
+      :service_role,
+      :user_role,
+      :workspace_security_group_id,
+      :engine_security_group_id,
+      :default_s3_location,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The unique Studio access URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateStudioOutput AWS API Documentation
+    #
+    class CreateStudioOutput < Struct.new(
+      :studio_id,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateStudioSessionMappingInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #         identity_id: "XmlStringMaxLen256",
+    #         identity_name: "XmlStringMaxLen256",
+    #         identity_type: "USER", # required, accepts USER, GROUP
+    #         session_policy_arn: "XmlStringMaxLen256", # required
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio to which the user or group will be
+    #   mapped.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_id
+    #   The globally unique identifier (GUID) of the user or group from the
+    #   AWS SSO Identity Store. For more information, see [UserId][1] and
+    #   [GroupId][2] in the *AWS SSO Identity Store API Reference*. Either
+    #   `IdentityName` or `IdentityId` must be specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_name
+    #   The name of the user or group. For more information, see
+    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
+    #   API Reference*. Either `IdentityName` or `IdentityId` must be
+    #   specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_type
+    #   Specifies whether the identity to map to the Amazon EMR Studio is a
+    #   user or a group.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_policy_arn
+    #   The Amazon Resource Name (ARN) for the session policy that will be
+    #   applied to the user or group. Session policies refine Studio user
+    #   permissions without the need to use multiple IAM user roles.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateStudioSessionMappingInput AWS API Documentation
+    #
+    class CreateStudioSessionMappingInput < Struct.new(
+      :studio_id,
+      :identity_id,
+      :identity_name,
+      :identity_type,
+      :session_policy_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteSecurityConfigurationInput
     #   data as a hash:
     #
@@ -1373,6 +1562,79 @@ module Aws::EMR
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfigurationOutput AWS API Documentation
     #
     class DeleteSecurityConfigurationOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteStudioInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteStudioInput AWS API Documentation
+    #
+    class DeleteStudioInput < Struct.new(
+      :studio_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteStudioSessionMappingInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #         identity_id: "XmlStringMaxLen256",
+    #         identity_name: "XmlStringMaxLen256",
+    #         identity_type: "USER", # required, accepts USER, GROUP
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_id
+    #   The globally unique identifier (GUID) of the user or group to remove
+    #   from the Amazon EMR Studio. For more information, see [UserId][1]
+    #   and [GroupId][2] in the *AWS SSO Identity Store API Reference*.
+    #   Either `IdentityName` or `IdentityId` must be specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_name
+    #   The name of the user name or group to remove from the Amazon EMR
+    #   Studio. For more information, see [UserName][1] and [DisplayName][2]
+    #   in the *AWS SSO Identity Store API Reference*. Either `IdentityName`
+    #   or `IdentityId` must be specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_type
+    #   Specifies whether the identity to delete from the Amazon EMR Studio
+    #   is a user or a group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteStudioSessionMappingInput AWS API Documentation
+    #
+    class DeleteStudioSessionMappingInput < Struct.new(
+      :studio_id,
+      :identity_id,
+      :identity_name,
+      :identity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # This input determines which cluster to describe.
     #
@@ -1571,6 +1833,37 @@ module Aws::EMR
     #
     class DescribeStepOutput < Struct.new(
       :step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStudioInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The Amazon EMR Studio ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStudioInput AWS API Documentation
+    #
+    class DescribeStudioInput < Struct.new(
+      :studio_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] studio
+    #   The Amazon EMR Studio details.
+    #   @return [Types::Studio]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStudioOutput AWS API Documentation
+    #
+    class DescribeStudioOutput < Struct.new(
+      :studio)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1836,9 +2129,9 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The descriptive message including the error the EMR service has
-    #   identified as the cause of step failure. This is text from an error
-    #   log that describes the root cause of the failure.
+    #   The descriptive message including the error the Amazon EMR service
+    #   has identified as the cause of step failure. This is text from an
+    #   error log that describes the root cause of the failure.
     #   @return [String]
     #
     # @!attribute [rw] log_file
@@ -1936,6 +2229,72 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetStudioSessionMappingInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #         identity_id: "XmlStringMaxLen256",
+    #         identity_name: "XmlStringMaxLen256",
+    #         identity_type: "USER", # required, accepts USER, GROUP
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_id
+    #   The globally unique identifier (GUID) of the user or group. For more
+    #   information, see [UserId][1] and [GroupId][2] in the *AWS SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_name
+    #   The name of the user or group to fetch. For more information, see
+    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
+    #   API Reference*. Either `IdentityName` or `IdentityId` must be
+    #   specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_type
+    #   Specifies whether the identity to fetch is a user or a group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetStudioSessionMappingInput AWS API Documentation
+    #
+    class GetStudioSessionMappingInput < Struct.new(
+      :studio_id,
+      :identity_id,
+      :identity_name,
+      :identity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_mapping
+    #   The session mapping details for the specified Amazon EMR Studio and
+    #   identity, including session policy ARN and creation time.
+    #   @return [Types::SessionMappingDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetStudioSessionMappingOutput AWS API Documentation
+    #
+    class GetStudioSessionMappingOutput < Struct.new(
+      :session_mapping)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A job flow step consisting of a JAR file whose main function will be
     # executed. The main function submits a job for Hadoop to execute and
     # waits for the job to finish or fail.
@@ -1957,7 +2316,7 @@ module Aws::EMR
     #
     # @!attribute [rw] properties
     #   A list of Java properties that are set when the step runs. You can
-    #   use these properties to pass key value pairs to your main function.
+    #   use these properties to pass key-value pairs to your main function.
     #   @return [Array<Types::KeyValue>]
     #
     # @!attribute [rw] jar
@@ -1996,7 +2355,7 @@ module Aws::EMR
     #
     # @!attribute [rw] properties
     #   The list of Java properties that are set when the step runs. You can
-    #   use these properties to pass key value pairs to your main function.
+    #   use these properties to pass key-value pairs to your main function.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] main_class
@@ -2095,7 +2454,7 @@ module Aws::EMR
     # Describes an instance fleet, which is a group of EC2 instances that
     # host a particular node type (master, core, or task) in an Amazon EMR
     # cluster. Instance fleets can consist of a mix of instance types and
-    # On-Demand and Spot instances, which are provisioned to meet a defined
+    # On-Demand and Spot Instances, which are provisioned to meet a defined
     # target capacity.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
@@ -2122,11 +2481,11 @@ module Aws::EMR
     #
     # @!attribute [rw] target_on_demand_capacity
     #   The target capacity of On-Demand units for the instance fleet, which
-    #   determines how many On-Demand instances to provision. When the
+    #   determines how many On-Demand Instances to provision. When the
     #   instance fleet launches, Amazon EMR tries to provision On-Demand
-    #   instances as specified by InstanceTypeConfig. Each instance
+    #   Instances as specified by InstanceTypeConfig. Each instance
     #   configuration has a specified `WeightedCapacity`. When an On-Demand
-    #   instance is provisioned, the `WeightedCapacity` units count toward
+    #   Instance is provisioned, the `WeightedCapacity` units count toward
     #   the target capacity. Amazon EMR provisions instances until the
     #   target capacity is totally fulfilled, even if this results in an
     #   overage. For example, if there are 2 units remaining to fulfill
@@ -2136,7 +2495,7 @@ module Aws::EMR
     #   InstanceFleet$ProvisionedOnDemandCapacity to determine the Spot
     #   capacity units that have been provisioned for the instance fleet.
     #
-    #   <note markdown="1"> If not specified or set to 0, only Spot instances are provisioned
+    #   <note markdown="1"> If not specified or set to 0, only Spot Instances are provisioned
     #   for the instance fleet using `TargetSpotCapacity`. At least one of
     #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
     #   than 0. For a master instance fleet, only one of
@@ -2148,8 +2507,8 @@ module Aws::EMR
     #
     # @!attribute [rw] target_spot_capacity
     #   The target capacity of Spot units for the instance fleet, which
-    #   determines how many Spot instances to provision. When the instance
-    #   fleet launches, Amazon EMR tries to provision Spot instances as
+    #   determines how many Spot Instances to provision. When the instance
+    #   fleet launches, Amazon EMR tries to provision Spot Instances as
     #   specified by InstanceTypeConfig. Each instance configuration has a
     #   specified `WeightedCapacity`. When a Spot instance is provisioned,
     #   the `WeightedCapacity` units count toward the target capacity.
@@ -2162,7 +2521,7 @@ module Aws::EMR
     #   determine the Spot capacity units that have been provisioned for the
     #   instance fleet.
     #
-    #   <note markdown="1"> If not specified or set to 0, only On-Demand instances are
+    #   <note markdown="1"> If not specified or set to 0, only On-Demand Instances are
     #   provisioned for the instance fleet. At least one of
     #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
     #   than 0. For a master instance fleet, only one of
@@ -2268,6 +2627,11 @@ module Aws::EMR
     #           },
     #           on_demand_specification: {
     #             allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #             capacity_reservation_options: {
+    #               usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #               capacity_reservation_preference: "open", # accepts open, none
+    #               capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #             },
     #           },
     #         },
     #       }
@@ -2278,16 +2642,16 @@ module Aws::EMR
     #
     # @!attribute [rw] instance_fleet_type
     #   The node type that the instance fleet hosts. Valid values are
-    #   MASTER,CORE,and TASK.
+    #   MASTER, CORE, and TASK.
     #   @return [String]
     #
     # @!attribute [rw] target_on_demand_capacity
     #   The target capacity of On-Demand units for the instance fleet, which
-    #   determines how many On-Demand instances to provision. When the
+    #   determines how many On-Demand Instances to provision. When the
     #   instance fleet launches, Amazon EMR tries to provision On-Demand
-    #   instances as specified by InstanceTypeConfig. Each instance
+    #   Instances as specified by InstanceTypeConfig. Each instance
     #   configuration has a specified `WeightedCapacity`. When an On-Demand
-    #   instance is provisioned, the `WeightedCapacity` units count toward
+    #   Instance is provisioned, the `WeightedCapacity` units count toward
     #   the target capacity. Amazon EMR provisions instances until the
     #   target capacity is totally fulfilled, even if this results in an
     #   overage. For example, if there are 2 units remaining to fulfill
@@ -2295,7 +2659,7 @@ module Aws::EMR
     #   `WeightedCapacity` of 5 units, the instance is provisioned, and the
     #   target capacity is exceeded by 3 units.
     #
-    #   <note markdown="1"> If not specified or set to 0, only Spot instances are provisioned
+    #   <note markdown="1"> If not specified or set to 0, only Spot Instances are provisioned
     #   for the instance fleet using `TargetSpotCapacity`. At least one of
     #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
     #   than 0. For a master instance fleet, only one of
@@ -2307,10 +2671,10 @@ module Aws::EMR
     #
     # @!attribute [rw] target_spot_capacity
     #   The target capacity of Spot units for the instance fleet, which
-    #   determines how many Spot instances to provision. When the instance
-    #   fleet launches, Amazon EMR tries to provision Spot instances as
+    #   determines how many Spot Instances to provision. When the instance
+    #   fleet launches, Amazon EMR tries to provision Spot Instances as
     #   specified by InstanceTypeConfig. Each instance configuration has a
-    #   specified `WeightedCapacity`. When a Spot instance is provisioned,
+    #   specified `WeightedCapacity`. When a Spot Instance is provisioned,
     #   the `WeightedCapacity` units count toward the target capacity.
     #   Amazon EMR provisions instances until the target capacity is totally
     #   fulfilled, even if this results in an overage. For example, if there
@@ -2319,7 +2683,7 @@ module Aws::EMR
     #   instance is provisioned, and the target capacity is exceeded by 3
     #   units.
     #
-    #   <note markdown="1"> If not specified or set to 0, only On-Demand instances are
+    #   <note markdown="1"> If not specified or set to 0, only On-Demand Instances are
     #   provisioned for the instance fleet. At least one of
     #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
     #   than 0. For a master instance fleet, only one of
@@ -2391,13 +2755,13 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # The launch specification for Spot instances in the fleet, which
+    # The launch specification for Spot Instances in the fleet, which
     # determines the defined duration, provisioning timeout behavior, and
     # allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     # versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot
-    # instance allocation strategies are available in Amazon EMR version
+    # Instance allocation strategies are available in Amazon EMR version
     # 5.12.1 and later.
     #
     #  </note>
@@ -2414,22 +2778,27 @@ module Aws::EMR
     #         },
     #         on_demand_specification: {
     #           allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #           capacity_reservation_options: {
+    #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #             capacity_reservation_preference: "open", # accepts open, none
+    #             capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #           },
     #         },
     #       }
     #
     # @!attribute [rw] spot_specification
-    #   The launch specification for Spot instances in the fleet, which
+    #   The launch specification for Spot Instances in the fleet, which
     #   determines the defined duration, provisioning timeout behavior, and
     #   allocation strategy.
     #   @return [Types::SpotProvisioningSpecification]
     #
     # @!attribute [rw] on_demand_specification
-    #   The launch specification for On-Demand instances in the instance
+    #   The launch specification for On-Demand Instances in the instance
     #   fleet, which determines the allocation strategy.
     #
     #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     #   versions 4.8.0 and later, excluding 5.0.x versions. On-Demand
-    #   instances allocation strategy is available in Amazon EMR version
+    #   Instances allocation strategy is available in Amazon EMR version
     #   5.12.1 and later.
     #
     #    </note>
@@ -2574,10 +2943,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot instance type as defined by
-    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
-    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
-    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   If specified, indicates that the instance group uses Spot Instances.
+    #   This is the maximum price you are willing to pay for Spot Instances.
+    #   Specify `OnDemandPrice` to set the amount equal to the On-Demand
+    #   price, or specify an amount in USD.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2756,10 +3125,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot instance type as defined by
-    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
-    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
-    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   If specified, indicates that the instance group uses Spot Instances.
+    #   This is the maximum price you are willing to pay for Spot Instances.
+    #   Specify `OnDemandPrice` to set the amount equal to the On-Demand
+    #   price, or specify an amount in USD.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2828,10 +3197,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot instance type as defined by
-    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
-    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
-    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   If specified, indicates that the instance group uses Spot Instances.
+    #   This is the maximum price you are willing to pay for Spot Instances.
+    #   Specify `OnDemandPrice` to set the amount equal to the On-Demand
+    #   price, or specify an amount in USD.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2923,7 +3292,7 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] instance_group_id
-    #   Unique ID of the instance group to expand or shrink.
+    #   Unique ID of the instance group to modify.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -3131,7 +3500,7 @@ module Aws::EMR
     # An instance type configuration for each instance type in an instance
     # fleet, which determines the EC2 instances Amazon EMR attempts to
     # provision to fulfill On-Demand and Spot target capacities. There can
-    # be a maximum of 5 instance type configurations in a fleet.
+    # be a maximum of five instance type configurations in a fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     # versions 4.8.0 and later, excluding 5.0.x versions.
@@ -3185,7 +3554,7 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot instance type as defined by
+    #   The bid price for each EC2 Spot Instance type as defined by
     #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
     #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
     #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
@@ -3193,15 +3562,15 @@ module Aws::EMR
     #
     # @!attribute [rw] bid_price_as_percentage_of_on_demand_price
     #   The bid price, as a percentage of On-Demand price, for each EC2 Spot
-    #   instance as defined by `InstanceType`. Expressed as a number (for
+    #   Instance as defined by `InstanceType`. Expressed as a number (for
     #   example, 20 specifies 20%). If neither `BidPrice` nor
     #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
     #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
     #   @return [Float]
     #
     # @!attribute [rw] ebs_configuration
-    #   The configuration of Amazon Elastic Block Storage (EBS) attached to
-    #   each instance as defined by `InstanceType`.
+    #   The configuration of Amazon Elastic Block Storage (Amazon EBS)
+    #   attached to each instance as defined by `InstanceType`.
     #   @return [Types::EbsConfiguration]
     #
     # @!attribute [rw] configurations
@@ -3244,13 +3613,13 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot instance type as defined by
+    #   The bid price for each EC2 Spot Instance type as defined by
     #   `InstanceType`. Expressed in USD.
     #   @return [String]
     #
     # @!attribute [rw] bid_price_as_percentage_of_on_demand_price
     #   The bid price, as a percentage of On-Demand price, for each EC2 Spot
-    #   instance as defined by `InstanceType`. Expressed as a number (for
+    #   Instance as defined by `InstanceType`. Expressed as a number (for
     #   example, 20 specifies 20%).
     #   @return [Float]
     #
@@ -3261,8 +3630,8 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] ebs_block_devices
-    #   The configuration of Amazon Elastic Block Storage (EBS) attached to
-    #   each instance as defined by `InstanceType`.
+    #   The configuration of Amazon Elastic Block Storage (Amazon EBS)
+    #   attached to each instance as defined by `InstanceType`.
     #   @return [Array<Types::EbsBlockDevice>]
     #
     # @!attribute [rw] ebs_optimized
@@ -3291,8 +3660,8 @@ module Aws::EMR
     #
     class InternalServerError < Aws::EmptyStructure; end
 
-    # This exception occurs when there is an internal failure in the EMR
-    # service.
+    # This exception occurs when there is an internal failure in the Amazon
+    # EMR service.
     #
     # @!attribute [rw] message
     #   The message associated with the exception.
@@ -3368,9 +3737,9 @@ module Aws::EMR
     #   @return [Array<Types::BootstrapActionDetail>]
     #
     # @!attribute [rw] supported_products
-    #   A list of strings set by third party software when the job flow is
-    #   launched. If you are not using third party software to manage the
-    #   job flow this value is empty.
+    #   A list of strings set by third-party software when the job flow is
+    #   launched. If you are not using third-party software to manage the
+    #   job flow, this value is empty.
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
@@ -3391,8 +3760,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] service_role
-    #   The IAM role that will be assumed by the Amazon EMR service to
-    #   access AWS resources on your behalf.
+    #   The IAM role that is assumed by the Amazon EMR service to access AWS
+    #   resources on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_role
@@ -3410,13 +3779,13 @@ module Aws::EMR
     #   to terminate the instance was submitted. This option is only
     #   available with Amazon EMR 5.1.0 and later and is the default for
     #   clusters created using that version. `TERMINATE_AT_TASK_COMPLETION`
-    #   indicates that Amazon EMR blacklists and drains tasks from nodes
-    #   before terminating the Amazon EC2 instances, regardless of the
-    #   instance-hour boundary. With either behavior, Amazon EMR removes the
-    #   least active nodes first and blocks instance termination if it could
-    #   lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION` available
-    #   only in Amazon EMR version 4.1.0 and later, and is the default for
-    #   versions of Amazon EMR earlier than 5.1.0.
+    #   indicates that Amazon EMR adds nodes to a deny list and drains tasks
+    #   from nodes before terminating the Amazon EC2 instances, regardless
+    #   of the instance-hour boundary. With either behavior, Amazon EMR
+    #   removes the least active nodes first and blocks instance termination
+    #   if it could lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION`
+    #   available only in Amazon EMR version 4.1.0 and later, and is the
+    #   default for versions of Amazon EMR earlier than 5.1.0.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowDetail AWS API Documentation
@@ -3483,10 +3852,10 @@ module Aws::EMR
 
     # A description of the Amazon EC2 instance on which the cluster (job
     # flow) runs. A valid JobFlowInstancesConfig must contain either
-    # InstanceGroups or InstanceFleets, which is the recommended
-    # configuration. They cannot be used together. You may also have
-    # MasterInstanceType, SlaveInstanceType, and InstanceCount (all three
-    # must be present), but we don't recommend this configuration.
+    # InstanceGroups or InstanceFleets. They cannot be used together. You
+    # may also have MasterInstanceType, SlaveInstanceType, and InstanceCount
+    # (all three must be present), but we don't recommend this
+    # configuration.
     #
     # @note When making an API call, you may pass JobFlowInstancesConfig
     #   data as a hash:
@@ -3614,6 +3983,11 @@ module Aws::EMR
     #               },
     #               on_demand_specification: {
     #                 allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #                 capacity_reservation_options: {
+    #                   usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                   capacity_reservation_preference: "open", # accepts open, none
+    #                   capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #                 },
     #               },
     #             },
     #           },
@@ -3662,8 +4036,8 @@ module Aws::EMR
     #   @return [Array<Types::InstanceFleetConfig>]
     #
     # @!attribute [rw] ec2_key_name
-    #   The name of the EC2 key pair that can be used to ssh to the master
-    #   node as the user called "hadoop."
+    #   The name of the EC2 key pair that can be used to connect to the
+    #   master node using SSH as the user called "hadoop."
     #   @return [String]
     #
     # @!attribute [rw] placement
@@ -3683,12 +4057,12 @@ module Aws::EMR
     #
     # @!attribute [rw] hadoop_version
     #   Applies only to Amazon EMR release versions earlier than 4.0. The
-    #   Hadoop version for the cluster. Valid inputs are "0.18"
-    #   (deprecated), "0.20" (deprecated), "0.20.205" (deprecated),
-    #   "1.0.3", "2.2.0", or "2.4.0". If you do not set this value,
-    #   the default of 0.18 is used, unless the `AmiVersion` parameter is
-    #   set in the RunJobFlow call, in which case the default version of
-    #   Hadoop for that AMI version is used.
+    #   Hadoop version for the cluster. Valid inputs are "0.18" (no longer
+    #   maintained), "0.20" (no longer maintained), "0.20.205" (no
+    #   longer maintained), "1.0.3", "2.2.0", or "2.4.0". If you do
+    #   not set this value, the default of 0.18 is used, unless the
+    #   `AmiVersion` parameter is set in the RunJobFlow call, in which case
+    #   the default version of Hadoop for that AMI version is used.
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_id
@@ -3793,17 +4167,17 @@ module Aws::EMR
     #
     # @!attribute [rw] normalized_instance_hours
     #   An approximation of the cost of the cluster, represented in
-    #   m1.small/hours. This value is incremented one time for every hour
-    #   that an m1.small runs. Larger instances are weighted more, so an
-    #   Amazon EC2 instance that is roughly four times more expensive would
-    #   result in the normalized instance hours being incremented by four.
-    #   This result is only an approximation and does not reflect the actual
-    #   billing rate.
+    #   m1.small/hours. This value is increased one time for every hour that
+    #   an m1.small instance runs. Larger instances are weighted more
+    #   heavily, so an Amazon EC2 instance that is roughly four times more
+    #   expensive would result in the normalized instance hours being
+    #   increased incrementally four times. This result is only an
+    #   approximation and does not reflect the actual billing rate.
     #   @return [Integer]
     #
     # @!attribute [rw] ec2_key_name
-    #   The name of an Amazon EC2 key pair that can be used to ssh to the
-    #   master node.
+    #   The name of an Amazon EC2 key pair that can be used to connect to
+    #   the master node using SSH.
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_id
@@ -3852,7 +4226,7 @@ module Aws::EMR
 
     # Attributes for Kerberos configuration when Kerberos authentication is
     # enabled using a security configuration. For more information see [Use
-    # Kerberos Authentication][1] in the *EMR Management Guide*.
+    # Kerberos Authentication][1] in the *Amazon EMR Management Guide*.
     #
     #
     #
@@ -3908,7 +4282,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # A key value pair.
+    # A key-value pair.
     #
     # @note When making an API call, you may pass KeyValue
     #   data as a hash:
@@ -3919,7 +4293,7 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] key
-    #   The unique identifier of a key value pair.
+    #   The unique identifier of a key-value pair.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4416,6 +4790,96 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStudioSessionMappingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256",
+    #         identity_type: "USER", # accepts USER, GROUP
+    #         marker: "Marker",
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_type
+    #   Specifies whether to return session mappings for users or groups. If
+    #   not specified, the results include session mapping details for both
+    #   users and groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that indicates the set of results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStudioSessionMappingsInput AWS API Documentation
+    #
+    class ListStudioSessionMappingsInput < Struct.new(
+      :studio_id,
+      :identity_type,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_mappings
+    #   A list of session mapping summary objects. Each object includes
+    #   session mapping details such as creation time, identity type (user
+    #   or group), and Amazon EMR Studio ID.
+    #   @return [Array<Types::SessionMappingSummary>]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStudioSessionMappingsOutput AWS API Documentation
+    #
+    class ListStudioSessionMappingsOutput < Struct.new(
+      :session_mappings,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStudiosInput
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "Marker",
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that indicates the set of results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStudiosInput AWS API Documentation
+    #
+    class ListStudiosInput < Struct.new(
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] studios
+    #   The list of Studio summary objects.
+    #   @return [Array<Types::StudioSummary>]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStudiosOutput AWS API Documentation
+    #
+    class ListStudiosOutput < Struct.new(
+      :studios,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Managed scaling policy for an Amazon EMR cluster. The policy specifies
     # the limits for resources that can be added or terminated from a
     # cluster. The policy only applies to the core and task nodes. The
@@ -4494,7 +4958,7 @@ module Aws::EMR
     #
     # @!attribute [rw] step_concurrency_level
     #   The number of steps that can be executed concurrently. You can
-    #   specify a maximum of 256 steps.
+    #   specify a minimum of 1 step and a maximum of 256 steps.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterInput AWS API Documentation
@@ -4691,7 +5155,7 @@ module Aws::EMR
     #
     # @!attribute [rw] tags
     #   A list of tags associated with a notebook execution. Tags are
-    #   user-defined key value pairs that consist of a required key string
+    #   user-defined key-value pairs that consist of a required key string
     #   with a maximum of 128 characters and an optional value string with a
     #   maximum of 256 characters.
     #   @return [Array<Types::Tag>]
@@ -4784,12 +5248,69 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # The launch specification for On-Demand instances in the instance
+    # Describes the strategy for using unused Capacity Reservations for
+    # fulfilling On-Demand capacity.
+    #
+    # @note When making an API call, you may pass OnDemandCapacityReservationOptions
+    #   data as a hash:
+    #
+    #       {
+    #         usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #         capacity_reservation_preference: "open", # accepts open, none
+    #         capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #       }
+    #
+    # @!attribute [rw] usage_strategy
+    #   Indicates whether to use unused Capacity Reservations for fulfilling
+    #   On-Demand capacity.
+    #
+    #   If you specify `use-capacity-reservations-first`, the fleet uses
+    #   unused Capacity Reservations to fulfill On-Demand capacity up to the
+    #   target On-Demand capacity. If multiple instance pools have unused
+    #   Capacity Reservations, the On-Demand allocation strategy
+    #   (`lowest-price`) is applied. If the number of unused Capacity
+    #   Reservations is less than the On-Demand target capacity, the
+    #   remaining On-Demand target capacity is launched according to the
+    #   On-Demand allocation strategy (`lowest-price`).
+    #
+    #   If you do not specify a value, the fleet fulfils the On-Demand
+    #   capacity according to the chosen On-Demand allocation strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_preference
+    #   Indicates the instance's Capacity Reservation preferences. Possible
+    #   preferences include:
+    #
+    #   * `open` - The instance can run in any open Capacity Reservation
+    #     that has matching attributes (instance type, platform,
+    #     Availability Zone).
+    #
+    #   * `none` - The instance avoids running in a Capacity Reservation
+    #     even if one is available. The instance runs as an On-Demand
+    #     Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_resource_group_arn
+    #   The ARN of the Capacity Reservation resource group in which to run
+    #   the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandCapacityReservationOptions AWS API Documentation
+    #
+    class OnDemandCapacityReservationOptions < Struct.new(
+      :usage_strategy,
+      :capacity_reservation_preference,
+      :capacity_reservation_resource_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The launch specification for On-Demand Instances in the instance
     # fleet, which determines the allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     # versions 4.8.0 and later, excluding 5.0.x versions. On-Demand
-    # instances allocation strategy is available in Amazon EMR version
+    # Instances allocation strategy is available in Amazon EMR version
     # 5.12.1 and later.
     #
     #  </note>
@@ -4799,18 +5320,29 @@ module Aws::EMR
     #
     #       {
     #         allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #         capacity_reservation_options: {
+    #           usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #           capacity_reservation_preference: "open", # accepts open, none
+    #           capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #         },
     #       }
     #
     # @!attribute [rw] allocation_strategy
     #   Specifies the strategy to use in launching On-Demand instance
-    #   fleets. Currently, the only option is lowest-price (the default),
+    #   fleets. Currently, the only option is `lowest-price` (the default),
     #   which launches the lowest price first.
     #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_options
+    #   The launch specification for On-Demand instances in the instance
+    #   fleet, which determines the allocation strategy.
+    #   @return [Types::OnDemandCapacityReservationOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandProvisioningSpecification AWS API Documentation
     #
     class OnDemandProvisioningSpecification < Struct.new(
-      :allocation_strategy)
+      :allocation_strategy,
+      :capacity_reservation_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5005,7 +5537,7 @@ module Aws::EMR
     #   @return [Types::AutoScalingPolicyDescription]
     #
     # @!attribute [rw] cluster_arn
-    #   The Amazon Resource Name of the cluster.
+    #   The Amazon Resource Name (ARN) of the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicyOutput AWS API Documentation
@@ -5331,6 +5863,11 @@ module Aws::EMR
     #                 },
     #                 on_demand_specification: {
     #                   allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #                   capacity_reservation_options: {
+    #                     usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                     capacity_reservation_preference: "open", # accepts open, none
+    #                     capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #                   },
     #                 },
     #               },
     #             },
@@ -5456,9 +5993,9 @@ module Aws::EMR
     #
     # @!attribute [rw] log_encryption_kms_key_id
     #   The AWS KMS customer master key (CMK) used for encrypting log files.
-    #   If a value is not provided, the logs will remain encrypted by
-    #   AES-256. This attribute is only available with EMR version 5.30.0
-    #   and later, excluding EMR 6.0.0.
+    #   If a value is not provided, the logs remain encrypted by AES-256.
+    #   This attribute is only available with Amazon EMR version 5.30.0 and
+    #   later, excluding Amazon EMR 6.0.0.
     #   @return [String]
     #
     # @!attribute [rw] additional_info
@@ -5542,7 +6079,7 @@ module Aws::EMR
     #
     #   * "mapr-m7" - launch the cluster using MapR M7 Edition.
     #
-    #   * "hunk" - launch the cluster with the Hunk Big Data Analtics
+    #   * "hunk" - launch the cluster with the Hunk Big Data Analytics
     #     Platform.
     #
     #   * "hue"- launch the cluster with Hue installed.
@@ -5616,11 +6153,11 @@ module Aws::EMR
     #   the request to terminate the instance was submitted. This option is
     #   only available with Amazon EMR 5.1.0 and later and is the default
     #   for clusters created using that version.
-    #   `TERMINATE_AT_TASK_COMPLETION` indicates that Amazon EMR blacklists
-    #   and drains tasks from nodes before terminating the Amazon EC2
-    #   instances, regardless of the instance-hour boundary. With either
-    #   behavior, Amazon EMR removes the least active nodes first and blocks
-    #   instance termination if it could lead to HDFS corruption.
+    #   `TERMINATE_AT_TASK_COMPLETION` indicates that Amazon EMR adds nodes
+    #   to a deny list and drains tasks from nodes before terminating the
+    #   Amazon EC2 instances, regardless of the instance-hour boundary. With
+    #   either behavior, Amazon EMR removes the least active nodes first and
+    #   blocks instance termination if it could lead to HDFS corruption.
     #   `TERMINATE_AT_TASK_COMPLETION` available only in Amazon EMR version
     #   4.1.0 and later, and is the default for versions of Amazon EMR
     #   earlier than 5.1.0.
@@ -5648,9 +6185,9 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ebs_root_volume_size
-    #   The size, in GiB, of the EBS root device volume of the Linux AMI
-    #   that is used for each EC2 instance. Available in Amazon EMR version
-    #   4.x and later.
+    #   The size, in GiB, of the Amazon EBS root device volume of the Linux
+    #   AMI that is used for each EC2 instance. Available in Amazon EMR
+    #   version 4.x and later.
     #   @return [Integer]
     #
     # @!attribute [rw] repo_upgrade_on_boot
@@ -5665,7 +6202,8 @@ module Aws::EMR
     # @!attribute [rw] kerberos_attributes
     #   Attributes for Kerberos configuration when Kerberos authentication
     #   is enabled using a security configuration. For more information see
-    #   [Use Kerberos Authentication][1] in the *EMR Management Guide*.
+    #   [Use Kerberos Authentication][1] in the *Amazon EMR Management
+    #   Guide*.
     #
     #
     #
@@ -5723,11 +6261,11 @@ module Aws::EMR
     # The result of the RunJobFlow operation.
     #
     # @!attribute [rw] job_flow_id
-    #   An unique identifier for the job flow.
+    #   A unique identifier for the job flow.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
-    #   The Amazon Resource Name of the cluster.
+    #   The Amazon Resource Name (ARN) of the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowOutput AWS API Documentation
@@ -5962,6 +6500,110 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Details for an Amazon EMR Studio session mapping including creation
+    # time, user or group ID, Studio ID, and so on.
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_id
+    #   The globally unique identifier (GUID) of the user or group.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_name
+    #   The name of the user or group. For more information, see
+    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_type
+    #   Specifies whether the identity mapped to the Amazon EMR Studio is a
+    #   user or a group.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_policy_arn
+    #   The Amazon Resource Name (ARN) of the session policy associated with
+    #   the user or group.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the session mapping was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time the session mapping was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SessionMappingDetail AWS API Documentation
+    #
+    class SessionMappingDetail < Struct.new(
+      :studio_id,
+      :identity_id,
+      :identity_name,
+      :identity_type,
+      :session_policy_arn,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for an Amazon EMR Studio session mapping. The details do not
+    # include the time the session mapping was last modified.
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_id
+    #   The globally unique identifier (GUID) of the user or group from the
+    #   AWS SSO Identity Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_name
+    #   The name of the user or group. For more information, see
+    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_type
+    #   Specifies whether the identity mapped to the Amazon EMR Studio is a
+    #   user or a group.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_policy_arn
+    #   The Amazon Resource Name (ARN) of the session policy associated with
+    #   the user or group.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the session mapping was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SessionMappingSummary AWS API Documentation
+    #
+    class SessionMappingSummary < Struct.new(
+      :studio_id,
+      :identity_id,
+      :identity_name,
+      :identity_type,
+      :session_policy_arn,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input argument to the TerminationProtection operation.
     #
     # @note When making an API call, you may pass SetTerminationProtectionInput
@@ -6114,12 +6756,12 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # The launch specification for Spot instances in the instance fleet,
+    # The launch specification for Spot Instances in the instance fleet,
     # which determines the defined duration, provisioning timeout behavior,
     # and allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # versions 4.8.0 and later, excluding 5.0.x versions. Spot instance
+    # versions 4.8.0 and later, excluding 5.0.x versions. Spot Instance
     # allocation strategy is available in Amazon EMR version 5.12.1 and
     # later.
     #
@@ -6136,7 +6778,7 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] timeout_duration_minutes
-    #   The spot provisioning timeout period in minutes. If Spot instances
+    #   The spot provisioning timeout period in minutes. If Spot Instances
     #   are not provisioned within this time period, the `TimeOutAction` is
     #   taken. Minimum value is 5 and maximum value is 1440. The timeout
     #   applies only during initial provisioning, when the cluster is first
@@ -6146,29 +6788,29 @@ module Aws::EMR
     # @!attribute [rw] timeout_action
     #   The action to take when `TargetSpotCapacity` has not been fulfilled
     #   when the `TimeoutDurationMinutes` has expired; that is, when all
-    #   Spot instances could not be provisioned within the Spot provisioning
+    #   Spot Instances could not be provisioned within the Spot provisioning
     #   timeout. Valid values are `TERMINATE_CLUSTER` and
     #   `SWITCH_TO_ON_DEMAND`. SWITCH\_TO\_ON\_DEMAND specifies that if no
-    #   Spot instances are available, On-Demand Instances should be
+    #   Spot Instances are available, On-Demand Instances should be
     #   provisioned to fulfill any remaining Spot capacity.
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
-    #   The defined duration for Spot instances (also known as Spot blocks)
-    #   in minutes. When specified, the Spot instance does not terminate
+    #   The defined duration for Spot Instances (also known as Spot blocks)
+    #   in minutes. When specified, the Spot Instance does not terminate
     #   before the defined duration expires, and defined duration pricing
-    #   for Spot instances applies. Valid values are 60, 120, 180, 240, 300,
-    #   or 360. The duration period starts as soon as a Spot instance
+    #   for Spot Instances applies. Valid values are 60, 120, 180, 240, 300,
+    #   or 360. The duration period starts as soon as a Spot Instance
     #   receives its instance ID. At the end of the duration, Amazon EC2
-    #   marks the Spot instance for termination and provides a Spot instance
+    #   marks the Spot Instance for termination and provides a Spot Instance
     #   termination notice, which gives the instance a two-minute warning
     #   before it terminates.
     #   @return [Integer]
     #
     # @!attribute [rw] allocation_strategy
-    #   Specifies the strategy to use in launching Spot instance fleets.
+    #   Specifies the strategy to use in launching Spot Instance fleets.
     #   Currently, the only option is capacity-optimized (the default),
-    #   which launches instances from Spot instance pools with optimal
+    #   which launches instances from Spot Instance pools with optimal
     #   capacity for the number of instances that are launching.
     #   @return [String]
     #
@@ -6249,7 +6891,7 @@ module Aws::EMR
     #
     # @!attribute [rw] tags
     #   A list of tags associated with a notebook execution. Tags are
-    #   user-defined key value pairs that consist of a required key string
+    #   user-defined key-value pairs that consist of a required key string
     #   with a maximum of 128 characters and an optional value string with a
     #   maximum of 256 characters.
     #   @return [Array<Types::Tag>]
@@ -6548,7 +7190,143 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # The list of supported product configurations which allow user-supplied
+    # Details for an Amazon EMR Studio including ID, creation time, name,
+    # and so on.
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_mode
+    #   Specifies whether the Amazon EMR Studio authenticates users using
+    #   single sign-on (SSO) or IAM.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC associated with the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The list of IDs of the subnets associated with the Amazon EMR
+    #   Studio.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_role
+    #   The name of the IAM role assumed by the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_role
+    #   The name of the IAM role assumed by users logged in to the Amazon
+    #   EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_security_group_id
+    #   The ID of the Workspace security group associated with the Amazon
+    #   EMR Studio. The Workspace security group allows outbound network
+    #   traffic to resources in the Engine security group and to the
+    #   internet.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_security_group_id
+    #   The ID of the Engine security group associated with the Amazon EMR
+    #   Studio. The Engine security group allows inbound network traffic
+    #   from resources in the Workspace security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The unique access URL of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the Amazon EMR Studio was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] default_s3_location
+    #   The Amazon S3 location to back up Amazon EMR Studio Workspaces and
+    #   notebook files.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the Amazon EMR Studio.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Studio AWS API Documentation
+    #
+    class Studio < Struct.new(
+      :studio_id,
+      :studio_arn,
+      :name,
+      :description,
+      :auth_mode,
+      :vpc_id,
+      :subnet_ids,
+      :service_role,
+      :user_role,
+      :workspace_security_group_id,
+      :engine_security_group_id,
+      :url,
+      :creation_time,
+      :default_s3_location,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for an Amazon EMR Studio, including ID, Name, VPC, and
+    # Description. The details do not include subnets, IAM roles, security
+    # groups, or tags associated with the Studio.
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Virtual Private Cloud (Amazon VPC) associated with the
+    #   Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The unique access URL of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the Amazon EMR Studio was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StudioSummary AWS API Documentation
+    #
+    class StudioSummary < Struct.new(
+      :studio_id,
+      :name,
+      :vpc_id,
+      :description,
+      :url,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of supported product configurations that allow user-supplied
     # arguments. EMR accepts these arguments and forwards them to the
     # corresponding installation script as bootstrap action arguments.
     #
@@ -6577,7 +7355,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # A key/value pair containing user-defined metadata that you can
+    # A key-value pair containing user-defined metadata that you can
     # associate with an Amazon EMR resource. Tags make it easier to
     # associate clusters in various ways, such as grouping clusters to track
     # your Amazon EMR resource allocation costs. For more information, see
@@ -6632,13 +7410,121 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] job_flow_ids
-    #   A list of job flows to be shutdown.
+    #   A list of job flows to be shut down.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlowsInput AWS API Documentation
     #
     class TerminateJobFlowsInput < Struct.new(
       :job_flow_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateStudioInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #         name: "XmlStringMaxLen256",
+    #         description: "XmlStringMaxLen256",
+    #         subnet_ids: ["String"],
+    #         default_s3_location: "XmlString",
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description to assign to the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to associate with the Amazon EMR Studio. The
+    #   list can include new subnet IDs, but must also include all of the
+    #   subnet IDs previously associated with the Studio. The list order
+    #   does not matter. A Studio can have a maximum of 5 subnets. The
+    #   subnets must belong to the same VPC as the Studio.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_s3_location
+    #   The Amazon S3 location to back up Workspaces and notebook files for
+    #   the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudioInput AWS API Documentation
+    #
+    class UpdateStudioInput < Struct.new(
+      :studio_id,
+      :name,
+      :description,
+      :subnet_ids,
+      :default_s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateStudioSessionMappingInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #         identity_id: "XmlStringMaxLen256",
+    #         identity_name: "XmlStringMaxLen256",
+    #         identity_type: "USER", # required, accepts USER, GROUP
+    #         session_policy_arn: "XmlStringMaxLen256", # required
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_id
+    #   The globally unique identifier (GUID) of the user or group. For more
+    #   information, see [UserId][1] and [GroupId][2] in the *AWS SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_name
+    #   The name of the user or group to update. For more information, see
+    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
+    #   API Reference*. Either `IdentityName` or `IdentityId` must be
+    #   specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
+    #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_type
+    #   Specifies whether the identity to update is a user or a group.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_policy_arn
+    #   The Amazon Resource Name (ARN) of the session policy to associate
+    #   with the specified user or group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudioSessionMappingInput AWS API Documentation
+    #
+    class UpdateStudioSessionMappingInput < Struct.new(
+      :studio_id,
+      :identity_id,
+      :identity_name,
+      :identity_type,
+      :session_policy_arn)
       SENSITIVE = []
       include Aws::Structure
     end

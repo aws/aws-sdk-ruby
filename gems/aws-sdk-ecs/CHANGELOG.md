@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2021-06-02)
+------------------
+
+* Feature - Documentation updates for Amazon ECS.
+
+1.79.0 (2021-05-26)
+------------------
+
+* Feature - The release adds support for registering External instances to your Amazon ECS clusters.
+
+1.78.0 (2021-05-10)
+------------------
+
+* Feature - This release contains updates for Amazon ECS.
+
+1.77.0 (2021-04-29)
+------------------
+
+* Feature - Add support for EphemeralStorage on TaskDefinition and TaskOverride
+
+1.76.0 (2021-03-15)
+------------------
+
+* Feature - This is for ecs exec feature release which includes two new APIs - execute-command and update-cluster and an AWS CLI customization for execute-command API
+
+1.75.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2021-01-19)
+------------------
+
+* Feature - This release adds support to include task definition metadata information such as registeredAt, deregisteredAt, registeredBy as part of DescribeTaskDefinition API.
+
+1.72.0 (2020-11-23)
+------------------
+
+* Feature - This release adds support for updating capacity providers, specifying custom instance warmup periods for capacity providers, and using deployment circuit breaker for your ECS Services.
+
+1.71.0 (2020-11-09)
+------------------
+
+* Feature - This release provides native support for specifying Amazon FSx for Windows File Server file systems as volumes in your Amazon ECS task definitions.
+
 1.70.0 (2020-09-30)
 ------------------
 

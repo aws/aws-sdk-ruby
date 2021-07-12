@@ -23,25 +23,35 @@ describe 'Client Interface:' do
       expect(resp.context.http_request.headers['Transfer-Encoding']).to be(nil)
       expect(resp.context.http_request.headers['Content-Length']).to eq('3')
 
-      rd, wr = IO.pipe
-      wr.puts 'hey'
-      resp = client.unsign_streaming(body: rd)
+      tf = Tempfile.new('transfer-encoding-test')
+      tf.write('hey')
+      io = IO.new(IO.sysopen(tf))
+
+      resp = client.unsign_streaming(body: io)
       expect(
         resp.context.http_request.headers['Transfer-Encoding']
       ).to eq('chunked')
       expect(resp.context.http_request.headers['Content-Length']).to eq(nil)
+
+      tf.close
+      tf.unlink
     end
 
     it 'raises error when `Content-Length` header is required but cannot be set' do
-      rd, wr = IO.pipe
-      wr.puts 'hey'
+      tf = Tempfile.new('transfer-encoding-test')
+      tf.write('hey')
+      io = IO.new(IO.sysopen(tf))
+
       msg = 'Required `Content-Length` value missing for the request.'
       expect do
-        client.streaming(body: rd)
+        client.streaming(body: io)
       end.to raise_error(Aws::Errors::MissingContentLength, msg)
       expect do
-        client.unsign_require_len_streaming(body: rd)
+        client.unsign_require_len_streaming(body: io)
       end.to raise_error(Aws::Errors::MissingContentLength, msg)
+
+      tf.close
+      tf.unlink
     end
 
     it 'allows `requireLength` and `v4-unsigned-body` for streaming operations' do

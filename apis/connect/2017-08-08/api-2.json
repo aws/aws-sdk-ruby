@@ -13,6 +13,107 @@
     "uid":"connect-2017-08-08"
   },
   "operations":{
+    "AssociateApprovedOrigin":{
+      "name":"AssociateApprovedOrigin",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/approved-origin"
+      },
+      "input":{"shape":"AssociateApprovedOriginRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "AssociateBot":{
+      "name":"AssociateBot",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/bot"
+      },
+      "input":{"shape":"AssociateBotRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "AssociateInstanceStorageConfig":{
+      "name":"AssociateInstanceStorageConfig",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/storage-config"
+      },
+      "input":{"shape":"AssociateInstanceStorageConfigRequest"},
+      "output":{"shape":"AssociateInstanceStorageConfigResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "AssociateLambdaFunction":{
+      "name":"AssociateLambdaFunction",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/lambda-function"
+      },
+      "input":{"shape":"AssociateLambdaFunctionRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "AssociateLexBot":{
+      "name":"AssociateLexBot",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/lex-bot"
+      },
+      "input":{"shape":"AssociateLexBotRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "AssociateQueueQuickConnects":{
+      "name":"AssociateQueueQuickConnects",
+      "http":{
+        "method":"POST",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/associate-quick-connects"
+      },
+      "input":{"shape":"AssociateQueueQuickConnectsRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "AssociateRoutingProfileQueues":{
       "name":"AssociateRoutingProfileQueues",
       "http":{
@@ -26,6 +127,24 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "AssociateSecurityKey":{
+      "name":"AssociateSecurityKey",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/security-key"
+      },
+      "input":{"shape":"AssociateSecurityKeyRequest"},
+      "output":{"shape":"AssociateSecurityKeyResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "CreateContactFlow":{
@@ -43,6 +162,74 @@
         {"shape":"DuplicateResourceException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "CreateInstance":{
+      "name":"CreateInstance",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance"
+      },
+      "input":{"shape":"CreateInstanceRequest"},
+      "output":{"shape":"CreateInstanceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "CreateIntegrationAssociation":{
+      "name":"CreateIntegrationAssociation",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/integration-associations"
+      },
+      "input":{"shape":"CreateIntegrationAssociationRequest"},
+      "output":{"shape":"CreateIntegrationAssociationResponse"},
+      "errors":[
+        {"shape":"DuplicateResourceException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "CreateQueue":{
+      "name":"CreateQueue",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/queues/{InstanceId}"
+      },
+      "input":{"shape":"CreateQueueRequest"},
+      "output":{"shape":"CreateQueueResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "CreateQuickConnect":{
+      "name":"CreateQuickConnect",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/quick-connects/{InstanceId}"
+      },
+      "input":{"shape":"CreateQuickConnectRequest"},
+      "output":{"shape":"CreateQuickConnectResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
       ]
@@ -65,6 +252,22 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "CreateUseCase":{
+      "name":"CreateUseCase",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}/use-cases"
+      },
+      "input":{"shape":"CreateUseCaseRequest"},
+      "output":{"shape":"CreateUseCaseResponse"},
+      "errors":[
+        {"shape":"DuplicateResourceException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "CreateUser":{
       "name":"CreateUser",
       "http":{
@@ -83,6 +286,80 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "CreateUserHierarchyGroup":{
+      "name":"CreateUserHierarchyGroup",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/user-hierarchy-groups/{InstanceId}"
+      },
+      "input":{"shape":"CreateUserHierarchyGroupRequest"},
+      "output":{"shape":"CreateUserHierarchyGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DeleteInstance":{
+      "name":"DeleteInstance",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}"
+      },
+      "input":{"shape":"DeleteInstanceRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "DeleteIntegrationAssociation":{
+      "name":"DeleteIntegrationAssociation",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}"
+      },
+      "input":{"shape":"DeleteIntegrationAssociationRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DeleteQuickConnect":{
+      "name":"DeleteQuickConnect",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/quick-connects/{InstanceId}/{QuickConnectId}"
+      },
+      "input":{"shape":"DeleteQuickConnectRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DeleteUseCase":{
+      "name":"DeleteUseCase",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}/use-cases/{UseCaseId}"
+      },
+      "input":{"shape":"DeleteUseCaseRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "DeleteUser":{
       "name":"DeleteUser",
       "http":{
@@ -94,6 +371,22 @@
         {"shape":"InvalidRequestException"},
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DeleteUserHierarchyGroup":{
+      "name":"DeleteUserHierarchyGroup",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}"
+      },
+      "input":{"shape":"DeleteUserHierarchyGroupRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
       ]
@@ -111,6 +404,100 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ContactFlowNotPublishedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DescribeHoursOfOperation":{
+      "name":"DescribeHoursOfOperation",
+      "http":{
+        "method":"GET",
+        "requestUri":"/hours-of-operations/{InstanceId}/{HoursOfOperationId}"
+      },
+      "input":{"shape":"DescribeHoursOfOperationRequest"},
+      "output":{"shape":"DescribeHoursOfOperationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DescribeInstance":{
+      "name":"DescribeInstance",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}"
+      },
+      "input":{"shape":"DescribeInstanceRequest"},
+      "output":{"shape":"DescribeInstanceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DescribeInstanceAttribute":{
+      "name":"DescribeInstanceAttribute",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/attribute/{AttributeType}"
+      },
+      "input":{"shape":"DescribeInstanceAttributeRequest"},
+      "output":{"shape":"DescribeInstanceAttributeResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DescribeInstanceStorageConfig":{
+      "name":"DescribeInstanceStorageConfig",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/storage-config/{AssociationId}"
+      },
+      "input":{"shape":"DescribeInstanceStorageConfigRequest"},
+      "output":{"shape":"DescribeInstanceStorageConfigResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DescribeQueue":{
+      "name":"DescribeQueue",
+      "http":{
+        "method":"GET",
+        "requestUri":"/queues/{InstanceId}/{QueueId}"
+      },
+      "input":{"shape":"DescribeQueueRequest"},
+      "output":{"shape":"DescribeQueueResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DescribeQuickConnect":{
+      "name":"DescribeQuickConnect",
+      "http":{
+        "method":"GET",
+        "requestUri":"/quick-connects/{InstanceId}/{QuickConnectId}"
+      },
+      "input":{"shape":"DescribeQuickConnectRequest"},
+      "output":{"shape":"DescribeQuickConnectResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
       ]
@@ -179,6 +566,95 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "DisassociateApprovedOrigin":{
+      "name":"DisassociateApprovedOrigin",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}/approved-origin"
+      },
+      "input":{"shape":"DisassociateApprovedOriginRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DisassociateBot":{
+      "name":"DisassociateBot",
+      "http":{
+        "method":"POST",
+        "requestUri":"/instance/{InstanceId}/bot"
+      },
+      "input":{"shape":"DisassociateBotRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DisassociateInstanceStorageConfig":{
+      "name":"DisassociateInstanceStorageConfig",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}/storage-config/{AssociationId}"
+      },
+      "input":{"shape":"DisassociateInstanceStorageConfigRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DisassociateLambdaFunction":{
+      "name":"DisassociateLambdaFunction",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}/lambda-function"
+      },
+      "input":{"shape":"DisassociateLambdaFunctionRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DisassociateLexBot":{
+      "name":"DisassociateLexBot",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}/lex-bot"
+      },
+      "input":{"shape":"DisassociateLexBotRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DisassociateQueueQuickConnects":{
+      "name":"DisassociateQueueQuickConnects",
+      "http":{
+        "method":"POST",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/disassociate-quick-connects"
+      },
+      "input":{"shape":"DisassociateQueueQuickConnectsRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "DisassociateRoutingProfileQueues":{
       "name":"DisassociateRoutingProfileQueues",
       "http":{
@@ -192,6 +668,21 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "DisassociateSecurityKey":{
+      "name":"DisassociateSecurityKey",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/instance/{InstanceId}/security-key/{AssociationId}"
+      },
+      "input":{"shape":"DisassociateSecurityKeyRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "GetContactAttributes":{
@@ -257,6 +748,37 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "ListApprovedOrigins":{
+      "name":"ListApprovedOrigins",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/approved-origins"
+      },
+      "input":{"shape":"ListApprovedOriginsRequest"},
+      "output":{"shape":"ListApprovedOriginsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListBots":{
+      "name":"ListBots",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/bots"
+      },
+      "input":{"shape":"ListBotsRequest"},
+      "output":{"shape":"ListBotsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "ListContactFlows":{
       "name":"ListContactFlows",
       "http":{
@@ -287,6 +809,98 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "ListInstanceAttributes":{
+      "name":"ListInstanceAttributes",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/attributes"
+      },
+      "input":{"shape":"ListInstanceAttributesRequest"},
+      "output":{"shape":"ListInstanceAttributesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListInstanceStorageConfigs":{
+      "name":"ListInstanceStorageConfigs",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/storage-configs"
+      },
+      "input":{"shape":"ListInstanceStorageConfigsRequest"},
+      "output":{"shape":"ListInstanceStorageConfigsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListInstances":{
+      "name":"ListInstances",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance"
+      },
+      "input":{"shape":"ListInstancesRequest"},
+      "output":{"shape":"ListInstancesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "ListIntegrationAssociations":{
+      "name":"ListIntegrationAssociations",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/integration-associations"
+      },
+      "input":{"shape":"ListIntegrationAssociationsRequest"},
+      "output":{"shape":"ListIntegrationAssociationsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListLambdaFunctions":{
+      "name":"ListLambdaFunctions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/lambda-functions"
+      },
+      "input":{"shape":"ListLambdaFunctionsRequest"},
+      "output":{"shape":"ListLambdaFunctionsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListLexBots":{
+      "name":"ListLexBots",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/lex-bots"
+      },
+      "input":{"shape":"ListLexBotsRequest"},
+      "output":{"shape":"ListLexBotsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListPhoneNumbers":{
@@ -321,6 +935,22 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "ListQueueQuickConnects":{
+      "name":"ListQueueQuickConnects",
+      "http":{
+        "method":"GET",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/quick-connects"
+      },
+      "input":{"shape":"ListQueueQuickConnectsRequest"},
+      "output":{"shape":"ListQueueQuickConnectsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "ListQueues":{
       "name":"ListQueues",
       "http":{
@@ -329,6 +959,22 @@
       },
       "input":{"shape":"ListQueuesRequest"},
       "output":{"shape":"ListQueuesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "ListQuickConnects":{
+      "name":"ListQuickConnects",
+      "http":{
+        "method":"GET",
+        "requestUri":"/quick-connects/{InstanceId}"
+      },
+      "input":{"shape":"ListQuickConnectsRequest"},
+      "output":{"shape":"ListQuickConnectsResponse"},
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InvalidParameterException"},
@@ -369,6 +1015,22 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "ListSecurityKeys":{
+      "name":"ListSecurityKeys",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/security-keys"
+      },
+      "input":{"shape":"ListSecurityKeysRequest"},
+      "output":{"shape":"ListSecurityKeysResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "ListSecurityProfiles":{
       "name":"ListSecurityProfiles",
       "http":{
@@ -398,6 +1060,21 @@
         {"shape":"InvalidParameterException"},
         {"shape":"InternalServiceException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListUseCases":{
+      "name":"ListUseCases",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}/use-cases"
+      },
+      "input":{"shape":"ListUseCasesRequest"},
+      "output":{"shape":"ListUseCasesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
         {"shape":"ThrottlingException"}
       ]
     },
@@ -494,6 +1171,23 @@
         {"shape":"LimitExceededException"},
         {"shape":"DestinationNotAllowedException"},
         {"shape":"OutboundContactNotPermittedException"}
+      ]
+    },
+    "StartTaskContact":{
+      "name":"StartTaskContact",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/contact/task"
+      },
+      "input":{"shape":"StartTaskContactRequest"},
+      "output":{"shape":"StartTaskContactResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"InternalServiceException"}
       ]
     },
     "StopContact":{
@@ -617,6 +1311,142 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "UpdateInstanceAttribute":{
+      "name":"UpdateInstanceAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/instance/{InstanceId}/attribute/{AttributeType}"
+      },
+      "input":{"shape":"UpdateInstanceAttributeRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "UpdateInstanceStorageConfig":{
+      "name":"UpdateInstanceStorageConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/instance/{InstanceId}/storage-config/{AssociationId}"
+      },
+      "input":{"shape":"UpdateInstanceStorageConfigRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "UpdateQueueHoursOfOperation":{
+      "name":"UpdateQueueHoursOfOperation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/hours-of-operation"
+      },
+      "input":{"shape":"UpdateQueueHoursOfOperationRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateQueueMaxContacts":{
+      "name":"UpdateQueueMaxContacts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/max-contacts"
+      },
+      "input":{"shape":"UpdateQueueMaxContactsRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateQueueName":{
+      "name":"UpdateQueueName",
+      "http":{
+        "method":"POST",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/name"
+      },
+      "input":{"shape":"UpdateQueueNameRequest"},
+      "errors":[
+        {"shape":"DuplicateResourceException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateQueueOutboundCallerConfig":{
+      "name":"UpdateQueueOutboundCallerConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/outbound-caller-config"
+      },
+      "input":{"shape":"UpdateQueueOutboundCallerConfigRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateQueueStatus":{
+      "name":"UpdateQueueStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/queues/{InstanceId}/{QueueId}/status"
+      },
+      "input":{"shape":"UpdateQueueStatusRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateQuickConnectConfig":{
+      "name":"UpdateQuickConnectConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/quick-connects/{InstanceId}/{QuickConnectId}/config"
+      },
+      "input":{"shape":"UpdateQuickConnectConfigRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateQuickConnectName":{
+      "name":"UpdateQuickConnectName",
+      "http":{
+        "method":"POST",
+        "requestUri":"/quick-connects/{InstanceId}/{QuickConnectId}/name"
+      },
+      "input":{"shape":"UpdateQuickConnectNameRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "UpdateRoutingProfileConcurrency":{
       "name":"UpdateRoutingProfileConcurrency",
       "http":{
@@ -689,6 +1519,38 @@
         {"shape":"InvalidRequestException"},
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateUserHierarchyGroupName":{
+      "name":"UpdateUserHierarchyGroupName",
+      "http":{
+        "method":"POST",
+        "requestUri":"/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}/name"
+      },
+      "input":{"shape":"UpdateUserHierarchyGroupNameRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateUserHierarchyStructure":{
+      "name":"UpdateUserHierarchyStructure",
+      "http":{
+        "method":"POST",
+        "requestUri":"/user-hierarchy-structure/{InstanceId}"
+      },
+      "input":{"shape":"UpdateUserHierarchyStructureRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
       ]
@@ -775,6 +1637,113 @@
       "max":100,
       "min":1
     },
+    "AliasArn":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "AssociateApprovedOriginRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Origin"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Origin":{"shape":"Origin"}
+      }
+    },
+    "AssociateBotRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "LexBot":{"shape":"LexBot"},
+        "LexV2Bot":{"shape":"LexV2Bot"}
+      }
+    },
+    "AssociateInstanceStorageConfigRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "ResourceType",
+        "StorageConfig"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "ResourceType":{"shape":"InstanceStorageResourceType"},
+        "StorageConfig":{"shape":"InstanceStorageConfig"}
+      }
+    },
+    "AssociateInstanceStorageConfigResponse":{
+      "type":"structure",
+      "members":{
+        "AssociationId":{"shape":"AssociationId"}
+      }
+    },
+    "AssociateLambdaFunctionRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "FunctionArn"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "FunctionArn":{"shape":"FunctionArn"}
+      }
+    },
+    "AssociateLexBotRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "LexBot"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "LexBot":{"shape":"LexBot"}
+      }
+    },
+    "AssociateQueueQuickConnectsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId",
+        "QuickConnectIds"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "QuickConnectIds":{"shape":"QuickConnectsList"}
+      }
+    },
     "AssociateRoutingProfileQueuesRequest":{
       "type":"structure",
       "required":[
@@ -796,6 +1765,39 @@
         "QueueConfigs":{"shape":"RoutingProfileQueueConfigList"}
       }
     },
+    "AssociateSecurityKeyRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Key"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Key":{"shape":"PEM"}
+      }
+    },
+    "AssociateSecurityKeyResponse":{
+      "type":"structure",
+      "members":{
+        "AssociationId":{"shape":"AssociationId"}
+      }
+    },
+    "AssociationId":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "Attribute":{
+      "type":"structure",
+      "members":{
+        "AttributeType":{"shape":"InstanceAttributeType"},
+        "Value":{"shape":"InstanceAttributeValue"}
+      }
+    },
     "AttributeName":{
       "type":"string",
       "max":32767,
@@ -811,12 +1813,26 @@
       "key":{"shape":"AttributeName"},
       "value":{"shape":"AttributeValue"}
     },
+    "AttributesList":{
+      "type":"list",
+      "member":{"shape":"Attribute"}
+    },
     "AutoAccept":{"type":"boolean"},
+    "BotName":{
+      "type":"string",
+      "max":50
+    },
+    "BucketName":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "Channel":{
       "type":"string",
       "enum":[
         "VOICE",
-        "CHAT"
+        "CHAT",
+        "TASK"
       ]
     },
     "Channels":{
@@ -849,13 +1865,23 @@
       "type":"string",
       "max":500
     },
+    "CommonDescriptionLength250":{
+      "type":"string",
+      "max":250,
+      "min":0
+    },
+    "CommonNameLength127":{
+      "type":"string",
+      "max":127,
+      "min":1
+    },
     "Comparison":{
       "type":"string",
       "enum":["LT"]
     },
     "Concurrency":{
       "type":"integer",
-      "max":5,
+      "max":10,
       "min":1
     },
     "ContactFlow":{
@@ -933,6 +1959,11 @@
       "error":{"httpStatusCode":410},
       "exception":true
     },
+    "ContactReferences":{
+      "type":"map",
+      "key":{"shape":"ReferenceKey"},
+      "value":{"shape":"Reference"}
+    },
     "CreateContactFlowRequest":{
       "type":"structure",
       "required":[
@@ -959,6 +1990,118 @@
       "members":{
         "ContactFlowId":{"shape":"ContactFlowId"},
         "ContactFlowArn":{"shape":"ARN"}
+      }
+    },
+    "CreateInstanceRequest":{
+      "type":"structure",
+      "required":[
+        "IdentityManagementType",
+        "InboundCallsEnabled",
+        "OutboundCallsEnabled"
+      ],
+      "members":{
+        "ClientToken":{"shape":"ClientToken"},
+        "IdentityManagementType":{"shape":"DirectoryType"},
+        "InstanceAlias":{"shape":"DirectoryAlias"},
+        "DirectoryId":{"shape":"DirectoryId"},
+        "InboundCallsEnabled":{"shape":"InboundCallsEnabled"},
+        "OutboundCallsEnabled":{"shape":"OutboundCallsEnabled"}
+      }
+    },
+    "CreateInstanceResponse":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"InstanceId"},
+        "Arn":{"shape":"ARN"}
+      }
+    },
+    "CreateIntegrationAssociationRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "IntegrationType",
+        "IntegrationArn",
+        "SourceApplicationUrl",
+        "SourceApplicationName",
+        "SourceType"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "IntegrationType":{"shape":"IntegrationType"},
+        "IntegrationArn":{"shape":"ARN"},
+        "SourceApplicationUrl":{"shape":"URI"},
+        "SourceApplicationName":{"shape":"SourceApplicationName"},
+        "SourceType":{"shape":"SourceType"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateIntegrationAssociationResponse":{
+      "type":"structure",
+      "members":{
+        "IntegrationAssociationId":{"shape":"IntegrationAssociationId"},
+        "IntegrationAssociationArn":{"shape":"ARN"}
+      }
+    },
+    "CreateQueueRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Name",
+        "HoursOfOperationId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Name":{"shape":"CommonNameLength127"},
+        "Description":{"shape":"QueueDescription"},
+        "OutboundCallerConfig":{"shape":"OutboundCallerConfig"},
+        "HoursOfOperationId":{"shape":"HoursOfOperationId"},
+        "MaxContacts":{
+          "shape":"QueueMaxContacts",
+          "box":true
+        },
+        "QuickConnectIds":{"shape":"QuickConnectsList"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateQueueResponse":{
+      "type":"structure",
+      "members":{
+        "QueueArn":{"shape":"ARN"},
+        "QueueId":{"shape":"QueueId"}
+      }
+    },
+    "CreateQuickConnectRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Name",
+        "QuickConnectConfig"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Name":{"shape":"QuickConnectName"},
+        "Description":{"shape":"QuickConnectDescription"},
+        "QuickConnectConfig":{"shape":"QuickConnectConfig"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateQuickConnectResponse":{
+      "type":"structure",
+      "members":{
+        "QuickConnectARN":{"shape":"ARN"},
+        "QuickConnectId":{"shape":"QuickConnectId"}
       }
     },
     "CreateRoutingProfileRequest":{
@@ -989,6 +2132,58 @@
       "members":{
         "RoutingProfileArn":{"shape":"ARN"},
         "RoutingProfileId":{"shape":"RoutingProfileId"}
+      }
+    },
+    "CreateUseCaseRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "IntegrationAssociationId",
+        "UseCaseType"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "IntegrationAssociationId":{
+          "shape":"IntegrationAssociationId",
+          "location":"uri",
+          "locationName":"IntegrationAssociationId"
+        },
+        "UseCaseType":{"shape":"UseCaseType"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateUseCaseResponse":{
+      "type":"structure",
+      "members":{
+        "UseCaseId":{"shape":"UseCaseId"},
+        "UseCaseArn":{"shape":"ARN"}
+      }
+    },
+    "CreateUserHierarchyGroupRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "InstanceId"
+      ],
+      "members":{
+        "Name":{"shape":"HierarchyGroupName"},
+        "ParentGroupId":{"shape":"HierarchyGroupId"},
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        }
+      }
+    },
+    "CreateUserHierarchyGroupResponse":{
+      "type":"structure",
+      "members":{
+        "HierarchyGroupId":{"shape":"HierarchyGroupId"},
+        "HierarchyGroupArn":{"shape":"ARN"}
       }
     },
     "CreateUserRequest":{
@@ -1092,6 +2287,99 @@
       "max":9999,
       "min":0
     },
+    "DeleteInstanceRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        }
+      }
+    },
+    "DeleteIntegrationAssociationRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "IntegrationAssociationId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "IntegrationAssociationId":{
+          "shape":"IntegrationAssociationId",
+          "location":"uri",
+          "locationName":"IntegrationAssociationId"
+        }
+      }
+    },
+    "DeleteQuickConnectRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QuickConnectId":{
+          "shape":"QuickConnectId",
+          "location":"uri",
+          "locationName":"QuickConnectId"
+        }
+      }
+    },
+    "DeleteUseCaseRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "IntegrationAssociationId",
+        "UseCaseId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "IntegrationAssociationId":{
+          "shape":"IntegrationAssociationId",
+          "location":"uri",
+          "locationName":"IntegrationAssociationId"
+        },
+        "UseCaseId":{
+          "shape":"UseCaseId",
+          "location":"uri",
+          "locationName":"UseCaseId"
+        }
+      }
+    },
+    "DeleteUserHierarchyGroupRequest":{
+      "type":"structure",
+      "required":[
+        "HierarchyGroupId",
+        "InstanceId"
+      ],
+      "members":{
+        "HierarchyGroupId":{
+          "shape":"HierarchyGroupId",
+          "location":"uri",
+          "locationName":"HierarchyGroupId"
+        },
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        }
+      }
+    },
     "DeleteUserRequest":{
       "type":"structure",
       "required":[
@@ -1134,6 +2422,154 @@
       "type":"structure",
       "members":{
         "ContactFlow":{"shape":"ContactFlow"}
+      }
+    },
+    "DescribeHoursOfOperationRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "HoursOfOperationId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "HoursOfOperationId":{
+          "shape":"HoursOfOperationId",
+          "location":"uri",
+          "locationName":"HoursOfOperationId"
+        }
+      }
+    },
+    "DescribeHoursOfOperationResponse":{
+      "type":"structure",
+      "members":{
+        "HoursOfOperation":{"shape":"HoursOfOperation"}
+      }
+    },
+    "DescribeInstanceAttributeRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AttributeType"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "AttributeType":{
+          "shape":"InstanceAttributeType",
+          "location":"uri",
+          "locationName":"AttributeType"
+        }
+      }
+    },
+    "DescribeInstanceAttributeResponse":{
+      "type":"structure",
+      "members":{
+        "Attribute":{"shape":"Attribute"}
+      }
+    },
+    "DescribeInstanceRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        }
+      }
+    },
+    "DescribeInstanceResponse":{
+      "type":"structure",
+      "members":{
+        "Instance":{"shape":"Instance"}
+      }
+    },
+    "DescribeInstanceStorageConfigRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AssociationId",
+        "ResourceType"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "AssociationId":{
+          "shape":"AssociationId",
+          "location":"uri",
+          "locationName":"AssociationId"
+        },
+        "ResourceType":{
+          "shape":"InstanceStorageResourceType",
+          "location":"querystring",
+          "locationName":"resourceType"
+        }
+      }
+    },
+    "DescribeInstanceStorageConfigResponse":{
+      "type":"structure",
+      "members":{
+        "StorageConfig":{"shape":"InstanceStorageConfig"}
+      }
+    },
+    "DescribeQueueRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        }
+      }
+    },
+    "DescribeQueueResponse":{
+      "type":"structure",
+      "members":{
+        "Queue":{"shape":"Queue"}
+      }
+    },
+    "DescribeQuickConnectRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QuickConnectId":{
+          "shape":"QuickConnectId",
+          "location":"uri",
+          "locationName":"QuickConnectId"
+        }
+      }
+    },
+    "DescribeQuickConnectResponse":{
+      "type":"structure",
+      "members":{
+        "QuickConnect":{"shape":"QuickConnect"}
       }
     },
     "DescribeRoutingProfileRequest":{
@@ -1228,6 +2664,11 @@
         "User":{"shape":"User"}
       }
     },
+    "Description":{
+      "type":"string",
+      "max":4096,
+      "min":0
+    },
     "DestinationNotAllowedException":{
       "type":"structure",
       "members":{
@@ -1243,7 +2684,150 @@
         "Channel":{"shape":"Channel"}
       }
     },
+    "DirectoryAlias":{
+      "type":"string",
+      "max":62,
+      "min":1,
+      "pattern":"^(?!d-)([\\da-zA-Z]+)([-]*[\\da-zA-Z])*$",
+      "sensitive":true
+    },
+    "DirectoryId":{
+      "type":"string",
+      "max":12,
+      "min":12,
+      "pattern":"^d-[0-9a-f]{10}$"
+    },
+    "DirectoryType":{
+      "type":"string",
+      "enum":[
+        "SAML",
+        "CONNECT_MANAGED",
+        "EXISTING_DIRECTORY"
+      ]
+    },
     "DirectoryUserId":{"type":"string"},
+    "DisassociateApprovedOriginRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Origin"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Origin":{
+          "shape":"Origin",
+          "location":"querystring",
+          "locationName":"origin"
+        }
+      }
+    },
+    "DisassociateBotRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "LexBot":{"shape":"LexBot"},
+        "LexV2Bot":{"shape":"LexV2Bot"}
+      }
+    },
+    "DisassociateInstanceStorageConfigRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AssociationId",
+        "ResourceType"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "AssociationId":{
+          "shape":"AssociationId",
+          "location":"uri",
+          "locationName":"AssociationId"
+        },
+        "ResourceType":{
+          "shape":"InstanceStorageResourceType",
+          "location":"querystring",
+          "locationName":"resourceType"
+        }
+      }
+    },
+    "DisassociateLambdaFunctionRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "FunctionArn"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "FunctionArn":{
+          "shape":"FunctionArn",
+          "location":"querystring",
+          "locationName":"functionArn"
+        }
+      }
+    },
+    "DisassociateLexBotRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "BotName",
+        "LexRegion"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "BotName":{
+          "shape":"BotName",
+          "location":"querystring",
+          "locationName":"botName"
+        },
+        "LexRegion":{
+          "shape":"LexRegion",
+          "location":"querystring",
+          "locationName":"lexRegion"
+        }
+      }
+    },
+    "DisassociateQueueQuickConnectsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId",
+        "QuickConnectIds"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "QuickConnectIds":{"shape":"QuickConnectsList"}
+      }
+    },
     "DisassociateRoutingProfileQueuesRequest":{
       "type":"structure",
       "required":[
@@ -1265,6 +2849,25 @@
         "QueueReferences":{"shape":"RoutingProfileQueueReferenceList"}
       }
     },
+    "DisassociateSecurityKeyRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AssociationId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "AssociationId":{
+          "shape":"AssociationId",
+          "location":"uri",
+          "locationName":"AssociationId"
+        }
+      }
+    },
     "DisplayName":{
       "type":"string",
       "max":256,
@@ -1279,12 +2882,36 @@
       "exception":true
     },
     "Email":{"type":"string"},
+    "EncryptionConfig":{
+      "type":"structure",
+      "required":[
+        "EncryptionType",
+        "KeyId"
+      ],
+      "members":{
+        "EncryptionType":{"shape":"EncryptionType"},
+        "KeyId":{"shape":"KeyId"}
+      }
+    },
+    "EncryptionType":{
+      "type":"string",
+      "enum":["KMS"]
+    },
     "Filters":{
       "type":"structure",
       "members":{
         "Queues":{"shape":"Queues"},
         "Channels":{"shape":"Channels"}
       }
+    },
+    "FunctionArn":{
+      "type":"string",
+      "max":140,
+      "min":1
+    },
+    "FunctionArnsList":{
+      "type":"list",
+      "member":{"shape":"FunctionArn"}
     },
     "GetContactAttributesRequest":{
       "type":"structure",
@@ -1439,6 +3066,13 @@
     },
     "HierarchyLevelId":{"type":"string"},
     "HierarchyLevelName":{"type":"string"},
+    "HierarchyLevelUpdate":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"HierarchyLevelName"}
+      }
+    },
     "HierarchyPath":{
       "type":"structure",
       "members":{
@@ -1457,6 +3091,16 @@
         "LevelThree":{"shape":"HierarchyLevel"},
         "LevelFour":{"shape":"HierarchyLevel"},
         "LevelFive":{"shape":"HierarchyLevel"}
+      }
+    },
+    "HierarchyStructureUpdate":{
+      "type":"structure",
+      "members":{
+        "LevelOne":{"shape":"HierarchyLevelUpdate"},
+        "LevelTwo":{"shape":"HierarchyLevelUpdate"},
+        "LevelThree":{"shape":"HierarchyLevelUpdate"},
+        "LevelFour":{"shape":"HierarchyLevelUpdate"},
+        "LevelFive":{"shape":"HierarchyLevelUpdate"}
       }
     },
     "HistoricalMetric":{
@@ -1530,6 +3174,52 @@
       "type":"list",
       "member":{"shape":"HistoricalMetric"}
     },
+    "Hours":{
+      "type":"integer",
+      "max":87600,
+      "min":0
+    },
+    "Hours24Format":{
+      "type":"integer",
+      "max":23,
+      "min":0
+    },
+    "HoursOfOperation":{
+      "type":"structure",
+      "members":{
+        "HoursOfOperationId":{"shape":"HoursOfOperationId"},
+        "HoursOfOperationArn":{"shape":"ARN"},
+        "Name":{"shape":"CommonNameLength127"},
+        "Description":{"shape":"CommonDescriptionLength250"},
+        "TimeZone":{"shape":"TimeZone"},
+        "Config":{"shape":"HoursOfOperationConfigList"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "HoursOfOperationConfig":{
+      "type":"structure",
+      "members":{
+        "Day":{"shape":"HoursOfOperationDays"},
+        "StartTime":{"shape":"HoursOfOperationTimeSlice"},
+        "EndTime":{"shape":"HoursOfOperationTimeSlice"}
+      }
+    },
+    "HoursOfOperationConfigList":{
+      "type":"list",
+      "member":{"shape":"HoursOfOperationConfig"}
+    },
+    "HoursOfOperationDays":{
+      "type":"string",
+      "enum":[
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY"
+      ]
+    },
     "HoursOfOperationId":{"type":"string"},
     "HoursOfOperationName":{"type":"string"},
     "HoursOfOperationSummary":{
@@ -1544,10 +3234,135 @@
       "type":"list",
       "member":{"shape":"HoursOfOperationSummary"}
     },
+    "HoursOfOperationTimeSlice":{
+      "type":"structure",
+      "members":{
+        "Hours":{"shape":"Hours24Format"},
+        "Minutes":{"shape":"MinutesLimit60"}
+      }
+    },
+    "InboundCallsEnabled":{"type":"boolean"},
+    "Instance":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"InstanceId"},
+        "Arn":{"shape":"ARN"},
+        "IdentityManagementType":{"shape":"DirectoryType"},
+        "InstanceAlias":{"shape":"DirectoryAlias"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "ServiceRole":{"shape":"ARN"},
+        "InstanceStatus":{"shape":"InstanceStatus"},
+        "StatusReason":{"shape":"InstanceStatusReason"},
+        "InboundCallsEnabled":{"shape":"InboundCallsEnabled"},
+        "OutboundCallsEnabled":{"shape":"OutboundCallsEnabled"}
+      }
+    },
+    "InstanceAttributeType":{
+      "type":"string",
+      "enum":[
+        "INBOUND_CALLS",
+        "OUTBOUND_CALLS",
+        "CONTACTFLOW_LOGS",
+        "CONTACT_LENS",
+        "AUTO_RESOLVE_BEST_VOICES",
+        "USE_CUSTOM_TTS_VOICES",
+        "EARLY_MEDIA"
+      ]
+    },
+    "InstanceAttributeValue":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
     "InstanceId":{
       "type":"string",
       "max":100,
       "min":1
+    },
+    "InstanceStatus":{
+      "type":"string",
+      "enum":[
+        "CREATION_IN_PROGRESS",
+        "ACTIVE",
+        "CREATION_FAILED"
+      ]
+    },
+    "InstanceStatusReason":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      }
+    },
+    "InstanceStorageConfig":{
+      "type":"structure",
+      "required":["StorageType"],
+      "members":{
+        "AssociationId":{"shape":"AssociationId"},
+        "StorageType":{"shape":"StorageType"},
+        "S3Config":{"shape":"S3Config"},
+        "KinesisVideoStreamConfig":{"shape":"KinesisVideoStreamConfig"},
+        "KinesisStreamConfig":{"shape":"KinesisStreamConfig"},
+        "KinesisFirehoseConfig":{"shape":"KinesisFirehoseConfig"}
+      }
+    },
+    "InstanceStorageConfigs":{
+      "type":"list",
+      "member":{"shape":"InstanceStorageConfig"}
+    },
+    "InstanceStorageResourceType":{
+      "type":"string",
+      "enum":[
+        "CHAT_TRANSCRIPTS",
+        "CALL_RECORDINGS",
+        "SCHEDULED_REPORTS",
+        "MEDIA_STREAMS",
+        "CONTACT_TRACE_RECORDS",
+        "AGENT_EVENTS"
+      ]
+    },
+    "InstanceSummary":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"InstanceId"},
+        "Arn":{"shape":"ARN"},
+        "IdentityManagementType":{"shape":"DirectoryType"},
+        "InstanceAlias":{"shape":"DirectoryAlias"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "ServiceRole":{"shape":"ARN"},
+        "InstanceStatus":{"shape":"InstanceStatus"},
+        "InboundCallsEnabled":{"shape":"InboundCallsEnabled"},
+        "OutboundCallsEnabled":{"shape":"OutboundCallsEnabled"}
+      }
+    },
+    "InstanceSummaryList":{
+      "type":"list",
+      "member":{"shape":"InstanceSummary"}
+    },
+    "IntegrationAssociationId":{
+      "type":"string",
+      "max":200,
+      "min":1
+    },
+    "IntegrationAssociationSummary":{
+      "type":"structure",
+      "members":{
+        "IntegrationAssociationId":{"shape":"IntegrationAssociationId"},
+        "IntegrationAssociationArn":{"shape":"ARN"},
+        "InstanceId":{"shape":"InstanceId"},
+        "IntegrationType":{"shape":"IntegrationType"},
+        "IntegrationArn":{"shape":"ARN"},
+        "SourceApplicationUrl":{"shape":"URI"},
+        "SourceApplicationName":{"shape":"SourceApplicationName"},
+        "SourceType":{"shape":"SourceType"}
+      }
+    },
+    "IntegrationAssociationSummaryList":{
+      "type":"list",
+      "member":{"shape":"IntegrationAssociationSummary"}
+    },
+    "IntegrationType":{
+      "type":"string",
+      "enum":["EVENT"]
     },
     "InternalServiceException":{
       "type":"structure",
@@ -1581,6 +3396,77 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "KeyId":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "KinesisFirehoseConfig":{
+      "type":"structure",
+      "required":["FirehoseArn"],
+      "members":{
+        "FirehoseArn":{"shape":"ARN"}
+      }
+    },
+    "KinesisStreamConfig":{
+      "type":"structure",
+      "required":["StreamArn"],
+      "members":{
+        "StreamArn":{"shape":"ARN"}
+      }
+    },
+    "KinesisVideoStreamConfig":{
+      "type":"structure",
+      "required":[
+        "Prefix",
+        "RetentionPeriodHours",
+        "EncryptionConfig"
+      ],
+      "members":{
+        "Prefix":{"shape":"Prefix"},
+        "RetentionPeriodHours":{"shape":"Hours"},
+        "EncryptionConfig":{"shape":"EncryptionConfig"}
+      }
+    },
+    "LexBot":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"BotName"},
+        "LexRegion":{"shape":"LexRegion"}
+      }
+    },
+    "LexBotConfig":{
+      "type":"structure",
+      "members":{
+        "LexBot":{"shape":"LexBot"},
+        "LexV2Bot":{"shape":"LexV2Bot"}
+      }
+    },
+    "LexBotConfigList":{
+      "type":"list",
+      "member":{"shape":"LexBotConfig"}
+    },
+    "LexBotsList":{
+      "type":"list",
+      "member":{"shape":"LexBot"}
+    },
+    "LexRegion":{
+      "type":"string",
+      "max":60
+    },
+    "LexV2Bot":{
+      "type":"structure",
+      "members":{
+        "AliasArn":{"shape":"AliasArn"}
+      }
+    },
+    "LexVersion":{
+      "type":"string",
+      "enum":[
+        "V1",
+        "V2"
+      ]
+    },
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -1588,6 +3474,72 @@
       },
       "error":{"httpStatusCode":429},
       "exception":true
+    },
+    "ListApprovedOriginsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult25",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListApprovedOriginsResponse":{
+      "type":"structure",
+      "members":{
+        "Origins":{"shape":"OriginsList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListBotsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "LexVersion"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult25",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "LexVersion":{
+          "shape":"LexVersion",
+          "location":"querystring",
+          "locationName":"lexVersion"
+        }
+      }
+    },
+    "ListBotsResponse":{
+      "type":"structure",
+      "members":{
+        "LexBots":{"shape":"LexBotConfigList"},
+        "NextToken":{"shape":"NextToken"}
+      }
     },
     "ListContactFlowsRequest":{
       "type":"structure",
@@ -1647,6 +3599,182 @@
       "type":"structure",
       "members":{
         "HoursOfOperationSummaryList":{"shape":"HoursOfOperationSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListInstanceAttributesRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult7",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListInstanceAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{"shape":"AttributesList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListInstanceStorageConfigsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "ResourceType"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "ResourceType":{
+          "shape":"InstanceStorageResourceType",
+          "location":"querystring",
+          "locationName":"resourceType"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult10",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListInstanceStorageConfigsResponse":{
+      "type":"structure",
+      "members":{
+        "StorageConfigs":{"shape":"InstanceStorageConfigs"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListInstancesRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult10",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListInstancesResponse":{
+      "type":"structure",
+      "members":{
+        "InstanceSummaryList":{"shape":"InstanceSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListIntegrationAssociationsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListIntegrationAssociationsResponse":{
+      "type":"structure",
+      "members":{
+        "IntegrationAssociationSummaryList":{"shape":"IntegrationAssociationSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListLambdaFunctionsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult25",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListLambdaFunctionsResponse":{
+      "type":"structure",
+      "members":{
+        "LambdaFunctions":{"shape":"FunctionArnsList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListLexBotsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult25",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListLexBotsResponse":{
+      "type":"structure",
+      "members":{
+        "LexBots":{"shape":"LexBotsList"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -1717,6 +3845,43 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListQueueQuickConnectsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListQueueQuickConnectsResponse":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"NextToken"},
+        "QuickConnectSummaryList":{"shape":"QuickConnectSummaryList"}
+      }
+    },
     "ListQueuesRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -1747,6 +3912,40 @@
       "type":"structure",
       "members":{
         "QueueSummaryList":{"shape":"QueueSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListQuickConnectsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult1000",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "QuickConnectTypes":{
+          "shape":"QuickConnectTypes",
+          "location":"querystring",
+          "locationName":"QuickConnectTypes"
+        }
+      }
+    },
+    "ListQuickConnectsResponse":{
+      "type":"structure",
+      "members":{
+        "QuickConnectSummaryList":{"shape":"QuickConnectSummaryList"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -1816,6 +4015,35 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListSecurityKeysRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult2",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListSecurityKeysResponse":{
+      "type":"structure",
+      "members":{
+        "SecurityKeys":{"shape":"SecurityKeysList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListSecurityProfilesRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -1860,6 +4088,43 @@
       "type":"structure",
       "members":{
         "tags":{"shape":"TagMap"}
+      }
+    },
+    "ListUseCasesRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "IntegrationAssociationId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "IntegrationAssociationId":{
+          "shape":"IntegrationAssociationId",
+          "location":"uri",
+          "locationName":"IntegrationAssociationId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListUseCasesResponse":{
+      "type":"structure",
+      "members":{
+        "UseCaseSummaryList":{"shape":"UseCaseSummaryList"},
+        "NextToken":{"shape":"NextToken"}
       }
     },
     "ListUserHierarchyGroupsRequest":{
@@ -1920,6 +4185,11 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "MaxResult10":{
+      "type":"integer",
+      "max":10,
+      "min":1
+    },
     "MaxResult100":{
       "type":"integer",
       "max":100,
@@ -1928,6 +4198,21 @@
     "MaxResult1000":{
       "type":"integer",
       "max":1000,
+      "min":1
+    },
+    "MaxResult2":{
+      "type":"integer",
+      "max":2,
+      "min":1
+    },
+    "MaxResult25":{
+      "type":"integer",
+      "max":25,
+      "min":1
+    },
+    "MaxResult7":{
+      "type":"integer",
+      "max":7,
       "min":1
     },
     "MediaConcurrencies":{
@@ -1946,7 +4231,39 @@
       }
     },
     "Message":{"type":"string"},
+    "MinutesLimit60":{
+      "type":"integer",
+      "max":59,
+      "min":0
+    },
+    "Name":{
+      "type":"string",
+      "max":512,
+      "min":0
+    },
     "NextToken":{"type":"string"},
+    "Origin":{
+      "type":"string",
+      "max":267
+    },
+    "OriginsList":{
+      "type":"list",
+      "member":{"shape":"Origin"}
+    },
+    "OutboundCallerConfig":{
+      "type":"structure",
+      "members":{
+        "OutboundCallerIdName":{"shape":"OutboundCallerIdName"},
+        "OutboundCallerIdNumberId":{"shape":"PhoneNumberId"},
+        "OutboundFlowId":{"shape":"ContactFlowId"}
+      }
+    },
+    "OutboundCallerIdName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "OutboundCallsEnabled":{"type":"boolean"},
     "OutboundContactNotPermittedException":{
       "type":"structure",
       "members":{
@@ -1954,6 +4271,11 @@
       },
       "error":{"httpStatusCode":403},
       "exception":true
+    },
+    "PEM":{
+      "type":"string",
+      "max":1024,
+      "min":1
     },
     "ParticipantDetails":{
       "type":"structure",
@@ -2225,6 +4547,13 @@
       "max":10
     },
     "PhoneNumberId":{"type":"string"},
+    "PhoneNumberQuickConnectConfig":{
+      "type":"structure",
+      "required":["PhoneNumber"],
+      "members":{
+        "PhoneNumber":{"shape":"PhoneNumber"}
+      }
+    },
     "PhoneNumberSummary":{
       "type":"structure",
       "members":{
@@ -2257,6 +4586,11 @@
         "SOFT_PHONE",
         "DESK_PHONE"
       ]
+    },
+    "Prefix":{
+      "type":"string",
+      "max":128,
+      "min":1
     },
     "Priority":{
       "type":"integer",
@@ -2302,11 +4636,48 @@
       "type":"list",
       "member":{"shape":"PromptSummary"}
     },
+    "Queue":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"CommonNameLength127"},
+        "QueueArn":{"shape":"ARN"},
+        "QueueId":{"shape":"QueueId"},
+        "Description":{"shape":"QueueDescription"},
+        "OutboundCallerConfig":{"shape":"OutboundCallerConfig"},
+        "HoursOfOperationId":{"shape":"HoursOfOperationId"},
+        "MaxContacts":{
+          "shape":"QueueMaxContacts",
+          "box":true
+        },
+        "Status":{"shape":"QueueStatus"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "QueueDescription":{
+      "type":"string",
+      "max":250,
+      "min":1
+    },
     "QueueId":{"type":"string"},
+    "QueueMaxContacts":{
+      "type":"integer",
+      "min":0
+    },
     "QueueName":{
       "type":"string",
       "max":256,
       "min":1
+    },
+    "QueueQuickConnectConfig":{
+      "type":"structure",
+      "required":[
+        "QueueId",
+        "ContactFlowId"
+      ],
+      "members":{
+        "QueueId":{"shape":"QueueId"},
+        "ContactFlowId":{"shape":"ContactFlowId"}
+      }
     },
     "QueueReference":{
       "type":"structure",
@@ -2314,6 +4685,13 @@
         "Id":{"shape":"QueueId"},
         "Arn":{"shape":"ARN"}
       }
+    },
+    "QueueStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "QueueSummary":{
       "type":"structure",
@@ -2346,6 +4724,113 @@
       "max":100,
       "min":1
     },
+    "QuickConnect":{
+      "type":"structure",
+      "members":{
+        "QuickConnectARN":{"shape":"ARN"},
+        "QuickConnectId":{"shape":"QuickConnectId"},
+        "Name":{"shape":"QuickConnectName"},
+        "Description":{"shape":"QuickConnectDescription"},
+        "QuickConnectConfig":{"shape":"QuickConnectConfig"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "QuickConnectConfig":{
+      "type":"structure",
+      "required":["QuickConnectType"],
+      "members":{
+        "QuickConnectType":{"shape":"QuickConnectType"},
+        "UserConfig":{"shape":"UserQuickConnectConfig"},
+        "QueueConfig":{"shape":"QueueQuickConnectConfig"},
+        "PhoneConfig":{"shape":"PhoneNumberQuickConnectConfig"}
+      }
+    },
+    "QuickConnectDescription":{
+      "type":"string",
+      "max":250,
+      "min":1
+    },
+    "QuickConnectId":{"type":"string"},
+    "QuickConnectName":{
+      "type":"string",
+      "max":127,
+      "min":1
+    },
+    "QuickConnectSummary":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"QuickConnectId"},
+        "Arn":{"shape":"ARN"},
+        "Name":{"shape":"QuickConnectName"},
+        "QuickConnectType":{"shape":"QuickConnectType"}
+      }
+    },
+    "QuickConnectSummaryList":{
+      "type":"list",
+      "member":{"shape":"QuickConnectSummary"}
+    },
+    "QuickConnectType":{
+      "type":"string",
+      "enum":[
+        "USER",
+        "QUEUE",
+        "PHONE_NUMBER"
+      ]
+    },
+    "QuickConnectTypes":{
+      "type":"list",
+      "member":{"shape":"QuickConnectType"},
+      "max":3
+    },
+    "QuickConnectsList":{
+      "type":"list",
+      "member":{"shape":"QuickConnectId"},
+      "max":50,
+      "min":1
+    },
+    "Reference":{
+      "type":"structure",
+      "required":[
+        "Value",
+        "Type"
+      ],
+      "members":{
+        "Value":{"shape":"ReferenceValue"},
+        "Type":{"shape":"ReferenceType"}
+      }
+    },
+    "ReferenceKey":{
+      "type":"string",
+      "max":4096,
+      "min":1
+    },
+    "ReferenceType":{
+      "type":"string",
+      "enum":["URL"]
+    },
+    "ReferenceValue":{
+      "type":"string",
+      "max":4096,
+      "min":0
+    },
+    "ResourceConflictException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"Message"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
+    "ResourceInUseException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"Message"},
+        "ResourceType":{"shape":"ResourceType"},
+        "ResourceId":{"shape":"ARN"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
@@ -2353,6 +4838,18 @@
       },
       "error":{"httpStatusCode":404},
       "exception":true
+    },
+    "ResourceType":{
+      "type":"string",
+      "enum":[
+        "CONTACT",
+        "CONTACT_FLOW",
+        "INSTANCE",
+        "PARTICIPANT",
+        "HIERARCHY_LEVEL",
+        "HIERARCHY_GROUP",
+        "USER"
+      ]
     },
     "ResumeContactRecordingRequest":{
       "type":"structure",
@@ -2471,6 +4968,30 @@
       "type":"list",
       "member":{"shape":"RoutingProfileSummary"}
     },
+    "S3Config":{
+      "type":"structure",
+      "required":[
+        "BucketName",
+        "BucketPrefix"
+      ],
+      "members":{
+        "BucketName":{"shape":"BucketName"},
+        "BucketPrefix":{"shape":"Prefix"},
+        "EncryptionConfig":{"shape":"EncryptionConfig"}
+      }
+    },
+    "SecurityKey":{
+      "type":"structure",
+      "members":{
+        "AssociationId":{"shape":"AssociationId"},
+        "Key":{"shape":"PEM"},
+        "CreationTime":{"shape":"timestamp"}
+      }
+    },
+    "SecurityKeysList":{
+      "type":"list",
+      "member":{"shape":"SecurityKey"}
+    },
     "SecurityProfileId":{"type":"string"},
     "SecurityProfileIds":{
       "type":"list",
@@ -2494,6 +5015,27 @@
     "SecurityToken":{
       "type":"string",
       "sensitive":true
+    },
+    "ServiceQuotaExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"Message"}
+      },
+      "error":{"httpStatusCode":402},
+      "exception":true
+    },
+    "SourceApplicationName":{
+      "type":"string",
+      "max":100,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_ -]+$"
+    },
+    "SourceType":{
+      "type":"string",
+      "enum":[
+        "SALESFORCE",
+        "ZENDESK"
+      ]
     },
     "StartChatContactRequest":{
       "type":"structure",
@@ -2568,6 +5110,33 @@
         "ContactId":{"shape":"ContactId"}
       }
     },
+    "StartTaskContactRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "ContactFlowId",
+        "Name"
+      ],
+      "members":{
+        "InstanceId":{"shape":"InstanceId"},
+        "PreviousContactId":{"shape":"ContactId"},
+        "ContactFlowId":{"shape":"ContactFlowId"},
+        "Attributes":{"shape":"Attributes"},
+        "Name":{"shape":"Name"},
+        "References":{"shape":"ContactReferences"},
+        "Description":{"shape":"Description"},
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "StartTaskContactResponse":{
+      "type":"structure",
+      "members":{
+        "ContactId":{"shape":"ContactId"}
+      }
+    },
     "Statistic":{
       "type":"string",
       "enum":[
@@ -2610,6 +5179,16 @@
       "members":{
       }
     },
+    "StorageType":{
+      "type":"string",
+      "enum":[
+        "S3",
+        "KINESIS_VIDEO_STREAM",
+        "KINESIS_STREAM",
+        "KINESIS_FIREHOSE"
+      ]
+    },
+    "String":{"type":"string"},
     "SuspendContactRecordingRequest":{
       "type":"structure",
       "required":[
@@ -2637,14 +5216,14 @@
     "TagKeyList":{
       "type":"list",
       "member":{"shape":"TagKey"},
-      "max":200,
+      "max":50,
       "min":1
     },
     "TagMap":{
       "type":"map",
       "key":{"shape":"TagKey"},
       "value":{"shape":"TagValue"},
-      "max":200,
+      "max":50,
       "min":1
     },
     "TagResourceRequest":{
@@ -2684,6 +5263,13 @@
       },
       "error":{"httpStatusCode":429},
       "exception":true
+    },
+    "TimeZone":{"type":"string"},
+    "Timestamp":{"type":"timestamp"},
+    "URI":{
+      "type":"string",
+      "max":2000,
+      "min":1
     },
     "Unit":{
       "type":"string",
@@ -2772,6 +5358,208 @@
         "Description":{"shape":"ContactFlowDescription"}
       }
     },
+    "UpdateInstanceAttributeRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AttributeType",
+        "Value"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "AttributeType":{
+          "shape":"InstanceAttributeType",
+          "location":"uri",
+          "locationName":"AttributeType"
+        },
+        "Value":{"shape":"InstanceAttributeValue"}
+      }
+    },
+    "UpdateInstanceStorageConfigRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AssociationId",
+        "ResourceType",
+        "StorageConfig"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "AssociationId":{
+          "shape":"AssociationId",
+          "location":"uri",
+          "locationName":"AssociationId"
+        },
+        "ResourceType":{
+          "shape":"InstanceStorageResourceType",
+          "location":"querystring",
+          "locationName":"resourceType"
+        },
+        "StorageConfig":{"shape":"InstanceStorageConfig"}
+      }
+    },
+    "UpdateQueueHoursOfOperationRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId",
+        "HoursOfOperationId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "HoursOfOperationId":{"shape":"HoursOfOperationId"}
+      }
+    },
+    "UpdateQueueMaxContactsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "MaxContacts":{
+          "shape":"QueueMaxContacts",
+          "box":true
+        }
+      }
+    },
+    "UpdateQueueNameRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "Name":{"shape":"CommonNameLength127"},
+        "Description":{"shape":"QueueDescription"}
+      }
+    },
+    "UpdateQueueOutboundCallerConfigRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId",
+        "OutboundCallerConfig"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "OutboundCallerConfig":{"shape":"OutboundCallerConfig"}
+      }
+    },
+    "UpdateQueueStatusRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId",
+        "Status"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        },
+        "Status":{"shape":"QueueStatus"}
+      }
+    },
+    "UpdateQuickConnectConfigRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QuickConnectId",
+        "QuickConnectConfig"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QuickConnectId":{
+          "shape":"QuickConnectId",
+          "location":"uri",
+          "locationName":"QuickConnectId"
+        },
+        "QuickConnectConfig":{"shape":"QuickConnectConfig"}
+      }
+    },
+    "UpdateQuickConnectDescription":{
+      "type":"string",
+      "max":250,
+      "min":0
+    },
+    "UpdateQuickConnectNameRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QuickConnectId":{
+          "shape":"QuickConnectId",
+          "location":"uri",
+          "locationName":"QuickConnectId"
+        },
+        "Name":{"shape":"QuickConnectName"},
+        "Description":{"shape":"UpdateQuickConnectDescription"}
+      }
+    },
     "UpdateRoutingProfileConcurrencyRequest":{
       "type":"structure",
       "required":[
@@ -2856,6 +5644,27 @@
         "QueueConfigs":{"shape":"RoutingProfileQueueConfigList"}
       }
     },
+    "UpdateUserHierarchyGroupNameRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "HierarchyGroupId",
+        "InstanceId"
+      ],
+      "members":{
+        "Name":{"shape":"HierarchyGroupName"},
+        "HierarchyGroupId":{
+          "shape":"HierarchyGroupId",
+          "location":"uri",
+          "locationName":"HierarchyGroupId"
+        },
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        }
+      }
+    },
     "UpdateUserHierarchyRequest":{
       "type":"structure",
       "required":[
@@ -2869,6 +5678,21 @@
           "location":"uri",
           "locationName":"UserId"
         },
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        }
+      }
+    },
+    "UpdateUserHierarchyStructureRequest":{
+      "type":"structure",
+      "required":[
+        "HierarchyStructure",
+        "InstanceId"
+      ],
+      "members":{
+        "HierarchyStructure":{"shape":"HierarchyStructureUpdate"},
         "InstanceId":{
           "shape":"InstanceId",
           "location":"uri",
@@ -2960,6 +5784,27 @@
         }
       }
     },
+    "UseCase":{
+      "type":"structure",
+      "members":{
+        "UseCaseId":{"shape":"UseCaseId"},
+        "UseCaseArn":{"shape":"ARN"},
+        "UseCaseType":{"shape":"UseCaseType"}
+      }
+    },
+    "UseCaseId":{
+      "type":"string",
+      "max":200,
+      "min":1
+    },
+    "UseCaseSummaryList":{
+      "type":"list",
+      "member":{"shape":"UseCase"}
+    },
+    "UseCaseType":{
+      "type":"string",
+      "enum":["RULES_EVALUATION"]
+    },
     "User":{
       "type":"structure",
       "members":{
@@ -3000,6 +5845,17 @@
         "AutoAccept":{"shape":"AutoAccept"},
         "AfterContactWorkTimeLimit":{"shape":"AfterContactWorkTimeLimit"},
         "DeskPhoneNumber":{"shape":"PhoneNumber"}
+      }
+    },
+    "UserQuickConnectConfig":{
+      "type":"structure",
+      "required":[
+        "UserId",
+        "ContactFlowId"
+      ],
+      "members":{
+        "UserId":{"shape":"UserId"},
+        "ContactFlowId":{"shape":"ContactFlowId"}
       }
     },
     "UserSummary":{

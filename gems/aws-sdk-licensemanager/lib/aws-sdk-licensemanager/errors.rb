@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,14 +29,21 @@ module Aws::LicenseManager
   # ## Error Classes
   # * {AccessDeniedException}
   # * {AuthorizationException}
+  # * {ConflictException}
+  # * {EntitlementNotAllowedException}
   # * {FailedDependencyException}
   # * {FilterLimitExceededException}
   # * {InvalidParameterValueException}
   # * {InvalidResourceStateException}
   # * {LicenseUsageException}
+  # * {NoEntitlementsAllowedException}
   # * {RateLimitExceededException}
+  # * {RedirectException}
   # * {ResourceLimitExceededException}
+  # * {ResourceNotFoundException}
   # * {ServerInternalException}
+  # * {UnsupportedDigitalSignatureMethodException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -74,6 +81,36 @@ module Aws::LicenseManager
       end
     end
 
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManager::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EntitlementNotAllowedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManager::Types::EntitlementNotAllowedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class FailedDependencyException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -86,6 +123,11 @@ module Aws::LicenseManager
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
       end
     end
 
@@ -149,6 +191,21 @@ module Aws::LicenseManager
       end
     end
 
+    class NoEntitlementsAllowedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManager::Types::NoEntitlementsAllowedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class RateLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -156,6 +213,26 @@ module Aws::LicenseManager
       # @param [Aws::LicenseManager::Types::RateLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RedirectException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManager::Types::RedirectException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def location
+        @data[:location]
       end
 
       # @return [String]
@@ -179,11 +256,56 @@ module Aws::LicenseManager
       end
     end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManager::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ServerInternalException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::LicenseManager::Types::ServerInternalException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnsupportedDigitalSignatureMethodException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManager::Types::UnsupportedDigitalSignatureMethodException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManager::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

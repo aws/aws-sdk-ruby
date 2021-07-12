@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -50,6 +50,8 @@ module Aws::CognitoIdentity
     GetOpenIdTokenForDeveloperIdentityResponse = Shapes::StructureShape.new(name: 'GetOpenIdTokenForDeveloperIdentityResponse')
     GetOpenIdTokenInput = Shapes::StructureShape.new(name: 'GetOpenIdTokenInput')
     GetOpenIdTokenResponse = Shapes::StructureShape.new(name: 'GetOpenIdTokenResponse')
+    GetPrincipalTagAttributeMapInput = Shapes::StructureShape.new(name: 'GetPrincipalTagAttributeMapInput')
+    GetPrincipalTagAttributeMapResponse = Shapes::StructureShape.new(name: 'GetPrincipalTagAttributeMapResponse')
     HideDisabled = Shapes::BooleanShape.new(name: 'HideDisabled')
     IdentitiesList = Shapes::ListShape.new(name: 'IdentitiesList')
     IdentityDescription = Shapes::StructureShape.new(name: 'IdentityDescription')
@@ -90,6 +92,9 @@ module Aws::CognitoIdentity
     OIDCProviderList = Shapes::ListShape.new(name: 'OIDCProviderList')
     OIDCToken = Shapes::StringShape.new(name: 'OIDCToken')
     PaginationKey = Shapes::StringShape.new(name: 'PaginationKey')
+    PrincipalTagID = Shapes::StringShape.new(name: 'PrincipalTagID')
+    PrincipalTagValue = Shapes::StringShape.new(name: 'PrincipalTagValue')
+    PrincipalTags = Shapes::MapShape.new(name: 'PrincipalTags')
     QueryLimit = Shapes::IntegerShape.new(name: 'QueryLimit')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -103,6 +108,8 @@ module Aws::CognitoIdentity
     SecretKeyString = Shapes::StringShape.new(name: 'SecretKeyString')
     SessionTokenString = Shapes::StringShape.new(name: 'SessionTokenString')
     SetIdentityPoolRolesInput = Shapes::StructureShape.new(name: 'SetIdentityPoolRolesInput')
+    SetPrincipalTagAttributeMapInput = Shapes::StructureShape.new(name: 'SetPrincipalTagAttributeMapInput')
+    SetPrincipalTagAttributeMapResponse = Shapes::StructureShape.new(name: 'SetPrincipalTagAttributeMapResponse')
     String = Shapes::StringShape.new(name: 'String')
     TagKeysType = Shapes::StringShape.new(name: 'TagKeysType')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
@@ -116,6 +123,7 @@ module Aws::CognitoIdentity
     UnprocessedIdentityIdList = Shapes::ListShape.new(name: 'UnprocessedIdentityIdList')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UseDefaults = Shapes::BooleanShape.new(name: 'UseDefaults')
 
     CognitoIdentityProvider.add_member(:provider_name, Shapes::ShapeRef.new(shape: CognitoIdentityProviderName, location_name: "ProviderName"))
     CognitoIdentityProvider.add_member(:client_id, Shapes::ShapeRef.new(shape: CognitoIdentityProviderClientId, location_name: "ClientId"))
@@ -195,6 +203,7 @@ module Aws::CognitoIdentity
     GetOpenIdTokenForDeveloperIdentityInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     GetOpenIdTokenForDeveloperIdentityInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "IdentityId"))
     GetOpenIdTokenForDeveloperIdentityInput.add_member(:logins, Shapes::ShapeRef.new(shape: LoginsMap, required: true, location_name: "Logins"))
+    GetOpenIdTokenForDeveloperIdentityInput.add_member(:principal_tags, Shapes::ShapeRef.new(shape: PrincipalTags, location_name: "PrincipalTags"))
     GetOpenIdTokenForDeveloperIdentityInput.add_member(:token_duration, Shapes::ShapeRef.new(shape: TokenDuration, location_name: "TokenDuration"))
     GetOpenIdTokenForDeveloperIdentityInput.struct_class = Types::GetOpenIdTokenForDeveloperIdentityInput
 
@@ -209,6 +218,16 @@ module Aws::CognitoIdentity
     GetOpenIdTokenResponse.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "IdentityId"))
     GetOpenIdTokenResponse.add_member(:token, Shapes::ShapeRef.new(shape: OIDCToken, location_name: "Token"))
     GetOpenIdTokenResponse.struct_class = Types::GetOpenIdTokenResponse
+
+    GetPrincipalTagAttributeMapInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
+    GetPrincipalTagAttributeMapInput.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, required: true, location_name: "IdentityProviderName"))
+    GetPrincipalTagAttributeMapInput.struct_class = Types::GetPrincipalTagAttributeMapInput
+
+    GetPrincipalTagAttributeMapResponse.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, location_name: "IdentityPoolId"))
+    GetPrincipalTagAttributeMapResponse.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "IdentityProviderName"))
+    GetPrincipalTagAttributeMapResponse.add_member(:use_defaults, Shapes::ShapeRef.new(shape: UseDefaults, location_name: "UseDefaults"))
+    GetPrincipalTagAttributeMapResponse.add_member(:principal_tags, Shapes::ShapeRef.new(shape: PrincipalTags, location_name: "PrincipalTags"))
+    GetPrincipalTagAttributeMapResponse.struct_class = Types::GetPrincipalTagAttributeMapResponse
 
     IdentitiesList.member = Shapes::ShapeRef.new(shape: IdentityDescription)
 
@@ -322,6 +341,9 @@ module Aws::CognitoIdentity
 
     OIDCProviderList.member = Shapes::ShapeRef.new(shape: ARNString)
 
+    PrincipalTags.key = Shapes::ShapeRef.new(shape: PrincipalTagID)
+    PrincipalTags.value = Shapes::ShapeRef.new(shape: PrincipalTagValue)
+
     ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceConflictException.struct_class = Types::ResourceConflictException
 
@@ -348,6 +370,18 @@ module Aws::CognitoIdentity
     SetIdentityPoolRolesInput.add_member(:roles, Shapes::ShapeRef.new(shape: RolesMap, required: true, location_name: "Roles"))
     SetIdentityPoolRolesInput.add_member(:role_mappings, Shapes::ShapeRef.new(shape: RoleMappingMap, location_name: "RoleMappings"))
     SetIdentityPoolRolesInput.struct_class = Types::SetIdentityPoolRolesInput
+
+    SetPrincipalTagAttributeMapInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
+    SetPrincipalTagAttributeMapInput.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, required: true, location_name: "IdentityProviderName"))
+    SetPrincipalTagAttributeMapInput.add_member(:use_defaults, Shapes::ShapeRef.new(shape: UseDefaults, location_name: "UseDefaults"))
+    SetPrincipalTagAttributeMapInput.add_member(:principal_tags, Shapes::ShapeRef.new(shape: PrincipalTags, location_name: "PrincipalTags"))
+    SetPrincipalTagAttributeMapInput.struct_class = Types::SetPrincipalTagAttributeMapInput
+
+    SetPrincipalTagAttributeMapResponse.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, location_name: "IdentityPoolId"))
+    SetPrincipalTagAttributeMapResponse.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "IdentityProviderName"))
+    SetPrincipalTagAttributeMapResponse.add_member(:use_defaults, Shapes::ShapeRef.new(shape: UseDefaults, location_name: "UseDefaults"))
+    SetPrincipalTagAttributeMapResponse.add_member(:principal_tags, Shapes::ShapeRef.new(shape: PrincipalTags, location_name: "PrincipalTags"))
+    SetPrincipalTagAttributeMapResponse.struct_class = Types::SetPrincipalTagAttributeMapResponse
 
     TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARNString, required: true, location_name: "ResourceArn"))
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: IdentityPoolTagsType, required: true, location_name: "Tags"))
@@ -542,6 +576,19 @@ module Aws::CognitoIdentity
         o.errors << Shapes::ShapeRef.new(shape: DeveloperUserAlreadyRegisteredException)
       end)
 
+      api.add_operation(:get_principal_tag_attribute_map, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPrincipalTagAttributeMap"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPrincipalTagAttributeMapInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPrincipalTagAttributeMapResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:list_identities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIdentities"
         o.http_method = "POST"
@@ -566,6 +613,12 @@ module Aws::CognitoIdentity
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -622,6 +675,19 @@ module Aws::CognitoIdentity
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:set_principal_tag_attribute_map, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetPrincipalTagAttributeMap"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetPrincipalTagAttributeMapInput)
+        o.output = Shapes::ShapeRef.new(shape: SetPrincipalTagAttributeMapResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

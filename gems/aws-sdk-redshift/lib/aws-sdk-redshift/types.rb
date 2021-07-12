@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -48,6 +48,12 @@ module Aws::Redshift
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # You are not authorized to access the cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccessToClusterDeniedFault AWS API Documentation
+    #
+    class AccessToClusterDeniedFault < Aws::EmptyStructure; end
 
     # The owner of the specified snapshot has not authorized your account to
     # access the snapshot.
@@ -105,6 +111,40 @@ module Aws::Redshift
     class AccountWithRestoreAccess < Struct.new(
       :account_id,
       :account_alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AQUA (Advanced Query Accelerator) configuration of the cluster.
+    #
+    # @!attribute [rw] aqua_status
+    #   The value indicates the status of AQUA on the cluster. Possible
+    #   values include the following.
+    #
+    #   * enabled - AQUA is enabled.
+    #
+    #   * disabled - AQUA is not enabled.
+    #
+    #   * applying - AQUA status is being applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA.
+    #   Possible values include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AquaConfiguration AWS API Documentation
+    #
+    class AquaConfiguration < Struct.new(
+      :aqua_status,
+      :aqua_configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -194,6 +234,37 @@ module Aws::Redshift
     #
     class AuthorizeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AuthorizeEndpointAccessMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         account: "String", # required
+    #         vpc_ids: ["String"],
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster to grant access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The AWS account ID to grant access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_ids
+    #   The virtual private cloud (VPC) identifiers to grant access to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeEndpointAccessMessage AWS API Documentation
+    #
+    class AuthorizeEndpointAccessMessage < Struct.new(
+      :cluster_identifier,
+      :account,
+      :vpc_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -705,6 +776,22 @@ module Aws::Redshift
     #   * ResizeType: Returns ClassicResize
     #   @return [Types::ResizeInfo]
     #
+    # @!attribute [rw] availability_zone_relocation_status
+    #   Describes the status of the Availability Zone relocation operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_namespace_arn
+    #   The namespace Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_storage_capacity_in_mega_bytes
+    #   The total storage capacity of the cluster in megabytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aqua_configuration
+    #   The AQUA (Advanced Query Accelerator) configuration of the cluster.
+    #   @return [Types::AquaConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -753,7 +840,11 @@ module Aws::Redshift
       :expected_next_snapshot_schedule_time,
       :expected_next_snapshot_schedule_time_status,
       :next_maintenance_window_start_time,
-      :resize_info)
+      :resize_info,
+      :availability_zone_relocation_status,
+      :cluster_namespace_arn,
+      :total_storage_capacity_in_mega_bytes,
+      :aqua_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1616,6 +1707,8 @@ module Aws::Redshift
     #         iam_roles: ["String"],
     #         maintenance_track_name: "String",
     #         snapshot_schedule_identifier: "String",
+    #         availability_zone_relocation: false,
+    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #       }
     #
     # @!attribute [rw] db_name
@@ -1684,8 +1777,8 @@ module Aws::Redshift
     #   Redshift Cluster Management Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -1813,6 +1906,9 @@ module Aws::Redshift
     #   value is 0, automated snapshots are disabled. Even if automated
     #   snapshots are disabled, you can still create manual snapshots when
     #   you want with CreateClusterSnapshot.
+    #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
     #
     #   Default: `1`
     #
@@ -1969,6 +2065,24 @@ module Aws::Redshift
     #   A unique identifier for the snapshot schedule.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster
+    #   between Availability Zones after the cluster is created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) when it is created. Possible values
+    #   include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2001,7 +2115,9 @@ module Aws::Redshift
       :additional_info,
       :iam_roles,
       :maintenance_track_name,
-      :snapshot_schedule_identifier)
+      :snapshot_schedule_identifier,
+      :availability_zone_relocation,
+      :aqua_configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2291,6 +2407,57 @@ module Aws::Redshift
     #
     class CreateClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEndpointAccessMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         resource_owner: "String",
+    #         endpoint_name: "String", # required
+    #         subnet_group_name: "String", # required
+    #         vpc_security_group_ids: ["String"],
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster to access.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS account ID of the owner of the cluster. This is only
+    #   required if the cluster is in another AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The Redshift-managed VPC endpoint name.
+    #
+    #   An endpoint name must contain 1-30 characters. Valid characters are
+    #   A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter.
+    #   The name can't contain two consecutive hyphens or end with a
+    #   hyphen.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_group_name
+    #   The subnet group from which Amazon Redshift chooses the subnet to
+    #   deploy the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   The security group that defines the ports, protocols, and sources
+    #   for inbound traffic that you are authorizing into your endpoint.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEndpointAccessMessage AWS API Documentation
+    #
+    class CreateEndpointAccessMessage < Struct.new(
+      :cluster_identifier,
+      :resource_owner,
+      :endpoint_name,
+      :subnet_group_name,
+      :vpc_security_group_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3164,6 +3331,25 @@ module Aws::Redshift
     #
     class DeleteClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteEndpointAccessMessage
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_name
+    #   The Redshift-managed VPC endpoint to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEndpointAccessMessage AWS API Documentation
+    #
+    class DeleteEndpointAccessMessage < Struct.new(
+      :endpoint_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4084,6 +4270,116 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEndpointAccessMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         resource_owner: "String",
+    #         endpoint_name: "String",
+    #         vpc_id: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier associated with the described endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS account ID of the owner of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint to be described.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The virtual private cloud (VPC) identifier with access to the
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAccess` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by the `MaxRecords` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAccessMessage AWS API Documentation
+    #
+    class DescribeEndpointAccessMessage < Struct.new(
+      :cluster_identifier,
+      :resource_owner,
+      :endpoint_name,
+      :vpc_id,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEndpointAuthorizationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         account: "String",
+    #         grantee: false,
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster to access.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The AWS account ID of either the cluster owner (grantor) or grantee.
+    #   If `Grantee` parameter is true, then the `Account` value is of the
+    #   grantor.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee
+    #   Indicates whether to check authorization from a grantor or grantee
+    #   point of view. If true, Amazon Redshift returns endpoint
+    #   authorizations that you've been granted. If false (default), checks
+    #   authorization from a grantor point of view.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAuthorization` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by the `MaxRecords` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAuthorizationMessage AWS API Documentation
+    #
+    class DescribeEndpointAuthorizationMessage < Struct.new(
+      :cluster_identifier,
+      :account,
+      :grantee,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeEventCategoriesMessage
     #   data as a hash:
     #
@@ -4603,6 +4899,59 @@ module Aws::Redshift
       :node_type,
       :max_records,
       :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePartnersInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "PartnerIntegrationAccountId", # required
+    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #         database_name: "PartnerIntegrationDatabaseName",
+    #         partner_name: "PartnerIntegrationPartnerName",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID that owns the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration is
+    #   being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database whose partner integration is being
+    #   described. If database name is not specified, then all databases in
+    #   the cluster are described.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner that is being described. If partner name is
+    #   not specified, then all partner integrations are described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribePartnersInputMessage AWS API Documentation
+    #
+    class DescribePartnersInputMessage < Struct.new(
+      :account_id,
+      :cluster_identifier,
+      :database_name,
+      :partner_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] partner_integration_info_list
+    #   A list of partner integrations.
+    #   @return [Array<Types::PartnerIntegrationInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribePartnersOutputMessage AWS API Documentation
+    #
+    class DescribePartnersOutputMessage < Struct.new(
+      :partner_integration_info_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5436,14 +5785,223 @@ module Aws::Redshift
     #   The port that the database engine is listening on.
     #   @return [Integer]
     #
+    # @!attribute [rw] vpc_endpoints
+    #   Describes a connection endpoint.
+    #   @return [Array<Types::VpcEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
       :address,
-      :port)
+      :port,
+      :vpc_endpoints)
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Describes a Redshift-managed VPC endpoint.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster associated with the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS account ID of the owner of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_group_name
+    #   The subnet group name where Amazon Redshift chooses to deploy the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_status
+    #   The status of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_create_time
+    #   The time (UTC) that the endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] port
+    #   The port number on which the cluster accepts incoming connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] address
+    #   The DNS address of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_groups
+    #   The security groups associated with the endpoint.
+    #   @return [Array<Types::VpcSecurityGroupMembership>]
+    #
+    # @!attribute [rw] vpc_endpoint
+    #   The connection endpoint for connecting to an Amazon Redshift cluster
+    #   through the proxy.
+    #   @return [Types::VpcEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAccess AWS API Documentation
+    #
+    class EndpointAccess < Struct.new(
+      :cluster_identifier,
+      :resource_owner,
+      :subnet_group_name,
+      :endpoint_status,
+      :endpoint_name,
+      :endpoint_create_time,
+      :port,
+      :address,
+      :vpc_security_groups,
+      :vpc_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_access_list
+    #   The list of endpoints with access to the cluster.
+    #   @return [Array<Types::EndpointAccess>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAccess` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by the `MaxRecords` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAccessList AWS API Documentation
+    #
+    class EndpointAccessList < Struct.new(
+      :endpoint_access_list,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account already has a Redshift-managed VPC endpoint with the given
+    # identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAlreadyExistsFault AWS API Documentation
+    #
+    class EndpointAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # Describes an endpoint authorization for authorizing Redshift-managed
+    # VPC endpoint access to a cluster across AWS accounts.
+    #
+    # @!attribute [rw] grantor
+    #   The AWS account ID of the cluster owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee
+    #   The AWS account ID of the grantee of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorize_time
+    #   The time (UTC) when the authorization was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cluster_status
+    #   The status of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the authorization action.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_all_vp_cs
+    #   Indicates whether all VPCs in the grantee account are allowed access
+    #   to the cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allowed_vp_cs
+    #   The VPCs allowed access to the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] endpoint_count
+    #   The number of Redshift-managed VPC endpoints created for the
+    #   authorization.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAuthorization AWS API Documentation
+    #
+    class EndpointAuthorization < Struct.new(
+      :grantor,
+      :grantee,
+      :cluster_identifier,
+      :authorize_time,
+      :cluster_status,
+      :status,
+      :allowed_all_vp_cs,
+      :allowed_vp_cs,
+      :endpoint_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The authorization already exists for this endpoint.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAuthorizationAlreadyExistsFault AWS API Documentation
+    #
+    class EndpointAuthorizationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] endpoint_authorization_list
+    #   The authorizations to an endpoint.
+    #   @return [Array<Types::EndpointAuthorization>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAuthorization` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by the `MaxRecords` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAuthorizationList AWS API Documentation
+    #
+    class EndpointAuthorizationList < Struct.new(
+      :endpoint_authorization_list,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The authorization for this endpoint can't be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAuthorizationNotFoundFault AWS API Documentation
+    #
+    class EndpointAuthorizationNotFoundFault < Aws::EmptyStructure; end
+
+    # The number of endpoint authorizations per cluster has exceeded its
+    # limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAuthorizationsPerClusterLimitExceededFault AWS API Documentation
+    #
+    class EndpointAuthorizationsPerClusterLimitExceededFault < Aws::EmptyStructure; end
+
+    # The endpoint name doesn't refer to an existing endpoint.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointNotFoundFault AWS API Documentation
+    #
+    class EndpointNotFoundFault < Aws::EmptyStructure; end
+
+    # The number of Redshift-managed VPC endpoints per authorization has
+    # exceeded its limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointsPerAuthorizationLimitExceededFault AWS API Documentation
+    #
+    class EndpointsPerAuthorizationLimitExceededFault < Aws::EmptyStructure; end
+
+    # The number of Redshift-managed VPC endpoints per cluster has exceeded
+    # its limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointsPerClusterLimitExceededFault AWS API Documentation
+    #
+    class EndpointsPerClusterLimitExceededFault < Aws::EmptyStructure; end
 
     # Describes an event.
     #
@@ -6136,6 +6694,12 @@ module Aws::Redshift
     #
     class InsufficientS3BucketPolicyFault < Aws::EmptyStructure; end
 
+    # The status of the authorization is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidAuthorizationStateFault AWS API Documentation
+    #
+    class InvalidAuthorizationStateFault < Aws::EmptyStructure; end
+
     # The cluster parameter group action can not be completed because
     # another task is in progress that involves the parameter group. Wait a
     # few moments and try the operation again.
@@ -6192,6 +6756,12 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidElasticIpFault AWS API Documentation
     #
     class InvalidElasticIpFault < Aws::EmptyStructure; end
+
+    # The status of the endpoint is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidEndpointStateFault AWS API Documentation
+    #
+    class InvalidEndpointStateFault < Aws::EmptyStructure; end
 
     # The specified HSM client certificate is not in the `available` state,
     # or it is still in use by one or more Amazon Redshift clusters.
@@ -6383,6 +6953,51 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyAquaInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster to be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] aqua_configuration_status
+    #   The new value of AQUA configuration status. Possible values include
+    #   the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaInputMessage AWS API Documentation
+    #
+    class ModifyAquaInputMessage < Struct.new(
+      :cluster_identifier,
+      :aqua_configuration_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aqua_configuration
+    #   The updated AQUA configuration of the cluster.
+    #   @return [Types::AquaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaOutputMessage AWS API Documentation
+    #
+    class ModifyAquaOutputMessage < Struct.new(
+      :aqua_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyClusterDbRevisionMessage
     #   data as a hash:
     #
@@ -6564,6 +7179,9 @@ module Aws::Redshift
     #         maintenance_track_name: "String",
     #         encrypted: false,
     #         kms_key_id: "String",
+    #         availability_zone_relocation: false,
+    #         availability_zone: "String",
+    #         port: 1,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -6594,8 +7212,8 @@ module Aws::Redshift
     #   Management Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -6688,6 +7306,9 @@ module Aws::Redshift
     #   If you decrease the automated snapshot retention period from its
     #   current value, existing automated snapshots that fall outside of the
     #   new retention period will be immediately deleted.
+    #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
     #
     #   Default: Uses existing setting.
     #
@@ -6838,6 +7459,21 @@ module Aws::Redshift
     #   that you want to use to encrypt data in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster
+    #   between Availability Zones after the cluster modification is
+    #   complete.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] availability_zone
+    #   The option to initiate relocation for an Amazon Redshift cluster to
+    #   the target Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The option to change the port of an Amazon Redshift cluster.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -6862,7 +7498,10 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :maintenance_track_name,
       :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :availability_zone_relocation,
+      :availability_zone,
+      :port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7050,6 +7689,32 @@ module Aws::Redshift
     #
     class ModifyClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyEndpointAccessMessage
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_name: "String", # required
+    #         vpc_security_group_ids: ["String"],
+    #       }
+    #
+    # @!attribute [rw] endpoint_name
+    #   The endpoint to be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   The complete list of VPC security groups associated with the
+    #   endpoint after the endpoint is modified.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEndpointAccessMessage AWS API Documentation
+    #
+    class ModifyEndpointAccessMessage < Struct.new(
+      :endpoint_name,
+      :vpc_security_group_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7359,6 +8024,35 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a network interface.
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The subnet identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IPv4 address of the network interface within the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :network_interface_id,
+      :subnet_id,
+      :private_ip_address,
+      :availability_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of node configurations.
     #
     # @!attribute [rw] node_type
@@ -7544,7 +8238,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
-    #   The value of the parameter.
+    #   The value of the parameter. If `ParameterName` is
+    #   `wlm_json_configuration`, then the maximum size of `ParameterValue`
+    #   is 8000 characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -7602,6 +8298,107 @@ module Aws::Redshift
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Describes a partner integration.
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database that receives data from a partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The partner integration status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message provided by the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date (UTC) that the partner integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date (UTC) that the partner integration status was last updated
+    #   by the partner.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerIntegrationInfo AWS API Documentation
+    #
+    class PartnerIntegrationInfo < Struct.new(
+      :database_name,
+      :partner_name,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PartnerIntegrationInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "PartnerIntegrationAccountId", # required
+    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #         database_name: "PartnerIntegrationDatabaseName", # required
+    #         partner_name: "PartnerIntegrationPartnerName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID that owns the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster that receives data from the
+    #   partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database that receives data from the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner that is authorized to send data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerIntegrationInputMessage AWS API Documentation
+    #
+    class PartnerIntegrationInputMessage < Struct.new(
+      :account_id,
+      :cluster_identifier,
+      :database_name,
+      :partner_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_name
+    #   The name of the database that receives data from the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner that is authorized to send data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerIntegrationOutputMessage AWS API Documentation
+    #
+    class PartnerIntegrationOutputMessage < Struct.new(
+      :database_name,
+      :partner_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name of the partner was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerNotFoundFault AWS API Documentation
+    #
+    class PartnerNotFoundFault < Aws::EmptyStructure; end
 
     # Describes a pause cluster operation. For example, a scheduled action
     # to run the `PauseCluster` API operation.
@@ -8342,6 +9139,8 @@ module Aws::Redshift
     #         maintenance_track_name: "String",
     #         snapshot_schedule_identifier: "String",
     #         number_of_nodes: 1,
+    #         availability_zone_relocation: false,
+    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -8496,6 +9295,9 @@ module Aws::Redshift
     #   snapshots are disabled, you can still create manual snapshots when
     #   you want with CreateClusterSnapshot.
     #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
+    #
     #   Default: The value selected for the cluster from which the snapshot
     #   was taken.
     #
@@ -8586,6 +9388,24 @@ module Aws::Redshift
     #   cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster
+    #   between Availability Zones after the cluster is restored.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) after the cluster is restored. Possible
+    #   values include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -8614,7 +9434,9 @@ module Aws::Redshift
       :iam_roles,
       :maintenance_track_name,
       :snapshot_schedule_identifier,
-      :number_of_nodes)
+      :number_of_nodes,
+      :availability_zone_relocation,
+      :aqua_configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8694,6 +9516,7 @@ module Aws::Redshift
     #         target_database_name: "String",
     #         target_schema_name: "String",
     #         new_table_name: "String", # required
+    #         enable_case_sensitive_identifier: false,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -8734,6 +9557,12 @@ module Aws::Redshift
     #   The name of the table to create as a result of the current request.
     #   @return [String]
     #
+    # @!attribute [rw] enable_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table
+    #   are case sensitive. If `true`, the names are case sensitive. If
+    #   `false` (default), the names are not case sensitive.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreTableFromClusterSnapshotMessage < Struct.new(
@@ -8744,7 +9573,8 @@ module Aws::Redshift
       :source_table_name,
       :target_database_name,
       :target_schema_name,
-      :new_table_name)
+      :new_table_name,
+      :enable_case_sensitive_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8879,6 +9709,46 @@ module Aws::Redshift
     #
     class RevokeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RevokeEndpointAccessMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         account: "String",
+    #         vpc_ids: ["String"],
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster to revoke access from.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The AWS account ID whose access is to be revoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_ids
+    #   The virtual private cloud (VPC) identifiers for which access is to
+    #   be revoked.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] force
+    #   Indicates whether to force the revoke action. If true, the
+    #   Redshift-managed VPC endpoints associated with the endpoint
+    #   authorization are also deleted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeEndpointAccessMessage AWS API Documentation
+    #
+    class RevokeEndpointAccessMessage < Struct.new(
+      :cluster_identifier,
+      :account,
+      :vpc_ids,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9248,6 +10118,11 @@ module Aws::Redshift
     #   cluster.
     #   @return [String]
     #
+    # @!attribute [rw] engine_full_version
+    #   The cluster version of the cluster used to create the snapshot. For
+    #   example, 1.0.15503.
+    #   @return [String]
+    #
     # @!attribute [rw] snapshot_type
     #   The snapshot type. Snapshots created using CreateClusterSnapshot and
     #   CopyClusterSnapshot are of type "manual".
@@ -9391,6 +10266,7 @@ module Aws::Redshift
       :cluster_create_time,
       :master_username,
       :cluster_version,
+      :engine_full_version,
       :snapshot_type,
       :node_type,
       :number_of_nodes,
@@ -10029,6 +10905,12 @@ module Aws::Redshift
     #
     class UnauthorizedOperation < Aws::EmptyStructure; end
 
+    # The partner integration is not authorized.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnauthorizedPartnerIntegrationFault AWS API Documentation
+    #
+    class UnauthorizedPartnerIntegrationFault < Aws::EmptyStructure; end
+
     # The specified region is incorrect or does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnknownSnapshotCopyRegionFault AWS API Documentation
@@ -10046,6 +10928,57 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnsupportedOptionFault AWS API Documentation
     #
     class UnsupportedOptionFault < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdatePartnerStatusInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "PartnerIntegrationAccountId", # required
+    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #         database_name: "PartnerIntegrationDatabaseName", # required
+    #         partner_name: "PartnerIntegrationPartnerName", # required
+    #         status: "Active", # required, accepts Active, Inactive, RuntimeFailure, ConnectionFailure
+    #         status_message: "PartnerIntegrationStatusMessage",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID that owns the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration
+    #   status is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database whose partner integration status is being
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner whose integration status is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The value of the updated status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message provided by the partner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdatePartnerStatusInputMessage AWS API Documentation
+    #
+    class UpdatePartnerStatusInputMessage < Struct.new(
+      :account_id,
+      :cluster_identifier,
+      :database_name,
+      :partner_name,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A maintenance track that you can switch the current track to.
     #
@@ -10164,6 +11097,33 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UsageLimitNotFoundFault AWS API Documentation
     #
     class UsageLimitNotFoundFault < Aws::EmptyStructure; end
+
+    # The connection endpoint for connecting to an Amazon Redshift cluster
+    # through the proxy.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The connection endpoint ID for connecting an Amazon Redshift cluster
+    #   through the proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC identifier that the endpoint is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces of the endpoint. Also known as an
+    #   interface endpoint.
+    #   @return [Array<Types::NetworkInterface>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/VpcEndpoint AWS API Documentation
+    #
+    class VpcEndpoint < Struct.new(
+      :vpc_endpoint_id,
+      :vpc_id,
+      :network_interfaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes the members of a VPC security group.
     #

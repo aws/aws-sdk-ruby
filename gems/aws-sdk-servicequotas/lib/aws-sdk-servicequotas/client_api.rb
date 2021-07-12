@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -15,6 +15,7 @@ module Aws::ServiceQuotas
 
     AWSServiceAccessNotEnabledException = Shapes::StructureShape.new(name: 'AWSServiceAccessNotEnabledException')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AssociateServiceQuotaTemplateRequest = Shapes::StructureShape.new(name: 'AssociateServiceQuotaTemplateRequest')
     AssociateServiceQuotaTemplateResponse = Shapes::StructureShape.new(name: 'AssociateServiceQuotaTemplateResponse')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
@@ -41,6 +42,8 @@ module Aws::ServiceQuotas
     GetServiceQuotaResponse = Shapes::StructureShape.new(name: 'GetServiceQuotaResponse')
     GlobalQuota = Shapes::BooleanShape.new(name: 'GlobalQuota')
     IllegalArgumentException = Shapes::StructureShape.new(name: 'IllegalArgumentException')
+    InputTagKeys = Shapes::ListShape.new(name: 'InputTagKeys')
+    InputTags = Shapes::ListShape.new(name: 'InputTags')
     InvalidPaginationTokenException = Shapes::StructureShape.new(name: 'InvalidPaginationTokenException')
     InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
     ListAWSDefaultServiceQuotasRequest = Shapes::StructureShape.new(name: 'ListAWSDefaultServiceQuotasRequest')
@@ -55,6 +58,8 @@ module Aws::ServiceQuotas
     ListServiceQuotasResponse = Shapes::StructureShape.new(name: 'ListServiceQuotasResponse')
     ListServicesRequest = Shapes::StructureShape.new(name: 'ListServicesRequest')
     ListServicesResponse = Shapes::StructureShape.new(name: 'ListServicesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MetricDimensionName = Shapes::StringShape.new(name: 'MetricDimensionName')
     MetricDimensionValue = Shapes::StringShape.new(name: 'MetricDimensionValue')
@@ -64,6 +69,7 @@ module Aws::ServiceQuotas
     NoAvailableOrganizationException = Shapes::StructureShape.new(name: 'NoAvailableOrganizationException')
     NoSuchResourceException = Shapes::StructureShape.new(name: 'NoSuchResourceException')
     OrganizationNotInAllFeaturesModeException = Shapes::StructureShape.new(name: 'OrganizationNotInAllFeaturesModeException')
+    OutputTags = Shapes::ListShape.new(name: 'OutputTags')
     PeriodUnit = Shapes::StringShape.new(name: 'PeriodUnit')
     PeriodValue = Shapes::IntegerShape.new(name: 'PeriodValue')
     PutServiceQuotaIncreaseRequestIntoTemplateRequest = Shapes::StructureShape.new(name: 'PutServiceQuotaIncreaseRequestIntoTemplateRequest')
@@ -98,8 +104,17 @@ module Aws::ServiceQuotas
     ServiceQuotaTemplateAssociationStatus = Shapes::StringShape.new(name: 'ServiceQuotaTemplateAssociationStatus')
     ServiceQuotaTemplateNotInUseException = Shapes::StructureShape.new(name: 'ServiceQuotaTemplateNotInUseException')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagPolicyViolationException = Shapes::StructureShape.new(name: 'TagPolicyViolationException')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemplatesNotAvailableInRegionException = Shapes::StructureShape.new(name: 'TemplatesNotAvailableInRegionException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
 
     AWSServiceAccessNotEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AWSServiceAccessNotEnabledException.struct_class = Types::AWSServiceAccessNotEnabledException
@@ -165,6 +180,10 @@ module Aws::ServiceQuotas
     IllegalArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     IllegalArgumentException.struct_class = Types::IllegalArgumentException
 
+    InputTagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    InputTags.member = Shapes::ShapeRef.new(shape: Tag)
+
     InvalidPaginationTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     InvalidPaginationTokenException.struct_class = Types::InvalidPaginationTokenException
 
@@ -228,6 +247,12 @@ module Aws::ServiceQuotas
     ListServicesResponse.add_member(:services, Shapes::ShapeRef.new(shape: ServiceInfoListDefinition, location_name: "Services"))
     ListServicesResponse.struct_class = Types::ListServicesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTags, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MetricDimensionsMapDefinition.key = Shapes::ShapeRef.new(shape: MetricDimensionName)
     MetricDimensionsMapDefinition.value = Shapes::ShapeRef.new(shape: MetricDimensionValue)
 
@@ -245,6 +270,8 @@ module Aws::ServiceQuotas
 
     OrganizationNotInAllFeaturesModeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     OrganizationNotInAllFeaturesModeException.struct_class = Types::OrganizationNotInAllFeaturesModeException
+
+    OutputTags.member = Shapes::ShapeRef.new(shape: Tag)
 
     PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "QuotaCode"))
     PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "ServiceCode"))
@@ -331,11 +358,33 @@ module Aws::ServiceQuotas
     ServiceQuotaTemplateNotInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ServiceQuotaTemplateNotInUseException.struct_class = Types::ServiceQuotaTemplateNotInUseException
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagPolicyViolationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TagPolicyViolationException.struct_class = Types::TagPolicyViolationException
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTags, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TemplatesNotAvailableInRegionException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     TemplatesNotAvailableInRegionException.struct_class = Types::TemplatesNotAvailableInRegionException
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: InputTagKeys, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
 
     # @api private
@@ -597,6 +646,19 @@ module Aws::ServiceQuotas
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:put_service_quota_increase_request_into_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutServiceQuotaIncreaseRequestIntoTemplate"
         o.http_method = "POST"
@@ -630,6 +692,34 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
     end
 

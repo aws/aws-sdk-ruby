@@ -153,21 +153,35 @@ module Aws
       #     obj.presigned_url(:put, acl: 'public-read')
       #     #=> "https://bucket-name.s3.amazonaws.com/object-key?..."
       #
-      # @param [Symbol] http_method
-      #   The HTTP method to generate a presigned URL for. Valid values
-      #   are `:get`, `:put`, `:head`, and `:delete`.
+      # @example Pre-signed UploadPart PUT
+      #
+      #     # the object uploaded using this URL will be publicly accessible
+      #     obj.presigned_url(:upload_part, part_number: 1, upload_id: 'uploadIdToken')
+      #     #=> "https://bucket-name.s3.amazonaws.com/object-key?..."
+      #
+      # @param [Symbol] method
+      #   The S3 operation to generate a presigned URL for. Valid values
+      #   are `:get`, `:put`, `:head`, `:delete`, `:create_multipart_upload`, 
+      #   `:list_multipart_uploads`, `:complete_multipart_upload`,
+      #   `:abort_multipart_upload`, `:list_parts`, and `:upload_part`.
       #
       # @param [Hash] params
       #   Additional request parameters to use when generating the pre-signed
       #   URL. See the related documentation in {Client} for accepted
       #   params.
       #
-      #   | HTTP Method   | Client Method          |
-      #   |---------------|------------------------|
-      #   | `:get`        | {Client#get_object}    |
-      #   | `:put`        | {Client#put_object}    |
-      #   | `:head`       | {Client#head_object}   |
-      #   | `:delete`     | {Client#delete_object} |
+      #   | Method                       | Client Method                      |
+      #   |------------------------------|------------------------------------|
+      #   | `:get`                       | {Client#get_object}                |
+      #   | `:put`                       | {Client#put_object}                |
+      #   | `:head`                      | {Client#head_object}               |
+      #   | `:delete`                    | {Client#delete_object}             |
+      #   | `:create_multipart_upload`   | {Client#create_multipart_upload}   |
+      #   | `:list_multipart_uploads`    | {Client#list_multipart_uploads}    |
+      #   | `:complete_multipart_upload` | {Client#complete_multipart_upload} |
+      #   | `:abort_multipart_upload`    | {Client#abort_multipart_upload}    |
+      #   | `:list_parts`                | {Client#list_parts}                |
+      #   | `:upload_part`               | {Client#upload_part}               |
       #
       # @option params [Boolean] :virtual_host (false) When `true` the
       #   presigned URL will use the bucket name as a virtual host.
@@ -188,10 +202,15 @@ module Aws
       #
       # @return [String]
       #
-      def presigned_url(http_method, params = {})
+      def presigned_url(method, params = {})
         presigner = Presigner.new(client: client)
+
+        if %w(delete head get put).include?(method.to_s)
+          method = "#{method}_object".to_sym
+        end
+
         presigner.presigned_url(
-          "#{http_method.downcase}_object",
+          method.downcase,
           params.merge(bucket: bucket_name, key: key)
         )
       end
@@ -201,15 +220,21 @@ module Aws
       #     s3.bucket('bucket-name').object('obj-key').public_url
       #     #=> "https://bucket-name.s3.amazonaws.com/obj-key"
       #
-      # To use virtual hosted bucket url (disables https):
+      # To use virtual hosted bucket url.
+      # Uses https unless secure: false is set.  If the bucket
+      # name contains dots (.) then you will need to set secure: false.
       #
-      #     s3.bucket('my.bucket.com').object('key')
+      #     s3.bucket('my-bucket.com').object('key')
       #       .public_url(virtual_host: true)
-      #     #=> "http://my.bucket.com/key"
+      #     #=> "https://my-bucket.com/key"
       #
       # @option options [Boolean] :virtual_host (false) When `true`, the bucket
       #   name will be used as the host name. This is useful when you have
       #   a CNAME configured for the bucket.
+      #
+      # @option options [Boolean] :secure (true) When `false`, http
+      #   will be used with virtual_host.  This is required when
+      #   the bucket name has a dot (.) in it.
       #
       # @return [String]
       def public_url(options = {})

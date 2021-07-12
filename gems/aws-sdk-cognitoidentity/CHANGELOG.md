@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-01-14)
+------------------
+
+* Feature - Add Attributes For Access Control support for Amazon Cognito Identity Pools to facilitate access to AWS resources based on attributes from social and corporate identity providers
+
+1.28.0 (2020-11-20)
+------------------
+
+* Feature - Added SDK pagination support for ListIdentityPools
+
 1.27.0 (2020-09-30)
 ------------------
 

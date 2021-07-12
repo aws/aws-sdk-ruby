@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.1 (2021-03-04)
+------------------
+
+* Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
+
 1.1.0 (2020-04-08)
 ------------------
 

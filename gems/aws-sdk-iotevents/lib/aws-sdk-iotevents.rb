@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -28,7 +28,7 @@ require_relative 'aws-sdk-iotevents/customizations'
 # structure.
 #
 #     io_t_events = Aws::IoTEvents::Client.new
-#     resp = io_t_events.create_detector_model(params)
+#     resp = io_t_events.create_alarm_model(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-iotevents/customizations'
 # @!group service
 module Aws::IoTEvents
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.24.0'
 
 end

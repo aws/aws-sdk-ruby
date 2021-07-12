@@ -92,6 +92,27 @@ module Aws
             'https://s3.us-west-2.amazonaws.com/')
         end
 
+        it 'does not modify custom endpoints' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            endpoint: 'https://my-endpoint.us-east-1.amazonaws.com'
+          )
+          bucket = 'bucketname'
+          resp = client.list_objects(bucket: bucket)
+          expect(resp.context.http_request.endpoint.to_s).to match(/us-east-1/)
+        end
+
+        it 'does not modify any ARNs' do
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-east-1'
+          )
+          arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          resp = client.list_objects(bucket: arn)
+          expect(resp.context.http_request.endpoint.to_s).to match(/us-east-1/)
+        end
+
       end
 
     end

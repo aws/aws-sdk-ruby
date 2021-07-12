@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -584,7 +584,7 @@ module Aws::SecretsManager
     #
     #   * If a version with this value already exists and that version's
     #     `SecretString` and `SecretBinary` values are different from those in
-    #     the request then the request fails because you cannot modify an
+    #     the request, then the request fails because you cannot modify an
     #     existing version. Instead, use PutSecretValue to create a new
     #     version.
     #
@@ -714,11 +714,21 @@ module Aws::SecretsManager
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
+    # @option params [Array<Types::ReplicaRegionType>] :add_replica_regions
+    #   (Optional) Add a list of regions to replicate secrets. Secrets Manager
+    #   replicates the KMSKeyID objects to the list of regions specified in
+    #   the parameter.
+    #
+    # @option params [Boolean] :force_overwrite_replica_secret
+    #   (Optional) If set, the replication overwrites a secret with the same
+    #   name in the destination region.
+    #
     # @return [Types::CreateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecretResponse#arn #arn} => String
     #   * {Types::CreateSecretResponse#name #name} => String
     #   * {Types::CreateSecretResponse#version_id #version_id} => String
+    #   * {Types::CreateSecretResponse#replication_status #replication_status} => Array&lt;Types::ReplicationStatusType&gt;
     #
     #
     # @example Example: To create a basic secret
@@ -755,6 +765,13 @@ module Aws::SecretsManager
     #         value: "TagValueType",
     #       },
     #     ],
+    #     add_replica_regions: [
+    #       {
+    #         region: "RegionType",
+    #         kms_key_id: "KmsKeyIdType",
+    #       },
+    #     ],
+    #     force_overwrite_replica_secret: false,
     #   })
     #
     # @example Response structure
@@ -762,6 +779,12 @@ module Aws::SecretsManager
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.version_id #=> String
+    #   resp.replication_status #=> Array
+    #   resp.replication_status[0].region #=> String
+    #   resp.replication_status[0].kms_key_id #=> String
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status_message #=> String
+    #   resp.replication_status[0].last_accessed_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecret AWS API Documentation
     #
@@ -786,8 +809,8 @@ module Aws::SecretsManager
     #
     # * To attach a resource policy to a secret, use PutResourcePolicy.
     #
-    # * To retrieve the current resource-based policy that's attached to a
-    #   secret, use GetResourcePolicy.
+    # * To retrieve the current resource-based policy attached to a secret,
+    #   use GetResourcePolicy.
     #
     # * To list all of the currently available secrets, use ListSecrets.
     #
@@ -857,7 +880,7 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Deletes an entire secret and all of its versions. You can optionally
+    # Deletes an entire secret and all of the versions. You can optionally
     # include a recovery window during which you can restore the secret. If
     # you don't specify a recovery window value, the operation defaults to
     # 30 days. Secrets Manager attaches a `DeletionDate` stamp to the secret
@@ -867,17 +890,17 @@ module Aws::SecretsManager
     # At any time before recovery window ends, you can use RestoreSecret to
     # remove the `DeletionDate` and cancel the deletion of the secret.
     #
-    # You cannot access the encrypted secret information in any secret that
-    # is scheduled for deletion. If you need to access that information, you
+    # You cannot access the encrypted secret information in any secret
+    # scheduled for deletion. If you need to access that information, you
     # must cancel the deletion with RestoreSecret and then retrieve the
     # information.
     #
     # <note markdown="1"> * There is no explicit operation to delete a version of a secret.
     #   Instead, remove all staging labels from the `VersionStage` field of
     #   a version. That marks the version as deprecated and allows Secrets
-    #   Manager to delete it as needed. Versions that do not have any
-    #   staging labels do not show up in ListSecretVersionIds unless you
-    #   specify `IncludeDeprecated`.
+    #   Manager to delete it as needed. Versions without any staging labels
+    #   do not show up in ListSecretVersionIds unless you specify
+    #   `IncludeDeprecated`.
     #
     # * The permanent secret deletion at the end of the waiting period is
     #   performed as a background task with low priority. There is no
@@ -902,8 +925,8 @@ module Aws::SecretsManager
     #   window has expired, use RestoreSecret.
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret that you want to delete. You can specify either
-    #   the Amazon Resource Name (ARN) or the friendly name of the secret.
+    #   Specifies the secret to delete. You can specify either the Amazon
+    #   Resource Name (ARN) or the friendly name of the secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -928,10 +951,11 @@ module Aws::SecretsManager
     #
     # @option params [Integer] :recovery_window_in_days
     #   (Optional) Specifies the number of days that Secrets Manager waits
-    #   before it can delete the secret. You can't use both this parameter
-    #   and the `ForceDeleteWithoutRecovery` parameter in the same API call.
+    #   before Secrets Manager can delete the secret. You can't use both this
+    #   parameter and the `ForceDeleteWithoutRecovery` parameter in the same
+    #   API call.
     #
-    #   This value can range from 7 to 30 days. The default value is 30.
+    #   This value can range from 7 to 30 days with a default value of 30.
     #
     # @option params [Boolean] :force_delete_without_recovery
     #   (Optional) Specifies that the secret is to be deleted without any
@@ -948,8 +972,12 @@ module Aws::SecretsManager
     #   to skip the normal waiting period before the permanent deletion that
     #   AWS would normally impose with the `RecoveryWindowInDays` parameter.
     #   If you delete a secret with the `ForceDeleteWithouRecovery` parameter,
-    #   then you have no opportunity to recover the secret. It is permanently
-    #   lost.
+    #   then you have no opportunity to recover the secret. You lose the
+    #   secret permanently.
+    #
+    #   If you use this parameter and include a previously deleted or
+    #   nonexistent secret, the operation does not return the error
+    #   `ResourceNotFoundException` in order to correctly handle retries.
     #
     # @return [Types::DeleteSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1065,6 +1093,8 @@ module Aws::SecretsManager
     #   * {Types::DescribeSecretResponse#version_ids_to_stages #version_ids_to_stages} => Hash&lt;String,Array&lt;String&gt;&gt;
     #   * {Types::DescribeSecretResponse#owning_service #owning_service} => String
     #   * {Types::DescribeSecretResponse#created_date #created_date} => Time
+    #   * {Types::DescribeSecretResponse#primary_region #primary_region} => String
+    #   * {Types::DescribeSecretResponse#replication_status #replication_status} => Array&lt;Types::ReplicationStatusType&gt;
     #
     #
     # @example Example: To retrieve the details of a secret
@@ -1136,6 +1166,13 @@ module Aws::SecretsManager
     #   resp.version_ids_to_stages["SecretVersionIdType"][0] #=> String
     #   resp.owning_service #=> String
     #   resp.created_date #=> Time
+    #   resp.primary_region #=> String
+    #   resp.replication_status #=> Array
+    #   resp.replication_status[0].region #=> String
+    #   resp.replication_status[0].kms_key_id #=> String
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status_message #=> String
+    #   resp.replication_status[0].last_accessed_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecret AWS API Documentation
     #
@@ -1395,10 +1432,11 @@ module Aws::SecretsManager
     #
     # @option params [String] :version_id
     #   Specifies the unique identifier of the version of the secret that you
-    #   want to retrieve. If you specify this parameter then don't specify
-    #   `VersionStage`. If you don't specify either a `VersionStage` or
-    #   `VersionId` then the default is to perform the operation on the
-    #   version with the `VersionStage` value of `AWSCURRENT`.
+    #   want to retrieve. If you specify both this parameter and
+    #   `VersionStage`, the two parameters must refer to the same secret
+    #   version. If you don't specify either a `VersionStage` or `VersionId`
+    #   then the default is to perform the operation on the version with the
+    #   `VersionStage` value of `AWSCURRENT`.
     #
     #   This value is typically a [UUID-type][1] value with 32 hexadecimal
     #   digits.
@@ -1412,10 +1450,11 @@ module Aws::SecretsManager
     #   label attached to the version.
     #
     #   Staging labels are used to keep track of different versions during the
-    #   rotation process. If you use this parameter then don't specify
-    #   `VersionId`. If you don't specify either a `VersionStage` or
-    #   `VersionId`, then the default is to perform the operation on the
-    #   version with the `VersionStage` value of `AWSCURRENT`.
+    #   rotation process. If you specify both this parameter and `VersionId`,
+    #   the two parameters must refer to the same secret version . If you
+    #   don't specify either a `VersionStage` or `VersionId`, then the
+    #   default is to perform the operation on the version with the
+    #   `VersionStage` value of `AWSCURRENT`.
     #
     # @return [Types::GetSecretValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1738,7 +1777,7 @@ module Aws::SecretsManager
     #     next_token: "NextTokenType",
     #     filters: [
     #       {
-    #         key: "description", # accepts description, name, tag-key, tag-value, all
+    #         key: "description", # accepts description, name, tag-key, tag-value, primary-region, all
     #         values: ["FilterValueStringType"],
     #       },
     #     ],
@@ -1767,6 +1806,7 @@ module Aws::SecretsManager
     #   resp.secret_list[0].secret_versions_to_stages["SecretVersionIdType"][0] #=> String
     #   resp.secret_list[0].owning_service #=> String
     #   resp.secret_list[0].created_date #=> Time
+    #   resp.secret_list[0].primary_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecrets AWS API Documentation
@@ -1803,8 +1843,8 @@ module Aws::SecretsManager
     # * To retrieve the resource policy attached to a secret, use
     #   GetResourcePolicy.
     #
-    # * To delete the resource-based policy that's attached to a secret,
-    #   use DeleteResourcePolicy.
+    # * To delete the resource-based policy attached to a secret, use
+    #   DeleteResourcePolicy.
     #
     # * To list all of the currently available secrets, use ListSecrets.
     #
@@ -1814,8 +1854,9 @@ module Aws::SecretsManager
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret that you want to attach the resource-based policy
-    #   to. You can specify either the ARN or the friendly name of the secret.
+    #   Specifies the secret that you want to attach the resource-based
+    #   policy. You can specify either the ARN or the friendly name of the
+    #   secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -1839,8 +1880,8 @@ module Aws::SecretsManager
     #    </note>
     #
     # @option params [required, String] :resource_policy
-    #   A JSON-formatted string that's constructed according to the grammar
-    #   and syntax for an AWS resource-based policy. The policy in the string
+    #   A JSON-formatted string constructed according to the grammar and
+    #   syntax for an AWS resource-based policy. The policy in the string
     #   identifies who can access or manage this secret and its versions. For
     #   information on how to format a JSON parameter for the various command
     #   line tool environments, see [Using JSON for Parameters][1] in the *AWS
@@ -1851,8 +1892,9 @@ module Aws::SecretsManager
     #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @option params [Boolean] :block_public_policy
-    #   Makes an optional API call to Zelkova to validate the Resource Policy
-    #   to prevent broad access to your secret.
+    #   (Optional) If you set the parameter, `BlockPublicPolicy` to true, then
+    #   you block resource-based policies that allow broad access to the
+    #   secret.
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1913,13 +1955,12 @@ module Aws::SecretsManager
     #   Secrets Manager automatically attaches the staging label
     #   `AWSCURRENT` to the new version.
     #
-    # * If another version of this secret already exists, then this
-    #   operation does not automatically move any staging labels other than
-    #   those that you explicitly specify in the `VersionStages` parameter.
+    # * If you do not specify a value for VersionStages then Secrets Manager
+    #   automatically moves the staging label `AWSCURRENT` to this new
+    #   version.
     #
     # * If this operation moves the staging label `AWSCURRENT` from another
-    #   version to this version (because you included it in the
-    #   `StagingLabels` parameter) then Secrets Manager also automatically
+    #   version to this version, then Secrets Manager also automatically
     #   moves the staging label `AWSPREVIOUS` to the version that
     #   `AWSCURRENT` was removed from.
     #
@@ -2155,6 +2196,95 @@ module Aws::SecretsManager
     # @param [Hash] params ({})
     def put_secret_value(params = {}, options = {})
       req = build_request(:put_secret_value, params)
+      req.send_request(options)
+    end
+
+    # Remove regions from replication.
+    #
+    # @option params [required, String] :secret_id
+    #   Remove a secret by `SecretId` from replica Regions.
+    #
+    # @option params [required, Array<String>] :remove_replica_regions
+    #   Remove replication from specific Regions.
+    #
+    # @return [Types::RemoveRegionsFromReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveRegionsFromReplicationResponse#arn #arn} => String
+    #   * {Types::RemoveRegionsFromReplicationResponse#replication_status #replication_status} => Array&lt;Types::ReplicationStatusType&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_regions_from_replication({
+    #     secret_id: "SecretIdType", # required
+    #     remove_replica_regions: ["RegionType"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.replication_status #=> Array
+    #   resp.replication_status[0].region #=> String
+    #   resp.replication_status[0].kms_key_id #=> String
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status_message #=> String
+    #   resp.replication_status[0].last_accessed_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RemoveRegionsFromReplication AWS API Documentation
+    #
+    # @overload remove_regions_from_replication(params = {})
+    # @param [Hash] params ({})
+    def remove_regions_from_replication(params = {}, options = {})
+      req = build_request(:remove_regions_from_replication, params)
+      req.send_request(options)
+    end
+
+    # Converts an existing secret to a multi-Region secret and begins
+    # replication the secret to a list of new regions.
+    #
+    # @option params [required, String] :secret_id
+    #   Use the `Secret Id` to replicate a secret to regions.
+    #
+    # @option params [required, Array<Types::ReplicaRegionType>] :add_replica_regions
+    #   Add Regions to replicate the secret.
+    #
+    # @option params [Boolean] :force_overwrite_replica_secret
+    #   (Optional) If set, Secrets Manager replication overwrites a secret
+    #   with the same name in the destination region.
+    #
+    # @return [Types::ReplicateSecretToRegionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReplicateSecretToRegionsResponse#arn #arn} => String
+    #   * {Types::ReplicateSecretToRegionsResponse#replication_status #replication_status} => Array&lt;Types::ReplicationStatusType&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.replicate_secret_to_regions({
+    #     secret_id: "SecretIdType", # required
+    #     add_replica_regions: [ # required
+    #       {
+    #         region: "RegionType",
+    #         kms_key_id: "KmsKeyIdType",
+    #       },
+    #     ],
+    #     force_overwrite_replica_secret: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.replication_status #=> Array
+    #   resp.replication_status[0].region #=> String
+    #   resp.replication_status[0].kms_key_id #=> String
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status_message #=> String
+    #   resp.replication_status[0].last_accessed_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ReplicateSecretToRegions AWS API Documentation
+    #
+    # @overload replicate_secret_to_regions(params = {})
+    # @param [Hash] params ({})
+    def replicate_secret_to_regions(params = {}, options = {})
+      req = build_request(:replicate_secret_to_regions, params)
       req.send_request(options)
     end
 
@@ -2400,6 +2530,36 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
+    # Removes the secret from replication and promotes the secret to a
+    # regional secret in the replica Region.
+    #
+    # @option params [required, String] :secret_id
+    #   Response to `StopReplicationToReplica` of a secret, based on the
+    #   `SecretId`.
+    #
+    # @return [Types::StopReplicationToReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopReplicationToReplicaResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_replication_to_replica({
+    #     secret_id: "SecretIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/StopReplicationToReplica AWS API Documentation
+    #
+    # @overload stop_replication_to_replica(params = {})
+    # @param [Hash] params ({})
+    def stop_replication_to_replica(params = {}, options = {})
+      req = build_request(:stop_replication_to_replica, params)
+      req.send_request(options)
+    end
+
     # Attaches one or more tags, each consisting of a key name and a value,
     # to the specified secret. Tags are part of the secret's overall
     # metadata, and are not associated with any specific version of the
@@ -2481,7 +2641,7 @@ module Aws::SecretsManager
     #   information on how to format a JSON parameter for the various command
     #   line tool environments, see [Using JSON for Parameters][1] in the *AWS
     #   CLI User Guide*. For the AWS CLI, you can also use the syntax: `--Tags
-    #   Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]`
+    #   Key="Key1",Value="Value1" Key="Key2",Value="Value2"[,…]`
     #
     #
     #
@@ -3088,16 +3248,38 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Validates the JSON text of the resource-based policy document attached
-    # to the specified secret. The JSON request string input and response
-    # output displays formatted code with white space and line breaks for
-    # better readability. Submit your input as a single line JSON string. A
-    # resource-based policy is optional.
+    # Validates that the resource policy does not grant a wide range of IAM
+    # principals access to your secret. The JSON request string input and
+    # response output displays formatted code with white space and line
+    # breaks for better readability. Submit your input as a single line JSON
+    # string. A resource-based policy is optional for secrets.
+    #
+    # The API performs three checks when validating the secret:
+    #
+    # * Sends a call to [Zelkova][1], an automated reasoning engine, to
+    #   ensure your Resource Policy does not allow broad access to your
+    #   secret.
+    #
+    # * Checks for correct syntax in a policy.
+    #
+    # * Verifies the policy does not lock out a caller.
+    #
+    # **Minimum Permissions**
+    #
+    # You must have the permissions required to access the following APIs:
+    #
+    # * `secretsmanager:PutResourcePolicy`
+    #
+    # * `secretsmanager:ValidateResourcePolicy`
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/
     #
     # @option params [String] :secret_id
-    #   The identifier for the secret that you want to validate a resource
-    #   policy. You can specify either the Amazon Resource Name (ARN) or the
-    #   friendly name of the secret.
+    #   (Optional) The identifier of the secret with the resource-based policy
+    #   you want to validate. You can specify either the Amazon Resource Name
+    #   (ARN) or the friendly name of the secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -3121,7 +3303,16 @@ module Aws::SecretsManager
     #    </note>
     #
     # @option params [required, String] :resource_policy
-    #   Identifies the Resource Policy attached to the secret.
+    #   A JSON-formatted string constructed according to the grammar and
+    #   syntax for an AWS resource-based policy. The policy in the string
+    #   identifies who can access or manage this secret and its versions. For
+    #   information on how to format a JSON parameter for the various command
+    #   line tool environments, see [Using JSON for Parameters][1] in the *AWS
+    #   CLI User Guide*.publi
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Types::ValidateResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3181,7 +3372,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

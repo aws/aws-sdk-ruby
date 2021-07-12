@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-07-07)
+------------------
+
+* Feature - Adding support for oplocks for SMB file shares,  S3 Access Point and S3 Private Link for all file shares and IP address support for file system associations
+
+1.55.0 (2021-04-07)
+------------------
+
+* Feature - File Gateway APIs now support FSx for Windows as a cloud storage.
+
+1.54.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2020-11-09)
+------------------
+
+* Feature - Added bandwidth rate limit schedule for Tape and Volume Gateways
+
+1.51.0 (2020-10-29)
+------------------
+
+* Feature - Adding support for access based enumeration on SMB file shares, file share visibility on SMB file shares, and file upload notifications for all file shares
+
 1.50.0 (2020-09-30)
 ------------------
 

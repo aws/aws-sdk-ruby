@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -60,6 +60,9 @@ module Aws::RDS
   # * {DBParameterGroupNotFoundFault}
   # * {DBParameterGroupQuotaExceededFault}
   # * {DBProxyAlreadyExistsFault}
+  # * {DBProxyEndpointAlreadyExistsFault}
+  # * {DBProxyEndpointNotFoundFault}
+  # * {DBProxyEndpointQuotaExceededFault}
   # * {DBProxyNotFoundFault}
   # * {DBProxyQuotaExceededFault}
   # * {DBProxyTargetAlreadyRegisteredFault}
@@ -101,6 +104,7 @@ module Aws::RDS
   # * {InvalidDBInstanceAutomatedBackupStateFault}
   # * {InvalidDBInstanceStateFault}
   # * {InvalidDBParameterGroupStateFault}
+  # * {InvalidDBProxyEndpointStateFault}
   # * {InvalidDBProxyStateFault}
   # * {InvalidDBSecurityGroupStateFault}
   # * {InvalidDBSnapshotStateFault}
@@ -472,6 +476,36 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::DBProxyAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBProxyEndpointAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBProxyEndpointAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBProxyEndpointNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBProxyEndpointNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBProxyEndpointQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBProxyEndpointQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -882,6 +916,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InvalidDBParameterGroupStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidDBProxyEndpointStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidDBProxyEndpointStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

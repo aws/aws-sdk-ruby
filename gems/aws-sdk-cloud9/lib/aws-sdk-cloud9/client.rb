@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -337,20 +337,21 @@ module Aws::Cloud9
 
     # @!group API Operations
 
-    # Creates an AWS Cloud9 development environment, launches an Amazon
-    # Elastic Compute Cloud (Amazon EC2) instance, and then connects from
-    # the instance to the environment.
+    # Creates an Cloud9 development environment, launches an Amazon Elastic
+    # Compute Cloud (Amazon EC2) instance, and then connects from the
+    # instance to the environment.
     #
     # @option params [required, String] :name
     #   The name of the environment to create.
     #
-    #   This name is visible to other AWS IAM users in the same AWS account.
+    #   This name is visible to other IAM users in the same Amazon Web
+    #   Services account.
     #
     # @option params [String] :description
     #   The description of the environment to create.
     #
     # @option params [String] :client_request_token
-    #   A unique, case-sensitive string that helps AWS Cloud9 to ensure this
+    #   A unique, case-sensitive string that helps Cloud9 to ensure this
     #   operation completes no more than one time.
     #
     #   For more information, see [Client Tokens][1] in the *Amazon EC2 API
@@ -358,15 +359,46 @@ module Aws::Cloud9
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :instance_type
     #   The type of instance to connect to the environment (for example,
     #   `t2.micro`).
     #
     # @option params [String] :subnet_id
-    #   The ID of the subnet in Amazon VPC that AWS Cloud9 will use to
-    #   communicate with the Amazon EC2 instance.
+    #   The ID of the subnet in Amazon VPC that Cloud9 will use to communicate
+    #   with the Amazon EC2 instance.
+    #
+    # @option params [String] :image_id
+    #   The identifier for the Amazon Machine Image (AMI) that's used to
+    #   create the EC2 instance. To choose an AMI for the instance, you must
+    #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)
+    #   path.
+    #
+    #   The default AMI is used if the parameter isn't explicitly assigned a
+    #   value in the request. Because Amazon Linux AMI has ended standard
+    #   support as of December 31, 2020, we recommend you choose Amazon Linux
+    #   2, which includes long term support through 2023.
+    #
+    #   <b>AMI aliases </b>
+    #
+    #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
+    #
+    #   * Amazon Linux 2: `amazonlinux-2-x86_64`
+    #
+    #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
+    #
+    #   **SSM paths**
+    #
+    #   * <b>Amazon Linux (default):
+    #     <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>
+    #     </b>
+    #
+    #   * Amazon Linux 2:
+    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
+    #
+    #   * Ubuntu 18.04:
+    #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
     #
     # @option params [Integer] :automatic_stop_time_minutes
     #   The number of minutes until the running instance is shut down after
@@ -374,15 +406,24 @@ module Aws::Cloud9
     #
     # @option params [String] :owner_arn
     #   The Amazon Resource Name (ARN) of the environment owner. This ARN can
-    #   be the ARN of any AWS IAM principal. If this value is not specified,
-    #   the ARN defaults to this environment's creator.
+    #   be the ARN of any IAM principal. If this value is not specified, the
+    #   ARN defaults to this environment's creator.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs that will be associated with the new AWS
+    #   An array of key-value pairs that will be associated with the new
     #   Cloud9 development environment.
     #
     # @option params [String] :connection_type
     #   The connection type used for connecting to an Amazon EC2 environment.
+    #   Valid values are `CONNECT_SSH` (default) and `CONNECT_SSM` (connected
+    #   through Amazon EC2 Systems Manager).
+    #
+    #   For more information, see [Accessing no-ingress EC2 instances with
+    #   Amazon EC2 Systems Manager][1] in the *Cloud9 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html
     #
     # @return [Types::CreateEnvironmentEC2Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -397,7 +438,7 @@ module Aws::Cloud9
     #     description: "This is my demonstration environment.", 
     #     instance_type: "t2.micro", 
     #     owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
-    #     subnet_id: "subnet-1fab8aEX", 
+    #     subnet_id: "subnet-6300cd1b", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -413,6 +454,7 @@ module Aws::Cloud9
     #     client_request_token: "ClientRequestToken",
     #     instance_type: "InstanceType", # required
     #     subnet_id: "SubnetId",
+    #     image_id: "ImageId",
     #     automatic_stop_time_minutes: 1,
     #     owner_arn: "UserArn",
     #     tags: [
@@ -437,7 +479,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Adds an environment member to an AWS Cloud9 development environment.
+    # Adds an environment member to an Cloud9 development environment.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment that contains the environment member you
@@ -503,9 +545,8 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Deletes an AWS Cloud9 development environment. If an Amazon EC2
-    # instance is connected to the environment, also terminates the
-    # instance.
+    # Deletes an Cloud9 development environment. If an Amazon EC2 instance
+    # is connected to the environment, also terminates the instance.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment to delete.
@@ -538,8 +579,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Deletes an environment member from an AWS Cloud9 development
-    # environment.
+    # Deletes an environment member from an Cloud9 development environment.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment to delete the environment member from.
@@ -578,8 +618,8 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Gets information about environment members for an AWS Cloud9
-    # development environment.
+    # Gets information about environment members for an Cloud9 development
+    # environment.
     #
     # @option params [String] :user_arn
     #   The Amazon Resource Name (ARN) of an individual environment member to
@@ -624,8 +664,7 @@ module Aws::Cloud9
     #
     # @example Example: DescribeEnvironmentMemberships1
     #
-    #   # The following example gets information about all of the environment members for the specified AWS Cloud9 development
-    #   # environment.
+    #   # The following example gets information about all of the environment members for the specified development environment.
     #
     #   resp = client.describe_environment_memberships({
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
@@ -651,7 +690,7 @@ module Aws::Cloud9
     #
     # @example Example: DescribeEnvironmentMemberships2
     #
-    #   # The following example gets information about the owner of the specified AWS Cloud9 development environment.
+    #   # The following example gets information about the owner of the specified development environment.
     #
     #   resp = client.describe_environment_memberships({
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
@@ -674,7 +713,7 @@ module Aws::Cloud9
     #
     # @example Example: DescribeEnvironmentMemberships3
     #
-    #   # The following example gets AWS Cloud9 development environment membership information for the specified user.
+    #   # The following example gets development environment membership information for the specified user.
     #
     #   resp = client.describe_environment_memberships({
     #     user_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
@@ -729,7 +768,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Gets status information for an AWS Cloud9 development environment.
+    # Gets status information for an Cloud9 development environment.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment to get status information about.
@@ -772,7 +811,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Gets information about AWS Cloud9 development environments.
+    # Gets information about Cloud9 development environments.
     #
     # @option params [required, Array<String>] :environment_ids
     #   The IDs of individual environments to get information about.
@@ -838,6 +877,7 @@ module Aws::Cloud9
     #   resp.environments[0].lifecycle.status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.environments[0].lifecycle.reason #=> String
     #   resp.environments[0].lifecycle.failure_resource #=> String
+    #   resp.environments[0].managed_credentials_status #=> String, one of "ENABLED_ON_CREATE", "ENABLED_BY_OWNER", "DISABLED_BY_DEFAULT", "DISABLED_BY_OWNER", "DISABLED_BY_COLLABORATOR", "PENDING_REMOVAL_BY_COLLABORATOR", "PENDING_START_REMOVAL_BY_COLLABORATOR", "PENDING_REMOVAL_BY_OWNER", "PENDING_START_REMOVAL_BY_OWNER", "FAILED_REMOVAL_BY_COLLABORATOR", "FAILED_REMOVAL_BY_OWNER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironments AWS API Documentation
     #
@@ -848,7 +888,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Gets a list of AWS Cloud9 development environment identifiers.
+    # Gets a list of Cloud9 development environment identifiers.
     #
     # @option params [String] :next_token
     #   During a previous call, if there are more than 25 items in the list,
@@ -905,12 +945,12 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Gets a list of the tags associated with an AWS Cloud9 development
+    # Gets a list of the tags associated with an Cloud9 development
     # environment.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
-    #   environment to get the tags for.
+    #   The Amazon Resource Name (ARN) of the Cloud9 development environment
+    #   to get the tags for.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -937,18 +977,17 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Adds tags to an AWS Cloud9 development environment.
+    # Adds tags to an Cloud9 development environment.
     #
-    # Tags that you add to an AWS Cloud9 environment by using this method
-    # will NOT be automatically propagated to underlying resources.
+    # Tags that you add to an Cloud9 environment by using this method will
+    # NOT be automatically propagated to underlying resources.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
-    #   environment to add tags to.
+    #   The Amazon Resource Name (ARN) of the Cloud9 development environment
+    #   to add tags to.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The list of tags to add to the given AWS Cloud9 development
-    #   environment.
+    #   The list of tags to add to the given Cloud9 development environment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -973,15 +1012,15 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Removes tags from an AWS Cloud9 development environment.
+    # Removes tags from an Cloud9 development environment.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
-    #   environment to remove tags from.
+    #   The Amazon Resource Name (ARN) of the Cloud9 development environment
+    #   to remove tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag names of the tags to remove from the given AWS Cloud9
-    #   development environment.
+    #   The tag names of the tags to remove from the given Cloud9 development
+    #   environment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1001,8 +1040,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Changes the settings of an existing AWS Cloud9 development
-    # environment.
+    # Changes the settings of an existing Cloud9 development environment.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment to change settings.
@@ -1045,8 +1083,8 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Changes the settings of an existing environment member for an AWS
-    # Cloud9 development environment.
+    # Changes the settings of an existing environment member for an Cloud9
+    # development environment.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment for the environment member whose settings
@@ -1125,7 +1163,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

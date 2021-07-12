@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-06-10)
+------------------
+
+* Feature - This release supports KMS customer-managed Customer Master Keys (CMKs) on member-specific Hyperledger Fabric resources.
+
+1.22.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2021-03-02)
+------------------
+
+* Feature - Updates for Ethereum general availability release.
+
+1.20.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2021-01-28)
+------------------
+
+* Feature - This release supports tagging on Amazon Managed Blockchain resources.
+
+1.18.0 (2020-12-21)
+------------------
+
+* Feature - Added support for provisioning and managing public Ethereum nodes on main and test networks supporting secure access using Sigv4 and standard open-source Ethereum APIs.
+
 1.17.0 (2020-09-30)
 ------------------
 

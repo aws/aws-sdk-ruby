@@ -10,14 +10,15 @@ module Aws
           default: 'legacy',
           doc_type: String,
           docstring: <<-DOCS) do |cfg|
-Passing in `regional` to enable regional endpoint for S3's `us-east-1`
-region. Defaults to `legacy` mode using global endpoint.
+Pass in `regional` to enable the `us-east-1` regional endpoint.
+Defaults to `legacy` mode which uses the global endpoint.
           DOCS
           resolve_iad_regional_endpoint(cfg)
         end
 
         def add_handlers(handlers, config)
-          if config.region == 'us-east-1'
+          # only modify non-custom endpoints
+          if config.regional_endpoint && config.region == 'us-east-1'
             handlers.add(Handler)
           end
         end
@@ -26,10 +27,14 @@ region. Defaults to `legacy` mode using global endpoint.
         class Handler < Seahorse::Client::Handler
 
           def call(context)
-            # keep legacy global endpoint pattern by default
-            if context.config.s3_us_east_1_regional_endpoint == 'legacy'
-              context.http_request.endpoint.host = IADRegionalEndpoint.legacy_host(
-                context.http_request.endpoint.host)
+            # WriteGetObjectResponse does not have a global endpoint
+            # ARNs are regionalized, so don't touch those either.
+            if context.operation.name != 'WriteGetObjectResponse' &&
+               context.config.s3_us_east_1_regional_endpoint == 'legacy' &&
+               !context.metadata[:s3_arn]
+              host = context.http_request.endpoint.host
+              legacy_host = IADRegionalEndpoint.legacy_host(host)
+              context.http_request.endpoint.host = legacy_host
             end
             @handler.call(context)
           end

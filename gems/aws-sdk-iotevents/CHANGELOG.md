@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-05-27)
+------------------
+
+* Feature - Releasing new APIs for AWS IoT Events Alarms
+
+1.23.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2021-02-23)
+------------------
+
+* Feature - This release adds an Analyze feature to AWS IoT Events that lets customers analyze their detector models for runtime issues.
+
+1.21.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2020-09-30)
 ------------------
 

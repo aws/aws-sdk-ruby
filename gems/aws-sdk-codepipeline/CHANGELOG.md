@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2021-03-05)
+------------------
+
+* Feature - Updated the parameters to make actionType required for UpdateActionType
+
+1.42.0 (2021-03-01)
+------------------
+
+* Feature - Added a new field to the ListPipelines API to allow maximum search results of 1000
+
+1.41.0 (2021-02-12)
+------------------
+
+* Feature - The release provides new GetActionType and UpdateActionType APIs for viewing and editing action types in CodePipeline.
+
+1.40.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2021-01-07)
+------------------
+
+* Feature - Adding cancelled status and summary for executions aborted by pipeline updates.
+
+1.38.0 (2020-11-16)
+------------------
+
+* Feature - We show details about inbound executions and id of action executions in GetPipelineState API. We also add ConflictException to StartPipelineExecution, RetryStageExecution, StopPipelineExecution APIs.
+
 1.37.0 (2020-09-30)
 ------------------
 

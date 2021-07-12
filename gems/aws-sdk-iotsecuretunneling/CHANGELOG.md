@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2020-11-16)
+------------------
+
+* Feature - Support using multiple data streams per tunnel using the Secure Tunneling multiplexing feature.
+
 1.8.0 (2020-09-30)
 ------------------
 

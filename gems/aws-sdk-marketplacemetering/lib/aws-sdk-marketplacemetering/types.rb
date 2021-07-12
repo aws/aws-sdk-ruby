@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -23,6 +23,17 @@ module Aws::MarketplaceMetering
     #             customer_identifier: "CustomerIdentifier", # required
     #             dimension: "UsageDimension", # required
     #             quantity: 1,
+    #             usage_allocations: [
+    #               {
+    #                 allocated_usage_quantity: 1, # required
+    #                 tags: [
+    #                   {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #           },
     #         ],
     #         product_code: "ProductCode", # required
@@ -217,6 +228,19 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # The tag is invalid, or the number of tags is greater than 5.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidTagException AWS API Documentation
+    #
+    class InvalidTagException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Registration token is invalid.
     #
     # @!attribute [rw] message
@@ -225,6 +249,20 @@ module Aws::MarketplaceMetering
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidTokenException AWS API Documentation
     #
     class InvalidTokenException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The usage allocation objects are invalid, or the number of allocations
+    # is greater than 500 for a single usage record.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidUsageAllocationsException AWS API Documentation
+    #
+    class InvalidUsageAllocationsException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -253,6 +291,17 @@ module Aws::MarketplaceMetering
     #         usage_dimension: "UsageDimension", # required
     #         usage_quantity: 1,
     #         dry_run: false,
+    #         usage_allocations: [
+    #           {
+    #             allocated_usage_quantity: 1, # required
+    #             tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] product_code
@@ -284,6 +333,14 @@ module Aws::MarketplaceMetering
     #   UnauthorizedException. Defaults to `false` if not specified.
     #   @return [Boolean]
     #
+    # @!attribute [rw] usage_allocations
+    #   The set of UsageAllocations to submit.
+    #
+    #   The sum of all UsageAllocation quantities must equal the
+    #   UsageQuantity of the MeterUsage request, and each UsageAllocation
+    #   must have a unique set of tags (include no tags).
+    #   @return [Array<Types::UsageAllocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageRequest AWS API Documentation
     #
     class MeterUsageRequest < Struct.new(
@@ -291,7 +348,8 @@ module Aws::MarketplaceMetering
       :timestamp,
       :usage_dimension,
       :usage_quantity,
-      :dry_run)
+      :dry_run,
+      :usage_allocations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -422,6 +480,37 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # Metadata assigned to an allocation. Each tag is made up of a key and a
+    # value.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that makes up a tag. A key is a label
+    #   that acts like a category for the specific tag values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   One part of a key-value pair that makes up a tag. A value acts as a
+    #   descriptor within a tag category (key). The value can be empty or
+    #   null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The calls to the API are throttled.
     #
     # @!attribute [rw] message
@@ -449,6 +538,42 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # Usage allocations allow you to split usage into buckets by tags.
+    #
+    # Each UsageAllocation indicates the usage quantity for a specific set
+    # of tags.
+    #
+    # @note When making an API call, you may pass UsageAllocation
+    #   data as a hash:
+    #
+    #       {
+    #         allocated_usage_quantity: 1, # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] allocated_usage_quantity
+    #   The total quantity allocated to this bucket of usage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   The set of tags that define the bucket of usage. For the bucket of
+    #   items with no tags, this parameter can be left out.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageAllocation AWS API Documentation
+    #
+    class UsageAllocation < Struct.new(
+      :allocated_usage_quantity,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A UsageRecord indicates a quantity of usage for a given product,
     # customer, dimension and time.
     #
@@ -463,6 +588,17 @@ module Aws::MarketplaceMetering
     #         customer_identifier: "CustomerIdentifier", # required
     #         dimension: "UsageDimension", # required
     #         quantity: 1,
+    #         usage_allocations: [
+    #           {
+    #             allocated_usage_quantity: 1, # required
+    #             tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] timestamp
@@ -489,13 +625,20 @@ module Aws::MarketplaceMetering
     #   dimension and time. Defaults to `0` if not specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] usage_allocations
+    #   The set of UsageAllocations to submit. The sum of all
+    #   UsageAllocation quantities must equal the Quantity of the
+    #   UsageRecord.
+    #   @return [Array<Types::UsageAllocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecord AWS API Documentation
     #
     class UsageRecord < Struct.new(
       :timestamp,
       :customer_identifier,
       :dimension,
-      :quantity)
+      :quantity,
+      :usage_allocations)
       SENSITIVE = []
       include Aws::Structure
     end

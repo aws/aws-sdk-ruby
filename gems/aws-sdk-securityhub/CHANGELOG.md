@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-06-24)
+------------------
+
+* Feature - Added new resource details for ECS clusters and ECS task definitions. Added additional information for S3 buckets, Elasticsearch domains, and API Gateway V2 stages.
+
+1.46.0 (2021-05-14)
+------------------
+
+* Feature - Updated descriptions to add notes on array lengths.
+
+1.45.0 (2021-05-03)
+------------------
+
+* Feature - Updated ASFF to add the following new resource details objects: AwsEc2NetworkAcl, AwsEc2Subnet, and AwsElasticBeanstalkEnvironment.
+
+1.44.0 (2021-05-03)
+------------------
+
+* Feature - Updated ASFF to add the following new resource details objects: AwsEc2NetworkAcl, AwsEc2Subnet, and AwsElasticBeanstalkEnvironment.
+
+1.43.0 (2021-04-22)
+------------------
+
+* Feature - Replaced the term "master" with "administrator". Added new actions to replace AcceptInvitation, GetMasterAccount, and DisassociateFromMasterAccount. In Member, replaced MasterId with AdministratorId.
+
+1.42.0 (2021-03-18)
+------------------
+
+* Feature - New object for separate provider and customer values. New objects track S3 Public Access Block configuration and identify sensitive data. BatchImportFinding requests are limited to 100 findings.
+
+1.41.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2021-02-03)
+------------------
+
+* Feature - Added a ProductArn parameter to DescribeProducts. ProductArn is used to identify the integration to return details for.
+
+1.39.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2021-01-21)
+------------------
+
+* Feature - This release of ASFF adds a new Action object and a new resource details object - AwsSsmPatchCompliance. It also adds several new attributes for the AwsEc2NetworkInterface resource type.
+
+1.37.0 (2020-12-21)
+------------------
+
+* Feature - Finding providers can now use BatchImportFindings to update Confidence, Criticality, RelatedFindings, Severity, and Types.
+
+1.36.0 (2020-11-23)
+------------------
+
+* Feature - Updated the account management API to support the integration with AWS Organizations. Added new methods to allow users to view and manage the delegated administrator account for Security Hub.
+
 1.35.0 (2020-09-30)
 ------------------
 

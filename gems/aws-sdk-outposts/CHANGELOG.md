@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-07-08)
+------------------
+
+* Feature - Added property filters for listOutposts
+
+1.16.0 (2021-05-26)
+------------------
+
+* Feature - Add ConflictException to DeleteOutpost, CreateOutpost
+
+1.15.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2020-12-21)
+------------------
+
+* Feature - In this release, AWS Outposts adds support for three new APIs: TagResource, UntagResource, and ListTagsForResource. Customers can now manage tags for their resources through the SDK.
+
+1.12.0 (2020-11-23)
+------------------
+
+* Feature - Support specifying tags during the creation of the Outpost resource. Tags are now returned in the response body of Outpost APIs.
+
+1.11.0 (2020-11-18)
+------------------
+
+* Feature - Mark the Name parameter in CreateOutpost as required.
+
 1.10.0 (2020-09-30)
 ------------------
 

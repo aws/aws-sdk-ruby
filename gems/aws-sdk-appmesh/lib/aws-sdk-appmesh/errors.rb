@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -27,14 +27,14 @@ module Aws::AppMesh
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
-  # * {ResourceInUseException}
   # * {BadRequestException}
   # * {ConflictException}
-  # * {InternalServerErrorException}
   # * {ForbiddenException}
-  # * {NotFoundException}
-  # * {ServiceUnavailableException}
+  # * {InternalServerErrorException}
   # * {LimitExceededException}
+  # * {NotFoundException}
+  # * {ResourceInUseException}
+  # * {ServiceUnavailableException}
   # * {TooManyRequestsException}
   # * {TooManyTagsException}
   #
@@ -43,21 +43,6 @@ module Aws::AppMesh
   module Errors
 
     extend Aws::Errors::DynamicErrors
-
-    class ResourceInUseException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::AppMesh::Types::ResourceInUseException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
 
     class BadRequestException < ServiceError
 
@@ -89,6 +74,21 @@ module Aws::AppMesh
       end
     end
 
+    class ForbiddenException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppMesh::Types::ForbiddenException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InternalServerErrorException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -102,13 +102,17 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
-    class ForbiddenException < ServiceError
+    class LimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::AppMesh::Types::ForbiddenException] data
+      # @param [Aws::AppMesh::Types::LimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -134,6 +138,21 @@ module Aws::AppMesh
       end
     end
 
+    class ResourceInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppMesh::Types::ResourceInUseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ServiceUnavailableException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -147,20 +166,9 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-    end
 
-    class LimitExceededException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::AppMesh::Types::LimitExceededException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
+      def retryable?
+        true
       end
     end
 
@@ -176,6 +184,14 @@ module Aws::AppMesh
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
       end
     end
 

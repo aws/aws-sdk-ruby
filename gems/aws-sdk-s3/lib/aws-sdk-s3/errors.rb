@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,6 +29,7 @@ module Aws::S3
   # ## Error Classes
   # * {BucketAlreadyExists}
   # * {BucketAlreadyOwnedByYou}
+  # * {InvalidObjectState}
   # * {NoSuchBucket}
   # * {NoSuchKey}
   # * {NoSuchUpload}
@@ -58,6 +59,26 @@ module Aws::S3
       # @param [Aws::S3::Types::BucketAlreadyOwnedByYou] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class InvalidObjectState < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3::Types::InvalidObjectState] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def storage_class
+        @data[:storage_class]
+      end
+
+      # @return [String]
+      def access_tier
+        @data[:access_tier]
       end
     end
 

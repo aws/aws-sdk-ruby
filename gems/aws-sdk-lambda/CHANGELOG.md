@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2021-07-06)
+------------------
+
+* Feature - Added support for AmazonMQRabbitMQ as an event source. Added support for VIRTUAL_HOST as SourceAccessType for streams event source mappings.
+
+1.62.0 (2021-03-16)
+------------------
+
+* Feature - Allow empty list for function response types
+
+1.61.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2021-03-08)
+------------------
+
+* Feature - Documentation updates for Lambda. Constraint updates to AddLayerVersionPermission's Action and OrganizationId parameters, and AddPermission's Principal and SourceAccount parameters.
+
+1.59.0 (2021-02-03)
+------------------
+
+* Feature - Support for creating Lambda Functions using 'nodejs14.x'
+
+1.58.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2020-12-15)
+------------------
+
+* Feature - Added support for Apache Kafka as a event source. Added support for TumblingWindowInSeconds for streams event source mappings. Added support for FunctionResponseTypes for streams event source mappings
+
+1.56.0 (2020-12-04)
+------------------
+
+* Feature - Added the additional enum InvalidImage to StateReasonCode and LastUpdateStatusReasonCode fields.
+
+1.55.0 (2020-12-01)
+------------------
+
+* Feature - This release includes support for a new feature: Container images support in AWS Lambda. This adds APIs for deploying functions as container images. AWS Lambda now supports memory up to 10240MB.
+
+1.54.0 (2020-11-23)
+------------------
+
+* Feature - This release includes support for new feature: Code Signing for AWS Lambda. This adds new resources and APIs to configure Lambda functions to accept and verify signed code artifacts at deployment.
+
+1.53.0 (2020-11-19)
+------------------
+
+* Feature - Added the starting position and starting position timestamp to ESM Configuration. Now customers will be able to view these fields for their ESM.
+
+1.52.0 (2020-11-05)
+------------------
+
+* Feature - Support Amazon MQ as an Event Source.
+
 1.51.0 (2020-09-30)
 ------------------
 

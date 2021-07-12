@@ -42,6 +42,36 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "CancelBatchPredictionJob":{
+      "name":"CancelBatchPredictionJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CancelBatchPredictionJobRequest"},
+      "output":{"shape":"CancelBatchPredictionJobResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "CreateBatchPredictionJob":{
+      "name":"CreateBatchPredictionJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateBatchPredictionJobRequest"},
+      "output":{"shape":"CreateBatchPredictionJobResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "CreateDetectorVersion":{
       "name":"CreateDetectorVersion",
       "http":{
@@ -117,6 +147,21 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "DeleteBatchPredictionJob":{
+      "name":"DeleteBatchPredictionJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteBatchPredictionJobRequest"},
+      "output":{"shape":"DeleteBatchPredictionJobResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "DeleteDetector":{
       "name":"DeleteDetector",
       "http":{
@@ -150,6 +195,21 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "DeleteEntityType":{
+      "name":"DeleteEntityType",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteEntityTypeRequest"},
+      "output":{"shape":"DeleteEntityTypeResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "DeleteEvent":{
       "name":"DeleteEvent",
       "http":{
@@ -161,6 +221,98 @@
       "errors":[
         {"shape":"InternalServerException"},
         {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"}
+      ]
+    },
+    "DeleteEventType":{
+      "name":"DeleteEventType",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteEventTypeRequest"},
+      "output":{"shape":"DeleteEventTypeResult"},
+      "errors":[
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "DeleteExternalModel":{
+      "name":"DeleteExternalModel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteExternalModelRequest"},
+      "output":{"shape":"DeleteExternalModelResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "DeleteLabel":{
+      "name":"DeleteLabel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteLabelRequest"},
+      "output":{"shape":"DeleteLabelResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "DeleteModel":{
+      "name":"DeleteModel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteModelRequest"},
+      "output":{"shape":"DeleteModelResult"},
+      "errors":[
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "DeleteModelVersion":{
+      "name":"DeleteModelVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteModelVersionRequest"},
+      "output":{"shape":"DeleteModelVersionResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"}
+      ]
+    },
+    "DeleteOutcome":{
+      "name":"DeleteOutcome",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteOutcomeRequest"},
+      "output":{"shape":"DeleteOutcomeResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
         {"shape":"AccessDeniedException"}
       ]
     },
@@ -175,6 +327,22 @@
       "errors":[
         {"shape":"ConflictException"},
         {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "DeleteVariable":{
+      "name":"DeleteVariable",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteVariableRequest"},
+      "output":{"shape":"DeleteVariableResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
         {"shape":"InternalServerException"},
         {"shape":"ThrottlingException"},
         {"shape":"AccessDeniedException"}
@@ -204,6 +372,21 @@
       },
       "input":{"shape":"DescribeModelVersionsRequest"},
       "output":{"shape":"DescribeModelVersionsResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "GetBatchPredictionJobs":{
+      "name":"GetBatchPredictionJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetBatchPredictionJobsRequest"},
+      "output":{"shape":"GetBatchPredictionJobsResult"},
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
@@ -271,7 +454,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"ThrottlingException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"}
       ]
     },
     "GetEventTypes":{
@@ -705,6 +889,17 @@
       },
       "exception":true
     },
+    "AsyncJobStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS_INITIALIZING",
+        "IN_PROGRESS",
+        "CANCEL_IN_PROGRESS",
+        "CANCELED",
+        "COMPLETE",
+        "FAILED"
+      ]
+    },
     "BatchCreateVariableError":{
       "type":"structure",
       "members":{
@@ -757,6 +952,42 @@
         "errors":{"shape":"BatchGetVariableErrorList"}
       }
     },
+    "BatchPrediction":{
+      "type":"structure",
+      "members":{
+        "jobId":{"shape":"identifier"},
+        "status":{"shape":"AsyncJobStatus"},
+        "failureReason":{"shape":"string"},
+        "startTime":{"shape":"time"},
+        "completionTime":{"shape":"time"},
+        "lastHeartbeatTime":{"shape":"time"},
+        "inputPath":{"shape":"s3BucketLocation"},
+        "outputPath":{"shape":"s3BucketLocation"},
+        "eventTypeName":{"shape":"identifier"},
+        "detectorName":{"shape":"identifier"},
+        "detectorVersion":{"shape":"floatVersionString"},
+        "iamRoleArn":{"shape":"iamRoleArn"},
+        "arn":{"shape":"fraudDetectorArn"},
+        "processedRecordsCount":{"shape":"Integer"},
+        "totalRecordsCount":{"shape":"Integer"}
+      }
+    },
+    "BatchPredictionList":{
+      "type":"list",
+      "member":{"shape":"BatchPrediction"}
+    },
+    "CancelBatchPredictionJobRequest":{
+      "type":"structure",
+      "required":["jobId"],
+      "members":{
+        "jobId":{"shape":"identifier"}
+      }
+    },
+    "CancelBatchPredictionJobResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "ConflictException":{
       "type":"structure",
       "required":["message"],
@@ -764,6 +995,32 @@
         "message":{"shape":"string"}
       },
       "exception":true
+    },
+    "CreateBatchPredictionJobRequest":{
+      "type":"structure",
+      "required":[
+        "jobId",
+        "inputPath",
+        "outputPath",
+        "eventTypeName",
+        "detectorName",
+        "iamRoleArn"
+      ],
+      "members":{
+        "jobId":{"shape":"identifier"},
+        "inputPath":{"shape":"s3BucketLocation"},
+        "outputPath":{"shape":"s3BucketLocation"},
+        "eventTypeName":{"shape":"identifier"},
+        "detectorName":{"shape":"identifier"},
+        "detectorVersion":{"shape":"wholeNumberVersionString"},
+        "iamRoleArn":{"shape":"iamRoleArn"},
+        "tags":{"shape":"tagList"}
+      }
+    },
+    "CreateBatchPredictionJobResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "CreateDetectorVersionRequest":{
       "type":"structure",
@@ -912,6 +1169,18 @@
         "fieldLevelMessages":{"shape":"fieldValidationMessageList"}
       }
     },
+    "DeleteBatchPredictionJobRequest":{
+      "type":"structure",
+      "required":["jobId"],
+      "members":{
+        "jobId":{"shape":"identifier"}
+      }
+    },
+    "DeleteBatchPredictionJobResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteDetectorRequest":{
       "type":"structure",
       "required":["detectorId"],
@@ -940,6 +1209,18 @@
       "members":{
       }
     },
+    "DeleteEntityTypeRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{"shape":"identifier"}
+      }
+    },
+    "DeleteEntityTypeResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteEventRequest":{
       "type":"structure",
       "required":[
@@ -947,11 +1228,93 @@
         "eventTypeName"
       ],
       "members":{
-        "eventId":{"shape":"string"},
-        "eventTypeName":{"shape":"string"}
+        "eventId":{"shape":"identifier"},
+        "eventTypeName":{"shape":"identifier"}
       }
     },
     "DeleteEventResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteEventTypeRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{"shape":"identifier"}
+      }
+    },
+    "DeleteEventTypeResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteExternalModelRequest":{
+      "type":"structure",
+      "required":["modelEndpoint"],
+      "members":{
+        "modelEndpoint":{"shape":"sageMakerEndpointIdentifier"}
+      }
+    },
+    "DeleteExternalModelResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteLabelRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{"shape":"identifier"}
+      }
+    },
+    "DeleteLabelResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteModelRequest":{
+      "type":"structure",
+      "required":[
+        "modelId",
+        "modelType"
+      ],
+      "members":{
+        "modelId":{"shape":"modelIdentifier"},
+        "modelType":{"shape":"ModelTypeEnum"}
+      }
+    },
+    "DeleteModelResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteModelVersionRequest":{
+      "type":"structure",
+      "required":[
+        "modelId",
+        "modelType",
+        "modelVersionNumber"
+      ],
+      "members":{
+        "modelId":{"shape":"modelIdentifier"},
+        "modelType":{"shape":"ModelTypeEnum"},
+        "modelVersionNumber":{"shape":"floatVersionString"}
+      }
+    },
+    "DeleteModelVersionResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteOutcomeRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{"shape":"identifier"}
+      }
+    },
+    "DeleteOutcomeResult":{
       "type":"structure",
       "members":{
       }
@@ -964,6 +1327,18 @@
       }
     },
     "DeleteRuleResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteVariableRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{"shape":"string"}
+      }
+    },
+    "DeleteVariableResult":{
       "type":"structure",
       "members":{
       }
@@ -1148,6 +1523,21 @@
         "title":{"shape":"string"},
         "content":{"shape":"string"},
         "type":{"shape":"string"}
+      }
+    },
+    "GetBatchPredictionJobsRequest":{
+      "type":"structure",
+      "members":{
+        "jobId":{"shape":"identifier"},
+        "maxResults":{"shape":"batchPredictionsMaxPageSize"},
+        "nextToken":{"shape":"string"}
+      }
+    },
+    "GetBatchPredictionJobsResult":{
+      "type":"structure",
+      "members":{
+        "batchPredictions":{"shape":"BatchPredictionList"},
+        "nextToken":{"shape":"string"}
       }
     },
     "GetDetectorVersionRequest":{
@@ -1376,6 +1766,7 @@
         "nextToken":{"shape":"string"}
       }
     },
+    "Integer":{"type":"integer"},
     "InternalServerException":{
       "type":"structure",
       "required":["message"],
@@ -1400,7 +1791,7 @@
       "type":"string",
       "max":90,
       "min":7,
-      "pattern":"^\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}|DEFAULT|arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\\d{12}:key\\/\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}$"
+      "pattern":"^DEFAULT|arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\\d{12}:key\\/\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}$"
     },
     "Label":{
       "type":"structure",
@@ -1422,6 +1813,10 @@
     "Language":{
       "type":"string",
       "enum":["DETECTORPL"]
+    },
+    "ListOfLogitMetrics":{
+      "type":"list",
+      "member":{"shape":"LogitMetric"}
     },
     "ListOfModelScores":{
       "type":"list",
@@ -1453,6 +1848,19 @@
       "members":{
         "tags":{"shape":"tagList"},
         "nextToken":{"shape":"string"}
+      }
+    },
+    "LogitMetric":{
+      "type":"structure",
+      "required":[
+        "variableName",
+        "variableType",
+        "variableImportance"
+      ],
+      "members":{
+        "variableName":{"shape":"string"},
+        "variableType":{"shape":"string"},
+        "variableImportance":{"shape":"float"}
       }
     },
     "MetricDataPoint":{
@@ -1578,7 +1986,8 @@
       "type":"string",
       "enum":[
         "ACTIVE",
-        "INACTIVE"
+        "INACTIVE",
+        "TRAINING_CANCELLED"
       ]
     },
     "NameList":{
@@ -1861,7 +2270,8 @@
       "type":"structure",
       "members":{
         "dataValidationMetrics":{"shape":"DataValidationMetrics"},
-        "trainingMetrics":{"shape":"TrainingMetrics"}
+        "trainingMetrics":{"shape":"TrainingMetrics"},
+        "variableImportanceMetrics":{"shape":"VariableImportanceMetrics"}
       }
     },
     "UntagResourceRequest":{
@@ -2094,6 +2504,12 @@
       "max":25,
       "min":1
     },
+    "VariableImportanceMetrics":{
+      "type":"structure",
+      "members":{
+        "LogitMetrics":{"shape":"ListOfLogitMetrics"}
+      }
+    },
     "VariableList":{
       "type":"list",
       "member":{"shape":"Variable"}
@@ -2103,6 +2519,12 @@
       "box":true,
       "max":100,
       "min":50
+    },
+    "batchPredictionsMaxPageSize":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":1
     },
     "blob":{"type":"blob"},
     "contentType":{
@@ -2258,7 +2680,11 @@
       "max":256,
       "min":0
     },
-    "time":{"type":"string"},
+    "time":{
+      "type":"string",
+      "max":30,
+      "min":11
+    },
     "variableName":{
       "type":"string",
       "max":64,

@@ -26,6 +26,7 @@
     "TagResource" : "<p>Adds tags to the specified MSK resource.</p>",
     "UntagResource" : "<p>Removes the tags associated with the keys that are provided in the query.</p>",
     "UpdateBrokerCount" : "<p>Updates the number of broker nodes in the cluster. You can use this operation to increase the number of brokers in an existing cluster. You can't decrease the number of brokers.</p>",
+    "UpdateBrokerType": "<p>Updates all the brokers in the cluster to the specified type.</p>",
     "UpdateBrokerStorage" : "<p>Updates the EBS storage associated with MSK brokers.</p>",
     "UpdateConfiguration" : "<p>Updates an existing MSK configuration. The configuration must be in the Active state.</p>",
     "UpdateClusterConfiguration" : "<p>Updates the cluster with the configuration that is specified in the request body.</p>",
@@ -66,8 +67,8 @@
     "BrokerNodeGroupInfo" : {
       "base" : "<p>Describes the setup to be used for Kafka broker nodes in the cluster.</p>",
       "refs" : {
-        "ClusterInfo$BrokerNodeGroupInfo" : "<p>Information about the broker nodes.</p>",
-        "CreateClusterRequest$BrokerNodeGroupInfo" : "<p>Information about the broker nodes in the cluster.</p>"
+        "ClusterInfo$BrokerNodeGroupInfo" : "<p>Information about the brokers.</p>",
+        "CreateClusterRequest$BrokerNodeGroupInfo" : "<p>Information about the brokers.</p>"
       }
     },
     "BrokerNodeInfo" : {
@@ -131,9 +132,9 @@
     "ClusterState" : {
       "base" : "<p>The state of a Kafka cluster.</p>",
       "refs" : {
-        "ClusterInfo$State" : "<p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>",
-        "CreateClusterResponse$State" : "<p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>",
-        "DeleteClusterResponse$State" : "<p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>"
+        "ClusterInfo$State" : "<p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>",
+        "CreateClusterResponse$State" : "<p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>",
+        "DeleteClusterResponse$State" : "<p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>"
       }
     },
     "CompatibleKafkaVersion" : {
@@ -256,10 +257,10 @@
       }
     },
     "EnhancedMonitoring" : {
-      "base" : "<p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
+      "base" : "<p>Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
       "refs" : {
-        "ClusterInfo$EnhancedMonitoring" : "<p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
-        "CreateClusterRequest$EnhancedMonitoring" : "<p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.</p>",
+        "ClusterInfo$EnhancedMonitoring" : "<p>Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
+        "CreateClusterRequest$EnhancedMonitoring" : "<p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.</p>",
         "MutableClusterInfo$EnhancedMonitoring" : "<p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>",
         "UpdateMonitoringRequest$EnhancedMonitoring" : "<p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>"
       }
@@ -476,6 +477,14 @@
     },
     "UpdateBrokerCountResponse" : {
       "base" : "<p>Response body for UpdateBrokerCount.</p>",
+      "refs" : { }
+    },
+    "UpdateBrokerTypeRequest" : {
+      "base" : "<p>Request body for UpdateBrokerType.</p>",
+      "refs" : { }
+    },
+    "UpdateBrokerTypeResponse" : {
+      "base" : "<p>Response body for UpdateBrokerType.</p>",
       "refs" : { }
     },
     "UpdateBrokerStorageRequest" : {
@@ -716,6 +725,7 @@
         "GetBootstrapBrokersResponse$BootstrapBrokerString" : "<p>A string containing one or more hostname:port pairs.</p>",
         "GetBootstrapBrokersResponse$BootstrapBrokerStringTls" : "<p>A string containing one or more DNS names (or IP) and TLS port pairs. The following is an example.</p> <programlisting>{\n    \"BootstrapBrokerStringTls\": \"b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094\"\n}</programlisting>",
         "GetBootstrapBrokersResponse$BootstrapBrokerStringSaslScram" : "<p>A string containing one or more DNS names (or IP) and SASL SCRAM port pairs. The following is an example.</p> <programlisting>{\n    \"BootstrapBrokerStringSaslScram\": \"b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096\"\n}</programlisting>",
+        "GetBootstrapBrokersResponse$BootstrapBrokerStringSaslIam" : "<p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs. The following is an example.</p> <programlisting>{\n    \"BootstrapBrokerStringSaslIam\": \"b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098\"\n}</programlisting>",
         "KafkaVersion$Version" : "<p>The Kafka version.</p>",
         "ListClusterOperationsResponse$NextToken" : "<p>If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.</p>",
         "ListClustersResponse$NextToken" : "<p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. To get another batch of clusters, provide this token in your next request.</p>",
@@ -736,6 +746,10 @@
         "UpdateBrokerCountRequest$CurrentVersion" : "<p>The current version of the cluster.</p>",
         "UpdateBrokerCountResponse$ClusterArn" : "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
         "UpdateBrokerCountResponse$ClusterOperationArn" : "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+        "UpdateBrokerTypeRequest$CurrentVersion": "<p>The current version of the cluster.</p>",
+        "UpdateBrokerTypeRequest$TargetInstanceType": "<p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>",
+        "UpdateBrokerTypeResponse$ClusterArn" : "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+        "UpdateBrokerTypeResponse$ClusterOperationArn" : "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
         "UpdateBrokerStorageRequest$CurrentVersion" : "<p>The version of cluster to update from. A successful operation will then generate a new version.</p>",
         "UpdateBrokerStorageResponse$ClusterArn" : "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
         "UpdateBrokerStorageResponse$ClusterOperationArn" : "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
@@ -774,7 +788,8 @@
     "__stringMin5Max32" : {
       "base" : null,
       "refs" : {
-        "BrokerNodeGroupInfo$InstanceType" : "<p>The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge, kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>"
+        "BrokerNodeGroupInfo$InstanceType" : "<p>The type of broker used in the Amazon MSK cluster.</p>",
+        "MutableClusterInfo$InstanceType": "<p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>"
       }
     },
     "__timestampIso8601" : {

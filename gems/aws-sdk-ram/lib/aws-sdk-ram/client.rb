@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -367,6 +367,7 @@ module Aws::RAM
     #   resp.resource_share_invitation.resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_invitation.resource_share_associations[0].last_updated_time #=> Time
     #   resp.resource_share_invitation.resource_share_associations[0].external #=> Boolean
+    #   resp.resource_share_invitation.receiver_arn #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AcceptResourceShareInvitation AWS API Documentation
@@ -388,7 +389,9 @@ module Aws::RAM
     #   The Amazon Resource Names (ARN) of the resources.
     #
     # @option params [Array<String>] :principals
-    #   The principals.
+    #   The principals to associate with the resource share. The possible
+    #   values are IDs of AWS accounts, and the ARNs of organizational units
+    #   (OU) or organizations from AWS Organizations.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -437,8 +440,8 @@ module Aws::RAM
     #   The Amazon Resource Name (ARN) of the resource share.
     #
     # @option params [required, String] :permission_arn
-    #   The ARN of the AWS RAM permission to associate with the resource
-    #   share.
+    #   The Amazon Resource Name (ARN) of the AWS RAM permissions to associate
+    #   with the resource share.
     #
     # @option params [Boolean] :replace
     #   Indicates whether the permission should replace the permissions that
@@ -449,6 +452,10 @@ module Aws::RAM
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
+    #
+    # @option params [Integer] :permission_version
+    #   The version of the AWS RAM permissions to associate with the resource
+    #   share.
     #
     # @return [Types::AssociateResourceSharePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -462,6 +469,7 @@ module Aws::RAM
     #     permission_arn: "String", # required
     #     replace: false,
     #     client_token: "String",
+    #     permission_version: 1,
     #   })
     #
     # @example Response structure
@@ -732,6 +740,7 @@ module Aws::RAM
     #   resp.permission.permission #=> String
     #   resp.permission.creation_time #=> Time
     #   resp.permission.last_updated_time #=> Time
+    #   resp.permission.is_resource_type_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermission AWS API Documentation
     #
@@ -862,7 +871,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the invitations for resource sharing that you've received.
+    # Gets the invitations that you have received for resource shares.
     #
     # @option params [Array<String>] :resource_share_invitation_arns
     #   The Amazon Resource Names (ARN) of the invitations.
@@ -914,6 +923,7 @@ module Aws::RAM
     #   resp.resource_share_invitations[0].resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_invitations[0].resource_share_associations[0].last_updated_time #=> Time
     #   resp.resource_share_invitations[0].resource_share_associations[0].external #=> Boolean
+    #   resp.resource_share_invitations[0].receiver_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareInvitations AWS API Documentation
@@ -929,7 +939,7 @@ module Aws::RAM
     # shared with you.
     #
     # @option params [Array<String>] :resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   The ARNs of the resource shares.
     #
     # @option params [String] :resource_share_status
     #   The status of the resource share.
@@ -950,6 +960,10 @@ module Aws::RAM
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
     #   `nextToken` value.
+    #
+    # @option params [String] :permission_arn
+    #   The Amazon Resource Name (ARN) of the AWS RAM permission that is
+    #   associated with the resource share.
     #
     # @return [Types::GetResourceSharesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -973,6 +987,7 @@ module Aws::RAM
     #     ],
     #     next_token: "String",
     #     max_results: 1,
+    #     permission_arn: "String",
     #   })
     #
     # @example Response structure
@@ -1072,6 +1087,8 @@ module Aws::RAM
     #   * {Types::ListPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourceSharePermissionSummary&gt;
     #   * {Types::ListPermissionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permissions({
@@ -1091,6 +1108,7 @@ module Aws::RAM
     #   resp.permissions[0].status #=> String
     #   resp.permissions[0].creation_time #=> Time
     #   resp.permissions[0].last_updated_time #=> Time
+    #   resp.permissions[0].is_resource_type_default #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissions AWS API Documentation
@@ -1117,12 +1135,20 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_share_arns
@@ -1193,6 +1219,8 @@ module Aws::RAM
     #   * {Types::ListResourceSharePermissionsResponse#permissions #permissions} => Array&lt;Types::ResourceSharePermissionSummary&gt;
     #   * {Types::ListResourceSharePermissionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resource_share_permissions({
@@ -1212,6 +1240,7 @@ module Aws::RAM
     #   resp.permissions[0].status #=> String
     #   resp.permissions[0].creation_time #=> Time
     #   resp.permissions[0].last_updated_time #=> Time
+    #   resp.permissions[0].is_resource_type_default #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceSharePermissions AWS API Documentation
@@ -1237,6 +1266,8 @@ module Aws::RAM
     #
     #   * {Types::ListResourceTypesResponse#resource_types #resource_types} => Array&lt;Types::ServiceNameAndResourceType&gt;
     #   * {Types::ListResourceTypesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1273,12 +1304,20 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_arns
@@ -1413,6 +1452,7 @@ module Aws::RAM
     #   resp.resource_share_invitation.resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_invitation.resource_share_associations[0].last_updated_time #=> Time
     #   resp.resource_share_invitation.resource_share_associations[0].external #=> Boolean
+    #   resp.resource_share_invitation.receiver_arn #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/RejectResourceShareInvitation AWS API Documentation
@@ -1550,7 +1590,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

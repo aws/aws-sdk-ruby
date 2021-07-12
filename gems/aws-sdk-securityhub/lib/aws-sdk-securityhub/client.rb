@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -328,18 +328,69 @@ module Aws::SecurityHub
     # @!group API Operations
 
     # Accepts the invitation to be a member account and be monitored by the
-    # Security Hub master account that the invitation was sent from.
+    # Security Hub administrator account that the invitation was sent from.
+    #
+    # This operation is only used by member accounts that are not added
+    # through Organizations.
     #
     # When the member account accepts the invitation, permission is granted
-    # to the master account to view findings generated in the member
+    # to the administrator account to view findings generated in the member
     # account.
     #
-    # @option params [required, String] :master_id
-    #   The account ID of the Security Hub master account that sent the
+    # @option params [required, String] :administrator_id
+    #   The account ID of the Security Hub administrator account that sent the
     #   invitation.
     #
     # @option params [required, String] :invitation_id
-    #   The ID of the invitation sent from the Security Hub master account.
+    #   The identifier of the invitation sent from the Security Hub
+    #   administrator account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_administrator_invitation({
+    #     administrator_id: "NonEmptyString", # required
+    #     invitation_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptAdministratorInvitation AWS API Documentation
+    #
+    # @overload accept_administrator_invitation(params = {})
+    # @param [Hash] params ({})
+    def accept_administrator_invitation(params = {}, options = {})
+      req = build_request(:accept_administrator_invitation, params)
+      req.send_request(options)
+    end
+
+    # This method is deprecated. Instead, use
+    # `AcceptAdministratorInvitation`.
+    #
+    # The Security Hub console continues to use `AcceptInvitation`. It will
+    # eventually change to use `AcceptAdministratorInvitation`. Any IAM
+    # policies that specifically control access to this function must
+    # continue to use `AcceptInvitation`. You should also add
+    # `AcceptAdministratorInvitation` to your policies to ensure that the
+    # correct permissions are in place after the console begins to use
+    # `AcceptAdministratorInvitation`.
+    #
+    # Accepts the invitation to be a member account and be monitored by the
+    # Security Hub administrator account that the invitation was sent from.
+    #
+    # This operation is only used by member accounts that are not added
+    # through Organizations.
+    #
+    # When the member account accepts the invitation, permission is granted
+    # to the administrator account to view findings generated in the member
+    # account.
+    #
+    # @option params [required, String] :master_id
+    #   The account ID of the Security Hub administrator account that sent the
+    #   invitation.
+    #
+    # @option params [required, String] :invitation_id
+    #   The identifier of the invitation sent from the Security Hub
+    #   administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -449,9 +500,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Imports security findings generated from an integrated third-party
-    # product into Security Hub. This action is requested by the integrated
-    # product to import its findings into Security Hub.
+    # Imports security findings generated from an integrated product into
+    # Security Hub. This action is requested by the integrated product to
+    # import its findings into Security Hub.
     #
     # The maximum allowed size for a finding is 240 Kb. An error is returned
     # for any finding larger than 240 Kb.
@@ -460,11 +511,20 @@ module Aws::SecurityHub
     # update the following finding fields and objects, which Security Hub
     # customers use to manage their investigation workflow.
     #
+    # * `Note`
+    #
+    # * `UserDefinedFields`
+    #
+    # * `VerificationState`
+    #
+    # * `Workflow`
+    #
+    # Finding providers also should not use `BatchImportFindings` to update
+    # the following attributes.
+    #
     # * `Confidence`
     #
     # * `Criticality`
-    #
-    # * `Note`
     #
     # * `RelatedFindings`
     #
@@ -472,11 +532,8 @@ module Aws::SecurityHub
     #
     # * `Types`
     #
-    # * `UserDefinedFields`
-    #
-    # * `VerificationState`
-    #
-    # * `Workflow`
+    # Instead, finding providers use `FindingProviderFields` to provide
+    # values for these attributes.
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
@@ -503,12 +560,12 @@ module Aws::SecurityHub
     #         product_arn: "NonEmptyString", # required
     #         generator_id: "NonEmptyString", # required
     #         aws_account_id: "NonEmptyString", # required
-    #         types: ["NonEmptyString"], # required
+    #         types: ["NonEmptyString"],
     #         first_observed_at: "NonEmptyString",
     #         last_observed_at: "NonEmptyString",
     #         created_at: "NonEmptyString", # required
     #         updated_at: "NonEmptyString", # required
-    #         severity: { # required
+    #         severity: {
     #           product: 1.0,
     #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #           normalized: 1,
@@ -632,6 +689,130 @@ module Aws::SecurityHub
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString",
     #             },
+    #             data_classification: {
+    #               detailed_results_location: "NonEmptyString",
+    #               result: {
+    #                 mime_type: "NonEmptyString",
+    #                 size_classified: 1,
+    #                 additional_occurrences: false,
+    #                 status: {
+    #                   code: "NonEmptyString",
+    #                   reason: "NonEmptyString",
+    #                 },
+    #                 sensitive_data: [
+    #                   {
+    #                     category: "NonEmptyString",
+    #                     detections: [
+    #                       {
+    #                         count: 1,
+    #                         type: "NonEmptyString",
+    #                         occurrences: {
+    #                           line_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           offset_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           pages: [
+    #                             {
+    #                               page_number: 1,
+    #                               line_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                               offset_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             },
+    #                           ],
+    #                           records: [
+    #                             {
+    #                               json_path: "NonEmptyString",
+    #                               record_index: 1,
+    #                             },
+    #                           ],
+    #                           cells: [
+    #                             {
+    #                               column: 1,
+    #                               row: 1,
+    #                               column_name: "NonEmptyString",
+    #                               cell_reference: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                     total_count: 1,
+    #                   },
+    #                 ],
+    #                 custom_data_identifiers: {
+    #                   detections: [
+    #                     {
+    #                       count: 1,
+    #                       arn: "NonEmptyString",
+    #                       name: "NonEmptyString",
+    #                       occurrences: {
+    #                         line_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         offset_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         pages: [
+    #                           {
+    #                             page_number: 1,
+    #                             line_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                             offset_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           },
+    #                         ],
+    #                         records: [
+    #                           {
+    #                             json_path: "NonEmptyString",
+    #                             record_index: 1,
+    #                           },
+    #                         ],
+    #                         cells: [
+    #                           {
+    #                             column: 1,
+    #                             row: 1,
+    #                             column_name: "NonEmptyString",
+    #                             cell_reference: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                   total_count: 1,
+    #                 },
+    #               },
+    #             },
     #             details: {
     #               aws_auto_scaling_auto_scaling_group: {
     #                 launch_configuration_name: "NonEmptyString",
@@ -723,6 +904,11 @@ module Aws::SecurityHub
     #                 vpc_id: "NonEmptyString",
     #                 subnet_id: "NonEmptyString",
     #                 launched_at: "NonEmptyString",
+    #                 network_interfaces: [
+    #                   {
+    #                     network_interface_id: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_ec2_network_interface: {
     #                 attachment: {
@@ -742,6 +928,19 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 source_dest_check: false,
+    #                 ip_v6_addresses: [
+    #                   {
+    #                     ip_v6_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 private_ip_addresses: [
+    #                   {
+    #                     private_ip_address: "NonEmptyString",
+    #                     private_dns_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 public_dns_name: "NonEmptyString",
+    #                 public_ip: "NonEmptyString",
     #               },
     #               aws_ec2_security_group: {
     #                 group_name: "NonEmptyString",
@@ -859,6 +1058,58 @@ module Aws::SecurityHub
     #                 network_interface_owner_id: "NonEmptyString",
     #                 private_ip_address: "NonEmptyString",
     #               },
+    #               aws_ec2_subnet: {
+    #                 assign_ipv_6_address_on_creation: false,
+    #                 availability_zone: "NonEmptyString",
+    #                 availability_zone_id: "NonEmptyString",
+    #                 available_ip_address_count: 1,
+    #                 cidr_block: "NonEmptyString",
+    #                 default_for_az: false,
+    #                 map_public_ip_on_launch: false,
+    #                 owner_id: "NonEmptyString",
+    #                 state: "NonEmptyString",
+    #                 subnet_arn: "NonEmptyString",
+    #                 subnet_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 ipv_6_cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ec2_network_acl: {
+    #                 is_default: false,
+    #                 network_acl_id: "NonEmptyString",
+    #                 owner_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 associations: [
+    #                   {
+    #                     network_acl_association_id: "NonEmptyString",
+    #                     network_acl_id: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 entries: [
+    #                   {
+    #                     cidr_block: "NonEmptyString",
+    #                     egress: false,
+    #                     icmp_type_code: {
+    #                       code: 1,
+    #                       type: 1,
+    #                     },
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     port_range: {
+    #                       from: 1,
+    #                       to: 1,
+    #                     },
+    #                     protocol: "NonEmptyString",
+    #                     rule_action: "NonEmptyString",
+    #                     rule_number: 1,
+    #                   },
+    #                 ],
+    #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
     #                   {
@@ -879,6 +1130,40 @@ module Aws::SecurityHub
     #                 type: "NonEmptyString",
     #                 vpc_id: "NonEmptyString",
     #               },
+    #               aws_elastic_beanstalk_environment: {
+    #                 application_name: "NonEmptyString",
+    #                 cname: "NonEmptyString",
+    #                 date_created: "NonEmptyString",
+    #                 date_updated: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 endpoint_url: "NonEmptyString",
+    #                 environment_arn: "NonEmptyString",
+    #                 environment_id: "NonEmptyString",
+    #                 environment_links: [
+    #                   {
+    #                     environment_name: "NonEmptyString",
+    #                     link_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 environment_name: "NonEmptyString",
+    #                 option_settings: [
+    #                   {
+    #                     namespace: "NonEmptyString",
+    #                     option_name: "NonEmptyString",
+    #                     resource_name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 platform_arn: "NonEmptyString",
+    #                 solution_stack_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 tier: {
+    #                   name: "NonEmptyString",
+    #                   type: "NonEmptyString",
+    #                   version: "NonEmptyString",
+    #                 },
+    #                 version_label: "NonEmptyString",
+    #               },
     #               aws_elasticsearch_domain: {
     #                 access_policies: "NonEmptyString",
     #                 domain_endpoint_options: {
@@ -896,8 +1181,27 @@ module Aws::SecurityHub
     #                   enabled: false,
     #                   kms_key_id: "NonEmptyString",
     #                 },
+    #                 log_publishing_options: {
+    #                   index_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   search_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                 },
     #                 node_to_node_encryption_options: {
     #                   enabled: false,
+    #                 },
+    #                 service_software_options: {
+    #                   automated_update_date: "NonEmptyString",
+    #                   cancellable: false,
+    #                   current_version: "NonEmptyString",
+    #                   description: "NonEmptyString",
+    #                   new_version: "NonEmptyString",
+    #                   update_available: false,
+    #                   update_status: "NonEmptyString",
     #                 },
     #                 vpc_options: {
     #                   availability_zones: ["NonEmptyString"],
@@ -920,6 +1224,67 @@ module Aws::SecurityHub
     #                     },
     #                   ],
     #                 },
+    #                 bucket_lifecycle_configuration: {
+    #                   rules: [
+    #                     {
+    #                       abort_incomplete_multipart_upload: {
+    #                         days_after_initiation: 1,
+    #                       },
+    #                       expiration_date: "NonEmptyString",
+    #                       expiration_in_days: 1,
+    #                       expired_object_delete_marker: false,
+    #                       filter: {
+    #                         predicate: {
+    #                           operands: [
+    #                             {
+    #                               prefix: "NonEmptyString",
+    #                               tag: {
+    #                                 key: "NonEmptyString",
+    #                                 value: "NonEmptyString",
+    #                               },
+    #                               type: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           prefix: "NonEmptyString",
+    #                           tag: {
+    #                             key: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                       },
+    #                       id: "NonEmptyString",
+    #                       noncurrent_version_expiration_in_days: 1,
+    #                       noncurrent_version_transitions: [
+    #                         {
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       prefix: "NonEmptyString",
+    #                       status: "NonEmptyString",
+    #                       transitions: [
+    #                         {
+    #                           date: "NonEmptyString",
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   ],
+    #                 },
+    #                 public_access_block_configuration: {
+    #                   block_public_acls: false,
+    #                   block_public_policy: false,
+    #                   ignore_public_acls: false,
+    #                   restrict_public_buckets: false,
+    #                 },
+    #               },
+    #               aws_s3_account_public_access_block: {
+    #                 block_public_acls: false,
+    #                 block_public_policy: false,
+    #                 ignore_public_acls: false,
+    #                 restrict_public_buckets: false,
     #               },
     #               aws_s3_object: {
     #                 last_modified: "NonEmptyString",
@@ -1006,6 +1371,7 @@ module Aws::SecurityHub
     #                 update_date: "NonEmptyString",
     #               },
     #               aws_api_gateway_v2_stage: {
+    #                 client_certificate_id: "NonEmptyString",
     #                 created_date: "NonEmptyString",
     #                 description: "NonEmptyString",
     #                 default_route_settings: {
@@ -1241,6 +1607,30 @@ module Aws::SecurityHub
     #                 sns_topic_arn: "NonEmptyString",
     #                 sns_topic_name: "NonEmptyString",
     #                 trail_arn: "NonEmptyString",
+    #               },
+    #               aws_ssm_patch_compliance: {
+    #                 patch: {
+    #                   compliance_summary: {
+    #                     status: "NonEmptyString",
+    #                     compliant_critical_count: 1,
+    #                     compliant_high_count: 1,
+    #                     compliant_medium_count: 1,
+    #                     execution_type: "NonEmptyString",
+    #                     non_compliant_critical_count: 1,
+    #                     compliant_informational_count: 1,
+    #                     non_compliant_informational_count: 1,
+    #                     compliant_unspecified_count: 1,
+    #                     non_compliant_low_count: 1,
+    #                     non_compliant_high_count: 1,
+    #                     compliant_low_count: 1,
+    #                     compliance_type: "NonEmptyString",
+    #                     patch_baseline_id: "NonEmptyString",
+    #                     overall_severity: "NonEmptyString",
+    #                     non_compliant_medium_count: 1,
+    #                     non_compliant_unspecified_count: 1,
+    #                     patch_group: "NonEmptyString",
+    #                   },
+    #                 },
     #               },
     #               aws_certificate_manager_certificate: {
     #                 certificate_authority_arn: "NonEmptyString",
@@ -1936,6 +2326,247 @@ module Aws::SecurityHub
     #                 ],
     #                 iam_database_authentication_enabled: false,
     #               },
+    #               aws_ecs_cluster: {
+    #                 capacity_providers: ["NonEmptyString"],
+    #                 cluster_settings: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 configuration: {
+    #                   execute_command_configuration: {
+    #                     kms_key_id: "NonEmptyString",
+    #                     log_configuration: {
+    #                       cloud_watch_encryption_enabled: false,
+    #                       cloud_watch_log_group_name: "NonEmptyString",
+    #                       s3_bucket_name: "NonEmptyString",
+    #                       s3_encryption_enabled: false,
+    #                       s3_key_prefix: "NonEmptyString",
+    #                     },
+    #                     logging: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 default_capacity_provider_strategy: [
+    #                   {
+    #                     base: 1,
+    #                     capacity_provider: "NonEmptyString",
+    #                     weight: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ecs_task_definition: {
+    #                 container_definitions: [
+    #                   {
+    #                     command: ["NonEmptyString"],
+    #                     cpu: 1,
+    #                     depends_on: [
+    #                       {
+    #                         condition: "NonEmptyString",
+    #                         container_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     disable_networking: false,
+    #                     dns_search_domains: ["NonEmptyString"],
+    #                     dns_servers: ["NonEmptyString"],
+    #                     docker_labels: {
+    #                       "NonEmptyString" => "NonEmptyString",
+    #                     },
+    #                     docker_security_options: ["NonEmptyString"],
+    #                     entry_point: ["NonEmptyString"],
+    #                     environment: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     environment_files: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     essential: false,
+    #                     extra_hosts: [
+    #                       {
+    #                         hostname: "NonEmptyString",
+    #                         ip_address: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     firelens_configuration: {
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     health_check: {
+    #                       command: ["NonEmptyString"],
+    #                       interval: 1,
+    #                       retries: 1,
+    #                       start_period: 1,
+    #                       timeout: 1,
+    #                     },
+    #                     hostname: "NonEmptyString",
+    #                     image: "NonEmptyString",
+    #                     interactive: false,
+    #                     links: ["NonEmptyString"],
+    #                     linux_parameters: {
+    #                       capabilities: {
+    #                         add: ["NonEmptyString"],
+    #                         drop: ["NonEmptyString"],
+    #                       },
+    #                       devices: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           host_path: "NonEmptyString",
+    #                           permissions: ["NonEmptyString"],
+    #                         },
+    #                       ],
+    #                       init_process_enabled: false,
+    #                       max_swap: 1,
+    #                       shared_memory_size: 1,
+    #                       swappiness: 1,
+    #                       tmpfs: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           mount_options: ["NonEmptyString"],
+    #                           size: 1,
+    #                         },
+    #                       ],
+    #                     },
+    #                     log_configuration: {
+    #                       log_driver: "NonEmptyString",
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       secret_options: [
+    #                         {
+    #                           name: "NonEmptyString",
+    #                           value_from: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     memory: 1,
+    #                     memory_reservation: 1,
+    #                     mount_points: [
+    #                       {
+    #                         container_path: "NonEmptyString",
+    #                         read_only: false,
+    #                         source_volume: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     name: "NonEmptyString",
+    #                     port_mappings: [
+    #                       {
+    #                         container_port: 1,
+    #                         host_port: 1,
+    #                         protocol: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     privileged: false,
+    #                     pseudo_terminal: false,
+    #                     readonly_root_filesystem: false,
+    #                     repository_credentials: {
+    #                       credentials_parameter: "NonEmptyString",
+    #                     },
+    #                     resource_requirements: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     secrets: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value_from: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     start_timeout: 1,
+    #                     stop_timeout: 1,
+    #                     system_controls: [
+    #                       {
+    #                         namespace: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ulimits: [
+    #                       {
+    #                         hard_limit: 1,
+    #                         name: "NonEmptyString",
+    #                         soft_limit: 1,
+    #                       },
+    #                     ],
+    #                     user: "NonEmptyString",
+    #                     volumes_from: [
+    #                       {
+    #                         read_only: false,
+    #                         source_container: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     working_directory: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cpu: "NonEmptyString",
+    #                 execution_role_arn: "NonEmptyString",
+    #                 family: "NonEmptyString",
+    #                 inference_accelerators: [
+    #                   {
+    #                     device_name: "NonEmptyString",
+    #                     device_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ipc_mode: "NonEmptyString",
+    #                 memory: "NonEmptyString",
+    #                 network_mode: "NonEmptyString",
+    #                 pid_mode: "NonEmptyString",
+    #                 placement_constraints: [
+    #                   {
+    #                     expression: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 proxy_configuration: {
+    #                   container_name: "NonEmptyString",
+    #                   proxy_configuration_properties: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 requires_compatibilities: ["NonEmptyString"],
+    #                 task_role_arn: "NonEmptyString",
+    #                 volumes: [
+    #                   {
+    #                     docker_volume_configuration: {
+    #                       autoprovision: false,
+    #                       driver: "NonEmptyString",
+    #                       driver_opts: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       labels: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       scope: "NonEmptyString",
+    #                     },
+    #                     efs_volume_configuration: {
+    #                       authorization_config: {
+    #                         access_point_id: "NonEmptyString",
+    #                         iam: "NonEmptyString",
+    #                       },
+    #                       filesystem_id: "NonEmptyString",
+    #                       root_directory: "NonEmptyString",
+    #                       transit_encryption: "NonEmptyString",
+    #                       transit_encryption_port: 1,
+    #                     },
+    #                     host: {
+    #                       source_path: "NonEmptyString",
+    #                     },
+    #                     name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
     #               container: {
     #                 name: "NonEmptyString",
     #                 image_id: "NonEmptyString",
@@ -2018,6 +2649,129 @@ module Aws::SecurityHub
     #           reboot_option: "NonEmptyString",
     #           operation: "NonEmptyString",
     #         },
+    #         action: {
+    #           action_type: "NonEmptyString",
+    #           network_connection_action: {
+    #             connection_direction: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             remote_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             local_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           aws_api_call_action: {
+    #             api: "NonEmptyString",
+    #             service_name: "NonEmptyString",
+    #             caller_type: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             domain_details: {
+    #               domain: "NonEmptyString",
+    #             },
+    #             affected_resources: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             first_seen: "NonEmptyString",
+    #             last_seen: "NonEmptyString",
+    #           },
+    #           dns_request_action: {
+    #             domain: "NonEmptyString",
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           port_probe_action: {
+    #             port_probe_details: [
+    #               {
+    #                 local_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 local_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                 },
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             blocked: false,
+    #           },
+    #         },
+    #         finding_provider_fields: {
+    #           confidence: 1,
+    #           criticality: 1,
+    #           related_findings: [
+    #             {
+    #               product_arn: "NonEmptyString", # required
+    #               id: "NonEmptyString", # required
+    #             },
+    #           ],
+    #           severity: {
+    #             label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #             original: "NonEmptyString",
+    #           },
+    #           types: ["NonEmptyString"],
+    #         },
     #       },
     #     ],
     #   })
@@ -2041,16 +2795,16 @@ module Aws::SecurityHub
     end
 
     # Used by Security Hub customers to update information about their
-    # investigation into a finding. Requested by master accounts or member
-    # accounts. Master accounts can update findings for their account and
-    # their member accounts. Member accounts can update findings for their
-    # account.
+    # investigation into a finding. Requested by administrator accounts or
+    # member accounts. Administrator accounts can update findings for their
+    # account and their member accounts. Member accounts can update findings
+    # for their account.
     #
     # Updates from `BatchUpdateFindings` do not affect the value of
     # `UpdatedAt` for a finding.
     #
-    # Master and member accounts can use `BatchUpdateFindings` to update the
-    # following finding fields and objects.
+    # Administrator and member accounts can use `BatchUpdateFindings` to
+    # update the following finding fields and objects.
     #
     # * `Confidence`
     #
@@ -2219,13 +2973,14 @@ module Aws::SecurityHub
     # trigger target actions in Amazon CloudWatch Events.
     #
     # @option params [required, String] :name
-    #   The name of the custom action target.
+    #   The name of the custom action target. Can contain up to 20 characters.
     #
     # @option params [required, String] :description
     #   The description for the custom action target.
     #
     # @option params [required, String] :id
-    #   The ID for the custom action target.
+    #   The ID for the custom action target. Can contain up to 20 alphanumeric
+    #   characters.
     #
     # @return [Types::CreateActionTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2835,6 +3590,50 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString", # required
     #   })
@@ -2853,30 +3652,49 @@ module Aws::SecurityHub
     end
 
     # Creates a member association in Security Hub between the specified
-    # accounts and the account used to make the request, which is the master
-    # account. To successfully create a member, you must use this action
-    # from an account that already has Security Hub enabled. To enable
-    # Security Hub, you can use the ` EnableSecurityHub ` operation.
+    # accounts and the account used to make the request, which is the
+    # administrator account. If you are integrated with Organizations, then
+    # the administrator account is designated by the organization management
+    # account.
     #
-    # After you use `CreateMembers` to create member account associations in
-    # Security Hub, you must use the ` InviteMembers ` operation to invite
-    # the accounts to enable Security Hub and become member accounts in
-    # Security Hub.
+    # `CreateMembers` is always used to add accounts that are not
+    # organization members.
     #
-    # If the account owner accepts the invitation, the account becomes a
-    # member account in Security Hub. A permissions policy is added that
-    # permits the master account to view the findings generated in the
-    # member account. When Security Hub is enabled in the invited account,
-    # findings start to be sent to both the member and master accounts.
+    # For accounts that are part of an organization, `CreateMembers` is only
+    # used in the following cases:
     #
-    # To remove the association between the master and member accounts, use
-    # the ` DisassociateFromMasterAccount ` or ` DisassociateMembers `
+    # * Security Hub is not configured to automatically add new accounts in
+    #   an organization.
+    #
+    # * The account was disassociated or deleted in Security Hub.
+    #
+    # This action can only be used by an account that has Security Hub
+    # enabled. To enable Security Hub, you can use the ` EnableSecurityHub `
     # operation.
     #
-    # @option params [Array<Types::AccountDetails>] :account_details
-    #   The list of accounts to associate with the Security Hub master
-    #   account. For each account, the list includes the account ID and the
-    #   email address.
+    # For accounts that are not organization members, you create the account
+    # association and then send an invitation to the member account. To send
+    # the invitation, you use the ` InviteMembers ` operation. If the
+    # account owner accepts the invitation, the account becomes a member
+    # account in Security Hub.
+    #
+    # Accounts that are part of an organization do not receive an
+    # invitation. They automatically become a member account in Security
+    # Hub.
+    #
+    # A permissions policy is added that permits the administrator account
+    # to view the findings generated in the member account. When Security
+    # Hub is enabled in a member account, the member account findings are
+    # also visible to the administrator account.
+    #
+    # To remove the association between the administrator and member
+    # accounts, use the ` DisassociateFromMasterAccount ` or `
+    # DisassociateMembers ` operation.
+    #
+    # @option params [required, Array<Types::AccountDetails>] :account_details
+    #   The list of accounts to associate with the Security Hub administrator
+    #   account. For each account, the list includes the account ID and
+    #   optionally the email address.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2885,9 +3703,9 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_members({
-    #     account_details: [
+    #     account_details: [ # required
     #       {
-    #         account_id: "AccountId",
+    #         account_id: "AccountId", # required
     #         email: "NonEmptyString",
     #       },
     #     ],
@@ -2909,6 +3727,9 @@ module Aws::SecurityHub
     end
 
     # Declines invitations to become a member account.
+    #
+    # This operation is only used by accounts that are not part of an
+    # organization. Organization accounts do not receive invitations.
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the accounts from which to decline the
@@ -3002,6 +3823,9 @@ module Aws::SecurityHub
     # Deletes invitations received by the AWS account to become a member
     # account.
     #
+    # This operation is only used by accounts that are not part of an
+    # organization. Organization accounts do not receive invitations.
+    #
     # @option params [required, Array<String>] :account_ids
     #   The list of the account IDs that sent the invitations to delete.
     #
@@ -3032,7 +3856,10 @@ module Aws::SecurityHub
 
     # Deletes the specified member accounts from Security Hub.
     #
-    # @option params [Array<String>] :account_ids
+    # Can be used to delete member accounts that belong to an organization
+    # as well as member accounts that were invited manually.
+    #
+    # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the member accounts to delete.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3042,7 +3869,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -3144,9 +3971,35 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns information about the available products that you can
-    # subscribe to and integrate with Security Hub in order to consolidate
-    # findings.
+    # Returns information about the Organizations configuration for Security
+    # Hub. Can only be called from a Security Hub administrator account.
+    #
+    # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
+    #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
+    #
+    # @example Response structure
+    #
+    #   resp.auto_enable #=> Boolean
+    #   resp.member_account_limit_reached #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
+    #
+    # @overload describe_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_configuration(params = {}, options = {})
+      req = build_request(:describe_organization_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns information about product integrations in Security Hub.
+    #
+    # You can optionally provide an integration ARN. If you provide an
+    # integration ARN, then the results only include that integration.
+    #
+    # If you do not provide an integration ARN, then the results include all
+    # of the available product integrations.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -3160,6 +4013,9 @@ module Aws::SecurityHub
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
+    # @option params [String] :product_arn
+    #   The ARN of the integration to return.
+    #
     # @return [Types::DescribeProductsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProductsResponse#products #products} => Array&lt;Types::Product&gt;
@@ -3172,6 +4028,7 @@ module Aws::SecurityHub
     #   resp = client.describe_products({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     product_arn: "NonEmptyString",
     #   })
     #
     # @example Response structure
@@ -3184,7 +4041,7 @@ module Aws::SecurityHub
     #   resp.products[0].categories #=> Array
     #   resp.products[0].categories[0] #=> String
     #   resp.products[0].integration_types #=> Array
-    #   resp.products[0].integration_types[0] #=> String, one of "SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+    #   resp.products[0].integration_types[0] #=> String, one of "SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB", "UPDATE_FINDINGS_IN_SECURITY_HUB"
     #   resp.products[0].marketplace_url #=> String
     #   resp.products[0].activation_url #=> String
     #   resp.products[0].product_subscription_resource_policy #=> String
@@ -3256,7 +4113,8 @@ module Aws::SecurityHub
     #
     # @option params [required, String] :standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a supported
-    #   standard.
+    #   standard. To get the subscription ARNs of the standards you have
+    #   enabled, use the ` GetEnabledStandards ` operation.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -3334,17 +4192,40 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Disables a Security Hub administrator account. Can only be called by
+    # the organization management account.
+    #
+    # @option params [required, String] :admin_account_id
+    #   The AWS account identifier of the Security Hub administrator account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_organization_admin_account({
+    #     admin_account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload disable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def disable_organization_admin_account(params = {}, options = {})
+      req = build_request(:disable_organization_admin_account, params)
+      req.send_request(options)
+    end
+
     # Disables Security Hub in your account only in the current Region. To
     # disable Security Hub in all Regions, you must submit one request per
     # Region where you have enabled Security Hub.
     #
-    # When you disable Security Hub for a master account, it doesn't
-    # disable Security Hub for any associated member accounts.
+    # When you disable Security Hub for an administrator account, it
+    # doesn't disable Security Hub for any associated member accounts.
     #
     # When you disable Security Hub, your existing findings and insights and
     # any Security Hub configuration settings are deleted after 90 days and
     # cannot be recovered. Any standards that were enabled are disabled, and
-    # your master and member account associations are removed.
+    # your administrator and member account associations are removed.
     #
     # If you want to save your existing findings, you must export them
     # before you disable Security Hub.
@@ -3361,7 +4242,41 @@ module Aws::SecurityHub
     end
 
     # Disassociates the current Security Hub member account from the
-    # associated master account.
+    # associated administrator account.
+    #
+    # This operation is only used by accounts that are not part of an
+    # organization. For organization accounts, only the administrator
+    # account can disassociate a member account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromAdministratorAccount AWS API Documentation
+    #
+    # @overload disassociate_from_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def disassociate_from_administrator_account(params = {}, options = {})
+      req = build_request(:disassociate_from_administrator_account, params)
+      req.send_request(options)
+    end
+
+    # This method is deprecated. Instead, use
+    # `DisassociateFromAdministratorAccount`.
+    #
+    # The Security Hub console continues to use
+    # `DisassociateFromMasterAccount`. It will eventually change to use
+    # `DisassociateFromAdministratorAccount`. Any IAM policies that
+    # specifically control access to this function must continue to use
+    # `DisassociateFromMasterAccount`. You should also add
+    # `DisassociateFromAdministratorAccount` to your policies to ensure that
+    # the correct permissions are in place after the console begins to use
+    # `DisassociateFromAdministratorAccount`.
+    #
+    # Disassociates the current Security Hub member account from the
+    # associated administrator account.
+    #
+    # This operation is only used by accounts that are not part of an
+    # organization. For organization accounts, only the administrator
+    # account can disassociate a member account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3374,19 +4289,22 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disassociates the specified member accounts from the associated master
-    # account.
+    # Disassociates the specified member accounts from the associated
+    # administrator account.
     #
-    # @option params [Array<String>] :account_ids
-    #   The account IDs of the member accounts to disassociate from the master
-    #   account.
+    # Can be used to disassociate both accounts that are managed using
+    # Organizations and accounts that were invited manually.
+    #
+    # @option params [required, Array<String>] :account_ids
+    #   The account IDs of the member accounts to disassociate from the
+    #   administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembers AWS API Documentation
@@ -3428,6 +4346,30 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def enable_import_findings_for_product(params = {}, options = {})
       req = build_request(:enable_import_findings_for_product, params)
+      req.send_request(options)
+    end
+
+    # Designates the Security Hub administrator account for an organization.
+    # Can only be called by the organization management account.
+    #
+    # @option params [required, String] :admin_account_id
+    #   The AWS account identifier of the account to designate as the Security
+    #   Hub administrator account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_organization_admin_account({
+    #     admin_account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload enable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def enable_organization_admin_account(params = {}, options = {})
+      req = build_request(:enable_organization_admin_account, params)
       req.send_request(options)
     end
 
@@ -3489,6 +4431,32 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def enable_security_hub(params = {}, options = {})
       req = build_request(:enable_security_hub, params)
+      req.send_request(options)
+    end
+
+    # Provides the details for the Security Hub administrator account for
+    # the current member account.
+    #
+    # Can be used by both member accounts that are managed using
+    # Organizations and accounts that were invited manually.
+    #
+    # @return [Types::GetAdministratorAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdministratorAccountResponse#administrator #administrator} => Types::Invitation
+    #
+    # @example Response structure
+    #
+    #   resp.administrator.account_id #=> String
+    #   resp.administrator.invitation_id #=> String
+    #   resp.administrator.invited_at #=> Time
+    #   resp.administrator.member_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAdministratorAccount AWS API Documentation
+    #
+    # @overload get_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def get_administrator_account(params = {}, options = {})
+      req = build_request(:get_administrator_account, params)
       req.send_request(options)
     end
 
@@ -4135,6 +5103,50 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     sort_criteria: [
     #       {
@@ -4239,6 +5251,71 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].resource_role #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].data_classification.detailed_results_location #=> String
+    #   resp.findings[0].resources[0].data_classification.result.mime_type #=> String
+    #   resp.findings[0].resources[0].data_classification.result.size_classified #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.additional_occurrences #=> Boolean
+    #   resp.findings[0].resources[0].data_classification.result.status.code #=> String
+    #   resp.findings[0].resources[0].data_classification.result.status.reason #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].category #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].count #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].type #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].page_number #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.records #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.records[0].json_path #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.records[0].record_index #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].row #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].column_name #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].cell_reference #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].total_count #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].count #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].arn #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].name #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].page_number #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.records #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.records[0].json_path #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.records[0].record_index #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].row #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].column_name #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].cell_reference #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.total_count #=> Integer
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.launch_configuration_name #=> String
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.load_balancer_names #=> Array
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.load_balancer_names[0] #=> String
@@ -4295,6 +5372,8 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_instance.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.subnet_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.launched_at #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_instance.network_interfaces #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_instance.network_interfaces[0].network_interface_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.attach_time #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.attachment_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.delete_on_termination #=> Boolean
@@ -4307,6 +5386,13 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.security_groups[0].group_name #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.security_groups[0].group_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.source_dest_check #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.ip_v6_addresses #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.ip_v6_addresses[0].ip_v6_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.private_ip_addresses #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.private_ip_addresses[0].private_ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.private_ip_addresses[0].private_dns_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.public_dns_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.public_ip #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.group_name #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.group_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.owner_id #=> String
@@ -4376,6 +5462,41 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_eip.network_interface_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_eip.network_interface_owner_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_eip.private_ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.assign_ipv_6_address_on_creation #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.availability_zone #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.availability_zone_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.available_ip_address_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.default_for_az #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.map_public_ip_on_launch #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.state #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.subnet_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.subnet_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set[0].cidr_block_state #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.is_default #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.network_acl_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations[0].network_acl_association_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations[0].network_acl_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations[0].subnet_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].egress #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].icmp_type_code.code #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].icmp_type_code.type #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].ipv_6_cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].port_range.from #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].port_range.to #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].rule_action #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].rule_number #=> Integer
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].zone_name #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].subnet_id #=> String
@@ -4390,6 +5511,30 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.state.reason #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.type #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.application_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.cname #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.date_created #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.date_updated #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.description #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.endpoint_url #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_links #=> Array
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_links[0].environment_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_links[0].link_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings #=> Array
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].namespace #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].option_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].resource_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.platform_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.solution_stack_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.status #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.tier.name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.tier.type #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.tier.version #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.version_label #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.access_policies #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_endpoint_options.tls_security_policy #=> String
@@ -4401,7 +5546,18 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_version #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.index_slow_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.index_slow_logs.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.search_slow_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.search_slow_logs.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.node_to_node_encryption_options.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.automated_update_date #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.cancellable #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.current_version #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.description #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.new_version #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.update_available #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.update_status #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.availability_zones[0] #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.security_group_ids #=> Array
@@ -4415,6 +5571,39 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules #=> Array
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].expiration_date #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].expiration_in_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].expired_object_delete_marker #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].tag.key #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].tag.value #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.tag.key #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.tag.value #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.type #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_expiration_in_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_transitions #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_transitions[0].days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_transitions[0].storage_class #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions[0].date #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions[0].days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions[0].storage_class #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.block_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.block_public_policy #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.ignore_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.restrict_public_buckets #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.block_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.block_public_policy #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.ignore_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.restrict_public_buckets #=> Boolean
     #   resp.findings[0].resources[0].details.aws_s3_object.last_modified #=> String
     #   resp.findings[0].resources[0].details.aws_s3_object.etag #=> String
     #   resp.findings[0].resources[0].details.aws_s3_object.version_id #=> String
@@ -4471,6 +5660,7 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_iam_policy.policy_version_list[0].is_default_version #=> Boolean
     #   resp.findings[0].resources[0].details.aws_iam_policy.policy_version_list[0].create_date #=> String
     #   resp.findings[0].resources[0].details.aws_iam_policy.update_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.client_certificate_id #=> String
     #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.created_date #=> String
     #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.description #=> String
     #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.default_route_settings.detailed_metrics_enabled #=> Boolean
@@ -4640,6 +5830,24 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.sns_topic_arn #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.sns_topic_name #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.trail_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.status #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_critical_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_high_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_medium_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.execution_type #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_critical_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_informational_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_informational_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_unspecified_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_low_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_high_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_low_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliance_type #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.patch_baseline_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.overall_severity #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_medium_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_unspecified_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.patch_group #=> String
     #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.certificate_authority_arn #=> String
     #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.created_at #=> String
     #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_name #=> String
@@ -5135,6 +6343,160 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_rds_db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.findings[0].resources[0].details.aws_rds_db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
     #   resp.findings[0].resources[0].details.aws_rds_db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.capacity_providers #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.capacity_providers[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.cluster_settings #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.cluster_settings[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.cluster_settings[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.logging #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].command #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].command[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].cpu #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].depends_on[0].condition #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].disable_networking #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_search_domains #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_search_domains[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_servers #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_servers[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_labels #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_labels["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_security_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].entry_point #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].entry_point[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment_files #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment_files[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment_files[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].essential #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].extra_hosts #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].extra_hosts[0].hostname #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].firelens_configuration.options["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].firelens_configuration.type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].hostname #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].image #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].links #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].links[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.add #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.log_driver #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.options #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.options["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].memory #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].memory_reservation #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points[0].container_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points[0].read_only #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points[0].source_volume #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings[0].container_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings[0].host_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings[0].protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].privileged #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].pseudo_terminal #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].readonly_root_filesystem #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].resource_requirements[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].secrets #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].secrets[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].stop_timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].user #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].volumes_from #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].volumes_from[0].read_only #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].volumes_from[0].source_container #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].working_directory #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.cpu #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.execution_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.family #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.inference_accelerators #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.inference_accelerators[0].device_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.inference_accelerators[0].device_type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.ipc_mode #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.memory #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.network_mode #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.pid_mode #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.placement_constraints #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.placement_constraints[0].expression #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.placement_constraints[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.container_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.proxy_configuration_properties #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.proxy_configuration_properties[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.proxy_configuration_properties[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.requires_compatibilities #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.requires_compatibilities[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.task_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.driver_opts["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.labels["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.scope #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.filesystem_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.transit_encryption #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].host.source_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].name #=> String
     #   resp.findings[0].resources[0].details.container.name #=> String
     #   resp.findings[0].resources[0].details.container.image_id #=> String
     #   resp.findings[0].resources[0].details.container.image_name #=> String
@@ -5189,6 +6551,69 @@ module Aws::SecurityHub
     #   resp.findings[0].patch_summary.operation_end_time #=> String
     #   resp.findings[0].patch_summary.reboot_option #=> String
     #   resp.findings[0].patch_summary.operation #=> String
+    #   resp.findings[0].action.action_type #=> String
+    #   resp.findings[0].action.network_connection_action.connection_direction #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.asn #=> Integer
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.org #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].action.network_connection_action.remote_port_details.port #=> Integer
+    #   resp.findings[0].action.network_connection_action.remote_port_details.port_name #=> String
+    #   resp.findings[0].action.network_connection_action.local_port_details.port #=> Integer
+    #   resp.findings[0].action.network_connection_action.local_port_details.port_name #=> String
+    #   resp.findings[0].action.network_connection_action.protocol #=> String
+    #   resp.findings[0].action.network_connection_action.blocked #=> Boolean
+    #   resp.findings[0].action.aws_api_call_action.api #=> String
+    #   resp.findings[0].action.aws_api_call_action.service_name #=> String
+    #   resp.findings[0].action.aws_api_call_action.caller_type #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.asn #=> Integer
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.org #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].action.aws_api_call_action.domain_details.domain #=> String
+    #   resp.findings[0].action.aws_api_call_action.affected_resources #=> Hash
+    #   resp.findings[0].action.aws_api_call_action.affected_resources["NonEmptyString"] #=> String
+    #   resp.findings[0].action.aws_api_call_action.first_seen #=> String
+    #   resp.findings[0].action.aws_api_call_action.last_seen #=> String
+    #   resp.findings[0].action.dns_request_action.domain #=> String
+    #   resp.findings[0].action.dns_request_action.protocol #=> String
+    #   resp.findings[0].action.dns_request_action.blocked #=> Boolean
+    #   resp.findings[0].action.port_probe_action.port_probe_details #=> Array
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].local_port_details.port #=> Integer
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].local_port_details.port_name #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn #=> Integer
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.org #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].action.port_probe_action.blocked #=> Boolean
+    #   resp.findings[0].finding_provider_fields.confidence #=> Integer
+    #   resp.findings[0].finding_provider_fields.criticality #=> Integer
+    #   resp.findings[0].finding_provider_fields.related_findings #=> Array
+    #   resp.findings[0].finding_provider_fields.related_findings[0].product_arn #=> String
+    #   resp.findings[0].finding_provider_fields.related_findings[0].id #=> String
+    #   resp.findings[0].finding_provider_fields.severity.label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.findings[0].finding_provider_fields.severity.original #=> String
+    #   resp.findings[0].finding_provider_fields.types #=> Array
+    #   resp.findings[0].finding_provider_fields.types[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindings AWS API Documentation
@@ -5550,6 +6975,29 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.note_updated_by[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].filters.keyword #=> Array
     #   resp.insights[0].filters.keyword[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_confidence #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].gte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].lte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].gte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].lte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_id #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_product_arn #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_product_arn[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_product_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_severity_label #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_severity_label[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_severity_original #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_severity_original[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_severity_original[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_types #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_types[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_types[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].group_by_attribute #=> String
     #   resp.next_token #=> String
     #
@@ -5583,8 +7031,20 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Provides the details for the Security Hub master account for the
-    # current member account.
+    # This method is deprecated. Instead, use `GetAdministratorAccount`.
+    #
+    # The Security Hub console continues to use `GetMasterAccount`. It will
+    # eventually change to use `GetAdministratorAccount`. Any IAM policies
+    # that specifically control access to this function must continue to use
+    # `GetMasterAccount`. You should also add `GetAdministratorAccount` to
+    # your policies to ensure that the correct permissions are in place
+    # after the console begins to use `GetAdministratorAccount`.
+    #
+    # Provides the details for the Security Hub administrator account for
+    # the current member account.
+    #
+    # Can be used by both member accounts that are managed using
+    # Organizations and accounts that were invited manually.
     #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5609,6 +7069,13 @@ module Aws::SecurityHub
     # Returns the details for the Security Hub member accounts for the
     # specified account IDs.
     #
+    # An administrator account can be either the delegated Security Hub
+    # administrator account for an organization or an administrator account
+    # that enabled Security Hub manually.
+    #
+    # The results include both member accounts that are managed using
+    # Organizations and accounts that were invited manually.
+    #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the Security Hub member accounts to return
     #   the details for.
@@ -5630,6 +7097,7 @@ module Aws::SecurityHub
     #   resp.members[0].account_id #=> String
     #   resp.members[0].email #=> String
     #   resp.members[0].master_id #=> String
+    #   resp.members[0].administrator_id #=> String
     #   resp.members[0].member_status #=> String
     #   resp.members[0].invited_at #=> Time
     #   resp.members[0].updated_at #=> Time
@@ -5647,17 +7115,20 @@ module Aws::SecurityHub
     end
 
     # Invites other AWS accounts to become member accounts for the Security
-    # Hub master account that the invitation is sent from.
+    # Hub administrator account that the invitation is sent from.
+    #
+    # This operation is only used to invite accounts that do not belong to
+    # an organization. Organization accounts do not receive invitations.
     #
     # Before you can use this action to invite a member, you must first use
     # the ` CreateMembers ` action to create the member account in Security
     # Hub.
     #
-    # When the account owner accepts the invitation to become a member
-    # account and enables Security Hub, the master account can view the
+    # When the account owner enables Security Hub and accepts the invitation
+    # to become a member account, the administrator account can view the
     # findings generated from the member account.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   The list of account IDs of the AWS accounts to invite to Security Hub
     #   as members.
     #
@@ -5668,7 +7139,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.invite_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -5733,6 +7204,10 @@ module Aws::SecurityHub
     # Lists all Security Hub membership invitations that were sent to the
     # current AWS account.
     #
+    # This operation is only used by accounts that are managed by
+    # invitation. Accounts that are managed using the integration with AWS
+    # Organizations do not receive invitations.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
     #
@@ -5778,16 +7253,19 @@ module Aws::SecurityHub
     end
 
     # Lists details about all member accounts for the current Security Hub
-    # master account.
+    # administrator account.
+    #
+    # The results include both member accounts that belong to an
+    # organization and member accounts that were invited manually.
     #
     # @option params [Boolean] :only_associated
     #   Specifies which member accounts to include in the response based on
-    #   their relationship status with the master account. The default value
-    #   is `TRUE`.
+    #   their relationship status with the administrator account. The default
+    #   value is `TRUE`.
     #
     #   If `OnlyAssociated` is set to `TRUE`, the response includes member
-    #   accounts whose relationship status with the master is set to `ENABLED`
-    #   or `DISABLED`.
+    #   accounts whose relationship status with the administrator account is
+    #   set to `ENABLED`.
     #
     #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
@@ -5824,6 +7302,7 @@ module Aws::SecurityHub
     #   resp.members[0].account_id #=> String
     #   resp.members[0].email #=> String
     #   resp.members[0].master_id #=> String
+    #   resp.members[0].administrator_id #=> String
     #   resp.members[0].member_status #=> String
     #   resp.members[0].invited_at #=> Time
     #   resp.members[0].updated_at #=> Time
@@ -5835,6 +7314,49 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def list_members(params = {}, options = {})
       req = build_request(:list_members, params)
+      req.send_request(options)
+    end
+
+    # Lists the Security Hub administrator accounts. Can only be called by
+    # the organization management account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `ListOrganizationAdminAccounts` operation, set the value of this
+    #   parameter to `NULL`. For subsequent calls to the operation, to
+    #   continue listing data, set the value of this parameter to the value
+    #   returned from the previous response.
+    #
+    # @return [Types::ListOrganizationAdminAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationAdminAccountsResponse#admin_accounts #admin_accounts} => Array&lt;Types::AdminAccount&gt;
+    #   * {Types::ListOrganizationAdminAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organization_admin_accounts({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_accounts #=> Array
+    #   resp.admin_accounts[0].account_id #=> String
+    #   resp.admin_accounts[0].status #=> String, one of "ENABLED", "DISABLE_IN_PROGRESS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccounts AWS API Documentation
+    #
+    # @overload list_organization_admin_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_organization_admin_accounts(params = {}, options = {})
+      req = build_request(:list_organization_admin_accounts, params)
       req.send_request(options)
     end
 
@@ -5873,7 +7395,9 @@ module Aws::SecurityHub
     #   The ARN of the resource to apply the tags to.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to add to the resource.
+    #   The tags to add to the resource. You can add up to 50 tags at a time.
+    #   The tag keys can be no longer than 128 characters. The tag values can
+    #   be no longer than 256 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5901,7 +7425,8 @@ module Aws::SecurityHub
     #   The ARN of the resource to remove the tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys associated with the tags to remove from the resource.
+    #   The tag keys associated with the tags to remove from the resource. You
+    #   can remove up to 50 tags at a time.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6528,6 +8053,50 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     note: {
     #       text: "NonEmptyString", # required
@@ -7121,6 +8690,50 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString",
     #   })
@@ -7131,6 +8744,36 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def update_insight(params = {}, options = {})
       req = build_request(:update_insight, params)
+      req.send_request(options)
+    end
+
+    # Used to update the configuration related to Organizations. Can only be
+    # called from a Security Hub administrator account.
+    #
+    # @option params [required, Boolean] :auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   By default, this is `false`, and new accounts are not added
+    #   automatically.
+    #
+    #   To automatically enable Security Hub for new accounts, set this to
+    #   `true`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_organization_configuration({
+    #     auto_enable: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfiguration AWS API Documentation
+    #
+    # @overload update_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_organization_configuration(params = {}, options = {})
+      req = build_request(:update_organization_configuration, params)
       req.send_request(options)
     end
 
@@ -7206,7 +8849,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

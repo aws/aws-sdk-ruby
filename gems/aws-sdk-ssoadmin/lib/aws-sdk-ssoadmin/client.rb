@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -461,6 +461,53 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Enables the attributes-based access control (ABAC) feature for the
+    # specified AWS SSO instance. You can also specify new attributes to add
+    # to your ABAC configuration during the enabling process. For more
+    # information about ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, Types::InstanceAccessControlAttributeConfiguration] :instance_access_control_attribute_configuration
+    #   Specifies the AWS SSO identity store attributes to add to your ABAC
+    #   configuration. When using an external identity provider as an identity
+    #   source, you can pass attributes through the SAML assertion as an
+    #   alternative to configuring attributes from the AWS SSO identity store.
+    #   If a SAML assertion passes any of these attributes, AWS SSO will
+    #   replace the attribute value with the value from the AWS SSO identity
+    #   store.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_instance_access_control_attribute_configuration({
+    #     instance_arn: "InstanceArn", # required
+    #     instance_access_control_attribute_configuration: { # required
+    #       access_control_attributes: [ # required
+    #         {
+    #           key: "AccessControlAttributeKey", # required
+    #           value: { # required
+    #             source: ["AccessControlAttributeValueSource"], # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfiguration AWS API Documentation
+    #
+    # @overload create_instance_access_control_attribute_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_instance_access_control_attribute_configuration(params = {}, options = {})
+      req = build_request(:create_instance_access_control_attribute_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a permission set within a specified SSO instance.
     #
     # <note markdown="1"> To grant users and groups access to AWS account resources, use `
@@ -626,6 +673,36 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Disables the attributes-based access control (ABAC) feature for the
+    # specified AWS SSO instance and deletes all of the attribute mappings
+    # that have been configured. Once deleted, any attributes that are
+    # received from an identity source and any custom attributes you have
+    # previously configured will not be passed. For more information about
+    # ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_instance_access_control_attribute_configuration({
+    #     instance_arn: "InstanceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInstanceAccessControlAttributeConfiguration AWS API Documentation
+    #
+    # @overload delete_instance_access_control_attribute_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_instance_access_control_attribute_configuration(params = {}, options = {})
+      req = build_request(:delete_instance_access_control_attribute_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified permission set.
     #
     # @option params [required, String] :instance_arn
@@ -741,6 +818,48 @@ module Aws::SSOAdmin
     # @param [Hash] params ({})
     def describe_account_assignment_deletion_status(params = {}, options = {})
       req = build_request(:describe_account_assignment_deletion_status, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of AWS SSO identity store attributes that have been
+    # configured to work with attributes-based access control (ABAC) for the
+    # specified AWS SSO instance. This will not return attributes configured
+    # and sent by an external identity provider. For more information about
+    # ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @return [Types::DescribeInstanceAccessControlAttributeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceAccessControlAttributeConfigurationResponse#status #status} => String
+    #   * {Types::DescribeInstanceAccessControlAttributeConfigurationResponse#status_reason #status_reason} => String
+    #   * {Types::DescribeInstanceAccessControlAttributeConfigurationResponse#instance_access_control_attribute_configuration #instance_access_control_attribute_configuration} => Types::InstanceAccessControlAttributeConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_access_control_attribute_configuration({
+    #     instance_arn: "InstanceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ENABLED", "CREATION_IN_PROGRESS", "CREATION_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.instance_access_control_attribute_configuration.access_control_attributes #=> Array
+    #   resp.instance_access_control_attribute_configuration.access_control_attributes[0].key #=> String
+    #   resp.instance_access_control_attribute_configuration.access_control_attributes[0].value.source #=> Array
+    #   resp.instance_access_control_attribute_configuration.access_control_attributes[0].value.source[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfiguration AWS API Documentation
+    #
+    # @overload describe_instance_access_control_attribute_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_access_control_attribute_configuration(params = {}, options = {})
+      req = build_request(:describe_instance_access_control_attribute_configuration, params)
       req.send_request(options)
     end
 
@@ -1582,6 +1701,51 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Updates the AWS SSO identity store attributes to use with the AWS SSO
+    # instance for attributes-based access control (ABAC). When using an
+    # external identity provider as an identity source, you can pass
+    # attributes through the SAML assertion as an alternative to configuring
+    # attributes from the AWS SSO identity store. If a SAML assertion passes
+    # any of these attributes, AWS SSO will replace the attribute value with
+    # the value from the AWS SSO identity store. For more information about
+    # ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #
+    # @option params [required, Types::InstanceAccessControlAttributeConfiguration] :instance_access_control_attribute_configuration
+    #   Updates the attributes for your ABAC configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_instance_access_control_attribute_configuration({
+    #     instance_arn: "InstanceArn", # required
+    #     instance_access_control_attribute_configuration: { # required
+    #       access_control_attributes: [ # required
+    #         {
+    #           key: "AccessControlAttributeKey", # required
+    #           value: { # required
+    #             source: ["AccessControlAttributeValueSource"], # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceAccessControlAttributeConfiguration AWS API Documentation
+    #
+    # @overload update_instance_access_control_attribute_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_instance_access_control_attribute_configuration(params = {}, options = {})
+      req = build_request(:update_instance_access_control_attribute_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates an existing permission set.
     #
     # @option params [required, String] :instance_arn
@@ -1639,7 +1803,7 @@ module Aws::SSOAdmin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

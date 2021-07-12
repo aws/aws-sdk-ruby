@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -40,6 +40,7 @@ module Aws::ConfigService
   # * {InvalidResultTokenException}
   # * {InvalidRoleException}
   # * {InvalidS3KeyPrefixException}
+  # * {InvalidS3KmsKeyArnException}
   # * {InvalidSNSTopicARNException}
   # * {InvalidTimeRangeException}
   # * {LastDeliveryChannelDeleteFailedException}
@@ -73,6 +74,7 @@ module Aws::ConfigService
   # * {OrganizationConformancePackTemplateValidationException}
   # * {OversizedConfigurationItemException}
   # * {RemediationInProgressException}
+  # * {ResourceConcurrentModificationException}
   # * {ResourceInUseException}
   # * {ResourceNotDiscoveredException}
   # * {ResourceNotFoundException}
@@ -210,6 +212,16 @@ module Aws::ConfigService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ConfigService::Types::InvalidS3KeyPrefixException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidS3KmsKeyArnException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConfigService::Types::InvalidS3KmsKeyArnException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -542,6 +554,21 @@ module Aws::ConfigService
       # @param [Aws::ConfigService::Types::RemediationInProgressException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class ResourceConcurrentModificationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConfigService::Types::ResourceConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

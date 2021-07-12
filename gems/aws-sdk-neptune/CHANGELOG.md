@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-05-17)
+------------------
+
+* Feature - Neptune support for CopyTagsToSnapshots
+
+1.34.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-12-04)
+------------------
+
+* Feature - Support `pre_signed_url` generation for `CopyDBClusterSnapshot` and `CreateDBCluster`.
+
 1.31.0 (2020-10-26)
 ------------------
 

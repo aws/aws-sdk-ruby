@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -355,11 +355,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
@@ -412,11 +412,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :label
     #   The label of the new high-availability partition group.
@@ -468,11 +468,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     # [7]: https://console.aws.amazon.com/support/home
     #
     # @option params [required, String] :subnet_id
@@ -553,11 +553,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :label
     #   The label for the client.
@@ -604,11 +604,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hapg_arn
     #   The ARN of the high-availability partition group to delete.
@@ -651,11 +651,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hsm_arn
     #   The ARN of the HSM to delete.
@@ -697,11 +697,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :client_arn
     #   The ARN of the client to delete.
@@ -743,11 +743,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hapg_arn
     #   The ARN of the high-availability partition group to describe.
@@ -810,11 +810,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :hsm_arn
     #   The ARN of the HSM. Either the `HsmArn` or the `SerialNumber`
@@ -903,11 +903,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :client_arn
     #   The ARN of the client.
@@ -962,11 +962,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :client_arn
     #   The ARN of the client.
@@ -1022,11 +1022,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @return [Types::ListAvailableZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1065,11 +1065,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :next_token
     #   The `NextToken` value from a previous call to `ListHapgs`. Pass null
@@ -1121,11 +1121,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :next_token
     #   The `NextToken` value from a previous call to `ListHsms`. Pass null if
@@ -1176,11 +1176,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :next_token
     #   The `NextToken` value from a previous call to `ListLunaClients`. Pass
@@ -1226,11 +1226,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
@@ -1274,11 +1274,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hapg_arn
     #   The ARN of the high-availability partition group to modify.
@@ -1335,11 +1335,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hsm_arn
     #   The ARN of the HSM to modify.
@@ -1411,11 +1411,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :client_arn
     #   The ARN of the client.
@@ -1464,11 +1464,11 @@ module Aws::CloudHSM
     #
     #
     # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
-    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
-    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [2]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
     # [4]: http://aws.amazon.com/cloudhsm/
-    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
-    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
@@ -1516,7 +1516,7 @@ module Aws::CloudHSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsm'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

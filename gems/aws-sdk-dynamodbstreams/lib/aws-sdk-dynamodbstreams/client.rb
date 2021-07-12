@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-dynamodbstreams/plugins/simple_attributes.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:dynamodbstreams)
 
@@ -75,6 +76,7 @@ module Aws::DynamoDBStreams
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::DynamoDBStreams::Plugins::SimpleAttributes)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -265,6 +267,10 @@ module Aws::DynamoDBStreams
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_attributes (false)
+    #     When enabled, returns DynamoDBStream attribute values using
+    #     hashes, arrays, sets, integers, floats, booleans, and nil.
     #
     #   @option options [Boolean] :simple_json (false)
     #     Disables request parameter conversion, validation, and formatting.
@@ -787,7 +793,7 @@ module Aws::DynamoDBStreams
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

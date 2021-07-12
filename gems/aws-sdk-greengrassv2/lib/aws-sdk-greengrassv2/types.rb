@@ -1,0 +1,3308 @@
+# frozen_string_literal: true
+
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GreengrassV2
+  module Types
+
+    # You don't have permission to perform the action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a request to associate a client device with a core device.
+    # The [BatchAssociateClientDeviceWithCoreDevice][1] operation consumes a
+    # list of these requests.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html
+    #
+    # @note When making an API call, you may pass AssociateClientDeviceWithCoreDeviceEntry
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing that represents the client device to
+    #   associate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateClientDeviceWithCoreDeviceEntry AWS API Documentation
+    #
+    class AssociateClientDeviceWithCoreDeviceEntry < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an error that occurs from a request to associate a client
+    # device with a core device. The
+    # [BatchAssociateClientDeviceWithCoreDevice][1] operation returns a list
+    # of these errors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing whose associate request failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides additional information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateClientDeviceWithCoreDeviceErrorEntry AWS API Documentation
+    #
+    class AssociateClientDeviceWithCoreDeviceErrorEntry < Struct.new(
+      :thing_name,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a client device that is associated to a
+    # core device for cloud discovery.
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing that represents the associated client
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_timestamp
+    #   The time that the client device was associated, expressed in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociatedClientDevice AWS API Documentation
+    #
+    class AssociatedClientDevice < Struct.new(
+      :thing_name,
+      :association_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchAssociateClientDeviceWithCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [
+    #           {
+    #             thing_name: "IoTThingName", # required
+    #           },
+    #         ],
+    #         core_device_thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of client devices to associate.
+    #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceEntry>]
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDeviceRequest AWS API Documentation
+    #
+    class BatchAssociateClientDeviceWithCoreDeviceRequest < Struct.new(
+      :entries,
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   The list of any errors for the entries in the request. Each error
+    #   entry contains the name of the AWS IoT thing that failed to
+    #   associate.
+    #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDeviceResponse AWS API Documentation
+    #
+    class BatchAssociateClientDeviceWithCoreDeviceResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisassociateClientDeviceFromCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [
+    #           {
+    #             thing_name: "IoTThingName", # required
+    #           },
+    #         ],
+    #         core_device_thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of client devices to disassociate.
+    #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceEntry>]
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDeviceRequest AWS API Documentation
+    #
+    class BatchDisassociateClientDeviceFromCoreDeviceRequest < Struct.new(
+      :entries,
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   The list of errors (if any) for the entries in the request. Each
+    #   error entry contains the name of the AWS IoT thing that failed to
+    #   disassociate.
+    #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDeviceResponse AWS API Documentation
+    #
+    class BatchDisassociateClientDeviceFromCoreDeviceResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CancelDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CancelDeploymentRequest AWS API Documentation
+    #
+    class CancelDeploymentRequest < Struct.new(
+      :deployment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   A message that communicates if the cancel was successful.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CancelDeploymentResponse AWS API Documentation
+    #
+    class CancelDeploymentResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the status of a component in the AWS IoT Greengrass service.
+    #
+    # @!attribute [rw] component_state
+    #   The state of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that communicates details, such as errors, about the
+    #   status of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   A dictionary of errors that communicate why the component is in an
+    #   error state. For example, if AWS IoT Greengrass can't access an
+    #   artifact for the component, then `errors` contains the artifact's
+    #   URI as a key, and the error message as the value for that key.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CloudComponentStatus AWS API Documentation
+    #
+    class CloudComponentStatus < Struct.new(
+      :component_state,
+      :message,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a component.
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The latest version of the component and its details.
+    #   @return [Types::ComponentLatestVersion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/Component AWS API Documentation
+    #
+    class Component < Struct.new(
+      :arn,
+      :component_name,
+      :latest_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a component that is a candidate to deploy
+    # to a AWS IoT Greengrass core device.
+    #
+    # @note When making an API call, you may pass ComponentCandidate
+    #   data as a hash:
+    #
+    #       {
+    #         component_name: "ComponentNameString",
+    #         component_version: "ComponentVersionString",
+    #         version_requirements: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_requirements
+    #   The version requirements for the component's dependencies. AWS IoT
+    #   Greengrass core devices get the version requirements from component
+    #   recipes.
+    #
+    #   AWS IoT Greengrass V2 uses semantic version constraints. For more
+    #   information, see [Semantic Versioning][1].
+    #
+    #
+    #
+    #   [1]: https://semver.org/
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentCandidate AWS API Documentation
+    #
+    class ComponentCandidate < Struct.new(
+      :component_name,
+      :component_version,
+      :version_requirements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a deployment's update to a component's
+    # configuration on Greengrass core devices. For more information, see
+    # [Update component configurations][1] in the *AWS IoT Greengrass V2
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html
+    #
+    # @note When making an API call, you may pass ComponentConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         merge: "ComponentConfigurationString",
+    #         reset: ["ComponentConfigurationPath"],
+    #       }
+    #
+    # @!attribute [rw] merge
+    #   A serialized JSON string that contains the configuration object to
+    #   merge to target devices. The core device merges this configuration
+    #   with the component's existing configuration. If this is the first
+    #   time a component deploys on a device, the core device merges this
+    #   configuration with the component's default configuration. This
+    #   means that the core device keeps it's existing configuration for
+    #   keys and values that you don't specify in this object. For more
+    #   information, see [Merge configuration updates][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update
+    #   @return [String]
+    #
+    # @!attribute [rw] reset
+    #   The list of configuration nodes to reset to default values on target
+    #   devices. Use JSON pointers to specify each node to reset. JSON
+    #   pointers start with a forward slash (`/`) and use forward slashes to
+    #   separate the key for each level in the object. For more information,
+    #   see the [JSON pointer specification][1] and [Reset configuration
+    #   updates][2] in the *AWS IoT Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentConfigurationUpdate AWS API Documentation
+    #
+    class ComponentConfigurationUpdate < Struct.new(
+      :merge,
+      :reset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a component dependency for a Lambda
+    # function component.
+    #
+    # @note When making an API call, you may pass ComponentDependencyRequirement
+    #   data as a hash:
+    #
+    #       {
+    #         version_requirement: "NonEmptyString",
+    #         dependency_type: "HARD", # accepts HARD, SOFT
+    #       }
+    #
+    # @!attribute [rw] version_requirement
+    #   The component version requirement for the component dependency.
+    #
+    #   AWS IoT Greengrass V2 uses semantic version constraints. For more
+    #   information, see [Semantic Versioning][1].
+    #
+    #
+    #
+    #   [1]: https://semver.org/
+    #   @return [String]
+    #
+    # @!attribute [rw] dependency_type
+    #   The type of this dependency. Choose from the following options:
+    #
+    #   * `SOFT` – The component doesn't restart if the dependency changes
+    #     state.
+    #
+    #   * `HARD` – The component restarts if the dependency changes state.
+    #
+    #   Default: `HARD`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentDependencyRequirement AWS API Documentation
+    #
+    class ComponentDependencyRequirement < Struct.new(
+      :version_requirement,
+      :dependency_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a component to deploy.
+    #
+    # @note When making an API call, you may pass ComponentDeploymentSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         component_version: "ComponentVersionString",
+    #         configuration_update: {
+    #           merge: "ComponentConfigurationString",
+    #           reset: ["ComponentConfigurationPath"],
+    #         },
+    #         run_with: {
+    #           posix_user: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_update
+    #   The configuration updates to deploy for the component. You can
+    #   define *reset* updates and *merge* updates. A reset updates the keys
+    #   that you specify to the default configuration for the component. A
+    #   merge updates the core device's component configuration with the
+    #   keys and values that you specify. The AWS IoT Greengrass Core
+    #   software applies reset updates before it applies merge updates. For
+    #   more information, see [Update component configurations][1] in the
+    #   *AWS IoT Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html
+    #   @return [Types::ComponentConfigurationUpdate]
+    #
+    # @!attribute [rw] run_with
+    #   The system user and group that the AWS IoT Greengrass Core software
+    #   uses to run component processes on the core device. If you omit this
+    #   parameter, the AWS IoT Greengrass Core software uses the system user
+    #   and group that you configure for the core device. For more
+    #   information, see [Configure the user and group that run
+    #   components][1] in the *AWS IoT Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user
+    #   @return [Types::ComponentRunWith]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentDeploymentSpecification AWS API Documentation
+    #
+    class ComponentDeploymentSpecification < Struct.new(
+      :component_version,
+      :configuration_update,
+      :run_with)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the latest version of a component.
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the component was created, expressed in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the component version.
+    #   @return [String]
+    #
+    # @!attribute [rw] publisher
+    #   The publisher of the component version.
+    #   @return [String]
+    #
+    # @!attribute [rw] platforms
+    #   The platforms that the component version supports.
+    #   @return [Array<Types::ComponentPlatform>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentLatestVersion AWS API Documentation
+    #
+    class ComponentLatestVersion < Struct.new(
+      :arn,
+      :component_version,
+      :creation_timestamp,
+      :description,
+      :publisher,
+      :platforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a platform that a component supports.
+    #
+    # @note When making an API call, you may pass ComponentPlatform
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         attributes: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the platform. This name helps you identify the
+    #   platform.
+    #
+    #   If you omit this parameter, AWS IoT Greengrass creates a friendly
+    #   name from the `os` and `architecture` of the platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A dictionary of attributes for the platform. The AWS IoT Greengrass
+    #   Core software defines the `os` and `platform` by default. You can
+    #   specify additional platform attributes for a core device when you
+    #   deploy the AWS IoT Greengrass nucleus component. For more
+    #   information, see the [AWS IoT Greengrass nucleus component][1] in
+    #   the *AWS IoT Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentPlatform AWS API Documentation
+    #
+    class ComponentPlatform < Struct.new(
+      :name,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information system user and group that the AWS IoT Greengrass
+    # Core software uses to run component processes on the core device. For
+    # more information, see [Configure the user and group that run
+    # components][1] in the *AWS IoT Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user
+    #
+    # @note When making an API call, you may pass ComponentRunWith
+    #   data as a hash:
+    #
+    #       {
+    #         posix_user: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] posix_user
+    #   The POSIX system user and (optional) group to use to run this
+    #   component. Specify the user and group separated by a colon (`:`) in
+    #   the following format: `user:group`. The group is optional. If you
+    #   don't specify a group, the AWS IoT Greengrass Core software uses
+    #   the primary user for the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentRunWith AWS API Documentation
+    #
+    class ComponentRunWith < Struct.new(
+      :posix_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a component version in a list.
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentVersionListItem AWS API Documentation
+    #
+    class ComponentVersionListItem < Struct.new(
+      :component_name,
+      :component_version,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Your request has conflicting operations. This can occur if you're
+    # trying to perform more than one operation on the same resource at the
+    # same time.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that conflicts with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that conflicts with the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a AWS IoT Greengrass core device, which is
+    # an AWS IoT thing that runs the AWS IoT Greengrass Core software.
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the core device. Core devices can have the following
+    #   statuses:
+    #
+    #   * `HEALTHY` – The AWS IoT Greengrass Core software and all
+    #     components run on the core device without issue.
+    #
+    #   * `UNHEALTHY` – The AWS IoT Greengrass Core software or a component
+    #     is in a failed state on the core device.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_status_update_timestamp
+    #   The time at which the core device's status last updated, expressed
+    #   in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CoreDevice AWS API Documentation
+    #
+    class CoreDevice < Struct.new(
+      :core_device_thing_name,
+      :status,
+      :last_status_update_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateComponentVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         inline_recipe: "data",
+    #         lambda_function: {
+    #           lambda_arn: "LambdaFunctionARNWithVersionNumber", # required
+    #           component_name: "ComponentNameString",
+    #           component_version: "ComponentVersionString",
+    #           component_platforms: [
+    #             {
+    #               name: "NonEmptyString",
+    #               attributes: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #             },
+    #           ],
+    #           component_dependencies: {
+    #             "NonEmptyString" => {
+    #               version_requirement: "NonEmptyString",
+    #               dependency_type: "HARD", # accepts HARD, SOFT
+    #             },
+    #           },
+    #           component_lambda_parameters: {
+    #             event_sources: [
+    #               {
+    #                 topic: "TopicString", # required
+    #                 type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
+    #               },
+    #             ],
+    #             max_queue_size: 1,
+    #             max_instances_count: 1,
+    #             max_idle_time_in_seconds: 1,
+    #             timeout_in_seconds: 1,
+    #             status_timeout_in_seconds: 1,
+    #             pinned: false,
+    #             input_payload_encoding_type: "json", # accepts json, binary
+    #             exec_args: ["LambdaExecArg"],
+    #             environment_variables: {
+    #               "NonEmptyString" => "String",
+    #             },
+    #             linux_process_params: {
+    #               isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #               container_params: {
+    #                 memory_size_in_kb: 1,
+    #                 mount_ro_sysfs: false,
+    #                 volumes: [
+    #                   {
+    #                     source_path: "FileSystemPath", # required
+    #                     destination_path: "FileSystemPath", # required
+    #                     permission: "ro", # accepts ro, rw
+    #                     add_group_owner: false,
+    #                   },
+    #                 ],
+    #                 devices: [
+    #                   {
+    #                     path: "FileSystemPath", # required
+    #                     permission: "ro", # accepts ro, rw
+    #                     add_group_owner: false,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] inline_recipe
+    #   The recipe to use to create the component. The recipe defines the
+    #   component's metadata, parameters, dependencies, lifecycle,
+    #   artifacts, and platform compatibility.
+    #
+    #   You must specify either `inlineRecipe` or `lambdaFunction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function
+    #   The parameters to create a component from a Lambda function.
+    #
+    #   You must specify either `inlineRecipe` or `lambdaFunction`.
+    #   @return [Types::LambdaFunctionRecipeSource]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateComponentVersionRequest AWS API Documentation
+    #
+    class CreateComponentVersionRequest < Struct.new(
+      :inline_recipe,
+      :lambda_function,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the component was created, expressed in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the component version in AWS IoT Greengrass V2. This
+    #   status is different from the status of the component on a core
+    #   device.
+    #   @return [Types::CloudComponentStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateComponentVersionResponse AWS API Documentation
+    #
+    class CreateComponentVersionResponse < Struct.new(
+      :arn,
+      :component_name,
+      :component_version,
+      :creation_timestamp,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "TargetARN", # required
+    #         deployment_name: "NonEmptyString",
+    #         components: {
+    #           "NonEmptyString" => {
+    #             component_version: "ComponentVersionString",
+    #             configuration_update: {
+    #               merge: "ComponentConfigurationString",
+    #               reset: ["ComponentConfigurationPath"],
+    #             },
+    #             run_with: {
+    #               posix_user: "NonEmptyString",
+    #             },
+    #           },
+    #         },
+    #         iot_job_configuration: {
+    #           job_executions_rollout_config: {
+    #             exponential_rate: {
+    #               base_rate_per_minute: 1, # required
+    #               increment_factor: 1.0, # required
+    #               rate_increase_criteria: { # required
+    #                 number_of_notified_things: 1,
+    #                 number_of_succeeded_things: 1,
+    #               },
+    #             },
+    #             maximum_per_minute: 1,
+    #           },
+    #           abort_config: {
+    #             criteria_list: [ # required
+    #               {
+    #                 failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #                 action: "CANCEL", # required, accepts CANCEL
+    #                 threshold_percentage: 1.0, # required
+    #                 min_number_of_executed_things: 1, # required
+    #               },
+    #             ],
+    #           },
+    #           timeout_config: {
+    #             in_progress_timeout_in_minutes: 1,
+    #           },
+    #         },
+    #         deployment_policies: {
+    #           failure_handling_policy: "ROLLBACK", # accepts ROLLBACK, DO_NOTHING
+    #           component_update_policy: {
+    #             timeout_in_seconds: 1,
+    #             action: "NOTIFY_COMPONENTS", # accepts NOTIFY_COMPONENTS, SKIP_NOTIFY_COMPONENTS
+    #           },
+    #           configuration_validation_policy: {
+    #             timeout_in_seconds: 1,
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_name
+    #   The name of the deployment.
+    #
+    #   You can create deployments without names. If you create a deployment
+    #   without a name, the AWS IoT Greengrass V2 console shows the
+    #   deployment name as `<targetType>:<targetName>`, where `targetType`
+    #   and `targetName` are the type and name of the deployment target.
+    #   @return [String]
+    #
+    # @!attribute [rw] components
+    #   The components to deploy. This is a dictionary, where each key is
+    #   the name of a component, and each key's value is the version and
+    #   configuration to deploy for that component.
+    #   @return [Hash<String,Types::ComponentDeploymentSpecification>]
+    #
+    # @!attribute [rw] iot_job_configuration
+    #   The job configuration for the deployment configuration. The job
+    #   configuration specifies the rollout, timeout, and stop
+    #   configurations for the deployment configuration.
+    #   @return [Types::DeploymentIoTJobConfiguration]
+    #
+    # @!attribute [rw] deployment_policies
+    #   The deployment policies for the deployment. These policies define
+    #   how the deployment updates components and handles failure.
+    #   @return [Types::DeploymentPolicies]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateDeploymentRequest AWS API Documentation
+    #
+    class CreateDeploymentRequest < Struct.new(
+      :target_arn,
+      :deployment_name,
+      :components,
+      :iot_job_configuration,
+      :deployment_policies,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_job_id
+    #   The ID of the AWS IoT job that applies the deployment to target
+    #   devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_job_arn
+    #   The [ARN][1] of the AWS IoT job that applies the deployment to
+    #   target devices.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateDeploymentResponse AWS API Documentation
+    #
+    class CreateDeploymentResponse < Struct.new(
+      :deployment_id,
+      :iot_job_id,
+      :iot_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteComponentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "ComponentVersionARN", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeleteComponentRequest AWS API Documentation
+    #
+    class DeleteComponentRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "CoreDeviceThingName", # required
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeleteCoreDeviceRequest AWS API Documentation
+    #
+    class DeleteCoreDeviceRequest < Struct.new(
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a deployment.
+    #
+    # @!attribute [rw] target_arn
+    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision number of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_name
+    #   The name of the deployment.
+    #
+    #   You can create deployments without names. If you create a deployment
+    #   without a name, the AWS IoT Greengrass V2 console shows the
+    #   deployment name as `<targetType>:<targetName>`, where `targetType`
+    #   and `targetName` are the type and name of the deployment target.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the deployment was created, expressed in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deployment_status
+    #   The status of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_latest_for_target
+    #   Whether or not the deployment is the latest revision for its target.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/Deployment AWS API Documentation
+    #
+    class Deployment < Struct.new(
+      :target_arn,
+      :revision_id,
+      :deployment_id,
+      :deployment_name,
+      :creation_timestamp,
+      :deployment_status,
+      :is_latest_for_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a deployment's policy that defines when
+    # components are safe to update.
+    #
+    # Each component on a device can report whether or not it's ready to
+    # update. After a component and its dependencies are ready, they can
+    # apply the update in the deployment. You can configure whether or not
+    # the deployment notifies components of an update and waits for a
+    # response. You specify the amount of time each component has to respond
+    # to the update notification.
+    #
+    # @note When making an API call, you may pass DeploymentComponentUpdatePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         timeout_in_seconds: 1,
+    #         action: "NOTIFY_COMPONENTS", # accepts NOTIFY_COMPONENTS, SKIP_NOTIFY_COMPONENTS
+    #       }
+    #
+    # @!attribute [rw] timeout_in_seconds
+    #   The amount of time in seconds that each component on a device has to
+    #   report that it's safe to update. If the component waits for longer
+    #   than this timeout, then the deployment proceeds on the device.
+    #
+    #   Default: `60`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   Whether or not to notify components and wait for components to
+    #   become safe to update. Choose from the following options:
+    #
+    #   * `NOTIFY_COMPONENTS` – The deployment notifies each component
+    #     before it stops and updates that component. Components can use the
+    #     [SubscribeToComponentUpdates][1] IPC operation to receive these
+    #     notifications. Then, components can respond with the
+    #     [DeferComponentUpdate][2] IPC operation. For more information, see
+    #     [Create deployments][3] in the *AWS IoT Greengrass V2 Developer
+    #     Guide*.
+    #
+    #   * `SKIP_NOTIFY_COMPONENTS` – The deployment doesn't notify
+    #     components or wait for them to be safe to update.
+    #
+    #   Default: `NOTIFY_COMPONENTS`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates
+    #   [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate
+    #   [3]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeploymentComponentUpdatePolicy AWS API Documentation
+    #
+    class DeploymentComponentUpdatePolicy < Struct.new(
+      :timeout_in_seconds,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about how long a component on a core device can
+    # validate its configuration updates before it times out. Components can
+    # use the [SubscribeToValidateConfigurationUpdates][1] IPC operation to
+    # receive notifications when a deployment specifies a configuration
+    # update. Then, components can respond with the
+    # [SendConfigurationValidityReport][2] IPC operation. For more
+    # information, see [Create deployments][3] in the *AWS IoT Greengrass V2
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates
+    # [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport
+    # [3]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
+    #
+    # @note When making an API call, you may pass DeploymentConfigurationValidationPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         timeout_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] timeout_in_seconds
+    #   The amount of time in seconds that a component can validate its
+    #   configuration updates. If the validation time exceeds this timeout,
+    #   then the deployment proceeds for the device.
+    #
+    #   Default: `30`
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeploymentConfigurationValidationPolicy AWS API Documentation
+    #
+    class DeploymentConfigurationValidationPolicy < Struct.new(
+      :timeout_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an AWS IoT job configuration.
+    #
+    # @note When making an API call, you may pass DeploymentIoTJobConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         job_executions_rollout_config: {
+    #           exponential_rate: {
+    #             base_rate_per_minute: 1, # required
+    #             increment_factor: 1.0, # required
+    #             rate_increase_criteria: { # required
+    #               number_of_notified_things: 1,
+    #               number_of_succeeded_things: 1,
+    #             },
+    #           },
+    #           maximum_per_minute: 1,
+    #         },
+    #         abort_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #               action: "CANCEL", # required, accepts CANCEL
+    #               threshold_percentage: 1.0, # required
+    #               min_number_of_executed_things: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         timeout_config: {
+    #           in_progress_timeout_in_minutes: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_executions_rollout_config
+    #   The rollout configuration for the job. This configuration defines
+    #   the rate at which the job rolls out to the fleet of target devices.
+    #   @return [Types::IoTJobExecutionsRolloutConfig]
+    #
+    # @!attribute [rw] abort_config
+    #   The stop configuration for the job. This configuration defines when
+    #   and how to stop a job rollout.
+    #   @return [Types::IoTJobAbortConfig]
+    #
+    # @!attribute [rw] timeout_config
+    #   The timeout configuration for the job. This configuration defines
+    #   the amount of time each device has to complete the job.
+    #   @return [Types::IoTJobTimeoutConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeploymentIoTJobConfiguration AWS API Documentation
+    #
+    class DeploymentIoTJobConfiguration < Struct.new(
+      :job_executions_rollout_config,
+      :abort_config,
+      :timeout_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about policies that define how a deployment
+    # updates components and handles failure.
+    #
+    # @note When making an API call, you may pass DeploymentPolicies
+    #   data as a hash:
+    #
+    #       {
+    #         failure_handling_policy: "ROLLBACK", # accepts ROLLBACK, DO_NOTHING
+    #         component_update_policy: {
+    #           timeout_in_seconds: 1,
+    #           action: "NOTIFY_COMPONENTS", # accepts NOTIFY_COMPONENTS, SKIP_NOTIFY_COMPONENTS
+    #         },
+    #         configuration_validation_policy: {
+    #           timeout_in_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] failure_handling_policy
+    #   The failure handling policy for the configuration deployment. This
+    #   policy defines what to do if the deployment fails.
+    #
+    #   Default: `ROLLBACK`
+    #   @return [String]
+    #
+    # @!attribute [rw] component_update_policy
+    #   The component update policy for the configuration deployment. This
+    #   policy defines when it's safe to deploy the configuration to
+    #   devices.
+    #   @return [Types::DeploymentComponentUpdatePolicy]
+    #
+    # @!attribute [rw] configuration_validation_policy
+    #   The configuration validation policy for the configuration
+    #   deployment. This policy defines how long each component has to
+    #   validate its configure updates.
+    #   @return [Types::DeploymentConfigurationValidationPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeploymentPolicies AWS API Documentation
+    #
+    class DeploymentPolicies < Struct.new(
+      :failure_handling_policy,
+      :component_update_policy,
+      :configuration_validation_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeComponentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "ComponentVersionARN", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DescribeComponentRequest AWS API Documentation
+    #
+    class DescribeComponentRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the component was created, expressed in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] publisher
+    #   The publisher of the component version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the component version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the component version in AWS IoT Greengrass V2. This
+    #   status is different from the status of the component on a core
+    #   device.
+    #   @return [Types::CloudComponentStatus]
+    #
+    # @!attribute [rw] platforms
+    #   The platforms that the component version supports.
+    #   @return [Array<Types::ComponentPlatform>]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DescribeComponentResponse AWS API Documentation
+    #
+    class DescribeComponentResponse < Struct.new(
+      :arn,
+      :component_name,
+      :component_version,
+      :creation_timestamp,
+      :publisher,
+      :description,
+      :status,
+      :platforms,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a request to disassociate a client device from a core device.
+    # The [BatchDisassociateClientDeviceWithCoreDevice][1] operation
+    # consumes a list of these requests.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html
+    #
+    # @note When making an API call, you may pass DisassociateClientDeviceFromCoreDeviceEntry
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing that represents the client device to
+    #   disassociate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateClientDeviceFromCoreDeviceEntry AWS API Documentation
+    #
+    class DisassociateClientDeviceFromCoreDeviceEntry < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an error that occurs from a request to disassociate a client
+    # device from a core device. The
+    # [BatchDisassociateClientDeviceWithCoreDevice][1] operation returns a
+    # list of these errors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing whose disassociate request failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides additional information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateClientDeviceFromCoreDeviceErrorEntry AWS API Documentation
+    #
+    class DisassociateClientDeviceFromCoreDeviceErrorEntry < Struct.new(
+      :thing_name,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a deployment job that AWS IoT Greengrass
+    # sends to a AWS IoT Greengrass core device.
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_name
+    #   The name of the deployment.
+    #
+    #   You can create deployments without names. If you create a deployment
+    #   without a name, the AWS IoT Greengrass V2 console shows the
+    #   deployment name as `<targetType>:<targetName>`, where `targetType`
+    #   and `targetName` are the type and name of the deployment target.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_job_id
+    #   The ID of the AWS IoT job that applies the deployment to target
+    #   devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_job_arn
+    #   The [ARN][1] of the AWS IoT job that applies the deployment to
+    #   target devices.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the deployment job.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] core_device_execution_status
+    #   The status of the deployment job on the AWS IoT Greengrass core
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason code for the update, if the job was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the deployment was created, expressed in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_timestamp
+    #   The time at which the deployment job was last modified, expressed in
+    #   ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/EffectiveDeployment AWS API Documentation
+    #
+    class EffectiveDeployment < Struct.new(
+      :deployment_id,
+      :deployment_name,
+      :iot_job_id,
+      :iot_job_arn,
+      :description,
+      :target_arn,
+      :core_device_execution_status,
+      :reason,
+      :creation_timestamp,
+      :modified_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetComponentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         recipe_output_format: "JSON", # accepts JSON, YAML
+    #         arn: "ComponentVersionARN", # required
+    #       }
+    #
+    # @!attribute [rw] recipe_output_format
+    #   The format of the recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentRequest AWS API Documentation
+    #
+    class GetComponentRequest < Struct.new(
+      :recipe_output_format,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recipe_output_format
+    #   The format of the recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipe
+    #   The recipe of the component version.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentResponse AWS API Documentation
+    #
+    class GetComponentResponse < Struct.new(
+      :recipe_output_format,
+      :recipe,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetComponentVersionArtifactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "ComponentVersionARN", # required
+    #         artifact_name: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version. Specify the ARN of a public
+    #   component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_name
+    #   The name of the artifact.
+    #
+    #   You can use the [GetComponent][1] operation to download the
+    #   component recipe, which includes the URI of the artifact. The
+    #   artifact name is the section of the URI after the scheme. For
+    #   example, in the artifact URI `greengrass:SomeArtifact.zip`, the
+    #   artifact name is `SomeArtifact.zip`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentVersionArtifactRequest AWS API Documentation
+    #
+    class GetComponentVersionArtifactRequest < Struct.new(
+      :arn,
+      :artifact_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pre_signed_url
+    #   The URL of the artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentVersionArtifactResponse AWS API Documentation
+    #
+    class GetComponentVersionArtifactResponse < Struct.new(
+      :pre_signed_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "CoreDeviceThingName", # required
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetCoreDeviceRequest AWS API Documentation
+    #
+    class GetCoreDeviceRequest < Struct.new(
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_version
+    #   The version of the AWS IoT Greengrass Core software that the core
+    #   device runs. This version is equivalent to the version of the AWS
+    #   IoT Greengrass nucleus component that runs on the core device. For
+    #   more information, see the [AWS IoT Greengrass nucleus component][1]
+    #   in the *AWS IoT Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The operating system platform that the core device runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The computer architecture of the core device.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the core device. The core device status can be:
+    #
+    #   * `HEALTHY` – The AWS IoT Greengrass Core software and all
+    #     components run on the core device without issue.
+    #
+    #   * `UNHEALTHY` – The AWS IoT Greengrass Core software or a component
+    #     is in a failed state on the core device.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_status_update_timestamp
+    #   The time at which the core device's status last updated, expressed
+    #   in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetCoreDeviceResponse AWS API Documentation
+    #
+    class GetCoreDeviceResponse < Struct.new(
+      :core_device_thing_name,
+      :core_version,
+      :platform,
+      :architecture,
+      :status,
+      :last_status_update_timestamp,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetDeploymentRequest AWS API Documentation
+    #
+    class GetDeploymentRequest < Struct.new(
+      :deployment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_arn
+    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision number of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_name
+    #   The name of the deployment.
+    #
+    #   You can create deployments without names. If you create a deployment
+    #   without a name, the AWS IoT Greengrass V2 console shows the
+    #   deployment name as `<targetType>:<targetName>`, where `targetType`
+    #   and `targetName` are the type and name of the deployment target.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_status
+    #   The status of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_job_id
+    #   The ID of the AWS IoT job that applies the deployment to target
+    #   devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_job_arn
+    #   The [ARN][1] of the AWS IoT job that applies the deployment to
+    #   target devices.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] components
+    #   The components to deploy. This is a dictionary, where each key is
+    #   the name of a component, and each key's value is the version and
+    #   configuration to deploy for that component.
+    #   @return [Hash<String,Types::ComponentDeploymentSpecification>]
+    #
+    # @!attribute [rw] deployment_policies
+    #   The deployment policies for the deployment. These policies define
+    #   how the deployment updates components and handles failure.
+    #   @return [Types::DeploymentPolicies]
+    #
+    # @!attribute [rw] iot_job_configuration
+    #   The job configuration for the deployment configuration. The job
+    #   configuration specifies the rollout, timeout, and stop
+    #   configurations for the deployment configuration.
+    #   @return [Types::DeploymentIoTJobConfiguration]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the deployment was created, expressed in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_latest_for_target
+    #   Whether or not the deployment is the latest revision for its target.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetDeploymentResponse AWS API Documentation
+    #
+    class GetDeploymentResponse < Struct.new(
+      :target_arn,
+      :revision_id,
+      :deployment_id,
+      :deployment_name,
+      :deployment_status,
+      :iot_job_id,
+      :iot_job_arn,
+      :components,
+      :deployment_policies,
+      :iot_job_configuration,
+      :creation_timestamp,
+      :is_latest_for_target,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a component on a AWS IoT Greengrass core
+    # device.
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_state
+    #   The lifecycle state of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_state_details
+    #   The details about the lifecycle state of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_root
+    #   Whether or not the component is a root component.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/InstalledComponent AWS API Documentation
+    #
+    class InstalledComponent < Struct.new(
+      :component_name,
+      :component_version,
+      :lifecycle_state,
+      :lifecycle_state_details,
+      :is_root)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS IoT Greengrass can't process your request right now. Try again
+    # later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The amount of time to wait before you retry the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message,
+      :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a list of criteria that define when and how to cancel a
+    # configuration deployment.
+    #
+    # @note When making an API call, you may pass IoTJobAbortConfig
+    #   data as a hash:
+    #
+    #       {
+    #         criteria_list: [ # required
+    #           {
+    #             failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #             action: "CANCEL", # required, accepts CANCEL
+    #             threshold_percentage: 1.0, # required
+    #             min_number_of_executed_things: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] criteria_list
+    #   The list of criteria that define when and how to cancel the
+    #   configuration deployment.
+    #   @return [Array<Types::IoTJobAbortCriteria>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/IoTJobAbortConfig AWS API Documentation
+    #
+    class IoTJobAbortConfig < Struct.new(
+      :criteria_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains criteria that define when and how to cancel a job.
+    #
+    # The deployment stops if the following conditions are true:
+    #
+    # 1.  The number of things that receive the deployment exceeds the
+    #     `minNumberOfExecutedThings`.
+    #
+    # 2.  The percentage of failures with type `failureType` exceeds the
+    #     `thresholdPercentage`.
+    #
+    # @note When making an API call, you may pass IoTJobAbortCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #         action: "CANCEL", # required, accepts CANCEL
+    #         threshold_percentage: 1.0, # required
+    #         min_number_of_executed_things: 1, # required
+    #       }
+    #
+    # @!attribute [rw] failure_type
+    #   The type of job deployment failure that can cancel a job.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to perform when the criteria are met.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold_percentage
+    #   The minimum percentage of `failureType` failures that occur before
+    #   the job can cancel.
+    #
+    #   This parameter supports up to two digits after the decimal (for
+    #   example, you can specify `10.9` or `10.99`, but not `10.999`).
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_number_of_executed_things
+    #   The minimum number of things that receive the configuration before
+    #   the job can cancel.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/IoTJobAbortCriteria AWS API Documentation
+    #
+    class IoTJobAbortCriteria < Struct.new(
+      :failure_type,
+      :action,
+      :threshold_percentage,
+      :min_number_of_executed_things)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the rollout configuration for a job. This
+    # configuration defines the rate at which the job deploys a
+    # configuration to a fleet of target devices.
+    #
+    # @note When making an API call, you may pass IoTJobExecutionsRolloutConfig
+    #   data as a hash:
+    #
+    #       {
+    #         exponential_rate: {
+    #           base_rate_per_minute: 1, # required
+    #           increment_factor: 1.0, # required
+    #           rate_increase_criteria: { # required
+    #             number_of_notified_things: 1,
+    #             number_of_succeeded_things: 1,
+    #           },
+    #         },
+    #         maximum_per_minute: 1,
+    #       }
+    #
+    # @!attribute [rw] exponential_rate
+    #   The exponential rate to increase the job rollout rate.
+    #   @return [Types::IoTJobExponentialRolloutRate]
+    #
+    # @!attribute [rw] maximum_per_minute
+    #   The maximum number of devices that receive a pending job
+    #   notification, per minute.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/IoTJobExecutionsRolloutConfig AWS API Documentation
+    #
+    class IoTJobExecutionsRolloutConfig < Struct.new(
+      :exponential_rate,
+      :maximum_per_minute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an exponential rollout rate for a
+    # configuration deployment job.
+    #
+    # @note When making an API call, you may pass IoTJobExponentialRolloutRate
+    #   data as a hash:
+    #
+    #       {
+    #         base_rate_per_minute: 1, # required
+    #         increment_factor: 1.0, # required
+    #         rate_increase_criteria: { # required
+    #           number_of_notified_things: 1,
+    #           number_of_succeeded_things: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] base_rate_per_minute
+    #   The minimum number of devices that receive a pending job
+    #   notification, per minute, when the job starts. This parameter
+    #   defines the initial rollout rate of the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] increment_factor
+    #   The exponential factor to increase the rollout rate for the job.
+    #
+    #   This parameter supports up to one digit after the decimal (for
+    #   example, you can specify `1.5`, but not `1.55`).
+    #   @return [Float]
+    #
+    # @!attribute [rw] rate_increase_criteria
+    #   The criteria to increase the rollout rate for the job.
+    #   @return [Types::IoTJobRateIncreaseCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/IoTJobExponentialRolloutRate AWS API Documentation
+    #
+    class IoTJobExponentialRolloutRate < Struct.new(
+      :base_rate_per_minute,
+      :increment_factor,
+      :rate_increase_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about criteria to meet before a job increases its
+    # rollout rate. Specify either `numberOfNotifiedThings` or
+    # `numberOfSucceededThings`.
+    #
+    # @note When making an API call, you may pass IoTJobRateIncreaseCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         number_of_notified_things: 1,
+    #         number_of_succeeded_things: 1,
+    #       }
+    #
+    # @!attribute [rw] number_of_notified_things
+    #   The number of devices to receive the job notification before the
+    #   rollout rate increases.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_succeeded_things
+    #   The number of devices to successfully run the configuration job
+    #   before the rollout rate increases.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/IoTJobRateIncreaseCriteria AWS API Documentation
+    #
+    class IoTJobRateIncreaseCriteria < Struct.new(
+      :number_of_notified_things,
+      :number_of_succeeded_things)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the timeout configuration for a job.
+    #
+    # @note When making an API call, you may pass IoTJobTimeoutConfig
+    #   data as a hash:
+    #
+    #       {
+    #         in_progress_timeout_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] in_progress_timeout_in_minutes
+    #   The amount of time, in minutes, that devices have to complete the
+    #   job. The timer starts when the job status is set to `IN_PROGRESS`.
+    #   If the job status doesn't change to a terminal state before the
+    #   time expires, then the job status is set to `TIMED_OUT`.
+    #
+    #   The timeout interval must be between 1 minute and 7 days (10080
+    #   minutes).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/IoTJobTimeoutConfig AWS API Documentation
+    #
+    class IoTJobTimeoutConfig < Struct.new(
+      :in_progress_timeout_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a container in which AWS Lambda functions
+    # run on AWS IoT Greengrass core devices.
+    #
+    # @note When making an API call, you may pass LambdaContainerParams
+    #   data as a hash:
+    #
+    #       {
+    #         memory_size_in_kb: 1,
+    #         mount_ro_sysfs: false,
+    #         volumes: [
+    #           {
+    #             source_path: "FileSystemPath", # required
+    #             destination_path: "FileSystemPath", # required
+    #             permission: "ro", # accepts ro, rw
+    #             add_group_owner: false,
+    #           },
+    #         ],
+    #         devices: [
+    #           {
+    #             path: "FileSystemPath", # required
+    #             permission: "ro", # accepts ro, rw
+    #             add_group_owner: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] memory_size_in_kb
+    #   The memory size of the container, expressed in kilobytes.
+    #
+    #   Default: `16384` (16 MB)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_ro_sysfs
+    #   Whether or not the container can read information from the device's
+    #   `/sys` folder.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] volumes
+    #   The list of volumes that the container can access.
+    #   @return [Array<Types::LambdaVolumeMount>]
+    #
+    # @!attribute [rw] devices
+    #   The list of system devices that the container can access.
+    #   @return [Array<Types::LambdaDeviceMount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaContainerParams AWS API Documentation
+    #
+    class LambdaContainerParams < Struct.new(
+      :memory_size_in_kb,
+      :mount_ro_sysfs,
+      :volumes,
+      :devices)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a device that Linux processes in a
+    # container can access.
+    #
+    # @note When making an API call, you may pass LambdaDeviceMount
+    #   data as a hash:
+    #
+    #       {
+    #         path: "FileSystemPath", # required
+    #         permission: "ro", # accepts ro, rw
+    #         add_group_owner: false,
+    #       }
+    #
+    # @!attribute [rw] path
+    #   The mount path for the device in the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   The permission to access the device: read/only (`ro`) or read/write
+    #   (`rw`).
+    #
+    #   Default: `ro`
+    #   @return [String]
+    #
+    # @!attribute [rw] add_group_owner
+    #   Whether or not to add the component's system user as an owner of
+    #   the device.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaDeviceMount AWS API Documentation
+    #
+    class LambdaDeviceMount < Struct.new(
+      :path,
+      :permission,
+      :add_group_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an event source for an AWS Lambda function.
+    # The event source defines the topics on which this Lambda function
+    # subscribes to receive messages that run the function.
+    #
+    # @note When making an API call, you may pass LambdaEventSource
+    #   data as a hash:
+    #
+    #       {
+    #         topic: "TopicString", # required
+    #         type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
+    #       }
+    #
+    # @!attribute [rw] topic
+    #   The topic to which to subscribe to receive event messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of event source. Choose from the following options:
+    #
+    #   * `PUB_SUB` – Subscribe to local publish/subscribe messages. This
+    #     event source type doesn't support MQTT wildcards (`+` and `#`) in
+    #     the event source topic.
+    #
+    #   * `IOT_CORE` – Subscribe to AWS IoT Core MQTT messages. This event
+    #     source type supports MQTT wildcards (`+` and `#`) in the event
+    #     source topic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaEventSource AWS API Documentation
+    #
+    class LambdaEventSource < Struct.new(
+      :topic,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains parameters for a Lambda function that runs on AWS IoT
+    # Greengrass.
+    #
+    # @note When making an API call, you may pass LambdaExecutionParameters
+    #   data as a hash:
+    #
+    #       {
+    #         event_sources: [
+    #           {
+    #             topic: "TopicString", # required
+    #             type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
+    #           },
+    #         ],
+    #         max_queue_size: 1,
+    #         max_instances_count: 1,
+    #         max_idle_time_in_seconds: 1,
+    #         timeout_in_seconds: 1,
+    #         status_timeout_in_seconds: 1,
+    #         pinned: false,
+    #         input_payload_encoding_type: "json", # accepts json, binary
+    #         exec_args: ["LambdaExecArg"],
+    #         environment_variables: {
+    #           "NonEmptyString" => "String",
+    #         },
+    #         linux_process_params: {
+    #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #           container_params: {
+    #             memory_size_in_kb: 1,
+    #             mount_ro_sysfs: false,
+    #             volumes: [
+    #               {
+    #                 source_path: "FileSystemPath", # required
+    #                 destination_path: "FileSystemPath", # required
+    #                 permission: "ro", # accepts ro, rw
+    #                 add_group_owner: false,
+    #               },
+    #             ],
+    #             devices: [
+    #               {
+    #                 path: "FileSystemPath", # required
+    #                 permission: "ro", # accepts ro, rw
+    #                 add_group_owner: false,
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] event_sources
+    #   The list of event sources to which to subscribe to receive work
+    #   messages. The Lambda function runs when it receives a message from
+    #   an event source. You can subscribe this function to local
+    #   publish/subscribe messages and AWS IoT Core MQTT messages.
+    #   @return [Array<Types::LambdaEventSource>]
+    #
+    # @!attribute [rw] max_queue_size
+    #   The maximum size of the message queue for the Lambda function
+    #   component. The AWS IoT Greengrass core stores messages in a FIFO
+    #   (first-in-first-out) queue until it can run the Lambda function to
+    #   consume each message.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_instances_count
+    #   The maximum number of instances that a non-pinned Lambda function
+    #   can run at the same time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_idle_time_in_seconds
+    #   The maximum amount of time in seconds that a non-pinned Lambda
+    #   function can idle before the AWS IoT Greengrass Core software stops
+    #   its process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_in_seconds
+    #   The maximum amount of time in seconds that the Lambda function can
+    #   process a work item.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_timeout_in_seconds
+    #   The interval in seconds at which a pinned (also known as long-lived)
+    #   Lambda function component sends status updates to the Lambda manager
+    #   component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pinned
+    #   Whether or not the Lambda function is pinned, or long-lived.
+    #
+    #   * A pinned Lambda function starts when AWS IoT Greengrass starts and
+    #     keeps running in its own container.
+    #
+    #   * A non-pinned Lambda function starts only when it receives a work
+    #     item and exists after it idles for `maxIdleTimeInSeconds`. If the
+    #     function has multiple work items, the AWS IoT Greengrass Core
+    #     software creates multiple instances of the function.
+    #
+    #   Default: `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] input_payload_encoding_type
+    #   The encoding type that the Lambda function supports.
+    #
+    #   Default: `json`
+    #   @return [String]
+    #
+    # @!attribute [rw] exec_args
+    #   The list of arguments to pass to the Lambda function when it runs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] environment_variables
+    #   The map of environment variables that are available to the Lambda
+    #   function when it runs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] linux_process_params
+    #   The parameters for the Linux process that contains the Lambda
+    #   function.
+    #   @return [Types::LambdaLinuxProcessParams]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaExecutionParameters AWS API Documentation
+    #
+    class LambdaExecutionParameters < Struct.new(
+      :event_sources,
+      :max_queue_size,
+      :max_instances_count,
+      :max_idle_time_in_seconds,
+      :timeout_in_seconds,
+      :status_timeout_in_seconds,
+      :pinned,
+      :input_payload_encoding_type,
+      :exec_args,
+      :environment_variables,
+      :linux_process_params)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an AWS Lambda function to import to create
+    # a component.
+    #
+    # @note When making an API call, you may pass LambdaFunctionRecipeSource
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_arn: "LambdaFunctionARNWithVersionNumber", # required
+    #         component_name: "ComponentNameString",
+    #         component_version: "ComponentVersionString",
+    #         component_platforms: [
+    #           {
+    #             name: "NonEmptyString",
+    #             attributes: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #           },
+    #         ],
+    #         component_dependencies: {
+    #           "NonEmptyString" => {
+    #             version_requirement: "NonEmptyString",
+    #             dependency_type: "HARD", # accepts HARD, SOFT
+    #           },
+    #         },
+    #         component_lambda_parameters: {
+    #           event_sources: [
+    #             {
+    #               topic: "TopicString", # required
+    #               type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
+    #             },
+    #           ],
+    #           max_queue_size: 1,
+    #           max_instances_count: 1,
+    #           max_idle_time_in_seconds: 1,
+    #           timeout_in_seconds: 1,
+    #           status_timeout_in_seconds: 1,
+    #           pinned: false,
+    #           input_payload_encoding_type: "json", # accepts json, binary
+    #           exec_args: ["LambdaExecArg"],
+    #           environment_variables: {
+    #             "NonEmptyString" => "String",
+    #           },
+    #           linux_process_params: {
+    #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #             container_params: {
+    #               memory_size_in_kb: 1,
+    #               mount_ro_sysfs: false,
+    #               volumes: [
+    #                 {
+    #                   source_path: "FileSystemPath", # required
+    #                   destination_path: "FileSystemPath", # required
+    #                   permission: "ro", # accepts ro, rw
+    #                   add_group_owner: false,
+    #                 },
+    #               ],
+    #               devices: [
+    #                 {
+    #                   path: "FileSystemPath", # required
+    #                   permission: "ro", # accepts ro, rw
+    #                   add_group_owner: false,
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lambda_arn
+    #   The [ARN][1] of the Lambda function. The ARN must include the
+    #   version of the function to import. You can't use version aliases
+    #   like `$LATEST`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #
+    #   Defaults to the name of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #
+    #   Defaults to the version of the Lambda function as a semantic
+    #   version. For example, if your function version is `3`, the component
+    #   version becomes `3.0.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_platforms
+    #   The platforms that the component version supports.
+    #   @return [Array<Types::ComponentPlatform>]
+    #
+    # @!attribute [rw] component_dependencies
+    #   The component versions on which this Lambda function component
+    #   depends.
+    #   @return [Hash<String,Types::ComponentDependencyRequirement>]
+    #
+    # @!attribute [rw] component_lambda_parameters
+    #   The system and runtime parameters for the Lambda function as it runs
+    #   on the AWS IoT Greengrass core device.
+    #   @return [Types::LambdaExecutionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaFunctionRecipeSource AWS API Documentation
+    #
+    class LambdaFunctionRecipeSource < Struct.new(
+      :lambda_arn,
+      :component_name,
+      :component_version,
+      :component_platforms,
+      :component_dependencies,
+      :component_lambda_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains parameters for a Linux process that contains an AWS Lambda
+    # function.
+    #
+    # @note When making an API call, you may pass LambdaLinuxProcessParams
+    #   data as a hash:
+    #
+    #       {
+    #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #         container_params: {
+    #           memory_size_in_kb: 1,
+    #           mount_ro_sysfs: false,
+    #           volumes: [
+    #             {
+    #               source_path: "FileSystemPath", # required
+    #               destination_path: "FileSystemPath", # required
+    #               permission: "ro", # accepts ro, rw
+    #               add_group_owner: false,
+    #             },
+    #           ],
+    #           devices: [
+    #             {
+    #               path: "FileSystemPath", # required
+    #               permission: "ro", # accepts ro, rw
+    #               add_group_owner: false,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] isolation_mode
+    #   The isolation mode for the process that contains the Lambda
+    #   function. The process can run in an isolated runtime environment
+    #   inside the AWS IoT Greengrass container, or as a regular process
+    #   outside any container.
+    #
+    #   Default: `GreengrassContainer`
+    #   @return [String]
+    #
+    # @!attribute [rw] container_params
+    #   The parameters for the container in which the Lambda function runs.
+    #   @return [Types::LambdaContainerParams]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaLinuxProcessParams AWS API Documentation
+    #
+    class LambdaLinuxProcessParams < Struct.new(
+      :isolation_mode,
+      :container_params)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a volume that Linux processes in a
+    # container can access. When you define a volume, the AWS IoT Greengrass
+    # Core software mounts the source files to the destination inside the
+    # container.
+    #
+    # @note When making an API call, you may pass LambdaVolumeMount
+    #   data as a hash:
+    #
+    #       {
+    #         source_path: "FileSystemPath", # required
+    #         destination_path: "FileSystemPath", # required
+    #         permission: "ro", # accepts ro, rw
+    #         add_group_owner: false,
+    #       }
+    #
+    # @!attribute [rw] source_path
+    #   The path to the physical volume in the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_path
+    #   The path to the logical volume in the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   The permission to access the volume: read/only (`ro`) or read/write
+    #   (`rw`).
+    #
+    #   Default: `ro`
+    #   @return [String]
+    #
+    # @!attribute [rw] add_group_owner
+    #   Whether or not to add the AWS IoT Greengrass user group as an owner
+    #   of the volume.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaVolumeMount AWS API Documentation
+    #
+    class LambdaVolumeMount < Struct.new(
+      :source_path,
+      :destination_path,
+      :permission,
+      :add_group_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListClientDevicesAssociatedWithCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "IoTThingName", # required
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDeviceRequest AWS API Documentation
+    #
+    class ListClientDevicesAssociatedWithCoreDeviceRequest < Struct.new(
+      :core_device_thing_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_client_devices
+    #   A list that describes the client devices that are associated with
+    #   the core device.
+    #   @return [Array<Types::AssociatedClientDevice>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDeviceResponse AWS API Documentation
+    #
+    class ListClientDevicesAssociatedWithCoreDeviceResponse < Struct.new(
+      :associated_client_devices,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListComponentVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "ComponentARN", # required
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponentVersionsRequest AWS API Documentation
+    #
+    class ListComponentVersionsRequest < Struct.new(
+      :arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] component_versions
+    #   A list of versions that exist for the component.
+    #   @return [Array<Types::ComponentVersionListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponentVersionsResponse AWS API Documentation
+    #
+    class ListComponentVersionsResponse < Struct.new(
+      :component_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListComponentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         scope: "PRIVATE", # accepts PRIVATE, PUBLIC
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] scope
+    #   The scope of the components to list.
+    #
+    #   Default: `PRIVATE`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponentsRequest AWS API Documentation
+    #
+    class ListComponentsRequest < Struct.new(
+      :scope,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] components
+    #   A list that summarizes each component.
+    #   @return [Array<Types::Component>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponentsResponse AWS API Documentation
+    #
+    class ListComponentsResponse < Struct.new(
+      :components,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCoreDevicesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_arn: "ThingGroupARN",
+    #         status: "HEALTHY", # accepts HEALTHY, UNHEALTHY
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] thing_group_arn
+    #   The [ARN][1] of the AWS IoT thing group by which to filter. If you
+    #   specify this parameter, the list includes only core devices that are
+    #   members of this thing group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The core device status by which to filter. If you specify this
+    #   parameter, the list includes only core devices that have this
+    #   status. Choose one of the following options:
+    #
+    #   * `HEALTHY` – The AWS IoT Greengrass Core software and all
+    #     components run on the core device without issue.
+    #
+    #   * `UNHEALTHY` – The AWS IoT Greengrass Core software or a component
+    #     is in a failed state on the core device.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListCoreDevicesRequest AWS API Documentation
+    #
+    class ListCoreDevicesRequest < Struct.new(
+      :thing_group_arn,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_devices
+    #   A list that summarizes each core device.
+    #   @return [Array<Types::CoreDevice>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListCoreDevicesResponse AWS API Documentation
+    #
+    class ListCoreDevicesResponse < Struct.new(
+      :core_devices,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDeploymentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "TargetARN",
+    #         history_filter: "ALL", # accepts ALL, LATEST_ONLY
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] history_filter
+    #   The filter for the list of deployments. Choose one of the following
+    #   options:
+    #
+    #   * `ALL` – The list includes all deployments.
+    #
+    #   * `LATEST_ONLY` – The list includes only the latest revision of each
+    #     deployment.
+    #
+    #   Default: `LATEST_ONLY`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListDeploymentsRequest AWS API Documentation
+    #
+    class ListDeploymentsRequest < Struct.new(
+      :target_arn,
+      :history_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployments
+    #   A list that summarizes each deployment.
+    #   @return [Array<Types::Deployment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListDeploymentsResponse AWS API Documentation
+    #
+    class ListDeploymentsResponse < Struct.new(
+      :deployments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEffectiveDeploymentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "CoreDeviceThingName", # required
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListEffectiveDeploymentsRequest AWS API Documentation
+    #
+    class ListEffectiveDeploymentsRequest < Struct.new(
+      :core_device_thing_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] effective_deployments
+    #   A list that summarizes each deployment on the core device.
+    #   @return [Array<Types::EffectiveDeployment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListEffectiveDeploymentsResponse AWS API Documentation
+    #
+    class ListEffectiveDeploymentsResponse < Struct.new(
+      :effective_deployments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListInstalledComponentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "CoreDeviceThingName", # required
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListInstalledComponentsRequest AWS API Documentation
+    #
+    class ListInstalledComponentsRequest < Struct.new(
+      :core_device_thing_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] installed_components
+    #   A list that summarizes each component on the core device.
+    #   @return [Array<Types::InstalledComponent>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListInstalledComponentsResponse AWS API Documentation
+    #
+    class ListInstalledComponentsResponse < Struct.new(
+      :installed_components,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GenericV2ARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The [ARN][1] of the resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ResolveComponentCandidatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         platform: { # required
+    #           name: "NonEmptyString",
+    #           attributes: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #         },
+    #         component_candidates: [ # required
+    #           {
+    #             component_name: "ComponentNameString",
+    #             component_version: "ComponentVersionString",
+    #             version_requirements: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] platform
+    #   The platform to use to resolve compatible components.
+    #   @return [Types::ComponentPlatform]
+    #
+    # @!attribute [rw] component_candidates
+    #   The list of components to resolve.
+    #   @return [Array<Types::ComponentCandidate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ResolveComponentCandidatesRequest AWS API Documentation
+    #
+    class ResolveComponentCandidatesRequest < Struct.new(
+      :platform,
+      :component_candidates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolved_component_versions
+    #   A list of components that meet the requirements that you specify in
+    #   the request. This list includes each component's recipe that you
+    #   can use to install the component.
+    #   @return [Array<Types::ResolvedComponentVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ResolveComponentCandidatesResponse AWS API Documentation
+    #
+    class ResolveComponentCandidatesResponse < Struct.new(
+      :resolved_component_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a component version that is compatible to
+    # run on a AWS IoT Greengrass core device.
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the component version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_version
+    #   The version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipe
+    #   The recipe of the component version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ResolvedComponentVersion AWS API Documentation
+    #
+    class ResolvedComponentVersion < Struct.new(
+      :arn,
+      :component_name,
+      :component_version,
+      :recipe)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested resource can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that isn't found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that isn't found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Your request exceeds a service quota. For example, you might have the
+    # maximum number of components that you can create.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that exceeds the service quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that exceeds the service quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The code for the quota in [Service Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code for the service in [Service Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type,
+      :quota_code,
+      :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GenericV2ARN", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The [ARN][1] of the resource to tag.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the resource.
+    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   Greengrass V2 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Your request exceeded a request rate quota. For example, you might
+    # have exceeded the amount of times that you can retrieve device or
+    # deployment status per second.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The code for the quota in [Service Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code for the service in [Service Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The amount of time to wait before you retry the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :quota_code,
+      :service_code,
+      :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GenericV2ARN", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The [ARN][1] of the resource to untag.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of keys for tags to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # The request isn't valid. This can occur if your request contains
+    # malformed JSON or unsupported characters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the validation exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The list of fields that failed to validate.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message,
+      :reason,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a validation exception field.
+    #
+    # @!attribute [rw] name
+    #   The name of the exception field.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message of the exception field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ValidationExceptionField AWS API Documentation
+    #
+    class ValidationExceptionField < Struct.new(
+      :name,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+  end
+end

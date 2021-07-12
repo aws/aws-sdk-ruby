@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -525,14 +525,23 @@ module Aws::Rekognition
     #
     #       {
     #         collection_id: "CollectionId", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] collection_id
     #   ID for the collection that you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   collection.
+    #   @return [Hash<String,String>]
+    #
     class CreateCollectionRequest < Struct.new(
-      :collection_id)
+      :collection_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -624,6 +633,10 @@ module Aws::Rekognition
     #           ],
     #           auto_create: false,
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] project_arn
@@ -647,12 +660,32 @@ module Aws::Rekognition
     #   The dataset to use for testing.
     #   @return [Types::TestingData]
     #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   model.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK). You can supply the Amazon Resource Name
+    #   (ARN) of your CMK, the ID of your CMK, or an alias for your CMK. The
+    #   key is used to encrypt training and test images copied into the
+    #   service for model training. Your source images are unaffected. The
+    #   key is also used to encrypt training results and manifest files
+    #   written to the output Amazon S3 bucket (`OutputConfig`).
+    #
+    #   If you don't specify a value for `KmsKeyId`, images copied into the
+    #   service are encrypted using a key that AWS owns and manages.
+    #   @return [String]
+    #
     class CreateProjectVersionRequest < Struct.new(
       :project_arn,
       :version_name,
       :output_config,
       :training_data,
-      :testing_data)
+      :testing_data,
+      :tags,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -691,6 +724,9 @@ module Aws::Rekognition
     #           },
     #         },
     #         role_arn: "RoleArn", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] input
@@ -722,12 +758,18 @@ module Aws::Rekognition
     #   ARN of the IAM role that allows access to the stream processor.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   stream processor.
+    #   @return [Hash<String,String>]
+    #
     class CreateStreamProcessorRequest < Struct.new(
       :input,
       :output,
       :name,
       :settings,
-      :role_arn)
+      :role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1649,10 +1691,10 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] min_confidence
-    #   Sets confidence of word detection. Words with detection confidence
-    #   below this will be excluded from the result. Values should be
-    #   between 0.5 and 1 as Text in Video will not return any result below
-    #   0.5.
+    #   Sets the confidence of word detection. Words with detection
+    #   confidence below this will be excluded from the result. Values
+    #   should be between 50 and 100 as Text in Video will not return any
+    #   result below 50.
     #   @return [Float]
     #
     # @!attribute [rw] min_bounding_box_height
@@ -3011,9 +3053,10 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The input image size exceeds the allowed limit. For more information,
-    # see Limits in Amazon Rekognition in the Amazon Rekognition Developer
-    # Guide.
+    # The input image size exceeds the allowed limit. If you are calling
+    # DetectProtectiveEquipment, the image size or resolution exceeds the
+    # allowed limit. For more information, see Limits in Amazon Rekognition
+    # in the Amazon Rekognition Developer Guide.
     #
     class ImageTooLargeException < Aws::EmptyStructure; end
 
@@ -3495,6 +3538,34 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the model, collection, or stream
+    #   processor that contains the tags that you want a list of.
+    #   @return [String]
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of key-value tags assigned to the resource.
+    #   @return [Hash<String,String>]
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a single type of unsafe content found in an
     # image or video. Each type of moderated content has a label within a
     # hierarchical taxonomy. For more information, see Detecting Unsafe
@@ -3833,6 +3904,11 @@ module Aws::Rekognition
     #   datasets.
     #   @return [Types::GroundTruthManifest]
     #
+    # @!attribute [rw] kms_key_id
+    #   The identifer for the AWS Key Management Service (AWS KMS) customer
+    #   master key that was used to encrypt the model during training.
+    #   @return [String]
+    #
     class ProjectVersionDescription < Struct.new(
       :project_version_arn,
       :creation_timestamp,
@@ -3845,7 +3921,8 @@ module Aws::Rekognition
       :training_data_result,
       :testing_data_result,
       :evaluation_result,
-      :manifest_summary)
+      :manifest_summary,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3983,7 +4060,7 @@ module Aws::Rekognition
     #
     # @!attribute [rw] persons_without_required_equipment
     #   An array of IDs for persons who are not wearing all of the types of
-    #   PPE specified in the RequiredEquipmentTypes field of the detected
+    #   PPE specified in the `RequiredEquipmentTypes` field of the detected
     #   personal protective equipment.
     #   @return [Array<Integer>]
     #
@@ -4102,7 +4179,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A collection with the specified ID already exists.
+    # A resource with the specified ID already exists.
     #
     class ResourceAlreadyExistsException < Aws::EmptyStructure; end
 
@@ -4110,7 +4187,7 @@ module Aws::Rekognition
     #
     class ResourceInUseException < Aws::EmptyStructure; end
 
-    # The collection specified in the request cannot be found.
+    # The resource specified in the request cannot be found.
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
@@ -5428,6 +5505,34 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the model, collection, or stream
+    #   processor that you want to assign the tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags to assign to the resource.
+    #   @return [Hash<String,String>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Information about a technical cue segment. For more information, see
     # SegmentDetection.
     #
@@ -5680,6 +5785,32 @@ module Aws::Rekognition
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the model, collection, or stream
+    #   processor that you want to remove the tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of the tags that you want to remove.
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Contains the Amazon S3 bucket location of the validation data for a
     # model training job.

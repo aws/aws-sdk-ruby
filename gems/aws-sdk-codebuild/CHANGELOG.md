@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-06-24)
+------------------
+
+* Feature - BucketOwnerAccess is currently not supported
+
+1.72.0 (2021-04-12)
+------------------
+
+* Feature - AWS CodeBuild now allows you to set the access permissions for build artifacts, project artifacts, and log files that are uploaded to an Amazon S3 bucket that is owned by another account.
+
+1.71.0 (2021-03-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2021-03-03)
+------------------
+
+* Feature - AWS CodeBuild now supports Session Manager debugging for batch builds.
+
+1.69.0 (2021-02-18)
+------------------
+
+* Feature - AWS CodeBuild now allows you to specify a separate bucket owner as part of the S3 destination in a report group.
+
+1.68.0 (2021-02-16)
+------------------
+
+* Feature - This release provides per-project limits for the number of concurrent builds
+
+1.67.0 (2021-02-03)
+------------------
+
+* Feature - Documentation updates for codebuild
+
+1.66.0 (2021-02-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2020-11-24)
+------------------
+
+* Feature - Adding GetReportGroupTrend API for Test Reports.
+
+1.64.0 (2020-11-18)
+------------------
+
+* Feature - AWS CodeBuild - Adding Status field for Report Group
+
 1.63.0 (2020-09-30)
 ------------------
 

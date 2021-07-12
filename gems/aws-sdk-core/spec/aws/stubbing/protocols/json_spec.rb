@@ -26,7 +26,7 @@ module Aws
           it 'populates the expected headers' do
             resp = Json.new.stub_data(api, operation, {})
             expect(resp.headers.to_h).to eq({
-              "content-type" => "application/x-amz-json-",
+              "content-type" => "application/x-amz-json-1.0",
               "x-amzn-requestid" => "stubbed-request-id",
             })
           end
