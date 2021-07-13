@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove `content-length` header from `AsyncClient`.
+
 1.29.0 (2021-05-11)
 ------------------
 
