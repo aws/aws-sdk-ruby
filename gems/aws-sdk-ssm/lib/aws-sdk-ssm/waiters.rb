@@ -136,6 +136,11 @@ module Aws::SSM
                 "matcher" => "path",
                 "state" => "failure",
                 "argument" => "status"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "error",
+                "expected" => "InvocationDoesNotExist"
               }
             ]
           )
