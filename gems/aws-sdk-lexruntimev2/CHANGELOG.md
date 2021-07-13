@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove `content-length` header from `AsyncClient`.
+
 1.3.0 (2021-06-15)
 ------------------
 
@@ -20,4 +22,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-lexruntimev2`.
-
