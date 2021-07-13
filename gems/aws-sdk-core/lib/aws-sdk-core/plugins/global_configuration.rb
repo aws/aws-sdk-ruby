@@ -44,6 +44,7 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       @identifiers = Set.new()
+      IDENTIFIERS = Aws::Partitions.service_ids.keys.map { |s| s.downcase.to_sym }
 
       # @api private
       def before_initialize(client_class, options)
@@ -64,6 +65,7 @@ module Aws
 
       def apply_aws_defaults(client_class, options)
         Aws.config.each do |option_name, default|
+          next if IDENTIFIERS.include?(option_name)
           next if self.class.identifiers.include?(option_name)
           next if options.key?(option_name)
           options[option_name] = default

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix an issue where global `Aws.config` could not be used with more than one service.
+
 3.117.0 (2021-07-12)
 ------------------
 
