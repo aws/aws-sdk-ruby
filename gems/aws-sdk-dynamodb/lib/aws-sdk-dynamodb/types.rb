@@ -93,7 +93,7 @@ module Aws::DynamoDB
     #
     # @note AttributeValue is a union - when making an API calls you must set exactly one of the members.
     #
-    # @note AttributeValue is a union - when returned from an API call exactly one value will be set.  You may call `#member` to determine which value is set.
+    # @note AttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AttributeValue corresponding to the set member.
     #
     # @!attribute [rw] s
     #   An attribute of type String. For example:
@@ -194,19 +194,6 @@ module Aws::DynamoDB
       class NULL < AttributeValue; end
       class BOOL < AttributeValue; end
       class Unknown < AttributeValue; end
-
-      MEMBER_SUBCLASS = {
-      s:S,
-      n:N,
-      b:B,
-      ss:SS,
-      ns:NS,
-      bs:BS,
-      m:M,
-      l:L,
-      null:NULL,
-      bool:BOOL,
-      unknown:Unknown}
     end
 
     # For the `UpdateItem` operation, represents the attributes to be

@@ -128,8 +128,8 @@ module AwsSdkCodeGenerator
         if @output_shapes.include?(shape_name)
           if shape['union']
             "@note #{shape_name} is a union - when returned from an API call"\
-            ' exactly one value will be set.  You may call `#member` to'\
-            ' determine which value is set.'
+            ' exactly one value will be set and the returned type will'\
+            " be a subclass of #{shape_name} corresponding to the set member."
           end
         end
       end
