@@ -55,7 +55,7 @@ module Aws
         validate({})
       end
 
-      it 'raises an error when a required paramter is missing' do
+      it 'raises an error when a required parameter is missing' do
         shapes['StructureShape']['required'] = %w(String)
         validate({}, 'missing required parameter params[:string]')
       end
@@ -87,6 +87,23 @@ module Aws
         validate({})
       end
 
+    end
+
+    describe 'unions' do
+      it 'raises an error when no values are set' do
+        shapes['StructureShape']['union'] = true
+        validate({}, 'No values provided to union')
+      end
+
+      it 'raises an error when multiple values are set' do
+        shapes['StructureShape']['union'] = true
+        validate({string: 's', boolean: true}, 'multiple values provided to union')
+      end
+
+      it 'access a struct with exactly one value set' do
+        shapes['StructureShape']['union'] = true
+        validate({string: 's'})
+      end
     end
 
     describe 'lists' do

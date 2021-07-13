@@ -70,6 +70,14 @@ module Aws
           end
         end
 
+        if @validate_required && shape.union
+          if values.length > 1
+            errors << "multiple values provided to union at #{context} - must contain exactly one of the supported types: #{shape.member_names.join(', ')}"
+          elsif values.length == 0
+            errors << "No values provided to union at #{context} - must contain exactly one of the supported types: #{shape.member_names.join(', ')}"
+          end
+        end
+
         # validate non-nil members
         values.each_pair do |name, value|
           unless value.nil?

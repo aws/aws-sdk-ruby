@@ -114,6 +114,9 @@ module Seahorse
         # @return [String, nil]
         attr_accessor :documentation
 
+        # @return [Boolean]
+        attr_accessor :union
+
         # Gets metadata for the given `key`.
         def [](key)
           @metadata[key.to_s]
@@ -262,6 +265,23 @@ module Seahorse
           @members_by_location_name[location_name]
         end
 
+      end
+
+      class UnionShape < StructureShape
+        def initialize(options = {})
+          @member_subclasses = {}
+          super options.merge(union: true)
+        end
+
+        # @api private
+        def member_subclass(member)
+          @member_subclasses[member]
+        end
+
+        # @api private
+        def add_member_subclass(member, subclass)
+          @member_subclasses[member] = subclass
+        end
       end
 
       class TimestampShape < Shape; end
