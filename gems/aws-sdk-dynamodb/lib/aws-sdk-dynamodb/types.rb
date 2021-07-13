@@ -182,6 +182,31 @@ module Aws::DynamoDB
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
+
+      class S < AttributeValue; end
+      class N < AttributeValue; end
+      class B < AttributeValue; end
+      class SS < AttributeValue; end
+      class NS < AttributeValue; end
+      class BS < AttributeValue; end
+      class M < AttributeValue; end
+      class L < AttributeValue; end
+      class NULL < AttributeValue; end
+      class BOOL < AttributeValue; end
+      class Unknown < AttributeValue; end
+
+      MEMBER_SUBCLASS = {
+      s:S,
+      n:N,
+      b:B,
+      ss:SS,
+      ns:NS,
+      bs:BS,
+      m:M,
+      l:L,
+      null:NULL,
+      bool:BOOL,
+      unknown:Unknown}
     end
 
     # For the `UpdateItem` operation, represents the attributes to be

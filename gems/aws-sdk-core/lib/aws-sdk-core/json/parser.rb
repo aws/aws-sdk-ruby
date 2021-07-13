@@ -32,6 +32,14 @@ module Aws
             target[:unknown] = { name: key, value: value }
           end
         end
+        if shape.union
+          # convert to subclass
+          require 'byebug'
+          byebug
+          member_subclass = ref.shape.struct_class.constants[:MEMBER_SUBCLASS][target.member].new
+          member_subclass[target.member] = target.value
+          target = member_subclass
+        end
         target
       end
 

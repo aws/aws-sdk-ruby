@@ -20,6 +20,15 @@ module {{module_name}}
       include Aws::Structure
       {{#union?}}
       include Aws::Structure::Union
+
+      {{#members}}
+      class {{member_class_name}} < {{class_name}}; end
+      {{/members}}
+
+      MEMBER_SUBCLASS = {
+      {{#members}}
+      {{member_name}}:{{member_class_name}}{{^last}},{{/last}}{{#last}}}{{/last}}
+      {{/members}}
       {{/union?}}
     end
     {{/empty?}}

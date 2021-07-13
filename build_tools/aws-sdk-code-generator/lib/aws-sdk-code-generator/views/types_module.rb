@@ -90,6 +90,7 @@ module AwsSdkCodeGenerator
             @api['shapes'][member_ref['shape']]['sensitive'])
           StructMember.new(
             member_name: underscore(member_name),
+            member_class_name: member_name,
             sensitive: sensitive
           )
         end
@@ -270,7 +271,7 @@ module AwsSdkCodeGenerator
           @documentation = options.fetch(:documentation)
           @sensitive_params = options.fetch(:sensitive_params)
           @union = options.fetch(:union)
-          @members << StructMember.new(member_name: :unknown) if @union
+          @members << StructMember.new(member_name: :unknown, member_class_name: 'Unknown') if @union
           if @members.nil? || @members.empty?
             @empty = true
           else
@@ -306,6 +307,11 @@ module AwsSdkCodeGenerator
 
         def initialize(options)
           @member_name = options.fetch(:member_name)
+          @member_class_name = options.fetch(:member_class_name, @member_name
+             .to_s
+             .split('_')
+             .collect(&:capitalize)
+             .join)
           @sensitive = options.fetch(:sensitive, false)
           @last = false
         end
@@ -315,6 +321,9 @@ module AwsSdkCodeGenerator
 
         # @return [Boolean]
         attr_accessor :sensitive
+
+        # @return [String]
+        attr_accessor :member_class_name
 
         # @return [Boolean]
         attr_accessor :last
