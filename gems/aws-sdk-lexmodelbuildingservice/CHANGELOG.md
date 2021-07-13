@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-07-13)
+------------------
+
+* Feature - Customers can now migrate bots built with Lex V1 APIs to V2 APIs. This release adds APIs to initiate and manage the migration of a bot.
+
 1.45.0 (2021-04-01)
 ------------------
 

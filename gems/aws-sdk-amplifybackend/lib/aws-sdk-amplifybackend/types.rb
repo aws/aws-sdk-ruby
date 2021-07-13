@@ -261,7 +261,7 @@ module Aws::AmplifyBackend
     #
     # @!attribute [rw] api_name
     #   The API name used to interact with the data model, configured as a
-    #   part of the amplify project.
+    #   part of your Amplify project.
     #   @return [String]
     #
     # @!attribute [rw] conflict_resolution
@@ -335,6 +335,47 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # Describes Apple social federation configurations for allowing your app
+    # users to sign in using OAuth.
+    #
+    # @note When making an API call, you may pass BackendAuthAppleProviderConfig
+    #   data as a hash:
+    #
+    #       {
+    #         client_id: "__string",
+    #         key_id: "__string",
+    #         private_key: "__string",
+    #         team_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] client_id
+    #   Describes the client\_id (also called Services ID) that comes from
+    #   Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   Describes the key\_id that comes from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   Describes the private\_key that comes from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_id
+    #   Describes the team\_id that comes from Apple.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/BackendAuthAppleProviderConfig AWS API Documentation
+    #
+    class BackendAuthAppleProviderConfig < Struct.new(
+      :client_id,
+      :key_id,
+      :private_key,
+      :team_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The response object for this operation.
     #
     # @!attribute [rw] app_id
@@ -386,12 +427,12 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] client_id
-    #   Describes the client\_id which can be obtained from the third-party
+    #   Describes the client\_id, which can be obtained from the third-party
     #   social federation provider.
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   Describes the client\_secret which can be obtained from third-party
+    #   Describes the client\_secret, which can be obtained from third-party
     #   social federation providers.
     #   @return [String]
     #
@@ -437,7 +478,7 @@ module Aws::AmplifyBackend
     # The request object for this operation.
     #
     # @!attribute [rw] operation
-    #   Filters the list of response objects to only include those with the
+    #   Filters the list of response objects to include only those with the
     #   specified operation name.
     #   @return [String]
     #
@@ -774,7 +815,7 @@ module Aws::AmplifyBackend
     #
     # @!attribute [rw] delivery_method
     #   Describes which mode to use (either SMS or email) to deliver
-    #   messages to app users that want to recover their password.
+    #   messages to app users who want to recover their password.
     #   @return [String]
     #
     # @!attribute [rw] email_settings
@@ -826,9 +867,9 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # Describes whether multi-factor authentication policies should be
-    # applied for your Amazon Cognito user pool configured as a part of your
-    # Amplify project.
+    # Describes whether to apply multi-factor authentication policies for
+    # your Amazon Cognito user pool configured as a part of your Amplify
+    # project.
     #
     # @note When making an API call, you may pass CreateBackendAuthMFAConfig
     #   data as a hash:
@@ -842,7 +883,7 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] mfa_mode
-    #   Describes whether MFA should be \[ON, OFF, OPTIONAL\] for
+    #   Describes whether MFA should be \[ON, OFF, or OPTIONAL\] for
     #   authentication in your Amplify project.
     #   @return [String]
     #
@@ -884,6 +925,12 @@ module Aws::AmplifyBackend
     #             client_id: "__string",
     #             client_secret: "__string",
     #           },
+    #           sign_in_with_apple: {
+    #             client_id: "__string",
+    #             key_id: "__string",
+    #             private_key: "__string",
+    #             team_id: "__string",
+    #           },
     #         },
     #       }
     #
@@ -906,7 +953,8 @@ module Aws::AmplifyBackend
     #   @return [Array<String>]
     #
     # @!attribute [rw] redirect_sign_out_ur_is
-    #   Redirect URLs used by OAuth when a user signs out of an Amplify app.
+    #   Redirect URLs that OAuth uses when a user signs out of an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] social_provider_settings
@@ -1030,6 +1078,12 @@ module Aws::AmplifyBackend
     #                   client_id: "__string",
     #                   client_secret: "__string",
     #                 },
+    #                 sign_in_with_apple: {
+    #                   client_id: "__string",
+    #                   key_id: "__string",
+    #                   private_key: "__string",
+    #                   team_id: "__string",
+    #                 },
     #               },
     #             },
     #             password_policy: {
@@ -1118,6 +1172,12 @@ module Aws::AmplifyBackend
     #               login_with_amazon: {
     #                 client_id: "__string",
     #                 client_secret: "__string",
+    #               },
+    #               sign_in_with_apple: {
+    #                 client_id: "__string",
+    #                 key_id: "__string",
+    #                 private_key: "__string",
+    #                 team_id: "__string",
     #               },
     #             },
     #           },
@@ -1238,6 +1298,12 @@ module Aws::AmplifyBackend
     #               client_id: "__string",
     #               client_secret: "__string",
     #             },
+    #             sign_in_with_apple: {
+    #               client_id: "__string",
+    #               key_id: "__string",
+    #               private_key: "__string",
+    #               team_id: "__string",
+    #             },
     #           },
     #         },
     #         password_policy: {
@@ -1255,9 +1321,9 @@ module Aws::AmplifyBackend
     #   @return [Types::CreateBackendAuthForgotPasswordConfig]
     #
     # @!attribute [rw] mfa
-    #   Describes whether multi-factor authentication policies should be
-    #   applied for your Amazon Cognito user pool configured as a part of
-    #   your Amplify project.
+    #   Describes whether to apply multi-factor authentication policies for
+    #   your Amazon Cognito user pool configured as a part of your Amplify
+    #   project.
     #   @return [Types::CreateBackendAuthMFAConfig]
     #
     # @!attribute [rw] o_auth
@@ -3086,6 +3152,12 @@ module Aws::AmplifyBackend
     #           client_id: "__string",
     #           client_secret: "__string",
     #         },
+    #         sign_in_with_apple: {
+    #           client_id: "__string",
+    #           key_id: "__string",
+    #           private_key: "__string",
+    #           team_id: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] facebook
@@ -3103,12 +3175,18 @@ module Aws::AmplifyBackend
     #   your app users to sign in using OAuth.
     #   @return [Types::BackendAuthSocialProviderConfig]
     #
+    # @!attribute [rw] sign_in_with_apple
+    #   Describes Apple social federation configurations for allowing your
+    #   app users to sign in using OAuth.
+    #   @return [Types::BackendAuthAppleProviderConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/SocialProviderSettings AWS API Documentation
     #
     class SocialProviderSettings < Struct.new(
       :facebook,
       :google,
-      :login_with_amazon)
+      :login_with_amazon,
+      :sign_in_with_apple)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3286,7 +3364,7 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] unauthenticated_login
-    #   A boolean value which can be set to allow or disallow guest-level
+    #   A boolean value that can be set to allow or disallow guest-level
     #   authorization into your Amplify app.
     #   @return [Boolean]
     #
@@ -3355,6 +3433,12 @@ module Aws::AmplifyBackend
     #             client_id: "__string",
     #             client_secret: "__string",
     #           },
+    #           sign_in_with_apple: {
+    #             client_id: "__string",
+    #             key_id: "__string",
+    #             private_key: "__string",
+    #             team_id: "__string",
+    #           },
     #         },
     #       }
     #
@@ -3374,11 +3458,13 @@ module Aws::AmplifyBackend
     #   @return [Array<String>]
     #
     # @!attribute [rw] redirect_sign_in_ur_is
-    #   Redirect URLs used by OAuth when a user signs in to an Amplify app.
+    #   Redirect URLs that OAuth uses when a user signs in to an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redirect_sign_out_ur_is
-    #   Redirect URLs used by OAuth when a user signs out of an Amplify app.
+    #   Redirect URLs that OAuth uses when a user signs out of an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] social_provider_settings
@@ -3497,6 +3583,12 @@ module Aws::AmplifyBackend
     #                   client_id: "__string",
     #                   client_secret: "__string",
     #                 },
+    #                 sign_in_with_apple: {
+    #                   client_id: "__string",
+    #                   key_id: "__string",
+    #                   private_key: "__string",
+    #                   team_id: "__string",
+    #                 },
     #               },
     #             },
     #             password_policy: {
@@ -3581,6 +3673,12 @@ module Aws::AmplifyBackend
     #               login_with_amazon: {
     #                 client_id: "__string",
     #                 client_secret: "__string",
+    #               },
+    #               sign_in_with_apple: {
+    #                 client_id: "__string",
+    #                 key_id: "__string",
+    #                 private_key: "__string",
+    #                 team_id: "__string",
     #               },
     #             },
     #           },
@@ -3699,6 +3797,12 @@ module Aws::AmplifyBackend
     #               client_id: "__string",
     #               client_secret: "__string",
     #             },
+    #             sign_in_with_apple: {
+    #               client_id: "__string",
+    #               key_id: "__string",
+    #               private_key: "__string",
+    #               team_id: "__string",
+    #             },
     #           },
     #         },
     #         password_policy: {
@@ -3713,9 +3817,9 @@ module Aws::AmplifyBackend
     #   @return [Types::UpdateBackendAuthForgotPasswordConfig]
     #
     # @!attribute [rw] mfa
-    #   Describes whether multi-factor authentication policies should be
-    #   applied for your Amazon Cognito user pool configured as a part of
-    #   your Amplify project.
+    #   Describes whether to apply multi-factor authentication policies for
+    #   your Amazon Cognito user pool configured as a part of your Amplify
+    #   project.
     #   @return [Types::UpdateBackendAuthMFAConfig]
     #
     # @!attribute [rw] o_auth

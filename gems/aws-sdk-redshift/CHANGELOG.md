@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-07-13)
+------------------
+
+* Feature - Release new APIs to support new Redshift feature - Authentication Profile
+
 1.64.0 (2021-06-28)
 ------------------
 

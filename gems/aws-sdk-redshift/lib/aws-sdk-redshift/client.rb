@@ -384,7 +384,7 @@ module Aws::Redshift
     # website.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID that owns the cluster.
+    #   The Region ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster that receives data from the
@@ -433,8 +433,7 @@ module Aws::Redshift
     #
     # If you authorize access to an Amazon EC2 security group, specify
     # *EC2SecurityGroupName* and *EC2SecurityGroupOwnerId*. The Amazon EC2
-    # security group and Amazon Redshift cluster must be in the same AWS
-    # Region.
+    # security group and Amazon Redshift cluster must be in the same Region.
     #
     # If you authorize access to a CIDR/IP address range, specify *CIDRIP*.
     # For an overview of CIDR blocks, see the Wikipedia article on
@@ -461,9 +460,9 @@ module Aws::Redshift
     #   The EC2 security group to be added the Amazon Redshift security group.
     #
     # @option params [String] :ec2_security_group_owner_id
-    #   The AWS account number of the owner of the security group specified by
-    #   the *EC2SecurityGroupName* parameter. The AWS Access Key ID is not an
-    #   acceptable value.
+    #   The account number of the owner of the security group specified by the
+    #   *EC2SecurityGroupName* parameter. The Amazon Web Services Access Key
+    #   ID is not an acceptable value.
     #
     #   Example: `111122223333`
     #
@@ -516,7 +515,7 @@ module Aws::Redshift
     #   The cluster identifier of the cluster to grant access to.
     #
     # @option params [required, String] :account
-    #   The AWS account ID to grant access to.
+    #   The account ID to grant access to.
     #
     # @option params [Array<String>] :vpc_ids
     #   The virtual private cloud (VPC) identifiers to grant access to.
@@ -563,8 +562,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Authorizes the specified AWS customer account to restore the specified
-    # snapshot.
+    # Authorizes the specified account to restore the specified snapshot.
     #
     # For more information about working with snapshots, go to [Amazon
     # Redshift Snapshots][1] in the *Amazon Redshift Cluster Management
@@ -584,10 +582,11 @@ module Aws::Redshift
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
-    #   The identifier of the AWS customer account authorized to restore the
-    #   specified snapshot.
+    #   The identifier of the account authorized to restore the specified
+    #   snapshot.
     #
-    #   To share a snapshot with AWS support, specify amazon-redshift-support.
+    #   To share a snapshot with Amazon Web Services Support, specify
+    #   amazon-redshift-support.
     #
     # @return [Types::AuthorizeSnapshotAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -860,7 +859,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for the AWS account that is making the request.
+    #   * Must be unique for the account that is making the request.
     #
     # @option params [Integer] :manual_snapshot_retention_period
     #   The number of days that a manual snapshot is retained. If the value is
@@ -934,6 +933,41 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Creates an authentication profile with the specified parameters.
+    #
+    # @option params [required, String] :authentication_profile_name
+    #   The name of the authentication profile to be created.
+    #
+    # @option params [required, String] :authentication_profile_content
+    #   The content of the authentication profile in JSON format. The maximum
+    #   length of the JSON string is determined by a quota for your account.
+    #
+    # @return [Types::CreateAuthenticationProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAuthenticationProfileResult#authentication_profile_name #authentication_profile_name} => String
+    #   * {Types::CreateAuthenticationProfileResult#authentication_profile_content #authentication_profile_content} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_authentication_profile({
+    #     authentication_profile_name: "AuthenticationProfileNameString", # required
+    #     authentication_profile_content: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authentication_profile_name #=> String
+    #   resp.authentication_profile_content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateAuthenticationProfile AWS API Documentation
+    #
+    # @overload create_authentication_profile(params = {})
+    # @param [Hash] params ({})
+    def create_authentication_profile(params = {}, options = {})
+      req = build_request(:create_authentication_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a new cluster with the specified parameters.
     #
     # To create a cluster in Virtual Private Cloud (VPC), you must provide a
@@ -989,7 +1023,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an AWS account.
+    #   * Must be unique for all clusters within an account.
     #
     #   Example: `myexamplecluster`
     #
@@ -1018,7 +1052,7 @@ module Aws::Redshift
     #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
     #
     # @option params [required, String] :master_username
-    #   The user name associated with the master user account for the cluster
+    #   The user name associated with the admin user account for the cluster
     #   that is being created.
     #
     #   Constraints:
@@ -1036,7 +1070,7 @@ module Aws::Redshift
     #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @option params [required, String] :master_user_password
-    #   The password associated with the master user account for the cluster
+    #   The password associated with the admin user account for the cluster
     #   that is being created.
     #
     #   Constraints:
@@ -1230,8 +1264,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #
     # @option params [String] :kms_key_id
-    #   The AWS Key Management Service (KMS) key ID of the encryption key that
-    #   you want to use to encrypt data in the cluster.
+    #   The Key Management Service (KMS) key ID of the encryption key that you
+    #   want to use to encrypt data in the cluster.
     #
     # @option params [Boolean] :enhanced_vpc_routing
     #   An option that specifies whether to create the cluster with enhanced
@@ -1252,10 +1286,10 @@ module Aws::Redshift
     #   Reserved.
     #
     # @option params [Array<String>] :iam_roles
-    #   A list of AWS Identity and Access Management (IAM) roles that can be
-    #   used by the cluster to access other AWS services. You must supply the
-    #   IAM roles in their Amazon Resource Name (ARN) format. You can supply
-    #   up to 10 IAM roles in a single request.
+    #   A list of Identity and Access Management (IAM) roles that can be used
+    #   by the cluster to access other Amazon Web Services services. You must
+    #   supply the IAM roles in their Amazon Resource Name (ARN) format. You
+    #   can supply up to 10 IAM roles in a single request.
     #
     #   A cluster can have up to 10 IAM roles associated with it at any time.
     #
@@ -1276,7 +1310,7 @@ module Aws::Redshift
     #   (Advanced Query Accelerator) when it is created. Possible values
     #   include the following.
     #
-    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #   * enabled - Use AQUA if it is available for the current Region and
     #     Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
@@ -1477,7 +1511,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique withing your AWS account.
+    #   * Must be unique withing your account.
     #
     #   <note markdown="1"> This value is stored as a lower-case string.
     #
@@ -1490,7 +1524,7 @@ module Aws::Redshift
     #
     #   To get a list of valid parameter group family names, you can call
     #   DescribeClusterParameterGroups. By default, Amazon Redshift returns a
-    #   list of all the parameter groups that are owned by your AWS account,
+    #   list of all the parameter groups that are owned by your account,
     #   including the default parameter groups for each Amazon Redshift engine
     #   version. The parameter group family names associated with the default
     #   parameter groups provide you the valid values. For example, a valid
@@ -1559,7 +1593,7 @@ module Aws::Redshift
     #
     #   * Must not be "Default".
     #
-    #   * Must be unique for all security groups that are created by your AWS
+    #   * Must be unique for all security groups that are created by your
     #     account.
     #
     #   Example: `examplesecuritygroup`
@@ -1630,7 +1664,7 @@ module Aws::Redshift
     #
     # @option params [required, String] :snapshot_identifier
     #   A unique identifier for the snapshot that you are requesting. This
-    #   identifier must be unique for all snapshots within the AWS account.
+    #   identifier must be unique for all snapshots within the account.
     #
     #   Constraints:
     #
@@ -1748,7 +1782,7 @@ module Aws::Redshift
     #
     #   * Must not be "Default".
     #
-    #   * Must be unique for all subnet groups that are created by your AWS
+    #   * Must be unique for all subnet groups that are created by your
     #     account.
     #
     #   Example: `examplesubnetgroup`
@@ -1812,8 +1846,8 @@ module Aws::Redshift
     #   The cluster identifier of the cluster to access.
     #
     # @option params [String] :resource_owner
-    #   The AWS account ID of the owner of the cluster. This is only required
-    #   if the cluster is in another AWS account.
+    #   The account ID of the owner of the cluster. This is only required if
+    #   the cluster is in another account.
     #
     # @option params [required, String] :endpoint_name
     #   The Redshift-managed VPC endpoint name.
@@ -1903,11 +1937,11 @@ module Aws::Redshift
     # type = cluster and source identifier = my-cluster-1, notifications
     # will be sent for all the cluster events for my-cluster-1. If you
     # specify a source type but do not specify a source identifier, you will
-    # receive notice of the events for the objects of that type in your AWS
+    # receive notice of the events for the objects of that type in your
     # account. If you do not specify either the SourceType nor the
     # SourceIdentifier, you will be notified of events generated from all
-    # Amazon Redshift sources belonging to your AWS account. You must
-    # specify a source type if you specify a source ID.
+    # Amazon Redshift sources belonging to your account. You must specify a
+    # source type if you specify a source ID.
     #
     # @option params [required, String] :subscription_name
     #   The name of the event subscription to be created.
@@ -1931,8 +1965,8 @@ module Aws::Redshift
     #   The type of source that will be generating the events. For example, if
     #   you want to be notified of events generated by a cluster, you would
     #   set this parameter to cluster. If this value is not specified, events
-    #   are returned for all Amazon Redshift objects in your AWS account. You
-    #   must specify a source type in order to specify source IDs.
+    #   are returned for all Amazon Redshift objects in your account. You must
+    #   specify a source type in order to specify source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
     #   cluster-security-group, cluster-snapshot, and scheduled-action.
@@ -2259,8 +2293,8 @@ module Aws::Redshift
     end
 
     # Creates a snapshot copy grant that permits Amazon Redshift to use a
-    # customer master key (CMK) from AWS Key Management Service (AWS KMS) to
-    # encrypt copied snapshots in a destination region.
+    # customer master key (CMK) from Key Management Service (KMS) to encrypt
+    # copied snapshots in a destination region.
     #
     # For more information about managing snapshot copy grants, go to
     # [Amazon Redshift Database Encryption][1] in the *Amazon Redshift
@@ -2272,7 +2306,7 @@ module Aws::Redshift
     #
     # @option params [required, String] :snapshot_copy_grant_name
     #   The name of the snapshot copy grant. This name must be unique in the
-    #   region for the AWS account.
+    #   region for the account.
     #
     #   Constraints:
     #
@@ -2284,7 +2318,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an AWS account.
+    #   * Must be unique for all clusters within an account.
     #
     # @option params [String] :kms_key_id
     #   The unique identifier of the customer master key (CMK) to which to
@@ -2525,6 +2559,34 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def create_usage_limit(params = {}, options = {})
       req = build_request(:create_usage_limit, params)
+      req.send_request(options)
+    end
+
+    # Deletes an authentication profile.
+    #
+    # @option params [required, String] :authentication_profile_name
+    #   The name of the authentication profile to delete.
+    #
+    # @return [Types::DeleteAuthenticationProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAuthenticationProfileResult#authentication_profile_name #authentication_profile_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_authentication_profile({
+    #     authentication_profile_name: "AuthenticationProfileNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authentication_profile_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteAuthenticationProfile AWS API Documentation
+    #
+    # @overload delete_authentication_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_authentication_profile(params = {}, options = {})
+      req = build_request(:delete_authentication_profile, params)
       req.send_request(options)
     end
 
@@ -3034,7 +3096,7 @@ module Aws::Redshift
     # website.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID that owns the cluster.
+    #   The Region ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster that receives data from the
@@ -3222,6 +3284,37 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Describes an authentication profile.
+    #
+    # @option params [String] :authentication_profile_name
+    #   The name of the authentication profile to describe. If not specified
+    #   then all authentication profiles owned by the account are listed.
+    #
+    # @return [Types::DescribeAuthenticationProfilesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAuthenticationProfilesResult#authentication_profiles #authentication_profiles} => Array&lt;Types::AuthenticationProfile&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_authentication_profiles({
+    #     authentication_profile_name: "AuthenticationProfileNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authentication_profiles #=> Array
+    #   resp.authentication_profiles[0].authentication_profile_name #=> String
+    #   resp.authentication_profiles[0].authentication_profile_content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAuthenticationProfiles AWS API Documentation
+    #
+    # @overload describe_authentication_profiles(params = {})
+    # @param [Hash] params ({})
+    def describe_authentication_profiles(params = {}, options = {})
+      req = build_request(:describe_authentication_profiles, params)
+      req.send_request(options)
+    end
+
     # Returns an array of `ClusterDbRevision` objects.
     #
     # @option params [String] :cluster_identifier
@@ -3335,10 +3428,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeClusterParameterGroups request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching cluster
@@ -3440,10 +3533,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeClusterParameters request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @return [Types::ClusterParameterGroupDetails] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3529,10 +3622,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeClusterSecurityGroups request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     #   Constraints: You can specify either the **ClusterSecurityGroupName**
     #   parameter or the **Marker** parameter, but not both.
@@ -3606,9 +3699,8 @@ module Aws::Redshift
 
     # Returns one or more snapshot objects, which contain metadata about
     # your cluster snapshots. By default, this operation returns information
-    # about all snapshots of all clusters that are owned by you AWS customer
-    # account. No information is returned for snapshots owned by inactive
-    # AWS customer accounts.
+    # about all snapshots of all clusters that are owned by your account. No
+    # information is returned for snapshots owned by inactive accounts.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all snapshots that match any combination of
@@ -3673,16 +3765,16 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeClusterSnapshots request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [String] :owner_account
-    #   The AWS customer account used to create or copy the snapshot. Use this
-    #   field to filter the results to snapshots owned by a particular
-    #   account. To describe snapshots you own, either specify your AWS
-    #   customer account, or do not specify the parameter.
+    #   The account used to create or copy the snapshot. Use this field to
+    #   filter the results to snapshots owned by a particular account. To
+    #   describe snapshots you own, either specify your account, or do not
+    #   specify the parameter.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching cluster
@@ -3814,7 +3906,7 @@ module Aws::Redshift
     # Returns one or more cluster subnet group objects, which contain
     # metadata about your cluster subnet groups. By default, this operation
     # returns information about all cluster subnet groups that are defined
-    # in you AWS account.
+    # in your account.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all subnet groups that match any combination
@@ -3845,10 +3937,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeClusterSubnetGroups request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching cluster
@@ -4006,10 +4098,11 @@ module Aws::Redshift
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeClusterVersions
-    #   request exceed the value specified in `MaxRecords`, AWS returns a
-    #   value in the `Marker` field of the response. You can retrieve the next
-    #   set of response records by providing the returned marker value in the
-    #   `Marker` parameter and retrying the request.
+    #   request exceed the value specified in `MaxRecords`, Amazon Web
+    #   Services returns a value in the `Marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
     #
     # @return [Types::ClusterVersionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4085,10 +4178,11 @@ module Aws::Redshift
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeClusters
-    #   request exceed the value specified in `MaxRecords`, AWS returns a
-    #   value in the `Marker` field of the response. You can retrieve the next
-    #   set of response records by providing the returned marker value in the
-    #   `Marker` parameter and retrying the request.
+    #   request exceed the value specified in `MaxRecords`, Amazon Web
+    #   Services returns a value in the `Marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
     #
     #   Constraints: You can specify either the **ClusterIdentifier**
     #   parameter or the **Marker** parameter, but not both.
@@ -4285,10 +4379,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeDefaultClusterParameters request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @return [Types::DescribeDefaultClusterParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4334,7 +4428,7 @@ module Aws::Redshift
     #   The cluster identifier associated with the described endpoint.
     #
     # @option params [String] :resource_owner
-    #   The AWS account ID of the owner of the cluster.
+    #   The account ID of the owner of the cluster.
     #
     # @option params [String] :endpoint_name
     #   The name of the endpoint to be described.
@@ -4410,8 +4504,8 @@ module Aws::Redshift
     #   The cluster identifier of the cluster to access.
     #
     # @option params [String] :account
-    #   The AWS account ID of either the cluster owner (grantor) or grantee.
-    #   If `Grantee` parameter is true, then the `Account` value is of the
+    #   The Aaccount ID of either the cluster owner (grantor) or grantee. If
+    #   `Grantee` parameter is true, then the `Account` value is of the
     #   grantor.
     #
     # @option params [Boolean] :grantee
@@ -4552,10 +4646,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeEventSubscriptions request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching event
@@ -4710,10 +4804,10 @@ module Aws::Redshift
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeEvents request
-    #   exceed the value specified in `MaxRecords`, AWS returns a value in the
-    #   `Marker` field of the response. You can retrieve the next set of
-    #   response records by providing the returned marker value in the
-    #   `Marker` parameter and retrying the request.
+    #   exceed the value specified in `MaxRecords`, Amazon Web Services
+    #   returns a value in the `Marker` field of the response. You can
+    #   retrieve the next set of response records by providing the returned
+    #   marker value in the `Marker` parameter and retrying the request.
     #
     # @return [Types::EventsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4758,7 +4852,7 @@ module Aws::Redshift
 
     # Returns information about the specified HSM client certificate. If no
     # certificate ID is specified, returns information about all the HSM
-    # certificates owned by your AWS customer account.
+    # certificates owned by your account.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all HSM client certificates that match any
@@ -4774,7 +4868,7 @@ module Aws::Redshift
     # @option params [String] :hsm_client_certificate_identifier
     #   The identifier of a specific HSM client certificate for which you want
     #   information. If no identifier is specified, information is returned
-    #   for all HSM client certificates owned by your AWS customer account.
+    #   for all HSM client certificates owned by your account.
     #
     # @option params [Integer] :max_records
     #   The maximum number of response records to return in each call. If the
@@ -4791,10 +4885,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeHsmClientCertificates request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching HSM client
@@ -4852,8 +4946,7 @@ module Aws::Redshift
 
     # Returns information about the specified Amazon Redshift HSM
     # configuration. If no configuration ID is specified, returns
-    # information about all the HSM configurations owned by your AWS
-    # customer account.
+    # information about all the HSM configurations owned by your account.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all HSM connections that match any combination
@@ -4869,7 +4962,7 @@ module Aws::Redshift
     # @option params [String] :hsm_configuration_identifier
     #   The identifier of a specific Amazon Redshift HSM configuration to be
     #   described. If no identifier is specified, information is returned for
-    #   all HSM configurations owned by your AWS customer account.
+    #   all HSM configurations owned by your account.
     #
     # @option params [Integer] :max_records
     #   The maximum number of response records to return in each call. If the
@@ -4886,10 +4979,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeHsmConfigurations request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching HSM
@@ -5008,9 +5101,8 @@ module Aws::Redshift
     #   configurations.
     #
     # @option params [String] :owner_account
-    #   The AWS customer account used to create or copy the snapshot. Required
-    #   if you are restoring a snapshot you do not own, optional if you own
-    #   the snapshot.
+    #   The account used to create or copy the snapshot. Required if you are
+    #   restoring a snapshot you do not own, optional if you own the snapshot.
     #
     # @option params [Array<Types::NodeConfigurationOptionsFilter>] :filters
     #   A set of name, operator, and value items to filter the results.
@@ -5019,10 +5111,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeNodeConfigurationOptions request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [Integer] :max_records
     #   The maximum number of response records to return in each call. If the
@@ -5080,12 +5172,12 @@ module Aws::Redshift
 
     # Returns a list of orderable cluster options. Before you create a new
     # cluster you can use this operation to find what options are available,
-    # such as the EC2 Availability Zones (AZ) in the specific AWS Region
-    # that you can specify, and the node types you can request. The node
-    # types differ by available storage, memory, CPU and price. With the
-    # cost involved you might want to obtain a list of cluster options in
-    # the specific region and specify values when creating a cluster. For
-    # more information about managing clusters, go to [Amazon Redshift
+    # such as the EC2 Availability Zones (AZ) in the specific Region that
+    # you can specify, and the node types you can request. The node types
+    # differ by available storage, memory, CPU and price. With the cost
+    # involved you might want to obtain a list of cluster options in the
+    # specific region and specify values when creating a cluster. For more
+    # information about managing clusters, go to [Amazon Redshift
     # Clusters][1] in the *Amazon Redshift Cluster Management Guide*.
     #
     #
@@ -5120,10 +5212,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeOrderableClusterOptions request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @return [Types::OrderableClusterOptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5166,7 +5258,7 @@ module Aws::Redshift
     # cluster.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID that owns the cluster.
+    #   The Region ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster whose partner integration is
@@ -5246,10 +5338,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeReservedNodeOfferings request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @return [Types::ReservedNodeOfferingsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5310,10 +5402,11 @@ module Aws::Redshift
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeReservedNodes
-    #   request exceed the value specified in `MaxRecords`, AWS returns a
-    #   value in the `Marker` field of the response. You can retrieve the next
-    #   set of response records by providing the returned marker value in the
-    #   `Marker` parameter and retrying the request.
+    #   request exceed the value specified in `MaxRecords`, Amazon Web
+    #   Services returns a value in the `Marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
     #
     # @return [Types::ReservedNodesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5372,8 +5465,8 @@ module Aws::Redshift
     #   The unique identifier of a cluster whose resize progress you are
     #   requesting. This parameter is case-sensitive.
     #
-    #   By default, resize operations for all clusters defined for an AWS
-    #   account are returned.
+    #   By default, resize operations for all clusters defined for an account
+    #   are returned.
     #
     # @return [Types::ResizeProgressMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5460,10 +5553,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeScheduledActions request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @option params [Integer] :max_records
     #   The maximum number of response records to return in each call. If the
@@ -5531,7 +5624,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Returns a list of snapshot copy grants owned by the AWS account in the
+    # Returns a list of snapshot copy grants owned by the account in the
     # destination region.
     #
     # For more information about managing snapshot copy grants, go to
@@ -5560,10 +5653,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   `DescribeSnapshotCopyGrant` request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     #   Constraints: You can specify either the **SnapshotCopyGrantName**
     #   parameter or the **Marker** parameter, but not both.
@@ -5961,10 +6054,11 @@ module Aws::Redshift
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeUsageLimits
-    #   request exceed the value specified in `MaxRecords`, AWS returns a
-    #   value in the `Marker` field of the response. You can retrieve the next
-    #   set of response records by providing the returned marker value in the
-    #   `Marker` parameter and retrying the request.
+    #   request exceed the value specified in `MaxRecords`, Amazon Web
+    #   Services returns a value in the `Marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching usage
@@ -6072,9 +6166,9 @@ module Aws::Redshift
     # region for a specified cluster.
     #
     # If your cluster and its snapshots are encrypted using a customer
-    # master key (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete
-    # the grant that grants Amazon Redshift permission to the CMK in the
-    # destination region.
+    # master key (CMK) from Key Management Service, use
+    # DeleteSnapshotCopyGrant to delete the grant that grants Amazon
+    # Redshift permission to the CMK in the destination region.
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the source cluster that you want to disable
@@ -6297,11 +6391,11 @@ module Aws::Redshift
     #   not already have cross-region snapshot copy enabled.
     #
     # @option params [required, String] :destination_region
-    #   The destination AWS Region that you want to copy snapshots to.
+    #   The destination Region that you want to copy snapshots to.
     #
-    #   Constraints: Must be the name of a valid AWS Region. For more
-    #   information, see [Regions and Endpoints][1] in the Amazon Web Services
-    #   General Reference.
+    #   Constraints: Must be the name of a valid Region. For more information,
+    #   see [Regions and Endpoints][1] in the Amazon Web Services General
+    #   Reference.
     #
     #
     #
@@ -6316,13 +6410,14 @@ module Aws::Redshift
     #   Constraints: Must be at least 1 and no more than 35.
     #
     # @option params [String] :snapshot_copy_grant_name
-    #   The name of the snapshot copy grant to use when snapshots of an AWS
-    #   KMS-encrypted cluster are copied to the destination region.
+    #   The name of the snapshot copy grant to use when snapshots of an Amazon
+    #   Web Services KMS-encrypted cluster are copied to the destination
+    #   region.
     #
     # @option params [Integer] :manual_snapshot_retention_period
     #   The number of days to retain newly copied snapshots in the destination
-    #   AWS Region after they are copied from the source AWS Region. If the
-    #   value is -1, the manual snapshot is retained indefinitely.
+    #   Region after they are copied from the source Region. If the value is
+    #   -1, the manual snapshot is retained indefinitely.
     #
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
@@ -6471,7 +6566,7 @@ module Aws::Redshift
     # Authentication to Generate Database User Credentials][1] in the Amazon
     # Redshift Cluster Management Guide.
     #
-    # The AWS Identity and Access Management (IAM)user or role that executes
+    # The Identity and Access Management (IAM) user or role that runs
     # GetClusterCredentials must have an IAM policy attached that allows
     # access to all necessary actions and resources. For more information
     # about permissions, see [Resource Policies for
@@ -6684,7 +6779,7 @@ module Aws::Redshift
     #   The new value of AQUA configuration status. Possible values include
     #   the following.
     #
-    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #   * enabled - Use AQUA if it is available for the current Region and
     #     Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
@@ -6716,6 +6811,42 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Modifies an authentication profile.
+    #
+    # @option params [required, String] :authentication_profile_name
+    #   The name of the authentication profile to replace.
+    #
+    # @option params [required, String] :authentication_profile_content
+    #   The new content of the authentication profile in JSON format. The
+    #   maximum length of the JSON string is determined by a quota for your
+    #   account.
+    #
+    # @return [Types::ModifyAuthenticationProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyAuthenticationProfileResult#authentication_profile_name #authentication_profile_name} => String
+    #   * {Types::ModifyAuthenticationProfileResult#authentication_profile_content #authentication_profile_content} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_authentication_profile({
+    #     authentication_profile_name: "AuthenticationProfileNameString", # required
+    #     authentication_profile_content: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authentication_profile_name #=> String
+    #   resp.authentication_profile_content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAuthenticationProfile AWS API Documentation
+    #
+    # @overload modify_authentication_profile(params = {})
+    # @param [Hash] params ({})
+    def modify_authentication_profile(params = {}, options = {})
+      req = build_request(:modify_authentication_profile, params)
+      req.send_request(options)
+    end
+
     # Modifies the settings for a cluster.
     #
     # You can also change node type and the number of nodes to scale up or
@@ -6723,7 +6854,7 @@ module Aws::Redshift
     # number of nodes and the node type even if one of the parameters does
     # not change.
     #
-    # You can add another security or parameter group, or change the master
+    # You can add another security or parameter group, or change the admin
     # user password. Resetting a cluster password or modifying the security
     # groups associated with a cluster do not need a reboot. However,
     # modifying a parameter group requires a reboot for parameters to take
@@ -6803,14 +6934,14 @@ module Aws::Redshift
     #   possible.
     #
     # @option params [String] :master_user_password
-    #   The new password for the cluster master user. This change is
+    #   The new password for the cluster admin user. This change is
     #   asynchronously applied as soon as possible. Between the time of the
     #   request and the completion of the request, the `MasterUserPassword`
     #   element exists in the `PendingModifiedValues` element of the operation
     #   response.
     #
     #   <note markdown="1"> Operations never return the password, so this operation provides a way
-    #   to regain access to the master user account for a cluster if the
+    #   to regain access to the admin user account for a cluster if the
     #   password is lost.
     #
     #    </note>
@@ -6930,7 +7061,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an AWS account.
+    #   * Must be unique for all clusters within an account.
     #
     #   Example: `examplecluster`
     #
@@ -6983,8 +7114,8 @@ module Aws::Redshift
     #   If the value is not encrypted (false), then the cluster is decrypted.
     #
     # @option params [String] :kms_key_id
-    #   The AWS Key Management Service (KMS) key ID of the encryption key that
-    #   you want to use to encrypt data in the cluster.
+    #   The Key Management Service (KMS) key ID of the encryption key that you
+    #   want to use to encrypt data in the cluster.
     #
     # @option params [Boolean] :availability_zone_relocation
     #   The option to enable relocation for an Amazon Redshift cluster between
@@ -7295,8 +7426,9 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the list of AWS Identity and Access Management (IAM) roles
-    # that can be used by the cluster to access other AWS services.
+    # Modifies the list of Identity and Access Management (IAM) roles that
+    # can be used by the cluster to access other Amazon Web Services
+    # services.
     #
     # A cluster can have up to 10 IAM roles associated at any time.
     #
@@ -7909,8 +8041,8 @@ module Aws::Redshift
     #   The type of source that will be generating the events. For example, if
     #   you want to be notified of events generated by a cluster, you would
     #   set this parameter to cluster. If this value is not specified, events
-    #   are returned for all Amazon Redshift objects in your AWS account. You
-    #   must specify a source type in order to specify source IDs.
+    #   are returned for all Amazon Redshift objects in your account. You must
+    #   specify a source type in order to specify source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
     #   cluster-security-group, cluster-snapshot, and scheduled-action.
@@ -8084,9 +8216,9 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the number of days to retain snapshots in the destination AWS
-    # Region after they are copied from the source AWS Region. By default,
-    # this operation only changes the retention period of copied automated
+    # Modifies the number of days to retain snapshots in the destination
+    # Region after they are copied from the source Region. By default, this
+    # operation only changes the retention period of copied automated
     # snapshots. The retention periods for both new and existing copied
     # automated snapshots are updated with the new retention period. You can
     # set the manual option to change only the retention periods of copied
@@ -8096,22 +8228,22 @@ module Aws::Redshift
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster for which you want to change the
     #   retention period for either automated or manual snapshots that are
-    #   copied to a destination AWS Region.
+    #   copied to a destination Region.
     #
     #   Constraints: Must be the valid name of an existing cluster that has
     #   cross-region snapshot copy enabled.
     #
     # @option params [required, Integer] :retention_period
     #   The number of days to retain automated snapshots in the destination
-    #   AWS Region after they are copied from the source AWS Region.
+    #   Region after they are copied from the source Region.
     #
     #   By default, this only changes the retention period of copied automated
     #   snapshots.
     #
     #   If you decrease the retention period for automated snapshots that are
-    #   copied to a destination AWS Region, Amazon Redshift deletes any
-    #   existing automated snapshots that were copied to the destination AWS
-    #   Region and that fall outside of the new retention period.
+    #   copied to a destination Region, Amazon Redshift deletes any existing
+    #   automated snapshots that were copied to the destination Region and
+    #   that fall outside of the new retention period.
     #
     #   Constraints: Must be at least 1 and no more than 35 for automated
     #   snapshots.
@@ -8990,7 +9122,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an AWS account.
+    #   * Must be unique for all clusters within an account.
     #
     # @option params [required, String] :snapshot_identifier
     #   The name of the snapshot from which to create the new cluster. This
@@ -9036,9 +9168,8 @@ module Aws::Redshift
     #   If `true`, the cluster can be accessed from a public network.
     #
     # @option params [String] :owner_account
-    #   The AWS customer account used to create or copy the snapshot. Required
-    #   if you are restoring a snapshot you do not own, optional if you own
-    #   the snapshot.
+    #   The account used to create or copy the snapshot. Required if you are
+    #   restoring a snapshot you do not own, optional if you own the snapshot.
     #
     # @option params [String] :hsm_client_certificate_identifier
     #   Specifies the name of the HSM client certificate the Amazon Redshift
@@ -9128,8 +9259,8 @@ module Aws::Redshift
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
     # @option params [String] :kms_key_id
-    #   The AWS Key Management Service (KMS) key ID of the encryption key that
-    #   you want to use to encrypt data in the cluster that you restore from a
+    #   The Key Management Service (KMS) key ID of the encryption key that you
+    #   want to use to encrypt data in the cluster that you restore from a
     #   shared snapshot.
     #
     # @option params [String] :node_type
@@ -9171,10 +9302,10 @@ module Aws::Redshift
     #   Reserved.
     #
     # @option params [Array<String>] :iam_roles
-    #   A list of AWS Identity and Access Management (IAM) roles that can be
-    #   used by the cluster to access other AWS services. You must supply the
-    #   IAM roles in their Amazon Resource Name (ARN) format. You can supply
-    #   up to 10 IAM roles in a single request.
+    #   A list of Identity and Access Management (IAM) roles that can be used
+    #   by the cluster to access other Amazon Web Services services. You must
+    #   supply the IAM roles in their Amazon Resource Name (ARN) format. You
+    #   can supply up to 10 IAM roles in a single request.
     #
     #   A cluster can have up to 10 IAM roles associated at any time.
     #
@@ -9202,7 +9333,7 @@ module Aws::Redshift
     #   (Advanced Query Accelerator) after the cluster is restored. Possible
     #   values include the following.
     #
-    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #   * enabled - Use AQUA if it is available for the current Region and
     #     Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
@@ -9620,11 +9751,11 @@ module Aws::Redshift
     #   also be provided and `CIDRIP` cannot be provided.
     #
     # @option params [String] :ec2_security_group_owner_id
-    #   The AWS account number of the owner of the security group specified in
-    #   the `EC2SecurityGroupName` parameter. The AWS access key ID is not an
-    #   acceptable value. If `EC2SecurityGroupOwnerId` is specified,
-    #   `EC2SecurityGroupName` must also be provided. and `CIDRIP` cannot be
-    #   provided.
+    #   The account number of the owner of the security group specified in the
+    #   `EC2SecurityGroupName` parameter. The Amazon Web Services access key
+    #   ID is not an acceptable value. If `EC2SecurityGroupOwnerId` is
+    #   specified, `EC2SecurityGroupName` must also be provided. and `CIDRIP`
+    #   cannot be provided.
     #
     #   Example: `111122223333`
     #
@@ -9677,7 +9808,7 @@ module Aws::Redshift
     #   The cluster to revoke access from.
     #
     # @option params [String] :account
-    #   The AWS account ID whose access is to be revoked.
+    #   The account ID whose access is to be revoked.
     #
     # @option params [Array<String>] :vpc_ids
     #   The virtual private cloud (VPC) identifiers for which access is to be
@@ -9731,9 +9862,9 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Removes the ability of the specified AWS customer account to restore
-    # the specified snapshot. If the account is currently restoring the
-    # snapshot, the restore will run to completion.
+    # Removes the ability of the specified account to restore the specified
+    # snapshot. If the account is currently restoring the snapshot, the
+    # restore will run to completion.
     #
     # For more information about working with snapshots, go to [Amazon
     # Redshift Snapshots][1] in the *Amazon Redshift Cluster Management
@@ -9753,8 +9884,8 @@ module Aws::Redshift
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
-    #   The identifier of the AWS customer account that can no longer restore
-    #   the specified snapshot.
+    #   The identifier of the account that can no longer restore the specified
+    #   snapshot.
     #
     # @return [Types::RevokeSnapshotAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9961,7 +10092,7 @@ module Aws::Redshift
     # Updates the status of a partner integration.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID that owns the cluster.
+    #   The Region ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster whose partner integration status
@@ -10023,7 +10154,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

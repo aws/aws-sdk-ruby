@@ -2175,6 +2175,129 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
+    # Provides details about an ongoing or complete migration from an Amazon
+    # Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the
+    # migration alerts and warnings related to the migration.
+    #
+    # @option params [required, String] :migration_id
+    #   The unique identifier of the migration to view. The `migrationID` is
+    #   returned by the operation.
+    #
+    # @return [Types::GetMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::GetMigrationResponse#v1_bot_name #v1_bot_name} => String
+    #   * {Types::GetMigrationResponse#v1_bot_version #v1_bot_version} => String
+    #   * {Types::GetMigrationResponse#v1_bot_locale #v1_bot_locale} => String
+    #   * {Types::GetMigrationResponse#v2_bot_id #v2_bot_id} => String
+    #   * {Types::GetMigrationResponse#v2_bot_role #v2_bot_role} => String
+    #   * {Types::GetMigrationResponse#migration_status #migration_status} => String
+    #   * {Types::GetMigrationResponse#migration_strategy #migration_strategy} => String
+    #   * {Types::GetMigrationResponse#migration_timestamp #migration_timestamp} => Time
+    #   * {Types::GetMigrationResponse#alerts #alerts} => Array&lt;Types::MigrationAlert&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_migration({
+    #     migration_id: "MigrationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_id #=> String
+    #   resp.v1_bot_name #=> String
+    #   resp.v1_bot_version #=> String
+    #   resp.v1_bot_locale #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-419", "es-ES", "es-US", "fr-FR", "fr-CA", "it-IT", "ja-JP"
+    #   resp.v2_bot_id #=> String
+    #   resp.v2_bot_role #=> String
+    #   resp.migration_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.migration_strategy #=> String, one of "CREATE_NEW", "UPDATE_EXISTING"
+    #   resp.migration_timestamp #=> Time
+    #   resp.alerts #=> Array
+    #   resp.alerts[0].type #=> String, one of "ERROR", "WARN"
+    #   resp.alerts[0].message #=> String
+    #   resp.alerts[0].details #=> Array
+    #   resp.alerts[0].details[0] #=> String
+    #   resp.alerts[0].reference_urls #=> Array
+    #   resp.alerts[0].reference_urls[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetMigration AWS API Documentation
+    #
+    # @overload get_migration(params = {})
+    # @param [Hash] params ({})
+    def get_migration(params = {}, options = {})
+      req = build_request(:get_migration, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+    #
+    # @option params [String] :sort_by_attribute
+    #   The field to sort the list of migrations by. You can sort by the
+    #   Amazon Lex V1 bot name or the date and time that the migration was
+    #   started.
+    #
+    # @option params [String] :sort_by_order
+    #   The order so sort the list.
+    #
+    # @option params [String] :v1_bot_name_contains
+    #   Filters the list to contain only bots whose name contains the
+    #   specified string. The string is matched anywhere in bot name.
+    #
+    # @option params [String] :migration_status_equals
+    #   Filters the list to contain only migrations in the specified state.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of migrations to return in the response. The
+    #   default is 10.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that fetches the next page of migrations. If the
+    #   response to this operation is truncated, Amazon Lex returns a
+    #   pagination token in the response. To fetch the next page of
+    #   migrations, specify the pagination token in the request.
+    #
+    # @return [Types::GetMigrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMigrationsResponse#migration_summaries #migration_summaries} => Array&lt;Types::MigrationSummary&gt;
+    #   * {Types::GetMigrationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_migrations({
+    #     sort_by_attribute: "V1_BOT_NAME", # accepts V1_BOT_NAME, MIGRATION_DATE_TIME
+    #     sort_by_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     v1_bot_name_contains: "BotName",
+    #     migration_status_equals: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_summaries #=> Array
+    #   resp.migration_summaries[0].migration_id #=> String
+    #   resp.migration_summaries[0].v1_bot_name #=> String
+    #   resp.migration_summaries[0].v1_bot_version #=> String
+    #   resp.migration_summaries[0].v1_bot_locale #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-419", "es-ES", "es-US", "fr-FR", "fr-CA", "it-IT", "ja-JP"
+    #   resp.migration_summaries[0].v2_bot_id #=> String
+    #   resp.migration_summaries[0].v2_bot_role #=> String
+    #   resp.migration_summaries[0].migration_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.migration_summaries[0].migration_strategy #=> String, one of "CREATE_NEW", "UPDATE_EXISTING"
+    #   resp.migration_summaries[0].migration_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetMigrations AWS API Documentation
+    #
+    # @overload get_migrations(params = {})
+    # @param [Hash] params ({})
+    def get_migrations(params = {}, options = {})
+      req = build_request(:get_migrations, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific version of a slot type. In
     # addition to specifying the slot type name, you must specify the slot
     # type version.
@@ -2440,9 +2563,10 @@ module Aws::LexModelBuildingService
     # contains information about a maximum of 100 utterances for each
     # version.
     #
-    # If you set `childDirected` field to true when you created your bot, or
-    # if you opted out of participating in improving Amazon Lex, utterances
-    # are not available.
+    # If you set `childDirected` field to true when you created your bot, if
+    # you are using slot obfuscation with one or more slots, or if you opted
+    # out of participating in improving Amazon Lex, utterances are not
+    # available.
     #
     # This operation requires permissions for the `lex:GetUtterancesView`
     # action.
@@ -4086,6 +4210,90 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
+    # Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate
+    # your bot when you want to take advantage of the new features of Amazon
+    # Lex V2.
+    #
+    # For more information, see [Migrating a bot][1] in the *Amazon Lex
+    # developer guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lex/latest/dg/migrate.html
+    #
+    # @option params [required, String] :v1_bot_name
+    #   The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex
+    #   V2.
+    #
+    # @option params [required, String] :v1_bot_version
+    #   The version of the bot to migrate to Amazon Lex V2. You can migrate
+    #   the `$LATEST` version as well as any numbered version.
+    #
+    # @option params [required, String] :v2_bot_name
+    #   The name of the Amazon Lex V2 bot that you are migrating the Amazon
+    #   Lex V1 bot to.
+    #
+    #   * If the Amazon Lex V2 bot doesn't exist, you must use the
+    #     `CREATE_NEW` migration strategy.
+    #
+    #   * If the Amazon Lex V2 bot exists, you must use the `UPDATE_EXISTING`
+    #     migration strategy to change the contents of the Amazon Lex V2 bot.
+    #
+    # @option params [required, String] :v2_bot_role
+    #   The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+    #
+    # @option params [required, String] :migration_strategy
+    #   The strategy used to conduct the migration.
+    #
+    #   * `CREATE_NEW` - Creates a new Amazon Lex V2 bot and migrates the
+    #     Amazon Lex V1 bot to the new bot.
+    #
+    #   * `UPDATE_EXISTING` - Overwrites the existing Amazon Lex V2 bot
+    #     metadata and the locale being migrated. It doesn't change any other
+    #     locales in the Amazon Lex V2 bot. If the locale doesn't exist, a
+    #     new locale is created in the Amazon Lex V2 bot.
+    #
+    # @return [Types::StartMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMigrationResponse#v1_bot_name #v1_bot_name} => String
+    #   * {Types::StartMigrationResponse#v1_bot_version #v1_bot_version} => String
+    #   * {Types::StartMigrationResponse#v1_bot_locale #v1_bot_locale} => String
+    #   * {Types::StartMigrationResponse#v2_bot_id #v2_bot_id} => String
+    #   * {Types::StartMigrationResponse#v2_bot_role #v2_bot_role} => String
+    #   * {Types::StartMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::StartMigrationResponse#migration_strategy #migration_strategy} => String
+    #   * {Types::StartMigrationResponse#migration_timestamp #migration_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_migration({
+    #     v1_bot_name: "BotName", # required
+    #     v1_bot_version: "Version", # required
+    #     v2_bot_name: "V2BotName", # required
+    #     v2_bot_role: "IamRoleArn", # required
+    #     migration_strategy: "CREATE_NEW", # required, accepts CREATE_NEW, UPDATE_EXISTING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.v1_bot_name #=> String
+    #   resp.v1_bot_version #=> String
+    #   resp.v1_bot_locale #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-419", "es-ES", "es-US", "fr-FR", "fr-CA", "it-IT", "ja-JP"
+    #   resp.v2_bot_id #=> String
+    #   resp.v2_bot_role #=> String
+    #   resp.migration_id #=> String
+    #   resp.migration_strategy #=> String, one of "CREATE_NEW", "UPDATE_EXISTING"
+    #   resp.migration_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartMigration AWS API Documentation
+    #
+    # @overload start_migration(params = {})
+    # @param [Hash] params ({})
+    def start_migration(params = {}, options = {})
+      req = build_request(:start_migration, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified resource. If a tag key
     # already exists, the existing value is replaced with the new value.
     #
@@ -4161,7 +4369,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
