@@ -109,10 +109,22 @@ module Aws
           when FlatListFrame
             @result[@member[:name]] << child.result
           when UnknownMemberFrame
-            @result[:unknown] = { name: child.path.last, value: child.result }
+            @result[:unknown] = { 'name' => child.path.last, 'value' => child.result }
           when NullFrame
           else
             @result[@member[:name]] = child.result
+          end
+
+          if @ref.shape.union
+            # a union may only have one member set
+            # convert to the union subclass
+            # The default Struct created will have defaults set for all values
+            # This also sets only one of the values leaving everything else nil
+            # as required for unions
+            set_member_name = @member ? @member[:name] : :unknown
+            member_subclass = @ref.shape.member_subclass(set_member_name).new # shape.member_subclass(target.member).new
+            member_subclass[set_member_name] = @result[set_member_name]
+            @result = member_subclass
           end
         end
 
@@ -312,6 +324,7 @@ module Aws
         MapShape => MapFrame,
         StringShape => StringFrame,
         StructureShape => StructureFrame,
+        UnionShape => StructureFrame,
         TimestampShape => TimestampFrame,
       }
 

@@ -29,14 +29,12 @@ module Aws
           if member_ref
             target[member_name] = parse_ref(member_ref, value)
           elsif shape.union
-            target[:unknown] = { name: key, value: value }
+            target[:unknown] = { 'name' => key, 'value' => value }
           end
         end
         if shape.union
           # convert to subclass
-          require 'byebug'
-          byebug
-          member_subclass = ref.shape.struct_class.constants[:MEMBER_SUBCLASS][target.member].new
+          member_subclass = shape.member_subclass(target.member).new
           member_subclass[target.member] = target.value
           target = member_subclass
         end
