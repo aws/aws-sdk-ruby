@@ -968,7 +968,7 @@ module Aws::Glue
     #   resp.triggers[0].name #=> String
     #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
-    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.triggers[0].description #=> String
     #   resp.triggers[0].schedule #=> String
@@ -987,6 +987,8 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
+    #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.triggers_not_found #=> Array
     #   resp.triggers_not_found[0] #=> String
     #
@@ -1056,7 +1058,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -1075,6 +1077,8 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -1111,6 +1115,8 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.edges #=> Array
     #   resp.workflows[0].last_run.graph.edges[0].source_id #=> String
     #   resp.workflows[0].last_run.graph.edges[0].destination_id #=> String
+    #   resp.workflows[0].last_run.starting_event_batch_condition.batch_size #=> Integer
+    #   resp.workflows[0].last_run.starting_event_batch_condition.batch_window #=> Integer
     #   resp.workflows[0].graph.nodes #=> Array
     #   resp.workflows[0].graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflows[0].graph.nodes[0].name #=> String
@@ -1118,7 +1124,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -1137,6 +1143,8 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -2939,6 +2947,10 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
+    # @option params [Types::EventBatchingCondition] :event_batching_condition
+    #   Batch condition that must be met (specified number of events received
+    #   or batch time window expired) before EventBridge event trigger fires.
+    #
     # @return [Types::CreateTriggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTriggerResponse#name #name} => String
@@ -2948,7 +2960,7 @@ module Aws::Glue
     #   resp = client.create_trigger({
     #     name: "NameString", # required
     #     workflow_name: "NameString",
-    #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
+    #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND, EVENT
     #     schedule: "GenericString",
     #     predicate: {
     #       logical: "AND", # accepts AND, ANY
@@ -2980,6 +2992,10 @@ module Aws::Glue
     #     start_on_creation: false,
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     event_batching_condition: {
+    #       batch_size: 1, # required
+    #       batch_window: 1,
     #     },
     #   })
     #
@@ -6853,7 +6869,7 @@ module Aws::Glue
     #   resp.trigger.name #=> String
     #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
-    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.trigger.description #=> String
     #   resp.trigger.schedule #=> String
@@ -6872,6 +6888,8 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger AWS API Documentation
     #
@@ -6916,7 +6934,7 @@ module Aws::Glue
     #   resp.triggers[0].name #=> String
     #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
-    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.triggers[0].description #=> String
     #   resp.triggers[0].schedule #=> String
@@ -6935,6 +6953,8 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
+    #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers AWS API Documentation
@@ -7106,7 +7126,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7125,6 +7145,8 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7161,6 +7183,8 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.edges #=> Array
     #   resp.workflow.last_run.graph.edges[0].source_id #=> String
     #   resp.workflow.last_run.graph.edges[0].destination_id #=> String
+    #   resp.workflow.last_run.starting_event_batch_condition.batch_size #=> Integer
+    #   resp.workflow.last_run.starting_event_batch_condition.batch_window #=> Integer
     #   resp.workflow.graph.nodes #=> Array
     #   resp.workflow.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflow.graph.nodes[0].name #=> String
@@ -7168,7 +7192,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7187,6 +7211,8 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7281,7 +7307,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7300,6 +7326,8 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7336,6 +7364,8 @@ module Aws::Glue
     #   resp.run.graph.edges #=> Array
     #   resp.run.graph.edges[0].source_id #=> String
     #   resp.run.graph.edges[0].destination_id #=> String
+    #   resp.run.starting_event_batch_condition.batch_size #=> Integer
+    #   resp.run.starting_event_batch_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRun AWS API Documentation
     #
@@ -7434,7 +7464,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7453,6 +7483,8 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs #=> Array
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7489,6 +7521,8 @@ module Aws::Glue
     #   resp.runs[0].graph.edges #=> Array
     #   resp.runs[0].graph.edges[0].source_id #=> String
     #   resp.runs[0].graph.edges[0].destination_id #=> String
+    #   resp.runs[0].starting_event_batch_condition.batch_size #=> Integer
+    #   resp.runs[0].starting_event_batch_condition.batch_window #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRuns AWS API Documentation
@@ -10479,6 +10513,10 @@ module Aws::Glue
     #           },
     #         ],
     #       },
+    #       event_batching_condition: {
+    #         batch_size: 1, # required
+    #         batch_window: 1,
+    #       },
     #     },
     #   })
     #
@@ -10487,7 +10525,7 @@ module Aws::Glue
     #   resp.trigger.name #=> String
     #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
-    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.trigger.description #=> String
     #   resp.trigger.schedule #=> String
@@ -10506,6 +10544,8 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger AWS API Documentation
     #
@@ -10625,7 +10665,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

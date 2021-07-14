@@ -4460,7 +4460,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         workflow_name: "NameString",
-    #         type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
+    #         type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND, EVENT
     #         schedule: "GenericString",
     #         predicate: {
     #           logical: "AND", # accepts AND, ANY
@@ -4492,6 +4492,10 @@ module Aws::Glue
     #         start_on_creation: false,
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         event_batching_condition: {
+    #           batch_size: 1, # required
+    #           batch_window: 1,
     #         },
     #       }
     #
@@ -4548,6 +4552,12 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] event_batching_condition
+    #   Batch condition that must be met (specified number of events
+    #   received or batch time window expired) before EventBridge event
+    #   trigger fires.
+    #   @return [Types::EventBatchingCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerRequest AWS API Documentation
     #
     class CreateTriggerRequest < Struct.new(
@@ -4559,7 +4569,8 @@ module Aws::Glue
       :actions,
       :description,
       :start_on_creation,
-      :tags)
+      :tags,
+      :event_batching_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6209,8 +6220,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # An edge represents a directed connection between two Glue components
-    # that are part of the workflow the edge belongs to.
+    # An edge represents a directed connection between two components on a
+    # workflow graph.
     #
     # @!attribute [rw] source_id
     #   The unique of the node within the workflow where the edge starts.
@@ -6369,6 +6380,36 @@ module Aws::Glue
     class EvaluationMetrics < Struct.new(
       :transform_type,
       :find_matches_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch condition that must be met (specified number of events received
+    # or batch time window expired) before EventBridge event trigger fires.
+    #
+    # @note When making an API call, you may pass EventBatchingCondition
+    #   data as a hash:
+    #
+    #       {
+    #         batch_size: 1, # required
+    #         batch_window: 1,
+    #       }
+    #
+    # @!attribute [rw] batch_size
+    #   Number of events that must be received from Amazon EventBridge
+    #   before EventBridge event trigger fires.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_window
+    #   Window of time in seconds after which EventBridge event trigger
+    #   fires. Window starts when first event is received.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EventBatchingCondition AWS API Documentation
+    #
+    class EventBatchingCondition < Struct.new(
+      :batch_size,
+      :batch_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11756,8 +11797,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A node represents an Glue component such as a trigger, or job, etc.,
-    # that is part of a workflow.
+    # A node represents an Glue component (trigger, crawler, or job) on a
+    # workflow graph.
     #
     # @!attribute [rw] type
     #   The type of Glue component represented by the node.
@@ -14104,6 +14145,28 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The batch condition that started the workflow run. Either the number
+    # of events in the batch size arrived, in which case the BatchSize
+    # member is non-zero, or the batch window expired, in which case the
+    # BatchWindow member is non-zero.
+    #
+    # @!attribute [rw] batch_size
+    #   Number of events in the batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_window
+    #   Duration of the batch window in seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartingEventBatchCondition AWS API Documentation
+    #
+    class StartingEventBatchCondition < Struct.new(
+      :batch_size,
+      :batch_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopCrawlerRequest
     #   data as a hash:
     #
@@ -15220,6 +15283,12 @@ module Aws::Glue
     #   The predicate of this trigger, which defines when it will fire.
     #   @return [Types::Predicate]
     #
+    # @!attribute [rw] event_batching_condition
+    #   Batch condition that must be met (specified number of events
+    #   received or batch time window expired) before EventBridge event
+    #   trigger fires.
+    #   @return [Types::EventBatchingCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Trigger AWS API Documentation
     #
     class Trigger < Struct.new(
@@ -15231,7 +15300,8 @@ module Aws::Glue
       :description,
       :schedule,
       :actions,
-      :predicate)
+      :predicate,
+      :event_batching_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15287,6 +15357,10 @@ module Aws::Glue
     #             },
     #           ],
     #         },
+    #         event_batching_condition: {
+    #           batch_size: 1, # required
+    #           batch_window: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -15315,6 +15389,12 @@ module Aws::Glue
     #   The predicate of this trigger, which defines when it will fire.
     #   @return [Types::Predicate]
     #
+    # @!attribute [rw] event_batching_condition
+    #   Batch condition that must be met (specified number of events
+    #   received or batch time window expired) before EventBridge event
+    #   trigger fires.
+    #   @return [Types::EventBatchingCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerUpdate AWS API Documentation
     #
     class TriggerUpdate < Struct.new(
@@ -15322,7 +15402,8 @@ module Aws::Glue
       :description,
       :schedule,
       :actions,
-      :predicate)
+      :predicate,
+      :event_batching_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16754,6 +16835,10 @@ module Aws::Glue
     #               },
     #             ],
     #           },
+    #           event_batching_condition: {
+    #             batch_size: 1, # required
+    #             batch_window: 1,
+    #           },
     #         },
     #       }
     #
@@ -17064,11 +17149,12 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A workflow represents a flow in which Glue components should be run to
-    # complete a logical task.
+    # A workflow is a collection of multiple dependent Glue jobs and
+    # crawlers that are run to complete a complex ETL task. A workflow
+    # manages the execution and monitoring of all its jobs and crawlers.
     #
     # @!attribute [rw] name
-    #   The name of the workflow representing the flow.
+    #   The name of the workflow.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -17077,7 +17163,9 @@ module Aws::Glue
     #
     # @!attribute [rw] default_run_properties
     #   A collection of properties to be used as part of each execution of
-    #   the workflow.
+    #   the workflow. The run properties are made available to each job in
+    #   the workflow. A job can modify the properties for the next jobs in
+    #   the flow.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] created_on
@@ -17189,6 +17277,10 @@ module Aws::Glue
     #   workflow as nodes and directed connections between them as edges.
     #   @return [Types::WorkflowGraph]
     #
+    # @!attribute [rw] starting_event_batch_condition
+    #   The batch condition that started the workflow run.
+    #   @return [Types::StartingEventBatchCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRun AWS API Documentation
     #
     class WorkflowRun < Struct.new(
@@ -17201,7 +17293,8 @@ module Aws::Glue
       :status,
       :error_message,
       :statistics,
-      :graph)
+      :graph,
+      :starting_event_batch_condition)
       SENSITIVE = []
       include Aws::Structure
     end

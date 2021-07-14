@@ -345,6 +345,10 @@ module Aws::HealthLake
     # @option params [required, String] :datastore_type_version
     #   The FHIR version of the Data Store. The only supported version is R4.
     #
+    # @option params [Types::SseConfiguration] :sse_configuration
+    #   The server-side encryption key configuration for a customer provided
+    #   encryption key specified for creating a Data Store.
+    #
     # @option params [Types::PreloadDataConfig] :preload_data_config
     #   Optional parameter to preload data upon creation of the Data Store.
     #   Currently, the only supported preloaded data is synthetic data
@@ -355,6 +359,9 @@ module Aws::HealthLake
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Resource tags that are applied to a Data Store when it is created.
     #
     # @return [Types::CreateFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -368,10 +375,22 @@ module Aws::HealthLake
     #   resp = client.create_fhir_datastore({
     #     datastore_name: "DatastoreName",
     #     datastore_type_version: "R4", # required, accepts R4
+    #     sse_configuration: {
+    #       kms_encryption_config: { # required
+    #         cmk_type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
+    #         kms_key_id: "EncryptionKeyID",
+    #       },
+    #     },
     #     preload_data_config: {
     #       preload_data_type: "SYNTHEA", # required, accepts SYNTHEA
     #     },
     #     client_token: "ClientTokenString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -451,6 +470,8 @@ module Aws::HealthLake
     #   resp.datastore_properties.created_at #=> Time
     #   resp.datastore_properties.datastore_type_version #=> String, one of "R4"
     #   resp.datastore_properties.datastore_endpoint #=> String
+    #   resp.datastore_properties.sse_configuration.kms_encryption_config.cmk_type #=> String, one of "CUSTOMER_MANAGED_KMS_KEY", "AWS_OWNED_KMS_KEY"
+    #   resp.datastore_properties.sse_configuration.kms_encryption_config.kms_key_id #=> String
     #   resp.datastore_properties.preload_data_config.preload_data_type #=> String, one of "SYNTHEA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastore AWS API Documentation
@@ -487,11 +508,12 @@ module Aws::HealthLake
     #
     #   resp.export_job_properties.job_id #=> String
     #   resp.export_job_properties.job_name #=> String
-    #   resp.export_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.export_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
     #   resp.export_job_properties.submit_time #=> Time
     #   resp.export_job_properties.end_time #=> Time
     #   resp.export_job_properties.datastore_id #=> String
-    #   resp.export_job_properties.output_data_config.s3_uri #=> String
+    #   resp.export_job_properties.output_data_config.s3_configuration.s3_uri #=> String
+    #   resp.export_job_properties.output_data_config.s3_configuration.kms_key_id #=> String
     #   resp.export_job_properties.data_access_role_arn #=> String
     #   resp.export_job_properties.message #=> String
     #
@@ -528,11 +550,13 @@ module Aws::HealthLake
     #
     #   resp.import_job_properties.job_id #=> String
     #   resp.import_job_properties.job_name #=> String
-    #   resp.import_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.import_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
     #   resp.import_job_properties.submit_time #=> Time
     #   resp.import_job_properties.end_time #=> Time
     #   resp.import_job_properties.datastore_id #=> String
     #   resp.import_job_properties.input_data_config.s3_uri #=> String
+    #   resp.import_job_properties.job_output_data_config.s3_configuration.s3_uri #=> String
+    #   resp.import_job_properties.job_output_data_config.s3_configuration.kms_key_id #=> String
     #   resp.import_job_properties.data_access_role_arn #=> String
     #   resp.import_job_properties.message #=> String
     #
@@ -588,6 +612,8 @@ module Aws::HealthLake
     #   resp.datastore_properties_list[0].created_at #=> Time
     #   resp.datastore_properties_list[0].datastore_type_version #=> String, one of "R4"
     #   resp.datastore_properties_list[0].datastore_endpoint #=> String
+    #   resp.datastore_properties_list[0].sse_configuration.kms_encryption_config.cmk_type #=> String, one of "CUSTOMER_MANAGED_KMS_KEY", "AWS_OWNED_KMS_KEY"
+    #   resp.datastore_properties_list[0].sse_configuration.kms_encryption_config.kms_key_id #=> String
     #   resp.datastore_properties_list[0].preload_data_config.preload_data_type #=> String, one of "SYNTHEA"
     #   resp.next_token #=> String
     #
@@ -597,6 +623,186 @@ module Aws::HealthLake
     # @param [Hash] params ({})
     def list_fhir_datastores(params = {}, options = {})
       req = build_request(:list_fhir_datastores, params)
+      req.send_request(options)
+    end
+
+    # Lists all FHIR export jobs associated with an account and their
+    # statuses.
+    #
+    # @option params [required, String] :datastore_id
+    #   This parameter limits the response to the export job with the
+    #   specified Data Store ID.
+    #
+    # @option params [String] :next_token
+    #   A pagination token used to identify the next page of results to return
+    #   for a ListFHIRExportJobs query.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter limits the number of results returned for a
+    #   ListFHIRExportJobs to a maximum quantity specified by the user.
+    #
+    # @option params [String] :job_name
+    #   This parameter limits the response to the export job with the
+    #   specified job name.
+    #
+    # @option params [String] :job_status
+    #   This parameter limits the response to the export jobs with the
+    #   specified job status.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submitted_before
+    #   This parameter limits the response to FHIR export jobs submitted
+    #   before a user specified date.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submitted_after
+    #   This parameter limits the response to FHIR export jobs submitted after
+    #   a user specified date.
+    #
+    # @return [Types::ListFHIRExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFHIRExportJobsResponse#export_job_properties_list #export_job_properties_list} => Array&lt;Types::ExportJobProperties&gt;
+    #   * {Types::ListFHIRExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_fhir_export_jobs({
+    #     datastore_id: "DatastoreId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     job_name: "JobName",
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED
+    #     submitted_before: Time.now,
+    #     submitted_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_job_properties_list #=> Array
+    #   resp.export_job_properties_list[0].job_id #=> String
+    #   resp.export_job_properties_list[0].job_name #=> String
+    #   resp.export_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.export_job_properties_list[0].submit_time #=> Time
+    #   resp.export_job_properties_list[0].end_time #=> Time
+    #   resp.export_job_properties_list[0].datastore_id #=> String
+    #   resp.export_job_properties_list[0].output_data_config.s3_configuration.s3_uri #=> String
+    #   resp.export_job_properties_list[0].output_data_config.s3_configuration.kms_key_id #=> String
+    #   resp.export_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.export_job_properties_list[0].message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRExportJobs AWS API Documentation
+    #
+    # @overload list_fhir_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_fhir_export_jobs(params = {}, options = {})
+      req = build_request(:list_fhir_export_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all FHIR import jobs associated with an account and their
+    # statuses.
+    #
+    # @option params [required, String] :datastore_id
+    #   This parameter limits the response to the import job with the
+    #   specified Data Store ID.
+    #
+    # @option params [String] :next_token
+    #   A pagination token used to identify the next page of results to return
+    #   for a ListFHIRImportJobs query.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter limits the number of results returned for a
+    #   ListFHIRImportJobs to a maximum quantity specified by the user.
+    #
+    # @option params [String] :job_name
+    #   This parameter limits the response to the import job with the
+    #   specified job name.
+    #
+    # @option params [String] :job_status
+    #   This parameter limits the response to the import job with the
+    #   specified job status.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submitted_before
+    #   This parameter limits the response to FHIR import jobs submitted
+    #   before a user specified date.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submitted_after
+    #   This parameter limits the response to FHIR import jobs submitted after
+    #   a user specified date.
+    #
+    # @return [Types::ListFHIRImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFHIRImportJobsResponse#import_job_properties_list #import_job_properties_list} => Array&lt;Types::ImportJobProperties&gt;
+    #   * {Types::ListFHIRImportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_fhir_import_jobs({
+    #     datastore_id: "DatastoreId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     job_name: "JobName",
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED
+    #     submitted_before: Time.now,
+    #     submitted_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_job_properties_list #=> Array
+    #   resp.import_job_properties_list[0].job_id #=> String
+    #   resp.import_job_properties_list[0].job_name #=> String
+    #   resp.import_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.import_job_properties_list[0].submit_time #=> Time
+    #   resp.import_job_properties_list[0].end_time #=> Time
+    #   resp.import_job_properties_list[0].datastore_id #=> String
+    #   resp.import_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.import_job_properties_list[0].job_output_data_config.s3_configuration.s3_uri #=> String
+    #   resp.import_job_properties_list[0].job_output_data_config.s3_configuration.kms_key_id #=> String
+    #   resp.import_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.import_job_properties_list[0].message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRImportJobs AWS API Documentation
+    #
+    # @overload list_fhir_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_fhir_import_jobs(params = {}, options = {})
+      req = build_request(:list_fhir_import_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all existing tags associated with a Data Store.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name(ARN) of the Data Store for which tags are
+    #   being added.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -633,7 +839,10 @@ module Aws::HealthLake
     #   resp = client.start_fhir_export_job({
     #     job_name: "JobName",
     #     output_data_config: { # required
-    #       s3_uri: "S3Uri",
+    #       s3_configuration: {
+    #         s3_uri: "S3Uri", # required
+    #         kms_key_id: "EncryptionKeyID", # required
+    #       },
     #     },
     #     datastore_id: "DatastoreId", # required
     #     data_access_role_arn: "IamRoleArn", # required
@@ -643,7 +852,7 @@ module Aws::HealthLake
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
     #   resp.datastore_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRExportJob AWS API Documentation
@@ -663,6 +872,10 @@ module Aws::HealthLake
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   The input properties of the FHIR Import job in the StartFHIRImport job
     #   request.
+    #
+    # @option params [required, Types::OutputDataConfig] :job_output_data_config
+    #   The output data configuration that was supplied when the export job
+    #   was created.
     #
     # @option params [required, String] :datastore_id
     #   The AWS-generated Data Store ID.
@@ -690,6 +903,12 @@ module Aws::HealthLake
     #     input_data_config: { # required
     #       s3_uri: "S3Uri",
     #     },
+    #     job_output_data_config: { # required
+    #       s3_configuration: {
+    #         s3_uri: "S3Uri", # required
+    #         kms_key_id: "EncryptionKeyID", # required
+    #       },
+    #     },
     #     datastore_id: "DatastoreId", # required
     #     data_access_role_arn: "IamRoleArn", # required
     #     client_token: "ClientTokenString", # required
@@ -698,7 +917,7 @@ module Aws::HealthLake
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
     #   resp.datastore_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRImportJob AWS API Documentation
@@ -707,6 +926,66 @@ module Aws::HealthLake
     # @param [Hash] params ({})
     def start_fhir_import_job(params = {}, options = {})
       req = build_request(:start_fhir_import_job, params)
+      req.send_request(options)
+    end
+
+    # Adds a user specifed key and value tag to a Data Store.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name(ARN)that gives Amazon HealthLake access to
+    #   the Data Store which tags are being added to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The user specified key and value pair tags being added to a Data
+    #   Store.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a Data Store.
+    #
+    # @option params [required, String] :resource_arn
+    #   "The Amazon Resource Name(ARN) of the Data Store for which tags are
+    #   being removed
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys for the tags to be removed from the Healthlake Data Store.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -723,7 +1002,7 @@ module Aws::HealthLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
