@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.249.0 (2021-07-15)
+------------------
+
+* Feature - This feature enables customers  to specify weekly recurring time window(s) for scheduled events that reboot, stop or terminate EC2 instances.
+
 1.248.0 (2021-07-07)
 ------------------
 

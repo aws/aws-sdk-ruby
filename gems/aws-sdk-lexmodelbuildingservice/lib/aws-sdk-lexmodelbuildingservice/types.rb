@@ -1795,7 +1795,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-IN, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -1865,7 +1865,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-IN, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -3470,7 +3470,7 @@ module Aws::LexModelBuildingService
     #         voice_id: "String",
     #         checksum: "String",
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
-    #         locale: "de-DE", # required, accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
+    #         locale: "de-DE", # required, accepts de-DE, en-AU, en-GB, en-IN, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
     #         child_directed: false, # required
     #         detect_sentiment: false,
     #         create_version: false,

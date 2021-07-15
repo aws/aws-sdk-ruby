@@ -181,8 +181,8 @@ module Aws::ECS
     #   from being terminated during a scale-in action. The Auto Scaling
     #   group and each instance in the Auto Scaling group must have instance
     #   protection from scale-in actions enabled as well. For more
-    #   information, see [Instance Protection][1] in the *AWS Auto Scaling
-    #   User Guide*.
+    #   information, see [Instance Protection][1] in the *Auto Scaling User
+    #   Guide*.
     #
     #   When managed termination protection is disabled, your Amazon EC2
     #   instances are not protected from termination when the Auto Scaling
@@ -237,8 +237,8 @@ module Aws::ECS
     #   from being terminated during a scale-in action. The Auto Scaling
     #   group and each instance in the Auto Scaling group must have instance
     #   protection from scale-in actions enabled as well. For more
-    #   information, see [Instance Protection][1] in the *AWS Auto Scaling
-    #   User Guide*.
+    #   information, see [Instance Protection][1] in the *Auto Scaling User
+    #   Guide*.
     #
     #   When managed termination protection is disabled, your Amazon EC2
     #   instances are not protected from termination when the Auto Scaling
@@ -305,8 +305,8 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Your AWS account has been blocked. For more information, contact [AWS
-    # Support][1].
+    # Your Amazon Web Services account has been blocked. For more
+    # information, contact [ Amazon Web Services Support][1].
     #
     #
     #
@@ -387,9 +387,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CapacityProvider AWS API Documentation
@@ -421,10 +421,10 @@ module Aws::ECS
     # capacity providers can be created with the CreateCapacityProvider API
     # operation.
     #
-    # To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    # or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    # providers are available to all accounts and only need to be associated
-    # with a cluster to be used in a capacity provider strategy.
+    # To use a Fargate capacity provider, specify either the `FARGATE` or
+    # `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
+    # available to all accounts and only need to be associated with a
+    # cluster to be used in a capacity provider strategy.
     #
     # @note When making an API call, you may pass CapacityProviderStrategyItem
     #   data as a hash:
@@ -505,7 +505,7 @@ module Aws::ECS
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) that identifies the cluster. The ARN
     #   contains the `arn:aws:ecs` namespace, followed by the Region of the
-    #   cluster, the AWS account ID of the cluster owner, the `cluster`
+    #   cluster, the account ID of the cluster owner, the `cluster`
     #   namespace, and then the cluster name. For example,
     #   `arn:aws:ecs:region:012345678910:cluster/test`.
     #   @return [String]
@@ -615,9 +615,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] settings
@@ -1635,7 +1635,7 @@ module Aws::ECS
     #   `--privileged` option to [docker run][3].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
-    #   on AWS Fargate.
+    #   on Fargate.
     #
     #    </note>
     #
@@ -2054,16 +2054,17 @@ module Aws::ECS
     # @!attribute [rw] container_instance_arn
     #   The Amazon Resource Name (ARN) of the container instance. The ARN
     #   contains the `arn:aws:ecs` namespace, followed by the Region of the
-    #   container instance, the AWS account ID of the container instance
-    #   owner, the `container-instance` namespace, and then the container
-    #   instance ID. For example,
+    #   container instance, the account ID of the container instance owner,
+    #   the `container-instance` namespace, and then the container instance
+    #   ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_id
     #   The ID of the container instance. For Amazon EC2 instances, this
     #   value is the Amazon EC2 instance ID. For external instances, this
-    #   value is the AWS Systems Manager managed instance ID.
+    #   value is the Amazon Web Services Systems Manager managed instance
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_name
@@ -2204,9 +2205,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance AWS API Documentation
@@ -2457,9 +2458,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCapacityProviderRequest AWS API Documentation
@@ -2557,9 +2558,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] settings
@@ -2586,10 +2587,10 @@ module Aws::ECS
     #   providers can be created with the CreateCapacityProvider API
     #   operation.
     #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be
-    #   associated with a cluster to be used.
+    #   To use a Fargate capacity provider, specify either the `FARGATE` or
+    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
+    #   are available to all accounts and only need to be associated with a
+    #   cluster to be used.
     #
     #   The PutClusterCapacityProviders API operation is used to update the
     #   list of available capacity providers for a cluster after the cluster
@@ -2749,15 +2750,15 @@ module Aws::ECS
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
-    #   Network Load Balancer. When creating an AWS CodeDeploy deployment
-    #   group, you specify two target groups (referred to as a
-    #   `targetGroupPair`). During a deployment, AWS CodeDeploy determines
-    #   which task set in your service has the status `PRIMARY` and
-    #   associates one target group with it, and then associates the other
-    #   target group with the replacement task set. The load balancer can
-    #   also have up to two listeners: a required listener for production
-    #   traffic and an optional listener that allows you perform validation
-    #   tests with Lambda functions before routing production traffic to it.
+    #   Network Load Balancer. When creating an CodeDeploy deployment group,
+    #   you specify two target groups (referred to as a `targetGroupPair`).
+    #   During a deployment, CodeDeploy determines which task set in your
+    #   service has the status `PRIMARY` and associates one target group
+    #   with it, and then associates the other target group with the
+    #   replacement task set. The load balancer can also have up to two
+    #   listeners: a required listener for production traffic and an
+    #   optional listener that allows you perform validation tests with
+    #   Lambda functions before routing production traffic to it.
     #
     #   After you create a service using the `ECS` deployment controller,
     #   the load balancer name or target group ARN, container name, and
@@ -2829,13 +2830,12 @@ module Aws::ECS
     #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
-    #   The `FARGATE` launch type runs your tasks on AWS Fargate On-Demand
+    #   The `FARGATE` launch type runs your tasks on Fargate On-Demand
     #   infrastructure.
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
-    #   provider strategy must be used. For more information, see [AWS
-    #   Fargate capacity providers][2] in the *Amazon ECS User Guide for AWS
-    #   Fargate*.
+    #   provider strategy must be used. For more information, see [Fargate
+    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
     #
     #    </note>
     #
@@ -2868,7 +2868,7 @@ module Aws::ECS
     #   The platform version that your tasks in the service are running on.
     #   A platform version is specified only for tasks using the Fargate
     #   launch type. If one isn't specified, the `LATEST` platform version
-    #   is used by default. For more information, see [AWS Fargate platform
+    #   is used by default. For more information, see [Fargate platform
     #   versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
@@ -3022,9 +3022,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_ecs_managed_tags
@@ -3083,6 +3083,10 @@ module Aws::ECS
 
     # @!attribute [rw] service
     #   The full description of your service following the create call.
+    #
+    #   A service will return either a `capacityProviderStrategy` or
+    #   `launchType` parameter, but not both, depending on which one was
+    #   specified during creation.
     #
     #   If a service is using the `ECS` deployment controller, the
     #   `deploymentController` and `taskSets` parameters will not be
@@ -3169,8 +3173,8 @@ module Aws::ECS
     #   An optional non-unique tag that identifies this task set in external
     #   systems. If the task set is associated with a service discovery
     #   registry, the tasks in this task set will have the
-    #   `ECS_TASK_SET_EXTERNAL_ID` AWS Cloud Map attribute set to the
-    #   provided value.
+    #   `ECS_TASK_SET_EXTERNAL_ID` Cloud Map attribute set to the provided
+    #   value.
     #   @return [String]
     #
     # @!attribute [rw] task_definition
@@ -3229,10 +3233,10 @@ module Aws::ECS
     #   providers can be created with the CreateCapacityProvider API
     #   operation.
     #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be
-    #   associated with a cluster to be used.
+    #   To use a Fargate capacity provider, specify either the `FARGATE` or
+    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
+    #   are available to all accounts and only need to be associated with a
+    #   cluster to be used.
     #
     #   The PutClusterCapacityProviders API operation is used to update the
     #   list of available capacity providers for a cluster after the cluster
@@ -3283,9 +3287,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSetRequest AWS API Documentation
@@ -3309,10 +3313,10 @@ module Aws::ECS
     end
 
     # @!attribute [rw] task_set
-    #   Information about a set of Amazon ECS tasks in either an AWS
-    #   CodeDeploy or an `EXTERNAL` deployment. A task set includes details
-    #   such as the desired number of tasks, how many tasks are running, and
-    #   whether the task set serves production traffic.
+    #   Information about a set of Amazon ECS tasks in either an CodeDeploy
+    #   or an `EXTERNAL` deployment. A task set includes details such as the
+    #   desired number of tasks, how many tasks are running, and whether the
+    #   task set serves production traffic.
     #   @return [Types::TaskSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSetResponse AWS API Documentation
@@ -3670,7 +3674,7 @@ module Aws::ECS
     #   The platform version on which your tasks in the service are running.
     #   A platform version is only specified for tasks using the Fargate
     #   launch type. If one is not specified, the `LATEST` platform version
-    #   is used by default. For more information, see [AWS Fargate Platform
+    #   is used by default. For more information, see [Fargate Platform
     #   Versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
@@ -3897,9 +3901,9 @@ module Aws::ECS
     #   CODE\_DEPLOY
     #
     #   : The blue/green (`CODE_DEPLOY`) deployment type uses the blue/green
-    #     deployment model powered by AWS CodeDeploy, which allows you to
-    #     verify a new deployment of a service before sending production
-    #     traffic to it.
+    #     deployment model powered by CodeDeploy, which allows you to verify
+    #     a new deployment of a service before sending production traffic to
+    #     it.
     #
     #   EXTERNAL
     #
@@ -3934,7 +3938,7 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance to
     #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed
-    #   by the Region of the container instance, the AWS account ID of the
+    #   by the Region of the container instance, the account ID of the
     #   container instance owner, the `container-instance` namespace, and
     #   then the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
@@ -4327,9 +4331,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionResponse AWS API Documentation
@@ -4499,7 +4503,7 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance. The
     #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
-    #   the container instance, the AWS account ID of the container instance
+    #   the container instance, the account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
@@ -4811,11 +4815,11 @@ module Aws::ECS
 
     # The amount of ephemeral storage to allocate for the task. This
     # parameter is used to expand the total amount of ephemeral storage
-    # available, beyond the default amount, for tasks hosted on AWS Fargate.
-    # For more information, see [Fargate task storage][1] in the *Amazon ECS
-    # User Guide for AWS Fargate*.
+    # available, beyond the default amount, for tasks hosted on Fargate. For
+    # more information, see [Fargate task storage][1] in the *Amazon ECS
+    # User Guide for Fargate*.
     #
-    # <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate using
+    # <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
     # platform version `1.4.0` or later.
     #
     #  </note>
@@ -4863,8 +4867,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   Specify an AWS Key Management Service key ID to encrypt the data
-    #   between the local client and the container.
+    #   Specify an Key Management Service key ID to encrypt the data between
+    #   the local client and the container.
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -5069,14 +5073,14 @@ module Aws::ECS
     # @!attribute [rw] credentials_parameter
     #   The authorization credential option to use. The authorization
     #   credential options can be provided using either the Amazon Resource
-    #   Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager
-    #   Parameter Store parameter. The ARNs refer to the stored credentials.
+    #   Name (ARN) of an Secrets Manager secret or SSM Parameter Store
+    #   parameter. The ARNs refer to the stored credentials.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   A fully qualified domain name hosted by an [AWS Directory
-    #   Service][1] Managed Microsoft AD (Active Directory) or self-hosted
-    #   AD on Amazon EC2.
+    #   A fully qualified domain name hosted by an [Directory Service][1]
+    #   Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon
+    #   EC2.
     #
     #
     #
@@ -5204,8 +5208,8 @@ module Aws::ECS
     #   FireLens Configuration][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
-    #   <note markdown="1"> Tasks hosted on AWS Fargate only support the `file` configuration
-    #   file type.
+    #   <note markdown="1"> Tasks hosted on Fargate only support the `file` configuration file
+    #   type.
     #
     #    </note>
     #
@@ -5269,7 +5273,7 @@ module Aws::ECS
     #
     # * Container health checks are supported for Fargate tasks if you are
     #   using platform version 1.1.0 or greater. For more information, see
-    #   [AWS Fargate Platform Versions][2].
+    #   [Fargate Platform Versions][2].
     #
     # * Container health checks are not supported for tasks that are part of
     #   a service that is configured to use a Classic Load Balancer.
@@ -5517,7 +5521,7 @@ module Aws::ECS
     #   `CapAdd` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cap-add` option to [docker run][3].
     #
-    #   <note markdown="1"> Tasks launched on AWS Fargate only support adding the `SYS_PTRACE`
+    #   <note markdown="1"> Tasks launched on Fargate only support adding the `SYS_PTRACE`
     #   kernel capability.
     #
     #    </note>
@@ -6651,7 +6655,7 @@ module Aws::ECS
     #   configuration][5] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    # * For tasks on AWS Fargate, because you do not have access to the
+    # * For tasks on Fargate, because you do not have access to the
     #   underlying infrastructure your tasks are hosted on, any additional
     #   software needed will have to be installed outside of the task. For
     #   example, the Fluentd output aggregators or a remote host running
@@ -6684,7 +6688,7 @@ module Aws::ECS
     # @!attribute [rw] log_driver
     #   The log driver to use for the container.
     #
-    #   For tasks on AWS Fargate, the supported log drivers are `awslogs`,
+    #   For tasks on Fargate, the supported log drivers are `awslogs`,
     #   `splunk`, and `awsfirelens`.
     #
     #   For tasks hosted on Amazon EC2 instances, the supported log drivers
@@ -7542,10 +7546,10 @@ module Aws::ECS
     #   providers can be created with the CreateCapacityProvider API
     #   operation.
     #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be
-    #   associated with a cluster to be used.
+    #   To use a Fargate capacity provider, specify either the `FARGATE` or
+    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
+    #   are available to all accounts and only need to be associated with a
+    #   cluster to be used.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_capacity_provider_strategy
@@ -7567,10 +7571,10 @@ module Aws::ECS
     #   providers can be created with the CreateCapacityProvider API
     #   operation.
     #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be
-    #   associated with a cluster to be used.
+    #   To use a Fargate capacity provider, specify either the `FARGATE` or
+    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
+    #   are available to all accounts and only need to be associated with a
+    #   cluster to be used.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutClusterCapacityProvidersRequest AWS API Documentation
@@ -7709,9 +7713,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceRequest AWS API Documentation
@@ -7997,11 +8001,11 @@ module Aws::ECS
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the task execution role that
-    #   grants the Amazon ECS container agent permission to make AWS API
-    #   calls on your behalf. The task execution IAM role is required
-    #   depending on the requirements of your task. For more information,
-    #   see [Amazon ECS task execution IAM role][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   grants the Amazon ECS container agent permission to make Amazon Web
+    #   Services API calls on your behalf. The task execution IAM role is
+    #   required depending on the requirements of your task. For more
+    #   information, see [Amazon ECS task execution IAM role][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -8014,13 +8018,15 @@ module Aws::ECS
     #   network mode is specified, the default is `bridge`.
     #
     #   For Amazon ECS tasks on Fargate, the `awsvpc` network mode is
-    #   required. For Amazon ECS tasks on Amazon EC2 instances, any network
-    #   mode can be used. If the network mode is set to `none`, you cannot
-    #   specify port mappings in your container definitions, and the tasks
-    #   containers do not have external connectivity. The `host` and
-    #   `awsvpc` network modes offer the highest networking performance for
-    #   containers because they use the EC2 network stack instead of the
-    #   virtualized network stack provided by the `bridge` mode.
+    #   required. For Amazon ECS tasks on Amazon EC2 Linux instances, any
+    #   network mode can be used. For Amazon ECS tasks on Amazon EC2 Windows
+    #   instances, `<default>` or `awsvpc` can be used. If the network mode
+    #   is set to `none`, you cannot specify port mappings in your container
+    #   definitions, and the tasks containers do not have external
+    #   connectivity. The `host` and `awsvpc` network modes offer the
+    #   highest networking performance for containers because they use the
+    #   EC2 network stack instead of the virtualized network stack provided
+    #   by the `bridge` mode.
     #
     #   With the `host` and `awsvpc` network modes, exposed container ports
     #   are mapped directly to the corresponding host port (for the `host`
@@ -8038,21 +8044,9 @@ module Aws::ECS
     #   For more information, see [Task Networking][1] in the *Amazon
     #   Elastic Container Service Developer Guide*.
     #
-    #   <note markdown="1"> Currently, only Amazon ECS-optimized AMIs, other Amazon Linux
-    #   variants with the `ecs-init` package, or AWS Fargate infrastructure
-    #   support the `awsvpc` network mode.
-    #
-    #    </note>
-    #
     #   If the network mode is `host`, you cannot run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
-    #
-    #   Docker for Windows uses different network modes than Docker for
-    #   Linux. When you register a task definition with Windows containers,
-    #   you must not specify a network mode. If you use the console to
-    #   register a task definition with Windows containers, you must choose
-    #   the `<default>` network mode object.
     #
     #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
@@ -8187,9 +8181,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] pid_mode
@@ -8207,7 +8201,7 @@ module Aws::ECS
     #   see [Docker security][2].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
-    #   on AWS Fargate.
+    #   on Fargate.
     #
     #    </note>
     #
@@ -8248,7 +8242,7 @@ module Aws::ECS
     #     `systemControls` will apply to all containers within a task.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
-    #   on AWS Fargate.
+    #   on Fargate.
     #
     #    </note>
     #
@@ -8284,12 +8278,12 @@ module Aws::ECS
     # @!attribute [rw] ephemeral_storage
     #   The amount of ephemeral storage to allocate for the task. This
     #   parameter is used to expand the total amount of ephemeral storage
-    #   available, beyond the default amount, for tasks hosted on AWS
-    #   Fargate. For more information, see [Fargate task storage][1] in the
-    #   *Amazon ECS User Guide for AWS Fargate*.
+    #   available, beyond the default amount, for tasks hosted on Fargate.
+    #   For more information, see [Fargate task storage][1] in the *Amazon
+    #   ECS User Guide for Fargate*.
     #
-    #   <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate
-    #   using platform version `1.4.0` or later.
+    #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
+    #   platform version `1.4.0` or later.
     #
     #    </note>
     #
@@ -8351,11 +8345,11 @@ module Aws::ECS
     #   The Amazon Resource Name (ARN) of the secret containing the private
     #   repository credentials.
     #
-    #   <note markdown="1"> When you are using the Amazon ECS API, AWS CLI, or AWS SDK, if the
-    #   secret exists in the same Region as the task that you are launching
-    #   then you can use either the full ARN or the name of the secret. When
-    #   you are using the AWS Management Console, you must specify the full
-    #   ARN of the secret.
+    #   <note markdown="1"> When you are using the Amazon ECS API, CLI, or Amazon Web Services
+    #   SDK, if the secret exists in the same Region as the task that you
+    #   are launching then you can use either the full ARN or the name of
+    #   the secret. When you are using the Amazon Web Services Management
+    #   Console, you must specify the full ARN of the secret.
     #
     #    </note>
     #   @return [String]
@@ -8582,6 +8576,9 @@ module Aws::ECS
     #   parameter must be omitted. If no `capacityProviderStrategy` or
     #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
     #   the cluster is used.
+    #
+    #   When you use cluster auto scaling, you must specify
+    #   `capacityProviderStrategy` and not `launchType`.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] cluster
@@ -8622,13 +8619,12 @@ module Aws::ECS
     #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
-    #   The `FARGATE` launch type runs your tasks on AWS Fargate On-Demand
+    #   The `FARGATE` launch type runs your tasks on Fargate On-Demand
     #   infrastructure.
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
-    #   provider strategy must be used. For more information, see [AWS
-    #   Fargate capacity providers][2] in the *Amazon ECS User Guide for AWS
-    #   Fargate*.
+    #   provider strategy must be used. For more information, see [Fargate
+    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
     #
     #    </note>
     #
@@ -8641,6 +8637,9 @@ module Aws::ECS
     #   A task can use either a launch type or a capacity provider strategy.
     #   If a `launchType` is specified, the `capacityProviderStrategy`
     #   parameter must be omitted.
+    #
+    #   When you use cluster auto scaling, you must specify
+    #   `capacityProviderStrategy` and not `launchType`.
     #
     #
     #
@@ -8691,8 +8690,8 @@ module Aws::ECS
     #   The platform version the task should run. A platform version is only
     #   specified for tasks using the Fargate launch type. If one is not
     #   specified, the `LATEST` platform version is used by default. For
-    #   more information, see [AWS Fargate Platform Versions][1] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
+    #   more information, see [Fargate Platform Versions][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -8754,9 +8753,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] task_definition
@@ -8867,13 +8866,13 @@ module Aws::ECS
     #
     # @!attribute [rw] value_from
     #   The secret to expose to the container. The supported values are
-    #   either the full ARN of the AWS Secrets Manager secret or the full
-    #   ARN of the parameter in the AWS Systems Manager Parameter Store.
+    #   either the full ARN of the Secrets Manager secret or the full ARN of
+    #   the parameter in the SSM Parameter Store.
     #
-    #   <note markdown="1"> If the AWS Systems Manager Parameter Store parameter exists in the
-    #   same Region as the task you are launching, then you can use either
-    #   the full ARN or name of the parameter. If the parameter exists in a
-    #   different Region, then the full ARN must be specified.
+    #   <note markdown="1"> If the SSM Parameter Store parameter exists in the same Region as
+    #   the task you are launching, then you can use either the full ARN or
+    #   name of the parameter. If the parameter exists in a different
+    #   Region, then the full ARN must be specified.
     #
     #    </note>
     #   @return [String]
@@ -8905,8 +8904,8 @@ module Aws::ECS
     # @!attribute [rw] service_arn
     #   The ARN that identifies the service. The ARN contains the
     #   `arn:aws:ecs` namespace, followed by the Region of the service, the
-    #   AWS account ID of the service owner, the `service` namespace, and
-    #   then the service name. For example,
+    #   account ID of the service owner, the `service` namespace, and then
+    #   the service name. For example,
     #   `arn:aws:ecs:region:012345678910:service/my-service`.
     #   @return [String]
     #
@@ -8960,26 +8959,23 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
-    #   The infrastructure on which your service is running. For more
-    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   The launch type the service is using. When using the
+    #   DescribeServices API, this field is omitted if the service was
+    #   created using a capacity provider strategy.
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
-    #   The capacity provider strategy associated with the service.
+    #   The capacity provider strategy the service is using. When using the
+    #   DescribeServices API, this field is omitted if the service was
+    #   created using a launch type.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
     #   The platform version on which to run your service. A platform
-    #   version is only specified for tasks using the Fargate launch type.
-    #   If one is not specified, the `LATEST` platform version is used by
-    #   default. For more information, see [AWS Fargate Platform
-    #   Versions][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   version is only specified for tasks hosted on Fargate. If one is not
+    #   specified, the `LATEST` platform version is used by default. For
+    #   more information, see [Fargate Platform Versions][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -8999,10 +8995,10 @@ module Aws::ECS
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] task_sets
-    #   Information about a set of Amazon ECS tasks in either an AWS
-    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
-    #   includes details such as the desired number of tasks, how many tasks
-    #   are running, and whether the task set serves production traffic.
+    #   Information about a set of Amazon ECS tasks in either an CodeDeploy
+    #   or an `EXTERNAL` deployment. An Amazon ECS task set includes details
+    #   such as the desired number of tasks, how many tasks are running, and
+    #   whether the task set serves production traffic.
     #   @return [Array<Types::TaskSet>]
     #
     # @!attribute [rw] deployments
@@ -9105,9 +9101,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] created_by
@@ -9228,7 +9224,7 @@ module Aws::ECS
     #
     # @!attribute [rw] registry_arn
     #   The Amazon Resource Name (ARN) of the service registry. The
-    #   currently supported service registry is AWS Cloud Map. For more
+    #   currently supported service registry is Cloud Map. For more
     #   information, see [CreateService][1].
     #
     #
@@ -9505,9 +9501,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] task_definition
@@ -9918,10 +9914,10 @@ module Aws::ECS
     # * Tag keys and values are case-sensitive.
     #
     # * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #   such as a prefix for either keys or values as it is reserved for AWS
-    #   use. You cannot edit or delete tag keys or values with this prefix.
-    #   Tags with this prefix do not count against your tags per resource
-    #   limit.
+    #   such as a prefix for either keys or values as it is reserved for
+    #   Amazon Web Services use. You cannot edit or delete tag keys or
+    #   values with this prefix. Tags with this prefix do not count against
+    #   your tags per resource limit.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -9996,9 +9992,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TagResourceRequest AWS API Documentation
@@ -10208,9 +10204,8 @@ module Aws::ECS
     #   The platform version on which your task is running. A platform
     #   version is only specified for tasks using the Fargate launch type.
     #   If one is not specified, the `LATEST` platform version is used by
-    #   default. For more information, see [AWS Fargate Platform
-    #   Versions][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   default. For more information, see [Fargate Platform Versions][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -10281,9 +10276,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] task_arn
@@ -10384,9 +10379,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
-    #   The short name or full Amazon Resource Name (ARN) of the AWS
-    #   Identity and Access Management (IAM) role that grants containers in
-    #   the task permission to call AWS APIs on your behalf. For more
+    #   The short name or full Amazon Resource Name (ARN) of the Identity
+    #   and Access Management role that grants containers in the task
+    #   permission to call Amazon Web Services APIs on your behalf. For more
     #   information, see [Amazon ECS Task Role][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
@@ -10405,11 +10400,11 @@ module Aws::ECS
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the task execution role that
-    #   grants the Amazon ECS container agent permission to make AWS API
-    #   calls on your behalf. The task execution IAM role is required
-    #   depending on the requirements of your task. For more information,
-    #   see [Amazon ECS task execution IAM role][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   grants the Amazon ECS container agent permission to make Amazon Web
+    #   Services API calls on your behalf. The task execution IAM role is
+    #   required depending on the requirements of your task. For more
+    #   information, see [Amazon ECS task execution IAM role][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -10422,13 +10417,15 @@ module Aws::ECS
     #   network mode is specified, the default is `bridge`.
     #
     #   For Amazon ECS tasks on Fargate, the `awsvpc` network mode is
-    #   required. For Amazon ECS tasks on Amazon EC2 instances, any network
-    #   mode can be used. If the network mode is set to `none`, you cannot
-    #   specify port mappings in your container definitions, and the tasks
-    #   containers do not have external connectivity. The `host` and
-    #   `awsvpc` network modes offer the highest networking performance for
-    #   containers because they use the EC2 network stack instead of the
-    #   virtualized network stack provided by the `bridge` mode.
+    #   required. For Amazon ECS tasks on Amazon EC2 Linux instances, any
+    #   network mode can be used. For Amazon ECS tasks on Amazon EC2 Windows
+    #   instances, `<default>` or `awsvpc` can be used. If the network mode
+    #   is set to `none`, you cannot specify port mappings in your container
+    #   definitions, and the tasks containers do not have external
+    #   connectivity. The `host` and `awsvpc` network modes offer the
+    #   highest networking performance for containers because they use the
+    #   EC2 network stack instead of the virtualized network stack provided
+    #   by the `bridge` mode.
     #
     #   With the `host` and `awsvpc` network modes, exposed container ports
     #   are mapped directly to the corresponding host port (for the `host`
@@ -10446,21 +10443,9 @@ module Aws::ECS
     #   For more information, see [Task Networking][1] in the *Amazon
     #   Elastic Container Service Developer Guide*.
     #
-    #   <note markdown="1"> Currently, only Amazon ECS-optimized AMIs, other Amazon Linux
-    #   variants with the `ecs-init` package, or AWS Fargate infrastructure
-    #   support the `awsvpc` network mode.
-    #
-    #    </note>
-    #
     #   If the network mode is `host`, you cannot run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
-    #
-    #   Docker for Windows uses different network modes than Docker for
-    #   Linux. When you register a task definition with Windows containers,
-    #   you must not specify a network mode. If you use the console to
-    #   register a task definition with Windows containers, you must choose
-    #   the `<default>` network mode object.
     #
     #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
@@ -10486,7 +10471,7 @@ module Aws::ECS
     #   Elastic Container Service Developer Guide*.
     #
     #   <note markdown="1"> The `host` and `sourcePath` parameters are not supported for tasks
-    #   run on AWS Fargate.
+    #   run on Fargate.
     #
     #    </note>
     #
@@ -10509,7 +10494,7 @@ module Aws::ECS
     #   EC2 instances. For more information, see [Attributes][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
-    #   <note markdown="1"> This parameter is not supported for tasks run on AWS Fargate.
+    #   <note markdown="1"> This parameter is not supported for tasks run on Fargate.
     #
     #    </note>
     #
@@ -10521,7 +10506,7 @@ module Aws::ECS
     # @!attribute [rw] placement_constraints
     #   An array of placement constraint objects to use for tasks.
     #
-    #   <note markdown="1"> This parameter is not supported for tasks run on AWS Fargate.
+    #   <note markdown="1"> This parameter is not supported for tasks run on Fargate.
     #
     #    </note>
     #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
@@ -10577,9 +10562,9 @@ module Aws::ECS
     #   optional. For more information regarding container-level memory and
     #   memory reservation, see [ContainerDefinition][1].
     #
-    #   If your tasks will be run on AWS Fargate, this field is required and
-    #   you must use one of the following values, which determines your
-    #   range of valid values for the `cpu` parameter:
+    #   If your tasks will be run on Fargate, this field is required and you
+    #   must use one of the following values, which determines your range of
+    #   valid values for the `cpu` parameter:
     #
     #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values:
     #     256 (.25 vCPU)
@@ -10620,7 +10605,7 @@ module Aws::ECS
     #   see [Docker security][2].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
-    #   on AWS Fargate.
+    #   on Fargate.
     #
     #    </note>
     #
@@ -10661,7 +10646,7 @@ module Aws::ECS
     #     `systemControls` will apply to all containers within a task.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
-    #   on AWS Fargate.
+    #   on Fargate.
     #
     #    </note>
     #
@@ -10740,8 +10725,7 @@ module Aws::ECS
     # definition. For more information, see [Task placement constraints][1]
     # in the *Amazon Elastic Container Service Developer Guide*.
     #
-    # <note markdown="1"> Task placement constraints are not supported for tasks run on AWS
-    # Fargate.
+    # <note markdown="1"> Task placement constraints are not supported for tasks run on Fargate.
     #
     #  </note>
     #
@@ -10859,8 +10843,8 @@ module Aws::ECS
     # @!attribute [rw] ephemeral_storage
     #   The ephemeral storage setting override for the task.
     #
-    #   <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate
-    #   using platform version `1.4.0` or later.
+    #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
+    #   platform version `1.4.0` or later.
     #
     #    </note>
     #   @return [Types::EphemeralStorage]
@@ -10879,10 +10863,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Information about a set of Amazon ECS tasks in either an AWS
-    # CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
-    # includes details such as the desired number of tasks, how many tasks
-    # are running, and whether the task set serves production traffic.
+    # Information about a set of Amazon ECS tasks in either an CodeDeploy or
+    # an `EXTERNAL` deployment. An Amazon ECS task set includes details such
+    # as the desired number of tasks, how many tasks are running, and
+    # whether the task set serves production traffic.
     #
     # @!attribute [rw] id
     #   The ID of the task set.
@@ -10904,20 +10888,20 @@ module Aws::ECS
     #
     # @!attribute [rw] started_by
     #   The tag specified when a task set is started. If the task set is
-    #   created by an AWS CodeDeploy deployment, the `startedBy` parameter
-    #   is `CODE_DEPLOY`. For a task set created for an external deployment,
+    #   created by an CodeDeploy deployment, the `startedBy` parameter is
+    #   `CODE_DEPLOY`. For a task set created for an external deployment,
     #   the startedBy field isn't used.
     #   @return [String]
     #
     # @!attribute [rw] external_id
     #   The external ID associated with the task set.
     #
-    #   If a task set is created by an AWS CodeDeploy deployment, the
-    #   `externalId` parameter contains the AWS CodeDeploy deployment ID.
+    #   If a task set is created by an CodeDeploy deployment, the
+    #   `externalId` parameter contains the CodeDeploy deployment ID.
     #
     #   If a task set is created for an external deployment and is
     #   associated with a service discovery registry, the `externalId`
-    #   parameter contains the `ECS_TASK_SET_EXTERNAL_ID` AWS Cloud Map
+    #   parameter contains the `ECS_TASK_SET_EXTERNAL_ID` Cloud Map
     #   attribute.
     #   @return [String]
     #
@@ -10987,11 +10971,10 @@ module Aws::ECS
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
-    #   The AWS Fargate platform version on which the tasks in the task set
-    #   are running. A platform version is only specified for tasks run on
-    #   AWS Fargate. For more information, see [AWS Fargate platform
-    #   versions][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   The Fargate platform version on which the tasks in the task set are
+    #   running. A platform version is only specified for tasks run on
+    #   Fargate. For more information, see [Fargate platform versions][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -11070,9 +11053,9 @@ module Aws::ECS
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
     #     of such as a prefix for either keys or values as it is reserved
-    #     for AWS use. You cannot edit or delete tag keys or values with
-    #     this prefix. Tags with this prefix do not count against your tags
-    #     per resource limit.
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskSet AWS API Documentation
@@ -11632,10 +11615,10 @@ module Aws::ECS
     #   providers can be created with the CreateCapacityProvider API
     #   operation.
     #
-    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
-    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
-    #   providers are available to all accounts and only need to be
-    #   associated with a cluster to be used.
+    #   To use a Fargate capacity provider, specify either the `FARGATE` or
+    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
+    #   are available to all accounts and only need to be associated with a
+    #   cluster to be used.
     #
     #   The PutClusterCapacityProviders API operation is used to update the
     #   list of available capacity providers for a cluster after the cluster
@@ -11679,8 +11662,8 @@ module Aws::ECS
     #   The platform version on which your tasks in the service are running.
     #   A platform version is only specified for tasks using the Fargate
     #   launch type. If a platform version is not specified, the `LATEST`
-    #   platform version is used by default. For more information, see [AWS
-    #   Fargate Platform Versions][1] in the *Amazon Elastic Container
+    #   platform version is used by default. For more information, see
+    #   [Fargate Platform Versions][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
     #
@@ -11928,7 +11911,7 @@ module Aws::ECS
     #   Windows containers only support the use of the `local` driver. To
     #   use bind mounts, specify the `host` parameter instead.
     #
-    #   <note markdown="1"> Docker volumes are not supported by tasks run on AWS Fargate.
+    #   <note markdown="1"> Docker volumes are not supported by tasks run on Fargate.
     #
     #    </note>
     #   @return [Types::DockerVolumeConfiguration]

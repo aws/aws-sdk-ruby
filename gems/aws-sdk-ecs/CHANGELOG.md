@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2021-07-15)
+------------------
+
+* Feature - Documentation updates for support of awsvpc mode on Windows.
+
 1.80.0 (2021-06-02)
 ------------------
 

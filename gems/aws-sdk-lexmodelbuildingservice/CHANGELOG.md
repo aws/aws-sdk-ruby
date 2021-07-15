@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-07-15)
+------------------
+
+* Feature - Lex now supports the en-IN locale
+
 1.46.0 (2021-07-13)
 ------------------
 

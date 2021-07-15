@@ -90,6 +90,8 @@ module Aws::EC2
     AssociateEnclaveCertificateIamRoleResult = Shapes::StructureShape.new(name: 'AssociateEnclaveCertificateIamRoleResult')
     AssociateIamInstanceProfileRequest = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileRequest')
     AssociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileResult')
+    AssociateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'AssociateInstanceEventWindowRequest')
+    AssociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'AssociateInstanceEventWindowResult')
     AssociateRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateRouteTableRequest')
     AssociateRouteTableResult = Shapes::StructureShape.new(name: 'AssociateRouteTableResult')
     AssociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockRequest')
@@ -322,6 +324,8 @@ module Aws::EC2
     CreateFpgaImageResult = Shapes::StructureShape.new(name: 'CreateFpgaImageResult')
     CreateImageRequest = Shapes::StructureShape.new(name: 'CreateImageRequest')
     CreateImageResult = Shapes::StructureShape.new(name: 'CreateImageResult')
+    CreateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'CreateInstanceEventWindowRequest')
+    CreateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'CreateInstanceEventWindowResult')
     CreateInstanceExportTaskRequest = Shapes::StructureShape.new(name: 'CreateInstanceExportTaskRequest')
     CreateInstanceExportTaskResult = Shapes::StructureShape.new(name: 'CreateInstanceExportTaskResult')
     CreateInternetGatewayRequest = Shapes::StructureShape.new(name: 'CreateInternetGatewayRequest')
@@ -434,6 +438,7 @@ module Aws::EC2
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
     DedicatedHostId = Shapes::StringShape.new(name: 'DedicatedHostId')
+    DedicatedHostIdList = Shapes::ListShape.new(name: 'DedicatedHostIdList')
     DefaultNetworkCardIndex = Shapes::IntegerShape.new(name: 'DefaultNetworkCardIndex')
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
@@ -461,6 +466,8 @@ module Aws::EC2
     DeleteFlowLogsResult = Shapes::StructureShape.new(name: 'DeleteFlowLogsResult')
     DeleteFpgaImageRequest = Shapes::StructureShape.new(name: 'DeleteFpgaImageRequest')
     DeleteFpgaImageResult = Shapes::StructureShape.new(name: 'DeleteFpgaImageResult')
+    DeleteInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'DeleteInstanceEventWindowRequest')
+    DeleteInstanceEventWindowResult = Shapes::StructureShape.new(name: 'DeleteInstanceEventWindowResult')
     DeleteInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteInternetGatewayRequest')
     DeleteKeyPairRequest = Shapes::StructureShape.new(name: 'DeleteKeyPairRequest')
     DeleteLaunchTemplateRequest = Shapes::StructureShape.new(name: 'DeleteLaunchTemplateRequest')
@@ -658,6 +665,8 @@ module Aws::EC2
     DescribeInstanceCreditSpecificationsResult = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsResult')
     DescribeInstanceEventNotificationAttributesRequest = Shapes::StructureShape.new(name: 'DescribeInstanceEventNotificationAttributesRequest')
     DescribeInstanceEventNotificationAttributesResult = Shapes::StructureShape.new(name: 'DescribeInstanceEventNotificationAttributesResult')
+    DescribeInstanceEventWindowsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceEventWindowsRequest')
+    DescribeInstanceEventWindowsResult = Shapes::StructureShape.new(name: 'DescribeInstanceEventWindowsResult')
     DescribeInstanceStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStatusRequest')
     DescribeInstanceStatusResult = Shapes::StructureShape.new(name: 'DescribeInstanceStatusResult')
     DescribeInstanceTypeOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceTypeOfferingsRequest')
@@ -889,6 +898,8 @@ module Aws::EC2
     DisassociateEnclaveCertificateIamRoleResult = Shapes::StructureShape.new(name: 'DisassociateEnclaveCertificateIamRoleResult')
     DisassociateIamInstanceProfileRequest = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileRequest')
     DisassociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileResult')
+    DisassociateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'DisassociateInstanceEventWindowRequest')
+    DisassociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'DisassociateInstanceEventWindowResult')
     DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
     DisassociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockRequest')
     DisassociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockResult')
@@ -1153,6 +1164,7 @@ module Aws::EC2
     HostReservationIdSet = Shapes::ListShape.new(name: 'HostReservationIdSet')
     HostReservationSet = Shapes::ListShape.new(name: 'HostReservationSet')
     HostTenancy = Shapes::StringShape.new(name: 'HostTenancy')
+    Hour = Shapes::IntegerShape.new(name: 'Hour')
     HttpTokensState = Shapes::StringShape.new(name: 'HttpTokensState')
     HypervisorType = Shapes::StringShape.new(name: 'HypervisorType')
     IKEVersionsList = Shapes::ListShape.new(name: 'IKEVersionsList')
@@ -1232,10 +1244,25 @@ module Aws::EC2
     InstanceCreditSpecificationListRequest = Shapes::ListShape.new(name: 'InstanceCreditSpecificationListRequest')
     InstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'InstanceCreditSpecificationRequest')
     InstanceEventId = Shapes::StringShape.new(name: 'InstanceEventId')
+    InstanceEventWindow = Shapes::StructureShape.new(name: 'InstanceEventWindow')
+    InstanceEventWindowAssociationRequest = Shapes::StructureShape.new(name: 'InstanceEventWindowAssociationRequest')
+    InstanceEventWindowAssociationTarget = Shapes::StructureShape.new(name: 'InstanceEventWindowAssociationTarget')
+    InstanceEventWindowCronExpression = Shapes::StringShape.new(name: 'InstanceEventWindowCronExpression')
+    InstanceEventWindowDisassociationRequest = Shapes::StructureShape.new(name: 'InstanceEventWindowDisassociationRequest')
+    InstanceEventWindowId = Shapes::StringShape.new(name: 'InstanceEventWindowId')
+    InstanceEventWindowIdSet = Shapes::ListShape.new(name: 'InstanceEventWindowIdSet')
+    InstanceEventWindowSet = Shapes::ListShape.new(name: 'InstanceEventWindowSet')
+    InstanceEventWindowState = Shapes::StringShape.new(name: 'InstanceEventWindowState')
+    InstanceEventWindowStateChange = Shapes::StructureShape.new(name: 'InstanceEventWindowStateChange')
+    InstanceEventWindowTimeRange = Shapes::StructureShape.new(name: 'InstanceEventWindowTimeRange')
+    InstanceEventWindowTimeRangeList = Shapes::ListShape.new(name: 'InstanceEventWindowTimeRangeList')
+    InstanceEventWindowTimeRangeRequest = Shapes::StructureShape.new(name: 'InstanceEventWindowTimeRangeRequest')
+    InstanceEventWindowTimeRangeRequestSet = Shapes::ListShape.new(name: 'InstanceEventWindowTimeRangeRequestSet')
     InstanceExportDetails = Shapes::StructureShape.new(name: 'InstanceExportDetails')
     InstanceFamilyCreditSpecification = Shapes::StructureShape.new(name: 'InstanceFamilyCreditSpecification')
     InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
+    InstanceIdList = Shapes::ListShape.new(name: 'InstanceIdList')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
     InstanceIdsSet = Shapes::ListShape.new(name: 'InstanceIdsSet')
@@ -1487,6 +1514,8 @@ module Aws::EC2
     ModifyInstanceCreditSpecificationResult = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationResult')
     ModifyInstanceEventStartTimeRequest = Shapes::StructureShape.new(name: 'ModifyInstanceEventStartTimeRequest')
     ModifyInstanceEventStartTimeResult = Shapes::StructureShape.new(name: 'ModifyInstanceEventStartTimeResult')
+    ModifyInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'ModifyInstanceEventWindowRequest')
+    ModifyInstanceEventWindowResult = Shapes::StructureShape.new(name: 'ModifyInstanceEventWindowResult')
     ModifyInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsRequest')
     ModifyInstanceMetadataOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsResult')
     ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
@@ -1855,6 +1884,7 @@ module Aws::EC2
     RestoreAddressToClassicResult = Shapes::StructureShape.new(name: 'RestoreAddressToClassicResult')
     RestoreManagedPrefixListVersionRequest = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionRequest')
     RestoreManagedPrefixListVersionResult = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionResult')
+    ResultRange = Shapes::IntegerShape.new(name: 'ResultRange')
     RevokeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressRequest')
     RevokeClientVpnIngressResult = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressResult')
     RevokeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressRequest')
@@ -2291,6 +2321,7 @@ module Aws::EC2
     VpnStaticRouteSource = Shapes::StringShape.new(name: 'VpnStaticRouteSource')
     VpnTunnelOptionsSpecification = Shapes::StructureShape.new(name: 'VpnTunnelOptionsSpecification')
     VpnTunnelOptionsSpecificationsList = Shapes::ListShape.new(name: 'VpnTunnelOptionsSpecificationsList')
+    WeekDay = Shapes::StringShape.new(name: 'WeekDay')
     WithdrawByoipCidrRequest = Shapes::StructureShape.new(name: 'WithdrawByoipCidrRequest')
     WithdrawByoipCidrResult = Shapes::StructureShape.new(name: 'WithdrawByoipCidrResult')
     ZoneIdStringList = Shapes::ListShape.new(name: 'ZoneIdStringList')
@@ -2584,6 +2615,14 @@ module Aws::EC2
 
     AssociateIamInstanceProfileResult.add_member(:iam_instance_profile_association, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociation, location_name: "iamInstanceProfileAssociation"))
     AssociateIamInstanceProfileResult.struct_class = Types::AssociateIamInstanceProfileResult
+
+    AssociateInstanceEventWindowRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateInstanceEventWindowRequest.add_member(:instance_event_window_id, Shapes::ShapeRef.new(shape: InstanceEventWindowId, required: true, location_name: "InstanceEventWindowId"))
+    AssociateInstanceEventWindowRequest.add_member(:association_target, Shapes::ShapeRef.new(shape: InstanceEventWindowAssociationRequest, required: true, location_name: "AssociationTarget"))
+    AssociateInstanceEventWindowRequest.struct_class = Types::AssociateInstanceEventWindowRequest
+
+    AssociateInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
+    AssociateInstanceEventWindowResult.struct_class = Types::AssociateInstanceEventWindowResult
 
     AssociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateRouteTableRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
@@ -3443,6 +3482,16 @@ module Aws::EC2
     CreateImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     CreateImageResult.struct_class = Types::CreateImageResult
 
+    CreateInstanceEventWindowRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateInstanceEventWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    CreateInstanceEventWindowRequest.add_member(:time_ranges, Shapes::ShapeRef.new(shape: InstanceEventWindowTimeRangeRequestSet, location_name: "TimeRange"))
+    CreateInstanceEventWindowRequest.add_member(:cron_expression, Shapes::ShapeRef.new(shape: InstanceEventWindowCronExpression, location_name: "CronExpression"))
+    CreateInstanceEventWindowRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateInstanceEventWindowRequest.struct_class = Types::CreateInstanceEventWindowRequest
+
+    CreateInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
+    CreateInstanceEventWindowResult.struct_class = Types::CreateInstanceEventWindowResult
+
     CreateInstanceExportTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateInstanceExportTaskRequest.add_member(:export_to_s3_task, Shapes::ShapeRef.new(shape: ExportToS3TaskSpecification, required: true, location_name: "exportToS3"))
     CreateInstanceExportTaskRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
@@ -4019,6 +4068,8 @@ module Aws::EC2
 
     CustomerGatewayList.member = Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "item")
 
+    DedicatedHostIdList.member = Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "item")
+
     DeleteCarrierGatewayRequest.add_member(:carrier_gateway_id, Shapes::ShapeRef.new(shape: CarrierGatewayId, required: true, location_name: "CarrierGatewayId"))
     DeleteCarrierGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteCarrierGatewayRequest.struct_class = Types::DeleteCarrierGatewayRequest
@@ -4096,6 +4147,14 @@ module Aws::EC2
 
     DeleteFpgaImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     DeleteFpgaImageResult.struct_class = Types::DeleteFpgaImageResult
+
+    DeleteInstanceEventWindowRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteInstanceEventWindowRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceDelete"))
+    DeleteInstanceEventWindowRequest.add_member(:instance_event_window_id, Shapes::ShapeRef.new(shape: InstanceEventWindowId, required: true, location_name: "InstanceEventWindowId"))
+    DeleteInstanceEventWindowRequest.struct_class = Types::DeleteInstanceEventWindowRequest
+
+    DeleteInstanceEventWindowResult.add_member(:instance_event_window_state, Shapes::ShapeRef.new(shape: InstanceEventWindowStateChange, location_name: "instanceEventWindowState"))
+    DeleteInstanceEventWindowResult.struct_class = Types::DeleteInstanceEventWindowResult
 
     DeleteInternetGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteInternetGatewayRequest.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: InternetGatewayId, required: true, location_name: "internetGatewayId"))
@@ -4890,6 +4949,17 @@ module Aws::EC2
 
     DescribeInstanceEventNotificationAttributesResult.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: InstanceTagNotificationAttribute, location_name: "instanceTagAttribute"))
     DescribeInstanceEventNotificationAttributesResult.struct_class = Types::DescribeInstanceEventNotificationAttributesResult
+
+    DescribeInstanceEventWindowsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceEventWindowsRequest.add_member(:instance_event_window_ids, Shapes::ShapeRef.new(shape: InstanceEventWindowIdSet, location_name: "InstanceEventWindowId"))
+    DescribeInstanceEventWindowsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceEventWindowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultRange, location_name: "MaxResults"))
+    DescribeInstanceEventWindowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeInstanceEventWindowsRequest.struct_class = Types::DescribeInstanceEventWindowsRequest
+
+    DescribeInstanceEventWindowsResult.add_member(:instance_event_windows, Shapes::ShapeRef.new(shape: InstanceEventWindowSet, location_name: "instanceEventWindowSet"))
+    DescribeInstanceEventWindowsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeInstanceEventWindowsResult.struct_class = Types::DescribeInstanceEventWindowsResult
 
     DescribeInstanceStatusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeInstanceStatusRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
@@ -5942,6 +6012,14 @@ module Aws::EC2
 
     DisassociateIamInstanceProfileResult.add_member(:iam_instance_profile_association, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociation, location_name: "iamInstanceProfileAssociation"))
     DisassociateIamInstanceProfileResult.struct_class = Types::DisassociateIamInstanceProfileResult
+
+    DisassociateInstanceEventWindowRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateInstanceEventWindowRequest.add_member(:instance_event_window_id, Shapes::ShapeRef.new(shape: InstanceEventWindowId, required: true, location_name: "InstanceEventWindowId"))
+    DisassociateInstanceEventWindowRequest.add_member(:association_target, Shapes::ShapeRef.new(shape: InstanceEventWindowDisassociationRequest, required: true, location_name: "AssociationTarget"))
+    DisassociateInstanceEventWindowRequest.struct_class = Types::DisassociateInstanceEventWindowRequest
+
+    DisassociateInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
+    DisassociateInstanceEventWindowResult.struct_class = Types::DisassociateInstanceEventWindowResult
 
     DisassociateRouteTableRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: RouteTableAssociationId, required: true, location_name: "associationId"))
     DisassociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -7266,6 +7344,54 @@ module Aws::EC2
     InstanceCreditSpecificationRequest.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "CpuCredits"))
     InstanceCreditSpecificationRequest.struct_class = Types::InstanceCreditSpecificationRequest
 
+    InstanceEventWindow.add_member(:instance_event_window_id, Shapes::ShapeRef.new(shape: InstanceEventWindowId, location_name: "instanceEventWindowId"))
+    InstanceEventWindow.add_member(:time_ranges, Shapes::ShapeRef.new(shape: InstanceEventWindowTimeRangeList, location_name: "timeRangeSet"))
+    InstanceEventWindow.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    InstanceEventWindow.add_member(:cron_expression, Shapes::ShapeRef.new(shape: InstanceEventWindowCronExpression, location_name: "cronExpression"))
+    InstanceEventWindow.add_member(:association_target, Shapes::ShapeRef.new(shape: InstanceEventWindowAssociationTarget, location_name: "associationTarget"))
+    InstanceEventWindow.add_member(:state, Shapes::ShapeRef.new(shape: InstanceEventWindowState, location_name: "state"))
+    InstanceEventWindow.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    InstanceEventWindow.struct_class = Types::InstanceEventWindow
+
+    InstanceEventWindowAssociationRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, location_name: "InstanceId"))
+    InstanceEventWindowAssociationRequest.add_member(:instance_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "InstanceTag"))
+    InstanceEventWindowAssociationRequest.add_member(:dedicated_host_ids, Shapes::ShapeRef.new(shape: DedicatedHostIdList, location_name: "DedicatedHostId"))
+    InstanceEventWindowAssociationRequest.struct_class = Types::InstanceEventWindowAssociationRequest
+
+    InstanceEventWindowAssociationTarget.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, location_name: "instanceIdSet"))
+    InstanceEventWindowAssociationTarget.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    InstanceEventWindowAssociationTarget.add_member(:dedicated_host_ids, Shapes::ShapeRef.new(shape: DedicatedHostIdList, location_name: "dedicatedHostIdSet"))
+    InstanceEventWindowAssociationTarget.struct_class = Types::InstanceEventWindowAssociationTarget
+
+    InstanceEventWindowDisassociationRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, location_name: "InstanceId"))
+    InstanceEventWindowDisassociationRequest.add_member(:instance_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "InstanceTag"))
+    InstanceEventWindowDisassociationRequest.add_member(:dedicated_host_ids, Shapes::ShapeRef.new(shape: DedicatedHostIdList, location_name: "DedicatedHostId"))
+    InstanceEventWindowDisassociationRequest.struct_class = Types::InstanceEventWindowDisassociationRequest
+
+    InstanceEventWindowIdSet.member = Shapes::ShapeRef.new(shape: InstanceEventWindowId, location_name: "InstanceEventWindowId")
+
+    InstanceEventWindowSet.member = Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "item")
+
+    InstanceEventWindowStateChange.add_member(:instance_event_window_id, Shapes::ShapeRef.new(shape: InstanceEventWindowId, location_name: "instanceEventWindowId"))
+    InstanceEventWindowStateChange.add_member(:state, Shapes::ShapeRef.new(shape: InstanceEventWindowState, location_name: "state"))
+    InstanceEventWindowStateChange.struct_class = Types::InstanceEventWindowStateChange
+
+    InstanceEventWindowTimeRange.add_member(:start_week_day, Shapes::ShapeRef.new(shape: WeekDay, location_name: "startWeekDay"))
+    InstanceEventWindowTimeRange.add_member(:start_hour, Shapes::ShapeRef.new(shape: Hour, location_name: "startHour"))
+    InstanceEventWindowTimeRange.add_member(:end_week_day, Shapes::ShapeRef.new(shape: WeekDay, location_name: "endWeekDay"))
+    InstanceEventWindowTimeRange.add_member(:end_hour, Shapes::ShapeRef.new(shape: Hour, location_name: "endHour"))
+    InstanceEventWindowTimeRange.struct_class = Types::InstanceEventWindowTimeRange
+
+    InstanceEventWindowTimeRangeList.member = Shapes::ShapeRef.new(shape: InstanceEventWindowTimeRange, location_name: "item")
+
+    InstanceEventWindowTimeRangeRequest.add_member(:start_week_day, Shapes::ShapeRef.new(shape: WeekDay, location_name: "StartWeekDay"))
+    InstanceEventWindowTimeRangeRequest.add_member(:start_hour, Shapes::ShapeRef.new(shape: Hour, location_name: "StartHour"))
+    InstanceEventWindowTimeRangeRequest.add_member(:end_week_day, Shapes::ShapeRef.new(shape: WeekDay, location_name: "EndWeekDay"))
+    InstanceEventWindowTimeRangeRequest.add_member(:end_hour, Shapes::ShapeRef.new(shape: Hour, location_name: "EndHour"))
+    InstanceEventWindowTimeRangeRequest.struct_class = Types::InstanceEventWindowTimeRangeRequest
+
+    InstanceEventWindowTimeRangeRequestSet.member = Shapes::ShapeRef.new(shape: InstanceEventWindowTimeRangeRequest)
+
     InstanceExportDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     InstanceExportDetails.add_member(:target_environment, Shapes::ShapeRef.new(shape: ExportEnvironment, location_name: "targetEnvironment"))
     InstanceExportDetails.struct_class = Types::InstanceExportDetails
@@ -7273,6 +7399,8 @@ module Aws::EC2
     InstanceFamilyCreditSpecification.add_member(:instance_family, Shapes::ShapeRef.new(shape: UnlimitedSupportedInstanceFamily, location_name: "instanceFamily"))
     InstanceFamilyCreditSpecification.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "cpuCredits"))
     InstanceFamilyCreditSpecification.struct_class = Types::InstanceFamilyCreditSpecification
+
+    InstanceIdList.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
 
     InstanceIdSet.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
 
@@ -8147,6 +8275,16 @@ module Aws::EC2
 
     ModifyInstanceEventStartTimeResult.add_member(:event, Shapes::ShapeRef.new(shape: InstanceStatusEvent, location_name: "event"))
     ModifyInstanceEventStartTimeResult.struct_class = Types::ModifyInstanceEventStartTimeResult
+
+    ModifyInstanceEventWindowRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceEventWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ModifyInstanceEventWindowRequest.add_member(:instance_event_window_id, Shapes::ShapeRef.new(shape: InstanceEventWindowId, required: true, location_name: "InstanceEventWindowId"))
+    ModifyInstanceEventWindowRequest.add_member(:time_ranges, Shapes::ShapeRef.new(shape: InstanceEventWindowTimeRangeRequestSet, location_name: "TimeRange"))
+    ModifyInstanceEventWindowRequest.add_member(:cron_expression, Shapes::ShapeRef.new(shape: InstanceEventWindowCronExpression, location_name: "CronExpression"))
+    ModifyInstanceEventWindowRequest.struct_class = Types::ModifyInstanceEventWindowRequest
+
+    ModifyInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
+    ModifyInstanceEventWindowResult.struct_class = Types::ModifyInstanceEventWindowResult
 
     ModifyInstanceMetadataOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ModifyInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
@@ -11436,6 +11574,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AssociateIamInstanceProfileResult)
       end)
 
+      api.add_operation(:associate_instance_event_window, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateInstanceEventWindow"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateInstanceEventWindowRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateInstanceEventWindowResult)
+      end)
+
       api.add_operation(:associate_route_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateRouteTable"
         o.http_method = "POST"
@@ -11754,6 +11900,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateImageRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateImageResult)
+      end)
+
+      api.add_operation(:create_instance_event_window, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInstanceEventWindow"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateInstanceEventWindowRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInstanceEventWindowResult)
       end)
 
       api.add_operation(:create_instance_export_task, Seahorse::Model::Operation.new.tap do |o|
@@ -12218,6 +12372,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteFpgaImageRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFpgaImageResult)
+      end)
+
+      api.add_operation(:delete_instance_event_window, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInstanceEventWindow"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInstanceEventWindowRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInstanceEventWindowResult)
       end)
 
       api.add_operation(:delete_internet_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -13112,6 +13274,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInstanceEventNotificationAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceEventNotificationAttributesResult)
+      end)
+
+      api.add_operation(:describe_instance_event_windows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceEventWindows"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceEventWindowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceEventWindowsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_status, Seahorse::Model::Operation.new.tap do |o|
@@ -14275,6 +14451,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisassociateIamInstanceProfileResult)
       end)
 
+      api.add_operation(:disassociate_instance_event_window, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateInstanceEventWindow"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateInstanceEventWindowRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateInstanceEventWindowResult)
+      end)
+
       api.add_operation(:disassociate_route_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateRouteTable"
         o.http_method = "POST"
@@ -14839,6 +15023,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceEventStartTimeRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyInstanceEventStartTimeResult)
+      end)
+
+      api.add_operation(:modify_instance_event_window, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceEventWindow"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceEventWindowRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceEventWindowResult)
       end)
 
       api.add_operation(:modify_instance_metadata_options, Seahorse::Model::Operation.new.tap do |o|
