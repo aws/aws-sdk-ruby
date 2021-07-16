@@ -10,8 +10,8 @@
 module Aws::AuditManager
   module Types
 
-    # The wrapper of AWS account details, such as account ID, email address,
-    # and so on.
+    # The wrapper of account details, such as account ID, email address, and
+    # so on.
     #
     # @note When making an API call, you may pass AWSAccount
     #   data as a hash:
@@ -23,15 +23,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier for the specified AWS account.
+    #   The identifier for the specified account.
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The email address associated with the specified AWS account.
+    #   The email address associated with the specified account.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified AWS account.
+    #   The name of the specified account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AWSAccount AWS API Documentation
@@ -44,7 +44,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # An AWS service such as Amazon S3, AWS CloudTrail, and so on.
+    # An Amazon Web Service such as Amazon S3, CloudTrail, and so on.
     #
     # @note When making an API call, you may pass AWSService
     #   data as a hash:
@@ -54,7 +54,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service.
+    #   The name of the Amazon Web Service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AWSService AWS API Documentation
@@ -65,9 +65,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # Your account is not registered with AWS Audit Manager. Check the
-    # delegated administrator setup on the AWS Audit Manager settings page,
-    # and try again.
+    # Your account is not registered with Audit Manager. Check the delegated
+    # administrator setup on the Audit Manager settings page, and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -80,16 +79,16 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # An entity that defines the scope of audit evidence collected by AWS
-    # Audit Manager. An AWS Audit Manager assessment is an implementation of
-    # an AWS Audit Manager framework.
+    # An entity that defines the scope of audit evidence collected by Audit
+    # Manager. An Audit Manager assessment is an implementation of an Audit
+    # Manager framework.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the assessment.
     #   @return [String]
     #
     # @!attribute [rw] aws_account
-    #   The AWS account associated with the assessment.
+    #   The account associated with the assessment.
     #   @return [Types::AWSAccount]
     #
     # @!attribute [rw] metadata
@@ -117,7 +116,7 @@ module Aws::AuditManager
     end
 
     # The control entity that represents a standard or custom control used
-    # in an AWS Audit Manager assessment.
+    # in an Audit Manager assessment.
     #
     # @!attribute [rw] id
     #   The identifier for the specified control.
@@ -171,7 +170,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # Represents a set of controls in an AWS Audit Manager assessment.
+    # Represents a set of controls in an Audit Manager assessment.
     #
     # @!attribute [rw] id
     #   The identifier of the control set in the assessment. This is the
@@ -223,8 +222,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The folder in which AWS Audit Manager stores evidence for an
-    # assessment.
+    # The folder in which Audit Manager stores evidence for an assessment.
     #
     # @!attribute [rw] name
     #   The name of the specified evidence folder.
@@ -251,7 +249,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] data_source
-    #   The AWS service from which the evidence was collected.
+    #   The Amazon Web Service from which the evidence was collected.
     #   @return [String]
     #
     # @!attribute [rw] author
@@ -277,7 +275,8 @@ module Aws::AuditManager
     # @!attribute [rw] evidence_by_type_configuration_data_count
     #   The number of evidence that falls under the configuration data
     #   category. This evidence is collected from configuration snapshots of
-    #   other AWS services such as Amazon EC2, Amazon S3, or IAM.
+    #   other Amazon Web Services services such as Amazon EC2, Amazon S3, or
+    #   IAM.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_by_type_manual_count
@@ -287,22 +286,22 @@ module Aws::AuditManager
     #
     # @!attribute [rw] evidence_by_type_compliance_check_count
     #   The number of evidence that falls under the compliance check
-    #   category. This evidence is collected from AWS Config or AWS Security
-    #   Hub.
+    #   category. This evidence is collected from Config or Security Hub.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_by_type_compliance_check_issues_count
-    #   The total number of issues that were reported directly from AWS
-    #   Security Hub, AWS Config, or both.
+    #   The total number of issues that were reported directly from Security
+    #   Hub, Config, or both.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_by_type_user_activity_count
     #   The number of evidence that falls under the user activity category.
-    #   This evidence is collected from AWS CloudTrail logs.
+    #   This evidence is collected from CloudTrail logs.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_aws_service_source_count
-    #   The total number of AWS resources assessed to generate the evidence.
+    #   The total number of Amazon Web Services resources assessed to
+    #   generate the evidence.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentEvidenceFolder AWS API Documentation
@@ -330,8 +329,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The file used to structure and automate AWS Audit Manager assessments
-    # for a given compliance standard.
+    # The file used to structure and automate Audit Manager assessments for
+    # a given compliance standard.
     #
     # @!attribute [rw] id
     #   The unique identifier for the framework.
@@ -455,8 +454,7 @@ module Aws::AuditManager
     #   @return [Types::AssessmentReportsDestination]
     #
     # @!attribute [rw] scope
-    #   The wrapper of AWS accounts and services in scope for the
-    #   assessment.
+    #   The wrapper of accounts and services in scope for the assessment.
     #   @return [Types::Scope]
     #
     # @!attribute [rw] roles
@@ -493,7 +491,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A metadata object associated with an assessment in AWS Audit Manager.
+    # A metadata object associated with an assessment in Audit Manager.
     #
     # @!attribute [rw] name
     #   The name of the assessment.
@@ -543,10 +541,10 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A finalized document generated from an AWS Audit Manager assessment.
-    # These reports summarize the relevant evidence collected for your
-    # audit, and link to the relevant evidence folders which are named and
-    # organized according to the controls specified in your assessment.
+    # A finalized document generated from an Audit Manager assessment. These
+    # reports summarize the relevant evidence collected for your audit, and
+    # link to the relevant evidence folders which are named and organized
+    # according to the controls specified in your assessment.
     #
     # @!attribute [rw] id
     #   The unique identifier for the specified assessment report.
@@ -561,7 +559,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The identifier for the specified AWS account.
+    #   The identifier for the specified account.
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
@@ -674,8 +672,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The location in which AWS Audit Manager saves assessment reports for
-    # the given assessment.
+    # The location in which Audit Manager saves assessment reports for the
+    # given assessment.
     #
     # @note When making an API call, you may pass AssessmentReportsDestination
     #   data as a hash:
@@ -785,7 +783,7 @@ module Aws::AuditManager
     # message.
     #
     # @!attribute [rw] create_delegation_request
-    #   The API request to batch create delegations in AWS Audit Manager.
+    #   The API request to batch create delegations in Audit Manager.
     #   @return [Types::CreateDelegationRequest]
     #
     # @!attribute [rw] error_code
@@ -824,7 +822,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] create_delegation_requests
-    #   The API request to batch create delegations in AWS Audit Manager.
+    #   The API request to batch create delegations in Audit Manager.
     #   @return [Array<Types::CreateDelegationRequest>]
     #
     # @!attribute [rw] assessment_id
@@ -978,7 +976,7 @@ module Aws::AuditManager
     # message.
     #
     # @!attribute [rw] manual_evidence
-    #   Manual evidence that cannot be collected automatically by AWS Audit
+    #   Manual evidence that cannot be collected automatically by Audit
     #   Manager.
     #   @return [Types::ManualEvidence]
     #
@@ -1056,7 +1054,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The record of a change within AWS Audit Manager, such as a modified
+    # The record of a change within Audit Manager, such as a modified
     # assessment, a delegated control set, and so on.
     #
     # @!attribute [rw] object_type
@@ -1092,7 +1090,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A control in AWS Audit Manager.
+    # A control in Audit Manager.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the specified control.
@@ -1128,8 +1126,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The data source that determines from where AWS Audit Manager
-    #   collects evidence for the control.
+    #   The data source that determines from where Audit Manager collects
+    #   evidence for the control.
     #   @return [String]
     #
     # @!attribute [rw] control_mapping_sources
@@ -1203,7 +1201,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The data source that determines from where AWS Audit Manager collects
+    # The data source that determines from where Audit Manager collects
     # evidence for the control.
     #
     # @note When making an API call, you may pass ControlMappingSource
@@ -1246,8 +1244,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] source_keyword
-    #   The keyword to search for in AWS CloudTrail logs, AWS Config rules,
-    #   AWS Security Hub checks, and AWS API names.
+    #   The keyword to search for in CloudTrail logs, Config rules, Security
+    #   Hub checks, and Amazon Web Services API names.
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -1289,8 +1287,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The data source that determines from where AWS Audit Manager
-    #   collects evidence for the control.
+    #   The data source that determines from where Audit Manager collects
+    #   evidence for the control.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1314,7 +1312,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A set of controls in AWS Audit Manager.
+    # A set of controls in Audit Manager.
     #
     # @!attribute [rw] id
     #   The identifier of the control set in the assessment. This is the
@@ -1340,7 +1338,7 @@ module Aws::AuditManager
     end
 
     # Control entity attributes that uniquely identify an existing control
-    # to be added to a framework in AWS Audit Manager.
+    # to be added to a framework in Audit Manager.
     #
     # @note When making an API call, you may pass CreateAssessmentFrameworkControl
     #   data as a hash:
@@ -1361,7 +1359,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A `controlSet` entity that represents a collection of controls in AWS
+    # A `controlSet` entity that represents a collection of controls in
     # Audit Manager. This does not contain the control set ID.
     #
     # @note When making an API call, you may pass CreateAssessmentFrameworkControlSet
@@ -1556,8 +1554,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentReportsDestination]
     #
     # @!attribute [rw] scope
-    #   The wrapper that contains the AWS accounts and AWS services in scope
-    #   for the assessment.
+    #   The wrapper that contains the accounts and services in scope for the
+    #   assessment.
     #   @return [Types::Scope]
     #
     # @!attribute [rw] roles
@@ -1587,9 +1585,9 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment
-    #   An entity that defines the scope of audit evidence collected by AWS
-    #   Audit Manager. An AWS Audit Manager assessment is an implementation
-    #   of an AWS Audit Manager framework.
+    #   An entity that defines the scope of audit evidence collected by
+    #   Audit Manager. An Audit Manager assessment is an implementation of
+    #   an Audit Manager framework.
     #   @return [Types::Assessment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentResponse AWS API Documentation
@@ -1625,8 +1623,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] source_description
-    #   The description of the data source that determines from where AWS
-    #   Audit Manager collects evidence for the control.
+    #   The description of the data source that determines from where Audit
+    #   Manager collects evidence for the control.
     #   @return [String]
     #
     # @!attribute [rw] source_set_up_option
@@ -1640,8 +1638,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] source_keyword
-    #   The keyword to search for in AWS CloudTrail logs, AWS Config rules,
-    #   AWS Security Hub checks, and AWS API names.
+    #   The keyword to search for in CloudTrail logs, Config rules, Security
+    #   Hub checks, and Amazon Web Services API names.
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -1751,7 +1749,7 @@ module Aws::AuditManager
     end
 
     # A collection of attributes used to create a delegation for an
-    # assessment in AWS Audit Manager.
+    # assessment in Audit Manager.
     #
     # @note When making an API call, you may pass CreateDelegationRequest
     #   data as a hash:
@@ -2094,7 +2092,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] evidence_aws_account_id
-    #   The identifier for the specified AWS account.
+    #   The identifier for the specified account.
     #   @return [String]
     #
     # @!attribute [rw] time
@@ -2102,7 +2100,7 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] event_source
-    #   The AWS service from which the evidence is collected.
+    #   The Amazon Web Service from which the evidence is collected.
     #   @return [String]
     #
     # @!attribute [rw] event_name
@@ -2130,18 +2128,18 @@ module Aws::AuditManager
     #
     # @!attribute [rw] compliance_check
     #   The evaluation status for evidence that falls under the compliance
-    #   check category. For evidence collected from AWS Security Hub, a
-    #   *Pass* or *Fail* result is shown. For evidence collected from AWS
-    #   Config, a *Compliant* or *Noncompliant* result is shown.
+    #   check category. For evidence collected from Security Hub, a *Pass*
+    #   or *Fail* result is shown. For evidence collected from Config, a
+    #   *Compliant* or *Noncompliant* result is shown.
     #   @return [String]
     #
     # @!attribute [rw] aws_organization
-    #   The AWS account from which the evidence is collected, and its AWS
+    #   The account from which the evidence is collected, and its
     #   organization path.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The identifier for the specified AWS account.
+    #   The identifier for the specified account.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
@@ -2178,8 +2176,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The file used to structure and automate AWS Audit Manager assessments
-    # for a given compliance standard.
+    # The file used to structure and automate Audit Manager assessments for
+    # a given compliance standard.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the specified framework.
@@ -2211,7 +2209,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The sources from which AWS Audit Manager collects evidence for the
+    #   The sources from which Audit Manager collects evidence for the
     #   control.
     #   @return [String]
     #
@@ -2298,7 +2296,7 @@ module Aws::AuditManager
     class GetAccountStatusRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] status
-    #   The status of the specified AWS account.
+    #   The status of the specified account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAccountStatusResponse AWS API Documentation
@@ -2398,14 +2396,14 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment
-    #   An entity that defines the scope of audit evidence collected by AWS
-    #   Audit Manager. An AWS Audit Manager assessment is an implementation
-    #   of an AWS Audit Manager framework.
+    #   An entity that defines the scope of audit evidence collected by
+    #   Audit Manager. An Audit Manager assessment is an implementation of
+    #   an Audit Manager framework.
     #   @return [Types::Assessment]
     #
     # @!attribute [rw] user_role
-    #   The wrapper that contains the AWS Audit Manager role information of
-    #   the current user, such as the role type and IAM Amazon Resource Name
+    #   The wrapper that contains the Audit Manager role information of the
+    #   current user, such as the role type and IAM Amazon Resource Name
     #   (ARN).
     #   @return [Types::Role]
     #
@@ -2850,7 +2848,7 @@ module Aws::AuditManager
     class GetServicesInScopeRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_metadata
-    #   The metadata associated with the aAWS service.
+    #   The metadata associated with the Amazon Web Service.
     #   @return [Array<Types::ServiceMetadata>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetServicesInScopeResponse AWS API Documentation
@@ -2881,8 +2879,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] settings
-    #   The settings object that holds all supported AWS Audit Manager
-    #   settings.
+    #   The settings object that holds all supported Audit Manager settings.
     #   @return [Types::Settings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetSettingsResponse AWS API Documentation
@@ -3216,7 +3213,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # Evidence that is uploaded to AWS Audit Manager manually.
+    # Evidence that is uploaded to Audit Manager manually.
     #
     # @note When making an API call, you may pass ManualEvidence
     #   data as a hash:
@@ -3237,9 +3234,9 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The notification used to inform a user of an update in AWS Audit
-    # Manager. For example, this includes the notification that is sent when
-    # a control set is delegated for review.
+    # The notification used to inform a user of an update in Audit Manager.
+    # For example, this includes the notification that is sent when a
+    # control set is delegated for review.
     #
     # @!attribute [rw] id
     #   The unique identifier for the notification.
@@ -3298,11 +3295,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] kms_key
-    #   The AWS KMS key details.
+    #   The KMS key details.
     #   @return [String]
     #
     # @!attribute [rw] delegated_admin_account
-    #   The delegated administrator account for AWS Audit Manager.
+    #   The delegated administrator account for Audit Manager.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/RegisterAccountRequest AWS API Documentation
@@ -3350,7 +3347,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] organization_id
-    #   The identifier for the specified AWS organization.
+    #   The identifier for the specified organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/RegisterOrganizationAdminAccountResponse AWS API Documentation
@@ -3362,7 +3359,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A system asset that is evaluated in an AWS Audit Manager assessment.
+    # A system asset that is evaluated in an Audit Manager assessment.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the specified resource.
@@ -3404,8 +3401,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The wrapper that contains the AWS Audit Manager role information of
-    # the current user, such as the role type and IAM Amazon Resource Name
+    # The wrapper that contains the Audit Manager role information of the
+    # current user, such as the role type and IAM Amazon Resource Name
     # (ARN).
     #
     # @note When making an API call, you may pass Role
@@ -3442,8 +3439,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The wrapper that contains the AWS accounts and AWS services in scope
-    # for the assessment.
+    # The wrapper that contains the accounts and services in scope for the
+    # assessment.
     #
     # @note When making an API call, you may pass Scope
     #   data as a hash:
@@ -3464,11 +3461,12 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] aws_accounts
-    #   The AWS accounts included in the scope of the assessment.
+    #   The accounts included in the scope of the assessment.
     #   @return [Array<Types::AWSAccount>]
     #
     # @!attribute [rw] aws_services
-    #   The AWS services included in the scope of the assessment.
+    #   The Amazon Web Services services included in the scope of the
+    #   assessment.
     #   @return [Array<Types::AWSService>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Scope AWS API Documentation
@@ -3480,23 +3478,23 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata associated with the specified AWS service.
+    # The metadata associated with the specified Amazon Web Service.
     #
     # @!attribute [rw] name
-    #   The name of the AWS service.
+    #   The name of the Amazon Web Service.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name of the AWS service.
+    #   The display name of the Amazon Web Service.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the specified AWS service.
+    #   The description of the specified Amazon Web Service.
     #   @return [String]
     #
     # @!attribute [rw] category
-    #   The category in which the AWS service belongs, such as compute,
-    #   storage, database, and so on.
+    #   The category in which the Amazon Web Service belongs, such as
+    #   compute, storage, database, and so on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ServiceMetadata AWS API Documentation
@@ -3510,11 +3508,10 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The settings object that holds all supported AWS Audit Manager
-    # settings.
+    # The settings object that holds all supported Audit Manager settings.
     #
     # @!attribute [rw] is_aws_org_enabled
-    #   Specifies whether AWS Organizations is enabled.
+    #   Specifies whether Organizations is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic
@@ -3531,7 +3528,7 @@ module Aws::AuditManager
     #   @return [Array<Types::Role>]
     #
     # @!attribute [rw] kms_key
-    #   The AWS KMS key details.
+    #   The KMS key details.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Settings AWS API Documentation
@@ -3546,8 +3543,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The keyword to search for in AWS CloudTrail logs, AWS Config rules,
-    # AWS Security Hub checks, and AWS API names.
+    # The keyword to search for in CloudTrail logs, Config rules, Security
+    # Hub checks, and Amazon Web Services API names.
     #
     # @note When making an API call, you may pass SourceKeyword
     #   data as a hash:
@@ -3562,8 +3559,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] keyword_value
-    #   The value of the keyword used to search AWS CloudTrail logs, AWS
-    #   Config rules, AWS Security Hub checks, and AWS API names when
+    #   The value of the keyword used to search CloudTrail logs, Config
+    #   rules, Security Hub checks, and Amazon Web Services API names when
     #   mapping a control data source.
     #   @return [String]
     #
@@ -3762,7 +3759,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A `controlSet` entity that represents a collection of controls in AWS
+    # A `controlSet` entity that represents a collection of controls in
     # Audit Manager. This does not contain the control set ID.
     #
     # @note When making an API call, you may pass UpdateAssessmentFrameworkControlSet
@@ -4092,7 +4089,7 @@ module Aws::AuditManager
     #
     # @!attribute [rw] sns_topic
     #   The Amazon Simple Notification Service (Amazon SNS) topic to which
-    #   AWS Audit Manager sends notifications.
+    #   Audit Manager sends notifications.
     #   @return [String]
     #
     # @!attribute [rw] default_assessment_reports_destination
@@ -4104,7 +4101,7 @@ module Aws::AuditManager
     #   @return [Array<Types::Role>]
     #
     # @!attribute [rw] kms_key
-    #   The AWS KMS key details.
+    #   The KMS key details.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateSettingsRequest AWS API Documentation

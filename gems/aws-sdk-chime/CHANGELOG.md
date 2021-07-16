@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-07-16)
+------------------
+
+* Feature - This SDK release adds Account Status as one of the attributes in Account API response
+
 1.50.0 (2021-07-07)
 ------------------
 

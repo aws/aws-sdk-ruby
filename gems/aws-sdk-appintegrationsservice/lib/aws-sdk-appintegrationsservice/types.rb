@@ -52,7 +52,7 @@ module Aws::AppIntegrationsService
     #   @return [Types::EventFilter]
     #
     # @!attribute [rw] event_bridge_bus
-    #   The Eventbridge bus.
+    #   The EventBridge bus.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -128,9 +128,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # The Amazon AppIntegrations APIs are in preview release and are subject
-    # to change.
-    #
     # The event filter.
     #
     # @note When making an API call, you may pass EventFilter
@@ -152,9 +149,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # The Amazon AppIntegrations APIs are in preview release and are subject
-    # to change.
-    #
     # The event integration.
     #
     # @!attribute [rw] event_integration_arn
@@ -174,7 +168,7 @@ module Aws::AppIntegrationsService
     #   @return [Types::EventFilter]
     #
     # @!attribute [rw] event_bridge_bus
-    #   The Amazon Eventbridge bus for the event integration.
+    #   The Amazon EventBridge bus for the event integration.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -194,9 +188,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # The Amazon AppIntegrations APIs are in preview release and are subject
-    # to change.
-    #
     # The event integration association.
     #
     # @!attribute [rw] event_integration_association_arn
@@ -218,7 +209,7 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] event_bridge_rule_name
-    #   The name of the Eventbridge rule.
+    #   The name of the EventBridge rule.
     #   @return [String]
     #
     # @!attribute [rw] client_association_metadata
@@ -270,7 +261,7 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] event_bridge_bus
-    #   The Eventbridge bus.
+    #   The EventBridge bus.
     #   @return [String]
     #
     # @!attribute [rw] event_filter
