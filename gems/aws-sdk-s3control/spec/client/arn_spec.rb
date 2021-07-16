@@ -116,43 +116,71 @@ module Aws
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
         end
 
-        it 's3_use_arn_region false; raises when given a fips client region' do
+        it 's3_use_arn_region false; ignores the arn region with a fips client region' do
           client = Aws::S3Control::Client.new(
             stub_responses: true,
-            region: 'fips-us-gov-east-1',
+            region: 'us-gov-west-1-fips',
             s3_use_arn_region: false
           )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'raises when given a fips arn' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1'
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:fips-us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'accepts an access point arn in us-gov and fips client region' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1'
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect_sigv4_service('s3-outposts')
           resp = client.get_bucket(bucket: arn)
-          host = 's3-outposts.us-gov-east-1.amazonaws.com'
+          host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
           expect(resp.context.http_request.endpoint.host).to eq(host)
           expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 'uses the fips client region that matches the arn region' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1-fips'
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect_sigv4_service('s3-outposts')
+          resp = client.get_bucket(bucket: arn)
+          outpost_header = 'op-01234567890123456'
+          account_header = '123456789012'
+          host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+          expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 's3_use_arn_region false; raises when the fips client region does not match the arn region' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1-fips',
+            s3_use_arn_region: false
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+        end
+
+        it 'raises when the fips client region does not match the arn region' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1-fips'
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+        end
+
+        it 'raises for FIPS region in ARN' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1'
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises when use_dualstack_endpoint is set' do
@@ -288,43 +316,71 @@ module Aws
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
         end
 
-        it 's3_use_arn_region false; raises when given a fips client region' do
+        it 's3_use_arn_region false; ignores the arn region with a fips client region' do
           client = Aws::S3Control::Client.new(
             stub_responses: true,
-            region: 'fips-us-gov-east-1',
+            region: 'us-gov-west-1-fips',
             s3_use_arn_region: false
           )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'raises when given a fips arn' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1'
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:fips-us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'accepts an access point arn in us-gov and fips client region' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1'
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
           expect_sigv4_service('s3-outposts')
           resp = client.get_bucket(bucket: arn)
-          host = 's3-outposts.us-gov-east-1.amazonaws.com'
+          host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
           expect(resp.context.http_request.endpoint.host).to eq(host)
           expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 'uses the fips client region that matches the arn region' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1-fips'
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          expect_sigv4_service('s3-outposts')
+          resp = client.get_bucket(bucket: arn)
+          outpost_header = 'op-01234567890123456'
+          account_header = '123456789012'
+          host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+          expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 's3_use_arn_region false; raises when the fips client region does not match the arn region' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1-fips',
+            s3_use_arn_region: false
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+        end
+
+        it 'raises when the fips client region does not match the arn region' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1-fips'
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+        end
+
+        it 'raises for FIPS region in ARN' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1'
+          )
+          arn = 'arn:aws:s3-outposts:us-gov-west-1-fips:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises when use_dualstack_endpoint is set' do
@@ -452,6 +508,21 @@ module Aws
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           end
+
+          it 'works for FIPS client regions' do
+            client = Aws::S3Control::Client.new(
+              stub_responses: true,
+              region: 'us-gov-west-1-fips'
+            )
+            expect_sigv4_service('s3-outposts')
+            resp = client.create_bucket(
+              bucket: 'bucket', outpost_id: 'op-01234567890123456'
+            )
+            host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
+            outpost_header = 'op-01234567890123456'
+            expect(resp.context.http_request.endpoint.host).to eq(host)
+            expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)  
+          end
         end
 
         describe '#list_regional_buckets' do
@@ -469,6 +540,21 @@ module Aws
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           end
+
+          it 'works for FIPS client regions' do
+            client = Aws::S3Control::Client.new(
+              stub_responses: true,
+              region: 'us-gov-west-1-fips'
+            )
+            expect_sigv4_service('s3-outposts')
+            resp = client.list_regional_buckets(
+              outpost_id: 'op-01234567890123456', account_id: '123456789012'
+            )
+            host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
+            outpost_header = 'op-01234567890123456'
+            expect(resp.context.http_request.endpoint.host).to eq(host)
+            expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+          end
         end
 
         describe '#create_access_point' do
@@ -481,6 +567,22 @@ module Aws
             arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
             resp = client.create_access_point(bucket: arn, name: 'myaccesspoint')
             host = 's3-outposts.us-west-2.amazonaws.com'
+            outpost_header = 'op-01234567890123456'
+            expect(resp.context.http_request.endpoint.host).to eq(host)
+            expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+            resp.context.http_request.body.rewind
+            expect(resp.context.http_request.body.read).to match(/<Bucket>mybucket<\/Bucket>/)
+          end
+
+          it 'works for FIPS client regions' do
+            client = Aws::S3Control::Client.new(
+              stub_responses: true,
+              region: 'us-gov-west-1-fips'
+            )
+            expect_sigv4_service('s3-outposts')
+            arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+            resp = client.create_access_point(bucket: arn, name: 'myaccesspoint')
+            host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
             outpost_header = 'op-01234567890123456'
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)

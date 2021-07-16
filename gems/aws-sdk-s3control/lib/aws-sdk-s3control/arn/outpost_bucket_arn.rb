@@ -23,7 +23,7 @@ module Aws
       end
 
       def support_fips?
-        false
+        true
       end
 
       def validate_arn!
@@ -35,6 +35,11 @@ module Aws
           raise ArgumentError,
                 'S3 accesspoint ARNs must contain both a region '\
                 'and an account id.'
+        end
+
+        if @region.include?('-fips') || @region.include?('fips-')
+          raise ArgumentError,
+                'S3 Access Point ARNs cannot contain a FIPS region'
         end
 
         if @type != 'outpost' && @subtype != 'bucket'
@@ -64,11 +69,11 @@ module Aws
       end
 
       # Outpost Bucket ARNs currently do not support dualstack
-      def host_url(region, _dualstack = false, custom_endpoint = nil)
+      def host_url(region, fips = false, _dualstack = false, custom_endpoint = nil)
         if custom_endpoint
           custom_endpoint
         else
-          "s3-outposts.#{region}.amazonaws.com"
+          "s3-outposts#{'-fips' if fips}.#{region}.amazonaws.com"
         end
       end
     end
