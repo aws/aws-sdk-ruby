@@ -36,10 +36,19 @@ module Aws
           )
         end
 
+        let(:boundary_obj) do
+          S3::Object.new(
+            bucket_name: 'bucket',
+            key: 'boundary',
+            client: client
+          )
+        end
+
         let(:one_meg) { 1024 * 1024 }
         let(:small_file) { Tempfile.new('small-file') }
         let(:large_file) { Tempfile.new('large-file') }
         let(:single_part_file) { Tempfile.new('single-part-file') }
+        let(:boundary_file) { Tempfile.new('range-boundary-file') }
         let(:version_id) { 'a-fake-version-id' }
 
         before(:each) do
@@ -173,6 +182,53 @@ module Aws
               ArgumentError,
               ":chunk_size shouldn't exceed total file size."
             )
+        end
+
+        context 'file size is chunk size boundary' do
+          before :each do
+            allow(client).to receive(:head_object).with(
+              bucket: 'bucket',
+              key: 'boundary',
+              part_number: 1
+            ).and_return(
+              client.stub_data(
+                :head_object,
+                content_length: (one_meg * 5) + 1
+              )
+            )
+
+            client.stub_responses(:get_object, ->(context) {
+              file_size = one_meg * 5 + 1
+              # S3 does not allow 1 byte ranges. This shouldn't be raised.
+              if context.params[:range] == "bytes=#{file_size}-#{file_size}"
+                'InvalidRange'
+              else
+                { content_range: "bytes 0-#{one_meg * 5 - 1}/#{file_size}" }
+              end
+            })
+          end
+
+          it 'downloads the file with default chunk size' do
+            expect(client).to receive(:head_object).with(
+              bucket: 'bucket',
+              key: 'boundary',
+              part_number: 1
+            ).exactly(1).times
+
+            boundary_obj.upload_file(boundary_file)
+            boundary_obj.download_file(path)
+          end
+
+          it 'downloads the file with provided chunk size' do
+            expect(client).to receive(:head_object).with(
+              bucket: 'bucket',
+              key: 'boundary',
+              part_number: 1
+            ).exactly(1).times
+
+            boundary_obj.upload_file(boundary_file)
+            boundary_obj.download_file(path, chunk_size: one_meg * 5)
+          end
         end
       end
     end
