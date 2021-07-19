@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix file downloading edge case for 1 byte multipart ranges (#2561).
+
 1.96.1 (2021-06-10)
 ------------------
 
