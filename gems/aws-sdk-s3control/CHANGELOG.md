@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support FIPS endpoints for S3 Outpost operations.
+
 1.34.0 (2021-06-03)
 ------------------
 
