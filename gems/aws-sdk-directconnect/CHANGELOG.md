@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-07-19)
+------------------
+
+* Feature - Documentation updates for directconnect
+
 1.42.0 (2021-07-13)
 ------------------
 

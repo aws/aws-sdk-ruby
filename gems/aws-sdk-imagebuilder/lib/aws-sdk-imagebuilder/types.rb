@@ -478,10 +478,26 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # A high-level overview of a component semantic version.
+    # The defining characteristics of a specific version of an TOE
+    # component.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the component.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -490,6 +506,31 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] version
     #   The semantic version of the component.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -597,6 +638,21 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the container recipe.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] container_type
@@ -620,8 +676,32 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The semantic version of the container recipe
-    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   The semantic version of the container recipe.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] components
@@ -769,8 +849,23 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could
-    #   be versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -932,8 +1027,24 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the container recipe
-    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   The semantic version of the container recipe. This version follows
+    #   the semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] components
@@ -1327,7 +1438,24 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the image recipe.
+    #   The semantic version of the image recipe. This version follows the
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] components
@@ -2597,10 +2725,28 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # An image build version.
+    # An Image Builder image. You must specify exactly one recipe for the
+    # image – either a container recipe (`containerRecipe`), which creates a
+    # container image, or an image recipe (`imageRecipe`), which creates an
+    # AMI.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the image.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2613,6 +2759,31 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] version
     #   The semantic version of the image.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -2640,7 +2811,7 @@ module Aws::Imagebuilder
     #   @return [Types::ImageRecipe]
     #
     # @!attribute [rw] container_recipe
-    #   The container recipe used to create the container image type.
+    #   The recipe that is used to create an Image Builder container image.
     #   @return [Types::ContainerRecipe]
     #
     # @!attribute [rw] source_pipeline_name
@@ -3063,39 +3234,85 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # An image semantic version.
+    # The defining characteristics of a specific version of an Image Builder
+    # image.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the image semantic version.
+    #   The Amazon Resource Name (ARN) of a specific version of an Image
+    #   Builder image.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the image semantic version.
+    #   The name of this specific version of an Image Builder image.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Specifies whether this is an AMI or container image.
+    #   Specifies whether this image is an AMI or a container image.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The semantic version of the image semantic version.
+    #   Details for a specific version of an Image Builder image. This
+    #   version follows the semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the image semantic version.
+    #   The platform of the image version, for example "Windows" or
+    #   "Linux".
     #   @return [String]
     #
     # @!attribute [rw] os_version
-    #   The operating system version of the instance. For example, Amazon
-    #   Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+    #   The operating system version of the Amazon EC2 build instance. For
+    #   example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server
+    #   2019.
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the image semantic version.
+    #   The owner of the image version.
     #   @return [String]
     #
     # @!attribute [rw] date_created
-    #   The date at which this image semantic version was created.
+    #   The date on which this specific version of the Image Builder image
+    #   was created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageVersion AWS API Documentation
@@ -3139,8 +3356,22 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could
-    #   be versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3156,7 +3387,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] type
     #   The type of the component denotes whether the component is used to
-    #   build the image or only to test it.
+    #   build the image, or only to test it.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -3711,8 +3942,7 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] by_name
-    #   Returns the list of component build versions for the specified
-    #   semantic version.
+    #   Returns the list of component build versions for the specified name.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -3742,6 +3972,12 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] component_version_list
     #   The list of component semantic versions.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    </note>
     #   @return [Array<Types::ComponentVersion>]
     #
     # @!attribute [rw] next_token
@@ -4293,6 +4529,21 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] image_version_list
     #   The list of image semantic versions.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [Array<Types::ImageVersion>]
     #
     # @!attribute [rw] next_token

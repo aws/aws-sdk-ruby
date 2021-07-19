@@ -584,10 +584,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the BGP peer terminates.
+    #   The Direct Connect endpoint that terminates the BGP peer.
     #   @return [String]
     #
     # @!attribute [rw] aws_logical_device_id
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/BGPPeer AWS API Documentation
@@ -954,13 +957,13 @@ module Aws::DirectConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the physical connection
-    #   terminates.
+    #   The Direct Connect endpoint that terminates the physical connection.
     #   @return [String]
     #
     # @!attribute [rw] aws_logical_device_id
-    #   The Direct Connect endpoint that terminates a physical connection's
-    #   BGP sessions.
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] has_logical_redundancy
@@ -2856,13 +2859,13 @@ module Aws::DirectConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the physical connection
-    #   terminates.
+    #   The Direct Connect endpoint that terminates the physical connection.
     #   @return [String]
     #
     # @!attribute [rw] aws_logical_device_id
-    #   The Direct Connect endpoint that terminates a physical connection's
-    #   BGP sessions.
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] has_logical_redundancy
@@ -2979,8 +2982,9 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] aws_logical_device_id
-    #   The Direct Connect endpoint that terminates a physical connection's
-    #   BGP sessions.
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] connections
@@ -4375,13 +4379,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the virtual interface
-    #   terminates.
+    #   The Direct Connect endpoint that terminates the physical connection.
     #   @return [String]
     #
     # @!attribute [rw] aws_logical_device_id
-    #   The Direct Connect endpoint that terminates a physical connection's
-    #   BGP sessions.
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] tags
