@@ -51,11 +51,11 @@ module Aws
                 credentials: context.config.credentials
               )
             elsif outpost_operation?(context)
+              region = context.config.region
               # outpost operations should go to the outposts endpoint only if
               # it's not a custom endpoint. the ARN class changes this for ARNs
               if context.config.regional_endpoint
                 fips = false
-                region = context.config.region
                 if region.include?('fips')
                   fips = true
                   region = region.gsub('fips-', '').gsub('-fips', '')
