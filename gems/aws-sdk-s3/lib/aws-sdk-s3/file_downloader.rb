@@ -99,6 +99,7 @@ module Aws
             MIN_CHUNK_SIZE
           ].max.to_i
           @chunk_size -= 1 if file_size % @chunk_size == 1
+          @chunk_size
         end
       end
 
