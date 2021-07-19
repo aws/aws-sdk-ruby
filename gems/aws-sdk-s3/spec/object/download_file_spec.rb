@@ -121,7 +121,6 @@ module Aws
             response_target: path
           ).exactly(1).times
 
-          small_obj.put(body: small_file)
           small_obj.download_file(path)
         end
 
@@ -132,7 +131,6 @@ module Aws
             part_number: 1
           ).exactly(1).times
 
-          large_obj.upload_file(large_file)
           large_obj.download_file(path)
         end
 
@@ -143,7 +141,6 @@ module Aws
             part_number: 1
           ).exactly(1).times
 
-          single_obj.put(body: single_part_file)
           single_obj.download_file(path)
         end
 
@@ -155,7 +152,6 @@ module Aws
             response_target: path
           ).exactly(1).times
 
-          small_obj.put(body: small_file)
           small_obj.download_file(path, version_id: version_id)
         end
 
@@ -185,6 +181,9 @@ module Aws
         end
 
         context 'file size is chunk size boundary' do
+          let(:file_size) { 5 * one_meg + 1 }
+          let(:chunk_size) { 5 * one_meg }
+
           before :each do
             allow(client).to receive(:head_object).with(
               bucket: 'bucket',
@@ -193,17 +192,16 @@ module Aws
             ).and_return(
               client.stub_data(
                 :head_object,
-                content_length: (one_meg * 5) + 1
+                content_length: file_size
               )
             )
 
             client.stub_responses(:get_object, ->(context) {
-              file_size = one_meg * 5 + 1
               # S3 does not allow 1 byte ranges. This shouldn't be raised.
               if context.params[:range] == "bytes=#{file_size}-#{file_size}"
                 'InvalidRange'
               else
-                { content_range: "bytes 0-#{one_meg * 5 - 1}/#{file_size}" }
+                { content_range: "bytes 0-#{chunk_size - 1}/#{file_size}" }
               end
             })
           end
@@ -215,7 +213,6 @@ module Aws
               part_number: 1
             ).exactly(1).times
 
-            boundary_obj.upload_file(boundary_file)
             boundary_obj.download_file(path)
           end
 
@@ -226,8 +223,7 @@ module Aws
               part_number: 1
             ).exactly(1).times
 
-            boundary_obj.upload_file(boundary_file)
-            boundary_obj.download_file(path, chunk_size: one_meg * 5)
+            boundary_obj.download_file(path, chunk_size: chunk_size)
           end
         end
       end
