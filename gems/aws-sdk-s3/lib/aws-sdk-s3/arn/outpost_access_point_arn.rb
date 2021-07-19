@@ -20,13 +20,14 @@ module Aws
 
       def validate_arn!
         unless @service == 's3-outposts'
-          raise ArgumentError, 'Must provide a valid S3 Outposts ARN.'
+          raise ArgumentError, 'Must provide a valid S3 Outpost Access '\
+                               'Point ARN.'
         end
 
         if @region.empty? || @account_id.empty?
           raise ArgumentError,
-                'S3 Outpost ARNs must contain both a region '\
-                'and an account id.'
+                'S3 Outpost Access Point ARNs must contain both a region '\
+                'and an account ID.'
         end
 
         if @type != 'outpost' && @subtype != 'accesspoint'
@@ -34,16 +35,16 @@ module Aws
         end
 
         if @outpost_id.nil? || @outpost_id.empty?
-          raise ArgumentError, 'Missing ARN outpost id.'
+          raise ArgumentError, 'Missing ARN outpost ID.'
         end
 
         if @access_point_name.nil? || @access_point_name.empty?
-          raise ArgumentError, 'Missing ARN accesspoint name.'
+          raise ArgumentError, 'Missing ARN Access Point name.'
         end
 
         if @extra
           raise ArgumentError,
-                'ARN accesspoint resource must be a single value.'
+                'ARN Access Point resource must be a single value.'
         end
 
         unless Seahorse::Util.host_label?(
