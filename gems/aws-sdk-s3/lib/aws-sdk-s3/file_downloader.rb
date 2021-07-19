@@ -94,12 +94,12 @@ module Aws
         if @chunk_size && @chunk_size > file_size
           raise ArgumentError, ":chunk_size shouldn't exceed total file size."
         else
-          @chunk_size ||= [
+          chunk_size = @chunk_size || [
             (file_size.to_f / MAX_PARTS).ceil,
             MIN_CHUNK_SIZE
           ].max.to_i
-          @chunk_size -= 1 if file_size % @chunk_size == 1
-          @chunk_size
+          chunk_size -= 1 if file_size % chunk_size == 1
+          chunk_size
         end
       end
 
