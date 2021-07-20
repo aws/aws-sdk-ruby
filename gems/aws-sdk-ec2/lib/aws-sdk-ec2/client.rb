@@ -2257,13 +2257,13 @@ module Aws::EC2
     # encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # After you attach an EBS volume, you must make it available. For more
-    # information, see [Making an EBS volume available for use][2].
+    # information, see [Make an EBS volume available for use][2].
     #
-    # If a volume has an AWS Marketplace product code:
+    # If a volume has an Marketplace product code:
     #
     # * The volume can be attached only to a stopped instance.
     #
-    # * AWS Marketplace product codes are copied from the volume to the
+    # * Marketplace product codes are copied from the volume to the
     #   instance.
     #
     # * You must be subscribed to the product.
@@ -2272,8 +2272,8 @@ module Aws::EC2
     #   the product. For example, you can't detach a volume from a Windows
     #   instance and attach it to a Linux instance.
     #
-    # For more information, see [Attaching Amazon EBS volumes][3] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [Attach an Amazon EBS volume to an
+    # instance][3] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -3747,11 +3747,11 @@ module Aws::EC2
     # When copying snapshots to a Region, copies of encrypted EBS snapshots
     # remain encrypted. Copies of unencrypted snapshots remain unencrypted,
     # unless you enable encryption for the snapshot copy operation. By
-    # default, encrypted snapshot copies use the default AWS Key Management
-    # Service (AWS KMS) customer master key (CMK); however, you can specify
-    # a different CMK. To copy an encrypted snapshot that has been shared
-    # from another account, you must have permissions for the CMK used to
-    # encrypt the snapshot.
+    # default, encrypted snapshot copies use the default Key Management
+    # Service (KMS) KMS key; however, you can specify a different KMS key.
+    # To copy an encrypted snapshot that has been shared from another
+    # account, you must have permissions for the KMS key used to encrypt the
+    # snapshot.
     #
     # Snapshots copied to an Outpost are encrypted by default using the
     # default encryption key for the Region, or a different key that you
@@ -3763,7 +3763,7 @@ module Aws::EC2
     # Snapshots created by copying another snapshot have an arbitrary volume
     # ID that should not be used for any purpose.
     #
-    # For more information, see [Copying an Amazon EBS snapshot][2] in the
+    # For more information, see [Copy an Amazon EBS snapshot][2] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -3777,12 +3777,14 @@ module Aws::EC2
     # @option params [String] :destination_outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
     #   snapshot. Only specify this parameter when copying a snapshot from an
-    #   AWS Region to an Outpost. The snapshot must be in the Region for the
-    #   destination Outpost. You cannot copy a snapshot from an Outpost to a
-    #   Region, from one Outpost to another, or within the same Outpost.
+    #   Amazon Web Services Region to an Outpost. The snapshot must be in the
+    #   Region for the destination Outpost. You cannot copy a snapshot from an
+    #   Outpost to a Region, from one Outpost to another, or within the same
+    #   Outpost.
     #
-    #   For more information, see [ Copying snapshots from an AWS Region to an
-    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   For more information, see [ Copy snapshots from an Amazon Web Services
+    #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
     #
     #
     #
@@ -3796,8 +3798,8 @@ module Aws::EC2
     #
     #   The snapshot copy is sent to the regional endpoint that you sent the
     #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
-    #   AWS CLI, this is specified using the `--region` parameter or the
-    #   default Region in your AWS configuration file.
+    #   CLI, this is specified using the `--region` parameter or the default
+    #   Region in your Amazon Web Services configuration file.
     #
     # @option params [Boolean] :encrypted
     #   To encrypt a copy of an unencrypted snapshot if encryption by default
@@ -3812,12 +3814,12 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
-    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
-    #   is specified, the encrypted state must be `true`.
+    #   The identifier of the Key Management Service (KMS) KMS key to use for
+    #   Amazon EBS encryption. If this parameter is not specified, your KMS
+    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
+    #   state must be `true`.
     #
-    #   You can specify the CMK using any of the following:
+    #   You can specify the KMS key using any of the following:
     #
     #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
@@ -3829,9 +3831,9 @@ module Aws::EC2
     #   * Alias ARN. For example,
     #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
-    #   ID, alias, or ARN that is not valid, the action can appear to
-    #   complete, but eventually fails.
+    #   Amazon Web Services authenticates the KMS key asynchronously.
+    #   Therefore, if you specify an ID, alias, or ARN that is not valid, the
+    #   action can appear to complete, but eventually fails.
     #
     # @option params [String] :presigned_url
     #   When you copy an encrypted source snapshot using the Amazon EC2 Query
@@ -3841,13 +3843,14 @@ module Aws::EC2
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,
     #   `SourceSnapshotId`, and `DestinationRegion` parameters. The
-    #   `PresignedUrl` must be signed using AWS Signature Version 4. Because
-    #   EBS snapshots are stored in Amazon S3, the signing algorithm for this
-    #   parameter uses the same logic that is described in [Authenticating
-    #   Requests: Using Query Parameters (AWS Signature Version 4)][2] in the
-    #   *Amazon Simple Storage Service API Reference*. An invalid or
-    #   improperly signed `PresignedUrl` will cause the copy operation to fail
-    #   asynchronously, and the snapshot will move to an `error` state.
+    #   `PresignedUrl` must be signed using Amazon Web Services Signature
+    #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
+    #   algorithm for this parameter uses the same logic that is described in
+    #   [Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][2] in the *Amazon Simple Storage Service API
+    #   Reference*. An invalid or improperly signed `PresignedUrl` will cause
+    #   the copy operation to fail asynchronously, and the snapshot will move
+    #   to an `error` state.
     #
     #
     #
@@ -7802,7 +7805,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance for which to replace the root volume.
@@ -7816,7 +7819,7 @@ module Aws::EC2
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token, a
     #   randomly generated token is used for the request to ensure
-    #   idempotency. For more information, see [Ensuring Idempotency][1].
+    #   idempotency. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -8451,22 +8454,23 @@ module Aws::EC2
     # stored on the same Outpost as the volume, or in the Region for that
     # Outpost.
     #
-    # When a snapshot is created, any AWS Marketplace product codes that are
+    # When a snapshot is created, any Marketplace product codes that are
     # associated with the source volume are propagated to the snapshot.
     #
     # You can take a snapshot of an attached volume that is in use. However,
-    # snapshots only capture data that has been written to your EBS volume
-    # at the time the snapshot command is issued; this might exclude any
-    # data that has been cached by any applications or the operating system.
-    # If you can pause any file systems on the volume long enough to take a
-    # snapshot, your snapshot should be complete. However, if you cannot
-    # pause all file writes to the volume, you should unmount the volume
-    # from within the instance, issue the snapshot command, and then remount
-    # the volume to ensure a consistent and complete snapshot. You may
-    # remount and use your volume while the snapshot status is `pending`.
+    # snapshots only capture data that has been written to your Amazon EBS
+    # volume at the time the snapshot command is issued; this might exclude
+    # any data that has been cached by any applications or the operating
+    # system. If you can pause any file systems on the volume long enough to
+    # take a snapshot, your snapshot should be complete. However, if you
+    # cannot pause all file writes to the volume, you should unmount the
+    # volume from within the instance, issue the snapshot command, and then
+    # remount the volume to ensure a consistent and complete snapshot. You
+    # may remount and use your volume while the snapshot status is
+    # `pending`.
     #
-    # To create a snapshot for EBS volumes that serve as root devices, you
-    # should stop the instance before taking the snapshot.
+    # To create a snapshot for Amazon EBS volumes that serve as root
+    # devices, you should stop the instance before taking the snapshot.
     #
     # Snapshots that are taken from encrypted volumes are automatically
     # encrypted. Volumes that are created from encrypted snapshots are also
@@ -8474,7 +8478,7 @@ module Aws::EC2
     # snapshots always remain protected.
     #
     # You can tag your snapshots during creation. For more information, see
-    # [Tagging your Amazon EC2 resources][1] in the *Amazon Elastic Compute
+    # [Tag your Amazon EC2 resources][1] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
     # For more information, see [Amazon Elastic Block Store][2] and [Amazon
@@ -8490,7 +8494,7 @@ module Aws::EC2
     #   A description for the snapshot.
     #
     # @option params [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create a
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create a
     #   local snapshot.
     #
     #   * To create a snapshot of a volume in a Region, omit this parameter.
@@ -8504,15 +8508,15 @@ module Aws::EC2
     #     snapshot on an Outpost, specify the ARN of the destination Outpost.
     #     The snapshot must be created on the same Outpost as the volume.
     #
-    #   For more information, see [ Creating local snapshots from volumes on
-    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   For more information, see [Create local snapshots from volumes on an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
     #
     # @option params [required, String] :volume_id
-    #   The ID of the EBS volume.
+    #   The ID of the Amazon EBS volume.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the snapshot during creation.
@@ -8635,8 +8639,8 @@ module Aws::EC2
     #   snapshots.
     #
     # @option params [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create
-    #   the local snapshots.
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create the
+    #   local snapshots.
     #
     #   * To create snapshots from an instance in a Region, omit this
     #     parameter. The snapshots are created in the same Region as the
@@ -8650,7 +8654,7 @@ module Aws::EC2
     #     snapshots on an Outpost, specify the ARN of the destination Outpost.
     #     The snapshots must be created on the same Outpost as the instance.
     #
-    #   For more information, see [ Creating multi-volume local snapshots from
+    #   For more information, see [ Create multi-volume local snapshots from
     #   instances on an Outpost][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
@@ -10255,7 +10259,7 @@ module Aws::EC2
     # Availability Zone.
     #
     # You can create a new empty volume or restore a volume from an EBS
-    # snapshot. Any AWS Marketplace product codes from the snapshot are
+    # snapshot. Any Marketplace product codes from the snapshot are
     # propagated to the volume.
     #
     # You can create encrypted volumes. Encrypted volumes must be attached
@@ -10265,10 +10269,10 @@ module Aws::EC2
     # Elastic Compute Cloud User Guide*.
     #
     # You can tag your volumes during creation. For more information, see
-    # [Tagging your Amazon EC2 resources][2] in the *Amazon Elastic Compute
+    # [Tag your Amazon EC2 resources][2] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
-    # For more information, see [Creating an Amazon EBS volume][3] in the
+    # For more information, see [Create an Amazon EBS volume][3] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -10312,9 +10316,9 @@ module Aws::EC2
     #
     #   * `io2`\: 100-64,000 IOPS
     #
-    #   For `io1` and `io2` volumes, we guarantee 64,000 IOPS only for
-    #   [Instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS.
+    #   `io1` and `io2` volumes support up to 64,000 IOPS only on [Instances
+    #   built on the Nitro System][1]. Other instance families support
+    #   performance up to 32,000 IOPS.
     #
     #   This parameter is required for `io1` and `io2` volumes. The default
     #   for `gp3` volumes is 3,000 IOPS. This parameter is not supported for
@@ -10325,12 +10329,12 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #
     # @option params [String] :kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
-    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
-    #   is specified, the encrypted state must be `true`.
+    #   The identifier of the Key Management Service (KMS) KMS key to use for
+    #   Amazon EBS encryption. If this parameter is not specified, your KMS
+    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
+    #   state must be `true`.
     #
-    #   You can specify the CMK using any of the following:
+    #   You can specify the KMS key using any of the following:
     #
     #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
@@ -10342,9 +10346,9 @@ module Aws::EC2
     #   * Alias ARN. For example,
     #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
-    #   ID, alias, or ARN that is not valid, the action can appear to
-    #   complete, but eventually fails.
+    #   Amazon Web Services authenticates the KMS key asynchronously.
+    #   Therefore, if you specify an ID, alias, or ARN that is not valid, the
+    #   action can appear to complete, but eventually fails.
     #
     # @option params [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost.
@@ -10420,6 +10424,18 @@ module Aws::EC2
     #   This parameter is valid only for `gp3` volumes.
     #
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::Volume] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10517,6 +10533,7 @@ module Aws::EC2
     #     ],
     #     multi_attach_enabled: false,
     #     throughput: 1,
+    #     client_token: "String",
     #   })
     #
     # @example Response structure
@@ -12893,7 +12910,7 @@ module Aws::EC2
     # by a registered AMI. You must first de-register the AMI before you can
     # delete the snapshot.
     #
-    # For more information, see [Deleting an Amazon EBS snapshot][1] in the
+    # For more information, see [Delete an Amazon EBS snapshot][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -13670,7 +13687,7 @@ module Aws::EC2
     #
     # The volume can remain in the `deleting` state for several minutes.
     #
-    # For more information, see [Deleting an Amazon EBS volume][1] in the
+    # For more information, see [Delete an Amazon EBS volume][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -16488,7 +16505,7 @@ module Aws::EC2
     #
     #   * `availability-zone`\: The Availability Zone of the snapshot.
     #
-    #   * `owner-id`\: The ID of the AWS account that enabled fast snapshot
+    #   * `owner-id`\: The ID of the account that enabled fast snapshot
     #     restore on the snapshot.
     #
     #   * `snapshot-id`\: The ID of the snapshot.
@@ -22686,7 +22703,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root
     #
     # @option params [Array<String>] :replace_root_volume_task_ids
     #   The ID of the root volume replacement task to view.
@@ -24295,25 +24312,25 @@ module Aws::EC2
     # EBS snapshots available to you.
     #
     # The snapshots available to you include public snapshots, private
-    # snapshots that you own, and private snapshots owned by other AWS
-    # accounts for which you have explicit create volume permissions.
+    # snapshots that you own, and private snapshots owned by other accounts
+    # for which you have explicit create volume permissions.
     #
     # The create volume permissions fall into the following categories:
     #
     # * *public*\: The owner of the snapshot granted create volume
-    #   permissions for the snapshot to the `all` group. All AWS accounts
-    #   have create volume permissions for these snapshots.
+    #   permissions for the snapshot to the `all` group. All accounts have
+    #   create volume permissions for these snapshots.
     #
     # * *explicit*\: The owner of the snapshot granted create volume
-    #   permissions to a specific AWS account.
+    #   permissions to a specific account.
     #
-    # * *implicit*\: An AWS account has implicit create volume permissions
-    #   for all snapshots it owns.
+    # * *implicit*\: An account has implicit create volume permissions for
+    #   all snapshots it owns.
     #
     # The list of snapshots returned can be filtered by specifying snapshot
-    # IDs, snapshot owners, or AWS accounts with create volume permissions.
-    # If no options are specified, Amazon EC2 returns all snapshots for
-    # which you have create volume permissions.
+    # IDs, snapshot owners, or accounts with create volume permissions. If
+    # no options are specified, Amazon EC2 returns all snapshots for which
+    # you have create volume permissions.
     #
     # If you specify one or more snapshot IDs, only snapshots that have the
     # specified IDs are returned. If you specify an invalid snapshot ID, an
@@ -24322,12 +24339,12 @@ module Aws::EC2
     #
     # If you specify one or more snapshot owners using the `OwnerIds`
     # option, only snapshots from the specified owners and for which you
-    # have access are returned. The results can include the AWS account IDs
-    # of the specified owners, `amazon` for snapshots owned by Amazon, or
+    # have access are returned. The results can include the account IDs of
+    # the specified owners, `amazon` for snapshots owned by Amazon, or
     # `self` for snapshots that you own.
     #
     # If you specify a list of restorable users, only snapshots with create
-    # snapshot permissions for those users are returned. You can specify AWS
+    # snapshot permissions for those users are returned. You can specify
     # account IDs (if you own the snapshots), `self` for snapshots for which
     # you own or have explicit permissions, or `all` for public snapshots.
     #
@@ -24358,12 +24375,12 @@ module Aws::EC2
     #     `false`)
     #
     #   * `owner-alias` - The owner alias, from an Amazon-maintained list
-    #     (`amazon`). This is not the user-configured AWS account alias set
-    #     using the IAM console. We recommend that you use the related
-    #     parameter instead of this filter.
+    #     (`amazon`). This is not the user-configured account alias set using
+    #     the IAM console. We recommend that you use the related parameter
+    #     instead of this filter.
     #
-    #   * `owner-id` - The AWS account ID of the owner. We recommend that you
-    #     use the related parameter instead of this filter.
+    #   * `owner-id` - The account ID of the owner. We recommend that you use
+    #     the related parameter instead of this filter.
     #
     #   * `progress` - The progress of the snapshot, as a percentage (for
     #     example, 80%).
@@ -24410,10 +24427,10 @@ module Aws::EC2
     #
     # @option params [Array<String>] :owner_ids
     #   Scopes the results to snapshots with the specified owners. You can
-    #   specify a combination of AWS account IDs, `self`, and `amazon`.
+    #   specify a combination of account IDs, `self`, and `amazon`.
     #
     # @option params [Array<String>] :restorable_by_user_ids
-    #   The IDs of the AWS accounts that can create volumes from the snapshot.
+    #   The IDs of the accounts that can create volumes from the snapshot.
     #
     # @option params [Array<String>] :snapshot_ids
     #   The snapshot IDs.
@@ -27139,8 +27156,8 @@ module Aws::EC2
     # check fails, the overall status is `impaired`. If the status is
     # `insufficient-data`, then the checks might still be taking place on
     # your volume at the time. We recommend that you retry the request. For
-    # more information about volume status, see [Monitoring the status of
-    # your volumes][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # more information about volume status, see [Monitor the status of your
+    # volumes][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # *Events*\: Reflect the cause of a volume status and might require you
     # to take action. For example, if your volume returns an `impaired`
@@ -27605,13 +27622,13 @@ module Aws::EC2
     # You can also use CloudWatch Events to check the status of a
     # modification to an EBS volume. For information about CloudWatch
     # Events, see the [Amazon CloudWatch Events User Guide][1]. For more
-    # information, see [Monitoring volume modifications][2] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # information, see [Monitor the progress of volume modifications][2] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -29161,10 +29178,10 @@ module Aws::EC2
     # root device of an instance, it can't be detached while the instance
     # is running. To detach the root volume, stop the instance first.
     #
-    # When a volume with an AWS Marketplace product code is detached from an
+    # When a volume with an Marketplace product code is detached from an
     # instance, the product code is no longer associated with the instance.
     #
-    # For more information, see [Detaching an Amazon EBS volume][1] in the
+    # For more information, see [Detach an Amazon EBS volume][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -30212,12 +30229,12 @@ module Aws::EC2
     # Region.
     #
     # After you enable encryption by default, the EBS volumes that you
-    # create are always encrypted, either using the default CMK or the CMK
-    # that you specified when you created each volume. For more information,
-    # see [Amazon EBS encryption][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # create are always encrypted, either using the default KMS key or the
+    # KMS key that you specified when you created each volume. For more
+    # information, see [Amazon EBS encryption][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
-    # You can specify the default CMK for encryption by default using
+    # You can specify the default KMS key for encryption by default using
     # ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
     #
     # Enabling encryption by default has no effect on the encryption status
@@ -30282,7 +30299,7 @@ module Aws::EC2
     # @option params [required, Array<String>] :source_snapshot_ids
     #   The IDs of one or more snapshots. For example,
     #   `snap-1234567890abcdef0`. You can specify a snapshot that was shared
-    #   with you from another AWS account.
+    #   with you from another account.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -31325,9 +31342,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the default customer master key (CMK) for EBS encryption by
-    # default for your account in this Region. You can change the default
-    # CMK for encryption by default using ModifyEbsDefaultKmsKeyId or
+    # Describes the default KMS key for EBS encryption by default for your
+    # account in this Region. You can change the default KMS key for
+    # encryption by default using ModifyEbsDefaultKmsKeyId or
     # ResetEbsDefaultKmsKeyId.
     #
     # For more information, see [Amazon EBS encryption][1] in the *Amazon
@@ -33530,18 +33547,20 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Changes the default customer master key (CMK) for EBS encryption by
-    # default for your account in this Region.
+    # Changes the default KMS key for EBS encryption by default for your
+    # account in this Region.
     #
-    # AWS creates a unique AWS managed CMK in each Region for use with
-    # encryption by default. If you change the default CMK to a symmetric
-    # customer managed CMK, it is used instead of the AWS managed CMK. To
-    # reset the default CMK to the AWS managed CMK for EBS, use
-    # ResetEbsDefaultKmsKeyId. Amazon EBS does not support asymmetric CMKs.
+    # Amazon Web Services creates a unique Amazon Web Services managed KMS
+    # key in each Region for use with encryption by default. If you change
+    # the default KMS key to a symmetric customer managed KMS key, it is
+    # used instead of the Amazon Web Services managed KMS key. To reset the
+    # default KMS key to the Amazon Web Services managed KMS key for EBS,
+    # use ResetEbsDefaultKmsKeyId. Amazon EBS does not support asymmetric
+    # KMS keys.
     #
-    # If you delete or disable the customer managed CMK that you specified
-    # for use with encryption by default, your instances will fail to
-    # launch.
+    # If you delete or disable the customer managed KMS key that you
+    # specified for use with encryption by default, your instances will fail
+    # to launch.
     #
     # For more information, see [Amazon EBS encryption][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
@@ -33551,12 +33570,12 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [required, String] :kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
-    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
-    #   is specified, the encrypted state must be `true`.
+    #   The identifier of the Key Management Service (KMS) KMS key to use for
+    #   Amazon EBS encryption. If this parameter is not specified, your KMS
+    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
+    #   state must be `true`.
     #
-    #   You can specify the CMK using any of the following:
+    #   You can specify the KMS key using any of the following:
     #
     #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
@@ -33568,11 +33587,11 @@ module Aws::EC2
     #   * Alias ARN. For example,
     #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
-    #   ID, alias, or ARN that is not valid, the action can appear to
-    #   complete, but eventually fails.
+    #   Amazon Web Services authenticates the KMS key asynchronously.
+    #   Therefore, if you specify an ID, alias, or ARN that is not valid, the
+    #   action can appear to complete, but eventually fails.
     #
-    #   Amazon EBS does not support asymmetric CMKs.
+    #   Amazon EBS does not support asymmetric KMS keys.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -35229,19 +35248,18 @@ module Aws::EC2
     end
 
     # Adds or removes permission settings for the specified snapshot. You
-    # may add or remove specified AWS account IDs from a snapshot's list of
+    # may add or remove specified account IDs from a snapshot's list of
     # create volume permissions, but you cannot do both in a single
     # operation. If you need to both add and remove account IDs for a
     # snapshot, you must use multiple operations. You can make up to 500
     # modifications to a snapshot in a single operation.
     #
-    # Encrypted snapshots and snapshots with AWS Marketplace product codes
-    # cannot be made public. Snapshots encrypted with your default CMK
+    # Encrypted snapshots and snapshots with Marketplace product codes
+    # cannot be made public. Snapshots encrypted with your default KMS key
     # cannot be shared with other accounts.
     #
-    # For more information about modifying snapshot permissions, see
-    # [Sharing snapshots][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # For more information about modifying snapshot permissions, see [Share
+    # a snapshot][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -36041,45 +36059,38 @@ module Aws::EC2
     # volume size, volume type, and IOPS capacity. If your EBS volume is
     # attached to a current-generation EC2 instance type, you might be able
     # to apply these changes without stopping the instance or detaching the
-    # volume from it. For more information about modifying an EBS volume
-    # running Linux, see [Modifying the size, IOPS, or type of an EBS volume
-    # on Linux][1]. For more information about modifying an EBS volume
-    # running Windows, see [Modifying the size, IOPS, or type of an EBS
-    # volume on Windows][2].
+    # volume from it. For more information about modifying EBS volumes, see
+    # [Amazon EBS Elastic Volumes][1] (Linux instances) or [Amazon EBS
+    # Elastic Volumes][2] (Windows instances).
     #
     # When you complete a resize operation on your volume, you need to
     # extend the volume's file-system size to take advantage of the new
-    # storage capacity. For information about extending a Linux file system,
-    # see [Extending a Linux file system][3]. For information about
-    # extending a Windows file system, see [Extending a Windows file
-    # system][4].
+    # storage capacity. For more information, see [Extend a Linux file
+    # system][3] or [Extend a Windows file system][4].
     #
     # You can use CloudWatch Events to check the status of a modification to
     # an EBS volume. For information about CloudWatch Events, see the
     # [Amazon CloudWatch Events User Guide][5]. You can also track the
     # status of a modification using DescribeVolumesModifications. For
     # information about tracking status changes using either method, see
-    # [Monitoring volume modifications][6].
+    # [Monitor the progress of volume modifications][6].
     #
     # With previous-generation instance types, resizing an EBS volume might
     # require detaching and reattaching the volume or stopping and
-    # restarting the instance. For more information, see [Amazon EBS Elastic
-    # Volumes][7] (Linux) or [Amazon EBS Elastic Volumes][8] (Windows).
+    # restarting the instance.
     #
     # If you reach the maximum volume modification rate per volume limit,
-    # you will need to wait at least six hours before applying further
-    # modifications to the affected EBS volume.
+    # you must wait at least six hours before applying further modifications
+    # to the affected EBS volume.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modify-volume.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-modify-volume.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows
     # [5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods
-    # [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modify-volume.html
-    # [8]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-modify-volume.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -36104,14 +36115,14 @@ module Aws::EC2
     #
     #   * `standard`\: 1-1,024
     #
-    #   Default: If no size is specified, the existing size is retained.
+    #   Default: The existing size is retained.
     #
     # @option params [String] :volume_type
     #   The target EBS volume type of the volume. For more information, see
     #   [Amazon EBS volume types][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
-    #   Default: If no type is specified, the existing type is retained.
+    #   Default: The existing type is retained.
     #
     #
     #
@@ -36129,16 +36140,16 @@ module Aws::EC2
     #
     #   * `io2`\: 100-64,000 IOPS
     #
-    #   Default: If no IOPS value is specified, the existing value is
-    #   retained, unless a volume type is modified that supports different
-    #   values.
+    #   Default: The existing value is retained if you keep the same volume
+    #   type. If you change the volume type to `io1`, `io2`, or `gp3`, the
+    #   default is 3,000.
     #
     # @option params [Integer] :throughput
     #   The target throughput of the volume, in MiB/s. This parameter is valid
     #   only for `gp3` volumes. The maximum value is 1,000.
     #
-    #   Default: If no throughput value is specified, the existing value is
-    #   retained.
+    #   Default: The existing value is retained if the source and target
+    #   volume type is `gp3`. Otherwise, the default value is 125.
     #
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
     #
@@ -39876,13 +39887,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Resets the default customer master key (CMK) for EBS encryption for
-    # your account in this Region to the AWS managed CMK for EBS.
+    # Resets the default KMS key for EBS encryption for your account in this
+    # Region to the Amazon Web Services managed KMS key for EBS.
     #
-    # After resetting the default CMK to the AWS managed CMK, you can
-    # continue to encrypt by a customer managed CMK by specifying it when
-    # you create the volume. For more information, see [Amazon EBS
-    # encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # After resetting the default KMS key to the Amazon Web Services managed
+    # KMS key, you can continue to encrypt by a customer managed KMS key by
+    # specifying it when you create the volume. For more information, see
+    # [Amazon EBS encryption][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #
     #
@@ -40110,9 +40122,8 @@ module Aws::EC2
 
     # Resets permission settings for the specified snapshot.
     #
-    # For more information about modifying snapshot permissions, see
-    # [Sharing snapshots][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # For more information about modifying snapshot permissions, see [Share
+    # a snapshot][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -43098,7 +43109,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.249.0'
+      context[:gem_version] = '1.250.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

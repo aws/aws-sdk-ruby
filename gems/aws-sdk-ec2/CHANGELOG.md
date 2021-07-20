@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.250.0 (2021-07-20)
+------------------
+
+* Feature - Added idempotency to the CreateVolume API using the ClientToken request parameter
+
 1.249.0 (2021-07-15)
 ------------------
 

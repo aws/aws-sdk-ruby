@@ -5386,13 +5386,14 @@ module Aws::EC2
     # @!attribute [rw] destination_outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
     #   snapshot. Only specify this parameter when copying a snapshot from
-    #   an AWS Region to an Outpost. The snapshot must be in the Region for
-    #   the destination Outpost. You cannot copy a snapshot from an Outpost
-    #   to a Region, from one Outpost to another, or within the same
-    #   Outpost.
+    #   an Amazon Web Services Region to an Outpost. The snapshot must be in
+    #   the Region for the destination Outpost. You cannot copy a snapshot
+    #   from an Outpost to a Region, from one Outpost to another, or within
+    #   the same Outpost.
     #
-    #   For more information, see [ Copying snapshots from an AWS Region to
-    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   For more information, see [ Copy snapshots from an Amazon Web
+    #   Services Region to an Outpost][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
     #
     #
@@ -5407,8 +5408,8 @@ module Aws::EC2
     #
     #   The snapshot copy is sent to the regional endpoint that you sent the
     #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With
-    #   the AWS CLI, this is specified using the `--region` parameter or the
-    #   default Region in your AWS configuration file.
+    #   the CLI, this is specified using the `--region` parameter or the
+    #   default Region in your Amazon Web Services configuration file.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -5426,12 +5427,12 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
-    #   is not specified, your AWS managed CMK for EBS is used. If
-    #   `KmsKeyId` is specified, the encrypted state must be `true`.
+    #   The identifier of the Key Management Service (KMS) KMS key to use
+    #   for Amazon EBS encryption. If this parameter is not specified, your
+    #   KMS key for Amazon EBS is used. If `KmsKeyId` is specified, the
+    #   encrypted state must be `true`.
     #
-    #   You can specify the CMK using any of the following:
+    #   You can specify the KMS key using any of the following:
     #
     #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
@@ -5443,9 +5444,9 @@ module Aws::EC2
     #   * Alias ARN. For example,
     #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
-    #   an ID, alias, or ARN that is not valid, the action can appear to
-    #   complete, but eventually fails.
+    #   Amazon Web Services authenticates the KMS key asynchronously.
+    #   Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #   the action can appear to complete, but eventually fails.
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
@@ -5457,14 +5458,14 @@ module Aws::EC2
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,
     #   `SourceSnapshotId`, and `DestinationRegion` parameters. The
-    #   `PresignedUrl` must be signed using AWS Signature Version 4. Because
-    #   EBS snapshots are stored in Amazon S3, the signing algorithm for
-    #   this parameter uses the same logic that is described in
-    #   [Authenticating Requests: Using Query Parameters (AWS Signature
-    #   Version 4)][2] in the *Amazon Simple Storage Service API Reference*.
-    #   An invalid or improperly signed `PresignedUrl` will cause the copy
-    #   operation to fail asynchronously, and the snapshot will move to an
-    #   `error` state.
+    #   `PresignedUrl` must be signed using Amazon Web Services Signature
+    #   Version 4. Because EBS snapshots are stored in Amazon S3, the
+    #   signing algorithm for this parameter uses the same logic that is
+    #   described in [Authenticating Requests: Using Query Parameters
+    #   (Amazon Web Services Signature Version 4)][2] in the *Amazon Simple
+    #   Storage Service API Reference*. An invalid or improperly signed
+    #   `PresignedUrl` will cause the copy operation to fail asynchronously,
+    #   and the snapshot will move to an `error` state.
     #
     #
     #
@@ -8827,7 +8828,7 @@ module Aws::EC2
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token, a
     #   randomly generated token is used for the request to ensure
-    #   idempotency. For more information, see [Ensuring Idempotency][1].
+    #   idempotency. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -9318,8 +9319,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
-    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create
-    #   a local snapshot.
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create a
+    #   local snapshot.
     #
     #   * To create a snapshot of a volume in a Region, omit this parameter.
     #     The snapshot is created in the same Region as the volume.
@@ -9333,8 +9334,8 @@ module Aws::EC2
     #     Outpost. The snapshot must be created on the same Outpost as the
     #     volume.
     #
-    #   For more information, see [ Creating local snapshots from volumes on
-    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   For more information, see [Create local snapshots from volumes on an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -9342,7 +9343,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] volume_id
-    #   The ID of the EBS volume.
+    #   The ID of the Amazon EBS volume.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -9404,8 +9405,8 @@ module Aws::EC2
     #   @return [Types::InstanceSpecification]
     #
     # @!attribute [rw] outpost_arn
-    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create
-    #   the local snapshots.
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create the
+    #   local snapshots.
     #
     #   * To create snapshots from an instance in a Region, omit this
     #     parameter. The snapshots are created in the same Region as the
@@ -9420,9 +9421,9 @@ module Aws::EC2
     #     Outpost. The snapshots must be created on the same Outpost as the
     #     instance.
     #
-    #   For more information, see [ Creating multi-volume local snapshots
-    #   from instances on an Outpost][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   For more information, see [ Create multi-volume local snapshots from
+    #   instances on an Outpost][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
     #
     #
     #
@@ -10918,7 +10919,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The AWS account ID to be added or removed.
+    #   The ID of the account to be added or removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermission AWS API Documentation
@@ -10952,11 +10953,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] add
-    #   Adds the specified AWS account ID or group to the list.
+    #   Adds the specified account ID or group to the list.
     #   @return [Array<Types::CreateVolumePermission>]
     #
     # @!attribute [rw] remove
-    #   Removes the specified AWS account ID or group from the list.
+    #   Removes the specified account ID or group from the list.
     #   @return [Array<Types::CreateVolumePermission>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermissionModifications AWS API Documentation
@@ -10994,6 +10995,7 @@ module Aws::EC2
     #         ],
     #         multi_attach_enabled: false,
     #         throughput: 1,
+    #         client_token: "String",
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -11033,9 +11035,9 @@ module Aws::EC2
     #
     #   * `io2`\: 100-64,000 IOPS
     #
-    #   For `io1` and `io2` volumes, we guarantee 64,000 IOPS only for
-    #   [Instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS.
+    #   `io1` and `io2` volumes support up to 64,000 IOPS only on [Instances
+    #   built on the Nitro System][1]. Other instance families support
+    #   performance up to 32,000 IOPS.
     #
     #   This parameter is required for `io1` and `io2` volumes. The default
     #   for `gp3` volumes is 3,000 IOPS. This parameter is not supported for
@@ -11047,12 +11049,12 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
-    #   is not specified, your AWS managed CMK for EBS is used. If
-    #   `KmsKeyId` is specified, the encrypted state must be `true`.
+    #   The identifier of the Key Management Service (KMS) KMS key to use
+    #   for Amazon EBS encryption. If this parameter is not specified, your
+    #   KMS key for Amazon EBS is used. If `KmsKeyId` is specified, the
+    #   encrypted state must be `true`.
     #
-    #   You can specify the CMK using any of the following:
+    #   You can specify the KMS key using any of the following:
     #
     #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
@@ -11064,9 +11066,9 @@ module Aws::EC2
     #   * Alias ARN. For example,
     #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
-    #   an ID, alias, or ARN that is not valid, the action can appear to
-    #   complete, but eventually fails.
+    #   Amazon Web Services authenticates the KMS key asynchronously.
+    #   Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #   the action can appear to complete, but eventually fails.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -11152,6 +11154,19 @@ module Aws::EC2
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
     #   @return [Integer]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumeRequest AWS API Documentation
     #
     class CreateVolumeRequest < Struct.new(
@@ -11166,7 +11181,8 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       :multi_attach_enabled,
-      :throughput)
+      :throughput,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16377,13 +16393,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that enabled fast snapshot restores on the
+    #   The ID of the account that enabled fast snapshot restores on the
     #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] owner_alias
-    #   The AWS owner alias that enabled fast snapshot restores on the
-    #   snapshot. This is intended for future use.
+    #   The Amazon Web Services owner alias that enabled fast snapshot
+    #   restores on the snapshot. This is intended for future use.
     #   @return [String]
     #
     # @!attribute [rw] enabling_time
@@ -16449,7 +16465,7 @@ module Aws::EC2
     #
     #   * `availability-zone`\: The Availability Zone of the snapshot.
     #
-    #   * `owner-id`\: The ID of the AWS account that enabled fast snapshot
+    #   * `owner-id`\: The ID of the account that enabled fast snapshot
     #     restore on the snapshot.
     #
     #   * `snapshot-id`\: The ID of the snapshot.
@@ -22417,12 +22433,12 @@ module Aws::EC2
     #     \| `false`)
     #
     #   * `owner-alias` - The owner alias, from an Amazon-maintained list
-    #     (`amazon`). This is not the user-configured AWS account alias set
+    #     (`amazon`). This is not the user-configured account alias set
     #     using the IAM console. We recommend that you use the related
     #     parameter instead of this filter.
     #
-    #   * `owner-id` - The AWS account ID of the owner. We recommend that
-    #     you use the related parameter instead of this filter.
+    #   * `owner-id` - The account ID of the owner. We recommend that you
+    #     use the related parameter instead of this filter.
     #
     #   * `progress` - The progress of the snapshot, as a percentage (for
     #     example, 80%).
@@ -22474,12 +22490,11 @@ module Aws::EC2
     #
     # @!attribute [rw] owner_ids
     #   Scopes the results to snapshots with the specified owners. You can
-    #   specify a combination of AWS account IDs, `self`, and `amazon`.
+    #   specify a combination of account IDs, `self`, and `amazon`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] restorable_by_user_ids
-    #   The IDs of the AWS accounts that can create volumes from the
-    #   snapshot.
+    #   The IDs of the accounts that can create volumes from the snapshot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_ids
@@ -26476,13 +26491,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that enabled fast snapshot restores on the
+    #   The ID of the account that enabled fast snapshot restores on the
     #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] owner_alias
-    #   The AWS owner alias that enabled fast snapshot restores on the
-    #   snapshot. This is intended for future use.
+    #   The Amazon Web Services owner alias that enabled fast snapshot
+    #   restores on the snapshot. This is intended for future use.
     #   @return [String]
     #
     # @!attribute [rw] enabling_time
@@ -28169,13 +28184,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that enabled fast snapshot restores on the
+    #   The ID of the account that enabled fast snapshot restores on the
     #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] owner_alias
-    #   The AWS owner alias that enabled fast snapshot restores on the
-    #   snapshot. This is intended for future use.
+    #   The Amazon Web Services owner alias that enabled fast snapshot
+    #   restores on the snapshot. This is intended for future use.
     #   @return [String]
     #
     # @!attribute [rw] enabling_time
@@ -28237,7 +28252,7 @@ module Aws::EC2
     # @!attribute [rw] source_snapshot_ids
     #   The IDs of one or more snapshots. For example,
     #   `snap-1234567890abcdef0`. You can specify a snapshot that was shared
-    #   with you from another AWS account.
+    #   with you from another account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -30936,8 +30951,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the default CMK for encryption by
-    #   default.
+    #   The Amazon Resource Name (ARN) of the default KMS key for encryption
+    #   by default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsDefaultKmsKeyIdResult AWS API Documentation
@@ -38992,12 +39007,12 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
-    #   is not specified, your AWS managed CMK for EBS is used. If
-    #   `KmsKeyId` is specified, the encrypted state must be `true`.
+    #   The identifier of the Key Management Service (KMS) KMS key to use
+    #   for Amazon EBS encryption. If this parameter is not specified, your
+    #   KMS key for Amazon EBS is used. If `KmsKeyId` is specified, the
+    #   encrypted state must be `true`.
     #
-    #   You can specify the CMK using any of the following:
+    #   You can specify the KMS key using any of the following:
     #
     #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
@@ -39009,11 +39024,11 @@ module Aws::EC2
     #   * Alias ARN. For example,
     #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
-    #   an ID, alias, or ARN that is not valid, the action can appear to
-    #   complete, but eventually fails.
+    #   Amazon Web Services authenticates the KMS key asynchronously.
+    #   Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #   the action can appear to complete, but eventually fails.
     #
-    #   Amazon EBS does not support asymmetric CMKs.
+    #   Amazon EBS does not support asymmetric KMS keys.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -39033,8 +39048,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the default CMK for encryption by
-    #   default.
+    #   The Amazon Resource Name (ARN) of the default KMS key for encryption
+    #   by default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyIdResult AWS API Documentation
@@ -41324,7 +41339,7 @@ module Aws::EC2
     #
     #   * `standard`\: 1-1,024
     #
-    #   Default: If no size is specified, the existing size is retained.
+    #   Default: The existing size is retained.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
@@ -41332,7 +41347,7 @@ module Aws::EC2
     #   [Amazon EBS volume types][1] in the *Amazon Elastic Compute Cloud
     #   User Guide*.
     #
-    #   Default: If no type is specified, the existing type is retained.
+    #   Default: The existing type is retained.
     #
     #
     #
@@ -41351,17 +41366,17 @@ module Aws::EC2
     #
     #   * `io2`\: 100-64,000 IOPS
     #
-    #   Default: If no IOPS value is specified, the existing value is
-    #   retained, unless a volume type is modified that supports different
-    #   values.
+    #   Default: The existing value is retained if you keep the same volume
+    #   type. If you change the volume type to `io1`, `io2`, or `gp3`, the
+    #   default is 3,000.
     #   @return [Integer]
     #
     # @!attribute [rw] throughput
     #   The target throughput of the volume, in MiB/s. This parameter is
     #   valid only for `gp3` volumes. The maximum value is 1,000.
     #
-    #   Default: If no throughput value is specified, the existing value is
-    #   retained.
+    #   Default: The existing value is retained if the source and target
+    #   volume type is `gp3`. Otherwise, the default value is 125.
     #
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
     #   @return [Integer]
@@ -48083,8 +48098,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the default CMK for EBS encryption
-    #   by default.
+    #   The Amazon Resource Name (ARN) of the default KMS key for EBS
+    #   encryption by default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyIdResult AWS API Documentation
@@ -51612,13 +51627,13 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (AWS KMS) customer master key (CMK) that was used to protect the
-    #   volume encryption key for the parent volume.
+    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
+    #   KMS key that was used to protect the volume encryption key for the
+    #   parent volume.
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the EBS snapshot owner.
+    #   The ID of the account that owns the EBS snapshot.
     #   @return [String]
     #
     # @!attribute [rw] progress
@@ -51640,11 +51655,10 @@ module Aws::EC2
     #
     # @!attribute [rw] state_message
     #   Encrypted Amazon EBS snapshots are copied asynchronously. If a
-    #   snapshot copy operation fails (for example, if the proper AWS Key
-    #   Management Service (AWS KMS) permissions are not obtained) this
-    #   field displays error state details to help you diagnose why the
-    #   error occurred. This parameter is only returned by
-    #   DescribeSnapshots.
+    #   snapshot copy operation fails (for example, if the proper Key
+    #   Management Service (KMS) permissions are not obtained) this field
+    #   displays error state details to help you diagnose why the error
+    #   occurred. This parameter is only returned by DescribeSnapshots.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -51658,15 +51672,15 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] owner_alias
-    #   The AWS owner alias, from an Amazon-maintained list (`amazon`). This
-    #   is not the user-configured AWS account alias set using the IAM
-    #   console.
+    #   The Amazon Web Services owner alias, from an Amazon-maintained list
+    #   (`amazon`). This is not the user-configured account alias set using
+    #   the IAM console.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
-    #   The ARN of the AWS Outpost on which the snapshot is stored. For more
-    #   information, see [EBS Local Snapshot on Outposts][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   The ARN of the Outpost on which the snapshot is stored. For more
+    #   information, see [Amazon EBS local snapshots on Outposts][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -51848,9 +51862,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
-    #   The ARN of the AWS Outpost on which the snapshot is stored. For more
-    #   information, see [EBS Local Snapshot on Outposts][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   The ARN of the Outpost on which the snapshot is stored. For more
+    #   information, see [Amazon EBS local snapshots on Outposts][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -56876,9 +56890,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (AWS KMS) customer master key (CMK) that was used to protect the
-    #   volume encryption key for the volume.
+    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
+    #   KMS key that was used to protect the volume encryption key for the
+    #   volume.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
