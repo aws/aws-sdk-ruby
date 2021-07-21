@@ -1657,6 +1657,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -5167,6 +5168,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -6645,6 +6647,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -7850,11 +7853,20 @@ module Aws::RDS
     #
     #   Supported filters:
     #
+    #   * `clone-group-id` - Accepts clone group identifiers. The results list
+    #     will only include information about the DB clusters associated with
+    #     these clone groups.
+    #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB clusters identified by these ARNs.
     #
-    #   ^
+    #   * `domain` - Accepts Active Directory directory IDs. The results list
+    #     will only include information about the DB clusters associated with
+    #     these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only include
+    #     information about the DB clusters for these engines.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -9507,6 +9519,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].tag_list #=> Array
     #   resp.db_snapshots[0].tag_list[0].key #=> String
     #   resp.db_snapshots[0].tag_list[0].value #=> String
+    #   resp.db_snapshots[0].original_snapshot_create_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10227,15 +10240,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more global DB clusters to describe.
-    #
-    #   Supported filters:
-    #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     information about the DB clusters identified by these ARNs.
-    #
-    #   ^
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -14165,6 +14170,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -20069,7 +20075,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

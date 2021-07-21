@@ -80,6 +80,8 @@ module Aws::EMR
     DescribeJobFlowsOutput = Shapes::StructureShape.new(name: 'DescribeJobFlowsOutput')
     DescribeNotebookExecutionInput = Shapes::StructureShape.new(name: 'DescribeNotebookExecutionInput')
     DescribeNotebookExecutionOutput = Shapes::StructureShape.new(name: 'DescribeNotebookExecutionOutput')
+    DescribeReleaseLabelInput = Shapes::StructureShape.new(name: 'DescribeReleaseLabelInput')
+    DescribeReleaseLabelOutput = Shapes::StructureShape.new(name: 'DescribeReleaseLabelOutput')
     DescribeSecurityConfigurationInput = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationInput')
     DescribeSecurityConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationOutput')
     DescribeStepInput = Shapes::StructureShape.new(name: 'DescribeStepInput')
@@ -183,6 +185,8 @@ module Aws::EMR
     ListInstancesOutput = Shapes::StructureShape.new(name: 'ListInstancesOutput')
     ListNotebookExecutionsInput = Shapes::StructureShape.new(name: 'ListNotebookExecutionsInput')
     ListNotebookExecutionsOutput = Shapes::StructureShape.new(name: 'ListNotebookExecutionsOutput')
+    ListReleaseLabelsInput = Shapes::StructureShape.new(name: 'ListReleaseLabelsInput')
+    ListReleaseLabelsOutput = Shapes::StructureShape.new(name: 'ListReleaseLabelsOutput')
     ListSecurityConfigurationsInput = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsInput')
     ListSecurityConfigurationsOutput = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsOutput')
     ListStepsInput = Shapes::StructureShape.new(name: 'ListStepsInput')
@@ -195,6 +199,7 @@ module Aws::EMR
     ManagedScalingPolicy = Shapes::StructureShape.new(name: 'ManagedScalingPolicy')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
+    MaxResultsNumber = Shapes::IntegerShape.new(name: 'MaxResultsNumber')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
     MetricDimensionList = Shapes::ListShape.new(name: 'MetricDimensionList')
     ModifyClusterInput = Shapes::StructureShape.new(name: 'ModifyClusterInput')
@@ -226,6 +231,7 @@ module Aws::EMR
     PutBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationOutput')
     PutManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'PutManagedScalingPolicyInput')
     PutManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutManagedScalingPolicyOutput')
+    ReleaseLabelFilter = Shapes::StructureShape.new(name: 'ReleaseLabelFilter')
     RemoveAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyInput')
     RemoveAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyOutput')
     RemoveManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveManagedScalingPolicyInput')
@@ -253,6 +259,8 @@ module Aws::EMR
     SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
     ShrinkPolicy = Shapes::StructureShape.new(name: 'ShrinkPolicy')
     SimpleScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'SimpleScalingPolicyConfiguration')
+    SimplifiedApplication = Shapes::StructureShape.new(name: 'SimplifiedApplication')
+    SimplifiedApplicationList = Shapes::ListShape.new(name: 'SimplifiedApplicationList')
     SpotProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'SpotProvisioningAllocationStrategy')
     SpotProvisioningSpecification = Shapes::StructureShape.new(name: 'SpotProvisioningSpecification')
     SpotProvisioningTimeoutAction = Shapes::StringShape.new(name: 'SpotProvisioningTimeoutAction')
@@ -546,6 +554,16 @@ module Aws::EMR
 
     DescribeNotebookExecutionOutput.add_member(:notebook_execution, Shapes::ShapeRef.new(shape: NotebookExecution, location_name: "NotebookExecution"))
     DescribeNotebookExecutionOutput.struct_class = Types::DescribeNotebookExecutionOutput
+
+    DescribeReleaseLabelInput.add_member(:release_label, Shapes::ShapeRef.new(shape: String, location_name: "ReleaseLabel"))
+    DescribeReleaseLabelInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReleaseLabelInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsNumber, location_name: "MaxResults"))
+    DescribeReleaseLabelInput.struct_class = Types::DescribeReleaseLabelInput
+
+    DescribeReleaseLabelOutput.add_member(:release_label, Shapes::ShapeRef.new(shape: String, location_name: "ReleaseLabel"))
+    DescribeReleaseLabelOutput.add_member(:applications, Shapes::ShapeRef.new(shape: SimplifiedApplicationList, location_name: "Applications"))
+    DescribeReleaseLabelOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReleaseLabelOutput.struct_class = Types::DescribeReleaseLabelOutput
 
     DescribeSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
     DescribeSecurityConfigurationInput.struct_class = Types::DescribeSecurityConfigurationInput
@@ -977,6 +995,15 @@ module Aws::EMR
     ListNotebookExecutionsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListNotebookExecutionsOutput.struct_class = Types::ListNotebookExecutionsOutput
 
+    ListReleaseLabelsInput.add_member(:filters, Shapes::ShapeRef.new(shape: ReleaseLabelFilter, location_name: "Filters"))
+    ListReleaseLabelsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReleaseLabelsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsNumber, location_name: "MaxResults"))
+    ListReleaseLabelsInput.struct_class = Types::ListReleaseLabelsInput
+
+    ListReleaseLabelsOutput.add_member(:release_labels, Shapes::ShapeRef.new(shape: StringList, location_name: "ReleaseLabels"))
+    ListReleaseLabelsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReleaseLabelsOutput.struct_class = Types::ListReleaseLabelsOutput
+
     ListSecurityConfigurationsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListSecurityConfigurationsInput.struct_class = Types::ListSecurityConfigurationsInput
 
@@ -1108,6 +1135,10 @@ module Aws::EMR
 
     PutManagedScalingPolicyOutput.struct_class = Types::PutManagedScalingPolicyOutput
 
+    ReleaseLabelFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "Prefix"))
+    ReleaseLabelFilter.add_member(:application, Shapes::ShapeRef.new(shape: String, location_name: "Application"))
+    ReleaseLabelFilter.struct_class = Types::ReleaseLabelFilter
+
     RemoveAutoScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     RemoveAutoScalingPolicyInput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, required: true, location_name: "InstanceGroupId"))
     RemoveAutoScalingPolicyInput.struct_class = Types::RemoveAutoScalingPolicyInput
@@ -1224,6 +1255,12 @@ module Aws::EMR
     SimpleScalingPolicyConfiguration.add_member(:scaling_adjustment, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ScalingAdjustment"))
     SimpleScalingPolicyConfiguration.add_member(:cool_down, Shapes::ShapeRef.new(shape: Integer, location_name: "CoolDown"))
     SimpleScalingPolicyConfiguration.struct_class = Types::SimpleScalingPolicyConfiguration
+
+    SimplifiedApplication.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    SimplifiedApplication.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    SimplifiedApplication.struct_class = Types::SimplifiedApplication
+
+    SimplifiedApplicationList.member = Shapes::ShapeRef.new(shape: SimplifiedApplication)
 
     SpotProvisioningSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "TimeoutDurationMinutes"))
     SpotProvisioningSpecification.add_member(:timeout_action, Shapes::ShapeRef.new(shape: SpotProvisioningTimeoutAction, required: true, location_name: "TimeoutAction"))
@@ -1531,6 +1568,16 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:describe_release_label, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReleaseLabel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReleaseLabelInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReleaseLabelOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:describe_security_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSecurityConfiguration"
         o.http_method = "POST"
@@ -1675,6 +1722,22 @@ module Aws::EMR
         o[:pager] = Aws::Pager.new(
           tokens: {
             "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_release_labels, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReleaseLabels"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReleaseLabelsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReleaseLabelsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
           }
         )
       end)

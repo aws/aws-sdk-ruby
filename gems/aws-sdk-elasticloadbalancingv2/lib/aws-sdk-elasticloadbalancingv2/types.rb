@@ -2388,6 +2388,16 @@ module Aws::ElasticLoadBalancingV2
     #     load balancer (`true`) or routed to targets (`false`). The default
     #     is `false`.
     #
+    #   * Indicates whether the two headers (`x-amzn-tls-version` and
+    #     `x-amzn-tls-cipher-suite`), which contain information about the
+    #     negotiated TLS version and cipher suite, are added to the client
+    #     request before sending it to the target. The `x-amzn-tls-version`
+    #     header has information about the TLS protocol version negotiated
+    #     with the client, and the `x-amzn-tls-cipher-suite` header has
+    #     information about the cipher suite negotiated with the client.
+    #     Both headers are in OpenSSL format. The possible values for the
+    #     attribute are `true` and `false`. The default is `false`.
+    #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
     #     value is `true` or `false`. The default is `true`. Elastic Load
     #     Balancing requires that message header names contain only
@@ -2896,13 +2906,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. For Application Load Balancers, the default is HTTP. For
-    #   Network Load Balancers and Gateway Load Balancers, the default is
-    #   TCP. The TCP protocol is not supported for health checks if the
-    #   protocol of the target group is HTTP or HTTPS. It is supported for
-    #   health checks only if the protocol of the target group is TCP, TLS,
-    #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are
-    #   not supported for health checks.
+    #   targets. The TCP protocol is supported for health checks only if the
+    #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The
+    #   GENEVE, TLS, UDP, and TCP\_UDP protocols are not supported for
+    #   health checks.
     #
     #   With Network Load Balancers, you can't modify this setting.
     #   @return [String]

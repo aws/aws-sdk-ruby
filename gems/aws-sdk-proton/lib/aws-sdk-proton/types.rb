@@ -326,7 +326,7 @@ module Aws::Proton
     #   `environmentAccountConnectionId` or `protonServiceRoleArn` parameter
     #   and value. For more information, see [Environment account
     #   connections](proton/latest/adminguide/ag-env-account-connections.html)
-    #   in the *AWS Proton Administration guide*.
+    #   in the *AWS Proton Administrator guide*.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -343,17 +343,17 @@ module Aws::Proton
     # @!attribute [rw] spec
     #   A link to a YAML formatted spec file that provides inputs as defined
     #   in the environment template bundle schema file. For more
-    #   information, see [Environments][1] in the *AWS Proton Administration
+    #   information, see [Environments][1] in the *AWS Proton Administrator
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-managing-environments.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   Create tags for your environment. For more information, see *AWS
-    #   Proton resources and tagging* in the [AWS Proton Administration
+    #   Proton resources and tagging* in the [AWS Proton Administrator
     #   Guide][1] or [AWS Proton User Guide][2].
     #
     #
@@ -372,11 +372,11 @@ module Aws::Proton
     #
     # @!attribute [rw] template_name
     #   The name of the environment template. For more information, see
-    #   [Environment Templates][1] in the *AWS Proton Administration Guide*.
+    #   [Environment Templates][1] in the *AWS Proton Administrator Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-templates.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentInput AWS API Documentation
@@ -449,7 +449,7 @@ module Aws::Proton
     #
     # @!attribute [rw] tags
     #   Create tags for your environment template. For more information, see
-    #   *AWS Proton resources and tagging* in the [AWS Proton Administration
+    #   *AWS Proton resources and tagging* in the [AWS Proton Administrator
     #   Guide][1] or [AWS Proton User Guide][2].
     #
     #
@@ -523,7 +523,7 @@ module Aws::Proton
     #   `majorVersion`.
     #
     #   To create a new major and minor version of the environment template,
-    #   exclude `majorVersion`.
+    #   *exclude* `majorVersion`.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -600,16 +600,16 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] repository_connection_arn
-    #   The ARN of the repository connection. For more information, see [Set
-    #   up repository connection][1] in the *AWS Proton Administration
-    #   Guide* and [Getting started][2] in the *AWS Proton User Guide*.
-    #   *Don't* include this parameter if your service template *doesn't*
-    #   include a service pipeline.
+    #   The Amazon Resource Name (ARN) of the repository connection. For
+    #   more information, see [Set up repository connection][1] in the *AWS
+    #   Proton Administrator Guide* and [Setting up with AWS Proton][2] in
+    #   the *AWS Proton User Guide*. *Don't* include this parameter if your
+    #   service template *doesn't* include a service pipeline.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#settingSS-up-vcontrol
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/ug-getting-started.html#getting-started-step1
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol
+    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection
     #   @return [String]
     #
     # @!attribute [rw] repository_id
@@ -620,10 +620,10 @@ module Aws::Proton
     # @!attribute [rw] spec
     #   A link to a spec file that provides inputs as defined in the service
     #   template bundle schema file. The spec file is in YAML format. Don’t
-    #   include pipeline inputs in the spec if your service template doesn’t
-    #   include a service pipeline. For more information, see [Create a
-    #   service][1] in the *AWS Proton Administration Guide* and [Create a
-    #   service][2] in the *AWS Proton User Guide*.
+    #   include pipeline inputs in the spec if your service template
+    #   *doesn’t* include a service pipeline. For more information, see
+    #   [Create a service][1] in the *AWS Proton Administrator Guide* and
+    #   [Create a service][2] in the *AWS Proton User Guide*.
     #
     #
     #
@@ -633,8 +633,8 @@ module Aws::Proton
     #
     # @!attribute [rw] tags
     #   Create tags for your service. For more information, see *AWS Proton
-    #   resources and tagging* in the [AWS Proton Administration Guide][1]
-    #   or [AWS Proton User Guide][2].
+    #   resources and tagging* in the [AWS Proton Administrator Guide][1] or
+    #   [AWS Proton User Guide][2].
     #
     #
     #
@@ -724,16 +724,16 @@ module Aws::Proton
     #   When included, this parameter indicates that an AWS Proton service
     #   pipeline *won't* be included for your service. Once specified, this
     #   parameter *can't* be changed. For more information, see [Service
-    #   template bundles][1] in the *AWS Proton Administration Guide*.
+    #   template bundles][1] in the *AWS Proton Administrator Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-template-bundles.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   Create tags for your service template. For more information, see
-    #   *AWS Proton resources and tagging* in the [AWS Proton Administration
+    #   *AWS Proton resources and tagging* in the [AWS Proton Administrator
     #   Guide][1] or [AWS Proton User Guide][2].
     #
     #
@@ -1151,8 +1151,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The ARN of the AWS Proton service role that allows AWS Proton to
-    #   make calls to other services on your behalf.
+    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
+    #   allows AWS Proton to make calls to other services on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] provisioning
@@ -1173,7 +1173,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   The ARN of the environment template.
+    #   The Amazon Resource Name (ARN) of the environment template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/Environment AWS API Documentation
@@ -1362,8 +1362,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The ARN of the AWS Proton service role that allows AWS Proton to
-    #   make calls to other services on your behalf.
+    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
+    #   allows AWS Proton to make calls to other services on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] provisioning
@@ -2452,7 +2452,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource for the listed tags.
+    #   The Amazon Resource Name (ARN) of the resource for the listed tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListTagsForResourceInput AWS API Documentation
@@ -2588,14 +2588,15 @@ module Aws::Proton
     #   @return [Types::ServicePipeline]
     #
     # @!attribute [rw] repository_connection_arn
-    #   The ARN of the repository connection. For more information, see [Set
-    #   up a repository connection][1] in the *AWS Proton Administration
-    #   Guide* and [Getting started][2] in the *AWS Proton User Guide*.
+    #   The Amazon Resource Name (ARN) of the repository connection. For
+    #   more information, see [Set up a repository connection][1] in the
+    #   *AWS Proton Administrator Guide* and [Setting up with AWS Proton][2]
+    #   in the *AWS Proton User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/ug-getting-started.html#getting-started-step1
+    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection
     #   @return [String]
     #
     # @!attribute [rw] repository_id
@@ -2851,7 +2852,7 @@ module Aws::Proton
     end
 
     # A quota was exceeded. For more information, see [AWS Proton Quotas][1]
-    # in the *AWS Proton Administration Guide*.
+    # in the *AWS Proton Administrator Guide*.
     #
     #
     #
@@ -3422,7 +3423,7 @@ module Aws::Proton
     #
     #   You can only update to a new environment account connection if it
     #   was created in the same environment account that the current
-    #   environment account connection was created in and associated with
+    #   environment account connection was created in and is associated with
     #   the current environment.
     #   @return [String]
     #
@@ -3431,8 +3432,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The ARN of the AWS Proton service role that allows AWS Proton to
-    #   make API calls to other services your behalf.
+    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
+    #   allows AWS Proton to make API calls to other services your behalf.
     #   @return [String]
     #
     # @!attribute [rw] spec
@@ -3598,7 +3599,7 @@ module Aws::Proton
     #   instances to remain. Omit the existing service instances to delete
     #   from the list. *Don't* include edits to the existing service
     #   instances or pipeline. For more information, see *Edit a service* in
-    #   the [AWS Proton Administration Guide][1] or the [AWS Proton User
+    #   the [AWS Proton Administrator Guide][1] or the [AWS Proton User
     #   Guide][2].
     #
     #

@@ -790,7 +790,7 @@ module Aws::Lambda
     #   (MQ) The name of the Amazon MQ broker destination queue to consume.
     #
     # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
-    #   An array of the authentication protocol, or the VPC components to
+    #   An array of authentication protocols or VPC components required to
     #   secure your event source.
     #
     # @option params [Types::SelfManagedEventSource] :self_managed_event_source
@@ -2828,7 +2828,9 @@ module Aws::Lambda
     #   A pagination token returned by a previous call.
     #
     # @option params [Integer] :max_items
-    #   The maximum number of event source mappings to return.
+    #   The maximum number of event source mappings to return. Note that
+    #   ListEventSourceMappings returns a maximum of 100 items in each
+    #   response, even if you set the number higher.
     #
     # @return [Types::ListEventSourceMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4337,7 +4339,7 @@ module Aws::Lambda
     #   concurrently.
     #
     # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
-    #   An array of the authentication protocol, or the VPC components to
+    #   An array of authentication protocols or VPC components required to
     #   secure your event source.
     #
     # @option params [Integer] :tumbling_window_in_seconds
@@ -5004,7 +5006,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

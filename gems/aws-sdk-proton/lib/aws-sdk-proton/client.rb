@@ -344,7 +344,7 @@ module Aws::Proton
     #
     # For more information, see [Environment account
     # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administration guide*.
+    # in the *AWS Proton Administrator guide*.
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection.
@@ -382,7 +382,7 @@ module Aws::Proton
 
     # Attempts to cancel an environment deployment on an UpdateEnvironment
     # action, if the deployment is `IN_PROGRESS`. For more information, see
-    # [Update an environment][1] in the *AWS Proton Administration guide*.
+    # [Update an environment][1] in the *AWS Proton Administrator guide*.
     #
     # The following list includes potential cancellation scenarios.
     #
@@ -444,7 +444,7 @@ module Aws::Proton
     # Attempts to cancel a service instance deployment on an
     # UpdateServiceInstance action, if the deployment is `IN_PROGRESS`. For
     # more information, see *Update a service instance* in the [AWS Proton
-    # Administration guide][1] or the [AWS Proton User guide][2].
+    # Administrator guide][1] or the [AWS Proton User guide][2].
     #
     # The following list includes potential cancellation scenarios.
     #
@@ -509,7 +509,7 @@ module Aws::Proton
     # Attempts to cancel a service pipeline deployment on an
     # UpdateServicePipeline action, if the deployment is `IN_PROGRESS`. For
     # more information, see *Update a service pipeline* in the [AWS Proton
-    # Administration guide][1] or the [AWS Proton User guide][2].
+    # Administrator guide][1] or the [AWS Proton User guide][2].
     #
     # The following list includes potential cancellation scenarios.
     #
@@ -567,7 +567,7 @@ module Aws::Proton
     # Deploy a new environment. An AWS Proton environment is created from an
     # environment template that defines infrastructure and resources that
     # can be shared across services. For more information, see the
-    # [Environments][1] in the *AWS Proton Administration Guide.*
+    # [Environments][1] in the *AWS Proton Administrator Guide.*
     #
     #
     #
@@ -583,7 +583,7 @@ module Aws::Proton
     #   `environmentAccountConnectionId` or `protonServiceRoleArn` parameter
     #   and value. For more information, see [Environment account
     #   connections](proton/latest/adminguide/ag-env-account-connections.html)
-    #   in the *AWS Proton Administration guide*.
+    #   in the *AWS Proton Administrator guide*.
     #
     # @option params [required, String] :name
     #   The name of the environment.
@@ -597,15 +597,15 @@ module Aws::Proton
     # @option params [required, String] :spec
     #   A link to a YAML formatted spec file that provides inputs as defined
     #   in the environment template bundle schema file. For more information,
-    #   see [Environments][1] in the *AWS Proton Administration Guide*.
+    #   see [Environments][1] in the *AWS Proton Administrator Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-managing-environments.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Create tags for your environment. For more information, see *AWS
-    #   Proton resources and tagging* in the [AWS Proton Administration
+    #   Proton resources and tagging* in the [AWS Proton Administrator
     #   Guide][1] or [AWS Proton User Guide][2].
     #
     #
@@ -621,11 +621,11 @@ module Aws::Proton
     #
     # @option params [required, String] :template_name
     #   The name of the environment template. For more information, see
-    #   [Environment Templates][1] in the *AWS Proton Administration Guide*.
+    #   [Environment Templates][1] in the *AWS Proton Administrator Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-templates.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html
     #
     # @return [Types::CreateEnvironmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -680,14 +680,14 @@ module Aws::Proton
 
     # Create an environment account connection in an environment account so
     # that environment infrastructure resources can be provisioned in the
-    # environment account from the management account.
+    # environment account from a management account.
     #
     # An environment account connection is a secure bi-directional
     # connection between a *management account* and an *environment account*
     # that maintains authorization and permissions. For more information,
     # see [Environment account
     # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administration guide*.
+    # in the *AWS Proton Administrator guide*.
     #
     # @option params [String] :client_token
     #   When included, if two identicial requests are made with the same
@@ -749,7 +749,7 @@ module Aws::Proton
     end
 
     # Create an environment template for AWS Proton. For more information,
-    # see [Environment Templates][1] in the *AWS Proton Administration
+    # see [Environment Templates][1] in the *AWS Proton Administrator
     # Guide*.
     #
     # You can create an environment template in one of the two following
@@ -766,12 +766,12 @@ module Aws::Proton
     #   provisioned and managed infrastructure, include the `provisioning`
     #   parameter and set the value to `CUSTOMER_MANAGED`. For more
     #   information, see [Register and publish an environment template][2]
-    #   in the *AWS Proton Administration Guide*.
+    #   in the *AWS Proton Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-templates.html
-    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/env-template-v1.html
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html
+    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/template-create.html
     #
     # @option params [String] :description
     #   A description of the environment template.
@@ -792,7 +792,7 @@ module Aws::Proton
     #
     # @option params [Array<Types::Tag>] :tags
     #   Create tags for your environment template. For more information, see
-    #   *AWS Proton resources and tagging* in the [AWS Proton Administration
+    #   *AWS Proton resources and tagging* in the [AWS Proton Administrator
     #   Guide][1] or [AWS Proton User Guide][2].
     #
     #
@@ -862,7 +862,7 @@ module Aws::Proton
     #   `majorVersion`.
     #
     #   To create a new major and minor version of the environment template,
-    #   exclude `majorVersion`.
+    #   *exclude* `majorVersion`.
     #
     # @option params [required, Types::TemplateVersionSourceInput] :source
     #   An object that includes the template bundle S3 bucket path and name
@@ -925,7 +925,7 @@ module Aws::Proton
     # Create an AWS Proton service. An AWS Proton service is an
     # instantiation of a service template and often includes several service
     # instances and pipeline. For more information, see [Services][1] in the
-    # *AWS Proton Administration Guide* and [Services][2] in the *AWS Proton
+    # *AWS Proton Administrator Guide* and [Services][2] in the *AWS Proton
     # User Guide*.
     #
     #
@@ -945,16 +945,16 @@ module Aws::Proton
     #   The service name.
     #
     # @option params [String] :repository_connection_arn
-    #   The ARN of the repository connection. For more information, see [Set
-    #   up repository connection][1] in the *AWS Proton Administration Guide*
-    #   and [Getting started][2] in the *AWS Proton User Guide*. *Don't*
-    #   include this parameter if your service template *doesn't* include a
-    #   service pipeline.
+    #   The Amazon Resource Name (ARN) of the repository connection. For more
+    #   information, see [Set up repository connection][1] in the *AWS Proton
+    #   Administrator Guide* and [Setting up with AWS Proton][2] in the *AWS
+    #   Proton User Guide*. *Don't* include this parameter if your service
+    #   template *doesn't* include a service pipeline.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#settingSS-up-vcontrol
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/ug-getting-started.html#getting-started-step1
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol
+    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection
     #
     # @option params [String] :repository_id
     #   The ID of the code repository. *Don't* include this parameter if your
@@ -963,9 +963,9 @@ module Aws::Proton
     # @option params [required, String] :spec
     #   A link to a spec file that provides inputs as defined in the service
     #   template bundle schema file. The spec file is in YAML format. Don’t
-    #   include pipeline inputs in the spec if your service template doesn’t
+    #   include pipeline inputs in the spec if your service template *doesn’t*
     #   include a service pipeline. For more information, see [Create a
-    #   service][1] in the *AWS Proton Administration Guide* and [Create a
+    #   service][1] in the *AWS Proton Administrator Guide* and [Create a
     #   service][2] in the *AWS Proton User Guide*.
     #
     #
@@ -975,7 +975,7 @@ module Aws::Proton
     #
     # @option params [Array<Types::Tag>] :tags
     #   Create tags for your service. For more information, see *AWS Proton
-    #   resources and tagging* in the [AWS Proton Administration Guide][1] or
+    #   resources and tagging* in the [AWS Proton Administrator Guide][1] or
     #   [AWS Proton User Guide][2].
     #
     #
@@ -1059,7 +1059,7 @@ module Aws::Proton
     # pipeline definition, they provide a link to their source code
     # repository. AWS Proton then deploys and manages the infrastructure
     # defined by the selected service template. For more information, see
-    # [Service Templates][1] in the *AWS Proton Administration Guide*.
+    # [Service Templates][1] in the *AWS Proton Administrator Guide*.
     #
     #
     #
@@ -1083,15 +1083,15 @@ module Aws::Proton
     #   When included, this parameter indicates that an AWS Proton service
     #   pipeline *won't* be included for your service. Once specified, this
     #   parameter *can't* be changed. For more information, see [Service
-    #   template bundles][1] in the *AWS Proton Administration Guide*.
+    #   template bundles][1] in the *AWS Proton Administrator Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-template-bundles.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Create tags for your service template. For more information, see *AWS
-    #   Proton resources and tagging* in the [AWS Proton Administration
+    #   Proton resources and tagging* in the [AWS Proton Administrator
     #   Guide][1] or [AWS Proton User Guide][2].
     #
     #
@@ -1288,7 +1288,7 @@ module Aws::Proton
     #
     # For more information, see [Environment account
     # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administration guide*.
+    # in the *AWS Proton Administrator guide*.
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection to delete.
@@ -1636,7 +1636,7 @@ module Aws::Proton
     #
     # For more information, see [Environment account
     # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administration guide*.
+    # in the *AWS Proton Administrator guide*.
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection.
@@ -1968,7 +1968,7 @@ module Aws::Proton
     #
     # For more information, see [Environment account
     # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administration guide*.
+    # in the *AWS Proton Administrator guide*.
     #
     # @option params [String] :environment_name
     #   The environment name that's associated with each listed environment
@@ -2406,7 +2406,7 @@ module Aws::Proton
     end
 
     # List tags for a resource. For more information, see *AWS Proton
-    # resources and tagging* in the [AWS Proton Administration Guide][1] or
+    # resources and tagging* in the [AWS Proton Administrator Guide][1] or
     # [AWS Proton User Guide][2].
     #
     #
@@ -2423,7 +2423,7 @@ module Aws::Proton
     #   requested.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource for the listed tags.
+    #   The Amazon Resource Name (ARN) of the resource for the listed tags.
     #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2468,7 +2468,7 @@ module Aws::Proton
     #
     # For more information, see [Environment account
     # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administration guide*.
+    # in the *AWS Proton Administrator guide*.
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection to reject.
@@ -2505,7 +2505,7 @@ module Aws::Proton
     end
 
     # Tag a resource. For more information, see *AWS Proton resources and
-    # tagging* in the [AWS Proton Administration Guide][1] or [AWS Proton
+    # tagging* in the [AWS Proton Administrator Guide][1] or [AWS Proton
     # User Guide][2].
     #
     #
@@ -2544,7 +2544,7 @@ module Aws::Proton
     end
 
     # Remove a tag from a resource. For more information, see *AWS Proton
-    # resources and tagging* in the [AWS Proton Administration Guide][1] or
+    # resources and tagging* in the [AWS Proton Administrator Guide][1] or
     # [AWS Proton User Guide][2].
     #
     #
@@ -2615,7 +2615,7 @@ module Aws::Proton
     #
     # You can only update to a new environment account connection if it was
     # created in the same environment account that the current environment
-    # account connection was created in and associated with the current
+    # account connection was created in and is associated with the current
     # environment.
     #
     # If the environment *isn't* associated with an environment account
@@ -2711,15 +2711,15 @@ module Aws::Proton
     #
     #   You can only update to a new environment account connection if it was
     #   created in the same environment account that the current environment
-    #   account connection was created in and associated with the current
+    #   account connection was created in and is associated with the current
     #   environment.
     #
     # @option params [required, String] :name
     #   The name of the environment to update.
     #
     # @option params [String] :proton_service_role_arn
-    #   The ARN of the AWS Proton service role that allows AWS Proton to make
-    #   API calls to other services your behalf.
+    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
+    #   allows AWS Proton to make API calls to other services your behalf.
     #
     # @option params [String] :spec
     #   The formatted specification that defines the update.
@@ -2780,7 +2780,7 @@ module Aws::Proton
     #
     # For more information, see [Environment account
     # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administration guide*.
+    # in the *AWS Proton Administrator guide*.
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection to update.
@@ -2945,7 +2945,7 @@ module Aws::Proton
     #   to remain. Omit the existing service instances to delete from the
     #   list. *Don't* include edits to the existing service instances or
     #   pipeline. For more information, see *Edit a service* in the [AWS
-    #   Proton Administration Guide][1] or the [AWS Proton User Guide][2].
+    #   Proton Administrator Guide][1] or the [AWS Proton User Guide][2].
     #
     #
     #
@@ -3392,7 +3392,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

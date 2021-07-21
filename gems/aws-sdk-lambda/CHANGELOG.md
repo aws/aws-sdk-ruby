@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2021-07-21)
+------------------
+
+* Feature - New ResourceConflictException error code for PutFunctionEventInvokeConfig, UpdateFunctionEventInvokeConfig, and DeleteFunctionEventInvokeConfig operations.
+
 1.63.0 (2021-07-06)
 ------------------
 

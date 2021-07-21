@@ -128,6 +128,10 @@ module Aws::Kendra
     # exception with the message "`AttributeFilter` cannot have a depth of
     # more than 2."
     #
+    # If you use more than 10 attribute filters, you receive a
+    # `ValidationException` exception with the message "`AttributeFilter`
+    # cannot have a length of more than 10".
+    #
     # @note When making an API call, you may pass AttributeFilter
     #   data as a hash:
     #
@@ -911,23 +915,25 @@ module Aws::Kendra
     #
     # @!attribute [rw] storage_capacity_units
     #   The amount of extra storage capacity for an index. A single capacity
-    #   unit for an index provides 150 GB of storage space or 500,000
-    #   documents, whichever is reached first.
+    #   unit provides 30 GB of storage space or 100,000 documents, whichever
+    #   is reached first.
     #   @return [Integer]
     #
     # @!attribute [rw] query_capacity_units
     #   The amount of extra query capacity for an index and
     #   [GetQuerySuggestions][1] capacity.
     #
-    #   A single extra capacity unit for an index provides 0.5 queries per
-    #   second or approximately 40,000 queries per day.
+    #   A single extra capacity unit for an index provides 0.1 queries per
+    #   second or approximately 8,000 queries per day.
     #
-    #   `GetQuerySuggestions` capacity is 5 times the provisioned query
-    #   capacity for an index. For example, the base capacity for an index
-    #   is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5
-    #   calls per second. If adding another 0.5 queries per second to total
-    #   1 queries per second for an index, the `GetQuerySuggestions`
-    #   capacity is 5 calls per second.
+    #   `GetQuerySuggestions` capacity is five times the provisioned query
+    #   capacity for an index, or the base capacity of 2.5 calls per second,
+    #   whichever is higher. For example, the base capacity for an index is
+    #   0.1 queries per second, and `GetQuerySuggestions` capacity has a
+    #   base of 2.5 calls per second. If you add another 0.1 queries per
+    #   second to total 0.2 queries per second for an index, the
+    #   `GetQuerySuggestions` capacity is 2.5 calls per second (higher than
+    #   five times 0.2 queries per second).
     #
     #
     #
@@ -1580,11 +1586,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of credentials stored in AWS Secrets
+    #   The Amazon Resource Name (ARN) of credentials stored in Secrets
     #   Manager. The credentials should be a user/password pair. For more
     #   information, see [Using a Database Data Source][1]. For more
-    #   information about AWS Secrets Manager, see [ What Is AWS Secrets
-    #   Manager ][2] in the <i> Secrets Manager </i> user guide.
+    #   information about Secrets Manager, see [ What Is Secrets Manager][2]
+    #   in the <i> Secrets Manager </i> user guide.
     #
     #
     #
@@ -1610,7 +1616,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -1908,6 +1914,20 @@ module Aws::Kendra
     #               ],
     #             },
     #           },
+    #           work_docs_configuration: {
+    #             organization_id: "OrganizationId", # required
+    #             crawl_comments: false,
+    #             use_change_log: false,
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -2177,6 +2197,13 @@ module Aws::Kendra
     #
     #   The `Edition` parameter is optional. If you don't supply a value,
     #   the default is `ENTERPRISE_EDITION`.
+    #
+    #   For more information on quota limits for enterprise and developer
+    #   editions, see [Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2750,6 +2777,20 @@ module Aws::Kendra
     #             ],
     #           },
     #         },
+    #         work_docs_configuration: {
+    #           organization_id: "OrganizationId", # required
+    #           crawl_comments: false,
+    #           use_change_log: false,
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -2797,6 +2838,11 @@ module Aws::Kendra
     #   web crawler.
     #   @return [Types::WebCrawlerConfiguration]
     #
+    # @!attribute [rw] work_docs_configuration
+    #   Provides the configuration information to connect to WorkDocs as
+    #   your data source.
+    #   @return [Types::WorkDocsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -2808,7 +2854,8 @@ module Aws::Kendra
       :service_now_configuration,
       :confluence_configuration,
       :google_drive_configuration,
-      :web_crawler_configuration)
+      :web_crawler_configuration,
+      :work_docs_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7465,13 +7512,13 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of credentials stored in AWS Secrets
+    #   The Amazon Resource Name (ARN) of credentials stored in Secrets
     #   Manager. The credentials should be a user/password pair. If you use
-    #   SharePoint Sever, you also need to provide the sever domain name as
+    #   SharePoint Server, you also need to provide the sever domain name as
     #   part of the credentials. For more information, see [Using a
-    #   Microsoft SharePoint Data Source][1]. For more information about AWS
-    #   Secrets Manager, see [ What Is AWS Secrets Manager ][2] in the
-    #   <i>Secrets Manager </i> user guide.
+    #   Microsoft SharePoint Data Source][1]. For more information about
+    #   Secrets Manager, see [ What Is Secrets Manager][2] in the <i>Secrets
+    #   Manager </i> user guide.
     #
     #
     #
@@ -8430,6 +8477,20 @@ module Aws::Kendra
     #               ],
     #             },
     #           },
+    #           work_docs_configuration: {
+    #             organization_id: "OrganizationId", # required
+    #             crawl_comments: false,
+    #             use_change_log: false,
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -9111,6 +9172,111 @@ module Aws::Kendra
       :url_exclusion_patterns,
       :proxy_configuration,
       :authentication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to Amazon WorkDocs
+    # as your data source.
+    #
+    # Amazon WorkDocs connector is available in Oregon, North Virginia,
+    # Sydney, Singapore and Ireland regions.
+    #
+    # @note When making an API call, you may pass WorkDocsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         crawl_comments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the directory corresponding to your Amazon
+    #   WorkDocs site repository.
+    #
+    #   You can find the organization ID in the [AWS Directory Service][1]
+    #   by going to **Active Directory**, then **Directories**. Your Amazon
+    #   WorkDocs site directory has an ID, which is the organization ID. You
+    #   can also set up a new Amazon WorkDocs directory in the AWS Directory
+    #   Service console and enable a Amazon WorkDocs site for the directory
+    #   in the Amazon WorkDocs console.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/directoryservicev2/
+    #   @return [String]
+    #
+    # @!attribute [rw] crawl_comments
+    #   `TRUE` to include comments on documents in your index. Including
+    #   comments in your index means each comment is a document that can be
+    #   searched on.
+    #
+    #   The default is set to `FALSE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the change logs to update documents in your index
+    #   instead of scanning all documents.
+    #
+    #   If you are syncing your Amazon WorkDocs data source with your index
+    #   for the first time, all documents are scanned. After your first
+    #   sync, you can use the change logs to update your documents in your
+    #   index for future syncs.
+    #
+    #   The default is set to `FALSE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files in
+    #   your Amazon WorkDocs site repository. Files that match the patterns
+    #   are included in the index. Files that don't match the patterns are
+    #   excluded from the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn’t included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files in
+    #   your Amazon WorkDocs site repository. Files that match the patterns
+    #   are excluded from the index. Files that don’t match the patterns are
+    #   included in the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn’t included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map Amazon
+    #   WorkDocs field names to custom index field names in Amazon Kendra.
+    #   You must first create the custom index fields using the
+    #   `UpdateIndex` operation before you map to Amazon WorkDocs fields.
+    #   For more information, see [Mapping Data Source Fields][1]. The
+    #   Amazon WorkDocs data source field names need to exist in your Amazon
+    #   WorkDocs custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/WorkDocsConfiguration AWS API Documentation
+    #
+    class WorkDocsConfiguration < Struct.new(
+      :organization_id,
+      :crawl_comments,
+      :use_change_log,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :field_mappings)
       SENSITIVE = []
       include Aws::Structure
     end

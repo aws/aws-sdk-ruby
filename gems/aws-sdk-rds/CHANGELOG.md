@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2021-07-21)
+------------------
+
+* Feature - Adds the OriginalSnapshotCreateTime field to the DBSnapshot response object. This field timestamps the underlying data of a snapshot and doesn't change when the snapshot is copied.
+
 1.121.0 (2021-06-17)
 ------------------
 

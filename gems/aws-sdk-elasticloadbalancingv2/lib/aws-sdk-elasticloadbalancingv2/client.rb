@@ -3520,13 +3520,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. For Application Load Balancers, the default is HTTP. For
-    #   Network Load Balancers and Gateway Load Balancers, the default is TCP.
-    #   The TCP protocol is not supported for health checks if the protocol of
-    #   the target group is HTTP or HTTPS. It is supported for health checks
-    #   only if the protocol of the target group is TCP, TLS, UDP, or
-    #   TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are not
-    #   supported for health checks.
+    #   targets. The TCP protocol is supported for health checks only if the
+    #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The
+    #   GENEVE, TLS, UDP, and TCP\_UDP protocols are not supported for health
+    #   checks.
     #
     #   With Network Load Balancers, you can't modify this setting.
     #
@@ -4272,7 +4269,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
