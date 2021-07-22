@@ -365,11 +365,11 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Creates a new ledger in your AWS account in the current Region.
+    # Creates a new ledger in your account in the current Region.
     #
     # @option params [required, String] :name
     #   The name of the ledger that you want to create. The name must be
-    #   unique among all of your ledgers in the current AWS Region.
+    #   unique among all of the ledgers in your account in the current Region.
     #
     #   Naming constraints for ledger names are defined in [Quotas in Amazon
     #   QLDB][1] in the *Amazon QLDB Developer Guide*.
@@ -426,6 +426,51 @@ module Aws::QLDB
     #   you can delete the ledger. You can disable it by calling the
     #   `UpdateLedger` operation to set the flag to `false`.
     #
+    # @option params [String] :kms_key
+    #   The key in Key Management Service (KMS) to use for encryption of data
+    #   at rest in the ledger. For more information, see [Encryption at
+    #   rest][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #   Use one of the following options to specify this parameter:
+    #
+    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #     Amazon Web Services on your behalf.
+    #
+    #   * **Undefined**\: By default, use an Amazon Web Services owned KMS
+    #     key.
+    #
+    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #     KMS key in your account that you create, own, and manage.
+    #
+    #     Amazon QLDB does not support asymmetric keys. For more information,
+    #     see [Using symmetric and asymmetric keys][2] in the *Key Management
+    #     Service Developer Guide*.
+    #
+    #   To specify a customer managed KMS key, you can use its key ID, Amazon
+    #   Resource Name (ARN), alias name, or alias ARN. When using an alias
+    #   name, prefix it with `"alias/"`. To specify a key in a different
+    #   account, you must use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   For more information, see [Key identifiers (KeyId)][3] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #
     # @return [Types::CreateLedgerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLedgerResponse#name #name} => String
@@ -434,6 +479,7 @@ module Aws::QLDB
     #   * {Types::CreateLedgerResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateLedgerResponse#permissions_mode #permissions_mode} => String
     #   * {Types::CreateLedgerResponse#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::CreateLedgerResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -444,6 +490,7 @@ module Aws::QLDB
     #     },
     #     permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
     #     deletion_protection: false,
+    #     kms_key: "KmsKey",
     #   })
     #
     # @example Response structure
@@ -454,6 +501,7 @@ module Aws::QLDB
     #   resp.creation_date_time #=> Time
     #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
     #   resp.deletion_protection #=> Boolean
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedger AWS API Documentation
     #
@@ -604,8 +652,8 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Returns information about a ledger, including its state and when it
-    # was created.
+    # Returns information about a ledger, including its state, permissions
+    # mode, encryption at rest settings, and when it was created.
     #
     # @option params [required, String] :name
     #   The name of the ledger that you want to describe.
@@ -618,6 +666,7 @@ module Aws::QLDB
     #   * {Types::DescribeLedgerResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeLedgerResponse#permissions_mode #permissions_mode} => String
     #   * {Types::DescribeLedgerResponse#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::DescribeLedgerResponse#encryption_description #encryption_description} => Types::LedgerEncryptionDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -633,6 +682,9 @@ module Aws::QLDB
     #   resp.creation_date_time #=> Time
     #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
     #   resp.deletion_protection #=> Boolean
+    #   resp.encryption_description.kms_key_arn #=> String
+    #   resp.encryption_description.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE"
+    #   resp.encryption_description.inaccessible_kms_key_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedger AWS API Documentation
     #
@@ -696,8 +748,8 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in AWS Key Management
-    #     Service (AWS KMS) for server-side encryption of your exported data.
+    #   * (Optional) Use your customer master key (CMK) in Key Management
+    #     Service (KMS) for server-side encryption of your exported data.
     #
     # @return [Types::ExportJournalToS3Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -961,7 +1013,7 @@ module Aws::QLDB
     end
 
     # Returns an array of journal export job descriptions for all ledgers
-    # that are associated with the current AWS account and Region.
+    # that are associated with the current account and Region.
     #
     # This action returns a maximum of `MaxResults` items, and is paginated
     # so that you can retrieve all the items by calling
@@ -1095,7 +1147,7 @@ module Aws::QLDB
     end
 
     # Returns an array of ledger summaries that are associated with the
-    # current AWS account and Region.
+    # current account and Region.
     #
     # This action returns a maximum of 100 items and is paginated so that
     # you can retrieve all the items by calling `ListLedgers` multiple
@@ -1347,6 +1399,50 @@ module Aws::QLDB
     #   you can delete the ledger. You can disable it by calling the
     #   `UpdateLedger` operation to set the flag to `false`.
     #
+    # @option params [String] :kms_key
+    #   The key in Key Management Service (KMS) to use for encryption of data
+    #   at rest in the ledger. For more information, see [Encryption at
+    #   rest][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #   Use one of the following options to specify this parameter:
+    #
+    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #     Amazon Web Services on your behalf.
+    #
+    #   * **Undefined**\: Make no changes to the KMS key of the ledger.
+    #
+    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #     KMS key in your account that you create, own, and manage.
+    #
+    #     Amazon QLDB does not support asymmetric keys. For more information,
+    #     see [Using symmetric and asymmetric keys][2] in the *Key Management
+    #     Service Developer Guide*.
+    #
+    #   To specify a customer managed KMS key, you can use its key ID, Amazon
+    #   Resource Name (ARN), alias name, or alias ARN. When using an alias
+    #   name, prefix it with `"alias/"`. To specify a key in a different
+    #   account, you must use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   For more information, see [Key identifiers (KeyId)][3] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #
     # @return [Types::UpdateLedgerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLedgerResponse#name #name} => String
@@ -1354,12 +1450,14 @@ module Aws::QLDB
     #   * {Types::UpdateLedgerResponse#state #state} => String
     #   * {Types::UpdateLedgerResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateLedgerResponse#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::UpdateLedgerResponse#encryption_description #encryption_description} => Types::LedgerEncryptionDescription
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_ledger({
     #     name: "LedgerName", # required
     #     deletion_protection: false,
+    #     kms_key: "KmsKey",
     #   })
     #
     # @example Response structure
@@ -1369,6 +1467,9 @@ module Aws::QLDB
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
     #   resp.creation_date_time #=> Time
     #   resp.deletion_protection #=> Boolean
+    #   resp.encryption_description.kms_key_arn #=> String
+    #   resp.encryption_description.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE"
+    #   resp.encryption_description.inaccessible_kms_key_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedger AWS API Documentation
     #
@@ -1468,7 +1569,7 @@ module Aws::QLDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

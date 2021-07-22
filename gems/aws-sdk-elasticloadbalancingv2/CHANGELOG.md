@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2021-07-22)
+------------------
+
+* Feature - Adds support for enabling TLS protocol version and cipher suite headers to be sent to backend targets for Application Load Balancers.
+
 1.63.0 (2021-07-21)
 ------------------
 

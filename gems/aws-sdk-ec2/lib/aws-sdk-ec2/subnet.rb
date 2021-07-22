@@ -100,7 +100,7 @@ module Aws::EC2
       data[:vpc_id]
     end
 
-    # The ID of the AWS account that owns the subnet.
+    # The ID of the account that owns the subnet.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -358,6 +358,18 @@ module Aws::EC2
     #         associate_carrier_ip_address: false,
     #         interface_type: "String",
     #         network_card_index: 1,
+    #         ipv_4_prefixes: [
+    #           {
+    #             ipv_4_prefix: "String",
+    #           },
+    #         ],
+    #         ipv_4_prefix_count: 1,
+    #         ipv_6_prefixes: [
+    #           {
+    #             ipv_6_prefix: "String",
+    #           },
+    #         ],
+    #         ipv_6_prefix_count: 1,
     #       },
     #     ],
     #     private_ip_address: "String",
@@ -756,6 +768,18 @@ module Aws::EC2
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
+    #     ipv_4_prefixes: [
+    #       {
+    #         ipv_4_prefix: "String",
+    #       },
+    #     ],
+    #     ipv_4_prefix_count: 1,
+    #     ipv_6_prefixes: [
+    #       {
+    #         ipv_6_prefix: "String",
+    #       },
+    #     ],
+    #     ipv_6_prefix_count: 1,
     #     interface_type: "efa", # accepts efa, branch, trunk
     #     tag_specifications: [
     #       {
@@ -813,6 +837,22 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    # @option options [Array<Types::Ipv4PrefixSpecificationRequest>] :ipv_4_prefixes
+    #   One or moreIPv4 Prefix Delegation prefixes assigned to the network
+    #   interface. You cannot use this option if you use the `Ipv4PrefixCount`
+    #   option.
+    # @option options [Integer] :ipv_4_prefix_count
+    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
+    #   assigns to the network interface. You cannot use this option if you
+    #   use the `Ipv4 Prefixes` option.
+    # @option options [Array<Types::Ipv6PrefixSpecificationRequest>] :ipv_6_prefixes
+    #   One or moreIPv6 Prefix Delegation prefixes assigned to the network
+    #   interface. You cannot use this option if you use the `Ipv6PrefixCount`
+    #   option.
+    # @option options [Integer] :ipv_6_prefix_count
+    #   The number of IPv6 Prefix Delegation prefixes that AWS automatically
+    #   assigns to the network interface. You cannot use this option if you
+    #   use the `Ipv6Prefixes` option.
     # @option options [String] :interface_type
     #   Indicates the type of network interface. To create an Elastic Fabric
     #   Adapter (EFA), specify `efa`. For more information, see [ Elastic

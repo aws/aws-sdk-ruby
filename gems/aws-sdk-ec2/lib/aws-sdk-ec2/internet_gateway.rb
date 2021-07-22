@@ -41,7 +41,7 @@ module Aws::EC2
       data[:attachments]
     end
 
-    # The ID of the AWS account that owns the internet gateway.
+    # The ID of the account that owns the internet gateway.
     # @return [String]
     def owner_id
       data[:owner_id]

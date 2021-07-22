@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.251.0 (2021-07-22)
+------------------
+
+* Feature - This release allows customers to assign prefixes to their elastic network interface and to reserve IP blocks in their subnet CIDRs. These reserved blocks can be used to assign prefixes to elastic network interfaces or be excluded from auto-assignment.
+
 1.250.0 (2021-07-20)
 ------------------
 

@@ -48,6 +48,6 @@ require_relative 'aws-sdk-gluedatabrew/customizations'
 # @!group service
 module Aws::GlueDataBrew
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

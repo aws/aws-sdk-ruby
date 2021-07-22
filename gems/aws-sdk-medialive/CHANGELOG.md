@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-07-22)
+------------------
+
+* Feature - MediaLive now supports passing through style data on WebVTT caption outputs.
+
 1.72.0 (2021-06-11)
 ------------------
 

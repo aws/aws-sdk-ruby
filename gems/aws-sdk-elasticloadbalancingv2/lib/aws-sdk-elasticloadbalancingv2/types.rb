@@ -2388,7 +2388,8 @@ module Aws::ElasticLoadBalancingV2
     #     load balancer (`true`) or routed to targets (`false`). The default
     #     is `false`.
     #
-    #   * Indicates whether the two headers (`x-amzn-tls-version` and
+    #   * `routing.http.x_amzn_tls_version_and_cipher_suite.enabled` -
+    #     Indicates whether the two headers (`x-amzn-tls-version` and
     #     `x-amzn-tls-cipher-suite`), which contain information about the
     #     negotiated TLS version and cipher suite, are added to the client
     #     request before sending it to the target. The `x-amzn-tls-version`
@@ -2906,10 +2907,13 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported for health checks only if the
-    #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The
-    #   GENEVE, TLS, UDP, and TCP\_UDP protocols are not supported for
-    #   health checks.
+    #   targets. For Application Load Balancers, the default is HTTP. For
+    #   Network Load Balancers and Gateway Load Balancers, the default is
+    #   TCP. The TCP protocol is not supported for health checks if the
+    #   protocol of the target group is HTTP or HTTPS. It is supported for
+    #   health checks only if the protocol of the target group is TCP, TLS,
+    #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are
+    #   not supported for health checks.
     #
     #   With Network Load Balancers, you can't modify this setting.
     #   @return [String]

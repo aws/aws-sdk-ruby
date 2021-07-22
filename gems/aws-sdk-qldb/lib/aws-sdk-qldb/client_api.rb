@@ -28,6 +28,7 @@ module Aws::QLDB
     DescribeLedgerRequest = Shapes::StructureShape.new(name: 'DescribeLedgerRequest')
     DescribeLedgerResponse = Shapes::StructureShape.new(name: 'DescribeLedgerResponse')
     Digest = Shapes::BlobShape.new(name: 'Digest')
+    EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
     ErrorCause = Shapes::StringShape.new(name: 'ErrorCause')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportJournalToS3Request = Shapes::StructureShape.new(name: 'ExportJournalToS3Request')
@@ -46,6 +47,8 @@ module Aws::QLDB
     JournalS3ExportDescription = Shapes::StructureShape.new(name: 'JournalS3ExportDescription')
     JournalS3ExportList = Shapes::ListShape.new(name: 'JournalS3ExportList')
     KinesisConfiguration = Shapes::StructureShape.new(name: 'KinesisConfiguration')
+    KmsKey = Shapes::StringShape.new(name: 'KmsKey')
+    LedgerEncryptionDescription = Shapes::StructureShape.new(name: 'LedgerEncryptionDescription')
     LedgerList = Shapes::ListShape.new(name: 'LedgerList')
     LedgerName = Shapes::StringShape.new(name: 'LedgerName')
     LedgerState = Shapes::StringShape.new(name: 'LedgerState')
@@ -107,6 +110,7 @@ module Aws::QLDB
     CreateLedgerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateLedgerRequest.add_member(:permissions_mode, Shapes::ShapeRef.new(shape: PermissionsMode, required: true, location_name: "PermissionsMode"))
     CreateLedgerRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
+    CreateLedgerRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
     CreateLedgerRequest.struct_class = Types::CreateLedgerRequest
 
     CreateLedgerResponse.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, location_name: "Name"))
@@ -115,6 +119,7 @@ module Aws::QLDB
     CreateLedgerResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDateTime"))
     CreateLedgerResponse.add_member(:permissions_mode, Shapes::ShapeRef.new(shape: PermissionsMode, location_name: "PermissionsMode"))
     CreateLedgerResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
+    CreateLedgerResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "KmsKeyArn"))
     CreateLedgerResponse.struct_class = Types::CreateLedgerResponse
 
     DeleteLedgerRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
@@ -143,6 +148,7 @@ module Aws::QLDB
     DescribeLedgerResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDateTime"))
     DescribeLedgerResponse.add_member(:permissions_mode, Shapes::ShapeRef.new(shape: PermissionsMode, location_name: "PermissionsMode"))
     DescribeLedgerResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
+    DescribeLedgerResponse.add_member(:encryption_description, Shapes::ShapeRef.new(shape: LedgerEncryptionDescription, location_name: "EncryptionDescription"))
     DescribeLedgerResponse.struct_class = Types::DescribeLedgerResponse
 
     ExportJournalToS3Request.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
@@ -215,6 +221,11 @@ module Aws::QLDB
     KinesisConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "StreamArn"))
     KinesisConfiguration.add_member(:aggregation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AggregationEnabled"))
     KinesisConfiguration.struct_class = Types::KinesisConfiguration
+
+    LedgerEncryptionDescription.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "KmsKeyArn"))
+    LedgerEncryptionDescription.add_member(:encryption_status, Shapes::ShapeRef.new(shape: EncryptionStatus, required: true, location_name: "EncryptionStatus"))
+    LedgerEncryptionDescription.add_member(:inaccessible_kms_key_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InaccessibleKmsKeyDateTime"))
+    LedgerEncryptionDescription.struct_class = Types::LedgerEncryptionDescription
 
     LedgerList.member = Shapes::ShapeRef.new(shape: LedgerSummary)
 
@@ -336,6 +347,7 @@ module Aws::QLDB
 
     UpdateLedgerRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
     UpdateLedgerRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
+    UpdateLedgerRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
     UpdateLedgerRequest.struct_class = Types::UpdateLedgerRequest
 
     UpdateLedgerResponse.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, location_name: "Name"))
@@ -343,6 +355,7 @@ module Aws::QLDB
     UpdateLedgerResponse.add_member(:state, Shapes::ShapeRef.new(shape: LedgerState, location_name: "State"))
     UpdateLedgerResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDateTime"))
     UpdateLedgerResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
+    UpdateLedgerResponse.add_member(:encryption_description, Shapes::ShapeRef.new(shape: LedgerEncryptionDescription, location_name: "EncryptionDescription"))
     UpdateLedgerResponse.struct_class = Types::UpdateLedgerResponse
 
     ValueHolder.add_member(:ion_text, Shapes::ShapeRef.new(shape: IonText, location_name: "IonText"))
