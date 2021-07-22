@@ -30,9 +30,9 @@ module AwsSdkCodeGenerator
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
         'streaming' => true, # transfer-encoding
-        'requiresLength' => true, # transder-encoding
+        'requiresLength' => true, # transfer-encoding
         'union' => false,
-      # event stream modeling
+        # event stream modeling
         'event' => false,
         'eventstream' => false,
         'eventheader' => false,
@@ -122,7 +122,6 @@ module AwsSdkCodeGenerator
       end
 
       def shape_definitions
-
         shape_enum.inject([]) do |groups, (shape_name, shape)|
           # APIG model, shape can start with downcase and with "__"
           if @service.protocol == 'api-gateway'
