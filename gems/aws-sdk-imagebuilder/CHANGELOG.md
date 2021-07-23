@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-07-23)
+------------------
+
+* Feature - Update to documentation to reapply missing change to SSM uninstall switch default value and improve description.
+
 1.24.0 (2021-07-19)
 ------------------
 
