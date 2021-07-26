@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-07-26)
+------------------
+
+* Feature - CloudWatch Synthetics now supports visual testing in its canaries.
+
 1.12.0 (2021-03-10)
 ------------------
 

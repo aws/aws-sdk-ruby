@@ -325,8 +325,11 @@ module Aws::Proton
     #   environment account. You must include either the
     #   `environmentAccountConnectionId` or `protonServiceRoleArn` parameter
     #   and value. For more information, see [Environment account
-    #   connections](proton/latest/adminguide/ag-env-account-connections.html)
-    #   in the *AWS Proton Administrator guide*.
+    #   connections][1] in the *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #   @return [String]
     #
     # @!attribute [rw] name

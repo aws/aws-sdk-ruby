@@ -424,6 +424,7 @@ module Aws::S3Control
     # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessPointResult#access_point_arn #access_point_arn} => String
+    #   * {Types::CreateAccessPointResult#alias #alias} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -445,6 +446,7 @@ module Aws::S3Control
     # @example Response structure
     #
     #   resp.access_point_arn #=> String
+    #   resp.alias #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPoint AWS API Documentation
     #
@@ -1781,6 +1783,9 @@ module Aws::S3Control
     #   * {Types::GetAccessPointResult#vpc_configuration #vpc_configuration} => Types::VpcConfiguration
     #   * {Types::GetAccessPointResult#public_access_block_configuration #public_access_block_configuration} => Types::PublicAccessBlockConfiguration
     #   * {Types::GetAccessPointResult#creation_date #creation_date} => Time
+    #   * {Types::GetAccessPointResult#alias #alias} => String
+    #   * {Types::GetAccessPointResult#access_point_arn #access_point_arn} => String
+    #   * {Types::GetAccessPointResult#endpoints #endpoints} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1800,6 +1805,10 @@ module Aws::S3Control
     #   resp.public_access_block_configuration.block_public_policy #=> Boolean
     #   resp.public_access_block_configuration.restrict_public_buckets #=> Boolean
     #   resp.creation_date #=> Time
+    #   resp.alias #=> String
+    #   resp.access_point_arn #=> String
+    #   resp.endpoints #=> Hash
+    #   resp.endpoints["NonEmptyMaxLength64String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPoint AWS API Documentation
     #
@@ -2790,6 +2799,7 @@ module Aws::S3Control
     #   resp.access_point_list[0].vpc_configuration.vpc_id #=> String
     #   resp.access_point_list[0].bucket #=> String
     #   resp.access_point_list[0].access_point_arn #=> String
+    #   resp.access_point_list[0].alias #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPoints AWS API Documentation
@@ -4043,7 +4053,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -342,9 +342,12 @@ module Aws::Proton
     # AWS Proton can use the associated IAM role to provision environment
     # infrastructure resources in the associated environment account.
     #
-    # For more information, see [Environment account
-    # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administrator guide*.
+    # For more information, see [Environment account connections][1] in the
+    # *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection.
@@ -582,8 +585,11 @@ module Aws::Proton
     #   environment account. You must include either the
     #   `environmentAccountConnectionId` or `protonServiceRoleArn` parameter
     #   and value. For more information, see [Environment account
-    #   connections](proton/latest/adminguide/ag-env-account-connections.html)
-    #   in the *AWS Proton Administrator guide*.
+    #   connections][1] in the *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [required, String] :name
     #   The name of the environment.
@@ -685,9 +691,12 @@ module Aws::Proton
     # An environment account connection is a secure bi-directional
     # connection between a *management account* and an *environment account*
     # that maintains authorization and permissions. For more information,
-    # see [Environment account
-    # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administrator guide*.
+    # see [Environment account connections][1] in the *AWS Proton
+    # Administrator guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [String] :client_token
     #   When included, if two identicial requests are made with the same
@@ -1286,9 +1295,12 @@ module Aws::Proton
     # You're responsible for cleaning up provisioned resources that remain
     # without an environment connection.
     #
-    # For more information, see [Environment account
-    # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administrator guide*.
+    # For more information, see [Environment account connections][1] in the
+    # *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection to delete.
@@ -1634,9 +1646,12 @@ module Aws::Proton
     # In an environment account, view the detail data for an environment
     # account connection.
     #
-    # For more information, see [Environment account
-    # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administrator guide*.
+    # For more information, see [Environment account connections][1] in the
+    # *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection.
@@ -1966,9 +1981,12 @@ module Aws::Proton
 
     # View a list of environment account connections.
     #
-    # For more information, see [Environment account
-    # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administrator guide*.
+    # For more information, see [Environment account connections][1] in the
+    # *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [String] :environment_name
     #   The environment name that's associated with each listed environment
@@ -2466,9 +2484,12 @@ module Aws::Proton
     # You *can’t* reject an environment account connection that is connected
     # to an environment.
     #
-    # For more information, see [Environment account
-    # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administrator guide*.
+    # For more information, see [Environment account connections][1] in the
+    # *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection to reject.
@@ -2778,9 +2799,12 @@ module Aws::Proton
     # In an environment account, update an environment account connection to
     # use a new IAM role.
     #
-    # For more information, see [Environment account
-    # connections](proton/latest/adminguide/ag-env-account-connections.html)
-    # in the *AWS Proton Administrator guide*.
+    # For more information, see [Environment account connections][1] in the
+    # *AWS Proton Administrator guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [required, String] :id
     #   The ID of the environment account connection to update.
@@ -3392,7 +3416,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -375,7 +375,7 @@ module Aws::Synthetics
     # @option params [required, String] :artifact_s3_location
     #   The location in Amazon S3 where Synthetics stores artifacts from the
     #   test runs of this canary. Artifacts include the log file, screenshots,
-    #   and HAR files.
+    #   and HAR files. The name of the S3 bucket can't include a period (.).
     #
     # @option params [required, String] :execution_role_arn
     #   The ARN of the IAM role to be used to run the canary. This role must
@@ -511,6 +511,11 @@ module Aws::Synthetics
     #   resp.canary.vpc_config.subnet_ids[0] #=> String
     #   resp.canary.vpc_config.security_group_ids #=> Array
     #   resp.canary.vpc_config.security_group_ids[0] #=> String
+    #   resp.canary.visual_reference.base_screenshots #=> Array
+    #   resp.canary.visual_reference.base_screenshots[0].screenshot_name #=> String
+    #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates #=> Array
+    #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates[0] #=> String
+    #   resp.canary.visual_reference.base_canary_run_id #=> String
     #   resp.canary.tags #=> Hash
     #   resp.canary.tags["TagKey"] #=> String
     #
@@ -637,6 +642,11 @@ module Aws::Synthetics
     #   resp.canaries[0].vpc_config.subnet_ids[0] #=> String
     #   resp.canaries[0].vpc_config.security_group_ids #=> Array
     #   resp.canaries[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.canaries[0].visual_reference.base_screenshots #=> Array
+    #   resp.canaries[0].visual_reference.base_screenshots[0].screenshot_name #=> String
+    #   resp.canaries[0].visual_reference.base_screenshots[0].ignore_coordinates #=> Array
+    #   resp.canaries[0].visual_reference.base_screenshots[0].ignore_coordinates[0] #=> String
+    #   resp.canaries[0].visual_reference.base_canary_run_id #=> String
     #   resp.canaries[0].tags #=> Hash
     #   resp.canaries[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -799,6 +809,11 @@ module Aws::Synthetics
     #   resp.canary.vpc_config.subnet_ids[0] #=> String
     #   resp.canary.vpc_config.security_group_ids #=> Array
     #   resp.canary.vpc_config.security_group_ids[0] #=> String
+    #   resp.canary.visual_reference.base_screenshots #=> Array
+    #   resp.canary.visual_reference.base_screenshots[0].screenshot_name #=> String
+    #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates #=> Array
+    #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates[0] #=> String
+    #   resp.canary.visual_reference.base_canary_run_id #=> String
     #   resp.canary.tags #=> Hash
     #   resp.canary.tags["TagKey"] #=> String
     #
@@ -968,8 +983,8 @@ module Aws::Synthetics
     # use them to scope user permissions, by granting a user permission to
     # access or change only resources with certain tag values.
     #
-    # Tags don't have any semantic meaning to AWS and are interpreted
-    # strictly as strings of characters.
+    # Tags don't have any semantic meaning to Amazon Web Services and are
+    # interpreted strictly as strings of characters.
     #
     # You can use the `TagResource` action with a canary that already has
     # tags. If you specify a new tag key for the alarm, this tag is appended
@@ -1116,6 +1131,8 @@ module Aws::Synthetics
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
     #
+    # @option params [Types::VisualReferenceInput] :visual_reference
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1149,6 +1166,15 @@ module Aws::Synthetics
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
     #     },
+    #     visual_reference: {
+    #       base_screenshots: [
+    #         {
+    #           screenshot_name: "String", # required
+    #           ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"],
+    #         },
+    #       ],
+    #       base_canary_run_id: "String", # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanary AWS API Documentation
@@ -1173,7 +1199,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

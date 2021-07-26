@@ -65,6 +65,10 @@ module Aws::S3Control
     #   The ARN for the access point.
     #   @return [String]
     #
+    # @!attribute [rw] alias
+    #   The name or alias of the access point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessPoint AWS API Documentation
     #
     class AccessPoint < Struct.new(
@@ -72,7 +76,8 @@ module Aws::S3Control
       :network_origin,
       :vpc_configuration,
       :bucket,
-      :access_point_arn)
+      :access_point_arn,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -376,10 +381,15 @@ module Aws::S3Control
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] alias
+    #   The name or alias of the access point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointResult AWS API Documentation
     #
     class CreateAccessPointResult < Struct.new(
-      :access_point_arn)
+      :access_point_arn,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1579,6 +1589,18 @@ module Aws::S3Control
     #   The date and time when the specified access point was created.
     #   @return [Time]
     #
+    # @!attribute [rw] alias
+    #   The name or alias of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_point_arn
+    #   The ARN of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   The VPC endpoint for the access point.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointResult AWS API Documentation
     #
     class GetAccessPointResult < Struct.new(
@@ -1587,7 +1609,10 @@ module Aws::S3Control
       :network_origin,
       :vpc_configuration,
       :public_access_block_configuration,
-      :creation_date)
+      :creation_date,
+      :alias,
+      :access_point_arn,
+      :endpoints)
       SENSITIVE = []
       include Aws::Structure
     end
