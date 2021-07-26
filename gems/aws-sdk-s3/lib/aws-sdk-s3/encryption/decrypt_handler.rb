@@ -166,7 +166,7 @@ module Aws
         # auth tag from the body when writing the final bytes.
         def authenticated_decrypter(context, cipher, envelope)
           if RUBY_VERSION.match(/1.9/)
-            raise "authenticated decryption not supported by OpenSSL in Ruby version ~> 1.9"
+            msg = 'authenticated decryption not supported by OpenSSL in Ruby version ~> 1.9'
             raise Aws::Errors::NonSupportedRubyVersionError, msg
           end
           http_resp = context.http_response
