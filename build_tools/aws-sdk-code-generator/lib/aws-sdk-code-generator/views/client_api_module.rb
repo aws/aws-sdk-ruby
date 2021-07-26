@@ -30,7 +30,8 @@ module AwsSdkCodeGenerator
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
         'streaming' => true, # transfer-encoding
-        'requiresLength' => true, # transder-encoding
+        'requiresLength' => true, # transfer-encoding
+        'union' => false,
         # event stream modeling
         'event' => false,
         'eventstream' => false,
@@ -61,7 +62,6 @@ module AwsSdkCodeGenerator
         'wrapper' => false,
         'xmlOrder' => false,
         'retryable' => false,
-        'union' => false
       }
 
       METADATA_KEYS = {
@@ -134,6 +134,13 @@ module AwsSdkCodeGenerator
               shape['members'].each do |member_name, member_ref|
                 lines << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
               end
+            end
+            if shape['union']
+              lines << "#{shape_name}.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))"
+              shape['members'].each do |member_name, member_ref|
+                lines << "#{shape_name}.add_member_subclass(:#{underscore(member_name)}, Types::#{shape_name}::#{member_name})"
+              end
+              lines << "#{shape_name}.add_member_subclass(:unknown, Types::#{shape_name}::Unknown)"
             end
             lines << "#{shape_name}.struct_class = Types::#{shape_name}"
             if payload = shape['payload']
@@ -259,7 +266,10 @@ module AwsSdkCodeGenerator
         if @service.protocol == 'api-gateway' && type == 'timestamp'
           shape['timestampFormat'] = 'iso8601'
         end
-        if SHAPE_CLASSES.key?(type)
+
+        if shape['union']
+          ["Shapes::UnionShape", shape]
+        elsif SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]
         else
           raise ArgumentError, "unsupported shape type `#{type}'"
