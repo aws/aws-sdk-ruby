@@ -307,11 +307,11 @@ module AwsSdkCodeGenerator
 
         def initialize(options)
           @member_name = options.fetch(:member_name)
-          @member_class_name = options.fetch(:member_class_name, @member_name
+          @member_class_name = options.fetch(:member_class_name, @member_name)
              .to_s
              .split('_')
              .collect(&:capitalize)
-             .join)
+             .join
           @sensitive = options.fetch(:sensitive, false)
           @last = false
         end

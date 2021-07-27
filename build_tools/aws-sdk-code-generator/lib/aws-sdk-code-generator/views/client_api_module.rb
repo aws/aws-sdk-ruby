@@ -138,7 +138,8 @@ module AwsSdkCodeGenerator
             if shape['union']
               lines << "#{shape_name}.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))"
               shape['members'].each do |member_name, member_ref|
-                lines << "#{shape_name}.add_member_subclass(:#{underscore(member_name)}, Types::#{shape_name}::#{member_name})"
+                member_class_name = member_name.to_s.split('_').collect(&:capitalize).join
+                lines << "#{shape_name}.add_member_subclass(:#{underscore(member_name)}, Types::#{shape_name}::#{member_class_name})"
               end
               lines << "#{shape_name}.add_member_subclass(:unknown, Types::#{shape_name}::Unknown)"
             end

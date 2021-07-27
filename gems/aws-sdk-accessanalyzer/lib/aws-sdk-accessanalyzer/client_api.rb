@@ -253,8 +253,8 @@ module Aws::AccessAnalyzer
     AclGrantee.add_member(:id, Shapes::ShapeRef.new(shape: AclCanonicalId, location_name: "id"))
     AclGrantee.add_member(:uri, Shapes::ShapeRef.new(shape: AclUri, location_name: "uri"))
     AclGrantee.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    AclGrantee.add_member_subclass(:id, Types::AclGrantee::id)
-    AclGrantee.add_member_subclass(:uri, Types::AclGrantee::uri)
+    AclGrantee.add_member_subclass(:id, Types::AclGrantee::Id)
+    AclGrantee.add_member_subclass(:uri, Types::AclGrantee::Uri)
     AclGrantee.add_member_subclass(:unknown, Types::AclGrantee::Unknown)
     AclGrantee.struct_class = Types::AclGrantee
 
@@ -331,11 +331,11 @@ module Aws::AccessAnalyzer
     Configuration.add_member(:secrets_manager_secret, Shapes::ShapeRef.new(shape: SecretsManagerSecretConfiguration, location_name: "secretsManagerSecret"))
     Configuration.add_member(:sqs_queue, Shapes::ShapeRef.new(shape: SqsQueueConfiguration, location_name: "sqsQueue"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Configuration.add_member_subclass(:iam_role, Types::Configuration::iamRole)
-    Configuration.add_member_subclass(:kms_key, Types::Configuration::kmsKey)
-    Configuration.add_member_subclass(:s3_bucket, Types::Configuration::s3Bucket)
-    Configuration.add_member_subclass(:secrets_manager_secret, Types::Configuration::secretsManagerSecret)
-    Configuration.add_member_subclass(:sqs_queue, Types::Configuration::sqsQueue)
+    Configuration.add_member_subclass(:iam_role, Types::Configuration::Iamrole)
+    Configuration.add_member_subclass(:kms_key, Types::Configuration::Kmskey)
+    Configuration.add_member_subclass(:s3_bucket, Types::Configuration::S3bucket)
+    Configuration.add_member_subclass(:secrets_manager_secret, Types::Configuration::Secretsmanagersecret)
+    Configuration.add_member_subclass(:sqs_queue, Types::Configuration::Sqsqueue)
     Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
 
@@ -625,8 +625,8 @@ module Aws::AccessAnalyzer
     NetworkOriginConfiguration.add_member(:internet_configuration, Shapes::ShapeRef.new(shape: InternetConfiguration, location_name: "internetConfiguration"))
     NetworkOriginConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     NetworkOriginConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    NetworkOriginConfiguration.add_member_subclass(:internet_configuration, Types::NetworkOriginConfiguration::internetConfiguration)
-    NetworkOriginConfiguration.add_member_subclass(:vpc_configuration, Types::NetworkOriginConfiguration::vpcConfiguration)
+    NetworkOriginConfiguration.add_member_subclass(:internet_configuration, Types::NetworkOriginConfiguration::Internetconfiguration)
+    NetworkOriginConfiguration.add_member_subclass(:vpc_configuration, Types::NetworkOriginConfiguration::Vpcconfiguration)
     NetworkOriginConfiguration.add_member_subclass(:unknown, Types::NetworkOriginConfiguration::Unknown)
     NetworkOriginConfiguration.struct_class = Types::NetworkOriginConfiguration
 
@@ -635,10 +635,10 @@ module Aws::AccessAnalyzer
     PathElement.add_member(:substring, Shapes::ShapeRef.new(shape: Substring, location_name: "substring"))
     PathElement.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     PathElement.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    PathElement.add_member_subclass(:index, Types::PathElement::index)
-    PathElement.add_member_subclass(:key, Types::PathElement::key)
-    PathElement.add_member_subclass(:substring, Types::PathElement::substring)
-    PathElement.add_member_subclass(:value, Types::PathElement::value)
+    PathElement.add_member_subclass(:index, Types::PathElement::Index)
+    PathElement.add_member_subclass(:key, Types::PathElement::Key)
+    PathElement.add_member_subclass(:substring, Types::PathElement::Substring)
+    PathElement.add_member_subclass(:value, Types::PathElement::Value)
     PathElement.add_member_subclass(:unknown, Types::PathElement::Unknown)
     PathElement.struct_class = Types::PathElement
 

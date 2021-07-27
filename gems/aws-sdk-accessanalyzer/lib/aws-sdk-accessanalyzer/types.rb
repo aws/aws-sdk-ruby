@@ -280,8 +280,8 @@ module Aws::AccessAnalyzer
       include Aws::Structure
       include Aws::Structure::Union
 
-      class id < AclGrantee; end
-      class uri < AclGrantee; end
+      class Id < AclGrantee; end
+      class Uri < AclGrantee; end
       class Unknown < AclGrantee; end
     end
 
@@ -656,11 +656,11 @@ module Aws::AccessAnalyzer
       include Aws::Structure
       include Aws::Structure::Union
 
-      class iamRole < Configuration; end
-      class kmsKey < Configuration; end
-      class s3Bucket < Configuration; end
-      class secretsManagerSecret < Configuration; end
-      class sqsQueue < Configuration; end
+      class Iamrole < Configuration; end
+      class Kmskey < Configuration; end
+      class S3bucket < Configuration; end
+      class Secretsmanagersecret < Configuration; end
+      class Sqsqueue < Configuration; end
       class Unknown < Configuration; end
     end
 
@@ -2466,8 +2466,8 @@ module Aws::AccessAnalyzer
       include Aws::Structure
       include Aws::Structure::Union
 
-      class internetConfiguration < NetworkOriginConfiguration; end
-      class vpcConfiguration < NetworkOriginConfiguration; end
+      class Internetconfiguration < NetworkOriginConfiguration; end
+      class Vpcconfiguration < NetworkOriginConfiguration; end
       class Unknown < NetworkOriginConfiguration; end
     end
 
@@ -2504,10 +2504,10 @@ module Aws::AccessAnalyzer
       include Aws::Structure
       include Aws::Structure::Union
 
-      class index < PathElement; end
-      class key < PathElement; end
-      class substring < PathElement; end
-      class value < PathElement; end
+      class Index < PathElement; end
+      class Key < PathElement; end
+      class Substring < PathElement; end
+      class Value < PathElement; end
       class Unknown < PathElement; end
     end
 
