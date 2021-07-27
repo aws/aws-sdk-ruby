@@ -28,7 +28,7 @@ require_relative 'aws-sdk-redshiftdataapiservice/customizations'
 # structure.
 #
 #     redshift_data_api_service = Aws::RedshiftDataAPIService::Client.new
-#     resp = redshift_data_api_service.cancel_statement(params)
+#     resp = redshift_data_api_service.batch_execute_statement(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-redshiftdataapiservice/customizations'
 # @!group service
 module Aws::RedshiftDataAPIService
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

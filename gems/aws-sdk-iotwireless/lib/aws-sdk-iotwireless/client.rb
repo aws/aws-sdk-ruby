@@ -1229,9 +1229,9 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Returns current default log-levels, or log levels by resource types,
-    # could be for wireless device log options or wireless gateway log
-    # options.
+    # Returns current default log levels or log levels by resource types.
+    # Based on resource types, log levels can be for wireless device log
+    # options or wireless gateway log options.
     #
     # @return [Types::GetLogLevelsByResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1297,17 +1297,18 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Fetches the log-level override if any for a given resource-ID and
-    # resource-type, coulde be a wireless device or a wireless gateway.
+    # Fetches the log-level override, if any, for a given resource-ID and
+    # resource-type. It can be used for a wireless device or a wireless
+    # gateway.
     #
     # @option params [required, String] :resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device id. For a wireless gateway, it is the wireless gateway
-    #   id.
+    #   wireless device ID. For a wireless gateway, it is the wireless gateway
+    #   ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, currently support WirelessDevice and
-    #   WirelessGateway.
+    #   The type of the resource, which can be `WirelessDevice` or
+    #   `WirelessGateway`.
     #
     # @return [Types::GetResourceLogLevelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1439,7 +1440,7 @@ module Aws::IoTWireless
     #
     #   resp = client.get_wireless_device({
     #     identifier: "Identifier", # required
-    #     identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName
+    #     identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName, SidewalkManufacturingSn
     #   })
     #
     # @example Response structure
@@ -1468,6 +1469,7 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.abp_v1_0_x.dev_addr #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.nwk_s_key #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.app_s_key #=> String
+    #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.sidewalk_id #=> String
     #   resp.sidewalk.sidewalk_manufacturing_sn #=> String
     #   resp.sidewalk.device_certificates #=> Array
@@ -2088,17 +2090,18 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Sets the log-level override for a resource-ID and resource-type, could
-    # be a wireless gateway or a wireless device.
+    # Sets the log-level override for a resource-ID and resource-type. This
+    # option can be specified for a wireless gateway or a wireless device. A
+    # limit of 200 log level override can be set per account.
     #
     # @option params [required, String] :resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device id. For a wireless gateway, it is the wireless gateway
-    #   id.
+    #   wireless device ID. For a wireless gateway, it is the wireless gateway
+    #   ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, currently support WirelessDevice and
-    #   WirelessGateway.
+    #   The type of the resource, which can be `WirelessDevice` or
+    #   `WirelessGateway`.
     #
     # @option params [required, String] :log_level
     #   The log level for a log message.
@@ -2120,8 +2123,8 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Remove log-level overrides if any for all resources (both wireless
-    # devices and wireless gateways).
+    # Removes the log-level overrides for all resources; both wireless
+    # devices and wireless gateways.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2132,17 +2135,18 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Remove log-level override if any for a specific resource-ID and
-    # resource-type, could be a wireless device or a wireless gateway.
+    # Removes the log-level override, if any, for a specific resource-ID and
+    # resource-type. It can be used for a wireless device or a wireless
+    # gateway.
     #
     # @option params [required, String] :resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device id. For a wireless gateway, it is the wireless gateway
-    #   id.
+    #   wireless device ID. For a wireless gateway, it is the wireless gateway
+    #   ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, currently support WirelessDevice and
-    #   WirelessGateway.
+    #   The type of the resource, which can be `WirelessDevice` or
+    #   `WirelessGateway`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2170,7 +2174,7 @@ module Aws::IoTWireless
     #   `0` for UM (unacknowledge mode) or `1` for AM (acknowledge mode).
     #
     # @option params [required, String] :payload_data
-    #   The message payload to send.
+    #   The binary to be sent to the end device, encoded in base64.
     #
     # @option params [Types::WirelessMetadata] :wireless_metadata
     #   Metadata about the message request.
@@ -2324,9 +2328,10 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Set default log level, or log levels by resource types, could be for
-    # wireless device log options or wireless gateways log options. This is
-    # to control the log messages that will be displayed in CloudWatch.
+    # Set default log level, or log levels by resource types. This can be
+    # for wireless device log options or wireless gateways log options and
+    # is used to control the log messages that'll be displayed in
+    # CloudWatch.
     #
     # @option params [String] :default_log_level
     #   The log level for a log message.
@@ -2497,7 +2502,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

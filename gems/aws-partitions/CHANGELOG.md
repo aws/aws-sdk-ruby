@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.480.0 (2021-07-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Route53RecoveryReadiness`.
+
+* Feature - Added support for enumerating regions for `Aws::Route53RecoveryControlConfig`.
+
+* Feature - Added support for enumerating regions for `Aws::Route53RecoveryCluster`.
+
 1.479.0 (2021-07-16)
 ------------------
 

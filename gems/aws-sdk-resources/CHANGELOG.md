@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.106.0 (2021-07-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-route53recoveryreadiness` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-route53recoverycontrolconfig` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-route53recoverycluster` gem.
+
 3.105.0 (2021-06-09)
 ------------------
 

@@ -1239,13 +1239,13 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device id. For a wireless gateway, it is the wireless
-    #   gateway id.
+    #   wireless device ID. For a wireless gateway, it is the wireless
+    #   gateway ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, currently support WirelessDevice and
-    #   WirelessGateway.
+    #   The type of the resource, which can be `WirelessDevice` or
+    #   `WirelessGateway`.
     #   @return [String]
     #
     class GetResourceLogLevelRequest < Struct.new(
@@ -1351,7 +1351,7 @@ module Aws::IoTWireless
     #
     #       {
     #         identifier: "Identifier", # required
-    #         identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName
+    #         identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName, SidewalkManufacturingSn
     #       }
     #
     # @!attribute [rw] identifier
@@ -2742,13 +2742,13 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device id. For a wireless gateway, it is the wireless
-    #   gateway id.
+    #   wireless device ID. For a wireless gateway, it is the wireless
+    #   gateway ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, currently support WirelessDevice and
-    #   WirelessGateway.
+    #   The type of the resource, which can be `WirelessDevice` or
+    #   `WirelessGateway`.
     #   @return [String]
     #
     # @!attribute [rw] log_level
@@ -2781,13 +2781,13 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device id. For a wireless gateway, it is the wireless
-    #   gateway id.
+    #   wireless device ID. For a wireless gateway, it is the wireless
+    #   gateway ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, currently support WirelessDevice and
-    #   WirelessGateway.
+    #   The type of the resource, which can be `WirelessDevice` or
+    #   `WirelessGateway`.
     #   @return [String]
     #
     class ResetResourceLogLevelRequest < Struct.new(
@@ -2849,7 +2849,7 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] payload_data
-    #   The message payload to send.
+    #   The binary to be sent to the end device, encoded in base64.
     #   @return [String]
     #
     # @!attribute [rw] wireless_metadata
@@ -3008,6 +3008,10 @@ module Aws::IoTWireless
 
     # Sidewalk device object.
     #
+    # @!attribute [rw] amazon_id
+    #   The Sidewalk Amazon ID.
+    #   @return [String]
+    #
     # @!attribute [rw] sidewalk_id
     #   The sidewalk device identification.
     #   @return [String]
@@ -3021,6 +3025,7 @@ module Aws::IoTWireless
     #   @return [Array<Types::CertificateList>]
     #
     class SidewalkDevice < Struct.new(
+      :amazon_id,
       :sidewalk_id,
       :sidewalk_manufacturing_sn,
       :device_certificates)
@@ -3097,7 +3102,8 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] message_type
-    #   Sidewalk device message type.
+    #   Sidewalk device message type. Default value is
+    #   `CUSTOM_COMMAND_ID_NOTIFY`.
     #   @return [String]
     #
     class SidewalkSendDataToDevice < Struct.new(
@@ -3560,11 +3566,13 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # The log option for a wireless device event. Can be used to set log
-    # level for a specific wireless device event. For a LoRaWAN device, the
-    # possible events for a log messsage are: Join, Rejoin, Downlink\_Data,
-    # Uplink\_Data. For a Sidewalk device, the possible events for a log
-    # message are: Registration, Downlink\_Data, Uplink\_Data.
+    # The log options for a wireless device event and can be used to set log
+    # levels for a specific wireless device event.
+    #
+    # For a LoRaWAN device, possible events for a log messsage are: `Join`,
+    # `Rejoin`, `Downlink_Data`, and `Uplink_Data`. For a Sidewalk device,
+    # possible events for a log message are `Registration`, `Downlink_Data`,
+    # and `Uplink_Data`.
     #
     # @note When making an API call, you may pass WirelessDeviceEventLogOption
     #   data as a hash:
@@ -3590,8 +3598,8 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # The log option for wireless devices. Can be used to set log level for
-    # a specific type of wireless device.
+    # The log options for wireless devices and can be used to set log levels
+    # for a specific type of wireless device.
     #
     # @note When making an API call, you may pass WirelessDeviceLogOption
     #   data as a hash:
@@ -3674,9 +3682,11 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # The log option for a wireless gateway event. Can be used to set log
-    # level for a specific wireless gateway event. For a LoRaWAN gateway,
-    # the possible events for a log message are: CUPS\_Request, Certificate.
+    # The log options for a wireless gateway event and can be used to set
+    # log levels for a specific wireless gateway event.
+    #
+    # For a LoRaWAN gateway, possible events for a log message are
+    # `CUPS_Request` and `Certificate`.
     #
     # @note When making an API call, you may pass WirelessGatewayEventLogOption
     #   data as a hash:
@@ -3702,8 +3712,8 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # The log option for wireless gateways. Can be used to set log level for
-    # a specific type of wireless gateway.
+    # The log options for wireless gateways and can be used to set log
+    # levels for a specific type of wireless gateway.
     #
     # @note When making an API call, you may pass WirelessGatewayLogOption
     #   data as a hash:

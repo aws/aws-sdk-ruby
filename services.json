@@ -721,6 +721,15 @@
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
   },
+  "Route53RecoveryCluster": {
+    "models": "route53-recovery-cluster/2019-12-02"
+  },
+  "Route53RecoveryControlConfig": {
+    "models": "route53-recovery-control-config/2020-11-02"
+  },
+  "Route53RecoveryReadiness": {
+    "models": "route53-recovery-readiness/2019-12-02"
+  },
   "Route53Resolver": {
     "models": "route53resolver/2018-04-01"
   },
