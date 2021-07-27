@@ -90,7 +90,6 @@ module AwsSdkCodeGenerator
             @api['shapes'][member_ref['shape']]['sensitive'])
           StructMember.new(
             member_name: underscore(member_name),
-            member_class_name: member_name,
             sensitive: sensitive
           )
         end
@@ -127,6 +126,8 @@ module AwsSdkCodeGenerator
       def output_example_docs(shape_name, shape)
         if @output_shapes.include?(shape_name)
           if shape['union']
+            require 'byebug'
+            byebug
             "@note #{shape_name} is a union - when returned from an API call"\
             ' exactly one value will be set and the returned type will'\
             " be a subclass of #{shape_name} corresponding to the set member."
@@ -307,11 +308,7 @@ module AwsSdkCodeGenerator
 
         def initialize(options)
           @member_name = options.fetch(:member_name)
-          @member_class_name = options.fetch(:member_class_name, @member_name
-             .to_s
-             .split('_')
-             .collect(&:capitalize)
-             .join)
+          @member_class_name = AwsSdkCodeGenerator::Helper::pascal_case(@member_name)
           @sensitive = options.fetch(:sensitive, false)
           @last = false
         end
