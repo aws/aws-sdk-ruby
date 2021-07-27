@@ -15,7 +15,7 @@ module Aws::RDSDataService
 
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArrayOfArray = Shapes::ListShape.new(name: 'ArrayOfArray')
-    ArrayValue = Shapes::UnionShape.new(name: 'ArrayValue')
+    ArrayValue = Shapes::StructureShape.new(name: 'ArrayValue')
     ArrayValueList = Shapes::ListShape.new(name: 'ArrayValueList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchExecuteStatementRequest = Shapes::StructureShape.new(name: 'BatchExecuteStatementRequest')
@@ -41,7 +41,7 @@ module Aws::RDSDataService
     ExecuteSqlResponse = Shapes::StructureShape.new(name: 'ExecuteSqlResponse')
     ExecuteStatementRequest = Shapes::StructureShape.new(name: 'ExecuteStatementRequest')
     ExecuteStatementResponse = Shapes::StructureShape.new(name: 'ExecuteStatementResponse')
-    Field = Shapes::UnionShape.new(name: 'Field')
+    Field = Shapes::StructureShape.new(name: 'Field')
     FieldList = Shapes::ListShape.new(name: 'FieldList')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     Id = Shapes::StringShape.new(name: 'Id')
@@ -77,7 +77,7 @@ module Aws::RDSDataService
     TypeHint = Shapes::StringShape.new(name: 'TypeHint')
     UpdateResult = Shapes::StructureShape.new(name: 'UpdateResult')
     UpdateResults = Shapes::ListShape.new(name: 'UpdateResults')
-    Value = Shapes::UnionShape.new(name: 'Value')
+    Value = Shapes::StructureShape.new(name: 'Value')
 
     ArrayOfArray.member = Shapes::ShapeRef.new(shape: ArrayValue)
 
@@ -86,13 +86,6 @@ module Aws::RDSDataService
     ArrayValue.add_member(:double_values, Shapes::ShapeRef.new(shape: DoubleArray, location_name: "doubleValues"))
     ArrayValue.add_member(:long_values, Shapes::ShapeRef.new(shape: LongArray, location_name: "longValues"))
     ArrayValue.add_member(:string_values, Shapes::ShapeRef.new(shape: StringArray, location_name: "stringValues"))
-    ArrayValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ArrayValue.add_member_subclass(:array_values, Types::ArrayValue::arrayValues)
-    ArrayValue.add_member_subclass(:boolean_values, Types::ArrayValue::booleanValues)
-    ArrayValue.add_member_subclass(:double_values, Types::ArrayValue::doubleValues)
-    ArrayValue.add_member_subclass(:long_values, Types::ArrayValue::longValues)
-    ArrayValue.add_member_subclass(:string_values, Types::ArrayValue::stringValues)
-    ArrayValue.add_member_subclass(:unknown, Types::ArrayValue::Unknown)
     ArrayValue.struct_class = Types::ArrayValue
 
     ArrayValueList.member = Shapes::ShapeRef.new(shape: Value)
@@ -184,15 +177,6 @@ module Aws::RDSDataService
     Field.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
     Field.add_member(:long_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue"))
     Field.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
-    Field.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Field.add_member_subclass(:array_value, Types::Field::arrayValue)
-    Field.add_member_subclass(:blob_value, Types::Field::blobValue)
-    Field.add_member_subclass(:boolean_value, Types::Field::booleanValue)
-    Field.add_member_subclass(:double_value, Types::Field::doubleValue)
-    Field.add_member_subclass(:is_null, Types::Field::isNull)
-    Field.add_member_subclass(:long_value, Types::Field::longValue)
-    Field.add_member_subclass(:string_value, Types::Field::stringValue)
-    Field.add_member_subclass(:unknown, Types::Field::Unknown)
     Field.struct_class = Types::Field
 
     FieldList.member = Shapes::ShapeRef.new(shape: Field)
@@ -278,18 +262,6 @@ module Aws::RDSDataService
     Value.add_member(:real_value, Shapes::ShapeRef.new(shape: BoxedFloat, location_name: "realValue"))
     Value.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
     Value.add_member(:struct_value, Shapes::ShapeRef.new(shape: StructValue, location_name: "structValue"))
-    Value.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Value.add_member_subclass(:array_values, Types::Value::arrayValues)
-    Value.add_member_subclass(:big_int_value, Types::Value::bigIntValue)
-    Value.add_member_subclass(:bit_value, Types::Value::bitValue)
-    Value.add_member_subclass(:blob_value, Types::Value::blobValue)
-    Value.add_member_subclass(:double_value, Types::Value::doubleValue)
-    Value.add_member_subclass(:int_value, Types::Value::intValue)
-    Value.add_member_subclass(:is_null, Types::Value::isNull)
-    Value.add_member_subclass(:real_value, Types::Value::realValue)
-    Value.add_member_subclass(:string_value, Types::Value::stringValue)
-    Value.add_member_subclass(:struct_value, Types::Value::structValue)
-    Value.add_member_subclass(:unknown, Types::Value::Unknown)
     Value.struct_class = Types::Value
 
 

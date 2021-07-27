@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-07-27)
+------------------
+
+* Feature - This release adds support for the RECOVERY_CONTROL health check type to be used in conjunction with Route53 Application Recovery Controller.
+
 1.50.0 (2021-07-27)
 ------------------
 

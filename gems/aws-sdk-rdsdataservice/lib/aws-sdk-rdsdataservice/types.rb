@@ -12,9 +12,26 @@ module Aws::RDSDataService
 
     # Contains an array.
     #
-    # @note ArrayValue is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass ArrayValue
+    #   data as a hash:
     #
-    # @note ArrayValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ArrayValue corresponding to the set member.
+    #       {
+    #         array_values: [
+    #           {
+    #             array_values: {
+    #               # recursive ArrayOfArray
+    #             },
+    #             boolean_values: [false],
+    #             double_values: [1.0],
+    #             long_values: [1],
+    #             string_values: ["String"],
+    #           },
+    #         ],
+    #         boolean_values: [false],
+    #         double_values: [1.0],
+    #         long_values: [1],
+    #         string_values: ["String"],
+    #       }
     #
     # @!attribute [rw] array_values
     #   An array of arrays.
@@ -43,18 +60,9 @@ module Aws::RDSDataService
       :boolean_values,
       :double_values,
       :long_values,
-      :string_values,
-      :unknown)
+      :string_values)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class arrayValues < ArrayValue; end
-      class booleanValues < ArrayValue; end
-      class doubleValues < ArrayValue; end
-      class longValues < ArrayValue; end
-      class stringValues < ArrayValue; end
-      class Unknown < ArrayValue; end
     end
 
     # There is an error in the call or in a SQL statement.
@@ -593,9 +601,28 @@ module Aws::RDSDataService
 
     # Contains a value.
     #
-    # @note Field is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass Field
+    #   data as a hash:
     #
-    # @note Field is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Field corresponding to the set member.
+    #       {
+    #         array_value: {
+    #           array_values: [
+    #             {
+    #               # recursive ArrayValue
+    #             },
+    #           ],
+    #           boolean_values: [false],
+    #           double_values: [1.0],
+    #           long_values: [1],
+    #           string_values: ["String"],
+    #         },
+    #         blob_value: "data",
+    #         boolean_value: false,
+    #         double_value: 1.0,
+    #         is_null: false,
+    #         long_value: 1,
+    #         string_value: "String",
+    #       }
     #
     # @!attribute [rw] array_value
     #   An array of values.
@@ -634,20 +661,9 @@ module Aws::RDSDataService
       :double_value,
       :is_null,
       :long_value,
-      :string_value,
-      :unknown)
+      :string_value)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class arrayValue < Field; end
-      class blobValue < Field; end
-      class booleanValue < Field; end
-      class doubleValue < Field; end
-      class isNull < Field; end
-      class longValue < Field; end
-      class stringValue < Field; end
-      class Unknown < Field; end
     end
 
     # There are insufficient privileges to make the call.
@@ -967,8 +983,6 @@ module Aws::RDSDataService
     #
     #      <important> <p>This data type is deprecated.</p> </important>
     #
-    # @note Value is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Value corresponding to the set member.
-    #
     # @!attribute [rw] array_values
     #   An array of column values.
     #   @return [Array<Types::Value>]
@@ -1021,23 +1035,9 @@ module Aws::RDSDataService
       :is_null,
       :real_value,
       :string_value,
-      :struct_value,
-      :unknown)
+      :struct_value)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class arrayValues < Value; end
-      class bigIntValue < Value; end
-      class bitValue < Value; end
-      class blobValue < Value; end
-      class doubleValue < Value; end
-      class intValue < Value; end
-      class isNull < Value; end
-      class realValue < Value; end
-      class stringValue < Value; end
-      class structValue < Value; end
-      class Unknown < Value; end
     end
 
   end

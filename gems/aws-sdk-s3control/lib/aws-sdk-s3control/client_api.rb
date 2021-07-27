@@ -188,7 +188,7 @@ module Aws::S3Control
     ObjectLambdaAllowedFeature = Shapes::StringShape.new(name: 'ObjectLambdaAllowedFeature')
     ObjectLambdaAllowedFeaturesList = Shapes::ListShape.new(name: 'ObjectLambdaAllowedFeaturesList')
     ObjectLambdaConfiguration = Shapes::StructureShape.new(name: 'ObjectLambdaConfiguration')
-    ObjectLambdaContentTransformation = Shapes::UnionShape.new(name: 'ObjectLambdaContentTransformation')
+    ObjectLambdaContentTransformation = Shapes::StructureShape.new(name: 'ObjectLambdaContentTransformation')
     ObjectLambdaPolicy = Shapes::StringShape.new(name: 'ObjectLambdaPolicy')
     ObjectLambdaSupportingAccessPointArn = Shapes::StringShape.new(name: 'ObjectLambdaSupportingAccessPointArn')
     ObjectLambdaTransformationConfiguration = Shapes::StructureShape.new(name: 'ObjectLambdaTransformationConfiguration')
@@ -781,9 +781,6 @@ module Aws::S3Control
     ObjectLambdaConfiguration.struct_class = Types::ObjectLambdaConfiguration
 
     ObjectLambdaContentTransformation.add_member(:aws_lambda, Shapes::ShapeRef.new(shape: AwsLambdaTransformation, location_name: "AwsLambda"))
-    ObjectLambdaContentTransformation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ObjectLambdaContentTransformation.add_member_subclass(:aws_lambda, Types::ObjectLambdaContentTransformation::AwsLambda)
-    ObjectLambdaContentTransformation.add_member_subclass(:unknown, Types::ObjectLambdaContentTransformation::Unknown)
     ObjectLambdaContentTransformation.struct_class = Types::ObjectLambdaContentTransformation
 
     ObjectLambdaTransformationConfiguration.add_member(:actions, Shapes::ShapeRef.new(shape: ObjectLambdaTransformationConfigurationActionsList, required: true, location_name: "Actions"))

@@ -183,9 +183,14 @@ module Aws::EMRContainers
     # The information about the container used for a job run or a managed
     # endpoint.
     #
-    # @note ContainerInfo is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass ContainerInfo
+    #   data as a hash:
     #
-    # @note ContainerInfo is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContainerInfo corresponding to the set member.
+    #       {
+    #         eks_info: {
+    #           namespace: "KubernetesNamespace",
+    #         },
+    #       }
     #
     # @!attribute [rw] eks_info
     #   The information about the EKS cluster.
@@ -194,14 +199,9 @@ module Aws::EMRContainers
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ContainerInfo AWS API Documentation
     #
     class ContainerInfo < Struct.new(
-      :eks_info,
-      :unknown)
+      :eks_info)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class eksInfo < ContainerInfo; end
-      class Unknown < ContainerInfo; end
     end
 
     # The information about the container provider.

@@ -3224,7 +3224,15 @@ module Aws::Proton
 
     # Template version source data.
     #
-    # @note TemplateVersionSourceInput is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass TemplateVersionSourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         s3: {
+    #           bucket: "S3Bucket", # required
+    #           key: "S3Key", # required
+    #         },
+    #       }
     #
     # @!attribute [rw] s3
     #   An S3 source object that includes the template bundle S3 path and
@@ -3234,14 +3242,9 @@ module Aws::Proton
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/TemplateVersionSourceInput AWS API Documentation
     #
     class TemplateVersionSourceInput < Struct.new(
-      :s3,
-      :unknown)
+      :s3)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class s3 < TemplateVersionSourceInput; end
-      class Unknown < TemplateVersionSourceInput; end
     end
 
     # The request was denied due to request throttling.
