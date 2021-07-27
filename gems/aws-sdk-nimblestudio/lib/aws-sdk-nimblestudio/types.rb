@@ -3461,35 +3461,9 @@ module Aws::NimbleStudio
 
     # The configuration of the studio component, based on component type.
     #
-    # @note When making an API call, you may pass StudioComponentConfiguration
-    #   data as a hash:
+    # @note StudioComponentConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         active_directory_configuration: {
-    #           computer_attributes: [
-    #             {
-    #               name: "ActiveDirectoryComputerAttributeName",
-    #               value: "ActiveDirectoryComputerAttributeValue",
-    #             },
-    #           ],
-    #           directory_id: "DirectoryId",
-    #           organizational_unit_distinguished_name: "ActiveDirectoryOrganizationalUnitDistinguishedName",
-    #         },
-    #         compute_farm_configuration: {
-    #           active_directory_user: "__string",
-    #           endpoint: "__string",
-    #         },
-    #         license_service_configuration: {
-    #           endpoint: "__string",
-    #         },
-    #         shared_file_system_configuration: {
-    #           endpoint: "__string",
-    #           file_system_id: "__string",
-    #           linux_mount_point: "LinuxMountPoint",
-    #           share_name: "__string",
-    #           windows_mount_drive: "WindowsMountDrive",
-    #         },
-    #       }
+    # @note StudioComponentConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StudioComponentConfiguration corresponding to the set member.
     #
     # @!attribute [rw] active_directory_configuration
     #   The configuration for a Microsoft Active Directory (Microsoft AD)
@@ -3517,9 +3491,17 @@ module Aws::NimbleStudio
       :active_directory_configuration,
       :compute_farm_configuration,
       :license_service_configuration,
-      :shared_file_system_configuration)
+      :shared_file_system_configuration,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class activeDirectoryConfiguration < StudioComponentConfiguration; end
+      class computeFarmConfiguration < StudioComponentConfiguration; end
+      class licenseServiceConfiguration < StudioComponentConfiguration; end
+      class sharedFileSystemConfiguration < StudioComponentConfiguration; end
+      class Unknown < StudioComponentConfiguration; end
     end
 
     # Initialization scripts for studio components.

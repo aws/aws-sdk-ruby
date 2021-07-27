@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-07-27)
+------------------
+
+* Feature - Add support for ListJob filters
+
 1.47.0 (2021-03-31)
 ------------------
 

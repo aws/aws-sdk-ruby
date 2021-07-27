@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-07-27)
+------------------
+
+* Feature - Change name of DDoS Response Team (DRT) to Shield Response Team (SRT)
+
 1.37.0 (2021-04-09)
 ------------------
 

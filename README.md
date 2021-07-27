@@ -386,6 +386,8 @@ RubyGems.org page under "LINKS" section.
 | AWS Resource Groups                                   | Aws::ResourceGroups                  | aws-sdk-resourcegroups                  | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI        | aws-sdk-resourcegroupstaggingapi        | 2017-01-26  |
 | AWS RoboMaker                                         | Aws::RoboMaker                       | aws-sdk-robomaker                       | 2018-06-29  |
+| AWS Route53 Recovery Control Config                   | Aws::Route53RecoveryControlConfig    | aws-sdk-route53recoverycontrolconfig    | 2020-11-02  |
+| AWS Route53 Recovery Readiness                        | Aws::Route53RecoveryReadiness        | aws-sdk-route53recoveryreadiness        | 2019-12-02  |
 | AWS S3 Control                                        | Aws::S3Control                       | aws-sdk-s3control                       | 2018-08-20  |
 | AWS SSO Identity Store                                | Aws::IdentityStore                   | aws-sdk-identitystore                   | 2020-06-15  |
 | AWS SSO OIDC                                          | Aws::SSOOIDC                         | aws-sdk-ssooidc                         | 2019-06-10  |
@@ -559,6 +561,7 @@ RubyGems.org page under "LINKS" section.
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |
+| Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster          | aws-sdk-route53recoverycluster          | 2019-12-02  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                      | aws-sdk-synthetics                      | 2017-10-11  |
