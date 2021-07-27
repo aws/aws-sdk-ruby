@@ -373,12 +373,12 @@ module Aws::Route53
     # already exist. You can't convert a public hosted zone into a private
     # hosted zone.
     #
-    # <note markdown="1"> If you want to associate a VPC that was created by using one account
-    # with a private hosted zone that was created by using a different
-    # account, the account that created the private hosted zone must first
-    # submit a `CreateVPCAssociationAuthorization` request. Then the account
-    # that created the VPC must submit an `AssociateVPCWithHostedZone`
-    # request.
+    # <note markdown="1"> If you want to associate a VPC that was created by using one AWS
+    # account with a private hosted zone that was created by using a
+    # different account, the AWS account that created the private hosted
+    # zone must first submit a `CreateVPCAssociationAuthorization` request.
+    # Then the account that created the VPC must submit an
+    # `AssociateVPCWithHostedZone` request.
     #
     #  </note>
     #
@@ -511,9 +511,9 @@ module Aws::Route53
     # * `DELETE`\: Deletes an existing resource record set that has the
     #   specified values.
     #
-    # * `UPSERT`\: If a resource record set does not already exist, Amazon
-    #   Web Services creates it. If a resource set does exist, Route 53
-    #   updates it with the values in the request.
+    # * `UPSERT`\: If a resource record set does not already exist, AWS
+    #   creates it. If a resource set does exist, Route 53 updates it with
+    #   the values in the request.
     #
     # **Syntaxes for Creating, Updating, and Deleting Resource Record Sets**
     #
@@ -1205,7 +1205,8 @@ module Aws::Route53
     # Adds, edits, or deletes tags for a health check or a hosted zone.
     #
     # For information about using tags for cost allocation, see [Using Cost
-    # Allocation Tags][1] in the *Billing and Cost Management User Guide*.
+    # Allocation Tags][1] in the *AWS Billing and Cost Management User
+    # Guide*.
     #
     #
     #
@@ -1365,7 +1366,7 @@ module Aws::Route53
     #     health_check_config: { # required
     #       ip_address: "IPAddress",
     #       port: 1,
-    #       type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC, RECOVERY_CONTROL
+    #       type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC
     #       resource_path: "ResourcePath",
     #       fully_qualified_domain_name: "FullyQualifiedDomainName",
     #       search_string: "SearchString",
@@ -1383,7 +1384,6 @@ module Aws::Route53
     #         name: "AlarmName", # required
     #       },
     #       insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
-    #       routing_control_arn: "RoutingControlArn",
     #     },
     #   })
     #
@@ -1395,7 +1395,7 @@ module Aws::Route53
     #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
-    #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC", "RECOVERY_CONTROL"
+    #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
     #   resp.health_check.health_check_config.resource_path #=> String
     #   resp.health_check.health_check_config.fully_qualified_domain_name #=> String
     #   resp.health_check.health_check_config.search_string #=> String
@@ -1413,7 +1413,6 @@ module Aws::Route53
     #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
-    #   resp.health_check.health_check_config.routing_control_arn #=> String
     #   resp.health_check.health_check_version #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.threshold #=> Float
@@ -1606,7 +1605,7 @@ module Aws::Route53
     #
     # @option params [required, String] :key_management_service_arn
     #   The Amazon resource name (ARN) for a customer managed customer master
-    #   key (CMK) in Key Management Service (KMS). The
+    #   key (CMK) in AWS Key Management Service (AWS KMS). The
     #   `KeyManagementServiceArn` must be unique for each key-signing key
     #   (KSK) in a single hosted zone. To see an example of
     #   `KeyManagementServiceArn` that grants the correct permissions for
@@ -1639,12 +1638,12 @@ module Aws::Route53
     #     The key policy must also include the Amazon Route 53 service in the
     #     principal for your account. Specify the following:
     #
-    #     * `"Service": "dnssec-route53.amazonaws.com"`
+    #     * `"Service": "dnssec.route53.aws.amazonaws.com"`
     #
     #     ^
     #
-    #   For more information about working with a customer managed CMK in KMS,
-    #   see [Key Management Service concepts][1].
+    #   For more information about working with a customer managed CMK in AWS
+    #   KMS, see [AWS Key Management Service concepts][1].
     #
     #
     #
@@ -1739,8 +1738,8 @@ module Aws::Route53
     #
     #       * You must create the log group in the us-east-1 region.
     #
-    #       * You must use the same account to create the log group and the
-    #         hosted zone that you want to configure query logging for.
+    #       * You must use the same AWS account to create the log group and
+    #         the hosted zone that you want to configure query logging for.
     #
     #       * When you create log groups for query logging, we recommend
     #         that you use a consistent prefix, for example:
@@ -1749,11 +1748,11 @@ module Aws::Route53
     #
     #         In the next step, you'll create a resource policy, which
     #         controls access to one or more log groups and the associated
-    #         Amazon Web Services resources, such as Route 53 hosted zones.
-    #         There's a limit on the number of resource policies that you
-    #         can create, so we recommend that you use a consistent prefix
-    #         so you can use the same resource policy for all the log groups
-    #         that you create for query logging.
+    #         AWS resources, such as Route 53 hosted zones. There's a limit
+    #         on the number of resource policies that you can create, so we
+    #         recommend that you use a consistent prefix so you can use the
+    #         same resource policy for all the log groups that you create
+    #         for query logging.
     #
     #   2.  Create a CloudWatch Logs resource policy, and give it the
     #       permissions that Route 53 needs to create log streams and to
@@ -1767,8 +1766,8 @@ module Aws::Route53
     #       `arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/*`
     #
     #       <note markdown="1"> You can't use the CloudWatch console to create or edit a
-    #       resource policy. You must use the CloudWatch API, one of the
-    #       Amazon Web Services SDKs, or the CLI.
+    #       resource policy. You must use the CloudWatch API, one of the AWS
+    #       SDKs, or the AWS CLI.
     #
     #        </note>
     #
@@ -1847,8 +1846,7 @@ module Aws::Route53
     #
     #   To get the ARN for a log group, you can use the CloudWatch console,
     #   the [DescribeLogGroups][1] API action, the [describe-log-groups][2]
-    #   command, or the applicable command in one of the Amazon Web Services
-    #   SDKs.
+    #   command, or the applicable command in one of the AWS SDKs.
     #
     #
     #
@@ -1884,7 +1882,8 @@ module Aws::Route53
     end
 
     # Creates a delegation set (a group of four name servers) that can be
-    # reused by multiple hosted zones that were created by the same account.
+    # reused by multiple hosted zones that were created by the same AWS
+    # account.
     #
     # You can also create a reusable delegation set that uses the four name
     # servers that are associated with an existing hosted zone. Specify the
@@ -2158,7 +2157,7 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Authorizes the account that created a specified VPC to submit an
+    # Authorizes the AWS account that created a specified VPC to submit an
     # `AssociateVPCWithHostedZone` request to associate the VPC with a
     # specified hosted zone that was created by a different account. To
     # submit a `CreateVPCAssociationAuthorization` request, you must use the
@@ -2258,8 +2257,8 @@ module Aws::Route53
     # see [Replacing and Deleting Health Checks][1] in the *Amazon Route 53
     # Developer Guide*.
     #
-    # If you're using Cloud Map and you configured Cloud Map to create a
-    # Route 53 health check when you register an instance, you can't use
+    # If you're using AWS Cloud Map and you configured Cloud Map to create
+    # a Route 53 health check when you register an instance, you can't use
     # the Route 53 `DeleteHealthCheck` command to delete the health check.
     # The health check is deleted automatically when you deregister the
     # instance; there can be a delay of several hours before the health
@@ -2291,8 +2290,8 @@ module Aws::Route53
 
     # Deletes a hosted zone.
     #
-    # If the hosted zone was created by another service, such as Cloud Map,
-    # see [Deleting Public Hosted Zones That Were Created by Another
+    # If the hosted zone was created by another service, such as AWS Cloud
+    # Map, see [Deleting Public Hosted Zones That Were Created by Another
     # Service][1] in the *Amazon Route 53 Developer Guide* for information
     # about how to delete it. (The process is the same for public and
     # private hosted zones that were created by another service.)
@@ -2337,7 +2336,7 @@ module Aws::Route53
     #   hosted zone.
     #
     # * Use the `ListHostedZones` action to get a list of the hosted zones
-    #   associated with the current account.
+    #   associated with the current AWS account.
     #
     #
     #
@@ -2558,22 +2557,22 @@ module Aws::Route53
     # the hosted zone to submit a `DeleteVPCAssociationAuthorization`
     # request.
     #
-    # Sending this request only prevents the account that created the VPC
-    # from associating the VPC with the Amazon Route 53 hosted zone in the
-    # future. If the VPC is already associated with the hosted zone,
+    # Sending this request only prevents the AWS account that created the
+    # VPC from associating the VPC with the Amazon Route 53 hosted zone in
+    # the future. If the VPC is already associated with the hosted zone,
     # `DeleteVPCAssociationAuthorization` won't disassociate the VPC from
     # the hosted zone. If you want to delete an existing association, use
     # `DisassociateVPCFromHostedZone`.
     #
     # @option params [required, String] :hosted_zone_id
     #   When removing authorization to associate a VPC that was created by one
-    #   account with a hosted zone that was created with a different account,
-    #   the ID of the hosted zone.
+    #   AWS account with a hosted zone that was created with a different AWS
+    #   account, the ID of the hosted zone.
     #
     # @option params [required, Types::VPC] :vpc
     #   When removing authorization to associate a VPC that was created by one
-    #   account with a hosted zone that was created with a different account,
-    #   a complex type that includes the ID and region of the VPC.
+    #   AWS account with a hosted zone that was created with a different AWS
+    #   account, a complex type that includes the ID and region of the VPC.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2641,7 +2640,7 @@ module Aws::Route53
     #   either the account that created the hosted zone or the account that
     #   created the Amazon VPC.
     #
-    # * Some services, such as Cloud Map and Amazon Elastic File System
+    # * Some services, such as AWS Cloud Map and Amazon Elastic File System
     #   (Amazon EFS) automatically create hosted zones and associate VPCs
     #   with the hosted zones. A service can create a hosted zone using your
     #   account or using its own account. You can disassociate a VPC from a
@@ -2736,9 +2735,8 @@ module Aws::Route53
     # For the default limit, see [Limits][1] in the *Amazon Route 53
     # Developer Guide*. To request a higher limit, [open a case][2].
     #
-    # <note markdown="1"> You can also view account limits in Amazon Web Services Trusted
-    # Advisor. Sign in to the Management Console and open the Trusted
-    # Advisor console at
+    # <note markdown="1"> You can also view account limits in AWS Trusted Advisor. Sign in to
+    # the AWS Management Console and open the Trusted Advisor console at
     # [https://console.aws.amazon.com/trustedadvisor/][3]. Then choose
     # **Service limits** in the navigation pane.
     #
@@ -2847,9 +2845,9 @@ module Aws::Route53
     # retrieves information that is already available to the public.
     #
     # `GetCheckerIpRanges` still works, but we recommend that you download
-    # ip-ranges.json, which includes IP address ranges for all Amazon Web
-    # Services services. For more information, see [IP Address Ranges of
-    # Amazon Route 53 Servers][1] in the *Amazon Route 53 Developer Guide*.
+    # ip-ranges.json, which includes IP address ranges for all AWS services.
+    # For more information, see [IP Address Ranges of Amazon Route 53
+    # Servers][1] in the *Amazon Route 53 Developer Guide*.
     #
     #
     #
@@ -3039,7 +3037,7 @@ module Aws::Route53
     #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
-    #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC", "RECOVERY_CONTROL"
+    #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
     #   resp.health_check.health_check_config.resource_path #=> String
     #   resp.health_check.health_check_config.fully_qualified_domain_name #=> String
     #   resp.health_check.health_check_config.search_string #=> String
@@ -3057,7 +3055,6 @@ module Aws::Route53
     #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
-    #   resp.health_check.health_check_config.routing_control_arn #=> String
     #   resp.health_check.health_check_version #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.threshold #=> Float
@@ -3080,7 +3077,7 @@ module Aws::Route53
     end
 
     # Retrieves the number of health checks that are associated with the
-    # current account.
+    # current AWS account.
     #
     # @return [Types::GetHealthCheckCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3141,10 +3138,6 @@ module Aws::Route53
     end
 
     # Gets status of a specified health check.
-    #
-    # This API is intended for use during development to diagnose behavior.
-    # It doesn’t support production use-cases with high query rates that
-    # require immediate and actionable responses.
     #
     # @option params [required, String] :health_check_id
     #   The ID for the health check that you want the current status for. When
@@ -3261,7 +3254,7 @@ module Aws::Route53
     end
 
     # Retrieves the number of hosted zones that are associated with the
-    # current account.
+    # current AWS account.
     #
     # @return [Types::GetHostedZoneCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3546,7 +3539,7 @@ module Aws::Route53
     end
 
     # Gets the number of traffic policy instances that are associated with
-    # the current account.
+    # the current AWS account.
     #
     # @return [Types::GetTrafficPolicyInstanceCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3662,7 +3655,7 @@ module Aws::Route53
     end
 
     # Retrieve a list of the health checks that are associated with the
-    # current account.
+    # current AWS account.
     #
     # @option params [String] :marker
     #   If the value of `IsTruncated` in the previous response was `true`, you
@@ -3708,7 +3701,7 @@ module Aws::Route53
     #   resp.health_checks[0].linked_service.description #=> String
     #   resp.health_checks[0].health_check_config.ip_address #=> String
     #   resp.health_checks[0].health_check_config.port #=> Integer
-    #   resp.health_checks[0].health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC", "RECOVERY_CONTROL"
+    #   resp.health_checks[0].health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
     #   resp.health_checks[0].health_check_config.resource_path #=> String
     #   resp.health_checks[0].health_check_config.fully_qualified_domain_name #=> String
     #   resp.health_checks[0].health_check_config.search_string #=> String
@@ -3726,7 +3719,6 @@ module Aws::Route53
     #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
     #   resp.health_checks[0].health_check_config.alarm_identifier.name #=> String
     #   resp.health_checks[0].health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
-    #   resp.health_checks[0].health_check_config.routing_control_arn #=> String
     #   resp.health_checks[0].health_check_version #=> Integer
     #   resp.health_checks[0].cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_checks[0].cloud_watch_alarm_configuration.threshold #=> Float
@@ -3753,7 +3745,7 @@ module Aws::Route53
     end
 
     # Retrieves a list of the public and private hosted zones that are
-    # associated with the current account. The response includes a
+    # associated with the current AWS account. The response includes a
     # `HostedZones` child element for each hosted zone.
     #
     # Amazon Route 53 returns a maximum of 100 items in each response. If
@@ -3829,7 +3821,7 @@ module Aws::Route53
 
     # Retrieves a list of your hosted zones in lexicographic order. The
     # response includes a `HostedZones` child element for each hosted zone
-    # created by the current account.
+    # created by the current AWS account.
     #
     # `ListHostedZonesByName` sorts hosted zones by name with the labels
     # reversed. For example:
@@ -3867,7 +3859,7 @@ module Aws::Route53
     #   produced the current response.
     #
     # * If the value of `IsTruncated` in the response is true, there are
-    #   more hosted zones associated with the current account.
+    #   more hosted zones associated with the current AWS account.
     #
     #   If `IsTruncated` is false, this response includes the last hosted
     #   zone that is associated with the current account. The `NextDNSName`
@@ -3876,7 +3868,7 @@ module Aws::Route53
     #
     # * The `NextDNSName` and `NextHostedZoneId` elements in the response
     #   contain the domain name and the hosted zone ID of the next hosted
-    #   zone that is associated with the current account. If you want to
+    #   zone that is associated with the current AWS account. If you want to
     #   list more hosted zones, make another call to
     #   `ListHostedZonesByName`, and specify the value of `NextDNSName` and
     #   `NextHostedZoneId` in the `dnsname` and `hostedzoneid` parameters,
@@ -3891,7 +3883,7 @@ module Aws::Route53
     #   the `dnsname` parameter only if you want to specify the name of the
     #   first hosted zone in the response. If you don't include the `dnsname`
     #   parameter, Amazon Route 53 returns all of the hosted zones that were
-    #   created by the current account, in ASCII order. For subsequent
+    #   created by the current AWS account, in ASCII order. For subsequent
     #   requests, include both `dnsname` and `hostedzoneid` parameters. For
     #   `dnsname`, specify the value of `NextDNSName` from the previous
     #   response.
@@ -3961,25 +3953,26 @@ module Aws::Route53
     end
 
     # Lists all the private hosted zones that a specified VPC is associated
-    # with, regardless of which account or Amazon Web Services service owns
-    # the hosted zones. The `HostedZoneOwner` structure in the response
-    # contains one of the following values:
+    # with, regardless of which AWS account or AWS service owns the hosted
+    # zones. The `HostedZoneOwner` structure in the response contains one of
+    # the following values:
     #
     # * An `OwningAccount` element, which contains the account number of
-    #   either the current account or another account. Some services, such
-    #   as Cloud Map, create hosted zones using the current account.
+    #   either the current AWS account or another AWS account. Some
+    #   services, such as AWS Cloud Map, create hosted zones using the
+    #   current account.
     #
-    # * An `OwningService` element, which identifies the Amazon Web Services
-    #   service that created and owns the hosted zone. For example, if a
-    #   hosted zone was created by Amazon Elastic File System (Amazon EFS),
-    #   the value of `Owner` is `efs.amazonaws.com`.
+    # * An `OwningService` element, which identifies the AWS service that
+    #   created and owns the hosted zone. For example, if a hosted zone was
+    #   created by Amazon Elastic File System (Amazon EFS), the value of
+    #   `Owner` is `efs.amazonaws.com`.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the Amazon VPC that you want to list hosted zones for.
     #
     # @option params [required, String] :vpc_region
-    #   For the Amazon VPC that you specified for `VPCId`, the Amazon Web
-    #   Services Region that you created the VPC in.
+    #   For the Amazon VPC that you specified for `VPCId`, the AWS Region that
+    #   you created the VPC in.
     #
     # @option params [Integer] :max_items
     #   (Optional) The maximum number of hosted zones that you want Amazon
@@ -4034,8 +4027,8 @@ module Aws::Route53
     end
 
     # Lists the configurations for DNS query logging that are associated
-    # with the current account or the configuration that is associated with
-    # a specified hosted zone.
+    # with the current AWS account or the configuration that is associated
+    # with a specified hosted zone.
     #
     # For more information about DNS query logs, see
     # [CreateQueryLoggingConfig][1]. Additional information, including the
@@ -4053,10 +4046,10 @@ module Aws::Route53
     #
     #   If you don't specify a hosted zone ID, `ListQueryLoggingConfigs`
     #   returns all of the configurations that are associated with the current
-    #   account.
+    #   AWS account.
     #
     # @option params [String] :next_token
-    #   (Optional) If the current account has more than `MaxResults` query
+    #   (Optional) If the current AWS account has more than `MaxResults` query
     #   logging configurations, use `NextToken` to get the second and
     #   subsequent pages of results.
     #
@@ -4069,8 +4062,8 @@ module Aws::Route53
     # @option params [String] :max_results
     #   (Optional) The maximum number of query logging configurations that you
     #   want Amazon Route 53 to return in response to the current request. If
-    #   the current account has more than `MaxResults` configurations, use the
-    #   value of [NextToken][1] in the response to get the next page of
+    #   the current AWS account has more than `MaxResults` configurations, use
+    #   the value of [NextToken][1] in the response to get the next page of
     #   results.
     #
     #   If you don't specify a value for `MaxResults`, Route 53 returns up to
@@ -4297,7 +4290,7 @@ module Aws::Route53
     end
 
     # Retrieves a list of the reusable delegation sets that are associated
-    # with the current account.
+    # with the current AWS account.
     #
     # @option params [String] :marker
     #   If the value of `IsTruncated` in the previous response was `true`, you
@@ -4356,7 +4349,8 @@ module Aws::Route53
     # Lists tags for one health check or hosted zone.
     #
     # For information about using tags for cost allocation, see [Using Cost
-    # Allocation Tags][1] in the *Billing and Cost Management User Guide*.
+    # Allocation Tags][1] in the *AWS Billing and Cost Management User
+    # Guide*.
     #
     #
     #
@@ -4403,7 +4397,8 @@ module Aws::Route53
     # Lists tags for up to 10 health checks or hosted zones.
     #
     # For information about using tags for cost allocation, see [Using Cost
-    # Allocation Tags][1] in the *Billing and Cost Management User Guide*.
+    # Allocation Tags][1] in the *AWS Billing and Cost Management User
+    # Guide*.
     #
     #
     #
@@ -4450,8 +4445,8 @@ module Aws::Route53
     end
 
     # Gets information about the latest version for every traffic policy
-    # that is associated with the current account. Policies are listed in
-    # the order that they were created in.
+    # that is associated with the current AWS account. Policies are listed
+    # in the order that they were created in.
     #
     # For information about how of deleting a traffic policy affects the
     # response from `ListTrafficPolicies`, see [DeleteTrafficPolicy][1].
@@ -4515,7 +4510,7 @@ module Aws::Route53
     end
 
     # Gets information about the traffic policy instances that you created
-    # by using the current account.
+    # by using the current AWS account.
     #
     # <note markdown="1"> After you submit an `UpdateTrafficPolicyInstance` request, there's a
     # brief delay while Amazon Route 53 creates the resource record sets
@@ -4978,8 +4973,8 @@ module Aws::Route53
     # @option params [String] :resolver_ip
     #   If you want to simulate a request from a specific DNS resolver,
     #   specify the IP address for that resolver. If you omit this value,
-    #   `TestDnsAnswer` uses the IP address of a DNS resolver in the Amazon
-    #   Web Services US East (N. Virginia) Region (`us-east-1`).
+    #   `TestDnsAnswer` uses the IP address of a DNS resolver in the AWS US
+    #   East (N. Virginia) Region (`us-east-1`).
     #
     # @option params [String] :edns0_client_subnet_ip
     #   If the resolver that you specified for resolverip supports EDNS0,
@@ -5412,7 +5407,7 @@ module Aws::Route53
     #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
-    #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC", "RECOVERY_CONTROL"
+    #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
     #   resp.health_check.health_check_config.resource_path #=> String
     #   resp.health_check.health_check_config.fully_qualified_domain_name #=> String
     #   resp.health_check.health_check_config.search_string #=> String
@@ -5430,7 +5425,6 @@ module Aws::Route53
     #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
-    #   resp.health_check.health_check_config.routing_control_arn #=> String
     #   resp.health_check.health_check_version #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.threshold #=> Float
@@ -5620,7 +5614,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

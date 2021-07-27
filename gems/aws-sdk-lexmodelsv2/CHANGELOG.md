@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.6.0 (2021-07-27)
-------------------
-
-* Feature - Add waiters that automatically poll for resource status for asynchronous operations, such as building a bot
-
 1.5.0 (2021-06-15)
 ------------------
 

@@ -25,11 +25,11 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # In order to grant the necessary access to the Shield Response Team
-    # (SRT) the user submitting the request must have the `iam:PassRole`
+    # In order to grant the necessary access to the DDoS Response Team
+    # (DRT), the user submitting the request must have the `iam:PassRole`
     # permission. This error indicates the user did not have the appropriate
     # permissions. For more information, see [Granting a User Permissions to
-    # Pass a Role to an Amazon Web Services Service][1].
+    # Pass a Role to an AWS Service][1].
     #
     #
     #
@@ -54,7 +54,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] log_bucket
-    #   The Amazon S3 bucket that contains the logs that you want to share.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucketRequest AWS API Documentation
@@ -77,8 +77,8 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the role the SRT will use to
-    #   access your Amazon Web Services account.
+    #   The Amazon Resource Name (ARN) of the role the DRT will use to
+    #   access your AWS account.
     #
     #   Prior to making the `AssociateDRTRole` request, you must attach the
     #   [AWSShieldDRTAccessPolicy][1] managed policy to this role. For more
@@ -147,8 +147,8 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] emergency_contact_list
-    #   A list of email addresses and phone numbers that the Shield Response
-    #   Team (SRT) can use to contact you for escalations to the SRT and to
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you for escalations to the DRT and to
     #   initiate proactive customer support.
     #
     #   To enable proactive engagement, the contact list must include at
@@ -213,16 +213,7 @@ module Aws::Shield
     #   @return [Array<Types::SummarizedCounter>]
     #
     # @!attribute [rw] attack_properties
-    #   The array of objects that provide details of the Shield event.
-    #
-    #   For infrastructure layer events (L3 and L4 events) after January 25,
-    #   2021, you can view metrics for top contributors in Amazon CloudWatch
-    #   metrics. For more information, see [Shield metrics and alarms][1] in
-    #   the *WAF Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms
+    #   The array of AttackProperty objects.
     #   @return [Array<Types::AttackProperty>]
     #
     # @!attribute [rw] mitigations
@@ -244,41 +235,33 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # Details of a Shield event. This is provided as part of an
-    # AttackDetail.
+    # Details of the described attack.
     #
     # @!attribute [rw] attack_layer
-    #   The type of Shield event that was observed. `NETWORK` indicates
-    #   layer 3 and layer 4 events and `APPLICATION` indicates layer 7
-    #   events.
-    #
-    #   For infrastructure layer events (L3 and L4 events) after January 25,
-    #   2021, you can view metrics for top contributors in Amazon CloudWatch
-    #   metrics. For more information, see [Shield metrics and alarms][1] in
-    #   the *WAF Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms
+    #   The type of distributed denial of service (DDoS) event that was
+    #   observed. `NETWORK` indicates layer 3 and layer 4 events and
+    #   `APPLICATION` indicates layer 7 events.
     #   @return [String]
     #
     # @!attribute [rw] attack_property_identifier
-    #   Defines the Shield event property information that is provided. The
+    #   Defines the DDoS attack property information that is provided. The
     #   `WORDPRESS_PINGBACK_REFLECTOR` and `WORDPRESS_PINGBACK_SOURCE`
-    #   values are valid only for WordPress reflective pingback events.
+    #   values are valid only for WordPress reflective pingback DDoS
+    #   attacks.
     #   @return [String]
     #
     # @!attribute [rw] top_contributors
-    #   Contributor objects for the top five contributors to a Shield event.
+    #   The array of contributor objects that includes the top five
+    #   contributors to an attack.
     #   @return [Array<Types::Contributor>]
     #
     # @!attribute [rw] unit
-    #   The unit used for the `Contributor` `Value` property.
+    #   The unit of the `Value` of the contributions.
     #   @return [String]
     #
     # @!attribute [rw] total
-    #   The total contributions made to this Shield event by all
-    #   contributors.
+    #   The total contributions made to this attack by all contributors, not
+    #   just the five listed in the `TopContributors` list.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackProperty AWS API Documentation
@@ -502,8 +485,8 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] aggregation
-    #   Defines how Shield combines resource data for the group in order to
-    #   detect, mitigate, and report events.
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
     #
     #   * Sum - Use the total traffic across the group. This is a good
     #     choice for most cases. Examples include Elastic IP addresses for
@@ -515,8 +498,9 @@ module Aws::Shield
     #
     #   * Max - Use the highest traffic from each resource. This is useful
     #     for resources that don't share traffic and for resources that
-    #     share that traffic in a non-uniform way. Examples include Amazon
-    #     CloudFront and origin resources for CloudFront distributions.
+    #     share that traffic in a non-uniform way. Examples include
+    #     CloudFront distributions and origin resources for CloudFront
+    #     distributions.
     #   @return [String]
     #
     # @!attribute [rw] pattern
@@ -593,10 +577,10 @@ module Aws::Shield
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
     #     `
     #
-    #   * For an Amazon CloudFront distribution:
+    #   * For an AWS CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
     #
-    #   * For an Global Accelerator accelerator:
+    #   * For an AWS Global Accelerator accelerator:
     #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
     #     `
     #
@@ -764,12 +748,12 @@ module Aws::Shield
     class DescribeDRTAccessRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the role the SRT used to access
-    #   your Amazon Web Services account.
+    #   The Amazon Resource Name (ARN) of the role the DRT used to access
+    #   your AWS account.
     #   @return [String]
     #
     # @!attribute [rw] log_bucket_list
-    #   The list of Amazon S3 buckets accessed by the SRT.
+    #   The list of Amazon S3 buckets accessed by the DRT.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessResponse AWS API Documentation
@@ -788,9 +772,9 @@ module Aws::Shield
     class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] emergency_contact_list
-    #   A list of email addresses and phone numbers that the Shield Response
-    #   Team (SRT) can use to contact you if you have proactive engagement
-    #   enabled, for escalations to the SRT and to initiate proactive
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the DRT and to initiate proactive
     #   customer support.
     #   @return [Array<Types::EmergencyContact>]
     #
@@ -824,8 +808,8 @@ module Aws::Shield
     end
 
     # @!attribute [rw] protection_group
-    #   A grouping of protected resources that you and Shield Advanced can
-    #   monitor as a collective. This resource grouping improves the
+    #   A grouping of protected resources that you and AWS Shield Advanced
+    #   can monitor as a collective. This resource grouping improves the
     #   accuracy of detection and reduces false positives.
     #   @return [Types::ProtectionGroup]
     #
@@ -853,8 +837,8 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the Amazon Web Services resource
-    #   for the Protection object that is described. When submitting the
+    #   The ARN (Amazon Resource Name) of the AWS resource for the
+    #   Protection object that is described. When submitting the
     #   `DescribeProtection` request you must provide either the
     #   `ResourceArn` or the `ProtectionID`, but not both.
     #   @return [String]
@@ -887,7 +871,7 @@ module Aws::Shield
     class DescribeSubscriptionRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] subscription
-    #   The Shield Advanced subscription details for an account.
+    #   The AWS Shield Advanced subscription details for an account.
     #   @return [Types::Subscription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscriptionResponse AWS API Documentation
@@ -916,7 +900,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] log_bucket
-    #   The Amazon S3 bucket that contains the logs that you want to share.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucketRequest AWS API Documentation
@@ -972,8 +956,8 @@ module Aws::Shield
     #
     class DisassociateHealthCheckResponse < Aws::EmptyStructure; end
 
-    # Contact information that the SRT can use to contact you if you have
-    # proactive engagement enabled, for escalations to the SRT and to
+    # Contact information that the DRT can use to contact you if you have
+    # proactive engagement enabled, for escalations to the DRT and to
     # initiate proactive customer support.
     #
     # @note When making an API call, you may pass EmergencyContact
@@ -1298,9 +1282,9 @@ module Aws::Shield
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more protection
-    #   groups than the value of MaxResults, Shield Advanced returns this
-    #   token that you can use in your next request, to get the next batch
-    #   of objects.
+    #   groups than the value of MaxResults, AWS Shield Advanced returns
+    #   this token that you can use in your next request, to get the next
+    #   batch of objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroupsResponse AWS API Documentation
@@ -1352,11 +1336,12 @@ module Aws::Shield
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more
-    #   Protections than the value of MaxResults, Shield Advanced returns a
-    #   NextToken value in the response that allows you to list another
-    #   group of Protections. For the second and subsequent ListProtections
-    #   requests, specify the value of NextToken from the previous response
-    #   to get information about another batch of Protections.
+    #   Protections than the value of MaxResults, AWS Shield Advanced
+    #   returns a NextToken value in the response that allows you to list
+    #   another group of Protections. For the second and subsequent
+    #   ListProtections requests, specify the value of NextToken from the
+    #   previous response to get information about another batch of
+    #   Protections.
     #
     #   Shield Advanced might return the list of Protection objects in
     #   batches smaller than the number specified by MaxResults. If there
@@ -1423,7 +1408,7 @@ module Aws::Shield
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more resources
-    #   in the protection group than the value of MaxResults, Shield
+    #   in the protection group than the value of MaxResults, AWS Shield
     #   Advanced returns this token that you can use in your next request,
     #   to get the next batch of objects.
     #   @return [String]
@@ -1538,8 +1523,8 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the Amazon Web Services resource
-    #   that is protected.
+    #   The ARN (Amazon Resource Name) of the AWS resource that is
+    #   protected.
     #   @return [String]
     #
     # @!attribute [rw] health_check_ids
@@ -1563,7 +1548,7 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # A grouping of protected resources that you and Shield Advanced can
+    # A grouping of protected resources that you and AWS Shield Advanced can
     # monitor as a collective. This resource grouping improves the accuracy
     # of detection and reduces false positives.
     #
@@ -1574,8 +1559,8 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] aggregation
-    #   Defines how Shield combines resource data for the group in order to
-    #   detect, mitigate, and report events.
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
     #
     #   * Sum - Use the total traffic across the group. This is a good
     #     choice for most cases. Examples include Elastic IP addresses for
@@ -1587,7 +1572,7 @@ module Aws::Shield
     #
     #   * Max - Use the highest traffic from each resource. This is useful
     #     for resources that don't share traffic and for resources that
-    #     share that traffic in a non-uniform way. Examples include Amazon
+    #     share that traffic in a non-uniform way. Examples include
     #     CloudFront distributions and origin resources for CloudFront
     #     distributions.
     #   @return [String]
@@ -1762,7 +1747,7 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # Information about the Shield Advanced subscription for an account.
+    # Information about the AWS Shield Advanced subscription for an account.
     #
     # @!attribute [rw] start_time
     #   The start time of the subscription, in Unix time in seconds. For
@@ -1778,8 +1763,8 @@ module Aws::Shield
     #   @return [Time]
     #
     # @!attribute [rw] time_commitment_in_seconds
-    #   The length, in seconds, of the Shield Advanced subscription for the
-    #   account.
+    #   The length, in seconds, of the AWS Shield Advanced subscription for
+    #   the account.
     #   @return [Integer]
     #
     # @!attribute [rw] auto_renew
@@ -1798,15 +1783,15 @@ module Aws::Shield
     #   @return [Array<Types::Limit>]
     #
     # @!attribute [rw] proactive_engagement_status
-    #   If `ENABLED`, the Shield Response Team (SRT) will use email and
-    #   phone to notify contacts about escalations to the SRT and to
-    #   initiate proactive customer support.
+    #   If `ENABLED`, the DDoS Response Team (DRT) will use email and phone
+    #   to notify contacts about escalations to the DRT and to initiate
+    #   proactive customer support.
     #
     #   If `PENDING`, you have requested proactive engagement and the
     #   request is pending. The status changes to `ENABLED` when your
     #   request is fully processed.
     #
-    #   If `DISABLED`, the SRT will not proactively notify contacts about
+    #   If `DISABLED`, the DRT will not proactively notify contacts about
     #   escalations or to initiate proactive customer support.
     #   @return [String]
     #
@@ -1910,15 +1895,15 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # A tag associated with an Amazon Web Services resource. Tags are
-    # key:value pairs that you can use to categorize and manage your
-    # resources, for purposes like billing or other management. Typically,
-    # the tag key represents a category, such as "environment", and the
-    # tag value represents a specific value within that category, such as
-    # "test," "development," or "production". Or you might set the tag
-    # key to "customer" and the value to the customer name or ID. You can
-    # specify one or more tags to add to each Amazon Web Services resource,
-    # up to 50 tags for a resource.
+    # A tag associated with an AWS resource. Tags are key:value pairs that
+    # you can use to categorize and manage your resources, for purposes like
+    # billing or other management. Typically, the tag key represents a
+    # category, such as "environment", and the tag value represents a
+    # specific value within that category, such as "test,"
+    # "development," or "production". Or you might set the tag key to
+    # "customer" and the value to the customer name or ID. You can specify
+    # one or more tags to add to each AWS resource, up to 50 tags for a
+    # resource.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -2065,9 +2050,9 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] emergency_contact_list
-    #   A list of email addresses and phone numbers that the Shield Response
-    #   Team (SRT) can use to contact you if you have proactive engagement
-    #   enabled, for escalations to the SRT and to initiate proactive
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the DRT and to initiate proactive
     #   customer support.
     #
     #   If you have proactive engagement enabled, the contact list must
@@ -2104,8 +2089,8 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] aggregation
-    #   Defines how Shield combines resource data for the group in order to
-    #   detect, mitigate, and report events.
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
     #
     #   * Sum - Use the total traffic across the group. This is a good
     #     choice for most cases. Examples include Elastic IP addresses for
@@ -2117,7 +2102,7 @@ module Aws::Shield
     #
     #   * Max - Use the highest traffic from each resource. This is useful
     #     for resources that don't share traffic and for resources that
-    #     share that traffic in a non-uniform way. Examples include Amazon
+    #     share that traffic in a non-uniform way. Examples include
     #     CloudFront distributions and origin resources for CloudFront
     #     distributions.
     #   @return [String]

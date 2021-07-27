@@ -148,9 +148,9 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # *Alias resource record sets only:* Information about the Amazon Web
-    # Services resource, such as a CloudFront distribution or an Amazon S3
-    # bucket, that you want to route traffic to.
+    # *Alias resource record sets only:* Information about the AWS resource,
+    # such as a CloudFront distribution or an Amazon S3 bucket, that you
+    # want to route traffic to.
     #
     # When creating resource record sets for a private hosted zone, note the
     # following:
@@ -182,7 +182,7 @@ module Aws::Route53
     #   Amazon API Gateway custom regional APIs and edge-optimized APIs
     #
     #   : Specify the hosted zone ID for your API. You can get the
-    #     applicable value using the CLI command [get-domain-names][1]\:
+    #     applicable value using the AWS CLI command [get-domain-names][1]\:
     #
     #     * For regional APIs, specify the value of `regionalHostedZoneId`.
     #
@@ -192,7 +192,7 @@ module Aws::Route53
     #   Amazon Virtual Private Cloud interface VPC endpoint
     #
     #   : Specify the hosted zone ID for your interface endpoint. You can
-    #     get the value of `HostedZoneId` using the CLI command
+    #     get the value of `HostedZoneId` using the AWS CLI command
     #     [describe-vpc-endpoints][2].
     #
     #   CloudFront distribution
@@ -209,8 +209,8 @@ module Aws::Route53
     #   : Specify the hosted zone ID for the region that you created the
     #     environment in. The environment must have a regionalized
     #     subdomain. For a list of regions and the corresponding hosted zone
-    #     IDs, see [Elastic Beanstalk endpoints and quotas][3] in the the
-    #     *Amazon Web Services General Reference*.
+    #     IDs, see [AWS Elastic Beanstalk endpoints and quotas][3] in the
+    #     the *Amazon Web Services General Reference*.
     #
     #   ELB load balancer
     #
@@ -223,7 +223,7 @@ module Aws::Route53
     #       in. Note that there are separate columns for Application and
     #       Classic Load Balancers and for Network Load Balancers.
     #
-    #     * **Management Console**\: Go to the Amazon EC2 page, choose
+    #     * **AWS Management Console**\: Go to the Amazon EC2 page, choose
     #       **Load Balancers** in the navigation pane, select the load
     #       balancer, and get the value of the **Hosted zone** field on the
     #       **Description** tab.
@@ -239,8 +239,9 @@ module Aws::Route53
     #         [DescribeLoadBalancers][6] to get the value of
     #         `CanonicalHostedZoneId`.
     #
-    #     * **CLI**\: Use `describe-load-balancers` to get the applicable
-    #       value. For more information, see the applicable guide:
+    #     * **AWS CLI**\: Use `describe-load-balancers` to get the
+    #       applicable value. For more information, see the applicable
+    #       guide:
     #
     #       * Classic Load Balancers: Use [describe-load-balancers][7] to
     #         get the value of `CanonicalHostedZoneNameId`.
@@ -249,7 +250,7 @@ module Aws::Route53
     #         [describe-load-balancers][8] to get the value of
     #         `CanonicalHostedZoneId`.
     #
-    #   Global Accelerator accelerator
+    #   AWS Global Accelerator accelerator
     #
     #   : Specify `Z2BJ6XQ5FK7U4H`.
     #
@@ -286,7 +287,7 @@ module Aws::Route53
     #   Amazon API Gateway custom regional APIs and edge-optimized APIs
     #
     #   : Specify the applicable domain name for your API. You can get the
-    #     applicable value using the CLI command [get-domain-names][1]\:
+    #     applicable value using the AWS CLI command [get-domain-names][1]\:
     #
     #     * For regional APIs, specify the value of `regionalDomainName`.
     #
@@ -305,7 +306,7 @@ module Aws::Route53
     #     `vpce-123456789abcdef01-example-us-east-1a.elasticloadbalancing.us-east-1.vpce.amazonaws.com`.
     #     For edge-optimized APIs, this is the domain name for the
     #     corresponding CloudFront distribution. You can get the value of
-    #     `DnsName` using the CLI command [describe-vpc-endpoints][2].
+    #     `DnsName` using the AWS CLI command [describe-vpc-endpoints][2].
     #
     #   CloudFront distribution
     #
@@ -355,27 +356,27 @@ module Aws::Route53
     #     can use the following methods to get the value of the CNAME
     #     attribute:
     #
-    #     * *Management Console*\: For information about how to get the
-    #       value by using the console, see [Using Custom Domains with
-    #       Elastic Beanstalk][4] in the *Elastic Beanstalk Developer
+    #     * *AWS Management Console*\: For information about how to get the
+    #       value by using the console, see [Using Custom Domains with AWS
+    #       Elastic Beanstalk][4] in the *AWS Elastic Beanstalk Developer
     #       Guide*.
     #
     #     * *Elastic Beanstalk API*\: Use the `DescribeEnvironments` action
     #       to get the value of the `CNAME` attribute. For more information,
-    #       see [DescribeEnvironments][5] in the *Elastic Beanstalk API
+    #       see [DescribeEnvironments][5] in the *AWS Elastic Beanstalk API
     #       Reference*.
     #
-    #     * *CLI*\: Use the `describe-environments` command to get the value
-    #       of the `CNAME` attribute. For more information, see
-    #       [describe-environments][6] in the *CLI Command Reference*.
+    #     * *AWS CLI*\: Use the `describe-environments` command to get the
+    #       value of the `CNAME` attribute. For more information, see
+    #       [describe-environments][6] in the *AWS CLI Command Reference*.
     #
     #   ELB load balancer
     #
     #   : Specify the DNS name that is associated with the load balancer.
-    #     Get the DNS name by using the Management Console, the ELB API, or
-    #     the CLI.
+    #     Get the DNS name by using the AWS Management Console, the ELB API,
+    #     or the AWS CLI.
     #
-    #     * **Management Console**\: Go to the EC2 page, choose **Load
+    #     * **AWS Management Console**\: Go to the EC2 page, choose **Load
     #       Balancers** in the navigation pane, choose the load balancer,
     #       choose the **Description** tab, and get the value of the **DNS
     #       name** field.
@@ -394,7 +395,7 @@ module Aws::Route53
     #       * Application and Network Load Balancers:
     #         [DescribeLoadBalancers][8]
     #
-    #     * **CLI**\: Use `describe-load-balancers` to get the value of
+    #     * **AWS CLI**\: Use `describe-load-balancers` to get the value of
     #       `DNSName`. For more information, see the applicable guide:
     #
     #       * Classic Load Balancers: [describe-load-balancers][9]
@@ -402,14 +403,15 @@ module Aws::Route53
     #       * Application and Network Load Balancers:
     #         [describe-load-balancers][10]
     #
-    #   Global Accelerator accelerator
+    #   AWS Global Accelerator accelerator
     #
     #   : Specify the DNS name for your accelerator:
     #
     #     * **Global Accelerator API:** To get the DNS name, use
     #       [DescribeAccelerator][11].
     #
-    #     * **CLI:** To get the DNS name, use [describe-accelerator][12].
+    #     * **AWS CLI:** To get the DNS name, use
+    #       [describe-accelerator][12].
     #
     #   Amazon S3 bucket that is configured as a static website
     #
@@ -458,9 +460,8 @@ module Aws::Route53
     #   *Applies only to alias, failover alias, geolocation alias, latency
     #   alias, and weighted alias resource record sets:* When
     #   `EvaluateTargetHealth` is `true`, an alias resource record set
-    #   inherits the health of the referenced Amazon Web Services resource,
-    #   such as an ELB load balancer or another resource record set in the
-    #   hosted zone.
+    #   inherits the health of the referenced AWS resource, such as an ELB
+    #   load balancer or another resource record set in the hosted zone.
     #
     #   Note the following:
     #
@@ -527,12 +528,12 @@ module Aws::Route53
     #
     #   Other records in the same hosted zone
     #
-    #   : If the Amazon Web Services resource that you specify in `DNSName`
-    #     is a record or a group of records (for example, a group of
-    #     weighted records) but is not another alias record, we recommend
-    #     that you associate a health check with all of the records in the
-    #     alias target. For more information, see [What Happens When You
-    #     Omit Health Checks?][1] in the *Amazon Route 53 Developer Guide*.
+    #   : If the AWS resource that you specify in `DNSName` is a record or a
+    #     group of records (for example, a group of weighted records) but is
+    #     not another alias record, we recommend that you associate a health
+    #     check with all of the records in the alias target. For more
+    #     information, see [What Happens When You Omit Health Checks?][1] in
+    #     the *Amazon Route 53 Developer Guide*.
     #
     #   For more information and examples, see [Amazon Route 53 Health
     #   Checks and DNS Failover][2] in the *Amazon Route 53 Developer
@@ -749,12 +750,7 @@ module Aws::Route53
     # your hosted zone.
     #
     # @!attribute [rw] id
-    #   This element contains an ID that you use when performing a
-    #   [GetChange][1] action to get detailed information about the change.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html
+    #   The ID of the request.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -774,7 +770,15 @@ module Aws::Route53
     #   @return [Time]
     #
     # @!attribute [rw] comment
-    #   A comment you can provide.
+    #   A complex type that describes change information about changes made
+    #   to your hosted zone.
+    #
+    #   This element contains an ID that you use when performing a
+    #   [GetChange][1] action to get detailed information about the change.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeInfo AWS API Documentation
@@ -1080,7 +1084,7 @@ module Aws::Route53
     #         health_check_config: { # required
     #           ip_address: "IPAddress",
     #           port: 1,
-    #           type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC, RECOVERY_CONTROL
+    #           type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC
     #           resource_path: "ResourcePath",
     #           fully_qualified_domain_name: "FullyQualifiedDomainName",
     #           search_string: "SearchString",
@@ -1098,7 +1102,6 @@ module Aws::Route53
     #             name: "AlarmName", # required
     #           },
     #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
-    #           routing_control_arn: "RoutingControlArn",
     #         },
     #       }
     #
@@ -1310,7 +1313,7 @@ module Aws::Route53
     #
     # @!attribute [rw] key_management_service_arn
     #   The Amazon resource name (ARN) for a customer managed customer
-    #   master key (CMK) in Key Management Service (KMS). The
+    #   master key (CMK) in AWS Key Management Service (AWS KMS). The
     #   `KeyManagementServiceArn` must be unique for each key-signing key
     #   (KSK) in a single hosted zone. To see an example of
     #   `KeyManagementServiceArn` that grants the correct permissions for
@@ -1343,12 +1346,12 @@ module Aws::Route53
     #     The key policy must also include the Amazon Route 53 service in
     #     the principal for your account. Specify the following:
     #
-    #     * `"Service": "dnssec-route53.amazonaws.com"`
+    #     * `"Service": "dnssec.route53.aws.amazonaws.com"`
     #
     #     ^
     #
     #   For more information about working with a customer managed CMK in
-    #   KMS, see [Key Management Service concepts][1].
+    #   AWS KMS, see [AWS Key Management Service concepts][1].
     #
     #
     #
@@ -1423,8 +1426,7 @@ module Aws::Route53
     #
     #   To get the ARN for a log group, you can use the CloudWatch console,
     #   the [DescribeLogGroups][1] API action, the [describe-log-groups][2]
-    #   command, or the applicable command in one of the Amazon Web Services
-    #   SDKs.
+    #   command, or the applicable command in one of the AWS SDKs.
     #
     #
     #
@@ -2182,8 +2184,8 @@ module Aws::Route53
     class DeleteTrafficPolicyResponse < Aws::EmptyStructure; end
 
     # A complex type that contains information about the request to remove
-    # authorization to associate a VPC that was created by one account with
-    # a hosted zone that was created with a different account.
+    # authorization to associate a VPC that was created by one AWS account
+    # with a hosted zone that was created with a different AWS account.
     #
     # @note When making an API call, you may pass DeleteVPCAssociationAuthorizationRequest
     #   data as a hash:
@@ -2198,14 +2200,15 @@ module Aws::Route53
     #
     # @!attribute [rw] hosted_zone_id
     #   When removing authorization to associate a VPC that was created by
-    #   one account with a hosted zone that was created with a different
-    #   account, the ID of the hosted zone.
+    #   one AWS account with a hosted zone that was created with a different
+    #   AWS account, the ID of the hosted zone.
     #   @return [String]
     #
     # @!attribute [rw] vpc
     #   When removing authorization to associate a VPC that was created by
-    #   one account with a hosted zone that was created with a different
-    #   account, a complex type that includes the ID and region of the VPC.
+    #   one AWS account with a hosted zone that was created with a different
+    #   AWS account, a complex type that includes the ID and region of the
+    #   VPC.
     #   @return [Types::VPC]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorizationRequest AWS API Documentation
@@ -2730,7 +2733,7 @@ module Aws::Route53
     end
 
     # A request for the number of health checks that are associated with the
-    # current account.
+    # current AWS account.
     #
     # @api private
     #
@@ -2742,7 +2745,7 @@ module Aws::Route53
     # request.
     #
     # @!attribute [rw] health_check_count
-    #   The number of health checks associated with the current account.
+    #   The number of health checks associated with the current AWS account.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCountResponse AWS API Documentation
@@ -2828,7 +2831,7 @@ module Aws::Route53
     #
     # @!attribute [rw] health_check
     #   A complex type that contains information about one health check that
-    #   is associated with the current account.
+    #   is associated with the current AWS account.
     #   @return [Types::HealthCheck]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckResponse AWS API Documentation
@@ -2887,7 +2890,7 @@ module Aws::Route53
     end
 
     # A request to retrieve a count of all the hosted zones that are
-    # associated with the current account.
+    # associated with the current AWS account.
     #
     # @api private
     #
@@ -2900,7 +2903,7 @@ module Aws::Route53
     #
     # @!attribute [rw] hosted_zone_count
     #   The total number of public and private hosted zones that are
-    #   associated with the current account.
+    #   associated with the current AWS account.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCountResponse AWS API Documentation
@@ -3149,7 +3152,7 @@ module Aws::Route53
     end
 
     # Request to get the number of traffic policy instances that are
-    # associated with the current account.
+    # associated with the current AWS account.
     #
     # @api private
     #
@@ -3162,7 +3165,7 @@ module Aws::Route53
     #
     # @!attribute [rw] traffic_policy_instance_count
     #   The number of traffic policy instances that are associated with the
-    #   current account.
+    #   current AWS account.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountResponse AWS API Documentation
@@ -3255,7 +3258,7 @@ module Aws::Route53
     end
 
     # A complex type that contains information about one health check that
-    # is associated with the current Amazon Web Services account.
+    # is associated with the current AWS account.
     #
     # @!attribute [rw] id
     #   The identifier that Amazon Route 53 assigned to the health check
@@ -3335,7 +3338,7 @@ module Aws::Route53
     #       {
     #         ip_address: "IPAddress",
     #         port: 1,
-    #         type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC, RECOVERY_CONTROL
+    #         type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC
     #         resource_path: "ResourcePath",
     #         fully_qualified_domain_name: "FullyQualifiedDomainName",
     #         search_string: "SearchString",
@@ -3353,7 +3356,6 @@ module Aws::Route53
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
-    #         routing_control_arn: "RoutingControlArn",
     #       }
     #
     # @!attribute [rw] ip_address
@@ -3459,12 +3461,6 @@ module Aws::Route53
     #     other health checks, Route 53 adds up the number of health checks
     #     that Route 53 health checkers consider to be healthy and compares
     #     that number with the value of `HealthThreshold`.
-    #
-    #   * **RECOVERY\_CONTROL**\: The health check is assocated with a
-    #     Route53 Application Recovery Controller routing control. If the
-    #     routing control state is `ON`, the health check is considered
-    #     healthy. If the state is `OFF`, the health check is considered
-    #     unhealthy.
     #
     #   For more information, see [How Route 53 Determines Whether an
     #   Endpoint Is Healthy][1] in the *Amazon Route 53 Developer Guide*.
@@ -3590,9 +3586,9 @@ module Aws::Route53
     #
     # @!attribute [rw] measure_latency
     #   Specify whether you want Amazon Route 53 to measure the latency
-    #   between health checkers in multiple Amazon Web Services regions and
-    #   your endpoint, and to display CloudWatch latency graphs on the
-    #   **Health Checks** page in the Route 53 console.
+    #   between health checkers in multiple AWS regions and your endpoint,
+    #   and to display CloudWatch latency graphs on the **Health Checks**
+    #   page in the Route 53 console.
     #
     #   You can't change the value of `MeasureLatency` after you create a
     #   health check.
@@ -3723,11 +3719,6 @@ module Aws::Route53
     #     known status, the default status for the health check is healthy.
     #   @return [String]
     #
-    # @!attribute [rw] routing_control_arn
-    #   The Amazon Resource Name (ARN) for Route53 Application Recovery
-    #   Controller routing control.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckConfig AWS API Documentation
     #
     class HealthCheckConfig < Struct.new(
@@ -3747,8 +3738,7 @@ module Aws::Route53
       :enable_sni,
       :regions,
       :alarm_identifier,
-      :insufficient_data_health_status,
-      :routing_control_arn)
+      :insufficient_data_health_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3983,20 +3973,20 @@ module Aws::Route53
     # vice versa.
     #
     # @!attribute [rw] owning_account
-    #   If the hosted zone was created by an account, or was created by an
-    #   Amazon Web Services service that creates hosted zones using the
-    #   current account, `OwningAccount` contains the account ID of that
-    #   account. For example, when you use Cloud Map to create a hosted
-    #   zone, Cloud Map creates the hosted zone using the current account.
+    #   If the hosted zone was created by an AWS account, or was created by
+    #   an AWS service that creates hosted zones using the current account,
+    #   `OwningAccount` contains the account ID of that account. For
+    #   example, when you use AWS Cloud Map to create a hosted zone, Cloud
+    #   Map creates the hosted zone using the current AWS account.
     #   @return [String]
     #
     # @!attribute [rw] owning_service
-    #   If an Amazon Web Services service uses its own account to create a
-    #   hosted zone and associate the specified VPC with that hosted zone,
-    #   `OwningService` contains an abbreviation that identifies the
-    #   service. For example, if Amazon Elastic File System (Amazon EFS)
-    #   created a hosted zone and associated a VPC with the hosted zone, the
-    #   value of `OwningService` is `efs.amazonaws.com`.
+    #   If an AWS service uses its own account to create a hosted zone and
+    #   associate the specified VPC with that hosted zone, `OwningService`
+    #   contains an abbreviation that identifies the service. For example,
+    #   if Amazon Elastic File System (Amazon EFS) created a hosted zone and
+    #   associated a VPC with the hosted zone, the value of `OwningService`
+    #   is `efs.amazonaws.com`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneOwner AWS API Documentation
@@ -4039,8 +4029,8 @@ module Aws::Route53
     #
     # @!attribute [rw] owner
     #   The owner of a private hosted zone that the specified VPC is
-    #   associated with. The owner can be either an account or an Amazon Web
-    #   Services service.
+    #   associated with. The owner can be either an AWS account or an AWS
+    #   service.
     #   @return [Types::HostedZoneOwner]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneSummary AWS API Documentation
@@ -4078,11 +4068,6 @@ module Aws::Route53
     #   `Resource` doesn't have the necessary permissions.
     #
     # * The resource policy hasn't finished propagating yet.
-    #
-    # * The Key management service (KMS) key you specified doesn’t exist or
-    #   it can’t be used with the log group associated with query log.
-    #   Update or provide a resource policy to grant permissions for the KMS
-    #   key.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4264,9 +4249,9 @@ module Aws::Route53
     #
     # @!attribute [rw] kms_arn
     #   The Amazon resource name (ARN) used to identify the customer managed
-    #   customer master key (CMK) in Key Management Service (KMS). The
-    #   `KmsArn` must be unique for each key-signing key (KSK) in a single
-    #   hosted zone.
+    #   customer master key (CMK) in AWS Key Management Service (AWS KMS).
+    #   The `KmsArn` must be unique for each key-signing key (KSK) in a
+    #   single hosted zone.
     #
     #   You must configure the CMK as follows:
     #
@@ -4295,12 +4280,12 @@ module Aws::Route53
     #     The key policy must also include the Amazon Route 53 service in
     #     the principal for your account. Specify the following:
     #
-    #     * `"Service": "dnssec-route53.amazonaws.com"`
+    #     * `"Service": "api-service.dnssec.route53.aws.internal"`
     #
     #     ^
     #
     #   For more information about working with the customer managed CMK in
-    #   KMS, see [Key Management Service concepts][1].
+    #   AWS KMS, see [AWS Key Management Service concepts][1].
     #
     #
     #
@@ -4532,8 +4517,8 @@ module Aws::Route53
     # on the number of reusable delegation sets, see [GetAccountLimit][1].
     # To get the current limit on the number of Amazon VPCs that you can
     # associate with a private hosted zone, see [GetHostedZoneLimit][2]. To
-    # request a higher limit, [create a case][3] with the Amazon Web
-    # Services Support Center.
+    # request a higher limit, [create a case][3] with the AWS Support
+    # Center.
     #
     #
     #
@@ -4698,7 +4683,7 @@ module Aws::Route53
     end
 
     # A request to retrieve a list of the health checks that are associated
-    # with the current account.
+    # with the current AWS account.
     #
     # @note When making an API call, you may pass ListHealthChecksRequest
     #   data as a hash:
@@ -4742,7 +4727,7 @@ module Aws::Route53
     #
     # @!attribute [rw] health_checks
     #   A complex type that contains one `HealthCheck` element for each
-    #   health check that is associated with the current account.
+    #   health check that is associated with the current AWS account.
     #   @return [Array<Types::HealthCheck>]
     #
     # @!attribute [rw] marker
@@ -4783,7 +4768,7 @@ module Aws::Route53
     end
 
     # Retrieves a list of the public and private hosted zones that are
-    # associated with the current account in ASCII order by domain name.
+    # associated with the current AWS account in ASCII order by domain name.
     #
     # @note When making an API call, you may pass ListHostedZonesByNameRequest
     #   data as a hash:
@@ -4799,7 +4784,7 @@ module Aws::Route53
     #   include the `dnsname` parameter only if you want to specify the name
     #   of the first hosted zone in the response. If you don't include the
     #   `dnsname` parameter, Amazon Route 53 returns all of the hosted zones
-    #   that were created by the current account, in ASCII order. For
+    #   that were created by the current AWS account, in ASCII order. For
     #   subsequent requests, include both `dnsname` and `hostedzoneid`
     #   parameters. For `dnsname`, specify the value of `NextDNSName` from
     #   the previous response.
@@ -4903,7 +4888,7 @@ module Aws::Route53
     end
 
     # Lists all the private hosted zones that a specified VPC is associated
-    # with, regardless of which account created the hosted zones.
+    # with, regardless of which AWS account created the hosted zones.
     #
     # @note When making an API call, you may pass ListHostedZonesByVPCRequest
     #   data as a hash:
@@ -4920,8 +4905,8 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] vpc_region
-    #   For the Amazon VPC that you specified for `VPCId`, the Amazon Web
-    #   Services Region that you created the VPC in.
+    #   For the Amazon VPC that you specified for `VPCId`, the AWS Region
+    #   that you created the VPC in.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -4969,7 +4954,7 @@ module Aws::Route53
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The value that you will use for `NextToken` in the next
+    #   The value that you specified for `NextToken` in the most recent
     #   `ListHostedZonesByVPC` request.
     #   @return [String]
     #
@@ -4984,7 +4969,7 @@ module Aws::Route53
     end
 
     # A request to retrieve a list of the public and private hosted zones
-    # that are associated with the current account.
+    # that are associated with the current AWS account.
     #
     # @note When making an API call, you may pass ListHostedZonesRequest
     #   data as a hash:
@@ -5091,12 +5076,12 @@ module Aws::Route53
     #
     #   If you don't specify a hosted zone ID, `ListQueryLoggingConfigs`
     #   returns all of the configurations that are associated with the
-    #   current account.
+    #   current AWS account.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   (Optional) If the current account has more than `MaxResults` query
-    #   logging configurations, use `NextToken` to get the second and
+    #   (Optional) If the current AWS account has more than `MaxResults`
+    #   query logging configurations, use `NextToken` to get the second and
     #   subsequent pages of results.
     #
     #   For the first `ListQueryLoggingConfigs` request, omit this value.
@@ -5109,7 +5094,7 @@ module Aws::Route53
     # @!attribute [rw] max_results
     #   (Optional) The maximum number of query logging configurations that
     #   you want Amazon Route 53 to return in response to the current
-    #   request. If the current account has more than `MaxResults`
+    #   request. If the current AWS account has more than `MaxResults`
     #   configurations, use the value of [NextToken][1] in the response to
     #   get the next page of results.
     #
@@ -5134,7 +5119,7 @@ module Aws::Route53
     # @!attribute [rw] query_logging_configs
     #   An array that contains one [QueryLoggingConfig][1] element for each
     #   configuration for DNS query logging that is associated with the
-    #   current account.
+    #   current AWS account.
     #
     #
     #
@@ -5143,8 +5128,8 @@ module Aws::Route53
     #
     # @!attribute [rw] next_token
     #   If a response includes the last of the query logging configurations
-    #   that are associated with the current account, `NextToken` doesn't
-    #   appear in the response.
+    #   that are associated with the current AWS account, `NextToken`
+    #   doesn't appear in the response.
     #
     #   If a response doesn't include the last of the configurations, you
     #   can get more configurations by submitting another
@@ -5313,7 +5298,7 @@ module Aws::Route53
     end
 
     # A request to get a list of the reusable delegation sets that are
-    # associated with the current account.
+    # associated with the current AWS account.
     #
     # @note When making an API call, you may pass ListReusableDelegationSetsRequest
     #   data as a hash:
@@ -5354,11 +5339,11 @@ module Aws::Route53
     end
 
     # A complex type that contains information about the reusable delegation
-    # sets that are associated with the current account.
+    # sets that are associated with the current AWS account.
     #
     # @!attribute [rw] delegation_sets
     #   A complex type that contains one `DelegationSet` element for each
-    #   reusable delegation set that was created by the current account.
+    #   reusable delegation set that was created by the current AWS account.
     #   @return [Array<Types::DelegationSet>]
     #
     # @!attribute [rw] marker
@@ -5494,7 +5479,7 @@ module Aws::Route53
     end
 
     # A complex type that contains the information about the request to list
-    # the traffic policies that are associated with the current account.
+    # the traffic policies that are associated with the current AWS account.
     #
     # @note When making an API call, you may pass ListTrafficPoliciesRequest
     #   data as a hash:
@@ -5538,7 +5523,7 @@ module Aws::Route53
     #
     # @!attribute [rw] traffic_policy_summaries
     #   A list that contains one `TrafficPolicySummary` element for each
-    #   traffic policy that was created by the current account.
+    #   traffic policy that was created by the current AWS account.
     #   @return [Array<Types::TrafficPolicySummary>]
     #
     # @!attribute [rw] is_truncated
@@ -5836,7 +5821,7 @@ module Aws::Route53
     end
 
     # A request to get information about the traffic policy instances that
-    # you created by using the current account.
+    # you created by using the current AWS account.
     #
     # @note When making an API call, you may pass ListTrafficPolicyInstancesRequest
     #   data as a hash:
@@ -6600,9 +6585,9 @@ module Aws::Route53
     # @!attribute [rw] region
     #   *Latency-based resource record sets only:* The Amazon EC2 Region
     #   where you created the resource that this resource record set refers
-    #   to. The resource typically is an Amazon Web Services resource, such
-    #   as an EC2 instance or an ELB load balancer, and is referred to by an
-    #   IP address or a DNS domain name, depending on the record type.
+    #   to. The resource typically is an AWS resource, such as an EC2
+    #   instance or an ELB load balancer, and is referred to by an IP
+    #   address or a DNS domain name, depending on the record type.
     #
     #   <note markdown="1"> Although creating latency and latency alias resource record sets in
     #   a private hosted zone is allowed, it's not supported.
@@ -6800,9 +6785,9 @@ module Aws::Route53
     #   @return [Array<Types::ResourceRecord>]
     #
     # @!attribute [rw] alias_target
-    #   *Alias resource record sets only:* Information about the Amazon Web
-    #   Services resource, such as a CloudFront distribution or an Amazon S3
-    #   bucket, that you want to route traffic to.
+    #   *Alias resource record sets only:* Information about the AWS
+    #   resource, such as a CloudFront distribution or an Amazon S3 bucket,
+    #   that you want to route traffic to.
     #
     #   If you're creating resource records sets for a private hosted zone,
     #   note the following:
@@ -7151,8 +7136,8 @@ module Aws::Route53
     # @!attribute [rw] resolver_ip
     #   If you want to simulate a request from a specific DNS resolver,
     #   specify the IP address for that resolver. If you omit this value,
-    #   `TestDnsAnswer` uses the IP address of a DNS resolver in the Amazon
-    #   Web Services US East (N. Virginia) Region (`us-east-1`).
+    #   `TestDnsAnswer` uses the IP address of a DNS resolver in the AWS US
+    #   East (N. Virginia) Region (`us-east-1`).
     #   @return [String]
     #
     # @!attribute [rw] edns0_client_subnet_ip
@@ -7265,11 +7250,11 @@ module Aws::Route53
     #
     # For information about how to get the current limit for an account, see
     # [GetAccountLimit][2]. To request a higher limit, [create a case][3]
-    # with the Amazon Web Services Support Center.
+    # with the AWS Support Center.
     #
-    # You have reached the maximum number of active health checks for an
-    # account. To request a higher limit, [create a case][3] with the Amazon
-    # Web Services Support Center.
+    # You have reached the maximum number of active health checks for an AWS
+    # account. To request a higher limit, [create a case][3] with the AWS
+    # Support Center.
     #
     #
     #
@@ -7302,8 +7287,8 @@ module Aws::Route53
     # To get the current limit on hosted zones that can be associated with a
     # reusable delegation set, see [GetReusableDelegationSetLimit][3].
     #
-    # To request a higher limit, [create a case][4] with the Amazon Web
-    # Services Support Center.
+    # To request a higher limit, [create a case][4] with the AWS Support
+    # Center.
     #
     #
     #
@@ -7345,8 +7330,8 @@ module Aws::Route53
     #
     # To get the current limit for an account, see [GetAccountLimit][2].
     #
-    # To request a higher limit, [create a case][3] with the Amazon Web
-    # Services Support Center.
+    # To request a higher limit, [create a case][3] with the AWS Support
+    # Center.
     #
     #
     #
@@ -7375,8 +7360,8 @@ module Aws::Route53
     # For information about how to get the current limit for an account, see
     # [GetAccountLimit][2].
     #
-    # To request a higher limit, [create a case][3] with the Amazon Web
-    # Services Support Center.
+    # To request a higher limit, [create a case][3] with the AWS Support
+    # Center.
     #
     #
     #
@@ -7612,7 +7597,7 @@ module Aws::Route53
     end
 
     # A complex type that contains information about the latest version of
-    # one traffic policy that is associated with the current account.
+    # one traffic policy that is associated with the current AWS account.
     #
     # @!attribute [rw] id
     #   The ID that Amazon Route 53 assigned to the traffic policy when you
@@ -7636,7 +7621,7 @@ module Aws::Route53
     #
     # @!attribute [rw] traffic_policy_count
     #   The number of traffic policies that are associated with the current
-    #   account.
+    #   AWS account.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicySummary AWS API Documentation

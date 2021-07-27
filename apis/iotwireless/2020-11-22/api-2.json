@@ -2705,7 +2705,6 @@
     "SidewalkDevice":{
       "type":"structure",
       "members":{
-        "AmazonId":{"shape":"AmazonId"},
         "SidewalkId":{"shape":"SidewalkId"},
         "SidewalkManufacturingSn":{"shape":"SidewalkManufacturingSn"},
         "DeviceCertificates":{"shape":"DeviceCertificateList"}
@@ -3082,8 +3081,7 @@
       "enum":[
         "WirelessDeviceId",
         "DevEui",
-        "ThingName",
-        "SidewalkManufacturingSn"
+        "ThingName"
       ]
     },
     "WirelessDeviceLogOption":{

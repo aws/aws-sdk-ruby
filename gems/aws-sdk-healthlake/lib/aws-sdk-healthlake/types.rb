@@ -526,9 +526,12 @@ module Aws::HealthLake
 
     # The input properties for an import job.
     #
-    # @note InputDataConfig is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass InputDataConfig
+    #   data as a hash:
     #
-    # @note InputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InputDataConfig corresponding to the set member.
+    #       {
+    #         s3_uri: "S3Uri",
+    #       }
     #
     # @!attribute [rw] s3_uri
     #   The S3Uri is the user specified S3 location of the FHIR data to be
@@ -538,14 +541,9 @@ module Aws::HealthLake
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/InputDataConfig AWS API Documentation
     #
     class InputDataConfig < Struct.new(
-      :s3_uri,
-      :unknown)
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class S3Uri < InputDataConfig; end
-      class Unknown < InputDataConfig; end
     end
 
     # Unknown error occurs in the service.
@@ -844,9 +842,15 @@ module Aws::HealthLake
     # The output data configuration that was supplied when the export job
     # was created.
     #
-    # @note OutputDataConfig is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass OutputDataConfig
+    #   data as a hash:
     #
-    # @note OutputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputDataConfig corresponding to the set member.
+    #       {
+    #         s3_configuration: {
+    #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "EncryptionKeyID", # required
+    #         },
+    #       }
     #
     # @!attribute [rw] s3_configuration
     #   The output data configuration that was supplied when the export job
@@ -856,14 +860,9 @@ module Aws::HealthLake
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/OutputDataConfig AWS API Documentation
     #
     class OutputDataConfig < Struct.new(
-      :s3_configuration,
-      :unknown)
+      :s3_configuration)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class S3Configuration < OutputDataConfig; end
-      class Unknown < OutputDataConfig; end
     end
 
     # The input properties for the preloaded Data Store. Only data preloaded

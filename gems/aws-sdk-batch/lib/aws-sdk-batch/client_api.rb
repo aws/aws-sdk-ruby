@@ -93,10 +93,8 @@ module Aws::Batch
     JobSummaryList = Shapes::ListShape.new(name: 'JobSummaryList')
     JobTimeout = Shapes::StructureShape.new(name: 'JobTimeout')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
-    KeyValuesPair = Shapes::StructureShape.new(name: 'KeyValuesPair')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
-    ListJobsFilterList = Shapes::ListShape.new(name: 'ListJobsFilterList')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -492,7 +490,6 @@ module Aws::Batch
     JobSummary.add_member(:container, Shapes::ShapeRef.new(shape: ContainerSummary, location_name: "container"))
     JobSummary.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayPropertiesSummary, location_name: "arrayProperties"))
     JobSummary.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodePropertiesSummary, location_name: "nodeProperties"))
-    JobSummary.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, location_name: "jobDefinition"))
     JobSummary.struct_class = Types::JobSummary
 
     JobSummaryList.member = Shapes::ShapeRef.new(shape: JobSummary)
@@ -503,10 +500,6 @@ module Aws::Batch
     KeyValuePair.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     KeyValuePair.struct_class = Types::KeyValuePair
-
-    KeyValuesPair.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    KeyValuesPair.add_member(:values, Shapes::ShapeRef.new(shape: StringList, location_name: "values"))
-    KeyValuesPair.struct_class = Types::KeyValuesPair
 
     LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
     LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
@@ -521,15 +514,12 @@ module Aws::Batch
     LinuxParameters.add_member(:swappiness, Shapes::ShapeRef.new(shape: Integer, location_name: "swappiness"))
     LinuxParameters.struct_class = Types::LinuxParameters
 
-    ListJobsFilterList.member = Shapes::ShapeRef.new(shape: KeyValuesPair)
-
     ListJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, location_name: "jobQueue"))
     ListJobsRequest.add_member(:array_job_id, Shapes::ShapeRef.new(shape: String, location_name: "arrayJobId"))
     ListJobsRequest.add_member(:multi_node_job_id, Shapes::ShapeRef.new(shape: String, location_name: "multiNodeJobId"))
     ListJobsRequest.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListJobsFilterList, location_name: "filters"))
     ListJobsRequest.struct_class = Types::ListJobsRequest
 
     ListJobsResponse.add_member(:job_summary_list, Shapes::ShapeRef.new(shape: JobSummaryList, required: true, location_name: "jobSummaryList"))

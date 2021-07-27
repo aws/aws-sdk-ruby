@@ -26,9 +26,20 @@ module Aws::SSMIncidents
     # The action that starts at the beginning of an incident. The response
     # plan defines the action.
     #
-    # @note Action is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass Action
+    #   data as a hash:
     #
-    # @note Action is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Action corresponding to the set member.
+    #       {
+    #         ssm_automation: {
+    #           document_name: "SsmAutomationDocumentNameString", # required
+    #           document_version: "SsmAutomationDocumentVersionString",
+    #           parameters: {
+    #             "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
+    #           },
+    #           role_arn: "RoleArn", # required
+    #           target_account: "RESPONSE_PLAN_OWNER_ACCOUNT", # accepts RESPONSE_PLAN_OWNER_ACCOUNT, IMPACTED_ACCOUNT
+    #         },
+    #       }
     #
     # @!attribute [rw] ssm_automation
     #   The Systems Manager automation document to start as the runbook at
@@ -38,14 +49,9 @@ module Aws::SSMIncidents
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/Action AWS API Documentation
     #
     class Action < Struct.new(
-      :ssm_automation,
-      :unknown)
+      :ssm_automation)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class ssmAutomation < Action; end
-      class Unknown < Action; end
     end
 
     # Defines the Region and KMS key to add to the replication set.
@@ -77,7 +83,13 @@ module Aws::SSMIncidents
 
     # Use the AttributeValueList to filter by string or integer values.
     #
-    # @note AttributeValueList is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass AttributeValueList
+    #   data as a hash:
+    #
+    #       {
+    #         integer_values: [1],
+    #         string_values: ["StringListMemberString"],
+    #       }
     #
     # @!attribute [rw] integer_values
     #   The list of integer values that the filter matches.
@@ -91,21 +103,13 @@ module Aws::SSMIncidents
     #
     class AttributeValueList < Struct.new(
       :integer_values,
-      :string_values,
-      :unknown)
+      :string_values)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class integerValues < AttributeValueList; end
-      class stringValues < AttributeValueList; end
-      class Unknown < AttributeValueList; end
     end
 
     # The Systems Manager automation document process to start as the
     # runbook at the beginning of the incident.
-    #
-    # @note AutomationExecution is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AutomationExecution corresponding to the set member.
     #
     # @!attribute [rw] ssm_execution_arn
     #   The Amazon Resource Name (ARN) of the automation process.
@@ -114,22 +118,22 @@ module Aws::SSMIncidents
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/AutomationExecution AWS API Documentation
     #
     class AutomationExecution < Struct.new(
-      :ssm_execution_arn,
-      :unknown)
+      :ssm_execution_arn)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class ssmExecutionArn < AutomationExecution; end
-      class Unknown < AutomationExecution; end
     end
 
     # The AWS Chatbot chat channel used for collaboration during an
     # incident.
     #
-    # @note ChatChannel is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass ChatChannel
+    #   data as a hash:
     #
-    # @note ChatChannel is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ChatChannel corresponding to the set member.
+    #       {
+    #         chatbot_sns: ["SnsArn"],
+    #         empty: {
+    #         },
+    #       }
     #
     # @!attribute [rw] chatbot_sns
     #   The SNS targets that AWS Chatbot uses to notify the chat channel of
@@ -146,15 +150,9 @@ module Aws::SSMIncidents
     #
     class ChatChannel < Struct.new(
       :chatbot_sns,
-      :empty,
-      :unknown)
+      :empty)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class chatbotSns < ChatChannel; end
-      class empty < ChatChannel; end
-      class Unknown < ChatChannel; end
     end
 
     # A conditional statement with which to compare a value, after a
@@ -163,7 +161,17 @@ module Aws::SSMIncidents
     # statement. If multiple values are specified for a conditional, the
     # values are `OR`d.
     #
-    # @note Condition is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass Condition
+    #   data as a hash:
+    #
+    #       {
+    #         after: Time.now,
+    #         before: Time.now,
+    #         equals: {
+    #           integer_values: [1],
+    #           string_values: ["StringListMemberString"],
+    #         },
+    #       }
     #
     # @!attribute [rw] after
     #   After the specified timestamp.
@@ -182,16 +190,9 @@ module Aws::SSMIncidents
     class Condition < Struct.new(
       :after,
       :before,
-      :equals,
-      :unknown)
+      :equals)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class after < Condition; end
-      class before < Condition; end
-      class equals < Condition; end
-      class Unknown < Condition; end
     end
 
     # Updating or deleting a resource causes an inconsistent state.
@@ -1161,9 +1162,14 @@ module Aws::SSMIncidents
 
     # Describes a related item.
     #
-    # @note ItemValue is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass ItemValue
+    #   data as a hash:
     #
-    # @note ItemValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ItemValue corresponding to the set member.
+    #       {
+    #         arn: "Arn",
+    #         metric_definition: "MetricDefinition",
+    #         url: "Url",
+    #       }
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the related item, if the related
@@ -1184,16 +1190,9 @@ module Aws::SSMIncidents
     class ItemValue < Struct.new(
       :arn,
       :metric_definition,
-      :url,
-      :unknown)
+      :url)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class arn < ItemValue; end
-      class metricDefinition < ItemValue; end
-      class url < ItemValue; end
-      class Unknown < ItemValue; end
     end
 
     # @note When making an API call, you may pass ListIncidentRecordsInput
@@ -1517,9 +1516,12 @@ module Aws::SSMIncidents
     # The SNS topic that's used by AWS Chatbot to notify the incidents chat
     # channel.
     #
-    # @note NotificationTargetItem is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass NotificationTargetItem
+    #   data as a hash:
     #
-    # @note NotificationTargetItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NotificationTargetItem corresponding to the set member.
+    #       {
+    #         sns_topic_arn: "Arn",
+    #       }
     #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic.
@@ -1528,14 +1530,9 @@ module Aws::SSMIncidents
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/NotificationTargetItem AWS API Documentation
     #
     class NotificationTargetItem < Struct.new(
-      :sns_topic_arn,
-      :unknown)
+      :sns_topic_arn)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class snsTopicArn < NotificationTargetItem; end
-      class Unknown < NotificationTargetItem; end
     end
 
     # @note When making an API call, you may pass PutResourcePolicyInput
@@ -1663,7 +1660,30 @@ module Aws::SSMIncidents
 
     # Details about the related item you're adding.
     #
-    # @note RelatedItemsUpdate is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass RelatedItemsUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         item_to_add: {
+    #           identifier: { # required
+    #             type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER
+    #             value: { # required
+    #               arn: "Arn",
+    #               metric_definition: "MetricDefinition",
+    #               url: "Url",
+    #             },
+    #           },
+    #           title: "RelatedItemTitleString",
+    #         },
+    #         item_to_remove: {
+    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER
+    #           value: { # required
+    #             arn: "Arn",
+    #             metric_definition: "MetricDefinition",
+    #             url: "Url",
+    #           },
+    #         },
+    #       }
     #
     # @!attribute [rw] item_to_add
     #   Details about the related item you're adding.
@@ -1677,15 +1697,9 @@ module Aws::SSMIncidents
     #
     class RelatedItemsUpdate < Struct.new(
       :item_to_add,
-      :item_to_remove,
-      :unknown)
+      :item_to_remove)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class itemToAdd < RelatedItemsUpdate; end
-      class itemToRemove < RelatedItemsUpdate; end
-      class Unknown < RelatedItemsUpdate; end
     end
 
     # The set of Regions that your Incident Manager data will be replicated
@@ -2374,7 +2388,18 @@ module Aws::SSMIncidents
 
     # Details used when updating the replication set.
     #
-    # @note UpdateReplicationSetAction is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass UpdateReplicationSetAction
+    #   data as a hash:
+    #
+    #       {
+    #         add_region_action: {
+    #           region_name: "RegionName", # required
+    #           sse_kms_key_id: "SseKmsKey",
+    #         },
+    #         delete_region_action: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       }
     #
     # @!attribute [rw] add_region_action
     #   Details about the Region that you're adding to the replication set.
@@ -2389,15 +2414,9 @@ module Aws::SSMIncidents
     #
     class UpdateReplicationSetAction < Struct.new(
       :add_region_action,
-      :delete_region_action,
-      :unknown)
+      :delete_region_action)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class addRegionAction < UpdateReplicationSetAction; end
-      class deleteRegionAction < UpdateReplicationSetAction; end
-      class Unknown < UpdateReplicationSetAction; end
     end
 
     # @note When making an API call, you may pass UpdateReplicationSetInput

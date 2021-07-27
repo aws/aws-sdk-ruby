@@ -86,8 +86,6 @@ module Aws::IoTAnalytics
     Datastore = Shapes::StructureShape.new(name: 'Datastore')
     DatastoreActivity = Shapes::StructureShape.new(name: 'DatastoreActivity')
     DatastoreArn = Shapes::StringShape.new(name: 'DatastoreArn')
-    DatastoreIotSiteWiseMultiLayerStorage = Shapes::StructureShape.new(name: 'DatastoreIotSiteWiseMultiLayerStorage')
-    DatastoreIotSiteWiseMultiLayerStorageSummary = Shapes::StructureShape.new(name: 'DatastoreIotSiteWiseMultiLayerStorageSummary')
     DatastoreName = Shapes::StringShape.new(name: 'DatastoreName')
     DatastorePartition = Shapes::StructureShape.new(name: 'DatastorePartition')
     DatastorePartitions = Shapes::StructureShape.new(name: 'DatastorePartitions')
@@ -137,8 +135,6 @@ module Aws::IoTAnalytics
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IotEventsDestinationConfiguration = Shapes::StructureShape.new(name: 'IotEventsDestinationConfiguration')
     IotEventsInputName = Shapes::StringShape.new(name: 'IotEventsInputName')
-    IotSiteWiseCustomerManagedDatastoreS3Storage = Shapes::StructureShape.new(name: 'IotSiteWiseCustomerManagedDatastoreS3Storage')
-    IotSiteWiseCustomerManagedDatastoreS3StorageSummary = Shapes::StructureShape.new(name: 'IotSiteWiseCustomerManagedDatastoreS3StorageSummary')
     JsonConfiguration = Shapes::StructureShape.new(name: 'JsonConfiguration')
     LambdaActivity = Shapes::StructureShape.new(name: 'LambdaActivity')
     LambdaName = Shapes::StringShape.new(name: 'LambdaName')
@@ -506,12 +502,6 @@ module Aws::IoTAnalytics
     DatastoreActivity.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location_name: "datastoreName"))
     DatastoreActivity.struct_class = Types::DatastoreActivity
 
-    DatastoreIotSiteWiseMultiLayerStorage.add_member(:customer_managed_s3_storage, Shapes::ShapeRef.new(shape: IotSiteWiseCustomerManagedDatastoreS3Storage, required: true, location_name: "customerManagedS3Storage"))
-    DatastoreIotSiteWiseMultiLayerStorage.struct_class = Types::DatastoreIotSiteWiseMultiLayerStorage
-
-    DatastoreIotSiteWiseMultiLayerStorageSummary.add_member(:customer_managed_s3_storage, Shapes::ShapeRef.new(shape: IotSiteWiseCustomerManagedDatastoreS3StorageSummary, location_name: "customerManagedS3Storage"))
-    DatastoreIotSiteWiseMultiLayerStorageSummary.struct_class = Types::DatastoreIotSiteWiseMultiLayerStorageSummary
-
     DatastorePartition.add_member(:attribute_partition, Shapes::ShapeRef.new(shape: Partition, location_name: "attributePartition"))
     DatastorePartition.add_member(:timestamp_partition, Shapes::ShapeRef.new(shape: TimestampPartition, location_name: "timestampPartition"))
     DatastorePartition.struct_class = Types::DatastorePartition
@@ -524,12 +514,10 @@ module Aws::IoTAnalytics
 
     DatastoreStorage.add_member(:service_managed_s3, Shapes::ShapeRef.new(shape: ServiceManagedDatastoreS3Storage, location_name: "serviceManagedS3"))
     DatastoreStorage.add_member(:customer_managed_s3, Shapes::ShapeRef.new(shape: CustomerManagedDatastoreS3Storage, location_name: "customerManagedS3"))
-    DatastoreStorage.add_member(:iot_site_wise_multi_layer_storage, Shapes::ShapeRef.new(shape: DatastoreIotSiteWiseMultiLayerStorage, location_name: "iotSiteWiseMultiLayerStorage"))
     DatastoreStorage.struct_class = Types::DatastoreStorage
 
     DatastoreStorageSummary.add_member(:service_managed_s3, Shapes::ShapeRef.new(shape: ServiceManagedDatastoreS3StorageSummary, location_name: "serviceManagedS3"))
     DatastoreStorageSummary.add_member(:customer_managed_s3, Shapes::ShapeRef.new(shape: CustomerManagedDatastoreS3StorageSummary, location_name: "customerManagedS3"))
-    DatastoreStorageSummary.add_member(:iot_site_wise_multi_layer_storage, Shapes::ShapeRef.new(shape: DatastoreIotSiteWiseMultiLayerStorageSummary, location_name: "iotSiteWiseMultiLayerStorage"))
     DatastoreStorageSummary.struct_class = Types::DatastoreStorageSummary
 
     DatastoreSummaries.member = Shapes::ShapeRef.new(shape: DatastoreSummary)
@@ -649,14 +637,6 @@ module Aws::IoTAnalytics
     IotEventsDestinationConfiguration.add_member(:input_name, Shapes::ShapeRef.new(shape: IotEventsInputName, required: true, location_name: "inputName"))
     IotEventsDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     IotEventsDestinationConfiguration.struct_class = Types::IotEventsDestinationConfiguration
-
-    IotSiteWiseCustomerManagedDatastoreS3Storage.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucket"))
-    IotSiteWiseCustomerManagedDatastoreS3Storage.add_member(:key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "keyPrefix"))
-    IotSiteWiseCustomerManagedDatastoreS3Storage.struct_class = Types::IotSiteWiseCustomerManagedDatastoreS3Storage
-
-    IotSiteWiseCustomerManagedDatastoreS3StorageSummary.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucket"))
-    IotSiteWiseCustomerManagedDatastoreS3StorageSummary.add_member(:key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "keyPrefix"))
-    IotSiteWiseCustomerManagedDatastoreS3StorageSummary.struct_class = Types::IotSiteWiseCustomerManagedDatastoreS3StorageSummary
 
     JsonConfiguration.struct_class = Types::JsonConfiguration
 

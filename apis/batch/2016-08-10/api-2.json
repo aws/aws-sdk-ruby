@@ -972,8 +972,7 @@
         "stoppedAt":{"shape":"Long"},
         "container":{"shape":"ContainerSummary"},
         "arrayProperties":{"shape":"ArrayPropertiesSummary"},
-        "nodeProperties":{"shape":"NodePropertiesSummary"},
-        "jobDefinition":{"shape":"String"}
+        "nodeProperties":{"shape":"NodePropertiesSummary"}
       }
     },
     "JobSummaryList":{
@@ -991,13 +990,6 @@
       "members":{
         "name":{"shape":"String"},
         "value":{"shape":"String"}
-      }
-    },
-    "KeyValuesPair":{
-      "type":"structure",
-      "members":{
-        "name":{"shape":"String"},
-        "values":{"shape":"StringList"}
       }
     },
     "LaunchTemplateSpecification":{
@@ -1019,10 +1011,6 @@
         "swappiness":{"shape":"Integer"}
       }
     },
-    "ListJobsFilterList":{
-      "type":"list",
-      "member":{"shape":"KeyValuesPair"}
-    },
     "ListJobsRequest":{
       "type":"structure",
       "members":{
@@ -1031,8 +1019,7 @@
         "multiNodeJobId":{"shape":"String"},
         "jobStatus":{"shape":"JobStatus"},
         "maxResults":{"shape":"Integer"},
-        "nextToken":{"shape":"String"},
-        "filters":{"shape":"ListJobsFilterList"}
+        "nextToken":{"shape":"String"}
       }
     },
     "ListJobsResponse":{

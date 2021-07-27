@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.48.0 (2021-07-27)
-------------------
-
-* Feature - Add support to use row-level security with tags when embedding dashboards for users not provisioned in QuickSight
-
 1.47.0 (2021-06-23)
 ------------------
 

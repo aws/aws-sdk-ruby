@@ -336,7 +336,7 @@ module Aws::IoTAnalytics
     #   The list of messages to be sent. Each message has the format: \\\{
     #   "messageId": "string", "payload": "string"\\}.
     #
-    #   The field names of message payloads (data) that you send to IoT
+    #   The field names of message payloads (data) that you send to AWS IoT
     #   Analytics:
     #
     #   * Must contain only alphanumeric characters and undescores (\_). No
@@ -413,9 +413,9 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Used to create a channel. A channel collects data from an MQTT topic
-    # and archives the raw, unprocessed messages before publishing the data
-    # to a pipeline.
+    # Creates a channel. A channel collects data from an MQTT topic and
+    # archives the raw, unprocessed messages before publishing the data to a
+    # pipeline.
     #
     # @option params [required, String] :channel_name
     #   The name of the channel.
@@ -423,7 +423,7 @@ module Aws::IoTAnalytics
     # @option params [Types::ChannelStorage] :channel_storage
     #   Where channel data is stored. You can choose one of `serviceManagedS3`
     #   or `customerManagedS3` storage. If not specified, the default is
-    #   `serviceManagedS3`. You can't change this storage option after the
+    #   `serviceManagedS3`. You cannot change this storage option after the
     #   channel is created.
     #
     # @option params [Types::RetentionPeriod] :retention_period
@@ -478,22 +478,22 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Used to create a dataset. A dataset stores data retrieved from a data
-    # store by applying a `queryAction` (a SQL query) or a `containerAction`
+    # Creates a dataset. A dataset stores data retrieved from a data store
+    # by applying a `queryAction` (a SQL query) or a `containerAction`
     # (executing a containerized application). This operation creates the
     # skeleton of a dataset. The dataset can be populated manually by
     # calling `CreateDatasetContent` or automatically according to a trigger
     # you specify.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the dataset.
+    #   The name of the data set.
     #
     # @option params [required, Array<Types::DatasetAction>] :actions
-    #   A list of actions that create the dataset contents.
+    #   A list of actions that create the data set contents.
     #
     # @option params [Array<Types::DatasetTrigger>] :triggers
-    #   A list of triggers. A trigger causes dataset contents to be populated
-    #   at a specified time interval or when another dataset's contents are
+    #   A list of triggers. A trigger causes data set contents to be populated
+    #   at a specified time interval or when another data set's contents are
     #   created. The list of triggers can be empty or contain up to five
     #   `DataSetTrigger` objects.
     #
@@ -506,9 +506,9 @@ module Aws::IoTAnalytics
     #   the dataset. If not specified or set to `null`, versions of dataset
     #   contents are retained for at most 90 days. The number of versions of
     #   dataset contents retained is determined by the
-    #   `versioningConfiguration` parameter. For more information, see [
-    #   Keeping Multiple Versions of IoT Analytics datasets][1] in the *IoT
-    #   Analytics User Guide*.
+    #   `versioningConfiguration` parameter. For more information, see
+    #   [Keeping Multiple Versions of AWS IoT Analytics Data Sets][1] in the
+    #   *AWS IoT Analytics User Guide*.
     #
     #
     #
@@ -519,20 +519,20 @@ module Aws::IoTAnalytics
     #   specified or set to null, only the latest version plus the latest
     #   succeeded version (if they are different) are kept for the time period
     #   specified by the `retentionPeriod` parameter. For more information,
-    #   see [Keeping Multiple Versions of IoT Analytics datasets][1] in the
-    #   *IoT Analytics User Guide*.
+    #   see [Keeping Multiple Versions of AWS IoT Analytics Data Sets][1] in
+    #   the *AWS IoT Analytics User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Metadata which can be used to manage the dataset.
+    #   Metadata which can be used to manage the data set.
     #
     # @option params [Array<Types::LateDataRule>] :late_data_rules
-    #   A list of data rules that send notifications to CloudWatch, when data
-    #   arrives late. To specify `lateDataRules`, the dataset must use a
-    #   [DeltaTimer][1] filter.
+    #   A list of data rules that send notifications to Amazon CloudWatch,
+    #   when data arrives late. To specify `lateDataRules`, the dataset must
+    #   use a [DeltaTimer][1] filter.
     #
     #
     #
@@ -655,7 +655,7 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates the content of a dataset by applying a `queryAction` (a SQL
+    # Creates the content of a data set by applying a `queryAction` (a SQL
     # query) or a `containerAction` (executing a containerized application).
     #
     # @option params [required, String] :dataset_name
@@ -691,17 +691,18 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates a data store, which is a repository for messages.
+    # Creates a data store, which is a repository for messages. Only data
+    # stores that are used to save pipeline data can be configured with
+    # `ParquetConfiguration`.
     #
     # @option params [required, String] :datastore_name
     #   The name of the data store.
     #
     # @option params [Types::DatastoreStorage] :datastore_storage
-    #   Where data in a data store is stored.. You can choose
-    #   `serviceManagedS3` storage, `customerManagedS3` storage, or
-    #   `iotSiteWiseMultiLayerStorage` storage. The default is
-    #   `serviceManagedS3`. You can't change the choice of Amazon S3 storage
-    #   after your data store is created.
+    #   Where data store data is stored. You can choose one of
+    #   `serviceManagedS3` or `customerManagedS3` storage. If not specified,
+    #   the default is `serviceManagedS3`. You cannot change this storage
+    #   option after the data store is created.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store. When
@@ -711,8 +712,8 @@ module Aws::IoTAnalytics
     #   Metadata which can be used to manage the data store.
     #
     # @option params [Types::FileFormatConfiguration] :file_format_configuration
-    #   Contains the configuration information of file formats. IoT Analytics
-    #   data stores support JSON and [Parquet][1].
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
     #
     #   The default file format is JSON. You can specify only one format.
     #
@@ -723,7 +724,7 @@ module Aws::IoTAnalytics
     #   [1]: https://parquet.apache.org/
     #
     # @option params [Types::DatastorePartitions] :datastore_partitions
-    #   Contains information about the partition dimensions in a data store.
+    #   Contains information about the partitions in a data store.
     #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -742,12 +743,6 @@ module Aws::IoTAnalytics
     #         bucket: "BucketName", # required
     #         key_prefix: "S3KeyPrefix",
     #         role_arn: "RoleArn", # required
-    #       },
-    #       iot_site_wise_multi_layer_storage: {
-    #         customer_managed_s3_storage: { # required
-    #           bucket: "BucketName", # required
-    #           key_prefix: "S3KeyPrefix",
-    #         },
     #       },
     #     },
     #     retention_period: {
@@ -816,7 +811,7 @@ module Aws::IoTAnalytics
     #   A list of `PipelineActivity` objects. Activities perform
     #   transformations on your messages, such as removing, renaming or adding
     #   message attributes; filtering messages based on attribute values;
-    #   invoking your Lambda unctions on messages for advanced processing; or
+    #   invoking your Lambda functions on messages for advanced processing; or
     #   performing mathematical transformations to normalize device data.
     #
     #   The list can be 2-25 `PipelineActivity` objects and must contain both
@@ -945,7 +940,7 @@ module Aws::IoTAnalytics
     # perform this operation.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the dataset to delete.
+    #   The name of the data set to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1036,7 +1031,7 @@ module Aws::IoTAnalytics
     #
     # @option params [Boolean] :include_statistics
     #   If true, additional statistical information about the channel is
-    #   included in the response. This feature can't be used with a channel
+    #   included in the response. This feature cannot be used with a channel
     #   whose S3 storage is customer-managed.
     #
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1077,7 +1072,7 @@ module Aws::IoTAnalytics
     # Retrieves information about a dataset.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the dataset whose information is retrieved.
+    #   The name of the data set whose information is retrieved.
     #
     # @return [Types::DescribeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1146,7 +1141,7 @@ module Aws::IoTAnalytics
     #
     # @option params [Boolean] :include_statistics
     #   If true, additional statistical information about the data store is
-    #   included in the response. This feature can't be used with a data
+    #   included in the response. This feature cannot be used with a data
     #   store whose S3 storage is customer-managed.
     #
     # @return [Types::DescribeDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1167,8 +1162,6 @@ module Aws::IoTAnalytics
     #   resp.datastore.storage.customer_managed_s3.bucket #=> String
     #   resp.datastore.storage.customer_managed_s3.key_prefix #=> String
     #   resp.datastore.storage.customer_managed_s3.role_arn #=> String
-    #   resp.datastore.storage.iot_site_wise_multi_layer_storage.customer_managed_s3_storage.bucket #=> String
-    #   resp.datastore.storage.iot_site_wise_multi_layer_storage.customer_managed_s3_storage.key_prefix #=> String
     #   resp.datastore.arn #=> String
     #   resp.datastore.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.datastore.retention_period.unlimited #=> Boolean
@@ -1193,7 +1186,8 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Retrieves the current settings of the IoT Analytics logging options.
+    # Retrieves the current settings of the AWS IoT Analytics logging
+    # options.
     #
     # @return [Types::DescribeLoggingOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1284,15 +1278,15 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Retrieves the contents of a dataset as presigned URIs.
+    # Retrieves the contents of a data set as presigned URIs.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the dataset whose contents are retrieved.
+    #   The name of the data set whose contents are retrieved.
     #
     # @option params [String] :version_id
-    #   The version of the dataset whose contents are retrieved. You can also
+    #   The version of the data set whose contents are retrieved. You can also
     #   use the strings "$LATEST" or "$LATEST\_SUCCEEDED" to retrieve the
-    #   contents of the latest or latest successfully completed dataset. If
+    #   contents of the latest or latest successfully completed data set. If
     #   not specified, "$LATEST\_SUCCEEDED" is the default.
     #
     # @return [Types::GetDatasetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1368,10 +1362,10 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Lists information about dataset contents that have been created.
+    # Lists information about data set contents that have been created.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the dataset whose contents information you want to list.
+    #   The name of the data set whose contents information you want to list.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
@@ -1380,12 +1374,12 @@ module Aws::IoTAnalytics
     #   The maximum number of results to return in this request.
     #
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_on_or_after
-    #   A filter to limit results to those dataset contents whose creation is
+    #   A filter to limit results to those data set contents whose creation is
     #   scheduled on or after the given time. See the field
     #   `triggers.schedule` in the `CreateDataset` request. (timestamp)
     #
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_before
-    #   A filter to limit results to those dataset contents whose creation is
+    #   A filter to limit results to those data set contents whose creation is
     #   scheduled before the given time. See the field `triggers.schedule` in
     #   the `CreateDataset` request. (timestamp)
     #
@@ -1424,7 +1418,7 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Retrieves information about datasets.
+    # Retrieves information about data sets.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
@@ -1501,8 +1495,6 @@ module Aws::IoTAnalytics
     #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.bucket #=> String
     #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.key_prefix #=> String
     #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.role_arn #=> String
-    #   resp.datastore_summaries[0].datastore_storage.iot_site_wise_multi_layer_storage.customer_managed_s3_storage.bucket #=> String
-    #   resp.datastore_summaries[0].datastore_storage.iot_site_wise_multi_layer_storage.customer_managed_s3_storage.key_prefix #=> String
     #   resp.datastore_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.datastore_summaries[0].creation_time #=> Time
     #   resp.datastore_summaries[0].last_update_time #=> Time
@@ -1592,7 +1584,7 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Sets or updates the IoT Analytics logging options.
+    # Sets or updates the AWS IoT Analytics logging options.
     #
     # If you update the value of any `loggingOptions` field, it takes up to
     # one minute for the change to take effect. Also, if you change the
@@ -1601,7 +1593,7 @@ module Aws::IoTAnalytics
     # for that change to take effect.
     #
     # @option params [required, Types::LoggingOptions] :logging_options
-    #   The new values of the IoT Analytics logging options.
+    #   The new values of the AWS IoT Analytics logging options.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1627,9 +1619,9 @@ module Aws::IoTAnalytics
     #
     # @option params [required, Types::PipelineActivity] :pipeline_activity
     #   The pipeline activity that is run. This must not be a channel activity
-    #   or a data store activity because these activities are used in a
+    #   or a datastore activity because these activities are used in a
     #   pipeline only to load the original message and to store the (possibly)
-    #   transformed message. If a Lambda activity is specified, only
+    #   transformed message. If a lambda activity is specified, only
     #   short-running Lambda functions (those with a timeout of less than 30
     #   seconds or less) can be used.
     #
@@ -1864,7 +1856,7 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Used to update the settings of a channel.
+    # Updates the settings of a channel.
     #
     # @option params [required, String] :channel_name
     #   The name of the channel to be updated.
@@ -1872,12 +1864,12 @@ module Aws::IoTAnalytics
     # @option params [Types::ChannelStorage] :channel_storage
     #   Where channel data is stored. You can choose one of `serviceManagedS3`
     #   or `customerManagedS3` storage. If not specified, the default is
-    #   `serviceManagedS3`. You can't change this storage option after the
+    #   `serviceManagedS3`. You cannot change this storage option after the
     #   channel is created.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel. The retention
-    #   period can't be updated if the channel's Amazon S3 storage is
+    #   period cannot be updated if the channel's S3 storage is
     #   customer-managed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1908,10 +1900,10 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Updates the settings of a dataset.
+    # Updates the settings of a data set.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the dataset to update.
+    #   The name of the data set to update.
     #
     # @option params [required, Array<Types::DatasetAction>] :actions
     #   A list of `DatasetAction` objects.
@@ -1932,17 +1924,17 @@ module Aws::IoTAnalytics
     #   specified or set to null, only the latest version plus the latest
     #   succeeded version (if they are different) are kept for the time period
     #   specified by the `retentionPeriod` parameter. For more information,
-    #   see [Keeping Multiple Versions of IoT Analytics datasets][1] in the
-    #   *IoT Analytics User Guide*.
+    #   see [Keeping Multiple Versions of AWS IoT Analytics Data Sets][1] in
+    #   the *AWS IoT Analytics User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
     #
     # @option params [Array<Types::LateDataRule>] :late_data_rules
-    #   A list of data rules that send notifications to CloudWatch, when data
-    #   arrives late. To specify `lateDataRules`, the dataset must use a
-    #   [DeltaTimer][1] filter.
+    #   A list of data rules that send notifications to Amazon CloudWatch,
+    #   when data arrives late. To specify `lateDataRules`, the dataset must
+    #   use a [DeltaTimer][1] filter.
     #
     #
     #
@@ -2048,26 +2040,25 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Used to update the settings of a data store.
+    # Updates the settings of a data store.
     #
     # @option params [required, String] :datastore_name
     #   The name of the data store to be updated.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store. The
-    #   retention period can't be updated if the data store's Amazon S3
-    #   storage is customer-managed.
+    #   retention period cannot be updated if the data store's S3 storage is
+    #   customer-managed.
     #
     # @option params [Types::DatastoreStorage] :datastore_storage
-    #   Where data in a data store is stored.. You can choose
-    #   `serviceManagedS3` storage, `customerManagedS3` storage, or
-    #   `iotSiteWiseMultiLayerStorage` storage. The default is
-    #   `serviceManagedS3`. You can't change the choice of Amazon S3 storage
-    #   after your data store is created.
+    #   Where data store data is stored. You can choose one of
+    #   `serviceManagedS3` or `customerManagedS3` storage. If not specified,
+    #   the default is`serviceManagedS3`. You cannot change this storage
+    #   option after the data store is created.
     #
     # @option params [Types::FileFormatConfiguration] :file_format_configuration
-    #   Contains the configuration information of file formats. IoT Analytics
-    #   data stores support JSON and [Parquet][1].
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
     #
     #   The default file format is JSON. You can specify only one format.
     #
@@ -2094,12 +2085,6 @@ module Aws::IoTAnalytics
     #         bucket: "BucketName", # required
     #         key_prefix: "S3KeyPrefix",
     #         role_arn: "RoleArn", # required
-    #       },
-    #       iot_site_wise_multi_layer_storage: {
-    #         customer_managed_s3_storage: { # required
-    #           bucket: "BucketName", # required
-    #           key_prefix: "S3KeyPrefix",
-    #         },
     #       },
     #     },
     #     file_format_configuration: {
@@ -2235,7 +2220,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

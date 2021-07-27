@@ -20,7 +20,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccessDeniedException AWS API Documentation
@@ -32,8 +32,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The Amazon QuickSight customizations associated with your Amazon Web
-    # Services account; or a QuickSight namespace in a specific Region;.
+    # The Amazon QuickSight customizations associated with your AWS account
+    # or a QuickSight namespace in a specific AWS Region.
     #
     # @note When making an API call, you may pass AccountCustomization
     #   data as a hash:
@@ -54,14 +54,13 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The QuickSight settings associated with your Amazon Web Services
-    # account;.
+    # The QuickSight settings associated with your AWS account.
     #
     # @!attribute [rw] account_name
     #   The "account name" you provided for the QuickSight subscription in
-    #   your Amazon Web Services account;. You create this name when you
-    #   sign up for QuickSight. It is unique in all of Amazon Web Services
-    #   and it appears only when users sign in.
+    #   your AWS account. You create this name when you sign up for
+    #   QuickSight. It is unique in all of AWS and it appears only in the
+    #   console when users sign in.
     #   @return [String]
     #
     # @!attribute [rw] edition
@@ -70,8 +69,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] default_namespace
-    #   The default QuickSight namespace for your Amazon Web Services
-    #   account;.
+    #   The default QuickSight namespace for your AWS account.
     #   @return [String]
     #
     # @!attribute [rw] notification_email
@@ -89,7 +87,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The active Identity and Access Management (IAM) policy assignment.
+    # The active AWS Identity and Access Management (IAM) policy assignment.
     #
     # @!attribute [rw] assignment_name
     #   A name for the IAM policy assignment.
@@ -368,58 +366,6 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Information about the dashboard that you want to embed.
-    #
-    # @note When making an API call, you may pass AnonymousUserDashboardEmbeddingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         initial_dashboard_id: "RestrictiveResourceId", # required
-    #       }
-    #
-    # @!attribute [rw] initial_dashboard_id
-    #   The dashboard ID for the dashboard that you want the user to see
-    #   first. This ID is included in the output URL. When the URL in
-    #   response is accessed, Amazon QuickSight renders this dashboard.
-    #
-    #   The Amazon Resource Name (ARN) of this dashboard must be included in
-    #   the `AuthorizedResourceArns` parameter. Otherwise, the request will
-    #   fail with `InvalidParameterValueException`.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserDashboardEmbeddingConfiguration AWS API Documentation
-    #
-    class AnonymousUserDashboardEmbeddingConfiguration < Struct.new(
-      :initial_dashboard_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The type of experience you want to embed. For anonymous users, you can
-    # embed an Amazon QuickSight dashboard.
-    #
-    # @note When making an API call, you may pass AnonymousUserEmbeddingExperienceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         dashboard: {
-    #           initial_dashboard_id: "RestrictiveResourceId", # required
-    #         },
-    #       }
-    #
-    # @!attribute [rw] dashboard
-    #   The type of embedding experience. In this case, an Amazon QuickSight
-    #   dashboard.
-    #   @return [Types::AnonymousUserDashboardEmbeddingConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserEmbeddingExperienceConfiguration AWS API Documentation
-    #
-    class AnonymousUserEmbeddingExperienceConfiguration < Struct.new(
-      :dashboard)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Amazon Athena parameters.
     #
     # @note When making an API call, you may pass AthenaParameters
@@ -507,7 +453,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Amazon Web Services IoT Analytics parameters.
+    # AWS IoT Analytics parameters.
     #
     # @note When making an API call, you may pass AwsIotAnalyticsParameters
     #   data as a hash:
@@ -595,7 +541,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -625,7 +571,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -871,7 +817,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ConflictException AWS API Documentation
@@ -901,8 +847,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to
-    #   customize QuickSight for.
+    #   The ID for the AWS account that you want to customize QuickSight
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -910,9 +856,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're adding in the current Region;.
-    #   You can add these to an Amazon Web Services account; and a
-    #   QuickSight namespace.
+    #   The QuickSight customizations you're adding in the current AWS
+    #   Region. You can add these to an AWS account and a QuickSight
+    #   namespace.
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
@@ -941,12 +887,12 @@ module Aws::QuickSight
 
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the customization that you
-    #   created for this Amazon Web Services account;.
+    #   created for this AWS account.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to
-    #   customize QuickSight for.
+    #   The ID for the AWS account that you want to customize QuickSight
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -954,11 +900,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're adding in the current Region;.
+    #   The QuickSight customizations you're adding in the current AWS
+    #   Region.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1038,8 +985,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; where you are creating an
-    #   analysis.
+    #   The ID of the AWS account where you are creating an analysis.
     #   @return [String]
     #
     # @!attribute [rw] analysis_id
@@ -1061,7 +1007,7 @@ module Aws::QuickSight
     # @!attribute [rw] permissions
     #   A structure that describes the principals and the resource-level
     #   permissions on an analysis. You can use the `Permissions` structure
-    #   to grant permissions by providing a list of Identity and Access
+    #   to grant permissions by providing a list of AWS Identity and Access
     #   Management (IAM) action information for each principal listed by
     #   Amazon Resource Name (ARN).
     #
@@ -1117,7 +1063,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAnalysisResponse AWS API Documentation
@@ -1232,8 +1178,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to create
-    #   the dashboard.
+    #   The ID of the AWS account where you want to create the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -1266,8 +1211,8 @@ module Aws::QuickSight
     #   from an analysis, first convert the analysis to a template by using
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
-    #   `SourceTemplate`ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Region;.
+    #   `SourceTemplate`ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list
     #   the replacement datasets for the placeholders listed in the
@@ -1306,8 +1251,7 @@ module Aws::QuickSight
     #   The Amazon Resource Name (ARN) of the theme that is being used for
     #   this dashboard. If you add a value for this field, it overrides the
     #   value that is used in the source entity. The theme ARN must exist in
-    #   the same Amazon Web Services account; where you create the
-    #   dashboard.
+    #   the same AWS account where you create the dashboard.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
@@ -1349,7 +1293,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardResponse AWS API Documentation
@@ -1501,18 +1445,6 @@ module Aws::QuickSight
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #           format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         row_level_permission_tag_configuration: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #           tag_rules: [ # required
-    #             {
-    #               tag_key: "SessionTagKey", # required
-    #               column_name: "String", # required
-    #               tag_multi_value_delimiter: "RowLevelPermissionTagDelimiter",
-    #               match_all_value: "SessionTagValue",
-    #             },
-    #           ],
     #         },
     #         column_level_permission_rules: [
     #           {
@@ -1529,12 +1461,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
     #   An ID for the dataset that you want to create. This ID is unique per
-    #   Region; for each Amazon Web Services account;.
+    #   AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1574,12 +1506,6 @@ module Aws::QuickSight
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
-    # @!attribute [rw] row_level_permission_tag_configuration
-    #   The configuration of tags on a dataset to set row-level security.
-    #   Row-level security tags are currently supported for anonymous
-    #   embedding only.
-    #   @return [Types::RowLevelPermissionTagConfiguration]
-    #
     # @!attribute [rw] column_level_permission_rules
     #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
     #   @return [Array<Types::ColumnLevelPermissionRule>]
@@ -1602,7 +1528,6 @@ module Aws::QuickSight
       :field_folders,
       :permissions,
       :row_level_permission_data_set,
-      :row_level_permission_tag_configuration,
       :column_level_permission_rules,
       :tags)
       SENSITIVE = []
@@ -1615,7 +1540,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_arn
@@ -1629,7 +1554,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1869,12 +1794,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   An ID for the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   An ID for the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1943,8 +1868,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] creation_status
@@ -1952,7 +1877,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2150,9 +2075,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2175,7 +2100,7 @@ module Aws::QuickSight
     #   @return [Types::GroupMember]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2213,9 +2138,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2240,7 +2165,7 @@ module Aws::QuickSight
     #   @return [Types::Group]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2272,13 +2197,13 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to assign
-    #   an IAM policy to QuickSight users or groups.
+    #   The ID of the AWS account where you want to assign an IAM policy to
+    #   QuickSight users or groups.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
     #   The name of the assignment, also called a rule. It must be unique
-    #   within an Amazon Web Services account;.
+    #   within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
@@ -2322,8 +2247,8 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. This name must be unique within the
-    #   Amazon Web Services account;.
+    #   The name of the assignment. This name must be unique within the AWS
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id
@@ -2354,7 +2279,7 @@ module Aws::QuickSight
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2393,7 +2318,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateIngestionRequest AWS API Documentation
@@ -2419,7 +2344,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2454,8 +2379,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to create
-    #   the QuickSight namespace in.
+    #   The ID for the AWS account that you want to create the QuickSight
+    #   namespace in.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2492,8 +2417,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] capacity_region
-    #   The Region; that you want to use for the free SPICE capacity for the
-    #   new namespace. This is set to the region that you run
+    #   The AWS Region that you want to use for the free SPICE capacity for
+    #   the new namespace. This is set to the region that you run
     #   CreateNamespace in.
     #   @return [String]
     #
@@ -2511,7 +2436,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2543,8 +2468,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template that you creating an alias for.
+    #   The ID of the AWS account that contains the template that you
+    #   creating an alias for.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -2554,7 +2479,7 @@ module Aws::QuickSight
     # @!attribute [rw] alias_name
     #   The name that you want to give to the template alias that you're
     #   creating. Don't start the alias name with the `$` character. Alias
-    #   names that start with `$` are reserved by Amazon QuickSight.
+    #   names that start with `$` are reserved by QuickSight.
     #   @return [String]
     #
     # @!attribute [rw] template_version_number
@@ -2581,7 +2506,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTemplateAliasResponse AWS API Documentation
@@ -2631,14 +2556,14 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] template_id
     #   An ID for the template that you want to create. This template is
-    #   unique per Region; in each Amazon Web Services account;.
+    #   unique per AWS Region in each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2656,8 +2581,8 @@ module Aws::QuickSight
     #   for an analysis. Both of these require an Amazon Resource Name
     #   (ARN). For `SourceTemplate`, specify the ARN of the source template.
     #   For `SourceAnalysis`, specify the ARN of the source analysis. The
-    #   `SourceTemplate` ARN can contain any Amazon Web Services account;
-    #   and any QuickSight-supported Region;.
+    #   `SourceTemplate` ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the
@@ -2714,7 +2639,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTemplateResponse AWS API Documentation
@@ -2741,8 +2666,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   for the new theme alias.
+    #   The ID of the AWS account that contains the theme for the new theme
+    #   alias.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -2779,7 +2704,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateThemeAliasResponse AWS API Documentation
@@ -2856,13 +2781,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to store
-    #   the new theme.
+    #   The ID of the AWS account where you want to store the new theme.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
     #   An ID for the theme that you want to create. The theme ID is unique
-    #   per Region; in each Amazon Web Services account;.
+    #   per AWS Region in each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2933,7 +2857,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateThemeResponse AWS API Documentation
@@ -3571,10 +3495,6 @@ module Aws::QuickSight
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
-    # @!attribute [rw] row_level_permission_tag_configuration
-    #   The element you can use to define tags for row-level security.
-    #   @return [Types::RowLevelPermissionTagConfiguration]
-    #
     # @!attribute [rw] column_level_permission_rules
     #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
     #   @return [Array<Types::ColumnLevelPermissionRule>]
@@ -3595,7 +3515,6 @@ module Aws::QuickSight
       :column_groups,
       :field_folders,
       :row_level_permission_data_set,
-      :row_level_permission_tag_configuration,
       :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
@@ -3697,10 +3616,6 @@ module Aws::QuickSight
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
-    # @!attribute [rw] row_level_permission_tag_configuration_applied
-    #   Whether or not the row level permission tags are applied.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] column_level_permission_rules_applied
     #   A value that indicates if the dataset has column level permission
     #   configured.
@@ -3716,7 +3631,6 @@ module Aws::QuickSight
       :last_updated_time,
       :import_mode,
       :row_level_permission_data_set,
-      :row_level_permission_tag_configuration_applied,
       :column_level_permission_rules_applied)
       SENSITIVE = []
       include Aws::Structure
@@ -3729,8 +3643,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4071,7 +3985,7 @@ module Aws::QuickSight
     #   @return [Types::AuroraPostgreSqlParameters]
     #
     # @!attribute [rw] aws_iot_analytics_parameters
-    #   Amazon Web Services IoT Analytics parameters.
+    #   AWS IoT Analytics parameters.
     #   @return [Types::AwsIotAnalyticsParameters]
     #
     # @!attribute [rw] jira_parameters
@@ -4224,8 +4138,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to delete
-    #   QuickSight customizations from in this Region;.
+    #   The ID for the AWS account that you want to delete QuickSight
+    #   customizations from in this AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -4243,7 +4157,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4270,8 +4184,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to delete
-    #   an analysis.
+    #   The ID of the AWS account where you want to delete an analysis.
     #   @return [String]
     #
     # @!attribute [rw] analysis_id
@@ -4320,7 +4233,7 @@ module Aws::QuickSight
     #   @return [Time]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAnalysisResponse AWS API Documentation
@@ -4345,8 +4258,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboard that you're deleting.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   deleting.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -4382,7 +4295,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDashboardResponse AWS API Documentation
@@ -4405,12 +4318,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDataSetRequest AWS API Documentation
@@ -4428,11 +4341,11 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4459,12 +4372,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDataSourceRequest AWS API Documentation
@@ -4481,12 +4394,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4634,9 +4547,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -4655,7 +4568,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4685,9 +4598,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -4705,7 +4618,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4731,8 +4644,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID where you want to delete the IAM
-    #   policy assignment.
+    #   The AWS account ID where you want to delete the IAM policy
+    #   assignment.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
@@ -4758,7 +4671,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4784,8 +4697,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to delete
-    #   the QuickSight namespace from.
+    #   The ID for the AWS account that you want to delete the QuickSight
+    #   namespace from.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -4802,7 +4715,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4828,8 +4741,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the item to
-    #   delete.
+    #   The ID of the AWS account that contains the item to delete.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -4870,7 +4782,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTemplateAliasResponse AWS API Documentation
@@ -4895,8 +4807,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template that you're deleting.
+    #   The ID of the AWS account that contains the template that you're
+    #   deleting.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -4920,7 +4832,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4956,8 +4868,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   alias to delete.
+    #   The ID of the AWS account that contains the theme alias to delete.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -4988,7 +4899,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5021,8 +4932,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're deleting.
+    #   The ID of the AWS account that contains the theme that you're
+    #   deleting.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -5051,7 +4962,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5087,9 +4998,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the user is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -5107,7 +5018,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5137,9 +5048,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the user is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -5157,7 +5068,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5183,8 +5094,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to
-    #   describe QuickSight customizations for.
+    #   The ID for the AWS account that you want to describe QuickSight
+    #   customizations for.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -5213,11 +5124,11 @@ module Aws::QuickSight
 
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the customization that's
-    #   associated with this Amazon Web Services account;.
+    #   associated with this AWS account.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you're describing.
+    #   The ID for the AWS account that you're describing.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -5225,11 +5136,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations that exist in the current Region;.
+    #   The QuickSight customizations that exist in the current AWS Region.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5257,8 +5168,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
-    #   settings that you want to list.
+    #   The ID for the AWS account that contains the settings that you want
+    #   to list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountSettingsRequest AWS API Documentation
@@ -5270,19 +5181,19 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] account_settings
-    #   The QuickSight settings for this Amazon Web Services account;. This
-    #   information includes the edition of Amazon QuickSight that you
-    #   subscribed to (Standard or Enterprise) and the notification email
-    #   for the QuickSight subscription. In the QuickSight console, the
-    #   QuickSight subscription is sometimes referred to as a QuickSight
-    #   "account" even though it's technically not an account by itself.
-    #   Instead, it's a subscription to the QuickSight service for your
-    #   Amazon Web Services account;. The edition that you subscribe to
-    #   applies to QuickSight in every Region; where you use it.
+    #   The QuickSight settings for this AWS account. This information
+    #   includes the edition of Amazon QuickSight that you subscribed to
+    #   (Standard or Enterprise) and the notification email for the
+    #   QuickSight subscription. In the QuickSight console, the QuickSight
+    #   subscription is sometimes referred to as a QuickSight "account"
+    #   even though it's technically not an account by itself. Instead,
+    #   it's a subscription to the QuickSight service for your AWS account.
+    #   The edition that you subscribe to applies to QuickSight in every AWS
+    #   Region where you use it.
     #   @return [Types::AccountSettings]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5308,9 +5219,9 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   analysis whose permissions you're describing. You must be using the
-    #   Amazon Web Services account; that the analysis is in.
+    #   The ID of the AWS account that contains the analysis whose
+    #   permissions you're describing. You must be using the AWS account
+    #   that the analysis is in.
     #   @return [String]
     #
     # @!attribute [rw] analysis_id
@@ -5346,7 +5257,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAnalysisPermissionsResponse AWS API Documentation
@@ -5370,9 +5281,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   analysis. You must be using the Amazon Web Services account; that
-    #   the analysis is in.
+    #   The ID of the AWS account that contains the analysis. You must be
+    #   using the AWS account that the analysis is in.
     #   @return [String]
     #
     # @!attribute [rw] analysis_id
@@ -5399,7 +5309,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAnalysisResponse AWS API Documentation
@@ -5421,8 +5331,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboard that you're describing permissions for.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   describing permissions for.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -5455,7 +5365,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardPermissionsResponse AWS API Documentation
@@ -5481,8 +5391,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboard that you're describing.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -5518,7 +5428,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardResponse AWS API Documentation
@@ -5540,12 +5450,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetPermissionsRequest AWS API Documentation
@@ -5563,7 +5473,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] permissions
@@ -5571,7 +5481,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5599,12 +5509,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetRequest AWS API Documentation
@@ -5621,7 +5531,7 @@ module Aws::QuickSight
     #   @return [Types::DataSet]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5647,12 +5557,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSourcePermissionsRequest AWS API Documentation
@@ -5669,8 +5579,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] permissions
@@ -5678,7 +5588,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5706,12 +5616,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSourceRequest AWS API Documentation
@@ -5728,7 +5638,7 @@ module Aws::QuickSight
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5920,9 +5830,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -5944,7 +5854,7 @@ module Aws::QuickSight
     #   @return [Types::Group]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5971,8 +5881,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   assignment that you want to describe.
+    #   The ID of the AWS account that contains the assignment that you want
+    #   to describe.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
@@ -5998,7 +5908,7 @@ module Aws::QuickSight
     #   @return [Types::IAMPolicyAssignment]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6025,7 +5935,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -6051,7 +5961,7 @@ module Aws::QuickSight
     #   @return [Types::Ingestion]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6077,8 +5987,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
-    #   QuickSight namespace that you want to describe.
+    #   The ID for the AWS account that contains the QuickSight namespace
+    #   that you want to describe.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -6096,15 +6006,15 @@ module Aws::QuickSight
 
     # @!attribute [rw] namespace
     #   The information about the namespace that you're describing. The
-    #   response includes the namespace ARN, name, Region;, creation status,
-    #   and identity store. `DescribeNamespace` also works for namespaces
-    #   that are in the process of being created. For incomplete namespaces,
-    #   this API operation lists the namespace error types and messages
-    #   associated with the creation process.
+    #   response includes the namespace ARN, name, AWS Region, creation
+    #   status, and identity store. `DescribeNamespace` also works for
+    #   namespaces that are in the process of being created. For incomplete
+    #   namespaces, this API operation lists the namespace error types and
+    #   messages associated with the creation process.
     #   @return [Types::NamespaceInfoV2]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6131,8 +6041,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template alias that you're describing.
+    #   The ID of the AWS account that contains the template alias that
+    #   you're describing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -6166,7 +6076,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTemplateAliasResponse AWS API Documentation
@@ -6188,8 +6098,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template that you're describing.
+    #   The ID of the AWS account that contains the template that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -6218,7 +6128,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6248,8 +6158,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template that you're describing.
+    #   The ID of the AWS account that contains the template that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -6290,7 +6200,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTemplateResponse AWS API Documentation
@@ -6313,8 +6223,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   alias that you're describing.
+    #   The ID of the AWS account that contains the theme alias that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -6344,7 +6254,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemeAliasResponse AWS API Documentation
@@ -6366,8 +6276,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're describing.
+    #   The ID of the AWS account that contains the theme that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -6396,7 +6306,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6426,8 +6336,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're describing.
+    #   The ID of the AWS account that contains the theme that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -6468,7 +6378,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemeResponse AWS API Documentation
@@ -6495,9 +6405,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the user is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -6519,7 +6429,7 @@ module Aws::QuickSight
     #   @return [Types::User]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6544,7 +6454,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DomainNotWhitelistedException AWS API Documentation
@@ -6785,175 +6695,6 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateEmbedUrlForAnonymousUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         aws_account_id: "AwsAccountId", # required
-    #         session_lifetime_in_minutes: 1,
-    #         namespace: "Namespace", # required
-    #         session_tags: [
-    #           {
-    #             key: "SessionTagKey", # required
-    #             value: "SessionTagValue", # required
-    #           },
-    #         ],
-    #         authorized_resource_arns: ["Arn"], # required
-    #         experience_configuration: { # required
-    #           dashboard: {
-    #             initial_dashboard_id: "RestrictiveResourceId", # required
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account that contains the
-    #   dashboard that you're embedding.
-    #   @return [String]
-    #
-    # @!attribute [rw] session_lifetime_in_minutes
-    #   How many minutes the session is valid. The session lifetime must be
-    #   in \[15-600\] minutes range.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] namespace
-    #   The Amazon QuickSight namespace that the anonymous user virtually
-    #   belongs to. If you are not using an Amazon QuickSight custom
-    #   namespace, set this to `default`.
-    #   @return [String]
-    #
-    # @!attribute [rw] session_tags
-    #   The session tags used for row-level security. Before you use this
-    #   parameter, make sure that you have configured the relevant datasets
-    #   using the `DataSet$RowLevelPermissionTagConfiguration` parameter so
-    #   that session tags can be used to provide row-level security.
-    #
-    #   These are not the tags used for the Amazon Web Services resource
-    #   tagging feature. For more information, see [Using Row-Level Security
-    #   (RLS) with Tags][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
-    #   @return [Array<Types::SessionTag>]
-    #
-    # @!attribute [rw] authorized_resource_arns
-    #   The Amazon Resource Names for the Amazon QuickSight resources that
-    #   the user is authorized to access during the lifetime of the session.
-    #   If you choose `Dashboard` embedding experience, pass the list of
-    #   dashboard ARNs in the account that you want the user to be able to
-    #   view.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] experience_configuration
-    #   The configuration of the experience you are embedding.
-    #   @return [Types::AnonymousUserEmbeddingExperienceConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserRequest AWS API Documentation
-    #
-    class GenerateEmbedUrlForAnonymousUserRequest < Struct.new(
-      :aws_account_id,
-      :session_lifetime_in_minutes,
-      :namespace,
-      :session_tags,
-      :authorized_resource_arns,
-      :experience_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] embed_url
-    #   The embed URL for the dashboard.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The HTTP status of the request.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserResponse AWS API Documentation
-    #
-    class GenerateEmbedUrlForAnonymousUserResponse < Struct.new(
-      :embed_url,
-      :status,
-      :request_id)
-      SENSITIVE = [:embed_url]
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GenerateEmbedUrlForRegisteredUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         aws_account_id: "AwsAccountId", # required
-    #         session_lifetime_in_minutes: 1,
-    #         user_arn: "Arn", # required
-    #         experience_configuration: { # required
-    #           dashboard: {
-    #             initial_dashboard_id: "RestrictiveResourceId", # required
-    #           },
-    #           quick_sight_console: {
-    #             initial_path: "EntryPath",
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account that contains the
-    #   dashboard that you're embedding.
-    #   @return [String]
-    #
-    # @!attribute [rw] session_lifetime_in_minutes
-    #   How many minutes the session is valid. The session lifetime must be
-    #   in \[15-600\] minutes range.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] user_arn
-    #   The Amazon Resource Name for the registered user.
-    #   @return [String]
-    #
-    # @!attribute [rw] experience_configuration
-    #   The experience you are embedding. For registered users, you can
-    #   embed Amazon QuickSight dashboards or the entire Amazon QuickSight
-    #   console.
-    #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForRegisteredUserRequest AWS API Documentation
-    #
-    class GenerateEmbedUrlForRegisteredUserRequest < Struct.new(
-      :aws_account_id,
-      :session_lifetime_in_minutes,
-      :user_arn,
-      :experience_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] embed_url
-    #   The embed URL for the Amazon QuickSight dashboard or console.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The HTTP status of the request.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForRegisteredUserResponse AWS API Documentation
-    #
-    class GenerateEmbedUrlForRegisteredUserResponse < Struct.new(
-      :embed_url,
-      :status,
-      :request_id)
-      SENSITIVE = [:embed_url]
-      include Aws::Structure
-    end
-
     # Geospatial column group that denotes a hierarchy.
     #
     # @note When making an API call, you may pass GeoSpatialColumnGroup
@@ -7004,12 +6745,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
-    #   dashboard that you're embedding.
+    #   The ID for the AWS account that contains the dashboard that you're
+    #   embedding.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to the Identity and Access
+    #   The ID for the dashboard, also added to the AWS Identity and Access
     #   Management (IAM) policy.
     #   @return [String]
     #
@@ -7062,9 +6803,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The Amazon QuickSight namespace that the user virtually belongs to.
-    #   If you are not using an Amazon QuickSight custom namespace, set this
-    #   to `default`.
+    #   The QuickSight namespace that contains the dashboard IDs in this
+    #   request. If you're not using a custom namespace, set this to
+    #   "`default`".
     #   @return [String]
     #
     # @!attribute [rw] additional_dashboard_ids
@@ -7109,7 +6850,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlResponse AWS API Documentation
@@ -7133,8 +6874,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; associated with your
-    #   QuickSight subscription.
+    #   The ID for the AWS account associated with your QuickSight
+    #   subscription.
     #   @return [String]
     #
     # @!attribute [rw] entry_point
@@ -7171,9 +6912,9 @@ module Aws::QuickSight
     #
     #   2.  Invited nonfederated users
     #
-    #   3.  Identity and Access Management (IAM) users and IAM role-based
-    #       sessions authenticated through Federated Single Sign-On using
-    #       SAML, OpenID Connect, or IAM federation
+    #   3.  AWS Identity and Access Management (IAM) users and IAM
+    #       role-based sessions authenticated through Federated Single
+    #       Sign-On using SAML, OpenID Connect, or IAM federation
     #
     #   Omit this parameter for users in the third group, IAM users and IAM
     #   role-based sessions.
@@ -7203,7 +6944,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetSessionEmbedUrlResponse AWS API Documentation
@@ -7288,10 +7029,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # An Identity and Access Management (IAM) policy assignment.
+    # An AWS Identity and Access Management (IAM) policy assignment.
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id
@@ -7353,7 +7094,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdentityTypeNotSupportedException AWS API Documentation
@@ -7490,7 +7231,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InternalFailureException AWS API Documentation
@@ -7508,7 +7249,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidNextTokenException AWS API Documentation
@@ -7526,7 +7267,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidParameterValueException AWS API Documentation
@@ -7647,7 +7388,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LimitExceededException AWS API Documentation
@@ -7670,8 +7411,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   analyses.
+    #   The ID of the AWS account that contains the analyses.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7705,7 +7445,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAnalysesResponse AWS API Documentation
@@ -7730,8 +7470,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboard that you're listing versions for.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   listing versions for.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -7773,7 +7513,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListDashboardVersionsResponse AWS API Documentation
@@ -7797,8 +7537,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboards that you're listing.
+    #   The ID of the AWS account that contains the dashboards that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7821,9 +7561,8 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] dashboard_summary_list
-    #   A structure that contains all of the dashboards in your Amazon Web
-    #   Services account;. This structure provides basic information about
-    #   the dashboards.
+    #   A structure that contains all of the dashboards in your AWS account.
+    #   This structure provides basic information about the dashboards.
     #   @return [Array<Types::DashboardSummary>]
     #
     # @!attribute [rw] next_token
@@ -7836,7 +7575,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListDashboardsResponse AWS API Documentation
@@ -7860,7 +7599,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7892,7 +7631,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -7920,7 +7659,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7952,7 +7691,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8122,9 +7861,9 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -8152,7 +7891,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8181,9 +7920,9 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8218,7 +7957,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8248,8 +7987,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   assignments.
+    #   The ID of the AWS account that contains the assignments.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -8286,7 +8024,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ActiveIAMPolicyAssignment>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8321,8 +8059,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains these IAM
-    #   policy assignments.
+    #   The ID of the AWS account that contains these IAM policy
+    #   assignments.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
@@ -8364,7 +8102,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8402,7 +8140,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -8430,7 +8168,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8458,8 +8196,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
-    #   QuickSight namespaces that you want to list.
+    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   that you want to list.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8481,9 +8219,9 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] namespaces
-    #   The information about the namespaces in this Amazon Web Services
-    #   account;. The response includes the namespace ARN, name, Region;,
-    #   notification email address, creation status, and identity store.
+    #   The information about the namespaces in this AWS account. The
+    #   response includes the namespace ARN, name, AWS Region, notification
+    #   email address, creation status, and identity store.
     #   @return [Array<Types::NamespaceInfoV2>]
     #
     # @!attribute [rw] next_token
@@ -8491,7 +8229,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8535,7 +8273,7 @@ module Aws::QuickSight
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8563,8 +8301,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template aliases that you're listing.
+    #   The ID of the AWS account that contains the template aliases that
+    #   you're listing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -8600,7 +8338,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8630,8 +8368,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   templates that you're listing.
+    #   The ID of the AWS account that contains the templates that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -8673,7 +8411,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTemplateVersionsResponse AWS API Documentation
@@ -8697,8 +8435,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   templates that you're listing.
+    #   The ID of the AWS account that contains the templates that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8734,7 +8472,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTemplatesResponse AWS API Documentation
@@ -8759,8 +8497,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   aliases that you're listing.
+    #   The ID of the AWS account that contains the theme aliases that
+    #   you're listing.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -8796,7 +8534,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8826,8 +8564,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the themes
-    #   that you're listing.
+    #   The ID of the AWS account that contains the themes that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -8869,7 +8607,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemeVersionsResponse AWS API Documentation
@@ -8894,8 +8632,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the themes
-    #   that you're listing.
+    #   The ID of the AWS account that contains the themes that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8916,7 +8654,7 @@ module Aws::QuickSight
     #   * `CUSTOM` - Display only the themes created by people using Amazon
     #     QuickSight.
     #
-    #   * `QUICKSIGHT` - Display only the starting themes defined by Amazon
+    #   * `QUICKSIGHT` - Display only the starting themes defined by
     #     QuickSight.
     #   @return [String]
     #
@@ -8945,7 +8683,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemesResponse AWS API Documentation
@@ -8976,9 +8714,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID that the user is in. Currently,
-    #   you use the ID for the Amazon Web Services account; that contains
-    #   your Amazon QuickSight account.
+    #   The AWS account ID that the user is in. Currently, you use the ID
+    #   for the AWS account that contains your Amazon QuickSight account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -9014,7 +8751,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -9043,9 +8780,9 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the user is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -9080,7 +8817,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -9391,7 +9128,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] capacity_region
-    #   The namespace Region;.
+    #   The namespace AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] creation_status
@@ -9648,7 +9385,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PreconditionNotMetException AWS API Documentation
@@ -9743,7 +9480,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickSightUserNotFoundException AWS API Documentation
@@ -9896,9 +9633,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the user is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -9939,7 +9676,8 @@ module Aws::QuickSight
     #   QuickSight (admin, author, reader).
     #
     #   This feature is available only to QuickSight Enterprise edition
-    #   subscriptions.
+    #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
+    #   (SSO).
     #   @return [String]
     #
     # @!attribute [rw] external_login_federation_provider_type
@@ -10001,7 +9739,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10015,142 +9753,6 @@ module Aws::QuickSight
       :user_invitation_url,
       :request_id,
       :status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the dashboard you want to embed.
-    #
-    # @note When making an API call, you may pass RegisteredUserDashboardEmbeddingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         initial_dashboard_id: "RestrictiveResourceId", # required
-    #       }
-    #
-    # @!attribute [rw] initial_dashboard_id
-    #   The dashboard ID for the dashboard that you want the user to see
-    #   first. This ID is included in the output URL. When the URL in
-    #   response is accessed, Amazon QuickSight renders this dashboard if
-    #   the user has permissions to view it.
-    #
-    #   If the user does not have permission to view this dashboard, they
-    #   see a permissions error message.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserDashboardEmbeddingConfiguration AWS API Documentation
-    #
-    class RegisteredUserDashboardEmbeddingConfiguration < Struct.new(
-      :initial_dashboard_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The type of experience you want to embed. For registered users, you
-    # can embed an Amazon QuickSight dashboard or the Amazon QuickSight
-    # console.
-    #
-    # <note markdown="1"> Exactly one of the experience configurations is required. You can
-    # choose `Dashboard` or `QuickSightConsole`. You cannot choose more than
-    # one experience configuraton.
-    #
-    #  </note>
-    #
-    # @note When making an API call, you may pass RegisteredUserEmbeddingExperienceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         dashboard: {
-    #           initial_dashboard_id: "RestrictiveResourceId", # required
-    #         },
-    #         quick_sight_console: {
-    #           initial_path: "EntryPath",
-    #         },
-    #       }
-    #
-    # @!attribute [rw] dashboard
-    #   The configuration details for providing a dashboard embedding
-    #   experience.
-    #   @return [Types::RegisteredUserDashboardEmbeddingConfiguration]
-    #
-    # @!attribute [rw] quick_sight_console
-    #   The configuration details for providing an Amazon QuickSight console
-    #   embedding experience. This can be used along with custom permissions
-    #   to restrict access to certain features. For more information, see
-    #   [Customizing Access to the Amazon QuickSight Console][1] in the
-    #   *Amazon QuickSight User Guide*.
-    #
-    #   Use `GenerateEmbedUrlForRegisteredUser` where you want to provide an
-    #   authoring portal that allows users to create data sources, datasets,
-    #   analyses, and dashboards. The users who accesses an embedded Amazon
-    #   QuickSight console needs to belong to the author or admin security
-    #   cohort. If you want to restrict permissions to some of these
-    #   features, add a custom permissions profile to the user with the `
-    #   UpdateUser ` API operation. Use ` RegisterUser ` API operation to
-    #   add a new user with a custom permission profile attached. For more
-    #   information, see the following sections in the *Amazon QuickSight
-    #   User Guide*\:
-    #
-    #   * [Embedding the Full Functionality of the Amazon QuickSight Console
-    #     for Authenticated Users][2]
-    #
-    #   * [Customizing Access to the Amazon QuickSight Console][1]
-    #
-    #   For more information about the high-level steps for embedding and
-    #   for an interactive demo of the ways you can customize embedding,
-    #   visit the [Amazon QuickSight Developer Portal][3].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
-    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html
-    #   [3]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
-    #   @return [Types::RegisteredUserQuickSightConsoleEmbeddingConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserEmbeddingExperienceConfiguration AWS API Documentation
-    #
-    class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
-      :dashboard,
-      :quick_sight_console)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the Amazon QuickSight console that you want to
-    # embed.
-    #
-    # @note When making an API call, you may pass RegisteredUserQuickSightConsoleEmbeddingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         initial_path: "EntryPath",
-    #       }
-    #
-    # @!attribute [rw] initial_path
-    #   The initial URL path for the Amazon QuickSight console.
-    #   `InitialPath` is required.
-    #
-    #   The entry point URL is constrained to the following paths:
-    #
-    #   * `/start`
-    #
-    #   * `/start/analyses`
-    #
-    #   * `/start/dashboards`
-    #
-    #   * `/start/favorites`
-    #
-    #   * `/dashboards/DashboardId`. *DashboardId* is the actual ID key from
-    #     the Amazon QuickSight console URL of the dashboard.
-    #
-    #   * `/analyses/AnalysisId`. *AnalysisId* is the actual ID key from the
-    #     Amazon QuickSight console URL of the analysis.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserQuickSightConsoleEmbeddingConfiguration AWS API Documentation
-    #
-    class RegisteredUserQuickSightConsoleEmbeddingConfiguration < Struct.new(
-      :initial_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10243,7 +9845,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourceExistsException AWS API Documentation
@@ -10266,7 +9868,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourceNotFoundException AWS API Documentation
@@ -10300,10 +9902,9 @@ module Aws::QuickSight
     #     associated with an analysis, dashboard, template, or theme. (This
     #     is common.)
     #
-    #   * The ARN of an Amazon Web Services account; root: This is an IAM
-    #     ARN rather than a QuickSight ARN. Use this option only to share
-    #     resources (templates) across Amazon Web Services accounts. (This
-    #     is less common.)
+    #   * The ARN of an AWS account root: This is an IAM ARN rather than a
+    #     QuickSight ARN. Use this option only to share resources
+    #     (templates) across AWS accounts. (This is less common.)
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -10329,7 +9930,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourceUnavailableException AWS API Documentation
@@ -10351,8 +9952,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   analysis.
+    #   The ID of the AWS account that contains the analysis.
     #   @return [String]
     #
     # @!attribute [rw] analysis_id
@@ -10382,7 +9982,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RestoreAnalysisResponse AWS API Documentation
@@ -10436,7 +10036,6 @@ module Aws::QuickSight
     #         arn: "Arn", # required
     #         permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #         format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
     # @!attribute [rw] namespace
@@ -10464,99 +10063,14 @@ module Aws::QuickSight
     #   required, and `Namespace` must not exist.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of the row-level security permission dataset. If enabled,
-    #   the status is `ENABLED`. If disabled, the status is `DISABLED`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionDataSet AWS API Documentation
     #
     class RowLevelPermissionDataSet < Struct.new(
       :namespace,
       :arn,
       :permission_policy,
-      :format_version,
-      :status)
+      :format_version)
       SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The configuration of tags on a dataset to set row-level security.
-    #
-    # @note When making an API call, you may pass RowLevelPermissionTagConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
-    #         tag_rules: [ # required
-    #           {
-    #             tag_key: "SessionTagKey", # required
-    #             column_name: "String", # required
-    #             tag_multi_value_delimiter: "RowLevelPermissionTagDelimiter",
-    #             match_all_value: "SessionTagValue",
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] status
-    #   The status of row-level security tags. If enabled, the status is
-    #   `ENABLED`. If disabled, the status is `DISABLED`.
-    #   @return [String]
-    #
-    # @!attribute [rw] tag_rules
-    #   A set of rules associated with row-level security, such as the tag
-    #   names and columns that they are assigned to.
-    #   @return [Array<Types::RowLevelPermissionTagRule>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionTagConfiguration AWS API Documentation
-    #
-    class RowLevelPermissionTagConfiguration < Struct.new(
-      :status,
-      :tag_rules)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A set of rules associated with a tag.
-    #
-    # @note When making an API call, you may pass RowLevelPermissionTagRule
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "SessionTagKey", # required
-    #         column_name: "String", # required
-    #         tag_multi_value_delimiter: "RowLevelPermissionTagDelimiter",
-    #         match_all_value: "SessionTagValue",
-    #       }
-    #
-    # @!attribute [rw] tag_key
-    #   The unique key for a tag.
-    #   @return [String]
-    #
-    # @!attribute [rw] column_name
-    #   The column name that a tag key is assigned to.
-    #   @return [String]
-    #
-    # @!attribute [rw] tag_multi_value_delimiter
-    #   A string that you want to use to delimit the values when you pass
-    #   the values at run time. For example, you can delimit the values with
-    #   a comma.
-    #   @return [String]
-    #
-    # @!attribute [rw] match_all_value
-    #   A string that you want to use to filter by all the values in a
-    #   column in the dataset and don’t want to list the values one by one.
-    #   For example, you can use an asterisk as your match all value.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionTagRule AWS API Documentation
-    #
-    class RowLevelPermissionTagRule < Struct.new(
-      :tag_key,
-      :column_name,
-      :tag_multi_value_delimiter,
-      :match_all_value)
-      SENSITIVE = [:match_all_value]
       include Aws::Structure
     end
 
@@ -10574,7 +10088,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] manifest_file_location
     #   Location of the Amazon S3 manifest file. This is NULL if the
-    #   manifest file was uploaded into QuickSight.
+    #   manifest file was uploaded in the console.
     #   @return [Types::ManifestFileLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/S3Parameters AWS API Documentation
@@ -10651,8 +10165,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   analyses that you're searching for.
+    #   The ID of the AWS account that contains the analyses that you're
+    #   searching for.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -10692,7 +10206,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchAnalysesResponse AWS API Documentation
@@ -10723,8 +10237,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the user
-    #   whose dashboards you're searching for.
+    #   The ID of the AWS account that contains the user whose dashboards
+    #   you're searching for.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -10769,7 +10283,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDashboardsResponse AWS API Documentation
@@ -10887,7 +10401,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SessionLifetimeInMinutesInvalidException AWS API Documentation
@@ -10899,39 +10413,12 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The key-value pair used for the row-level security tags feature.
-    #
-    # @note When making an API call, you may pass SessionTag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "SessionTagKey", # required
-    #         value: "SessionTagValue", # required
-    #       }
-    #
-    # @!attribute [rw] key
-    #   The key for the tag.
-    #   @return [String]
-    #
-    # @!attribute [rw] value
-    #   The value that you want to assign the tag.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SessionTag AWS API Documentation
-    #
-    class SessionTag < Struct.new(
-      :key,
-      :value)
-      SENSITIVE = [:value]
-      include Aws::Structure
-    end
-
     # A *sheet*, which is an object that contains a set of visuals that are
-    # viewed together on one page in Amazon QuickSight. Every analysis and
-    # dashboard contains at least one sheet. Each sheet contains at least
-    # one visualization widget, for example a chart, pivot table, or
-    # narrative insight. Sheets can be associated with other components,
-    # such as controls, filters, and so on.
+    # viewed together on one page in the Amazon QuickSight console. Every
+    # analysis and dashboard contains at least one sheet. Each sheet
+    # contains at least one visualization widget, for example a chart, pivot
+    # table, or narrative insight. Sheets can be associated with other
+    # components, such as controls, filters, and so on.
     #
     # @!attribute [rw] sheet_id
     #   The unique identifier associated with a sheet.
@@ -11203,9 +10690,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] tags
     #   The dataset column tag, currently only used for geospatial type
-    #   tagging.
+    #   tagging. .
     #
-    #   <note markdown="1"> This is not tags for the Amazon Web Services tagging feature.
+    #   <note markdown="1"> This is not tags for the AWS tagging feature. .
     #
     #    </note>
     #   @return [Array<Types::ColumnTag>]
@@ -11251,7 +10738,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -11275,9 +10762,9 @@ module Aws::QuickSight
     # dataset placeholders with datasets that follow the same schema that
     # was used to create the source analysis and template.
     #
-    # You can share templates across Amazon Web Services accounts by
-    # allowing users in other Amazon Web Services accounts to create a
-    # template or a dashboard from an existing template.
+    # You can share templates across AWS accounts by allowing users in other
+    # AWS accounts to create a template or a dashboard from an existing
+    # template.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the template.
@@ -11292,8 +10779,8 @@ module Aws::QuickSight
     #   @return [Types::TemplateVersion]
     #
     # @!attribute [rw] template_id
-    #   The ID for the template. This is unique per Region; for each Amazon
-    #   Web Services account;.
+    #   The ID for the template. This is unique per AWS Region for each AWS
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
@@ -11459,8 +10946,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   The ID of the template. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the template. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -11787,8 +11274,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] theme_id
-    #   The ID of the theme. This ID is unique per Region; for each Amazon
-    #   Web Services account;.
+    #   The ID of the theme. This ID is unique per AWS Region for each AWS
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] latest_version_number
@@ -11908,7 +11395,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThrottlingException AWS API Documentation
@@ -12219,8 +11706,8 @@ module Aws::QuickSight
     end
 
     # This error indicates that you are calling an embedding operation in
-    # Amazon QuickSight without the required pricing plan on your Amazon Web
-    # Services account;. Before you can use embedding for anonymous users, a
+    # Amazon QuickSight without the required pricing plan on your AWS
+    # account. Before you can use embedding for anonymous users, a
     # QuickSight administrator needs to add capacity pricing to QuickSight.
     # You can do this on the **Manage QuickSight** page.
     #
@@ -12231,7 +11718,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnsupportedPricingPlanException AWS API Documentation
@@ -12253,7 +11740,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnsupportedUserEditionException AWS API Documentation
@@ -12293,7 +11780,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -12321,8 +11808,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to update
-    #   QuickSight customizations for.
+    #   The ID for the AWS account that you want to update QuickSight
+    #   customizations for.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -12330,8 +11817,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're updating in the current
-    #   Region;.
+    #   The QuickSight customizations you're updating in the current AWS
+    #   Region.
     #   @return [Types::AccountCustomization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomizationRequest AWS API Documentation
@@ -12346,12 +11833,12 @@ module Aws::QuickSight
 
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the updated customization for
-    #   this Amazon Web Services account;.
+    #   this AWS account.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to update
-    #   QuickSight customizations for.
+    #   The ID for the AWS account that you want to update QuickSight
+    #   customizations for.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -12360,12 +11847,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're updating in the current
-    #   Region;.
+    #   The QuickSight customizations you're updating in the current AWS
+    #   Region.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -12395,21 +11882,20 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
-    #   QuickSight settings that you want to list.
+    #   The ID for the AWS account that contains the QuickSight settings
+    #   that you want to list.
     #   @return [String]
     #
     # @!attribute [rw] default_namespace
-    #   The default namespace for this Amazon Web Services account;.
-    #   Currently, the default is `default`. Identity and Access Management
-    #   (IAM) users that register for the first time with QuickSight provide
-    #   an email that becomes associated with the default namespace.
+    #   The default namespace for this AWS account. Currently, the default
+    #   is `default`. AWS Identity and Access Management (IAM) users that
+    #   register for the first time with QuickSight provide an email that
+    #   becomes associated with the default namespace.
     #   @return [String]
     #
     # @!attribute [rw] notification_email
     #   The email address that you want QuickSight to send notifications to
-    #   regarding your Amazon Web Services account; or QuickSight
-    #   subscription.
+    #   regarding your AWS account or QuickSight subscription.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountSettingsRequest AWS API Documentation
@@ -12423,7 +11909,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -12460,9 +11946,9 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   analysis whose permissions you're updating. You must be using the
-    #   Amazon Web Services account; that the analysis is in.
+    #   The ID of the AWS account that contains the analysis whose
+    #   permissions you're updating. You must be using the AWS account that
+    #   the analysis is in.
     #   @return [String]
     #
     # @!attribute [rw] analysis_id
@@ -12505,7 +11991,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -12572,8 +12058,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   analysis that you're updating.
+    #   The ID of the AWS account that contains the analysis that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] analysis_id
@@ -12634,7 +12120,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAnalysisResponse AWS API Documentation
@@ -12670,8 +12156,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboard whose permissions you're updating.
+    #   The ID of the AWS account that contains the dashboard whose
+    #   permissions you're updating.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -12710,7 +12196,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -12739,8 +12225,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboard that you're updating.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -12774,7 +12260,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardPublishedVersionResponse AWS API Documentation
@@ -12848,8 +12334,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboard that you're updating.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -12868,8 +12354,8 @@ module Aws::QuickSight
     #   from an analysis, first convert the analysis to a template by using
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
-    #   `SourceTemplate` ARN can contain any Amazon Web Services account;
-    #   and any QuickSight-supported Region;.
+    #   `SourceTemplate` ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list
     #   the replacement datasets for the placeholders listed in the
@@ -12909,8 +12395,7 @@ module Aws::QuickSight
     #   The Amazon Resource Name (ARN) of the theme that is being used for
     #   this dashboard. If you add a value for this field, it overrides the
     #   value that was originally associated with the entity. The theme ARN
-    #   must exist in the same Amazon Web Services account; where you create
-    #   the dashboard.
+    #   must exist in the same AWS account where you create the dashboard.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardRequest AWS API Documentation
@@ -12949,7 +12434,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardResponse AWS API Documentation
@@ -12986,12 +12471,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset whose permissions you want to update. This ID
-    #   is unique per Region; for each Amazon Web Services account;.
+    #   is unique per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
@@ -13019,11 +12504,11 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset whose permissions you want to update. This ID
-    #   is unique per Region; for each Amazon Web Services account;.
+    #   is unique per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -13171,18 +12656,6 @@ module Aws::QuickSight
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #           format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         row_level_permission_tag_configuration: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #           tag_rules: [ # required
-    #             {
-    #               tag_key: "SessionTagKey", # required
-    #               column_name: "String", # required
-    #               tag_multi_value_delimiter: "RowLevelPermissionTagDelimiter",
-    #               match_all_value: "SessionTagValue",
-    #             },
-    #           ],
     #         },
     #         column_level_permission_rules: [
     #           {
@@ -13193,12 +12666,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to update. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -13234,12 +12707,6 @@ module Aws::QuickSight
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
-    # @!attribute [rw] row_level_permission_tag_configuration
-    #   The configuration of tags on a dataset to set row-level security.
-    #   Row-level security tags are currently supported for anonymous
-    #   embedding only.
-    #   @return [Types::RowLevelPermissionTagConfiguration]
-    #
     # @!attribute [rw] column_level_permission_rules
     #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
     #   @return [Array<Types::ColumnLevelPermissionRule>]
@@ -13256,7 +12723,6 @@ module Aws::QuickSight
       :column_groups,
       :field_folders,
       :row_level_permission_data_set,
-      :row_level_permission_tag_configuration,
       :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
@@ -13268,7 +12734,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_arn
@@ -13282,7 +12748,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -13323,12 +12789,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
@@ -13357,12 +12823,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -13587,12 +13053,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -13639,8 +13105,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] update_status
@@ -13648,7 +13114,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -13823,9 +13289,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the group is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -13848,7 +13314,7 @@ module Aws::QuickSight
     #   @return [Types::Group]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -13880,13 +13346,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the IAM
-    #   policy assignment.
+    #   The ID of the AWS account that contains the IAM policy assignment.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
     #   The name of the assignment, also called a rule. This name must be
-    #   unique within an Amazon Web Services account;.
+    #   unique within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -13961,7 +13426,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -13993,8 +13458,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template alias that you're updating.
+    #   The ID of the AWS account that contains the template alias that
+    #   you're updating.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -14033,7 +13498,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTemplateAliasResponse AWS API Documentation
@@ -14067,8 +13532,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template.
+    #   The ID of the AWS account that contains the template.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -14107,7 +13571,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -14151,8 +13615,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   template that you're updating.
+    #   The ID of the AWS account that contains the template that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -14166,8 +13630,8 @@ module Aws::QuickSight
     #   for an analysis. Both of these require an Amazon Resource Name
     #   (ARN). For `SourceTemplate`, specify the ARN of the source template.
     #   For `SourceAnalysis`, specify the ARN of the source analysis. The
-    #   `SourceTemplate` ARN can contain any Amazon Web Services account;
-    #   and any QuickSight-supported Region;.
+    #   `SourceTemplate` ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the
@@ -14220,7 +13684,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTemplateResponse AWS API Documentation
@@ -14247,8 +13711,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   alias that you're updating.
+    #   The ID of the AWS account that contains the theme alias that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -14283,7 +13747,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemeAliasResponse AWS API Documentation
@@ -14317,7 +13781,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme.
+    #   The ID of the AWS account that contains the theme.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -14356,7 +13820,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -14427,8 +13891,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're updating.
+    #   The ID of the AWS account that contains the theme that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] theme_id
@@ -14441,7 +13905,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] base_theme_id
     #   The theme ID, defined by Amazon QuickSight, that a custom theme
-    #   inherits from. All themes initially inherit from a default Amazon
+    #   inherits from. All themes initially inherit from a default
     #   QuickSight theme.
     #   @return [String]
     #
@@ -14491,7 +13955,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemeResponse AWS API Documentation
@@ -14528,9 +13992,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the AWS account that the user is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -14583,7 +14047,8 @@ module Aws::QuickSight
     #   QuickSight (admin, author, reader).
     #
     #   This feature is available only to QuickSight Enterprise edition
-    #   subscriptions.
+    #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
+    #   (SSO).
     #   @return [String]
     #
     # @!attribute [rw] unapply_custom_permissions
@@ -14649,7 +14114,7 @@ module Aws::QuickSight
     #   @return [Types::User]
     #
     # @!attribute [rw] request_id
-    #   The Amazon Web Services request ID for this operation.
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status

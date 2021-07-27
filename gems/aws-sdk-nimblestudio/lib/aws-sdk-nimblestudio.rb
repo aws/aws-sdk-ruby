@@ -48,6 +48,6 @@ require_relative 'aws-sdk-nimblestudio/customizations'
 # @!group service
 module Aws::NimbleStudio
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.1.0'
 
 end

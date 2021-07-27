@@ -35,10 +35,7 @@ module Aws::QuickSight
     AnalysisSourceTemplate = Shapes::StructureShape.new(name: 'AnalysisSourceTemplate')
     AnalysisSummary = Shapes::StructureShape.new(name: 'AnalysisSummary')
     AnalysisSummaryList = Shapes::ListShape.new(name: 'AnalysisSummaryList')
-    AnonymousUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardEmbeddingConfiguration')
-    AnonymousUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserEmbeddingExperienceConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
-    ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssignmentStatus = Shapes::StringShape.new(name: 'AssignmentStatus')
     AthenaParameters = Shapes::StructureShape.new(name: 'AthenaParameters')
     AuroraParameters = Shapes::StructureShape.new(name: 'AuroraParameters')
@@ -248,7 +245,6 @@ module Aws::QuickSight
     Edition = Shapes::StringShape.new(name: 'Edition')
     EmbeddingIdentityType = Shapes::StringShape.new(name: 'EmbeddingIdentityType')
     EmbeddingUrl = Shapes::StringShape.new(name: 'EmbeddingUrl')
-    EntryPath = Shapes::StringShape.new(name: 'EntryPath')
     EntryPoint = Shapes::StringShape.new(name: 'EntryPoint')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
@@ -272,10 +268,6 @@ module Aws::QuickSight
     FolderSummary = Shapes::StructureShape.new(name: 'FolderSummary')
     FolderSummaryList = Shapes::ListShape.new(name: 'FolderSummaryList')
     FolderType = Shapes::StringShape.new(name: 'FolderType')
-    GenerateEmbedUrlForAnonymousUserRequest = Shapes::StructureShape.new(name: 'GenerateEmbedUrlForAnonymousUserRequest')
-    GenerateEmbedUrlForAnonymousUserResponse = Shapes::StructureShape.new(name: 'GenerateEmbedUrlForAnonymousUserResponse')
-    GenerateEmbedUrlForRegisteredUserRequest = Shapes::StructureShape.new(name: 'GenerateEmbedUrlForRegisteredUserRequest')
-    GenerateEmbedUrlForRegisteredUserResponse = Shapes::StructureShape.new(name: 'GenerateEmbedUrlForRegisteredUserResponse')
     GeoSpatialColumnGroup = Shapes::StructureShape.new(name: 'GeoSpatialColumnGroup')
     GeoSpatialCountryCode = Shapes::StringShape.new(name: 'GeoSpatialCountryCode')
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
@@ -418,9 +410,6 @@ module Aws::QuickSight
     RedshiftParameters = Shapes::StructureShape.new(name: 'RedshiftParameters')
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
-    RegisteredUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserDashboardEmbeddingConfiguration')
-    RegisteredUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserEmbeddingExperienceConfiguration')
-    RegisteredUserQuickSightConsoleEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQuickSightConsoleEmbeddingConfiguration')
     RelationalTable = Shapes::StructureShape.new(name: 'RelationalTable')
     RelationalTableCatalog = Shapes::StringShape.new(name: 'RelationalTableCatalog')
     RelationalTableName = Shapes::StringShape.new(name: 'RelationalTableName')
@@ -443,10 +432,6 @@ module Aws::QuickSight
     RowLevelPermissionDataSet = Shapes::StructureShape.new(name: 'RowLevelPermissionDataSet')
     RowLevelPermissionFormatVersion = Shapes::StringShape.new(name: 'RowLevelPermissionFormatVersion')
     RowLevelPermissionPolicy = Shapes::StringShape.new(name: 'RowLevelPermissionPolicy')
-    RowLevelPermissionTagConfiguration = Shapes::StructureShape.new(name: 'RowLevelPermissionTagConfiguration')
-    RowLevelPermissionTagDelimiter = Shapes::StringShape.new(name: 'RowLevelPermissionTagDelimiter')
-    RowLevelPermissionTagRule = Shapes::StructureShape.new(name: 'RowLevelPermissionTagRule')
-    RowLevelPermissionTagRuleList = Shapes::ListShape.new(name: 'RowLevelPermissionTagRuleList')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Parameters = Shapes::StructureShape.new(name: 'S3Parameters')
@@ -460,10 +445,6 @@ module Aws::QuickSight
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
-    SessionTag = Shapes::StructureShape.new(name: 'SessionTag')
-    SessionTagKey = Shapes::StringShape.new(name: 'SessionTagKey')
-    SessionTagList = Shapes::ListShape.new(name: 'SessionTagList')
-    SessionTagValue = Shapes::StringShape.new(name: 'SessionTagValue')
     Sheet = Shapes::StructureShape.new(name: 'Sheet')
     SheetControlsOption = Shapes::StructureShape.new(name: 'SheetControlsOption')
     SheetList = Shapes::ListShape.new(name: 'SheetList')
@@ -474,7 +455,6 @@ module Aws::QuickSight
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlServerParameters = Shapes::StructureShape.new(name: 'SqlServerParameters')
     SslProperties = Shapes::StructureShape.new(name: 'SslProperties')
-    Status = Shapes::StringShape.new(name: 'Status')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -665,14 +645,6 @@ module Aws::QuickSight
 
     AnalysisSummaryList.member = Shapes::ShapeRef.new(shape: AnalysisSummary)
 
-    AnonymousUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
-    AnonymousUserDashboardEmbeddingConfiguration.struct_class = Types::AnonymousUserDashboardEmbeddingConfiguration
-
-    AnonymousUserEmbeddingExperienceConfiguration.add_member(:dashboard, Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfiguration, location_name: "Dashboard"))
-    AnonymousUserEmbeddingExperienceConfiguration.struct_class = Types::AnonymousUserEmbeddingExperienceConfiguration
-
-    ArnList.member = Shapes::ShapeRef.new(shape: Arn)
-
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     AthenaParameters.struct_class = Types::AthenaParameters
 
@@ -831,7 +803,6 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:field_folders, Shapes::ShapeRef.new(shape: FieldFolderMap, location_name: "FieldFolders"))
     CreateDataSetRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     CreateDataSetRequest.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
-    CreateDataSetRequest.add_member(:row_level_permission_tag_configuration, Shapes::ShapeRef.new(shape: RowLevelPermissionTagConfiguration, location_name: "RowLevelPermissionTagConfiguration"))
     CreateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     CreateDataSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataSetRequest.struct_class = Types::CreateDataSetRequest
@@ -1108,7 +1079,6 @@ module Aws::QuickSight
     DataSet.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
     DataSet.add_member(:field_folders, Shapes::ShapeRef.new(shape: FieldFolderMap, location_name: "FieldFolders"))
     DataSet.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
-    DataSet.add_member(:row_level_permission_tag_configuration, Shapes::ShapeRef.new(shape: RowLevelPermissionTagConfiguration, location_name: "RowLevelPermissionTagConfiguration"))
     DataSet.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     DataSet.struct_class = Types::DataSet
 
@@ -1137,7 +1107,6 @@ module Aws::QuickSight
     DataSetSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     DataSetSummary.add_member(:import_mode, Shapes::ShapeRef.new(shape: DataSetImportMode, location_name: "ImportMode"))
     DataSetSummary.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
-    DataSetSummary.add_member(:row_level_permission_tag_configuration_applied, Shapes::ShapeRef.new(shape: Boolean, location_name: "RowLevelPermissionTagConfigurationApplied"))
     DataSetSummary.add_member(:column_level_permission_rules_applied, Shapes::ShapeRef.new(shape: Boolean, location_name: "ColumnLevelPermissionRulesApplied"))
     DataSetSummary.struct_class = Types::DataSetSummary
 
@@ -1680,30 +1649,6 @@ module Aws::QuickSight
 
     FolderSummaryList.member = Shapes::ShapeRef.new(shape: FolderSummary)
 
-    GenerateEmbedUrlForAnonymousUserRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    GenerateEmbedUrlForAnonymousUserRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location_name: "SessionLifetimeInMinutes"))
-    GenerateEmbedUrlForAnonymousUserRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
-    GenerateEmbedUrlForAnonymousUserRequest.add_member(:session_tags, Shapes::ShapeRef.new(shape: SessionTagList, location_name: "SessionTags"))
-    GenerateEmbedUrlForAnonymousUserRequest.add_member(:authorized_resource_arns, Shapes::ShapeRef.new(shape: ArnList, required: true, location_name: "AuthorizedResourceArns"))
-    GenerateEmbedUrlForAnonymousUserRequest.add_member(:experience_configuration, Shapes::ShapeRef.new(shape: AnonymousUserEmbeddingExperienceConfiguration, required: true, location_name: "ExperienceConfiguration"))
-    GenerateEmbedUrlForAnonymousUserRequest.struct_class = Types::GenerateEmbedUrlForAnonymousUserRequest
-
-    GenerateEmbedUrlForAnonymousUserResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, required: true, location_name: "EmbedUrl"))
-    GenerateEmbedUrlForAnonymousUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, required: true, location: "statusCode", location_name: "Status"))
-    GenerateEmbedUrlForAnonymousUserResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
-    GenerateEmbedUrlForAnonymousUserResponse.struct_class = Types::GenerateEmbedUrlForAnonymousUserResponse
-
-    GenerateEmbedUrlForRegisteredUserRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    GenerateEmbedUrlForRegisteredUserRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location_name: "SessionLifetimeInMinutes"))
-    GenerateEmbedUrlForRegisteredUserRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "UserArn"))
-    GenerateEmbedUrlForRegisteredUserRequest.add_member(:experience_configuration, Shapes::ShapeRef.new(shape: RegisteredUserEmbeddingExperienceConfiguration, required: true, location_name: "ExperienceConfiguration"))
-    GenerateEmbedUrlForRegisteredUserRequest.struct_class = Types::GenerateEmbedUrlForRegisteredUserRequest
-
-    GenerateEmbedUrlForRegisteredUserResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, required: true, location_name: "EmbedUrl"))
-    GenerateEmbedUrlForRegisteredUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, required: true, location: "statusCode", location_name: "Status"))
-    GenerateEmbedUrlForRegisteredUserResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
-    GenerateEmbedUrlForRegisteredUserResponse.struct_class = Types::GenerateEmbedUrlForRegisteredUserResponse
-
     GeoSpatialColumnGroup.add_member(:name, Shapes::ShapeRef.new(shape: ColumnGroupName, required: true, location_name: "Name"))
     GeoSpatialColumnGroup.add_member(:country_code, Shapes::ShapeRef.new(shape: GeoSpatialCountryCode, required: true, location_name: "CountryCode"))
     GeoSpatialColumnGroup.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, required: true, location_name: "Columns"))
@@ -2228,16 +2173,6 @@ module Aws::QuickSight
     RegisterUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     RegisterUserResponse.struct_class = Types::RegisterUserResponse
 
-    RegisteredUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
-    RegisteredUserDashboardEmbeddingConfiguration.struct_class = Types::RegisteredUserDashboardEmbeddingConfiguration
-
-    RegisteredUserEmbeddingExperienceConfiguration.add_member(:dashboard, Shapes::ShapeRef.new(shape: RegisteredUserDashboardEmbeddingConfiguration, location_name: "Dashboard"))
-    RegisteredUserEmbeddingExperienceConfiguration.add_member(:quick_sight_console, Shapes::ShapeRef.new(shape: RegisteredUserQuickSightConsoleEmbeddingConfiguration, location_name: "QuickSightConsole"))
-    RegisteredUserEmbeddingExperienceConfiguration.struct_class = Types::RegisteredUserEmbeddingExperienceConfiguration
-
-    RegisteredUserQuickSightConsoleEmbeddingConfiguration.add_member(:initial_path, Shapes::ShapeRef.new(shape: EntryPath, location_name: "InitialPath"))
-    RegisteredUserQuickSightConsoleEmbeddingConfiguration.struct_class = Types::RegisteredUserQuickSightConsoleEmbeddingConfiguration
-
     RelationalTable.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DataSourceArn"))
     RelationalTable.add_member(:catalog, Shapes::ShapeRef.new(shape: RelationalTableCatalog, location_name: "Catalog"))
     RelationalTable.add_member(:schema, Shapes::ShapeRef.new(shape: RelationalTableSchema, location_name: "Schema"))
@@ -2288,20 +2223,7 @@ module Aws::QuickSight
     RowLevelPermissionDataSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     RowLevelPermissionDataSet.add_member(:permission_policy, Shapes::ShapeRef.new(shape: RowLevelPermissionPolicy, required: true, location_name: "PermissionPolicy"))
     RowLevelPermissionDataSet.add_member(:format_version, Shapes::ShapeRef.new(shape: RowLevelPermissionFormatVersion, location_name: "FormatVersion"))
-    RowLevelPermissionDataSet.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     RowLevelPermissionDataSet.struct_class = Types::RowLevelPermissionDataSet
-
-    RowLevelPermissionTagConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
-    RowLevelPermissionTagConfiguration.add_member(:tag_rules, Shapes::ShapeRef.new(shape: RowLevelPermissionTagRuleList, required: true, location_name: "TagRules"))
-    RowLevelPermissionTagConfiguration.struct_class = Types::RowLevelPermissionTagConfiguration
-
-    RowLevelPermissionTagRule.add_member(:tag_key, Shapes::ShapeRef.new(shape: SessionTagKey, required: true, location_name: "TagKey"))
-    RowLevelPermissionTagRule.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ColumnName"))
-    RowLevelPermissionTagRule.add_member(:tag_multi_value_delimiter, Shapes::ShapeRef.new(shape: RowLevelPermissionTagDelimiter, location_name: "TagMultiValueDelimiter"))
-    RowLevelPermissionTagRule.add_member(:match_all_value, Shapes::ShapeRef.new(shape: SessionTagValue, location_name: "MatchAllValue"))
-    RowLevelPermissionTagRule.struct_class = Types::RowLevelPermissionTagRule
-
-    RowLevelPermissionTagRuleList.member = Shapes::ShapeRef.new(shape: RowLevelPermissionTagRule)
 
     S3Parameters.add_member(:manifest_file_location, Shapes::ShapeRef.new(shape: ManifestFileLocation, required: true, location_name: "ManifestFileLocation"))
     S3Parameters.struct_class = Types::S3Parameters
@@ -2353,12 +2275,6 @@ module Aws::QuickSight
     SessionLifetimeInMinutesInvalidException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     SessionLifetimeInMinutesInvalidException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SessionLifetimeInMinutesInvalidException.struct_class = Types::SessionLifetimeInMinutesInvalidException
-
-    SessionTag.add_member(:key, Shapes::ShapeRef.new(shape: SessionTagKey, required: true, location_name: "Key"))
-    SessionTag.add_member(:value, Shapes::ShapeRef.new(shape: SessionTagValue, required: true, location_name: "Value"))
-    SessionTag.struct_class = Types::SessionTag
-
-    SessionTagList.member = Shapes::ShapeRef.new(shape: SessionTag)
 
     Sheet.add_member(:sheet_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "SheetId"))
     Sheet.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
@@ -2715,7 +2631,6 @@ module Aws::QuickSight
     UpdateDataSetRequest.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
     UpdateDataSetRequest.add_member(:field_folders, Shapes::ShapeRef.new(shape: FieldFolderMap, location_name: "FieldFolders"))
     UpdateDataSetRequest.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
-    UpdateDataSetRequest.add_member(:row_level_permission_tag_configuration, Shapes::ShapeRef.new(shape: RowLevelPermissionTagConfiguration, location_name: "RowLevelPermissionTagConfiguration"))
     UpdateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     UpdateDataSetRequest.struct_class = Types::UpdateDataSetRequest
 
@@ -3793,39 +3708,6 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-      end)
-
-      api.add_operation(:generate_embed_url_for_anonymous_user, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GenerateEmbedUrlForAnonymousUser"
-        o.http_method = "POST"
-        o.http_request_uri = "/accounts/{AwsAccountId}/embed-url/anonymous-user"
-        o.input = Shapes::ShapeRef.new(shape: GenerateEmbedUrlForAnonymousUserRequest)
-        o.output = Shapes::ShapeRef.new(shape: GenerateEmbedUrlForAnonymousUserResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: SessionLifetimeInMinutesInvalidException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-      end)
-
-      api.add_operation(:generate_embed_url_for_registered_user, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GenerateEmbedUrlForRegisteredUser"
-        o.http_method = "POST"
-        o.http_request_uri = "/accounts/{AwsAccountId}/embed-url/registered-user"
-        o.input = Shapes::ShapeRef.new(shape: GenerateEmbedUrlForRegisteredUserRequest)
-        o.output = Shapes::ShapeRef.new(shape: GenerateEmbedUrlForRegisteredUserResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: QuickSightUserNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: SessionLifetimeInMinutesInvalidException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:get_dashboard_embed_url, Seahorse::Model::Operation.new.tap do |o|
