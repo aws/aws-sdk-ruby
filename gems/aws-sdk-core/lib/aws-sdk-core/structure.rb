@@ -70,20 +70,11 @@ module Aws
       end
 
     end
-
-    module Union
-      def member
-        self.members.select { |k| self[k] }.first
-      end
-
-      def value
-        self[member] if member
-      end
-    end
   end
 
   # @api private
   class EmptyStructure < Struct.new('AwsEmptyStructure')
     include(Aws::Structure)
   end
+
 end

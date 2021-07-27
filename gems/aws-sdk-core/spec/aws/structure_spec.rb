@@ -89,36 +89,5 @@ module Aws
       end
     end
 
-    describe 'Union' do
-      class UnionType < Struct.new(
-        :member_1,
-        :member_2)
-        include Aws::Structure
-        include Aws::Structure::Union
-      end
-
-      let(:union) { UnionType.new(member_1: 'member_1') }
-
-      describe '#member' do
-        it 'returns the set member' do
-          expect(union.member).to eq :member_1
-        end
-
-        it 'returns nil when no member is set' do
-          expect(UnionType.new.member).to be_nil
-        end
-      end
-
-      describe '#value' do
-        it 'returns the set value' do
-          expect(union.value).to eq 'member_1'
-        end
-
-        it 'returns nil when no member is set' do
-          expect(UnionType.new.value).to be_nil
-        end
-      end
-    end
-
   end
 end
