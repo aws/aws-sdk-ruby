@@ -126,8 +126,6 @@ module AwsSdkCodeGenerator
       def output_example_docs(shape_name, shape)
         if @output_shapes.include?(shape_name)
           if shape['union']
-            require 'byebug'
-            byebug
             "@note #{shape_name} is a union - when returned from an API call"\
             ' exactly one value will be set and the returned type will'\
             " be a subclass of #{shape_name} corresponding to the set member."
