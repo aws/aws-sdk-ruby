@@ -137,11 +137,9 @@ module AwsSdkCodeGenerator
             end
             if shape['union']
               lines << "#{shape_name}.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))"
-              puts "Union members: #{shape_name}"
               shape['members'].each do |member_name, member_ref|
                 member_name_underscore = underscore(member_name)
                 member_class_name = pascal_case(member_name_underscore)
-                puts "\tmember: #{member_name} underscore: #{member_name_underscore} member_class_name: #{member_class_name}"
                 lines << "#{shape_name}.add_member_subclass(:#{member_name_underscore}, Types::#{shape_name}::#{member_class_name})"
               end
               lines << "#{shape_name}.add_member_subclass(:unknown, Types::#{shape_name}::Unknown)"
