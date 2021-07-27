@@ -888,8 +888,7 @@
         "L":{"shape":"ListAttributeValue"},
         "NULL":{"shape":"NullAttributeValue"},
         "BOOL":{"shape":"BooleanAttributeValue"}
-      },
-      "union": true
+      }
     },
     "AttributeValueList":{
       "type":"list",
