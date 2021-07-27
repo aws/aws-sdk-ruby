@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-07-26)
+------------------
+
+* Feature - SDK update to support creation of Cross-Account Metric Alarms and update API documentation.
+
 1.51.0 (2021-03-30)
 ------------------
 

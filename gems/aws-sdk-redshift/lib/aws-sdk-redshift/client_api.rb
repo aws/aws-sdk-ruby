@@ -30,6 +30,12 @@ module Aws::Redshift
     AttributeNameList = Shapes::ListShape.new(name: 'AttributeNameList')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     AttributeValueTarget = Shapes::StructureShape.new(name: 'AttributeValueTarget')
+    AuthenticationProfile = Shapes::StructureShape.new(name: 'AuthenticationProfile')
+    AuthenticationProfileAlreadyExistsFault = Shapes::StructureShape.new(name: 'AuthenticationProfileAlreadyExistsFault')
+    AuthenticationProfileList = Shapes::ListShape.new(name: 'AuthenticationProfileList')
+    AuthenticationProfileNameString = Shapes::StringShape.new(name: 'AuthenticationProfileNameString')
+    AuthenticationProfileNotFoundFault = Shapes::StructureShape.new(name: 'AuthenticationProfileNotFoundFault')
+    AuthenticationProfileQuotaExceededFault = Shapes::StructureShape.new(name: 'AuthenticationProfileQuotaExceededFault')
     AuthorizationAlreadyExistsFault = Shapes::StructureShape.new(name: 'AuthorizationAlreadyExistsFault')
     AuthorizationNotFoundFault = Shapes::StructureShape.new(name: 'AuthorizationNotFoundFault')
     AuthorizationQuotaExceededFault = Shapes::StructureShape.new(name: 'AuthorizationQuotaExceededFault')
@@ -106,6 +112,8 @@ module Aws::Redshift
     CopyClusterSnapshotMessage = Shapes::StructureShape.new(name: 'CopyClusterSnapshotMessage')
     CopyClusterSnapshotResult = Shapes::StructureShape.new(name: 'CopyClusterSnapshotResult')
     CopyToRegionDisabledFault = Shapes::StructureShape.new(name: 'CopyToRegionDisabledFault')
+    CreateAuthenticationProfileMessage = Shapes::StructureShape.new(name: 'CreateAuthenticationProfileMessage')
+    CreateAuthenticationProfileResult = Shapes::StructureShape.new(name: 'CreateAuthenticationProfileResult')
     CreateClusterMessage = Shapes::StructureShape.new(name: 'CreateClusterMessage')
     CreateClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'CreateClusterParameterGroupMessage')
     CreateClusterParameterGroupResult = Shapes::StructureShape.new(name: 'CreateClusterParameterGroupResult')
@@ -135,6 +143,8 @@ module Aws::Redshift
     DefaultClusterParameters = Shapes::StructureShape.new(name: 'DefaultClusterParameters')
     DeferredMaintenanceWindow = Shapes::StructureShape.new(name: 'DeferredMaintenanceWindow')
     DeferredMaintenanceWindowsList = Shapes::ListShape.new(name: 'DeferredMaintenanceWindowsList')
+    DeleteAuthenticationProfileMessage = Shapes::StructureShape.new(name: 'DeleteAuthenticationProfileMessage')
+    DeleteAuthenticationProfileResult = Shapes::StructureShape.new(name: 'DeleteAuthenticationProfileResult')
     DeleteClusterMessage = Shapes::StructureShape.new(name: 'DeleteClusterMessage')
     DeleteClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'DeleteClusterParameterGroupMessage')
     DeleteClusterResult = Shapes::StructureShape.new(name: 'DeleteClusterResult')
@@ -155,6 +165,8 @@ module Aws::Redshift
     DependentServiceRequestThrottlingFault = Shapes::StructureShape.new(name: 'DependentServiceRequestThrottlingFault')
     DependentServiceUnavailableFault = Shapes::StructureShape.new(name: 'DependentServiceUnavailableFault')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
+    DescribeAuthenticationProfilesMessage = Shapes::StructureShape.new(name: 'DescribeAuthenticationProfilesMessage')
+    DescribeAuthenticationProfilesResult = Shapes::StructureShape.new(name: 'DescribeAuthenticationProfilesResult')
     DescribeClusterDbRevisionsMessage = Shapes::StructureShape.new(name: 'DescribeClusterDbRevisionsMessage')
     DescribeClusterParameterGroupsMessage = Shapes::StructureShape.new(name: 'DescribeClusterParameterGroupsMessage')
     DescribeClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeClusterParametersMessage')
@@ -255,6 +267,7 @@ module Aws::Redshift
     InsufficientS3BucketPolicyFault = Shapes::StructureShape.new(name: 'InsufficientS3BucketPolicyFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+    InvalidAuthenticationProfileRequestFault = Shapes::StructureShape.new(name: 'InvalidAuthenticationProfileRequestFault')
     InvalidAuthorizationStateFault = Shapes::StructureShape.new(name: 'InvalidAuthorizationStateFault')
     InvalidClusterParameterGroupStateFault = Shapes::StructureShape.new(name: 'InvalidClusterParameterGroupStateFault')
     InvalidClusterSecurityGroupStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSecurityGroupStateFault')
@@ -290,6 +303,8 @@ module Aws::Redshift
     Mode = Shapes::StringShape.new(name: 'Mode')
     ModifyAquaInputMessage = Shapes::StructureShape.new(name: 'ModifyAquaInputMessage')
     ModifyAquaOutputMessage = Shapes::StructureShape.new(name: 'ModifyAquaOutputMessage')
+    ModifyAuthenticationProfileMessage = Shapes::StructureShape.new(name: 'ModifyAuthenticationProfileMessage')
+    ModifyAuthenticationProfileResult = Shapes::StructureShape.new(name: 'ModifyAuthenticationProfileResult')
     ModifyClusterDbRevisionMessage = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionMessage')
     ModifyClusterDbRevisionResult = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionResult')
     ModifyClusterIamRolesMessage = Shapes::StructureShape.new(name: 'ModifyClusterIamRolesMessage')
@@ -529,6 +544,18 @@ module Aws::Redshift
 
     AttributeValueTarget.add_member(:attribute_value, Shapes::ShapeRef.new(shape: String, location_name: "AttributeValue"))
     AttributeValueTarget.struct_class = Types::AttributeValueTarget
+
+    AuthenticationProfile.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, location_name: "AuthenticationProfileName"))
+    AuthenticationProfile.add_member(:authentication_profile_content, Shapes::ShapeRef.new(shape: String, location_name: "AuthenticationProfileContent"))
+    AuthenticationProfile.struct_class = Types::AuthenticationProfile
+
+    AuthenticationProfileAlreadyExistsFault.struct_class = Types::AuthenticationProfileAlreadyExistsFault
+
+    AuthenticationProfileList.member = Shapes::ShapeRef.new(shape: AuthenticationProfile)
+
+    AuthenticationProfileNotFoundFault.struct_class = Types::AuthenticationProfileNotFoundFault
+
+    AuthenticationProfileQuotaExceededFault.struct_class = Types::AuthenticationProfileQuotaExceededFault
 
     AuthorizationAlreadyExistsFault.struct_class = Types::AuthorizationAlreadyExistsFault
 
@@ -814,6 +841,14 @@ module Aws::Redshift
 
     CopyToRegionDisabledFault.struct_class = Types::CopyToRegionDisabledFault
 
+    CreateAuthenticationProfileMessage.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, required: true, location_name: "AuthenticationProfileName"))
+    CreateAuthenticationProfileMessage.add_member(:authentication_profile_content, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AuthenticationProfileContent"))
+    CreateAuthenticationProfileMessage.struct_class = Types::CreateAuthenticationProfileMessage
+
+    CreateAuthenticationProfileResult.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, location_name: "AuthenticationProfileName"))
+    CreateAuthenticationProfileResult.add_member(:authentication_profile_content, Shapes::ShapeRef.new(shape: String, location_name: "AuthenticationProfileContent"))
+    CreateAuthenticationProfileResult.struct_class = Types::CreateAuthenticationProfileResult
+
     CreateClusterMessage.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "DBName"))
     CreateClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     CreateClusterMessage.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
@@ -990,6 +1025,12 @@ module Aws::Redshift
 
     DeferredMaintenanceWindowsList.member = Shapes::ShapeRef.new(shape: DeferredMaintenanceWindow, location_name: "DeferredMaintenanceWindow")
 
+    DeleteAuthenticationProfileMessage.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, required: true, location_name: "AuthenticationProfileName"))
+    DeleteAuthenticationProfileMessage.struct_class = Types::DeleteAuthenticationProfileMessage
+
+    DeleteAuthenticationProfileResult.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, location_name: "AuthenticationProfileName"))
+    DeleteAuthenticationProfileResult.struct_class = Types::DeleteAuthenticationProfileResult
+
     DeleteClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     DeleteClusterMessage.add_member(:skip_final_cluster_snapshot, Shapes::ShapeRef.new(shape: Boolean, location_name: "SkipFinalClusterSnapshot"))
     DeleteClusterMessage.add_member(:final_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "FinalClusterSnapshotIdentifier"))
@@ -1051,6 +1092,12 @@ module Aws::Redshift
 
     DescribeAccountAttributesMessage.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
     DescribeAccountAttributesMessage.struct_class = Types::DescribeAccountAttributesMessage
+
+    DescribeAuthenticationProfilesMessage.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, location_name: "AuthenticationProfileName"))
+    DescribeAuthenticationProfilesMessage.struct_class = Types::DescribeAuthenticationProfilesMessage
+
+    DescribeAuthenticationProfilesResult.add_member(:authentication_profiles, Shapes::ShapeRef.new(shape: AuthenticationProfileList, location_name: "AuthenticationProfiles"))
+    DescribeAuthenticationProfilesResult.struct_class = Types::DescribeAuthenticationProfilesResult
 
     DescribeClusterDbRevisionsMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
     DescribeClusterDbRevisionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1492,6 +1539,8 @@ module Aws::Redshift
 
     InsufficientS3BucketPolicyFault.struct_class = Types::InsufficientS3BucketPolicyFault
 
+    InvalidAuthenticationProfileRequestFault.struct_class = Types::InvalidAuthenticationProfileRequestFault
+
     InvalidAuthorizationStateFault.struct_class = Types::InvalidAuthorizationStateFault
 
     InvalidClusterParameterGroupStateFault.struct_class = Types::InvalidClusterParameterGroupStateFault
@@ -1567,6 +1616,14 @@ module Aws::Redshift
 
     ModifyAquaOutputMessage.add_member(:aqua_configuration, Shapes::ShapeRef.new(shape: AquaConfiguration, location_name: "AquaConfiguration"))
     ModifyAquaOutputMessage.struct_class = Types::ModifyAquaOutputMessage
+
+    ModifyAuthenticationProfileMessage.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, required: true, location_name: "AuthenticationProfileName"))
+    ModifyAuthenticationProfileMessage.add_member(:authentication_profile_content, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AuthenticationProfileContent"))
+    ModifyAuthenticationProfileMessage.struct_class = Types::ModifyAuthenticationProfileMessage
+
+    ModifyAuthenticationProfileResult.add_member(:authentication_profile_name, Shapes::ShapeRef.new(shape: AuthenticationProfileNameString, location_name: "AuthenticationProfileName"))
+    ModifyAuthenticationProfileResult.add_member(:authentication_profile_content, Shapes::ShapeRef.new(shape: String, location_name: "AuthenticationProfileContent"))
+    ModifyAuthenticationProfileResult.struct_class = Types::ModifyAuthenticationProfileResult
 
     ModifyClusterDbRevisionMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ModifyClusterDbRevisionMessage.add_member(:revision_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RevisionTarget"))
@@ -2427,6 +2484,17 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRetentionPeriodFault)
       end)
 
+      api.add_operation(:create_authentication_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAuthenticationProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAuthenticationProfileMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateAuthenticationProfileResult)
+        o.errors << Shapes::ShapeRef.new(shape: AuthenticationProfileAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: AuthenticationProfileQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAuthenticationProfileRequestFault)
+      end)
+
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCluster"
         o.http_method = "POST"
@@ -2642,6 +2710,16 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
+      api.add_operation(:delete_authentication_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAuthenticationProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAuthenticationProfileMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAuthenticationProfileResult)
+        o.errors << Shapes::ShapeRef.new(shape: AuthenticationProfileNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAuthenticationProfileRequestFault)
+      end)
+
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCluster"
         o.http_method = "POST"
@@ -2806,6 +2884,16 @@ module Aws::Redshift
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountAttributesMessage)
         o.output = Shapes::ShapeRef.new(shape: AccountAttributeList)
+      end)
+
+      api.add_operation(:describe_authentication_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAuthenticationProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAuthenticationProfilesMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAuthenticationProfilesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AuthenticationProfileNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAuthenticationProfileRequestFault)
       end)
 
       api.add_operation(:describe_cluster_db_revisions, Seahorse::Model::Operation.new.tap do |o|
@@ -3357,6 +3445,17 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:modify_authentication_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyAuthenticationProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyAuthenticationProfileMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyAuthenticationProfileResult)
+        o.errors << Shapes::ShapeRef.new(shape: AuthenticationProfileNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AuthenticationProfileQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAuthenticationProfileRequestFault)
       end)
 
       api.add_operation(:modify_cluster, Seahorse::Model::Operation.new.tap do |o|

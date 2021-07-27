@@ -33,7 +33,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] associated_gateway_owner_account
-    #   The ID of the AWS account that owns the virtual private gateway or
+    #   The ID of the account that owns the virtual private gateway or
     #   transit gateway.
     #   @return [String]
     #
@@ -42,7 +42,7 @@ module Aws::DirectConnect
     #   gateway.
     #
     #   For information about how to set the prefixes, see [Allowed
-    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #   Prefixes][1] in the *Direct Connect User Guide*.
     #
     #
     #
@@ -87,8 +87,8 @@ module Aws::DirectConnect
     # @!attribute [rw] bandwidth
     #   The bandwidth of the connection. The possible values are 50Mbps,
     #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps,
-    #   and 10Gbps. Note that only those AWS Direct Connect Partners who
-    #   have met specific requirements are allowed to create a 1Gbps, 2Gbps,
+    #   and 10Gbps. Note that only those Direct Connect Partners who have
+    #   met specific requirements are allowed to create a 1Gbps, 2Gbps,
     #   5Gbps or 10Gbps hosted connection.
     #   @return [String]
     #
@@ -97,8 +97,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account of the customer for whom the connection
-    #   will be provisioned.
+    #   The ID of the account of the customer for whom the connection will
+    #   be provisioned.
     #   @return [String]
     #
     # @!attribute [rw] interconnect_id
@@ -144,14 +144,14 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account ID of the customer for the connection.
+    #   The ID of the account ID of the customer for the connection.
     #   @return [String]
     #
     # @!attribute [rw] bandwidth
     #   The bandwidth of the connection. The possible values are 50Mbps,
     #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps,
-    #   and 10Gbps. Note that only those AWS Direct Connect Partners who
-    #   have met specific requirements are allowed to create a 1Gbps, 2Gbps,
+    #   and 10Gbps. Note that only those Direct Connect Partners who have
+    #   met specific requirements are allowed to create a 1Gbps, 2Gbps,
     #   5Gbps or 10Gbps hosted connection.
     #   @return [String]
     #
@@ -210,7 +210,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the virtual private interface.
+    #   The ID of the account that owns the virtual private interface.
     #   @return [String]
     #
     # @!attribute [rw] new_private_virtual_interface_allocation
@@ -261,7 +261,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the public virtual interface.
+    #   The ID of the account that owns the public virtual interface.
     #   @return [String]
     #
     # @!attribute [rw] new_public_virtual_interface_allocation
@@ -308,7 +308,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the transit virtual interface.
+    #   The ID of the account that owns the transit virtual interface.
     #   @return [String]
     #
     # @!attribute [rw] new_transit_virtual_interface_allocation
@@ -506,7 +506,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the associated virtual private
+    #   The ID of the account that owns the associated virtual private
     #   gateway or transit gateway.
     #   @return [String]
     #
@@ -584,7 +584,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the BGP peer terminates.
+    #   The Direct Connect endpoint that terminates the BGP peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_logical_device_id
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/BGPPeer AWS API Documentation
@@ -598,7 +604,8 @@ module Aws::DirectConnect
       :customer_address,
       :bgp_peer_state,
       :bgp_status,
-      :aws_device_v2)
+      :aws_device_v2,
+      :aws_logical_device_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -867,10 +874,10 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # Information about an AWS Direct Connect connection.
+    # Information about an Direct Connect connection.
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the connection.
+    #   The ID of the account that owns the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_id
@@ -912,7 +919,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region where the connection is located.
+    #   The Region where the connection is located.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -928,8 +935,8 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] partner_name
-    #   The name of the AWS Direct Connect service provider associated with
-    #   the connection.
+    #   The name of the Direct Connect service provider associated with the
+    #   connection.
     #   @return [String]
     #
     # @!attribute [rw] loa_issue_time
@@ -950,8 +957,13 @@ module Aws::DirectConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the physical connection
-    #   terminates.
+    #   The Direct Connect endpoint that terminates the physical connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_logical_device_id
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] has_logical_redundancy
@@ -1007,6 +1019,7 @@ module Aws::DirectConnect
       :aws_device,
       :jumbo_frame_capable,
       :aws_device_v2,
+      :aws_logical_device_id,
       :has_logical_redundancy,
       :tags,
       :provider_name,
@@ -1122,7 +1135,7 @@ module Aws::DirectConnect
     #
     #   MAC Security (MACsec) is only available on dedicated connections.
     #   For information about MAC Security (MACsec) prerequisties, see
-    #   [MACsec prerequisties][1] in the *AWS Direct Connect User Guide*.
+    #   [MACsec prerequisties][1] in the *Direct Connect User Guide*.
     #
     #
     #
@@ -1167,7 +1180,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_owner_account
-    #   The ID of the AWS account that owns the Direct Connect gateway.
+    #   The ID of the account that owns the Direct Connect gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
@@ -1236,7 +1249,7 @@ module Aws::DirectConnect
     #   transit gateway.
     #
     #   For information about how to set the prefixes, see [Allowed
-    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #   Prefixes][1] in the *Direct Connect User Guide*.
     #
     #
     #
@@ -1428,8 +1441,8 @@ module Aws::DirectConnect
     #
     #   <note markdown="1"> All connections in the LAG must be capable of supporting MAC
     #   Security (MACsec). For information about MAC Security (MACsec)
-    #   prerequisties, see [MACsec prerequisties][1] in the *AWS Direct
-    #   Connect User Guide*.
+    #   prerequisties, see [MACsec prerequisties][1] in the *Direct Connect
+    #   User Guide*.
     #
     #    </note>
     #
@@ -2461,7 +2474,7 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the Direct Connect gateway.
+    #   The ID of the account that owns the Direct Connect gateway.
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_state
@@ -2505,7 +2518,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_owner_account
-    #   The ID of the AWS account that owns the associated gateway.
+    #   The ID of the account that owns the associated gateway.
     #   @return [String]
     #
     # @!attribute [rw] association_state
@@ -2549,11 +2562,11 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_gateway_region
-    #   The AWS Region where the virtual private gateway is located.
+    #   The Region where the virtual private gateway is located.
     #   @return [String]
     #
     # @!attribute [rw] virtual_gateway_owner_account
-    #   The ID of the AWS account that owns the virtual private gateway.
+    #   The ID of the account that owns the virtual private gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociation AWS API Documentation
@@ -2585,7 +2598,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_owner_account
-    #   The ID of the AWS account that owns the Direct Connect gateway.
+    #   The ID of the account that owns the Direct Connect gateway.
     #   @return [String]
     #
     # @!attribute [rw] proposal_state
@@ -2641,11 +2654,11 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_region
-    #   The AWS Region where the virtual interface is located.
+    #   The Region where the virtual interface is located.
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_owner_account
-    #   The ID of the AWS account that owns the virtual interface.
+    #   The ID of the account that owns the virtual interface.
     #   @return [String]
     #
     # @!attribute [rw] attachment_state
@@ -2817,7 +2830,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region where the connection is located.
+    #   The Region where the connection is located.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -2846,8 +2859,13 @@ module Aws::DirectConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the physical connection
-    #   terminates.
+    #   The Direct Connect endpoint that terminates the physical connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_logical_device_id
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] has_logical_redundancy
@@ -2877,6 +2895,7 @@ module Aws::DirectConnect
       :aws_device,
       :jumbo_frame_capable,
       :aws_device_v2,
+      :aws_logical_device_id,
       :has_logical_redundancy,
       :tags,
       :provider_name)
@@ -2913,7 +2932,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the LAG.
+    #   The ID of the account that owns the LAG.
     #   @return [String]
     #
     # @!attribute [rw] lag_name
@@ -2946,7 +2965,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region where the connection is located.
+    #   The Region where the connection is located.
     #   @return [String]
     #
     # @!attribute [rw] minimum_links
@@ -2955,11 +2974,17 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] aws_device
-    #   The AWS Direct Connect endpoint that hosts the LAG.
+    #   The Direct Connect endpoint that hosts the LAG.
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
-    #   The AWS Direct Connect endpoint that hosts the LAG.
+    #   The Direct Connect endpoint that hosts the LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_logical_device_id
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] connections
@@ -3016,6 +3041,7 @@ module Aws::DirectConnect
       :minimum_links,
       :aws_device,
       :aws_device_v2,
+      :aws_logical_device_id,
       :connections,
       :allows_hosted_connections,
       :jumbo_frame_capable,
@@ -3135,7 +3161,7 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # Information about an AWS Direct Connect location.
+    # Information about an Direct Connect location.
     #
     # @!attribute [rw] location_code
     #   The code for the location.
@@ -3147,7 +3173,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region for the location.
+    #   The Region for the location.
     #   @return [String]
     #
     # @!attribute [rw] available_port_speeds
@@ -3519,8 +3545,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] route_filter_prefixes
-    #   The routes to be advertised to the AWS network in this Region.
-    #   Applies to public virtual interfaces.
+    #   The routes to be advertised to the Amazon Web Services network in
+    #   this Region. Applies to public virtual interfaces.
     #   @return [Array<Types::RouteFilterPrefix>]
     #
     # @!attribute [rw] tags
@@ -3606,8 +3632,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] route_filter_prefixes
-    #   The routes to be advertised to the AWS network in this Region.
-    #   Applies to public virtual interfaces.
+    #   The routes to be advertised to the Amazon Web Services network in
+    #   this Region. Applies to public virtual interfaces.
     #   @return [Array<Types::RouteFilterPrefix>]
     #
     # @!attribute [rw] tags
@@ -3801,8 +3827,7 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # Information about a tag associated with an AWS Direct Connect
-    # resource.
+    # Information about a tag associated with an Direct Connect resource.
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -4134,7 +4159,8 @@ module Aws::DirectConnect
     # @!attribute [rw] encryption_mode
     #   The LAG MAC Security (MACsec) encryption mode.
     #
-    #   AWS applies the value to all connections which are part of the LAG.
+    #   Amazon Web Services applies the value to all connections which are
+    #   part of the LAG.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLagRequest AWS API Documentation
@@ -4221,7 +4247,7 @@ module Aws::DirectConnect
     # Information about a virtual interface.
     #
     # @!attribute [rw] owner_account
-    #   The ID of the AWS account that owns the virtual interface.
+    #   The ID of the account that owns the virtual interface.
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_id
@@ -4340,8 +4366,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] route_filter_prefixes
-    #   The routes to be advertised to the AWS network in this Region.
-    #   Applies to public virtual interfaces.
+    #   The routes to be advertised to the Amazon Web Services network in
+    #   this Region. Applies to public virtual interfaces.
     #   @return [Array<Types::RouteFilterPrefix>]
     #
     # @!attribute [rw] bgp_peers
@@ -4349,12 +4375,17 @@ module Aws::DirectConnect
     #   @return [Array<Types::BGPPeer>]
     #
     # @!attribute [rw] region
-    #   The AWS Region where the virtual interface is located.
+    #   The Region where the virtual interface is located.
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint on which the virtual interface
-    #   terminates.
+    #   The Direct Connect endpoint that terminates the physical connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_logical_device_id
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4387,6 +4418,7 @@ module Aws::DirectConnect
       :bgp_peers,
       :region,
       :aws_device_v2,
+      :aws_logical_device_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure

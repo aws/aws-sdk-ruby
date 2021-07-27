@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2021-07-14)
+------------------
+
+* Feature - Add support for Event Driven Workflows
+
 1.89.0 (2021-06-28)
 ------------------
 

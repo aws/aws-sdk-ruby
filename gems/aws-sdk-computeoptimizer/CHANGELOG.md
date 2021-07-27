@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-07-20)
+------------------
+
+* Feature - Documentation updates for Compute Optimizer
+
 1.18.0 (2021-05-24)
 ------------------
 

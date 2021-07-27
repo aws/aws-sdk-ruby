@@ -376,8 +376,23 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could be
-    #   versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   The description of the component. Describes the contents of the
@@ -470,8 +485,24 @@ module Aws::Imagebuilder
     #   The description of the container recipe.
     #
     # @option params [required, String] :semantic_version
-    #   The semantic version of the container recipe
-    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   The semantic version of the container recipe. This version follows the
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #
     # @option params [required, Array<Types::ComponentConfiguration>] :components
     #   Components for build and test that are included in the container
@@ -865,7 +896,24 @@ module Aws::Imagebuilder
     #   The description of the image recipe.
     #
     # @option params [required, String] :semantic_version
-    #   The semantic version of the image recipe.
+    #   The semantic version of the image recipe. This version follows the
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #
     # @option params [required, Array<Types::ComponentConfiguration>] :components
     #   The components of the image recipe.
@@ -1929,8 +1977,22 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could be
-    #   versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   The description of the component. Describes the contents of the
@@ -1943,7 +2005,7 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :type
     #   The type of the component denotes whether the component is used to
-    #   build the image or only to test it.
+    #   build the image, or only to test it.
     #
     # @option params [required, String] :format
     #   The format of the resource that you want to import as a component.
@@ -2016,6 +2078,21 @@ module Aws::Imagebuilder
     # Returns the list of component build versions for the specified
     # semantic version.
     #
+    # <note markdown="1"> The semantic version has four nodes:
+    # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    # assign values for the first three, and can filter on all of them.
+    #
+    #  **Filtering:** When you retrieve or reference a resource with a
+    # semantic version, you can use wildcards (x) to filter your results.
+    # When you use a wildcard in any node, all nodes to the right of the
+    # first wildcard must also be wildcards. For example, specifying
+    # "1.2.x", or "1.x.x" works to filter list results, but neither
+    # "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    # build - Image Builder automatically uses a wildcard for that, if
+    # applicable.
+    #
+    #  </note>
+    #
     # @option params [required, String] :component_version_arn
     #   The component version Amazon Resource Name (ARN) whose versions you
     #   want to list.
@@ -2074,6 +2151,21 @@ module Aws::Imagebuilder
     # Returns the list of component build versions for the specified
     # semantic version.
     #
+    # <note markdown="1"> The semantic version has four nodes:
+    # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    # assign values for the first three, and can filter on all of them.
+    #
+    #  **Filtering:** When you retrieve or reference a resource with a
+    # semantic version, you can use wildcards (x) to filter your results.
+    # When you use a wildcard in any node, all nodes to the right of the
+    # first wildcard must also be wildcards. For example, specifying
+    # "1.2.x", or "1.x.x" works to filter list results, but neither
+    # "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    # build - Image Builder automatically uses a wildcard for that, if
+    # applicable.
+    #
+    #  </note>
+    #
     # @option params [String] :owner
     #   The owner defines which components you want to list. By default, this
     #   request will only show components owned by your account. You can use
@@ -2085,8 +2177,7 @@ module Aws::Imagebuilder
     #   The filters.
     #
     # @option params [Boolean] :by_name
-    #   Returns the list of component build versions for the specified
-    #   semantic version.
+    #   Returns the list of component build versions for the specified name.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -3326,7 +3417,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

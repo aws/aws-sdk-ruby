@@ -64,6 +64,10 @@ module Aws::Chime
     #   Supported licenses for the Amazon Chime account.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] account_status
+    #   The status of the account, `Suspended` or `Active`.
+    #   @return [String]
+    #
     # @!attribute [rw] signin_delegate_groups
     #   The sign-in delegate groups associated with the account.
     #   @return [Array<Types::SigninDelegateGroup>]
@@ -78,6 +82,7 @@ module Aws::Chime
       :created_timestamp,
       :default_license,
       :supported_licenses,
+      :account_status,
       :signin_delegate_groups)
       SENSITIVE = []
       include Aws::Structure

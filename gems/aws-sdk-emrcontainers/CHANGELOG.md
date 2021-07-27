@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-07-19)
+------------------
+
+* Feature - Updated DescribeManagedEndpoint and ListManagedEndpoints to return failureReason and stateDetails in API response.
+
 1.3.0 (2021-03-10)
 ------------------
 

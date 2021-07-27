@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-07-13)
+------------------
+
+* Feature - Add paginator for GetCostEstimation
+
 1.7.0 (2021-07-08)
 ------------------
 

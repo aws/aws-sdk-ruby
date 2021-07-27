@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-07-13)
+------------------
+
+* Feature - Documentation updates for api.pricing
+
 1.27.0 (2021-03-31)
 ------------------
 

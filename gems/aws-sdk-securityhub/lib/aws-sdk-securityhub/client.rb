@@ -413,8 +413,8 @@ module Aws::SecurityHub
     # Disables the standards specified by the provided
     # `StandardsSubscriptionArns`.
     #
-    # For more information, see [Security Standards][1] section of the *AWS
-    # Security Hub User Guide*.
+    # For more information, see [Security Standards][1] section of the
+    # *Security Hub User Guide*.
     #
     #
     #
@@ -452,11 +452,10 @@ module Aws::SecurityHub
     end
 
     # Enables the standards specified by the provided `StandardsArn`. To
-    # obtain the ARN for a standard, use the ` DescribeStandards `
-    # operation.
+    # obtain the ARN for a standard, use the `DescribeStandards` operation.
     #
     # For more information, see the [Security Standards][1] section of the
-    # *AWS Security Hub User Guide*.
+    # *Security Hub User Guide*.
     #
     #
     #
@@ -537,8 +536,8 @@ module Aws::SecurityHub
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
-    #   must follow the [AWS Security Finding Format][1]. Maximum of 100
-    #   findings per request.
+    #   must follow the [Amazon Web Services Security Finding Format][1].
+    #   Maximum of 100 findings per request.
     #
     #
     #
@@ -558,6 +557,9 @@ module Aws::SecurityHub
     #         schema_version: "NonEmptyString", # required
     #         id: "NonEmptyString", # required
     #         product_arn: "NonEmptyString", # required
+    #         product_name: "NonEmptyString",
+    #         company_name: "NonEmptyString",
+    #         region: "NonEmptyString",
     #         generator_id: "NonEmptyString", # required
     #         aws_account_id: "NonEmptyString", # required
     #         types: ["NonEmptyString"],
@@ -1177,6 +1179,17 @@ module Aws::SecurityHub
     #                   "NonEmptyString" => "NonEmptyString",
     #                 },
     #                 elasticsearch_version: "NonEmptyString",
+    #                 elasticsearch_cluster_config: {
+    #                   dedicated_master_count: 1,
+    #                   dedicated_master_enabled: false,
+    #                   dedicated_master_type: "NonEmptyString",
+    #                   instance_count: 1,
+    #                   instance_type: "NonEmptyString",
+    #                   zone_awareness_config: {
+    #                     availability_zone_count: 1,
+    #                   },
+    #                   zone_awareness_enabled: false,
+    #                 },
     #                 encryption_at_rest_options: {
     #                   enabled: false,
     #                   kms_key_id: "NonEmptyString",
@@ -1187,6 +1200,10 @@ module Aws::SecurityHub
     #                     enabled: false,
     #                   },
     #                   search_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   audit_logs: {
     #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
     #                     enabled: false,
     #                   },
@@ -2576,6 +2593,87 @@ module Aws::SecurityHub
     #               other: {
     #                 "NonEmptyString" => "NonEmptyString",
     #               },
+    #               aws_rds_event_subscription: {
+    #                 cust_subscription_id: "NonEmptyString",
+    #                 customer_aws_id: "NonEmptyString",
+    #                 enabled: false,
+    #                 event_categories_list: ["NonEmptyString"],
+    #                 event_subscription_arn: "NonEmptyString",
+    #                 sns_topic_arn: "NonEmptyString",
+    #                 source_ids_list: ["NonEmptyString"],
+    #                 source_type: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 subscription_creation_time: "NonEmptyString",
+    #               },
+    #               aws_ecs_service: {
+    #                 capacity_provider_strategy: [
+    #                   {
+    #                     base: 1,
+    #                     capacity_provider: "NonEmptyString",
+    #                     weight: 1,
+    #                   },
+    #                 ],
+    #                 cluster: "NonEmptyString",
+    #                 deployment_configuration: {
+    #                   deployment_circuit_breaker: {
+    #                     enable: false,
+    #                     rollback: false,
+    #                   },
+    #                   maximum_percent: 1,
+    #                   minimum_healthy_percent: 1,
+    #                 },
+    #                 deployment_controller: {
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 desired_count: 1,
+    #                 enable_ecs_managed_tags: false,
+    #                 enable_execute_command: false,
+    #                 health_check_grace_period_seconds: 1,
+    #                 launch_type: "NonEmptyString",
+    #                 load_balancers: [
+    #                   {
+    #                     container_name: "NonEmptyString",
+    #                     container_port: 1,
+    #                     load_balancer_name: "NonEmptyString",
+    #                     target_group_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 name: "NonEmptyString",
+    #                 network_configuration: {
+    #                   aws_vpc_configuration: {
+    #                     assign_public_ip: "NonEmptyString",
+    #                     security_groups: ["NonEmptyString"],
+    #                     subnets: ["NonEmptyString"],
+    #                   },
+    #                 },
+    #                 placement_constraints: [
+    #                   {
+    #                     expression: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 placement_strategies: [
+    #                   {
+    #                     field: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 platform_version: "NonEmptyString",
+    #                 propagate_tags: "NonEmptyString",
+    #                 role: "NonEmptyString",
+    #                 scheduling_strategy: "NonEmptyString",
+    #                 service_arn: "NonEmptyString",
+    #                 service_name: "NonEmptyString",
+    #                 service_registries: [
+    #                   {
+    #                     container_name: "NonEmptyString",
+    #                     container_port: 1,
+    #                     port: 1,
+    #                     registry_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 task_definition: "NonEmptyString",
+    #               },
     #             },
     #           },
     #         ],
@@ -2827,8 +2925,7 @@ module Aws::SecurityHub
     # You can configure IAM policies to restrict access to fields and field
     # values. For example, you might not want member accounts to be able to
     # suppress findings or change the finding severity. See [Configuring
-    # access to BatchUpdateFindings][1] in the *AWS Security Hub User
-    # Guide*.
+    # access to BatchUpdateFindings][1] in the *Security Hub User Guide*.
     #
     #
     #
@@ -3056,6 +3153,12 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       generator_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       region: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
@@ -3470,6 +3573,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       resource_aws_iam_access_key_principal_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
@@ -3484,6 +3593,12 @@ module Aws::SecurityHub
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
     #           },
+    #         },
+    #       ],
+    #       resource_aws_iam_user_user_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
     #       resource_container_name: [
@@ -3660,27 +3775,31 @@ module Aws::SecurityHub
     # `CreateMembers` is always used to add accounts that are not
     # organization members.
     #
-    # For accounts that are part of an organization, `CreateMembers` is only
-    # used in the following cases:
+    # For accounts that are managed using Organizations, `CreateMembers` is
+    # only used in the following cases:
     #
-    # * Security Hub is not configured to automatically add new accounts in
-    #   an organization.
+    # * Security Hub is not configured to automatically add new organization
+    #   accounts.
     #
     # * The account was disassociated or deleted in Security Hub.
     #
     # This action can only be used by an account that has Security Hub
-    # enabled. To enable Security Hub, you can use the ` EnableSecurityHub `
+    # enabled. To enable Security Hub, you can use the `EnableSecurityHub`
     # operation.
     #
     # For accounts that are not organization members, you create the account
     # association and then send an invitation to the member account. To send
-    # the invitation, you use the ` InviteMembers ` operation. If the
-    # account owner accepts the invitation, the account becomes a member
-    # account in Security Hub.
+    # the invitation, you use the `InviteMembers` operation. If the account
+    # owner accepts the invitation, the account becomes a member account in
+    # Security Hub.
     #
-    # Accounts that are part of an organization do not receive an
+    # Accounts that are managed using Organizations do not receive an
     # invitation. They automatically become a member account in Security
-    # Hub.
+    # Hub, and Security Hub is automatically enabled for those accounts.
+    # Note that Security Hub cannot be enabled automatically for the
+    # organization management account. The organization management account
+    # must enable Security Hub before the administrator account enables it
+    # as a member account.
     #
     # A permissions policy is added that permits the administrator account
     # to view the findings generated in the member account. When Security
@@ -3688,8 +3807,8 @@ module Aws::SecurityHub
     # also visible to the administrator account.
     #
     # To remove the association between the administrator and member
-    # accounts, use the ` DisassociateFromMasterAccount ` or `
-    # DisassociateMembers ` operation.
+    # accounts, use the `DisassociateFromMasterAccount` or
+    # `DisassociateMembers` operation.
     #
     # @option params [required, Array<Types::AccountDetails>] :account_details
     #   The list of accounts to associate with the Security Hub administrator
@@ -3820,8 +3939,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes invitations received by the AWS account to become a member
-    # account.
+    # Deletes invitations received by the Amazon Web Services account to
+    # become a member account.
     #
     # This operation is only used by accounts that are not part of an
     # organization. Organization accounts do not receive invitations.
@@ -4114,7 +4233,7 @@ module Aws::SecurityHub
     # @option params [required, String] :standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a supported
     #   standard. To get the subscription ARNs of the standards you have
-    #   enabled, use the ` GetEnabledStandards ` operation.
+    #   enabled, use the `GetEnabledStandards` operation.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -4196,7 +4315,8 @@ module Aws::SecurityHub
     # the organization management account.
     #
     # @option params [required, String] :admin_account_id
-    #   The AWS account identifier of the Security Hub administrator account.
+    #   The Amazon Web Services account identifier of the Security Hub
+    #   administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4353,8 +4473,8 @@ module Aws::SecurityHub
     # Can only be called by the organization management account.
     #
     # @option params [required, String] :admin_account_id
-    #   The AWS account identifier of the account to designate as the Security
-    #   Hub administrator account.
+    #   The Amazon Web Services account identifier of the account to designate
+    #   as the Security Hub administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4383,9 +4503,9 @@ module Aws::SecurityHub
     # When you use the `EnableSecurityHub` operation to enable Security Hub,
     # you also automatically enable the following standards.
     #
-    # * CIS AWS Foundations
+    # * CIS Amazon Web Services Foundations
     #
-    # * AWS Foundational Security Best Practices
+    # * Amazon Web Services Foundational Security Best Practices
     #
     # You do not enable the Payment Card Industry Data Security Standard
     # (PCI DSS) standard.
@@ -4393,12 +4513,12 @@ module Aws::SecurityHub
     # To not enable the automatically enabled standards, set
     # `EnableDefaultStandards` to `false`.
     #
-    # After you enable Security Hub, to enable a standard, use the `
-    # BatchEnableStandards ` operation. To disable a standard, use the `
-    # BatchDisableStandards ` operation.
+    # After you enable Security Hub, to enable a standard, use the
+    # `BatchEnableStandards` operation. To disable a standard, use the
+    # `BatchDisableStandards` operation.
     #
-    # To learn more, see [Setting Up AWS Security Hub][1] in the *AWS
-    # Security Hub User Guide*.
+    # To learn more, see the [setup information][1] in the *Security Hub
+    # User Guide*.
     #
     #
     #
@@ -4569,6 +4689,12 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       generator_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       region: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
@@ -4983,6 +5109,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       resource_aws_iam_access_key_principal_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
@@ -4997,6 +5129,12 @@ module Aws::SecurityHub
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
     #           },
+    #         },
+    #       ],
+    #       resource_aws_iam_user_user_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
     #       resource_container_name: [
@@ -5164,6 +5302,9 @@ module Aws::SecurityHub
     #   resp.findings[0].schema_version #=> String
     #   resp.findings[0].id #=> String
     #   resp.findings[0].product_arn #=> String
+    #   resp.findings[0].product_name #=> String
+    #   resp.findings[0].company_name #=> String
+    #   resp.findings[0].region #=> String
     #   resp.findings[0].generator_id #=> String
     #   resp.findings[0].aws_account_id #=> String
     #   resp.findings[0].types #=> Array
@@ -5544,12 +5685,21 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.endpoints #=> Hash
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.endpoints["NonEmptyString"] #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_version #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_cluster_config.dedicated_master_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_cluster_config.dedicated_master_type #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_cluster_config.instance_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_cluster_config.instance_type #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_cluster_config.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.kms_key_id #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.index_slow_logs.cloud_watch_logs_log_group_arn #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.index_slow_logs.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.search_slow_logs.cloud_watch_logs_log_group_arn #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.search_slow_logs.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.audit_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.audit_logs.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.automated_update_date #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.cancellable #=> Boolean
@@ -6503,6 +6653,62 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.container.launched_at #=> String
     #   resp.findings[0].resources[0].details.other #=> Hash
     #   resp.findings[0].resources[0].details.other["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.cust_subscription_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.customer_aws_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.event_categories_list #=> Array
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.event_categories_list[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.event_subscription_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.sns_topic_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.source_ids_list #=> Array
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.source_ids_list[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.source_type #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.status #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_event_subscription.subscription_creation_time #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.capacity_provider_strategy #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_service.capacity_provider_strategy[0].base #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.cluster #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_service.deployment_configuration.maximum_percent #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.deployment_controller.type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.desired_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.enable_ecs_managed_tags #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_service.enable_execute_command #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_service.health_check_grace_period_seconds #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.launch_type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.load_balancers #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_service.load_balancers[0].container_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.load_balancers[0].container_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.load_balancers[0].load_balancer_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.load_balancers[0].target_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.network_configuration.aws_vpc_configuration.assign_public_ip #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.network_configuration.aws_vpc_configuration.security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_service.network_configuration.aws_vpc_configuration.security_groups[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.network_configuration.aws_vpc_configuration.subnets #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_service.network_configuration.aws_vpc_configuration.subnets[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.placement_constraints #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_service.placement_constraints[0].expression #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.placement_constraints[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.placement_strategies #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_service.placement_strategies[0].field #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.placement_strategies[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.platform_version #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.propagate_tags #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.role #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.scheduling_strategy #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.service_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.service_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.service_registries #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_service.service_registries[0].container_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.service_registries[0].container_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.service_registries[0].port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_service.service_registries[0].registry_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_service.task_definition #=> String
     #   resp.findings[0].compliance.status #=> String, one of "PASSED", "WARNING", "FAILED", "NOT_AVAILABLE"
     #   resp.findings[0].compliance.related_requirements #=> Array
     #   resp.findings[0].compliance.related_requirements[0] #=> String
@@ -6708,6 +6914,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.generator_id #=> Array
     #   resp.insights[0].filters.generator_id[0].value #=> String
     #   resp.insights[0].filters.generator_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.region #=> Array
+    #   resp.insights[0].filters.region[0].value #=> String
+    #   resp.insights[0].filters.region[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].filters.type #=> Array
     #   resp.insights[0].filters.type[0].value #=> String
     #   resp.insights[0].filters.type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
@@ -6915,6 +7124,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_aws_iam_access_key_user_name #=> Array
     #   resp.insights[0].filters.resource_aws_iam_access_key_user_name[0].value #=> String
     #   resp.insights[0].filters.resource_aws_iam_access_key_user_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.resource_aws_iam_access_key_principal_name #=> Array
+    #   resp.insights[0].filters.resource_aws_iam_access_key_principal_name[0].value #=> String
+    #   resp.insights[0].filters.resource_aws_iam_access_key_principal_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].filters.resource_aws_iam_access_key_status #=> Array
     #   resp.insights[0].filters.resource_aws_iam_access_key_status[0].value #=> String
     #   resp.insights[0].filters.resource_aws_iam_access_key_status[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
@@ -6923,6 +7135,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].end #=> String
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.resource_aws_iam_user_user_name #=> Array
+    #   resp.insights[0].filters.resource_aws_iam_user_user_name[0].value #=> String
+    #   resp.insights[0].filters.resource_aws_iam_user_user_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].filters.resource_container_name #=> Array
     #   resp.insights[0].filters.resource_container_name[0].value #=> String
     #   resp.insights[0].filters.resource_container_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
@@ -7114,14 +7329,15 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Invites other AWS accounts to become member accounts for the Security
-    # Hub administrator account that the invitation is sent from.
+    # Invites other Amazon Web Services accounts to become member accounts
+    # for the Security Hub administrator account that the invitation is sent
+    # from.
     #
     # This operation is only used to invite accounts that do not belong to
     # an organization. Organization accounts do not receive invitations.
     #
     # Before you can use this action to invite a member, you must first use
-    # the ` CreateMembers ` action to create the member account in Security
+    # the `CreateMembers` action to create the member account in Security
     # Hub.
     #
     # When the account owner enables Security Hub and accepts the invitation
@@ -7129,8 +7345,8 @@ module Aws::SecurityHub
     # findings generated from the member account.
     #
     # @option params [required, Array<String>] :account_ids
-    #   The list of account IDs of the AWS accounts to invite to Security Hub
-    #   as members.
+    #   The list of account IDs of the Amazon Web Services accounts to invite
+    #   to Security Hub as members.
     #
     # @return [Types::InviteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7202,10 +7418,10 @@ module Aws::SecurityHub
     end
 
     # Lists all Security Hub membership invitations that were sent to the
-    # current AWS account.
+    # current Amazon Web Services account.
     #
     # This operation is only used by accounts that are managed by
-    # invitation. Accounts that are managed using the integration with AWS
+    # invitation. Accounts that are managed using the integration with
     # Organizations do not receive invitations.
     #
     # @option params [Integer] :max_results
@@ -7524,6 +7740,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       region: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #       type: [
     #         {
     #           value: "NonEmptyString",
@@ -7933,6 +8155,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       resource_aws_iam_access_key_principal_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
@@ -7947,6 +8175,12 @@ module Aws::SecurityHub
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
     #           },
+    #         },
+    #       ],
+    #       resource_aws_iam_user_user_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
     #       resource_container_name: [
@@ -8161,6 +8395,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       region: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #       type: [
     #         {
     #           value: "NonEmptyString",
@@ -8570,6 +8810,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       resource_aws_iam_access_key_principal_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #       resource_aws_iam_access_key_status: [
     #         {
     #           value: "NonEmptyString",
@@ -8584,6 +8830,12 @@ module Aws::SecurityHub
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
     #           },
+    #         },
+    #       ],
+    #       resource_aws_iam_user_user_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
     #       resource_container_name: [
@@ -8849,7 +9101,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

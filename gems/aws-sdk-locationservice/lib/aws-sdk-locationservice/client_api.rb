@@ -200,6 +200,7 @@ module Aws::LocationService
     SearchPlaceIndexForTextRequest = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextRequest')
     SearchPlaceIndexForTextResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextResponse')
     SearchPlaceIndexForTextSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextSummary')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Step = Shapes::StructureShape.new(name: 'Step')
     StepDistanceDouble = Shapes::FloatShape.new(name: 'StepDistanceDouble')
     StepDurationSecondsDouble = Shapes::FloatShape.new(name: 'StepDurationSecondsDouble')
@@ -226,6 +227,16 @@ module Aws::LocationService
     TruckWeightTotalDouble = Shapes::FloatShape.new(name: 'TruckWeightTotalDouble')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'UpdateGeofenceCollectionRequest')
+    UpdateGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'UpdateGeofenceCollectionResponse')
+    UpdateMapRequest = Shapes::StructureShape.new(name: 'UpdateMapRequest')
+    UpdateMapResponse = Shapes::StructureShape.new(name: 'UpdateMapResponse')
+    UpdatePlaceIndexRequest = Shapes::StructureShape.new(name: 'UpdatePlaceIndexRequest')
+    UpdatePlaceIndexResponse = Shapes::StructureShape.new(name: 'UpdatePlaceIndexResponse')
+    UpdateRouteCalculatorRequest = Shapes::StructureShape.new(name: 'UpdateRouteCalculatorRequest')
+    UpdateRouteCalculatorResponse = Shapes::StructureShape.new(name: 'UpdateRouteCalculatorResponse')
+    UpdateTrackerRequest = Shapes::StructureShape.new(name: 'UpdateTrackerRequest')
+    UpdateTrackerResponse = Shapes::StructureShape.new(name: 'UpdateTrackerResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -889,6 +900,9 @@ module Aws::LocationService
     SearchPlaceIndexForTextSummary.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForTextSummaryString, required: true, location_name: "Text"))
     SearchPlaceIndexForTextSummary.struct_class = Types::SearchPlaceIndexForTextSummary
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     Step.add_member(:distance, Shapes::ShapeRef.new(shape: StepDistanceDouble, required: true, location_name: "Distance"))
     Step.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: StepDurationSecondsDouble, required: true, location_name: "DurationSeconds"))
     Step.add_member(:end_position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "EndPosition"))
@@ -927,6 +941,59 @@ module Aws::LocationService
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateGeofenceCollectionRequest.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CollectionName"))
+    UpdateGeofenceCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    UpdateGeofenceCollectionRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
+    UpdateGeofenceCollectionRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, location_name: "PricingPlanDataSource"))
+    UpdateGeofenceCollectionRequest.struct_class = Types::UpdateGeofenceCollectionRequest
+
+    UpdateGeofenceCollectionResponse.add_member(:collection_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CollectionArn"))
+    UpdateGeofenceCollectionResponse.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CollectionName"))
+    UpdateGeofenceCollectionResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdateGeofenceCollectionResponse.struct_class = Types::UpdateGeofenceCollectionResponse
+
+    UpdateMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    UpdateMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
+    UpdateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
+    UpdateMapRequest.struct_class = Types::UpdateMapRequest
+
+    UpdateMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MapArn"))
+    UpdateMapResponse.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
+    UpdateMapResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdateMapResponse.struct_class = Types::UpdateMapResponse
+
+    UpdatePlaceIndexRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "DataSourceConfiguration"))
+    UpdatePlaceIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    UpdatePlaceIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
+    UpdatePlaceIndexRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
+    UpdatePlaceIndexRequest.struct_class = Types::UpdatePlaceIndexRequest
+
+    UpdatePlaceIndexResponse.add_member(:index_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "IndexArn"))
+    UpdatePlaceIndexResponse.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "IndexName"))
+    UpdatePlaceIndexResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdatePlaceIndexResponse.struct_class = Types::UpdatePlaceIndexResponse
+
+    UpdateRouteCalculatorRequest.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CalculatorName"))
+    UpdateRouteCalculatorRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    UpdateRouteCalculatorRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
+    UpdateRouteCalculatorRequest.struct_class = Types::UpdateRouteCalculatorRequest
+
+    UpdateRouteCalculatorResponse.add_member(:calculator_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CalculatorArn"))
+    UpdateRouteCalculatorResponse.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CalculatorName"))
+    UpdateRouteCalculatorResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdateRouteCalculatorResponse.struct_class = Types::UpdateRouteCalculatorResponse
+
+    UpdateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    UpdateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
+    UpdateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, location_name: "PricingPlanDataSource"))
+    UpdateTrackerRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "TrackerName"))
+    UpdateTrackerRequest.struct_class = Types::UpdateTrackerRequest
+
+    UpdateTrackerResponse.add_member(:tracker_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TrackerArn"))
+    UpdateTrackerResponse.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TrackerName"))
+    UpdateTrackerResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdateTrackerResponse.struct_class = Types::UpdateTrackerResponse
 
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, required: true, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -971,6 +1038,7 @@ module Aws::LocationService
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -1718,6 +1786,86 @@ module Aws::LocationService
         }
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_geofence_collection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGeofenceCollection"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/geofencing/v0/collections/{CollectionName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "geofencing.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateGeofenceCollectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGeofenceCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_map, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMap"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/maps/v0/maps/{MapName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "maps.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateMapRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMapResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_place_index, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePlaceIndex"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/places/v0/indexes/{IndexName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "places.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdatePlaceIndexRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePlaceIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_route_calculator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRouteCalculator"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/routes/v0/calculators/{CalculatorName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "routes.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateRouteCalculatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRouteCalculatorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_tracker, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTracker"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/tracking/v0/trackers/{TrackerName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "tracking.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateTrackerRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTrackerResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

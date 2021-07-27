@@ -46,6 +46,8 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] improvement_plan_url
     #   The improvement plan URL for a question.
+    #
+    #   This value is only available if the question has been answered.
     #   @return [String]
     #
     # @!attribute [rw] helpful_resource_url
@@ -62,6 +64,10 @@ module Aws::WellArchitected
     #   The values entered replace the previously selected choices.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] choice_answers
+    #   A list of selected choices to a question in your workload.
+    #   @return [Array<Types::ChoiceAnswer>]
+    #
     # @!attribute [rw] is_applicable
     #   Defines whether this question is applicable to a lens review.
     #   @return [Boolean]
@@ -72,6 +78,10 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why the question is not applicable to your workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Answer AWS API Documentation
@@ -85,9 +95,11 @@ module Aws::WellArchitected
       :helpful_resource_url,
       :choices,
       :selected_choices,
+      :choice_answers,
       :is_applicable,
       :risk,
-      :notes)
+      :notes,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -118,12 +130,21 @@ module Aws::WellArchitected
     #   The values entered replace the previously selected choices.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] choice_answer_summaries
+    #   A list of selected choices to a question in your workload.
+    #   @return [Array<Types::ChoiceAnswerSummary>]
+    #
     # @!attribute [rw] is_applicable
     #   Defines whether this question is applicable to a lens review.
     #   @return [Boolean]
     #
     # @!attribute [rw] risk
     #   The risk for a given workload, lens review, pillar, or question.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why a choice is non-applicable to a question in your
+    #   workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AnswerSummary AWS API Documentation
@@ -134,8 +155,10 @@ module Aws::WellArchitected
       :question_title,
       :choices,
       :selected_choices,
+      :choice_answer_summaries,
       :is_applicable,
-      :risk)
+      :risk,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -190,6 +213,96 @@ module Aws::WellArchitected
       :choice_id,
       :title,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A choice that has been answered on a question in your workload.
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why a choice is non-applicable to a question in your
+    #   workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with a choice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ChoiceAnswer AWS API Documentation
+    #
+    class ChoiceAnswer < Struct.new(
+      :choice_id,
+      :status,
+      :reason,
+      :notes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A choice summary that has been answered on a question in your
+    # workload.
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why a choice is non-applicable to a question in your
+    #   workload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ChoiceAnswerSummary AWS API Documentation
+    #
+    class ChoiceAnswerSummary < Struct.new(
+      :choice_id,
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of choices to be updated.
+    #
+    # @note When making an API call, you may pass ChoiceUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         status: "SELECTED", # required, accepts SELECTED, NOT_APPLICABLE, UNSELECTED
+    #         reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
+    #         notes: "ChoiceNotes",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why a choice is non-applicable to a question in your
+    #   workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with a choice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ChoiceUpdate AWS API Documentation
+    #
+    class ChoiceUpdate < Struct.new(
+      :status,
+      :reason,
+      :notes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1062,6 +1175,8 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] improvement_plan_url
     #   The improvement plan URL for a question.
+    #
+    #   This value is only available if the question has been answered.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ImprovementSummary AWS API Documentation
@@ -2263,7 +2378,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The keys of the tags to be removed.
+    #   A list of tag keys. Existing tags of the resource whose keys are
+    #   members of this list are removed from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UntagResourceInput AWS API Documentation
@@ -2289,8 +2405,16 @@ module Aws::WellArchitected
     #         lens_alias: "LensAlias", # required
     #         question_id: "QuestionId", # required
     #         selected_choices: ["ChoiceId"],
+    #         choice_updates: {
+    #           "ChoiceId" => {
+    #             status: "SELECTED", # required, accepts SELECTED, NOT_APPLICABLE, UNSELECTED
+    #             reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
+    #             notes: "ChoiceNotes",
+    #           },
+    #         },
     #         notes: "Notes",
     #         is_applicable: false,
+    #         reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
     #       }
     #
     # @!attribute [rw] workload_id
@@ -2314,6 +2438,11 @@ module Aws::WellArchitected
     #   The values entered replace the previously selected choices.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] choice_updates
+    #   A list of choices to update on a question in your workload. The
+    #   String key corresponds to the choice ID to be updated.
+    #   @return [Hash<String,Types::ChoiceUpdate>]
+    #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
     #   @return [String]
@@ -2322,6 +2451,10 @@ module Aws::WellArchitected
     #   Defines whether this question is applicable to a lens review.
     #   @return [Boolean]
     #
+    # @!attribute [rw] reason
+    #   The reason why a question is not applicable to your workload.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAnswerInput AWS API Documentation
     #
     class UpdateAnswerInput < Struct.new(
@@ -2329,8 +2462,10 @@ module Aws::WellArchitected
       :lens_alias,
       :question_id,
       :selected_choices,
+      :choice_updates,
       :notes,
-      :is_applicable)
+      :is_applicable,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -899,6 +899,7 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.account_status #=> String, one of "Suspended", "Active"
     #   resp.account.signin_delegate_groups #=> Array
     #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
@@ -3562,6 +3563,7 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.account_status #=> String, one of "Suspended", "Active"
     #   resp.account.signin_delegate_groups #=> Array
     #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
@@ -4768,6 +4770,7 @@ module Aws::Chime
     #   resp.accounts[0].default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.accounts[0].supported_licenses #=> Array
     #   resp.accounts[0].supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.accounts[0].account_status #=> String, one of "Suspended", "Active"
     #   resp.accounts[0].signin_delegate_groups #=> Array
     #   resp.accounts[0].signin_delegate_groups[0].group_name #=> String
     #   resp.next_token #=> String
@@ -7408,6 +7411,7 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.account_status #=> String, one of "Suspended", "Active"
     #   resp.account.signin_delegate_groups #=> Array
     #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
@@ -8336,7 +8340,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

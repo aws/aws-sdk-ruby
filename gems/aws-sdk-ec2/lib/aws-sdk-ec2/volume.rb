@@ -59,9 +59,8 @@ module Aws::EC2
       data[:encrypted]
     end
 
-    # The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS
-    # KMS) customer master key (CMK) that was used to protect the volume
-    # encryption key for the volume.
+    # The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS
+    # key that was used to protect the volume encryption key for the volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -296,7 +295,7 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -311,7 +310,7 @@ module Aws::EC2
     # @option options [String] :description
     #   A description for the snapshot.
     # @option options [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create a
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create a
     #   local snapshot.
     #
     #   * To create a snapshot of a volume in a Region, omit this parameter.
@@ -325,8 +324,8 @@ module Aws::EC2
     #     snapshot on an Outpost, specify the ARN of the destination Outpost.
     #     The snapshot must be created on the same Outpost as the volume.
     #
-    #   For more information, see [ Creating local snapshots from volumes on
-    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   For more information, see [Create local snapshots from volumes on an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -411,8 +410,8 @@ module Aws::EC2
     #   if its value is an empty string.
     #
     #   If you omit this parameter, we delete all user-defined tags for the
-    #   specified resources. We do not delete AWS-generated tags (tags that
-    #   have the `aws:` prefix).
+    #   specified resources. We do not delete Amazon Web Services-generated
+    #   tags (tags that have the `aws:` prefix).
     # @return [Tag::Collection]
     def delete_tags(options = {})
       batch = []
@@ -647,12 +646,12 @@ module Aws::EC2
     #     `false`)
     #
     #   * `owner-alias` - The owner alias, from an Amazon-maintained list
-    #     (`amazon`). This is not the user-configured AWS account alias set
-    #     using the IAM console. We recommend that you use the related
-    #     parameter instead of this filter.
+    #     (`amazon`). This is not the user-configured account alias set using
+    #     the IAM console. We recommend that you use the related parameter
+    #     instead of this filter.
     #
-    #   * `owner-id` - The AWS account ID of the owner. We recommend that you
-    #     use the related parameter instead of this filter.
+    #   * `owner-id` - The account ID of the owner. We recommend that you use
+    #     the related parameter instead of this filter.
     #
     #   * `progress` - The progress of the snapshot, as a percentage (for
     #     example, 80%).
@@ -679,9 +678,9 @@ module Aws::EC2
     #   * `volume-size` - The size of the volume, in GiB.
     # @option options [Array<String>] :owner_ids
     #   Scopes the results to snapshots with the specified owners. You can
-    #   specify a combination of AWS account IDs, `self`, and `amazon`.
+    #   specify a combination of account IDs, `self`, and `amazon`.
     # @option options [Array<String>] :restorable_by_user_ids
-    #   The IDs of the AWS accounts that can create volumes from the snapshot.
+    #   The IDs of the accounts that can create volumes from the snapshot.
     # @option options [Array<String>] :snapshot_ids
     #   The snapshot IDs.
     #

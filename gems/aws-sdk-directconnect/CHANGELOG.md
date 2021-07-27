@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-07-19)
+------------------
+
+* Feature - Documentation updates for directconnect
+
+1.42.0 (2021-07-13)
+------------------
+
+* Feature - This release adds a new filed named awsLogicalDeviceId that it displays the AWS Direct Connect endpoint which terminates a physical connection's BGP Sessions.
+
 1.41.0 (2021-03-31)
 ------------------
 

@@ -467,6 +467,124 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Analyzes an input document for financially related relationships
+    # between text.
+    #
+    # Information is returned as `ExpenseDocuments` and seperated as
+    # follows.
+    #
+    # * `LineItemGroups`- A data set containing `LineItems` which store
+    #   information about the lines of text, such as an item purchased and
+    #   its price on a receipt.
+    #
+    # * `SummaryFields`- Contains all other information a receipt, such as
+    #   header information or the vendors name.
+    #
+    # @option params [required, Types::Document] :document
+    #   The input document, either as bytes or as an S3 object.
+    #
+    #   You pass image bytes to an Amazon Textract API operation by using the
+    #   `Bytes` property. For example, you would use the `Bytes` property to
+    #   pass a document loaded from a local file system. Image bytes passed by
+    #   using the `Bytes` property must be base64 encoded. Your code might not
+    #   need to encode document file bytes if you're using an AWS SDK to call
+    #   Amazon Textract API operations.
+    #
+    #   You pass images stored in an S3 bucket to an Amazon Textract API
+    #   operation by using the `S3Object` property. Documents stored in an S3
+    #   bucket don't need to be base64 encoded.
+    #
+    #   The AWS Region for the S3 bucket that contains the S3 object must
+    #   match the AWS Region that you use for Amazon Textract operations.
+    #
+    #   If you use the AWS CLI to call Amazon Textract operations, passing
+    #   image bytes using the Bytes property isn't supported. You must first
+    #   upload the document to an Amazon S3 bucket, and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Textract to process an S3 object, the user must have
+    #   permission to access the S3 object.
+    #
+    # @return [Types::AnalyzeExpenseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AnalyzeExpenseResponse#document_metadata #document_metadata} => Types::DocumentMetadata
+    #   * {Types::AnalyzeExpenseResponse#expense_documents #expense_documents} => Array&lt;Types::ExpenseDocument&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.analyze_expense({
+    #     document: { # required
+    #       bytes: "data",
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_metadata.pages #=> Integer
+    #   resp.expense_documents #=> Array
+    #   resp.expense_documents[0].expense_index #=> Integer
+    #   resp.expense_documents[0].summary_fields #=> Array
+    #   resp.expense_documents[0].summary_fields[0].type.text #=> String
+    #   resp.expense_documents[0].summary_fields[0].type.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.text #=> String
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.text #=> String
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].page_number #=> Integer
+    #   resp.expense_documents[0].line_item_groups #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_item_group_index #=> Integer
+    #   resp.expense_documents[0].line_item_groups[0].line_items #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].type.text #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].type.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.text #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.text #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].page_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeExpense AWS API Documentation
+    #
+    # @overload analyze_expense(params = {})
+    # @param [Hash] params ({})
+    def analyze_expense(params = {}, options = {})
+      req = build_request(:analyze_expense, params)
+      req.send_request(options)
+    end
+
     # Detects text in the input document. Amazon Textract can detect lines
     # of text and the words that make up a line of text. The input document
     # must be an image in JPEG or PNG format. `DetectDocumentText` returns
@@ -1029,7 +1147,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

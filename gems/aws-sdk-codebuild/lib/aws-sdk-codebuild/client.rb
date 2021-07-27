@@ -441,6 +441,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].artifacts.override_artifact_name #=> Boolean
     #   resp.build_batches[0].artifacts.encryption_disabled #=> Boolean
     #   resp.build_batches[0].artifacts.artifact_identifier #=> String
+    #   resp.build_batches[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].secondary_artifacts #=> Array
     #   resp.build_batches[0].secondary_artifacts[0].location #=> String
     #   resp.build_batches[0].secondary_artifacts[0].sha256sum #=> String
@@ -448,6 +449,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batches[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batches[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batches[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batches[0].cache.location #=> String
     #   resp.build_batches[0].cache.modes #=> Array
@@ -471,6 +473,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batches[0].log_config.s3_logs.location #=> String
     #   resp.build_batches[0].log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batches[0].log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].build_timeout_in_minutes #=> Integer
     #   resp.build_batches[0].queued_timeout_in_minutes #=> Integer
     #   resp.build_batches[0].complete #=> Boolean
@@ -858,6 +861,7 @@ module Aws::CodeBuild
     #   resp.builds[0].artifacts.override_artifact_name #=> Boolean
     #   resp.builds[0].artifacts.encryption_disabled #=> Boolean
     #   resp.builds[0].artifacts.artifact_identifier #=> String
+    #   resp.builds[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].secondary_artifacts #=> Array
     #   resp.builds[0].secondary_artifacts[0].location #=> String
     #   resp.builds[0].secondary_artifacts[0].sha256sum #=> String
@@ -865,6 +869,7 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.builds[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].cache.modes #=> Array
@@ -894,6 +899,7 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.builds[0].logs.s3_logs.location #=> String
     #   resp.builds[0].logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.builds[0].logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].queued_timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
@@ -936,8 +942,8 @@ module Aws::CodeBuild
     #
     # @option params [required, Array<String>] :names
     #   The names or ARNs of the build projects. To get information about a
-    #   project shared with your Amazon Web Services account, its ARN must be
-    #   specified. You cannot specify a shared project using its name.
+    #   project shared with your AWS account, its ARN must be specified. You
+    #   cannot specify a shared project using its name.
     #
     # @return [Types::BatchGetProjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -994,6 +1000,7 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.override_artifact_name #=> Boolean
     #   resp.projects[0].artifacts.encryption_disabled #=> Boolean
     #   resp.projects[0].artifacts.artifact_identifier #=> String
+    #   resp.projects[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].secondary_artifacts #=> Array
     #   resp.projects[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].secondary_artifacts[0].location #=> String
@@ -1004,6 +1011,7 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.projects[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].cache.modes #=> Array
@@ -1053,6 +1061,7 @@ module Aws::CodeBuild
     #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.projects[0].logs_config.s3_logs.location #=> String
     #   resp.projects[0].logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.projects[0].logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].file_system_locations #=> Array
     #   resp.projects[0].file_system_locations[0].type #=> String, one of "EFS"
     #   resp.projects[0].file_system_locations[0].location #=> String
@@ -1202,7 +1211,7 @@ module Aws::CodeBuild
     #   specified, the latest version is used. If specified, it must be one
     #   of:
     #
-    #   * For CodeCommit: the commit ID, branch, or Git tag to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
     #     that corresponds to the version of the source code you want to
@@ -1223,7 +1232,7 @@ module Aws::CodeBuild
     #   takes precedence over this `sourceVersion` (at the project level).
     #
     #   For more information, see [Source Version Sample with CodeBuild][1] in
-    #   the *CodeBuild User Guide*.
+    #   the *AWS CodeBuild User Guide*.
     #
     #
     #
@@ -1249,22 +1258,22 @@ module Aws::CodeBuild
     #   Information about the build environment for the build project.
     #
     # @option params [required, String] :service_role
-    #   The ARN of the Identity and Access Management role that enables
-    #   CodeBuild to interact with dependent Amazon Web Services services on
-    #   behalf of the Amazon Web Services account.
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   enables AWS CodeBuild to interact with dependent AWS services on
+    #   behalf of the AWS account.
     #
     # @option params [Integer] :timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before it times out any build that has not been marked as completed.
-    #   The default is 60 minutes.
+    #   How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
+    #   wait before it times out any build that has not been marked as
+    #   completed. The default is 60 minutes.
     #
     # @option params [Integer] :queued_timeout_in_minutes
     #   The number of minutes a build is allowed to be queued before it times
     #   out.
     #
     # @option params [String] :encryption_key
-    #   The Key Management Service customer master key (CMK) to be used for
-    #   encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
+    #   be used for encrypting the build output artifacts.
     #
     #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
     #   artifacts if your service role has permission to that key.
@@ -1278,11 +1287,11 @@ module Aws::CodeBuild
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this build project.
     #
-    #   These tags are available for use by Amazon Web Services services that
-    #   support CodeBuild build project tags.
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild build project tags.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+    #   VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
     #
     # @option params [Boolean] :badge_enabled
     #   Set this to true to generate a publicly accessible URL for your
@@ -1290,7 +1299,8 @@ module Aws::CodeBuild
     #
     # @option params [Types::LogsConfig] :logs_config
     #   Information about logs for the build project. These can be logs in
-    #   CloudWatch Logs, logs uploaded to a specified S3 bucket, or both.
+    #   Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or
+    #   both.
     #
     # @option params [Array<Types::ProjectFileSystemLocation>] :file_system_locations
     #   An array of `ProjectFileSystemLocation` objects for a CodeBuild build
@@ -1378,6 +1388,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts: [
     #       {
@@ -1390,6 +1401,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     cache: {
@@ -1442,6 +1454,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     file_system_locations: [
@@ -1508,6 +1521,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.secondary_artifacts #=> Array
     #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.secondary_artifacts[0].location #=> String
@@ -1518,6 +1532,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.project.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
@@ -1567,6 +1582,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.file_system_locations #=> Array
     #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.project.file_system_locations[0].location #=> String
@@ -1606,8 +1622,8 @@ module Aws::CodeBuild
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this report group.
     #
-    #   These tags are available for use by Amazon Web Services services that
-    #   support CodeBuild report group tags.
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
     #
     # @return [Types::CreateReportGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1665,26 +1681,26 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # For an existing CodeBuild build project that has its source code
-    # stored in a GitHub or Bitbucket repository, enables CodeBuild to start
-    # rebuilding the source code every time a code change is pushed to the
-    # repository.
+    # For an existing AWS CodeBuild build project that has its source code
+    # stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to
+    # start rebuilding the source code every time a code change is pushed to
+    # the repository.
     #
-    # If you enable webhooks for an CodeBuild project, and the project is
-    # used as a build step in CodePipeline, then two identical builds are
-    # created for each commit. One build is triggered through webhooks, and
-    # one through CodePipeline. Because billing is on a per-build basis, you
-    # are billed for both builds. Therefore, if you are using CodePipeline,
-    # we recommend that you disable webhooks in CodeBuild. In the CodeBuild
-    # console, clear the Webhook box. For more information, see step 5 in
-    # [Change a Build Project's Settings][1].
+    # If you enable webhooks for an AWS CodeBuild project, and the project
+    # is used as a build step in AWS CodePipeline, then two identical builds
+    # are created for each commit. One build is triggered through webhooks,
+    # and one through AWS CodePipeline. Because billing is on a per-build
+    # basis, you are billed for both builds. Therefore, if you are using AWS
+    # CodePipeline, we recommend that you disable webhooks in AWS CodeBuild.
+    # In the AWS CodeBuild console, clear the Webhook box. For more
+    # information, see step 5 in [Change a Build Project's Settings][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
     #
     # @option params [required, String] :project_name
-    #   The name of the CodeBuild project.
+    #   The name of the AWS CodeBuild project.
     #
     # @option params [String] :branch_filter
     #   A regular expression used to determine which repository branches are
@@ -1923,13 +1939,13 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # For an existing CodeBuild build project that has its source code
-    # stored in a GitHub or Bitbucket repository, stops CodeBuild from
+    # For an existing AWS CodeBuild build project that has its source code
+    # stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from
     # rebuilding the source code every time a code change is pushed to the
     # repository.
     #
     # @option params [required, String] :project_name
-    #   The name of the CodeBuild project.
+    #   The name of the AWS CodeBuild project.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2210,7 +2226,7 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Imports the source repository credentials for an CodeBuild project
+    # Imports the source repository credentials for an AWS CodeBuild project
     # that has its source code stored in a GitHub, GitHub Enterprise, or
     # Bitbucket repository.
     #
@@ -2229,7 +2245,8 @@ module Aws::CodeBuild
     # @option params [required, String] :auth_type
     #   The type of authentication used to connect to a GitHub, GitHub
     #   Enterprise, or Bitbucket repository. An OAUTH connection is not
-    #   supported by the API and must be created using the CodeBuild console.
+    #   supported by the API and must be created using the AWS CodeBuild
+    #   console.
     #
     # @option params [Boolean] :should_overwrite
     #   Set to `false` to prevent overwriting the repository source
@@ -2266,7 +2283,8 @@ module Aws::CodeBuild
     # Resets the cache for a project.
     #
     # @option params [required, String] :project_name
-    #   The name of the CodeBuild build project that the cache is reset for.
+    #   The name of the AWS CodeBuild build project that the cache is reset
+    #   for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2451,7 +2469,7 @@ module Aws::CodeBuild
     # each build identifier representing a single build.
     #
     # @option params [required, String] :project_name
-    #   The name of the CodeBuild project.
+    #   The name of the AWS CodeBuild project.
     #
     # @option params [String] :sort_order
     #   The order to list results in. The results are sorted by build number,
@@ -2505,7 +2523,8 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Gets information about Docker images that are managed by CodeBuild.
+    # Gets information about Docker images that are managed by AWS
+    # CodeBuild.
     #
     # @return [Types::ListCuratedEnvironmentImagesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2598,8 +2617,7 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Gets a list ARNs for the report groups in the current Amazon Web
-    # Services account.
+    # Gets a list ARNs for the report groups in the current AWS account.
     #
     # @option params [String] :sort_order
     #   Used to specify the order to sort the list of returned report groups.
@@ -2661,8 +2679,7 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Returns a list of ARNs for the reports in the current Amazon Web
-    # Services account.
+    # Returns a list of ARNs for the reports in the current AWS account.
     #
     # @option params [String] :sort_order
     #   Specifies the sort order for the list of returned reports. Valid
@@ -2784,12 +2801,12 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Gets a list of projects that are shared with other Amazon Web Services
-    # accounts or users.
+    # Gets a list of projects that are shared with other AWS accounts or
+    # users.
     #
     # @option params [String] :sort_by
     #   The criterion to be used to list build projects shared with the
-    #   current Amazon Web Services account or user. Valid values include:
+    #   current AWS account or user. Valid values include:
     #
     #   * `ARN`\: List based on the ARN.
     #
@@ -2849,8 +2866,8 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Gets a list of report groups that are shared with other Amazon Web
-    # Services accounts or users.
+    # Gets a list of report groups that are shared with other AWS accounts
+    # or users.
     #
     # @option params [String] :sort_order
     #   The order in which to list shared report groups. Valid values include:
@@ -2861,7 +2878,7 @@ module Aws::CodeBuild
     #
     # @option params [String] :sort_by
     #   The criterion to be used to list report groups shared with the current
-    #   Amazon Web Services account or user. Valid values include:
+    #   AWS account or user. Valid values include:
     #
     #   * `ARN`\: List based on the ARN.
     #
@@ -2940,7 +2957,7 @@ module Aws::CodeBuild
     #
     # @option params [required, String] :policy
     #   A JSON-formatted resource policy. For more information, see [Sharing a
-    #   Project][1] and [Sharing a Report Group][2] in the *CodeBuild User
+    #   Project][1] and [Sharing a Report Group][2] in the *AWS CodeBuild User
     #   Guide*.
     #
     #
@@ -2985,7 +3002,7 @@ module Aws::CodeBuild
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the `RetryBuild` request. The token is included in the
     #   `RetryBuild` request and is valid for five minutes. If you repeat the
-    #   `RetryBuild` request with the same token, but change a parameter,
+    #   `RetryBuild` request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #
     # @return [Types::RetryBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3054,6 +3071,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -3061,6 +3079,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -3090,6 +3109,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -3137,7 +3157,7 @@ module Aws::CodeBuild
     #   idempotency of the `RetryBuildBatch` request. The token is included in
     #   the `RetryBuildBatch` request and is valid for five minutes. If you
     #   repeat the `RetryBuildBatch` request with the same token, but change a
-    #   parameter, CodeBuild returns a parameter mismatch error.
+    #   parameter, AWS CodeBuild returns a parameter mismatch error.
     #
     # @option params [String] :retry_type
     #   Specifies the type of retry to perform.
@@ -3208,6 +3228,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -3215,6 +3236,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -3238,6 +3260,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -3301,7 +3324,7 @@ module Aws::CodeBuild
     # Starts running a build.
     #
     # @option params [required, String] :project_name
-    #   The name of the CodeBuild build project to start running a build.
+    #   The name of the AWS CodeBuild build project to start running a build.
     #
     # @option params [Array<Types::ProjectSource>] :secondary_sources_override
     #   An array of `ProjectSource` objects.
@@ -3316,7 +3339,7 @@ module Aws::CodeBuild
     #   not specified, the latest version is used. If specified, the contents
     #   depends on the source provider:
     #
-    #   CodeCommit
+    #   AWS CodeCommit
     #
     #   : The commit ID, branch, or Git tag to use.
     #
@@ -3345,7 +3368,7 @@ module Aws::CodeBuild
     #   `sourceVersion` (at the build level) takes precedence.
     #
     #   For more information, see [Source Version Sample with CodeBuild][1] in
-    #   the *CodeBuild User Guide*.
+    #   the *AWS CodeBuild User Guide*.
     #
     #
     #
@@ -3382,7 +3405,7 @@ module Aws::CodeBuild
     #
     # @option params [Types::GitSubmodulesConfig] :git_submodules_config_override
     #   Information about the Git submodules configuration for this build of
-    #   an CodeBuild build project.
+    #   an AWS CodeBuild build project.
     #
     # @option params [String] :buildspec_override
     #   A buildspec file declaration that overrides, for this build only, the
@@ -3391,8 +3414,8 @@ module Aws::CodeBuild
     #   If this value is set, it can be either an inline buildspec definition,
     #   the path to an alternate buildspec file relative to the value of the
     #   built-in `CODEBUILD_SRC_DIR` environment variable, or the path to an
-    #   S3 bucket. The bucket must be in the same Region as the build project.
-    #   Specify the buildspec file using its ARN (for example,
+    #   S3 bucket. The bucket must be in the same AWS Region as the build
+    #   project. Specify the buildspec file using its ARN (for example,
     #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
     #   not provided or is set to an empty string, the source code must
     #   contain a buildspec file in its root directory. For more information,
@@ -3419,7 +3442,7 @@ module Aws::CodeBuild
     #   associated with the source provider must have write access to the
     #   repo. If the user does not have write access, the build status cannot
     #   be updated. For more information, see [Source provider access][1] in
-    #   the *CodeBuild User Guide*.
+    #   the *AWS CodeBuild User Guide*.
     #
     #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
     #   your source provider.
@@ -3472,9 +3495,9 @@ module Aws::CodeBuild
     #   out.
     #
     # @option params [String] :encryption_key_override
-    #   The Key Management Service customer master key (CMK) that overrides
-    #   the one specified in the build project. The CMK key encrypts the build
-    #   output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   that overrides the one specified in the build project. The CMK key
+    #   encrypts the build output artifacts.
     #
     #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
     #   artifacts if your service role has permission to that key.
@@ -3489,7 +3512,7 @@ module Aws::CodeBuild
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
     #   StartBuild request and is valid for 5 minutes. If you repeat the
-    #   StartBuild request with the same token, but change a parameter,
+    #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #
     # @option params [Types::LogsConfig] :logs_config_override
@@ -3500,22 +3523,23 @@ module Aws::CodeBuild
     #   The credentials for access to a private registry.
     #
     # @option params [String] :image_pull_credentials_type_override
-    #   The type of credentials CodeBuild uses to pull images in your build.
-    #   There are two valid values:
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   build. There are two valid values:
     #
     #   CODEBUILD
     #
-    #   : Specifies that CodeBuild uses its own credentials. This requires
-    #     that you modify your ECR repository policy to trust CodeBuild's
+    #   : Specifies that AWS CodeBuild uses its own credentials. This requires
+    #     that you modify your ECR repository policy to trust AWS CodeBuild's
     #     service principal.
     #
     #   SERVICE\_ROLE
     #
-    #   : Specifies that CodeBuild uses your build project's service role.
+    #   : Specifies that AWS CodeBuild uses your build project's service
+    #     role.
     #
     #   When using a cross-account or private registry image, you must use
-    #   `SERVICE_ROLE` credentials. When using an CodeBuild curated image, you
-    #   must use `CODEBUILD` credentials.
+    #   `SERVICE_ROLE` credentials. When using an AWS CodeBuild curated image,
+    #   you must use `CODEBUILD` credentials.
     #
     # @option params [Boolean] :debug_session_enabled
     #   Specifies if session debugging is enabled for this build. For more
@@ -3572,6 +3596,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts_override: [
     #       {
@@ -3584,6 +3609,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     environment_variables_override: [
@@ -3635,6 +3661,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     registry_credential_override: {
@@ -3700,6 +3727,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -3707,6 +3735,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -3736,6 +3765,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -3790,7 +3820,7 @@ module Aws::CodeBuild
     #   If not specified, the latest version is used. If specified, the
     #   contents depends on the source provider:
     #
-    #   CodeCommit
+    #   AWS CodeCommit
     #
     #   : The commit ID, branch, or Git tag to use.
     #
@@ -3819,7 +3849,7 @@ module Aws::CodeBuild
     #   `sourceVersion` (at the build level) takes precedence.
     #
     #   For more information, see [Source Version Sample with CodeBuild][1] in
-    #   the *CodeBuild User Guide*.
+    #   the *AWS CodeBuild User Guide*.
     #
     #
     #
@@ -3866,8 +3896,8 @@ module Aws::CodeBuild
     #   If this value is set, it can be either an inline buildspec definition,
     #   the path to an alternate buildspec file relative to the value of the
     #   built-in `CODEBUILD_SRC_DIR` environment variable, or the path to an
-    #   S3 bucket. The bucket must be in the same Region as the build project.
-    #   Specify the buildspec file using its ARN (for example,
+    #   S3 bucket. The bucket must be in the same AWS Region as the build
+    #   project. Specify the buildspec file using its ARN (for example,
     #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
     #   not provided or is set to an empty string, the source code must
     #   contain a buildspec file in its root directory. For more information,
@@ -3930,9 +3960,9 @@ module Aws::CodeBuild
     #   times out.
     #
     # @option params [String] :encryption_key_override
-    #   The Key Management Service customer master key (CMK) that overrides
-    #   the one specified in the batch build project. The CMK key encrypts the
-    #   build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   that overrides the one specified in the batch build project. The CMK
+    #   key encrypts the build output artifacts.
     #
     #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
     #   artifacts if your service role has permission to that key.
@@ -3948,7 +3978,7 @@ module Aws::CodeBuild
     #   idempotency of the `StartBuildBatch` request. The token is included in
     #   the `StartBuildBatch` request and is valid for five minutes. If you
     #   repeat the `StartBuildBatch` request with the same token, but change a
-    #   parameter, CodeBuild returns a parameter mismatch error.
+    #   parameter, AWS CodeBuild returns a parameter mismatch error.
     #
     # @option params [Types::LogsConfig] :logs_config_override
     #   A `LogsConfig` object that override the log settings defined in the
@@ -3959,22 +3989,23 @@ module Aws::CodeBuild
     #   a private registry.
     #
     # @option params [String] :image_pull_credentials_type_override
-    #   The type of credentials CodeBuild uses to pull images in your batch
-    #   build. There are two valid values:
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   batch build. There are two valid values:
     #
     #   CODEBUILD
     #
-    #   : Specifies that CodeBuild uses its own credentials. This requires
-    #     that you modify your ECR repository policy to trust CodeBuild's
+    #   : Specifies that AWS CodeBuild uses its own credentials. This requires
+    #     that you modify your ECR repository policy to trust AWS CodeBuild's
     #     service principal.
     #
     #   SERVICE\_ROLE
     #
-    #   : Specifies that CodeBuild uses your build project's service role.
+    #   : Specifies that AWS CodeBuild uses your build project's service
+    #     role.
     #
     #   When using a cross-account or private registry image, you must use
-    #   `SERVICE_ROLE` credentials. When using an CodeBuild curated image, you
-    #   must use `CODEBUILD` credentials.
+    #   `SERVICE_ROLE` credentials. When using an AWS CodeBuild curated image,
+    #   you must use `CODEBUILD` credentials.
     #
     # @option params [Types::ProjectBuildBatchConfig] :build_batch_config_override
     #   A `BuildBatchConfigOverride` object that contains batch build
@@ -4036,6 +4067,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts_override: [
     #       {
@@ -4048,6 +4080,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     environment_variables_override: [
@@ -4095,6 +4128,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     registry_credential_override: {
@@ -4168,6 +4202,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -4175,6 +4210,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -4198,6 +4234,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -4328,6 +4365,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -4335,6 +4373,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -4364,6 +4403,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -4469,6 +4509,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -4476,6 +4517,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -4499,6 +4541,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -4583,7 +4626,7 @@ module Aws::CodeBuild
     #   specified, the latest version is used. If specified, it must be one
     #   of:
     #
-    #   * For CodeCommit: the commit ID, branch, or Git tag to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
     #     that corresponds to the version of the source code you want to
@@ -4604,7 +4647,7 @@ module Aws::CodeBuild
     #   takes precedence over this `sourceVersion` (at the project level).
     #
     #   For more information, see [Source Version Sample with CodeBuild][1] in
-    #   the *CodeBuild User Guide*.
+    #   the *AWS CodeBuild User Guide*.
     #
     #
     #
@@ -4631,12 +4674,12 @@ module Aws::CodeBuild
     #   project.
     #
     # @option params [String] :service_role
-    #   The replacement ARN of the Identity and Access Management role that
-    #   enables CodeBuild to interact with dependent Amazon Web Services
-    #   services on behalf of the Amazon Web Services account.
+    #   The replacement ARN of the AWS Identity and Access Management (IAM)
+    #   role that enables AWS CodeBuild to interact with dependent AWS
+    #   services on behalf of the AWS account.
     #
     # @option params [Integer] :timeout_in_minutes
-    #   The replacement value in minutes, from 5 to 480 (8 hours), for
+    #   The replacement value in minutes, from 5 to 480 (8 hours), for AWS
     #   CodeBuild to wait before timing out any related build that did not get
     #   marked as completed.
     #
@@ -4645,8 +4688,8 @@ module Aws::CodeBuild
     #   out.
     #
     # @option params [String] :encryption_key
-    #   The Key Management Service customer master key (CMK) to be used for
-    #   encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
+    #   be used for encrypting the build output artifacts.
     #
     #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
     #   artifacts if your service role has permission to that key.
@@ -4661,11 +4704,11 @@ module Aws::CodeBuild
     #   An updated list of tag key and value pairs associated with this build
     #   project.
     #
-    #   These tags are available for use by Amazon Web Services services that
-    #   support CodeBuild build project tags.
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild build project tags.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+    #   VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
     #
     # @option params [Boolean] :badge_enabled
     #   Set this to true to generate a publicly accessible URL for your
@@ -4673,7 +4716,7 @@ module Aws::CodeBuild
     #
     # @option params [Types::LogsConfig] :logs_config
     #   Information about logs for the build project. A project can create
-    #   logs in CloudWatch Logs, logs in an S3 bucket, or both.
+    #   logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both.
     #
     # @option params [Array<Types::ProjectFileSystemLocation>] :file_system_locations
     #   An array of `ProjectFileSystemLocation` objects for a CodeBuild build
@@ -4762,6 +4805,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts: [
     #       {
@@ -4774,6 +4818,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     cache: {
@@ -4826,6 +4871,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     file_system_locations: [
@@ -4892,6 +4938,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.secondary_artifacts #=> Array
     #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.secondary_artifacts[0].location #=> String
@@ -4902,6 +4949,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.project.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
@@ -4951,6 +4999,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.file_system_locations #=> Array
     #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.project.file_system_locations[0].location #=> String
@@ -4990,8 +5039,8 @@ module Aws::CodeBuild
     #   An updated list of tag key and value pairs associated with this report
     #   group.
     #
-    #   These tags are available for use by Amazon Web Services services that
-    #   support CodeBuild report group tags.
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
     #
     # @return [Types::UpdateReportGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5048,14 +5097,14 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Updates the webhook associated with an CodeBuild build project.
+    # Updates the webhook associated with an AWS CodeBuild build project.
     #
     # <note markdown="1"> If you use Bitbucket for your repository, `rotateSecret` is ignored.
     #
     #  </note>
     #
     # @option params [required, String] :project_name
-    #   The name of the CodeBuild project.
+    #   The name of the AWS CodeBuild project.
     #
     # @option params [String] :branch_filter
     #   A regular expression used to determine which repository branches are
@@ -5139,7 +5188,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

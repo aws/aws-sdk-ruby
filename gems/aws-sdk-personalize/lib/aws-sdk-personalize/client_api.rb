@@ -352,7 +352,7 @@ module Aws::Personalize
 
     CreateCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
-    CreateCampaignRequest.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, required: true, location_name: "minProvisionedTPS"))
+    CreateCampaignRequest.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minProvisionedTPS"))
     CreateCampaignRequest.add_member(:campaign_config, Shapes::ShapeRef.new(shape: CampaignConfig, location_name: "campaignConfig"))
     CreateCampaignRequest.struct_class = Types::CreateCampaignRequest
 

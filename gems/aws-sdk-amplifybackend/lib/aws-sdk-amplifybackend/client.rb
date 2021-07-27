@@ -574,6 +574,12 @@ module Aws::AmplifyBackend
     #               client_id: "__string",
     #               client_secret: "__string",
     #             },
+    #             sign_in_with_apple: {
+    #               client_id: "__string",
+    #               key_id: "__string",
+    #               private_key: "__string",
+    #               team_id: "__string",
+    #             },
     #           },
     #         },
     #         password_policy: {
@@ -1149,6 +1155,10 @@ module Aws::AmplifyBackend
     #   resp.resource_config.user_pool_configs.o_auth.social_provider_settings.google.client_secret #=> String
     #   resp.resource_config.user_pool_configs.o_auth.social_provider_settings.login_with_amazon.client_id #=> String
     #   resp.resource_config.user_pool_configs.o_auth.social_provider_settings.login_with_amazon.client_secret #=> String
+    #   resp.resource_config.user_pool_configs.o_auth.social_provider_settings.sign_in_with_apple.client_id #=> String
+    #   resp.resource_config.user_pool_configs.o_auth.social_provider_settings.sign_in_with_apple.key_id #=> String
+    #   resp.resource_config.user_pool_configs.o_auth.social_provider_settings.sign_in_with_apple.private_key #=> String
+    #   resp.resource_config.user_pool_configs.o_auth.social_provider_settings.sign_in_with_apple.team_id #=> String
     #   resp.resource_config.user_pool_configs.password_policy.additional_constraints #=> Array
     #   resp.resource_config.user_pool_configs.password_policy.additional_constraints[0] #=> String, one of "REQUIRE_DIGIT", "REQUIRE_LOWERCASE", "REQUIRE_SYMBOL", "REQUIRE_UPPERCASE"
     #   resp.resource_config.user_pool_configs.password_policy.minimum_length #=> Float
@@ -1576,6 +1586,12 @@ module Aws::AmplifyBackend
     #               client_id: "__string",
     #               client_secret: "__string",
     #             },
+    #             sign_in_with_apple: {
+    #               client_id: "__string",
+    #               key_id: "__string",
+    #               private_key: "__string",
+    #               team_id: "__string",
+    #             },
     #           },
     #         },
     #         password_policy: {
@@ -1716,7 +1732,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

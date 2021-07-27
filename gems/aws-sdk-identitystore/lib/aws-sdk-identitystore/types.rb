@@ -41,10 +41,10 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
-    #   d-1234567890. In this example, d- is a fixed prefix, and 1234567890
-    #   is a randomly generated string which contains number and lower case
-    #   letters. This value is generated at the time that a new identity
-    #   store is created.
+    #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
+    #   `1234567890` is a randomly generated string that contains number and
+    #   lower case letters. This value is generated at the time that a new
+    #   identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -65,11 +65,11 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Contains the group’s display name value. The length limit is 1024
+    #   Contains the group’s display name value. The length limit is 1,024
     #   characters. This value can consist of letters, accented characters,
-    #   symbols, numbers, punctuation, tab, new line, carriage return, space
-    #   and non breaking space in this attribute. The characters
-    #   “&lt;&gt;;:%” are excluded. This value is specified at the time the
+    #   symbols, numbers, punctuation, tab, new line, carriage return,
+    #   space, and nonbreaking space in this attribute. The characters
+    #   `<>;:%` are excluded. This value is specified at the time that the
     #   group is created and stored as an attribute of the group object in
     #   the identity store.
     #   @return [String]
@@ -93,10 +93,10 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
-    #   d-1234567890. In this example, d- is a fixed prefix, and 1234567890
-    #   is a randomly generated string which contains number and lower case
-    #   letters. This value is generated at the time that a new identity
-    #   store is created.
+    #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
+    #   `1234567890` is a randomly generated string that contains number and
+    #   lower case letters. This value is generated at the time that a new
+    #   identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -113,9 +113,9 @@ module Aws::IdentityStore
     end
 
     # @!attribute [rw] user_name
-    #   Contains the user’s username value. The length limit is 128
+    #   Contains the user’s user name value. The length limit is 128
     #   characters. This value can consist of letters, accented characters,
-    #   symbols, numbers and punctuation. The characters “&lt;&gt;;:%” are
+    #   symbols, numbers, and punctuation. The characters `<>;:%` are
     #   excluded. This value is specified at the time the user is created
     #   and stored as an attribute of the user object in the identity store.
     #   @return [String]
@@ -146,10 +146,10 @@ module Aws::IdentityStore
     #       }
     #
     # @!attribute [rw] attribute_path
-    #   The attribute path used to specify which attribute name to search.
-    #   Length limit is 255 characters. For example, `UserName` is a valid
-    #   attribute path for the `ListUsers` API, and `DisplayName` is a valid
-    #   attribute path for the `ListGroups` API.
+    #   The attribute path that is used to specify which attribute name to
+    #   search. Length limit is 255 characters. For example, `UserName` is a
+    #   valid attribute path for the `ListUsers` API, and `DisplayName` is a
+    #   valid attribute path for the `ListGroups` API.
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
@@ -174,13 +174,13 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Contains the group’s display name value. The length limit is 1024
+    #   Contains the group’s display name value. The length limit is 1,024
     #   characters. This value can consist of letters, accented characters,
-    #   symbols, numbers, punctuation, tab, new line, carriage return, space
-    #   and non breaking space in this attribute. The characters
-    #   “&lt;&gt;;:%” are excluded. This value is specified at the time the
-    #   group is created and stored as an attribute of the group object in
-    #   the identity store.
+    #   symbols, numbers, punctuation, tab, new line, carriage return,
+    #   space, and nonbreaking space in this attribute. The characters
+    #   `<>;:%` are excluded. This value is specified at the time the group
+    #   is created and stored as an attribute of the group object in the
+    #   identity store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Group AWS API Documentation
@@ -231,24 +231,25 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
-    #   d-1234567890. In this example, d- is a fixed prefix, and 1234567890
-    #   is a randomly generated string which contains number and lower case
-    #   letters. This value is generated at the time that a new identity
-    #   store is created.
+    #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
+    #   `1234567890` is a randomly generated string that contains number and
+    #   lower case letters. This value is generated at the time that a new
+    #   identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to be returned per request, which is
-    #   used in the `ListUsers` and `ListGroups` request to specify how many
-    #   results to return in one page. The length limit is 50 characters.
+    #   The maximum number of results to be returned per request. This
+    #   parameter is used in the `ListUsers` and `ListGroups` request to
+    #   specify how many results to return in one page. The length limit is
+    #   50 characters.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers` and `ListGroups` APIs.
-    #   This value is generated by the identity store service and is
-    #   returned in the API response if the total results are more than the
-    #   size of one page, and when this token is used in the API request to
-    #   search for the next page.
+    #   The pagination token used for the `ListUsers` and `ListGroups` API
+    #   operations. This value is generated by the identity store service.
+    #   It is returned in the API response if the total results are more
+    #   than the size of one page. This token is also returned when it is
+    #   used in the API request to search for the next page.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -272,11 +273,11 @@ module Aws::IdentityStore
     #   @return [Array<Types::Group>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers` and `ListGroups` APIs.
-    #   This value is generated by the identity store service and is
-    #   returned in the API response if the total results are more than the
-    #   size of one page, and when this token is used in the API request to
-    #   search for the next page.
+    #   The pagination token used for the `ListUsers` and `ListGroups` API
+    #   operations. This value is generated by the identity store service.
+    #   It is returned in the API response if the total results are more
+    #   than the size of one page. This token is also returned when it1 is
+    #   used in the API request to search for the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupsResponse AWS API Documentation
@@ -305,24 +306,25 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
-    #   d-1234567890. In this example, d- is a fixed prefix, and 1234567890
-    #   is a randomly generated string which contains number and lower case
-    #   letters. This value is generated at the time that a new identity
-    #   store is created.
+    #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
+    #   `1234567890` is a randomly generated string that contains number and
+    #   lower case letters. This value is generated at the time that a new
+    #   identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to be returned per request, which is
-    #   used in the `ListUsers` and `ListGroups` request to specify how many
-    #   results to return in one page. The length limit is 50 characters.
+    #   The maximum number of results to be returned per request. This
+    #   parameter is used in the `ListUsers` and `ListGroups` request to
+    #   specify how many results to return in one page. The length limit is
+    #   50 characters.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers` and `ListGroups` APIs.
-    #   This value is generated by the identity store service and is
-    #   returned in the API response if the total results are more than the
-    #   size of one page, and when this token is used in the API request to
-    #   search for the next page.
+    #   The pagination token used for the `ListUsers` and `ListGroups` API
+    #   operations. This value is generated by the identity store service.
+    #   It is returned in the API response if the total results are more
+    #   than the size of one page. This token is also returned when it is
+    #   used in the API request to search for the next page.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -346,11 +348,11 @@ module Aws::IdentityStore
     #   @return [Array<Types::User>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers` and `ListGroups` APIs.
-    #   This value is generated by the identity store service and is
-    #   returned in the API response if the total results are more than the
-    #   size of one page, and when this token is used in the API request to
-    #   search for the next page.
+    #   The pagination token used for the `ListUsers` and `ListGroups` API
+    #   operations. This value is generated by the identity store service.
+    #   It is returned in the API response if the total results are more
+    #   than the size of one page. This token is also returned when it is
+    #   used in the API request to search for the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListUsersResponse AWS API Documentation
@@ -427,9 +429,9 @@ module Aws::IdentityStore
     # attributes.
     #
     # @!attribute [rw] user_name
-    #   Contains the user’s username value. The length limit is 128
+    #   Contains the user’s user name value. The length limit is 128
     #   characters. This value can consist of letters, accented characters,
-    #   symbols, numbers and punctuation. The characters “&lt;&gt;;:%” are
+    #   symbols, numbers, and punctuation. The characters `<>;:%` are
     #   excluded. This value is specified at the time the user is created
     #   and stored as an attribute of the user object in the identity store.
     #   @return [String]

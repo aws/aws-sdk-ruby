@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-07-23)
+------------------
+
+* Feature - Update to documentation to reapply missing change to SSM uninstall switch default value and improve description.
+
+1.24.0 (2021-07-19)
+------------------
+
+* Feature - Documentation updates for reversal of default value for additional instance configuration SSM switch, plus improved descriptions for semantic versioning.
+
 1.23.0 (2021-07-06)
 ------------------
 

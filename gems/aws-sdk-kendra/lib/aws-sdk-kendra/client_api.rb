@@ -254,6 +254,7 @@ module Aws::Kendra
     OneDriveUserList = Shapes::ListShape.new(name: 'OneDriveUserList')
     OneDriveUsers = Shapes::StructureShape.new(name: 'OneDriveUsers')
     Order = Shapes::StringShape.new(name: 'Order')
+    OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
     Port = Shapes::IntegerShape.new(name: 'Port')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
@@ -397,6 +398,7 @@ module Aws::Kendra
     VpcSecurityGroupId = Shapes::StringShape.new(name: 'VpcSecurityGroupId')
     WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
     WebCrawlerMode = Shapes::StringShape.new(name: 'WebCrawlerMode')
+    WorkDocsConfiguration = Shapes::StructureShape.new(name: 'WorkDocsConfiguration')
 
     AccessControlListConfiguration.add_member(:key_path, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "KeyPath"))
     AccessControlListConfiguration.struct_class = Types::AccessControlListConfiguration
@@ -651,6 +653,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:confluence_configuration, Shapes::ShapeRef.new(shape: ConfluenceConfiguration, location_name: "ConfluenceConfiguration"))
     DataSourceConfiguration.add_member(:google_drive_configuration, Shapes::ShapeRef.new(shape: GoogleDriveConfiguration, location_name: "GoogleDriveConfiguration"))
     DataSourceConfiguration.add_member(:web_crawler_configuration, Shapes::ShapeRef.new(shape: WebCrawlerConfiguration, location_name: "WebCrawlerConfiguration"))
+    DataSourceConfiguration.add_member(:work_docs_configuration, Shapes::ShapeRef.new(shape: WorkDocsConfiguration, location_name: "WorkDocsConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1521,6 +1524,14 @@ module Aws::Kendra
     WebCrawlerConfiguration.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
     WebCrawlerConfiguration.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfiguration, location_name: "AuthenticationConfiguration"))
     WebCrawlerConfiguration.struct_class = Types::WebCrawlerConfiguration
+
+    WorkDocsConfiguration.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    WorkDocsConfiguration.add_member(:crawl_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlComments"))
+    WorkDocsConfiguration.add_member(:use_change_log, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseChangeLog"))
+    WorkDocsConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    WorkDocsConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    WorkDocsConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    WorkDocsConfiguration.struct_class = Types::WorkDocsConfiguration
 
 
     # @api private

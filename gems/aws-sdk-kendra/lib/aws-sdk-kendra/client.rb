@@ -694,7 +694,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -992,6 +992,20 @@ module Aws::Kendra
     #           ],
     #         },
     #       },
+    #       work_docs_configuration: {
+    #         organization_id: "OrganizationId", # required
+    #         crawl_comments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -1128,6 +1142,13 @@ module Aws::Kendra
     #
     #   The `Edition` parameter is optional. If you don't supply a value, the
     #   default is `ENTERPRISE_EDITION`.
+    #
+    #   For more information on quota limits for enterprise and developer
+    #   editions, see [Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #
     # @option params [required, String] :role_arn
     #   An Identity and Access Management(IAM) role that gives Amazon Kendra
@@ -1647,7 +1668,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -1855,6 +1876,17 @@ module Aws::Kendra
     #   resp.configuration.web_crawler_configuration.authentication_configuration.basic_authentication[0].host #=> String
     #   resp.configuration.web_crawler_configuration.authentication_configuration.basic_authentication[0].port #=> Integer
     #   resp.configuration.web_crawler_configuration.authentication_configuration.basic_authentication[0].credentials #=> String
+    #   resp.configuration.work_docs_configuration.organization_id #=> String
+    #   resp.configuration.work_docs_configuration.crawl_comments #=> Boolean
+    #   resp.configuration.work_docs_configuration.use_change_log #=> Boolean
+    #   resp.configuration.work_docs_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.work_docs_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.work_docs_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.work_docs_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.work_docs_configuration.field_mappings #=> Array
+    #   resp.configuration.work_docs_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.work_docs_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.work_docs_configuration.field_mappings[0].index_field_name #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -2381,7 +2413,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -3150,7 +3182,7 @@ module Aws::Kendra
     end
 
     # Enables you to provide feedback to Amazon Kendra to improve the
-    # performance of the service.
+    # performance of your index.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index that was queried.
@@ -3592,6 +3624,20 @@ module Aws::Kendra
     #           ],
     #         },
     #       },
+    #       work_docs_configuration: {
+    #         organization_id: "OrganizationId", # required
+    #         crawl_comments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -3921,7 +3967,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

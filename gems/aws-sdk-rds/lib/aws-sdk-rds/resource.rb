@@ -1997,11 +1997,20 @@ module Aws::RDS
     #
     #   Supported filters:
     #
+    #   * `clone-group-id` - Accepts clone group identifiers. The results list
+    #     will only include information about the DB clusters associated with
+    #     these clone groups.
+    #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB clusters identified by these ARNs.
     #
-    #   ^
+    #   * `domain` - Accepts Active Directory directory IDs. The results list
+    #     will only include information about the DB clusters associated with
+    #     these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only include
+    #     information about the DB clusters for these engines.
     # @option options [Boolean] :include_shared
     #   Optional Boolean parameter that specifies whether the output includes
     #   information about clusters shared from other Amazon Web Services

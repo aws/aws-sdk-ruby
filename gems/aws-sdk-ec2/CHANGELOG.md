@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.251.0 (2021-07-22)
+------------------
+
+* Feature - This release allows customers to assign prefixes to their elastic network interface and to reserve IP blocks in their subnet CIDRs. These reserved blocks can be used to assign prefixes to elastic network interfaces or be excluded from auto-assignment.
+
+1.250.0 (2021-07-20)
+------------------
+
+* Feature - Added idempotency to the CreateVolume API using the ClientToken request parameter
+
+1.249.0 (2021-07-15)
+------------------
+
+* Feature - This feature enables customers  to specify weekly recurring time window(s) for scheduled events that reboot, stop or terminate EC2 instances.
+
 1.248.0 (2021-07-07)
 ------------------
 
