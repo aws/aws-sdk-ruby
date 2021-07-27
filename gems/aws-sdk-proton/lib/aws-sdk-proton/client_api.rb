@@ -167,7 +167,7 @@ module Aws::Proton
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemplateSchema = Shapes::StringShape.new(name: 'TemplateSchema')
     TemplateVersionPart = Shapes::StringShape.new(name: 'TemplateVersionPart')
-    TemplateVersionSourceInput = Shapes::StructureShape.new(name: 'TemplateVersionSourceInput')
+    TemplateVersionSourceInput = Shapes::UnionShape.new(name: 'TemplateVersionSourceInput')
     TemplateVersionStatus = Shapes::StringShape.new(name: 'TemplateVersionStatus')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -784,6 +784,9 @@ module Aws::Proton
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
     TemplateVersionSourceInput.add_member(:s3, Shapes::ShapeRef.new(shape: S3ObjectSource, location_name: "s3"))
+    TemplateVersionSourceInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TemplateVersionSourceInput.add_member_subclass(:s3, Types::TemplateVersionSourceInput::s3)
+    TemplateVersionSourceInput.add_member_subclass(:unknown, Types::TemplateVersionSourceInput::Unknown)
     TemplateVersionSourceInput.struct_class = Types::TemplateVersionSourceInput
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))

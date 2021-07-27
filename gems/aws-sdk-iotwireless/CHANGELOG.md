@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.12.0 (2021-07-27)
-------------------
-
-* Feature - Add SidewalkManufacturingSn as an identifier to allow Customer to query WirelessDevice, in the response, AmazonId is added in the case that Sidewalk device is return.
-
 1.11.0 (2021-07-27)
 ------------------
 

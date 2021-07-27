@@ -22,7 +22,7 @@ module Aws::EMRContainers
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
     ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
-    ContainerInfo = Shapes::StructureShape.new(name: 'ContainerInfo')
+    ContainerInfo = Shapes::UnionShape.new(name: 'ContainerInfo')
     ContainerProvider = Shapes::StructureShape.new(name: 'ContainerProvider')
     ContainerProviderType = Shapes::StringShape.new(name: 'ContainerProviderType')
     CreateManagedEndpointRequest = Shapes::StructureShape.new(name: 'CreateManagedEndpointRequest')
@@ -129,6 +129,9 @@ module Aws::EMRContainers
     ConfigurationOverrides.struct_class = Types::ConfigurationOverrides
 
     ContainerInfo.add_member(:eks_info, Shapes::ShapeRef.new(shape: EksInfo, location_name: "eksInfo"))
+    ContainerInfo.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContainerInfo.add_member_subclass(:eks_info, Types::ContainerInfo::eksInfo)
+    ContainerInfo.add_member_subclass(:unknown, Types::ContainerInfo::Unknown)
     ContainerInfo.struct_class = Types::ContainerInfo
 
     ContainerProvider.add_member(:type, Shapes::ShapeRef.new(shape: ContainerProviderType, required: true, location_name: "type"))

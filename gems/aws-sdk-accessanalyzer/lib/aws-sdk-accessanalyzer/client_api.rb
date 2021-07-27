@@ -27,7 +27,7 @@ module Aws::AccessAnalyzer
     AccessPreviewSummary = Shapes::StructureShape.new(name: 'AccessPreviewSummary')
     AccessPreviewsList = Shapes::ListShape.new(name: 'AccessPreviewsList')
     AclCanonicalId = Shapes::StringShape.new(name: 'AclCanonicalId')
-    AclGrantee = Shapes::StructureShape.new(name: 'AclGrantee')
+    AclGrantee = Shapes::UnionShape.new(name: 'AclGrantee')
     AclPermission = Shapes::StringShape.new(name: 'AclPermission')
     AclUri = Shapes::StringShape.new(name: 'AclUri')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
@@ -48,7 +48,7 @@ module Aws::AccessAnalyzer
     CloudTrailDetails = Shapes::StructureShape.new(name: 'CloudTrailDetails')
     CloudTrailProperties = Shapes::StructureShape.new(name: 'CloudTrailProperties')
     ConditionKeyMap = Shapes::MapShape.new(name: 'ConditionKeyMap')
-    Configuration = Shapes::StructureShape.new(name: 'Configuration')
+    Configuration = Shapes::UnionShape.new(name: 'Configuration')
     ConfigurationsMap = Shapes::MapShape.new(name: 'ConfigurationsMap')
     ConfigurationsMapKey = Shapes::StringShape.new(name: 'ConfigurationsMapKey')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -137,9 +137,9 @@ module Aws::AccessAnalyzer
     Location = Shapes::StructureShape.new(name: 'Location')
     LocationList = Shapes::ListShape.new(name: 'LocationList')
     Name = Shapes::StringShape.new(name: 'Name')
-    NetworkOriginConfiguration = Shapes::StructureShape.new(name: 'NetworkOriginConfiguration')
+    NetworkOriginConfiguration = Shapes::UnionShape.new(name: 'NetworkOriginConfiguration')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
-    PathElement = Shapes::StructureShape.new(name: 'PathElement')
+    PathElement = Shapes::UnionShape.new(name: 'PathElement')
     PathElementList = Shapes::ListShape.new(name: 'PathElementList')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyGeneration = Shapes::StructureShape.new(name: 'PolicyGeneration')
@@ -252,6 +252,10 @@ module Aws::AccessAnalyzer
 
     AclGrantee.add_member(:id, Shapes::ShapeRef.new(shape: AclCanonicalId, location_name: "id"))
     AclGrantee.add_member(:uri, Shapes::ShapeRef.new(shape: AclUri, location_name: "uri"))
+    AclGrantee.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AclGrantee.add_member_subclass(:id, Types::AclGrantee::id)
+    AclGrantee.add_member_subclass(:uri, Types::AclGrantee::uri)
+    AclGrantee.add_member_subclass(:unknown, Types::AclGrantee::Unknown)
     AclGrantee.struct_class = Types::AclGrantee
 
     ActionList.member = Shapes::ShapeRef.new(shape: String)
@@ -326,6 +330,13 @@ module Aws::AccessAnalyzer
     Configuration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketConfiguration, location_name: "s3Bucket"))
     Configuration.add_member(:secrets_manager_secret, Shapes::ShapeRef.new(shape: SecretsManagerSecretConfiguration, location_name: "secretsManagerSecret"))
     Configuration.add_member(:sqs_queue, Shapes::ShapeRef.new(shape: SqsQueueConfiguration, location_name: "sqsQueue"))
+    Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Configuration.add_member_subclass(:iam_role, Types::Configuration::iamRole)
+    Configuration.add_member_subclass(:kms_key, Types::Configuration::kmsKey)
+    Configuration.add_member_subclass(:s3_bucket, Types::Configuration::s3Bucket)
+    Configuration.add_member_subclass(:secrets_manager_secret, Types::Configuration::secretsManagerSecret)
+    Configuration.add_member_subclass(:sqs_queue, Types::Configuration::sqsQueue)
+    Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
 
     ConfigurationsMap.key = Shapes::ShapeRef.new(shape: ConfigurationsMapKey)
@@ -613,12 +624,22 @@ module Aws::AccessAnalyzer
 
     NetworkOriginConfiguration.add_member(:internet_configuration, Shapes::ShapeRef.new(shape: InternetConfiguration, location_name: "internetConfiguration"))
     NetworkOriginConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
+    NetworkOriginConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    NetworkOriginConfiguration.add_member_subclass(:internet_configuration, Types::NetworkOriginConfiguration::internetConfiguration)
+    NetworkOriginConfiguration.add_member_subclass(:vpc_configuration, Types::NetworkOriginConfiguration::vpcConfiguration)
+    NetworkOriginConfiguration.add_member_subclass(:unknown, Types::NetworkOriginConfiguration::Unknown)
     NetworkOriginConfiguration.struct_class = Types::NetworkOriginConfiguration
 
     PathElement.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
     PathElement.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     PathElement.add_member(:substring, Shapes::ShapeRef.new(shape: Substring, location_name: "substring"))
     PathElement.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    PathElement.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PathElement.add_member_subclass(:index, Types::PathElement::index)
+    PathElement.add_member_subclass(:key, Types::PathElement::key)
+    PathElement.add_member_subclass(:substring, Types::PathElement::substring)
+    PathElement.add_member_subclass(:value, Types::PathElement::value)
+    PathElement.add_member_subclass(:unknown, Types::PathElement::Unknown)
     PathElement.struct_class = Types::PathElement
 
     PathElementList.member = Shapes::ShapeRef.new(shape: PathElement)
