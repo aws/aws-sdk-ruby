@@ -327,6 +327,259 @@ module Aws::IoTEvents
 
     # @!group API Operations
 
+    # Creates an alarm model to monitor an AWS IoT Events input attribute.
+    # You can use the alarm to get notified when the value is outside a
+    # specified range. For more information, see [Create an alarm model][1]
+    # in the *AWS IoT Events Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html
+    #
+    # @option params [required, String] :alarm_model_name
+    #   A unique name that helps you identify the alarm model. You can't
+    #   change this name after you create the alarm model.
+    #
+    # @option params [String] :alarm_model_description
+    #   A description that tells you what the alarm model detects.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the IAM role that allows the alarm to perform actions and
+    #   access AWS resources. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that contain metadata for the alarm model.
+    #   The tags help you manage the alarm model. For more information, see
+    #   [Tagging your AWS IoT Events resources][1] in the *AWS IoT Events
+    #   Developer Guide*.
+    #
+    #   You can create up to 50 tags for one alarm model.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html
+    #
+    # @option params [String] :key
+    #   An input attribute used as a key to create an alarm. AWS IoT Events
+    #   routes [inputs][1] associated with this key to the alarm.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html
+    #
+    # @option params [Integer] :severity
+    #   A non-negative integer that reflects the severity level of the alarm.
+    #
+    # @option params [required, Types::AlarmRule] :alarm_rule
+    #   Defines when your alarm is invoked.
+    #
+    # @option params [Types::AlarmNotification] :alarm_notification
+    #   Contains information about one or more notification actions.
+    #
+    # @option params [Types::AlarmEventActions] :alarm_event_actions
+    #   Contains information about one or more alarm actions.
+    #
+    # @option params [Types::AlarmCapabilities] :alarm_capabilities
+    #   Contains the configuration information of alarm state changes.
+    #
+    # @return [Types::CreateAlarmModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAlarmModelResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateAlarmModelResponse#alarm_model_arn #alarm_model_arn} => String
+    #   * {Types::CreateAlarmModelResponse#alarm_model_version #alarm_model_version} => String
+    #   * {Types::CreateAlarmModelResponse#last_update_time #last_update_time} => Time
+    #   * {Types::CreateAlarmModelResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_alarm_model({
+    #     alarm_model_name: "AlarmModelName", # required
+    #     alarm_model_description: "AlarmModelDescription",
+    #     role_arn: "AmazonResourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     key: "AttributeJsonPath",
+    #     severity: 1,
+    #     alarm_rule: { # required
+    #       simple_rule: {
+    #         input_property: "InputProperty", # required
+    #         comparison_operator: "GREATER", # required, accepts GREATER, GREATER_OR_EQUAL, LESS, LESS_OR_EQUAL, EQUAL, NOT_EQUAL
+    #         threshold: "Threshold", # required
+    #       },
+    #     },
+    #     alarm_notification: {
+    #       notification_actions: [
+    #         {
+    #           action: { # required
+    #             lambda_action: {
+    #               function_arn: "AmazonResourceName", # required
+    #               payload: {
+    #                 content_expression: "ContentExpression", # required
+    #                 type: "STRING", # required, accepts STRING, JSON
+    #               },
+    #             },
+    #           },
+    #           sms_configurations: [
+    #             {
+    #               sender_id: "SMSSenderId",
+    #               additional_message: "NotificationAdditionalMessage",
+    #               recipients: [ # required
+    #                 {
+    #                   sso_identity: {
+    #                     identity_store_id: "IdentityStoreId", # required
+    #                     user_id: "SSOReferenceId",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           email_configurations: [
+    #             {
+    #               from: "FromEmail", # required
+    #               content: {
+    #                 subject: "EmailSubject",
+    #                 additional_message: "NotificationAdditionalMessage",
+    #               },
+    #               recipients: { # required
+    #                 to: [
+    #                   {
+    #                     sso_identity: {
+    #                       identity_store_id: "IdentityStoreId", # required
+    #                       user_id: "SSOReferenceId",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     alarm_event_actions: {
+    #       alarm_actions: [
+    #         {
+    #           sns: {
+    #             target_arn: "AmazonResourceName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           iot_topic_publish: {
+    #             mqtt_topic: "MQTTTopic", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           lambda: {
+    #             function_arn: "AmazonResourceName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           iot_events: {
+    #             input_name: "InputName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           sqs: {
+    #             queue_url: "QueueUrl", # required
+    #             use_base_64: false,
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           firehose: {
+    #             delivery_stream_name: "DeliveryStreamName", # required
+    #             separator: "FirehoseSeparator",
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           dynamo_db: {
+    #             hash_key_type: "DynamoKeyType",
+    #             hash_key_field: "DynamoKeyField", # required
+    #             hash_key_value: "DynamoKeyValue", # required
+    #             range_key_type: "DynamoKeyType",
+    #             range_key_field: "DynamoKeyField",
+    #             range_key_value: "DynamoKeyValue",
+    #             operation: "DynamoOperation",
+    #             payload_field: "DynamoKeyField",
+    #             table_name: "DynamoTableName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           dynamo_d_bv_2: {
+    #             table_name: "DynamoTableName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           iot_site_wise: {
+    #             entry_id: "AssetPropertyEntryId",
+    #             asset_id: "AssetId",
+    #             property_id: "AssetPropertyId",
+    #             property_alias: "AssetPropertyAlias",
+    #             property_value: {
+    #               value: {
+    #                 string_value: "AssetPropertyStringValue",
+    #                 integer_value: "AssetPropertyIntegerValue",
+    #                 double_value: "AssetPropertyDoubleValue",
+    #                 boolean_value: "AssetPropertyBooleanValue",
+    #               },
+    #               timestamp: {
+    #                 time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                 offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #               },
+    #               quality: "AssetPropertyQuality",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     alarm_capabilities: {
+    #       initialization_configuration: {
+    #         disabled_on_initialization: false, # required
+    #       },
+    #       acknowledge_flow: {
+    #         enabled: false, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.alarm_model_arn #=> String
+    #   resp.alarm_model_version #=> String
+    #   resp.last_update_time #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "FAILED"
+    #
+    # @overload create_alarm_model(params = {})
+    # @param [Hash] params ({})
+    def create_alarm_model(params = {}, options = {})
+      req = build_request(:create_alarm_model, params)
+      req.send_request(options)
+    end
+
     # Creates a detector model.
     #
     # @option params [required, String] :detector_model_name
@@ -462,8 +715,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -572,8 +825,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -685,8 +938,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -797,8 +1050,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -906,6 +1159,27 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
+    # Deletes an alarm model. Any alarm instances that were created based on
+    # this alarm model are also deleted. This action can't be undone.
+    #
+    # @option params [required, String] :alarm_model_name
+    #   The name of the alarm model.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_alarm_model({
+    #     alarm_model_name: "AlarmModelName", # required
+    #   })
+    #
+    # @overload delete_alarm_model(params = {})
+    # @param [Hash] params ({})
+    def delete_alarm_model(params = {}, options = {})
+      req = build_request(:delete_alarm_model, params)
+      req.send_request(options)
+    end
+
     # Deletes a detector model. Any active instances of the detector model
     # are also deleted.
     #
@@ -944,6 +1218,130 @@ module Aws::IoTEvents
     # @param [Hash] params ({})
     def delete_input(params = {}, options = {})
       req = build_request(:delete_input, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an alarm model. If you don't specify a
+    # value for the `alarmModelVersion` parameter, the latest version is
+    # returned.
+    #
+    # @option params [required, String] :alarm_model_name
+    #   The name of the alarm model.
+    #
+    # @option params [String] :alarm_model_version
+    #   The version of the alarm model.
+    #
+    # @return [Types::DescribeAlarmModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAlarmModelResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeAlarmModelResponse#alarm_model_arn #alarm_model_arn} => String
+    #   * {Types::DescribeAlarmModelResponse#alarm_model_version #alarm_model_version} => String
+    #   * {Types::DescribeAlarmModelResponse#last_update_time #last_update_time} => Time
+    #   * {Types::DescribeAlarmModelResponse#status #status} => String
+    #   * {Types::DescribeAlarmModelResponse#status_message #status_message} => String
+    #   * {Types::DescribeAlarmModelResponse#alarm_model_name #alarm_model_name} => String
+    #   * {Types::DescribeAlarmModelResponse#alarm_model_description #alarm_model_description} => String
+    #   * {Types::DescribeAlarmModelResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeAlarmModelResponse#key #key} => String
+    #   * {Types::DescribeAlarmModelResponse#severity #severity} => Integer
+    #   * {Types::DescribeAlarmModelResponse#alarm_rule #alarm_rule} => Types::AlarmRule
+    #   * {Types::DescribeAlarmModelResponse#alarm_notification #alarm_notification} => Types::AlarmNotification
+    #   * {Types::DescribeAlarmModelResponse#alarm_event_actions #alarm_event_actions} => Types::AlarmEventActions
+    #   * {Types::DescribeAlarmModelResponse#alarm_capabilities #alarm_capabilities} => Types::AlarmCapabilities
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_alarm_model({
+    #     alarm_model_name: "AlarmModelName", # required
+    #     alarm_model_version: "AlarmModelVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.alarm_model_arn #=> String
+    #   resp.alarm_model_version #=> String
+    #   resp.last_update_time #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.alarm_model_name #=> String
+    #   resp.alarm_model_description #=> String
+    #   resp.role_arn #=> String
+    #   resp.key #=> String
+    #   resp.severity #=> Integer
+    #   resp.alarm_rule.simple_rule.input_property #=> String
+    #   resp.alarm_rule.simple_rule.comparison_operator #=> String, one of "GREATER", "GREATER_OR_EQUAL", "LESS", "LESS_OR_EQUAL", "EQUAL", "NOT_EQUAL"
+    #   resp.alarm_rule.simple_rule.threshold #=> String
+    #   resp.alarm_notification.notification_actions #=> Array
+    #   resp.alarm_notification.notification_actions[0].action.lambda_action.function_arn #=> String
+    #   resp.alarm_notification.notification_actions[0].action.lambda_action.payload.content_expression #=> String
+    #   resp.alarm_notification.notification_actions[0].action.lambda_action.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_notification.notification_actions[0].sms_configurations #=> Array
+    #   resp.alarm_notification.notification_actions[0].sms_configurations[0].sender_id #=> String
+    #   resp.alarm_notification.notification_actions[0].sms_configurations[0].additional_message #=> String
+    #   resp.alarm_notification.notification_actions[0].sms_configurations[0].recipients #=> Array
+    #   resp.alarm_notification.notification_actions[0].sms_configurations[0].recipients[0].sso_identity.identity_store_id #=> String
+    #   resp.alarm_notification.notification_actions[0].sms_configurations[0].recipients[0].sso_identity.user_id #=> String
+    #   resp.alarm_notification.notification_actions[0].email_configurations #=> Array
+    #   resp.alarm_notification.notification_actions[0].email_configurations[0].from #=> String
+    #   resp.alarm_notification.notification_actions[0].email_configurations[0].content.subject #=> String
+    #   resp.alarm_notification.notification_actions[0].email_configurations[0].content.additional_message #=> String
+    #   resp.alarm_notification.notification_actions[0].email_configurations[0].recipients.to #=> Array
+    #   resp.alarm_notification.notification_actions[0].email_configurations[0].recipients.to[0].sso_identity.identity_store_id #=> String
+    #   resp.alarm_notification.notification_actions[0].email_configurations[0].recipients.to[0].sso_identity.user_id #=> String
+    #   resp.alarm_event_actions.alarm_actions #=> Array
+    #   resp.alarm_event_actions.alarm_actions[0].sns.target_arn #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].sns.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].sns.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].iot_topic_publish.mqtt_topic #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_topic_publish.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_topic_publish.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].lambda.function_arn #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].lambda.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].lambda.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].iot_events.input_name #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_events.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_events.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].sqs.queue_url #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.alarm_event_actions.alarm_actions[0].sqs.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].sqs.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].firehose.delivery_stream_name #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].firehose.separator #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].firehose.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].firehose.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.hash_key_type #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.hash_key_field #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.hash_key_value #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.range_key_type #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.range_key_field #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.range_key_value #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.operation #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.payload_field #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.table_name #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_db.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_d_bv_2.table_name #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_d_bv_2.payload.content_expression #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.entry_id #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.asset_id #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_id #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_alias #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_value.value.string_value #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_value.value.integer_value #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_value.value.double_value #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_value.value.boolean_value #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_value.timestamp.time_in_seconds #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_value.timestamp.offset_in_nanos #=> String
+    #   resp.alarm_event_actions.alarm_actions[0].iot_site_wise.property_value.quality #=> String
+    #   resp.alarm_capabilities.initialization_configuration.disabled_on_initialization #=> Boolean
+    #   resp.alarm_capabilities.acknowledge_flow.enabled #=> Boolean
+    #
+    # @overload describe_alarm_model(params = {})
+    # @param [Hash] params ({})
+    def describe_alarm_model(params = {}, options = {})
+      req = build_request(:describe_alarm_model, params)
       req.send_request(options)
     end
 
@@ -1215,7 +1613,12 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
-    # Retrieves execution information about a detector model analysis
+    # Retrieves runtime information about a detector model analysis.
+    #
+    # <note markdown="1"> After AWS IoT Events starts analyzing your detector model, you have up
+    # to 24 hours to retrieve the analysis results.
+    #
+    #  </note>
     #
     # @option params [required, String] :analysis_id
     #   The ID of the analysis result that you want to retrieve.
@@ -1298,6 +1701,11 @@ module Aws::IoTEvents
 
     # Retrieves one or more analysis results of the detector model.
     #
+    # <note markdown="1"> After AWS IoT Events starts analyzing your detector model, you have up
+    # to 24 hours to retrieve the analysis results.
+    #
+    #  </note>
+    #
     # @option params [required, String] :analysis_id
     #   The ID of the analysis result that you want to retrieve.
     #
@@ -1334,6 +1742,87 @@ module Aws::IoTEvents
     # @param [Hash] params ({})
     def get_detector_model_analysis_results(params = {}, options = {})
       req = build_request(:get_detector_model_analysis_results, params)
+      req.send_request(options)
+    end
+
+    # Lists all the versions of an alarm model. The operation returns only
+    # the metadata associated with each alarm model version.
+    #
+    # @option params [required, String] :alarm_model_name
+    #   The name of the alarm model.
+    #
+    # @option params [String] :next_token
+    #   The token that you can use to return the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListAlarmModelVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAlarmModelVersionsResponse#alarm_model_version_summaries #alarm_model_version_summaries} => Array&lt;Types::AlarmModelVersionSummary&gt;
+    #   * {Types::ListAlarmModelVersionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_alarm_model_versions({
+    #     alarm_model_name: "AlarmModelName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alarm_model_version_summaries #=> Array
+    #   resp.alarm_model_version_summaries[0].alarm_model_name #=> String
+    #   resp.alarm_model_version_summaries[0].alarm_model_arn #=> String
+    #   resp.alarm_model_version_summaries[0].alarm_model_version #=> String
+    #   resp.alarm_model_version_summaries[0].role_arn #=> String
+    #   resp.alarm_model_version_summaries[0].creation_time #=> Time
+    #   resp.alarm_model_version_summaries[0].last_update_time #=> Time
+    #   resp.alarm_model_version_summaries[0].status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "FAILED"
+    #   resp.alarm_model_version_summaries[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_alarm_model_versions(params = {})
+    # @param [Hash] params ({})
+    def list_alarm_model_versions(params = {}, options = {})
+      req = build_request(:list_alarm_model_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the alarm models that you created. The operation returns only
+    # the metadata associated with each alarm model.
+    #
+    # @option params [String] :next_token
+    #   The token that you can use to return the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListAlarmModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAlarmModelsResponse#alarm_model_summaries #alarm_model_summaries} => Array&lt;Types::AlarmModelSummary&gt;
+    #   * {Types::ListAlarmModelsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_alarm_models({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alarm_model_summaries #=> Array
+    #   resp.alarm_model_summaries[0].creation_time #=> Time
+    #   resp.alarm_model_summaries[0].alarm_model_description #=> String
+    #   resp.alarm_model_summaries[0].alarm_model_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_alarm_models(params = {})
+    # @param [Hash] params ({})
+    def list_alarm_models(params = {}, options = {})
+      req = build_request(:list_alarm_models, params)
       req.send_request(options)
     end
 
@@ -1415,6 +1904,54 @@ module Aws::IoTEvents
     # @param [Hash] params ({})
     def list_detector_models(params = {}, options = {})
       req = build_request(:list_detector_models, params)
+      req.send_request(options)
+    end
+
+    # Lists one or more input routings.
+    #
+    # @option params [required, Types::InputIdentifier] :input_identifier
+    #   The identifer of the routed input.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :next_token
+    #   The token that you can use to return the next set of results.
+    #
+    # @return [Types::ListInputRoutingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInputRoutingsResponse#routed_resources #routed_resources} => Array&lt;Types::RoutedResource&gt;
+    #   * {Types::ListInputRoutingsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_input_routings({
+    #     input_identifier: { # required
+    #       iot_events_input_identifier: {
+    #         input_name: "InputName", # required
+    #       },
+    #       iot_site_wise_input_identifier: {
+    #         iot_site_wise_asset_model_property_identifier: {
+    #           asset_model_id: "AssetModelId", # required
+    #           property_id: "AssetPropertyId", # required
+    #         },
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routed_resources #=> Array
+    #   resp.routed_resources[0].name #=> String
+    #   resp.routed_resources[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_input_routings(params = {})
+    # @param [Hash] params ({})
+    def list_input_routings(params = {}, options = {})
+      req = build_request(:list_input_routings, params)
       req.send_request(options)
     end
 
@@ -1521,7 +2058,7 @@ module Aws::IoTEvents
     end
 
     # Performs an analysis of your detector model. For more information, see
-    # [Running detector model analyses][1] in the *AWS IoT Events Developer
+    # [Troubleshooting a detector model][1] in the *AWS IoT Events Developer
     # Guide*.
     #
     #
@@ -1635,8 +2172,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -1745,8 +2282,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -1858,8 +2395,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -1970,8 +2507,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -2057,6 +2594,226 @@ module Aws::IoTEvents
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an alarm model. Any alarms that were created based on the
+    # previous version are deleted and then created again as new data
+    # arrives.
+    #
+    # @option params [required, String] :alarm_model_name
+    #   The name of the alarm model.
+    #
+    # @option params [String] :alarm_model_description
+    #   The description of the alarm model.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the IAM role that allows the alarm to perform actions and
+    #   access AWS resources. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Integer] :severity
+    #   A non-negative integer that reflects the severity level of the alarm.
+    #
+    # @option params [required, Types::AlarmRule] :alarm_rule
+    #   Defines when your alarm is invoked.
+    #
+    # @option params [Types::AlarmNotification] :alarm_notification
+    #   Contains information about one or more notification actions.
+    #
+    # @option params [Types::AlarmEventActions] :alarm_event_actions
+    #   Contains information about one or more alarm actions.
+    #
+    # @option params [Types::AlarmCapabilities] :alarm_capabilities
+    #   Contains the configuration information of alarm state changes.
+    #
+    # @return [Types::UpdateAlarmModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAlarmModelResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateAlarmModelResponse#alarm_model_arn #alarm_model_arn} => String
+    #   * {Types::UpdateAlarmModelResponse#alarm_model_version #alarm_model_version} => String
+    #   * {Types::UpdateAlarmModelResponse#last_update_time #last_update_time} => Time
+    #   * {Types::UpdateAlarmModelResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_alarm_model({
+    #     alarm_model_name: "AlarmModelName", # required
+    #     alarm_model_description: "AlarmModelDescription",
+    #     role_arn: "AmazonResourceName", # required
+    #     severity: 1,
+    #     alarm_rule: { # required
+    #       simple_rule: {
+    #         input_property: "InputProperty", # required
+    #         comparison_operator: "GREATER", # required, accepts GREATER, GREATER_OR_EQUAL, LESS, LESS_OR_EQUAL, EQUAL, NOT_EQUAL
+    #         threshold: "Threshold", # required
+    #       },
+    #     },
+    #     alarm_notification: {
+    #       notification_actions: [
+    #         {
+    #           action: { # required
+    #             lambda_action: {
+    #               function_arn: "AmazonResourceName", # required
+    #               payload: {
+    #                 content_expression: "ContentExpression", # required
+    #                 type: "STRING", # required, accepts STRING, JSON
+    #               },
+    #             },
+    #           },
+    #           sms_configurations: [
+    #             {
+    #               sender_id: "SMSSenderId",
+    #               additional_message: "NotificationAdditionalMessage",
+    #               recipients: [ # required
+    #                 {
+    #                   sso_identity: {
+    #                     identity_store_id: "IdentityStoreId", # required
+    #                     user_id: "SSOReferenceId",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           email_configurations: [
+    #             {
+    #               from: "FromEmail", # required
+    #               content: {
+    #                 subject: "EmailSubject",
+    #                 additional_message: "NotificationAdditionalMessage",
+    #               },
+    #               recipients: { # required
+    #                 to: [
+    #                   {
+    #                     sso_identity: {
+    #                       identity_store_id: "IdentityStoreId", # required
+    #                       user_id: "SSOReferenceId",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     alarm_event_actions: {
+    #       alarm_actions: [
+    #         {
+    #           sns: {
+    #             target_arn: "AmazonResourceName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           iot_topic_publish: {
+    #             mqtt_topic: "MQTTTopic", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           lambda: {
+    #             function_arn: "AmazonResourceName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           iot_events: {
+    #             input_name: "InputName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           sqs: {
+    #             queue_url: "QueueUrl", # required
+    #             use_base_64: false,
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           firehose: {
+    #             delivery_stream_name: "DeliveryStreamName", # required
+    #             separator: "FirehoseSeparator",
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           dynamo_db: {
+    #             hash_key_type: "DynamoKeyType",
+    #             hash_key_field: "DynamoKeyField", # required
+    #             hash_key_value: "DynamoKeyValue", # required
+    #             range_key_type: "DynamoKeyType",
+    #             range_key_field: "DynamoKeyField",
+    #             range_key_value: "DynamoKeyValue",
+    #             operation: "DynamoOperation",
+    #             payload_field: "DynamoKeyField",
+    #             table_name: "DynamoTableName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           dynamo_d_bv_2: {
+    #             table_name: "DynamoTableName", # required
+    #             payload: {
+    #               content_expression: "ContentExpression", # required
+    #               type: "STRING", # required, accepts STRING, JSON
+    #             },
+    #           },
+    #           iot_site_wise: {
+    #             entry_id: "AssetPropertyEntryId",
+    #             asset_id: "AssetId",
+    #             property_id: "AssetPropertyId",
+    #             property_alias: "AssetPropertyAlias",
+    #             property_value: {
+    #               value: {
+    #                 string_value: "AssetPropertyStringValue",
+    #                 integer_value: "AssetPropertyIntegerValue",
+    #                 double_value: "AssetPropertyDoubleValue",
+    #                 boolean_value: "AssetPropertyBooleanValue",
+    #               },
+    #               timestamp: {
+    #                 time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                 offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #               },
+    #               quality: "AssetPropertyQuality",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     alarm_capabilities: {
+    #       initialization_configuration: {
+    #         disabled_on_initialization: false, # required
+    #       },
+    #       acknowledge_flow: {
+    #         enabled: false, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.alarm_model_arn #=> String
+    #   resp.alarm_model_version #=> String
+    #   resp.last_update_time #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "INACTIVE", "FAILED"
+    #
+    # @overload update_alarm_model(params = {})
+    # @param [Hash] params ({})
+    def update_alarm_model(params = {}, options = {})
+      req = build_request(:update_alarm_model, params)
       req.send_request(options)
     end
 
@@ -2185,8 +2942,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -2295,8 +3052,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -2408,8 +3165,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -2520,8 +3277,8 @@ module Aws::IoTEvents
     #                       asset_id: "AssetId",
     #                       property_id: "AssetPropertyId",
     #                       property_alias: "AssetPropertyAlias",
-    #                       property_value: { # required
-    #                         value: { # required
+    #                       property_value: {
+    #                         value: {
     #                           string_value: "AssetPropertyStringValue",
     #                           integer_value: "AssetPropertyIntegerValue",
     #                           double_value: "AssetPropertyDoubleValue",
@@ -2626,7 +3383,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

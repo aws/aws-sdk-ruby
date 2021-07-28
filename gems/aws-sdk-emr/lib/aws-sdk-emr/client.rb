@@ -663,7 +663,10 @@ module Aws::EMR
     # maximum of 256 steps are allowed in each CancelSteps request.
     # CancelSteps is idempotent but asynchronous; it does not guarantee that
     # a step will be canceled, even if the request is successfully
-    # submitted. You can only cancel steps that are in a `PENDING` state.
+    # submitted. When you use Amazon EMR versions 5.28.0 and later, you can
+    # cancel steps that are in a `PENDING` or `RUNNING` state. In earlier
+    # versions of Amazon EMR, you can only cancel steps that are in a
+    # `PENDING` state.
     #
     # @option params [required, String] :cluster_id
     #   The `ClusterID` for the specified steps that will be canceled. Use
@@ -772,7 +775,7 @@ module Aws::EMR
     # @option params [required, String] :service_role
     #   The IAM role that will be assumed by the Amazon EMR Studio. The
     #   service role provides a way for Amazon EMR Studio to interoperate with
-    #   other AWS services.
+    #   other Amazon Web Services services.
     #
     # @option params [required, String] :user_role
     #   The IAM user role that will be assumed by users and groups logged in
@@ -850,9 +853,10 @@ module Aws::EMR
     #
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group from the
-    #   AWS SSO Identity Store. For more information, see [UserId][1] and
-    #   [GroupId][2] in the *AWS SSO Identity Store API Reference*. Either
-    #   `IdentityName` or `IdentityId` must be specified.
+    #   Amazon Web Services SSO Identity Store. For more information, see
+    #   [UserId][1] and [GroupId][2] in the *Amazon Web Services SSO Identity
+    #   Store API Reference*. Either `IdentityName` or `IdentityId` must be
+    #   specified.
     #
     #
     #
@@ -861,8 +865,9 @@ module Aws::EMR
     #
     # @option params [String] :identity_name
     #   The name of the user or group. For more information, see [UserName][1]
-    #   and [DisplayName][2] in the *AWS SSO Identity Store API Reference*.
-    #   Either `IdentityName` or `IdentityId` must be specified.
+    #   and [DisplayName][2] in the *Amazon Web Services SSO Identity Store
+    #   API Reference*. Either `IdentityName` or `IdentityId` must be
+    #   specified.
     #
     #
     #
@@ -875,8 +880,14 @@ module Aws::EMR
     #
     # @option params [required, String] :session_policy_arn
     #   The Amazon Resource Name (ARN) for the session policy that will be
-    #   applied to the user or group. Session policies refine Studio user
-    #   permissions without the need to use multiple IAM user roles.
+    #   applied to the user or group. You should specify the ARN for the
+    #   session policy that you want to apply, not the ARN of your user role.
+    #   For more information, see [Create an EMR Studio User Role with Session
+    #   Policies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -951,8 +962,8 @@ module Aws::EMR
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group to remove
     #   from the Amazon EMR Studio. For more information, see [UserId][1] and
-    #   [GroupId][2] in the *AWS SSO Identity Store API Reference*. Either
-    #   `IdentityName` or `IdentityId` must be specified.
+    #   [GroupId][2] in the *Amazon Web Services SSO Identity Store API
+    #   Reference*. Either `IdentityName` or `IdentityId` must be specified.
     #
     #
     #
@@ -962,8 +973,8 @@ module Aws::EMR
     # @option params [String] :identity_name
     #   The name of the user name or group to remove from the Amazon EMR
     #   Studio. For more information, see [UserName][1] and [DisplayName][2]
-    #   in the *AWS SSO Identity Store API Reference*. Either `IdentityName`
-    #   or `IdentityId` must be specified.
+    #   in the *Amazon Web Services SSO Store API Reference*. Either
+    #   `IdentityName` or `IdentityId` must be specified.
     #
     #
     #
@@ -1266,6 +1277,51 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Provides EMR release label details, such as releases available the
+    # region where the API request is run, and the available applications
+    # for a specific EMR release label. Can also list EMR release versions
+    # that support a specified version of Spark.
+    #
+    # @option params [String] :release_label
+    #   The target release label to be described.
+    #
+    # @option params [String] :next_token
+    #   The pagination token. Reserved for future use. Currently set to null.
+    #
+    # @option params [Integer] :max_results
+    #   Reserved for future use. Currently set to null.
+    #
+    # @return [Types::DescribeReleaseLabelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReleaseLabelOutput#release_label #release_label} => String
+    #   * {Types::DescribeReleaseLabelOutput#applications #applications} => Array&lt;Types::SimplifiedApplication&gt;
+    #   * {Types::DescribeReleaseLabelOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_release_label({
+    #     release_label: "String",
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.release_label #=> String
+    #   resp.applications #=> Array
+    #   resp.applications[0].name #=> String
+    #   resp.applications[0].version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeReleaseLabel AWS API Documentation
+    #
+    # @overload describe_release_label(params = {})
+    # @param [Hash] params ({})
+    def describe_release_label(params = {}, options = {})
+      req = build_request(:describe_release_label, params)
+      req.send_request(options)
+    end
+
     # Provides the details of a security configuration by returning the
     # configuration JSON.
     #
@@ -1399,7 +1455,7 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Returns the Amazon EMR block public access configuration for your AWS
+    # Returns the Amazon EMR block public access configuration for your
     # account in the current Region. For more information see [Configure
     # Block Public Access for Amazon EMR][1] in the *Amazon EMR Management
     # Guide*.
@@ -1472,9 +1528,9 @@ module Aws::EMR
     #
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *AWS SSO Identity
-    #   Store API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
+    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   `IdentityId` must be specified.
     #
     #
     #
@@ -1483,8 +1539,9 @@ module Aws::EMR
     #
     # @option params [String] :identity_name
     #   The name of the user or group to fetch. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store API
-    #   Reference*. Either `IdentityName` or `IdentityId` must be specified.
+    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified.
     #
     #
     #
@@ -1568,12 +1625,12 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Provides the status of all clusters visible to this AWS account.
-    # Allows you to filter the list of clusters based on certain criteria;
-    # for example, filtering by cluster creation date and time or by status.
-    # This call returns a maximum of 50 clusters per call, but returns a
-    # marker to track the paging of the cluster list across multiple
-    # ListClusters calls.
+    # Provides the status of all clusters visible to this account. Allows
+    # you to filter the list of clusters based on certain criteria; for
+    # example, filtering by cluster creation date and time or by status.
+    # This call returns a maximum of 50 clusters in unsorted order per call,
+    # but returns a marker to track the paging of the cluster list across
+    # multiple ListClusters calls.
     #
     # @option params [Time,DateTime,Date,Integer,String] :created_after
     #   The creation date and time beginning value filter for listing
@@ -1583,7 +1640,9 @@ module Aws::EMR
     #   The creation date and time end value filter for listing clusters.
     #
     # @option params [Array<String>] :cluster_states
-    #   The cluster state filters to apply when listing clusters.
+    #   The cluster state filters to apply when listing clusters. Clusters
+    #   that change state while this action runs may be not be returned as
+    #   expected in the list of clusters.
     #
     # @option params [String] :marker
     #   The pagination token that indicates the next set of results to
@@ -1977,6 +2036,60 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Retrieves release labels of EMR services in the region where the API
+    # is called.
+    #
+    # @option params [Types::ReleaseLabelFilter] :filters
+    #   Filters the results of the request. `Prefix` specifies the prefix of
+    #   release labels to return. `Application` specifies the application
+    #   (with/without version) of release labels to return.
+    #
+    # @option params [String] :next_token
+    #   Specifies the next page of results. If `NextToken` is not specified,
+    #   which is usually the case for the first request of ListReleaseLabels,
+    #   the first page of results are determined by other filtering parameters
+    #   or by the latest version. The `ListReleaseLabels` request fails if the
+    #   identity (AWS AccountID) and all filtering parameters are different
+    #   from the original request, or if the `NextToken` is expired or
+    #   tampered with.
+    #
+    # @option params [Integer] :max_results
+    #   Defines the maximum number of release labels to return in a single
+    #   response. The default is `100`.
+    #
+    # @return [Types::ListReleaseLabelsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReleaseLabelsOutput#release_labels #release_labels} => Array&lt;String&gt;
+    #   * {Types::ListReleaseLabelsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_release_labels({
+    #     filters: {
+    #       prefix: "String",
+    #       application: "String",
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.release_labels #=> Array
+    #   resp.release_labels[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListReleaseLabels AWS API Documentation
+    #
+    # @overload list_release_labels(params = {})
+    # @param [Hash] params ({})
+    def list_release_labels(params = {}, options = {})
+      req = build_request(:list_release_labels, params)
+      req.send_request(options)
+    end
+
     # Lists all the security configurations visible to this account,
     # providing their creation dates and times, and their names. This call
     # returns a maximum of 50 clusters per call, but returns a marker to
@@ -2016,8 +2129,11 @@ module Aws::EMR
     end
 
     # Provides a list of steps for the cluster in reverse order unless you
-    # specify `stepIds` with the request of filter by `StepStates`. You can
-    # specify a maximum of 10 `stepIDs`.
+    # specify `stepIds` with the request or filter by `StepStates`. You can
+    # specify a maximum of 10 `stepIDs`. The CLI automatically paginates
+    # results to return a list greater than 50 steps. To return more than 50
+    # steps using the CLI, specify a `Marker`, which is a pagination token
+    # that indicates the next set of steps to retrieve.
     #
     # @option params [required, String] :cluster_id
     #   The identifier of the cluster for which to list the steps.
@@ -2031,8 +2147,10 @@ module Aws::EMR
     #   constraint applies to the overall length of the array.
     #
     # @option params [String] :marker
-    #   The pagination token that indicates the next set of results to
-    #   retrieve.
+    #   The maximum number of steps that a single `ListSteps` action returns
+    #   is 50. To return a longer list of steps, use multiple `ListSteps`
+    #   actions along with the `Marker` parameter, which is a pagination token
+    #   that indicates the next set of results to retrieve.
     #
     # @return [Types::ListStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2131,9 +2249,9 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Returns a list of all Amazon EMR Studios associated with the AWS
-    # account. The list includes details such as ID, Studio Access URL, and
-    # creation time for each Studio.
+    # Returns a list of all Amazon EMR Studios associated with the account.
+    # The list includes details such as ID, Studio Access URL, and creation
+    # time for each Studio.
     #
     # @option params [String] :marker
     #   The pagination token that indicates the set of results to retrieve.
@@ -2179,7 +2297,10 @@ module Aws::EMR
     #
     # @option params [Integer] :step_concurrency_level
     #   The number of steps that can be executed concurrently. You can specify
-    #   a minimum of 1 step and a maximum of 256 steps.
+    #   a minimum of 1 step and a maximum of 256 steps. We recommend that you
+    #   do not change this parameter while steps are running or the
+    #   `ActionOnFailure` setting may not behave as expected. For more
+    #   information see Step$ActionOnFailure.
     #
     # @return [Types::ModifyClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2219,7 +2340,7 @@ module Aws::EMR
     #   The unique identifier of the cluster.
     #
     # @option params [required, Types::InstanceFleetModifyConfig] :instance_fleet
-    #   The unique identifier of the instance fleet.
+    #   The configuration parameters of the instance fleet.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2405,7 +2526,7 @@ module Aws::EMR
     end
 
     # Creates or updates an Amazon EMR block public access configuration for
-    # your AWS account in the current Region. For more information see
+    # your account in the current Region. For more information see
     # [Configure Block Public Access for Amazon EMR][1] in the *Amazon EMR
     # Management Guide*.
     #
@@ -2632,10 +2753,9 @@ module Aws::EMR
     #   value is not provided, logs are not created.
     #
     # @option params [String] :log_encryption_kms_key_id
-    #   The AWS KMS customer master key (CMK) used for encrypting log files.
-    #   If a value is not provided, the logs remain encrypted by AES-256. This
-    #   attribute is only available with Amazon EMR version 5.30.0 and later,
-    #   excluding Amazon EMR 6.0.0.
+    #   The KMS key used for encrypting log files. If a value is not provided,
+    #   the logs remain encrypted by AES-256. This attribute is only available
+    #   with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.
     #
     # @option params [String] :additional_info
     #   A JSON string for selecting additional features.
@@ -2740,10 +2860,22 @@ module Aws::EMR
     #   supplied for the EMR cluster you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
-    #   A value of `true` indicates that all IAM users in the AWS account can
-    #   perform cluster actions if they have the proper IAM policy
-    #   permissions. This is the default. A value of `false` indicates that
-    #   only the IAM user who created the cluster can perform actions.
+    #   Set this value to `true` so that IAM principals in the account
+    #   associated with the cluster can perform EMR actions on the cluster
+    #   that their IAM policies allow. This value defaults to `false` for
+    #   clusters created using the EMR API or the CLI [create-cluster][1]
+    #   command.
+    #
+    #   When set to `false`, only the IAM principal that created the cluster
+    #   and the account root user can perform EMR actions for the cluster,
+    #   regardless of the IAM permissions policies attached to other IAM
+    #   principals. For more information, see [Understanding the EMR Cluster
+    #   VisibleToAllUsers Setting][2] in the *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html
+    #   [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #
     # @option params [String] :job_flow_role
     #   Also called instance profile and EC2 role. An IAM role for an EMR
@@ -2753,7 +2885,7 @@ module Aws::EMR
     #
     # @option params [String] :service_role
     #   The IAM role that will be assumed by the Amazon EMR service to access
-    #   AWS resources on your behalf.
+    #   Amazon Web Services resources on your behalf.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with a cluster and propagate to Amazon EC2
@@ -3159,25 +3291,32 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Sets the Cluster$VisibleToAllUsers value, which determines whether the
-    # cluster is visible to all IAM users of the AWS account associated with
-    # the cluster. Only the IAM user who created the cluster or the AWS
-    # account root user can call this action. The default value, `true`,
-    # indicates that all IAM users in the AWS account can perform cluster
-    # actions if they have the proper IAM policy permissions. If set to
-    # `false`, only the IAM user that created the cluster can perform
-    # actions. This action works on running clusters. You can override the
-    # default `true` setting when you create a cluster by using the
-    # `VisibleToAllUsers` parameter with `RunJobFlow`.
+    # Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When
+    # `true`, IAM principals in the account can perform EMR cluster actions
+    # that their IAM policies allow. When `false`, only the IAM principal
+    # that created the cluster and the account root user can perform EMR
+    # actions on the cluster, regardless of IAM permissions policies
+    # attached to other IAM principals.
+    #
+    # This action works on running clusters. When you create a cluster, use
+    # the RunJobFlowInput$VisibleToAllUsers parameter.
+    #
+    # For more information, see [Understanding the EMR Cluster
+    # VisibleToAllUsers Setting][1] in the *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #
     # @option params [required, Array<String>] :job_flow_ids
     #   The unique identifier of the job flow (cluster).
     #
     # @option params [required, Boolean] :visible_to_all_users
-    #   A value of `true` indicates that all IAM users in the AWS account can
-    #   perform cluster actions if they have the proper IAM policy
-    #   permissions. This is the default. A value of `false` indicates that
-    #   only the IAM user who created the cluster can perform actions.
+    #   A value of `true` indicates that an IAM principal in the account can
+    #   perform EMR actions on the cluster that the IAM policies attached to
+    #   the principal allow. A value of `false` indicates that only the IAM
+    #   principal that created the cluster and the Amazon Web Services root
+    #   user can perform EMR actions on the cluster.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3384,9 +3523,9 @@ module Aws::EMR
     #
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *AWS SSO Identity
-    #   Store API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
+    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   `IdentityId` must be specified.
     #
     #
     #
@@ -3395,8 +3534,9 @@ module Aws::EMR
     #
     # @option params [String] :identity_name
     #   The name of the user or group to update. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store API
-    #   Reference*. Either `IdentityName` or `IdentityId` must be specified.
+    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified.
     #
     #
     #
@@ -3444,7 +3584,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

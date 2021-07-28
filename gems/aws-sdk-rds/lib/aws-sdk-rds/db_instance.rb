@@ -50,12 +50,12 @@ module Aws::RDS
 
     # Specifies the current state of this database.
     #
-    # For information about DB instance statuses, see [DB Instance
-    # Status][1] in the *Amazon RDS User Guide.*
+    # For information about DB instance statuses, see [Viewing DB instance
+    # status][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Status.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/accessing-monitoring.html#Overview.DBInstance.Status
     # @return [String]
     def db_instance_status
       data[:db_instance_status]
@@ -340,19 +340,21 @@ module Aws::RDS
       data[:storage_encrypted]
     end
 
-    # If `StorageEncrypted` is true, the AWS KMS key identifier for the
-    # encrypted DB instance.
+    # If `StorageEncrypted` is true, the Amazon Web Services KMS key
+    # identifier for the encrypted DB instance.
     #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
+    # The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    # alias ARN, or alias name for the Amazon Web Services KMS customer
+    # master key (CMK).
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
     end
 
-    # The AWS Region-unique, immutable identifier for the DB instance. This
-    # identifier is found in AWS CloudTrail log entries whenever the AWS KMS
-    # customer master key (CMK) for the DB instance is accessed.
+    # The Amazon Web Services Region-unique, immutable identifier for the DB
+    # instance. This identifier is found in Amazon Web Services CloudTrail
+    # log entries whenever the Amazon Web Services KMS customer master key
+    # (CMK) for the DB instance is accessed.
     # @return [String]
     def dbi_resource_id
       data[:dbi_resource_id]
@@ -433,8 +435,8 @@ module Aws::RDS
       data[:timezone]
     end
 
-    # True if mapping of AWS Identity and Access Management (IAM) accounts
-    # to database accounts is enabled, and otherwise false.
+    # True if mapping of Amazon Web Services Identity and Access Management
+    # (IAM) accounts to database accounts is enabled, and otherwise false.
     #
     # IAM database authentication can be enabled for the following database
     # engines
@@ -457,11 +459,12 @@ module Aws::RDS
       data[:performance_insights_enabled]
     end
 
-    # The AWS KMS key identifier for encryption of Performance Insights
-    # data.
+    # The Amazon Web Services KMS key identifier for encryption of
+    # Performance Insights data.
     #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
+    # The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    # alias ARN, or alias name for the Amazon Web Services KMS customer
+    # master key (CMK).
     # @return [String]
     def performance_insights_kms_key_id
       data[:performance_insights_kms_key_id]
@@ -508,8 +511,8 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
-    # The AWS Identity and Access Management (IAM) roles associated with the
-    # DB instance.
+    # The Amazon Web Services Identity and Access Management (IAM) roles
+    # associated with the DB instance.
     # @return [Array<Types::DBInstanceRole>]
     def associated_roles
       data[:associated_roles]
@@ -556,10 +559,11 @@ module Aws::RDS
     # network.
     #
     # For more information about RDS on Outposts, see [Working with Amazon
-    # RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    # RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
+    # Guide*.
     #
     # For more information about CoIPs, see [Customer-owned IP addresses][2]
-    # in the *AWS Outposts User Guide*.
+    # in the *Amazon Web Services Outposts User Guide*.
     #
     #
     #
@@ -570,10 +574,48 @@ module Aws::RDS
       data[:customer_owned_ip_enabled]
     end
 
-    # The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+    # The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    # Services Backup.
     # @return [String]
     def aws_backup_recovery_point_arn
       data[:aws_backup_recovery_point_arn]
+    end
+
+    # The status of the database activity stream.
+    # @return [String]
+    def activity_stream_status
+      data[:activity_stream_status]
+    end
+
+    # The Amazon Web Services KMS key identifier used for encrypting
+    # messages in the database activity stream. The Amazon Web Services KMS
+    # key identifier is the key ARN, key ID, alias ARN, or alias name for
+    # the Amazon Web Services KMS customer master key (CMK).
+    # @return [String]
+    def activity_stream_kms_key_id
+      data[:activity_stream_kms_key_id]
+    end
+
+    # The name of the Amazon Kinesis data stream used for the database
+    # activity stream.
+    # @return [String]
+    def activity_stream_kinesis_stream_name
+      data[:activity_stream_kinesis_stream_name]
+    end
+
+    # The mode of the database activity stream. Database events such as a
+    # change or access generate an activity stream event. RDS for Oracle
+    # always handles these events asynchronously.
+    # @return [String]
+    def activity_stream_mode
+      data[:activity_stream_mode]
+    end
+
+    # Indicates whether engine-native audit fields are included in the
+    # database activity stream.
+    # @return [Boolean]
+    def activity_stream_engine_native_audit_fields_included
+      data[:activity_stream_engine_native_audit_fields_included]
     end
 
     # @!endgroup
@@ -957,10 +999,10 @@ module Aws::RDS
     #     * Web and Express editions: Must be an integer from 20 to 1024.
     # @option options [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
-    #   Regions, or for all database engines. For the full list of DB instance
-    #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the *Amazon RDS User Guide.*
+    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
+    #   Web Services Regions, or for all database engines. For the full list
+    #   of DB instance classes, and availability for your engine, see [DB
+    #   Instance Class][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -968,7 +1010,8 @@ module Aws::RDS
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this instance.
     #
-    #   Not every database engine is available for every AWS Region.
+    #   Not every database engine is available for every Amazon Web Services
+    #   Region.
     #
     #   Valid Values:
     #
@@ -984,11 +1027,11 @@ module Aws::RDS
     #
     #   * `oracle-ee`
     #
+    #   * `oracle-ee-cdb`
+    #
     #   * `oracle-se2`
     #
-    #   * `oracle-se1`
-    #
-    #   * `oracle-se`
+    #   * `oracle-se2-cdb`
     #
     #   * `postgres`
     #
@@ -1109,17 +1152,18 @@ module Aws::RDS
     #   VPC.
     # @option options [String] :availability_zone
     #   The Availability Zone (AZ) where the database will be created. For
-    #   information on AWS Regions and Availability Zones, see [Regions and
-    #   Availability Zones][1].
+    #   information on Amazon Web Services Regions and Availability Zones, see
+    #   [Regions and Availability Zones][1].
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
-    #   AWS Region.
+    #   Amazon Web Services Region.
     #
     #   Example: `us-east-1d`
     #
     #   Constraint: The `AvailabilityZone` parameter can't be specified if
     #   the DB instance is a Multi-AZ deployment. The specified Availability
-    #   Zone must be in the same AWS Region as the current endpoint.
+    #   Zone must be in the same Amazon Web Services Region as the current
+    #   endpoint.
     #
     #   <note markdown="1"> If you're creating a DB instance in an RDS on VMware environment,
     #   specify the identifier of the custom Availability Zone to create the
@@ -1146,8 +1190,8 @@ module Aws::RDS
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week.
+    #   block of time for each Amazon Web Services Region, occurring on a
+    #   random day of the week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1189,8 +1233,8 @@ module Aws::RDS
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
     #   parameter. The default is a 30-minute window selected at random from
-    #   an 8-hour block of time for each AWS Region. For more information, see
-    #   [Backup window][1] in the *Amazon RDS User Guide*.
+    #   an 8-hour block of time for each Amazon Web Services Region. For more
+    #   information, see [Backup window][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -1269,7 +1313,8 @@ module Aws::RDS
     #
     #   The following are the database engines and links to information about
     #   the major and minor versions that are available with Amazon RDS. Not
-    #   every database engine is available for every AWS Region.
+    #   every database engine is available for every Amazon Web Services
+    #   Region.
     #
     #   **Amazon Aurora**
     #
@@ -1409,21 +1454,24 @@ module Aws::RDS
     #   Not applicable. The encryption for DB instances is managed by the DB
     #   cluster.
     # @option options [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB instance.
+    #   The Amazon Web Services KMS key identifier for an encrypted DB
+    #   instance.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
-    #   different AWS account, specify the key ARN or alias ARN.
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS customer
+    #   master key (CMK). To use a CMK in a different Amazon Web Services
+    #   account, specify the key ARN or alias ARN.
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. The AWS KMS key identifier is managed by the DB
-    #   cluster. For more information, see `CreateDBCluster`.
+    #   Not applicable. The Amazon Web Services KMS key identifier is managed
+    #   by the DB cluster. For more information, see `CreateDBCluster`.
     #
     #   If `StorageEncrypted` is enabled, and you do not specify a value for
     #   the `KmsKeyId` parameter, then Amazon RDS uses your default CMK. There
-    #   is a default CMK for your AWS account. Your AWS account has a
-    #   different default CMK for each AWS Region.
+    #   is a default CMK for your Amazon Web Services account. Your Amazon Web
+    #   Services account has a different default CMK for each Amazon Web
+    #   Services Region.
     # @option options [String] :domain
     #   The Active Directory directory ID to create the DB instance in.
     #   Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
@@ -1490,12 +1538,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
-    #   This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts
-    #   to database accounts is managed by the DB cluster.
+    #   This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
+    #   Services IAM accounts to database accounts is managed by the DB
+    #   cluster.
     #
     #   For more information, see [ IAM Database Authentication for MySQL and
     #   PostgreSQL][1] in the *Amazon RDS User Guide.*
@@ -1514,16 +1563,17 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
-    #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data.
+    #   The Amazon Web Services KMS key identifier for encryption of
+    #   Performance Insights data.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK).
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS customer
+    #   master key (CMK).
     #
     #   If you do not specify a value for `PerformanceInsightsKMSKeyId`, then
-    #   Amazon RDS uses your default CMK. There is a default CMK for your AWS
-    #   account. Your AWS account has a different default CMK for each AWS
-    #   Region.
+    #   Amazon RDS uses your default CMK. There is a default CMK for your
+    #   Amazon Web Services account. Your Amazon Web Services account has a
+    #   different default CMK for each Amazon Web Services Region.
     # @option options [Integer] :performance_insights_retention_period
     #   The amount of time, in days, to retain Performance Insights data.
     #   Valid values are 7 or 731 (2 years).
@@ -1602,10 +1652,11 @@ module Aws::RDS
     #   from outside of its virtual private cloud (VPC) on your local network.
     #
     #   For more information about RDS on Outposts, see [Working with Amazon
-    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #   RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #   For more information about CoIPs, see [Customer-owned IP addresses][2]
-    #   in the *AWS Outposts User Guide*.
+    #   in the *Amazon Web Services Outposts User Guide*.
     #
     #
     #
@@ -1675,10 +1726,10 @@ module Aws::RDS
     #   a lowercase string.
     # @option options [String] :db_instance_class
     #   The compute and memory capacity of the read replica, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
-    #   Regions, or for all database engines. For the full list of DB instance
-    #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the *Amazon RDS User Guide.*
+    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
+    #   Web Services Regions, or for all database engines. For the full list
+    #   of DB instance classes, and availability for your engine, see [DB
+    #   Instance Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: Inherits from the source DB instance.
     #
@@ -1689,7 +1740,7 @@ module Aws::RDS
     #   The Availability Zone (AZ) where the read replica will be created.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
-    #   AWS Region.
+    #   Amazon Web Services Region.
     #
     #   Example: `us-east-1d`
     # @option options [Integer] :port
@@ -1773,15 +1824,15 @@ module Aws::RDS
     #   Constraints:
     #
     #   * Can only be specified if the source DB instance identifier specifies
-    #     a DB instance in another AWS Region.
+    #     a DB instance in another Amazon Web Services Region.
     #
     #   * If supplied, must match the name of an existing DBSubnetGroup.
     #
-    #   * The specified DB subnet group must be in the same AWS Region in
-    #     which the operation is running.
+    #   * The specified DB subnet group must be in the same Amazon Web
+    #     Services Region in which the operation is running.
     #
-    #   * All read replicas in one AWS Region that are created from the same
-    #     source DB instance must either:&gt;
+    #   * All read replicas in one Amazon Web Services Region that are created
+    #     from the same source DB instance must either:&gt;
     #
     #     * Specify DB subnet groups from the same VPC. All these read
     #       replicas are created in the same VPC.
@@ -1830,75 +1881,84 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
     # @option options [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted read replica.
+    #   The Amazon Web Services KMS key identifier for an encrypted read
+    #   replica.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS CMK.
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS CMK.
     #
-    #   If you create an encrypted read replica in the same AWS Region as the
-    #   source DB instance, then do not specify a value for this parameter. A
-    #   read replica in the same Region is always encrypted with the same AWS
-    #   KMS CMK as the source DB instance.
+    #   If you create an encrypted read replica in the same Amazon Web
+    #   Services Region as the source DB instance, then do not specify a value
+    #   for this parameter. A read replica in the same Region is always
+    #   encrypted with the same Amazon Web Services KMS CMK as the source DB
+    #   instance.
     #
-    #   If you create an encrypted read replica in a different AWS Region,
-    #   then you must specify a AWS KMS key identifier for the destination AWS
-    #   Region. AWS KMS CMKs are specific to the AWS Region that they are
-    #   created in, and you can't use CMKs from one AWS Region in another AWS
-    #   Region.
+    #   If you create an encrypted read replica in a different Amazon Web
+    #   Services Region, then you must specify a Amazon Web Services KMS key
+    #   identifier for the destination Amazon Web Services Region. Amazon Web
+    #   Services KMS CMKs are specific to the Amazon Web Services Region that
+    #   they are created in, and you can't use CMKs from one Amazon Web
+    #   Services Region in another Amazon Web Services Region.
     #
     #   You can't create an encrypted read replica from an unencrypted DB
     #   instance.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBInstanceReadReplica` API action in the source AWS Region that
-    #   contains the source DB instance.
+    #   `CreateDBInstanceReadReplica` API action in the source Amazon Web
+    #   Services Region that contains the source DB instance.
     #
     #   You must specify this parameter when you create an encrypted read
-    #   replica from another AWS Region by using the Amazon RDS API. Don't
-    #   specify `PreSignedUrl` when you are creating an encrypted read replica
-    #   in the same AWS Region.
+    #   replica from another Amazon Web Services Region by using the Amazon
+    #   RDS API. Don't specify `PreSignedUrl` when you are creating an
+    #   encrypted read replica in the same Amazon Web Services Region.
     #
     #   The presigned URL must be a valid request for the
     #   `CreateDBInstanceReadReplica` API action that can be executed in the
-    #   source AWS Region that contains the encrypted source DB instance. The
-    #   presigned URL request must contain the following parameter values:
+    #   source Amazon Web Services Region that contains the encrypted source
+    #   DB instance. The presigned URL request must contain the following
+    #   parameter values:
     #
-    #   * `DestinationRegion` - The AWS Region that the encrypted read replica
-    #     is created in. This AWS Region is the same one where the
-    #     `CreateDBInstanceReadReplica` action is called that contains this
-    #     presigned URL.
+    #   * `DestinationRegion` - The Amazon Web Services Region that the
+    #     encrypted read replica is created in. This Amazon Web Services
+    #     Region is the same one where the `CreateDBInstanceReadReplica`
+    #     action is called that contains this presigned URL.
     #
     #     For example, if you create an encrypted DB instance in the us-west-1
-    #     AWS Region, from a source DB instance in the us-east-2 AWS Region,
-    #     then you call the `CreateDBInstanceReadReplica` action in the
-    #     us-east-1 AWS Region and provide a presigned URL that contains a
-    #     call to the `CreateDBInstanceReadReplica` action in the us-west-2
-    #     AWS Region. For this example, the `DestinationRegion` in the
-    #     presigned URL must be set to the us-east-1 AWS Region.
+    #     Amazon Web Services Region, from a source DB instance in the
+    #     us-east-2 Amazon Web Services Region, then you call the
+    #     `CreateDBInstanceReadReplica` action in the us-east-1 Amazon Web
+    #     Services Region and provide a presigned URL that contains a call to
+    #     the `CreateDBInstanceReadReplica` action in the us-west-2 Amazon Web
+    #     Services Region. For this example, the `DestinationRegion` in the
+    #     presigned URL must be set to the us-east-1 Amazon Web Services
+    #     Region.
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the read replica in the destination AWS Region. This is the
-    #     same identifier for both the `CreateDBInstanceReadReplica` action
-    #     that is called in the destination AWS Region, and the action
-    #     contained in the presigned URL.
+    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the key
+    #     to use to encrypt the read replica in the destination Amazon Web
+    #     Services Region. This is the same identifier for both the
+    #     `CreateDBInstanceReadReplica` action that is called in the
+    #     destination Amazon Web Services Region, and the action contained in
+    #     the presigned URL.
     #
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
     #     encrypted DB instance to be replicated. This identifier must be in
-    #     the Amazon Resource Name (ARN) format for the source AWS Region. For
-    #     example, if you are creating an encrypted read replica from a DB
-    #     instance in the us-west-2 AWS Region, then your
-    #     `SourceDBInstanceIdentifier` looks like the following example:
+    #     the Amazon Resource Name (ARN) format for the source Amazon Web
+    #     Services Region. For example, if you are creating an encrypted read
+    #     replica from a DB instance in the us-west-2 Amazon Web Services
+    #     Region, then your `SourceDBInstanceIdentifier` looks like the
+    #     following example:
     #     `arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see
-    #   [Authenticating Requests: Using Query Parameters (AWS Signature
-    #   Version 4)][1] and [Signature Version 4 Signing Process][2].
+    #   [Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][1] and [Signature Version 4 Signing Process][2].
     #
-    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
-    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
+    #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
-    #   operation that can be executed in the source AWS Region.
+    #   operation that can be executed in the source Amazon Web Services
+    #   Region.
     #
     #    `SourceRegion` isn't supported for SQL Server, because SQL Server on
     #   Amazon RDS doesn't support cross-region read replicas.
@@ -1910,9 +1970,9 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -1932,16 +1992,17 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
-    #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data.
+    #   The Amazon Web Services KMS key identifier for encryption of
+    #   Performance Insights data.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK).
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS customer
+    #   master key (CMK).
     #
     #   If you do not specify a value for `PerformanceInsightsKMSKeyId`, then
-    #   Amazon RDS uses your default CMK. There is a default CMK for your AWS
-    #   account. Your AWS account has a different default CMK for each AWS
-    #   Region.
+    #   Amazon RDS uses your default CMK. There is a default CMK for your
+    #   Amazon Web Services account. Your Amazon Web Services account has a
+    #   different default CMK for each Amazon Web Services Region.
     # @option options [Integer] :performance_insights_retention_period
     #   The amount of time, in days, to retain Performance Insights data.
     #   Valid values are 7 or 731 (2 years).
@@ -2203,10 +2264,10 @@ module Aws::RDS
     #   `CreateDBInstance`.
     # @option options [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
-    #   Regions, or for all database engines. For the full list of DB instance
-    #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the *Amazon RDS User Guide.*
+    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
+    #   Web Services Regions, or for all database engines. For the full list
+    #   of DB instance classes, and availability for your engine, see [DB
+    #   Instance Class][1] in the *Amazon RDS User Guide.*
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
@@ -2374,8 +2435,8 @@ module Aws::RDS
     #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
     #   as possible. The default is a 30-minute window selected at random from
-    #   an 8-hour block of time for each AWS Region. For more information, see
-    #   [Backup window][1] in the *Amazon RDS User Guide.*
+    #   an 8-hour block of time for each Amazon Web Services Region. For more
+    #   information, see [Backup window][1] in the *Amazon RDS User Guide.*
     #
     #   **Amazon Aurora**
     #
@@ -2685,12 +2746,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
-    #   This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts
-    #   to database accounts is managed by the DB cluster.
+    #   This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
+    #   Services IAM accounts to database accounts is managed by the DB
+    #   cluster.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -2710,16 +2772,17 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
-    #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data.
+    #   The Amazon Web Services KMS key identifier for encryption of
+    #   Performance Insights data.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK).
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS customer
+    #   master key (CMK).
     #
     #   If you do not specify a value for `PerformanceInsightsKMSKeyId`, then
-    #   Amazon RDS uses your default CMK. There is a default CMK for your AWS
-    #   account. Your AWS account has a different default CMK for each AWS
-    #   Region.
+    #   Amazon RDS uses your default CMK. There is a default CMK for your
+    #   Amazon Web Services account. Your Amazon Web Services account has a
+    #   different default CMK for each Amazon Web Services Region.
     # @option options [Integer] :performance_insights_retention_period
     #   The amount of time, in days, to retain Performance Insights data.
     #   Valid values are 7 or 731 (2 years).
@@ -2812,17 +2875,19 @@ module Aws::RDS
     #   from outside of its virtual private cloud (VPC) on your local network.
     #
     #   For more information about RDS on Outposts, see [Working with Amazon
-    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #   RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #   For more information about CoIPs, see [Customer-owned IP addresses][2]
-    #   in the *AWS Outposts User Guide*.
+    #   in the *Amazon Web Services Outposts User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     # @option options [String] :aws_backup_recovery_point_arn
-    #   The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2859,9 +2924,9 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   RDS User Guide.*
+    #   block of time for each Amazon Web Services Region. To see the time
+    #   blocks available, see [ Adjusting the Preferred Maintenance Window][1]
+    #   in the *Amazon RDS User Guide.*
     #
     #   Constraints:
     #
@@ -2992,9 +3057,9 @@ module Aws::RDS
     # @option options [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
     #   example, `db.m4.large`. Not all DB instance classes are available in
-    #   all AWS Regions, or for all database engines. For the full list of DB
-    #   instance classes, and availability for your engine, see [DB Instance
-    #   Class][1] in the *Amazon RDS User Guide.*
+    #   all Amazon Web Services Regions, or for all database engines. For the
+    #   full list of DB instance classes, and availability for your engine,
+    #   see [DB Instance Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -3074,11 +3139,11 @@ module Aws::RDS
     #
     #   * `oracle-ee`
     #
+    #   * `oracle-ee-cdb`
+    #
     #   * `oracle-se2`
     #
-    #   * `oracle-se1`
-    #
-    #   * `oracle-se`
+    #   * `oracle-se2-cdb`
     #
     #   * `postgres`
     #
@@ -3153,9 +3218,9 @@ module Aws::RDS
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -3230,10 +3295,11 @@ module Aws::RDS
     #   from outside of its virtual private cloud (VPC) on your local network.
     #
     #   For more information about RDS on Outposts, see [Working with Amazon
-    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #   RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #   For more information about CoIPs, see [Customer-owned IP addresses][2]
-    #   in the *AWS Outposts User Guide*.
+    #   in the *Amazon Web Services Outposts User Guide*.
     #
     #
     #
@@ -3562,21 +3628,21 @@ module Aws::RDS
     #   following values:
     #
     #   * `automated` - Return all DB snapshots that have been automatically
-    #     taken by Amazon RDS for my AWS account.
+    #     taken by Amazon RDS for my Amazon Web Services account.
     #
-    #   * `manual` - Return all DB snapshots that have been taken by my AWS
-    #     account.
+    #   * `manual` - Return all DB snapshots that have been taken by my Amazon
+    #     Web Services account.
     #
     #   * `shared` - Return all manual DB snapshots that have been shared to
-    #     my AWS account.
+    #     my Amazon Web Services account.
     #
     #   * `public` - Return all DB snapshots that have been marked as public.
     #
-    #   * `awsbackup` - Return the DB snapshots managed by the AWS Backup
-    #     service.
+    #   * `awsbackup` - Return the DB snapshots managed by the Amazon Web
+    #     Services Backup service.
     #
-    #     For information about AWS Backup, see the [ *AWS Backup Developer
-    #     Guide.* ][1]
+    #     For information about Amazon Web Services Backup, see the [ *Amazon
+    #     Web Services Backup Developer Guide.* ][1]
     #
     #     The `awsbackup` type does not apply to Aurora.
     #
@@ -3613,17 +3679,17 @@ module Aws::RDS
     #   * `engine` - Accepts names of database engines.
     # @option options [Boolean] :include_shared
     #   A value that indicates whether to include shared manual DB cluster
-    #   snapshots from other AWS accounts that this AWS account has been given
-    #   permission to copy or restore. By default, these snapshots are not
-    #   included.
+    #   snapshots from other Amazon Web Services accounts that this Amazon Web
+    #   Services account has been given permission to copy or restore. By
+    #   default, these snapshots are not included.
     #
-    #   You can give an AWS account permission to restore a manual DB snapshot
-    #   from another AWS account by using the `ModifyDBSnapshotAttribute` API
-    #   action.
+    #   You can give an Amazon Web Services account permission to restore a
+    #   manual DB snapshot from another Amazon Web Services account by using
+    #   the `ModifyDBSnapshotAttribute` API action.
     # @option options [Boolean] :include_public
     #   A value that indicates whether to include manual DB cluster snapshots
-    #   that are public and can be copied or restored by any AWS account. By
-    #   default, the public snapshots are not included.
+    #   that are public and can be copied or restored by any Amazon Web
+    #   Services account. By default, the public snapshots are not included.
     #
     #   You can share a manual DB snapshot as public by using the
     #   ModifyDBSnapshotAttribute API.

@@ -946,6 +946,10 @@ module Aws::EventBridge
     # When you delete a rule, incoming events might continue to match to the
     # deleted rule. Allow a short period of time for changes to take effect.
     #
+    # If you call delete rule multiple times for the same rule, all calls
+    # will succeed. When you call delete rule for a non-existent custom
+    # eventbus, `ResourceNotFoundException` is returned.
+    #
     # Managed rules are rules created and managed by another AWS service on
     # your behalf. These rules are created by those other AWS services to
     # support functionality in those services. You can delete these rules
@@ -2052,6 +2056,23 @@ module Aws::EventBridge
     #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.targets[0].ecs_parameters.platform_version #=> String
     #   resp.targets[0].ecs_parameters.group #=> String
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy #=> Array
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.targets[0].ecs_parameters.capacity_provider_strategy[0].base #=> Integer
+    #   resp.targets[0].ecs_parameters.enable_ecs_managed_tags #=> Boolean
+    #   resp.targets[0].ecs_parameters.enable_execute_command #=> Boolean
+    #   resp.targets[0].ecs_parameters.placement_constraints #=> Array
+    #   resp.targets[0].ecs_parameters.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.targets[0].ecs_parameters.placement_constraints[0].expression #=> String
+    #   resp.targets[0].ecs_parameters.placement_strategy #=> Array
+    #   resp.targets[0].ecs_parameters.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.targets[0].ecs_parameters.placement_strategy[0].field #=> String
+    #   resp.targets[0].ecs_parameters.propagate_tags #=> String, one of "TASK_DEFINITION"
+    #   resp.targets[0].ecs_parameters.reference_id #=> String
+    #   resp.targets[0].ecs_parameters.tags #=> Array
+    #   resp.targets[0].ecs_parameters.tags[0].key #=> String
+    #   resp.targets[0].ecs_parameters.tags[0].value #=> String
     #   resp.targets[0].batch_parameters.job_definition #=> String
     #   resp.targets[0].batch_parameters.job_name #=> String
     #   resp.targets[0].batch_parameters.array_properties.size #=> Integer
@@ -2097,7 +2118,7 @@ module Aws::EventBridge
     # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutEventsResponse#failed_entry_count #failed_entry_count} => Integer
-    #   * {Types::PutEventsResponse#entries #entries} => Array&lt;Types::PutEventsResultEntry&gt;
+    #   * {Types::PutEventsResponse#entries #data.entries} => Array&lt;Types::PutEventsResultEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -2118,10 +2139,10 @@ module Aws::EventBridge
     # @example Response structure
     #
     #   resp.failed_entry_count #=> Integer
-    #   resp.entries #=> Array
-    #   resp.entries[0].event_id #=> String
-    #   resp.entries[0].error_code #=> String
-    #   resp.entries[0].error_message #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].event_id #=> String
+    #   resp.data.entries[0].error_code #=> String
+    #   resp.data.entries[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEvents AWS API Documentation
     #
@@ -2141,7 +2162,7 @@ module Aws::EventBridge
     # @return [Types::PutPartnerEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPartnerEventsResponse#failed_entry_count #failed_entry_count} => Integer
-    #   * {Types::PutPartnerEventsResponse#entries #entries} => Array&lt;Types::PutPartnerEventsResultEntry&gt;
+    #   * {Types::PutPartnerEventsResponse#entries #data.entries} => Array&lt;Types::PutPartnerEventsResultEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -2160,10 +2181,10 @@ module Aws::EventBridge
     # @example Response structure
     #
     #   resp.failed_entry_count #=> Integer
-    #   resp.entries #=> Array
-    #   resp.entries[0].event_id #=> String
-    #   resp.entries[0].error_code #=> String
-    #   resp.entries[0].error_message #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].event_id #=> String
+    #   resp.data.entries[0].error_code #=> String
+    #   resp.data.entries[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEvents AWS API Documentation
     #
@@ -2416,43 +2437,57 @@ module Aws::EventBridge
     #
     # You can configure the following as targets for Events:
     #
-    # * EC2 instances
+    # * [API destination][1]
     #
-    # * SSM Run Command
+    # * Amazon API Gateway REST API endpoints
     #
-    # * SSM Automation
+    # * API Gateway
     #
-    # * AWS Lambda functions
+    # * AWS Batch job queue
     #
-    # * Data streams in Amazon Kinesis Data Streams
+    # * CloudWatch Logs group
     #
-    # * Data delivery streams in Amazon Kinesis Data Firehose
+    # * CodeBuild project
+    #
+    # * CodePineline
+    #
+    # * Amazon EC2 `CreateSnapshot` API call
+    #
+    # * Amazon EC2 `RebootInstances` API call
+    #
+    # * Amazon EC2 `StopInstances` API call
+    #
+    # * Amazon EC2 `TerminateInstances` API call
     #
     # * Amazon ECS tasks
     #
-    # * AWS Step Functions state machines
+    # * Event bus in a different AWS account or Region.
     #
-    # * AWS Batch jobs
+    #   You can use an event bus in the US East (N. Virginia) us-east-1, US
+    #   West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a
+    #   target for a rule.
     #
-    # * AWS CodeBuild projects
+    # * Firehose delivery stream (Kinesis Data Firehose)
     #
-    # * Pipelines in AWS CodePipeline
+    # * Inspector assessment template (Amazon Inspector)
     #
-    # * Amazon Inspector assessment templates
+    # * Kinesis stream (Kinesis Data Stream)
     #
-    # * Amazon SNS topics
+    # * AWS Lambda function
     #
-    # * Amazon SQS queues, including FIFO queues
+    # * Redshift clusters (Data API statement execution)
     #
-    # * The default event bus of another AWS account
+    # * Amazon SNS topic
     #
-    # * Amazon API Gateway REST APIs
+    # * Amazon SQS queues (includes FIFO queues
     #
-    # * Redshift Clusters to invoke Data API ExecuteStatement on
+    # * SSM Automation
     #
-    # * Custom/SaaS HTTPS APIs via EventBridge API Destinations
+    # * SSM OpsItem
     #
-    # * Amazon SageMaker Model Building Pipelines
+    # * SSM Run Command
+    #
+    # * Step Functions state machines
     #
     # Creating rules with built-in targets is supported only in the AWS
     # Management Console. The built-in targets are `EC2 CreateSnapshot API
@@ -2472,7 +2507,7 @@ module Aws::EventBridge
     # streams, AWS Step Functions state machines and API Gateway REST APIs,
     # EventBridge relies on IAM roles that you specify in the `RoleARN`
     # argument in `PutTargets`. For more information, see [Authentication
-    # and Access Control][1] in the *Amazon EventBridge User Guide*.
+    # and Access Control][2] in the *Amazon EventBridge User Guide*.
     #
     # If another AWS account is in the same region and has granted you
     # permission (using `PutPermission`), you can send events to that
@@ -2483,7 +2518,7 @@ module Aws::EventBridge
     # account is charged for each sent event. Each event sent to another
     # account is charged as a custom event. The account receiving the event
     # is not charged. For more information, see [Amazon EventBridge
-    # (CloudWatch Events) Pricing][2].
+    # (CloudWatch Events) Pricing][3].
     #
     # <note markdown="1"> `Input`, `InputPath`, and `InputTransformer` are not available with
     # `PutTarget` if the target is an event bus of a different AWS account.
@@ -2495,7 +2530,7 @@ module Aws::EventBridge
     # organization instead of directly by the account ID, then you must
     # specify a `RoleArn` with proper permissions in the `Target` structure.
     # For more information, see [Sending and Receiving Events Between AWS
-    # Accounts][3] in the *Amazon EventBridge User Guide*.
+    # Accounts][4] in the *Amazon EventBridge User Guide*.
     #
     # For more information about enabling cross-account events, see
     # PutPermission.
@@ -2535,9 +2570,10 @@ module Aws::EventBridge
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
-    # [2]: https://aws.amazon.com/eventbridge/pricing/
-    # [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
+    # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
+    # [3]: https://aws.amazon.com/eventbridge/pricing/
+    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -2596,6 +2632,35 @@ module Aws::EventBridge
     #           },
     #           platform_version: "String",
     #           group: "String",
+    #           capacity_provider_strategy: [
+    #             {
+    #               capacity_provider: "CapacityProvider", # required
+    #               weight: 1,
+    #               base: 1,
+    #             },
+    #           ],
+    #           enable_ecs_managed_tags: false,
+    #           enable_execute_command: false,
+    #           placement_constraints: [
+    #             {
+    #               type: "distinctInstance", # accepts distinctInstance, memberOf
+    #               expression: "PlacementConstraintExpression",
+    #             },
+    #           ],
+    #           placement_strategy: [
+    #             {
+    #               type: "random", # accepts random, spread, binpack
+    #               field: "PlacementStrategyField",
+    #             },
+    #           ],
+    #           propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
+    #           reference_id: "ReferenceId",
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
     #         },
     #         batch_parameters: {
     #           job_definition: "String", # required
@@ -2938,7 +3003,7 @@ module Aws::EventBridge
     end
 
     # Removes one or more tags from the specified EventBridge resource. In
-    # Amazon EventBridge (CloudWatch Events, rules and event buses can be
+    # Amazon EventBridge (CloudWatch Events), rules and event buses can be
     # tagged.
     #
     # @option params [required, String] :resource_arn
@@ -3190,7 +3255,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

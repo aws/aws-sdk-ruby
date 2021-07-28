@@ -2807,6 +2807,14 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_ops_per_second #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_bytes_per_second #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_read_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_write_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_read_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_write_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.network_resource_utilization.network_in_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.network_resource_utilization.network_out_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.network_resource_utilization.network_packets_in_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.network_resource_utilization.network_packets_out_per_second #=> String
     #   resp.rightsizing_recommendations[0].current_instance.reservation_covered_hours_in_lookback_period #=> String
     #   resp.rightsizing_recommendations[0].current_instance.savings_plans_covered_hours_in_lookback_period #=> String
     #   resp.rightsizing_recommendations[0].current_instance.on_demand_hours_in_lookback_period #=> String
@@ -2835,8 +2843,20 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_ops_per_second #=> String
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_bytes_per_second #=> String
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_read_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_write_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_read_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.disk_resource_utilization.disk_write_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.network_resource_utilization.network_in_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.network_resource_utilization.network_out_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.network_resource_utilization.network_packets_in_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.network_resource_utilization.network_packets_out_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].platform_differences #=> Array
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].platform_differences[0] #=> String, one of "HYPERVISOR", "NETWORK_INTERFACE", "STORAGE_INTERFACE", "INSTANCE_STORE_AVAILABILITY", "VIRTUALIZATION_TYPE"
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.estimated_monthly_savings #=> String
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.currency_code #=> String
+    #   resp.rightsizing_recommendations[0].finding_reason_codes #=> Array
+    #   resp.rightsizing_recommendations[0].finding_reason_codes[0] #=> String, one of "CPU_OVER_PROVISIONED", "CPU_UNDER_PROVISIONED", "MEMORY_OVER_PROVISIONED", "MEMORY_UNDER_PROVISIONED", "EBS_THROUGHPUT_OVER_PROVISIONED", "EBS_THROUGHPUT_UNDER_PROVISIONED", "EBS_IOPS_OVER_PROVISIONED", "EBS_IOPS_UNDER_PROVISIONED", "NETWORK_BANDWIDTH_OVER_PROVISIONED", "NETWORK_BANDWIDTH_UNDER_PROVISIONED", "NETWORK_PPS_OVER_PROVISIONED", "NETWORK_PPS_UNDER_PROVISIONED", "DISK_IOPS_OVER_PROVISIONED", "DISK_IOPS_UNDER_PROVISIONED", "DISK_THROUGHPUT_OVER_PROVISIONED", "DISK_THROUGHPUT_UNDER_PROVISIONED"
     #   resp.next_page_token #=> String
     #   resp.configuration.recommendation_target #=> String, one of "SAME_INSTANCE_FAMILY", "CROSS_INSTANCE_FAMILY"
     #   resp.configuration.benefits_considered #=> Boolean
@@ -4099,7 +4119,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

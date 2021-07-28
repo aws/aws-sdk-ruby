@@ -454,7 +454,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -476,7 +476,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -734,7 +734,7 @@ module Aws::Macie2
     # Associates an account with an Amazon Macie administrator account.
     #
     # @option params [required, Types::AccountDetail] :account
-    #   Specifies details for an account to associate with an Amazon Macie
+    #   Specifies the details of an account to associate with an Amazon Macie
     #   administrator account.
     #
     # @option params [Hash<String,String>] :tags
@@ -1079,7 +1079,7 @@ module Aws::Macie2
     #   resp.s3_job_definition.bucket_definitions[0].buckets[0] #=> String
     #   resp.s3_job_definition.scoping.excludes.and #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG", "OBJECT_KEY"
+    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values[0] #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
@@ -1090,7 +1090,7 @@ module Aws::Macie2
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.target #=> String, one of "S3_OBJECT"
     #   resp.s3_job_definition.scoping.includes.and #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG", "OBJECT_KEY"
+    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values[0] #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
@@ -1137,8 +1137,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the Amazon Macie configuration settings for an AWS
-    # organization.
+    # Retrieves the Amazon Macie configuration settings for an Amazon Web
+    # Services organization.
     #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1174,7 +1174,7 @@ module Aws::Macie2
     end
 
     # Disables an account as the delegated Amazon Macie administrator
-    # account for an AWS organization.
+    # account for an Amazon Web Services organization.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -1257,10 +1257,10 @@ module Aws::Macie2
     #
     # @option params [String] :finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
-    #   findings for an account. This includes publishing updates to AWS
-    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
-    #   Events). For more information, see [Monitoring and processing
-    #   findings][1] in the *Amazon Macie User Guide*. Valid values are:
+    #   findings for an account. This includes publishing updates to Security
+    #   Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+    #   For more information, see [Monitoring and processing findings][1] in
+    #   the *Amazon Macie User Guide*. Valid values are:
     #
     #
     #
@@ -1289,7 +1289,7 @@ module Aws::Macie2
     end
 
     # Designates an account as the delegated Amazon Macie administrator
-    # account for an AWS organization.
+    # account for an Amazon Web Services organization.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -1792,7 +1792,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the configuration settings for publishing findings to AWS
+    # Retrieves the configuration settings for publishing findings to
     # Security Hub.
     #
     # @return [Types::GetFindingsPublicationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2354,7 +2354,7 @@ module Aws::Macie2
     end
 
     # Retrieves information about the delegated Amazon Macie administrator
-    # account for an AWS organization.
+    # account for an Amazon Web Services organization.
     #
     # @option params [Integer] :max_results
     #
@@ -2459,8 +2459,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Updates the configuration settings for publishing findings to AWS
-    # Security Hub.
+    # Updates the configuration settings for publishing findings to Security
+    # Hub.
     #
     # @option params [String] :client_token
     #   **A suitable default value is auto-generated.** You should normally
@@ -2468,7 +2468,7 @@ module Aws::Macie2
     #
     # @option params [Types::SecurityHubConfiguration] :security_hub_configuration
     #   Specifies configuration settings that determine which findings are
-    #   published to AWS Security Hub automatically. For information about how
+    #   published to Security Hub automatically. For information about how
     #   Macie publishes findings to Security Hub, see [Amazon Macie
     #   integration with Security Hub][1] in the *Amazon Macie User Guide*.
     #
@@ -2497,8 +2497,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves (queries) statistical data and other information about AWS
-    # resources that Amazon Macie monitors and analyzes.
+    # Retrieves (queries) statistical data and other information about
+    # Amazon Web Services resources that Amazon Macie monitors and analyzes.
     #
     # @option params [Types::SearchResourcesBucketCriteria] :bucket_criteria
     #   Specifies property- and tag-based conditions that define filter
@@ -2511,7 +2511,8 @@ module Aws::Macie2
     #
     # @option params [Types::SearchResourcesSortCriteria] :sort_criteria
     #   Specifies criteria for sorting the results of a query for information
-    #   about AWS resources that Amazon Macie monitors and analyzes.
+    #   about Amazon Web Services resources that Amazon Macie monitors and
+    #   analyzes.
     #
     # @return [Types::SearchResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2748,6 +2749,10 @@ module Aws::Macie2
     #
     # @option params [Integer] :position
     #
+    # @option params [String] :client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::UpdateFindingsFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFindingsFilterResponse#arn #arn} => String
@@ -2774,6 +2779,7 @@ module Aws::Macie2
     #     id: "__string", # required
     #     name: "__string",
     #     position: 1,
+    #     client_token: "__string",
     #   })
     #
     # @example Response structure
@@ -2795,10 +2801,10 @@ module Aws::Macie2
     #
     # @option params [String] :finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
-    #   findings for an account. This includes publishing updates to AWS
-    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
-    #   Events). For more information, see [Monitoring and processing
-    #   findings][1] in the *Amazon Macie User Guide*. Valid values are:
+    #   findings for an account. This includes publishing updates to Security
+    #   Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+    #   For more information, see [Monitoring and processing findings][1] in
+    #   the *Amazon Macie User Guide*. Valid values are:
     #
     #
     #
@@ -2851,8 +2857,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Updates the Amazon Macie configuration settings for an AWS
-    # organization.
+    # Updates the Amazon Macie configuration settings for an Amazon Web
+    # Services organization.
     #
     # @option params [required, Boolean] :auto_enable
     #
@@ -2886,7 +2892,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

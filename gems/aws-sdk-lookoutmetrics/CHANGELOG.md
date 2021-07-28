@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-06-14)
+------------------
+
+* Feature - Added "LEARNING" status for anomaly detector and updated description for "Offset" parameter in MetricSet APIs.
+
+1.3.0 (2021-05-28)
+------------------
+
+* Feature - Allowing dot(.) character in table name for RDS and Redshift as source connector.
+
 1.2.0 (2021-05-07)
 ------------------
 

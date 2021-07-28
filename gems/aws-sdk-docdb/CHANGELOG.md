@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-06-23)
+------------------
+
+* Feature - DocumentDB documentation-only edits
+
+1.31.0 (2021-06-02)
+------------------
+
+* Feature - This SDK release adds support for DocDB global clusters.
+
 1.30.0 (2021-03-29)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-07-14)
+------------------
+
+* Feature - This update provides support for Well-Architected API users to mark answer choices as not applicable.
+
 1.4.0 (2021-03-10)
 ------------------
 

@@ -32,11 +32,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Inspect all of the elements that AWS WAF has parsed and extracted from
-    # the web request JSON body that are within the JsonBody `MatchScope`.
-    # This is used with the FieldToMatch option `JsonBody`.
+    # Inspect all of the elements that WAF has parsed and extracted from the
+    # web request JSON body that are within the JsonBody `MatchScope`. This
+    # is used with the FieldToMatch option `JsonBody`.
     #
-    # This is used only to indicate the web request component for AWS WAF to
+    # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
     # @api private
@@ -47,7 +47,7 @@ module Aws::WAFV2
 
     # All query arguments of a web request.
     #
-    # This is used only to indicate the web request component for AWS WAF to
+    # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
     # @api private
@@ -56,7 +56,7 @@ module Aws::WAFV2
     #
     class AllQueryArguments < Aws::EmptyStructure; end
 
-    # Specifies that AWS WAF should allow the request and optionally defines
+    # Specifies that WAF should allow the request and optionally defines
     # additional custom handling for the request.
     #
     # This is used in the context of other settings, for example to specify
@@ -80,8 +80,8 @@ module Aws::WAFV2
     #   Defines custom handling for the web request.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -139,7 +139,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #               positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -175,7 +175,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -210,7 +210,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -247,7 +247,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -306,7 +306,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -378,7 +378,7 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] web_acl_arn
-    #   The Amazon Resource Name (ARN) of the Web ACL that you want to
+    #   The Amazon Resource Name (ARN) of the web ACL that you want to
     #   associate with the resource.
     #   @return [String]
     #
@@ -392,7 +392,7 @@ module Aws::WAFV2
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
-    #   * For an API Gateway REST API:
+    #   * For an Amazon API Gateway REST API:
     #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     #   * For an AppSync GraphQL API:
@@ -412,7 +412,7 @@ module Aws::WAFV2
     #
     class AssociateWebACLResponse < Aws::EmptyStructure; end
 
-    # Specifies that AWS WAF should block the request and optionally defines
+    # Specifies that WAF should block the request and optionally defines
     # additional custom handling for the response to the web request.
     #
     # This is used in the context of other settings, for example to specify
@@ -438,8 +438,8 @@ module Aws::WAFV2
     #   Defines a custom response for the web request.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -458,7 +458,7 @@ module Aws::WAFV2
     # The body of a web request. This immediately follows the request
     # headers.
     #
-    # This is used only to indicate the web request component for AWS WAF to
+    # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
     # @api private
@@ -467,11 +467,11 @@ module Aws::WAFV2
     #
     class Body < Aws::EmptyStructure; end
 
-    # A rule statement that defines a string match search for AWS WAF to
-    # apply to web requests. The byte match statement provides the bytes to
-    # search for, the location in requests that you want AWS WAF to search,
-    # and other settings. The bytes to search for are typically a string
-    # that corresponds with ASCII characters. In the AWS WAF console and the
+    # A rule statement that defines a string match search for WAF to apply
+    # to web requests. The byte match statement provides the bytes to search
+    # for, the location in requests that you want WAF to search, and other
+    # settings. The bytes to search for are typically a string that
+    # corresponds with ASCII characters. In the WAF console and the
     # developer guide, this is refered to as a string match statement.
     #
     # @note When making an API call, you may pass ByteMatchStatement
@@ -509,30 +509,30 @@ module Aws::WAFV2
     #         text_transformations: [ # required
     #           {
     #             priority: 1, # required
-    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #           },
     #         ],
     #         positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
     #       }
     #
     # @!attribute [rw] search_string
-    #   A string value that you want AWS WAF to search for. AWS WAF searches
-    #   only in the part of web requests that you designate for inspection
-    #   in FieldToMatch. The maximum length of the value is 50 bytes.
+    #   A string value that you want WAF to search for. WAF searches only in
+    #   the part of web requests that you designate for inspection in
+    #   FieldToMatch. The maximum length of the value is 50 bytes.
     #
     #   Valid values depend on the component that you specify for inspection
     #   in `FieldToMatch`\:
     #
-    #   * `Method`\: The HTTP method that you want AWS WAF to search for.
-    #     This indicates the type of operation specified in the request.
+    #   * `Method`\: The HTTP method that you want WAF to search for. This
+    #     indicates the type of operation specified in the request.
     #
-    #   * `UriPath`\: The value that you want AWS WAF to search for in the
-    #     URI path, for example, `/images/daily-ad.jpg`.
+    #   * `UriPath`\: The value that you want WAF to search for in the URI
+    #     path, for example, `/images/daily-ad.jpg`.
     #
     #   If `SearchString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
     #
-    #   **If you're using the AWS WAF API**
+    #   **If you're using the WAF API**
     #
     #   Specify a base64-encoded version of the value. The maximum length of
     #   the value before you base64-encode it is 50 bytes.
@@ -543,29 +543,29 @@ module Aws::WAFV2
     #   base64-encoding and include the resulting value, `QmFkQm90`, in the
     #   value of `SearchString`.
     #
-    #   **If you're using the AWS CLI or one of the AWS SDKs**
+    #   **If you're using the CLI or one of the Amazon Web Services SDKs**
     #
-    #   The value that you want AWS WAF to search for. The SDK automatically
+    #   The value that you want WAF to search for. The SDK automatically
     #   base64 encodes the value.
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want AWS WAF to inspect. For more
+    #   The part of a web request that you want WAF to inspect. For more
     #   information, see FieldToMatch.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, AWS WAF
+    #   you specify one or more transformations in a rule statement, WAF
     #   performs all transformations on the content of the request component
     #   identified by `FieldToMatch`, starting from the lowest priority
     #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] positional_constraint
-    #   The area within the portion of a web request that you want AWS WAF
-    #   to search for `SearchString`. Valid values include the following:
+    #   The area within the portion of a web request that you want WAF to
+    #   search for `SearchString`. Valid values include the following:
     #
     #   **CONTAINS**
     #
@@ -659,7 +659,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #                 positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -695,7 +695,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -730,7 +730,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -767,7 +767,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -826,7 +826,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -940,10 +940,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1011,7 +1011,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Specifies that AWS WAF should count the request. Optionally defines
+    # Specifies that WAF should count the request. Optionally defines
     # additional custom handling for the request.
     #
     # This is used in the context of other settings, for example to specify
@@ -1035,8 +1035,8 @@ module Aws::WAFV2
     #   Defines custom handling for the web request.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -1075,10 +1075,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1100,25 +1100,24 @@ module Aws::WAFV2
     # @!attribute [rw] addresses
     #   Contains an array of strings that specify one or more IP addresses
     #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
-    #   /0.
+    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
     #
     #   Examples:
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address 192.0.2.44, specify
     #     `192.0.2.44/32`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
     #     specify `192.0.2.0/24`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address
     #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from IP addresses
     #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
@@ -1190,10 +1189,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1289,7 +1288,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #                 positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -1325,7 +1324,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -1360,7 +1359,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -1397,7 +1396,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -1456,7 +1455,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -1592,10 +1591,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1611,11 +1610,11 @@ module Aws::WAFV2
     #
     #   When you create your own rule group, you define this, and you cannot
     #   change it after creation. When you add or modify the rules in a rule
-    #   group, AWS WAF enforces this limit. You can check the capacity for a
-    #   set of rules using CheckCapacity.
+    #   group, WAF enforces this limit. You can check the capacity for a set
+    #   of rules using CheckCapacity.
     #
-    #   AWS WAF uses WCUs to calculate and control the operating resources
-    #   that are used to run your rules, rule groups, and web ACLs. AWS WAF
+    #   WAF uses WCUs to calculate and control the operating resources that
+    #   are used to run your rules, rule groups, and web ACLs. WAF
     #   calculates capacity differently for each rule type, to reflect the
     #   relative cost of each rule. Simple rules that cost little to run use
     #   fewer WCUs than more complex rules that use more processing power.
@@ -1631,8 +1630,8 @@ module Aws::WAFV2
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
     #   to allow, block, or count. Each rule includes one top-level
-    #   statement that AWS WAF uses to identify matching web requests, and
-    #   parameters that govern how AWS WAF handles them.
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -1651,12 +1650,12 @@ module Aws::WAFV2
     #   the rules that you define in the rule group.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][3] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -1764,7 +1763,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #                 positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -1800,7 +1799,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -1835,7 +1834,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -1872,7 +1871,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -1931,7 +1930,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -2062,15 +2061,15 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   The name of the web ACL. You cannot change the name of a web ACL
     #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2087,14 +2086,14 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification.
+    #   A description of the web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
     #   to allow, block, or count. Each rule includes one top-level
-    #   statement that AWS WAF uses to identify matching web requests, and
-    #   parameters that govern how AWS WAF handles them.
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -2113,12 +2112,12 @@ module Aws::WAFV2
     #   rules and default actions that you define in the web ACL.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][3] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -2171,10 +2170,10 @@ module Aws::WAFV2
     # @!attribute [rw] name
     #   The name of the custom header.
     #
-    #   For custom request header insertion, when AWS WAF inserts the header
+    #   For custom request header insertion, when WAF inserts the header
     #   into the request, it prefixes this name `x-amzn-waf-`, to avoid
     #   confusion with the headers that are already in the request. For
-    #   example, for the header name `sample`, AWS WAF inserts the header
+    #   example, for the header name `sample`, WAF inserts the header
     #   `x-amzn-waf-sample`.
     #   @return [String]
     #
@@ -2196,7 +2195,7 @@ module Aws::WAFV2
     # allow and count.
     #
     # For information about customizing web requests and responses, see
-    # [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
+    # [Customizing web requests and responses in WAF][1] in the [WAF
     # Developer Guide][2].
     #
     #
@@ -2221,8 +2220,8 @@ module Aws::WAFV2
     #   are not allowed.
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][1] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -2243,7 +2242,7 @@ module Aws::WAFV2
     # BlockAction.
     #
     # For information about customizing web requests and responses, see
-    # [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
+    # [Customizing web requests and responses in WAF][1] in the [WAF
     # Developer Guide][2].
     #
     #
@@ -2270,7 +2269,7 @@ module Aws::WAFV2
     #
     #   For a list of status codes that you can use in your custom
     #   reqponses, see [Supported status codes for custom response][1] in
-    #   the [AWS WAF Developer Guide][2].
+    #   the [WAF Developer Guide][2].
     #
     #
     #
@@ -2279,10 +2278,10 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] custom_response_body_key
-    #   References the response body that you want AWS WAF to return to the
-    #   web request client. You can define a custom response for a rule
-    #   action or a default web ACL action that is set to block. To do this,
-    #   you first define the response body key and value in the
+    #   References the response body that you want WAF to return to the web
+    #   request client. You can define a custom response for a rule action
+    #   or a default web ACL action that is set to block. To do this, you
+    #   first define the response body key and value in the
     #   `CustomResponseBodies` setting for the WebACL or RuleGroup where you
     #   want to use it. Then, in the rule action or web ACL default action
     #   `BlockAction` setting, you reference the response body using this
@@ -2294,8 +2293,8 @@ module Aws::WAFV2
     #   not allowed.
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][1] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -2336,8 +2335,8 @@ module Aws::WAFV2
     #   must specify JSON content in the `ContentType` setting.
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][1] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -2354,8 +2353,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # In a WebACL, this is the action that you want AWS WAF to perform when
-    # a web request doesn't match any of the rules in the `WebACL`. The
+    # In a WebACL, this is the action that you want WAF to perform when a
+    # web request doesn't match any of the rules in the `WebACL`. The
     # default action must be a terminating action, so you can't use count.
     #
     # @note When making an API call, you may pass DefaultAction
@@ -2387,11 +2386,11 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] block
-    #   Specifies that AWS WAF should block requests by default.
+    #   Specifies that WAF should block requests by default.
     #   @return [Types::BlockAction]
     #
     # @!attribute [rw] allow
-    #   Specifies that AWS WAF should allow requests by default.
+    #   Specifies that WAF should allow requests by default.
     #   @return [Types::AllowAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DefaultAction AWS API Documentation
@@ -2416,14 +2415,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] web_acl_lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -2437,14 +2436,14 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] next_web_acl_lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -2472,10 +2471,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2493,14 +2492,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -2585,10 +2584,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2606,14 +2605,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -2648,10 +2647,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2669,14 +2668,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -2706,15 +2705,15 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   The name of the web ACL. You cannot change the name of a web ACL
     #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2726,20 +2725,20 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the Web ACL. This ID is returned in the
+    #   The unique identifier for the web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -2778,10 +2777,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2803,10 +2802,10 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] capacity
-    #   The web ACL capacity units (WCUs) required for this rule group. AWS
-    #   WAF uses web ACL capacity units (WCU) to calculate and control the
+    #   The web ACL capacity units (WCUs) required for this rule group. WAF
+    #   uses web ACL capacity units (WCU) to calculate and control the
     #   operating resources that are used to run your rules, rule groups,
-    #   and web ACLs. AWS WAF calculates capacity differently for each rule
+    #   and web ACLs. WAF calculates capacity differently for each rule
     #   type, to reflect each rule's relative cost. Rule group capacity is
     #   fixed at creation, so users can plan their web ACL WCU usage when
     #   they use a rule group. The WCU limit for web ACLs is 1,500.
@@ -2824,18 +2823,18 @@ module Aws::WAFV2
     #
     #     `awswaf:managed:<vendor>:<rule group name>`\:
     #
-    #   * When a rule with a label matches a web request, AWS WAF adds the
-    #     fully qualified label to the request. A fully qualified label is
-    #     made up of the label namespace from the rule group or web ACL
-    #     where the rule is defined and the label from the rule, separated
-    #     by a colon:
+    #   * When a rule with a label matches a web request, WAF adds the fully
+    #     qualified label to the request. A fully qualified label is made up
+    #     of the label namespace from the rule group or web ACL where the
+    #     rule is defined and the label from the rule, separated by a colon:
     #
     #     `<label namespace>:<label from rule>`
     #   @return [String]
     #
     # @!attribute [rw] available_labels
     #   The labels that one or more rules in this rule group add to matching
-    #   web ACLs. These labels are defined in the `RuleLabels` for a Rule.
+    #   web requests. These labels are defined in the `RuleLabels` for a
+    #   Rule.
     #   @return [Array<Types::LabelSummary>]
     #
     # @!attribute [rw] consumed_labels
@@ -2874,7 +2873,7 @@ module Aws::WAFV2
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
-    #   * For an API Gateway REST API:
+    #   * For an Amazon API Gateway REST API:
     #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     #   * For an AppSync GraphQL API:
@@ -2917,12 +2916,12 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The part of a web request that you want AWS WAF to inspect. Include
-    # the single `FieldToMatch` type that you want to inspect, with
-    # additional specifications as needed, according to the type. You
-    # specify a single request component in `FieldToMatch` for each rule
-    # statement that requires it. To inspect more than one component of a
-    # web request, create a separate rule statement for each component.
+    # The part of a web request that you want WAF to inspect. Include the
+    # single `FieldToMatch` type that you want to inspect, with additional
+    # specifications as needed, according to the type. You specify a single
+    # request component in `FieldToMatch` for each rule statement that
+    # requires it. To inspect more than one component of a web request,
+    # create a separate rule statement for each component.
     #
     # @note When making an API call, you may pass FieldToMatch
     #   data as a hash:
@@ -2968,8 +2967,8 @@ module Aws::WAFV2
     #   argument to inspect, such as *UserName* or *SalesRegion*. The name
     #   can be up to 30 characters long and isn't case sensitive.
     #
-    #   This is used only to indicate the web request component for AWS WAF
-    #   to inspect, in the FieldToMatch specification.
+    #   This is used only to indicate the web request component for WAF to
+    #   inspect, in the FieldToMatch specification.
     #
     #   Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
     #   @return [Types::SingleQueryArgument]
@@ -2995,12 +2994,12 @@ module Aws::WAFV2
     #   server as the HTTP request body, such as data from a form.
     #
     #   Note that only the first 8 KB (8192 bytes) of the request body are
-    #   forwarded to AWS WAF for inspection by the underlying host service.
-    #   If you don't need to inspect more than 8 KB, you can guarantee that
+    #   forwarded to WAF for inspection by the underlying host service. If
+    #   you don't need to inspect more than 8 KB, you can guarantee that
     #   you don't allow additional bytes in by combining a statement that
     #   inspects the body of the web request, such as ByteMatchStatement or
     #   RegexPatternSetReferenceStatement, with a SizeConstraintStatement
-    #   that enforces an 8 KB size limit on the body of the request. AWS WAF
+    #   that enforces an 8 KB size limit on the body of the request. WAF
     #   doesn't support inspecting the entire contents of web requests
     #   whose bodies exceed the 8 KB limit.
     #   @return [Types::Body]
@@ -3017,12 +3016,12 @@ module Aws::WAFV2
     #   server as the HTTP request body, such as data from a form.
     #
     #   Note that only the first 8 KB (8192 bytes) of the request body are
-    #   forwarded to AWS WAF for inspection by the underlying host service.
-    #   If you don't need to inspect more than 8 KB, you can guarantee that
+    #   forwarded to WAF for inspection by the underlying host service. If
+    #   you don't need to inspect more than 8 KB, you can guarantee that
     #   you don't allow additional bytes in by combining a statement that
     #   inspects the body of the web request, such as ByteMatchStatement or
     #   RegexPatternSetReferenceStatement, with a SizeConstraintStatement
-    #   that enforces an 8 KB size limit on the body of the request. AWS WAF
+    #   that enforces an 8 KB size limit on the body of the request. WAF
     #   doesn't support inspecting the entire contents of web requests
     #   whose bodies exceed the 8 KB limit.
     #   @return [Types::JsonBody]
@@ -3087,7 +3086,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # A rule group that's defined for an AWS Firewall Manager WAF policy.
+    # A rule group that's defined for an Firewall Manager WAF policy.
     #
     # @!attribute [rw] name
     #   The name of the rule group. You cannot change the name of a rule
@@ -3096,15 +3095,15 @@ module Aws::WAFV2
     #
     # @!attribute [rw] priority
     #   If you define more than one rule group in the first or last Firewall
-    #   Manager rule groups, AWS WAF evaluates each request against the rule
+    #   Manager rule groups, WAF evaluates each request against the rule
     #   groups in order, starting from the lowest priority setting. The
     #   priorities don't need to be consecutive, but they must all be
     #   different.
     #   @return [Integer]
     #
     # @!attribute [rw] firewall_manager_statement
-    #   The processing guidance for an AWS Firewall Manager rule. This is
-    #   like a regular rule Statement, but it can only contain a rule group
+    #   The processing guidance for an Firewall Manager rule. This is like a
+    #   regular rule Statement, but it can only contain a rule group
     #   reference.
     #   @return [Types::FirewallManagerStatement]
     #
@@ -3144,8 +3143,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The processing guidance for an AWS Firewall Manager rule. This is like
-    # a regular rule Statement, but it can only contain a rule group
+    # The processing guidance for an Firewall Manager rule. This is like a
+    # regular rule Statement, but it can only contain a rule group
     # reference.
     #
     # @!attribute [rw] managed_rule_group_statement
@@ -3154,7 +3153,7 @@ module Aws::WAFV2
     #   rule group in this statement. You can retrieve the required names by
     #   calling ListAvailableManagedRuleGroups.
     #
-    #   You can't nest a `ManagedRuleGroupStatement`, for example for use
+    #   You cannot nest a `ManagedRuleGroupStatement`, for example for use
     #   inside a `NotStatement` or `OrStatement`. It can only be referenced
     #   as a top-level statement within a rule.
     #   @return [Types::ManagedRuleGroupStatement]
@@ -3183,8 +3182,8 @@ module Aws::WAFV2
     # web request origin. Commonly, this is the X-Forwarded-For (XFF)
     # header, but you can specify any header name.
     #
-    # <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    # doesn't apply the rule to the web request at all.
+    # <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    # apply the rule to the web request at all.
     #
     #  </note>
     #
@@ -3192,8 +3191,8 @@ module Aws::WAFV2
     # RateBasedStatement. For IPSetReferenceStatement, use
     # IPSetForwardedIPConfig instead.
     #
-    # AWS WAF only evaluates the first IP address found in the specified
-    # HTTP header.
+    # WAF only evaluates the first IP address found in the specified HTTP
+    # header.
     #
     # @note When making an API call, you may pass ForwardedIPConfig
     #   data as a hash:
@@ -3208,8 +3207,8 @@ module Aws::WAFV2
     #   to use the X-Forwarded-For (XFF) header, set this to
     #   `X-Forwarded-For`.
     #
-    #   <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    #   doesn't apply the rule to the web request at all.
+    #   <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    #   apply the rule to the web request at all.
     #
     #    </note>
     #   @return [String]
@@ -3218,15 +3217,15 @@ module Aws::WAFV2
     #   The match status to assign to the web request if the request
     #   doesn't have a valid IP address in the specified position.
     #
-    #   <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    #   doesn't apply the rule to the web request at all.
+    #   <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    #   apply the rule to the web request at all.
     #
     #    </note>
     #
     #   You can specify the following fallback behaviors:
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
-    #     AWS WAF applies the rule action to the request.
+    #     WAF applies the rule action to the request.
     #
     #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
@@ -3267,8 +3266,8 @@ module Aws::WAFV2
     #   web request origin. Commonly, this is the X-Forwarded-For (XFF)
     #   header, but you can specify any header name.
     #
-    #   <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    #   doesn't apply the rule to the web request at all.
+    #   <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    #   apply the rule to the web request at all.
     #
     #    </note>
     #   @return [Types::ForwardedIPConfig]
@@ -3297,10 +3296,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3331,14 +3330,14 @@ module Aws::WAFV2
     #   @return [Types::IPSet]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -3426,10 +3425,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3441,12 +3440,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] web_acl_name
-    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   The name of the web ACL. You cannot change the name of a web ACL
     #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] web_acl_id
-    #   The unique identifier for the Web ACL. This ID is returned in the
+    #   The unique identifier for the web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #   @return [String]
@@ -3498,10 +3497,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3532,14 +3531,14 @@ module Aws::WAFV2
     #   @return [Types::RegexPatternSet]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -3556,9 +3555,10 @@ module Aws::WAFV2
     #   data as a hash:
     #
     #       {
-    #         name: "EntityName", # required
-    #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #         id: "EntityId", # required
+    #         name: "EntityName",
+    #         scope: "CLOUDFRONT", # accepts CLOUDFRONT, REGIONAL
+    #         id: "EntityId",
+    #         arn: "ResourceArn",
     #       }
     #
     # @!attribute [rw] name
@@ -3567,10 +3567,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3587,12 +3587,17 @@ module Aws::WAFV2
     #   like update and delete.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the entity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetRuleGroupRequest AWS API Documentation
     #
     class GetRuleGroupRequest < Struct.new(
       :name,
       :scope,
-      :id)
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3601,14 +3606,14 @@ module Aws::WAFV2
     #   @return [Types::RuleGroup]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -3646,10 +3651,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3667,15 +3672,15 @@ module Aws::WAFV2
     #   format. UTC format includes the special designator, `Z`. For
     #   example, `"2016-09-27T14:50Z"`. You can specify any time range in
     #   the previous three hours. If you specify a start time that's
-    #   earlier than three hours ago, AWS WAF sets it to three hours ago.
+    #   earlier than three hours ago, WAF sets it to three hours ago.
     #   @return [Types::TimeWindow]
     #
     # @!attribute [rw] max_items
-    #   The number of requests that you want AWS WAF to return from among
-    #   the first 5,000 requests that your AWS resource received during the
-    #   time range. If your resource received fewer requests than the value
-    #   of `MaxItems`, `GetSampledRequests` returns information about all of
-    #   them.
+    #   The number of requests that you want WAF to return from among the
+    #   first 5,000 requests that your Amazon Web Services resource received
+    #   during the time range. If your resource received fewer requests than
+    #   the value of `MaxItems`, `GetSampledRequests` returns information
+    #   about all of them.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetSampledRequestsRequest AWS API Documentation
@@ -3698,17 +3703,17 @@ module Aws::WAFV2
     # @!attribute [rw] population_size
     #   The total number of requests from which `GetSampledRequests` got a
     #   sample of `MaxItems` requests. If `PopulationSize` is less than
-    #   `MaxItems`, the sample includes every request that your AWS resource
-    #   received during the specified time range.
+    #   `MaxItems`, the sample includes every request that your Amazon Web
+    #   Services resource received during the specified time range.
     #   @return [Integer]
     #
     # @!attribute [rw] time_window
     #   Usually, `TimeWindow` is the time range that you specified in the
-    #   `GetSampledRequests` request. However, if your AWS resource received
-    #   more than 5,000 requests during the time range that you specified in
-    #   the request, `GetSampledRequests` returns the time range for the
-    #   first 5,000 requests. Times are in Coordinated Universal Time (UTC)
-    #   format.
+    #   `GetSampledRequests` request. However, if your Amazon Web Services
+    #   resource received more than 5,000 requests during the time range
+    #   that you specified in the request, `GetSampledRequests` returns the
+    #   time range for the first 5,000 requests. Times are in Coordinated
+    #   Universal Time (UTC) format.
     #   @return [Types::TimeWindow]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetSampledRequestsResponse AWS API Documentation
@@ -3741,8 +3746,8 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] web_acl
-    #   The Web ACL that is associated with the resource. If there is no
-    #   associated resource, AWS WAF returns a null Web ACL.
+    #   The web ACL that is associated with the resource. If there is no
+    #   associated resource, WAF returns a null web ACL.
     #   @return [Types::WebACL]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResourceResponse AWS API Documentation
@@ -3763,15 +3768,15 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   The name of the web ACL. You cannot change the name of a web ACL
     #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3783,7 +3788,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the Web ACL. This ID is returned in the
+    #   The unique identifier for the web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #   @return [String]
@@ -3799,19 +3804,19 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] web_acl
-    #   The Web ACL specification. You can modify the settings in this Web
-    #   ACL and use it to update this Web ACL or create a new one.
+    #   The web ACL specification. You can modify the settings in this web
+    #   ACL and use it to update this web ACL or create a new one.
     #   @return [Types::WebACL]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -3905,13 +3910,12 @@ module Aws::WAFV2
     end
 
     # Contains one or more IP addresses or blocks of IP addresses specified
-    # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-    # all IPv4 and IPv6 CIDR ranges except for /0. For information about
-    # CIDR notation, see the Wikipedia entry [Classless Inter-Domain
-    # Routing][1].
+    # in Classless Inter-Domain Routing (CIDR) notation. WAF supports all
+    # IPv4 and IPv6 CIDR ranges except for /0. For information about CIDR
+    # notation, see the Wikipedia entry [Classless Inter-Domain Routing][1].
     #
-    # AWS WAF assigns an ARN to each `IPSet` that you create. To use an IP
-    # set in a rule, you provide the ARN to the Rule statement
+    # WAF assigns an ARN to each `IPSet` that you create. To use an IP set
+    # in a rule, you provide the ARN to the Rule statement
     # IPSetReferenceStatement.
     #
     #
@@ -3944,25 +3948,24 @@ module Aws::WAFV2
     # @!attribute [rw] addresses
     #   Contains an array of strings that specify one or more IP addresses
     #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
-    #   /0.
+    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
     #
     #   Examples:
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address 192.0.2.44, specify
     #     `192.0.2.44/32`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
     #     specify `192.0.2.0/24`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address
     #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from IP addresses
     #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
@@ -3994,8 +3997,8 @@ module Aws::WAFV2
     # web request origin. Commonly, this is the X-Forwarded-For (XFF)
     # header, but you can specify any header name.
     #
-    # <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    # doesn't apply the rule to the web request at all.
+    # <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    # apply the rule to the web request at all.
     #
     #  </note>
     #
@@ -4017,8 +4020,8 @@ module Aws::WAFV2
     #   to use the X-Forwarded-For (XFF) header, set this to
     #   `X-Forwarded-For`.
     #
-    #   <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    #   doesn't apply the rule to the web request at all.
+    #   <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    #   apply the rule to the web request at all.
     #
     #    </note>
     #   @return [String]
@@ -4027,15 +4030,15 @@ module Aws::WAFV2
     #   The match status to assign to the web request if the request
     #   doesn't have a valid IP address in the specified position.
     #
-    #   <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    #   doesn't apply the rule to the web request at all.
+    #   <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    #   apply the rule to the web request at all.
     #
     #    </note>
     #
     #   You can specify the following fallback behaviors:
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
-    #     AWS WAF applies the rule action to the request.
+    #     WAF applies the rule action to the request.
     #
     #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
@@ -4057,8 +4060,8 @@ module Aws::WAFV2
     #     the header.
     #
     #   * ANY - Inspect all IP addresses in the header for a match. If the
-    #     header contains more than 10 IP addresses, AWS WAF inspects the
-    #     last 10.
+    #     header contains more than 10 IP addresses, WAF inspects the last
+    #     10.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/IPSetForwardedIPConfig AWS API Documentation
@@ -4078,8 +4081,8 @@ module Aws::WAFV2
     #
     # Each IP set rule statement references an IP set. You create and
     # maintain the set independent of your rules. This allows you to use the
-    # single set in multiple rules. When you update the referenced set, AWS
-    # WAF automatically updates all rules that reference it.
+    # single set in multiple rules. When you update the referenced set, WAF
+    # automatically updates all rules that reference it.
     #
     # @note When making an API call, you may pass IPSetReferenceStatement
     #   data as a hash:
@@ -4104,8 +4107,8 @@ module Aws::WAFV2
     #   web request origin. Commonly, this is the X-Forwarded-For (XFF)
     #   header, but you can specify any header name.
     #
-    #   <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    #   doesn't apply the rule to the web request at all.
+    #   <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    #   apply the rule to the web request at all.
     #
     #    </note>
     #   @return [Types::IPSetForwardedIPConfig]
@@ -4140,14 +4143,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -4172,7 +4175,7 @@ module Aws::WAFV2
     # specification.
     #
     # Use the specifications in this object to indicate which parts of the
-    # JSON body to inspect using the rule's inspection criteria. AWS WAF
+    # JSON body to inspect using the rule's inspection criteria. WAF
     # inspects only the parts of the JSON that result from the matches that
     # you indicate.
     #
@@ -4190,39 +4193,38 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] match_pattern
-    #   The patterns to look for in the JSON body. AWS WAF inspects the
-    #   results of these pattern matches against the rule inspection
-    #   criteria.
+    #   The patterns to look for in the JSON body. WAF inspects the results
+    #   of these pattern matches against the rule inspection criteria.
     #   @return [Types::JsonMatchPattern]
     #
     # @!attribute [rw] match_scope
     #   The parts of the JSON to match against using the `MatchPattern`. If
-    #   you specify `All`, AWS WAF matches against keys and values.
+    #   you specify `All`, WAF matches against keys and values.
     #   @return [String]
     #
     # @!attribute [rw] invalid_fallback_behavior
-    #   What AWS WAF should do if it fails to completely parse the JSON
-    #   body. The options are the following:
+    #   What WAF should do if it fails to completely parse the JSON body.
+    #   The options are the following:
     #
-    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. AWS WAF
-    #     applies the text transformations and inspection criteria that you
-    #     defined for the JSON inspection to the body text string.
+    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. WAF applies
+    #     the text transformations and inspection criteria that you defined
+    #     for the JSON inspection to the body text string.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
-    #     AWS WAF applies the rule action to the request.
+    #     WAF applies the rule action to the request.
     #
     #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
     #
-    #   If you don't provide this setting, AWS WAF parses and evaluates the
+    #   If you don't provide this setting, WAF parses and evaluates the
     #   content only up to the first parsing failure that it encounters.
     #
-    #   AWS WAF does its best to parse the entire JSON body, but might be
-    #   forced to stop for reasons such as invalid characters, duplicate
+    #   WAF does its best to parse the entire JSON body, but might be forced
+    #   to stop for reasons such as characters that aren't valid, duplicate
     #   keys, truncation, and any content whose root node isn't an object
     #   or an array.
     #
-    #   AWS WAF parses the JSON in the following examples as two valid key,
+    #   WAF parses the JSON in the following examples as two valid key,
     #   value pairs:
     #
     #   * Missing comma: `\{"key1":"value1""key2":"value2"\}`
@@ -4242,9 +4244,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The patterns to look for in the JSON body. AWS WAF inspects the
-    # results of these pattern matches against the rule inspection criteria.
-    # This is used with the FieldToMatch option `JsonBody`.
+    # The patterns to look for in the JSON body. WAF inspects the results of
+    # these pattern matches against the rule inspection criteria. This is
+    # used with the FieldToMatch option `JsonBody`.
     #
     # @note When making an API call, you may pass JsonMatchPattern
     #   data as a hash:
@@ -4326,8 +4328,8 @@ module Aws::WAFV2
     # qualified labels have a prefix, optional namespaces, and label name.
     # The prefix identifies the rule group or web ACL context of the rule
     # that added the label. If you do not provide the fully qualified name
-    # in your label match string, AWS WAF performs the search for labels
-    # that were added in the same context as the label match statement.
+    # in your label match string, WAF performs the search for labels that
+    # were added in the same context as the label match statement.
     #
     # @note When making an API call, you may pass LabelMatchStatement
     #   data as a hash:
@@ -4344,7 +4346,7 @@ module Aws::WAFV2
     #
     # @!attribute [rw] key
     #   The string to match against. The setting you provide for this
-    #   depends on the match statement's `Scope` settings:
+    #   depends on the match statement's `Scope` setting:
     #
     #   * If the `Scope` indicates `LABEL`, then this specification must
     #     include the name and can include any number of preceding namespace
@@ -4426,10 +4428,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4443,16 +4445,16 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of objects that you want AWS WAF to return for
-    #   this request. If more objects are available, in the response, AWS
-    #   WAF provides a `NextMarker` value that you can use in a subsequent
-    #   call to get the next batch of objects.
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupsRequest AWS API Documentation
@@ -4468,9 +4470,9 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] managed_rule_groups
@@ -4495,10 +4497,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4512,16 +4514,16 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of objects that you want AWS WAF to return for
-    #   this request. If more objects are available, in the response, AWS
-    #   WAF provides a `NextMarker` value that you can use in a subsequent
-    #   call to get the next batch of objects.
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListIPSetsRequest AWS API Documentation
@@ -4537,9 +4539,9 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] ip_sets
@@ -4566,10 +4568,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4583,16 +4585,16 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of objects that you want AWS WAF to return for
-    #   this request. If more objects are available, in the response, AWS
-    #   WAF provides a `NextMarker` value that you can use in a subsequent
-    #   call to get the next batch of objects.
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurationsRequest AWS API Documentation
@@ -4611,9 +4613,9 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurationsResponse AWS API Documentation
@@ -4635,10 +4637,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4652,16 +4654,16 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of objects that you want AWS WAF to return for
-    #   this request. If more objects are available, in the response, AWS
-    #   WAF provides a `NextMarker` value that you can use in a subsequent
-    #   call to get the next batch of objects.
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListRegexPatternSetsRequest AWS API Documentation
@@ -4677,9 +4679,9 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] regex_pattern_sets
@@ -4703,13 +4705,13 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] web_acl_arn
-    #   The Amazon Resource Name (ARN) of the Web ACL.
+    #   The Amazon Resource Name (ARN) of the web ACL.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
     #   Used for web ACLs that are scoped for regional applications. A
     #   regional application can be an Application Load Balancer (ALB), an
-    #   API Gateway REST API, or an AppSync GraphQL API.
+    #   Amazon API Gateway REST API, or an AppSync GraphQL API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListResourcesForWebACLRequest AWS API Documentation
@@ -4744,10 +4746,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4761,16 +4763,16 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of objects that you want AWS WAF to return for
-    #   this request. If more objects are available, in the response, AWS
-    #   WAF provides a `NextMarker` value that you can use in a subsequent
-    #   call to get the next batch of objects.
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListRuleGroupsRequest AWS API Documentation
@@ -4786,9 +4788,9 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] rule_groups
@@ -4815,16 +4817,16 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of objects that you want AWS WAF to return for
-    #   this request. If more objects are available, in the response, AWS
-    #   WAF provides a `NextMarker` value that you can use in a subsequent
-    #   call to get the next batch of objects.
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #   @return [Integer]
     #
     # @!attribute [rw] resource_arn
@@ -4844,9 +4846,9 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] tag_info_for_resource
@@ -4872,10 +4874,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4889,16 +4891,16 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of objects that you want AWS WAF to return for
-    #   this request. If more objects are available, in the response, AWS
-    #   WAF provides a `NextMarker` value that you can use in a subsequent
-    #   call to get the next batch of objects.
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListWebACLsRequest AWS API Documentation
@@ -4914,9 +4916,9 @@ module Aws::WAFV2
     # @!attribute [rw] next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, AWS WAF returns a `NextMarker` value in the response. To
-    #   retrieve the next batch of objects, provide the marker from the
-    #   prior call in your next request.
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
     #   @return [String]
     #
     # @!attribute [rw] web_acls
@@ -4932,10 +4934,10 @@ module Aws::WAFV2
     end
 
     # Defines an association between Amazon Kinesis Data Firehose
-    # destinations and a web ACL resource, for logging from AWS WAF. As part
-    # of the association, you can specify parts of the standard logging
-    # fields to keep out of the logs and you can specify filters so that you
-    # log only a subset of the logging records.
+    # destinations and a web ACL resource, for logging from WAF. As part of
+    # the association, you can specify parts of the standard logging fields
+    # to keep out of the logs and you can specify filters so that you log
+    # only a subset of the logging records.
     #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
@@ -5016,9 +5018,9 @@ module Aws::WAFV2
     #   @return [Array<Types::FieldToMatch>]
     #
     # @!attribute [rw] managed_by_firewall_manager
-    #   Indicates whether the logging configuration was created by AWS
-    #   Firewall Manager, as part of an AWS WAF policy configuration. If
-    #   true, only Firewall Manager can modify or delete the configuration.
+    #   Indicates whether the logging configuration was created by Firewall
+    #   Manager, as part of an WAF policy configuration. If true, only
+    #   Firewall Manager can modify or delete the configuration.
     #   @return [Boolean]
     #
     # @!attribute [rw] logging_filter
@@ -5092,7 +5094,7 @@ module Aws::WAFV2
     # rule group in this statement. You can retrieve the required names by
     # calling ListAvailableManagedRuleGroups.
     #
-    # You can't nest a `ManagedRuleGroupStatement`, for example for use
+    # You cannot nest a `ManagedRuleGroupStatement`, for example for use
     # inside a `NotStatement` or `OrStatement`. It can only be referenced as
     # a top-level statement within a rule.
     #
@@ -5140,7 +5142,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -5176,7 +5178,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5211,7 +5213,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5248,7 +5250,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5307,7 +5309,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5377,8 +5379,12 @@ module Aws::WAFV2
     #   @return [Array<Types::ExcludedRule>]
     #
     # @!attribute [rw] scope_down_statement
-    #   The processing guidance for a Rule, used by AWS WAF to determine
-    #   whether a web request matches the rule.
+    #   An optional nested statement that narrows the scope of the web
+    #   requests that are evaluated by the managed rule group. Requests are
+    #   only evaluated by the rule group if they match the scope-down
+    #   statement. You can use any nestable Statement in the scope-down
+    #   statement, and you can nest statements at any level, the same as you
+    #   can for a rule statement.
     #   @return [Types::Statement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupStatement AWS API Documentation
@@ -5396,9 +5402,9 @@ module Aws::WAFV2
     # ListAvailableManagedRuleGroups. This provides information like the
     # name and vendor name, that you provide when you add a
     # ManagedRuleGroupStatement to a web ACL. Managed rule groups include
-    # AWS Managed Rules rule groups, which are free of charge to AWS WAF
-    # customers, and AWS Marketplace managed rule groups, which you can
-    # subscribe to through AWS Marketplace.
+    # Amazon Web Services Managed Rules rule groups, which are free of
+    # charge to WAF customers, and Marketplace managed rule groups, which
+    # you can subscribe to through Marketplace.
     #
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
@@ -5411,8 +5417,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the managed rule group, provided by AWS Managed
-    #   Rules or the AWS Marketplace seller who manages it.
+    #   The description of the managed rule group, provided by Amazon Web
+    #   Services Managed Rules or the Marketplace seller who manages it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupSummary AWS API Documentation
@@ -5428,7 +5434,7 @@ module Aws::WAFV2
     # The HTTP method of a web request. The method indicates the type of
     # operation that the request is asking the origin to perform.
     #
-    # This is used only to indicate the web request component for AWS WAF to
+    # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
     # @api private
@@ -5437,8 +5443,8 @@ module Aws::WAFV2
     #
     class Method < Aws::EmptyStructure; end
 
-    # Specifies that AWS WAF should do nothing. This is generally used to
-    # try out a rule without performing any actions. You set the
+    # Specifies that WAF should do nothing. This is generally used to try
+    # out a rule without performing any actions. You set the
     # `OverrideAction` on the Rule.
     #
     # This is used in the context of other settings, for example to specify
@@ -5490,7 +5496,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -5526,7 +5532,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5561,7 +5567,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5598,7 +5604,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5657,7 +5663,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -5764,7 +5770,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #               positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -5800,7 +5806,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -5835,7 +5841,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -5872,7 +5878,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -5931,7 +5937,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -6154,8 +6160,8 @@ module Aws::WAFV2
     #   * `Effect` must specify `Allow`.
     #
     #   * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
-    #     and `wafv2:PutFirewallManagerRuleGroups`. AWS WAF rejects any
-    #     extra actions or wildcard actions in the policy.
+    #     and `wafv2:PutFirewallManagerRuleGroups`. WAF rejects any extra
+    #     actions or wildcard actions in the policy.
     #
     #   * The policy must not include a `Resource` parameter.
     #
@@ -6182,7 +6188,7 @@ module Aws::WAFV2
     # The query string of a web request. This is the part of a URL that
     # appears after a `?` character, if any.
     #
-    # This is used only to indicate the web request component for AWS WAF to
+    # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
     # @api private
@@ -6197,8 +6203,8 @@ module Aws::WAFV2
     # You can use this to put a temporary block on requests from an IP
     # address that is sending excessive requests.
     #
-    # When the rule action triggers, AWS WAF blocks additional requests from
-    # the IP address until the request rate falls below the limit.
+    # When the rule action triggers, WAF blocks additional requests from the
+    # IP address until the request rate falls below the limit.
     #
     # You can optionally nest another statement inside the rate-based
     # statement, to narrow the scope of the rule so that it only counts
@@ -6263,7 +6269,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -6299,7 +6305,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -6334,7 +6340,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -6371,7 +6377,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -6430,7 +6436,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -6506,10 +6512,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope_down_statement
-    #   An optional nested statement that narrows the scope of the
-    #   rate-based statement to matching web requests. This can be any
-    #   nestable statement, and you can nest statements at any level below
-    #   this scope-down statement.
+    #   An optional nested statement that narrows the scope of the web
+    #   requests that are evaluated by the rate-based statement. Requests
+    #   are only tracked by the rate-based statement if they match the
+    #   scope-down statement. You can use any nestable Statement in the
+    #   scope-down statement, and you can nest statements at any level, the
+    #   same as you can for a rule statement.
     #   @return [Types::Statement]
     #
     # @!attribute [rw] forwarded_ip_config
@@ -6518,8 +6526,8 @@ module Aws::WAFV2
     #   web request origin. Commonly, this is the X-Forwarded-For (XFF)
     #   header, but you can specify any header name.
     #
-    #   <note markdown="1"> If the specified header isn't present in the request, AWS WAF
-    #   doesn't apply the rule to the web request at all.
+    #   <note markdown="1"> If the specified header isn't present in the request, WAF doesn't
+    #   apply the rule to the web request at all.
     #
     #    </note>
     #
@@ -6579,8 +6587,8 @@ module Aws::WAFV2
 
     # Contains one or more regular expressions.
     #
-    # AWS WAF assigns an ARN to each `RegexPatternSet` that you create. To
-    # use a set in a rule, you provide the ARN to the Rule statement
+    # WAF assigns an ARN to each `RegexPatternSet` that you create. To use a
+    # set in a rule, you provide the ARN to the Rule statement
     # RegexPatternSetReferenceStatement.
     #
     # @!attribute [rw] name
@@ -6628,8 +6636,7 @@ module Aws::WAFV2
     # Each regex pattern set rule statement references a regex pattern set.
     # You create and maintain the set independent of your rules. This allows
     # you to use the single set in multiple rules. When you update the
-    # referenced set, AWS WAF automatically updates all rules that reference
-    # it.
+    # referenced set, WAF automatically updates all rules that reference it.
     #
     # @note When making an API call, you may pass RegexPatternSetReferenceStatement
     #   data as a hash:
@@ -6666,7 +6673,7 @@ module Aws::WAFV2
     #         text_transformations: [ # required
     #           {
     #             priority: 1, # required
-    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #           },
     #         ],
     #       }
@@ -6677,14 +6684,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want AWS WAF to inspect. For more
+    #   The part of a web request that you want WAF to inspect. For more
     #   information, see FieldToMatch.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, AWS WAF
+    #   you specify one or more transformations in a rule statement, WAF
     #   performs all transformations on the content of the request component
     #   identified by `FieldToMatch`, starting from the lowest priority
     #   setting, before inspecting the content for a match.
@@ -6722,14 +6729,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -6751,9 +6758,8 @@ module Aws::WAFV2
 
     # A single rule, which you can use in a WebACL or RuleGroup to identify
     # web requests that you want to allow, block, or count. Each rule
-    # includes one top-level Statement that AWS WAF uses to identify
-    # matching web requests, and parameters that govern how AWS WAF handles
-    # them.
+    # includes one top-level Statement that WAF uses to identify matching
+    # web requests, and parameters that govern how WAF handles them.
     #
     # @note When making an API call, you may pass Rule
     #   data as a hash:
@@ -6794,7 +6800,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -6830,7 +6836,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -6865,7 +6871,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -6902,7 +6908,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -6961,7 +6967,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
     #           },
@@ -7078,22 +7084,22 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   If you define more than one `Rule` in a `WebACL`, AWS WAF evaluates
-    #   each request against the `Rules` in order based on the value of
-    #   `Priority`. AWS WAF processes rules with lower priority first. The
+    #   If you define more than one `Rule` in a `WebACL`, WAF evaluates each
+    #   request against the `Rules` in order based on the value of
+    #   `Priority`. WAF processes rules with lower priority first. The
     #   priorities don't need to be consecutive, but they must all be
     #   different.
     #   @return [Integer]
     #
     # @!attribute [rw] statement
-    #   The AWS WAF processing statement for the rule, for example
+    #   The WAF processing statement for the rule, for example
     #   ByteMatchStatement or SizeConstraintStatement.
     #   @return [Types::Statement]
     #
     # @!attribute [rw] action
-    #   The action that AWS WAF should take on a web request when it matches
-    #   the rule statement. Settings at the web ACL level can override the
-    #   rule action setting.
+    #   The action that WAF should take on a web request when it matches the
+    #   rule statement. Settings at the web ACL level can override the rule
+    #   action setting.
     #
     #   This is used only for rules whose statements do not reference a rule
     #   group. Rule statements that reference a rule group include
@@ -7130,9 +7136,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] rule_labels
     #   Labels to apply to web requests that match the rule match statement.
-    #   AWS WAF applies fully qualified labels to matching web requests. A
-    #   fully qualified label is the concatenation of a label namespace and
-    #   a rule label. The rule's rule group or web ACL defines the label
+    #   WAF applies fully qualified labels to matching web requests. A fully
+    #   qualified label is the concatenation of a label namespace and a rule
+    #   label. The rule's rule group or web ACL defines the label
     #   namespace.
     #
     #   Rules that run after this rule in the web ACL can match against
@@ -7173,7 +7179,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The action that AWS WAF should take on a web request when it matches a
+    # The action that WAF should take on a web request when it matches a
     # rule's statement. Settings at the web ACL level can override the rule
     # action setting.
     #
@@ -7216,15 +7222,15 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] block
-    #   Instructs AWS WAF to block the web request.
+    #   Instructs WAF to block the web request.
     #   @return [Types::BlockAction]
     #
     # @!attribute [rw] allow
-    #   Instructs AWS WAF to allow the web request.
+    #   Instructs WAF to allow the web request.
     #   @return [Types::AllowAction]
     #
     # @!attribute [rw] count
-    #   Instructs AWS WAF to count the web request and allow it.
+    #   Instructs WAF to count the web request and allow it.
     #   @return [Types::CountAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleAction AWS API Documentation
@@ -7259,11 +7265,11 @@ module Aws::WAFV2
     #
     #   When you create your own rule group, you define this, and you cannot
     #   change it after creation. When you add or modify the rules in a rule
-    #   group, AWS WAF enforces this limit. You can check the capacity for a
-    #   set of rules using CheckCapacity.
+    #   group, WAF enforces this limit. You can check the capacity for a set
+    #   of rules using CheckCapacity.
     #
-    #   AWS WAF uses WCUs to calculate and control the operating resources
-    #   that are used to run your rules, rule groups, and web ACLs. AWS WAF
+    #   WAF uses WCUs to calculate and control the operating resources that
+    #   are used to run your rules, rule groups, and web ACLs. WAF
     #   calculates capacity differently for each rule type, to reflect the
     #   relative cost of each rule. Simple rules that cost little to run use
     #   fewer WCUs than more complex rules that use more processing power.
@@ -7283,8 +7289,8 @@ module Aws::WAFV2
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
     #   to allow, block, or count. Each rule includes one top-level
-    #   statement that AWS WAF uses to identify matching web requests, and
-    #   parameters that govern how AWS WAF handles them.
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -7301,11 +7307,10 @@ module Aws::WAFV2
     #
     #     `awswaf:<account ID>:rulegroup:<rule group name>:`
     #
-    #   * When a rule with a label matches a web request, AWS WAF adds the
-    #     fully qualified label to the request. A fully qualified label is
-    #     made up of the label namespace from the rule group or web ACL
-    #     where the rule is defined and the label from the rule, separated
-    #     by a colon:
+    #   * When a rule with a label matches a web request, WAF adds the fully
+    #     qualified label to the request. A fully qualified label is made up
+    #     of the label namespace from the rule group or web ACL where the
+    #     rule is defined and the label from the rule, separated by a colon:
     #
     #     `<label namespace>:<label from rule>`
     #   @return [String]
@@ -7317,12 +7322,12 @@ module Aws::WAFV2
     #   the rules that you define in the rule group.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][3] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -7333,7 +7338,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] available_labels
     #   The labels that one or more rules in this rule group add to matching
-    #   web ACLs. These labels are defined in the `RuleLabels` for a Rule.
+    #   web requests. These labels are defined in the `RuleLabels` for a
+    #   Rule.
     #   @return [Array<Types::LabelSummary>]
     #
     # @!attribute [rw] consumed_labels
@@ -7387,7 +7393,7 @@ module Aws::WAFV2
     #
     # @!attribute [rw] excluded_rules
     #   The names of rules that are in the referenced rule group, but that
-    #   you want AWS WAF to exclude from processing for this rule statement.
+    #   you want WAF to exclude from processing for this rule statement.
     #   @return [Array<Types::ExcludedRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleGroupReferenceStatement AWS API Documentation
@@ -7421,14 +7427,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -7459,8 +7465,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   The action that AWS WAF should take on a web request when it matches
-    #   a rule's statement. Settings at the web ACL level can override the
+    #   The action that WAF should take on a web request when it matches a
+    #   rule's statement. Settings at the web ACL level can override the
     #   rule action setting.
     #   @return [Types::RuleAction]
     #
@@ -7491,8 +7497,8 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] timestamp
-    #   The time at which AWS WAF received the request from your AWS
-    #   resource, in Unix time format (in seconds).
+    #   The time at which WAF received the request from your Amazon Web
+    #   Services resource, in Unix time format (in seconds).
     #   @return [Time]
     #
     # @!attribute [rw] action
@@ -7509,9 +7515,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] request_headers_inserted
-    #   Custom request headers inserted by AWS WAF into the request,
-    #   according to the custom request configuration for the matching rule
-    #   action.
+    #   Custom request headers inserted by WAF into the request, according
+    #   to the custom request configuration for the matching rule action.
     #   @return [Array<Types::HTTPHeader>]
     #
     # @!attribute [rw] response_code_sent
@@ -7519,7 +7524,7 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] labels
-    #   Labels applied to the web request by matching rules. AWS WAF applies
+    #   Labels applied to the web request by matching rules. WAF applies
     #   fully qualified labels to matching web requests. A fully qualified
     #   label is the concatenation of a label namespace and a rule label.
     #   The rule's rule group or web ACL defines the label namespace.
@@ -7547,7 +7552,7 @@ module Aws::WAFV2
     # One of the headers in a web request, identified by name, for example,
     # `User-Agent` or `Referer`. This setting isn't case sensitive.
     #
-    # This is used only to indicate the web request component for AWS WAF to
+    # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
     # @note When making an API call, you may pass SingleHeader
@@ -7597,11 +7602,10 @@ module Aws::WAFV2
     # (&gt;) or less than (&lt;). For example, you can use a size constraint
     # statement to look for query strings that are longer than 100 bytes.
     #
-    # If you configure AWS WAF to inspect the request body, AWS WAF inspects
-    # only the first 8192 bytes (8 KB). If the request body for your web
-    # requests never exceeds 8192 bytes, you can create a size constraint
-    # condition and block requests that have a request body greater than
-    # 8192 bytes.
+    # If you configure WAF to inspect the request body, WAF inspects only
+    # the first 8192 bytes (8 KB). If the request body for your web requests
+    # never exceeds 8192 bytes, you can create a size constraint condition
+    # and block requests that have a request body greater than 8192 bytes.
     #
     # If you choose URI for the value of Part of the request to filter on,
     # the slash (/) in the URI counts as one character. For example, the URI
@@ -7643,13 +7647,13 @@ module Aws::WAFV2
     #         text_transformations: [ # required
     #           {
     #             priority: 1, # required
-    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want AWS WAF to inspect. For more
+    #   The part of a web request that you want WAF to inspect. For more
     #   information, see FieldToMatch.
     #   @return [Types::FieldToMatch]
     #
@@ -7665,7 +7669,7 @@ module Aws::WAFV2
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, AWS WAF
+    #   you specify one or more transformations in a rule statement, WAF
     #   performs all transformations on the content of the request component
     #   identified by `FieldToMatch`, starting from the lowest priority
     #   setting, before inspecting the content for a match.
@@ -7687,9 +7691,9 @@ module Aws::WAFV2
     # requests that appear to contain malicious SQL code, create one or more
     # SQL injection match conditions. An SQL injection match condition
     # identifies the part of web requests, such as the URI or the query
-    # string, that you want AWS WAF to inspect. Later in the process, when
-    # you create a web ACL, you specify whether to allow or block requests
-    # that appear to contain malicious SQL code.
+    # string, that you want WAF to inspect. Later in the process, when you
+    # create a web ACL, you specify whether to allow or block requests that
+    # appear to contain malicious SQL code.
     #
     # @note When making an API call, you may pass SqliMatchStatement
     #   data as a hash:
@@ -7725,20 +7729,20 @@ module Aws::WAFV2
     #         text_transformations: [ # required
     #           {
     #             priority: 1, # required
-    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want AWS WAF to inspect. For more
+    #   The part of a web request that you want WAF to inspect. For more
     #   information, see FieldToMatch.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, AWS WAF
+    #   you specify one or more transformations in a rule statement, WAF
     #   performs all transformations on the content of the request component
     #   identified by `FieldToMatch`, starting from the lowest priority
     #   setting, before inspecting the content for a match.
@@ -7753,8 +7757,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The processing guidance for a Rule, used by AWS WAF to determine
-    # whether a web request matches the rule.
+    # The processing guidance for a Rule, used by WAF to determine whether a
+    # web request matches the rule.
     #
     # @note When making an API call, you may pass Statement
     #   data as a hash:
@@ -7792,7 +7796,7 @@ module Aws::WAFV2
     #           text_transformations: [ # required
     #             {
     #               priority: 1, # required
-    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #             },
     #           ],
     #           positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -7828,7 +7832,7 @@ module Aws::WAFV2
     #           text_transformations: [ # required
     #             {
     #               priority: 1, # required
-    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #             },
     #           ],
     #         },
@@ -7863,7 +7867,7 @@ module Aws::WAFV2
     #           text_transformations: [ # required
     #             {
     #               priority: 1, # required
-    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #             },
     #           ],
     #         },
@@ -7900,7 +7904,7 @@ module Aws::WAFV2
     #           text_transformations: [ # required
     #             {
     #               priority: 1, # required
-    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #             },
     #           ],
     #         },
@@ -7959,7 +7963,7 @@ module Aws::WAFV2
     #           text_transformations: [ # required
     #             {
     #               priority: 1, # required
-    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #             },
     #           ],
     #         },
@@ -7999,7 +8003,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #               positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -8035,7 +8039,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -8070,7 +8074,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -8107,7 +8111,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -8166,7 +8170,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -8249,7 +8253,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #                 positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -8285,7 +8289,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8320,7 +8324,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8357,7 +8361,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8416,7 +8420,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8498,7 +8502,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #                 positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -8534,7 +8538,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8569,7 +8573,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8606,7 +8610,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8665,7 +8669,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -8746,7 +8750,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #               positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -8782,7 +8786,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -8817,7 +8821,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -8854,7 +8858,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -8913,7 +8917,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -9004,7 +9008,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #               positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -9040,7 +9044,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -9075,7 +9079,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -9112,7 +9116,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -9171,7 +9175,7 @@ module Aws::WAFV2
     #               text_transformations: [ # required
     #                 {
     #                   priority: 1, # required
-    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
     #             },
@@ -9221,13 +9225,12 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] byte_match_statement
-    #   A rule statement that defines a string match search for AWS WAF to
-    #   apply to web requests. The byte match statement provides the bytes
-    #   to search for, the location in requests that you want AWS WAF to
-    #   search, and other settings. The bytes to search for are typically a
-    #   string that corresponds with ASCII characters. In the AWS WAF
-    #   console and the developer guide, this is refered to as a string
-    #   match statement.
+    #   A rule statement that defines a string match search for WAF to apply
+    #   to web requests. The byte match statement provides the bytes to
+    #   search for, the location in requests that you want WAF to search,
+    #   and other settings. The bytes to search for are typically a string
+    #   that corresponds with ASCII characters. In the WAF console and the
+    #   developer guide, this is refered to as a string match statement.
     #   @return [Types::ByteMatchStatement]
     #
     # @!attribute [rw] sqli_match_statement
@@ -9236,20 +9239,20 @@ module Aws::WAFV2
     #   requests that appear to contain malicious SQL code, create one or
     #   more SQL injection match conditions. An SQL injection match
     #   condition identifies the part of web requests, such as the URI or
-    #   the query string, that you want AWS WAF to inspect. Later in the
+    #   the query string, that you want WAF to inspect. Later in the
     #   process, when you create a web ACL, you specify whether to allow or
     #   block requests that appear to contain malicious SQL code.
     #   @return [Types::SqliMatchStatement]
     #
     # @!attribute [rw] xss_match_statement
     #   A rule statement that defines a cross-site scripting (XSS) match
-    #   search for AWS WAF to apply to web requests. XSS attacks are those
-    #   where the attacker uses vulnerabilities in a benign website as a
-    #   vehicle to inject malicious client-site scripts into other
-    #   legitimate web browsers. The XSS match statement provides the
-    #   location in requests that you want AWS WAF to search and text
-    #   transformations to use on the search area before AWS WAF searches
-    #   for character sequences that are likely to be malicious strings.
+    #   search for WAF to apply to web requests. XSS attacks are those where
+    #   the attacker uses vulnerabilities in a benign website as a vehicle
+    #   to inject malicious client-site scripts into other legitimate web
+    #   browsers. The XSS match statement provides the location in requests
+    #   that you want WAF to search and text transformations to use on the
+    #   search area before WAF searches for character sequences that are
+    #   likely to be malicious strings.
     #   @return [Types::XssMatchStatement]
     #
     # @!attribute [rw] size_constraint_statement
@@ -9259,11 +9262,11 @@ module Aws::WAFV2
     #   constraint statement to look for query strings that are longer than
     #   100 bytes.
     #
-    #   If you configure AWS WAF to inspect the request body, AWS WAF
-    #   inspects only the first 8192 bytes (8 KB). If the request body for
-    #   your web requests never exceeds 8192 bytes, you can create a size
-    #   constraint condition and block requests that have a request body
-    #   greater than 8192 bytes.
+    #   If you configure WAF to inspect the request body, WAF inspects only
+    #   the first 8192 bytes (8 KB). If the request body for your web
+    #   requests never exceeds 8192 bytes, you can create a size constraint
+    #   condition and block requests that have a request body greater than
+    #   8192 bytes.
     #
     #   If you choose URI for the value of Part of the request to filter on,
     #   the slash (/) in the URI counts as one character. For example, the
@@ -9294,7 +9297,7 @@ module Aws::WAFV2
     #   Each IP set rule statement references an IP set. You create and
     #   maintain the set independent of your rules. This allows you to use
     #   the single set in multiple rules. When you update the referenced
-    #   set, AWS WAF automatically updates all rules that reference it.
+    #   set, WAF automatically updates all rules that reference it.
     #   @return [Types::IPSetReferenceStatement]
     #
     # @!attribute [rw] regex_pattern_set_reference_statement
@@ -9309,7 +9312,7 @@ module Aws::WAFV2
     #   Each regex pattern set rule statement references a regex pattern
     #   set. You create and maintain the set independent of your rules. This
     #   allows you to use the single set in multiple rules. When you update
-    #   the referenced set, AWS WAF automatically updates all rules that
+    #   the referenced set, WAF automatically updates all rules that
     #   reference it.
     #   @return [Types::RegexPatternSetReferenceStatement]
     #
@@ -9320,8 +9323,8 @@ module Aws::WAFV2
     #   time span. You can use this to put a temporary block on requests
     #   from an IP address that is sending excessive requests.
     #
-    #   When the rule action triggers, AWS WAF blocks additional requests
-    #   from the IP address until the request rate falls below the limit.
+    #   When the rule action triggers, WAF blocks additional requests from
+    #   the IP address until the request rate falls below the limit.
     #
     #   You can optionally nest another statement inside the rate-based
     #   statement, to narrow the scope of the rule so that it only counts
@@ -9371,7 +9374,7 @@ module Aws::WAFV2
     #   rule group in this statement. You can retrieve the required names by
     #   calling ListAvailableManagedRuleGroups.
     #
-    #   You can't nest a `ManagedRuleGroupStatement`, for example for use
+    #   You cannot nest a `ManagedRuleGroupStatement`, for example for use
     #   inside a `NotStatement` or `OrStatement`. It can only be referenced
     #   as a top-level statement within a rule.
     #   @return [Types::ManagedRuleGroupStatement]
@@ -9387,9 +9390,8 @@ module Aws::WAFV2
     #   Fully qualified labels have a prefix, optional namespaces, and label
     #   name. The prefix identifies the rule group or web ACL context of the
     #   rule that added the label. If you do not provide the fully qualified
-    #   name in your label match string, AWS WAF performs the search for
-    #   labels that were added in the same context as the label match
-    #   statement.
+    #   name in your label match string, WAF performs the search for labels
+    #   that were added in the same context as the label match statement.
     #   @return [Types::LabelMatchStatement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Statement AWS API Documentation
@@ -9413,19 +9415,19 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # A tag associated with an AWS resource. Tags are key:value pairs that
-    # you can use to categorize and manage your resources, for purposes like
-    # billing or other management. Typically, the tag key represents a
-    # category, such as "environment", and the tag value represents a
-    # specific value within that category, such as "test,"
-    # "development," or "production". Or you might set the tag key to
-    # "customer" and the value to the customer name or ID. You can specify
-    # one or more tags to add to each AWS resource, up to 50 tags for a
-    # resource.
+    # A tag associated with an Amazon Web Services resource. Tags are
+    # key:value pairs that you can use to categorize and manage your
+    # resources, for purposes like billing or other management. Typically,
+    # the tag key represents a category, such as "environment", and the
+    # tag value represents a specific value within that category, such as
+    # "test," "development," or "production". Or you might set the tag
+    # key to "customer" and the value to the customer name or ID. You can
+    # specify one or more tags to add to each Amazon Web Services resource,
+    # up to 50 tags for a resource.
     #
-    # You can tag the AWS resources that you manage through AWS WAF: web
-    # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
-    # or view tags through the AWS WAF console.
+    # You can tag the Amazon Web Services resources that you manage through
+    # WAF: web ACLs, rule groups, IP sets, and regex pattern sets. You
+    # can't manage or view tags through the WAF console.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -9456,19 +9458,19 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The collection of tagging definitions for an AWS resource. Tags are
-    # key:value pairs that you can use to categorize and manage your
-    # resources, for purposes like billing or other management. Typically,
-    # the tag key represents a category, such as "environment", and the
-    # tag value represents a specific value within that category, such as
-    # "test," "development," or "production". Or you might set the tag
-    # key to "customer" and the value to the customer name or ID. You can
-    # specify one or more tags to add to each AWS resource, up to 50 tags
-    # for a resource.
+    # The collection of tagging definitions for an Amazon Web Services
+    # resource. Tags are key:value pairs that you can use to categorize and
+    # manage your resources, for purposes like billing or other management.
+    # Typically, the tag key represents a category, such as "environment",
+    # and the tag value represents a specific value within that category,
+    # such as "test," "development," or "production". Or you might set
+    # the tag key to "customer" and the value to the customer name or ID.
+    # You can specify one or more tags to add to each Amazon Web Services
+    # resource, up to 50 tags for a resource.
     #
-    # You can tag the AWS resources that you manage through AWS WAF: web
-    # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
-    # or view tags through the AWS WAF console.
+    # You can tag the Amazon Web Services resources that you manage through
+    # WAF: web ACLs, rule groups, IP sets, and regex pattern sets. You
+    # can't manage or view tags through the WAF console.
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -9529,60 +9531,77 @@ module Aws::WAFV2
     #
     #       {
     #         priority: 1, # required
-    #         type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #         type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #       }
     #
     # @!attribute [rw] priority
     #   Sets the relative processing order for multiple transformations that
-    #   are defined for a rule statement. AWS WAF processes all
-    #   transformations, from lowest priority to highest, before inspecting
-    #   the transformed content. The priorities don't need to be
-    #   consecutive, but they must all be different.
+    #   are defined for a rule statement. WAF processes all transformations,
+    #   from lowest priority to highest, before inspecting the transformed
+    #   content. The priorities don't need to be consecutive, but they must
+    #   all be different.
     #   @return [Integer]
     #
     # @!attribute [rw] type
     #   You can specify the following transformation types:
     #
-    #   **CMD\_LINE**
+    #   **BASE64\_DECODE** - Decode a `Base64`-encoded string.
     #
-    #   When you're concerned that attackers are injecting an operating
-    #   system command line command and using unusual formatting to disguise
-    #   some or all of the command, use this option to perform the following
-    #   transformations:
+    #   **BASE64\_DECODE\_EXT** - Decode a `Base64`-encoded string, but use
+    #   a forgiving implementation that ignores characters that aren't
+    #   valid.
     #
-    #   * Delete the following characters: \\ " ' ^
+    #   **CMD\_LINE** - Command-line transformations. These are helpful in
+    #   reducing effectiveness of attackers who inject an operating system
+    #   command-line command and use unusual formatting to disguise some or
+    #   all of the command.
     #
-    #   * Delete spaces before the following characters: / (
+    #   * Delete the following characters: `\ " ' ^`
     #
-    #   * Replace the following characters with a space: , ;
+    #   * Delete spaces before the following characters: `/ (`
+    #
+    #   * Replace the following characters with a space: `, ;`
     #
     #   * Replace multiple spaces with one space
     #
     #   * Convert uppercase letters (A-Z) to lowercase (a-z)
     #
-    #   **COMPRESS\_WHITE\_SPACE**
-    #
-    #   Use this option to replace the following characters with a space
+    #   **COMPRESS\_WHITE\_SPACE** - Replace these characters with a space
     #   character (decimal 32):
     #
-    #   * \\f, formfeed, decimal 12
+    #   * `\f`, formfeed, decimal 12
     #
-    #   * \\t, tab, decimal 9
+    #   * `\t`, tab, decimal 9
     #
-    #   * \\n, newline, decimal 10
+    #   * `\n`, newline, decimal 10
     #
-    #   * \\r, carriage return, decimal 13
+    #   * `\r`, carriage return, decimal 13
     #
-    #   * \\v, vertical tab, decimal 11
+    #   * `\v`, vertical tab, decimal 11
     #
-    #   * non-breaking space, decimal 160
+    #   * Non-breaking space, decimal 160
     #
     #   `COMPRESS_WHITE_SPACE` also replaces multiple spaces with one space.
     #
-    #   **HTML\_ENTITY\_DECODE**
+    #   **CSS\_DECODE** - Decode characters that were encoded using CSS 2.x
+    #   escape rules `syndata.html#characters`. This function uses up to two
+    #   bytes in the decoding process, so it can help to uncover ASCII
+    #   characters that were encoded using CSS encoding that wouldn’t
+    #   typically be encoded. It's also useful in countering evasion, which
+    #   is a combination of a backslash and non-hexadecimal characters. For
+    #   example, `ja\vascript` for javascript.
     #
-    #   Use this option to replace HTML-encoded characters with unencoded
-    #   characters. `HTML_ENTITY_DECODE` performs the following operations:
+    #   **ESCAPE\_SEQ\_DECODE** - Decode the following ANSI C escape
+    #   sequences: `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`, `\`, `\?`,
+    #   `'`, `"`, `\xHH` (hexadecimal), `\0OOO` (octal). Encodings that
+    #   aren't valid remain in the output.
+    #
+    #   **HEX\_DECODE** - Decode a string of hexadecimal characters into a
+    #   binary.
+    #
+    #   **HTML\_ENTITY\_DECODE** - Replace HTML-encoded characters with
+    #   unencoded characters. `HTML_ENTITY_DECODE` performs these
+    #   operations:
     #
     #   * Replaces `(ampersand)quot;` with `"`
     #
@@ -9598,18 +9617,54 @@ module Aws::WAFV2
     #   * Replaces characters that are represented in decimal format,
     #     `(ampersand)#nnnn;`, with the corresponding characters
     #
-    #   **LOWERCASE**
+    #   **JS\_DECODE** - Decode JavaScript escape sequences. If a `` `u`
+    #   `HHHH` code is in the full-width ASCII code range of `FF01-FF5E`,
+    #   then the higher byte is used to detect and adjust the lower byte. If
+    #   not, only the lower byte is used and the higher byte is zeroed,
+    #   causing a possible loss of information.
     #
-    #   Use this option to convert uppercase letters (A-Z) to lowercase
-    #   (a-z).
+    #   **LOWERCASE** - Convert uppercase letters (A-Z) to lowercase (a-z).
     #
-    #   **URL\_DECODE**
+    #   **MD5** - Calculate an MD5 hash from the data in the input. The
+    #   computed hash is in a raw binary form.
     #
-    #   Use this option to decode a URL-encoded value.
+    #   **NONE** - Specify `NONE` if you don't want any text
+    #   transformations.
     #
-    #   **NONE**
+    #   **NORMALIZE\_PATH** - Remove multiple slashes, directory
+    #   self-references, and directory back-references that are not at the
+    #   beginning of the input from an input string.
     #
-    #   Specify `NONE` if you don't want any text transformations.
+    #   **NORMALIZE\_PATH\_WIN** - This is the same as `NORMALIZE_PATH`, but
+    #   first converts backslash characters to forward slashes.
+    #
+    #   **REMOVE\_NULLS** - Remove all `NULL` bytes from the input.
+    #
+    #   **REPLACE\_COMMENTS** - Replace each occurrence of a C-style comment
+    #   (`/* ... */`) with a single space. Multiple consecutive occurrences
+    #   are not compressed. Unterminated comments are also replaced with a
+    #   space (ASCII 0x20). However, a standalone termination of a comment
+    #   (`*/`) is not acted upon.
+    #
+    #   **REPLACE\_NULLS** - Replace NULL bytes in the input with space
+    #   characters (ASCII `0x20`).
+    #
+    #   **SQL\_HEX\_DECODE** - Decode the following ANSI C escape sequences:
+    #   `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`, `\`, `\?`, `'`, `"`,
+    #   `\xHH` (hexadecimal), `\0OOO` (octal). Encodings that aren't valid
+    #   remain in the output.
+    #
+    #   **URL\_DECODE** - Decode a URL-encoded value.
+    #
+    #   **URL\_DECODE\_UNI** - Like `URL_DECODE`, but with support for
+    #   Microsoft-specific `%u` encoding. If the code is in the full-width
+    #   ASCII code range of `FF01-FF5E`, the higher byte is used to detect
+    #   and adjust the lower byte. Otherwise, only the lower byte is used
+    #   and the higher byte is zeroed.
+    #
+    #   **UTF8\_TO\_UNICODE** - Convert all UTF-8 character sequences to
+    #   Unicode. This helps input normalization, and minimizing
+    #   false-positives and false-negatives for non-English languages.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/TextTransformation AWS API Documentation
@@ -9622,8 +9677,8 @@ module Aws::WAFV2
     end
 
     # In a GetSampledRequests request, the `StartTime` and `EndTime` objects
-    # specify the time range for which you want AWS WAF to return a sample
-    # of web requests.
+    # specify the time range for which you want WAF to return a sample of
+    # web requests.
     #
     # You must specify the times in Coordinated Universal Time (UTC) format.
     # UTC format includes the special designator, `Z`. For example,
@@ -9631,12 +9686,12 @@ module Aws::WAFV2
     # three hours.
     #
     # In a GetSampledRequests response, the `StartTime` and `EndTime`
-    # objects specify the time range for which AWS WAF actually returned a
-    # sample of web requests. AWS WAF gets the specified number of requests
-    # from among the first 5,000 requests that your AWS resource receives
-    # during the specified time period. If your resource receives more than
-    # 5,000 requests during that period, AWS WAF stops sampling after the
-    # 5,000th request. In that case, `EndTime` is the time that AWS WAF
+    # objects specify the time range for which WAF actually returned a
+    # sample of web requests. WAF gets the specified number of requests from
+    # among the first 5,000 requests that your Amazon Web Services resource
+    # receives during the specified time period. If your resource receives
+    # more than 5,000 requests during that period, WAF stops sampling after
+    # the 5,000th request. In that case, `EndTime` is the time that WAF
     # received the 5,000th request.
     #
     # @note When making an API call, you may pass TimeWindow
@@ -9650,19 +9705,19 @@ module Aws::WAFV2
     # @!attribute [rw] start_time
     #   The beginning of the time range from which you want
     #   `GetSampledRequests` to return a sample of the requests that your
-    #   AWS resource received. You must specify the times in Coordinated
-    #   Universal Time (UTC) format. UTC format includes the special
-    #   designator, `Z`. For example, `"2016-09-27T14:50Z"`. You can specify
-    #   any time range in the previous three hours.
+    #   Amazon Web Services resource received. You must specify the times in
+    #   Coordinated Universal Time (UTC) format. UTC format includes the
+    #   special designator, `Z`. For example, `"2016-09-27T14:50Z"`. You can
+    #   specify any time range in the previous three hours.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time range from which you want `GetSampledRequests`
-    #   to return a sample of the requests that your AWS resource received.
-    #   You must specify the times in Coordinated Universal Time (UTC)
-    #   format. UTC format includes the special designator, `Z`. For
-    #   example, `"2016-09-27T14:50Z"`. You can specify any time range in
-    #   the previous three hours.
+    #   to return a sample of the requests that your Amazon Web Services
+    #   resource received. You must specify the times in Coordinated
+    #   Universal Time (UTC) format. UTC format includes the special
+    #   designator, `Z`. For example, `"2016-09-27T14:50Z"`. You can specify
+    #   any time range in the previous three hours.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/TimeWindow AWS API Documentation
@@ -9722,10 +9777,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -9749,25 +9804,24 @@ module Aws::WAFV2
     # @!attribute [rw] addresses
     #   Contains an array of strings that specify one or more IP addresses
     #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
-    #   /0.
+    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
     #
     #   Examples:
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address 192.0.2.44, specify
     #     `192.0.2.44/32`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
     #     specify `192.0.2.0/24`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address
     #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure AWS WAF to allow, block, or count requests that
+    #   * To configure WAF to allow, block, or count requests that
     #     originated from IP addresses
     #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
@@ -9782,14 +9836,14 @@ module Aws::WAFV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -9807,9 +9861,9 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] next_lock_token
-    #   A token used for optimistic locking. AWS WAF returns this token to
-    #   your update requests. You use `NextLockToken` in the same manner as
-    #   you use `LockToken`.
+    #   A token used for optimistic locking. WAF returns this token to your
+    #   update requests. You use `NextLockToken` in the same manner as you
+    #   use `LockToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateIPSetResponse AWS API Documentation
@@ -9842,10 +9896,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -9870,14 +9924,14 @@ module Aws::WAFV2
     #   @return [Array<Types::Regex>]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -9895,9 +9949,9 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] next_lock_token
-    #   A token used for optimistic locking. AWS WAF returns this token to
-    #   your update requests. You use `NextLockToken` in the same manner as
-    #   you use `LockToken`.
+    #   A token used for optimistic locking. WAF returns this token to your
+    #   update requests. You use `NextLockToken` in the same manner as you
+    #   use `LockToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateRegexPatternSetResponse AWS API Documentation
@@ -9953,7 +10007,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #                 positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -9989,7 +10043,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10024,7 +10078,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10061,7 +10115,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10120,7 +10174,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10251,10 +10305,10 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -10278,8 +10332,8 @@ module Aws::WAFV2
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
     #   to allow, block, or count. Each rule includes one top-level
-    #   statement that AWS WAF uses to identify matching web requests, and
-    #   parameters that govern how AWS WAF handles them.
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -10288,14 +10342,14 @@ module Aws::WAFV2
     #   @return [Types::VisibilityConfig]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -10306,12 +10360,12 @@ module Aws::WAFV2
     #   the rules that you define in the rule group.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][3] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -10336,9 +10390,9 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] next_lock_token
-    #   A token used for optimistic locking. AWS WAF returns this token to
-    #   your update requests. You use `NextLockToken` in the same manner as
-    #   you use `LockToken`.
+    #   A token used for optimistic locking. WAF returns this token to your
+    #   update requests. You use `NextLockToken` in the same manner as you
+    #   use `LockToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateRuleGroupResponse AWS API Documentation
@@ -10418,7 +10472,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #                 positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -10454,7 +10508,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10489,7 +10543,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10526,7 +10580,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10585,7 +10639,7 @@ module Aws::WAFV2
     #                 text_transformations: [ # required
     #                   {
     #                     priority: 1, # required
-    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
     #               },
@@ -10711,15 +10765,15 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   The name of the web ACL. You cannot change the name of a web ACL
     #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Specifies whether this is for an AWS CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
-    #   API.
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -10731,7 +10785,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the Web ACL. This ID is returned in the
+    #   The unique identifier for the web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #   @return [String]
@@ -10742,14 +10796,14 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification.
+    #   A description of the web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
     #   to allow, block, or count. Each rule includes one top-level
-    #   statement that AWS WAF uses to identify matching web requests, and
-    #   parameters that govern how AWS WAF handles them.
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -10758,14 +10812,14 @@ module Aws::WAFV2
     #   @return [Types::VisibilityConfig]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -10776,12 +10830,12 @@ module Aws::WAFV2
     #   rules and default actions that you define in the web ACL.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][3] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -10807,9 +10861,9 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] next_lock_token
-    #   A token used for optimistic locking. AWS WAF returns this token to
-    #   your update requests. You use `NextLockToken` in the same manner as
-    #   you use `LockToken`.
+    #   A token used for optimistic locking. WAF returns this token to your
+    #   update requests. You use `NextLockToken` in the same manner as you
+    #   use `LockToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateWebACLResponse AWS API Documentation
@@ -10821,10 +10875,10 @@ module Aws::WAFV2
     end
 
     # The path component of the URI of a web request. This is the part of a
-    # web request that identifies a resource, for example,
+    # web request that identifies a resource. For example,
     # `/images/daily-ad.jpg`.
     #
-    # This is used only to indicate the web request component for AWS WAF to
+    # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
     # @api private
@@ -10846,14 +10900,14 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] sampled_requests_enabled
-    #   A boolean indicating whether AWS WAF should store a sampling of the
-    #   web requests that match the rules. You can view the sampled requests
-    #   through the AWS WAF console.
+    #   A boolean indicating whether WAF should store a sampling of the web
+    #   requests that match the rules. You can view the sampled requests
+    #   through the WAF console.
     #   @return [Boolean]
     #
     # @!attribute [rw] cloud_watch_metrics_enabled
     #   A boolean indicating whether the associated resource sends metrics
-    #   to CloudWatch. For the list of available metrics, see [AWS WAF
+    #   to Amazon CloudWatch. For the list of available metrics, see [WAF
     #   Metrics][1].
     #
     #
@@ -10862,10 +10916,10 @@ module Aws::WAFV2
     #   @return [Boolean]
     #
     # @!attribute [rw] metric_name
-    #   A name of the CloudWatch metric. The name can contain only the
-    #   characters: A-Z, a-z, 0-9, - (hyphen), and \_ (underscore). The name
-    #   can be from one to 128 characters long. It can't contain whitespace
-    #   or metric names reserved for AWS WAF, for example "All" and
+    #   A name of the Amazon CloudWatch metric. The name can contain only
+    #   the characters: A-Z, a-z, 0-9, - (hyphen), and \_ (underscore). The
+    #   name can be from one to 128 characters long. It can't contain
+    #   whitespace or metric names reserved for WAF, for example "All" and
     #   "Default\_Action."
     #   @return [String]
     #
@@ -10879,8 +10933,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t perform the operation because your resource is being
-    # used by another resource or it’s associated with another resource.
+    # WAF couldn’t perform the operation because your resource is being used
+    # by another resource or it’s associated with another resource.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -10893,8 +10947,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t perform the operation because the resource that you
-    # tried to save is a duplicate of an existing one.
+    # WAF couldn’t perform the operation because the resource that you tried
+    # to save is a duplicate of an existing one.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -10907,8 +10961,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Your request is valid, but AWS WAF couldn’t perform the operation
-    # because of a system problem. Retry your request.
+    # Your request is valid, but WAF couldn’t perform the operation because
+    # of a system problem. Retry your request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -10934,10 +10988,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The operation failed because AWS WAF didn't recognize a parameter in
-    # the request. For example:
+    # The operation failed because WAF didn't recognize a parameter in the
+    # request. For example:
     #
-    # * You specified an invalid parameter name or value.
+    # * You specified a parameter name or value that isn't valid.
     #
     # * Your nested statement isn't valid. You might have tried to nest a
     #   statement that can’t be nested.
@@ -10946,7 +11000,7 @@ module Aws::WAFV2
     #   among the types available at DefaultAction.
     #
     # * Your request references an ARN that is malformed, or corresponds to
-    #   a resource with which a Web ACL cannot be associated.
+    #   a resource with which a web ACL can't be associated.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -10985,7 +11039,7 @@ module Aws::WAFV2
     # * `Effect` must specify `Allow`.
     #
     # * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
-    #   and `wafv2:PutFirewallManagerRuleGroups`. AWS WAF rejects any extra
+    #   and `wafv2:PutFirewallManagerRuleGroups`. WAF rejects any extra
     #   actions or wildcard actions in the policy.
     #
     # * The policy must not include a `Resource` parameter.
@@ -11007,7 +11061,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t perform the operation because the resource that you
+    # WAF couldn’t perform the operation because the resource that you
     # requested isn’t valid. Check the resource, and try again.
     #
     # @!attribute [rw] message
@@ -11021,10 +11075,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t perform the operation because you exceeded your
-    # resource limit. For example, the maximum number of `WebACL` objects
-    # that you can create for an AWS account. For more information, see
-    # [Limits][1] in the *AWS WAF Developer Guide*.
+    # WAF couldn’t perform the operation because you exceeded your resource
+    # limit. For example, the maximum number of `WebACL` objects that you
+    # can create for an account. For more information, see [Limits][1] in
+    # the *WAF Developer Guide*.
     #
     #
     #
@@ -11041,7 +11095,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t perform the operation because your resource doesn’t
+    # WAF couldn’t perform the operation because your resource doesn’t
     # exist.
     #
     # @!attribute [rw] message
@@ -11055,10 +11109,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t save your changes because you tried to update or
-    # delete a resource that has changed since you last retrieved it. Get
-    # the resource again, make any changes you need to make to the new copy,
-    # and retry your operation.
+    # WAF couldn’t save your changes because you tried to update or delete a
+    # resource that has changed since you last retrieved it. Get the
+    # resource again, make any changes you need to make to the new copy, and
+    # retry your operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -11071,9 +11125,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF is not able to access the service linked role. This can be
-    # caused by a previous `PutLoggingConfiguration` request, which can lock
-    # the service linked role for about 20 seconds. Please try your request
+    # WAF is not able to access the service linked role. This can be caused
+    # by a previous `PutLoggingConfiguration` request, which can lock the
+    # service linked role for about 20 seconds. Please try your request
     # again. The service linked role can also be locked by a previous
     # `DeleteServiceLinkedRole` request, which can lock the role for 15
     # minutes or more. If you recently made a call to
@@ -11119,7 +11173,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t perform your tagging operation because of an internal
+    # WAF couldn’t perform your tagging operation because of an internal
     # error. Retry your request.
     #
     # @!attribute [rw] message
@@ -11133,7 +11187,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # AWS WAF couldn’t retrieve the resource that you requested. Retry your
+    # WAF couldn’t retrieve the resource that you requested. Retry your
     # request.
     #
     # @!attribute [rw] message
@@ -11147,18 +11201,19 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # A Web ACL defines a collection of rules to use to inspect and control
+    # A web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the Web ACL, you
+    # for requests that match the statement of the rule. In the web ACL, you
     # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a Web ACL can be a
+    # does not match any of the rules. The rules in a web ACL can be a
     # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a Web ACL with one or more AWS resources to protect. The
-    # resources can be Amazon CloudFront, an Amazon API Gateway REST API, an
-    # Application Load Balancer, or an AWS AppSync GraphQL API.
+    # can associate a web ACL with one or more Amazon Web Services resources
+    # to protect. The resources can be an Amazon CloudFront distribution, an
+    # Amazon API Gateway REST API, an Application Load Balancer, or an
+    # AppSync GraphQL API.
     #
     # @!attribute [rw] name
-    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   The name of the web ACL. You cannot change the name of a web ACL
     #   after you create it.
     #   @return [String]
     #
@@ -11169,7 +11224,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Web ACL that you want to
+    #   The Amazon Resource Name (ARN) of the web ACL that you want to
     #   associate with the resource.
     #   @return [String]
     #
@@ -11179,14 +11234,14 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification.
+    #   A description of the web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
     #   to allow, block, or count. Each rule includes one top-level
-    #   statement that AWS WAF uses to identify matching web requests, and
-    #   parameters that govern how AWS WAF handles them.
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -11198,8 +11253,8 @@ module Aws::WAFV2
     #   The web ACL capacity units (WCUs) currently being used by this web
     #   ACL.
     #
-    #   AWS WAF uses WCUs to calculate and control the operating resources
-    #   that are used to run your rules, rule groups, and web ACLs. AWS WAF
+    #   WAF uses WCUs to calculate and control the operating resources that
+    #   are used to run your rules, rule groups, and web ACLs. WAF
     #   calculates capacity differently for each rule type, to reflect the
     #   relative cost of each rule. Simple rules that cost little to run use
     #   fewer WCUs than more complex rules that use more processing power.
@@ -11209,10 +11264,10 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] pre_process_firewall_manager_rule_groups
-    #   The first set of rules for AWS WAF to process in the web ACL. This
-    #   is defined in an AWS Firewall Manager WAF policy and contains only
-    #   rule group references. You can't alter these. Any rules and rule
-    #   groups that you define for the web ACL are prioritized after these.
+    #   The first set of rules for WAF to process in the web ACL. This is
+    #   defined in an Firewall Manager WAF policy and contains only rule
+    #   group references. You can't alter these. Any rules and rule groups
+    #   that you define for the web ACL are prioritized after these.
     #
     #   In the Firewall Manager WAF policy, the Firewall Manager
     #   administrator can define a set of rule groups to run first in the
@@ -11222,8 +11277,8 @@ module Aws::WAFV2
     #   @return [Array<Types::FirewallManagerRuleGroup>]
     #
     # @!attribute [rw] post_process_firewall_manager_rule_groups
-    #   The last set of rules for AWS WAF to process in the web ACL. This is
-    #   defined in an AWS Firewall Manager WAF policy and contains only rule
+    #   The last set of rules for WAF to process in the web ACL. This is
+    #   defined in an Firewall Manager WAF policy and contains only rule
     #   group references. You can't alter these. Any rules and rule groups
     #   that you define for the web ACL are prioritized before these.
     #
@@ -11235,9 +11290,9 @@ module Aws::WAFV2
     #   @return [Array<Types::FirewallManagerRuleGroup>]
     #
     # @!attribute [rw] managed_by_firewall_manager
-    #   Indicates whether this web ACL is managed by AWS Firewall Manager.
-    #   If true, then only AWS Firewall Manager can delete the web ACL or
-    #   any Firewall Manager rule groups in the web ACL.
+    #   Indicates whether this web ACL is managed by Firewall Manager. If
+    #   true, then only Firewall Manager can delete the web ACL or any
+    #   Firewall Manager rule groups in the web ACL.
     #   @return [Boolean]
     #
     # @!attribute [rw] label_namespace
@@ -11249,11 +11304,10 @@ module Aws::WAFV2
     #
     #     `awswaf:<account ID>:webacl:<web ACL name>:`
     #
-    #   * When a rule with a label matches a web request, AWS WAF adds the
-    #     fully qualified label to the request. A fully qualified label is
-    #     made up of the label namespace from the rule group or web ACL
-    #     where the rule is defined and the label from the rule, separated
-    #     by a colon:
+    #   * When a rule with a label matches a web request, WAF adds the fully
+    #     qualified label to the request. A fully qualified label is made up
+    #     of the label namespace from the rule group or web ACL where the
+    #     rule is defined and the label from the rule, separated by a colon:
     #
     #     `<label namespace>:<label from rule>`
     #   @return [String]
@@ -11265,12 +11319,12 @@ module Aws::WAFV2
     #   rules and default actions that you define in the web ACL.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
-    #   WAF Developer Guide][2].
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom
-    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
-    #   WAF Developer Guide][2].
+    #   request and response settings, see [WAF quotas][3] in the [WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -11305,29 +11359,29 @@ module Aws::WAFV2
     # to operations like AssociateWebACL.
     #
     # @!attribute [rw] name
-    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   The name of the web ACL. You cannot change the name of a web ACL
     #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the Web ACL. This ID is returned in the
+    #   The unique identifier for the web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification.
+    #   A description of the web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. AWS WAF returns a token to your
-    #   get and list requests, to mark the state of the entity at the time
-    #   of the request. To make changes to the entity associated with the
+    #   A token used for optimistic locking. WAF returns a token to your get
+    #   and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the
     #   token, you provide the token to operations like update and delete.
-    #   AWS WAF uses the token to ensure that no changes have been made to
-    #   the entity since you last retrieved it. If a change has been made,
-    #   the update fails with a `WAFOptimisticLockException`. If this
-    #   happens, perform another get, and use the new token returned by that
+    #   WAF uses the token to ensure that no changes have been made to the
+    #   entity since you last retrieved it. If a change has been made, the
+    #   update fails with a `WAFOptimisticLockException`. If this happens,
+    #   perform another get, and use the new token returned by that
     #   operation.
     #   @return [String]
     #
@@ -11348,13 +11402,13 @@ module Aws::WAFV2
     end
 
     # A rule statement that defines a cross-site scripting (XSS) match
-    # search for AWS WAF to apply to web requests. XSS attacks are those
-    # where the attacker uses vulnerabilities in a benign website as a
-    # vehicle to inject malicious client-site scripts into other legitimate
-    # web browsers. The XSS match statement provides the location in
-    # requests that you want AWS WAF to search and text transformations to
-    # use on the search area before AWS WAF searches for character sequences
-    # that are likely to be malicious strings.
+    # search for WAF to apply to web requests. XSS attacks are those where
+    # the attacker uses vulnerabilities in a benign website as a vehicle to
+    # inject malicious client-site scripts into other legitimate web
+    # browsers. The XSS match statement provides the location in requests
+    # that you want WAF to search and text transformations to use on the
+    # search area before WAF searches for character sequences that are
+    # likely to be malicious strings.
     #
     # @note When making an API call, you may pass XssMatchStatement
     #   data as a hash:
@@ -11390,20 +11444,20 @@ module Aws::WAFV2
     #         text_transformations: [ # required
     #           {
     #             priority: 1, # required
-    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want AWS WAF to inspect. For more
+    #   The part of a web request that you want WAF to inspect. For more
     #   information, see FieldToMatch.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, AWS WAF
+    #   you specify one or more transformations in a rule statement, WAF
     #   performs all transformations on the content of the request component
     #   identified by `FieldToMatch`, starting from the lowest priority
     #   setting, before inspecting the content for a match.

@@ -10,7 +10,7 @@
 module Aws::Batch
   module Types
 
-    # An object representing an AWS Batch array job.
+    # An object representing an Batch array job.
     #
     # @note When making an API call, you may pass ArrayProperties
     #   data as a hash:
@@ -105,9 +105,9 @@ module Aws::Batch
     #
     # @!attribute [rw] log_stream_name
     #   The name of the CloudWatch Logs log stream associated with the
-    #   container. The log group for AWS Batch jobs is `/aws/batch/job`.
-    #   Each container attempt receives a log stream name when they reach
-    #   the `RUNNING` status.
+    #   container. The log group for Batch jobs is `/aws/batch/job`. Each
+    #   container attempt receives a log stream name when they reach the
+    #   `RUNNING` status.
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
@@ -172,14 +172,14 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_id
-    #   The AWS Batch job ID of the job to cancel.
+    #   The Batch job ID of the job to cancel.
     #   @return [String]
     #
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
     #   canceling it. This message is returned by future DescribeJobs
-    #   operations on the job. This message is also recorded in the AWS
-    #   Batch activity logs.
+    #   operations on the job. This message is also recorded in the Batch
+    #   activity logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobRequest AWS API Documentation
@@ -211,7 +211,7 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object representing an AWS Batch compute environment.
+    # An object representing an Batch compute environment.
     #
     # @!attribute [rw] compute_environment_name
     #   The name of the compute environment. Up to 128 letters (uppercase
@@ -233,8 +233,8 @@ module Aws::Batch
     #
     # @!attribute [rw] type
     #   The type of the compute environment: `MANAGED` or `UNMANAGED`. For
-    #   more information, see [Compute Environments][1] in the *AWS Batch
-    #   User Guide*.
+    #   more information, see [Compute Environments][1] in the *Batch User
+    #   Guide*.
     #
     #
     #
@@ -245,13 +245,13 @@ module Aws::Batch
     #   The state of the compute environment. The valid values are `ENABLED`
     #   or `DISABLED`.
     #
-    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt
-    #   to place jobs from an associated job queue on the compute resources
+    #   If the state is `ENABLED`, then the Batch scheduler can attempt to
+    #   place jobs from an associated job queue on the compute resources
     #   within the environment. If the compute environment is managed, then
     #   it can scale its instances out or in automatically, based on the job
     #   queue demand.
     #
-    #   If the state is `DISABLED`, then the AWS Batch scheduler doesn't
+    #   If the state is `DISABLED`, then the Batch scheduler doesn't
     #   attempt to place jobs within the environment. Jobs in a `STARTING`
     #   or `RUNNING` state continue to progress normally. Managed compute
     #   environments in the `DISABLED` state don't scale out. However, they
@@ -270,7 +270,7 @@ module Aws::Batch
     #
     # @!attribute [rw] compute_resources
     #   The compute resources defined for the compute environment. For more
-    #   information, see [Compute Environments][1] in the *AWS Batch User
+    #   information, see [Compute Environments][1] in the *Batch User
     #   Guide*.
     #
     #
@@ -280,9 +280,9 @@ module Aws::Batch
     #
     # @!attribute [rw] service_role
     #   The service role associated with the compute environment that allows
-    #   AWS Batch to make calls to AWS API operations on your behalf. For
-    #   more information, see [AWS Batch service IAM role][1] in the *AWS
-    #   Batch User Guide*.
+    #   Batch to make calls to Amazon Web Services API operations on your
+    #   behalf. For more information, see [Batch service IAM role][1] in the
+    #   *Batch User Guide*.
     #
     #
     #
@@ -317,7 +317,7 @@ module Aws::Batch
     # can't be mixed.
     #
     # <note markdown="1"> All compute environments that are associated with a job queue must
-    # share the same architecture. AWS Batch doesn't support mixing compute
+    # share the same architecture. Batch doesn't support mixing compute
     # environment architecture types in a single job queue.
     #
     #  </note>
@@ -350,9 +350,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object representing an AWS Batch compute resource. For more
-    # information, see [Compute Environments][1] in the *AWS Batch User
-    # Guide*.
+    # An object representing an Batch compute resource. For more
+    # information, see [Compute Environments][1] in the *Batch User Guide*.
     #
     #
     #
@@ -395,11 +394,11 @@ module Aws::Batch
     # @!attribute [rw] type
     #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`, or
     #   `FARGATE_SPOT`. For more information, see [Compute Environments][1]
-    #   in the *AWS Batch User Guide*.
+    #   in the *Batch User Guide*.
     #
     #   If you choose `SPOT`, you must also specify an Amazon EC2 Spot Fleet
     #   role with the `spotIamFleetRole` parameter. For more information,
-    #   see [Amazon EC2 Spot Fleet role][2] in the *AWS Batch User Guide*.
+    #   see [Amazon EC2 Spot Fleet role][2] in the *Batch User Guide*.
     #
     #
     #
@@ -412,21 +411,21 @@ module Aws::Batch
     #   enough instances of the best fitting instance type can be allocated.
     #   This might be because of availability of the instance type in the
     #   Region or [Amazon EC2 service limits][1]. For more information, see
-    #   [Allocation Strategies][2] in the *AWS Batch User Guide*.
+    #   [Allocation Strategies][2] in the *Batch User Guide*.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
     #
     #   BEST\_FIT (default)
     #
-    #   : AWS Batch selects an instance type that best fits the needs of the
+    #   : Batch selects an instance type that best fits the needs of the
     #     jobs with a preference for the lowest-cost instance type. If
     #     additional instances of the selected instance type aren't
-    #     available, AWS Batch waits for the additional instances to be
+    #     available, Batch waits for the additional instances to be
     #     available. If there aren't enough instances available, or if the
-    #     user is hitting [Amazon EC2 service limits][1] then additional
+    #     user is reaching [Amazon EC2 service limits][1] then additional
     #     jobs aren't run until the currently running jobs have completed.
     #     This allocation strategy keeps costs lower but can limit scaling.
     #     If you are using Spot Fleets with `BEST_FIT` then the Spot Fleet
@@ -434,24 +433,24 @@ module Aws::Batch
     #
     #   BEST\_FIT\_PROGRESSIVE
     #
-    #   : AWS Batch will select additional instance types that are large
-    #     enough to meet the requirements of the jobs in the queue, with a
+    #   : Batch will select additional instance types that are large enough
+    #     to meet the requirements of the jobs in the queue, with a
     #     preference for instance types with a lower cost per unit vCPU. If
     #     additional instances of the previously selected instance types
-    #     aren't available, AWS Batch will select new instance types.
+    #     aren't available, Batch will select new instance types.
     #
     #   SPOT\_CAPACITY\_OPTIMIZED
     #
-    #   : AWS Batch will select one or more instance types that are large
-    #     enough to meet the requirements of the jobs in the queue, with a
+    #   : Batch will select one or more instance types that are large enough
+    #     to meet the requirements of the jobs in the queue, with a
     #     preference for instance types that are less likely to be
     #     interrupted. This allocation strategy is only available for Spot
     #     Instance compute resources.
     #
     #   With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
-    #   strategies, AWS Batch might need to go above `maxvCpus` to meet your
-    #   capacity requirements. In this event, AWS Batch never exceeds
-    #   `maxvCpus` by more than a single instance.
+    #   strategies, Batch might need to go above `maxvCpus` to meet your
+    #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
+    #   by more than a single instance.
     #
     #
     #
@@ -463,7 +462,7 @@ module Aws::Batch
     #   The minimum number of Amazon EC2 vCPUs that an environment should
     #   maintain (even if the compute environment is `DISABLED`).
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -474,21 +473,21 @@ module Aws::Batch
     #   can reach.
     #
     #   <note markdown="1"> With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
-    #   allocation strategies, AWS Batch might need to exceed `maxvCpus` to
-    #   meet your capacity requirements. In this event, AWS Batch never
-    #   exceeds `maxvCpus` by more than a single instance. For example, no
-    #   more than a single instance from among those specified in your
-    #   compute environment is allocated.
+    #   allocation strategies, Batch might need to exceed `maxvCpus` to meet
+    #   your capacity requirements. In this event, Batch never exceeds
+    #   `maxvCpus` by more than a single instance. For example, no more than
+    #   a single instance from among those specified in your compute
+    #   environment is allocated.
     #
     #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] desiredv_cpus
     #   The desired number of Amazon EC2 vCPUS in the compute environment.
-    #   AWS Batch modifies this value between the minimum and maximum
-    #   values, based on job queue demand.
+    #   Batch modifies this value between the minimum and maximum values,
+    #   based on job queue demand.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -502,7 +501,7 @@ module Aws::Batch
     #   select instance types (from the C4, M4, and R4 instance families)
     #   that match the demand of your job queues.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -527,7 +526,7 @@ module Aws::Batch
     #   compute environment. This parameter is overridden by the
     #   `imageIdOverride` member of the `Ec2Configuration` structure.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -549,7 +548,7 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The VPC subnets into which the compute resources are launched. These
+    #   The VPC subnets where the compute resources are launched. These
     #   subnets must be within the same VPC. Fargate compute resources can
     #   contain up to 16 subnets. For more information, see [VPCs and
     #   Subnets][1] in the *Amazon VPC User Guide*.
@@ -564,10 +563,10 @@ module Aws::Batch
     #   the compute environment. One or more security groups must be
     #   specified, either in `securityGroupIds` or using a launch template
     #   referenced in `launchTemplate`. This parameter is required for jobs
-    #   running on Fargate resources and must contain at least one security
-    #   group. Fargate doesn't support launch templates. If security groups
-    #   are specified using both `securityGroupIds` and `launchTemplate`,
-    #   the values in `securityGroupIds` is used.
+    #   that are running on Fargate resources and must contain at least one
+    #   security group. Fargate doesn't support launch templates. If
+    #   security groups are specified using both `securityGroupIds` and
+    #   `launchTemplate`, the values in `securityGroupIds` are used.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_key_pair
@@ -575,7 +574,7 @@ module Aws::Batch
     #   compute environment. You can use this key pair to log in to your
     #   instances with SSH.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -587,10 +586,10 @@ module Aws::Batch
     #   Resource Name (ARN) of an instance profile. For example, `
     #   ecsInstanceRole ` or
     #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole `.
-    #   For more information, see [Amazon ECS Instance Role][1] in the *AWS
-    #   Batch User Guide*.
+    #   For more information, see [Amazon ECS Instance Role][1] in the
+    #   *Batch User Guide*.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -602,17 +601,17 @@ module Aws::Batch
     #
     # @!attribute [rw] tags
     #   Key-value pair tags to be applied to EC2 resources that are launched
-    #   in the compute environment. For AWS Batch, these take the form of
+    #   in the compute environment. For Batch, these take the form of
     #   "String1": "String2", where String1 is the tag key and String2
-    #   is the tag value−for example, \\\{ "Name": "AWS Batch Instance -
-    #   C4OnDemand" \\}. This is helpful for recognizing your AWS Batch
+    #   is the tag value−for example, `\{ "Name": "Batch Instance -
+    #   C4OnDemand" \}`. This is helpful for recognizing your Batch
     #   instances in the Amazon EC2 console. These tags can't be updated or
-    #   removed after the compute environment has been created; any changes
-    #   require creating a new compute environment and removing the old
-    #   compute environment. These tags aren't seen when using the AWS
-    #   Batch `ListTagsForResource` API operation.
+    #   removed after the compute environment is created.Aany changes to
+    #   these tags require that you create a new compute environment and
+    #   remove the old compute environment. These tags aren't seen when
+    #   using the Batch `ListTagsForResource` API operation.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -628,7 +627,7 @@ module Aws::Batch
     #   potential. For more information, see [Placement Groups][1] in the
     #   *Amazon EC2 User Guide for Linux Instances*.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -648,7 +647,7 @@ module Aws::Batch
     #   If you leave this field empty, the default value is 100% of the
     #   On-Demand price.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -659,9 +658,9 @@ module Aws::Batch
     #   applied to a `SPOT` compute environment. This role is required if
     #   the allocation strategy set to `BEST_FIT` or if the allocation
     #   strategy isn't specified. For more information, see [Amazon EC2
-    #   Spot Fleet Role][1] in the *AWS Batch User Guide*.
+    #   Spot Fleet Role][1] in the *Batch User Guide*.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -671,7 +670,7 @@ module Aws::Batch
     #   managed policy. The previously recommended
     #   **AmazonEC2SpotFleetRole** managed policy doesn't have the required
     #   permissions to tag Spot Instances. For more information, see [Spot
-    #   Instances not tagged on creation][2] in the *AWS Batch User Guide*.
+    #   Instances not tagged on creation][2] in the *Batch User Guide*.
     #
     #
     #
@@ -685,10 +684,10 @@ module Aws::Batch
     #   CreateComputeEnvironment API operation override the same parameters
     #   in the launch template. You must specify either the launch template
     #   ID or launch template name in the request, but not both. For more
-    #   information, see [Launch Template Support][1] in the *AWS Batch User
+    #   information, see [Launch Template Support][1] in the *Batch User
     #   Guide*.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -703,7 +702,7 @@ module Aws::Batch
     #   EC2 instances in the compute environment. If `Ec2Configuration`
     #   isn't specified, the default is `ECS_AL1`.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -735,7 +734,7 @@ module Aws::Batch
 
     # An object representing the attributes of a compute environment that
     # can be updated. For more information, see [Compute Environments][1] in
-    # the *AWS Batch User Guide*.
+    # the *Batch User Guide*.
     #
     #
     #
@@ -756,7 +755,7 @@ module Aws::Batch
     #   The minimum number of Amazon EC2 vCPUs that an environment should
     #   maintain.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
@@ -767,10 +766,10 @@ module Aws::Batch
     #   reach.
     #
     #   <note markdown="1"> With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
-    #   allocation strategies, AWS Batch might need to exceed `maxvCpus` to
-    #   meet your capacity requirements. In this event, AWS Batch never
-    #   exceeds `maxvCpus` by more than a single instance. That is, no more
-    #   than a single instance from among those specified in your compute
+    #   allocation strategies, Batch might need to exceed `maxvCpus` to meet
+    #   your capacity requirements. In this event, Batch never exceeds
+    #   `maxvCpus` by more than a single instance. That is, no more than a
+    #   single instance from among those specified in your compute
     #   environment.
     #
     #    </note>
@@ -779,19 +778,19 @@ module Aws::Batch
     # @!attribute [rw] desiredv_cpus
     #   The desired number of Amazon EC2 vCPUS in the compute environment.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] subnets
-    #   The VPC subnets that the compute resources are launched into.
-    #   Fargate compute resources can contain up to 16 subnets. Providing an
-    #   empty list will be handled as if this parameter wasn't specified
-    #   and no change is made. This can't be specified for EC2 compute
-    #   resources. For more information, see [VPCs and Subnets][1] in the
-    #   *Amazon VPC User Guide*.
+    #   The VPC subnets where the compute resources are launched. Fargate
+    #   compute resources can contain up to 16 subnets. Providing an empty
+    #   list will be handled as if this parameter wasn't specified and no
+    #   change is made. This can't be specified for EC2 compute resources.
+    #   For more information, see [VPCs and Subnets][1] in the *Amazon VPC
+    #   User Guide*.
     #
     #
     #
@@ -868,9 +867,9 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the execution role that AWS Batch
-    #   can assume. For more information, see [AWS Batch execution IAM
-    #   role][1] in the *AWS Batch User Guide*.
+    #   The Amazon Resource Name (ARN) of the execution role that Batch can
+    #   assume. For more information, see [Batch execution IAM role][1] in
+    #   the *Batch User Guide*.
     #
     #
     #
@@ -885,7 +884,7 @@ module Aws::Batch
     #   The environment variables to pass to a container.
     #
     #   <note markdown="1"> Environment variables must not start with `AWS_BATCH`; this naming
-    #   convention is reserved for variables that are set by the AWS Batch
+    #   convention is reserved for variables that are set by the Batch
     #   service.
     #
     #    </note>
@@ -913,7 +912,7 @@ module Aws::Batch
     #   maps to `Ulimits` in the [Create a container][1] section of the
     #   [Docker Remote API][2] and the `--ulimit` option to [docker run][3].
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources.
     #
     #    </note>
@@ -930,7 +929,7 @@ module Aws::Batch
     #   permissions on the host container instance (similar to the `root`
     #   user). The default value is false.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided, or specified as false.
     #
     #    </note>
@@ -970,16 +969,16 @@ module Aws::Batch
     #
     # @!attribute [rw] log_stream_name
     #   The name of the CloudWatch Logs log stream associated with the
-    #   container. The log group for AWS Batch jobs is `/aws/batch/job`.
-    #   Each container attempt receives a log stream name when they reach
-    #   the `RUNNING` status.
+    #   container. The log group for Batch jobs is `/aws/batch/job`. Each
+    #   container attempt receives a log stream name when they reach the
+    #   `RUNNING` status.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
     #   The instance type of the underlying host infrastructure of a
     #   multi-node parallel job.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources.
     #
     #    </note>
@@ -1015,10 +1014,10 @@ module Aws::Batch
     #   log drivers, see [Configure logging drivers][4] in the Docker
     #   documentation.
     #
-    #   <note markdown="1"> AWS Batch currently supports a subset of the logging drivers
-    #   available to the Docker daemon (shown in the LogConfiguration data
-    #   type). Additional log drivers might be available in future releases
-    #   of the Amazon ECS container agent.
+    #   <note markdown="1"> Batch currently supports a subset of the logging drivers available
+    #   to the Docker daemon (shown in the LogConfiguration data type).
+    #   Additional log drivers might be available in future releases of the
+    #   Amazon ECS container agent.
     #
     #    </note>
     #
@@ -1049,7 +1048,7 @@ module Aws::Batch
     #
     # @!attribute [rw] secrets
     #   The secrets to pass to the container. For more information, see
-    #   [Specifying sensitive data][1] in the *AWS Batch User Guide*.
+    #   [Specifying sensitive data][1] in the *Batch User Guide*.
     #
     #
     #
@@ -1057,13 +1056,15 @@ module Aws::Batch
     #   @return [Array<Types::Secret>]
     #
     # @!attribute [rw] network_configuration
-    #   The network configuration for jobs running on Fargate resources.
-    #   Jobs running on EC2 resources must not specify this parameter.
+    #   The network configuration for jobs that are running on Fargate
+    #   resources. Jobs that are running on EC2 resources must not specify
+    #   this parameter.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] fargate_platform_configuration
-    #   The platform configuration for jobs running on Fargate resources.
-    #   Jobs running on EC2 resources must not specify this parameter.
+    #   The platform configuration for jobs that are running on Fargate
+    #   resources. Jobs that are running on EC2 resources must not specify
+    #   this parameter.
     #   @return [Types::FargatePlatformConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
@@ -1127,23 +1128,22 @@ module Aws::Batch
     #   This parameter indicates the number of vCPUs reserved for the
     #   container.It overrides the `vcpus` parameter that's set in the job
     #   definition, but doesn't override any vCPU requirement specified in
-    #   the `resourceRequirement` structure in the job definition.
-    #
-    #   This parameter is supported for jobs that run on EC2 resources, but
-    #   isn't supported for jobs that run on Fargate resources. For Fargate
-    #   resources, you can only use `resourceRequirement`. For EC2
-    #   resources, you can use either this parameter or
-    #   `resourceRequirement` but not both.
+    #   the `resourceRequirement` structure in the job definition. To
+    #   override vCPU requirements that are specified in the
+    #   `ResourceRequirement` structure in the job definition,
+    #   `ResourceRequirement` must be specified in the `SubmitJob` request,
+    #   with `type` set to `VCPU` and `value` set to the new value.
     #
     #   This parameter maps to `CpuShares` in the [Create a container][1]
     #   section of the [Docker Remote API][2] and the `--cpu-shares` option
     #   to [docker run][3]. Each vCPU is equivalent to 1,024 CPU shares. You
     #   must specify at least one vCPU.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs that run on Fargate
-    #   resources and shouldn't be provided. For jobs that run on Fargate
-    #   resources, you must specify the vCPU requirement for the job using
-    #   `resourceRequirements`.
+    #   <note markdown="1"> This parameter is supported for jobs that run on EC2 resources, but
+    #   isn't supported for jobs that run on Fargate resources. For Fargate
+    #   resources, you can only use `resourceRequirement`. For EC2
+    #   resources, you can use either this parameter or
+    #   `resourceRequirement` but not both.
     #
     #    </note>
     #
@@ -1159,7 +1159,10 @@ module Aws::Batch
     #   reserved for the job. It overrides the `memory` parameter set in the
     #   job definition, but doesn't override any memory requirement
     #   specified in the `ResourceRequirement` structure in the job
-    #   definition.
+    #   definition. To override memory requirements that are specified in
+    #   the `ResourceRequirement` structure in the job definition,
+    #   `ResourceRequirement` must be specified in the `SubmitJob` request,
+    #   with `type` set to `MEMORY` and `value` set to the new value.
     #
     #   This parameter is supported for jobs that run on EC2 resources, but
     #   isn't supported for jobs that run on Fargate resources. For these
@@ -1175,7 +1178,7 @@ module Aws::Batch
     #   The instance type to use for a multi-node parallel job.
     #
     #   <note markdown="1"> This parameter isn't applicable to single-node container jobs or
-    #   for jobs running on Fargate resources and shouldn't be provided.
+    #   jobs that run on Fargate resources, and shouldn't be provided.
     #
     #    </note>
     #   @return [String]
@@ -1187,7 +1190,7 @@ module Aws::Batch
     #   Docker image or the job definition.
     #
     #   <note markdown="1"> Environment variables must not start with `AWS_BATCH`; this naming
-    #   convention is reserved for variables that are set by the AWS Batch
+    #   convention is reserved for variables that are set by the Batch
     #   service.
     #
     #    </note>
@@ -1360,7 +1363,7 @@ module Aws::Batch
     #   1,024 CPU shares. This parameter maps to `CpuShares` in the [Create
     #   a container][1] section of the [Docker Remote API][2] and the
     #   `--cpu-shares` option to [docker run][3]. The number of vCPUs must
-    #   be specified but can be be specified in several places. You must
+    #   be specified but can be specified in several places. You must
     #   specify it at least once for each node.
     #
     #   This parameter is supported on EC2 resources but isn't supported
@@ -1368,7 +1371,7 @@ module Aws::Batch
     #   `resourceRequirement` instead. You can use this parameter or
     #   `resourceRequirements` structure but not both.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided. For jobs that run on Fargate
     #   resources, you must specify the vCPU requirement for the job using
     #   `resourceRequirements`.
@@ -1385,7 +1388,7 @@ module Aws::Batch
     # @!attribute [rw] memory
     #   This parameter indicates the memory hard limit (in MiB) for a
     #   container. If your container attempts to exceed the specified
-    #   number, it is terminated. You must specify at least 4 MiB of memory
+    #   number, it's terminated. You must specify at least 4 MiB of memory
     #   for a job using this parameter. The memory hard limit can be
     #   specified in several places. It must be specified for each node at
     #   least once.
@@ -1396,12 +1399,12 @@ module Aws::Batch
     #
     #   This parameter is supported on EC2 resources but isn't supported on
     #   Fargate resources. For Fargate resources, you should specify the
-    #   memory requirement using `resourceRequirement`. You can do this for
-    #   EC2 resources.
+    #   memory requirement using `resourceRequirement`. You can also do this
+    #   for EC2 resources.
     #
     #   <note markdown="1"> If you're trying to maximize your resource utilization by providing
     #   your jobs as much memory as possible for a particular instance type,
-    #   see [Memory Management][4] in the *AWS Batch User Guide*.
+    #   see [Memory Management][4] in the *Batch User Guide*.
     #
     #    </note>
     #
@@ -1430,9 +1433,9 @@ module Aws::Batch
     #
     # @!attribute [rw] job_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that the container
-    #   can assume for AWS permissions. For more information, see [IAM Roles
-    #   for Tasks][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   can assume for Amazon Web Services permissions. For more
+    #   information, see [IAM Roles for Tasks][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #
     #
@@ -1440,10 +1443,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the execution role that AWS Batch
-    #   can assume. For jobs that run on Fargate resources, you must provide
-    #   an execution role. For more information, see [AWS Batch execution
-    #   IAM role][1] in the *AWS Batch User Guide*.
+    #   The Amazon Resource Name (ARN) of the execution role that Batch can
+    #   assume. For jobs that run on Fargate resources, you must provide an
+    #   execution role. For more information, see [Batch execution IAM
+    #   role][1] in the *Batch User Guide*.
     #
     #
     #
@@ -1463,7 +1466,7 @@ module Aws::Batch
     #   sensitive information, such as credential data.
     #
     #   <note markdown="1"> Environment variables must not start with `AWS_BATCH`; this naming
-    #   convention is reserved for variables that are set by the AWS Batch
+    #   convention is reserved for variables that are set by the Batch
     #   service.
     #
     #    </note>
@@ -1507,7 +1510,7 @@ module Aws::Batch
     #   `--privileged` option to [docker run][3]. The default value is
     #   false.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided, or specified as false.
     #
     #    </note>
@@ -1524,7 +1527,7 @@ module Aws::Batch
     #   `Ulimits` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--ulimit` option to [docker run][3].
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided.
     #
     #    </note>
@@ -1553,7 +1556,7 @@ module Aws::Batch
     #   groups in a multi-node parallel job must use the same instance type.
     #
     #   <note markdown="1"> This parameter isn't applicable to single-node container jobs or
-    #   for jobs that run on Fargate resources and shouldn't be provided.
+    #   jobs that run on Fargate resources, and shouldn't be provided.
     #
     #    </note>
     #   @return [String]
@@ -1583,9 +1586,8 @@ module Aws::Batch
     #   options for different supported log drivers, see [Configure logging
     #   drivers][4] in the Docker documentation.
     #
-    #   <note markdown="1"> AWS Batch currently supports a subset of the logging drivers
-    #   available to the Docker daemon (shown in the LogConfiguration data
-    #   type).
+    #   <note markdown="1"> Batch currently supports a subset of the logging drivers available
+    #   to the Docker daemon (shown in the LogConfiguration data type).
     #
     #    </note>
     #
@@ -1616,7 +1618,7 @@ module Aws::Batch
     #
     # @!attribute [rw] secrets
     #   The secrets for the container. For more information, see [Specifying
-    #   sensitive data][1] in the *AWS Batch User Guide*.
+    #   sensitive data][1] in the *Batch User Guide*.
     #
     #
     #
@@ -1624,13 +1626,15 @@ module Aws::Batch
     #   @return [Array<Types::Secret>]
     #
     # @!attribute [rw] network_configuration
-    #   The network configuration for jobs running on Fargate resources.
-    #   Jobs running on EC2 resources must not specify this parameter.
+    #   The network configuration for jobs that are running on Fargate
+    #   resources. Jobs that are running on EC2 resources must not specify
+    #   this parameter.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] fargate_platform_configuration
-    #   The platform configuration for jobs running on Fargate resources.
-    #   Jobs running on EC2 resources must not specify this parameter.
+    #   The platform configuration for jobs that are running on Fargate
+    #   resources. Jobs that are running on EC2 resources must not specify
+    #   this parameter.
     #   @return [Types::FargatePlatformConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
@@ -1732,8 +1736,8 @@ module Aws::Batch
     #
     # @!attribute [rw] type
     #   The type of the compute environment: `MANAGED` or `UNMANAGED`. For
-    #   more information, see [Compute Environments][1] in the *AWS Batch
-    #   User Guide*.
+    #   more information, see [Compute Environments][1] in the *Batch User
+    #   Guide*.
     #
     #
     #
@@ -1745,13 +1749,13 @@ module Aws::Batch
     #   then the compute environment accepts jobs from a queue and can scale
     #   out automatically based on queues.
     #
-    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt
-    #   to place jobs from an associated job queue on the compute resources
+    #   If the state is `ENABLED`, then the Batch scheduler can attempt to
+    #   place jobs from an associated job queue on the compute resources
     #   within the environment. If the compute environment is managed, then
     #   it can scale its instances out or in automatically, based on the job
     #   queue demand.
     #
-    #   If the state is `DISABLED`, then the AWS Batch scheduler doesn't
+    #   If the state is `DISABLED`, then the Batch scheduler doesn't
     #   attempt to place jobs within the environment. Jobs in a `STARTING`
     #   or `RUNNING` state continue to progress normally. Managed compute
     #   environments in the `DISABLED` state don't scale out. However, they
@@ -1762,7 +1766,7 @@ module Aws::Batch
     #   Details about the compute resources managed by the compute
     #   environment. This parameter is required for managed compute
     #   environments. For more information, see [Compute Environments][1] in
-    #   the *AWS Batch User Guide*.
+    #   the *Batch User Guide*.
     #
     #
     #
@@ -1770,16 +1774,16 @@ module Aws::Batch
     #   @return [Types::ComputeResource]
     #
     # @!attribute [rw] service_role
-    #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
-    #   Batch to make calls to other AWS services on your behalf. For more
-    #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
-    #   User Guide*.
+    #   The full Amazon Resource Name (ARN) of the IAM role that allows
+    #   Batch to make calls to other Amazon Web Services services on your
+    #   behalf. For more information, see [Batch service IAM role][1] in the
+    #   *Batch User Guide*.
     #
-    #   If your account has already created the AWS Batch service-linked
-    #   role, that role is used by default for your compute environment
-    #   unless you specify a role here. If the AWS Batch service-linked role
-    #   does not exist in your account, and no role is specified here, the
-    #   service will try to create the AWS Batch service-linked role in your
+    #   If your account already created the Batch service-linked role, that
+    #   role is used by default for your compute environment unless you
+    #   specify a different role here. If the Batch service-linked role
+    #   doesn't exist in your account, and no role is specified here, the
+    #   service attempts to create the Batch service-linked role in your
     #   account.
     #
     #   If your specified role has a path other than `/`, then you must
@@ -1789,12 +1793,12 @@ module Aws::Batch
     #   For more information, see [Friendly names and paths][2] in the *IAM
     #   User Guide*.
     #
-    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN
-    #   might contain the `service-role` path prefix. When you only specify
-    #   the name of the service role, AWS Batch assumes that your ARN
-    #   doesn't use the `service-role` path prefix. Because of this, we
-    #   recommend that you specify the full ARN of your service role when
-    #   you create compute environments.
+    #   <note markdown="1"> Depending on how you created your Batch service role, its ARN might
+    #   contain the `service-role` path prefix. When you only specify the
+    #   name of the service role, Batch assumes that your ARN doesn't use
+    #   the `service-role` path prefix. Because of this, we recommend that
+    #   you specify the full ARN of your service role when you create
+    #   compute environments.
     #
     #    </note>
     #
@@ -1807,8 +1811,8 @@ module Aws::Batch
     # @!attribute [rw] tags
     #   The tags that you apply to the compute environment to help you
     #   categorize and organize your resources. Each tag consists of a key
-    #   and an optional value. For more information, see [Tagging AWS
-    #   Resources][1] in *AWS General Reference*.
+    #   and an optional value. For more information, see [Tagging Amazon Web
+    #   Services Resources][1] in *Amazon Web Services General Reference*.
     #
     #   These tags can be updated or removed using the [TagResource][2] and
     #   [UntagResource][3] API operations. These tags don't propagate to
@@ -1892,7 +1896,7 @@ module Aws::Batch
     #   priority value of `10` is given scheduling preference over a job
     #   queue with a priority value of `1`. All of the compute environments
     #   must be either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or
-    #   `FARGATE_SPOT`); EC2 and Fargate compute environments cannot be
+    #   `FARGATE_SPOT`); EC2 and Fargate compute environments can't be
     #   mixed.
     #   @return [Integer]
     #
@@ -1908,8 +1912,8 @@ module Aws::Batch
     #   can't be mixed.
     #
     #   <note markdown="1"> All compute environments that are associated with a job queue must
-    #   share the same architecture. AWS Batch doesn't support mixing
-    #   compute environment architecture types in a single job queue.
+    #   share the same architecture. Batch doesn't support mixing compute
+    #   environment architecture types in a single job queue.
     #
     #    </note>
     #   @return [Array<Types::ComputeEnvironmentOrder>]
@@ -1917,8 +1921,8 @@ module Aws::Batch
     # @!attribute [rw] tags
     #   The tags that you apply to the job queue to help you categorize and
     #   organize your resources. Each tag consists of a key and an optional
-    #   value. For more information, see [Tagging your AWS Batch
-    #   resources][1] in *AWS Batch User Guide*.
+    #   value. For more information, see [Tagging your Batch resources][1]
+    #   in *Batch User Guide*.
     #
     #
     #
@@ -2119,8 +2123,11 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_definitions
-    #   A list of up to 100 job definition names or full Amazon Resource
-    #   Name (ARN) entries.
+    #   A list of up to 100 job definitions. Each entry in the list can
+    #   either be an ARN of the form
+    #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
+    #   or a short version using the form
+    #   `$\{JobDefinitionName\}:$\{Revision\}`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -2299,8 +2306,8 @@ module Aws::Batch
 
     # An object representing a container instance host device.
     #
-    # <note markdown="1"> This object isn't applicable to jobs running on Fargate resources and
-    # shouldn't be provided.
+    # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
+    # resources and shouldn't be provided.
     #
     #  </note>
     #
@@ -2318,8 +2325,8 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] container_path
-    #   The path inside the container used to expose the host device. By
-    #   default, the `hostPath` value is used.
+    #   The path inside the container that's used to expose the host
+    #   device. By default, the `hostPath` value is used.
     #   @return [String]
     #
     # @!attribute [rw] permissions
@@ -2365,18 +2372,18 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] iam
-    #   Whether or not to use the AWS Batch execution IAM role defined in a
-    #   job definition when mounting the Amazon EFS file system. If enabled,
+    #   Whether or not to use the Batch job IAM role defined in a job
+    #   definition when mounting the Amazon EFS file system. If enabled,
     #   transit encryption must be enabled in the `EFSVolumeConfiguration`.
     #   If this parameter is omitted, the default value of `DISABLED` is
     #   used. For more information, see [Using Amazon EFS Access Points][1]
-    #   in the *AWS Batch User Guide*. EFS IAM authorization requires that
+    #   in the *Batch User Guide*. EFS IAM authorization requires that
     #   `TransitEncryption` be `ENABLED` and that a `JobRoleArn` is
     #   specified.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html#efs-volume-accesspoints
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/efs-volumes.html#efs-volume-accesspoints
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EFSAuthorizationConfig AWS API Documentation
@@ -2388,13 +2395,13 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # This parameter is specified when you are using an Amazon Elastic File
-    # System file system for task storage. For more information, see [Amazon
-    # EFS Volumes][1] in the *AWS Batch User Guide*.
+    # This is used when you're using an Amazon Elastic File System file
+    # system for job storage. For more information, see [Amazon EFS
+    # Volumes][1] in the *Batch User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html
+    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/efs-volumes.html
     #
     # @note When making an API call, you may pass EFSVolumeConfiguration
     #   data as a hash:
@@ -2417,21 +2424,22 @@ module Aws::Batch
     # @!attribute [rw] root_directory
     #   The directory within the Amazon EFS file system to mount as the root
     #   directory inside the host. If this parameter is omitted, the root of
-    #   the Amazon EFS volume will be used. Specifying `/` will have the
-    #   same effect as omitting this parameter.
+    #   the Amazon EFS volume is used instead. Specifying `/` has the same
+    #   effect as omitting this parameter. The maximum length is 4,096
+    #   characters.
     #
     #   If an EFS access point is specified in the `authorizationConfig`,
-    #   the root directory parameter must either be omitted or set to `/`
-    #   which will enforce the path set on the Amazon EFS access point.
+    #   the root directory parameter must either be omitted or set to `/`,
+    #   which enforces the path set on the Amazon EFS access point.
     #   @return [String]
     #
     # @!attribute [rw] transit_encryption
-    #   Whether or not to enable encryption for Amazon EFS data in transit
-    #   between the Amazon ECS host and the Amazon EFS server. Transit
-    #   encryption must be enabled if Amazon EFS IAM authorization is used.
-    #   If this parameter is omitted, the default value of `DISABLED` is
-    #   used. For more information, see [Encrypting data in transit][1] in
-    #   the *Amazon Elastic File System User Guide*.
+    #   Determines whether to enable encryption for Amazon EFS data in
+    #   transit between the Amazon ECS host and the Amazon EFS server.
+    #   Transit encryption must be enabled if Amazon EFS IAM authorization
+    #   is used. If this parameter is omitted, the default value of
+    #   `DISABLED` is used. For more information, see [Encrypting data in
+    #   transit][1] in the *Amazon Elastic File System User Guide*.
     #
     #
     #
@@ -2440,10 +2448,11 @@ module Aws::Batch
     #
     # @!attribute [rw] transit_encryption_port
     #   The port to use when sending encrypted data between the Amazon ECS
-    #   host and the Amazon EFS server. If you do not specify a transit
-    #   encryption port, it will use the port selection strategy that the
-    #   Amazon EFS mount helper uses. For more information, see [EFS Mount
-    #   Helper][1] in the *Amazon Elastic File System User Guide*.
+    #   host and the Amazon EFS server. If you don't specify a transit
+    #   encryption port, it uses the port selection strategy that the Amazon
+    #   EFS mount helper uses. The value must be between 0 and 65,535. For
+    #   more information, see [EFS Mount Helper][1] in the *Amazon Elastic
+    #   File System User Guide*.
     #
     #
     #
@@ -2470,10 +2479,11 @@ module Aws::Batch
     # Provides information used to select Amazon Machine Images (AMIs) for
     # instances in the compute environment. If `Ec2Configuration` isn't
     # specified, the default is currently `ECS_AL1` ([Amazon Linux][1]) for
-    # non-GPU, non-Graviton instances. Starting on March 31, 2021, this
+    # non-GPU, non AWSGraviton instances. Starting on March 31, 2021, this
     # default will be changing to `ECS_AL2` ([Amazon Linux 2][2]).
     #
-    # <note markdown="1"> This object isn't applicable to jobs running on Fargate resources.
+    # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
+    # resources.
     #
     #  </note>
     #
@@ -2499,21 +2509,22 @@ module Aws::Batch
     #
     #   ECS\_AL2
     #
-    #   : [Amazon Linux 2][2]− Default for all AWS Graviton-based instance
-    #     families (for example, `C6g`, `M6g`, `R6g`, and `T4g`) and can be
-    #     used for all non-GPU instance types.
+    #   : [Amazon Linux 2][2]− Default for all Amazon Web Services
+    #     Graviton-based instance families (for example, `C6g`, `M6g`,
+    #     `R6g`, and `T4g`) and can be used for all non-GPU instance types.
     #
     #   ECS\_AL2\_NVIDIA
     #
     #   : [Amazon Linux 2 (GPU)][3]−Default for all GPU instance families
-    #     (for example `P4` and `G4`) and can be used for all non-AWS
-    #     Graviton-based instance types.
+    #     (for example `P4` and `G4`) and can be used for all non Amazon Web
+    #     Services Graviton-based instance types.
     #
     #   ECS\_AL1
     #
-    #   : [Amazon Linux][4]−Default for all non-GPU, non-AWS Graviton
-    #     instance families. Amazon Linux is reaching the end-of-life of
-    #     standard support. For more information, see [Amazon Linux AMI][5].
+    #   : [Amazon Linux][4]−Default for all non-GPU, non Amazon Web Services
+    #     Graviton instance families. Amazon Linux is reaching the
+    #     end-of-life of standard support. For more information, see [Amazon
+    #     Linux AMI][5].
     #
     #
     #
@@ -2554,7 +2565,7 @@ module Aws::Batch
     #
     # @!attribute [rw] on_status_reason
     #   Contains a glob pattern to match against the `StatusReason` returned
-    #   for a job. The pattern can be up to 512 characters long, and can
+    #   for a job. The pattern can be up to 512 characters in length. It can
     #   contain letters, numbers, periods (.), colons (:), and white space
     #   (including spaces or tabs). It can optionally end with an asterisk
     #   (*) so that only the start of the string needs to be an exact
@@ -2563,8 +2574,8 @@ module Aws::Batch
     #
     # @!attribute [rw] on_reason
     #   Contains a glob pattern to match against the `Reason` returned for a
-    #   job. The pattern can be up to 512 characters long, and can contain
-    #   letters, numbers, periods (.), colons (:), and white space
+    #   job. The pattern can be up to 512 characters in length. It can
+    #   contain letters, numbers, periods (.), colons (:), and white space
     #   (including spaces and tabs). It can optionally end with an asterisk
     #   (*) so that only the start of the string needs to be an exact
     #   match.
@@ -2573,9 +2584,9 @@ module Aws::Batch
     # @!attribute [rw] on_exit_code
     #   Contains a glob pattern to match against the decimal representation
     #   of the `ExitCode` returned for a job. The pattern can be up to 512
-    #   characters long, can contain only numbers, and can optionally end
-    #   with an asterisk (*) so that only the start of the string needs to
-    #   be an exact match.
+    #   characters in length. It can contain only numbers, and can
+    #   optionally end with an asterisk (*) so that only the start of the
+    #   string needs to be an exact match.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -2595,8 +2606,9 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # The platform configuration for jobs running on Fargate resources. For
-    # jobs that run on EC2 resources, you shouldn't specify this parameter.
+    # The platform configuration for jobs that are running on Fargate
+    # resources. Jobs that run on EC2 resources must not specify this
+    # parameter.
     #
     # @note When making an API call, you may pass FargatePlatformConfiguration
     #   data as a hash:
@@ -2606,13 +2618,13 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] platform_version
-    #   The AWS Fargate platform version where the jobs are running. A
-    #   platform version is specified only for jobs running on Fargate
+    #   The Fargate platform version where the jobs are running. A platform
+    #   version is specified only for jobs that are running on Fargate
     #   resources. If one isn't specified, the `LATEST` platform version is
-    #   used by default. This uses a recent, approved version of the AWS
-    #   Fargate platform for compute resources. For more information, see
-    #   [AWS Fargate platform versions][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
+    #   used by default. This uses a recent, approved version of the Fargate
+    #   platform for compute resources. For more information, see [Fargate
+    #   platform versions][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #
     #
@@ -2664,7 +2676,7 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object representing an AWS Batch job definition.
+    # An object representing an Batch job definition.
     #
     # @!attribute [rw] job_definition_name
     #   The name of the job definition.
@@ -2686,7 +2698,7 @@ module Aws::Batch
     #   The type of job definition. If the job is run on Fargate resources,
     #   then `multinode` isn't supported. For more information about
     #   multi-node parallel jobs, see [Creating a multi-node parallel job
-    #   definition][1] in the *AWS Batch User Guide*.
+    #   definition][1] in the *Batch User Guide*.
     #
     #
     #
@@ -2699,7 +2711,7 @@ module Aws::Batch
     #   pair mapping. Parameters in a `SubmitJob` request override any
     #   corresponding parameter defaults from the job definition. For more
     #   information about specifying parameters, see [Job Definition
-    #   Parameters][1] in the *AWS Batch User Guide*.
+    #   Parameters][1] in the *Batch User Guide*.
     #
     #
     #
@@ -2717,7 +2729,7 @@ module Aws::Batch
     #
     # @!attribute [rw] timeout
     #   The timeout configuration for jobs that are submitted with this job
-    #   definition. You can specify a timeout duration after which AWS Batch
+    #   definition. You can specify a timeout duration after which Batch
     #   terminates your jobs if they haven't finished.
     #   @return [Types::JobTimeout]
     #
@@ -2771,7 +2783,7 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object representing an AWS Batch job dependency.
+    # An object representing an Batch job dependency.
     #
     # @note When making an API call, you may pass JobDependency
     #   data as a hash:
@@ -2782,7 +2794,7 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_id
-    #   The job ID of the AWS Batch job associated with this dependency.
+    #   The job ID of the Batch job associated with this dependency.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2798,7 +2810,7 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object representing an AWS Batch job.
+    # An object representing an Batch job.
     #
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the job.
@@ -2821,7 +2833,7 @@ module Aws::Batch
     #   The current status for the job.
     #
     #   <note markdown="1"> If your jobs don't progress to `STARTING`, see [Jobs Stuck in
-    #   RUNNABLE Status][1] in the troubleshooting section of the *AWS Batch
+    #   RUNNABLE Status][1] in the troubleshooting section of the *Batch
     #   User Guide*.
     #
     #    </note>
@@ -2893,7 +2905,8 @@ module Aws::Batch
     #   An object representing the node properties of a multi-node parallel
     #   job.
     #
-    #   <note markdown="1"> This isn't applicable to jobs running on Fargate resources.
+    #   <note markdown="1"> This isn't applicable to jobs that are running on Fargate
+    #   resources.
     #
     #    </note>
     #   @return [Types::NodeProperties]
@@ -2955,7 +2968,7 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object representing the details of an AWS Batch job queue.
+    # An object representing the details of an Batch job queue.
     #
     # @!attribute [rw] job_queue_name
     #   The name of the job queue.
@@ -3001,7 +3014,7 @@ module Aws::Batch
     #
     # @!attribute [rw] tags
     #   The tags applied to the job queue. For more information, see
-    #   [Tagging your AWS Batch resources][1] in *AWS Batch User Guide*.
+    #   [Tagging your Batch resources][1] in *Batch User Guide*.
     #
     #
     #
@@ -3077,10 +3090,15 @@ module Aws::Batch
     # @!attribute [rw] node_properties
     #   The node properties for a single node in a job summary list.
     #
-    #   <note markdown="1"> This isn't applicable to jobs running on Fargate resources.
+    #   <note markdown="1"> This isn't applicable to jobs that are running on Fargate
+    #   resources.
     #
     #    </note>
     #   @return [Types::NodePropertiesSummary]
+    #
+    # @!attribute [rw] job_definition
+    #   The Amazon Resource Name (ARN) of the job definition.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobSummary AWS API Documentation
     #
@@ -3095,7 +3113,8 @@ module Aws::Batch
       :stopped_at,
       :container,
       :array_properties,
-      :node_properties)
+      :node_properties,
+      :job_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3111,7 +3130,7 @@ module Aws::Batch
     #
     # @!attribute [rw] attempt_duration_seconds
     #   The time duration in seconds (measured from the job attempt's
-    #   `startedAt` timestamp) after which AWS Batch terminates your jobs if
+    #   `startedAt` timestamp) after which Batch terminates your jobs if
     #   they have not finished. The minimum value for the timeout is 60
     #   seconds.
     #   @return [Integer]
@@ -3153,6 +3172,34 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # A filter name and value pair that's used to return a more specific
+    # list of results from a `ListJobs` API operation.
+    #
+    # @note When making an API call, you may pass KeyValuesPair
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Filter names are case sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The filter values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/KeyValuesPair AWS API Documentation
+    #
+    class KeyValuesPair < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a launch template associated with a compute
     # resource. You must specify either the launch template ID or launch
     # template name in the request, but not both.
@@ -3162,7 +3209,8 @@ module Aws::Batch
     # values in the `securityGroupIds` parameter of
     # `CreateComputeEnvironment` will be used.
     #
-    # <note markdown="1"> This object isn't applicable to jobs running on Fargate resources.
+    # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
+    # resources.
     #
     #  </note>
     #
@@ -3191,7 +3239,7 @@ module Aws::Batch
     #   launch template is used.
     #
     #   After the compute environment is created, the launch template
-    #   version used will not be changed, even if the `$Default` or
+    #   version that's used isn't changed, even if the `$Default` or
     #   `$Latest` version for the launch template is updated. To use a new
     #   launch template version, create a new compute environment, add the
     #   new compute environment to the existing job queue, remove the old
@@ -3243,7 +3291,7 @@ module Aws::Batch
     #   `Devices` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--device` option to [docker run][3].
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided.
     #
     #    </note>
@@ -3273,7 +3321,7 @@ module Aws::Batch
     #   The value for the size (in MiB) of the `/dev/shm` volume. This
     #   parameter maps to the `--shm-size` option to [docker run][1].
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided.
     #
     #    </note>
@@ -3288,7 +3336,7 @@ module Aws::Batch
     #   mount. This parameter maps to the `--tmpfs` option to [docker
     #   run][1].
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided.
     #
     #    </note>
@@ -3312,7 +3360,7 @@ module Aws::Batch
     #   `maxSwap` value must be set for the `swappiness` parameter to be
     #   used.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided.
     #
     #    </note>
@@ -3330,9 +3378,10 @@ module Aws::Batch
     #   be swapped very aggressively. Accepted values are whole numbers
     #   between `0` and `100`. If the `swappiness` parameter isn't
     #   specified, a default value of `60` is used. If a value isn't
-    #   specified for `maxSwap` then this parameter is ignored. If `maxSwap`
-    #   is set to 0, the container doesn't use swap. This parameter maps to
-    #   the `--memory-swappiness` option to [docker run][1].
+    #   specified for `maxSwap`, then this parameter is ignored. If
+    #   `maxSwap` is set to 0, the container doesn't use swap. This
+    #   parameter maps to the `--memory-swappiness` option to [docker
+    #   run][1].
     #
     #   Consider the following when you use a per-container swap
     #   configuration.
@@ -3357,7 +3406,7 @@ module Aws::Batch
     #     value of 60, and the total swap usage will be limited to two times
     #     the memory reservation of the container.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided.
     #
     #    </note>
@@ -3394,6 +3443,12 @@ module Aws::Batch
     #         job_status: "SUBMITTED", # accepts SUBMITTED, PENDING, RUNNABLE, STARTING, RUNNING, SUCCEEDED, FAILED
     #         max_results: 1,
     #         next_token: "String",
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] job_queue
@@ -3413,8 +3468,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The job status used to filter jobs in the specified queue. If you
-    #   don't specify a status, only `RUNNING` jobs are returned.
+    #   The job status used to filter jobs in the specified queue. If the
+    #   `filters` parameter is specified, the `jobStatus` parameter is
+    #   ignored and jobs with any status are returned. If you don't specify
+    #   a status, only `RUNNING` jobs are returned.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3442,6 +3499,56 @@ module Aws::Batch
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   The filter to apply to the query. Only one filter can be used at a
+    #   time. When the filter is used, `jobStatus` is ignored. The filter
+    #   doesn't apply to child jobs in an array or multi-node parallel
+    #   (MNP) jobs. The results are sorted by the `createdAt` field, with
+    #   the most recent jobs being first.
+    #
+    #   JOB\_NAME
+    #
+    #   : The value of the filter is a case-insensitive match for the job
+    #     name. If the value ends with an asterisk (*), the filter will
+    #     match any job name that begins with the string before the '*'.
+    #     This corresponds to the `jobName` value. For example, `test1`
+    #     matches both `Test1` and `test1`, and `test1*` matches both
+    #     `test1` and `Test10`. When the `JOB_NAME` filter is used, the
+    #     results are grouped by the job name and version.
+    #
+    #   JOB\_DEFINITION
+    #
+    #   : The value for the filter is the name or Amazon Resource Name (ARN)
+    #     of the job definition. This corresponds to the `jobDefinition`
+    #     value. The value is case sensitive. When the value for the filter
+    #     is the job definition name, the results include all the jobs that
+    #     used any revision of that job definition name. If the value ends
+    #     with an asterisk (*), the filter will match any job definition
+    #     name that begins with the string before the '*'. For example,
+    #     `jd1` matches only `jd1`, and `jd1*` matches both `jd1` and
+    #     `jd1A`. The version of the job definition that's used doesn't
+    #     affect the sort order. When the `JOB_DEFINITION` filter is used
+    #     and the ARN is used (which is in the form
+    #     `arn:$\{Partition\}:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`),
+    #     the results include jobs that used the specified revision of the
+    #     job definition. Asterisk (*) is not supported when the ARN is
+    #     used.
+    #
+    #   BEFORE\_CREATED\_AT
+    #
+    #   : The value for the filter is the time that's before the job was
+    #     created. This corresponds to the `createdAt` value. The value is a
+    #     string representation of the number of seconds since 00:00:00 UTC
+    #     (midnight) on January 1, 1970.
+    #
+    #   AFTER\_CREATED\_AT
+    #
+    #   : The value for the filter is the time that's after the job was
+    #     created. This corresponds to the `createdAt` value. The value is a
+    #     string representation of the number of seconds since 00:00:00 UTC
+    #     (midnight) on January 1, 1970.
+    #   @return [Array<Types::KeyValuesPair>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsRequest AWS API Documentation
     #
     class ListJobsRequest < Struct.new(
@@ -3450,7 +3557,8 @@ module Aws::Batch
       :multi_node_job_id,
       :job_status,
       :max_results,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3484,10 +3592,9 @@ module Aws::Batch
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource that
-    #   tags are listed for. AWS Batch resources that support tags are
-    #   compute environments, jobs, job definitions, and job queues. ARNs
-    #   for child jobs of array and multi-node parallel (MNP) jobs are not
-    #   supported.
+    #   tags are listed for. Batch resources that support tags are compute
+    #   environments, jobs, job definitions, and job queues. ARNs for child
+    #   jobs of array and multi-node parallel (MNP) jobs are not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListTagsForResourceRequest AWS API Documentation
@@ -3537,17 +3644,17 @@ module Aws::Batch
     #   The supported log drivers are `awslogs`, `fluentd`, `gelf`,
     #   `json-file`, `journald`, `logentries`, `syslog`, and `splunk`.
     #
-    #   <note markdown="1"> Jobs running on Fargate resources are restricted to the `awslogs`
-    #   and `splunk` log drivers.
+    #   <note markdown="1"> Jobs that are running on Fargate resources are restricted to the
+    #   `awslogs` and `splunk` log drivers.
     #
     #    </note>
     #
     #   awslogs
     #
     #   : Specifies the Amazon CloudWatch Logs logging driver. For more
-    #     information, see [Using the awslogs Log Driver][1] in the *AWS
-    #     Batch User Guide* and [Amazon CloudWatch Logs logging driver][2]
-    #     in the Docker documentation.
+    #     information, see [Using the awslogs Log Driver][1] in the *Batch
+    #     User Guide* and [Amazon CloudWatch Logs logging driver][2] in the
+    #     Docker documentation.
     #
     #   fluentd
     #
@@ -3624,7 +3731,7 @@ module Aws::Batch
     #
     # @!attribute [rw] secret_options
     #   The secrets to pass to the log configuration. For more information,
-    #   see [Specifying Sensitive Data][1] in the *AWS Batch User Guide*.
+    #   see [Specifying Sensitive Data][1] in the *Batch User Guide*.
     #
     #
     #
@@ -3683,8 +3790,9 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # The network configuration for jobs running on Fargate resources. Jobs
-    # running on EC2 resources must not specify this parameter.
+    # The network configuration for jobs that are running on Fargate
+    # resources. Jobs that are running on EC2 resources must not specify
+    # this parameter.
     #
     # @note When making an API call, you may pass NetworkConfiguration
     #   data as a hash:
@@ -3695,8 +3803,8 @@ module Aws::Batch
     #
     # @!attribute [rw] assign_public_ip
     #   Indicates whether the job should have a public IP address. For a job
-    #   running on Fargate resources in a private subnet to send outbound
-    #   traffic to the internet (for example, in order to pull container
+    #   that is running on Fargate resources in a private subnet to send
+    #   outbound traffic to the internet (for example, to pull container
     #   images), the private subnet requires a NAT gateway be attached to
     #   route requests to the internet. For more information, see [Amazon
     #   ECS task networking][1]. The default value is "DISABLED".
@@ -3764,8 +3872,8 @@ module Aws::Batch
     # Object representing any node overrides to a job definition that's
     # used in a SubmitJob API operation.
     #
-    # <note markdown="1"> This isn't applicable to jobs running on Fargate resources and
-    # shouldn't be provided; use `containerOverrides` instead.
+    # <note markdown="1"> This isn't applicable to jobs that are running on Fargate resources
+    # and shouldn't be provided; use `containerOverrides` instead.
     #
     #  </note>
     #
@@ -4430,7 +4538,7 @@ module Aws::Batch
     # @!attribute [rw] type
     #   The type of job definition. For more information about multi-node
     #   parallel jobs, see [Creating a multi-node parallel job
-    #   definition][1] in the *AWS Batch User Guide*.
+    #   definition][1] in the *Batch User Guide*.
     #
     #   <note markdown="1"> If the job is run on Fargate resources, then `multinode` isn't
     #   supported.
@@ -4465,7 +4573,7 @@ module Aws::Batch
     #   An object with various properties specific to multi-node parallel
     #   jobs. If you specify node properties for a job, it becomes a
     #   multi-node parallel job. For more information, see [Multi-node
-    #   Parallel Jobs][1] in the *AWS Batch User Guide*. If the job
+    #   Parallel Jobs][1] in the *Batch User Guide*. If the job
     #   definition's `type` parameter is `container`, then you must specify
     #   either `containerProperties` or `nodeProperties`.
     #
@@ -4498,12 +4606,12 @@ module Aws::Batch
     #
     # @!attribute [rw] timeout
     #   The timeout configuration for jobs that are submitted with this job
-    #   definition, after which AWS Batch terminates your jobs if they have
-    #   not finished. If a job is terminated due to a timeout, it isn't
+    #   definition, after which Batch terminates your jobs if they have not
+    #   finished. If a job is terminated due to a timeout, it isn't
     #   retried. The minimum value for the timeout is 60 seconds. Any
     #   timeout configuration that's specified during a SubmitJob operation
     #   overrides the timeout configuration defined here. For more
-    #   information, see [Job Timeouts][1] in the *AWS Batch User Guide*.
+    #   information, see [Job Timeouts][1] in the *Batch User Guide*.
     #
     #
     #
@@ -4513,8 +4621,8 @@ module Aws::Batch
     # @!attribute [rw] tags
     #   The tags that you apply to the job definition to help you categorize
     #   and organize your resources. Each tag consists of a key and an
-    #   optional value. For more information, see [Tagging AWS Resources][1]
-    #   in *AWS Batch User Guide*.
+    #   optional value. For more information, see [Tagging Amazon Web
+    #   Services Resources][1] in *Batch User Guide*.
     #
     #
     #
@@ -4588,35 +4696,36 @@ module Aws::Batch
     #     exceed the number of available GPUs on the compute resource that
     #     the job is launched on.
     #
-    #     <note markdown="1"> GPUs are not available for jobs running on Fargate resources.
+    #     <note markdown="1"> GPUs are not available for jobs that are running on Fargate
+    #     resources.
     #
     #      </note>
     #
     #   type="MEMORY"
     #
     #   : The memory hard limit (in MiB) present to the container. This
-    #     parameter is supported for jobs running on EC2 resources. If your
-    #     container attempts to exceed the memory specified, the container
-    #     is terminated. This parameter maps to `Memory` in the [Create a
-    #     container][1] section of the [Docker Remote API][2] and the
-    #     `--memory` option to [docker run][3]. You must specify at least 4
-    #     MiB of memory for a job. This is required but can be specified in
-    #     several places for multi-node parallel (MNP) jobs. It must be
-    #     specified for each node at least once. This parameter maps to
-    #     `Memory` in the [Create a container][1] section of the [Docker
+    #     parameter is supported for jobs that are running on EC2 resources.
+    #     If your container attempts to exceed the memory specified, the
+    #     container is terminated. This parameter maps to `Memory` in the
+    #     [Create a container][1] section of the [Docker Remote API][2] and
+    #     the `--memory` option to [docker run][3]. You must specify at
+    #     least 4 MiB of memory for a job. This is required but can be
+    #     specified in several places for multi-node parallel (MNP) jobs. It
+    #     must be specified for each node at least once. This parameter maps
+    #     to `Memory` in the [Create a container][1] section of the [Docker
     #     Remote API][2] and the `--memory` option to [docker run][3].
     #
     #     <note markdown="1"> If you're trying to maximize your resource utilization by
     #     providing your jobs as much memory as possible for a particular
-    #     instance type, see [Memory Management][4] in the *AWS Batch User
+    #     instance type, see [Memory Management][4] in the *Batch User
     #     Guide*.
     #
     #      </note>
     #
-    #     For jobs running on Fargate resources, then `value` is the hard
-    #     limit (in MiB), and must match one of the supported values and the
-    #     `VCPU` values must be one of the values supported for that memory
-    #     value.
+    #     For jobs that are running on Fargate resources, then `value` is
+    #     the hard limit (in MiB), and must match one of the supported
+    #     values and the `VCPU` values must be one of the values supported
+    #     for that memory value.
     #
     #     value = 512
     #
@@ -4664,10 +4773,10 @@ module Aws::Batch
     #     but can be specified in several places; it must be specified for
     #     each node at least once.
     #
-    #     For jobs running on Fargate resources, then `value` must match one
-    #     of the supported values and the `MEMORY` values must be one of the
-    #     values supported for that VCPU value. The supported values are
-    #     0.25, 0.5, 1, 2, and 4
+    #     For jobs that are running on Fargate resources, then `value` must
+    #     match one of the supported values and the `MEMORY` values must be
+    #     one of the values supported for that VCPU value. The supported
+    #     values are 0.25, 0.5, 1, 2, and 4
     #
     #     value = 0.25
     #
@@ -4715,7 +4824,7 @@ module Aws::Batch
     end
 
     # The retry strategy associated with a job. For more information, see
-    # [Automated job retries][1] in the *AWS Batch User Guide*.
+    # [Automated job retries][1] in the *Batch User Guide*.
     #
     #
     #
@@ -4767,8 +4876,8 @@ module Aws::Batch
     # * To reference sensitive information in the log configuration of a
     #   container, use the `secretOptions` container definition parameter.
     #
-    # For more information, see [Specifying sensitive data][1] in the *AWS
-    # Batch User Guide*.
+    # For more information, see [Specifying sensitive data][1] in the *Batch
+    # User Guide*.
     #
     #
     #
@@ -4788,13 +4897,14 @@ module Aws::Batch
     #
     # @!attribute [rw] value_from
     #   The secret to expose to the container. The supported values are
-    #   either the full ARN of the AWS Secrets Manager secret or the full
-    #   ARN of the parameter in the AWS Systems Manager Parameter Store.
+    #   either the full ARN of the Secrets Manager secret or the full ARN of
+    #   the parameter in the Amazon Web Services Systems Manager Parameter
+    #   Store.
     #
-    #   <note markdown="1"> If the AWS Systems Manager Parameter Store parameter exists in the
-    #   same Region as the job you're launching, then you can use either
-    #   the full ARN or name of the parameter. If the parameter exists in a
-    #   different Region, then the full ARN must be specified.
+    #   <note markdown="1"> If the Amazon Web Services Systems Manager Parameter Store parameter
+    #   exists in the same Region as the job you're launching, then you can
+    #   use either the full ARN or name of the parameter. If the parameter
+    #   exists in a different Region, then the full ARN must be specified.
     #
     #    </note>
     #   @return [String]
@@ -4921,7 +5031,7 @@ module Aws::Batch
     #   The array properties for the submitted job, such as the size of the
     #   array. The array size can be between 2 and 10,000. If you specify
     #   array properties for a job, it becomes an array job. For more
-    #   information, see [Array Jobs][1] in the *AWS Batch User Guide*.
+    #   information, see [Array Jobs][1] in the *Batch User Guide*.
     #
     #
     #
@@ -4967,7 +5077,7 @@ module Aws::Batch
     #   A list of node overrides in JSON format that specify the node range
     #   to target and the container overrides for that node range.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources; use `containerOverrides` instead.
     #
     #    </note>
@@ -4992,14 +5102,14 @@ module Aws::Batch
     #
     # @!attribute [rw] timeout
     #   The timeout configuration for this SubmitJob operation. You can
-    #   specify a timeout duration after which AWS Batch terminates your
-    #   jobs if they haven't finished. If a job is terminated due to a
-    #   timeout, it isn't retried. The minimum value for the timeout is 60
-    #   seconds. This configuration overrides any timeout configuration
-    #   specified in the job definition. For array jobs, child jobs have the
-    #   same timeout configuration as the parent job. For more information,
-    #   see [Job Timeouts][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   specify a timeout duration after which Batch terminates your jobs if
+    #   they haven't finished. If a job is terminated due to a timeout, it
+    #   isn't retried. The minimum value for the timeout is 60 seconds.
+    #   This configuration overrides any timeout configuration specified in
+    #   the job definition. For array jobs, child jobs have the same timeout
+    #   configuration as the parent job. For more information, see [Job
+    #   Timeouts][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     #
     #
@@ -5009,8 +5119,8 @@ module Aws::Batch
     # @!attribute [rw] tags
     #   The tags that you apply to the job request to help you categorize
     #   and organize your resources. Each tag consists of a key and an
-    #   optional value. For more information, see [Tagging AWS Resources][1]
-    #   in *AWS General Reference*.
+    #   optional value. For more information, see [Tagging Amazon Web
+    #   Services Resources][1] in *Amazon Web Services General Reference*.
     #
     #
     #
@@ -5070,7 +5180,7 @@ module Aws::Batch
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that tags are added
-    #   to. AWS Batch resources that support tags are compute environments,
+    #   to. Batch resources that support tags are compute environments,
     #   jobs, job definitions, and job queues. ARNs for child jobs of array
     #   and multi-node parallel (MNP) jobs are not supported.
     #   @return [String]
@@ -5078,8 +5188,8 @@ module Aws::Batch
     # @!attribute [rw] tags
     #   The tags that you apply to the resource to help you categorize and
     #   organize your resources. Each tag consists of a key and an optional
-    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
-    #   General Reference*.
+    #   value. For more information, see [Tagging Amazon Web Services
+    #   Resources][1] in *Amazon Web Services General Reference*.
     #
     #
     #
@@ -5110,14 +5220,14 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_id
-    #   The AWS Batch job ID of the job to terminate.
+    #   The Batch job ID of the job to terminate.
     #   @return [String]
     #
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
     #   canceling it. This message is returned by future DescribeJobs
-    #   operations on the job. This message is also recorded in the AWS
-    #   Batch activity logs.
+    #   operations on the job. This message is also recorded in the Batch
+    #   activity logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobRequest AWS API Documentation
@@ -5135,7 +5245,8 @@ module Aws::Batch
 
     # The container path, mount options, and size of the tmpfs mount.
     #
-    # <note markdown="1"> This object isn't applicable to jobs running on Fargate resources.
+    # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
+    # resources.
     #
     #  </note>
     #
@@ -5184,7 +5295,8 @@ module Aws::Batch
 
     # The `ulimit` settings to pass to the container.
     #
-    # <note markdown="1"> This object isn't applicable to jobs running on Fargate resources.
+    # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
+    # resources.
     #
     #  </note>
     #
@@ -5229,9 +5341,9 @@ module Aws::Batch
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. AWS Batch resources that support tags are compute
-    #   environments, jobs, job definitions, and job queues. ARNs for child
-    #   jobs of array and multi-node parallel (MNP) jobs are not supported.
+    #   tags. Batch resources that support tags are compute environments,
+    #   jobs, job definitions, and job queues. ARNs for child jobs of array
+    #   and multi-node parallel (MNP) jobs are not supported.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -5279,13 +5391,13 @@ module Aws::Batch
     #   `ENABLED` state can accept jobs from a queue and scale in or out
     #   automatically based on the workload demand of its associated queues.
     #
-    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt
-    #   to place jobs from an associated job queue on the compute resources
+    #   If the state is `ENABLED`, then the Batch scheduler can attempt to
+    #   place jobs from an associated job queue on the compute resources
     #   within the environment. If the compute environment is managed, then
     #   it can scale its instances out or in automatically, based on the job
     #   queue demand.
     #
-    #   If the state is `DISABLED`, then the AWS Batch scheduler doesn't
+    #   If the state is `DISABLED`, then the Batch scheduler doesn't
     #   attempt to place jobs within the environment. Jobs in a `STARTING`
     #   or `RUNNING` state continue to progress normally. Managed compute
     #   environments in the `DISABLED` state don't scale out. However, they
@@ -5295,7 +5407,7 @@ module Aws::Batch
     # @!attribute [rw] compute_resources
     #   Details of the compute resources managed by the compute environment.
     #   Required for a managed compute environment. For more information,
-    #   see [Compute Environments][1] in the *AWS Batch User Guide*.
+    #   see [Compute Environments][1] in the *Batch User Guide*.
     #
     #
     #
@@ -5303,25 +5415,26 @@ module Aws::Batch
     #   @return [Types::ComputeResourceUpdate]
     #
     # @!attribute [rw] service_role
-    #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
-    #   Batch to make calls to other AWS services on your behalf. For more
-    #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
-    #   User Guide*.
+    #   The full Amazon Resource Name (ARN) of the IAM role that allows
+    #   Batch to make calls to other Amazon Web Services services on your
+    #   behalf. For more information, see [Batch service IAM role][1] in the
+    #   *Batch User Guide*.
     #
-    #   If the compute environment has a service-linked role, it cannot be
-    #   changed to use a regular IAM role. If the compute environment has a
-    #   regular IAM role, it cannot be changed to use a service-linked role.
+    #   If the compute environment has a service-linked role, it can't be
+    #   changed to use a regular IAM role. Likewise, if the compute
+    #   environment has a regular IAM role, it can't be changed to use a
+    #   service-linked role.
     #
     #   If your specified role has a path other than `/`, then you must
     #   either specify the full role ARN (this is recommended) or prefix the
     #   role name with the path.
     #
-    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN
-    #   might contain the `service-role` path prefix. When you only specify
-    #   the name of the service role, AWS Batch assumes that your ARN
-    #   doesn't use the `service-role` path prefix. Because of this, we
-    #   recommend that you specify the full ARN of your service role when
-    #   you create compute environments.
+    #   <note markdown="1"> Depending on how you created your Batch service role, its ARN might
+    #   contain the `service-role` path prefix. When you only specify the
+    #   name of the service role, Batch assumes that your ARN doesn't use
+    #   the `service-role` path prefix. Because of this, we recommend that
+    #   you specify the full ARN of your service role when you create
+    #   compute environments.
     #
     #    </note>
     #
@@ -5410,8 +5523,8 @@ module Aws::Batch
     #   can't be mixed.
     #
     #   <note markdown="1"> All compute environments that are associated with a job queue must
-    #   share the same architecture. AWS Batch doesn't support mixing
-    #   compute environment architecture types in a single job queue.
+    #   share the same architecture. Batch doesn't support mixing compute
+    #   environment architecture types in a single job queue.
     #
     #    </note>
     #   @return [Array<Types::ComputeEnvironmentOrder>]
@@ -5474,7 +5587,7 @@ module Aws::Batch
     #   guaranteed to persist after the containers associated with it stop
     #   running.
     #
-    #   <note markdown="1"> This parameter isn't applicable to jobs running on Fargate
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources and shouldn't be provided.
     #
     #    </note>
@@ -5489,8 +5602,9 @@ module Aws::Batch
     #
     # @!attribute [rw] efs_volume_configuration
     #   This parameter is specified when you are using an Amazon Elastic
-    #   File System file system for job storage. Jobs running on Fargate
-    #   resources must specify a `platformVersion` of at least `1.4.0`.
+    #   File System file system for job storage. Jobs that are running on
+    #   Fargate resources must specify a `platformVersion` of at least
+    #   `1.4.0`.
     #   @return [Types::EFSVolumeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Volume AWS API Documentation

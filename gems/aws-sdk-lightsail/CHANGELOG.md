@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-07-14)
+------------------
+
+* Feature - This release adds support for the Amazon Lightsail object storage service, which allows you to create buckets and store objects.
+
+1.51.0 (2021-06-02)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.50.0 (2021-05-27)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
+1.49.0 (2021-05-19)
+------------------
+
+* Feature - Documentation updates for Amazon Lightsail.
+
 1.48.0 (2021-04-13)
 ------------------
 

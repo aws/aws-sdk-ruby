@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-07-20)
+------------------
+
+* Feature - Documentation updates for Compute Optimizer
+
+1.18.0 (2021-05-24)
+------------------
+
+* Feature - Adds support for 1) additional instance types, 2) additional instance metrics, 3) finding reasons for instance recommendations, and 4) platform differences between a current instance and a recommended instance type.
+
+1.17.0 (2021-05-18)
+------------------
+
+* Feature - This release enables compute optimizer to support exporting  recommendations to Amazon S3 for EBS volumes and Lambda Functions.
+
 1.16.0 (2021-03-10)
 ------------------
 

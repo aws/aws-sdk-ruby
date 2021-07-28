@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-07-16)
+------------------
+
+* Feature - Documentation update for AppIntegrations Service
+
 1.2.0 (2021-03-10)
 ------------------
 

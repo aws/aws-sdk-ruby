@@ -345,12 +345,11 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the bot will be used
     #   in. The string must match one of the supported locales. All of the
     #   intents, slot types, and slots used in the bot must have the same
-    #   locale. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   locale. For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::BuildBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -373,7 +372,7 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #   resp.last_build_submitted_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BuildBotLocale AWS API Documentation
@@ -463,7 +462,7 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #   resp.creation_date_time #=> Time
     #   resp.bot_tags #=> Hash
     #   resp.bot_tags["TagKey"] #=> String
@@ -637,12 +636,11 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the bot will be used
     #   in. The string must match one of the supported locales. All of the
     #   intents, slot types, and slots used in the bot must have the same
-    #   locale. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   locale. For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [String] :description
     #   A description of the bot locale. Use this to help identify the bot
@@ -707,7 +705,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #   resp.creation_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocale AWS API Documentation
@@ -768,7 +766,7 @@ module Aws::LexModelsV2
     #   resp.bot_version #=> String
     #   resp.bot_version_locale_specification #=> Hash
     #   resp.bot_version_locale_specification["LocaleId"].source_bot_version #=> String
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #   resp.creation_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotVersion AWS API Documentation
@@ -777,6 +775,80 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def create_bot_version(params = {}, options = {})
       req = build_request(:create_bot_version, params)
+      req.send_request(options)
+    end
+
+    # Creates a zip archive containing the contents of a bot or a bot
+    # locale. The archive contains a directory structure that contains JSON
+    # files that define the bot.
+    #
+    # You can create an archive that contains the complete definition of a
+    # bot, or you can specify that the archive contain only the definition
+    # of a single bot locale.
+    #
+    # For more information about exporting bots, and about the structure of
+    # the export archive, see [ Importing and exporting bots ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html
+    #
+    # @option params [required, Types::ExportResourceSpecification] :resource_specification
+    #   Specifies the type of resource to export, either a bot or a bot
+    #   locale. You can only specify one type of resource to export.
+    #
+    # @option params [required, String] :file_format
+    #   The file format of the bot or bot locale definition files.
+    #
+    # @option params [String] :file_password
+    #   An password to use to encrypt the exported archive. Using a password
+    #   is optional, but you should encrypt the archive to protect the data in
+    #   transit between Amazon Lex and your local computer.
+    #
+    # @return [Types::CreateExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExportResponse#export_id #export_id} => String
+    #   * {Types::CreateExportResponse#resource_specification #resource_specification} => Types::ExportResourceSpecification
+    #   * {Types::CreateExportResponse#file_format #file_format} => String
+    #   * {Types::CreateExportResponse#export_status #export_status} => String
+    #   * {Types::CreateExportResponse#creation_date_time #creation_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_export({
+    #     resource_specification: { # required
+    #       bot_export_specification: {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #       },
+    #       bot_locale_export_specification: {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       },
+    #     },
+    #     file_format: "LexJson", # required, accepts LexJson
+    #     file_password: "ImportExportFilePassword",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_id #=> String
+    #   resp.resource_specification.bot_export_specification.bot_id #=> String
+    #   resp.resource_specification.bot_export_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_export_specification.bot_id #=> String
+    #   resp.resource_specification.bot_locale_export_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_export_specification.locale_id #=> String
+    #   resp.file_format #=> String, one of "LexJson"
+    #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.creation_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateExport AWS API Documentation
+    #
+    # @overload create_export(params = {})
+    # @param [Hash] params ({})
+    def create_export(params = {}, options = {})
+      req = build_request(:create_export, params)
       req.send_request(options)
     end
 
@@ -908,7 +980,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale where this intent is used.
     #   All of the bots, slot types, and slots used by the intent must have
-    #   the same locale.
+    #   the same locale. For more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::CreateIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1229,6 +1305,154 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Creates a new resource policy with the specified policy statements.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :policy
+    #   A resource policy to add to the resource. The policy is a JSON
+    #   structure that contains one or more statements that define the policy.
+    #   The policy must follow the IAM syntax. For more information about the
+    #   contents of a JSON policy document, see [ IAM JSON policy reference
+    #   ][1].
+    #
+    #   If the policy isn't valid, Amazon Lex returns a validation exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #
+    # @return [Types::CreateResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::CreateResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicy AWS API Documentation
+    #
+    # @overload create_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def create_resource_policy(params = {}, options = {})
+      req = build_request(:create_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Adds a new resource policy statement to a bot or bot alias. If a
+    # resource policy exists, the statement is added to the current resource
+    # policy. If a policy doesn't exist, a new policy is created.
+    #
+    # You can't create a resource policy statement that allows
+    # cross-account access.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :statement_id
+    #   The name of the statement. The ID is the same as the `Sid` IAM
+    #   property. The statement name must be unique within the policy. For
+    #   more information, see [IAM JSON policy elements: Sid][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html
+    #
+    # @option params [required, String] :effect
+    #   Determines whether the statement allows or denies access to the
+    #   resource.
+    #
+    # @option params [required, Array<Types::Principal>] :principal
+    #   An IAM principal, such as an IAM users, IAM roles, or AWS services
+    #   that is allowed or denied access to a resource. For more information,
+    #   see [AWS JSON policy elements: Principal][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    #
+    # @option params [required, Array<String>] :action
+    #   The Amazon Lex action that this policy either allows or denies. The
+    #   action must apply to the resource type of the specified ARN. For more
+    #   information, see [ Actions, resources, and condition keys for Amazon
+    #   Lex V2][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html
+    #
+    # @option params [Hash<String,Hash>] :condition
+    #   Specifies a condition when the policy is in effect. If the principal
+    #   of the policy is a service principal, you must provide two condition
+    #   blocks, one with a SourceAccount global condition key and one with a
+    #   SourceArn global condition key.
+    #
+    #   For more information, see [IAM JSON policy elements: Condition ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision of the policy to edit. If this revision
+    #   ID doesn't match the current revision ID, Amazon Lex throws an
+    #   exception.
+    #
+    #   If you don't specify a revision, Amazon Lex overwrites the contents
+    #   of the policy with the new values.
+    #
+    # @return [Types::CreateResourcePolicyStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourcePolicyStatementResponse#resource_arn #resource_arn} => String
+    #   * {Types::CreateResourcePolicyStatementResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_policy_statement({
+    #     resource_arn: "AmazonResourceName", # required
+    #     statement_id: "Name", # required
+    #     effect: "Allow", # required, accepts Allow, Deny
+    #     principal: [ # required
+    #       {
+    #         service: "ServicePrincipal",
+    #         arn: "PrincipalArn",
+    #       },
+    #     ],
+    #     action: ["Operation"], # required
+    #     condition: {
+    #       "ConditionOperator" => {
+    #         "ConditionKey" => "ConditionValue",
+    #       },
+    #     },
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicyStatement AWS API Documentation
+    #
+    # @overload create_resource_policy_statement(params = {})
+    # @param [Hash] params ({})
+    def create_resource_policy_statement(params = {}, options = {})
+      req = build_request(:create_resource_policy_statement, params)
+      req.send_request(options)
+    end
+
     # Creates a slot in an intent. A slot is a variable needed to fulfill an
     # intent. For example, an `OrderPizza` intent might need slots for size,
     # crust, and number of pizzas. For each slot, you define one or more
@@ -1268,15 +1492,23 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the slot will be used
     #   in. The string must match one of the supported locales. All of the
     #   bots, intents, slot types used by the slot must have the same locale.
-    #   For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, String] :intent_id
     #   The identifier of the intent that contains the slot.
+    #
+    # @option params [Types::MultipleValuesSetting] :multiple_values_setting
+    #   Indicates whether the slot returns multiple values in one response.
+    #   Multi-value slots are only available in the en-US locale. If you set
+    #   this value to `true` in any other locale, Amazon Lex throws a
+    #   `ValidationException`.
+    #
+    #   If the `multipleValuesSetting` is not set, the default value is
+    #   `false`.
     #
     # @return [Types::CreateSlotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1291,6 +1523,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateSlotResponse#locale_id #locale_id} => String
     #   * {Types::CreateSlotResponse#intent_id #intent_id} => String
     #   * {Types::CreateSlotResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -1537,6 +1770,9 @@ module Aws::LexModelsV2
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
     #     intent_id: "Id", # required
+    #     multiple_values_setting: {
+    #       allow_multiple_values: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1643,6 +1879,7 @@ module Aws::LexModelsV2
     #   resp.locale_id #=> String
     #   resp.intent_id #=> String
     #   resp.creation_date_time #=> Time
+    #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlot AWS API Documentation
     #
@@ -1705,12 +1942,11 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the slot type will be
     #   used in. The string must match one of the supported locales. All of
     #   the bots, intents, and slots used by the slot type must have the same
-    #   locale. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   locale. For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::CreateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1780,6 +2016,28 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Gets a pre-signed S3 write URL that you use to upload the zip archive
+    # when importing a bot or a bot locale.
+    #
+    # @return [Types::CreateUploadUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUploadUrlResponse#import_id #import_id} => String
+    #   * {Types::CreateUploadUrlResponse#upload_url #upload_url} => String
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.upload_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateUploadUrl AWS API Documentation
+    #
+    # @overload create_upload_url(params = {})
+    # @param [Hash] params ({})
+    def create_upload_url(params = {}, options = {})
+      req = build_request(:create_upload_url, params)
+      req.send_request(options)
+    end
+
     # Deletes all versions of a bot, including the `Draft` version. To
     # delete a specific version, use the `DeleteBotVersion` operation.
     #
@@ -1813,7 +2071,7 @@ module Aws::LexModelsV2
     # @example Response structure
     #
     #   resp.bot_id #=> String
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBot AWS API Documentation
     #
@@ -1879,12 +2137,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale that will be deleted. The
     #   string must match one of the supported locales. For more information,
-    #   see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::DeleteBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1906,7 +2163,7 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotLocale AWS API Documentation
     #
@@ -1951,7 +2208,7 @@ module Aws::LexModelsV2
     #
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotVersion AWS API Documentation
     #
@@ -1959,6 +2216,68 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def delete_bot_version(params = {}, options = {})
       req = build_request(:delete_bot_version, params)
+      req.send_request(options)
+    end
+
+    # Removes a previous export and the associated files stored in an S3
+    # bucket.
+    #
+    # @option params [required, String] :export_id
+    #   The unique identifier of the export to delete.
+    #
+    # @return [Types::DeleteExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteExportResponse#export_id #export_id} => String
+    #   * {Types::DeleteExportResponse#export_status #export_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_export({
+    #     export_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_id #=> String
+    #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteExport AWS API Documentation
+    #
+    # @overload delete_export(params = {})
+    # @param [Hash] params ({})
+    def delete_export(params = {}, options = {})
+      req = build_request(:delete_export, params)
+      req.send_request(options)
+    end
+
+    # Removes a previous import and the associated file stored in an S3
+    # bucket.
+    #
+    # @option params [required, String] :import_id
+    #   The unique identifier of the import to delete.
+    #
+    # @return [Types::DeleteImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteImportResponse#import_id #import_id} => String
+    #   * {Types::DeleteImportResponse#import_status #import_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_import({
+    #     import_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteImport AWS API Documentation
+    #
+    # @overload delete_import(params = {})
+    # @param [Hash] params ({})
+    def delete_import(params = {}, options = {})
+      req = build_request(:delete_import, params)
       req.send_request(options)
     end
 
@@ -1978,12 +2297,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale where the bot will be
     #   deleted. The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2005,6 +2323,94 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Removes an existing policy from a bot or bot alias. If the resource
+    # doesn't have a policy attached, Amazon Lex returns an exception.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that has the
+    #   resource policy attached.
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision to edit. If this ID doesn't match the
+    #   current revision number, Amazon Lex returns an exception
+    #
+    #   If you don't specify a revision ID, Amazon Lex will delete the
+    #   current policy.
+    #
+    # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::DeleteResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a policy statement from a resource policy. If you delete the
+    # last statement from a policy, the policy is deleted. If you specify a
+    # statement ID that doesn't exist in the policy, or if the bot or bot
+    # alias doesn't have a policy attached, Amazon Lex returns an
+    # exception.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :statement_id
+    #   The name of the statement (SID) to delete from the policy.
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision of the policy to delete the statement
+    #   from. If this revision ID doesn't match the current revision ID,
+    #   Amazon Lex throws an exception.
+    #
+    #   If you don't specify a revision, Amazon Lex removes the current
+    #   contents of the statement.
+    #
+    # @return [Types::DeleteResourcePolicyStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyStatementResponse#resource_arn #resource_arn} => String
+    #   * {Types::DeleteResourcePolicyStatementResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy_statement({
+    #     resource_arn: "AmazonResourceName", # required
+    #     statement_id: "Name", # required
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicyStatement AWS API Documentation
+    #
+    # @overload delete_resource_policy_statement(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy_statement(params = {}, options = {})
+      req = build_request(:delete_resource_policy_statement, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified slot from an intent.
     #
     # @option params [required, String] :slot_id
@@ -2019,12 +2425,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale that the slot will be
     #   deleted from. The string must match one of the supported locales. For
-    #   more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, String] :intent_id
     #   The identifier of the intent associated with the slot.
@@ -2068,12 +2473,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale that the slot type will be
     #   deleted from. The string must match one of the supported locales. For
-    #   more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [Boolean] :skip_resource_in_use_check
     #   By default, the `DeleteSlotType` operations throws a
@@ -2133,9 +2537,14 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bot_available
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBot AWS API Documentation
     #
@@ -2205,6 +2614,11 @@ module Aws::LexModelsV2
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bot_alias_available
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotAlias AWS API Documentation
     #
     # @overload describe_bot_alias(params = {})
@@ -2224,12 +2638,12 @@ module Aws::LexModelsV2
     #
     # @option params [required, String] :locale_id
     #   The unique identifier of the locale to describe. The string must match
-    #   one of the supported locales. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   one of the supported locales. For more information, see [Supported
+    #   languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::DescribeBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2268,7 +2682,7 @@ module Aws::LexModelsV2
     #   resp.voice_settings.voice_id #=> String
     #   resp.intents_count #=> Integer
     #   resp.slot_types_count #=> Integer
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
     #   resp.creation_date_time #=> Time
@@ -2277,6 +2691,13 @@ module Aws::LexModelsV2
     #   resp.bot_locale_history_events #=> Array
     #   resp.bot_locale_history_events[0].event #=> String
     #   resp.bot_locale_history_events[0].event_date #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bot_locale_built
+    #   * bot_locale_created
+    #   * bot_locale_express_testing_available
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocale AWS API Documentation
     #
@@ -2325,10 +2746,15 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
     #   resp.creation_date_time #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bot_version_available
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotVersion AWS API Documentation
     #
@@ -2336,6 +2762,120 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def describe_bot_version(params = {}, options = {})
       req = build_request(:describe_bot_version, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a specific export.
+    #
+    # @option params [required, String] :export_id
+    #   The unique identifier of the export to describe.
+    #
+    # @return [Types::DescribeExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExportResponse#export_id #export_id} => String
+    #   * {Types::DescribeExportResponse#resource_specification #resource_specification} => Types::ExportResourceSpecification
+    #   * {Types::DescribeExportResponse#file_format #file_format} => String
+    #   * {Types::DescribeExportResponse#export_status #export_status} => String
+    #   * {Types::DescribeExportResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #   * {Types::DescribeExportResponse#download_url #download_url} => String
+    #   * {Types::DescribeExportResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeExportResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_export({
+    #     export_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_id #=> String
+    #   resp.resource_specification.bot_export_specification.bot_id #=> String
+    #   resp.resource_specification.bot_export_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_export_specification.bot_id #=> String
+    #   resp.resource_specification.bot_locale_export_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_export_specification.locale_id #=> String
+    #   resp.file_format #=> String, one of "LexJson"
+    #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #   resp.download_url #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bot_export_completed
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeExport AWS API Documentation
+    #
+    # @overload describe_export(params = {})
+    # @param [Hash] params ({})
+    def describe_export(params = {}, options = {})
+      req = build_request(:describe_export, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a specific import.
+    #
+    # @option params [required, String] :import_id
+    #   The unique identifier of the import to describe.
+    #
+    # @return [Types::DescribeImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImportResponse#import_id #import_id} => String
+    #   * {Types::DescribeImportResponse#resource_specification #resource_specification} => Types::ImportResourceSpecification
+    #   * {Types::DescribeImportResponse#imported_resource_id #imported_resource_id} => String
+    #   * {Types::DescribeImportResponse#imported_resource_name #imported_resource_name} => String
+    #   * {Types::DescribeImportResponse#merge_strategy #merge_strategy} => String
+    #   * {Types::DescribeImportResponse#import_status #import_status} => String
+    #   * {Types::DescribeImportResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #   * {Types::DescribeImportResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeImportResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_import({
+    #     import_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.resource_specification.bot_import_specification.bot_name #=> String
+    #   resp.resource_specification.bot_import_specification.role_arn #=> String
+    #   resp.resource_specification.bot_import_specification.data_privacy.child_directed #=> Boolean
+    #   resp.resource_specification.bot_import_specification.idle_session_ttl_in_seconds #=> Integer
+    #   resp.resource_specification.bot_import_specification.bot_tags #=> Hash
+    #   resp.resource_specification.bot_import_specification.bot_tags["TagKey"] #=> String
+    #   resp.resource_specification.bot_import_specification.test_bot_alias_tags #=> Hash
+    #   resp.resource_specification.bot_import_specification.test_bot_alias_tags["TagKey"] #=> String
+    #   resp.resource_specification.bot_locale_import_specification.bot_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
+    #   resp.imported_resource_id #=> String
+    #   resp.imported_resource_name #=> String
+    #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
+    #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bot_import_completed
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeImport AWS API Documentation
+    #
+    # @overload describe_import(params = {})
+    # @param [Hash] params ({})
+    def describe_import(params = {}, options = {})
+      req = build_request(:describe_import, params)
       req.send_request(options)
     end
 
@@ -2353,12 +2893,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the intent to describe.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::DescribeIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2491,6 +3030,39 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Gets the resource policy and policy revision for a bot or bot alias.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::DescribeResourcePolicyResponse#policy #policy} => String
+    #   * {Types::DescribeResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeResourcePolicy AWS API Documentation
+    #
+    # @overload describe_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_policy(params = {}, options = {})
+      req = build_request(:describe_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Gets metadata information about a slot.
     #
     # @option params [required, String] :slot_id
@@ -2505,12 +3077,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the slot to describe. The
     #   string must match one of the supported locales. For more information,
-    #   see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, String] :intent_id
     #   The identifier of the intent that contains the slot.
@@ -2529,6 +3100,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeSlotResponse#intent_id #intent_id} => String
     #   * {Types::DescribeSlotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeSlotResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -2645,6 +3217,7 @@ module Aws::LexModelsV2
     #   resp.intent_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlot AWS API Documentation
     #
@@ -2669,12 +3242,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the slot type to
     #   describe. The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::DescribeSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2846,7 +3418,7 @@ module Aws::LexModelsV2
     #   resp.bot_locale_summaries[0].locale_id #=> String
     #   resp.bot_locale_summaries[0].locale_name #=> String
     #   resp.bot_locale_summaries[0].description #=> String
-    #   resp.bot_locale_summaries[0].bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt"
+    #   resp.bot_locale_summaries[0].bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #   resp.bot_locale_summaries[0].last_updated_date_time #=> Time
     #   resp.bot_locale_summaries[0].last_build_submitted_date_time #=> Time
     #
@@ -2915,7 +3487,7 @@ module Aws::LexModelsV2
     #   resp.bot_version_summaries[0].bot_name #=> String
     #   resp.bot_version_summaries[0].bot_version #=> String
     #   resp.bot_version_summaries[0].description #=> String
-    #   resp.bot_version_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_version_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #   resp.bot_version_summaries[0].creation_date_time #=> Time
     #   resp.next_token #=> String
     #
@@ -2981,7 +3553,7 @@ module Aws::LexModelsV2
     #   resp.bot_summaries[0].bot_id #=> String
     #   resp.bot_summaries[0].bot_name #=> String
     #   resp.bot_summaries[0].description #=> String
-    #   resp.bot_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #   resp.bot_summaries[0].latest_bot_version #=> String
     #   resp.bot_summaries[0].last_updated_date_time #=> Time
     #   resp.next_token #=> String
@@ -3006,12 +3578,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the intents to list. The
     #   string must match one of the supported locales. For more information,
-    #   see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [Types::BuiltInIntentSortBy] :sort_by
     #   Specifies sorting parameters for the list of built-in intents. You can
@@ -3071,12 +3642,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the slot types to list.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [Types::BuiltInSlotTypeSortBy] :sort_by
     #   Determines the sort order for the response from the
@@ -3131,6 +3701,173 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Lists the exports for a bot or bot locale. Exports are kept in the
+    # list for 7 days.
+    #
+    # @option params [String] :bot_id
+    #   The unique identifier that Amazon Lex assigned to the bot.
+    #
+    # @option params [String] :bot_version
+    #   The version of the bot to list exports for.
+    #
+    # @option params [Types::ExportSortBy] :sort_by
+    #   Determines the field that the list of exports is sorted by. You can
+    #   sort by the `LastUpdatedDateTime` field in ascending or descending
+    #   order.
+    #
+    # @option params [Array<Types::ExportFilter>] :filters
+    #   Provides the specification of a filter used to limit the exports in
+    #   the response to only those that match the filter specification. You
+    #   can only specify one filter and one string to filter on.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of exports to return in each page of results. If
+    #   there are fewer results than the max page size, only the actual number
+    #   of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the `ListExports` operation contans more results
+    #   that specified in the `maxResults` parameter, a token is returned in
+    #   the response. Use that token in the `nextToken` parameter to return
+    #   the next page of results.
+    #
+    # @return [Types::ListExportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportsResponse#bot_id #bot_id} => String
+    #   * {Types::ListExportsResponse#bot_version #bot_version} => String
+    #   * {Types::ListExportsResponse#export_summaries #export_summaries} => Array&lt;Types::ExportSummary&gt;
+    #   * {Types::ListExportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exports({
+    #     bot_id: "Id",
+    #     bot_version: "BotVersion",
+    #     sort_by: {
+    #       attribute: "LastUpdatedDateTime", # required, accepts LastUpdatedDateTime
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     filters: [
+    #       {
+    #         name: "ExportResourceType", # required, accepts ExportResourceType
+    #         values: ["FilterValue"], # required
+    #         operator: "CO", # required, accepts CO, EQ
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.export_summaries #=> Array
+    #   resp.export_summaries[0].export_id #=> String
+    #   resp.export_summaries[0].resource_specification.bot_export_specification.bot_id #=> String
+    #   resp.export_summaries[0].resource_specification.bot_export_specification.bot_version #=> String
+    #   resp.export_summaries[0].resource_specification.bot_locale_export_specification.bot_id #=> String
+    #   resp.export_summaries[0].resource_specification.bot_locale_export_specification.bot_version #=> String
+    #   resp.export_summaries[0].resource_specification.bot_locale_export_specification.locale_id #=> String
+    #   resp.export_summaries[0].file_format #=> String, one of "LexJson"
+    #   resp.export_summaries[0].export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.export_summaries[0].creation_date_time #=> Time
+    #   resp.export_summaries[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListExports AWS API Documentation
+    #
+    # @overload list_exports(params = {})
+    # @param [Hash] params ({})
+    def list_exports(params = {}, options = {})
+      req = build_request(:list_exports, params)
+      req.send_request(options)
+    end
+
+    # Lists the imports for a bot or bot locale. Imports are kept in the
+    # list for 7 days.
+    #
+    # @option params [String] :bot_id
+    #   The unique identifier that Amazon Lex assigned to the bot.
+    #
+    # @option params [String] :bot_version
+    #   The version of the bot to list imports for.
+    #
+    # @option params [Types::ImportSortBy] :sort_by
+    #   Determines the field that the list of imports is sorted by. You can
+    #   sort by the `LastUpdatedDateTime` field in ascending or descending
+    #   order.
+    #
+    # @option params [Array<Types::ImportFilter>] :filters
+    #   Provides the specification of a filter used to limit the bots in the
+    #   response to only those that match the filter specification. You can
+    #   only specify one filter and one string to filter on.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of imports to return in each page of results. If
+    #   there are fewer results than the max page size, only the actual number
+    #   of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the `ListImports` operation contains more results
+    #   than specified in the `maxResults` parameter, a token is returned in
+    #   the response. Use that token in the `nextToken` parameter to return
+    #   the next page of results.
+    #
+    # @return [Types::ListImportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportsResponse#bot_id #bot_id} => String
+    #   * {Types::ListImportsResponse#bot_version #bot_version} => String
+    #   * {Types::ListImportsResponse#import_summaries #import_summaries} => Array&lt;Types::ImportSummary&gt;
+    #   * {Types::ListImportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_imports({
+    #     bot_id: "Id",
+    #     bot_version: "DraftBotVersion",
+    #     sort_by: {
+    #       attribute: "LastUpdatedDateTime", # required, accepts LastUpdatedDateTime
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     filters: [
+    #       {
+    #         name: "ImportResourceType", # required, accepts ImportResourceType
+    #         values: ["FilterValue"], # required
+    #         operator: "CO", # required, accepts CO, EQ
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.import_summaries #=> Array
+    #   resp.import_summaries[0].import_id #=> String
+    #   resp.import_summaries[0].imported_resource_id #=> String
+    #   resp.import_summaries[0].imported_resource_name #=> String
+    #   resp.import_summaries[0].import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.import_summaries[0].merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
+    #   resp.import_summaries[0].creation_date_time #=> Time
+    #   resp.import_summaries[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListImports AWS API Documentation
+    #
+    # @overload list_imports(params = {})
+    # @param [Hash] params ({})
+    def list_imports(params = {}, options = {})
+      req = build_request(:list_imports, params)
+      req.send_request(options)
+    end
+
     # Get a list of intents that meet the specified criteria.
     #
     # @option params [required, String] :bot_id
@@ -3142,12 +3879,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the intents to list. The
     #   string must match one of the supported locales. For more information,
-    #   see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [Types::IntentSortBy] :sort_by
     #   Determines the sort order for the response from the `ListIntents`
@@ -3240,12 +3976,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the slot types to list.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [Types::SlotTypeSortBy] :sort_by
     #   Determines the sort order for the response from the `ListSlotTypes`
@@ -3332,12 +4067,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the slots to list. The
     #   string must match one of the supported locales. For more information,
-    #   see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, String] :intent_id
     #   The unique identifier of the intent that contains the slot.
@@ -3473,6 +4207,97 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Starts importing a bot or bot locale from a zip archive that you
+    # uploaded to an S3 bucket.
+    #
+    # @option params [required, String] :import_id
+    #   The unique identifier for the import. It is included in the response
+    #   from the operation.
+    #
+    # @option params [required, Types::ImportResourceSpecification] :resource_specification
+    #   Parameters for creating the bot or bot locale.
+    #
+    # @option params [required, String] :merge_strategy
+    #   The strategy to use when there is a name conflict between the imported
+    #   resource and an existing resource. When the merge strategy is
+    #   `FailOnConflict` existing resources are not overwritten and the import
+    #   fails.
+    #
+    # @option params [String] :file_password
+    #   The password used to encrypt the zip archive that contains the bot or
+    #   bot locale definition. You should always encrypt the zip archive to
+    #   protect it during transit between your site and Amazon Lex.
+    #
+    # @return [Types::StartImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportResponse#import_id #import_id} => String
+    #   * {Types::StartImportResponse#resource_specification #resource_specification} => Types::ImportResourceSpecification
+    #   * {Types::StartImportResponse#merge_strategy #merge_strategy} => String
+    #   * {Types::StartImportResponse#import_status #import_status} => String
+    #   * {Types::StartImportResponse#creation_date_time #creation_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import({
+    #     import_id: "Id", # required
+    #     resource_specification: { # required
+    #       bot_import_specification: {
+    #         bot_name: "Name", # required
+    #         role_arn: "RoleArn", # required
+    #         data_privacy: { # required
+    #           child_directed: false, # required
+    #         },
+    #         idle_session_ttl_in_seconds: 1,
+    #         bot_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         test_bot_alias_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       },
+    #       bot_locale_import_specification: {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         nlu_intent_confidence_threshold: 1.0,
+    #         voice_settings: {
+    #           voice_id: "VoiceId", # required
+    #         },
+    #       },
+    #     },
+    #     merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict
+    #     file_password: "ImportExportFilePassword",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.resource_specification.bot_import_specification.bot_name #=> String
+    #   resp.resource_specification.bot_import_specification.role_arn #=> String
+    #   resp.resource_specification.bot_import_specification.data_privacy.child_directed #=> Boolean
+    #   resp.resource_specification.bot_import_specification.idle_session_ttl_in_seconds #=> Integer
+    #   resp.resource_specification.bot_import_specification.bot_tags #=> Hash
+    #   resp.resource_specification.bot_import_specification.bot_tags["TagKey"] #=> String
+    #   resp.resource_specification.bot_import_specification.test_bot_alias_tags #=> Hash
+    #   resp.resource_specification.bot_import_specification.test_bot_alias_tags["TagKey"] #=> String
+    #   resp.resource_specification.bot_locale_import_specification.bot_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
+    #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
+    #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.creation_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartImport AWS API Documentation
+    #
+    # @overload start_import(params = {})
+    # @param [Hash] params ({})
+    def start_import(params = {}, options = {})
+      req = build_request(:start_import, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified resource. If a tag key
     # already exists, the existing value is replaced with the new value.
     #
@@ -3596,7 +4421,7 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
     #
@@ -3746,11 +4571,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale to update. The string must
     #   match one of the supported locales. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [String] :description
     #   The new description of the locale.
@@ -3800,7 +4625,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
     #   resp.creation_date_time #=> Time
@@ -3812,6 +4637,57 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def update_bot_locale(params = {}, options = {})
       req = build_request(:update_bot_locale, params)
+      req.send_request(options)
+    end
+
+    # Updates the password used to protect an export zip archive.
+    #
+    # The password is not required. If you don't supply a password, Amazon
+    # Lex generates a zip file that is not protected by a password. This is
+    # the archive that is available at the pre-signed S3 URL provided by the
+    # operation.
+    #
+    # @option params [required, String] :export_id
+    #   The unique identifier Amazon Lex assigned to the export.
+    #
+    # @option params [String] :file_password
+    #   The new password to use to encrypt the export zip archive.
+    #
+    # @return [Types::UpdateExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateExportResponse#export_id #export_id} => String
+    #   * {Types::UpdateExportResponse#resource_specification #resource_specification} => Types::ExportResourceSpecification
+    #   * {Types::UpdateExportResponse#file_format #file_format} => String
+    #   * {Types::UpdateExportResponse#export_status #export_status} => String
+    #   * {Types::UpdateExportResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::UpdateExportResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_export({
+    #     export_id: "Id", # required
+    #     file_password: "ImportExportFilePassword",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_id #=> String
+    #   resp.resource_specification.bot_export_specification.bot_id #=> String
+    #   resp.resource_specification.bot_export_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_export_specification.bot_id #=> String
+    #   resp.resource_specification.bot_locale_export_specification.bot_version #=> String
+    #   resp.resource_specification.bot_locale_export_specification.locale_id #=> String
+    #   resp.file_format #=> String, one of "LexJson"
+    #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateExport AWS API Documentation
+    #
+    # @overload update_export(params = {})
+    # @param [Hash] params ({})
+    def update_export(params = {}, options = {})
+      req = build_request(:update_export, params)
       req.send_request(options)
     end
 
@@ -3873,12 +4749,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale where this intent is used.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::UpdateIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4212,6 +5087,62 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Replaces the existing resource policy for a bot or bot alias with a
+    # new one. If the policy doesn't exist, Amazon Lex returns an
+    # exception.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :policy
+    #   A resource policy to add to the resource. The policy is a JSON
+    #   structure that contains one or more statements that define the policy.
+    #   The policy must follow the IAM syntax. For more information about the
+    #   contents of a JSON policy document, see [ IAM JSON policy reference
+    #   ][1].
+    #
+    #   If the policy isn't valid, Amazon Lex returns a validation exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision of the policy to update. If this
+    #   revision ID doesn't match the current revision ID, Amazon Lex throws
+    #   an exception.
+    #
+    #   If you don't specify a revision, Amazon Lex overwrites the contents
+    #   of the policy with the new values.
+    #
+    # @return [Types::UpdateResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::UpdateResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #     policy: "Policy", # required
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateResourcePolicy AWS API Documentation
+    #
+    # @overload update_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def update_resource_policy(params = {}, options = {})
+      req = build_request(:update_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Updates the settings for a slot.
     #
     # @option params [required, String] :slot_id
@@ -4244,15 +5175,23 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale that contains the slot. The
     #   string must match one of the supported locales. For more information,
-    #   see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, String] :intent_id
     #   The identifier of the intent that contains the slot.
+    #
+    # @option params [Types::MultipleValuesSetting] :multiple_values_setting
+    #   Determines whether the slot accepts multiple values in one response.
+    #   Multiple value slots are only available in the en-US locale. If you
+    #   set this value to `true` in any other locale, Amazon Lex throws a
+    #   `ValidationException`.
+    #
+    #   If the `multipleValuesSetting` is not set, the default value is
+    #   `false`.
     #
     # @return [Types::UpdateSlotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4268,6 +5207,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateSlotResponse#intent_id #intent_id} => String
     #   * {Types::UpdateSlotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateSlotResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -4515,6 +5455,9 @@ module Aws::LexModelsV2
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
     #     intent_id: "Id", # required
+    #     multiple_values_setting: {
+    #       allow_multiple_values: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4622,6 +5565,7 @@ module Aws::LexModelsV2
     #   resp.intent_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlot AWS API Documentation
     #
@@ -4664,12 +5608,11 @@ module Aws::LexModelsV2
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale that contains the slot type.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @return [Types::UpdateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4755,14 +5698,141 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name                          | params                        | :delay   | :max_attempts |
+    # | ------------------------------------ | ----------------------------- | -------- | ------------- |
+    # | bot_alias_available                  | {Client#describe_bot_alias}   | 10       | 35            |
+    # | bot_available                        | {Client#describe_bot}         | 10       | 35            |
+    # | bot_export_completed                 | {Client#describe_export}      | 10       | 35            |
+    # | bot_import_completed                 | {Client#describe_import}      | 10       | 35            |
+    # | bot_locale_built                     | {Client#describe_bot_locale}  | 10       | 35            |
+    # | bot_locale_created                   | {Client#describe_bot_locale}  | 10       | 35            |
+    # | bot_locale_express_testing_available | {Client#describe_bot_locale}  | 10       | 35            |
+    # | bot_version_available                | {Client#describe_bot_version} | 10       | 35            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        bot_alias_available: Waiters::BotAliasAvailable,
+        bot_available: Waiters::BotAvailable,
+        bot_export_completed: Waiters::BotExportCompleted,
+        bot_import_completed: Waiters::BotImportCompleted,
+        bot_locale_built: Waiters::BotLocaleBuilt,
+        bot_locale_created: Waiters::BotLocaleCreated,
+        bot_locale_express_testing_available: Waiters::BotLocaleExpressTestingAvailable,
+        bot_version_available: Waiters::BotVersionAvailable
+      }
     end
 
     class << self

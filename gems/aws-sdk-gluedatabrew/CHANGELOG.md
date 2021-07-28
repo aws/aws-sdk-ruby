@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2021-07-22)
+------------------
+
+* Feature - This SDK release adds two new features: 1) Output to Native JDBC destinations and 2) Adding configurations to profile jobs
+
+1.8.0 (2021-06-30)
+------------------
+
+* Feature - Adds support for the output of job results to the AWS Glue Data Catalog.
+
 1.7.0 (2021-03-30)
 ------------------
 

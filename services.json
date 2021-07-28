@@ -41,6 +41,9 @@
   "AppRegistry": {
     "models": "servicecatalog-appregistry/2020-06-24"
   },
+  "AppRunner": {
+    "models": "apprunner/2020-05-15"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01"
   },
@@ -664,6 +667,9 @@
   "PrometheusService": {
     "models": "amp/2020-08-01"
   },
+  "Proton": {
+    "models": "proton/2020-07-20"
+  },
   "QLDB": {
     "models": "qldb/2019-01-02"
   },
@@ -714,6 +720,15 @@
   },
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
+  },
+  "Route53RecoveryCluster": {
+    "models": "route53-recovery-cluster/2019-12-02"
+  },
+  "Route53RecoveryControlConfig": {
+    "models": "route53-recovery-control-config/2020-11-02"
+  },
+  "Route53RecoveryReadiness": {
+    "models": "route53-recovery-readiness/2019-12-02"
   },
   "Route53Resolver": {
     "models": "route53resolver/2018-04-01"

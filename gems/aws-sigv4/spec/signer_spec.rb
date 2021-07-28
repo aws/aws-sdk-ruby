@@ -269,7 +269,17 @@ module Aws
           expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
         end
 
-        it 'can omit the X-Amz-Content-Sha256 header' do
+        it 'adds the X-Amz-Content-Sha256 header if :apply_checksum_header is true' do
+          options[:apply_checksum_header] = true
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'https://domain.com',
+            body: 'abc'
+          )
+          expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
+        end
+
+        it 'can omit the X-Amz-Content-Sha256 header if :apply_checksum_header is false' do
           options[:apply_checksum_header] = false
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -344,6 +354,32 @@ module Aws
             body: StringIO.new('http-body')
           )
           expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4a7d3e06d1950eb64a3daa1becaa8ba030d9099858516cb2fa4533fab4e8937d')
+        end
+
+        it 'escapes path for the canonical request by default' do
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'https://domain.com/foo%bar'
+          )
+          expect(signature.canonical_request.lines[1]).to eq "/foo%25bar\n"
+        end
+
+        it 'escapes path for the canonical request if :uri_escape_path is true' do
+          options[:uri_escape_path] = true
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'https://domain.com/foo%bar'
+          )
+          expect(signature.canonical_request.lines[1]).to eq "/foo%25bar\n"
+        end
+
+        it 'does not escape path for the canonical request if :uri_escape_path is false' do
+          options[:uri_escape_path] = false
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'https://domain.com/foo%bar'
+          )
+          expect(signature.canonical_request.lines[1]).to eq "/foo%bar\n"
         end
 
       end

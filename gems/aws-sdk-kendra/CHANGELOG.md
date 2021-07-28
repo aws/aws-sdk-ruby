@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-07-21)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Amazon WorkDocs. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-workdocs.html
+
+1.30.0 (2021-07-12)
+------------------
+
+* Feature - Amazon Kendra now supports Principal Store
+
+1.29.0 (2021-06-30)
+------------------
+
+* Feature - Amazon Kendra Enterprise Edition now offered in smaller more granular units to enable customers with smaller workloads. Virtual Storage Capacity units now offer scaling in increments of 100,000 documents (up to 30GB) per unit and Virtual Query Units offer scaling increments of 8,000 queries per day.
+
+1.28.0 (2021-06-24)
+------------------
+
+* Feature - Amazon Kendra now supports SharePoint 2013 and SharePoint 2016 when using a SharePoint data source.
+
+1.27.0 (2021-06-17)
+------------------
+
+* Feature - Amazon Kendra now supports the indexing of web documents for search through the web crawler.
+
+1.26.0 (2021-06-09)
+------------------
+
+* Feature - AWS Kendra now supports checking document status.
+
+1.25.0 (2021-05-27)
+------------------
+
+* Feature - Amazon Kendra now suggests popular queries in order to help guide query typing and help overall accuracy.
+
 1.24.0 (2021-04-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-06-10)
+------------------
+
+* Feature - Release BatchGetRecord API for AWS SageMaker Feature Store Runtime.
+
 1.2.0 (2021-03-10)
 ------------------
 

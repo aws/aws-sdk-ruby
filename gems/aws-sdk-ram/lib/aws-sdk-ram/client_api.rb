@@ -137,6 +137,7 @@ module Aws::RAM
     AssociateResourceSharePermissionRequest.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "permissionArn"))
     AssociateResourceSharePermissionRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "replace"))
     AssociateResourceSharePermissionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    AssociateResourceSharePermissionRequest.add_member(:permission_version, Shapes::ShapeRef.new(shape: Integer, location_name: "permissionVersion"))
     AssociateResourceSharePermissionRequest.struct_class = Types::AssociateResourceSharePermissionRequest
 
     AssociateResourceSharePermissionResponse.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnValue"))
@@ -245,6 +246,7 @@ module Aws::RAM
     GetResourceSharesRequest.add_member(:tag_filters, Shapes::ShapeRef.new(shape: TagFilters, location_name: "tagFilters"))
     GetResourceSharesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetResourceSharesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetResourceSharesRequest.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "permissionArn"))
     GetResourceSharesRequest.struct_class = Types::GetResourceSharesRequest
 
     GetResourceSharesResponse.add_member(:resource_shares, Shapes::ShapeRef.new(shape: ResourceShareList, location_name: "resourceShares"))
@@ -423,6 +425,7 @@ module Aws::RAM
     ResourceShareInvitation.add_member(:invitation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "invitationTimestamp"))
     ResourceShareInvitation.add_member(:status, Shapes::ShapeRef.new(shape: ResourceShareInvitationStatus, location_name: "status"))
     ResourceShareInvitation.add_member(:resource_share_associations, Shapes::ShapeRef.new(shape: ResourceShareAssociationList, deprecated: true, location_name: "resourceShareAssociations", metadata: {"deprecatedMessage"=>"This member has been deprecated. Use ListPendingInvitationResources."}))
+    ResourceShareInvitation.add_member(:receiver_arn, Shapes::ShapeRef.new(shape: String, location_name: "receiverArn"))
     ResourceShareInvitation.struct_class = Types::ResourceShareInvitation
 
     ResourceShareInvitationAlreadyAcceptedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -454,6 +457,7 @@ module Aws::RAM
     ResourceSharePermissionDetail.add_member(:permission, Shapes::ShapeRef.new(shape: String, location_name: "permission"))
     ResourceSharePermissionDetail.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     ResourceSharePermissionDetail.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastUpdatedTime"))
+    ResourceSharePermissionDetail.add_member(:is_resource_type_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isResourceTypeDefault"))
     ResourceSharePermissionDetail.struct_class = Types::ResourceSharePermissionDetail
 
     ResourceSharePermissionList.member = Shapes::ShapeRef.new(shape: ResourceSharePermissionSummary)
@@ -466,6 +470,7 @@ module Aws::RAM
     ResourceSharePermissionSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ResourceSharePermissionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     ResourceSharePermissionSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastUpdatedTime"))
+    ResourceSharePermissionSummary.add_member(:is_resource_type_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isResourceTypeDefault"))
     ResourceSharePermissionSummary.struct_class = Types::ResourceSharePermissionSummary
 
     ServerInternalException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -665,6 +670,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateTransitionException)
       end)
 
       api.add_operation(:enable_sharing_with_aws_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -809,6 +815,12 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_principals, Seahorse::Model::Operation.new.tap do |o|
@@ -844,6 +856,12 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resource_types, Seahorse::Model::Operation.new.tap do |o|
@@ -856,6 +874,12 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resources, Seahorse::Model::Operation.new.tap do |o|
@@ -886,6 +910,7 @@ module Aws::RAM
         o.input = Shapes::ShapeRef.new(shape: PromoteResourceShareCreatedFromPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PromoteResourceShareCreatedFromPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceShareLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
@@ -920,6 +945,7 @@ module Aws::RAM
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceArnNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)

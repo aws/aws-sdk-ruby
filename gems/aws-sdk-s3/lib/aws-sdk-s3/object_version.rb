@@ -247,7 +247,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -347,7 +347,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -431,7 +431,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -536,7 +536,7 @@ module Aws::S3
       #   request. Bucket owners need not specify this parameter in their
       #   requests. For information about downloading objects from requester
       #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-      #   in the *Amazon S3 Developer Guide*.
+      #   in the *Amazon S3 User Guide*.
       #
       #
       #

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2021-07-15)
+------------------
+
+* Feature - Documentation updates for cognito-idp
+
+1.53.0 (2021-06-10)
+------------------
+
+* Feature - Amazon Cognito now supports targeted sign out through refresh token revocation
+
+1.52.0 (2021-06-08)
+------------------
+
+* Feature - Documentation updates for cognito-idp
+
 1.51.0 (2021-04-22)
 ------------------
 

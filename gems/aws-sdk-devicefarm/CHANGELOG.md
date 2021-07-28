@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-05-27)
+------------------
+
+* Feature - Introduces support for using our desktop testing service with applications hosted within your Virtual Private Cloud (VPC).
+
 1.41.0 (2021-03-10)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-06-03)
+------------------
+
+* Feature - Documentation updates for Route 53 Resolver
+
 1.25.0 (2021-04-01)
 ------------------
 

@@ -1384,6 +1384,7 @@ module Aws::Macie2
     UpdateFindingsFilterRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
     UpdateFindingsFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateFindingsFilterRequest.add_member(:position, Shapes::ShapeRef.new(shape: __integer, location_name: "position"))
+    UpdateFindingsFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateFindingsFilterRequest.struct_class = Types::UpdateFindingsFilterRequest
 
     UpdateFindingsFilterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))

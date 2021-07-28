@@ -503,8 +503,9 @@ module Aws::LookoutMetrics
     #   A list of metrics that the dataset will contain.
     #
     # @option params [Integer] :offset
-    #   After an interval ends, the amount of time that the detector waits
-    #   before importing data.
+    #   After an interval ends, the amount of seconds that the detector waits
+    #   before importing data. Offset is only supported for S3 and Redshift
+    #   datasources.
     #
     # @option params [Types::TimestampColumn] :timestamp_column
     #   Contains information about the column used for tracking time in your
@@ -803,7 +804,7 @@ module Aws::LookoutMetrics
     #   resp.anomaly_detector_config.anomaly_detector_frequency #=> String, one of "P1D", "PT1H", "PT10M", "PT5M"
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
-    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
+    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
     #   resp.failure_reason #=> String
     #   resp.kms_key_arn #=> String
     #
@@ -1155,7 +1156,7 @@ module Aws::LookoutMetrics
     #   resp.anomaly_detector_summary_list[0].anomaly_detector_description #=> String
     #   resp.anomaly_detector_summary_list[0].creation_time #=> Time
     #   resp.anomaly_detector_summary_list[0].last_modification_time #=> Time
-    #   resp.anomaly_detector_summary_list[0].status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
+    #   resp.anomaly_detector_summary_list[0].status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
     #   resp.anomaly_detector_summary_list[0].tags #=> Hash
     #   resp.anomaly_detector_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1524,8 +1525,9 @@ module Aws::LookoutMetrics
     #   The metric list.
     #
     # @option params [Integer] :offset
-    #   After an interval ends, the amount of time that the detector waits
-    #   before importing data.
+    #   After an interval ends, the amount of seconds that the detector waits
+    #   before importing data. Offset is only supported for S3 and Redshift
+    #   datasources.
     #
     # @option params [Types::TimestampColumn] :timestamp_column
     #   The timestamp column.
@@ -1644,7 +1646,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

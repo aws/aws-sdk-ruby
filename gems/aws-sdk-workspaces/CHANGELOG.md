@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-05-25)
+------------------
+
+* Feature - Adds support for Linux device types in WorkspaceAccessProperties
+
 1.52.0 (2021-03-12)
 ------------------
 

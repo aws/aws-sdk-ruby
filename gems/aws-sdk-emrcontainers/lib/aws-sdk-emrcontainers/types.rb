@@ -188,7 +188,7 @@ module Aws::EMRContainers
     #
     #       {
     #         eks_info: {
-    #           namespace: "String256",
+    #           namespace: "KubernetesNamespace",
     #         },
     #       }
     #
@@ -211,10 +211,10 @@ module Aws::EMRContainers
     #
     #       {
     #         type: "EKS", # required, accepts EKS
-    #         id: "String256", # required
+    #         id: "ClusterId", # required
     #         info: {
     #           eks_info: {
-    #             namespace: "String256",
+    #             namespace: "KubernetesNamespace",
     #           },
     #         },
     #       }
@@ -372,10 +372,10 @@ module Aws::EMRContainers
     #         name: "ResourceNameString", # required
     #         container_provider: { # required
     #           type: "EKS", # required, accepts EKS
-    #           id: "String256", # required
+    #           id: "ClusterId", # required
     #           info: {
     #             eks_info: {
-    #               namespace: "String256",
+    #               namespace: "KubernetesNamespace",
     #             },
     #           },
     #         },
@@ -623,7 +623,7 @@ module Aws::EMRContainers
     #   data as a hash:
     #
     #       {
-    #         namespace: "String256",
+    #         namespace: "KubernetesNamespace",
     #       }
     #
     # @!attribute [rw] namespace
@@ -698,6 +698,14 @@ module Aws::EMRContainers
     #   The subnet IDs of the endpoint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] state_details
+    #   Additional details of the endpoint state.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reasons why the endpoint has failed.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags of the endpoint.
     #   @return [Hash<String,String>]
@@ -719,6 +727,8 @@ module Aws::EMRContainers
       :created_at,
       :security_group,
       :subnet_ids,
+      :state_details,
+      :failure_reason,
       :tags)
       SENSITIVE = []
       include Aws::Structure

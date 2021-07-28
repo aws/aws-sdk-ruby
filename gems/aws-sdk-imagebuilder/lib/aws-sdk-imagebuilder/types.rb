@@ -10,23 +10,65 @@
 module Aws::Imagebuilder
   module Types
 
-    # Details of an EC2 AMI.
+    # In addition to your infrastruction configuration, these settings
+    # provide an extra layer of control over your build instances. For
+    # instances where Image Builder installs the SSM agent, you can choose
+    # whether to keep it for the AMI that you create. You can also specify
+    # commands to run on launch for all of your build instances.
+    #
+    # @note When making an API call, you may pass AdditionalInstanceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         systems_manager_agent: {
+    #           uninstall_after_build: false,
+    #         },
+    #         user_data_override: "UserDataOverride",
+    #       }
+    #
+    # @!attribute [rw] systems_manager_agent
+    #   Contains settings for the SSM agent on your build instance.
+    #   @return [Types::SystemsManagerAgent]
+    #
+    # @!attribute [rw] user_data_override
+    #   Use this property to provide commands or a command script to run
+    #   when you launch your build instance.
+    #
+    #   <note markdown="1"> The userDataOverride property replaces any commands that Image
+    #   Builder might have added to ensure that SSM is installed on your
+    #   Linux build instance. If you override the user data, make sure that
+    #   you add commands to install SSM, if it is not pre-installed on your
+    #   source image.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/AdditionalInstanceConfiguration AWS API Documentation
+    #
+    class AdditionalInstanceConfiguration < Struct.new(
+      :systems_manager_agent,
+      :user_data_override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of an Amazon EC2 AMI.
     #
     # @!attribute [rw] region
-    #   The AWS Region of the EC2 AMI.
+    #   The Region of the Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The AMI ID of the EC2 AMI.
+    #   The AMI ID of the Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the EC2 AMI.
+    #   The name of the Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the EC2 AMI. Minimum and maximum length are in
-    #   characters.
+    #   The description of the Amazon EC2 AMI. Minimum and maximum length
+    #   are in characters.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -91,8 +133,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] launch_permission
-    #   Launch permissions can be used to configure which AWS accounts can
-    #   use the AMI to launch instances.
+    #   Launch permissions can be used to configure which accounts can use
+    #   the AMI to launch instances.
     #   @return [Types::LaunchPermissionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/AmiDistributionConfiguration AWS API Documentation
@@ -227,6 +269,11 @@ module Aws::Imagebuilder
     #   parent image OS version during image recipe creation.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] parameters
+    #   Contains parameter details for each of the parameters that are
+    #   defined for the component.
+    #   @return [Array<Types::ComponentParameterDetail>]
+    #
     # @!attribute [rw] owner
     #   The owner of the component.
     #   @return [String]
@@ -262,6 +309,7 @@ module Aws::Imagebuilder
       :type,
       :platform,
       :supported_os_versions,
+      :parameters,
       :owner,
       :data,
       :kms_key_id,
@@ -279,16 +327,86 @@ module Aws::Imagebuilder
     #
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "ComponentParameterName", # required
+    #             value: ["ComponentParameterValue"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] component_arn
     #   The Amazon Resource Name (ARN) of the component.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   A group of parameter settings that are used to configure the
+    #   component for a specific recipe.
+    #   @return [Array<Types::ComponentParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentConfiguration AWS API Documentation
     #
     class ComponentConfiguration < Struct.new(
-      :component_arn)
+      :component_arn,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a key/value pair that sets the named component parameter.
+    #
+    # @note When making an API call, you may pass ComponentParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ComponentParameterName", # required
+    #         value: ["ComponentParameterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the component parameter to set.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Sets the value for the named component parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentParameter AWS API Documentation
+    #
+    class ComponentParameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a parameter that is used to provide configuration details for
+    # the component.
+    #
+    # @!attribute [rw] name
+    #   The name of this input parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of input this parameter provides. The currently supported
+    #   value is "string".
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of this parameter if no input is provided.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   Describes this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentParameterDetail AWS API Documentation
+    #
+    class ComponentParameterDetail < Struct.new(
+      :name,
+      :type,
+      :default_value,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -360,10 +478,26 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # A high-level overview of a component semantic version.
+    # The defining characteristics of a specific version of an TOE
+    # component.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the component.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -372,6 +506,31 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] version
     #   The semantic version of the component.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -479,6 +638,21 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the container recipe.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] container_type
@@ -502,8 +676,32 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The semantic version of the container recipe
-    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   The semantic version of the container recipe.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] components
@@ -651,8 +849,23 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could
-    #   be versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -683,10 +896,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use
+    #   Amazon S3, you can specify component content up to your service
+    #   quota. Either `data` or `uri` can be used to specify the data within
+    #   the component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -756,6 +970,12 @@ module Aws::Imagebuilder
     #         components: [ # required
     #           {
     #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #             parameters: [
+    #               {
+    #                 name: "ComponentParameterName", # required
+    #                 value: ["ComponentParameterValue"], # required
+    #               },
+    #             ],
     #           },
     #         ],
     #         instance_configuration: {
@@ -807,8 +1027,24 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the container recipe
-    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   The semantic version of the container recipe. This version follows
+    #   the semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] components
@@ -827,7 +1063,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] dockerfile_template_uri
-    #   The S3 URI for the Dockerfile that will be used to build your
+    #   The Amazon S3 URI for the Dockerfile that will be used to build your
     #   container image.
     #   @return [String]
     #
@@ -1155,6 +1391,12 @@ module Aws::Imagebuilder
     #         components: [ # required
     #           {
     #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #             parameters: [
+    #               {
+    #                 name: "ComponentParameterName", # required
+    #                 value: ["ComponentParameterValue"], # required
+    #               },
+    #             ],
     #           },
     #         ],
     #         parent_image: "NonEmptyString", # required
@@ -1178,6 +1420,12 @@ module Aws::Imagebuilder
     #           "TagKey" => "TagValue",
     #         },
     #         working_directory: "NonEmptyString",
+    #         additional_instance_configuration: {
+    #           systems_manager_agent: {
+    #             uninstall_after_build: false,
+    #           },
+    #           user_data_override: "UserDataOverride",
+    #         },
     #         client_token: "ClientToken", # required
     #       }
     #
@@ -1190,7 +1438,24 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the image recipe.
+    #   The semantic version of the image recipe. This version follows the
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] components
@@ -1217,8 +1482,13 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] working_directory
-    #   The working directory to be used during build and test workflows.
+    #   The working directory used during build and test workflows.
     #   @return [String]
+    #
+    # @!attribute [rw] additional_instance_configuration
+    #   Specify additional settings and launch scripts for your build
+    #   instances.
+    #   @return [Types::AdditionalInstanceConfiguration]
     #
     # @!attribute [rw] client_token
     #   The idempotency token used to make this request idempotent.
@@ -1238,6 +1508,7 @@ module Aws::Imagebuilder
       :block_device_mappings,
       :tags,
       :working_directory,
+      :additional_instance_configuration,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1410,17 +1681,17 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] instance_profile_name
     #   The instance profile to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
     #   The subnet ID in which to place the instance used to customize your
-    #   EC2 AMI.
+    #   Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -2454,10 +2725,28 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # An image build version.
+    # An Image Builder image. You must specify exactly one recipe for the
+    # image – either a container recipe (`containerRecipe`), which creates a
+    # container image, or an image recipe (`imageRecipe`), which creates an
+    # AMI.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the image.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2470,6 +2759,31 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] version
     #   The semantic version of the image.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -2497,7 +2811,7 @@ module Aws::Imagebuilder
     #   @return [Types::ImageRecipe]
     #
     # @!attribute [rw] container_recipe
-    #   The container recipe used to create the container image type.
+    #   The recipe that is used to create an Image Builder container image.
     #   @return [Types::ContainerRecipe]
     #
     # @!attribute [rw] source_pipeline_name
@@ -2736,6 +3050,14 @@ module Aws::Imagebuilder
     #   The working directory to be used during build and test workflows.
     #   @return [String]
     #
+    # @!attribute [rw] additional_instance_configuration
+    #   Before you create a new AMI, Image Builder launches temporary Amazon
+    #   EC2 instances to build and test your image configuration. Instance
+    #   configuration adds a layer of control over those instances. You can
+    #   define settings and add scripts to run when an instance is launched
+    #   from your AMI.
+    #   @return [Types::AdditionalInstanceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageRecipe AWS API Documentation
     #
     class ImageRecipe < Struct.new(
@@ -2751,7 +3073,8 @@ module Aws::Imagebuilder
       :block_device_mappings,
       :date_created,
       :tags,
-      :working_directory)
+      :working_directory,
+      :additional_instance_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2911,39 +3234,85 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # An image semantic version.
+    # The defining characteristics of a specific version of an Image Builder
+    # image.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the image semantic version.
+    #   The Amazon Resource Name (ARN) of a specific version of an Image
+    #   Builder image.
+    #
+    #   <note markdown="1"> Semantic versioning is included in each object's Amazon Resource
+    #   Name (ARN), at the level that applies to that object as follows:
+    #
+    #    1.  Versionless ARNs and Name ARNs do not include specific values in
+    #       any of the nodes. The nodes are either left off entirely, or
+    #       they are specified as wildcards, for example: x.x.x.
+    #
+    #   2.  Version ARNs have only the first three nodes:
+    #       &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+    #
+    #   3.  Build version ARNs have all four nodes, and point to a specific
+    #       build for a specific version of an object.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the image semantic version.
+    #   The name of this specific version of an Image Builder image.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Specifies whether this is an AMI or container image.
+    #   Specifies whether this image is an AMI or a container image.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The semantic version of the image semantic version.
+    #   Details for a specific version of an Image Builder image. This
+    #   version follows the semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the image semantic version.
+    #   The platform of the image version, for example "Windows" or
+    #   "Linux".
     #   @return [String]
     #
     # @!attribute [rw] os_version
-    #   The operating system version of the instance. For example, Amazon
-    #   Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+    #   The operating system version of the Amazon EC2 build instance. For
+    #   example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server
+    #   2019.
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the image semantic version.
+    #   The owner of the image version.
     #   @return [String]
     #
     # @!attribute [rw] date_created
-    #   The date at which this image semantic version was created.
+    #   The date on which this specific version of the Image Builder image
+    #   was created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageVersion AWS API Documentation
@@ -2987,8 +3356,22 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could
-    #   be versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3004,7 +3387,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] type
     #   The type of the component denotes whether the component is used to
-    #   build the image or only to test it.
+    #   build the image, or only to test it.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -3022,10 +3405,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use
+    #   Amazon S3, you can specify component content up to your service
+    #   quota. Either `data` or `uri` can be used to specify the data within
+    #   the component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -3119,7 +3503,7 @@ module Aws::Imagebuilder
     #   @return [Types::Logging]
     #
     # @!attribute [rw] key_pair
-    #   The EC2 key pair of the infrastructure configuration.
+    #   The Amazon EC2 key pair of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] terminate_instance_on_failure
@@ -3170,7 +3554,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # The infrastructure used when building EC2 AMIs.
+    # The infrastructure used when building Amazon EC2 AMIs.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration.
@@ -3401,11 +3785,11 @@ module Aws::Imagebuilder
     end
 
     # Describes the configuration for a launch permission. The launch
-    # permission modification request is sent to the [EC2
+    # permission modification request is sent to the [Amazon EC2
     # ModifyImageAttribute][1] API on behalf of the user for each Region
     # they have selected to distribute the AMI. To make an AMI public, set
     # the launch permission authorized accounts to `all`. See the examples
-    # for making an AMI public at [EC2 ModifyImageAttribute][1].
+    # for making an AMI public at [Amazon EC2 ModifyImageAttribute][1].
     #
     #
     #
@@ -3420,7 +3804,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] user_ids
-    #   The AWS account ID.
+    #   The account ID.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
@@ -3436,7 +3820,8 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # Identifies an EC2 launch template to use for a specific account.
+    # Identifies an Amazon EC2 launch template to use for a specific
+    # account.
     #
     # @note When making an API call, you may pass LaunchTemplateConfiguration
     #   data as a hash:
@@ -3448,7 +3833,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] launch_template_id
-    #   Identifies the EC2 launch template to use.
+    #   Identifies the Amazon EC2 launch template to use.
     #   @return [String]
     #
     # @!attribute [rw] account_id
@@ -3456,8 +3841,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] set_default_version
-    #   Set the specified EC2 launch template as the default launch template
-    #   for the specified account.
+    #   Set the specified Amazon EC2 launch template as the default launch
+    #   template for the specified account.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/LaunchTemplateConfiguration AWS API Documentation
@@ -3557,8 +3942,7 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] by_name
-    #   Returns the list of component build versions for the specified
-    #   semantic version.
+    #   Returns the list of component build versions for the specified name.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -3588,6 +3972,12 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] component_version_list
     #   The list of component semantic versions.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    </note>
     #   @return [Array<Types::ComponentVersion>]
     #
     # @!attribute [rw] next_token
@@ -4139,6 +4529,21 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] image_version_list
     #   The list of image semantic versions.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #   @return [Array<Types::ImageVersion>]
     #
     # @!attribute [rw] next_token
@@ -4279,7 +4684,7 @@ module Aws::Imagebuilder
     # The resources produced by this image.
     #
     # @!attribute [rw] amis
-    #   The EC2 AMIs created by this image.
+    #   The Amazon EC2 AMIs created by this image.
     #   @return [Array<Types::Ami>]
     #
     # @!attribute [rw] containers
@@ -4714,6 +5119,31 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Contains settings for the SSM agent on your build instance.
+    #
+    # @note When making an API call, you may pass SystemsManagerAgent
+    #   data as a hash:
+    #
+    #       {
+    #         uninstall_after_build: false,
+    #       }
+    #
+    # @!attribute [rw] uninstall_after_build
+    #   Controls whether the SSM agent is removed from your final build
+    #   image, prior to creating the new AMI. If this is set to true, then
+    #   the agent is removed from the final image. If it's set to false,
+    #   then the agent is left in, so that it is included in the new AMI.
+    #   The default value is false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SystemsManagerAgent AWS API Documentation
+    #
+    class SystemsManagerAgent < Struct.new(
+      :uninstall_after_build)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -5062,17 +5492,17 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] instance_profile_name
     #   The instance profile to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet ID to place the instance used to customize your EC2 AMI
-    #   in.
+    #   The subnet ID to place the instance used to customize your Amazon
+    #   EC2 AMI in.
     #   @return [String]
     #
     # @!attribute [rw] logging

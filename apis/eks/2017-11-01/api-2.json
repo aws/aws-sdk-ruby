@@ -578,7 +578,8 @@
         "ClusterUnreachable",
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
-        "AdmissionRequestDenied"
+        "AdmissionRequestDenied",
+        "UnsupportedAddonModification"
       ]
     },
     "AddonIssueList":{
@@ -887,6 +888,7 @@
           "idempotencyToken":true
         },
         "launchTemplate":{"shape":"LaunchTemplateSpecification"},
+        "updateConfig":{"shape":"NodegroupUpdateConfig"},
         "capacityType":{"shape":"CapacityTypes"},
         "version":{"shape":"String"},
         "releaseVersion":{"shape":"String"}
@@ -1230,7 +1232,8 @@
         "ClusterUnreachable",
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
-        "AdmissionRequestDenied"
+        "AdmissionRequestDenied",
+        "UnsupportedAddonModification"
       ]
     },
     "ErrorDetail":{
@@ -1646,6 +1649,7 @@
         "resources":{"shape":"NodegroupResources"},
         "diskSize":{"shape":"BoxedInteger"},
         "health":{"shape":"NodegroupHealth"},
+        "updateConfig":{"shape":"NodegroupUpdateConfig"},
         "launchTemplate":{"shape":"LaunchTemplateSpecification"},
         "tags":{"shape":"TagMap"}
       }
@@ -1706,6 +1710,18 @@
         "DEGRADED"
       ]
     },
+    "NodegroupUpdateConfig":{
+      "type":"structure",
+      "members":{
+        "maxUnavailable":{"shape":"NonZeroInteger"},
+        "maxUnavailablePercentage":{"shape":"PercentCapacity"}
+      }
+    },
+    "NonZeroInteger":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
     "NotFoundException":{
       "type":"structure",
       "members":{
@@ -1754,6 +1770,12 @@
         "groupsPrefix":{"shape":"String"},
         "requiredClaims":{"shape":"requiredClaimsMap"}
       }
+    },
+    "PercentCapacity":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
     },
     "Provider":{
       "type":"structure",
@@ -2051,6 +2073,7 @@
         "labels":{"shape":"UpdateLabelsPayload"},
         "taints":{"shape":"UpdateTaintsPayload"},
         "scalingConfig":{"shape":"NodegroupScalingConfig"},
+        "updateConfig":{"shape":"NodegroupUpdateConfig"},
         "clientRequestToken":{
           "shape":"String",
           "idempotencyToken":true
@@ -2126,7 +2149,9 @@
         "EncryptionConfig",
         "AddonVersion",
         "ServiceAccountRoleArn",
-        "ResolveConflicts"
+        "ResolveConflicts",
+        "MaxUnavailable",
+        "MaxUnavailablePercentage"
       ]
     },
     "UpdateParams":{

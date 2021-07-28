@@ -1,6 +1,81 @@
 Unreleased Changes
 ------------------
 
+1.251.0 (2021-07-22)
+------------------
+
+* Feature - This release allows customers to assign prefixes to their elastic network interface and to reserve IP blocks in their subnet CIDRs. These reserved blocks can be used to assign prefixes to elastic network interfaces or be excluded from auto-assignment.
+
+1.250.0 (2021-07-20)
+------------------
+
+* Feature - Added idempotency to the CreateVolume API using the ClientToken request parameter
+
+1.249.0 (2021-07-15)
+------------------
+
+* Feature - This feature enables customers  to specify weekly recurring time window(s) for scheduled events that reboot, stop or terminate EC2 instances.
+
+1.248.0 (2021-07-07)
+------------------
+
+* Feature - This release adds resource ids and tagging support for VPC security group rules.
+
+1.247.0 (2021-07-02)
+------------------
+
+* Feature - This release removes network-insights-boundary
+
+1.246.0 (2021-07-01)
+------------------
+
+* Feature - Adding a new reserved field to support future infrastructure improvements for Amazon EC2 Fleet.
+
+1.245.0 (2021-06-23)
+------------------
+
+* Feature - This release adds support for provisioning your own IP (BYOIP) range in multiple regions. This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+
+1.244.0 (2021-06-16)
+------------------
+
+* Feature - This release adds support for VLAN-tagged network traffic over an Elastic Network Interface (ENI). This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+
+1.243.0 (2021-06-15)
+------------------
+
+* Feature - EC2 M5n, M5dn, R5n, R5dn metal instances with 100 Gbps network performance and Elastic Fabric Adapter (EFA) for ultra low latency
+
+1.242.0 (2021-06-11)
+------------------
+
+* Feature - Amazon EC2 adds new AMI property to flag outdated AMIs
+
+1.241.0 (2021-06-10)
+------------------
+
+* Feature - This release adds a new optional parameter connectivityType (public, private) for the CreateNatGateway API. Private NatGateway does not require customers to attach an InternetGateway to the VPC and can be used for communication with other VPCs and on-premise networks.
+
+1.240.0 (2021-06-01)
+------------------
+
+* Feature - Added idempotency to CreateNetworkInterface using the ClientToken parameter.
+
+1.239.0 (2021-05-27)
+------------------
+
+* Feature - This release removes resource ids and tagging support for VPC security group rules.
+
+1.238.0 (2021-05-26)
+------------------
+
+* Feature - This release adds resource ids and tagging support for VPC security group rules.
+
+1.237.0 (2021-05-24)
+------------------
+
+* Feature - This release adds support for creating and managing EC2 On-Demand Capacity Reservations on Outposts.
+
 1.236.0 (2021-05-12)
 ------------------
 

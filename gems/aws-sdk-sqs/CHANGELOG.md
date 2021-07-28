@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-07-01)
+------------------
+
+* Feature - Documentation updates for Amazon SQS.
+
+1.39.0 (2021-05-27)
+------------------
+
+* Feature - Documentation updates for Amazon SQS for General Availability of high throughput for FIFO queues.
+
 1.38.0 (2021-03-25)
 ------------------
 

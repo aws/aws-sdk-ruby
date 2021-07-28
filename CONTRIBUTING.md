@@ -35,16 +35,15 @@ one of:
 ## What we are looking for
 
 We are open to anything that improves the SDK and doesn't unnecessarily cause backwards-incompatible changes. If you are
-unsure if your idea is something we would be open to, please ask us; Open an issue, send us an email, or ask in the
-[Gitter channel](https://gitter.im/aws/aws-sdk-ruby). Specifically, here are a few things that we would
-appreciate help on:
+unsure if your idea is something we would be open to, please ask us; Open an issue or send us an email.
+Specifically, here are a few things that we would appreciate help on:
 
 1. **Waiters** – Waiter configurations are located in the apis directory.
 2. **Docs** – We  greatly appreciate contributions to our documentation. The docs are written as code comments
    and via a pair of [YARD](https://github.com/lsegal/yard) plugins.
 3. **Tests** – We maintain high code coverage, but if there are any tests you feel are missing, please add them.
 4. **Convenience features** – Are there any features you feel would add value to the SDK? Contributions in this
-   area would be greatly appreciated. 
+   area would be greatly appreciated.
 5. If you have some other ideas, please let us know!
 
 ## Running the unit tests

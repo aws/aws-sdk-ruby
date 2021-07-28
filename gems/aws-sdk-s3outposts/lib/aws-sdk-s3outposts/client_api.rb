@@ -19,8 +19,10 @@ module Aws::S3Outposts
     CreateEndpointRequest = Shapes::StructureShape.new(name: 'CreateEndpointRequest')
     CreateEndpointResult = Shapes::StructureShape.new(name: 'CreateEndpointResult')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
+    CustomerOwnedIpv4Pool = Shapes::StringShape.new(name: 'CustomerOwnedIpv4Pool')
     DeleteEndpointRequest = Shapes::StructureShape.new(name: 'DeleteEndpointRequest')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    EndpointAccessType = Shapes::StringShape.new(name: 'EndpointAccessType')
     EndpointArn = Shapes::StringShape.new(name: 'EndpointArn')
     EndpointId = Shapes::StringShape.new(name: 'EndpointId')
     EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
@@ -39,6 +41,7 @@ module Aws::S3Outposts
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -49,6 +52,8 @@ module Aws::S3Outposts
     CreateEndpointRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location_name: "OutpostId"))
     CreateEndpointRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     CreateEndpointRequest.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, required: true, location_name: "SecurityGroupId"))
+    CreateEndpointRequest.add_member(:access_type, Shapes::ShapeRef.new(shape: EndpointAccessType, location_name: "AccessType"))
+    CreateEndpointRequest.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
     CreateEndpointRequest.struct_class = Types::CreateEndpointRequest
 
     CreateEndpointResult.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "EndpointArn"))
@@ -64,6 +69,11 @@ module Aws::S3Outposts
     Endpoint.add_member(:status, Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status"))
     Endpoint.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     Endpoint.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "NetworkInterfaces"))
+    Endpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    Endpoint.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    Endpoint.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId"))
+    Endpoint.add_member(:access_type, Shapes::ShapeRef.new(shape: EndpointAccessType, location_name: "AccessType"))
+    Endpoint.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
     Endpoint.struct_class = Types::Endpoint
 
     Endpoints.member = Shapes::ShapeRef.new(shape: Endpoint)

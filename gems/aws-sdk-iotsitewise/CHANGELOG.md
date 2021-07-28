@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-07-15)
+------------------
+
+* Feature - Update the default endpoint for the APIs used to manage asset models, assets, gateways, tags, and account configurations. If you have firewalls with strict egress rules, configure the rules to grant you access to api.iotsitewise.[region].amazonaws.com or api.iotsitewise.[cn-region].amazonaws.com.cn.
+
+1.24.0 (2021-07-07)
+------------------
+
+* Feature - This release add storage configuration APIs for AWS IoT SiteWise.
+
+1.23.0 (2021-05-27)
+------------------
+
+* Feature - IoT SiteWise Monitor Portal API updates to add alarms feature configuration.
+
+1.22.0 (2021-05-18)
+------------------
+
+* Feature - Documentation updates for AWS IoT SiteWise.
+
 1.21.0 (2021-04-28)
 ------------------
 

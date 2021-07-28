@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2021-07-13)
+------------------
+
+* Feature - Changes to OpsCenter APIs to support a new feature, operational insights.
+
+1.111.0 (2021-06-03)
+------------------
+
+* Feature - Documentation updates for ssm to fix customer reported issue
+
 1.110.0 (2021-05-10)
 ------------------
 

@@ -655,8 +655,8 @@ module Aws::CloudTrail
     #
     # * If your event selector includes management events.
     #
-    # * If your event selector includes data events, the Amazon S3 objects
-    #   or AWS Lambda functions that you are logging for data events.
+    # * If your event selector includes data events, the resources on which
+    #   you are logging data events.
     #
     # For more information, see [Logging Data and Management Events for
     # Trails ][1] in the *AWS CloudTrail User Guide*.
@@ -1670,7 +1670,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

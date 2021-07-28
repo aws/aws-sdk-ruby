@@ -495,7 +495,8 @@ module Aws::IoT
     #   The name of the policy to attach.
     #
     # @option params [required, String] :target
-    #   The [identity][1] to which the policy is attached.
+    #   The [identity][1] to which the policy is attached. For example, a
+    #   thing group or a certificate.
     #
     #
     #
@@ -1216,11 +1217,6 @@ module Aws::IoT
 
     # Creates a domain configuration.
     #
-    # <note markdown="1"> The domain configuration feature is in public preview and is subject
-    # to change.
-    #
-    #  </note>
-    #
     # @option params [required, String] :domain_configuration_name
     #   The name of the domain configuration. This value must be unique to a
     #   region.
@@ -1395,10 +1391,8 @@ module Aws::IoT
     #   A list of things and thing groups to which the job should be sent.
     #
     # @option params [String] :document_source
-    #   An S3 link to the job document.
-    #
-    # @option params [String] :document
-    #   The job document.
+    #   An S3 link to the job document. Required if you don't specify a value
+    #   for `document`.
     #
     #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
     #   placeholder link when specifying the document.
@@ -1411,6 +1405,10 @@ module Aws::IoT
     #   bucket to which you are linking.
     #
     #    </note>
+    #
+    # @option params [String] :document
+    #   The job document. Required if you don't specify a value for
+    #   `documentSource`.
     #
     # @option params [String] :description
     #   A short text description of the job.
@@ -1454,6 +1452,9 @@ module Aws::IoT
     #   <note markdown="1"> The `namespaceId` feature is in public preview.
     #
     #    </note>
+    #
+    # @option params [String] :job_template_arn
+    #   The ARN of the job template used to create the job.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1505,6 +1506,7 @@ module Aws::IoT
     #       },
     #     ],
     #     namespace_id: "NamespaceId",
+    #     job_template_arn: "JobTemplateArn",
     #   })
     #
     # @example Response structure
@@ -1517,6 +1519,118 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_job(params = {}, options = {})
       req = build_request(:create_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a job template.
+    #
+    # @option params [required, String] :job_template_id
+    #   A unique identifier for the job template. We recommend using a UUID.
+    #   Alpha-numeric characters, "-", and "\_" are valid for use here.
+    #
+    # @option params [String] :job_arn
+    #   The ARN of the job to use as the basis for the job template.
+    #
+    # @option params [String] :document_source
+    #   An S3 link to the job document to use in the template. Required if you
+    #   don't specify a value for `document`.
+    #
+    #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
+    #   placeholder link when specifying the document.
+    #
+    #    The placeholder link is of the following form:
+    #
+    #    `$\{aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key\}`
+    #
+    #    where *bucket* is your bucket name and *key* is the object in the
+    #   bucket to which you are linking.
+    #
+    #    </note>
+    #
+    # @option params [String] :document
+    #   The job document. Required if you don't specify a value for
+    #   `documentSource`.
+    #
+    # @option params [required, String] :description
+    #   A description of the job document.
+    #
+    # @option params [Types::PresignedUrlConfig] :presigned_url_config
+    #   Configuration for pre-signed S3 URLs.
+    #
+    # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
+    #   Allows you to create a staged rollout of a job.
+    #
+    # @option params [Types::AbortConfig] :abort_config
+    #   The criteria that determine when and how a job abort takes place.
+    #
+    # @option params [Types::TimeoutConfig] :timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. A timer is started when the job execution status is set to
+    #   `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the timer expires, it will be automatically set
+    #   to `TIMED_OUT`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata that can be used to manage the job template.
+    #
+    # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateJobTemplateResponse#job_template_arn #job_template_arn} => String
+    #   * {Types::CreateJobTemplateResponse#job_template_id #job_template_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_job_template({
+    #     job_template_id: "JobTemplateId", # required
+    #     job_arn: "JobArn",
+    #     document_source: "JobDocumentSource",
+    #     document: "JobDocument",
+    #     description: "JobDescription", # required
+    #     presigned_url_config: {
+    #       role_arn: "RoleArn",
+    #       expires_in_sec: 1,
+    #     },
+    #     job_executions_rollout_config: {
+    #       maximum_per_minute: 1,
+    #       exponential_rate: {
+    #         base_rate_per_minute: 1, # required
+    #         increment_factor: 1.0, # required
+    #         rate_increase_criteria: { # required
+    #           number_of_notified_things: 1,
+    #           number_of_succeeded_things: 1,
+    #         },
+    #       },
+    #     },
+    #     abort_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #           action: "CANCEL", # required, accepts CANCEL
+    #           threshold_percentage: 1.0, # required
+    #           min_number_of_executed_things: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     timeout_config: {
+    #       in_progress_timeout_in_minutes: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_template_arn #=> String
+    #   resp.job_template_id #=> String
+    #
+    # @overload create_job_template(params = {})
+    # @param [Hash] params ({})
+    def create_job_template(params = {}, options = {})
+      req = build_request(:create_job_template, params)
       req.send_request(options)
     end
 
@@ -3196,11 +3310,6 @@ module Aws::IoT
 
     # Deletes the specified domain configuration.
     #
-    # <note markdown="1"> The domain configuration feature is in public preview and is subject
-    # to change.
-    #
-    #  </note>
-    #
     # @option params [required, String] :domain_configuration_name
     #   The name of the domain configuration to be deleted.
     #
@@ -3364,6 +3473,26 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_job_execution(params = {}, options = {})
       req = build_request(:delete_job_execution, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified job template.
+    #
+    # @option params [required, String] :job_template_id
+    #   The unique identifier of the job template to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job_template({
+    #     job_template_id: "JobTemplateId", # required
+    #   })
+    #
+    # @overload delete_job_template(params = {})
+    # @param [Hash] params ({})
+    def delete_job_template(params = {}, options = {})
+      req = build_request(:delete_job_template, params)
       req.send_request(options)
     end
 
@@ -4365,11 +4494,6 @@ module Aws::IoT
 
     # Gets summary information about a domain configuration.
     #
-    # <note markdown="1"> The domain configuration feature is in public preview and is subject
-    # to change.
-    #
-    #  </note>
-    #
     # @option params [required, String] :domain_configuration_name
     #   The name of the domain configuration.
     #
@@ -4572,6 +4696,7 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_timed_out_things #=> Integer
     #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #   resp.job.namespace_id #=> String
+    #   resp.job.job_template_arn #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -4623,6 +4748,59 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_job_execution(params = {}, options = {})
       req = build_request(:describe_job_execution, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a job template.
+    #
+    # @option params [required, String] :job_template_id
+    #   The unique identifier of the job template.
+    #
+    # @return [Types::DescribeJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeJobTemplateResponse#job_template_arn #job_template_arn} => String
+    #   * {Types::DescribeJobTemplateResponse#job_template_id #job_template_id} => String
+    #   * {Types::DescribeJobTemplateResponse#description #description} => String
+    #   * {Types::DescribeJobTemplateResponse#document_source #document_source} => String
+    #   * {Types::DescribeJobTemplateResponse#document #document} => String
+    #   * {Types::DescribeJobTemplateResponse#created_at #created_at} => Time
+    #   * {Types::DescribeJobTemplateResponse#presigned_url_config #presigned_url_config} => Types::PresignedUrlConfig
+    #   * {Types::DescribeJobTemplateResponse#job_executions_rollout_config #job_executions_rollout_config} => Types::JobExecutionsRolloutConfig
+    #   * {Types::DescribeJobTemplateResponse#abort_config #abort_config} => Types::AbortConfig
+    #   * {Types::DescribeJobTemplateResponse#timeout_config #timeout_config} => Types::TimeoutConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_job_template({
+    #     job_template_id: "JobTemplateId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_template_arn #=> String
+    #   resp.job_template_id #=> String
+    #   resp.description #=> String
+    #   resp.document_source #=> String
+    #   resp.document #=> String
+    #   resp.created_at #=> Time
+    #   resp.presigned_url_config.role_arn #=> String
+    #   resp.presigned_url_config.expires_in_sec #=> Integer
+    #   resp.job_executions_rollout_config.maximum_per_minute #=> Integer
+    #   resp.job_executions_rollout_config.exponential_rate.base_rate_per_minute #=> Integer
+    #   resp.job_executions_rollout_config.exponential_rate.increment_factor #=> Float
+    #   resp.job_executions_rollout_config.exponential_rate.rate_increase_criteria.number_of_notified_things #=> Integer
+    #   resp.job_executions_rollout_config.exponential_rate.rate_increase_criteria.number_of_succeeded_things #=> Integer
+    #   resp.abort_config.criteria_list #=> Array
+    #   resp.abort_config.criteria_list[0].failure_type #=> String, one of "FAILED", "REJECTED", "TIMED_OUT", "ALL"
+    #   resp.abort_config.criteria_list[0].action #=> String, one of "CANCEL"
+    #   resp.abort_config.criteria_list[0].threshold_percentage #=> Float
+    #   resp.abort_config.criteria_list[0].min_number_of_executed_things #=> Integer
+    #   resp.timeout_config.in_progress_timeout_in_minutes #=> Integer
+    #
+    # @overload describe_job_template(params = {})
+    # @param [Hash] params ({})
+    def describe_job_template(params = {}, options = {})
+      req = build_request(:describe_job_template, params)
       req.send_request(options)
     end
 
@@ -6993,11 +7171,6 @@ module Aws::IoT
     # Gets a list of domain configurations for the user. This list is sorted
     # alphabetically by domain configuration name.
     #
-    # <note markdown="1"> The domain configuration feature is in public preview and is subject
-    # to change.
-    #
-    #  </note>
-    #
     # @option params [String] :marker
     #   The marker for the next set of results.
     #
@@ -7181,6 +7354,42 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_job_executions_for_thing(params = {}, options = {})
       req = build_request(:list_job_executions_for_thing, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of job templates.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the list.
+    #
+    # @option params [String] :next_token
+    #   The token to use to return the next set of results in the list.
+    #
+    # @return [Types::ListJobTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobTemplatesResponse#job_templates #job_templates} => Array&lt;Types::JobTemplateSummary&gt;
+    #   * {Types::ListJobTemplatesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_job_templates({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_templates #=> Array
+    #   resp.job_templates[0].job_template_arn #=> String
+    #   resp.job_templates[0].job_template_id #=> String
+    #   resp.job_templates[0].description #=> String
+    #   resp.job_templates[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_job_templates(params = {})
+    # @param [Hash] params ({})
+    def list_job_templates(params = {}, options = {})
+      req = build_request(:list_job_templates, params)
       req.send_request(options)
     end
 
@@ -10406,11 +10615,6 @@ module Aws::IoT
     # Updates values stored in the domain configuration. Domain
     # configurations for default endpoints can't be updated.
     #
-    # <note markdown="1"> The domain configuration feature is in public preview and is subject
-    # to change.
-    #
-    #  </note>
-    #
     # @option params [required, String] :domain_configuration_name
     #   The name of the domain configuration to be updated.
     #
@@ -11355,7 +11559,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

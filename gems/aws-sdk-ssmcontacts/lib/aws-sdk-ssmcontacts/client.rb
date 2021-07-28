@@ -490,7 +490,8 @@ module Aws::SSMContacts
     # your contact.
     #
     # @option params [required, String] :contact_id
-    #   The Amazon Resource Name (ARN) of the contact channel.
+    #   The Amazon Resource Name (ARN) of the contact you are adding the
+    #   contact channel to.
     #
     # @option params [required, String] :name
     #   The name of the contact channel.
@@ -1470,7 +1471,7 @@ module Aws::SSMContacts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmcontacts'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-07-23)
+------------------
+
+* Feature - Added product name, company name, and Region fields for security findings. Added details objects for RDS event subscriptions and AWS ECS services. Added fields to the details for AWS Elasticsearch domains.
+
+1.47.0 (2021-06-24)
+------------------
+
+* Feature - Added new resource details for ECS clusters and ECS task definitions. Added additional information for S3 buckets, Elasticsearch domains, and API Gateway V2 stages.
+
 1.46.0 (2021-05-14)
 ------------------
 

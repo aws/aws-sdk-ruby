@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-07-13)
+------------------
+
+* Feature - Added Sign in with Apple OAuth provider.
+
+1.4.0 (2021-06-25)
+------------------
+
+* Feature - Imports an existing backend authentication resource.
+
 1.3.0 (2021-03-10)
 ------------------
 

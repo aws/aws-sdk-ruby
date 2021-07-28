@@ -9,7 +9,7 @@ module Aws
       describe Client do
 
         before do
-          if RUBY_VERSION.match(/1.9/)
+          if RUBY_VERSION.match(/^1.9/)
             skip('authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9')
           end
           # suppress deprecation warning

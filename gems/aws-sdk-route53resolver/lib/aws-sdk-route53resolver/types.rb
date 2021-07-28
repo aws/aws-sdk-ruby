@@ -44,7 +44,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -64,14 +64,16 @@ module Aws::Route53Resolver
     # @!attribute [rw] priority
     #   The setting that determines the processing order of the rule group
     #   among the rule groups that you associate with the specified VPC. DNS
-    #   Firewall filters VPC traffic starting from rule group with the
+    #   Firewall filters VPC traffic starting from the rule group with the
     #   lowest numeric priority setting.
     #
     #   You must specify a unique priority for each rule group that you
     #   associate with a single VPC. To make it easier to insert rule groups
-    #   later, leave space between the numbers, for example, use 100, 200,
+    #   later, leave space between the numbers, for example, use 101, 200,
     #   and so on. You can change the priority setting for a rule group
     #   association after you create it.
+    #
+    #   The allowed values for `Priority` are between 100 and 9900.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -105,7 +107,7 @@ module Aws::Route53Resolver
     end
 
     # @!attribute [rw] firewall_rule_group_association
-    #   The association that you just created. The association has an Id
+    #   The association that you just created. The association has an ID
     #   that you can use to identify it in other requests, like update and
     #   delete.
     #   @return [Types::FirewallRuleGroupAssociation]
@@ -284,7 +286,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows you to
-    #   retry failed requests without the risk of executing the operation
+    #   retry failed requests without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -339,7 +341,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string defined by you to identify the request. This allows
-    #   you to retry failed requests without the risk of executing the
+    #   you to retry failed requests without the risk of running the
     #   operation twice. This can be any unique string, for example, a
     #   timestamp.
     #
@@ -396,7 +398,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows you to
-    #   retry failed requests without the risk of executing the operation
+    #   retry failed requests without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -430,7 +432,7 @@ module Aws::Route53Resolver
     #
     #   * `ALLOW` - Permit the request to go through.
     #
-    #   * `ALERT` - Permit the request and send metrics and log to Cloud
+    #   * `ALERT` - Permit the request and send metrics and logs to Cloud
     #     Watch.
     #
     #   * `BLOCK` - Disallow the request. This option requires additional
@@ -439,7 +441,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] block_response
     #   The way that you want DNS Firewall to block the request, used with
-    #   the rule aciton setting `BLOCK`.
+    #   the rule action setting `BLOCK`.
     #
     #   * `NODATA` - Respond indicating that the query was successful, but
     #     no response is available for it.
@@ -538,7 +540,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #   @return [String]
@@ -621,7 +623,7 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] name
-    #   The name that you want to give the query logging configuration
+    #   The name that you want to give the query logging configuration.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
@@ -649,7 +651,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -711,7 +713,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #   @return [String]
@@ -749,7 +751,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] target_ips
     #   The IPs that you want Resolver to forward DNS queries to. You can
-    #   specify only IPv4 addresses. Separate IP addresses with a comma.
+    #   specify only IPv4 addresses. Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
     #   `FORWARD`.
@@ -1373,10 +1375,10 @@ module Aws::Route53Resolver
     end
 
     # Configuration of the firewall behavior provided by DNS Firewall for a
-    # single Amazon virtual private cloud (VPC).
+    # single VPC from Amazon Virtual Private Cloud (Amazon VPC).
     #
     # @!attribute [rw] id
-    #   The Id of the firewall configuration.
+    #   The ID of the firewall configuration.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1417,7 +1419,7 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # High level information about a list of firewall domains for use in a
+    # High-level information about a list of firewall domains for use in a
     # FirewallRule. This is returned by GetFirewallDomainList.
     #
     # To retrieve the domains that are defined for this domain list, call
@@ -1456,7 +1458,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string defined by you to identify the request. This allows
-    #   you to retry failed requests without the risk of executing the
+    #   you to retry failed requests without the risk of running the
     #   operation twice. This can be any unique string, for example, a
     #   timestamp.
     #   @return [String]
@@ -1508,7 +1510,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string defined by you to identify the request. This allows
-    #   you to retry failed requests without the risk of executing the
+    #   you to retry failed requests without the risk of running the
     #   operation twice. This can be any unique string, for example, a
     #   timestamp.
     #   @return [String]
@@ -1673,7 +1675,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string defined by you to identify the request. This allows
-    #   you to retry failed requests without the risk of executing the
+    #   you to retry failed requests without the risk of running the
     #   operation twice. This can be any unique string, for example, a
     #   timestamp.
     #   @return [String]
@@ -1712,7 +1714,7 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # An association between a firewall rul group and a VPC, which enables
+    # An association between a firewall rule group and a VPC, which enables
     # DNS filtering for the VPC.
     #
     # @!attribute [rw] id
@@ -1768,7 +1770,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string defined by you to identify the request. This allows
-    #   you to retry failed requests without the risk of executing the
+    #   you to retry failed requests without the risk of running the
     #   operation twice. This can be any unique string, for example, a
     #   timestamp.
     #   @return [String]
@@ -1829,7 +1831,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] creator_request_id
     #   A unique string defined by you to identify the request. This allows
-    #   you to retry failed requests without the risk of executing the
+    #   you to retry failed requests without the risk of running the
     #   operation twice. This can be any unique string, for example, a
     #   timestamp.
     #   @return [String]
@@ -1861,8 +1863,7 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the Amazon virtual private cloud (VPC) that the
-    #   configuration is for.
+    #   The ID of the VPC from Amazon VPC that the configuration is for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallConfigRequest AWS API Documentation
@@ -1875,7 +1876,7 @@ module Aws::Route53Resolver
 
     # @!attribute [rw] firewall_config
     #   Configuration of the firewall behavior provided by DNS Firewall for
-    #   a single Amazon virtual private cloud (VPC).
+    #   a single VPC from AmazonVPC.
     #   @return [Types::FirewallConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallConfigResponse AWS API Documentation
@@ -1970,7 +1971,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] firewall_rule_group_policy
     #   The AWS Identity and Access Management (AWS IAM) policy for sharing
     #   the specified rule group. You can use the policy to share the rule
-    #   group using AWS Resource Access Manager (RAM).
+    #   group using AWS Resource Access Manager (AWS RAM).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupPolicyResponse AWS API Documentation
@@ -2298,7 +2299,8 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] domain_file_url
     #   The fully qualified URL or URI of the file stored in Amazon Simple
-    #   Storage Service (S3) that contains the list of domains to import.
+    #   Storage Service (Amazon S3) that contains the list of domains to
+    #   import.
     #
     #   The file must be in an S3 bucket that's in the same Region as your
     #   DNS Firewall. The file must be a text file and must contain a single
@@ -2626,7 +2628,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] firewall_configs
     #   The configurations for the firewall behavior provided by DNS
-    #   Firewall for Amazon virtual private clouds (VPC).
+    #   Firewall for VPCs from Amazon Virtual Private Cloud (Amazon VPC).
     #   @return [Array<Types::FirewallConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallConfigsResponse AWS API Documentation
@@ -2684,7 +2686,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] firewall_domain_lists
     #   A list of the domain lists that you have defined.
     #
-    #   This might be a parital list of the domain lists that you've
+    #   This might be a partial list of the domain lists that you've
     #   defined. For information, see `MaxResults`.
     #   @return [Array<Types::FirewallDomainListMetadata>]
     #
@@ -2749,7 +2751,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] domains
     #   A list of the domains in the firewall domain list.
     #
-    #   This might be a parital list of the domains that you've defined in
+    #   This might be a partial list of the domains that you've defined in
     #   the domain list. For information, see `MaxResults`.
     #   @return [Array<String>]
     #
@@ -2789,7 +2791,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] priority
     #   The setting that determines the processing order of the rule group
     #   among the rule groups that are associated with a single VPC. DNS
-    #   Firewall filters VPC traffic starting from rule group with the
+    #   Firewall filters VPC traffic starting from the rule group with the
     #   lowest numeric priority setting.
     #   @return [Integer]
     #
@@ -2994,7 +2996,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] firewall_rules
     #   A list of the rules that you have defined.
     #
-    #   This might be a parital list of the firewall rules that you've
+    #   This might be a partial list of the firewall rules that you've
     #   defined. For information, see `MaxResults`.
     #   @return [Array<Types::FirewallRule>]
     #
@@ -4002,7 +4004,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request that created the
     #   Resolver endpoint. The `CreatorRequestId` allows failed requests to
-    #   be retried without the risk of executing the operation twice.
+    #   be retried without the risk of running the operation twice.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4195,7 +4197,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request that created the query
     #   logging configuration. The `CreatorRequestId` allows failed requests
-    #   to be retried without the risk of executing the operation twice.
+    #   to be retried without the risk of running the operation twice.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -4327,7 +4329,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] creator_request_id
     #   A unique string that you specified when you created the Resolver
     #   rule. `CreatorRequestId` identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -4392,7 +4394,7 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] share_status
-    #   Whether the rules is shared and, if so, whether the current account
+    #   Whether the rule is shared and, if so, whether the current account
     #   is sharing the rule with another account, or another account is
     #   sharing the rule with the current account.
     #   @return [String]
@@ -4818,8 +4820,7 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the Amazon virtual private cloud (VPC) that the
-    #   configuration is for.
+    #   The ID of the VPC that the configuration is for.
     #   @return [String]
     #
     # @!attribute [rw] firewall_fail_open
@@ -4850,7 +4851,7 @@ module Aws::Route53Resolver
 
     # @!attribute [rw] firewall_config
     #   Configuration of the firewall behavior provided by DNS Firewall for
-    #   a single Amazon virtual private cloud (VPC).
+    #   a single VPC.
     #   @return [Types::FirewallConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallConfigResponse AWS API Documentation
@@ -4914,7 +4915,7 @@ module Aws::Route53Resolver
     end
 
     # @!attribute [rw] id
-    #   The Id of the firewall domain list that DNS Firewall just updated.
+    #   The ID of the firewall domain list that DNS Firewall just updated.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4956,7 +4957,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] priority
     #   The setting that determines the processing order of the rule group
     #   among the rule groups that you associate with the specified VPC. DNS
-    #   Firewall filters VPC traffic starting from rule group with the
+    #   Firewall filters VPC traffic starting from the rule group with the
     #   lowest numeric priority setting.
     #
     #   You must specify a unique priority for each rule group that you

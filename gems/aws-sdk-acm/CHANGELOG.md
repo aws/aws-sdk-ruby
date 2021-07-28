@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-07-14)
+------------------
+
+* Feature - Added support for RSA 3072 SSL certificate import
+
 1.41.0 (2021-03-10)
 ------------------
 

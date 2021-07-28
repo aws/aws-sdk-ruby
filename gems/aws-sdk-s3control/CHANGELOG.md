@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-07-26)
+------------------
+
+* Feature - S3 Access Point aliases can be used anywhere you use S3 bucket names to access data in S3
+
+1.35.0 (2021-07-22)
+------------------
+
+* Feature - Documentation updates for Amazon S3-control
+
+1.34.0 (2021-06-03)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports S3 Bucket Keys.
+
 1.33.0 (2021-05-11)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2021-07-21)
+------------------
+
+* Feature - AWS CodeBuild now allows you to set the access permissions for build artifacts, project artifacts, and log files that are uploaded to an Amazon S3 bucket that is owned by another account.
+
+1.73.0 (2021-06-24)
+------------------
+
+* Feature - BucketOwnerAccess is currently not supported
+
 1.72.0 (2021-04-12)
 ------------------
 

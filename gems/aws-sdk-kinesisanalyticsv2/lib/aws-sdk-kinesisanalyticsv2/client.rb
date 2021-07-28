@@ -345,17 +345,21 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [Integer] :current_application_version_id
     #   The version ID of the Kinesis Data Analytics application. You must
-    #   provide the `ApplicationVersionID` or the `ConditionalToken`.You can
-    #   retrieve the application version ID using DescribeApplication.
+    #   provide the `CurrentApplicationVersionId` or the
+    #   `ConditionalToken`.You can retrieve the application version ID using
+    #   DescribeApplication. For better concurrency support, use the
+    #   `ConditionalToken` parameter instead of `CurrentApplicationVersionId`.
     #
     # @option params [required, Types::CloudWatchLoggingOption] :cloud_watch_logging_option
     #   Provides the Amazon CloudWatch log stream Amazon Resource Name (ARN).
     #
     # @option params [String] :conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #
     # @return [Types::AddApplicationCloudWatchLoggingOptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -519,8 +523,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [required, Integer] :current_application_version_id
     #   The version of the application to which you want to add the input
-    #   processing configuration. You must provide the `ApplicationVersionID`
-    #   or the `ConditionalToken`. You can use the DescribeApplication
+    #   processing configuration. You can use the DescribeApplication
     #   operation to get the current application version. If the version
     #   specified is not the current version, the
     #   `ConcurrentModificationException` is returned.
@@ -597,11 +600,9 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [required, Integer] :current_application_version_id
     #   The version of the application to which you want to add the output
-    #   configuration. You must provide the `ApplicationVersionID` or the
-    #   `ConditionalToken`. You can use the DescribeApplication operation to
-    #   get the current application version. If the version specified is not
-    #   the current version, the `ConcurrentModificationException` is
-    #   returned.
+    #   configuration. You can use the DescribeApplication operation to get
+    #   the current application version. If the version specified is not the
+    #   current version, the `ConcurrentModificationException` is returned.
     #
     # @option params [required, Types::Output] :output
     #   An array of objects, each describing one output configuration. In the
@@ -776,11 +777,12 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [Integer] :current_application_version_id
     #   The version of the application to which you want to add the VPC
-    #   configuration. You must provide the `ApplicationVersionID` or the
-    #   `ConditionalToken`. You can use the DescribeApplication operation to
-    #   get the current application version. If the version specified is not
-    #   the current version, the `ConcurrentModificationException` is
-    #   returned.
+    #   configuration. You must provide the `CurrentApplicationVersionId` or
+    #   the `ConditionalToken`. You can use the DescribeApplication operation
+    #   to get the current application version. If the version specified is
+    #   not the current version, the `ConcurrentModificationException` is
+    #   returned. For better concurrency support, use the `ConditionalToken`
+    #   parameter instead of `CurrentApplicationVersionId`.
     #
     # @option params [required, Types::VpcConfiguration] :vpc_configuration
     #   Description of the VPC to add to the application.
@@ -789,7 +791,9 @@ module Aws::KinesisAnalyticsV2
     #   A value you use to implement strong concurrency for application
     #   updates. You must provide the `ApplicationVersionID` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #
     # @return [Types::AddApplicationVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -870,6 +874,11 @@ module Aws::KinesisAnalyticsV2
     #
     #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
+    # @option params [String] :application_mode
+    #   Use the `STREAMING` mode to create a Kinesis Data Analytics Studio
+    #   notebook. To create a Kinesis Data Analytics Studio notebook, use the
+    #   `INTERACTIVE` mode.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_detail #application_detail} => Types::ApplicationDetail
@@ -879,7 +888,7 @@ module Aws::KinesisAnalyticsV2
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     application_description: "ApplicationDescription",
-    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11
+    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, ZEPPELIN-FLINK-1_0
     #     service_execution_role: "RoleARN", # required
     #     application_configuration: {
     #       sql_application_configuration: {
@@ -1002,7 +1011,7 @@ module Aws::KinesisAnalyticsV2
     #           },
     #         ],
     #       },
-    #       application_code_configuration: { # required
+    #       application_code_configuration: {
     #         code_content: {
     #           text_content: "TextContent",
     #           zip_file_content: "data",
@@ -1023,6 +1032,37 @@ module Aws::KinesisAnalyticsV2
     #           security_group_ids: ["SecurityGroupId"], # required
     #         },
     #       ],
+    #       zeppelin_application_configuration: {
+    #         monitoring_configuration: {
+    #           log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #         },
+    #         catalog_configuration: {
+    #           glue_data_catalog_configuration: { # required
+    #             database_arn: "DatabaseARN", # required
+    #           },
+    #         },
+    #         deploy_as_application_configuration: {
+    #           s3_content_location: { # required
+    #             bucket_arn: "BucketARN", # required
+    #             base_path: "BasePath",
+    #           },
+    #         },
+    #         custom_artifacts_configuration: [
+    #           {
+    #             artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #             s3_content_location: {
+    #               bucket_arn: "BucketARN", # required
+    #               file_key: "FileKey", # required
+    #               object_version: "ObjectVersion",
+    #             },
+    #             maven_reference: {
+    #               group_id: "MavenGroupId", # required
+    #               artifact_id: "MavenArtifactId", # required
+    #               version: "MavenVersion", # required
+    #             },
+    #           },
+    #         ],
+    #       },
     #     },
     #     cloud_watch_logging_options: [
     #       {
@@ -1035,6 +1075,7 @@ module Aws::KinesisAnalyticsV2
     #         value: "TagValue",
     #       },
     #     ],
+    #     application_mode: "STREAMING", # accepts STREAMING, INTERACTIVE
     #   })
     #
     # @example Response structure
@@ -1042,7 +1083,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1130,6 +1171,18 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.monitoring_configuration_description.log_level #=> String, one of "INFO", "WARN", "ERROR", "DEBUG"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.catalog_configuration_description.glue_data_catalog_configuration_description.database_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.base_path #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description #=> Array
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].artifact_type #=> String, one of "UDF", "DEPENDENCY_JAR"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.file_key #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.object_version #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.group_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.artifact_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.version #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -1140,6 +1193,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
+    #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplication AWS API Documentation
     #
@@ -1189,7 +1243,7 @@ module Aws::KinesisAnalyticsV2
     #
     #   resp = client.create_application_presigned_url({
     #     application_name: "ApplicationName", # required
-    #     url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL
+    #     url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL, ZEPPELIN_UI_URL
     #     session_expiration_duration_in_seconds: 1,
     #   })
     #
@@ -1267,8 +1321,10 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [Integer] :current_application_version_id
     #   The version ID of the application. You must provide the
-    #   `ApplicationVersionID` or the `ConditionalToken`. You can retrieve the
-    #   application version ID using DescribeApplication.
+    #   `CurrentApplicationVersionId` or the `ConditionalToken`. You can
+    #   retrieve the application version ID using DescribeApplication. For
+    #   better concurrency support, use the `ConditionalToken` parameter
+    #   instead of `CurrentApplicationVersionId`.
     #
     # @option params [required, String] :cloud_watch_logging_option_id
     #   The `CloudWatchLoggingOptionId` of the Amazon CloudWatch logging
@@ -1277,9 +1333,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [String] :conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #
     # @return [Types::DeleteApplicationCloudWatchLoggingOptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1494,17 +1552,21 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [Integer] :current_application_version_id
     #   The current application version ID. You must provide the
-    #   `ApplicationVersionID` or the `ConditionalToken`.You can retrieve the
-    #   application version ID using DescribeApplication.
+    #   `CurrentApplicationVersionId` or the `ConditionalToken`. You can
+    #   retrieve the application version ID using DescribeApplication. For
+    #   better concurrency support, use the `ConditionalToken` parameter
+    #   instead of `CurrentApplicationVersionId`.
     #
     # @option params [required, String] :vpc_configuration_id
     #   The ID of the VPC configuration to delete.
     #
     # @option params [String] :conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #
     # @return [Types::DeleteApplicationVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1563,7 +1625,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1651,6 +1713,18 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.monitoring_configuration_description.log_level #=> String, one of "INFO", "WARN", "ERROR", "DEBUG"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.catalog_configuration_description.glue_data_catalog_configuration_description.database_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.base_path #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description #=> Array
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].artifact_type #=> String, one of "UDF", "DEPENDENCY_JAR"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.file_key #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.object_version #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.group_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.artifact_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.version #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -1661,6 +1735,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
+    #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplication AWS API Documentation
     #
@@ -1740,7 +1815,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_arn #=> String
     #   resp.application_version_detail.application_description #=> String
     #   resp.application_version_detail.application_name #=> String
-    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
+    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
     #   resp.application_version_detail.service_execution_role #=> String
     #   resp.application_version_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
     #   resp.application_version_detail.application_version_id #=> Integer
@@ -1828,6 +1903,18 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.monitoring_configuration_description.log_level #=> String, one of "INFO", "WARN", "ERROR", "DEBUG"
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.catalog_configuration_description.glue_data_catalog_configuration_description.database_arn #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.bucket_arn #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.base_path #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description #=> Array
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].artifact_type #=> String, one of "UDF", "DEPENDENCY_JAR"
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.bucket_arn #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.file_key #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.object_version #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.group_id #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.artifact_id #=> String
+    #   resp.application_version_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.version #=> String
     #   resp.application_version_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_version_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_version_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -1838,6 +1925,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_version_rolled_back_from #=> Integer
     #   resp.application_version_detail.conditional_token #=> String
     #   resp.application_version_detail.application_version_rolled_back_to #=> Integer
+    #   resp.application_version_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationVersion AWS API Documentation
     #
@@ -2073,7 +2161,8 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries[0].application_arn #=> String
     #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
     #   resp.application_summaries[0].application_version_id #=> Integer
-    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
+    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
+    #   resp.application_summaries[0].application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplications AWS API Documentation
@@ -2156,7 +2245,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -2244,6 +2333,18 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.monitoring_configuration_description.log_level #=> String, one of "INFO", "WARN", "ERROR", "DEBUG"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.catalog_configuration_description.glue_data_catalog_configuration_description.database_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.base_path #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description #=> Array
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].artifact_type #=> String, one of "UDF", "DEPENDENCY_JAR"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.file_key #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.object_version #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.group_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.artifact_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.version #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -2254,6 +2355,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
+    #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RollbackApplication AWS API Documentation
     #
@@ -2271,7 +2373,7 @@ module Aws::KinesisAnalyticsV2
     # @option params [required, String] :application_name
     #   The name of the application.
     #
-    # @option params [required, Types::RunConfiguration] :run_configuration
+    # @option params [Types::RunConfiguration] :run_configuration
     #   Identifies the run configuration (start parameters) of a Kinesis Data
     #   Analytics application.
     #
@@ -2281,7 +2383,7 @@ module Aws::KinesisAnalyticsV2
     #
     #   resp = client.start_application({
     #     application_name: "ApplicationName", # required
-    #     run_configuration: { # required
+    #     run_configuration: {
     #       flink_run_configuration: {
     #         allow_non_restored_state: false,
     #       },
@@ -2447,8 +2549,10 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [Integer] :current_application_version_id
     #   The current application version ID. You must provide the
-    #   `ApplicationVersionID` or the `ConditionalToken`.You can retrieve the
-    #   application version ID using DescribeApplication.
+    #   `CurrentApplicationVersionId` or the `ConditionalToken`.You can
+    #   retrieve the application version ID using DescribeApplication. For
+    #   better concurrency support, use the `ConditionalToken` parameter
+    #   instead of `CurrentApplicationVersionId`.
     #
     # @option params [Types::ApplicationConfigurationUpdate] :application_configuration_update
     #   Describes application configuration updates.
@@ -2467,9 +2571,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [String] :conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2626,6 +2732,37 @@ module Aws::KinesisAnalyticsV2
     #           security_group_id_updates: ["SecurityGroupId"],
     #         },
     #       ],
+    #       zeppelin_application_configuration_update: {
+    #         monitoring_configuration_update: {
+    #           log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #         },
+    #         catalog_configuration_update: {
+    #           glue_data_catalog_configuration_update: { # required
+    #             database_arn_update: "DatabaseARN",
+    #           },
+    #         },
+    #         deploy_as_application_configuration_update: {
+    #           s3_content_location_update: { # required
+    #             bucket_arn_update: "BucketARN", # required
+    #             base_path_update: "BasePath",
+    #           },
+    #         },
+    #         custom_artifacts_configuration_update: [
+    #           {
+    #             artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #             s3_content_location: {
+    #               bucket_arn: "BucketARN", # required
+    #               file_key: "FileKey", # required
+    #               object_version: "ObjectVersion",
+    #             },
+    #             maven_reference: {
+    #               group_id: "MavenGroupId", # required
+    #               artifact_id: "MavenArtifactId", # required
+    #               version: "MavenVersion", # required
+    #             },
+    #           },
+    #         ],
+    #       },
     #     },
     #     service_execution_role_update: "RoleARN",
     #     run_configuration_update: {
@@ -2651,7 +2788,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -2739,6 +2876,18 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.monitoring_configuration_description.log_level #=> String, one of "INFO", "WARN", "ERROR", "DEBUG"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.catalog_configuration_description.glue_data_catalog_configuration_description.database_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.deploy_as_application_configuration_description.s3_content_location_description.base_path #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description #=> Array
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].artifact_type #=> String, one of "UDF", "DEPENDENCY_JAR"
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.bucket_arn #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.file_key #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].s3_content_location_description.object_version #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.group_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.artifact_id #=> String
+    #   resp.application_detail.application_configuration_description.zeppelin_application_configuration_description.custom_artifacts_configuration_description[0].maven_reference_description.version #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -2749,6 +2898,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
+    #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplication AWS API Documentation
     #
@@ -2838,7 +2988,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

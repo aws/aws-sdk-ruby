@@ -327,6 +327,109 @@ module Aws::GreengrassV2
 
     # @!group API Operations
 
+    # Associate a list of client devices with a core device. Use this API
+    # operation to specify which client devices can discover a core device
+    # through cloud discovery. With cloud discovery, client devices connect
+    # to AWS IoT Greengrass to retrieve associated core devices'
+    # connectivity information and certificates. For more information, see
+    # [Configure cloud discovery][1] in the *AWS IoT Greengrass V2 Developer
+    # Guide*.
+    #
+    # <note markdown="1"> Client devices are local IoT devices that connect to and communicate
+    # with an AWS IoT Greengrass core device over MQTT. You can connect
+    # client devices to a core device to sync MQTT messages and data to AWS
+    # IoT Core and interact with client devices in AWS IoT Greengrass
+    # components. For more information, see [Interact with local IoT
+    # devices][2] in the *AWS IoT Greengrass V2 Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html
+    # [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html
+    #
+    # @option params [Array<Types::AssociateClientDeviceWithCoreDeviceEntry>] :entries
+    #   The list of client devices to associate.
+    #
+    # @option params [required, String] :core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #
+    # @return [Types::BatchAssociateClientDeviceWithCoreDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateClientDeviceWithCoreDeviceResponse#error_entries #error_entries} => Array&lt;Types::AssociateClientDeviceWithCoreDeviceErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_client_device_with_core_device({
+    #     entries: [
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       },
+    #     ],
+    #     core_device_thing_name: "IoTThingName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].thing_name #=> String
+    #   resp.error_entries[0].code #=> String
+    #   resp.error_entries[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDevice AWS API Documentation
+    #
+    # @overload batch_associate_client_device_with_core_device(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_client_device_with_core_device(params = {}, options = {})
+      req = build_request(:batch_associate_client_device_with_core_device, params)
+      req.send_request(options)
+    end
+
+    # Disassociate a list of client devices from a core device. After you
+    # disassociate a client device from a core device, the client device
+    # won't be able to use cloud discovery to retrieve the core device's
+    # connectivity information and certificates.
+    #
+    # @option params [Array<Types::DisassociateClientDeviceFromCoreDeviceEntry>] :entries
+    #   The list of client devices to disassociate.
+    #
+    # @option params [required, String] :core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #
+    # @return [Types::BatchDisassociateClientDeviceFromCoreDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateClientDeviceFromCoreDeviceResponse#error_entries #error_entries} => Array&lt;Types::DisassociateClientDeviceFromCoreDeviceErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_client_device_from_core_device({
+    #     entries: [
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       },
+    #     ],
+    #     core_device_thing_name: "IoTThingName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].thing_name #=> String
+    #   resp.error_entries[0].code #=> String
+    #   resp.error_entries[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDevice AWS API Documentation
+    #
+    # @overload batch_disassociate_client_device_from_core_device(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_client_device_from_core_device(params = {}, options = {})
+      req = build_request(:batch_disassociate_client_device_from_core_device, params)
+      req.send_request(options)
+    end
+
     # Cancels a deployment. This operation cancels the deployment for
     # devices that haven't yet received it. If a device already received
     # the deployment, this operation doesn't change anything for that
@@ -990,7 +1093,52 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
-    # Retrieves a paginated list of all versions for a component.
+    # Retrieves a paginated list of client devices that are associated with
+    # a core device.
+    #
+    # @option params [required, String] :core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per paginated request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @return [Types::ListClientDevicesAssociatedWithCoreDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClientDevicesAssociatedWithCoreDeviceResponse#associated_client_devices #associated_client_devices} => Array&lt;Types::AssociatedClientDevice&gt;
+    #   * {Types::ListClientDevicesAssociatedWithCoreDeviceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_client_devices_associated_with_core_device({
+    #     core_device_thing_name: "IoTThingName", # required
+    #     max_results: 1,
+    #     next_token: "NextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associated_client_devices #=> Array
+    #   resp.associated_client_devices[0].thing_name #=> String
+    #   resp.associated_client_devices[0].association_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDevice AWS API Documentation
+    #
+    # @overload list_client_devices_associated_with_core_device(params = {})
+    # @param [Hash] params ({})
+    def list_client_devices_associated_with_core_device(params = {}, options = {})
+      req = build_request(:list_client_devices_associated_with_core_device, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of all versions for a component. Greater
+    # versions are listed first.
     #
     # @option params [required, String] :arn
     #   The [ARN][1] of the component version.
@@ -1501,7 +1649,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

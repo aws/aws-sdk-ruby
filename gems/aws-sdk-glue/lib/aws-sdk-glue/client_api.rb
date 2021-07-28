@@ -49,6 +49,7 @@ module Aws::Glue
     BatchGetTriggersResponse = Shapes::StructureShape.new(name: 'BatchGetTriggersResponse')
     BatchGetWorkflowsRequest = Shapes::StructureShape.new(name: 'BatchGetWorkflowsRequest')
     BatchGetWorkflowsResponse = Shapes::StructureShape.new(name: 'BatchGetWorkflowsResponse')
+    BatchSize = Shapes::IntegerShape.new(name: 'BatchSize')
     BatchStopJobRunError = Shapes::StructureShape.new(name: 'BatchStopJobRunError')
     BatchStopJobRunErrorList = Shapes::ListShape.new(name: 'BatchStopJobRunErrorList')
     BatchStopJobRunJobRunIdList = Shapes::ListShape.new(name: 'BatchStopJobRunJobRunIdList')
@@ -62,6 +63,7 @@ module Aws::Glue
     BatchUpdatePartitionRequestEntry = Shapes::StructureShape.new(name: 'BatchUpdatePartitionRequestEntry')
     BatchUpdatePartitionRequestEntryList = Shapes::ListShape.new(name: 'BatchUpdatePartitionRequestEntryList')
     BatchUpdatePartitionResponse = Shapes::StructureShape.new(name: 'BatchUpdatePartitionResponse')
+    BatchWindow = Shapes::IntegerShape.new(name: 'BatchWindow')
     BinaryColumnStatisticsData = Shapes::StructureShape.new(name: 'BinaryColumnStatisticsData')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -276,6 +278,7 @@ module Aws::Glue
     ErrorMessageString = Shapes::StringShape.new(name: 'ErrorMessageString')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     EvaluationMetrics = Shapes::StructureShape.new(name: 'EvaluationMetrics')
+    EventBatchingCondition = Shapes::StructureShape.new(name: 'EventBatchingCondition')
     ExecutionProperty = Shapes::StructureShape.new(name: 'ExecutionProperty')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
     ExistCondition = Shapes::StringShape.new(name: 'ExistCondition')
@@ -653,6 +656,7 @@ module Aws::Glue
     StartTriggerResponse = Shapes::StructureShape.new(name: 'StartTriggerResponse')
     StartWorkflowRunRequest = Shapes::StructureShape.new(name: 'StartWorkflowRunRequest')
     StartWorkflowRunResponse = Shapes::StructureShape.new(name: 'StartWorkflowRunResponse')
+    StartingEventBatchCondition = Shapes::StructureShape.new(name: 'StartingEventBatchCondition')
     StopCrawlerRequest = Shapes::StructureShape.new(name: 'StopCrawlerRequest')
     StopCrawlerResponse = Shapes::StructureShape.new(name: 'StopCrawlerResponse')
     StopCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StopCrawlerScheduleRequest')
@@ -1423,6 +1427,7 @@ module Aws::Glue
     CreateTriggerRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateTriggerRequest.add_member(:start_on_creation, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "StartOnCreation"))
     CreateTriggerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateTriggerRequest.add_member(:event_batching_condition, Shapes::ShapeRef.new(shape: EventBatchingCondition, location_name: "EventBatchingCondition"))
     CreateTriggerRequest.struct_class = Types::CreateTriggerRequest
 
     CreateTriggerResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -1739,6 +1744,10 @@ module Aws::Glue
     EvaluationMetrics.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, required: true, location_name: "TransformType"))
     EvaluationMetrics.add_member(:find_matches_metrics, Shapes::ShapeRef.new(shape: FindMatchesMetrics, location_name: "FindMatchesMetrics"))
     EvaluationMetrics.struct_class = Types::EvaluationMetrics
+
+    EventBatchingCondition.add_member(:batch_size, Shapes::ShapeRef.new(shape: BatchSize, required: true, location_name: "BatchSize"))
+    EventBatchingCondition.add_member(:batch_window, Shapes::ShapeRef.new(shape: BatchWindow, location_name: "BatchWindow"))
+    EventBatchingCondition.struct_class = Types::EventBatchingCondition
 
     ExecutionProperty.add_member(:max_concurrent_runs, Shapes::ShapeRef.new(shape: MaxConcurrentRuns, location_name: "MaxConcurrentRuns"))
     ExecutionProperty.struct_class = Types::ExecutionProperty
@@ -2842,6 +2851,7 @@ module Aws::Glue
     S3Target.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     S3Target.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
     S3Target.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
+    S3Target.add_member(:sample_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "SampleSize"))
     S3Target.struct_class = Types::S3Target
 
     S3TargetList.member = Shapes::ShapeRef.new(shape: S3Target)
@@ -3015,6 +3025,10 @@ module Aws::Glue
 
     StartWorkflowRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "RunId"))
     StartWorkflowRunResponse.struct_class = Types::StartWorkflowRunResponse
+
+    StartingEventBatchCondition.add_member(:batch_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "BatchSize"))
+    StartingEventBatchCondition.add_member(:batch_window, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "BatchWindow"))
+    StartingEventBatchCondition.struct_class = Types::StartingEventBatchCondition
 
     StopCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StopCrawlerRequest.struct_class = Types::StopCrawlerRequest
@@ -3201,6 +3215,7 @@ module Aws::Glue
     Trigger.add_member(:schedule, Shapes::ShapeRef.new(shape: GenericString, location_name: "Schedule"))
     Trigger.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, location_name: "Actions"))
     Trigger.add_member(:predicate, Shapes::ShapeRef.new(shape: Predicate, location_name: "Predicate"))
+    Trigger.add_member(:event_batching_condition, Shapes::ShapeRef.new(shape: EventBatchingCondition, location_name: "EventBatchingCondition"))
     Trigger.struct_class = Types::Trigger
 
     TriggerList.member = Shapes::ShapeRef.new(shape: Trigger)
@@ -3215,6 +3230,7 @@ module Aws::Glue
     TriggerUpdate.add_member(:schedule, Shapes::ShapeRef.new(shape: GenericString, location_name: "Schedule"))
     TriggerUpdate.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, location_name: "Actions"))
     TriggerUpdate.add_member(:predicate, Shapes::ShapeRef.new(shape: Predicate, location_name: "Predicate"))
+    TriggerUpdate.add_member(:event_batching_condition, Shapes::ShapeRef.new(shape: EventBatchingCondition, location_name: "EventBatchingCondition"))
     TriggerUpdate.struct_class = Types::TriggerUpdate
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, required: true, location_name: "ResourceArn"))
@@ -3461,6 +3477,7 @@ module Aws::Glue
     WorkflowRun.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorString, location_name: "ErrorMessage"))
     WorkflowRun.add_member(:statistics, Shapes::ShapeRef.new(shape: WorkflowRunStatistics, location_name: "Statistics"))
     WorkflowRun.add_member(:graph, Shapes::ShapeRef.new(shape: WorkflowGraph, location_name: "Graph"))
+    WorkflowRun.add_member(:starting_event_batch_condition, Shapes::ShapeRef.new(shape: StartingEventBatchCondition, location_name: "StartingEventBatchCondition"))
     WorkflowRun.struct_class = Types::WorkflowRun
 
     WorkflowRunProperties.key = Shapes::ShapeRef.new(shape: IdString)

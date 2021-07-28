@@ -18,6 +18,9 @@ module Aws::Outposts
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
+    AvailabilityZoneIdList = Shapes::ListShape.new(name: 'AvailabilityZoneIdList')
+    AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
     CreateOutpostOutput = Shapes::StructureShape.new(name: 'CreateOutpostOutput')
     DeleteOutpostInput = Shapes::StructureShape.new(name: 'DeleteOutpostInput')
@@ -34,6 +37,7 @@ module Aws::Outposts
     InstanceTypeListDefinition = Shapes::ListShape.new(name: 'InstanceTypeListDefinition')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LifeCycleStatus = Shapes::StringShape.new(name: 'LifeCycleStatus')
+    LifeCycleStatusList = Shapes::ListShape.new(name: 'LifeCycleStatusList')
     ListOutpostsInput = Shapes::StructureShape.new(name: 'ListOutpostsInput')
     ListOutpostsOutput = Shapes::StructureShape.new(name: 'ListOutpostsOutput')
     ListSitesInput = Shapes::StructureShape.new(name: 'ListSitesInput')
@@ -48,11 +52,14 @@ module Aws::Outposts
     OutpostId = Shapes::StringShape.new(name: 'OutpostId')
     OutpostName = Shapes::StringShape.new(name: 'OutpostName')
     OwnerId = Shapes::StringShape.new(name: 'OwnerId')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Site = Shapes::StructureShape.new(name: 'Site')
+    SiteArn = Shapes::StringShape.new(name: 'SiteArn')
     SiteDescription = Shapes::StringShape.new(name: 'SiteDescription')
     SiteId = Shapes::StringShape.new(name: 'SiteId')
     SiteName = Shapes::StringShape.new(name: 'SiteName')
+    String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -68,6 +75,15 @@ module Aws::Outposts
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AvailabilityZoneIdList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneId)
+
+    AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
+    ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateOutpostInput.add_member(:name, Shapes::ShapeRef.new(shape: OutpostName, required: true, location_name: "Name"))
     CreateOutpostInput.add_member(:description, Shapes::ShapeRef.new(shape: OutpostDescription, location_name: "Description"))
@@ -115,8 +131,13 @@ module Aws::Outposts
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    LifeCycleStatusList.member = Shapes::ShapeRef.new(shape: LifeCycleStatus)
+
     ListOutpostsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
     ListOutpostsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
+    ListOutpostsInput.add_member(:life_cycle_status_filter, Shapes::ShapeRef.new(shape: LifeCycleStatusList, location: "querystring", location_name: "LifeCycleStatusFilter"))
+    ListOutpostsInput.add_member(:availability_zone_filter, Shapes::ShapeRef.new(shape: AvailabilityZoneList, location: "querystring", location_name: "AvailabilityZoneFilter"))
+    ListOutpostsInput.add_member(:availability_zone_id_filter, Shapes::ShapeRef.new(shape: AvailabilityZoneIdList, location: "querystring", location_name: "AvailabilityZoneIdFilter"))
     ListOutpostsInput.struct_class = Types::ListOutpostsInput
 
     ListOutpostsOutput.add_member(:outposts, Shapes::ShapeRef.new(shape: outpostListDefinition, location_name: "Outposts"))
@@ -150,6 +171,7 @@ module Aws::Outposts
     Outpost.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
     Outpost.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     Outpost.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Outpost.add_member(:site_arn, Shapes::ShapeRef.new(shape: SiteArn, location_name: "SiteArn"))
     Outpost.struct_class = Types::Outpost
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -160,6 +182,7 @@ module Aws::Outposts
     Site.add_member(:name, Shapes::ShapeRef.new(shape: SiteName, location_name: "Name"))
     Site.add_member(:description, Shapes::ShapeRef.new(shape: SiteDescription, location_name: "Description"))
     Site.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Site.add_member(:site_arn, Shapes::ShapeRef.new(shape: SiteArn, location_name: "SiteArn"))
     Site.struct_class = Types::Site
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -212,6 +235,7 @@ module Aws::Outposts
         o.input = Shapes::ShapeRef.new(shape: CreateOutpostInput)
         o.output = Shapes::ShapeRef.new(shape: CreateOutpostOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -225,6 +249,7 @@ module Aws::Outposts
         o.input = Shapes::ShapeRef.new(shape: DeleteOutpostInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteOutpostOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -237,6 +262,7 @@ module Aws::Outposts
         o.input = Shapes::ShapeRef.new(shape: DeleteSiteInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteSiteOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

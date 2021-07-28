@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-07-07)
+------------------
+
+* Feature - Amazon CloudFront now provides two new APIs, ListConflictingAliases and AssociateAlias, that help locate and move Alternate Domain Names (CNAMEs) if you encounter the CNAMEAlreadyExists error code.
+
+1.52.0 (2021-06-23)
+------------------
+
+* Feature - Amazon CloudFront adds support for a new security policy, TLSv1.2_2021.
+
+1.51.0 (2021-05-26)
+------------------
+
+* Feature - Documentation fix for CloudFront
+
 1.50.0 (2021-04-30)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-06-24)
+------------------
+
+* Feature - Released Amazon Connect quick connects management API for general availability (GA). For more information, see https://docs.aws.amazon.com/connect/latest/APIReference/Welcome.html
+
+1.45.0 (2021-06-15)
+------------------
+
+* Feature - This release adds new sets of APIs: AssociateBot, DisassociateBot, and ListBots. You can use it to programmatically add an Amazon Lex bot or Amazon Lex V2 bot on the specified Amazon Connect instance
+
 1.44.0 (2021-05-07)
 ------------------
 

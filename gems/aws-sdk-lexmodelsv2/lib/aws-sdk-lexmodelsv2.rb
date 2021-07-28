@@ -15,6 +15,7 @@ require_relative 'aws-sdk-lexmodelsv2/types'
 require_relative 'aws-sdk-lexmodelsv2/client_api'
 require_relative 'aws-sdk-lexmodelsv2/client'
 require_relative 'aws-sdk-lexmodelsv2/errors'
+require_relative 'aws-sdk-lexmodelsv2/waiters'
 require_relative 'aws-sdk-lexmodelsv2/resource'
 require_relative 'aws-sdk-lexmodelsv2/customizations'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-lexmodelsv2/customizations'
 # @!group service
 module Aws::LexModelsV2
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.6.0'
 
 end

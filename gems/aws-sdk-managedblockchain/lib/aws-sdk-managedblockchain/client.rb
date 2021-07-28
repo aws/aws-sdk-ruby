@@ -382,6 +382,7 @@ module Aws::ManagedBlockchain
     #       tags: {
     #         "TagKey" => "TagValue",
     #       },
+    #       kms_key_arn: "ArnString",
     #     },
     #   })
     #
@@ -499,6 +500,7 @@ module Aws::ManagedBlockchain
     #       tags: {
     #         "TagKey" => "TagValue",
     #       },
+    #       kms_key_arn: "ArnString",
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -820,11 +822,12 @@ module Aws::ManagedBlockchain
     #   resp.member.framework_attributes.fabric.admin_username #=> String
     #   resp.member.framework_attributes.fabric.ca_endpoint #=> String
     #   resp.member.log_publishing_configuration.fabric.ca_logs.cloudwatch.enabled #=> Boolean
-    #   resp.member.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED"
+    #   resp.member.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "INACCESSIBLE_ENCRYPTION_KEY"
     #   resp.member.creation_date #=> Time
     #   resp.member.tags #=> Hash
     #   resp.member.tags["TagKey"] #=> String
     #   resp.member.arn #=> String
+    #   resp.member.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetMember AWS API Documentation
     #
@@ -923,11 +926,12 @@ module Aws::ManagedBlockchain
     #   resp.node.log_publishing_configuration.fabric.chaincode_logs.cloudwatch.enabled #=> Boolean
     #   resp.node.log_publishing_configuration.fabric.peer_logs.cloudwatch.enabled #=> Boolean
     #   resp.node.state_db #=> String, one of "LevelDB", "CouchDB"
-    #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "UNHEALTHY", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
+    #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "UNHEALTHY", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED", "INACCESSIBLE_ENCRYPTION_KEY"
     #   resp.node.creation_date #=> Time
     #   resp.node.tags #=> Hash
     #   resp.node.tags["TagKey"] #=> String
     #   resp.node.arn #=> String
+    #   resp.node.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetNode AWS API Documentation
     #
@@ -1080,7 +1084,7 @@ module Aws::ManagedBlockchain
     #   resp = client.list_members({
     #     network_id: "ResourceIdString", # required
     #     name: "String",
-    #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED
+    #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED, INACCESSIBLE_ENCRYPTION_KEY
     #     is_owned: false,
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -1092,7 +1096,7 @@ module Aws::ManagedBlockchain
     #   resp.members[0].id #=> String
     #   resp.members[0].name #=> String
     #   resp.members[0].description #=> String
-    #   resp.members[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED"
+    #   resp.members[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "INACCESSIBLE_ENCRYPTION_KEY"
     #   resp.members[0].creation_date #=> Time
     #   resp.members[0].is_owned #=> Boolean
     #   resp.members[0].arn #=> String
@@ -1207,7 +1211,7 @@ module Aws::ManagedBlockchain
     #   resp = client.list_nodes({
     #     network_id: "ResourceIdString", # required
     #     member_id: "ResourceIdString",
-    #     status: "CREATING", # accepts CREATING, AVAILABLE, UNHEALTHY, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
+    #     status: "CREATING", # accepts CREATING, AVAILABLE, UNHEALTHY, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED, INACCESSIBLE_ENCRYPTION_KEY
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -1216,7 +1220,7 @@ module Aws::ManagedBlockchain
     #
     #   resp.nodes #=> Array
     #   resp.nodes[0].id #=> String
-    #   resp.nodes[0].status #=> String, one of "CREATING", "AVAILABLE", "UNHEALTHY", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
+    #   resp.nodes[0].status #=> String, one of "CREATING", "AVAILABLE", "UNHEALTHY", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED", "INACCESSIBLE_ENCRYPTION_KEY"
     #   resp.nodes[0].creation_date #=> Time
     #   resp.nodes[0].availability_zone #=> String
     #   resp.nodes[0].instance_type #=> String
@@ -1648,7 +1652,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -67,7 +67,7 @@ module Aws::EC2
       data[:network_interface_id]
     end
 
-    # The ID of the AWS account that owns the network interface.
+    # The ID of the account that owns the network interface.
     # @return [String]
     def network_interface_owner_id
       data[:network_interface_owner_id]

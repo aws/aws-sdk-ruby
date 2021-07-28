@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-06-04)
+------------------
+
+* Feature - AWS CloudTrail supports data events on new service resources, including Amazon DynamoDB tables and S3 Object Lambda access points.
+
 1.34.0 (2021-03-10)
 ------------------
 

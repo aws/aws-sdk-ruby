@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-06-24)
+------------------
+
+* Feature - Added support for 15 new text transformation.
+
 1.20.0 (2021-04-01)
 ------------------
 

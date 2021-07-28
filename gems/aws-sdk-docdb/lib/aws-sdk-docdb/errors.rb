@@ -50,6 +50,9 @@ module Aws::DocDB
   # * {DBSubnetQuotaExceededFault}
   # * {DBUpgradeDependencyFailureFault}
   # * {EventSubscriptionQuotaExceededFault}
+  # * {GlobalClusterAlreadyExistsFault}
+  # * {GlobalClusterNotFoundFault}
+  # * {GlobalClusterQuotaExceededFault}
   # * {InstanceQuotaExceededFault}
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
@@ -63,6 +66,7 @@ module Aws::DocDB
   # * {InvalidDBSubnetGroupStateFault}
   # * {InvalidDBSubnetStateFault}
   # * {InvalidEventSubscriptionStateFault}
+  # * {InvalidGlobalClusterStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
@@ -317,6 +321,36 @@ module Aws::DocDB
       end
     end
 
+    class GlobalClusterAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::GlobalClusterAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalClusterNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::GlobalClusterNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalClusterQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::GlobalClusterQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InstanceQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -442,6 +476,16 @@ module Aws::DocDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DocDB::Types::InvalidEventSubscriptionStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidGlobalClusterStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::InvalidGlobalClusterStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

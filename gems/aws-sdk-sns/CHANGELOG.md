@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-07-06)
+------------------
+
+* Feature - Documentation updates for Amazon SNS.
+
+1.41.0 (2021-06-01)
+------------------
+
+* Feature - This release adds SMS sandbox in Amazon SNS and the ability to view all configured origination numbers. The SMS sandbox provides a safe environment for sending SMS messages, without risking your reputation as an SMS sender.
+
 1.40.0 (2021-04-23)
 ------------------
 

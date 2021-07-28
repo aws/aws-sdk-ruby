@@ -357,7 +357,7 @@ module Aws::LicenseManager
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/AcceptGrant AWS API Documentation
@@ -587,7 +587,7 @@ module Aws::LicenseManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_grant({
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #     grant_name: "String", # required
     #     license_arn: "Arn", # required
     #     principals: ["Arn"], # required
@@ -598,7 +598,7 @@ module Aws::LicenseManager
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateGrant AWS API Documentation
@@ -628,6 +628,8 @@ module Aws::LicenseManager
     # @option params [String] :status
     #   Grant status.
     #
+    # @option params [String] :status_reason
+    #
     # @option params [String] :source_version
     #   Current version of the grant.
     #
@@ -640,18 +642,19 @@ module Aws::LicenseManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_grant_version({
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #     grant_arn: "Arn", # required
     #     grant_name: "String",
     #     allowed_operations: ["CreateGrant"], # accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
-    #     status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED
+    #     status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
+    #     status_reason: "StatusReasonMessage",
     #     source_version: "String",
     #   })
     #
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateGrantVersion AWS API Documentation
@@ -750,7 +753,7 @@ module Aws::LicenseManager
     #         value: "String",
     #       },
     #     ],
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #   })
     #
     # @example Response structure
@@ -873,6 +876,77 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Creates a new report generator.
+    #
+    # @option params [required, String] :report_generator_name
+    #   Name of the report generator.
+    #
+    # @option params [required, Array<String>] :type
+    #   Type of reports to generate. The following report types an be
+    #   generated:
+    #
+    #   * License configuration report - Reports on the number and details of
+    #     consumed licenses for a license configuration.
+    #
+    #   * Resource report - Reports on the tracked licenses and resource
+    #     consumption for a license configuration.
+    #
+    # @option params [required, Types::ReportContext] :report_context
+    #   Defines the type of license configuration the report generator tracks.
+    #
+    # @option params [required, Types::ReportFrequency] :report_frequency
+    #   Frequency by which reports are generated. Reports can be generated
+    #   daily, monthly, or weekly.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @option params [String] :description
+    #   Description of the report generator.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to add to the report generator.
+    #
+    # @return [Types::CreateLicenseManagerReportGeneratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLicenseManagerReportGeneratorResponse#license_manager_report_generator_arn #license_manager_report_generator_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_license_manager_report_generator({
+    #     report_generator_name: "ReportGeneratorName", # required
+    #     type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
+    #     report_context: { # required
+    #       license_configuration_arns: ["Arn"], # required
+    #     },
+    #     report_frequency: { # required
+    #       value: 1,
+    #       period: "DAY", # accepts DAY, WEEK, MONTH
+    #     },
+    #     client_token: "ClientRequestToken", # required
+    #     description: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_manager_report_generator_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseManagerReportGenerator AWS API Documentation
+    #
+    # @overload create_license_manager_report_generator(params = {})
+    # @param [Hash] params ({})
+    def create_license_manager_report_generator(params = {}, options = {})
+      req = build_request(:create_license_manager_report_generator, params)
+      req.send_request(options)
+    end
+
     # Creates a new version of the specified license.
     #
     # @option params [required, String] :license_arn
@@ -963,7 +1037,7 @@ module Aws::LicenseManager
     #       },
     #     },
     #     status: "AVAILABLE", # required, accepts AVAILABLE, PENDING_AVAILABLE, DEACTIVATED, SUSPENDED, EXPIRED, PENDING_DELETE, DELETED
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #     source_version: "String",
     #   })
     #
@@ -1021,7 +1095,7 @@ module Aws::LicenseManager
     #     role_arns: ["Arn"],
     #     expiration_in_days: 1,
     #     token_properties: ["String"],
-    #     client_token: "IdempotencyToken", # required
+    #     client_token: "ClientToken", # required
     #   })
     #
     # @example Response structure
@@ -1044,6 +1118,8 @@ module Aws::LicenseManager
     # @option params [required, String] :grant_arn
     #   Amazon Resource Name (ARN) of the grant.
     #
+    # @option params [String] :status_reason
+    #
     # @option params [required, String] :version
     #   Current version of the grant.
     #
@@ -1057,13 +1133,14 @@ module Aws::LicenseManager
     #
     #   resp = client.delete_grant({
     #     grant_arn: "Arn", # required
+    #     status_reason: "StatusReasonMessage",
     #     version: "String", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteGrant AWS API Documentation
@@ -1130,6 +1207,33 @@ module Aws::LicenseManager
     # @param [Hash] params ({})
     def delete_license_configuration(params = {}, options = {})
       req = build_request(:delete_license_configuration, params)
+      req.send_request(options)
+    end
+
+    # Delete an existing report generator.
+    #
+    # This action deletes the report generator, which stops it from
+    # generating future reports and cannot be reversed. However, the
+    # previous reports from this generator will remain in your S3 bucket.
+    #
+    # @option params [required, String] :license_manager_report_generator_arn
+    #   Amazon Resource Number (ARN) of the report generator that will be
+    #   deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_license_manager_report_generator({
+    #     license_manager_report_generator_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseManagerReportGenerator AWS API Documentation
+    #
+    # @overload delete_license_manager_report_generator(params = {})
+    # @param [Hash] params ({})
+    def delete_license_manager_report_generator(params = {}, options = {})
+      req = build_request(:delete_license_manager_report_generator, params)
       req.send_request(options)
     end
 
@@ -1252,7 +1356,7 @@ module Aws::LicenseManager
     #   resp.grant.license_arn #=> String
     #   resp.grant.grantee_principal_arn #=> String
     #   resp.grant.home_region #=> String
-    #   resp.grant.grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.grant.grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.grant.status_reason #=> String
     #   resp.grant.version #=> String
     #   resp.grant.granted_operations #=> Array
@@ -1399,6 +1503,53 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Gets information on the specified report generator.
+    #
+    # @option params [required, String] :license_manager_report_generator_arn
+    #   mazon Resource Number (ARN) of the report generator to retrieve
+    #   information on.
+    #
+    # @return [Types::GetLicenseManagerReportGeneratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLicenseManagerReportGeneratorResponse#report_generator #report_generator} => Types::ReportGenerator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_license_manager_report_generator({
+    #     license_manager_report_generator_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_generator.report_generator_name #=> String
+    #   resp.report_generator.report_type #=> Array
+    #   resp.report_generator.report_type[0] #=> String, one of "LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"
+    #   resp.report_generator.report_context.license_configuration_arns #=> Array
+    #   resp.report_generator.report_context.license_configuration_arns[0] #=> String
+    #   resp.report_generator.report_frequency.value #=> Integer
+    #   resp.report_generator.report_frequency.period #=> String, one of "DAY", "WEEK", "MONTH"
+    #   resp.report_generator.license_manager_report_generator_arn #=> String
+    #   resp.report_generator.last_run_status #=> String
+    #   resp.report_generator.last_run_failure_reason #=> String
+    #   resp.report_generator.last_report_generation_time #=> String
+    #   resp.report_generator.report_creator_account #=> String
+    #   resp.report_generator.description #=> String
+    #   resp.report_generator.s3_location.bucket #=> String
+    #   resp.report_generator.s3_location.key_prefix #=> String
+    #   resp.report_generator.create_time #=> String
+    #   resp.report_generator.tags #=> Array
+    #   resp.report_generator.tags[0].key #=> String
+    #   resp.report_generator.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseManagerReportGenerator AWS API Documentation
+    #
+    # @overload get_license_manager_report_generator(params = {})
+    # @param [Hash] params ({})
+    def get_license_manager_report_generator(params = {}, options = {})
+      req = build_request(:get_license_manager_report_generator, params)
+      req.send_request(options)
+    end
+
     # Gets detailed information about the usage of the specified license.
     #
     # @option params [required, String] :license_arn
@@ -1514,13 +1665,15 @@ module Aws::LicenseManager
     # @option params [Array<Types::Filter>] :filters
     #   Filters to scope the results. The following filters are supported:
     #
-    #   * `LicenseARN`
+    #   * `LicenseArn`
     #
-    #   * `Status`
+    #   * `GrantStatus`
     #
-    #   * `PrincipalARN`
+    #   * `GranteePrincipalARN`
     #
-    #   * `ParentARN`
+    #   * `ProductSKU`
+    #
+    #   * `LicenseIssuerName`
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
@@ -1556,7 +1709,7 @@ module Aws::LicenseManager
     #   resp.grants[0].license_arn #=> String
     #   resp.grants[0].grantee_principal_arn #=> String
     #   resp.grants[0].home_region #=> String
-    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.grants[0].status_reason #=> String
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
@@ -1707,6 +1860,72 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Lists the report generators for your account.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters to scope the results. The following filters are supported:
+    #
+    #   * `LicenseConfigurationArn`
+    #
+    #   ^
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @return [Types::ListLicenseManagerReportGeneratorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLicenseManagerReportGeneratorsResponse#report_generators #report_generators} => Array&lt;Types::ReportGenerator&gt;
+    #   * {Types::ListLicenseManagerReportGeneratorsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_license_manager_report_generators({
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_generators #=> Array
+    #   resp.report_generators[0].report_generator_name #=> String
+    #   resp.report_generators[0].report_type #=> Array
+    #   resp.report_generators[0].report_type[0] #=> String, one of "LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"
+    #   resp.report_generators[0].report_context.license_configuration_arns #=> Array
+    #   resp.report_generators[0].report_context.license_configuration_arns[0] #=> String
+    #   resp.report_generators[0].report_frequency.value #=> Integer
+    #   resp.report_generators[0].report_frequency.period #=> String, one of "DAY", "WEEK", "MONTH"
+    #   resp.report_generators[0].license_manager_report_generator_arn #=> String
+    #   resp.report_generators[0].last_run_status #=> String
+    #   resp.report_generators[0].last_run_failure_reason #=> String
+    #   resp.report_generators[0].last_report_generation_time #=> String
+    #   resp.report_generators[0].report_creator_account #=> String
+    #   resp.report_generators[0].description #=> String
+    #   resp.report_generators[0].s3_location.bucket #=> String
+    #   resp.report_generators[0].s3_location.key_prefix #=> String
+    #   resp.report_generators[0].create_time #=> String
+    #   resp.report_generators[0].tags #=> Array
+    #   resp.report_generators[0].tags[0].key #=> String
+    #   resp.report_generators[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseManagerReportGenerators AWS API Documentation
+    #
+    # @overload list_license_manager_report_generators(params = {})
+    # @param [Hash] params ({})
+    def list_license_manager_report_generators(params = {}, options = {})
+      req = build_request(:list_license_manager_report_generators, params)
+      req.send_request(options)
+    end
+
     # Describes the license configurations for the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -1826,7 +2045,7 @@ module Aws::LicenseManager
     #
     #   * `ProductSKU`
     #
-    #   * `KeyFingerprint`
+    #   * `Fingerprint`
     #
     #   * `Status`
     #
@@ -1905,9 +2124,15 @@ module Aws::LicenseManager
     # @option params [Array<Types::Filter>] :filters
     #   Filters to scope the results. The following filters are supported:
     #
-    #   * `LicenseARN`
+    #   * `ProductSKU`
     #
-    #   * `Status`
+    #   * `LicenseIssuerName`
+    #
+    #   * `LicenseArn`
+    #
+    #   * `GrantStatus`
+    #
+    #   * `GranterAccountId`
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
@@ -1943,7 +2168,7 @@ module Aws::LicenseManager
     #   resp.grants[0].license_arn #=> String
     #   resp.grants[0].grantee_principal_arn #=> String
     #   resp.grants[0].home_region #=> String
-    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.grants[0].status_reason #=> String
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
@@ -1971,9 +2196,11 @@ module Aws::LicenseManager
     #
     #   * `Status`
     #
-    #   * `KeyFingerprint`
+    #   * `Fingerprint`
     #
-    #   * `Issuer`
+    #   * `IssuerName`
+    #
+    #   * `Beneficiary`
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
@@ -2031,7 +2258,8 @@ module Aws::LicenseManager
     #   resp.licenses[0].license_metadata[0].value #=> String
     #   resp.licenses[0].create_time #=> String
     #   resp.licenses[0].version #=> String
-    #   resp.licenses[0].received_metadata.received_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "DISABLED"
+    #   resp.licenses[0].received_metadata.received_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.licenses[0].received_metadata.received_status_reason #=> String
     #   resp.licenses[0].received_metadata.allowed_operations #=> Array
     #   resp.licenses[0].received_metadata.allowed_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
     #   resp.next_token #=> String
@@ -2155,7 +2383,7 @@ module Aws::LicenseManager
     # @option params [Array<Types::Filter>] :filters
     #   Filters to scope the results. The following filter is supported:
     #
-    #   * `licenseArns`
+    #   * `LicenseArns`
     #
     #   ^
     #
@@ -2294,7 +2522,7 @@ module Aws::LicenseManager
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/RejectGrant AWS API Documentation
@@ -2429,6 +2657,71 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Updates a report generator.
+    #
+    # After you make changes to a report generator, it will start generating
+    # new reports within 60 minutes of being updated.
+    #
+    # @option params [required, String] :license_manager_report_generator_arn
+    #   Amazon Resource Number (ARN) of the report generator to update.
+    #
+    # @option params [required, String] :report_generator_name
+    #   Name of the report generator.
+    #
+    # @option params [required, Array<String>] :type
+    #   Type of reports to generate. The following report types an be
+    #   generated:
+    #
+    #   * License configuration report - Reports on the number and details of
+    #     consumed licenses for a license configuration.
+    #
+    #   * Resource report - Reports on the tracked licenses and resource
+    #     consumption for a license configuration.
+    #
+    # @option params [required, Types::ReportContext] :report_context
+    #   ?
+    #
+    # @option params [required, Types::ReportFrequency] :report_frequency
+    #   Frequency by which reports are generated. The following options are
+    #   avaiable:
+    #
+    #   ??? What are the APi value options?
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @option params [String] :description
+    #   Description of the report generator.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_license_manager_report_generator({
+    #     license_manager_report_generator_arn: "String", # required
+    #     report_generator_name: "ReportGeneratorName", # required
+    #     type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
+    #     report_context: { # required
+    #       license_configuration_arns: ["Arn"], # required
+    #     },
+    #     report_frequency: { # required
+    #       value: 1,
+    #       period: "DAY", # accepts DAY, WEEK, MONTH
+    #     },
+    #     client_token: "ClientRequestToken", # required
+    #     description: "String",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseManagerReportGenerator AWS API Documentation
+    #
+    # @overload update_license_manager_report_generator(params = {})
+    # @param [Hash] params ({})
+    def update_license_manager_report_generator(params = {}, options = {})
+      req = build_request(:update_license_manager_report_generator, params)
+      req.send_request(options)
+    end
+
     # Adds or removes the specified license configurations for the specified
     # AWS resource.
     #
@@ -2527,7 +2820,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -28,8 +28,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version ID of the Kinesis Data Analytics application. You must
-    #   provide the `ApplicationVersionID` or the `ConditionalToken`.You can
-    #   retrieve the application version ID using DescribeApplication.
+    #   provide the `CurrentApplicationVersionId` or the
+    #   `ConditionalToken`.You can retrieve the application version ID using
+    #   DescribeApplication. For better concurrency support, use the
+    #   `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_watch_logging_option
@@ -39,9 +42,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationCloudWatchLoggingOptionRequest AWS API Documentation
@@ -101,10 +106,9 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version of the application to which you want to add the input
-    #   processing configuration. You must provide the
-    #   `ApplicationVersionID` or the `ConditionalToken`. You can use the
-    #   DescribeApplication operation to get the current application
-    #   version. If the version specified is not the current version, the
+    #   processing configuration. You can use the DescribeApplication
+    #   operation to get the current application version. If the version
+    #   specified is not the current version, the
     #   `ConcurrentModificationException` is returned.
     #   @return [Integer]
     #
@@ -284,11 +288,9 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version of the application to which you want to add the output
-    #   configuration. You must provide the `ApplicationVersionID` or the
-    #   `ConditionalToken`. You can use the DescribeApplication operation to
-    #   get the current application version. If the version specified is not
-    #   the current version, the `ConcurrentModificationException` is
-    #   returned.
+    #   configuration. You can use the DescribeApplication operation to get
+    #   the current application version. If the version specified is not the
+    #   current version, the `ConcurrentModificationException` is returned.
     #   @return [Integer]
     #
     # @!attribute [rw] output
@@ -446,11 +448,13 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version of the application to which you want to add the VPC
-    #   configuration. You must provide the `ApplicationVersionID` or the
-    #   `ConditionalToken`. You can use the DescribeApplication operation to
-    #   get the current application version. If the version specified is not
-    #   the current version, the `ConcurrentModificationException` is
-    #   returned.
+    #   configuration. You must provide the `CurrentApplicationVersionId` or
+    #   the `ConditionalToken`. You can use the DescribeApplication
+    #   operation to get the current application version. If the version
+    #   specified is not the current version, the
+    #   `ConcurrentModificationException` is returned. For better
+    #   concurrency support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_configuration
@@ -461,7 +465,9 @@ module Aws::KinesisAnalyticsV2
     #   A value you use to implement strong concurrency for application
     #   updates. You must provide the `ApplicationVersionID` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfigurationRequest AWS API Documentation
@@ -499,8 +505,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes code configuration for a Flink-based Kinesis Data Analytics
-    # application.
+    # Describes code configuration for an application.
     #
     # @note When making an API call, you may pass ApplicationCodeConfiguration
     #   data as a hash:
@@ -535,8 +540,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes code configuration for a Flink-based Kinesis Data Analytics
-    # application.
+    # Describes code configuration for an application.
     #
     # @!attribute [rw] code_content_type
     #   Specifies whether the code content is in text or zip format.
@@ -556,8 +560,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes code configuration updates to a Flink-based Kinesis Data
-    # Analytics application.
+    # Describes code configuration updates for an application. This is
+    # supported for a Flink-based Kinesis Data Analytics application or a
+    # SQL-based Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass ApplicationCodeConfigurationUpdate
     #   data as a hash:
@@ -719,7 +724,7 @@ module Aws::KinesisAnalyticsV2
     #             },
     #           ],
     #         },
-    #         application_code_configuration: { # required
+    #         application_code_configuration: {
     #           code_content: {
     #             text_content: "TextContent",
     #             zip_file_content: "data",
@@ -740,6 +745,37 @@ module Aws::KinesisAnalyticsV2
     #             security_group_ids: ["SecurityGroupId"], # required
     #           },
     #         ],
+    #         zeppelin_application_configuration: {
+    #           monitoring_configuration: {
+    #             log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #           },
+    #           catalog_configuration: {
+    #             glue_data_catalog_configuration: { # required
+    #               database_arn: "DatabaseARN", # required
+    #             },
+    #           },
+    #           deploy_as_application_configuration: {
+    #             s3_content_location: { # required
+    #               bucket_arn: "BucketARN", # required
+    #               base_path: "BasePath",
+    #             },
+    #           },
+    #           custom_artifacts_configuration: [
+    #             {
+    #               artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #               s3_content_location: {
+    #                 bucket_arn: "BucketARN", # required
+    #                 file_key: "FileKey", # required
+    #                 object_version: "ObjectVersion",
+    #               },
+    #               maven_reference: {
+    #                 group_id: "MavenGroupId", # required
+    #                 artifact_id: "MavenArtifactId", # required
+    #                 version: "MavenVersion", # required
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] sql_application_configuration
@@ -772,6 +808,11 @@ module Aws::KinesisAnalyticsV2
     #   application.
     #   @return [Array<Types::VpcConfiguration>]
     #
+    # @!attribute [rw] zeppelin_application_configuration
+    #   The configuration parameters for a Kinesis Data Analytics Studio
+    #   notebook.
+    #   @return [Types::ZeppelinApplicationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationConfiguration AWS API Documentation
     #
     class ApplicationConfiguration < Struct.new(
@@ -780,7 +821,8 @@ module Aws::KinesisAnalyticsV2
       :environment_properties,
       :application_code_configuration,
       :application_snapshot_configuration,
-      :vpc_configurations)
+      :vpc_configurations,
+      :zeppelin_application_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -822,6 +864,11 @@ module Aws::KinesisAnalyticsV2
     #   application.
     #   @return [Array<Types::VpcConfigurationDescription>]
     #
+    # @!attribute [rw] zeppelin_application_configuration_description
+    #   The configuration parameters for a Kinesis Data Analytics Studio
+    #   notebook.
+    #   @return [Types::ZeppelinApplicationConfigurationDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationConfigurationDescription AWS API Documentation
     #
     class ApplicationConfigurationDescription < Struct.new(
@@ -831,7 +878,8 @@ module Aws::KinesisAnalyticsV2
       :flink_application_configuration_description,
       :environment_property_descriptions,
       :application_snapshot_configuration_description,
-      :vpc_configuration_descriptions)
+      :vpc_configuration_descriptions,
+      :zeppelin_application_configuration_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -987,6 +1035,37 @@ module Aws::KinesisAnalyticsV2
     #             security_group_id_updates: ["SecurityGroupId"],
     #           },
     #         ],
+    #         zeppelin_application_configuration_update: {
+    #           monitoring_configuration_update: {
+    #             log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #           },
+    #           catalog_configuration_update: {
+    #             glue_data_catalog_configuration_update: { # required
+    #               database_arn_update: "DatabaseARN",
+    #             },
+    #           },
+    #           deploy_as_application_configuration_update: {
+    #             s3_content_location_update: { # required
+    #               bucket_arn_update: "BucketARN", # required
+    #               base_path_update: "BasePath",
+    #             },
+    #           },
+    #           custom_artifacts_configuration_update: [
+    #             {
+    #               artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #               s3_content_location: {
+    #                 bucket_arn: "BucketARN", # required
+    #                 file_key: "FileKey", # required
+    #                 object_version: "ObjectVersion",
+    #               },
+    #               maven_reference: {
+    #                 group_id: "MavenGroupId", # required
+    #                 artifact_id: "MavenArtifactId", # required
+    #                 version: "MavenVersion", # required
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] sql_application_configuration_update
@@ -995,8 +1074,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::SqlApplicationConfigurationUpdate]
     #
     # @!attribute [rw] application_code_configuration_update
-    #   Describes updates to a Flink-based Kinesis Data Analytics
-    #   application's code configuration.
+    #   Describes updates to an application's code configuration.
     #   @return [Types::ApplicationCodeConfigurationUpdate]
     #
     # @!attribute [rw] flink_application_configuration_update
@@ -1019,6 +1097,11 @@ module Aws::KinesisAnalyticsV2
     #   to the application.
     #   @return [Array<Types::VpcConfigurationUpdate>]
     #
+    # @!attribute [rw] zeppelin_application_configuration_update
+    #   Updates to the configuration of a Kinesis Data Analytics Studio
+    #   notebook.
+    #   @return [Types::ZeppelinApplicationConfigurationUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationConfigurationUpdate AWS API Documentation
     #
     class ApplicationConfigurationUpdate < Struct.new(
@@ -1027,7 +1110,8 @@ module Aws::KinesisAnalyticsV2
       :flink_application_configuration_update,
       :environment_property_updates,
       :application_snapshot_configuration_update,
-      :vpc_configuration_updates)
+      :vpc_configuration_updates,
+      :zeppelin_application_configuration_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1077,8 +1161,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [Time]
     #
     # @!attribute [rw] application_configuration_description
-    #   Provides details about the application's Java, SQL, or Scala code
-    #   and starting parameters.
+    #   Describes details about the application code and starting parameters
+    #   for a Kinesis Data Analytics application.
     #   @return [Types::ApplicationConfigurationDescription]
     #
     # @!attribute [rw] cloud_watch_logging_option_descriptions
@@ -1108,6 +1192,12 @@ module Aws::KinesisAnalyticsV2
     #   The version to which you want to roll back the application.
     #   @return [Integer]
     #
+    # @!attribute [rw] application_mode
+    #   To create a Kinesis Data Analytics Studio notebook, you must set the
+    #   mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for
+    #   Apache Flink application, the mode is optional.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationDetail AWS API Documentation
     #
     class ApplicationDetail < Struct.new(
@@ -1126,7 +1216,8 @@ module Aws::KinesisAnalyticsV2
       :application_version_updated_from,
       :application_version_rolled_back_from,
       :conditional_token,
-      :application_version_rolled_back_to)
+      :application_version_rolled_back_to,
+      :application_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1252,8 +1343,8 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] snapshots_enabled_update
-    #   Describes updates to whether snapshots are enabled for a Flink-based
-    #   Kinesis Data Analytics application.
+    #   Describes updates to whether snapshots are enabled for an
+    #   application.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSnapshotConfigurationUpdate AWS API Documentation
@@ -1284,8 +1375,13 @@ module Aws::KinesisAnalyticsV2
     #   @return [Integer]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1_0`, `FLINK-1_6`,
-    #   `FLINK-1_8`, or `FLINK-1_11`).
+    #   The runtime environment for the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_mode
+    #   For a Kinesis Data Analytics for Apache Flink application, the mode
+    #   is `STREAMING`. For a Kinesis Data Analytics Studio notebook, it is
+    #   `INTERACTIVE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSummary AWS API Documentation
@@ -1295,7 +1391,8 @@ module Aws::KinesisAnalyticsV2
       :application_arn,
       :application_status,
       :application_version_id,
-      :runtime_environment)
+      :runtime_environment,
+      :application_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1353,6 +1450,77 @@ module Aws::KinesisAnalyticsV2
     class CSVMappingParameters < Struct.new(
       :record_row_delimiter,
       :record_column_delimiter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration parameters for the default AWS Glue database. You
+    # use this database for SQL queries that you write in a Kinesis Data
+    # Analytics Studio notebook.
+    #
+    # @note When making an API call, you may pass CatalogConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         glue_data_catalog_configuration: { # required
+    #           database_arn: "DatabaseARN", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] glue_data_catalog_configuration
+    #   The configuration parameters for the default AWS Glue database. You
+    #   use this database for Apache Flink SQL queries and table API
+    #   transforms that you write in a Kinesis Data Analytics Studio
+    #   notebook.
+    #   @return [Types::GlueDataCatalogConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CatalogConfiguration AWS API Documentation
+    #
+    class CatalogConfiguration < Struct.new(
+      :glue_data_catalog_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration parameters for the default AWS Glue database. You
+    # use this database for Apache Flink SQL queries and table API
+    # transforms that you write in a Kinesis Data Analytics Studio notebook.
+    #
+    # @!attribute [rw] glue_data_catalog_configuration_description
+    #   The configuration parameters for the default AWS Glue database. You
+    #   use this database for SQL queries that you write in a Kinesis Data
+    #   Analytics Studio notebook.
+    #   @return [Types::GlueDataCatalogConfigurationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CatalogConfigurationDescription AWS API Documentation
+    #
+    class CatalogConfigurationDescription < Struct.new(
+      :glue_data_catalog_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates to
+    #
+    # @note When making an API call, you may pass CatalogConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         glue_data_catalog_configuration_update: { # required
+    #           database_arn_update: "DatabaseARN",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] glue_data_catalog_configuration_update
+    #   Updates to the configuration parameters for the default AWS Glue
+    #   database. You use this database for SQL queries that you write in a
+    #   Kinesis Data Analytics Studio notebook.
+    #   @return [Types::GlueDataCatalogConfigurationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CatalogConfigurationUpdate AWS API Documentation
+    #
+    class CatalogConfigurationUpdate < Struct.new(
+      :glue_data_catalog_configuration_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1705,7 +1873,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] s3_content_location
-    #   Information about the Amazon S3 bucket containing the application
+    #   Information about the Amazon S3 bucket that contains the application
     #   code.
     #   @return [Types::S3ContentLocation]
     #
@@ -1719,8 +1887,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes details about the application code for a Flink-based Kinesis
-    # Data Analytics application.
+    # Describes details about the code of a Kinesis Data Analytics
+    # application.
     #
     # @!attribute [rw] text_content
     #   The text-format code
@@ -1751,8 +1919,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes an update to the code of a Flink-based Kinesis Data
-    # Analytics application.
+    # Describes an update to the code of an application. Not supported for
+    # Apache Zeppelin.
     #
     # @note When making an API call, you may pass CodeContentUpdate
     #   data as a hash:
@@ -1823,7 +1991,7 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
-    #         url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL
+    #         url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL, ZEPPELIN_UI_URL
     #         session_expiration_duration_in_seconds: 1,
     #       }
     #
@@ -1869,7 +2037,7 @@ module Aws::KinesisAnalyticsV2
     #       {
     #         application_name: "ApplicationName", # required
     #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11
+    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, ZEPPELIN-FLINK-1_0
     #         service_execution_role: "RoleARN", # required
     #         application_configuration: {
     #           sql_application_configuration: {
@@ -1992,7 +2160,7 @@ module Aws::KinesisAnalyticsV2
     #               },
     #             ],
     #           },
-    #           application_code_configuration: { # required
+    #           application_code_configuration: {
     #             code_content: {
     #               text_content: "TextContent",
     #               zip_file_content: "data",
@@ -2013,6 +2181,37 @@ module Aws::KinesisAnalyticsV2
     #               security_group_ids: ["SecurityGroupId"], # required
     #             },
     #           ],
+    #           zeppelin_application_configuration: {
+    #             monitoring_configuration: {
+    #               log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #             },
+    #             catalog_configuration: {
+    #               glue_data_catalog_configuration: { # required
+    #                 database_arn: "DatabaseARN", # required
+    #               },
+    #             },
+    #             deploy_as_application_configuration: {
+    #               s3_content_location: { # required
+    #                 bucket_arn: "BucketARN", # required
+    #                 base_path: "BasePath",
+    #               },
+    #             },
+    #             custom_artifacts_configuration: [
+    #               {
+    #                 artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #                 s3_content_location: {
+    #                   bucket_arn: "BucketARN", # required
+    #                   file_key: "FileKey", # required
+    #                   object_version: "ObjectVersion",
+    #                 },
+    #                 maven_reference: {
+    #                   group_id: "MavenGroupId", # required
+    #                   artifact_id: "MavenArtifactId", # required
+    #                   version: "MavenVersion", # required
+    #                 },
+    #               },
+    #             ],
+    #           },
     #         },
     #         cloud_watch_logging_options: [
     #           {
@@ -2025,6 +2224,7 @@ module Aws::KinesisAnalyticsV2
     #             value: "TagValue",
     #           },
     #         ],
+    #         application_mode: "STREAMING", # accepts STREAMING, INTERACTIVE
     #       }
     #
     # @!attribute [rw] application_name
@@ -2067,6 +2267,12 @@ module Aws::KinesisAnalyticsV2
     #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] application_mode
+    #   Use the `STREAMING` mode to create a Kinesis Data Analytics Studio
+    #   notebook. To create a Kinesis Data Analytics Studio notebook, use
+    #   the `INTERACTIVE` mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -2076,7 +2282,8 @@ module Aws::KinesisAnalyticsV2
       :service_execution_role,
       :application_configuration,
       :cloud_watch_logging_options,
-      :tags)
+      :tags,
+      :application_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2124,6 +2331,84 @@ module Aws::KinesisAnalyticsV2
     #
     class CreateApplicationSnapshotResponse < Aws::EmptyStructure; end
 
+    # Specifies dependency JARs, as well as JAR files that contain
+    # user-defined functions (UDF).
+    #
+    # @note When making an API call, you may pass CustomArtifactConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #         s3_content_location: {
+    #           bucket_arn: "BucketARN", # required
+    #           file_key: "FileKey", # required
+    #           object_version: "ObjectVersion",
+    #         },
+    #         maven_reference: {
+    #           group_id: "MavenGroupId", # required
+    #           artifact_id: "MavenArtifactId", # required
+    #           version: "MavenVersion", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] artifact_type
+    #   `UDF` stands for user-defined functions. This type of artifact must
+    #   be in an S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an
+    #   S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_content_location
+    #   For a Kinesis Data Analytics application provides a description of
+    #   an Amazon S3 object, including the Amazon Resource Name (ARN) of the
+    #   S3 bucket, the name of the Amazon S3 object that contains the data,
+    #   and the version number of the Amazon S3 object that contains the
+    #   data.
+    #   @return [Types::S3ContentLocation]
+    #
+    # @!attribute [rw] maven_reference
+    #   The parameters required to fully specify a Maven reference.
+    #   @return [Types::MavenReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CustomArtifactConfiguration AWS API Documentation
+    #
+    class CustomArtifactConfiguration < Struct.new(
+      :artifact_type,
+      :s3_content_location,
+      :maven_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a dependency JAR or a JAR of user-defined functions.
+    #
+    # @!attribute [rw] artifact_type
+    #   `UDF` stands for user-defined functions. This type of artifact must
+    #   be in an S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an
+    #   S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_content_location_description
+    #   For a Kinesis Data Analytics application provides a description of
+    #   an Amazon S3 object, including the Amazon Resource Name (ARN) of the
+    #   S3 bucket, the name of the Amazon S3 object that contains the data,
+    #   and the version number of the Amazon S3 object that contains the
+    #   data.
+    #   @return [Types::S3ContentLocation]
+    #
+    # @!attribute [rw] maven_reference_description
+    #   The parameters that are required to specify a Maven dependency.
+    #   @return [Types::MavenReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CustomArtifactConfigurationDescription AWS API Documentation
+    #
+    class CustomArtifactConfigurationDescription < Struct.new(
+      :artifact_type,
+      :s3_content_location_description,
+      :maven_reference_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteApplicationCloudWatchLoggingOptionRequest
     #   data as a hash:
     #
@@ -2140,8 +2425,10 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version ID of the application. You must provide the
-    #   `ApplicationVersionID` or the `ConditionalToken`. You can retrieve
-    #   the application version ID using DescribeApplication.
+    #   `CurrentApplicationVersionId` or the `ConditionalToken`. You can
+    #   retrieve the application version ID using DescribeApplication. For
+    #   better concurrency support, use the `ConditionalToken` parameter
+    #   instead of `CurrentApplicationVersionId`.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_watch_logging_option_id
@@ -2152,9 +2439,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationCloudWatchLoggingOptionRequest AWS API Documentation
@@ -2439,8 +2728,10 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The current application version ID. You must provide the
-    #   `ApplicationVersionID` or the `ConditionalToken`.You can retrieve
-    #   the application version ID using DescribeApplication.
+    #   `CurrentApplicationVersionId` or the `ConditionalToken`. You can
+    #   retrieve the application version ID using DescribeApplication. For
+    #   better concurrency support, use the `ConditionalToken` parameter
+    #   instead of `CurrentApplicationVersionId`.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_configuration_id
@@ -2449,9 +2740,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfigurationRequest AWS API Documentation
@@ -2478,6 +2771,77 @@ module Aws::KinesisAnalyticsV2
     class DeleteApplicationVpcConfigurationResponse < Struct.new(
       :application_arn,
       :application_version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information required to deploy a Kinesis Data Analytics Studio
+    # notebook as an application with durable state..
+    #
+    # @note When making an API call, you may pass DeployAsApplicationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         s3_content_location: { # required
+    #           bucket_arn: "BucketARN", # required
+    #           base_path: "BasePath",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_content_location
+    #   The description of an Amazon S3 object that contains the Amazon Data
+    #   Analytics application, including the Amazon Resource Name (ARN) of
+    #   the S3 bucket, the name of the Amazon S3 object that contains the
+    #   data, and the version number of the Amazon S3 object that contains
+    #   the data.
+    #   @return [Types::S3ContentBaseLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeployAsApplicationConfiguration AWS API Documentation
+    #
+    class DeployAsApplicationConfiguration < Struct.new(
+      :s3_content_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration information required to deploy an Amazon Data
+    # Analytics Studio notebook as an application with durable state.
+    #
+    # @!attribute [rw] s3_content_location_description
+    #   The location that holds the data required to specify an Amazon Data
+    #   Analytics application.
+    #   @return [Types::S3ContentBaseLocationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeployAsApplicationConfigurationDescription AWS API Documentation
+    #
+    class DeployAsApplicationConfigurationDescription < Struct.new(
+      :s3_content_location_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates to the configuration information required to deploy an Amazon
+    # Data Analytics Studio notebook as an application with durable state..
+    #
+    # @note When making an API call, you may pass DeployAsApplicationConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         s3_content_location_update: { # required
+    #           bucket_arn_update: "BucketARN", # required
+    #           base_path_update: "BasePath",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_content_location_update
+    #   Updates to the location that holds the data required to specify an
+    #   Amazon Data Analytics application.
+    #   @return [Types::S3ContentBaseLocationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeployAsApplicationConfigurationUpdate AWS API Documentation
+    #
+    class DeployAsApplicationConfigurationUpdate < Struct.new(
+      :s3_content_location_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2739,8 +3103,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the execution properties for a Flink-based Kinesis Data
-    # Analytics application.
+    # Describes the execution properties for an Apache Flink runtime.
     #
     # @!attribute [rw] property_group_descriptions
     #   Describes the execution property groups.
@@ -2755,7 +3118,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes updates to the execution property groups for a Flink-based
-    # Kinesis Data Analytics application.
+    # Kinesis Data Analytics application or a Studio notebook.
     #
     # @note When making an API call, you may pass EnvironmentPropertyUpdates
     #   data as a hash:
@@ -2784,7 +3147,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes configuration parameters for a Flink-based Kinesis Data
-    # Analytics application.
+    # Analytics application or a Studio notebook.
     #
     # @note When making an API call, you may pass FlinkApplicationConfiguration
     #   data as a hash:
@@ -2971,6 +3334,68 @@ module Aws::KinesisAnalyticsV2
     #
     class FlinkRunConfiguration < Struct.new(
       :allow_non_restored_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the Glue Data Catalog that you use for Apache
+    # Flink SQL queries and table API transforms that you write in an
+    # application.
+    #
+    # @note When making an API call, you may pass GlueDataCatalogConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         database_arn: "DatabaseARN", # required
+    #       }
+    #
+    # @!attribute [rw] database_arn
+    #   The Amazon Resource Name (ARN) of the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/GlueDataCatalogConfiguration AWS API Documentation
+    #
+    class GlueDataCatalogConfiguration < Struct.new(
+      :database_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the Glue Data Catalog that you use for Apache
+    # Flink SQL queries and table API transforms that you write in an
+    # application.
+    #
+    # @!attribute [rw] database_arn
+    #   The Amazon Resource Name (ARN) of the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/GlueDataCatalogConfigurationDescription AWS API Documentation
+    #
+    class GlueDataCatalogConfigurationDescription < Struct.new(
+      :database_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates to the configuration of the Glue Data Catalog that you use for
+    # SQL queries that you write in a Kinesis Data Analytics Studio
+    # notebook.
+    #
+    # @note When making an API call, you may pass GlueDataCatalogConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         database_arn_update: "DatabaseARN",
+    #       }
+    #
+    # @!attribute [rw] database_arn_update
+    #   The updated Amazon Resource Name (ARN) of the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/GlueDataCatalogConfigurationUpdate AWS API Documentation
+    #
+    class GlueDataCatalogConfigurationUpdate < Struct.new(
+      :database_arn_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4279,9 +4704,43 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes configuration parameters for Amazon CloudWatch logging for a
-    # Flink-based Kinesis Data Analytics application. For more information
-    # about CloudWatch logging, see [Monitoring][1].
+    # The information required to specify a Maven reference. You can use
+    # Maven references to specify dependency JAR files.
+    #
+    # @note When making an API call, you may pass MavenReference
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "MavenGroupId", # required
+    #         artifact_id: "MavenArtifactId", # required
+    #         version: "MavenVersion", # required
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The group ID of the Maven reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_id
+    #   The artifact ID of the Maven reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the Maven reference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/MavenReference AWS API Documentation
+    #
+    class MavenReference < Struct.new(
+      :group_id,
+      :artifact_id,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes configuration parameters for Amazon CloudWatch logging for
+    # an application. For more information about CloudWatch logging, see
+    # [Monitoring][1].
     #
     #
     #
@@ -4323,8 +4782,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes configuration parameters for CloudWatch logging for a
-    # Flink-based Kinesis Data Analytics application.
+    # Describes configuration parameters for CloudWatch logging for an
+    # application.
     #
     # @!attribute [rw] configuration_type
     #   Describes whether to use the default CloudWatch logging
@@ -4350,7 +4809,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes updates to configuration parameters for Amazon CloudWatch
-    # logging for a Flink-based Kinesis Data Analytics application.
+    # logging for an application.
     #
     # @note When making an API call, you may pass MonitoringConfigurationUpdate
     #   data as a hash:
@@ -4687,8 +5146,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates to parameters for how a Flink-based Kinesis Data
-    # Analytics application executes multiple tasks simultaneously.
+    # Describes updates to parameters for how an application executes
+    # multiple tasks simultaneously.
     #
     # @note When making an API call, you may pass ParallelismConfigurationUpdate
     #   data as a hash:
@@ -4728,8 +5187,8 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] auto_scaling_enabled_update
     #   Describes updates to whether the Kinesis Data Analytics service can
-    #   increase the parallelism of the application in response to increased
-    #   throughput.
+    #   increase the parallelism of a Flink-based Kinesis Data Analytics
+    #   application in response to increased throughput.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ParallelismConfigurationUpdate AWS API Documentation
@@ -4743,8 +5202,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Property key-value pairs passed into a Flink-based Kinesis Data
-    # Analytics application.
+    # Property key-value pairs passed into an application.
     #
     # @note When making an API call, you may pass PropertyGroup
     #   data as a hash:
@@ -5221,8 +5679,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the location of a Flink-based Kinesis Data Analytics
-    # application's code stored in an S3 bucket.
+    # Describes the location of an application's code stored in an S3
+    # bucket.
     #
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) for the S3 bucket containing the
@@ -5277,11 +5735,84 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For a Flink-based Kinesis Data Analytics application, provides a
-    # description of an Amazon S3 object, including the Amazon Resource Name
-    # (ARN) of the S3 bucket, the name of the Amazon S3 object that contains
-    # the data, and the version number of the Amazon S3 object that contains
-    # the data.
+    # The S3 bucket that holds the application information.
+    #
+    # @note When making an API call, you may pass S3ContentBaseLocation
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_arn: "BucketARN", # required
+    #         base_path: "BasePath",
+    #       }
+    #
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_path
+    #   The base path for the S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/S3ContentBaseLocation AWS API Documentation
+    #
+    class S3ContentBaseLocation < Struct.new(
+      :bucket_arn,
+      :base_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The description of the S3 base location that holds the application.
+    #
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_path
+    #   The base path for the S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/S3ContentBaseLocationDescription AWS API Documentation
+    #
+    class S3ContentBaseLocationDescription < Struct.new(
+      :bucket_arn,
+      :base_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information required to update the S3 base location that holds the
+    # application.
+    #
+    # @note When making an API call, you may pass S3ContentBaseLocationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_arn_update: "BucketARN", # required
+    #         base_path_update: "BasePath",
+    #       }
+    #
+    # @!attribute [rw] bucket_arn_update
+    #   The updated Amazon Resource Name (ARN) of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_path_update
+    #   The updated S3 bucket path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/S3ContentBaseLocationUpdate AWS API Documentation
+    #
+    class S3ContentBaseLocationUpdate < Struct.new(
+      :bucket_arn_update,
+      :base_path_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For a Kinesis Data Analytics application provides a description of an
+    # Amazon S3 object, including the Amazon Resource Name (ARN) of the S3
+    # bucket, the name of the Amazon S3 object that contains the data, and
+    # the version number of the Amazon S3 object that contains the data.
     #
     # @note When making an API call, you may pass S3ContentLocation
     #   data as a hash:
@@ -5315,8 +5846,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes an update for the Amazon S3 code content location for a
-    # Flink-based Kinesis Data Analytics application.
+    # Describes an update for the Amazon S3 code content location for an
+    # application.
     #
     # @note When making an API call, you may pass S3ContentLocationUpdate
     #   data as a hash:
@@ -5854,7 +6385,7 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
-    #         run_configuration: { # required
+    #         run_configuration: {
     #           flink_run_configuration: {
     #             allow_non_restored_state: false,
     #           },
@@ -6293,6 +6824,37 @@ module Aws::KinesisAnalyticsV2
     #               security_group_id_updates: ["SecurityGroupId"],
     #             },
     #           ],
+    #           zeppelin_application_configuration_update: {
+    #             monitoring_configuration_update: {
+    #               log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #             },
+    #             catalog_configuration_update: {
+    #               glue_data_catalog_configuration_update: { # required
+    #                 database_arn_update: "DatabaseARN",
+    #               },
+    #             },
+    #             deploy_as_application_configuration_update: {
+    #               s3_content_location_update: { # required
+    #                 bucket_arn_update: "BucketARN", # required
+    #                 base_path_update: "BasePath",
+    #               },
+    #             },
+    #             custom_artifacts_configuration_update: [
+    #               {
+    #                 artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #                 s3_content_location: {
+    #                   bucket_arn: "BucketARN", # required
+    #                   file_key: "FileKey", # required
+    #                   object_version: "ObjectVersion",
+    #                 },
+    #                 maven_reference: {
+    #                   group_id: "MavenGroupId", # required
+    #                   artifact_id: "MavenArtifactId", # required
+    #                   version: "MavenVersion", # required
+    #                 },
+    #               },
+    #             ],
+    #           },
     #         },
     #         service_execution_role_update: "RoleARN",
     #         run_configuration_update: {
@@ -6319,8 +6881,10 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The current application version ID. You must provide the
-    #   `ApplicationVersionID` or the `ConditionalToken`.You can retrieve
-    #   the application version ID using DescribeApplication.
+    #   `CurrentApplicationVersionId` or the `ConditionalToken`.You can
+    #   retrieve the application version ID using DescribeApplication. For
+    #   better concurrency support, use the `ConditionalToken` parameter
+    #   instead of `CurrentApplicationVersionId`.
     #   @return [Integer]
     #
     # @!attribute [rw] application_configuration_update
@@ -6344,9 +6908,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] conditional_token
     #   A value you use to implement strong concurrency for application
-    #   updates. You must provide the `ApplicationVersionID` or the
+    #   updates. You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`. You get the application's current
-    #   `ConditionalToken` using DescribeApplication.
+    #   `ConditionalToken` using DescribeApplication. For better concurrency
+    #   support, use the `ConditionalToken` parameter instead of
+    #   `CurrentApplicationVersionId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationRequest AWS API Documentation
@@ -6486,6 +7052,242 @@ module Aws::KinesisAnalyticsV2
       :vpc_configuration_id,
       :subnet_id_updates,
       :security_group_id_updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of a Kinesis Data Analytics Studio notebook.
+    #
+    # @note When making an API call, you may pass ZeppelinApplicationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         monitoring_configuration: {
+    #           log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #         },
+    #         catalog_configuration: {
+    #           glue_data_catalog_configuration: { # required
+    #             database_arn: "DatabaseARN", # required
+    #           },
+    #         },
+    #         deploy_as_application_configuration: {
+    #           s3_content_location: { # required
+    #             bucket_arn: "BucketARN", # required
+    #             base_path: "BasePath",
+    #           },
+    #         },
+    #         custom_artifacts_configuration: [
+    #           {
+    #             artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #             s3_content_location: {
+    #               bucket_arn: "BucketARN", # required
+    #               file_key: "FileKey", # required
+    #               object_version: "ObjectVersion",
+    #             },
+    #             maven_reference: {
+    #               group_id: "MavenGroupId", # required
+    #               artifact_id: "MavenArtifactId", # required
+    #               version: "MavenVersion", # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] monitoring_configuration
+    #   The monitoring configuration of a Kinesis Data Analytics Studio
+    #   notebook.
+    #   @return [Types::ZeppelinMonitoringConfiguration]
+    #
+    # @!attribute [rw] catalog_configuration
+    #   The AWS Glue Data Catalog that you use in queries in a Kinesis Data
+    #   Analytics Studio notebook.
+    #   @return [Types::CatalogConfiguration]
+    #
+    # @!attribute [rw] deploy_as_application_configuration
+    #   The information required to deploy a Kinesis Data Analytics Studio
+    #   notebook as an application with durable state..
+    #   @return [Types::DeployAsApplicationConfiguration]
+    #
+    # @!attribute [rw] custom_artifacts_configuration
+    #   Custom artifacts are dependency JARs and user-defined functions
+    #   (UDF).
+    #   @return [Array<Types::CustomArtifactConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ZeppelinApplicationConfiguration AWS API Documentation
+    #
+    class ZeppelinApplicationConfiguration < Struct.new(
+      :monitoring_configuration,
+      :catalog_configuration,
+      :deploy_as_application_configuration,
+      :custom_artifacts_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of a Kinesis Data Analytics Studio notebook.
+    #
+    # @!attribute [rw] monitoring_configuration_description
+    #   The monitoring configuration of a Kinesis Data Analytics Studio
+    #   notebook.
+    #   @return [Types::ZeppelinMonitoringConfigurationDescription]
+    #
+    # @!attribute [rw] catalog_configuration_description
+    #   The AWS Glue Data Catalog that is associated with the Kinesis Data
+    #   Analytics Studio notebook.
+    #   @return [Types::CatalogConfigurationDescription]
+    #
+    # @!attribute [rw] deploy_as_application_configuration_description
+    #   The parameters required to deploy a Kinesis Data Analytics Studio
+    #   notebook as an application with durable state..
+    #   @return [Types::DeployAsApplicationConfigurationDescription]
+    #
+    # @!attribute [rw] custom_artifacts_configuration_description
+    #   Custom artifacts are dependency JARs and user-defined functions
+    #   (UDF).
+    #   @return [Array<Types::CustomArtifactConfigurationDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ZeppelinApplicationConfigurationDescription AWS API Documentation
+    #
+    class ZeppelinApplicationConfigurationDescription < Struct.new(
+      :monitoring_configuration_description,
+      :catalog_configuration_description,
+      :deploy_as_application_configuration_description,
+      :custom_artifacts_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates to the configuration of Kinesis Data Analytics Studio
+    # notebook.
+    #
+    # @note When making an API call, you may pass ZeppelinApplicationConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         monitoring_configuration_update: {
+    #           log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #         },
+    #         catalog_configuration_update: {
+    #           glue_data_catalog_configuration_update: { # required
+    #             database_arn_update: "DatabaseARN",
+    #           },
+    #         },
+    #         deploy_as_application_configuration_update: {
+    #           s3_content_location_update: { # required
+    #             bucket_arn_update: "BucketARN", # required
+    #             base_path_update: "BasePath",
+    #           },
+    #         },
+    #         custom_artifacts_configuration_update: [
+    #           {
+    #             artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
+    #             s3_content_location: {
+    #               bucket_arn: "BucketARN", # required
+    #               file_key: "FileKey", # required
+    #               object_version: "ObjectVersion",
+    #             },
+    #             maven_reference: {
+    #               group_id: "MavenGroupId", # required
+    #               artifact_id: "MavenArtifactId", # required
+    #               version: "MavenVersion", # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] monitoring_configuration_update
+    #   Updates to the monitoring configuration of a Kinesis Data Analytics
+    #   Studio notebook.
+    #   @return [Types::ZeppelinMonitoringConfigurationUpdate]
+    #
+    # @!attribute [rw] catalog_configuration_update
+    #   Updates to the configuration of the AWS Glue Data Catalog that is
+    #   associated with the Kinesis Data Analytics Studio notebook.
+    #   @return [Types::CatalogConfigurationUpdate]
+    #
+    # @!attribute [rw] deploy_as_application_configuration_update
+    #   Updates to the configuration information required to deploy an
+    #   Amazon Data Analytics Studio notebook as an application with durable
+    #   state..
+    #   @return [Types::DeployAsApplicationConfigurationUpdate]
+    #
+    # @!attribute [rw] custom_artifacts_configuration_update
+    #   Updates to the customer artifacts. Custom artifacts are dependency
+    #   JAR files and user-defined functions (UDF).
+    #   @return [Array<Types::CustomArtifactConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ZeppelinApplicationConfigurationUpdate AWS API Documentation
+    #
+    class ZeppelinApplicationConfigurationUpdate < Struct.new(
+      :monitoring_configuration_update,
+      :catalog_configuration_update,
+      :deploy_as_application_configuration_update,
+      :custom_artifacts_configuration_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes configuration parameters for Amazon CloudWatch logging for a
+    # Kinesis Data Analytics Studio notebook. For more information about
+    # CloudWatch logging, see [Monitoring][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html
+    #
+    # @note When making an API call, you may pass ZeppelinMonitoringConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #       }
+    #
+    # @!attribute [rw] log_level
+    #   The verbosity of the CloudWatch Logs for an application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ZeppelinMonitoringConfiguration AWS API Documentation
+    #
+    class ZeppelinMonitoringConfiguration < Struct.new(
+      :log_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The monitoring configuration for Apache Zeppelin within a Kinesis Data
+    # Analytics Studio notebook.
+    #
+    # @!attribute [rw] log_level
+    #   Describes the verbosity of the CloudWatch Logs for an application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ZeppelinMonitoringConfigurationDescription AWS API Documentation
+    #
+    class ZeppelinMonitoringConfigurationDescription < Struct.new(
+      :log_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates to the monitoring configuration for Apache Zeppelin within a
+    # Kinesis Data Analytics Studio notebook.
+    #
+    # @note When making an API call, you may pass ZeppelinMonitoringConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
+    #       }
+    #
+    # @!attribute [rw] log_level_update
+    #   Updates to the logging level for Apache Zeppelin within a Kinesis
+    #   Data Analytics Studio notebook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ZeppelinMonitoringConfigurationUpdate AWS API Documentation
+    #
+    class ZeppelinMonitoringConfigurationUpdate < Struct.new(
+      :log_level_update)
       SENSITIVE = []
       include Aws::Structure
     end

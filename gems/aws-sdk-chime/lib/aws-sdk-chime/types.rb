@@ -64,6 +64,10 @@ module Aws::Chime
     #   Supported licenses for the Amazon Chime account.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] account_status
+    #   The status of the account, `Suspended` or `Active`.
+    #   @return [String]
+    #
     # @!attribute [rw] signin_delegate_groups
     #   The sign-in delegate groups associated with the account.
     #   @return [Array<Types::SigninDelegateGroup>]
@@ -78,6 +82,7 @@ module Aws::Chime
       :created_timestamp,
       :default_license,
       :supported_licenses,
+      :account_status,
       :signin_delegate_groups)
       SENSITIVE = []
       include Aws::Structure
@@ -2126,6 +2131,67 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateMediaCapturePipelineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
+    #         source_arn: "Arn", # required
+    #         sink_type: "S3Bucket", # required, accepts S3Bucket
+    #         sink_arn: "Arn", # required
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] source_type
+    #   Source type from which the media artifacts will be captured. A Chime
+    #   SDK Meeting is the only supported source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   ARN of the source from which the media artifacts are captured.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_type
+    #   Destination type to which the media artifacts are saved. You must
+    #   use an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_arn
+    #   The ARN of the sink type.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The token assigned to the client making the pipeline request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipelineRequest AWS API Documentation
+    #
+    class CreateMediaCapturePipelineRequest < Struct.new(
+      :source_type,
+      :source_arn,
+      :sink_type,
+      :sink_arn,
+      :client_request_token)
+      SENSITIVE = [:source_arn, :sink_arn, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_capture_pipeline
+    #   A media capture pipeline object, the ID, source type, source ARN,
+    #   sink type, and sink ARN of a media capture pipeline object.
+    #   @return [Types::MediaCapturePipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipelineResponse AWS API Documentation
+    #
+    class CreateMediaCapturePipelineResponse < Struct.new(
+      :media_capture_pipeline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateMeetingDialOutRequest
     #   data as a hash:
     #
@@ -3248,6 +3314,25 @@ module Aws::Chime
     class DeleteEventsConfigurationRequest < Struct.new(
       :account_id,
       :bot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteMediaCapturePipelineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         media_pipeline_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] media_pipeline_id
+    #   The ID of the media capture pipeline being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteMediaCapturePipelineRequest AWS API Documentation
+    #
+    class DeleteMediaCapturePipelineRequest < Struct.new(
+      :media_pipeline_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4454,6 +4539,37 @@ module Aws::Chime
     class GetGlobalSettingsResponse < Struct.new(
       :business_calling,
       :voice_connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMediaCapturePipelineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         media_pipeline_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] media_pipeline_id
+    #   The ID of the pipeline that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMediaCapturePipelineRequest AWS API Documentation
+    #
+    class GetMediaCapturePipelineRequest < Struct.new(
+      :media_pipeline_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_capture_pipeline
+    #   The media capture pipeline object.
+    #   @return [Types::MediaCapturePipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMediaCapturePipelineResponse AWS API Documentation
+    #
+    class GetMediaCapturePipelineResponse < Struct.new(
+      :media_capture_pipeline)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6028,6 +6144,49 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMediaCapturePipelinesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token used to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   Range: 1 - 99.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMediaCapturePipelinesRequest AWS API Documentation
+    #
+    class ListMediaCapturePipelinesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_capture_pipelines
+    #   The media capture pipeline objects in the list.
+    #   @return [Array<Types::MediaCapturePipeline>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMediaCapturePipelinesResponse AWS API Documentation
+    #
+    class ListMediaCapturePipelinesResponse < Struct.new(
+      :media_capture_pipelines,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMeetingTagsRequest
     #   data as a hash:
     #
@@ -6754,6 +6913,60 @@ module Aws::Chime
     #
     class LogoutUserResponse < Aws::EmptyStructure; end
 
+    # A media capture pipeline object. A string consisting of an ID, source
+    # type, a source ARN, a sink type, and a sink ARN.
+    #
+    # @!attribute [rw] media_pipeline_id
+    #   The ID of a media capture pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   Source type from which media artifacts are saved. You must use
+    #   `ChimeMeeting`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   ARN of the source from which the media artifacts will be saved.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the media capture pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_type
+    #   Destination type to which the media artifacts are saved. You must
+    #   use an S3 Bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_arn
+    #   ARN of the destination to which the media artifacts are saved.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the capture pipeline was created, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The time at which the capture pipeline was updated, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaCapturePipeline AWS API Documentation
+    #
+    class MediaCapturePipeline < Struct.new(
+      :media_pipeline_id,
+      :source_type,
+      :source_arn,
+      :status,
+      :sink_type,
+      :sink_arn,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = [:source_arn, :sink_arn]
+      include Aws::Structure
+    end
+
     # A set of endpoints used by clients to connect to the media service
     # group for a Amazon Chime SDK meeting.
     #
@@ -6785,6 +6998,10 @@ module Aws::Chime
     #   The turn control URL.
     #   @return [String]
     #
+    # @!attribute [rw] event_ingestion_url
+    #   The event ingestion URL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaPlacement AWS API Documentation
     #
     class MediaPlacement < Struct.new(
@@ -6794,7 +7011,8 @@ module Aws::Chime
       :screen_sharing_url,
       :screen_viewing_url,
       :signaling_url,
-      :turn_control_url)
+      :turn_control_url,
+      :event_ingestion_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9186,6 +9404,7 @@ module Aws::Chime
     #       {
     #         account_id: "NonEmptyString", # required
     #         name: "AccountName",
+    #         default_license: "Basic", # accepts Basic, Plus, Pro, ProTrial
     #       }
     #
     # @!attribute [rw] account_id
@@ -9196,11 +9415,17 @@ module Aws::Chime
     #   The new name for the specified Amazon Chime account.
     #   @return [String]
     #
+    # @!attribute [rw] default_license
+    #   The default license applied when you add users to an Amazon Chime
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccountRequest AWS API Documentation
     #
     class UpdateAccountRequest < Struct.new(
       :account_id,
-      :name)
+      :name,
+      :default_license)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9792,6 +10017,52 @@ module Aws::Chime
     #
     class UpdateRoomResponse < Struct.new(
       :room)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSipMediaApplicationCallRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString", # required
+    #         transaction_id: "NonEmptyString", # required
+    #         arguments: { # required
+    #           "SensitiveString" => "SensitiveString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The ID of the SIP media application handling the call.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   The ID of the call transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] arguments
+    #   Arguments made available to the Lambda function as part of the
+    #   `CALL_UPDATE_REQUESTED` event. Can contain 0-20 key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationCallRequest AWS API Documentation
+    #
+    class UpdateSipMediaApplicationCallRequest < Struct.new(
+      :sip_media_application_id,
+      :transaction_id,
+      :arguments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application_call
+    #   A `Call` instance for a SIP media application.
+    #   @return [Types::SipMediaApplicationCall]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationCallResponse AWS API Documentation
+    #
+    class UpdateSipMediaApplicationCallResponse < Struct.new(
+      :sip_media_application_call)
       SENSITIVE = []
       include Aws::Structure
     end

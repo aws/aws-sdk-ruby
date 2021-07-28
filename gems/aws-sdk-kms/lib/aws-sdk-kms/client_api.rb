@@ -150,7 +150,12 @@ module Aws::KMS
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     MarkerType = Shapes::StringShape.new(name: 'MarkerType')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
+    MultiRegionConfiguration = Shapes::StructureShape.new(name: 'MultiRegionConfiguration')
+    MultiRegionKey = Shapes::StructureShape.new(name: 'MultiRegionKey')
+    MultiRegionKeyList = Shapes::ListShape.new(name: 'MultiRegionKeyList')
+    MultiRegionKeyType = Shapes::StringShape.new(name: 'MultiRegionKeyType')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NullableBooleanType = Shapes::BooleanShape.new(name: 'NullableBooleanType')
     NumberOfBytesType = Shapes::IntegerShape.new(name: 'NumberOfBytesType')
     OriginType = Shapes::StringShape.new(name: 'OriginType')
     PendingWindowInDaysType = Shapes::IntegerShape.new(name: 'PendingWindowInDaysType')
@@ -163,6 +168,9 @@ module Aws::KMS
     PutKeyPolicyRequest = Shapes::StructureShape.new(name: 'PutKeyPolicyRequest')
     ReEncryptRequest = Shapes::StructureShape.new(name: 'ReEncryptRequest')
     ReEncryptResponse = Shapes::StructureShape.new(name: 'ReEncryptResponse')
+    RegionType = Shapes::StringShape.new(name: 'RegionType')
+    ReplicateKeyRequest = Shapes::StructureShape.new(name: 'ReplicateKeyRequest')
+    ReplicateKeyResponse = Shapes::StructureShape.new(name: 'ReplicateKeyResponse')
     RetireGrantRequest = Shapes::StructureShape.new(name: 'RetireGrantRequest')
     RevokeGrantRequest = Shapes::StructureShape.new(name: 'RevokeGrantRequest')
     ScheduleKeyDeletionRequest = Shapes::StructureShape.new(name: 'ScheduleKeyDeletionRequest')
@@ -185,6 +193,7 @@ module Aws::KMS
     UpdateCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'UpdateCustomKeyStoreRequest')
     UpdateCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'UpdateCustomKeyStoreResponse')
     UpdateKeyDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateKeyDescriptionRequest')
+    UpdatePrimaryRegionRequest = Shapes::StructureShape.new(name: 'UpdatePrimaryRegionRequest')
     VerifyRequest = Shapes::StructureShape.new(name: 'VerifyRequest')
     VerifyResponse = Shapes::StructureShape.new(name: 'VerifyResponse')
     WrappingKeySpec = Shapes::StringShape.new(name: 'WrappingKeySpec')
@@ -261,6 +270,7 @@ module Aws::KMS
     CreateKeyRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
     CreateKeyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
     CreateKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateKeyRequest.add_member(:multi_region, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "MultiRegion"))
     CreateKeyRequest.struct_class = Types::CreateKeyRequest
 
     CreateKeyResponse.add_member(:key_metadata, Shapes::ShapeRef.new(shape: KeyMetadata, location_name: "KeyMetadata"))
@@ -560,6 +570,9 @@ module Aws::KMS
     KeyMetadata.add_member(:customer_master_key_spec, Shapes::ShapeRef.new(shape: CustomerMasterKeySpec, location_name: "CustomerMasterKeySpec"))
     KeyMetadata.add_member(:encryption_algorithms, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpecList, location_name: "EncryptionAlgorithms"))
     KeyMetadata.add_member(:signing_algorithms, Shapes::ShapeRef.new(shape: SigningAlgorithmSpecList, location_name: "SigningAlgorithms"))
+    KeyMetadata.add_member(:multi_region, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "MultiRegion"))
+    KeyMetadata.add_member(:multi_region_configuration, Shapes::ShapeRef.new(shape: MultiRegionConfiguration, location_name: "MultiRegionConfiguration"))
+    KeyMetadata.add_member(:pending_deletion_window_in_days, Shapes::ShapeRef.new(shape: PendingWindowInDaysType, location_name: "PendingDeletionWindowInDays"))
     KeyMetadata.struct_class = Types::KeyMetadata
 
     KeyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
@@ -627,6 +640,17 @@ module Aws::KMS
     MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
 
+    MultiRegionConfiguration.add_member(:multi_region_key_type, Shapes::ShapeRef.new(shape: MultiRegionKeyType, location_name: "MultiRegionKeyType"))
+    MultiRegionConfiguration.add_member(:primary_key, Shapes::ShapeRef.new(shape: MultiRegionKey, location_name: "PrimaryKey"))
+    MultiRegionConfiguration.add_member(:replica_keys, Shapes::ShapeRef.new(shape: MultiRegionKeyList, location_name: "ReplicaKeys"))
+    MultiRegionConfiguration.struct_class = Types::MultiRegionConfiguration
+
+    MultiRegionKey.add_member(:arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "Arn"))
+    MultiRegionKey.add_member(:region, Shapes::ShapeRef.new(shape: RegionType, location_name: "Region"))
+    MultiRegionKey.struct_class = Types::MultiRegionKey
+
+    MultiRegionKeyList.member = Shapes::ShapeRef.new(shape: MultiRegionKey)
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -655,6 +679,19 @@ module Aws::KMS
     ReEncryptResponse.add_member(:destination_encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "DestinationEncryptionAlgorithm"))
     ReEncryptResponse.struct_class = Types::ReEncryptResponse
 
+    ReplicateKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    ReplicateKeyRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: RegionType, required: true, location_name: "ReplicaRegion"))
+    ReplicateKeyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyType, location_name: "Policy"))
+    ReplicateKeyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
+    ReplicateKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
+    ReplicateKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ReplicateKeyRequest.struct_class = Types::ReplicateKeyRequest
+
+    ReplicateKeyResponse.add_member(:replica_key_metadata, Shapes::ShapeRef.new(shape: KeyMetadata, location_name: "ReplicaKeyMetadata"))
+    ReplicateKeyResponse.add_member(:replica_policy, Shapes::ShapeRef.new(shape: PolicyType, location_name: "ReplicaPolicy"))
+    ReplicateKeyResponse.add_member(:replica_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ReplicaTags"))
+    ReplicateKeyResponse.struct_class = Types::ReplicateKeyResponse
+
     RetireGrantRequest.add_member(:grant_token, Shapes::ShapeRef.new(shape: GrantTokenType, location_name: "GrantToken"))
     RetireGrantRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     RetireGrantRequest.add_member(:grant_id, Shapes::ShapeRef.new(shape: GrantIdType, location_name: "GrantId"))
@@ -670,6 +707,8 @@ module Aws::KMS
 
     ScheduleKeyDeletionResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     ScheduleKeyDeletionResponse.add_member(:deletion_date, Shapes::ShapeRef.new(shape: DateType, location_name: "DeletionDate"))
+    ScheduleKeyDeletionResponse.add_member(:key_state, Shapes::ShapeRef.new(shape: KeyState, location_name: "KeyState"))
+    ScheduleKeyDeletionResponse.add_member(:pending_window_in_days, Shapes::ShapeRef.new(shape: PendingWindowInDaysType, location_name: "PendingWindowInDays"))
     ScheduleKeyDeletionResponse.struct_class = Types::ScheduleKeyDeletionResponse
 
     SignRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -723,6 +762,10 @@ module Aws::KMS
     UpdateKeyDescriptionRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     UpdateKeyDescriptionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionType, required: true, location_name: "Description"))
     UpdateKeyDescriptionRequest.struct_class = Types::UpdateKeyDescriptionRequest
+
+    UpdatePrimaryRegionRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    UpdatePrimaryRegionRequest.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionType, required: true, location_name: "PrimaryRegion"))
+    UpdatePrimaryRegionRequest.struct_class = Types::UpdatePrimaryRegionRequest
 
     VerifyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     VerifyRequest.add_member(:message, Shapes::ShapeRef.new(shape: PlaintextType, required: true, location_name: "Message"))
@@ -909,6 +952,7 @@ module Aws::KMS
         o.input = Shapes::ShapeRef.new(shape: DescribeCustomKeyStoresRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCustomKeyStoresResponse)
         o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
       end)
 
@@ -1302,6 +1346,24 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
       end)
 
+      api.add_operation(:replicate_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReplicateKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReplicateKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReplicateKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:retire_grant, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RetireGrant"
         o.http_method = "POST"
@@ -1427,6 +1489,20 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+      end)
+
+      api.add_operation(:update_primary_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePrimaryRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePrimaryRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:verify, Seahorse::Model::Operation.new.tap do |o|

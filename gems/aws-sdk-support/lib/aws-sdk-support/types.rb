@@ -84,8 +84,8 @@ module Aws::Support
     #       }
     #
     # @!attribute [rw] case_id
-    #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string formatted as shown in this example:
+    #   The support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -273,37 +273,38 @@ module Aws::Support
     # It is contained in the response from a DescribeCases request.
     # **CaseDetails** contains the following fields:
     #
-    # * **caseId.** The AWS Support case ID requested or returned in the
-    #   call. The case ID is an alphanumeric string formatted as shown in
-    #   this example: case-*12345678910-2013-c4c1d2bf33c5cf47*.
+    # * **caseId** - The support case ID requested or returned in the call.
+    #   The case ID is an alphanumeric string formatted as shown in this
+    #   example: case-*12345678910-2013-c4c1d2bf33c5cf47*.
     #
-    # * **categoryCode.** The category of problem for the AWS Support case.
-    #   Corresponds to the CategoryCode values returned by a call to
+    # * **categoryCode** - The category of problem for the support case.
+    #   Corresponds to the `CategoryCode` values returned by a call to
     #   DescribeServices.
     #
-    # * **displayId.** The identifier for the case on pages in the AWS
+    # * **displayId** - The identifier for the case on pages in the AWS
     #   Support Center.
     #
-    # * **language.** The ISO 639-1 code for the language in which AWS
+    # * **language** - The ISO 639-1 code for the language in which AWS
     #   provides support. AWS Support currently supports English ("en")
     #   and Japanese ("ja"). Language parameters must be passed explicitly
     #   for operations that take them.
     #
-    # * **nextToken.** A resumption point for pagination.
+    # * **nextToken** - A resumption point for pagination.
     #
-    # * **recentCommunications.** One or more Communication objects. Fields
+    # * **recentCommunications** - One or more Communication objects. Fields
     #   of these objects are `attachments`, `body`, `caseId`, `submittedBy`,
     #   and `timeCreated`.
     #
-    # * **serviceCode.** The identifier for the AWS service that corresponds
-    #   to the service code defined in the call to DescribeServices.
+    # * **serviceCode** - The identifier for the AWS service that
+    #   corresponds to the service code defined in the call to
+    #   DescribeServices.
     #
-    # * **severityCode.** The severity code assigned to the case. Contains
+    # * **severityCode** - The severity code assigned to the case. Contains
     #   one of the values returned by the call to DescribeSeverityLevels.
     #   The possible values are: `low`, `normal`, `high`, `urgent`, and
     #   `critical`.
     #
-    # * **status.** The status of the case in the AWS Support Center. Valid
+    # * **status** - The status of the case in the AWS Support Center. Valid
     #   values:
     #
     #   * `opened`
@@ -318,16 +319,16 @@ module Aws::Support
     #
     #   * `work-in-progress`
     #
-    # * **subject.** The subject line of the case.
+    # * **subject** - The subject line of the case.
     #
-    # * **submittedBy.** The email address of the account that submitted the
-    #   case.
+    # * **submittedBy** - The email address of the account that submitted
+    #   the case.
     #
-    # * **timeCreated.** The time the case was created, in ISO-8601 format.
+    # * **timeCreated** - The time the case was created, in ISO-8601 format.
     #
     # @!attribute [rw] case_id
-    #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string formatted as shown in this example:
+    #   The support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -364,7 +365,7 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] category_code
-    #   The category of problem for the AWS Support case.
+    #   The category of problem for the support case.
     #   @return [String]
     #
     # @!attribute [rw] severity_code
@@ -418,7 +419,7 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # The requested `caseId` could not be located.
+    # The requested `caseId` couldn't be located.
     #
     # @!attribute [rw] message
     #   The requested `CaseId` could not be located.
@@ -453,14 +454,14 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # A communication associated with an AWS Support case. The communication
+    # A communication associated with a support case. The communication
     # consists of the case ID, the message body, attachment information, the
     # submitter of the communication, and the date and time of the
     # communication.
     #
     # @!attribute [rw] case_id
-    #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string formatted as shown in this example:
+    #   The support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -472,8 +473,8 @@ module Aws::Support
     #   The identity of the account that submitted, or responded to, the
     #   support case. Customer entries include the role or IAM user as well
     #   as the email address. For example, "AdminRole (Role)
-    #   &lt;someone@example.com&gt;. Entries from the AWS Support team
-    #   display "Amazon Web Services," and do not show an email address.
+    #   &lt;janedoe@example.com&gt;. Entries from the AWS Support team
+    #   display "Amazon Web Services," and don't show an email address.
     #   @return [String]
     #
     # @!attribute [rw] time_created
@@ -512,8 +513,8 @@ module Aws::Support
     #       }
     #
     # @!attribute [rw] subject
-    #   The title of the AWS Support case. The title appears in the
-    #   **Subject** field on the AWS Support Center [Create Case][1] page.
+    #   The title of the support case. The title appears in the **Subject**
+    #   field on the AWS Support Center [Create Case][1] page.
     #
     #
     #
@@ -545,7 +546,7 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] category_code
-    #   The category of problem for the AWS Support case. You also use the
+    #   The category of problem for the support case. You also use the
     #   DescribeServices operation to get the category code for a service.
     #   Each AWS service defines its own set of category codes.
     #   @return [String]
@@ -605,12 +606,12 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # The AWS Support case ID returned by a successful completion of the
+    # The support case ID returned by a successful completion of the
     # CreateCase operation.
     #
     # @!attribute [rw] case_id
-    #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string in the following format:
+    #   The support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string in the following format:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -738,7 +739,7 @@ module Aws::Support
     #
     # @!attribute [rw] include_communications
     #   Specifies whether to include communications in the `DescribeCases`
-    #   response. By default, communications are incuded.
+    #   response. By default, communications are included.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCasesRequest AWS API Documentation
@@ -793,8 +794,8 @@ module Aws::Support
     #       }
     #
     # @!attribute [rw] case_id
-    #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string formatted as shown in this example:
+    #   The support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -938,7 +939,7 @@ module Aws::Support
     #       }
     #
     # @!attribute [rw] check_ids
-    #   The IDs of the Trusted Advisor checks to get the status of.
+    #   The IDs of the Trusted Advisor checks to get the status.
     #
     #   <note markdown="1"> If you specify the check ID of a check that is automatically
     #   refreshed, you might see an `InvalidParameterValue` error.
@@ -1125,8 +1126,11 @@ module Aws::Support
     #
     # @!attribute [rw] check_id
     #   The unique identifier for the Trusted Advisor check to refresh.
-    #   **Note:** Specifying the check ID of a check that is automatically
-    #   refreshed causes an `InvalidParameterValue` error.
+    #
+    #   <note markdown="1"> Specifying the check ID of a check that is automatically refreshed
+    #   causes an `InvalidParameterValue` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheckRequest AWS API Documentation
@@ -1160,8 +1164,8 @@ module Aws::Support
     #       }
     #
     # @!attribute [rw] case_id
-    #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string formatted as shown in this example:
+    #   The support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -1242,21 +1246,22 @@ module Aws::Support
     #   The name of the severity level that corresponds to the severity
     #   level code.
     #
-    #   <note markdown="1"> The values returned by the API differ from the values that are
-    #   displayed in the AWS Support Center. For example, for the code
-    #   "low", the API name is "Low", but the name in the Support Center
-    #   is "General guidance". These are the Support Center code/name
-    #   mappings:
+    #   <note markdown="1"> The values returned by the API are different from the values that
+    #   appear in the AWS Support Center. For example, the API uses the code
+    #   `low`, but the name appears as General guidance in Support Center.
     #
-    #    * `low`\: General guidance
+    #    The following are the API code names and how they appear in the
+    #   console:
     #
-    #   * `normal`\: System impaired
+    #    * `low` - General guidance
     #
-    #   * `high`\: Production system impaired
+    #   * `normal` - System impaired
     #
-    #   * `urgent`\: Production system down
+    #   * `high` - Production system impaired
     #
-    #   * `critical`\: Business-critical system down
+    #   * `urgent` - Production system down
+    #
+    #   * `critical` - Business-critical system down
     #
     #    </note>
     #
@@ -1343,18 +1348,18 @@ module Aws::Support
     #   The status of the Trusted Advisor check for which a refresh has been
     #   requested:
     #
-    #   * `none:` The check is not refreshed or the non-success status
+    #   * `none` - The check is not refreshed or the non-success status
     #     exceeds the timeout
     #
-    #   * `enqueued:` The check refresh requests has entered the refresh
+    #   * `enqueued` - The check refresh requests has entered the refresh
     #     queue
     #
-    #   * `processing:` The check refresh request is picked up by the rule
+    #   * `processing` - The check refresh request is picked up by the rule
     #     processing engine
     #
-    #   * `success:` The check is successfully refreshed
+    #   * `success` - The check is successfully refreshed
     #
-    #   * `abandoned:` The check refresh has failed
+    #   * `abandoned` - The check refresh has failed
     #   @return [String]
     #
     # @!attribute [rw] millis_until_next_refreshable
@@ -1489,7 +1494,7 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region in which the identified resource is located.
+    #   The AWS Region in which the identified resource is located.
     #   @return [String]
     #
     # @!attribute [rw] resource_id

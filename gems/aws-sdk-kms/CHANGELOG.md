@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-06-16)
+------------------
+
+* Feature - Adds support for multi-Region keys
+
 1.43.0 (2021-03-10)
 ------------------
 

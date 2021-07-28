@@ -18,6 +18,7 @@ module Aws::EMRContainers
     CancelJobRunResponse = Shapes::StructureShape.new(name: 'CancelJobRunResponse')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchMonitoringConfiguration = Shapes::StructureShape.new(name: 'CloudWatchMonitoringConfiguration')
+    ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
     ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
@@ -60,6 +61,7 @@ module Aws::EMRContainers
     JobRunState = Shapes::StringShape.new(name: 'JobRunState')
     JobRunStates = Shapes::ListShape.new(name: 'JobRunStates')
     JobRuns = Shapes::ListShape.new(name: 'JobRuns')
+    KubernetesNamespace = Shapes::StringShape.new(name: 'KubernetesNamespace')
     ListJobRunsRequest = Shapes::StructureShape.new(name: 'ListJobRunsRequest')
     ListJobRunsResponse = Shapes::StructureShape.new(name: 'ListJobRunsResponse')
     ListManagedEndpointsRequest = Shapes::StructureShape.new(name: 'ListManagedEndpointsRequest')
@@ -130,7 +132,7 @@ module Aws::EMRContainers
     ContainerInfo.struct_class = Types::ContainerInfo
 
     ContainerProvider.add_member(:type, Shapes::ShapeRef.new(shape: ContainerProviderType, required: true, location_name: "type"))
-    ContainerProvider.add_member(:id, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "id"))
+    ContainerProvider.add_member(:id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "id"))
     ContainerProvider.add_member(:info, Shapes::ShapeRef.new(shape: ContainerInfo, location_name: "info"))
     ContainerProvider.struct_class = Types::ContainerProvider
 
@@ -196,7 +198,7 @@ module Aws::EMRContainers
     DescribeVirtualClusterResponse.add_member(:virtual_cluster, Shapes::ShapeRef.new(shape: VirtualCluster, location_name: "virtualCluster"))
     DescribeVirtualClusterResponse.struct_class = Types::DescribeVirtualClusterResponse
 
-    EksInfo.add_member(:namespace, Shapes::ShapeRef.new(shape: String256, location_name: "namespace"))
+    EksInfo.add_member(:namespace, Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: "namespace"))
     EksInfo.struct_class = Types::EksInfo
 
     Endpoint.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
@@ -213,6 +215,8 @@ module Aws::EMRContainers
     Endpoint.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
     Endpoint.add_member(:security_group, Shapes::ShapeRef.new(shape: String256, location_name: "securityGroup"))
     Endpoint.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))
+    Endpoint.add_member(:state_details, Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails"))
+    Endpoint.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     Endpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Endpoint.struct_class = Types::Endpoint
 

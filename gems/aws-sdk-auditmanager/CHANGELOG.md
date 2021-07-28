@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-07-16)
+------------------
+
+* Feature - This release relaxes the S3 URL character restrictions in AWS Audit Manager. Regex patterns have been updated for the following attributes: s3RelativePath, destination, and s3ResourcePath. 'AWS' terms have also been replaced with entities to align with China Rebrand documentation efforts.
+
 1.7.0 (2021-05-05)
 ------------------
 

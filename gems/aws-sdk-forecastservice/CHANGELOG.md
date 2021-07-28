@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-06-03)
+------------------
+
+* Feature - Added optional field AutoMLOverrideStrategy to CreatePredictor API that allows users to customize AutoML strategy. If provided in CreatePredictor request, this field is visible in DescribePredictor and GetAccuracyMetrics responses.
+
+1.20.0 (2021-05-21)
+------------------
+
+* Feature - Updated attribute statistics in DescribeDatasetImportJob response to support Long values
+
 1.19.0 (2021-04-30)
 ------------------
 

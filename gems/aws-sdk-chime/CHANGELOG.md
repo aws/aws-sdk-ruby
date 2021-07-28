@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-07-16)
+------------------
+
+* Feature - This SDK release adds Account Status as one of the attributes in Account API response
+
+1.50.0 (2021-07-07)
+------------------
+
+* Feature - Releasing new APIs for AWS Chime MediaCapturePipeline
+
+1.49.0 (2021-06-24)
+------------------
+
+* Feature - Adds EventIngestionUrl field to MediaPlacement
+
+1.48.0 (2021-06-17)
+------------------
+
+* Feature - This release adds a new API UpdateSipMediaApplicationCall, to update an in-progress call for SipMediaApplication.
+
+1.47.0 (2021-06-10)
+------------------
+
+* Feature - This SDK release adds support for UpdateAccount API to allow users to update their default license on Chime account.
+
 1.46.0 (2021-05-04)
 ------------------
 

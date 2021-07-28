@@ -321,7 +321,7 @@ module Aws
           end
           resp = s3.create_bucket(bucket: 'aws-sdk')
           expect(resp.context.http_request.body_contents.strip)
-            .to eq(<<-XML.strip)
+            .to eq(<<-XML.gsub(/(^\s+|\n)/, ''))
 <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
   <LocationConstraint>us-west-2</LocationConstraint>
 </CreateBucketConfiguration>
@@ -341,7 +341,7 @@ module Aws
             }
           )
           expect(resp.context.http_request.body_contents.strip)
-            .to eq(<<-XML.strip)
+            .to eq(<<-XML.gsub(/(^\s+|\n)/, ''))
 <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
   <LocationConstraint>EU</LocationConstraint>
 </CreateBucketConfiguration>
@@ -583,7 +583,7 @@ module Aws
               ]
             }
           )
-          expect(resp.context.http_request.body_contents).to eq(<<-XML)
+          expect(resp.context.http_request.body_contents).to eq(<<-XML.gsub(/(^\s+|\n)/, ''))
 <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
   <AccessControlList>
     <Grant>

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2021-07-15)
+------------------
+
+* Feature - Documentation updates for support of awsvpc mode on Windows.
+
+1.80.0 (2021-06-02)
+------------------
+
+* Feature - Documentation updates for Amazon ECS.
+
+1.79.0 (2021-05-26)
+------------------
+
+* Feature - The release adds support for registering External instances to your Amazon ECS clusters.
+
 1.78.0 (2021-05-10)
 ------------------
 

@@ -17,6 +17,7 @@ module Aws::MediaTailor
     AccessType = Shapes::StringShape.new(name: 'AccessType')
     AdBreak = Shapes::StructureShape.new(name: 'AdBreak')
     AdMarkerPassthrough = Shapes::StructureShape.new(name: 'AdMarkerPassthrough')
+    Alert = Shapes::StructureShape.new(name: 'Alert')
     AvailSuppression = Shapes::StructureShape.new(name: 'AvailSuppression')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Bumper = Shapes::StructureShape.new(name: 'Bumper')
@@ -68,6 +69,8 @@ module Aws::MediaTailor
     HttpConfiguration = Shapes::StructureShape.new(name: 'HttpConfiguration')
     HttpPackageConfiguration = Shapes::StructureShape.new(name: 'HttpPackageConfiguration')
     HttpPackageConfigurations = Shapes::ListShape.new(name: 'HttpPackageConfigurations')
+    ListAlertsRequest = Shapes::StructureShape.new(name: 'ListAlertsRequest')
+    ListAlertsResponse = Shapes::StructureShape.new(name: 'ListAlertsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListPlaybackConfigurationsRequest = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsRequest')
@@ -95,8 +98,10 @@ module Aws::MediaTailor
     RequestOutputs = Shapes::ListShape.new(name: 'RequestOutputs')
     ResponseOutputItem = Shapes::StructureShape.new(name: 'ResponseOutputItem')
     ResponseOutputs = Shapes::ListShape.new(name: 'ResponseOutputs')
+    ScheduleAdBreak = Shapes::StructureShape.new(name: 'ScheduleAdBreak')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     ScheduleEntry = Shapes::StructureShape.new(name: 'ScheduleEntry')
+    SecretsManagerAccessTokenConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerAccessTokenConfiguration')
     SlateSource = Shapes::StructureShape.new(name: 'SlateSource')
     SourceLocation = Shapes::StructureShape.new(name: 'SourceLocation')
     SpliceInsertMessage = Shapes::StructureShape.new(name: 'SpliceInsertMessage')
@@ -119,8 +124,10 @@ module Aws::MediaTailor
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __listOfAdBreak = Shapes::ListShape.new(name: '__listOfAdBreak')
+    __listOfAlert = Shapes::ListShape.new(name: '__listOfAlert')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
     __listOfPlaybackConfiguration = Shapes::ListShape.new(name: '__listOfPlaybackConfiguration')
+    __listOfScheduleAdBreak = Shapes::ListShape.new(name: '__listOfScheduleAdBreak')
     __listOfScheduleEntry = Shapes::ListShape.new(name: '__listOfScheduleEntry')
     __listOfSourceLocation = Shapes::ListShape.new(name: '__listOfSourceLocation')
     __listOfVodSource = Shapes::ListShape.new(name: '__listOfVodSource')
@@ -131,6 +138,7 @@ module Aws::MediaTailor
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
     AccessConfiguration.add_member(:access_type, Shapes::ShapeRef.new(shape: AccessType, location_name: "AccessType"))
+    AccessConfiguration.add_member(:secrets_manager_access_token_configuration, Shapes::ShapeRef.new(shape: SecretsManagerAccessTokenConfiguration, location_name: "SecretsManagerAccessTokenConfiguration"))
     AccessConfiguration.struct_class = Types::AccessConfiguration
 
     AdBreak.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
@@ -141,6 +149,13 @@ module Aws::MediaTailor
 
     AdMarkerPassthrough.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     AdMarkerPassthrough.struct_class = Types::AdMarkerPassthrough
+
+    Alert.add_member(:alert_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertCode"))
+    Alert.add_member(:alert_message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertMessage"))
+    Alert.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, required: true, location_name: "LastModifiedTime"))
+    Alert.add_member(:related_resource_arns, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "RelatedResourceArns"))
+    Alert.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ResourceArn"))
+    Alert.struct_class = Types::Alert
 
     AvailSuppression.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
     AvailSuppression.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "Value"))
@@ -395,6 +410,15 @@ module Aws::MediaTailor
 
     HttpPackageConfigurations.member = Shapes::ShapeRef.new(shape: HttpPackageConfiguration)
 
+    ListAlertsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAlertsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListAlertsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "resourceArn"))
+    ListAlertsRequest.struct_class = Types::ListAlertsRequest
+
+    ListAlertsResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfAlert, location_name: "Items"))
+    ListAlertsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListAlertsResponse.struct_class = Types::ListAlertsResponse
+
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListChannelsRequest.struct_class = Types::ListChannelsRequest
@@ -520,6 +544,12 @@ module Aws::MediaTailor
 
     ResponseOutputs.member = Shapes::ShapeRef.new(shape: ResponseOutputItem)
 
+    ScheduleAdBreak.add_member(:approximate_duration_seconds, Shapes::ShapeRef.new(shape: __long, location_name: "ApproximateDurationSeconds"))
+    ScheduleAdBreak.add_member(:approximate_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ApproximateStartTime"))
+    ScheduleAdBreak.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
+    ScheduleAdBreak.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
+    ScheduleAdBreak.struct_class = Types::ScheduleAdBreak
+
     ScheduleConfiguration.add_member(:transition, Shapes::ShapeRef.new(shape: Transition, required: true, location_name: "Transition"))
     ScheduleConfiguration.struct_class = Types::ScheduleConfiguration
 
@@ -528,9 +558,15 @@ module Aws::MediaTailor
     ScheduleEntry.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
     ScheduleEntry.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
     ScheduleEntry.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProgramName"))
+    ScheduleEntry.add_member(:schedule_ad_breaks, Shapes::ShapeRef.new(shape: __listOfScheduleAdBreak, location_name: "ScheduleAdBreaks"))
     ScheduleEntry.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
     ScheduleEntry.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
     ScheduleEntry.struct_class = Types::ScheduleEntry
+
+    SecretsManagerAccessTokenConfiguration.add_member(:header_name, Shapes::ShapeRef.new(shape: __string, location_name: "HeaderName"))
+    SecretsManagerAccessTokenConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SecretArn"))
+    SecretsManagerAccessTokenConfiguration.add_member(:secret_string_key, Shapes::ShapeRef.new(shape: __string, location_name: "SecretStringKey"))
+    SecretsManagerAccessTokenConfiguration.struct_class = Types::SecretsManagerAccessTokenConfiguration
 
     SlateSource.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     SlateSource.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
@@ -630,9 +666,13 @@ module Aws::MediaTailor
 
     __listOfAdBreak.member = Shapes::ShapeRef.new(shape: AdBreak)
 
+    __listOfAlert.member = Shapes::ShapeRef.new(shape: Alert)
+
     __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
 
     __listOfPlaybackConfiguration.member = Shapes::ShapeRef.new(shape: PlaybackConfiguration)
+
+    __listOfScheduleAdBreak.member = Shapes::ShapeRef.new(shape: ScheduleAdBreak)
 
     __listOfScheduleEntry.member = Shapes::ShapeRef.new(shape: ScheduleEntry)
 
@@ -804,6 +844,20 @@ module Aws::MediaTailor
         o.http_request_uri = "/playbackConfiguration/{Name}"
         o.input = Shapes::ShapeRef.new(shape: GetPlaybackConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPlaybackConfigurationResponse)
+      end)
+
+      api.add_operation(:list_alerts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAlerts"
+        o.http_method = "GET"
+        o.http_request_uri = "/alerts"
+        o.input = Shapes::ShapeRef.new(shape: ListAlertsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAlertsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|

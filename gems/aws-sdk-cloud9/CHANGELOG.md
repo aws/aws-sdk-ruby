@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-06-24)
+------------------
+
+* Feature - Minor update to AWS Cloud9 documentation to allow correct parsing of outputted text
+
+1.34.0 (2021-06-23)
+------------------
+
+* Feature - Updated documentation for CreateEnvironmentEC2 to explain that because Amazon Linux AMI has ended standard support as of December 31, 2020, we recommend you choose Amazon Linux 2--which includes long term support through 2023--for new AWS Cloud9 environments.
+
 1.33.0 (2021-04-06)
 ------------------
 

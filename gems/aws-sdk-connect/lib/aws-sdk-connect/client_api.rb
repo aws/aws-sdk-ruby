@@ -18,7 +18,9 @@ module Aws::Connect
     AgentFirstName = Shapes::StringShape.new(name: 'AgentFirstName')
     AgentLastName = Shapes::StringShape.new(name: 'AgentLastName')
     AgentUsername = Shapes::StringShape.new(name: 'AgentUsername')
+    AliasArn = Shapes::StringShape.new(name: 'AliasArn')
     AssociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'AssociateApprovedOriginRequest')
+    AssociateBotRequest = Shapes::StructureShape.new(name: 'AssociateBotRequest')
     AssociateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigRequest')
     AssociateInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigResponse')
     AssociateLambdaFunctionRequest = Shapes::StructureShape.new(name: 'AssociateLambdaFunctionRequest')
@@ -122,6 +124,7 @@ module Aws::Connect
     DirectoryType = Shapes::StringShape.new(name: 'DirectoryType')
     DirectoryUserId = Shapes::StringShape.new(name: 'DirectoryUserId')
     DisassociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'DisassociateApprovedOriginRequest')
+    DisassociateBotRequest = Shapes::StructureShape.new(name: 'DisassociateBotRequest')
     DisassociateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'DisassociateInstanceStorageConfigRequest')
     DisassociateLambdaFunctionRequest = Shapes::StructureShape.new(name: 'DisassociateLambdaFunctionRequest')
     DisassociateLexBotRequest = Shapes::StructureShape.new(name: 'DisassociateLexBotRequest')
@@ -201,11 +204,17 @@ module Aws::Connect
     KinesisStreamConfig = Shapes::StructureShape.new(name: 'KinesisStreamConfig')
     KinesisVideoStreamConfig = Shapes::StructureShape.new(name: 'KinesisVideoStreamConfig')
     LexBot = Shapes::StructureShape.new(name: 'LexBot')
+    LexBotConfig = Shapes::StructureShape.new(name: 'LexBotConfig')
+    LexBotConfigList = Shapes::ListShape.new(name: 'LexBotConfigList')
     LexBotsList = Shapes::ListShape.new(name: 'LexBotsList')
     LexRegion = Shapes::StringShape.new(name: 'LexRegion')
+    LexV2Bot = Shapes::StructureShape.new(name: 'LexV2Bot')
+    LexVersion = Shapes::StringShape.new(name: 'LexVersion')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListApprovedOriginsRequest = Shapes::StructureShape.new(name: 'ListApprovedOriginsRequest')
     ListApprovedOriginsResponse = Shapes::StructureShape.new(name: 'ListApprovedOriginsResponse')
+    ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
+    ListBotsResponse = Shapes::StructureShape.new(name: 'ListBotsResponse')
     ListContactFlowsRequest = Shapes::StructureShape.new(name: 'ListContactFlowsRequest')
     ListContactFlowsResponse = Shapes::StructureShape.new(name: 'ListContactFlowsResponse')
     ListHoursOfOperationsRequest = Shapes::StructureShape.new(name: 'ListHoursOfOperationsRequest')
@@ -389,6 +398,7 @@ module Aws::Connect
     UpdateQueueOutboundCallerConfigRequest = Shapes::StructureShape.new(name: 'UpdateQueueOutboundCallerConfigRequest')
     UpdateQueueStatusRequest = Shapes::StructureShape.new(name: 'UpdateQueueStatusRequest')
     UpdateQuickConnectConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectConfigRequest')
+    UpdateQuickConnectDescription = Shapes::StringShape.new(name: 'UpdateQuickConnectDescription')
     UpdateQuickConnectNameRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectNameRequest')
     UpdateRoutingProfileConcurrencyRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileConcurrencyRequest')
     UpdateRoutingProfileDefaultOutboundQueueRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileDefaultOutboundQueueRequest')
@@ -421,6 +431,11 @@ module Aws::Connect
     AssociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateApprovedOriginRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, required: true, location_name: "Origin"))
     AssociateApprovedOriginRequest.struct_class = Types::AssociateApprovedOriginRequest
+
+    AssociateBotRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    AssociateBotRequest.add_member(:lex_bot, Shapes::ShapeRef.new(shape: LexBot, location_name: "LexBot"))
+    AssociateBotRequest.add_member(:lex_v2_bot, Shapes::ShapeRef.new(shape: LexV2Bot, location_name: "LexV2Bot"))
+    AssociateBotRequest.struct_class = Types::AssociateBotRequest
 
     AssociateInstanceStorageConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateInstanceStorageConfigRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: InstanceStorageResourceType, required: true, location_name: "ResourceType"))
@@ -743,6 +758,11 @@ module Aws::Connect
     DisassociateApprovedOriginRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, required: true, location: "querystring", location_name: "origin"))
     DisassociateApprovedOriginRequest.struct_class = Types::DisassociateApprovedOriginRequest
 
+    DisassociateBotRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DisassociateBotRequest.add_member(:lex_bot, Shapes::ShapeRef.new(shape: LexBot, location_name: "LexBot"))
+    DisassociateBotRequest.add_member(:lex_v2_bot, Shapes::ShapeRef.new(shape: LexV2Bot, location_name: "LexV2Bot"))
+    DisassociateBotRequest.struct_class = Types::DisassociateBotRequest
+
     DisassociateInstanceStorageConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateInstanceStorageConfigRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location: "uri", location_name: "AssociationId"))
     DisassociateInstanceStorageConfigRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: InstanceStorageResourceType, required: true, location: "querystring", location_name: "resourceType"))
@@ -993,7 +1013,16 @@ module Aws::Connect
     LexBot.add_member(:lex_region, Shapes::ShapeRef.new(shape: LexRegion, location_name: "LexRegion"))
     LexBot.struct_class = Types::LexBot
 
+    LexBotConfig.add_member(:lex_bot, Shapes::ShapeRef.new(shape: LexBot, location_name: "LexBot"))
+    LexBotConfig.add_member(:lex_v2_bot, Shapes::ShapeRef.new(shape: LexV2Bot, location_name: "LexV2Bot"))
+    LexBotConfig.struct_class = Types::LexBotConfig
+
+    LexBotConfigList.member = Shapes::ShapeRef.new(shape: LexBotConfig)
+
     LexBotsList.member = Shapes::ShapeRef.new(shape: LexBot)
+
+    LexV2Bot.add_member(:alias_arn, Shapes::ShapeRef.new(shape: AliasArn, location_name: "AliasArn"))
+    LexV2Bot.struct_class = Types::LexV2Bot
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -1006,6 +1035,16 @@ module Aws::Connect
     ListApprovedOriginsResponse.add_member(:origins, Shapes::ShapeRef.new(shape: OriginsList, location_name: "Origins"))
     ListApprovedOriginsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListApprovedOriginsResponse.struct_class = Types::ListApprovedOriginsResponse
+
+    ListBotsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListBotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListBotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult25, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListBotsRequest.add_member(:lex_version, Shapes::ShapeRef.new(shape: LexVersion, required: true, location: "querystring", location_name: "lexVersion"))
+    ListBotsRequest.struct_class = Types::ListBotsRequest
+
+    ListBotsResponse.add_member(:lex_bots, Shapes::ShapeRef.new(shape: LexBotConfigList, location_name: "LexBots"))
+    ListBotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListBotsResponse.struct_class = Types::ListBotsResponse
 
     ListContactFlowsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListContactFlowsRequest.add_member(:contact_flow_types, Shapes::ShapeRef.new(shape: ContactFlowTypes, location: "querystring", location_name: "contactFlowTypes"))
@@ -1540,7 +1579,7 @@ module Aws::Connect
     UpdateQuickConnectNameRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateQuickConnectNameRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
     UpdateQuickConnectNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, location_name: "Name"))
-    UpdateQuickConnectNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: QuickConnectDescription, location_name: "Description"))
+    UpdateQuickConnectNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateQuickConnectDescription, location_name: "Description"))
     UpdateQuickConnectNameRequest.struct_class = Types::UpdateQuickConnectNameRequest
 
     UpdateRoutingProfileConcurrencyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -1675,6 +1714,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:associate_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateBot"
+        o.http_method = "PUT"
+        o.http_request_uri = "/instance/{InstanceId}/bot"
+        o.input = Shapes::ShapeRef.new(shape: AssociateBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -2125,6 +2179,18 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:disassociate_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateBot"
+        o.http_method = "POST"
+        o.http_request_uri = "/instance/{InstanceId}/bot"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:disassociate_instance_storage_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateInstanceStorageConfig"
         o.http_method = "DELETE"
@@ -2276,6 +2342,24 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_bots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBots"
+        o.http_method = "GET"
+        o.http_request_uri = "/instance/{InstanceId}/bots"
+        o.input = Shapes::ShapeRef.new(shape: ListBotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBotsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

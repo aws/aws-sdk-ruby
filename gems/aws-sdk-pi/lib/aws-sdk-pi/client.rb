@@ -455,26 +455,26 @@ module Aws::PI
     #
     #   resp = client.describe_dimension_keys({
     #     service_type: "RDS", # required, accepts RDS
-    #     identifier: "String", # required
+    #     identifier: "RequestString", # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
-    #     metric: "String", # required
+    #     metric: "RequestString", # required
     #     period_in_seconds: 1,
     #     group_by: { # required
-    #       group: "String", # required
-    #       dimensions: ["String"],
+    #       group: "RequestString", # required
+    #       dimensions: ["RequestString"],
     #       limit: 1,
     #     },
     #     partition_by: {
-    #       group: "String", # required
-    #       dimensions: ["String"],
+    #       group: "RequestString", # required
+    #       dimensions: ["RequestString"],
     #       limit: 1,
     #     },
     #     filter: {
-    #       "String" => "String",
+    #       "RequestString" => "RequestString",
     #     },
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -483,10 +483,10 @@ module Aws::PI
     #   resp.aligned_end_time #=> Time
     #   resp.partition_keys #=> Array
     #   resp.partition_keys[0].dimensions #=> Hash
-    #   resp.partition_keys[0].dimensions["String"] #=> String
+    #   resp.partition_keys[0].dimensions["RequestString"] #=> String
     #   resp.keys #=> Array
     #   resp.keys[0].dimensions #=> Hash
-    #   resp.keys[0].dimensions["String"] #=> String
+    #   resp.keys[0].dimensions["RequestString"] #=> String
     #   resp.keys[0].total #=> Float
     #   resp.keys[0].partitions #=> Array
     #   resp.keys[0].partitions[0] #=> Float
@@ -498,6 +498,70 @@ module Aws::PI
     # @param [Hash] params ({})
     def describe_dimension_keys(params = {}, options = {})
       req = build_request(:describe_dimension_keys, params)
+      req.send_request(options)
+    end
+
+    # Get the attributes of the specified dimension group for a DB instance
+    # or data source. For example, if you specify a SQL ID,
+    # `GetDimensionKeyDetails` retrieves the full text of the dimension
+    # `db.sql.statement` associated with this ID. This operation is useful
+    # because `GetResourceMetrics` and `DescribeDimensionKeys` don't
+    # support retrieval of large SQL statement text.
+    #
+    # @option params [required, String] :service_type
+    #   The AWS service for which Performance Insights returns data. The only
+    #   valid value is `RDS`.
+    #
+    # @option params [required, String] :identifier
+    #   The ID for a data source from which to gather dimension data. This ID
+    #   must be immutable and unique within an AWS Region. When a DB instance
+    #   is the data source, specify its `DbiResourceId` value. For example,
+    #   specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #
+    # @option params [required, String] :group
+    #   The name of the dimension group. The only valid value is `db.sql`.
+    #   Performance Insights searches the specified group for the dimension
+    #   group ID.
+    #
+    # @option params [required, String] :group_identifier
+    #   The ID of the dimension group from which to retrieve dimension
+    #   details. For dimension group `db.sql`, the group ID is `db.sql.id`.
+    #
+    # @option params [Array<String>] :requested_dimensions
+    #   A list of dimensions to retrieve the detail data for within the given
+    #   dimension group. For the dimension group `db.sql`, specify either the
+    #   full dimension name `db.sql.statement` or the short dimension name
+    #   `statement`. If you don't specify this parameter, Performance
+    #   Insights returns all dimension data within the specified dimension
+    #   group.
+    #
+    # @return [Types::GetDimensionKeyDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDimensionKeyDetailsResponse#dimensions #dimensions} => Array&lt;Types::DimensionKeyDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dimension_key_details({
+    #     service_type: "RDS", # required, accepts RDS
+    #     identifier: "IdentifierString", # required
+    #     group: "RequestString", # required
+    #     group_identifier: "RequestString", # required
+    #     requested_dimensions: ["RequestString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dimensions #=> Array
+    #   resp.dimensions[0].value #=> String
+    #   resp.dimensions[0].dimension #=> String
+    #   resp.dimensions[0].status #=> String, one of "AVAILABLE", "PROCESSING", "UNAVAILABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetDimensionKeyDetails AWS API Documentation
+    #
+    # @overload get_dimension_key_details(params = {})
+    # @param [Hash] params ({})
+    def get_dimension_key_details(params = {}, options = {})
+      req = build_request(:get_dimension_key_details, params)
       req.send_request(options)
     end
 
@@ -586,17 +650,17 @@ module Aws::PI
     #
     #   resp = client.get_resource_metrics({
     #     service_type: "RDS", # required, accepts RDS
-    #     identifier: "String", # required
+    #     identifier: "RequestString", # required
     #     metric_queries: [ # required
     #       {
-    #         metric: "String", # required
+    #         metric: "RequestString", # required
     #         group_by: {
-    #           group: "String", # required
-    #           dimensions: ["String"],
+    #           group: "RequestString", # required
+    #           dimensions: ["RequestString"],
     #           limit: 1,
     #         },
     #         filter: {
-    #           "String" => "String",
+    #           "RequestString" => "RequestString",
     #         },
     #       },
     #     ],
@@ -604,7 +668,7 @@ module Aws::PI
     #     end_time: Time.now, # required
     #     period_in_seconds: 1,
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -615,7 +679,7 @@ module Aws::PI
     #   resp.metric_list #=> Array
     #   resp.metric_list[0].key.metric #=> String
     #   resp.metric_list[0].key.dimensions #=> Hash
-    #   resp.metric_list[0].key.dimensions["String"] #=> String
+    #   resp.metric_list[0].key.dimensions["RequestString"] #=> String
     #   resp.metric_list[0].data_points #=> Array
     #   resp.metric_list[0].data_points[0].timestamp #=> Time
     #   resp.metric_list[0].data_points[0].value #=> Float
@@ -643,7 +707,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

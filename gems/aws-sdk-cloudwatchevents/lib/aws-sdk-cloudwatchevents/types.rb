@@ -320,6 +320,50 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # The details of a capacity provider strategy. To learn more, see
+    # [CapacityProviderStrategyItem][1] in the Amazon ECS API Reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html
+    #
+    # @note When making an API call, you may pass CapacityProviderStrategyItem
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_provider: "CapacityProvider", # required
+    #         weight: 1,
+    #         base: 1,
+    #       }
+    #
+    # @!attribute [rw] capacity_provider
+    #   The short name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The weight value designates the relative percentage of the total
+    #   number of tasks launched that should use the specified capacity
+    #   provider. The weight value is taken into consideration after the
+    #   base value, if defined, is satisfied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] base
+    #   The base value designates how many tasks, at a minimum, to run on
+    #   the specified capacity provider. Only one capacity provider in a
+    #   capacity provider strategy can have a base defined. If no value is
+    #   specified, the default value of 0 is used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CapacityProviderStrategyItem AWS API Documentation
+    #
+    class CapacityProviderStrategyItem < Struct.new(
+      :capacity_provider,
+      :weight,
+      :base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There is concurrent modification on a rule, target, archive, or
     # replay.
     #
@@ -2212,6 +2256,35 @@ module Aws::CloudWatchEvents
     #         },
     #         platform_version: "String",
     #         group: "String",
+    #         capacity_provider_strategy: [
+    #           {
+    #             capacity_provider: "CapacityProvider", # required
+    #             weight: 1,
+    #             base: 1,
+    #           },
+    #         ],
+    #         enable_ecs_managed_tags: false,
+    #         enable_execute_command: false,
+    #         placement_constraints: [
+    #           {
+    #             type: "distinctInstance", # accepts distinctInstance, memberOf
+    #             expression: "PlacementConstraintExpression",
+    #           },
+    #         ],
+    #         placement_strategy: [
+    #           {
+    #             type: "random", # accepts random, spread, binpack
+    #             field: "PlacementStrategyField",
+    #           },
+    #         ],
+    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
+    #         reference_id: "ReferenceId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] task_definition_arn
@@ -2267,6 +2340,64 @@ module Aws::CloudWatchEvents
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy to use for the task.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   launchType is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
+    # @!attribute [rw] enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task.
+    #   For more information, see [Tagging Your Amazon ECS Resources][1] in
+    #   the Amazon Elastic Container Service Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_execute_command
+    #   Whether or not to enable the execute command functionality for the
+    #   containers in this task. If true, this enables execute command
+    #   functionality on all containers in the task.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] placement_constraints
+    #   An array of placement constraint objects to use for the task. You
+    #   can specify up to 10 constraints per task (including constraints in
+    #   the task definition and those specified at runtime).
+    #   @return [Array<Types::PlacementConstraint>]
+    #
+    # @!attribute [rw] placement_strategy
+    #   The placement strategy objects to use for the task. You can specify
+    #   a maximum of five strategy rules per task.
+    #   @return [Array<Types::PlacementStrategy>]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags are not propagated.
+    #   Tags can only be propagated to the task during task creation. To add
+    #   tags to a task after task creation, use the TagResource API action.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_id
+    #   The reference ID to use for the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the task to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. To learn more, see [RunTask][1] in the
+    #   Amazon ECS API Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EcsParameters AWS API Documentation
     #
     class EcsParameters < Struct.new(
@@ -2275,7 +2406,15 @@ module Aws::CloudWatchEvents
       :launch_type,
       :network_configuration,
       :platform_version,
-      :group)
+      :group,
+      :capacity_provider_strategy,
+      :enable_ecs_managed_tags,
+      :enable_execute_command,
+      :placement_constraints,
+      :placement_strategy,
+      :propagate_tags,
+      :reference_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2308,11 +2447,10 @@ module Aws::CloudWatchEvents
 
     # An event bus receives events from a source and routes them to rules
     # associated with that event bus. Your account's default event bus
-    # receives rules from AWS services. A custom event bus can receive rules
-    # from AWS services as well as your custom applications and services. A
-    # partner event bus receives events from an event source created by an
-    # SaaS partner. These events come from the partners services or
-    # applications.
+    # receives events from AWS services. A custom event bus can receive
+    # events from your custom applications and services. A partner event bus
+    # receives events from an event source created by an SaaS partner. These
+    # events come from the partners services or applications.
     #
     # @!attribute [rw] name
     #   The name of the event bus.
@@ -3344,6 +3482,95 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # An object representing a constraint on task placement. To learn more,
+    # see [Task Placement Constraints][1] in the Amazon Elastic Container
+    # Service Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
+    #
+    # @note When making an API call, you may pass PlacementConstraint
+    #   data as a hash:
+    #
+    #       {
+    #         type: "distinctInstance", # accepts distinctInstance, memberOf
+    #         expression: "PlacementConstraintExpression",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of constraint. Use distinctInstance to ensure that each
+    #   task in a particular group is running on a different container
+    #   instance. Use memberOf to restrict the selection to a group of valid
+    #   candidates.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   A cluster query language expression to apply to the constraint. You
+    #   cannot specify an expression if the constraint type is
+    #   `distinctInstance`. To learn more, see [Cluster Query Language][1]
+    #   in the Amazon Elastic Container Service Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PlacementConstraint AWS API Documentation
+    #
+    class PlacementConstraint < Struct.new(
+      :type,
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The task placement strategy for a task or service. To learn more, see
+    # [Task Placement Strategies][1] in the Amazon Elastic Container Service
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
+    #
+    # @note When making an API call, you may pass PlacementStrategy
+    #   data as a hash:
+    #
+    #       {
+    #         type: "random", # accepts random, spread, binpack
+    #         field: "PlacementStrategyField",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of placement strategy. The random placement strategy
+    #   randomly places tasks on available candidates. The spread placement
+    #   strategy spreads placement across available candidates evenly based
+    #   on the field parameter. The binpack strategy places tasks on
+    #   available candidates that have the least available amount of the
+    #   resource that is specified with the field parameter. For example, if
+    #   you binpack on memory, a task is placed on the instance with the
+    #   least amount of remaining memory (but still enough to run the task).
+    #   @return [String]
+    #
+    # @!attribute [rw] field
+    #   The field to apply the placement strategy against. For the spread
+    #   placement strategy, valid values are instanceId (or host, which has
+    #   the same effect), or any platform or custom attribute that is
+    #   applied to a container instance, such as
+    #   attribute:ecs.availability-zone. For the binpack placement strategy,
+    #   valid values are cpu and memory. For the random placement strategy,
+    #   this field is not used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PlacementStrategy AWS API Documentation
+    #
+    class PlacementStrategy < Struct.new(
+      :type,
+      :field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The event bus policy is too long. For more information, see the
     # limits.
     #
@@ -3834,6 +4061,35 @@ module Aws::CloudWatchEvents
     #               },
     #               platform_version: "String",
     #               group: "String",
+    #               capacity_provider_strategy: [
+    #                 {
+    #                   capacity_provider: "CapacityProvider", # required
+    #                   weight: 1,
+    #                   base: 1,
+    #                 },
+    #               ],
+    #               enable_ecs_managed_tags: false,
+    #               enable_execute_command: false,
+    #               placement_constraints: [
+    #                 {
+    #                   type: "distinctInstance", # accepts distinctInstance, memberOf
+    #                   expression: "PlacementConstraintExpression",
+    #                 },
+    #               ],
+    #               placement_strategy: [
+    #                 {
+    #                   type: "random", # accepts random, spread, binpack
+    #                   field: "PlacementStrategyField",
+    #                 },
+    #               ],
+    #               propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
+    #               reference_id: "ReferenceId",
+    #               tags: [
+    #                 {
+    #                   key: "TagKey", # required
+    #                   value: "TagValue", # required
+    #                 },
+    #               ],
     #             },
     #             batch_parameters: {
     #               job_definition: "String", # required
@@ -4662,6 +4918,35 @@ module Aws::CloudWatchEvents
     #           },
     #           platform_version: "String",
     #           group: "String",
+    #           capacity_provider_strategy: [
+    #             {
+    #               capacity_provider: "CapacityProvider", # required
+    #               weight: 1,
+    #               base: 1,
+    #             },
+    #           ],
+    #           enable_ecs_managed_tags: false,
+    #           enable_execute_command: false,
+    #           placement_constraints: [
+    #             {
+    #               type: "distinctInstance", # accepts distinctInstance, memberOf
+    #               expression: "PlacementConstraintExpression",
+    #             },
+    #           ],
+    #           placement_strategy: [
+    #             {
+    #               type: "random", # accepts random, spread, binpack
+    #               field: "PlacementStrategyField",
+    #             },
+    #           ],
+    #           propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
+    #           reference_id: "ReferenceId",
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
     #         },
     #         batch_parameters: {
     #           job_definition: "String", # required

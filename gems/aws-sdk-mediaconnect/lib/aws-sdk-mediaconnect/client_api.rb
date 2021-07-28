@@ -49,6 +49,7 @@ module Aws::MediaConnect
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
     EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
     FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
+    FailoverMode = Shapes::StringShape.new(name: 'FailoverMode')
     Flow = Shapes::StructureShape.new(name: 'Flow')
     Fmtp = Shapes::StructureShape.new(name: 'Fmtp')
     FmtpRequest = Shapes::StructureShape.new(name: 'FmtpRequest')
@@ -113,6 +114,7 @@ module Aws::MediaConnect
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetSourceRequest = Shapes::StructureShape.new(name: 'SetSourceRequest')
     Source = Shapes::StructureShape.new(name: 'Source')
+    SourcePriority = Shapes::StructureShape.new(name: 'SourcePriority')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartFlowRequest = Shapes::StructureShape.new(name: 'StartFlowRequest')
     StartFlowResponse = Shapes::StructureShape.new(name: 'StartFlowResponse')
@@ -318,7 +320,9 @@ module Aws::MediaConnect
     Entitlement.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subscribers"))
     Entitlement.struct_class = Types::Entitlement
 
+    FailoverConfig.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     FailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: __integer, location_name: "recoveryWindow"))
+    FailoverConfig.add_member(:source_priority, Shapes::ShapeRef.new(shape: SourcePriority, location_name: "sourcePriority"))
     FailoverConfig.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     FailoverConfig.struct_class = Types::FailoverConfig
 
@@ -621,6 +625,9 @@ module Aws::MediaConnect
     Source.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))
     Source.struct_class = Types::Source
 
+    SourcePriority.add_member(:primary_source, Shapes::ShapeRef.new(shape: __string, location_name: "primarySource"))
+    SourcePriority.struct_class = Types::SourcePriority
+
     StartFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     StartFlowRequest.struct_class = Types::StartFlowRequest
 
@@ -668,7 +675,9 @@ module Aws::MediaConnect
     UpdateEncryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     UpdateEncryption.struct_class = Types::UpdateEncryption
 
+    UpdateFailoverConfig.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     UpdateFailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: __integer, location_name: "recoveryWindow"))
+    UpdateFailoverConfig.add_member(:source_priority, Shapes::ShapeRef.new(shape: SourcePriority, location_name: "sourcePriority"))
     UpdateFailoverConfig.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     UpdateFailoverConfig.struct_class = Types::UpdateFailoverConfig
 

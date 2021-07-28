@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-05-25)
+------------------
+
+* Feature - This release includes support for a new feature: Job templates for AWS IoT Device Management Jobs. The release includes job templates as a new resource and APIs for managing job templates.
+
 1.68.0 (2021-03-31)
 ------------------
 

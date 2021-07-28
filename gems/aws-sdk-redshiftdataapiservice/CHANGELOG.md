@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-07-27)
+------------------
+
+* Feature - Added structures to support new Data API operation BatchExecuteStatement, used to execute multiple SQL statements within a single transaction.
+
+1.7.0 (2021-06-15)
+------------------
+
+* Feature - Redshift Data API service now supports SQL parameterization.
+
 1.6.0 (2021-03-10)
 ------------------
 

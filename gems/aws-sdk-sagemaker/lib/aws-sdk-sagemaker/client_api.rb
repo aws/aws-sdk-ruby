@@ -130,6 +130,8 @@ module Aws::SageMaker
     BooleanOperator = Shapes::StringShape.new(name: 'BooleanOperator')
     Branch = Shapes::StringShape.new(name: 'Branch')
     CacheHitResult = Shapes::StructureShape.new(name: 'CacheHitResult')
+    CallbackStepMetadata = Shapes::StructureShape.new(name: 'CallbackStepMetadata')
+    CallbackToken = Shapes::StringShape.new(name: 'CallbackToken')
     CandidateArtifactLocations = Shapes::StructureShape.new(name: 'CandidateArtifactLocations')
     CandidateDefinitionNotebookLocation = Shapes::StringShape.new(name: 'CandidateDefinitionNotebookLocation')
     CandidateName = Shapes::StringShape.new(name: 'CandidateName')
@@ -521,9 +523,14 @@ module Aws::SageMaker
     EdgePackagingJobStatus = Shapes::StringShape.new(name: 'EdgePackagingJobStatus')
     EdgePackagingJobSummaries = Shapes::ListShape.new(name: 'EdgePackagingJobSummaries')
     EdgePackagingJobSummary = Shapes::StructureShape.new(name: 'EdgePackagingJobSummary')
+    EdgePresetDeploymentArtifact = Shapes::StringShape.new(name: 'EdgePresetDeploymentArtifact')
+    EdgePresetDeploymentOutput = Shapes::StructureShape.new(name: 'EdgePresetDeploymentOutput')
+    EdgePresetDeploymentStatus = Shapes::StringShape.new(name: 'EdgePresetDeploymentStatus')
+    EdgePresetDeploymentType = Shapes::StringShape.new(name: 'EdgePresetDeploymentType')
     EdgeVersion = Shapes::StringShape.new(name: 'EdgeVersion')
     EfsUid = Shapes::StringShape.new(name: 'EfsUid')
     EnableCapture = Shapes::BooleanShape.new(name: 'EnableCapture')
+    EnableIotRoleAlias = Shapes::BooleanShape.new(name: 'EnableIotRoleAlias')
     EnableSagemakerServicecatalogPortfolioInput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioInput')
     EnableSagemakerServicecatalogPortfolioOutput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioOutput')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
@@ -680,6 +687,7 @@ module Aws::SageMaker
     Images = Shapes::ListShape.new(name: 'Images')
     InferenceExecutionConfig = Shapes::StructureShape.new(name: 'InferenceExecutionConfig')
     InferenceExecutionMode = Shapes::StringShape.new(name: 'InferenceExecutionMode')
+    InferenceImage = Shapes::StringShape.new(name: 'InferenceImage')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
     InputConfig = Shapes::StructureShape.new(name: 'InputConfig')
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
@@ -966,6 +974,11 @@ module Aws::SageMaker
     MountPath = Shapes::StringShape.new(name: 'MountPath')
     MultiModelConfig = Shapes::StructureShape.new(name: 'MultiModelConfig')
     NameContains = Shapes::StringShape.new(name: 'NameContains')
+    NeoVpcConfig = Shapes::StructureShape.new(name: 'NeoVpcConfig')
+    NeoVpcSecurityGroupId = Shapes::StringShape.new(name: 'NeoVpcSecurityGroupId')
+    NeoVpcSecurityGroupIds = Shapes::ListShape.new(name: 'NeoVpcSecurityGroupIds')
+    NeoVpcSubnetId = Shapes::StringShape.new(name: 'NeoVpcSubnetId')
+    NeoVpcSubnets = Shapes::ListShape.new(name: 'NeoVpcSubnets')
     NestedFilters = Shapes::StructureShape.new(name: 'NestedFilters')
     NestedFiltersList = Shapes::ListShape.new(name: 'NestedFiltersList')
     NetworkConfig = Shapes::StructureShape.new(name: 'NetworkConfig')
@@ -1016,6 +1029,8 @@ module Aws::SageMaker
     OrderKey = Shapes::StringShape.new(name: 'OrderKey')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    OutputParameter = Shapes::StructureShape.new(name: 'OutputParameter')
+    OutputParameterList = Shapes::ListShape.new(name: 'OutputParameterList')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
@@ -1037,6 +1052,7 @@ module Aws::SageMaker
     PipelineExecution = Shapes::StructureShape.new(name: 'PipelineExecution')
     PipelineExecutionArn = Shapes::StringShape.new(name: 'PipelineExecutionArn')
     PipelineExecutionDescription = Shapes::StringShape.new(name: 'PipelineExecutionDescription')
+    PipelineExecutionFailureReason = Shapes::StringShape.new(name: 'PipelineExecutionFailureReason')
     PipelineExecutionName = Shapes::StringShape.new(name: 'PipelineExecutionName')
     PipelineExecutionStatus = Shapes::StringShape.new(name: 'PipelineExecutionStatus')
     PipelineExecutionStep = Shapes::StructureShape.new(name: 'PipelineExecutionStep')
@@ -1044,6 +1060,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata = Shapes::StructureShape.new(name: 'PipelineExecutionStepMetadata')
     PipelineExecutionSummary = Shapes::StructureShape.new(name: 'PipelineExecutionSummary')
     PipelineExecutionSummaryList = Shapes::ListShape.new(name: 'PipelineExecutionSummaryList')
+    PipelineExperimentConfig = Shapes::StructureShape.new(name: 'PipelineExperimentConfig')
     PipelineName = Shapes::StringShape.new(name: 'PipelineName')
     PipelineParameterName = Shapes::StringShape.new(name: 'PipelineParameterName')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
@@ -1186,6 +1203,10 @@ module Aws::SageMaker
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     Seed = Shapes::IntegerShape.new(name: 'Seed')
+    SendPipelineExecutionStepFailureRequest = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepFailureRequest')
+    SendPipelineExecutionStepFailureResponse = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepFailureResponse')
+    SendPipelineExecutionStepSuccessRequest = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepSuccessRequest')
+    SendPipelineExecutionStepSuccessResponse = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepSuccessResponse')
     ServiceCatalogEntityId = Shapes::StringShape.new(name: 'ServiceCatalogEntityId')
     ServiceCatalogProvisionedProductDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisionedProductDetails')
     ServiceCatalogProvisioningDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisioningDetails')
@@ -1346,6 +1367,7 @@ module Aws::SageMaker
     TrialSummaries = Shapes::ListShape.new(name: 'TrialSummaries')
     TrialSummary = Shapes::StructureShape.new(name: 'TrialSummary')
     TuningJobCompletionCriteria = Shapes::StructureShape.new(name: 'TuningJobCompletionCriteria')
+    TuningJobStepMetaData = Shapes::StructureShape.new(name: 'TuningJobStepMetaData')
     USD = Shapes::StructureShape.new(name: 'USD')
     UiConfig = Shapes::StructureShape.new(name: 'UiConfig')
     UiTemplate = Shapes::StructureShape.new(name: 'UiTemplate')
@@ -1686,6 +1708,11 @@ module Aws::SageMaker
     CacheHitResult.add_member(:source_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "SourcePipelineExecutionArn"))
     CacheHitResult.struct_class = Types::CacheHitResult
 
+    CallbackStepMetadata.add_member(:callback_token, Shapes::ShapeRef.new(shape: CallbackToken, location_name: "CallbackToken"))
+    CallbackStepMetadata.add_member(:sqs_queue_url, Shapes::ShapeRef.new(shape: String256, location_name: "SqsQueueUrl"))
+    CallbackStepMetadata.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
+    CallbackStepMetadata.struct_class = Types::CallbackStepMetadata
+
     CandidateArtifactLocations.add_member(:explainability, Shapes::ShapeRef.new(shape: ExplainabilityLocation, required: true, location_name: "Explainability"))
     CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
 
@@ -1920,6 +1947,7 @@ module Aws::SageMaker
     CreateCompilationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateCompilationJobRequest.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfig, required: true, location_name: "InputConfig"))
     CreateCompilationJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
+    CreateCompilationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: NeoVpcConfig, location_name: "VpcConfig"))
     CreateCompilationJobRequest.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     CreateCompilationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCompilationJobRequest.struct_class = Types::CreateCompilationJobRequest
@@ -1958,6 +1986,7 @@ module Aws::SageMaker
     CreateDeviceFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: DeviceFleetDescription, location_name: "Description"))
     CreateDeviceFleetRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: EdgeOutputConfig, required: true, location_name: "OutputConfig"))
     CreateDeviceFleetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDeviceFleetRequest.add_member(:enable_iot_role_alias, Shapes::ShapeRef.new(shape: EnableIotRoleAlias, location_name: "EnableIotRoleAlias"))
     CreateDeviceFleetRequest.struct_class = Types::CreateDeviceFleetRequest
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -2749,6 +2778,7 @@ module Aws::SageMaker
     DescribeCompilationJobResponse.add_member(:compilation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationStartTime"))
     DescribeCompilationJobResponse.add_member(:compilation_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationEndTime"))
     DescribeCompilationJobResponse.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
+    DescribeCompilationJobResponse.add_member(:inference_image, Shapes::ShapeRef.new(shape: InferenceImage, location_name: "InferenceImage"))
     DescribeCompilationJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
     DescribeCompilationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, required: true, location_name: "LastModifiedTime"))
     DescribeCompilationJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, required: true, location_name: "FailureReason"))
@@ -2757,6 +2787,7 @@ module Aws::SageMaker
     DescribeCompilationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     DescribeCompilationJobResponse.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfig, required: true, location_name: "InputConfig"))
     DescribeCompilationJobResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
+    DescribeCompilationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: NeoVpcConfig, location_name: "VpcConfig"))
     DescribeCompilationJobResponse.struct_class = Types::DescribeCompilationJobResponse
 
     DescribeContextRequest.add_member(:context_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ContextName"))
@@ -2859,6 +2890,7 @@ module Aws::SageMaker
     DescribeEdgePackagingJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeEdgePackagingJobResponse.add_member(:model_artifact, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ModelArtifact"))
     DescribeEdgePackagingJobResponse.add_member(:model_signature, Shapes::ShapeRef.new(shape: String, location_name: "ModelSignature"))
+    DescribeEdgePackagingJobResponse.add_member(:preset_deployment_output, Shapes::ShapeRef.new(shape: EdgePresetDeploymentOutput, location_name: "PresetDeploymentOutput"))
     DescribeEdgePackagingJobResponse.struct_class = Types::DescribeEdgePackagingJobResponse
 
     DescribeEndpointConfigInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
@@ -3181,6 +3213,8 @@ module Aws::SageMaker
     DescribePipelineExecutionResponse.add_member(:pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "PipelineExecutionDisplayName"))
     DescribePipelineExecutionResponse.add_member(:pipeline_execution_status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "PipelineExecutionStatus"))
     DescribePipelineExecutionResponse.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
+    DescribePipelineExecutionResponse.add_member(:pipeline_experiment_config, Shapes::ShapeRef.new(shape: PipelineExperimentConfig, location_name: "PipelineExperimentConfig"))
+    DescribePipelineExecutionResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: PipelineExecutionFailureReason, location_name: "FailureReason"))
     DescribePipelineExecutionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribePipelineExecutionResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribePipelineExecutionResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
@@ -3474,6 +3508,8 @@ module Aws::SageMaker
 
     EdgeOutputConfig.add_member(:s3_output_location, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputLocation"))
     EdgeOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    EdgeOutputConfig.add_member(:preset_deployment_type, Shapes::ShapeRef.new(shape: EdgePresetDeploymentType, location_name: "PresetDeploymentType"))
+    EdgeOutputConfig.add_member(:preset_deployment_config, Shapes::ShapeRef.new(shape: String, location_name: "PresetDeploymentConfig"))
     EdgeOutputConfig.struct_class = Types::EdgeOutputConfig
 
     EdgePackagingJobSummaries.member = Shapes::ShapeRef.new(shape: EdgePackagingJobSummary)
@@ -3487,6 +3523,12 @@ module Aws::SageMaker
     EdgePackagingJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     EdgePackagingJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     EdgePackagingJobSummary.struct_class = Types::EdgePackagingJobSummary
+
+    EdgePresetDeploymentOutput.add_member(:type, Shapes::ShapeRef.new(shape: EdgePresetDeploymentType, required: true, location_name: "Type"))
+    EdgePresetDeploymentOutput.add_member(:artifact, Shapes::ShapeRef.new(shape: EdgePresetDeploymentArtifact, location_name: "Artifact"))
+    EdgePresetDeploymentOutput.add_member(:status, Shapes::ShapeRef.new(shape: EdgePresetDeploymentStatus, location_name: "Status"))
+    EdgePresetDeploymentOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    EdgePresetDeploymentOutput.struct_class = Types::EdgePresetDeploymentOutput
 
     EnableSagemakerServicecatalogPortfolioInput.struct_class = Types::EnableSagemakerServicecatalogPortfolioInput
 
@@ -4824,6 +4866,7 @@ module Aws::SageMaker
     ModelPackageContainerDefinition.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "ImageDigest"))
     ModelPackageContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     ModelPackageContainerDefinition.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, location_name: "ProductId"))
+    ModelPackageContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ModelPackageContainerDefinition.struct_class = Types::ModelPackageContainerDefinition
 
     ModelPackageContainerDefinitionList.member = Shapes::ShapeRef.new(shape: ModelPackageContainerDefinition)
@@ -5041,6 +5084,14 @@ module Aws::SageMaker
     MultiModelConfig.add_member(:model_cache_setting, Shapes::ShapeRef.new(shape: ModelCacheSetting, location_name: "ModelCacheSetting"))
     MultiModelConfig.struct_class = Types::MultiModelConfig
 
+    NeoVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: NeoVpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    NeoVpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: NeoVpcSubnets, required: true, location_name: "Subnets"))
+    NeoVpcConfig.struct_class = Types::NeoVpcConfig
+
+    NeoVpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: NeoVpcSecurityGroupId)
+
+    NeoVpcSubnets.member = Shapes::ShapeRef.new(shape: NeoVpcSubnetId)
+
     NestedFilters.add_member(:nested_property_name, Shapes::ShapeRef.new(shape: ResourcePropertyName, required: true, location_name: "NestedPropertyName"))
     NestedFilters.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "Filters"))
     NestedFilters.struct_class = Types::NestedFilters
@@ -5138,6 +5189,12 @@ module Aws::SageMaker
     OutputDataConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputPath"))
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
+    OutputParameter.add_member(:name, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "Name"))
+    OutputParameter.add_member(:value, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "Value"))
+    OutputParameter.struct_class = Types::OutputParameter
+
+    OutputParameterList.member = Shapes::ShapeRef.new(shape: OutputParameter)
+
     Parameter.add_member(:name, Shapes::ShapeRef.new(shape: PipelineParameterName, required: true, location_name: "Name"))
     Parameter.add_member(:value, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "Value"))
     Parameter.struct_class = Types::Parameter
@@ -5186,6 +5243,8 @@ module Aws::SageMaker
     PipelineExecution.add_member(:pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "PipelineExecutionDisplayName"))
     PipelineExecution.add_member(:pipeline_execution_status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "PipelineExecutionStatus"))
     PipelineExecution.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
+    PipelineExecution.add_member(:pipeline_experiment_config, Shapes::ShapeRef.new(shape: PipelineExperimentConfig, location_name: "PipelineExperimentConfig"))
+    PipelineExecution.add_member(:failure_reason, Shapes::ShapeRef.new(shape: PipelineExecutionFailureReason, location_name: "FailureReason"))
     PipelineExecution.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     PipelineExecution.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     PipelineExecution.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
@@ -5207,9 +5266,11 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:training_job, Shapes::ShapeRef.new(shape: TrainingJobStepMetadata, location_name: "TrainingJob"))
     PipelineExecutionStepMetadata.add_member(:processing_job, Shapes::ShapeRef.new(shape: ProcessingJobStepMetadata, location_name: "ProcessingJob"))
     PipelineExecutionStepMetadata.add_member(:transform_job, Shapes::ShapeRef.new(shape: TransformJobStepMetadata, location_name: "TransformJob"))
+    PipelineExecutionStepMetadata.add_member(:tuning_job, Shapes::ShapeRef.new(shape: TuningJobStepMetaData, location_name: "TuningJob"))
     PipelineExecutionStepMetadata.add_member(:model, Shapes::ShapeRef.new(shape: ModelStepMetadata, location_name: "Model"))
     PipelineExecutionStepMetadata.add_member(:register_model, Shapes::ShapeRef.new(shape: RegisterModelStepMetadata, location_name: "RegisterModel"))
     PipelineExecutionStepMetadata.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionStepMetadata, location_name: "Condition"))
+    PipelineExecutionStepMetadata.add_member(:callback, Shapes::ShapeRef.new(shape: CallbackStepMetadata, location_name: "Callback"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -5220,6 +5281,10 @@ module Aws::SageMaker
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
+
+    PipelineExperimentConfig.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
+    PipelineExperimentConfig.add_member(:trial_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialName"))
+    PipelineExperimentConfig.struct_class = Types::PipelineExperimentConfig
 
     PipelineSummary.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
     PipelineSummary.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "PipelineName"))
@@ -5558,6 +5623,22 @@ module Aws::SageMaker
     SecondaryStatusTransitions.member = Shapes::ShapeRef.new(shape: SecondaryStatusTransition)
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    SendPipelineExecutionStepFailureRequest.add_member(:callback_token, Shapes::ShapeRef.new(shape: CallbackToken, required: true, location_name: "CallbackToken"))
+    SendPipelineExecutionStepFailureRequest.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String256, location_name: "FailureReason"))
+    SendPipelineExecutionStepFailureRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendPipelineExecutionStepFailureRequest.struct_class = Types::SendPipelineExecutionStepFailureRequest
+
+    SendPipelineExecutionStepFailureResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
+    SendPipelineExecutionStepFailureResponse.struct_class = Types::SendPipelineExecutionStepFailureResponse
+
+    SendPipelineExecutionStepSuccessRequest.add_member(:callback_token, Shapes::ShapeRef.new(shape: CallbackToken, required: true, location_name: "CallbackToken"))
+    SendPipelineExecutionStepSuccessRequest.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
+    SendPipelineExecutionStepSuccessRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendPipelineExecutionStepSuccessRequest.struct_class = Types::SendPipelineExecutionStepSuccessRequest
+
+    SendPipelineExecutionStepSuccessResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
+    SendPipelineExecutionStepSuccessResponse.struct_class = Types::SendPipelineExecutionStepSuccessResponse
 
     ServiceCatalogProvisionedProductDetails.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, location_name: "ProvisionedProductId"))
     ServiceCatalogProvisionedProductDetails.add_member(:provisioned_product_status_message, Shapes::ShapeRef.new(shape: ProvisionedProductStatusMessage, location_name: "ProvisionedProductStatusMessage"))
@@ -5961,6 +6042,9 @@ module Aws::SageMaker
     TuningJobCompletionCriteria.add_member(:target_objective_metric_value, Shapes::ShapeRef.new(shape: TargetObjectiveMetricValue, required: true, location_name: "TargetObjectiveMetricValue"))
     TuningJobCompletionCriteria.struct_class = Types::TuningJobCompletionCriteria
 
+    TuningJobStepMetaData.add_member(:arn, Shapes::ShapeRef.new(shape: HyperParameterTuningJobArn, location_name: "Arn"))
+    TuningJobStepMetaData.struct_class = Types::TuningJobStepMetaData
+
     USD.add_member(:dollars, Shapes::ShapeRef.new(shape: Dollars, location_name: "Dollars"))
     USD.add_member(:cents, Shapes::ShapeRef.new(shape: Cents, location_name: "Cents"))
     USD.add_member(:tenth_fractions_of_a_cent, Shapes::ShapeRef.new(shape: TenthFractionsOfACent, location_name: "TenthFractionsOfACent"))
@@ -6023,6 +6107,7 @@ module Aws::SageMaker
     UpdateDeviceFleetRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     UpdateDeviceFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: DeviceFleetDescription, location_name: "Description"))
     UpdateDeviceFleetRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: EdgeOutputConfig, required: true, location_name: "OutputConfig"))
+    UpdateDeviceFleetRequest.add_member(:enable_iot_role_alias, Shapes::ShapeRef.new(shape: EnableIotRoleAlias, location_name: "EnableIotRoleAlias"))
     UpdateDeviceFleetRequest.struct_class = Types::UpdateDeviceFleetRequest
 
     UpdateDevicesRequest.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
@@ -6925,6 +7010,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteModelPackageGroupInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_model_package_group_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -6984,6 +7070,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteProjectInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -8298,6 +8385,26 @@ module Aws::SageMaker
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:send_pipeline_execution_step_failure, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendPipelineExecutionStepFailure"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepFailureRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepFailureResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:send_pipeline_execution_step_success, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendPipelineExecutionStepSuccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepSuccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepSuccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
       api.add_operation(:start_monitoring_schedule, Seahorse::Model::Operation.new.tap do |o|

@@ -1040,6 +1040,7 @@ module Aws::MediaLive
     #               style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #             },
     #             webvtt_destination_settings: {
+    #               style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #             },
     #           },
     #           language_code: "__string",
@@ -1476,7 +1477,7 @@ module Aws::MediaLive
     #               capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #             },
     #             h264_settings: {
-    #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #               adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #               bitrate: 1,
     #               buf_fill_pct: 1,
@@ -1531,7 +1532,7 @@ module Aws::MediaLive
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #             },
     #             h265_settings: {
-    #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #               adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #               alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #               bitrate: 1,
@@ -1641,6 +1642,10 @@ module Aws::MediaLive
     #             {
     #               name: "__stringMin1", # required
     #               selector_settings: {
+    #                 audio_hls_rendition_selection: {
+    #                   group_id: "__stringMin1", # required
+    #                   name: "__stringMin1", # required
+    #                 },
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
     #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -1669,6 +1674,7 @@ module Aws::MediaLive
     #                 arib_source_settings: {
     #                 },
     #                 dvb_sub_source_settings: {
+    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 embedded_source_settings: {
@@ -1682,6 +1688,7 @@ module Aws::MediaLive
     #                   source_608_channel_number: 1,
     #                 },
     #                 scte_27_source_settings: {
+    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 teletext_source_settings: {
@@ -1706,6 +1713,7 @@ module Aws::MediaLive
     #               buffer_segments: 1,
     #               retries: 1,
     #               retry_interval: 1,
+    #               scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
@@ -1894,6 +1902,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
@@ -2182,7 +2191,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions #=> Array
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_fill_pct #=> Integer
@@ -2223,7 +2232,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
@@ -2292,6 +2301,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -2301,6 +2312,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -2308,6 +2320,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -2322,6 +2335,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -2936,6 +2950,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -3224,7 +3239,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_fill_pct #=> Integer
@@ -3265,7 +3280,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
@@ -3334,6 +3349,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -3343,6 +3360,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -3350,6 +3368,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -3364,6 +3383,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -3615,7 +3635,7 @@ module Aws::MediaLive
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
-    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION", "MGHD", "MGUHD"
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.start #=> String
     #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
@@ -3849,6 +3869,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -4137,7 +4158,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_fill_pct #=> Integer
@@ -4178,7 +4199,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
@@ -4247,6 +4268,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -4256,6 +4279,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -4263,6 +4287,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -4277,6 +4302,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -4715,7 +4741,7 @@ module Aws::MediaLive
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
-    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION", "MGHD", "MGUHD"
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.usage_price #=> Float
     #
@@ -4780,7 +4806,7 @@ module Aws::MediaLive
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
-    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION", "MGHD", "MGUHD"
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.start #=> String
     #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
@@ -4946,6 +4972,8 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_id #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -4955,6 +4983,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -4962,6 +4991,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -4976,6 +5006,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.channels[0].input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channels[0].input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -5045,7 +5076,6 @@ module Aws::MediaLive
     #   resp.input_device_transfers[0].id #=> String
     #   resp.input_device_transfers[0].message #=> String
     #   resp.input_device_transfers[0].target_customer_id #=> String
-    #   resp.input_device_transfers[0].target_region #=> String
     #   resp.input_device_transfers[0].transfer_type #=> String, one of "OUTGOING", "INCOMING"
     #   resp.next_token #=> String
     #
@@ -5383,7 +5413,7 @@ module Aws::MediaLive
     #   resp.offerings[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.offerings[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.offerings[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
-    #   resp.offerings[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.offerings[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION", "MGHD", "MGUHD"
     #   resp.offerings[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.offerings[0].usage_price #=> Float
     #
@@ -5463,7 +5493,7 @@ module Aws::MediaLive
     #   resp.reservations[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservations[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.reservations[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
-    #   resp.reservations[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservations[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION", "MGHD", "MGUHD"
     #   resp.reservations[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservations[0].start #=> String
     #   resp.reservations[0].state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
@@ -5562,7 +5592,7 @@ module Aws::MediaLive
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
-    #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION", "MGHD", "MGUHD"
     #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservation.start #=> String
     #   resp.reservation.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
@@ -5772,6 +5802,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -6060,7 +6091,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_fill_pct #=> Integer
@@ -6101,7 +6132,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
@@ -6170,6 +6201,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -6179,6 +6212,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -6186,6 +6220,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -6200,6 +6235,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -6467,6 +6503,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -6755,7 +6792,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_fill_pct #=> Integer
@@ -6796,7 +6833,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
@@ -6865,6 +6902,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -6874,6 +6913,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -6881,6 +6921,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -6895,6 +6936,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -7277,6 +7319,7 @@ module Aws::MediaLive
     #               style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #             },
     #             webvtt_destination_settings: {
+    #               style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #             },
     #           },
     #           language_code: "__string",
@@ -7713,7 +7756,7 @@ module Aws::MediaLive
     #               capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #             },
     #             h264_settings: {
-    #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #               adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #               bitrate: 1,
     #               buf_fill_pct: 1,
@@ -7768,7 +7811,7 @@ module Aws::MediaLive
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #             },
     #             h265_settings: {
-    #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #               adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #               alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #               bitrate: 1,
@@ -7878,6 +7921,10 @@ module Aws::MediaLive
     #             {
     #               name: "__stringMin1", # required
     #               selector_settings: {
+    #                 audio_hls_rendition_selection: {
+    #                   group_id: "__stringMin1", # required
+    #                   name: "__stringMin1", # required
+    #                 },
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
     #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -7906,6 +7953,7 @@ module Aws::MediaLive
     #                 arib_source_settings: {
     #                 },
     #                 dvb_sub_source_settings: {
+    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 embedded_source_settings: {
@@ -7919,6 +7967,7 @@ module Aws::MediaLive
     #                   source_608_channel_number: 1,
     #                 },
     #                 scte_27_source_settings: {
+    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 teletext_source_settings: {
@@ -7943,6 +7992,7 @@ module Aws::MediaLive
     #               buffer_segments: 1,
     #               retries: 1,
     #               retry_interval: 1,
+    #               scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
@@ -8121,6 +8171,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
@@ -8409,7 +8460,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions #=> Array
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_fill_pct #=> Integer
@@ -8450,7 +8501,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
@@ -8519,6 +8570,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -8528,6 +8581,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -8535,6 +8589,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -8549,6 +8604,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -8777,6 +8833,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
@@ -9065,7 +9122,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions #=> Array
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_fill_pct #=> Integer
@@ -9106,7 +9163,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
@@ -9175,6 +9232,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -9184,6 +9243,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].name #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.scte_20_detection #=> String, one of "AUTO", "OFF"
@@ -9191,6 +9251,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.ocr_language #=> String, one of "DEU", "ENG", "FRA", "NLD", "POR", "SPA"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
@@ -9205,6 +9266,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.buffer_segments #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
     #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
@@ -9645,7 +9707,7 @@ module Aws::MediaLive
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
-    #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION", "MGHD", "MGUHD"
     #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservation.start #=> String
     #   resp.reservation.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
@@ -9675,7 +9737,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

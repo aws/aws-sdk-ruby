@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2021-07-09)
+------------------
+
+* Feature - Releasing new APIs related to Tuning steps in model building pipelines.
+
+1.92.0 (2021-07-01)
+------------------
+
+* Feature - SageMaker model registry now supports up to 5 containers and associated environment variables.
+
+1.91.0 (2021-06-28)
+------------------
+
+* Feature - Sagemaker Neo now supports running compilation jobs using customer's Amazon VPC
+
+1.90.0 (2021-06-17)
+------------------
+
+* Feature - Enable ml.g4dn instance types for SageMaker Batch Transform and SageMaker Processing
+
+1.89.0 (2021-06-10)
+------------------
+
+* Feature - Using SageMaker Edge Manager with AWS IoT Greengrass v2 simplifies accessing, maintaining, and deploying models to your devices. You can now create deployable IoT Greengrass components during edge packaging jobs. You can choose to create a device fleet with or without creating an AWS IoT role alias.
+
+1.88.0 (2021-06-07)
+------------------
+
+* Feature - AWS SageMaker - Releasing new APIs related to Callback steps in model building pipelines. Adds experiment integration to model building pipelines.
+
 1.87.0 (2021-05-05)
 ------------------
 

@@ -1,10 +1,9 @@
 # AWS SDK for Ruby - Version 3
 
-[![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core) 
+[![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core)
 [![Build Status](https://github.com/aws/aws-sdk-ruby/workflows/CI/badge.svg)](https://github.com/aws/aws-sdk-ruby/actions)
 [![Github forks](https://img.shields.io/github/forks/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/network)
 [![Github stars](https://img.shields.io/github/stars/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/stargazers)
-[![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Links of Interest
 
@@ -258,7 +257,6 @@ Simply downcase the service module name for the helper:
 Please use any of these resources for getting help:
 
 * Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`.
-* Join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby).
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
 
 ## Maintenance and support for SDK major versions
@@ -294,6 +292,7 @@ RubyGems.org page under "LINKS" section.
 | ----------------------------------------------------- | ------------------------------------ | --------------------------------------- | ----------- |
 | AWS Amplify                                           | Aws::Amplify                         | aws-sdk-amplify                         | 2017-07-25  |
 | AWS App Mesh                                          | Aws::AppMesh                         | aws-sdk-appmesh                         | 2019-01-25  |
+| AWS App Runner                                        | Aws::AppRunner                       | aws-sdk-apprunner                       | 2020-05-15  |
 | AWS AppSync                                           | Aws::AppSync                         | aws-sdk-appsync                         | 2017-07-25  |
 | AWS Application Cost Profiler                         | Aws::ApplicationCostProfiler         | aws-sdk-applicationcostprofiler         | 2020-09-10  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService     | aws-sdk-applicationdiscoveryservice     | 2015-11-01  |
@@ -381,11 +380,14 @@ RubyGems.org page under "LINKS" section.
 | AWS Outposts                                          | Aws::Outposts                        | aws-sdk-outposts                        | 2019-12-03  |
 | AWS Performance Insights                              | Aws::PI                              | aws-sdk-pi                              | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                         | aws-sdk-pricing                         | 2017-10-15  |
+| AWS Proton                                            | Aws::Proton                          | aws-sdk-proton                          | 2020-07-20  |
 | AWS RDS DataService                                   | Aws::RDSDataService                  | aws-sdk-rdsdataservice                  | 2018-08-01  |
 | AWS Resource Access Manager                           | Aws::RAM                             | aws-sdk-ram                             | 2018-01-04  |
 | AWS Resource Groups                                   | Aws::ResourceGroups                  | aws-sdk-resourcegroups                  | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI        | aws-sdk-resourcegroupstaggingapi        | 2017-01-26  |
 | AWS RoboMaker                                         | Aws::RoboMaker                       | aws-sdk-robomaker                       | 2018-06-29  |
+| AWS Route53 Recovery Control Config                   | Aws::Route53RecoveryControlConfig    | aws-sdk-route53recoverycontrolconfig    | 2020-11-02  |
+| AWS Route53 Recovery Readiness                        | Aws::Route53RecoveryReadiness        | aws-sdk-route53recoveryreadiness        | 2019-12-02  |
 | AWS S3 Control                                        | Aws::S3Control                       | aws-sdk-s3control                       | 2018-08-20  |
 | AWS SSO Identity Store                                | Aws::IdentityStore                   | aws-sdk-identitystore                   | 2020-06-15  |
 | AWS SSO OIDC                                          | Aws::SSOOIDC                         | aws-sdk-ssooidc                         | 2019-06-10  |
@@ -559,6 +561,7 @@ RubyGems.org page under "LINKS" section.
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |
+| Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster          | aws-sdk-route53recoverycluster          | 2019-12-02  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                      | aws-sdk-synthetics                      | 2017-10-11  |

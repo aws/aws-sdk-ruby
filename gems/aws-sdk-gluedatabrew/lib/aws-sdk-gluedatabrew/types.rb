@@ -68,6 +68,81 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Selector of a column from a dataset for profile job configuration. One
+    # selector includes either a column name or a regular expression.
+    #
+    # @note When making an API call, you may pass ColumnSelector
+    #   data as a hash:
+    #
+    #       {
+    #         regex: "ColumnName",
+    #         name: "ColumnName",
+    #       }
+    #
+    # @!attribute [rw] regex
+    #   A regular expression for selecting a column from a dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a column from a dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ColumnSelector AWS API Documentation
+    #
+    class ColumnSelector < Struct.new(
+      :regex,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for column evaluations for a profile job.
+    # ColumnStatisticsConfiguration can be used to select evaluations and
+    # override parameters of evaluations for particular columns.
+    #
+    # @note When making an API call, you may pass ColumnStatisticsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         selectors: [
+    #           {
+    #             regex: "ColumnName",
+    #             name: "ColumnName",
+    #           },
+    #         ],
+    #         statistics: { # required
+    #           included_statistics: ["Statistic"],
+    #           overrides: [
+    #             {
+    #               statistic: "Statistic", # required
+    #               parameters: { # required
+    #                 "ParameterName" => "ParameterValue",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] selectors
+    #   List of column selectors. Selectors can be used to select columns
+    #   from the dataset. When selectors are undefined, configuration will
+    #   be applied to all supported columns.
+    #   @return [Array<Types::ColumnSelector>]
+    #
+    # @!attribute [rw] statistics
+    #   Configuration for evaluations. Statistics can be used to select
+    #   evaluations and override parameters of evaluations.
+    #   @return [Types::StatisticsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ColumnStatisticsConfiguration AWS API Documentation
+    #
+    class ColumnStatisticsConfiguration < Struct.new(
+      :selectors,
+      :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an individual condition that evaluates to true or false.
     #
     # Conditions are used with recipe actions. The action is only performed
@@ -89,7 +164,7 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] condition
     #   A specific condition to apply to a recipe action. For more
-    #   information, see [Recipe structure][1] in the *AWS Glue DataBrew
+    #   information, see [Recipe structure][1] in the *Glue DataBrew
     #   Developer Guide*.
     #
     #
@@ -214,8 +289,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The file format of a dataset that is created from an S3 file or
-    #   folder.
+    #   The file format of a dataset that is created from an Amazon S3 file
+    #   or folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
@@ -225,12 +300,12 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] input
     #   Represents information on how DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Glue Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @!attribute [rw] path_options
-    #   A set of options that defines how DataBrew interprets an S3 path of
-    #   the dataset.
+    #   A set of options that defines how DataBrew interprets an Amazon S3
+    #   path of the dataset.
     #   @return [Types::PathOptions]
     #
     # @!attribute [rw] tags
@@ -277,6 +352,46 @@ module Aws::GlueDataBrew
     #           bucket: "Bucket", # required
     #           key: "Key",
     #         },
+    #         configuration: {
+    #           dataset_statistics_configuration: {
+    #             included_statistics: ["Statistic"],
+    #             overrides: [
+    #               {
+    #                 statistic: "Statistic", # required
+    #                 parameters: { # required
+    #                   "ParameterName" => "ParameterValue",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           profile_columns: [
+    #             {
+    #               regex: "ColumnName",
+    #               name: "ColumnName",
+    #             },
+    #           ],
+    #           column_statistics_configurations: [
+    #             {
+    #               selectors: [
+    #                 {
+    #                   regex: "ColumnName",
+    #                   name: "ColumnName",
+    #                 },
+    #               ],
+    #               statistics: { # required
+    #                 included_statistics: ["Statistic"],
+    #                 overrides: [
+    #                   {
+    #                     statistic: "Statistic", # required
+    #                     parameters: { # required
+    #                       "ParameterName" => "ParameterValue",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
     #         role_arn: "Arn", # required
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -300,8 +415,8 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - `SSE-KMS` - Server-side encryption with AWS
-    #     KMS-managed keys.
+    #   * `SSE-KMS` - `SSE-KMS` - Server-side encryption with KMS-managed
+    #     keys.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -331,9 +446,16 @@ module Aws::GlueDataBrew
     #   DataBrew can read input data, or write output from a job.
     #   @return [Types::S3Location]
     #
+    # @!attribute [rw] configuration
+    #   Configuration for profile jobs. Used to select columns, do
+    #   evaluations, and override default parameters of evaluations. When
+    #   configuration is null, the profile job will run with default
+    #   settings.
+    #   @return [Types::ProfileConfiguration]
+    #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -364,6 +486,7 @@ module Aws::GlueDataBrew
       :max_capacity,
       :max_retries,
       :output_location,
+      :configuration,
       :role_arn,
       :tags,
       :timeout,
@@ -420,8 +543,8 @@ module Aws::GlueDataBrew
     #   @return [Types::Sample]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed for this request.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -464,7 +587,7 @@ module Aws::GlueDataBrew
     #         log_subscription: "ENABLE", # accepts ENABLE, DISABLE
     #         max_capacity: 1,
     #         max_retries: 1,
-    #         outputs: [ # required
+    #         outputs: [
     #           {
     #             compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
     #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
@@ -479,6 +602,40 @@ module Aws::GlueDataBrew
     #                 delimiter: "Delimiter",
     #               },
     #             },
+    #           },
+    #         ],
+    #         data_catalog_outputs: [
+    #           {
+    #             catalog_id: "CatalogId",
+    #             database_name: "DatabaseName", # required
+    #             table_name: "TableName", # required
+    #             s3_options: {
+    #               location: { # required
+    #                 bucket: "Bucket", # required
+    #                 key: "Key",
+    #               },
+    #             },
+    #             database_options: {
+    #               temp_directory: {
+    #                 bucket: "Bucket", # required
+    #                 key: "Key",
+    #               },
+    #               table_name: "DatabaseTableName", # required
+    #             },
+    #             overwrite: false,
+    #           },
+    #         ],
+    #         database_outputs: [
+    #           {
+    #             glue_connection_name: "GlueConnectionName", # required
+    #             database_options: { # required
+    #               temp_directory: {
+    #                 bucket: "Bucket", # required
+    #                 key: "Key",
+    #               },
+    #               table_name: "DatabaseTableName", # required
+    #             },
+    #             database_output_mode: "NEW_TABLE", # accepts NEW_TABLE
     #           },
     #         ],
     #         project_name: "ProjectName",
@@ -505,7 +662,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -535,6 +692,16 @@ module Aws::GlueDataBrew
     #   job.
     #   @return [Array<Types::Output>]
     #
+    # @!attribute [rw] data_catalog_outputs
+    #   One or more artifacts that represent the Glue Data Catalog output
+    #   from running the job.
+    #   @return [Array<Types::DataCatalogOutput>]
+    #
+    # @!attribute [rw] database_outputs
+    #   Represents a list of JDBC database output objects which defines the
+    #   output destination for a DataBrew recipe job to write to.
+    #   @return [Array<Types::DatabaseOutput>]
+    #
     # @!attribute [rw] project_name
     #   Either the name of an existing project, or a combination of a recipe
     #   and a dataset to associate with the recipe.
@@ -545,8 +712,8 @@ module Aws::GlueDataBrew
     #   @return [Types::RecipeReference]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -569,6 +736,8 @@ module Aws::GlueDataBrew
       :max_capacity,
       :max_retries,
       :outputs,
+      :data_catalog_outputs,
+      :database_outputs,
       :project_name,
       :recipe_reference,
       :role_arn,
@@ -678,8 +847,8 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *AWS Glue
-    #   DataBrew Developer Guide*.
+    #   more information, see [Cron expressions][1] in the *Glue DataBrew
+    #   Developer Guide*.
     #
     #
     #
@@ -773,8 +942,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents how metadata stored in the AWS Glue Data Catalog is defined
-    # in a DataBrew dataset.
+    # Represents how metadata stored in the Glue Data Catalog is defined in
+    # a DataBrew dataset.
     #
     # @note When making an API call, you may pass DataCatalogInputDefinition
     #   data as a hash:
@@ -790,8 +959,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] catalog_id
-    #   The unique identifier of the AWS account that holds the Data Catalog
-    #   that stores the data.
+    #   The unique identifier of the Amazon Web Services account that holds
+    #   the Data Catalog that stores the data.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -804,8 +973,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] temp_directory
-    #   An Amazon location that AWS Glue Data Catalog can use as a temporary
-    #   directory.
+    #   Represents an Amazon location where DataBrew can store intermediate
+    #   results.
     #   @return [Types::S3Location]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DataCatalogInputDefinition AWS API Documentation
@@ -815,6 +984,74 @@ module Aws::GlueDataBrew
       :database_name,
       :table_name,
       :temp_directory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents options that specify how and where in the Glue Data Catalog
+    # DataBrew writes the output generated by recipe jobs.
+    #
+    # @note When making an API call, you may pass DataCatalogOutput
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogId",
+    #         database_name: "DatabaseName", # required
+    #         table_name: "TableName", # required
+    #         s3_options: {
+    #           location: { # required
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #         },
+    #         database_options: {
+    #           temp_directory: {
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #           table_name: "DatabaseTableName", # required
+    #         },
+    #         overwrite: false,
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The unique identifier of the Amazon Web Services account that holds
+    #   the Data Catalog that stores the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of a database in the Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of a table in the Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_options
+    #   Represents options that specify how and where DataBrew writes the
+    #   Amazon S3 output generated by recipe jobs.
+    #   @return [Types::S3TableOutputOptions]
+    #
+    # @!attribute [rw] database_options
+    #   Represents options that specify how and where DataBrew writes the
+    #   database output generated by recipe jobs.
+    #   @return [Types::DatabaseTableOutputOptions]
+    #
+    # @!attribute [rw] overwrite
+    #   A value that, if true, means that any data in the location specified
+    #   for output is overwritten with new output. Not supported with
+    #   DatabaseOptions.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DataCatalogOutput AWS API Documentation
+    #
+    class DataCatalogOutput < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :s3_options,
+      :database_options,
+      :overwrite)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -834,8 +1071,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] glue_connection_name
-    #   The AWS Glue Connection that stores the connection information for
-    #   the target database.
+    #   The Glue Connection that stores the connection information for the
+    #   target database.
     #   @return [String]
     #
     # @!attribute [rw] database_table_name
@@ -857,10 +1094,86 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Represents a JDBC database output object which defines the output
+    # destination for a DataBrew recipe job to write into.
+    #
+    # @note When making an API call, you may pass DatabaseOutput
+    #   data as a hash:
+    #
+    #       {
+    #         glue_connection_name: "GlueConnectionName", # required
+    #         database_options: { # required
+    #           temp_directory: {
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #           table_name: "DatabaseTableName", # required
+    #         },
+    #         database_output_mode: "NEW_TABLE", # accepts NEW_TABLE
+    #       }
+    #
+    # @!attribute [rw] glue_connection_name
+    #   The Glue connection that stores the connection information for the
+    #   target database.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_options
+    #   Represents options that specify how and where DataBrew writes the
+    #   database output generated by recipe jobs.
+    #   @return [Types::DatabaseTableOutputOptions]
+    #
+    # @!attribute [rw] database_output_mode
+    #   The output mode to write into the database. Currently supported
+    #   option: NEW\_TABLE.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DatabaseOutput AWS API Documentation
+    #
+    class DatabaseOutput < Struct.new(
+      :glue_connection_name,
+      :database_options,
+      :database_output_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents options that specify how and where DataBrew writes the
+    # database output generated by recipe jobs.
+    #
+    # @note When making an API call, you may pass DatabaseTableOutputOptions
+    #   data as a hash:
+    #
+    #       {
+    #         temp_directory: {
+    #           bucket: "Bucket", # required
+    #           key: "Key",
+    #         },
+    #         table_name: "DatabaseTableName", # required
+    #       }
+    #
+    # @!attribute [rw] temp_directory
+    #   Represents an Amazon S3 location (bucket name and object key) where
+    #   DataBrew can store intermediate results.
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] table_name
+    #   A prefix for the name of a table DataBrew will create in the
+    #   database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DatabaseTableOutputOptions AWS API Documentation
+    #
+    class DatabaseTableOutputOptions < Struct.new(
+      :temp_directory,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a dataset that can be processed by DataBrew.
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account that owns the dataset.
+    #   The ID of the Amazon Web Services account that owns the dataset.
     #   @return [String]
     #
     # @!attribute [rw] created_by
@@ -876,8 +1189,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The file format of a dataset that is created from an S3 file or
-    #   folder.
+    #   The file format of a dataset that is created from an Amazon S3 file
+    #   or folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
@@ -886,8 +1199,8 @@ module Aws::GlueDataBrew
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
-    #   Information on how DataBrew can find the dataset, in either the AWS
-    #   Glue Data Catalog or Amazon S3.
+    #   Information on how DataBrew can find the dataset, in either the Glue
+    #   Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @!attribute [rw] last_modified_date
@@ -901,12 +1214,12 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] source
     #   The location of the data for the dataset, either Amazon S3 or the
-    #   AWS Glue Data Catalog.
+    #   Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] path_options
-    #   A set of options that defines how DataBrew interprets an S3 path of
-    #   the dataset.
+    #   A set of options that defines how DataBrew interprets an Amazon S3
+    #   path of the dataset.
     #   @return [Types::PathOptions]
     #
     # @!attribute [rw] tags
@@ -938,7 +1251,7 @@ module Aws::GlueDataBrew
     end
 
     # Represents a dataset paramater that defines type and conditions for a
-    # parameter in the S3 path of the dataset.
+    # parameter in the Amazon S3 path of the dataset.
     #
     # @note When making an API call, you may pass DatasetParameter
     #   data as a hash:
@@ -961,7 +1274,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the parameter that is used in the dataset's S3 path.
+    #   The name of the parameter that is used in the dataset's Amazon S3
+    #   path.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -976,8 +1290,7 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] create_column
     #   Optional boolean value that defines whether the captured value of
-    #   this parameter should be loaded as an additional column in the
-    #   dataset.
+    #   this parameter should be used to create a new column in a dataset.
     #   @return [Boolean]
     #
     # @!attribute [rw] filter
@@ -998,7 +1311,7 @@ module Aws::GlueDataBrew
     end
 
     # Represents additional options for correct interpretation of datetime
-    # parameters used in the S3 path of a dataset.
+    # parameters used in the Amazon S3 path of a dataset.
     #
     # @note When making an API call, you may pass DatetimeOptions
     #   data as a hash:
@@ -1011,16 +1324,17 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] format
     #   Required option, that defines the datetime format used for a date
-    #   parameter in the S3 path. Should use only supported datetime
-    #   specifiers and separation characters, all litera a-z or A-Z
-    #   character should be escaped with single quotes. E.g.
+    #   parameter in the Amazon S3 path. Should use only supported datetime
+    #   specifiers and separation characters, all literal a-z or A-Z
+    #   characters should be escaped with single quotes. E.g.
     #   "MM.dd.yyyy-'at'-HH:mm".
     #   @return [String]
     #
     # @!attribute [rw] timezone_offset
     #   Optional value for a timezone offset of the datetime parameter value
-    #   in the S3 path. Shouldn't be used if Format for this parameter
-    #   includes timezone fields. If no offset specified, UTC is assumed.
+    #   in the Amazon S3 path. Shouldn't be used if Format for this
+    #   parameter includes timezone fields. If no offset specified, UTC is
+    #   assumed.
     #   @return [String]
     #
     # @!attribute [rw] locale_code
@@ -1238,8 +1552,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The file format of a dataset that is created from an S3 file or
-    #   folder.
+    #   The file format of a dataset that is created from an Amazon S3 file
+    #   or folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
@@ -1249,7 +1563,7 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] input
     #   Represents information on how DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Glue Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @!attribute [rw] last_modified_date
@@ -1262,13 +1576,13 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The location of the data for this dataset, Amazon S3 or the AWS Glue
+    #   The location of the data for this dataset, Amazon S3 or the Glue
     #   Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] path_options
-    #   A set of options that defines how DataBrew interprets an S3 path of
-    #   the dataset.
+    #   A set of options that defines how DataBrew interprets an Amazon S3
+    #   path of the dataset.
     #   @return [Types::PathOptions]
     #
     # @!attribute [rw] tags
@@ -1338,7 +1652,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -1383,9 +1697,26 @@ module Aws::GlueDataBrew
     #   job.
     #   @return [Array<Types::Output>]
     #
+    # @!attribute [rw] data_catalog_outputs
+    #   One or more artifacts that represent the Glue Data Catalog output
+    #   from running the job.
+    #   @return [Array<Types::DataCatalogOutput>]
+    #
+    # @!attribute [rw] database_outputs
+    #   Represents a list of JDBC database output objects which defines the
+    #   output destination for a DataBrew recipe job to write into.
+    #   @return [Array<Types::DatabaseOutput>]
+    #
     # @!attribute [rw] project_name
     #   The DataBrew project associated with this job.
     #   @return [String]
+    #
+    # @!attribute [rw] profile_configuration
+    #   Configuration for profile jobs. Used to select columns, do
+    #   evaluations, and override default parameters of evaluations. When
+    #   configuration is null, the profile job will run with default
+    #   settings.
+    #   @return [Types::ProfileConfiguration]
     #
     # @!attribute [rw] recipe_reference
     #   Represents the name and version of a DataBrew recipe.
@@ -1396,7 +1727,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS Identity and Access Management (IAM) role to be
+    #   The ARN of the Identity and Access Management (IAM) role to be
     #   assumed when DataBrew runs the job.
     #   @return [String]
     #
@@ -1430,7 +1761,10 @@ module Aws::GlueDataBrew
       :max_capacity,
       :max_retries,
       :outputs,
+      :data_catalog_outputs,
+      :database_outputs,
       :project_name,
+      :profile_configuration,
       :recipe_reference,
       :resource_arn,
       :role_arn,
@@ -1492,6 +1826,13 @@ module Aws::GlueDataBrew
     #   The name of the job being processed during this run.
     #   @return [String]
     #
+    # @!attribute [rw] profile_configuration
+    #   Configuration for profile jobs. Used to select columns, do
+    #   evaluations, and override default parameters of evaluations. When
+    #   configuration is null, the profile job will run with default
+    #   settings.
+    #   @return [Types::ProfileConfiguration]
+    #
     # @!attribute [rw] run_id
     #   The unique identifier of the job run.
     #   @return [String]
@@ -1512,6 +1853,16 @@ module Aws::GlueDataBrew
     # @!attribute [rw] outputs
     #   One or more output artifacts from a job run.
     #   @return [Array<Types::Output>]
+    #
+    # @!attribute [rw] data_catalog_outputs
+    #   One or more artifacts that represent the Glue Data Catalog output
+    #   from running the job.
+    #   @return [Array<Types::DataCatalogOutput>]
+    #
+    # @!attribute [rw] database_outputs
+    #   Represents a list of JDBC database output objects which defines the
+    #   output destination for a DataBrew recipe job to write into.
+    #   @return [Array<Types::DatabaseOutput>]
     #
     # @!attribute [rw] recipe_reference
     #   Represents the name and version of a DataBrew recipe.
@@ -1542,11 +1893,14 @@ module Aws::GlueDataBrew
       :error_message,
       :execution_time,
       :job_name,
+      :profile_configuration,
       :run_id,
       :state,
       :log_subscription,
       :log_group_name,
       :outputs,
+      :data_catalog_outputs,
+      :database_outputs,
       :recipe_reference,
       :started_by,
       :started_on,
@@ -1613,7 +1967,7 @@ module Aws::GlueDataBrew
     #   @return [Types::Sample]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS Identity and Access Management (IAM) role to be
+    #   The ARN of the Identity and Access Management (IAM) role to be
     #   assumed when DataBrew runs the job.
     #   @return [String]
     #
@@ -1810,7 +2164,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] cron_expression
     #   The date or dates and time or times when the jobs are to be run for
     #   the schedule. For more information, see [Cron expressions][1] in the
-    #   *AWS Glue DataBrew Developer Guide*.
+    #   *Glue DataBrew Developer Guide*.
     #
     #
     #
@@ -1879,8 +2233,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents a limit imposed on number of S3 files that should be
-    # selected for a dataset from a connected S3 path.
+    # Represents a limit imposed on number of Amazon S3 files that should be
+    # selected for a dataset from a connected Amazon S3 path.
     #
     # @note When making an API call, you may pass FilesLimit
     #   data as a hash:
@@ -1892,19 +2246,19 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] max_files
-    #   The number of S3 files to select.
+    #   The number of Amazon S3 files to select.
     #   @return [Integer]
     #
     # @!attribute [rw] ordered_by
-    #   A criteria to use for S3 files sorting before their selection. By
-    #   default uses LAST\_MODIFIED\_DATE as a sorting criteria. Currently
-    #   it's the only allowed value.
+    #   A criteria to use for Amazon S3 files sorting before their
+    #   selection. By default uses LAST\_MODIFIED\_DATE as a sorting
+    #   criteria. Currently it's the only allowed value.
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   A criteria to use for S3 files sorting before their selection. By
-    #   default uses DESCENDING order, i.e. most recent files are selected
-    #   first. Anotherpossible value is ASCENDING.
+    #   A criteria to use for Amazon S3 files sorting before their
+    #   selection. By default uses DESCENDING order, i.e. most recent files
+    #   are selected first. Anotherpossible value is ASCENDING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/FilesLimit AWS API Documentation
@@ -1917,7 +2271,13 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents a structure for defining parameter conditions.
+    # Represents a structure for defining parameter conditions. Supported
+    # conditions are described here: [Supported conditions for dynamic
+    # datasets][1] in the *Glue DataBrew Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs-aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets
     #
     # @note When making an API call, you may pass FilterExpression
     #   data as a hash:
@@ -1996,7 +2356,7 @@ module Aws::GlueDataBrew
     end
 
     # Represents information on how DataBrew can find data, in either the
-    # AWS Glue Data Catalog or Amazon S3.
+    # Glue Data Catalog or Amazon S3.
     #
     # @note When making an API call, you may pass Input
     #   data as a hash:
@@ -2030,7 +2390,7 @@ module Aws::GlueDataBrew
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] data_catalog_input_definition
-    #   The AWS Glue Data Catalog parameters for the data.
+    #   The Glue Data Catalog parameters for the data.
     #   @return [Types::DataCatalogInputDefinition]
     #
     # @!attribute [rw] database_input_definition
@@ -2063,7 +2423,7 @@ module Aws::GlueDataBrew
     # Represents all of the attributes of a DataBrew job.
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account that owns the job.
+    #   The ID of the Amazon Web Services account that owns the job.
     #   @return [String]
     #
     # @!attribute [rw] created_by
@@ -2091,7 +2451,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -2135,6 +2495,16 @@ module Aws::GlueDataBrew
     # @!attribute [rw] outputs
     #   One or more artifacts that represent output from running the job.
     #   @return [Array<Types::Output>]
+    #
+    # @!attribute [rw] data_catalog_outputs
+    #   One or more artifacts that represent the Glue Data Catalog output
+    #   from running the job.
+    #   @return [Array<Types::DataCatalogOutput>]
+    #
+    # @!attribute [rw] database_outputs
+    #   Represents a list of JDBC database output objects which defines the
+    #   output destination for a DataBrew recipe job to write into.
+    #   @return [Array<Types::DatabaseOutput>]
     #
     # @!attribute [rw] project_name
     #   The name of the project that the job is associated with.
@@ -2187,6 +2557,8 @@ module Aws::GlueDataBrew
       :max_capacity,
       :max_retries,
       :outputs,
+      :data_catalog_outputs,
+      :database_outputs,
       :project_name,
       :recipe_reference,
       :resource_arn,
@@ -2247,6 +2619,16 @@ module Aws::GlueDataBrew
     #   One or more output artifacts from a job run.
     #   @return [Array<Types::Output>]
     #
+    # @!attribute [rw] data_catalog_outputs
+    #   One or more artifacts that represent the Glue Data Catalog output
+    #   from running the job.
+    #   @return [Array<Types::DataCatalogOutput>]
+    #
+    # @!attribute [rw] database_outputs
+    #   Represents a list of JDBC database output objects which defines the
+    #   output destination for a DataBrew recipe job to write into.
+    #   @return [Array<Types::DatabaseOutput>]
+    #
     # @!attribute [rw] recipe_reference
     #   The set of steps processed by the job.
     #   @return [Types::RecipeReference]
@@ -2282,6 +2664,8 @@ module Aws::GlueDataBrew
       :log_subscription,
       :log_group_name,
       :outputs,
+      :data_catalog_outputs,
+      :database_outputs,
       :recipe_reference,
       :started_by,
       :started_on,
@@ -2332,7 +2716,7 @@ module Aws::GlueDataBrew
     end
 
     # Represents the JSON-specific options that define how input is to be
-    # interpreted by AWS Glue DataBrew.
+    # interpreted by Glue DataBrew.
     #
     # @note When making an API call, you may pass JsonOptions
     #   data as a hash:
@@ -2739,8 +3123,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents options that specify how and where DataBrew writes the
-    # output generated by recipe jobs or profile jobs.
+    # Represents options that specify how and where in Amazon S3 DataBrew
+    # writes the output generated by recipe jobs or profile jobs.
     #
     # @note When making an API call, you may pass Output
     #   data as a hash:
@@ -2828,7 +3212,7 @@ module Aws::GlueDataBrew
     end
 
     # Represents a set of options that define how DataBrew selects files for
-    # a given S3 path in a dataset.
+    # a given Amazon S3 path in a dataset.
     #
     # @note When making an API call, you may pass PathOptions
     #   data as a hash:
@@ -2866,8 +3250,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] last_modified_date_condition
-    #   If provided, this structure defines a date range for matching S3
-    #   objects based on their LastModifiedDate attribute in S3.
+    #   If provided, this structure defines a date range for matching Amazon
+    #   S3 objects based on their LastModifiedDate attribute in Amazon S3.
     #   @return [Types::FilterExpression]
     #
     # @!attribute [rw] files_limit
@@ -2876,8 +3260,8 @@ module Aws::GlueDataBrew
     #   @return [Types::FilesLimit]
     #
     # @!attribute [rw] parameters
-    #   A structure that maps names of parameters used in the S3 path of a
-    #   dataset to their definitions.
+    #   A structure that maps names of parameters used in the Amazon S3 path
+    #   of a dataset to their definitions.
     #   @return [Hash<String,Types::DatasetParameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/PathOptions AWS API Documentation
@@ -2890,10 +3274,90 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Configuration for profile jobs. Configuration can be used to select
+    # columns, do evaluations, and override default parameters of
+    # evaluations. When configuration is undefined, the profile job will
+    # apply default settings to all supported columns.
+    #
+    # @note When making an API call, you may pass ProfileConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_statistics_configuration: {
+    #           included_statistics: ["Statistic"],
+    #           overrides: [
+    #             {
+    #               statistic: "Statistic", # required
+    #               parameters: { # required
+    #                 "ParameterName" => "ParameterValue",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         profile_columns: [
+    #           {
+    #             regex: "ColumnName",
+    #             name: "ColumnName",
+    #           },
+    #         ],
+    #         column_statistics_configurations: [
+    #           {
+    #             selectors: [
+    #               {
+    #                 regex: "ColumnName",
+    #                 name: "ColumnName",
+    #               },
+    #             ],
+    #             statistics: { # required
+    #               included_statistics: ["Statistic"],
+    #               overrides: [
+    #                 {
+    #                   statistic: "Statistic", # required
+    #                   parameters: { # required
+    #                     "ParameterName" => "ParameterValue",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dataset_statistics_configuration
+    #   Configuration for inter-column evaluations. Configuration can be
+    #   used to select evaluations and override parameters of evaluations.
+    #   When configuration is undefined, the profile job will run all
+    #   supported inter-column evaluations.
+    #   @return [Types::StatisticsConfiguration]
+    #
+    # @!attribute [rw] profile_columns
+    #   List of column selectors. ProfileColumns can be used to select
+    #   columns from the dataset. When ProfileColumns is undefined, the
+    #   profile job will profile all supported columns.
+    #   @return [Array<Types::ColumnSelector>]
+    #
+    # @!attribute [rw] column_statistics_configurations
+    #   List of configurations for column evaluations.
+    #   ColumnStatisticsConfigurations are used to select evaluations and
+    #   override parameters of evaluations for particular columns. When
+    #   ColumnStatisticsConfigurations is undefined, the profile job will
+    #   profile all supported columns and run all supported evaluations.
+    #   @return [Array<Types::ColumnStatisticsConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ProfileConfiguration AWS API Documentation
+    #
+    class ProfileConfiguration < Struct.new(
+      :dataset_statistics_configuration,
+      :profile_columns,
+      :column_statistics_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents all of the attributes of a DataBrew project.
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account that owns the project.
+    #   The ID of the Amazon Web Services account that owns the project.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -3101,12 +3565,11 @@ module Aws::GlueDataBrew
 
     # Represents a transformation and associated parameters that are used to
     # apply a change to a DataBrew dataset. For more information, see
-    # [Recipe structure][1] and [Recipe actions reference][2].
+    # [Recipe actions reference][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html
-    # [2]: https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html
+    # [1]: https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html
     #
     # @note When making an API call, you may pass RecipeAction
     #   data as a hash:
@@ -3257,7 +3720,7 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket name.
+    #   The Amazon S3 bucket name.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -3269,6 +3732,32 @@ module Aws::GlueDataBrew
     class S3Location < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents options that specify how and where DataBrew writes the
+    # Amazon S3 output generated by recipe jobs.
+    #
+    # @note When making an API call, you may pass S3TableOutputOptions
+    #   data as a hash:
+    #
+    #       {
+    #         location: { # required
+    #           bucket: "Bucket", # required
+    #           key: "Key",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] location
+    #   Represents an Amazon S3 location (bucket name and object key) where
+    #   DataBrew can write output from a job.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/S3TableOutputOptions AWS API Documentation
+    #
+    class S3TableOutputOptions < Struct.new(
+      :location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3304,7 +3793,7 @@ module Aws::GlueDataBrew
     # Represents one or more dates and times when a job is to run.
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account that owns the schedule.
+    #   The ID of the Amazon Web Services account that owns the schedule.
     #   @return [String]
     #
     # @!attribute [rw] created_by
@@ -3334,8 +3823,7 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] cron_expression
     #   The dates and times when the job is to run. For more information,
-    #   see [Cron expressions][1] in the *AWS Glue DataBrew Developer
-    #   Guide*.
+    #   see [Cron expressions][1] in the *Glue DataBrew Developer Guide*.
     #
     #
     #
@@ -3548,6 +4036,72 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Override of a particular evaluation for a profile job.
+    #
+    # @note When making an API call, you may pass StatisticOverride
+    #   data as a hash:
+    #
+    #       {
+    #         statistic: "Statistic", # required
+    #         parameters: { # required
+    #           "ParameterName" => "ParameterValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] statistic
+    #   The name of an evaluation
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A map that includes overrides of an evaluation’s parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/StatisticOverride AWS API Documentation
+    #
+    class StatisticOverride < Struct.new(
+      :statistic,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration of evaluations for a profile job. This configuration can
+    # be used to select evaluations and override the parameters of selected
+    # evaluations.
+    #
+    # @note When making an API call, you may pass StatisticsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         included_statistics: ["Statistic"],
+    #         overrides: [
+    #           {
+    #             statistic: "Statistic", # required
+    #             parameters: { # required
+    #               "ParameterName" => "ParameterValue",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] included_statistics
+    #   List of included evaluations. When the list is undefined, all
+    #   supported evaluations will be included.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] overrides
+    #   List of overrides for evaluations.
+    #   @return [Array<Types::StatisticOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/StatisticsConfiguration AWS API Documentation
+    #
+    class StatisticsConfiguration < Struct.new(
+      :included_statistics,
+      :overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopJobRunRequest
     #   data as a hash:
     #
@@ -3729,8 +4283,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The file format of a dataset that is created from an S3 file or
-    #   folder.
+    #   The file format of a dataset that is created from an Amazon S3 file
+    #   or folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
@@ -3740,12 +4294,12 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] input
     #   Represents information on how DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Glue Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @!attribute [rw] path_options
-    #   A set of options that defines how DataBrew interprets an S3 path of
-    #   the dataset.
+    #   A set of options that defines how DataBrew interprets an Amazon S3
+    #   path of the dataset.
     #   @return [Types::PathOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateDatasetRequest AWS API Documentation
@@ -3776,6 +4330,46 @@ module Aws::GlueDataBrew
     #   data as a hash:
     #
     #       {
+    #         configuration: {
+    #           dataset_statistics_configuration: {
+    #             included_statistics: ["Statistic"],
+    #             overrides: [
+    #               {
+    #                 statistic: "Statistic", # required
+    #                 parameters: { # required
+    #                   "ParameterName" => "ParameterValue",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           profile_columns: [
+    #             {
+    #               regex: "ColumnName",
+    #               name: "ColumnName",
+    #             },
+    #           ],
+    #           column_statistics_configurations: [
+    #             {
+    #               selectors: [
+    #                 {
+    #                   regex: "ColumnName",
+    #                   name: "ColumnName",
+    #                 },
+    #               ],
+    #               statistics: { # required
+    #                 included_statistics: ["Statistic"],
+    #                 overrides: [
+    #                   {
+    #                     statistic: "Statistic", # required
+    #                     parameters: { # required
+    #                       "ParameterName" => "ParameterValue",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
     #         encryption_key_arn: "EncryptionKeyArn",
     #         encryption_mode: "SSE-KMS", # accepts SSE-KMS, SSE-S3
     #         name: "JobName", # required
@@ -3794,6 +4388,13 @@ module Aws::GlueDataBrew
     #         },
     #       }
     #
+    # @!attribute [rw] configuration
+    #   Configuration for profile jobs. Used to select columns, do
+    #   evaluations, and override default parameters of evaluations. When
+    #   configuration is null, the profile job will run with default
+    #   settings.
+    #   @return [Types::ProfileConfiguration]
+    #
     # @!attribute [rw] encryption_key_arn
     #   The Amazon Resource Name (ARN) of an encryption key that is used to
     #   protect the job.
@@ -3802,7 +4403,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -3832,8 +4433,8 @@ module Aws::GlueDataBrew
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] timeout
@@ -3852,6 +4453,7 @@ module Aws::GlueDataBrew
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateProfileJobRequest AWS API Documentation
     #
     class UpdateProfileJobRequest < Struct.new(
+      :configuration,
       :encryption_key_arn,
       :encryption_mode,
       :name,
@@ -3941,7 +4543,7 @@ module Aws::GlueDataBrew
     #         log_subscription: "ENABLE", # accepts ENABLE, DISABLE
     #         max_capacity: 1,
     #         max_retries: 1,
-    #         outputs: [ # required
+    #         outputs: [
     #           {
     #             compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
     #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
@@ -3958,6 +4560,40 @@ module Aws::GlueDataBrew
     #             },
     #           },
     #         ],
+    #         data_catalog_outputs: [
+    #           {
+    #             catalog_id: "CatalogId",
+    #             database_name: "DatabaseName", # required
+    #             table_name: "TableName", # required
+    #             s3_options: {
+    #               location: { # required
+    #                 bucket: "Bucket", # required
+    #                 key: "Key",
+    #               },
+    #             },
+    #             database_options: {
+    #               temp_directory: {
+    #                 bucket: "Bucket", # required
+    #                 key: "Key",
+    #               },
+    #               table_name: "DatabaseTableName", # required
+    #             },
+    #             overwrite: false,
+    #           },
+    #         ],
+    #         database_outputs: [
+    #           {
+    #             glue_connection_name: "GlueConnectionName", # required
+    #             database_options: { # required
+    #               temp_directory: {
+    #                 bucket: "Bucket", # required
+    #                 key: "Key",
+    #               },
+    #               table_name: "DatabaseTableName", # required
+    #             },
+    #             database_output_mode: "NEW_TABLE", # accepts NEW_TABLE
+    #           },
+    #         ],
     #         role_arn: "Arn", # required
     #         timeout: 1,
     #       }
@@ -3970,7 +4606,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -3999,9 +4635,19 @@ module Aws::GlueDataBrew
     #   job.
     #   @return [Array<Types::Output>]
     #
+    # @!attribute [rw] data_catalog_outputs
+    #   One or more artifacts that represent the Glue Data Catalog output
+    #   from running the job.
+    #   @return [Array<Types::DataCatalogOutput>]
+    #
+    # @!attribute [rw] database_outputs
+    #   Represents a list of JDBC database output objects which defines the
+    #   output destination for a DataBrew recipe job to write into.
+    #   @return [Array<Types::DatabaseOutput>]
+    #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] timeout
@@ -4019,6 +4665,8 @@ module Aws::GlueDataBrew
       :max_capacity,
       :max_retries,
       :outputs,
+      :data_catalog_outputs,
+      :database_outputs,
       :role_arn,
       :timeout)
       SENSITIVE = []
@@ -4113,8 +4761,8 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *AWS Glue
-    #   DataBrew Developer Guide*.
+    #   more information, see [Cron expressions][1] in the *Glue DataBrew
+    #   Developer Guide*.
     #
     #
     #

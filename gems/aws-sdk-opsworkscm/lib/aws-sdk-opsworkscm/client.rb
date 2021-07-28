@@ -610,7 +610,7 @@ module Aws::OpsWorksCM
     # @option params [String] :engine_version
     #   The major release version of the engine that you want to use. For a
     #   Chef server, the valid value for EngineVersion is currently `2`. For a
-    #   Puppet server, the valid value is `2017`.
+    #   Puppet server, valid values are `2019` or `2017`.
     #
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
     #   Optional engine attributes on a specified server.
@@ -1427,7 +1427,9 @@ module Aws::OpsWorksCM
     #   The name of the key pair to set on the new EC2 instance. This can be
     #   helpful if the administrator no longer has the SSH key.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::RestoreServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreServerResponse#server #server} => Types::Server
     #
     # @example Request syntax with placeholder values
     #
@@ -1437,6 +1439,37 @@ module Aws::OpsWorksCM
     #     instance_type: "String",
     #     key_pair: "KeyPair",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.server.associate_public_ip_address #=> Boolean
+    #   resp.server.backup_retention_count #=> Integer
+    #   resp.server.server_name #=> String
+    #   resp.server.created_at #=> Time
+    #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
+    #   resp.server.disable_automated_backup #=> Boolean
+    #   resp.server.endpoint #=> String
+    #   resp.server.engine #=> String
+    #   resp.server.engine_model #=> String
+    #   resp.server.engine_attributes #=> Array
+    #   resp.server.engine_attributes[0].name #=> String
+    #   resp.server.engine_attributes[0].value #=> String
+    #   resp.server.engine_version #=> String
+    #   resp.server.instance_profile_arn #=> String
+    #   resp.server.instance_type #=> String
+    #   resp.server.key_pair #=> String
+    #   resp.server.maintenance_status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.server.preferred_maintenance_window #=> String
+    #   resp.server.preferred_backup_window #=> String
+    #   resp.server.security_group_ids #=> Array
+    #   resp.server.security_group_ids[0] #=> String
+    #   resp.server.service_role_arn #=> String
+    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "RESTORING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY", "TERMINATED"
+    #   resp.server.status_reason #=> String
+    #   resp.server.subnet_ids #=> Array
+    #   resp.server.subnet_ids[0] #=> String
+    #   resp.server.server_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServer AWS API Documentation
     #
@@ -1784,7 +1817,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

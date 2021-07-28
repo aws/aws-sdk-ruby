@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-07-12)
+------------------
+
+* Feature - Documentation updates for Wesley to support the parallel node upgrade feature.
+
+1.57.0 (2021-07-08)
+------------------
+
+* Feature - Added waiters for EKS FargateProfiles.
+
+1.56.0 (2021-07-06)
+------------------
+
+* Feature - Adding new error code UnsupportedAddonModification for Addons in EKS
+
+1.55.0 (2021-06-07)
+------------------
+
+* Feature - Added updateConfig option that allows customers to control upgrade velocity in Managed Node Group.
+
+1.54.0 (2021-05-19)
+------------------
+
+* Feature - Update the EKS AddonActive waiter.
+
 1.53.0 (2021-05-10)
 ------------------
 

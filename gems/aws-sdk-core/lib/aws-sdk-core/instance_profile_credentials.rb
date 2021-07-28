@@ -5,7 +5,6 @@ require 'net/http'
 
 module Aws
   class InstanceProfileCredentials
-
     include CredentialProvider
     include RefreshingCredentials
 
@@ -44,7 +43,13 @@ module Aws
     # @param [Hash] options
     # @option options [Integer] :retries (1) Number of times to retry
     #   when retrieving credentials.
-    # @option options [String] :ip_address ('169.254.169.254')
+    # @option options [String] :endpoint ('http://169.254.169.254') The IMDS
+    #   endpoint. This option has precedence over the :endpoint_mode.
+    # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
+    #   the instance metadata service. This is either 'IPv4' ('169.254.169.254')
+    #   or 'IPv6' ('[fd00:ec2::254]').
+    # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use
+    #   :endpoint instead. The IP address for the endpoint.
     # @option options [Integer] :port (80)
     # @option options [Float] :http_open_timeout (1)
     # @option options [Float] :http_read_timeout (1)
@@ -60,7 +65,8 @@ module Aws
     #   to 21600 seconds
     def initialize(options = {})
       @retries = options[:retries] || 1
-      @ip_address = options[:ip_address] || '169.254.169.254'
+      endpoint_mode = resolve_endpoint_mode(options)
+      @endpoint = resolve_endpoint(options, endpoint_mode)
       @port = options[:port] || 80
       @http_open_timeout = options[:http_open_timeout] || 1
       @http_read_timeout = options[:http_read_timeout] || 1
@@ -77,6 +83,34 @@ module Aws
     attr_reader :retries
 
     private
+
+    def resolve_endpoint_mode(options)
+      value = options[:endpoint_mode]
+      value ||= ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE']
+      value ||= Aws.shared_config.ec2_metadata_service_endpoint_mode(
+        profile: options[:profile]
+      )
+      value || 'IPv4'
+    end
+
+    def resolve_endpoint(options, endpoint_mode)
+      value = options[:endpoint] || options[:ip_address]
+      value ||= ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT']
+      value ||= Aws.shared_config.ec2_metadata_service_endpoint(
+        profile: options[:profile]
+      )
+
+      return value if value
+
+      case endpoint_mode.downcase
+      when 'ipv4' then 'http://169.254.169.254'
+      when 'ipv6' then 'http://[fd00:ec2::254]'
+      else
+        raise ArgumentError,
+              ':endpoint_mode is not valid, expected IPv4 or IPv6, '\
+              "got: #{endpoint_mode}"
+      end
+    end
 
     def backoff(backoff)
       case backoff
@@ -152,7 +186,8 @@ module Aws
     end
 
     def open_connection
-      http = Net::HTTP.new(@ip_address, @port, nil)
+      uri = URI.parse(@endpoint)
+      http = Net::HTTP.new(uri.hostname || @endpoint, @port || uri.port)
       http.open_timeout = @http_open_timeout
       http.read_timeout = @http_read_timeout
       http.set_debug_output(@http_debug_output) if @http_debug_output

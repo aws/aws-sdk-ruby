@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-07-13)
+------------------
+
+* Feature - Add paginator for GetCostEstimation
+
+1.7.0 (2021-07-08)
+------------------
+
+* Feature - Add AnomalyReportedTimeRange field to include open and close time of anomalies.
+
 1.6.0 (2021-05-04)
 ------------------
 

@@ -12,7 +12,6 @@ if RUBY_VERSION >= '2.1'
     require 'http/2'
   rescue LoadError; end
 end
-require 'seahorse/client/plugins/content_length.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
@@ -42,7 +41,6 @@ module Aws::TranscribeStreamingService
 
     set_api(ClientApi::API)
 
-    add_plugin(Seahorse::Client::Plugins::ContentLength)
     add_plugin(Aws::Plugins::CredentialsConfiguration)
     add_plugin(Aws::Plugins::Logging)
     add_plugin(Aws::Plugins::ParamConverter)
@@ -813,7 +811,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.29.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

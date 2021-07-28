@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-07-26)
+------------------
+
+* Feature - Documentation updates for SSO API Ref.
+
 1.5.0 (2021-03-10)
 ------------------
 

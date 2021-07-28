@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-06-08)
+------------------
+
+* Feature - This release adds support for auditing end-user access to files, folders, and file shares using Windows event logs, enabling customers to meet their security and compliance needs.
+
+1.37.0 (2021-05-27)
+------------------
+
+* Feature - This release adds LZ4 data compression support to FSx for Lustre to reduce storage consumption of both file system storage and file system backups.
+
 1.36.0 (2021-04-12)
 ------------------
 

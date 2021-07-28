@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-07-08)
+------------------
+
+* Feature - Add ListAlerts for Channel, Program, Source Location, and VOD Source to return alerts for resources.
+
+1.40.0 (2021-06-23)
+------------------
+
+* Feature - Update GetChannelSchedule to return information on ad breaks.
+
+1.39.0 (2021-06-16)
+------------------
+
+* Feature - Adds AWS Secrets Manager Access Token Authentication for Source Locations
+
 1.38.0 (2021-03-16)
 ------------------
 

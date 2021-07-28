@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-06-23)
+------------------
+
+* Feature - Adds support for S3 based full repository analysis and changed lines scan.
+
 1.17.0 (2021-04-26)
 ------------------
 

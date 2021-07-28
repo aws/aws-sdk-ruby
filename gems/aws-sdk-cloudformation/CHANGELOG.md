@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-06-21)
+------------------
+
+* Feature - CloudFormation registry service now supports 3rd party public type sharing
+
 1.52.0 (2021-04-28)
 ------------------
 

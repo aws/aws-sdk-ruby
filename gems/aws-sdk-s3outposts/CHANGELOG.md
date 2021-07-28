@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-07-23)
+------------------
+
+* Feature - Add on-premise access type support for endpoints
+
 1.2.0 (2021-03-10)
 ------------------
 

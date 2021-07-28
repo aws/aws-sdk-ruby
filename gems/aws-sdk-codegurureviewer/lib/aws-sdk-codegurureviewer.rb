@@ -15,6 +15,7 @@ require_relative 'aws-sdk-codegurureviewer/types'
 require_relative 'aws-sdk-codegurureviewer/client_api'
 require_relative 'aws-sdk-codegurureviewer/client'
 require_relative 'aws-sdk-codegurureviewer/errors'
+require_relative 'aws-sdk-codegurureviewer/waiters'
 require_relative 'aws-sdk-codegurureviewer/resource'
 require_relative 'aws-sdk-codegurureviewer/customizations'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-codegurureviewer/customizations'
 # @!group service
 module Aws::CodeGuruReviewer
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end

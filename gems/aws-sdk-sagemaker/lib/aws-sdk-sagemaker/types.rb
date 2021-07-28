@@ -172,9 +172,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -287,8 +288,8 @@ module Aws::SageMaker
     # @!attribute [rw] algorithm_name
     #   The name of the algorithm resource to use for the training job. This
     #   must be an algorithm resource that you created or subscribe to on
-    #   AWS Marketplace. If you specify a value for this parameter, you
-    #   can't specify a value for `TrainingImage`.
+    #   Amazon Web Services Marketplace. If you specify a value for this
+    #   parameter, you can't specify a value for `TrainingImage`.
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -442,7 +443,7 @@ module Aws::SageMaker
     # runs to validate your algorithm.
     #
     # The data provided in the validation profile is made available to your
-    # buyers on AWS Marketplace.
+    # buyers on Amazon Web Services Marketplace.
     #
     # @note When making an API call, you may pass AlgorithmValidationProfile
     #   data as a hash:
@@ -520,7 +521,7 @@ module Aws::SageMaker
     #             kms_key_id: "KmsKeyId",
     #           },
     #           transform_resources: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             instance_count: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -634,7 +635,7 @@ module Aws::SageMaker
     #                 kms_key_id: "KmsKeyId",
     #               },
     #               transform_resources: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #                 instance_count: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
     #               },
@@ -1678,8 +1679,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data generated from an Athena query execution.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data generated from
+    #   an Athena query execution.
     #   @return [String]
     #
     # @!attribute [rw] output_format
@@ -1926,13 +1928,12 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
-    #   The maximum time, in seconds, a job is allowed to run.
+    #   The maximum time, in seconds, a training job is allowed to run as
+    #   part of an AutoML job.
     #   @return [Integer]
     #
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
-    #   The maximum time, in seconds, an AutoML job is allowed to wait for a
-    #   trial to complete. It must be equal to or greater than
-    #   `MaxRuntimePerTrainingJobInSeconds`.
+    #   The maximum runtime, in seconds, an AutoML job has to complete.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobCompletionCriteria AWS API Documentation
@@ -2146,7 +2147,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS encryption key ID.
+    #   The Amazon Web Services KMS encryption key ID.
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
@@ -2336,6 +2337,31 @@ module Aws::SageMaker
     #
     class CacheHitResult < Struct.new(
       :source_pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata about a callback step.
+    #
+    # @!attribute [rw] callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] sqs_queue_url
+    #   The URL of the Amazon Simple Queue Service (Amazon SQS) queue used
+    #   by the callback step.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_parameters
+    #   A list of the output parameters of the callback step.
+    #   @return [Array<Types::OutputParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CallbackStepMetadata AWS API Documentation
+    #
+    class CallbackStepMetadata < Struct.new(
+      :callback_token,
+      :sqs_queue_url,
+      :output_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2707,8 +2733,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] git_config
     #   Configuration details for the Git repository, including the URL
-    #   where it is located and the ARN of the AWS Secrets Manager secret
-    #   that contains the credentials used to access the repository.
+    #   where it is located and the ARN of the Amazon Web Services Secrets
+    #   Manager secret that contains the credentials used to access the
+    #   repository.
     #   @return [Types::GitConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeRepositorySummary AWS API Documentation
@@ -3019,13 +3046,15 @@ module Aws::SageMaker
     #
     #    </note>
     #
-    #   If you provide a value for this parameter, Amazon SageMaker uses AWS
-    #   Security Token Service to download model artifacts from the S3 path
-    #   you provide. AWS STS is activated in your IAM user account by
-    #   default. If you previously deactivated AWS STS for a region, you
-    #   need to reactivate AWS STS for that region. For more information,
-    #   see [Activating and Deactivating AWS STS in an AWS Region][2] in the
-    #   *AWS Identity and Access Management User Guide*.
+    #   If you provide a value for this parameter, Amazon SageMaker uses
+    #   Amazon Web Services Security Token Service to download model
+    #   artifacts from the S3 path you provide. Amazon Web Services STS is
+    #   activated in your IAM user account by default. If you previously
+    #   deactivated Amazon Web Services STS for a region, you need to
+    #   reactivate Amazon Web Services STS for that region. For more
+    #   information, see [Activating and Deactivating Amazon Web Services
+    #   STS in an Amazon Web Services Region][2] in the *Amazon Web Services
+    #   Identity and Access Management User Guide*.
     #
     #   If you use a built-in algorithm to create a model, Amazon SageMaker
     #   requires that you provide a S3 path to the model artifacts in
@@ -3273,8 +3302,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] action_name
-    #   The name of the action. Must be unique to your account in an AWS
-    #   Region.
+    #   The name of the action. Must be unique to your account in an Amazon
+    #   Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -3398,9 +3427,12 @@ module Aws::SageMaker
     #               image_digest: "ImageDigest",
     #               model_data_url: "Url",
     #               product_id: "ProductId",
+    #               environment: {
+    #                 "EnvironmentKey" => "EnvironmentValue",
+    #               },
     #             },
     #           ],
-    #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #           supported_content_types: ["ContentType"], # required
     #           supported_response_mime_types: ["ResponseMIMEType"], # required
@@ -3481,7 +3513,7 @@ module Aws::SageMaker
     #                   kms_key_id: "KmsKeyId",
     #                 },
     #                 transform_resources: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #                   instance_count: 1, # required
     #                   volume_kms_key_id: "KmsKeyId",
     #                 },
@@ -3551,14 +3583,15 @@ module Aws::SageMaker
     #   @return [Types::AlgorithmValidationSpecification]
     #
     # @!attribute [rw] certify_for_marketplace
-    #   Whether to certify the algorithm so that it can be listed in AWS
-    #   Marketplace.
+    #   Whether to certify the algorithm so that it can be listed in Amazon
+    #   Web Services Marketplace.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -3757,8 +3790,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] artifact_name
-    #   The name of the artifact. Must be unique to your account in an AWS
-    #   Region.
+    #   The name of the artifact. Must be unique to your account in an
+    #   Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -3877,10 +3910,6 @@ module Aws::SageMaker
     #   Provides information about encryption and the Amazon S3 output path
     #   needed to store artifacts from an AutoML job. Format(s) supported:
     #   CSV.
-    #
-    #   &lt;para&gt;Specifies whether to automatically deploy the best
-    #   &amp;ATP; model to an endpoint and the name of that endpoint if
-    #   deployed automatically.&lt;/para&gt;
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] problem_type
@@ -3908,10 +3937,6 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that is used to access the data.
-    #
-    #   &lt;para&gt;Specifies whether to automatically deploy the best
-    #   &amp;ATP; model to an endpoint and the name of that endpoint if
-    #   deployed automatically.&lt;/para&gt;
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
@@ -3990,9 +4015,10 @@ module Aws::SageMaker
     #   @return [Types::GitConfig]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -4035,7 +4061,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -4043,6 +4069,10 @@ module Aws::SageMaker
     #           },
     #           compiler_options: "CompilerOptions",
     #           kms_key_id: "KmsKeyId",
+    #         },
+    #         vpc_config: {
+    #           security_group_ids: ["NeoVpcSecurityGroupId"], # required
+    #           subnets: ["NeoVpcSubnetId"], # required
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -4058,7 +4088,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] compilation_job_name
     #   A name for the model compilation job. The name must be unique within
-    #   the AWS Region and within your AWS account.
+    #   the Amazon Web Services Region and within your Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -4096,6 +4127,17 @@ module Aws::SageMaker
     #   model and the target device the model runs on.
     #   @return [Types::OutputConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   A VpcConfig object that specifies the VPC that you want your
+    #   compilation job to connect to. Control access to your models by
+    #   configuring the VPC. For more information, see [Protect Compilation
+    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+    #   @return [Types::NeoVpcConfig]
+    #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model compilation job can run. When
     #   the job reaches the time limit, Amazon SageMaker ends the
@@ -4103,9 +4145,10 @@ module Aws::SageMaker
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -4119,6 +4162,7 @@ module Aws::SageMaker
       :role_arn,
       :input_config,
       :output_config,
+      :vpc_config,
       :stopping_condition,
       :tags)
       SENSITIVE = []
@@ -4168,8 +4212,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] context_name
-    #   The name of the context. Must be unique to your account in an AWS
-    #   Region.
+    #   The name of the context. Must be unique to your account in an Amazon
+    #   Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -4270,7 +4314,7 @@ module Aws::SageMaker
     #         job_resources: { # required
     #           cluster_config: { # required
     #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -4336,8 +4380,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -4383,6 +4427,8 @@ module Aws::SageMaker
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #           preset_deployment_config: "String",
     #         },
     #         tags: [
     #           {
@@ -4390,6 +4436,7 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         enable_iot_role_alias: false,
     #       }
     #
     # @!attribute [rw] device_fleet_name
@@ -4397,8 +4444,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) that has access to AWS Internet of
-    #   Things (IoT).
+    #   The Amazon Resource Name (ARN) that has access to Amazon Web
+    #   Services Internet of Things (IoT).
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4414,6 +4461,15 @@ module Aws::SageMaker
     #   Creates tags for the specified fleet.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] enable_iot_role_alias
+    #   Whether to create an Amazon Web Services IoT Role Alias during
+    #   device fleet creation. The name of the role alias generated will
+    #   match this pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #
+    #   For example, if your device fleet is called "demo-fleet", the name
+    #   of the role alias will be "SageMakerEdge-demo-fleet".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDeviceFleetRequest AWS API Documentation
     #
     class CreateDeviceFleetRequest < Struct.new(
@@ -4421,7 +4477,8 @@ module Aws::SageMaker
       :role_arn,
       :description,
       :output_config,
-      :tags)
+      :tags,
+      :enable_iot_role_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4535,9 +4592,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   SageMaker uses AWS KMS to encrypt the EFS volume attached to the
-    #   domain with an AWS managed customer master key (CMK) by default. For
-    #   more control, specify a customer managed CMK.
+    #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
+    #   attached to the domain with an Amazon Web Services managed customer
+    #   master key (CMK) by default. For more control, specify a customer
+    #   managed CMK.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -4585,6 +4643,8 @@ module Aws::SageMaker
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #           preset_deployment_config: "String",
     #         },
     #         resource_key: "KmsKeyId",
     #         tags: [
@@ -4704,9 +4764,10 @@ module Aws::SageMaker
     #   @return [Types::DataCaptureConfig]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -4714,9 +4775,10 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
-    #   that Amazon SageMaker uses to encrypt data on the storage volume
-    #   attached to the ML compute instance that hosts the endpoint.
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service key that Amazon SageMaker uses to encrypt data on
+    #   the storage volume attached to the ML compute instance that hosts
+    #   the endpoint.
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -4732,8 +4794,8 @@ module Aws::SageMaker
     #
     #   The KMS key policy must grant permission to the IAM role that you
     #   specify in your `CreateEndpoint`, `UpdateEndpoint` requests. For
-    #   more information, refer to the AWS Key Management Service section[
-    #   Using Key Policies in AWS KMS ][1]
+    #   more information, refer to the Amazon Web Services Key Management
+    #   Service section[ Using Key Policies in Amazon Web Services KMS ][1]
     #
     #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
     #   the instance type. Local storage volumes are encrypted using a
@@ -4799,9 +4861,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the endpoint.The name must be unique within an AWS
-    #   Region in your AWS account. The name is case-insensitive in
-    #   `CreateEndpoint`, but the case is preserved and must be matched in .
+    #   The name of the endpoint.The name must be unique within an Amazon
+    #   Web Services Region in your Amazon Web Services account. The name is
+    #   case-insensitive in `CreateEndpoint`, but the case is preserved and
+    #   must be matched in .
     #   @return [String]
     #
     # @!attribute [rw] endpoint_config_name
@@ -4810,9 +4873,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -4857,8 +4921,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] experiment_name
-    #   The name of the experiment. The name must be unique in your AWS
-    #   account and is not case-sensitive.
+    #   The name of the experiment. The name must be unique in your Amazon
+    #   Web Services account and is not case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -4943,7 +5007,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] feature_group_name
     #   The name of the `FeatureGroup`. The name must be unique within an
-    #   AWS Region in an AWS account. The name:
+    #   Amazon Web Services Region in an Amazon Web Services account. The
+    #   name:
     #
     #   * Must start and end with an alphanumeric character.
     #
@@ -5010,8 +5075,8 @@ module Aws::SageMaker
     #   the `EnableOnlineStore` flag in `OnlineStoreConfig`; the default
     #   value is `False`.
     #
-    #   You can also include an AWS KMS key ID (`KMSKeyId`) for at-rest
-    #   encryption of the `OnlineStore`.
+    #   You can also include an Amazon Web Services KMS key ID (`KMSKeyId`)
+    #   for at-rest encryption of the `OnlineStore`.
     #   @return [Types::OnlineStoreConfig]
     #
     # @!attribute [rw] offline_store_config
@@ -5021,7 +5086,8 @@ module Aws::SageMaker
     #   * The Amazon Simple Storage Service (Amazon S3) location of an
     #     `OfflineStore`.
     #
-    #   * A configuration for an AWS Glue or AWS Hive data cataolgue.
+    #   * A configuration for an Amazon Web Services Glue or Amazon Web
+    #     Services Hive data cataolgue.
     #
     #   * An KMS encryption key to encrypt the Amazon S3 location used for
     #     `OfflineStore`.
@@ -5496,9 +5562,10 @@ module Aws::SageMaker
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of the tuning job. This name is the prefix for the names of
     #   all training jobs that this tuning job launches. The name must be
-    #   unique within the same AWS account and AWS Region. The name must
-    #   have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9, and : +
-    #   = @ \_ % - (hyphen). The name is not case sensitive.
+    #   unique within the same Amazon Web Services account and Amazon Web
+    #   Services Region. The name must have 1 to 32 characters. Valid
+    #   characters are a-z, A-Z, 0-9, and : + = @ \_ % - (hyphen). The name
+    #   is not case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_config
@@ -5549,9 +5616,10 @@ module Aws::SageMaker
     #   @return [Types::HyperParameterTuningJobWarmStartConfig]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #   Tags that you specify for the tuning job are also added to all
     #   training jobs that the tuning job launches.
@@ -5668,8 +5736,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the
-    #   SDK for Python (Boto3), add a unique value to the call.
+    #   A unique ID. If not specified, the Amazon Web Services CLI and
+    #   Amazon Web Services SDKs, such as the SDK for Python (Boto3), add a
+    #   unique value to the call.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -5774,9 +5843,9 @@ module Aws::SageMaker
     # @!attribute [rw] labeling_job_name
     #   The name of the labeling job. This name is used to identify the job
     #   in a list of labeling jobs. Labeling job names must be unique within
-    #   an AWS account and region. `LabelingJobName` is not case sensitive.
-    #   For example, Example-job and example-job are considered the same
-    #   labeling job name by Ground Truth.
+    #   an Amazon Web Services account and region. `LabelingJobName` is not
+    #   case sensitive. For example, Example-job and example-job are
+    #   considered the same labeling job name by Ground Truth.
     #   @return [String]
     #
     # @!attribute [rw] label_attribute_name
@@ -5856,8 +5925,9 @@ module Aws::SageMaker
     #   @return [Types::LabelingJobInputConfig]
     #
     # @!attribute [rw] output_config
-    #   The location of the output data and the AWS Key Management Service
-    #   key ID for the key used to encrypt the output data, if any.
+    #   The location of the output data and the Amazon Web Services Key
+    #   Management Service key ID for the key used to encrypt the output
+    #   data, if any.
     #   @return [Types::LabelingJobOutputConfig]
     #
     # @!attribute [rw] role_arn
@@ -5934,8 +6004,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   An array of key/value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*.
+    #   Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*.
     #
     #
     #
@@ -6022,7 +6092,7 @@ module Aws::SageMaker
     #         job_resources: { # required
     #           cluster_config: { # required
     #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -6049,7 +6119,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the bias job definition. The name must be unique within
-    #   an AWS Region in the AWS account.
+    #   an Amazon Web Services Region in the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] model_bias_baseline_config
@@ -6089,8 +6159,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -6173,7 +6243,7 @@ module Aws::SageMaker
     #         job_resources: { # required
     #           cluster_config: { # required
     #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -6200,7 +6270,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the model explainability job definition. The name must
-    #   be unique within an AWS Region in the AWS account.
+    #   be unique within an Amazon Web Services Region in the Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] model_explainability_baseline_config
@@ -6240,8 +6311,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -6376,9 +6447,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -6455,8 +6527,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   A list of key value pairs associated with the model group. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -6500,9 +6572,12 @@ module Aws::SageMaker
     #               image_digest: "ImageDigest",
     #               model_data_url: "Url",
     #               product_id: "ProductId",
+    #               environment: {
+    #                 "EnvironmentKey" => "EnvironmentValue",
+    #               },
     #             },
     #           ],
-    #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #           supported_content_types: ["ContentType"], # required
     #           supported_response_mime_types: ["ResponseMIMEType"], # required
@@ -6537,7 +6612,7 @@ module Aws::SageMaker
     #                   kms_key_id: "KmsKeyId",
     #                 },
     #                 transform_resources: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #                   instance_count: 1, # required
     #                   volume_kms_key_id: "KmsKeyId",
     #                 },
@@ -6654,7 +6729,8 @@ module Aws::SageMaker
     #   @return [Types::SourceAlgorithmSpecification]
     #
     # @!attribute [rw] certify_for_marketplace
-    #   Whether to certify the model package for listing on AWS Marketplace.
+    #   Whether to certify the model package for listing on Amazon Web
+    #   Services Marketplace.
     #
     #   This parameter is optional for unversioned models, and does not
     #   apply to versioned models.
@@ -6662,8 +6738,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   A list of key value pairs associated with the model. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -6782,7 +6858,7 @@ module Aws::SageMaker
     #         job_resources: { # required
     #           cluster_config: { # required
     #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -6848,8 +6924,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -6935,7 +7011,7 @@ module Aws::SageMaker
     #             monitoring_resources: { # required
     #               cluster_config: { # required
     #                 instance_count: 1, # required
-    #                 instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #                 instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #                 volume_size_in_gb: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
     #               },
@@ -6976,7 +7052,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the monitoring schedule. The name must be unique within
-    #   an AWS Region within an AWS account.
+    #   an Amazon Web Services Region within an Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] monitoring_schedule_config
@@ -6988,7 +7064,7 @@ module Aws::SageMaker
     #   (Optional) An array of key-value pairs. For more information, see
     #   [Using Cost Allocation Tags](
     #   https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-    #   in the *AWS Billing and Cost Management User Guide*.
+    #   in the *Amazon Web Services Billing and Cost Management User Guide*.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateMonitoringScheduleRequest AWS API Documentation
@@ -7057,11 +7133,11 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
-    #   When you send any requests to AWS resources from the notebook
-    #   instance, Amazon SageMaker assumes this role to perform tasks on
-    #   your behalf. You must grant this role necessary permissions so
-    #   Amazon SageMaker can perform these tasks. The policy must allow the
-    #   Amazon SageMaker service principal (sagemaker.amazonaws.com)
+    #   When you send any requests to Amazon Web Services resources from the
+    #   notebook instance, Amazon SageMaker assumes this role to perform
+    #   tasks on your behalf. You must grant this role necessary permissions
+    #   so Amazon SageMaker can perform these tasks. The policy must allow
+    #   the Amazon SageMaker service principal (sagemaker.amazonaws.com)
     #   permissions to assume this role. For more information, see [Amazon
     #   SageMaker Roles][1].
     #
@@ -7076,11 +7152,12 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
-    #   that Amazon SageMaker uses to encrypt data on the storage volume
-    #   attached to your notebook instance. The KMS key you provide must be
-    #   enabled. For information, see [Enabling and Disabling Keys][1] in
-    #   the *AWS Key Management Service Developer Guide*.
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service key that Amazon SageMaker uses to encrypt data on
+    #   the storage volume attached to your notebook instance. The KMS key
+    #   you provide must be enabled. For information, see [Enabling and
+    #   Disabling Keys][1] in the *Amazon Web Services Key Management
+    #   Service Developer Guide*.
     #
     #
     #
@@ -7088,9 +7165,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -7143,10 +7221,11 @@ module Aws::SageMaker
     #   A Git repository to associate with the notebook instance as its
     #   default code repository. This can be either the name of a Git
     #   repository stored as a resource in your account, or the URL of a Git
-    #   repository in [AWS CodeCommit][1] or in any other Git repository.
-    #   When you open a notebook instance, it opens in the directory that
-    #   contains this repository. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   repository in [Amazon Web Services CodeCommit][1] or in any other
+    #   Git repository. When you open a notebook instance, it opens in the
+    #   directory that contains this repository. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -7158,10 +7237,11 @@ module Aws::SageMaker
     #   An array of up to three Git repositories to associate with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories
-    #   in [AWS CodeCommit][1] or in any other Git repository. These
-    #   repositories are cloned at the same level as the default repository
-    #   of your notebook instance. For more information, see [Associating
-    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
+    #   in [Amazon Web Services CodeCommit][1] or in any other Git
+    #   repository. These repositories are cloned at the same level as the
+    #   default repository of your notebook instance. For more information,
+    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -7499,7 +7579,7 @@ module Aws::SageMaker
     #         processing_resources: { # required
     #           cluster_config: { # required
     #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -7548,7 +7628,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] processing_job_name
     #   The name of the processing job. The name must be unique within an
-    #   AWS Region in the AWS account.
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] processing_resources
@@ -7585,8 +7665,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -7669,7 +7749,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] service_catalog_provisioning_details
     #   The product ID and provisioning artifact ID to provision a service
-    #   catalog. For information, see [What is AWS Service Catalog][1].
+    #   catalog. For information, see [What is Amazon Web Services Service
+    #   Catalog][1].
     #
     #
     #
@@ -7678,8 +7759,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   An array of key-value pairs that you want to use to organize and
-    #   track your AWS resource costs. For more information, see [Tagging
-    #   AWS resources][1] in the *AWS General Reference Guide*.
+    #   track your Amazon Web Services resource costs. For more information,
+    #   see [Tagging Amazon Web Services resources][1] in the *Amazon Web
+    #   Services General Reference Guide*.
     #
     #
     #
@@ -7813,7 +7895,7 @@ module Aws::SageMaker
     #             local_path: "DirectoryPath",
     #             s3_output_path: "S3Uri",
     #             rule_evaluator_image: "AlgorithmImage", # required
-    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1,
     #             rule_parameters: {
     #               "ConfigKey" => "ConfigValue",
@@ -7842,7 +7924,7 @@ module Aws::SageMaker
     #             local_path: "DirectoryPath",
     #             s3_output_path: "S3Uri",
     #             rule_evaluator_image: "AlgorithmImage", # required
-    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1,
     #             rule_parameters: {
     #               "ConfigKey" => "ConfigValue",
@@ -7858,8 +7940,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] training_job_name
-    #   The name of the training job. The name must be unique within an AWS
-    #   Region in an AWS account.
+    #   The name of the training job. The name must be unique within an
+    #   Amazon Web Services Region in an Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameters
@@ -7973,9 +8055,10 @@ module Aws::SageMaker
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -8153,7 +8236,7 @@ module Aws::SageMaker
     #           kms_key_id: "KmsKeyId",
     #         },
     #         transform_resources: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           instance_count: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
     #         },
@@ -8176,14 +8259,15 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] transform_job_name
-    #   The name of the transform job. The name must be unique within an AWS
-    #   Region in an AWS account.
+    #   The name of the transform job. The name must be unique within an
+    #   Amazon Web Services Region in an Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] model_name
     #   The name of the model that you want to use for the transform job.
     #   `ModelName` must be the name of an existing Amazon SageMaker model
-    #   within an AWS Region in an AWS account.
+    #   within an Amazon Web Services Region in an Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrent_transforms
@@ -8275,8 +8359,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -8371,8 +8455,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] trial_component_name
-    #   The name of the component. The name must be unique in your AWS
-    #   account and is not case-sensitive.
+    #   The name of the component. The name must be unique in your Amazon
+    #   Web Services account and is not case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -8475,8 +8559,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] trial_name
-    #   The name of the trial. The name must be unique in your AWS account
-    #   and is not case-sensitive.
+    #   The name of the trial. The name must be unique in your Amazon Web
+    #   Services account and is not case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -8592,9 +8676,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_value
-    #   The username of the associated AWS Single Sign-On User for this
-    #   UserProfile. If the Domain's AuthMode is SSO, this field is
-    #   required, and must match a valid username of a user in your
+    #   The username of the associated Amazon Web Services Single Sign-On
+    #   User for this UserProfile. If the Domain's AuthMode is SSO, this
+    #   field is required, and must match a valid username of a user in your
     #   directory. If the Domain's AuthMode is not SSO, this field cannot
     #   be specified.
     #   @return [String]
@@ -8809,8 +8893,8 @@ module Aws::SageMaker
     #   An array of key-value pairs.
     #
     #   For more information, see [Resource Tag][1] and [Using Cost
-    #   Allocation Tags][2] in the <i> AWS Billing and Cost Management User
-    #   Guide</i>.
+    #   Allocation Tags][2] in the <i> Amazon Web Services Billing and Cost
+    #   Management User Guide</i>.
     #
     #
     #
@@ -9413,7 +9497,7 @@ module Aws::SageMaker
     #         local_path: "DirectoryPath",
     #         s3_output_path: "S3Uri",
     #         rule_evaluator_image: "AlgorithmImage", # required
-    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         volume_size_in_gb: 1,
     #         rule_parameters: {
     #           "ConfigKey" => "ConfigValue",
@@ -9890,7 +9974,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] feature_group_name
     #   The name of the `FeatureGroup` you want to delete. The name must be
-    #   unique within an AWS Region in an AWS account.
+    #   unique within an Amazon Web Services Region in an Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteFeatureGroupRequest AWS API Documentation
@@ -10103,8 +10188,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] model_package_name
-    #   The name of the model package. The name must have 1 to 63
-    #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   The name or Amazon Resource Name (ARN) of the model package to
+    #   delete.
+    #
+    #   When you specify a name, the name must have 1 to 63 characters.
+    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackageInput AWS API Documentation
@@ -10680,7 +10768,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] certify_for_marketplace
-    #   Whether the algorithm is certified to be listed in AWS Marketplace.
+    #   Whether the algorithm is certified to be listed in Amazon Web
+    #   Services Marketplace.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithmOutput AWS API Documentation
@@ -10967,10 +11056,10 @@ module Aws::SageMaker
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that has read permission to the input data
-    #   location and write permission to the output data location in Amazon
-    #   S3.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that has read permission to the
+    #   input data location and write permission to the output data location
+    #   in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
@@ -11109,8 +11198,8 @@ module Aws::SageMaker
     # @!attribute [rw] git_config
     #   Configuration details about the repository, including the URL where
     #   the repository is located, the default branch, and the Amazon
-    #   Resource Name (ARN) of the AWS Secrets Manager secret that contains
-    #   the credentials used to access the repository.
+    #   Resource Name (ARN) of the Amazon Web Services Secrets Manager
+    #   secret that contains the credentials used to access the repository.
     #   @return [Types::GitConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepositoryOutput AWS API Documentation
@@ -11181,6 +11270,11 @@ module Aws::SageMaker
     #   compilation job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
+    # @!attribute [rw] inference_image
+    #   The inference image to use when compiling a model. Specify an image
+    #   only if the target device is a cloud instance.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The time that the model compilation job was created.
     #   @return [Time]
@@ -11220,6 +11314,17 @@ module Aws::SageMaker
     #   target device that the model runs on.
     #   @return [Types::OutputConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   A VpcConfig object that specifies the VPC that you want your
+    #   compilation job to connect to. Control access to your models by
+    #   configuring the VPC. For more information, see [Protect Compilation
+    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+    #   @return [Types::NeoVpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobResponse AWS API Documentation
     #
     class DescribeCompilationJobResponse < Struct.new(
@@ -11229,6 +11334,7 @@ module Aws::SageMaker
       :compilation_start_time,
       :compilation_end_time,
       :stopping_condition,
+      :inference_image,
       :creation_time,
       :last_modified_time,
       :failure_reason,
@@ -11236,7 +11342,8 @@ module Aws::SageMaker
       :model_digests,
       :role_arn,
       :input_config,
-      :output_config)
+      :output_config,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11451,13 +11558,13 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) that has access to AWS Internet of
-    #   Things (IoT).
+    #   The Amazon Resource Name (ARN) that has access to Amazon Web
+    #   Services Internet of Things (IoT).
     #   @return [String]
     #
     # @!attribute [rw] iot_role_alias
-    #   The Amazon Resource Name (ARN) alias created in AWS Internet of
-    #   Things (IoT).
+    #   The Amazon Resource Name (ARN) alias created in Amazon Web Services
+    #   Internet of Things (IoT).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDeviceFleetResponse AWS API Documentation
@@ -11523,8 +11630,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] iot_thing_name
-    #   The AWS Internet of Things (IoT) object thing name associated with
-    #   the device.
+    #   The Amazon Web Services Internet of Things (IoT) object thing name
+    #   associated with the device.
     #   @return [String]
     #
     # @!attribute [rw] registration_time
@@ -11659,8 +11766,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS customer managed CMK used to encrypt the EFS volume
-    #   attached to the domain.
+    #   The Amazon Web Services KMS customer managed CMK used to encrypt the
+    #   EFS volume attached to the domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
@@ -11765,6 +11872,10 @@ module Aws::SageMaker
     #   The signature document of files in the model artifact.
     #   @return [String]
     #
+    # @!attribute [rw] preset_deployment_output
+    #   The output of a SageMaker Edge Manager deployable resource.
+    #   @return [Types::EdgePresetDeploymentOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgePackagingJobResponse AWS API Documentation
     #
     class DescribeEdgePackagingJobResponse < Struct.new(
@@ -11781,7 +11892,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :model_artifact,
-      :model_signature)
+      :model_signature,
+      :preset_deployment_output)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11822,8 +11934,8 @@ module Aws::SageMaker
     #   @return [Types::DataCaptureConfig]
     #
     # @!attribute [rw] kms_key_id
-    #   AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it
-    #   on the ML storage volume attached to the instance.
+    #   Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt data
+    #   when storing it on the ML storage volume attached to the instance.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -12088,8 +12200,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] offline_store_config
     #   The configuration of the `OfflineStore`, inducing the S3 location of
-    #   the `OfflineStore`, AWS Glue or AWS Hive data catalogue
-    #   configurations, and the security configuration.
+    #   the `OfflineStore`, Amazon Web Services Glue or Amazon Web Services
+    #   Hive data catalogue configurations, and the security configuration.
     #   @return [Types::OfflineStoreConfig]
     #
     # @!attribute [rw] role_arn
@@ -12203,8 +12315,8 @@ module Aws::SageMaker
     #   @return [Types::FlowDefinitionOutputConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) execution role for the flow definition.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) execution role for the flow definition.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -12617,8 +12729,9 @@ module Aws::SageMaker
     #   @return [Types::LabelingJobInputConfig]
     #
     # @!attribute [rw] output_config
-    #   The location of the job's output data and the AWS Key Management
-    #   Service key ID for the key used to encrypt the output data, if any.
+    #   The location of the job's output data and the Amazon Web Services
+    #   Key Management Service key ID for the key used to encrypt the output
+    #   data, if any.
     #   @return [Types::LabelingJobOutputConfig]
     #
     # @!attribute [rw] role_arn
@@ -12683,9 +12796,10 @@ module Aws::SageMaker
     #   @return [Types::HumanTaskConfig]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -12730,7 +12844,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the model bias job definition. The name must be unique
-    #   within an AWS Region in the AWS account.
+    #   within an Amazon Web Services Region in the Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelBiasJobDefinitionRequest AWS API Documentation
@@ -12747,7 +12862,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the bias job definition. The name must be unique within
-    #   an AWS Region in the AWS account.
+    #   an Amazon Web Services Region in the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -12780,10 +12895,10 @@ module Aws::SageMaker
     #   @return [Types::MonitoringNetworkConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that has read permission to the input data
-    #   location and write permission to the output data location in Amazon
-    #   S3.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that has read permission to the
+    #   input data location and write permission to the output data location
+    #   in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] stopping_condition
@@ -12818,7 +12933,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the model explainability job definition. The name must
-    #   be unique within an AWS Region in the AWS account.
+    #   be unique within an Amazon Web Services Region in the Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelExplainabilityJobDefinitionRequest AWS API Documentation
@@ -12835,7 +12951,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the explainability job definition. The name must be
-    #   unique within an AWS Region in the AWS account.
+    #   unique within an Amazon Web Services Region in the Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -12868,10 +12985,10 @@ module Aws::SageMaker
     #   @return [Types::MonitoringNetworkConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that has read permission to the input data
-    #   location and write permission to the output data location in Amazon
-    #   S3.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that has read permission to the
+    #   input data location and write permission to the output data location
+    #   in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] stopping_condition
@@ -13044,7 +13161,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] model_package_name
-    #   The name of the model package to describe.
+    #   The name or Amazon Resource Name (ARN) of the model package to
+    #   describe.
+    #
+    #   When you specify a name, the name must have 1 to 63 characters.
+    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageInput AWS API Documentation
@@ -13104,8 +13225,8 @@ module Aws::SageMaker
     #   @return [Types::ModelPackageStatusDetails]
     #
     # @!attribute [rw] certify_for_marketplace
-    #   Whether the model package is certified for listing on AWS
-    #   Marketplace.
+    #   Whether the model package is certified for listing on Amazon Web
+    #   Services Marketplace.
     #   @return [Boolean]
     #
     # @!attribute [rw] model_approval_status
@@ -13174,7 +13295,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the model quality job. The name must be unique within an
-    #   AWS Region in the AWS account.
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelQualityJobDefinitionRequest AWS API Documentation
@@ -13191,7 +13312,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_definition_name
     #   The name of the quality job definition. The name must be unique
-    #   within an AWS Region in the AWS account.
+    #   within an Amazon Web Services Region in the Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -13458,8 +13580,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS key ID Amazon SageMaker uses to encrypt data when
-    #   storing it on the ML storage volume attached to the instance.
+    #   The Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt
+    #   data when storing it on the ML storage volume attached to the
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
@@ -13522,10 +13645,11 @@ module Aws::SageMaker
     #   The Git repository associated with the notebook instance as its
     #   default code repository. This can be either the name of a Git
     #   repository stored as a resource in your account, or the URL of a Git
-    #   repository in [AWS CodeCommit][1] or in any other Git repository.
-    #   When you open a notebook instance, it opens in the directory that
-    #   contains this repository. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   repository in [Amazon Web Services CodeCommit][1] or in any other
+    #   Git repository. When you open a notebook instance, it opens in the
+    #   directory that contains this repository. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -13537,10 +13661,11 @@ module Aws::SageMaker
     #   An array of up to three Git repositories associated with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories
-    #   in [AWS CodeCommit][1] or in any other Git repository. These
-    #   repositories are cloned at the same level as the default repository
-    #   of your notebook instance. For more information, see [Associating
-    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
+    #   in [Amazon Web Services CodeCommit][1] or in any other Git
+    #   repository. These repositories are cloned at the same level as the
+    #   default repository of your notebook instance. For more information,
+    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -13662,6 +13787,15 @@ module Aws::SageMaker
     #   The description of the pipeline execution.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_experiment_config
+    #   Specifies the names of the experiment and trial created by a
+    #   pipeline.
+    #   @return [Types::PipelineExperimentConfig]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the execution failed, a message describing why.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The time when the pipeline execution was created.
     #   @return [Time]
@@ -13688,6 +13822,8 @@ module Aws::SageMaker
       :pipeline_execution_display_name,
       :pipeline_execution_status,
       :pipeline_execution_description,
+      :pipeline_experiment_config,
+      :failure_reason,
       :creation_time,
       :last_modified_time,
       :created_by,
@@ -13793,7 +13929,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] processing_job_name
     #   The name of the processing job. The name must be unique within an
-    #   AWS Region in the AWS account.
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProcessingJobRequest AWS API Documentation
@@ -13814,7 +13950,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] processing_job_name
     #   The name of the processing job. The name must be unique within an
-    #   AWS Region in the AWS account.
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] processing_resources
@@ -13960,7 +14096,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] service_catalog_provisioning_details
     #   Information used to provision a service catalog product. For
-    #   information, see [What is AWS Service Catalog][1].
+    #   information, see [What is Amazon Web Services Service Catalog][1].
     #
     #
     #
@@ -14173,8 +14309,8 @@ module Aws::SageMaker
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
-    #   The AWS Identity and Access Management (IAM) role configured for the
-    #   training job.
+    #   The Amazon Web Services Identity and Access Management (IAM) role
+    #   configured for the training job.
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
@@ -14888,10 +15024,10 @@ module Aws::SageMaker
     # @!attribute [rw] workforce
     #   A single private workforce, which is automatically created when you
     #   create your first private work team. You can create one private work
-    #   force in each AWS Region. By default, any workforce-related API
-    #   operation used in a specific region will apply to the workforce
-    #   created in that region. To learn how to create a private workforce,
-    #   see [Create a Private Workforce][1].
+    #   force in each Amazon Web Services Region. By default, any
+    #   workforce-related API operation used in a specific region will apply
+    #   to the workforce created in that region. To learn how to create a
+    #   private workforce, see [Create a Private Workforce][1].
     #
     #
     #
@@ -14990,7 +15126,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] iot_thing_name
-    #   AWS Internet of Things (IoT) object name.
+    #   Amazon Web Services Internet of Things (IoT) object name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Device AWS API Documentation
@@ -15070,8 +15206,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] iot_thing_name
-    #   The AWS Internet of Things (IoT) object thing name associated with
-    #   the device..
+    #   The Amazon Web Services Internet of Things (IoT) object thing name
+    #   associated with the device..
     #   @return [String]
     #
     # @!attribute [rw] registration_time
@@ -15296,6 +15432,8 @@ module Aws::SageMaker
     #       {
     #         s3_output_location: "S3Uri", # required
     #         kms_key_id: "KmsKeyId",
+    #         preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #         preset_deployment_config: "String",
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -15303,17 +15441,65 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data on the storage volume after compilation job. If
-    #   you don't provide a KMS key ID, Amazon SageMaker uses the default
-    #   KMS key for Amazon S3 for your role's account.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume after compilation job. If you don't provide a KMS key ID,
+    #   Amazon SageMaker uses the default KMS key for Amazon S3 for your
+    #   role's account.
+    #   @return [String]
+    #
+    # @!attribute [rw] preset_deployment_type
+    #   The deployment type SageMaker Edge Manager will create. Currently
+    #   only supports Amazon Web Services IoT Greengrass Version 2
+    #   components.
+    #   @return [String]
+    #
+    # @!attribute [rw] preset_deployment_config
+    #   The configuration used to create deployment artifacts. Specify
+    #   configuration options with a JSON string. The available
+    #   configuration options for each type are:
+    #
+    #   * `ComponentName` (optional) - Name of the GreenGrass V2 component.
+    #     If not specified, the default name generated consists of
+    #     "SagemakerEdgeManager" and the name of your SageMaker Edge
+    #     Manager packaging job.
+    #
+    #   * `ComponentDescription` (optional) - Description of the component.
+    #
+    #   * `ComponentVersion` (optional) - The version of the component.
+    #
+    #     <note markdown="1"> Amazon Web Services IoT Greengrass uses semantic versions for
+    #     components. Semantic versions follow a<i> major.minor.patch</i>
+    #     number system. For example, version 1.0.0 represents the first
+    #     major release for a component. For more information, see the
+    #     [semantic version specification][1].
+    #
+    #      </note>
+    #
+    #   * `PlatformOS` (optional) - The name of the operating system for the
+    #     platform. Supported platforms include Windows and Linux.
+    #
+    #   * `PlatformArchitecture` (optional) - The processor architecture for
+    #     the platform.
+    #
+    #     Supported architectures Windows include: Windows32\_x86,
+    #     Windows64\_x64.
+    #
+    #     Supported architectures for Linux include: Linux x86\_64, Linux
+    #     ARMV8.
+    #
+    #
+    #
+    #   [1]: https://semver.org/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeOutputConfig AWS API Documentation
     #
     class EdgeOutputConfig < Struct.new(
       :s3_output_location,
-      :kms_key_id)
+      :kms_key_id,
+      :preset_deployment_type,
+      :preset_deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15363,6 +15549,37 @@ module Aws::SageMaker
       :model_version,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output of a SageMaker Edge Manager deployable resource.
+    #
+    # @!attribute [rw] type
+    #   The deployment type created by SageMaker Edge Manager. Currently
+    #   only supports Amazon Web Services IoT Greengrass Version 2
+    #   components.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact
+    #   The Amazon Resource Name (ARN) of the generated deployable resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the deployable resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Returns a message describing the status of the deployed resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgePresetDeploymentOutput AWS API Documentation
+    #
+    class EdgePresetDeploymentOutput < Struct.new(
+      :type,
+      :artifact,
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15426,8 +15643,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   A list of the tags associated with the endpoint. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -15911,10 +16128,10 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] online_store_config
-    #   Use this to specify the AWS Key Management Service (KMS) Key ID, or
-    #   `KMSKeyId`, for at rest data encryption. You can turn `OnlineStore`
-    #   on or off by specifying the `EnableOnlineStore` flag at General
-    #   Assembly; the default value is `False`.
+    #   Use this to specify the Amazon Web Services Key Management Service
+    #   (KMS) Key ID, or `KMSKeyId`, for at rest data encryption. You can
+    #   turn `OnlineStore` on or off by specifying the `EnableOnlineStore`
+    #   flag at General Assembly; the default value is `False`.
     #   @return [Types::OnlineStoreConfig]
     #
     # @!attribute [rw] offline_store_config
@@ -15924,8 +16141,8 @@ module Aws::SageMaker
     #   to create an `OfflineStore`.
     #
     #   To encrypt an `OfflineStore` using at rest data encryption, specify
-    #   AWS Key Management Service (KMS) key ID, or `KMSKeyId`, in
-    #   `S3StorageConfig`.
+    #   Amazon Web Services Key Management Service (KMS) key ID, or
+    #   `KMSKeyId`, in `S3StorageConfig`.
     #   @return [Types::OfflineStoreConfig]
     #
     # @!attribute [rw] role_arn
@@ -16543,8 +16760,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies configuration details for a Git repository in your AWS
-    # account.
+    # Specifies configuration details for a Git repository in your Amazon
+    # Web Services account.
     #
     # @note When making an API call, you may pass GitConfig
     #   data as a hash:
@@ -16564,10 +16781,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
-    #   that contains the credentials used to access the git repository. The
-    #   secret must have a staging label of `AWSCURRENT` and must be in the
-    #   following format:
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the credentials used to access the git
+    #   repository. The secret must have a staging label of `AWSCURRENT` and
+    #   must be in the following format:
     #
     #   `\{"username": UserName, "password": Password\}`
     #   @return [String]
@@ -16593,10 +16810,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
-    #   that contains the credentials used to access the git repository. The
-    #   secret must have a staging label of `AWSCURRENT` and must be in the
-    #   following format:
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the credentials used to access the git
+    #   repository. The secret must have a staging label of `AWSCURRENT` and
+    #   must be in the following format:
     #
     #   `\{"username": UserName, "password": Password\}`
     #   @return [String]
@@ -17725,7 +17942,7 @@ module Aws::SageMaker
     #
     #   * For [3D point cloud][4] and [video frame][5] labeling jobs, the
     #     maximum is 7 days (604,800 seconds). If you want to change these
-    #     limits, contact AWS Support.
+    #     limits, contact Amazon Web Services Support.
     #
     #
     #
@@ -17747,7 +17964,8 @@ module Aws::SageMaker
     #
     #   * If you choose a private or vendor workforce, the default value is
     #     10 days (864,000 seconds). For most users, the maximum is also 10
-    #     days. If you want to change this limit, contact AWS Support.
+    #     days. If you want to change this limit, contact Amazon Web
+    #     Services Support.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_task_count
@@ -18773,9 +18991,12 @@ module Aws::SageMaker
     #             image_digest: "ImageDigest",
     #             model_data_url: "Url",
     #             product_id: "ProductId",
+    #             environment: {
+    #               "EnvironmentKey" => "EnvironmentValue",
+    #             },
     #           },
     #         ],
-    #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #         supported_content_types: ["ContentType"], # required
     #         supported_response_mime_types: ["ResponseMIMEType"], # required
@@ -19262,7 +19483,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the kernel.
+    #   The name of the Jupyter kernel in the image. This value is case
+    #   sensitive.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -19480,7 +19702,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] work_requester_account_id
-    #   The AWS account ID of the account used to start the labeling job.
+    #   The Amazon Web Services account ID of the account used to start the
+    #   labeling job.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -19580,16 +19803,16 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service ID of the key used to encrypt the
-    #   output data, if any.
+    #   The Amazon Web Services Key Management Service ID of the key used to
+    #   encrypt the output data, if any.
     #
     #   If you provide your own KMS key ID, you must add the required
     #   permissions to your KMS key described in [Encrypt Output Data and
-    #   Storage Volume with AWS KMS][1].
+    #   Storage Volume with Amazon Web Services KMS][1].
     #
     #   If you don't provide a KMS key ID, Amazon SageMaker uses the
-    #   default AWS KMS key for Amazon S3 for your role's account to
-    #   encrypt your output data.
+    #   default Amazon Web Services KMS key for Amazon S3 for your role's
+    #   account to encrypt your output data.
     #
     #   If you use a bucket policy with an `s3:PutObject` permission that
     #   only allows objects with server-side encryption, set the condition
@@ -19643,18 +19866,18 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data on the storage volume attached to the ML
-    #   compute instance(s) that run the training and inference jobs used
-    #   for automated data labeling.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to the ML compute instance(s) that run the training
+    #   and inference jobs used for automated data labeling.
     #
     #   You can only specify a `VolumeKmsKeyId` when you create a labeling
     #   job with automated data labeling enabled using the API operation
-    #   `CreateLabelingJob`. You cannot specify an AWS KMS customer managed
-    #   CMK to encrypt the storage volume used for automated data labeling
-    #   model training and inference when you create a labeling job using
-    #   the console. To learn more, see [Output Data and Storage Volume
-    #   Encryption][1].
+    #   `CreateLabelingJob`. You cannot specify an Amazon Web Services KMS
+    #   customer managed CMK to encrypt the storage volume used for
+    #   automated data labeling model training and inference when you create
+    #   a labeling job using the console. To learn more, see [Output Data
+    #   and Storage Volume Encryption][1].
     #
     #   The `VolumeKmsKeyId` can be any of the following formats:
     #
@@ -20629,8 +20852,9 @@ module Aws::SageMaker
     #   * Last modified time
     #
     #   * Configuration information, including the URL location of the
-    #     repository and the ARN of the AWS Secrets Manager secret that
-    #     contains the credentials used to access the repository.
+    #     repository and the ARN of the Amazon Web Services Secrets Manager
+    #     secret that contains the credentials used to access the
+    #     repository.
     #   @return [Array<Types::CodeRepositorySummary>]
     #
     # @!attribute [rw] next_token
@@ -22395,7 +22619,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_package_group_summary_list
-    #   A list of summaries of the model groups in your AWS account.
+    #   A list of summaries of the model groups in your Amazon Web Services
+    #   account.
     #   @return [Array<Types::ModelPackageGroupSummary>]
     #
     # @!attribute [rw] next_token
@@ -24493,7 +24718,7 @@ module Aws::SageMaker
     end
 
     # Specifies a metric that the training algorithm writes to `stderr` or
-    # `stdout` . Amazon SageMakerhyperparameter tuning captures all defined
+    # `stdout`. Amazon SageMakerhyperparameter tuning captures all defined
     # metrics. You specify one metric that a hyperparameter tuning job uses
     # as its objective metric to choose the best training job.
     #
@@ -24764,7 +24989,7 @@ module Aws::SageMaker
     # @!attribute [rw] auto_generate_endpoint_name
     #   Set to `True` to automatically generate an endpoint name for a
     #   one-click Autopilot model deployment; set to `False` otherwise. The
-    #   default value is `True`.
+    #   default value is `False`.
     #
     #   <note markdown="1"> If you set `AutoGenerateEndpointName` to `True`, do not specify the
     #   `EndpointName`; otherwise a 400 error is thrown.
@@ -25064,10 +25289,10 @@ module Aws::SageMaker
     #   @return [Types::ModelPackageStatusDetails]
     #
     # @!attribute [rw] certify_for_marketplace
-    #   Whether the model package is to be certified to be listed on AWS
-    #   Marketplace. For information about listing model packages on AWS
-    #   Marketplace, see [List Your Algorithm or Model Package on AWS
-    #   Marketplace][1].
+    #   Whether the model package is to be certified to be listed on Amazon
+    #   Web Services Marketplace. For information about listing model
+    #   packages on Amazon Web Services Marketplace, see [List Your
+    #   Algorithm or Model Package on Amazon Web Services Marketplace][1].
     #
     #
     #
@@ -25115,8 +25340,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model package. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -25161,6 +25386,9 @@ module Aws::SageMaker
     #         image_digest: "ImageDigest",
     #         model_data_url: "Url",
     #         product_id: "ProductId",
+    #         environment: {
+    #           "EnvironmentKey" => "EnvironmentValue",
+    #         },
     #       }
     #
     # @!attribute [rw] container_hostname
@@ -25200,8 +25428,14 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The AWS Marketplace product ID of the model package.
+    #   The Amazon Web Services Marketplace product ID of the model package.
     #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container. Each key
+    #   and value in the `Environment` string to string map can have length
+    #   of up to 1024. We support up to 16 entries in the map.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
     #
@@ -25210,7 +25444,8 @@ module Aws::SageMaker
       :image,
       :image_digest,
       :model_data_url,
-      :product_id)
+      :product_id,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25258,8 +25493,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model group. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -25421,7 +25656,7 @@ module Aws::SageMaker
     # used in the process of validating the model package.
     #
     # The data provided in the validation profile is made available to your
-    # buyers on AWS Marketplace.
+    # buyers on Amazon Web Services Marketplace.
     #
     # @note When making an API call, you may pass ModelPackageValidationProfile
     #   data as a hash:
@@ -25453,7 +25688,7 @@ module Aws::SageMaker
     #             kms_key_id: "KmsKeyId",
     #           },
     #           transform_resources: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             instance_count: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -25514,7 +25749,7 @@ module Aws::SageMaker
     #                 kms_key_id: "KmsKeyId",
     #               },
     #               transform_resources: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #                 instance_count: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
     #               },
@@ -25857,7 +26092,7 @@ module Aws::SageMaker
     #
     #       {
     #         instance_count: 1, # required
-    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
     #       }
@@ -25878,9 +26113,10 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data on the storage volume attached to the ML
-    #   compute instance(s) that run the model monitoring job.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to the ML compute instance(s) that run the model
+    #   monitoring job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringClusterConfig AWS API Documentation
@@ -26074,7 +26310,7 @@ module Aws::SageMaker
     #         monitoring_resources: { # required
     #           cluster_config: { # required
     #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
     #           },
@@ -26291,9 +26527,9 @@ module Aws::SageMaker
     #   @return [Array<Types::MonitoringOutput>]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt the model artifacts at rest using Amazon S3
-    #   server-side encryption.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt the model artifacts
+    #   at rest using Amazon S3 server-side encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringOutputConfig AWS API Documentation
@@ -26313,7 +26549,7 @@ module Aws::SageMaker
     #       {
     #         cluster_config: { # required
     #           instance_count: 1, # required
-    #           instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
     #         },
@@ -26428,8 +26664,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   A list of the tags associated with the monitoring schedlue. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -26504,7 +26740,7 @@ module Aws::SageMaker
     #           monitoring_resources: { # required
     #             cluster_config: { # required
     #               instance_count: 1, # required
-    #               instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
     #             },
@@ -26686,6 +26922,44 @@ module Aws::SageMaker
     #
     class MultiModelConfig < Struct.new(
       :model_cache_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VpcConfig configuration object that specifies the VPC that you
+    # want the compilation jobs to connect to. For more information on
+    # controlling access to your Amazon S3 buckets used for compilation job,
+    # see [Give Amazon SageMaker Compilation Jobs Access to Resources in
+    # Your Amazon VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+    #
+    # @note When making an API call, you may pass NeoVpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["NeoVpcSecurityGroupId"], # required
+    #         subnets: ["NeoVpcSubnetId"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs. IDs have the form of `sg-xxxxxxxx`.
+    #   Specify the security groups for the VPC that is specified in the
+    #   `Subnets` field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC that you want to connect the
+    #   compilation job to for accessing the model in Amazon S3.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NeoVpcConfig AWS API Documentation
+    #
+    class NeoVpcConfig < Struct.new(
+      :security_group_ids,
+      :subnets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26913,10 +27187,11 @@ module Aws::SageMaker
     #   The Git repository associated with the notebook instance as its
     #   default code repository. This can be either the name of a Git
     #   repository stored as a resource in your account, or the URL of a Git
-    #   repository in [AWS CodeCommit][1] or in any other Git repository.
-    #   When you open a notebook instance, it opens in the directory that
-    #   contains this repository. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   repository in [Amazon Web Services CodeCommit][1] or in any other
+    #   Git repository. When you open a notebook instance, it opens in the
+    #   directory that contains this repository. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -26928,10 +27203,11 @@ module Aws::SageMaker
     #   An array of up to three Git repositories associated with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories
-    #   in [AWS CodeCommit][1] or in any other Git repository. These
-    #   repositories are cloned at the same level as the default repository
-    #   of your notebook instance. For more information, see [Associating
-    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
+    #   in [Amazon Web Services CodeCommit][1] or in any other Git
+    #   repository. These repositories are cloned at the same level as the
+    #   default repository of your notebook instance. For more information,
+    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -27019,8 +27295,8 @@ module Aws::SageMaker
     # to create an `OfflineStore`.
     #
     # To encrypt an `OfflineStore` using at rest data encryption, specify
-    # AWS Key Management Service (KMS) key ID, or `KMSKeyId`, in
-    # `S3StorageConfig`.
+    # Amazon Web Services Key Management Service (KMS) key ID, or
+    # `KMSKeyId`, in `S3StorageConfig`.
     #
     # @note When making an API call, you may pass OfflineStoreConfig
     #   data as a hash:
@@ -27044,8 +27320,8 @@ module Aws::SageMaker
     #   @return [Types::S3StorageConfig]
     #
     # @!attribute [rw] disable_glue_table_creation
-    #   Set to `True` to disable the automatic creation of an AWS Glue table
-    #   when configuring an `OfflineStore`.
+    #   Set to `True` to disable the automatic creation of an Amazon Web
+    #   Services Glue table when configuring an `OfflineStore`.
     #   @return [Boolean]
     #
     # @!attribute [rw] data_catalog_config
@@ -27228,10 +27504,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Use this to specify the AWS Key Management Service (KMS) Key ID, or
-    # `KMSKeyId`, for at rest data encryption. You can turn `OnlineStore` on
-    # or off by specifying the `EnableOnlineStore` flag at General Assembly;
-    # the default value is `False`.
+    # Use this to specify the Amazon Web Services Key Management Service
+    # (KMS) Key ID, or `KMSKeyId`, for at rest data encryption. You can turn
+    # `OnlineStore` on or off by specifying the `EnableOnlineStore` flag at
+    # General Assembly; the default value is `False`.
     #
     # @note When making an API call, you may pass OnlineStoreConfig
     #   data as a hash:
@@ -27275,9 +27551,9 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key that
-    #   SageMaker Feature Store uses to encrypt the Amazon S3 objects at
-    #   rest using Amazon S3 server-side encryption.
+    #   The ID of the Amazon Web Services Key Management Service (Amazon Web
+    #   Services KMS) key that SageMaker Feature Store uses to encrypt the
+    #   Amazon S3 objects at rest using Amazon S3 server-side encryption.
     #
     #   The caller (either IAM user or IAM role) of `CreateFeatureGroup`
     #   must have below permissions to the `OnlineStore` `KmsKeyId`\:
@@ -27335,7 +27611,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -27506,10 +27782,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data on the storage volume after compilation job. If
-    #   you don't provide a KMS key ID, Amazon SageMaker uses the default
-    #   KMS key for Amazon S3 for your role's account
+    #   The Amazon Web Services Key Management Service key (Amazon Web
+    #   Services KMS) that Amazon SageMaker uses to encrypt your output
+    #   models with Amazon S3 server-side encryption after compilation job.
+    #   If you don't provide a KMS key ID, Amazon SageMaker uses the
+    #   default KMS key for Amazon S3 for your role's account. For more
+    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide.*
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -27522,6 +27801,10 @@ module Aws::SageMaker
     #
     #   * Alias name ARN:
     #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig AWS API Documentation
@@ -27548,10 +27831,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt the model artifacts at rest using Amazon S3
-    #   server-side encryption. The `KmsKeyId` can be any of the following
-    #   formats:
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt the model artifacts
+    #   at rest using Amazon S3 server-side encryption. The `KmsKeyId` can
+    #   be any of the following formats:
     #
     #   * // KMS Key ID
     #
@@ -27584,8 +27867,8 @@ module Aws::SageMaker
     #   The KMS key policy must grant permission to the IAM role that you
     #   specify in your `CreateTrainingJob`, `CreateTransformJob`, or
     #   `CreateHyperParameterTuningJob` requests. For more information, see
-    #   [Using Key Policies in AWS KMS][2] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   [Using Key Policies in Amazon Web Services KMS][2] in the *Amazon
+    #   Web Services Key Management Service Developer Guide*.
     #
     #
     #
@@ -27603,6 +27886,33 @@ module Aws::SageMaker
     class OutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_output_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An output parameter of a pipeline step.
+    #
+    # @note When making an API call, you may pass OutputParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String256", # required
+    #         value: "String1024", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the output parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the output parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputParameter AWS API Documentation
+    #
+    class OutputParameter < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27886,6 +28196,15 @@ module Aws::SageMaker
     #   The description of the pipeline execution.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_experiment_config
+    #   Specifies the names of the experiment and trial created by a
+    #   pipeline.
+    #   @return [Types::PipelineExperimentConfig]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the execution failed, a message describing why.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The creation time of the pipeline execution.
     #   @return [Time]
@@ -27916,6 +28235,8 @@ module Aws::SageMaker
       :pipeline_execution_display_name,
       :pipeline_execution_status,
       :pipeline_execution_description,
+      :pipeline_experiment_config,
+      :failure_reason,
       :creation_time,
       :last_modified_time,
       :created_by,
@@ -27954,7 +28275,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   The metadata for the step execution.
+    #   Metadata for the step execution.
     #   @return [Types::PipelineExecutionStepMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStep AWS API Documentation
@@ -27988,6 +28309,11 @@ module Aws::SageMaker
     #   this step execution.
     #   @return [Types::TransformJobStepMetadata]
     #
+    # @!attribute [rw] tuning_job
+    #   The Amazon Resource Name (ARN) of the tuning job that was run by
+    #   this step execution.
+    #   @return [Types::TuningJobStepMetaData]
+    #
     # @!attribute [rw] model
     #   Metadata for the Model step.
     #   @return [Types::ModelStepMetadata]
@@ -28001,15 +28327,21 @@ module Aws::SageMaker
     #   condition.
     #   @return [Types::ConditionStepMetadata]
     #
+    # @!attribute [rw] callback
+    #   Metadata about a callback step.
+    #   @return [Types::CallbackStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
       :training_job,
       :processing_job,
       :transform_job,
+      :tuning_job,
       :model,
       :register_model,
-      :condition)
+      :condition,
+      :callback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28044,6 +28376,25 @@ module Aws::SageMaker
       :pipeline_execution_status,
       :pipeline_execution_description,
       :pipeline_execution_display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the names of the experiment and trial created by a pipeline.
+    #
+    # @!attribute [rw] experiment_name
+    #   The name of the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] trial_name
+    #   The name of the trial.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExperimentConfig AWS API Documentation
+    #
+    class PipelineExperimentConfig < Struct.new(
+      :experiment_name,
+      :trial_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28104,7 +28455,7 @@ module Aws::SageMaker
     #
     #       {
     #         instance_count: 1, # required
-    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
     #       }
@@ -28122,12 +28473,48 @@ module Aws::SageMaker
     # @!attribute [rw] volume_size_in_gb
     #   The size of the ML storage volume in gigabytes that you want to
     #   provision. You must specify sufficient ML storage for your scenario.
+    #
+    #   <note markdown="1"> Certain Nitro-based instances include local storage with a fixed
+    #   total size, dependent on the instance type. When using these
+    #   instances for processing, Amazon SageMaker mounts the local instance
+    #   storage instead of Amazon EBS gp2 storage. You can't request a
+    #   `VolumeSizeInGB` greater than the total size of the local instance
+    #   storage.
+    #
+    #    For a list of instance types that support local instance storage,
+    #   including the total size per instance type, see [Instance Store
+    #   Volumes][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data on the storage volume attached to the ML
-    #   compute instance(s) that run the processing job.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to the ML compute instance(s) that run the
+    #   processing job.
+    #
+    #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
+    #   the instance type. Local storage volumes are encrypted using a
+    #   hardware module on the instance. You can't request a
+    #   `VolumeKmsKeyId` when using an instance type with local storage.
+    #
+    #    For a list of instance types that support local instance storage,
+    #   see [Instance Store Volumes][1].
+    #
+    #    For more information about local instance storage encryption, see
+    #   [SSD Instance Store Volumes][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingClusterConfig AWS API Documentation
@@ -28353,8 +28740,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] tags
     #   An array of key-value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*.
+    #   Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*.
     #
     #
     #
@@ -28536,10 +28923,11 @@ module Aws::SageMaker
     #   @return [Array<Types::ProcessingOutput>]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt the processing job output. `KmsKeyId` can be an ID
-    #   of a KMS key, ARN of a KMS key, alias of a KMS key, or alias of a
-    #   KMS key. The `KmsKeyId` is applied to all outputs.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt the processing job
+    #   output. `KmsKeyId` can be an ID of a KMS key, ARN of a KMS key,
+    #   alias of a KMS key, or alias of a KMS key. The `KmsKeyId` is applied
+    #   to all outputs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingOutputConfig AWS API Documentation
@@ -28561,7 +28949,7 @@ module Aws::SageMaker
     #       {
     #         cluster_config: { # required
     #           instance_count: 1, # required
-    #           instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
     #         },
@@ -28717,10 +29105,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Identifies a model that you want to host and the resources to deploy
-    # for hosting it. If you are deploying multiple models, tell Amazon
-    # SageMaker how to distribute traffic among the models by specifying
-    # variant weights.
+    # Identifies a model that you want to host and the resources chosen to
+    # deploy for hosting it. If you are deploying multiple models, tell
+    # Amazon SageMaker how to distribute traffic among the models by
+    # specifying variant weights.
     #
     # @note When making an API call, you may pass ProductionVariant
     #   data as a hash:
@@ -28809,10 +29197,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt the core dump data at rest using Amazon S3
-    #   server-side encryption. The `KmsKeyId` can be any of the following
-    #   formats:
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt the core dump data at
+    #   rest using Amazon S3 server-side encryption. The `KmsKeyId` can be
+    #   any of the following formats:
     #
     #   * // KMS Key ID
     #
@@ -28844,8 +29232,9 @@ module Aws::SageMaker
     #
     #   The KMS key policy must grant permission to the IAM role that you
     #   specify in your `CreateEndpoint` and `UpdateEndpoint` requests. For
-    #   more information, see [Using Key Policies in AWS KMS][2] in the *AWS
-    #   Key Management Service Developer Guide*.
+    #   more information, see [Using Key Policies in Amazon Web Services
+    #   KMS][2] in the *Amazon Web Services Key Management Service Developer
+    #   Guide*.
     #
     #
     #
@@ -29025,7 +29414,7 @@ module Aws::SageMaker
     #         local_path: "DirectoryPath",
     #         s3_output_path: "S3Uri",
     #         rule_evaluator_image: "AlgorithmImage", # required
-    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         volume_size_in_gb: 1,
     #         rule_parameters: {
     #           "ConfigKey" => "ConfigValue",
@@ -29191,8 +29580,8 @@ module Aws::SageMaker
     end
 
     # A key value pair used when you provision a project as a service
-    # catalog product. For information, see [What is AWS Service
-    # Catalog][1].
+    # catalog product. For information, see [What is Amazon Web Services
+    # Service Catalog][1].
     #
     #
     #
@@ -29534,8 +29923,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data from a Redshift execution.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data from a Redshift
+    #   execution.
     #   @return [String]
     #
     # @!attribute [rw] output_format
@@ -29733,8 +30123,8 @@ module Aws::SageMaker
     # registry where your model image is hosted. Specify a value for this
     # property only if you specified `Vpc` as the value for the
     # `RepositoryAccessMode` field of the `ImageConfig` object that you
-    # passed to a call to CreateModel and the private Docker registry where
-    # the model image is hosted requires authentication.
+    # passed to a call to `CreateModel` and the private Docker registry
+    # where the model image is hosted requires authentication.
     #
     # @note When making an API call, you may pass RepositoryAuthConfig
     #   data as a hash:
@@ -29744,11 +30134,12 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] repository_credentials_provider_arn
-    #   The Amazon Resource Name (ARN) of an AWS Lambda function that
-    #   provides credentials to authenticate to the private Docker registry
-    #   where your model image is hosted. For information about how to
-    #   create an AWS Lambda function, see [Create a Lambda function with
-    #   the console][1] in the *AWS Lambda Developer Guide*.
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services Lambda
+    #   function that provides credentials to authenticate to the private
+    #   Docker registry where your model image is hosted. For information
+    #   about how to create an Amazon Web Services Lambda function, see
+    #   [Create a Lambda function with the console][1] in the *Amazon Web
+    #   Services Lambda Developer Guide*.
     #
     #
     #
@@ -29846,9 +30237,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The AWS KMS key that Amazon SageMaker uses to encrypt data on the
-    #   storage volume attached to the ML compute instance(s) that run the
-    #   training job.
+    #   The Amazon Web Services KMS key that Amazon SageMaker uses to
+    #   encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that run the training job.
     #
     #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
     #   the instance type. Local storage volumes are encrypted using a
@@ -30182,8 +30573,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (KMS) key ID of the key used to
-    #   encrypt any objects written into the `OfflineStore` S3 location.
+    #   The Amazon Web Services Key Management Service (KMS) key ID of the
+    #   key used to encrypt any objects written into the `OfflineStore` S3
+    #   location.
     #
     #   The IAM `roleARN` that is passed as a parameter to
     #   `CreateFeatureGroup` must have below permissions to the `KmsKeyId`\:
@@ -30659,8 +31051,110 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendPipelineExecutionStepFailureRequest
+    #   data as a hash:
+    #
+    #       {
+    #         callback_token: "CallbackToken", # required
+    #         failure_reason: "String256",
+    #         client_request_token: "IdempotencyToken",
+    #       }
+    #
+    # @!attribute [rw] callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   A message describing why the step failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepFailureRequest AWS API Documentation
+    #
+    class SendPipelineExecutionStepFailureRequest < Struct.new(
+      :callback_token,
+      :failure_reason,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepFailureResponse AWS API Documentation
+    #
+    class SendPipelineExecutionStepFailureResponse < Struct.new(
+      :pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SendPipelineExecutionStepSuccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         callback_token: "CallbackToken", # required
+    #         output_parameters: [
+    #           {
+    #             name: "String256", # required
+    #             value: "String1024", # required
+    #           },
+    #         ],
+    #         client_request_token: "IdempotencyToken",
+    #       }
+    #
+    # @!attribute [rw] callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_parameters
+    #   A list of the output parameters of the callback step.
+    #   @return [Array<Types::OutputParameter>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepSuccessRequest AWS API Documentation
+    #
+    class SendPipelineExecutionStepSuccessRequest < Struct.new(
+      :callback_token,
+      :output_parameters,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepSuccessResponse AWS API Documentation
+    #
+    class SendPipelineExecutionStepSuccessResponse < Struct.new(
+      :pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of a provisioned service catalog product. For information
-    # about service catalog, see [What is AWS Service Catalog][1].
+    # about service catalog, see [What is Amazon Web Services Service
+    # Catalog][1].
     #
     #
     #
@@ -30707,8 +31201,8 @@ module Aws::SageMaker
     end
 
     # Details that you specify to provision a service catalog product. For
-    # information about service catalog, see .[What is AWS Service
-    # Catalog][1].
+    # information about service catalog, see .[What is Amazon Web Services
+    # Service Catalog][1].
     #
     #
     #
@@ -30785,9 +31279,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] s3_kms_key_id
-    #   When `NotebookOutputOption` is `Allowed`, the AWS Key Management
-    #   Service (KMS) encryption key ID used to encrypt the notebook cell
-    #   output in the Amazon S3 bucket.
+    #   When `NotebookOutputOption` is `Allowed`, the Amazon Web Services
+    #   Key Management Service (KMS) encryption key ID used to encrypt the
+    #   notebook cell output in the Amazon S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SharingSettings AWS API Documentation
@@ -30838,8 +31332,8 @@ module Aws::SageMaker
 
     # Specifies an algorithm that was used to create the model package. The
     # algorithm must be either an algorithm resource in your Amazon
-    # SageMaker account or an algorithm in AWS Marketplace that you are
-    # subscribed to.
+    # SageMaker account or an algorithm in Amazon Web Services Marketplace
+    # that you are subscribed to.
     #
     # @note When making an API call, you may pass SourceAlgorithm
     #   data as a hash:
@@ -30863,8 +31357,8 @@ module Aws::SageMaker
     # @!attribute [rw] algorithm_name
     #   The name of an algorithm that was used to create the model package.
     #   The algorithm must be either an algorithm resource in your Amazon
-    #   SageMaker account or an algorithm in AWS Marketplace that you are
-    #   subscribed to.
+    #   SageMaker account or an algorithm in Amazon Web Services Marketplace
+    #   that you are subscribed to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithm AWS API Documentation
@@ -31404,7 +31898,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Describes a tag.
+    # A tag object that consists of a key and an optional value, used to
+    # manage metadata for Amazon SageMaker Amazon Web Services resources.
+    #
+    # You can add tags to notebook instances, training jobs, hyperparameter
+    # tuning jobs, batch transform jobs, models, labeling jobs, work teams,
+    # endpoint configurations, and endpoints. For more information on adding
+    # tags to Amazon SageMaker resources, see AddTags.
+    #
+    # For more information on adding metadata to your Amazon Web Services
+    # resources with tagging, see [Tagging Amazon Web Services
+    # resources][1]. For advice on best practices for managing Amazon Web
+    # Services resources with tagging, see [Tagging Best Practices:
+    # Implement an Effective Amazon Web Services Resource Tagging
+    # Strategy][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    # [2]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -31415,7 +31927,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] key
-    #   The tag key.
+    #   The tag key. Tag keys must be unique per resource.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -31695,8 +32207,8 @@ module Aws::SageMaker
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
-    #   The AWS Identity and Access Management (IAM) role configured for the
-    #   training job.
+    #   The Amazon Web Services Identity and Access Management (IAM) role
+    #   configured for the training job.
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
@@ -31860,9 +32372,10 @@ module Aws::SageMaker
     #   @return [Types::RetryStrategy]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -32562,7 +33075,7 @@ module Aws::SageMaker
     #           kms_key_id: "KmsKeyId",
     #         },
     #         transform_resources: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           instance_count: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
     #         },
@@ -32732,10 +33245,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt the model artifacts at rest using Amazon S3
-    #   server-side encryption. The `KmsKeyId` can be any of the following
-    #   formats:
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt the model artifacts
+    #   at rest using Amazon S3 server-side encryption. The `KmsKeyId` can
+    #   be any of the following formats:
     #
     #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
@@ -32754,8 +33267,8 @@ module Aws::SageMaker
     #
     #   The KMS key policy must grant permission to the IAM role that you
     #   specify in your CreateModel request. For more information, see
-    #   [Using Key Policies in AWS KMS][2] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   [Using Key Policies in Amazon Web Services KMS][2] in the *Amazon
+    #   Web Services Key Management Service Developer Guide*.
     #
     #
     #
@@ -32781,7 +33294,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         instance_count: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
     #       }
@@ -32789,7 +33302,7 @@ module Aws::SageMaker
     # @!attribute [rw] instance_type
     #   The ML compute instance type for the transform job. If you are using
     #   built-in algorithms to transform moderately sized datasets, we
-    #   recommend using ml.m4.xlarge or `ml.m5.large` instance types.
+    #   recommend using ml.m4.xlarge or `ml.m5.large`instance types.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -32799,10 +33312,25 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt model data on the storage volume attached to the ML
-    #   compute instance(s) that run the batch transform job. The
-    #   `VolumeKmsKeyId` can be any of the following formats:
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt model data on the
+    #   storage volume attached to the ML compute instance(s) that run the
+    #   batch transform job.
+    #
+    #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
+    #   the instance type. Local storage volumes are encrypted using a
+    #   hardware module on the instance. You can't request a
+    #   `VolumeKmsKeyId` when using an instance type with local storage.
+    #
+    #    For a list of instance types that support local instance storage,
+    #   see [Instance Store Volumes][1].
+    #
+    #    For more information about local instance storage encryption, see
+    #   [SSD Instance Store Volumes][2].
+    #
+    #    </note>
+    #
+    #   The `VolumeKmsKeyId` can be any of the following formats:
     #
     #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
@@ -32813,6 +33341,11 @@ module Aws::SageMaker
     #
     #   * Alias name ARN:
     #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources AWS API Documentation
@@ -33482,6 +34015,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Metadata for a tuning step.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the tuning job that was run by
+    #   this step execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TuningJobStepMetaData AWS API Documentation
+    #
+    class TuningJobStepMetaData < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an amount of money in United States dollars.
     #
     # @note When making an API call, you may pass USD
@@ -33545,8 +34093,8 @@ module Aws::SageMaker
     #   Use this parameter when you are creating a labeling job for 3D point
     #   cloud and video fram labeling jobs. Use your labeling job task type
     #   to select one of the following ARNs and use it with this parameter
-    #   when you create a labeling job. Replace `aws-region` with the AWS
-    #   region you are creating your labeling job in.
+    #   when you create a labeling job. Replace `aws-region` with the Amazon
+    #   Web Services region you are creating your labeling job in.
     #
     #   **3D Point Cloud HumanTaskUiArns**
     #
@@ -33810,10 +34358,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] git_config
     #   The configuration of the git repository, including the URL and the
-    #   Amazon Resource Name (ARN) of the AWS Secrets Manager secret that
-    #   contains the credentials used to access the repository. The secret
-    #   must have a staging label of `AWSCURRENT` and must be in the
-    #   following format:
+    #   Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the credentials used to access the
+    #   repository. The secret must have a staging label of `AWSCURRENT` and
+    #   must be in the following format:
     #
     #   `\{"username": UserName, "password": Password\}`
     #   @return [Types::GitConfigForUpdate]
@@ -33900,7 +34448,10 @@ module Aws::SageMaker
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #           preset_deployment_config: "String",
     #         },
+    #         enable_iot_role_alias: false,
     #       }
     #
     # @!attribute [rw] device_fleet_name
@@ -33919,13 +34470,23 @@ module Aws::SageMaker
     #   Output configuration for storing sample data collected by the fleet.
     #   @return [Types::EdgeOutputConfig]
     #
+    # @!attribute [rw] enable_iot_role_alias
+    #   Whether to create an Amazon Web Services IoT Role Alias during
+    #   device fleet creation. The name of the role alias generated will
+    #   match this pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #
+    #   For example, if your device fleet is called "demo-fleet", the name
+    #   of the role alias will be "SageMakerEdge-demo-fleet".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDeviceFleetRequest AWS API Documentation
     #
     class UpdateDeviceFleetRequest < Struct.new(
       :device_fleet_name,
       :role_arn,
       :description,
-      :output_config)
+      :output_config,
+      :enable_iot_role_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34367,7 +34928,7 @@ module Aws::SageMaker
     #             monitoring_resources: { # required
     #               cluster_config: { # required
     #                 instance_count: 1, # required
-    #                 instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #                 instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #                 volume_size_in_gb: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
     #               },
@@ -34402,7 +34963,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the monitoring schedule. The name must be unique within
-    #   an AWS Region within an AWS account.
+    #   an Amazon Web Services Region within an Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] monitoring_schedule_config
@@ -34506,10 +35067,11 @@ module Aws::SageMaker
     #   The Git repository to associate with the notebook instance as its
     #   default code repository. This can be either the name of a Git
     #   repository stored as a resource in your account, or the URL of a Git
-    #   repository in [AWS CodeCommit][1] or in any other Git repository.
-    #   When you open a notebook instance, it opens in the directory that
-    #   contains this repository. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   repository in [Amazon Web Services CodeCommit][1] or in any other
+    #   Git repository. When you open a notebook instance, it opens in the
+    #   directory that contains this repository. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -34521,10 +35083,11 @@ module Aws::SageMaker
     #   An array of up to three Git repositories to associate with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories
-    #   in [AWS CodeCommit][1] or in any other Git repository. These
-    #   repositories are cloned at the same level as the default repository
-    #   of your notebook instance. For more information, see [Associating
-    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
+    #   in [Amazon Web Services CodeCommit][1] or in any other Git
+    #   repository. These repositories are cloned at the same level as the
+    #   default repository of your notebook instance. For more information,
+    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -34762,7 +35325,7 @@ module Aws::SageMaker
     #             local_path: "DirectoryPath",
     #             s3_output_path: "S3Uri",
     #             rule_evaluator_image: "AlgorithmImage", # required
-    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             volume_size_in_gb: 1,
     #             rule_parameters: {
     #               "ConfigKey" => "ConfigValue",
@@ -35092,10 +35655,10 @@ module Aws::SageMaker
 
     # @!attribute [rw] workforce
     #   A single private workforce. You can create one private work force in
-    #   each AWS Region. By default, any workforce-related API operation
-    #   used in a specific region will apply to the workforce created in
-    #   that region. To learn how to create a private workforce, see [Create
-    #   a Private Workforce][1].
+    #   each Amazon Web Services Region. By default, any workforce-related
+    #   API operation used in a specific region will apply to the workforce
+    #   created in that region. To learn how to create a private workforce,
+    #   see [Create a Private Workforce][1].
     #
     #
     #
@@ -35443,10 +36006,10 @@ module Aws::SageMaker
 
     # A single private workforce, which is automatically created when you
     # create your first private work team. You can create one private work
-    # force in each AWS Region. By default, any workforce-related API
-    # operation used in a specific region will apply to the workforce
-    # created in that region. To learn how to create a private workforce,
-    # see [Create a Private Workforce][1].
+    # force in each Amazon Web Services Region. By default, any
+    # workforce-related API operation used in a specific region will apply
+    # to the workforce created in that region. To learn how to create a
+    # private workforce, see [Create a Private Workforce][1].
     #
     #
     #

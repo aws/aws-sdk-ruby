@@ -23,6 +23,175 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
+    # Contains a request to associate a client device with a core device.
+    # The [BatchAssociateClientDeviceWithCoreDevice][1] operation consumes a
+    # list of these requests.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html
+    #
+    # @note When making an API call, you may pass AssociateClientDeviceWithCoreDeviceEntry
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing that represents the client device to
+    #   associate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateClientDeviceWithCoreDeviceEntry AWS API Documentation
+    #
+    class AssociateClientDeviceWithCoreDeviceEntry < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an error that occurs from a request to associate a client
+    # device with a core device. The
+    # [BatchAssociateClientDeviceWithCoreDevice][1] operation returns a list
+    # of these errors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing whose associate request failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides additional information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateClientDeviceWithCoreDeviceErrorEntry AWS API Documentation
+    #
+    class AssociateClientDeviceWithCoreDeviceErrorEntry < Struct.new(
+      :thing_name,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a client device that is associated to a
+    # core device for cloud discovery.
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing that represents the associated client
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_timestamp
+    #   The time that the client device was associated, expressed in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociatedClientDevice AWS API Documentation
+    #
+    class AssociatedClientDevice < Struct.new(
+      :thing_name,
+      :association_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchAssociateClientDeviceWithCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [
+    #           {
+    #             thing_name: "IoTThingName", # required
+    #           },
+    #         ],
+    #         core_device_thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of client devices to associate.
+    #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceEntry>]
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDeviceRequest AWS API Documentation
+    #
+    class BatchAssociateClientDeviceWithCoreDeviceRequest < Struct.new(
+      :entries,
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   The list of any errors for the entries in the request. Each error
+    #   entry contains the name of the AWS IoT thing that failed to
+    #   associate.
+    #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDeviceResponse AWS API Documentation
+    #
+    class BatchAssociateClientDeviceWithCoreDeviceResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisassociateClientDeviceFromCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [
+    #           {
+    #             thing_name: "IoTThingName", # required
+    #           },
+    #         ],
+    #         core_device_thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of client devices to disassociate.
+    #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceEntry>]
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDeviceRequest AWS API Documentation
+    #
+    class BatchDisassociateClientDeviceFromCoreDeviceRequest < Struct.new(
+      :entries,
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   The list of errors (if any) for the entries in the request. Each
+    #   error entry contains the name of the AWS IoT thing that failed to
+    #   disassociate.
+    #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDeviceResponse AWS API Documentation
+    #
+    class BatchDisassociateClientDeviceFromCoreDeviceResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelDeploymentRequest
     #   data as a hash:
     #
@@ -1188,6 +1357,65 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
+    # Contains a request to disassociate a client device from a core device.
+    # The [BatchDisassociateClientDeviceWithCoreDevice][1] operation
+    # consumes a list of these requests.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html
+    #
+    # @note When making an API call, you may pass DisassociateClientDeviceFromCoreDeviceEntry
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing that represents the client device to
+    #   disassociate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateClientDeviceFromCoreDeviceEntry AWS API Documentation
+    #
+    class DisassociateClientDeviceFromCoreDeviceEntry < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an error that occurs from a request to disassociate a client
+    # device from a core device. The
+    # [BatchDisassociateClientDeviceWithCoreDevice][1] operation returns a
+    # list of these errors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the AWS IoT thing whose disassociate request failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides additional information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateClientDeviceFromCoreDeviceErrorEntry AWS API Documentation
+    #
+    class DisassociateClientDeviceFromCoreDeviceErrorEntry < Struct.new(
+      :thing_name,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a deployment job that AWS IoT Greengrass
     # sends to a AWS IoT Greengrass core device.
     #
@@ -2334,6 +2562,57 @@ module Aws::GreengrassV2
       :destination_path,
       :permission,
       :add_group_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListClientDevicesAssociatedWithCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "IoTThingName", # required
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the AWS IoT
+    #   thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDeviceRequest AWS API Documentation
+    #
+    class ListClientDevicesAssociatedWithCoreDeviceRequest < Struct.new(
+      :core_device_thing_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_client_devices
+    #   A list that describes the client devices that are associated with
+    #   the core device.
+    #   @return [Array<Types::AssociatedClientDevice>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDeviceResponse AWS API Documentation
+    #
+    class ListClientDevicesAssociatedWithCoreDeviceResponse < Struct.new(
+      :associated_client_devices,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

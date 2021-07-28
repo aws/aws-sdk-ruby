@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-06-04)
+------------------
+
+* Feature - The new GetDimensionKeyDetails action retrieves the attributes of the specified dimension group for a DB instance or data source.
+
 1.27.0 (2021-03-10)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-06-14)
+------------------
+
+* Feature - We have verified the APIs being released here and are ready to release
+
 1.3.0 (2021-03-10)
 ------------------
 

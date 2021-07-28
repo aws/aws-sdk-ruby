@@ -443,7 +443,11 @@ module Aws::DataSync
     #
     # @option params [Array<String>] :security_group_arns
     #   The ARNs of the security groups used to protect your data transfer
-    #   task subnets. See CreateAgentRequest$SubnetArns.
+    #   task subnets. See [SecurityGroupArns][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns
     #
     # @return [Types::CreateAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -583,6 +587,10 @@ module Aws::DataSync
     # @option params [required, String] :user
     #   The user who has the permissions to access files and folders in the
     #   FSx for Windows File Server file system.
+    #
+    #   For information about choosing a user name that ensures sufficient
+    #   permissions to files, folders, and metadata, see
+    #   [user](create-fsx-location.html#FSxWuser).
     #
     # @option params [String] :domain
     #   The name of the Windows domain that the FSx for Windows File Server
@@ -734,8 +742,12 @@ module Aws::DataSync
     end
 
     # Creates an endpoint for a self-managed object storage bucket. For more
-    # information about self-managed object storage locations, see
-    # create-object-location.
+    # information about self-managed object storage locations, see [Creating
+    # a location for object storage][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html
     #
     # @option params [required, String] :server_hostname
     #   The name of the self-managed object storage server. This value is the
@@ -841,11 +853,13 @@ module Aws::DataSync
     #
     #   For more information about S3 storage classes, see [Amazon S3 Storage
     #   Classes][1]. Some storage classes have behaviors that can affect your
-    #   S3 storage cost. For detailed information, see using-storage-classes.
+    #   S3 storage cost. For detailed information, see [Considerations when
+    #   working with S3 storage classes in DataSync][2].
     #
     #
     #
     #   [1]: http://aws.amazon.com/s3/storage-classes/
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #
     # @option params [required, Types::S3Config] :s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -858,7 +872,11 @@ module Aws::DataSync
     #   If you are using DataSync on an AWS Outpost, specify the Amazon
     #   Resource Names (ARNs) of the DataSync agents deployed on your Outpost.
     #   For more information about launching a DataSync agent on an AWS
-    #   Outpost, see outposts-agent.
+    #   Outpost, see [Deploy your DataSync agent on AWS Outposts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -938,6 +956,10 @@ module Aws::DataSync
     # @option params [required, String] :user
     #   The user who can mount the share, has the permissions to access files
     #   and folders in the SMB share.
+    #
+    #   For information about choosing a user name that ensures sufficient
+    #   permissions to files, folders, and metadata, see
+    #   [user](create-smb-location.html#SMBuser).
     #
     # @option params [String] :domain
     #   The name of the Windows domain that the SMB server belongs to.
@@ -1043,7 +1065,11 @@ module Aws::DataSync
     #
     #   For each individual task execution, you can override these options by
     #   specifying the `OverrideOptions` before starting the task execution.
-    #   For more information, see the operation.
+    #   For more information, see the [StartTaskExecution][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :excludes
     #   A list of filter rules that determines which files to exclude from a
@@ -1054,7 +1080,11 @@ module Aws::DataSync
     # @option params [Types::TaskSchedule] :schedule
     #   Specifies a schedule used to periodically transfer files from a source
     #   to a destination location. The schedule should be specified in UTC
-    #   time. For more information, see task-scheduling.
+    #   time. For more information, see [Scheduling your task][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -1085,6 +1115,7 @@ module Aws::DataSync
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #     },
     #     excludes: [
     #       {
@@ -1353,7 +1384,11 @@ module Aws::DataSync
 
     # Returns metadata about a self-managed object storage server location.
     # For more information about self-managed object storage locations, see
-    # create-object-location.
+    # [Creating a location for object storage][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the self-managed object storage
@@ -1533,6 +1568,7 @@ module Aws::DataSync
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
     #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
+    #   resp.options.security_descriptor_copy_flags #=> String, one of "NONE", "OWNER_DACL", "OWNER_DACL_SACL"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1593,6 +1629,7 @@ module Aws::DataSync
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
     #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
+    #   resp.options.security_descriptor_copy_flags #=> String, one of "NONE", "OWNER_DACL", "OWNER_DACL_SACL"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1887,15 +1924,19 @@ module Aws::DataSync
     #
     # @option params [Types::Options] :override_options
     #   Represents the options that are available to control the behavior of a
-    #   StartTaskExecution operation. Behavior includes preserving metadata
-    #   such as user ID (UID), group ID (GID), and file permissions, and also
-    #   overwriting files in the destination, data integrity verification, and
-    #   so on.
+    #   [StartTaskExecution][1] operation. Behavior includes preserving
+    #   metadata such as user ID (UID), group ID (GID), and file permissions,
+    #   and also overwriting files in the destination, data integrity
+    #   verification, and so on.
     #
     #   A task has a set of default options associated with it. If you don't
-    #   specify an option in StartTaskExecution, the default value is used.
-    #   You can override the defaults options on each task execution by
-    #   specifying an overriding `Options` value to StartTaskExecution.
+    #   specify an option in [StartTaskExecution][1], the default value is
+    #   used. You can override the defaults options on each task execution by
+    #   specifying an overriding `Options` value to [StartTaskExecution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :includes
     #   A list of filter rules that determines which files to include when
@@ -1925,6 +1966,7 @@ module Aws::DataSync
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #     },
     #     includes: [
     #       {
@@ -2032,7 +2074,11 @@ module Aws::DataSync
 
     # Updates some of the parameters of a previously created location for
     # Network File System (NFS) access. For information about creating an
-    # NFS location, see create-nfs-location.
+    # NFS location, see [Creating a location for NFS][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the NFS location to update.
@@ -2103,8 +2149,12 @@ module Aws::DataSync
 
     # Updates some of the parameters of a previously created location for
     # self-managed object storage server access. For information about
-    # creating a self-managed object storage location, see
-    # create-object-location.
+    # creating a self-managed object storage location, see [Creating a
+    # location for object storage][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the self-managed object storage
@@ -2165,7 +2215,11 @@ module Aws::DataSync
 
     # Updates some of the parameters of a previously created location for
     # Server Message Block (SMB) file system access. For information about
-    # creating an SMB location, see create-smb-location.
+    # creating an SMB location, see [Creating a location for SMB][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the SMB location to update.
@@ -2249,15 +2303,19 @@ module Aws::DataSync
     #
     # @option params [Types::Options] :options
     #   Represents the options that are available to control the behavior of a
-    #   StartTaskExecution operation. Behavior includes preserving metadata
-    #   such as user ID (UID), group ID (GID), and file permissions, and also
-    #   overwriting files in the destination, data integrity verification, and
-    #   so on.
+    #   [StartTaskExecution][1] operation. Behavior includes preserving
+    #   metadata such as user ID (UID), group ID (GID), and file permissions,
+    #   and also overwriting files in the destination, data integrity
+    #   verification, and so on.
     #
     #   A task has a set of default options associated with it. If you don't
-    #   specify an option in StartTaskExecution, the default value is used.
-    #   You can override the defaults options on each task execution by
-    #   specifying an overriding `Options` value to StartTaskExecution.
+    #   specify an option in [StartTaskExecution][1], the default value is
+    #   used. You can override the defaults options on each task execution by
+    #   specifying an overriding `Options` value to [StartTaskExecution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :excludes
     #   A list of filter rules that determines which files to exclude from a
@@ -2270,7 +2328,12 @@ module Aws::DataSync
     #   to a destination location. You can configure your task to execute
     #   hourly, daily, weekly or on specific days of the week. You control
     #   when in the day or hour you want the task to execute. The time you
-    #   specify is UTC time. For more information, see task-scheduling.
+    #   specify is UTC time. For more information, see [Scheduling your
+    #   task][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @option params [String] :name
     #   The name of the task to update.
@@ -2299,6 +2362,7 @@ module Aws::DataSync
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #     },
     #     excludes: [
     #       {
@@ -2343,15 +2407,19 @@ module Aws::DataSync
     #
     # @option params [required, Types::Options] :options
     #   Represents the options that are available to control the behavior of a
-    #   StartTaskExecution operation. Behavior includes preserving metadata
-    #   such as user ID (UID), group ID (GID), and file permissions, and also
-    #   overwriting files in the destination, data integrity verification, and
-    #   so on.
+    #   [StartTaskExecution][1] operation. Behavior includes preserving
+    #   metadata such as user ID (UID), group ID (GID), and file permissions,
+    #   and also overwriting files in the destination, data integrity
+    #   verification, and so on.
     #
     #   A task has a set of default options associated with it. If you don't
-    #   specify an option in StartTaskExecution, the default value is used.
-    #   You can override the defaults options on each task execution by
-    #   specifying an overriding `Options` value to StartTaskExecution.
+    #   specify an option in [StartTaskExecution][1], the default value is
+    #   used. You can override the defaults options on each task execution by
+    #   specifying an overriding `Options` value to [StartTaskExecution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2373,6 +2441,7 @@ module Aws::DataSync
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #     },
     #   })
     #
@@ -2398,7 +2467,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

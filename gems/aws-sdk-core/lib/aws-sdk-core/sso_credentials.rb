@@ -8,8 +8,7 @@ module Aws
   # AWS CLI with the correct profile.
   #
   # For more background on AWS SSO see the official
-  # {what is SSO}[https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html]
-  # page.
+  # {https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html what is SSO Userguide}
   #
   # ## Refreshing Credentials from SSO
   #

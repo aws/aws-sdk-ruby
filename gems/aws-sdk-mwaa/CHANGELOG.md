@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-05-26)
+------------------
+
+* Feature - Adds scheduler count selection for Environments using Airflow version 2.0.2 or later.
+
 1.4.0 (2021-03-16)
 ------------------
 

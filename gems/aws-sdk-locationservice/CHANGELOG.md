@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-07-19)
+------------------
+
+* Feature - Add five new API operations: UpdateGeofenceCollection, UpdateMap, UpdatePlaceIndex, UpdateRouteCalculator, UpdateTracker.
+
+1.4.0 (2021-05-28)
+------------------
+
+* Feature - Adds support for calculation of routes, resource tagging and customer provided KMS keys.
+
 1.3.0 (2021-03-29)
 ------------------
 
