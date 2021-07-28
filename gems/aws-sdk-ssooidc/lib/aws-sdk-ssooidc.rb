@@ -48,6 +48,6 @@ require_relative 'aws-sdk-ssooidc/customizations'
 # @!group service
 module Aws::SSOOIDC
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

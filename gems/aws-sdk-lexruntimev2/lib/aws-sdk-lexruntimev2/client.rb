@@ -981,7 +981,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.3.1'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

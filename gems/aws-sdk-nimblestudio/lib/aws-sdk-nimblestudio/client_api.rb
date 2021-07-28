@@ -228,7 +228,7 @@ module Aws::NimbleStudio
     StreamingSessionStreamStatusCode = Shapes::StringShape.new(name: 'StreamingSessionStreamStatusCode')
     Studio = Shapes::StructureShape.new(name: 'Studio')
     StudioComponent = Shapes::StructureShape.new(name: 'StudioComponent')
-    StudioComponentConfiguration = Shapes::StructureShape.new(name: 'StudioComponentConfiguration')
+    StudioComponentConfiguration = Shapes::UnionShape.new(name: 'StudioComponentConfiguration')
     StudioComponentDescription = Shapes::StringShape.new(name: 'StudioComponentDescription')
     StudioComponentId = Shapes::StringShape.new(name: 'StudioComponentId')
     StudioComponentInitializationScript = Shapes::StructureShape.new(name: 'StudioComponentInitializationScript')
@@ -1065,6 +1065,12 @@ module Aws::NimbleStudio
     StudioComponentConfiguration.add_member(:compute_farm_configuration, Shapes::ShapeRef.new(shape: ComputeFarmConfiguration, location_name: "computeFarmConfiguration"))
     StudioComponentConfiguration.add_member(:license_service_configuration, Shapes::ShapeRef.new(shape: LicenseServiceConfiguration, location_name: "licenseServiceConfiguration"))
     StudioComponentConfiguration.add_member(:shared_file_system_configuration, Shapes::ShapeRef.new(shape: SharedFileSystemConfiguration, location_name: "sharedFileSystemConfiguration"))
+    StudioComponentConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    StudioComponentConfiguration.add_member_subclass(:active_directory_configuration, Types::StudioComponentConfiguration::ActiveDirectoryConfiguration)
+    StudioComponentConfiguration.add_member_subclass(:compute_farm_configuration, Types::StudioComponentConfiguration::ComputeFarmConfiguration)
+    StudioComponentConfiguration.add_member_subclass(:license_service_configuration, Types::StudioComponentConfiguration::LicenseServiceConfiguration)
+    StudioComponentConfiguration.add_member_subclass(:shared_file_system_configuration, Types::StudioComponentConfiguration::SharedFileSystemConfiguration)
+    StudioComponentConfiguration.add_member_subclass(:unknown, Types::StudioComponentConfiguration::Unknown)
     StudioComponentConfiguration.struct_class = Types::StudioComponentConfiguration
 
     StudioComponentInitializationScript.add_member(:launch_profile_protocol_version, Shapes::ShapeRef.new(shape: LaunchProfileProtocolVersion, location_name: "launchProfileProtocolVersion"))

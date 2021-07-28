@@ -3440,15 +3440,9 @@ module Aws::S3Control
 
     # A container for AwsLambdaTransformation.
     #
-    # @note When making an API call, you may pass ObjectLambdaContentTransformation
-    #   data as a hash:
+    # @note ObjectLambdaContentTransformation is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         aws_lambda: {
-    #           function_arn: "FunctionArnString", # required
-    #           function_payload: "AwsLambdaTransformationPayload",
-    #         },
-    #       }
+    # @note ObjectLambdaContentTransformation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ObjectLambdaContentTransformation corresponding to the set member.
     #
     # @!attribute [rw] aws_lambda
     #   A container for an Lambda function.
@@ -3457,9 +3451,14 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaContentTransformation AWS API Documentation
     #
     class ObjectLambdaContentTransformation < Struct.new(
-      :aws_lambda)
+      :aws_lambda,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsLambda < ObjectLambdaContentTransformation; end
+      class Unknown < ObjectLambdaContentTransformation; end
     end
 
     # A configuration used when creating an Object Lambda Access Point
