@@ -42,7 +42,6 @@ module Aws::CloudFormation
   # * {OperationNotFoundException}
   # * {OperationStatusCheckFailedException}
   # * {StackInstanceNotFoundException}
-  # * {StackNotFoundException}
   # * {StackSetNotEmptyException}
   # * {StackSetNotFoundException}
   # * {StaleRequestException}
@@ -206,16 +205,6 @@ module Aws::CloudFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFormation::Types::StackInstanceNotFoundException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class StackNotFoundException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::CloudFormation::Types::StackNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

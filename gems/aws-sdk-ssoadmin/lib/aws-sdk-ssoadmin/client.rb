@@ -341,17 +341,17 @@ module Aws::SSOAdmin
     #
     # <note markdown="1"> If the permission set is already referenced by one or more account
     # assignments, you will need to call ` ProvisionPermissionSet ` after
-    # this operation. Calling `ProvisionPermissionSet` applies the
-    # corresponding IAM policy updates to all assigned accounts.
+    # this action to apply the corresponding IAM policy updates to all
+    # assigned accounts.
     #
     #  </note>
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the PermissionSet that the managed policy should be
@@ -379,34 +379,34 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Assigns access to a principal for a specified Amazon Web Services
-    # account using a specified permission set.
+    # Assigns access to a principal for a specified AWS account using a
+    # specified permission set.
     #
     # <note markdown="1"> The term *principal* here refers to a user or group that is defined in
-    # Amazon Web Services SSO.
+    # AWS SSO.
     #
     #  </note>
     #
     # <note markdown="1"> As part of a successful `CreateAccountAssignment` call, the specified
     # permission set will automatically be provisioned to the account in the
-    # form of an IAM policy. That policy is attached to the SSO-created IAM
-    # role. If the permission set is subsequently updated, the corresponding
-    # IAM policies attached to roles in your accounts will not be updated
-    # automatically. In this case, you must call ` ProvisionPermissionSet `
-    # to make these updates.
+    # form of an IAM policy attached to the SSO-created IAM role. If the
+    # permission set is subsequently updated, the corresponding IAM policies
+    # attached to roles in your accounts will not be updated automatically.
+    # In this case, you will need to call ` ProvisionPermissionSet ` to make
+    # these updates.
     #
     #  </note>
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :target_id
-    #   TargetID is an Amazon Web Services account identifier, typically a
-    #   10-12 digit string (For example, 123456789012).
+    #   TargetID is an AWS account identifier, typically a 10-12 digit string
+    #   (For example, 123456789012).
     #
     # @option params [required, String] :target_type
     #   The entity type for which the assignment will be created.
@@ -419,11 +419,10 @@ module Aws::SSOAdmin
     #   The entity type for which the assignment will be created.
     #
     # @option params [required, String] :principal_id
-    #   An identifier for an object in Amazon Web Services SSO, such as a user
-    #   or group. PrincipalIds are GUIDs (For example,
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
-    #   PrincipalIds in Amazon Web Services SSO, see the [Amazon Web Services
-    #   SSO Identity Store API
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #
     # @return [Types::CreateAccountAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -463,25 +462,24 @@ module Aws::SSOAdmin
     end
 
     # Enables the attributes-based access control (ABAC) feature for the
-    # specified Amazon Web Services SSO instance. You can also specify new
-    # attributes to add to your ABAC configuration during the enabling
-    # process. For more information about ABAC, see [Attribute-Based Access
-    # Control](/singlesignon/latest/userguide/abac.html) in the *Amazon Web
-    # Services SSO User Guide*.
+    # specified AWS SSO instance. You can also specify new attributes to add
+    # to your ABAC configuration during the enabling process. For more
+    # information about ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed.
     #
     # @option params [required, Types::InstanceAccessControlAttributeConfiguration] :instance_access_control_attribute_configuration
-    #   Specifies the Amazon Web Services SSO identity store attributes to add
-    #   to your ABAC configuration. When using an external identity provider
-    #   as an identity source, you can pass attributes through the SAML
-    #   assertion. Doing so provides an alternative to configuring attributes
-    #   from the Amazon Web Services SSO identity store. If a SAML assertion
-    #   passes any of these attributes, Amazon Web Services SSO will replace
-    #   the attribute value with the value from the Amazon Web Services SSO
-    #   identity store.
+    #   Specifies the AWS SSO identity store attributes to add to your ABAC
+    #   configuration. When using an external identity provider as an identity
+    #   source, you can pass attributes through the SAML assertion as an
+    #   alternative to configuring attributes from the AWS SSO identity store.
+    #   If a SAML assertion passes any of these attributes, AWS SSO will
+    #   replace the attribute value with the value from the AWS SSO identity
+    #   store.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -512,8 +510,8 @@ module Aws::SSOAdmin
 
     # Creates a permission set within a specified SSO instance.
     #
-    # <note markdown="1"> To grant users and groups access to Amazon Web Services account
-    # resources, use ` CreateAccountAssignment `.
+    # <note markdown="1"> To grant users and groups access to AWS account resources, use `
+    # CreateAccountAssignment `.
     #
     #  </note>
     #
@@ -526,9 +524,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [String] :session_duration
     #   The length of time that the application user sessions are valid in the
@@ -579,19 +577,19 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Deletes a principal's access from a specified Amazon Web Services
-    # account using a specified permission set.
+    # Deletes a principal's access from a specified AWS account using a
+    # specified permission set.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :target_id
-    #   TargetID is an Amazon Web Services account identifier, typically a
-    #   10-12 digit string (For example, 123456789012).
+    #   TargetID is an AWS account identifier, typically a 10-12 digit string
+    #   (For example, 123456789012).
     #
     # @option params [required, String] :target_type
     #   The entity type for which the assignment will be deleted.
@@ -603,11 +601,10 @@ module Aws::SSOAdmin
     #   The entity type for which the assignment will be deleted.
     #
     # @option params [required, String] :principal_id
-    #   An identifier for an object in Amazon Web Services SSO, such as a user
-    #   or group. PrincipalIds are GUIDs (For example,
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
-    #   PrincipalIds in Amazon Web Services SSO, see the [Amazon Web Services
-    #   SSO Identity Store API
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #
     # @return [Types::DeleteAccountAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -651,9 +648,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set that will be used to remove access.
@@ -677,13 +674,13 @@ module Aws::SSOAdmin
     end
 
     # Disables the attributes-based access control (ABAC) feature for the
-    # specified Amazon Web Services SSO instance and deletes all of the
-    # attribute mappings that have been configured. Once deleted, any
-    # attributes that are received from an identity source and any custom
-    # attributes you have previously configured will not be passed. For more
-    # information about ABAC, see [Attribute-Based Access
-    # Control](/singlesignon/latest/userguide/abac.html) in the *Amazon Web
-    # Services SSO User Guide*.
+    # specified AWS SSO instance and deletes all of the attribute mappings
+    # that have been configured. Once deleted, any attributes that are
+    # received from an identity source and any custom attributes you have
+    # previously configured will not be passed. For more information about
+    # ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
@@ -711,9 +708,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set that should be deleted.
@@ -741,9 +738,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :account_assignment_creation_request_id
     #   The identifier that is used to track the request operation progress.
@@ -785,9 +782,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :account_assignment_deletion_request_id
     #   The identifier that is used to track the request operation progress.
@@ -824,13 +821,13 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Returns the list of Amazon Web Services SSO identity store attributes
-    # that have been configured to work with attributes-based access control
-    # (ABAC) for the specified Amazon Web Services SSO instance. This will
-    # not return attributes configured and sent by an external identity
-    # provider. For more information about ABAC, see [Attribute-Based Access
-    # Control](/singlesignon/latest/userguide/abac.html) in the *Amazon Web
-    # Services SSO User Guide*.
+    # Returns the list of AWS SSO identity store attributes that have been
+    # configured to work with attributes-based access control (ABAC) for the
+    # specified AWS SSO instance. This will not return attributes configured
+    # and sent by an external identity provider. For more information about
+    # ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
@@ -871,9 +868,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set.
@@ -913,9 +910,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :provision_permission_set_request_id
     #   The identifier that is provided by the ProvisionPermissionSet call to
@@ -956,9 +953,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the PermissionSet from which the policy should be detached.
@@ -990,9 +987,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set.
@@ -1021,15 +1018,15 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Lists the status of the Amazon Web Services account assignment
-    # creation requests for a specified SSO instance.
+    # Lists the status of the AWS account assignment creation requests for a
+    # specified SSO instance.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the assignment.
@@ -1076,15 +1073,15 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Lists the status of the Amazon Web Services account assignment
-    # deletion requests for a specified SSO instance.
+    # Lists the status of the AWS account assignment deletion requests for a
+    # specified SSO instance.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the assignment.
@@ -1131,19 +1128,18 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Lists the assignee of the specified Amazon Web Services account with
-    # the specified permission set.
+    # Lists the assignee of the specified AWS account with the specified
+    # permission set.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :account_id
-    #   The identifier of the Amazon Web Services account from which to list
-    #   the assignments.
+    #   The identifier of the AWS account from which to list the assignments.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set from which to list assignments.
@@ -1190,23 +1186,22 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Lists all the Amazon Web Services accounts where the specified
-    # permission set is provisioned.
+    # Lists all the AWS accounts where the specified permission set is
+    # provisioned.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
-    #   The ARN of the PermissionSet from which the associated Amazon Web
-    #   Services accounts will be listed.
+    #   The ARN of the PermissionSet from which the associated AWS accounts
+    #   will be listed.
     #
     # @option params [String] :provisioning_status
-    #   The permission set provisioning status for an Amazon Web Services
-    #   account.
+    #   The permission set provisioning status for an AWS account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the PermissionSet.
@@ -1292,9 +1287,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the PermissionSet whose managed policies will be listed.
@@ -1344,9 +1339,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the assignment.
@@ -1398,9 +1393,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [String] :next_token
     #   The pagination token for the list API. Initially the value is null.
@@ -1439,19 +1434,18 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Lists all the permission sets that are provisioned to a specified
-    # Amazon Web Services account.
+    # Lists all the permission sets that are provisioned to a specified AWS
+    # account.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :account_id
-    #   The identifier of the Amazon Web Services account from which to list
-    #   the assignments.
+    #   The identifier of the AWS account from which to list the assignments.
     #
     # @option params [String] :provisioning_status
     #   The status object for the permission set provisioning operation.
@@ -1500,9 +1494,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource with the tags to be listed.
@@ -1548,16 +1542,16 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set.
     #
     # @option params [String] :target_id
-    #   TargetID is an Amazon Web Services account identifier, typically a
-    #   10-12 digit string (For example, 123456789012).
+    #   TargetID is an AWS account identifier, typically a 10-12 digit string
+    #   (For example, 123456789012).
     #
     # @option params [required, String] :target_type
     #   The entity type for which the assignment will be created.
@@ -1605,9 +1599,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set.
@@ -1639,9 +1633,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource with the tags to be listed.
@@ -1678,9 +1672,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource with the tags to be listed.
@@ -1707,17 +1701,16 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Updates the Amazon Web Services SSO identity store attributes that you
-    # can use with the Amazon Web Services SSO instance for attributes-based
-    # access control (ABAC). When using an external identity provider as an
-    # identity source, you can pass attributes through the SAML assertion as
-    # an alternative to configuring attributes from the Amazon Web Services
-    # SSO identity store. If a SAML assertion passes any of these
-    # attributes, Amazon Web Services SSO replaces the attribute value with
-    # the value from the Amazon Web Services SSO identity store. For more
-    # information about ABAC, see [Attribute-Based Access
-    # Control](/singlesignon/latest/userguide/abac.html) in the *Amazon Web
-    # Services SSO User Guide*.
+    # Updates the AWS SSO identity store attributes to use with the AWS SSO
+    # instance for attributes-based access control (ABAC). When using an
+    # external identity provider as an identity source, you can pass
+    # attributes through the SAML assertion as an alternative to configuring
+    # attributes from the AWS SSO identity store. If a SAML assertion passes
+    # any of these attributes, AWS SSO will replace the attribute value with
+    # the value from the AWS SSO identity store. For more information about
+    # ABAC, see [Attribute-Based Access
+    # Control](/singlesignon/latest/userguide/abac.html) in the *AWS SSO
+    # User Guide*.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
@@ -1758,9 +1751,9 @@ module Aws::SSOAdmin
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
-    #   (ARNs) and Amazon Web Services Service
+    #   (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set.
@@ -1810,7 +1803,7 @@ module Aws::SSOAdmin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

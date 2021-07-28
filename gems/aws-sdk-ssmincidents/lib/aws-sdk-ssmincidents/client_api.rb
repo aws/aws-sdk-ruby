@@ -14,18 +14,18 @@ module Aws::SSMIncidents
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
-    Action = Shapes::UnionShape.new(name: 'Action')
+    Action = Shapes::StructureShape.new(name: 'Action')
     ActionsList = Shapes::ListShape.new(name: 'ActionsList')
     AddRegionAction = Shapes::StructureShape.new(name: 'AddRegionAction')
     Arn = Shapes::StringShape.new(name: 'Arn')
-    AttributeValueList = Shapes::UnionShape.new(name: 'AttributeValueList')
-    AutomationExecution = Shapes::UnionShape.new(name: 'AutomationExecution')
+    AttributeValueList = Shapes::StructureShape.new(name: 'AttributeValueList')
+    AutomationExecution = Shapes::StructureShape.new(name: 'AutomationExecution')
     AutomationExecutionSet = Shapes::ListShape.new(name: 'AutomationExecutionSet')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
-    ChatChannel = Shapes::UnionShape.new(name: 'ChatChannel')
+    ChatChannel = Shapes::StructureShape.new(name: 'ChatChannel')
     ChatbotSnsConfigurationSet = Shapes::ListShape.new(name: 'ChatbotSnsConfigurationSet')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
-    Condition = Shapes::UnionShape.new(name: 'Condition')
+    Condition = Shapes::StructureShape.new(name: 'Condition')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateReplicationSetInput = Shapes::StructureShape.new(name: 'CreateReplicationSetInput')
     CreateReplicationSetOutput = Shapes::StructureShape.new(name: 'CreateReplicationSetOutput')
@@ -79,7 +79,7 @@ module Aws::SSMIncidents
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ItemIdentifier = Shapes::StructureShape.new(name: 'ItemIdentifier')
     ItemType = Shapes::StringShape.new(name: 'ItemType')
-    ItemValue = Shapes::UnionShape.new(name: 'ItemValue')
+    ItemValue = Shapes::StructureShape.new(name: 'ItemValue')
     ListIncidentRecordsInput = Shapes::StructureShape.new(name: 'ListIncidentRecordsInput')
     ListIncidentRecordsOutput = Shapes::StructureShape.new(name: 'ListIncidentRecordsOutput')
     ListRelatedItemsInput = Shapes::StructureShape.new(name: 'ListRelatedItemsInput')
@@ -95,7 +95,7 @@ module Aws::SSMIncidents
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MetricDefinition = Shapes::StringShape.new(name: 'MetricDefinition')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
-    NotificationTargetItem = Shapes::UnionShape.new(name: 'NotificationTargetItem')
+    NotificationTargetItem = Shapes::StructureShape.new(name: 'NotificationTargetItem')
     NotificationTargetSet = Shapes::ListShape.new(name: 'NotificationTargetSet')
     Policy = Shapes::StringShape.new(name: 'Policy')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
@@ -111,7 +111,7 @@ module Aws::SSMIncidents
     RelatedItem = Shapes::StructureShape.new(name: 'RelatedItem')
     RelatedItemList = Shapes::ListShape.new(name: 'RelatedItemList')
     RelatedItemTitleString = Shapes::StringShape.new(name: 'RelatedItemTitleString')
-    RelatedItemsUpdate = Shapes::UnionShape.new(name: 'RelatedItemsUpdate')
+    RelatedItemsUpdate = Shapes::StructureShape.new(name: 'RelatedItemsUpdate')
     ReplicationSet = Shapes::StructureShape.new(name: 'ReplicationSet')
     ReplicationSetArnList = Shapes::ListShape.new(name: 'ReplicationSetArnList')
     ReplicationSetStatus = Shapes::StringShape.new(name: 'ReplicationSetStatus')
@@ -164,7 +164,7 @@ module Aws::SSMIncidents
     UpdateIncidentRecordOutput = Shapes::StructureShape.new(name: 'UpdateIncidentRecordOutput')
     UpdateRelatedItemsInput = Shapes::StructureShape.new(name: 'UpdateRelatedItemsInput')
     UpdateRelatedItemsOutput = Shapes::StructureShape.new(name: 'UpdateRelatedItemsOutput')
-    UpdateReplicationSetAction = Shapes::UnionShape.new(name: 'UpdateReplicationSetAction')
+    UpdateReplicationSetAction = Shapes::StructureShape.new(name: 'UpdateReplicationSetAction')
     UpdateReplicationSetInput = Shapes::StructureShape.new(name: 'UpdateReplicationSetInput')
     UpdateReplicationSetInputActionsList = Shapes::ListShape.new(name: 'UpdateReplicationSetInputActionsList')
     UpdateReplicationSetOutput = Shapes::StructureShape.new(name: 'UpdateReplicationSetOutput')
@@ -179,9 +179,6 @@ module Aws::SSMIncidents
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     Action.add_member(:ssm_automation, Shapes::ShapeRef.new(shape: SsmAutomation, location_name: "ssmAutomation"))
-    Action.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Action.add_member_subclass(:ssm_automation, Types::Action::SsmAutomation)
-    Action.add_member_subclass(:unknown, Types::Action::Unknown)
     Action.struct_class = Types::Action
 
     ActionsList.member = Shapes::ShapeRef.new(shape: Action)
@@ -192,26 +189,15 @@ module Aws::SSMIncidents
 
     AttributeValueList.add_member(:integer_values, Shapes::ShapeRef.new(shape: IntegerList, location_name: "integerValues"))
     AttributeValueList.add_member(:string_values, Shapes::ShapeRef.new(shape: StringList, location_name: "stringValues"))
-    AttributeValueList.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    AttributeValueList.add_member_subclass(:integer_values, Types::AttributeValueList::IntegerValues)
-    AttributeValueList.add_member_subclass(:string_values, Types::AttributeValueList::StringValues)
-    AttributeValueList.add_member_subclass(:unknown, Types::AttributeValueList::Unknown)
     AttributeValueList.struct_class = Types::AttributeValueList
 
     AutomationExecution.add_member(:ssm_execution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ssmExecutionArn"))
-    AutomationExecution.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    AutomationExecution.add_member_subclass(:ssm_execution_arn, Types::AutomationExecution::SsmExecutionArn)
-    AutomationExecution.add_member_subclass(:unknown, Types::AutomationExecution::Unknown)
     AutomationExecution.struct_class = Types::AutomationExecution
 
     AutomationExecutionSet.member = Shapes::ShapeRef.new(shape: AutomationExecution)
 
     ChatChannel.add_member(:chatbot_sns, Shapes::ShapeRef.new(shape: ChatbotSnsConfigurationSet, location_name: "chatbotSns"))
     ChatChannel.add_member(:empty, Shapes::ShapeRef.new(shape: EmptyChatChannel, location_name: "empty"))
-    ChatChannel.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ChatChannel.add_member_subclass(:chatbot_sns, Types::ChatChannel::ChatbotSns)
-    ChatChannel.add_member_subclass(:empty, Types::ChatChannel::Empty)
-    ChatChannel.add_member_subclass(:unknown, Types::ChatChannel::Unknown)
     ChatChannel.struct_class = Types::ChatChannel
 
     ChatbotSnsConfigurationSet.member = Shapes::ShapeRef.new(shape: SnsArn)
@@ -219,11 +205,6 @@ module Aws::SSMIncidents
     Condition.add_member(:after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "after"))
     Condition.add_member(:before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "before"))
     Condition.add_member(:equals, Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "equals"))
-    Condition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Condition.add_member_subclass(:after, Types::Condition::After)
-    Condition.add_member_subclass(:before, Types::Condition::Before)
-    Condition.add_member_subclass(:equals, Types::Condition::Equals)
-    Condition.add_member_subclass(:unknown, Types::Condition::Unknown)
     Condition.struct_class = Types::Condition
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
@@ -403,11 +384,6 @@ module Aws::SSMIncidents
     ItemValue.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     ItemValue.add_member(:metric_definition, Shapes::ShapeRef.new(shape: MetricDefinition, location_name: "metricDefinition"))
     ItemValue.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))
-    ItemValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ItemValue.add_member_subclass(:arn, Types::ItemValue::Arn)
-    ItemValue.add_member_subclass(:metric_definition, Types::ItemValue::MetricDefinition)
-    ItemValue.add_member_subclass(:url, Types::ItemValue::Url)
-    ItemValue.add_member_subclass(:unknown, Types::ItemValue::Unknown)
     ItemValue.struct_class = Types::ItemValue
 
     ListIncidentRecordsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
@@ -463,9 +439,6 @@ module Aws::SSMIncidents
     ListTimelineEventsOutput.struct_class = Types::ListTimelineEventsOutput
 
     NotificationTargetItem.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "snsTopicArn"))
-    NotificationTargetItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    NotificationTargetItem.add_member_subclass(:sns_topic_arn, Types::NotificationTargetItem::SnsTopicArn)
-    NotificationTargetItem.add_member_subclass(:unknown, Types::NotificationTargetItem::Unknown)
     NotificationTargetItem.struct_class = Types::NotificationTargetItem
 
     NotificationTargetSet.member = Shapes::ShapeRef.new(shape: NotificationTargetItem)
@@ -500,10 +473,6 @@ module Aws::SSMIncidents
 
     RelatedItemsUpdate.add_member(:item_to_add, Shapes::ShapeRef.new(shape: RelatedItem, location_name: "itemToAdd"))
     RelatedItemsUpdate.add_member(:item_to_remove, Shapes::ShapeRef.new(shape: ItemIdentifier, location_name: "itemToRemove"))
-    RelatedItemsUpdate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    RelatedItemsUpdate.add_member_subclass(:item_to_add, Types::RelatedItemsUpdate::ItemToAdd)
-    RelatedItemsUpdate.add_member_subclass(:item_to_remove, Types::RelatedItemsUpdate::ItemToRemove)
-    RelatedItemsUpdate.add_member_subclass(:unknown, Types::RelatedItemsUpdate::Unknown)
     RelatedItemsUpdate.struct_class = Types::RelatedItemsUpdate
 
     ReplicationSet.add_member(:created_by, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "createdBy"))
@@ -632,10 +601,6 @@ module Aws::SSMIncidents
 
     UpdateReplicationSetAction.add_member(:add_region_action, Shapes::ShapeRef.new(shape: AddRegionAction, location_name: "addRegionAction"))
     UpdateReplicationSetAction.add_member(:delete_region_action, Shapes::ShapeRef.new(shape: DeleteRegionAction, location_name: "deleteRegionAction"))
-    UpdateReplicationSetAction.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    UpdateReplicationSetAction.add_member_subclass(:add_region_action, Types::UpdateReplicationSetAction::AddRegionAction)
-    UpdateReplicationSetAction.add_member_subclass(:delete_region_action, Types::UpdateReplicationSetAction::DeleteRegionAction)
-    UpdateReplicationSetAction.add_member_subclass(:unknown, Types::UpdateReplicationSetAction::Unknown)
     UpdateReplicationSetAction.struct_class = Types::UpdateReplicationSetAction
 
     UpdateReplicationSetInput.add_member(:actions, Shapes::ShapeRef.new(shape: UpdateReplicationSetInputActionsList, required: true, location_name: "actions"))

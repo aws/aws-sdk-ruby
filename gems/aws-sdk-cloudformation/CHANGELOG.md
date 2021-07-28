@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.54.0 (2021-07-28)
-------------------
-
-* Feature - SDK update to support Importing existing Stacks to new/existing Self Managed StackSet - Stack Import feature.
-
 1.53.0 (2021-06-21)
 ------------------
 

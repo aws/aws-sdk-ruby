@@ -654,8 +654,6 @@ module Aws::RedshiftDataAPIService
 
     # A data value in a column.
     #
-    # @note Field is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Field corresponding to the set member.
-    #
     # @!attribute [rw] blob_value
     #   A value of the BLOB data type.
     #   @return [String]
@@ -688,19 +686,9 @@ module Aws::RedshiftDataAPIService
       :double_value,
       :is_null,
       :long_value,
-      :string_value,
-      :unknown)
+      :string_value)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class BlobValue < Field; end
-      class BooleanValue < Field; end
-      class DoubleValue < Field; end
-      class IsNull < Field; end
-      class LongValue < Field; end
-      class StringValue < Field; end
-      class Unknown < Field; end
     end
 
     # @note When making an API call, you may pass GetStatementResultRequest

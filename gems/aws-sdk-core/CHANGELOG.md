@@ -1,9 +1,6 @@
 Unreleased Changes
 ------------------
 
-3.118.0 (2021-07-28)
-------------------
-
 * Feature - Add support for Tagged Unions using a "sealed" classes like approach where each union member has a corresponding subclass.
 
 3.117.0 (2021-07-12)

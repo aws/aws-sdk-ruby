@@ -35,7 +35,7 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementException = Shapes::StructureShape.new(name: 'ExecuteStatementException')
     ExecuteStatementInput = Shapes::StructureShape.new(name: 'ExecuteStatementInput')
     ExecuteStatementOutput = Shapes::StructureShape.new(name: 'ExecuteStatementOutput')
-    Field = Shapes::UnionShape.new(name: 'Field')
+    Field = Shapes::StructureShape.new(name: 'Field')
     FieldList = Shapes::ListShape.new(name: 'FieldList')
     GetStatementResultRequest = Shapes::StructureShape.new(name: 'GetStatementResultRequest')
     GetStatementResultResponse = Shapes::StructureShape.new(name: 'GetStatementResultResponse')
@@ -197,14 +197,6 @@ module Aws::RedshiftDataAPIService
     Field.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
     Field.add_member(:long_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue"))
     Field.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
-    Field.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Field.add_member_subclass(:blob_value, Types::Field::BlobValue)
-    Field.add_member_subclass(:boolean_value, Types::Field::BooleanValue)
-    Field.add_member_subclass(:double_value, Types::Field::DoubleValue)
-    Field.add_member_subclass(:is_null, Types::Field::IsNull)
-    Field.add_member_subclass(:long_value, Types::Field::LongValue)
-    Field.add_member_subclass(:string_value, Types::Field::StringValue)
-    Field.add_member_subclass(:unknown, Types::Field::Unknown)
     Field.struct_class = Types::Field
 
     FieldList.member = Shapes::ShapeRef.new(shape: Field)
