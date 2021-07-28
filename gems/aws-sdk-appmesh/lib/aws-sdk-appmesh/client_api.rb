@@ -13,7 +13,7 @@ module Aws::AppMesh
 
     include Seahorse::Model
 
-    AccessLog = Shapes::StructureShape.new(name: 'AccessLog')
+    AccessLog = Shapes::UnionShape.new(name: 'AccessLog')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AwsCloudMapInstanceAttribute = Shapes::StructureShape.new(name: 'AwsCloudMapInstanceAttribute')
@@ -22,7 +22,7 @@ module Aws::AppMesh
     AwsCloudMapInstanceAttributes = Shapes::ListShape.new(name: 'AwsCloudMapInstanceAttributes')
     AwsCloudMapName = Shapes::StringShape.new(name: 'AwsCloudMapName')
     AwsCloudMapServiceDiscovery = Shapes::StructureShape.new(name: 'AwsCloudMapServiceDiscovery')
-    Backend = Shapes::StructureShape.new(name: 'Backend')
+    Backend = Shapes::UnionShape.new(name: 'Backend')
     BackendDefaults = Shapes::StructureShape.new(name: 'BackendDefaults')
     Backends = Shapes::ListShape.new(name: 'Backends')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -30,7 +30,7 @@ module Aws::AppMesh
     CertificateAuthorityArns = Shapes::ListShape.new(name: 'CertificateAuthorityArns')
     ClientPolicy = Shapes::StructureShape.new(name: 'ClientPolicy')
     ClientPolicyTls = Shapes::StructureShape.new(name: 'ClientPolicyTls')
-    ClientTlsCertificate = Shapes::StructureShape.new(name: 'ClientTlsCertificate')
+    ClientTlsCertificate = Shapes::UnionShape.new(name: 'ClientTlsCertificate')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateGatewayRouteInput = Shapes::StructureShape.new(name: 'CreateGatewayRouteInput')
     CreateGatewayRouteOutput = Shapes::StructureShape.new(name: 'CreateGatewayRouteOutput')
@@ -103,7 +103,7 @@ module Aws::AppMesh
     GrpcGatewayRouteMetadata = Shapes::StructureShape.new(name: 'GrpcGatewayRouteMetadata')
     GrpcGatewayRouteMetadataList = Shapes::ListShape.new(name: 'GrpcGatewayRouteMetadataList')
     GrpcGatewayRouteRewrite = Shapes::StructureShape.new(name: 'GrpcGatewayRouteRewrite')
-    GrpcMetadataMatchMethod = Shapes::StructureShape.new(name: 'GrpcMetadataMatchMethod')
+    GrpcMetadataMatchMethod = Shapes::UnionShape.new(name: 'GrpcMetadataMatchMethod')
     GrpcRetryPolicy = Shapes::StructureShape.new(name: 'GrpcRetryPolicy')
     GrpcRetryPolicyEvent = Shapes::StringShape.new(name: 'GrpcRetryPolicyEvent')
     GrpcRetryPolicyEvents = Shapes::ListShape.new(name: 'GrpcRetryPolicyEvents')
@@ -112,10 +112,10 @@ module Aws::AppMesh
     GrpcRouteMatch = Shapes::StructureShape.new(name: 'GrpcRouteMatch')
     GrpcRouteMetadata = Shapes::StructureShape.new(name: 'GrpcRouteMetadata')
     GrpcRouteMetadataList = Shapes::ListShape.new(name: 'GrpcRouteMetadataList')
-    GrpcRouteMetadataMatchMethod = Shapes::StructureShape.new(name: 'GrpcRouteMetadataMatchMethod')
+    GrpcRouteMetadataMatchMethod = Shapes::UnionShape.new(name: 'GrpcRouteMetadataMatchMethod')
     GrpcTimeout = Shapes::StructureShape.new(name: 'GrpcTimeout')
     HeaderMatch = Shapes::StringShape.new(name: 'HeaderMatch')
-    HeaderMatchMethod = Shapes::StructureShape.new(name: 'HeaderMatchMethod')
+    HeaderMatchMethod = Shapes::UnionShape.new(name: 'HeaderMatchMethod')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     HealthCheckIntervalMillis = Shapes::IntegerShape.new(name: 'HealthCheckIntervalMillis')
     HealthCheckPolicy = Shapes::StructureShape.new(name: 'HealthCheckPolicy')
@@ -173,15 +173,15 @@ module Aws::AppMesh
     ListVirtualServicesLimit = Shapes::IntegerShape.new(name: 'ListVirtualServicesLimit')
     ListVirtualServicesOutput = Shapes::StructureShape.new(name: 'ListVirtualServicesOutput')
     Listener = Shapes::StructureShape.new(name: 'Listener')
-    ListenerTimeout = Shapes::StructureShape.new(name: 'ListenerTimeout')
+    ListenerTimeout = Shapes::UnionShape.new(name: 'ListenerTimeout')
     ListenerTls = Shapes::StructureShape.new(name: 'ListenerTls')
     ListenerTlsAcmCertificate = Shapes::StructureShape.new(name: 'ListenerTlsAcmCertificate')
-    ListenerTlsCertificate = Shapes::StructureShape.new(name: 'ListenerTlsCertificate')
+    ListenerTlsCertificate = Shapes::UnionShape.new(name: 'ListenerTlsCertificate')
     ListenerTlsFileCertificate = Shapes::StructureShape.new(name: 'ListenerTlsFileCertificate')
     ListenerTlsMode = Shapes::StringShape.new(name: 'ListenerTlsMode')
     ListenerTlsSdsCertificate = Shapes::StructureShape.new(name: 'ListenerTlsSdsCertificate')
     ListenerTlsValidationContext = Shapes::StructureShape.new(name: 'ListenerTlsValidationContext')
-    ListenerTlsValidationContextTrust = Shapes::StructureShape.new(name: 'ListenerTlsValidationContextTrust')
+    ListenerTlsValidationContextTrust = Shapes::UnionShape.new(name: 'ListenerTlsValidationContextTrust')
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -219,7 +219,7 @@ module Aws::AppMesh
     RouteStatus = Shapes::StructureShape.new(name: 'RouteStatus')
     RouteStatusCode = Shapes::StringShape.new(name: 'RouteStatusCode')
     SdsSecretName = Shapes::StringShape.new(name: 'SdsSecretName')
-    ServiceDiscovery = Shapes::StructureShape.new(name: 'ServiceDiscovery')
+    ServiceDiscovery = Shapes::UnionShape.new(name: 'ServiceDiscovery')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     String = Shapes::StringShape.new(name: 'String')
@@ -246,7 +246,7 @@ module Aws::AppMesh
     TlsValidationContextAcmTrust = Shapes::StructureShape.new(name: 'TlsValidationContextAcmTrust')
     TlsValidationContextFileTrust = Shapes::StructureShape.new(name: 'TlsValidationContextFileTrust')
     TlsValidationContextSdsTrust = Shapes::StructureShape.new(name: 'TlsValidationContextSdsTrust')
-    TlsValidationContextTrust = Shapes::StructureShape.new(name: 'TlsValidationContextTrust')
+    TlsValidationContextTrust = Shapes::UnionShape.new(name: 'TlsValidationContextTrust')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
@@ -265,13 +265,13 @@ module Aws::AppMesh
     UpdateVirtualRouterOutput = Shapes::StructureShape.new(name: 'UpdateVirtualRouterOutput')
     UpdateVirtualServiceInput = Shapes::StructureShape.new(name: 'UpdateVirtualServiceInput')
     UpdateVirtualServiceOutput = Shapes::StructureShape.new(name: 'UpdateVirtualServiceOutput')
-    VirtualGatewayAccessLog = Shapes::StructureShape.new(name: 'VirtualGatewayAccessLog')
+    VirtualGatewayAccessLog = Shapes::UnionShape.new(name: 'VirtualGatewayAccessLog')
     VirtualGatewayBackendDefaults = Shapes::StructureShape.new(name: 'VirtualGatewayBackendDefaults')
     VirtualGatewayCertificateAuthorityArns = Shapes::ListShape.new(name: 'VirtualGatewayCertificateAuthorityArns')
     VirtualGatewayClientPolicy = Shapes::StructureShape.new(name: 'VirtualGatewayClientPolicy')
     VirtualGatewayClientPolicyTls = Shapes::StructureShape.new(name: 'VirtualGatewayClientPolicyTls')
-    VirtualGatewayClientTlsCertificate = Shapes::StructureShape.new(name: 'VirtualGatewayClientTlsCertificate')
-    VirtualGatewayConnectionPool = Shapes::StructureShape.new(name: 'VirtualGatewayConnectionPool')
+    VirtualGatewayClientTlsCertificate = Shapes::UnionShape.new(name: 'VirtualGatewayClientTlsCertificate')
+    VirtualGatewayConnectionPool = Shapes::UnionShape.new(name: 'VirtualGatewayConnectionPool')
     VirtualGatewayData = Shapes::StructureShape.new(name: 'VirtualGatewayData')
     VirtualGatewayFileAccessLog = Shapes::StructureShape.new(name: 'VirtualGatewayFileAccessLog')
     VirtualGatewayGrpcConnectionPool = Shapes::StructureShape.new(name: 'VirtualGatewayGrpcConnectionPool')
@@ -285,12 +285,12 @@ module Aws::AppMesh
     VirtualGatewayListener = Shapes::StructureShape.new(name: 'VirtualGatewayListener')
     VirtualGatewayListenerTls = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTls')
     VirtualGatewayListenerTlsAcmCertificate = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTlsAcmCertificate')
-    VirtualGatewayListenerTlsCertificate = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTlsCertificate')
+    VirtualGatewayListenerTlsCertificate = Shapes::UnionShape.new(name: 'VirtualGatewayListenerTlsCertificate')
     VirtualGatewayListenerTlsFileCertificate = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTlsFileCertificate')
     VirtualGatewayListenerTlsMode = Shapes::StringShape.new(name: 'VirtualGatewayListenerTlsMode')
     VirtualGatewayListenerTlsSdsCertificate = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTlsSdsCertificate')
     VirtualGatewayListenerTlsValidationContext = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTlsValidationContext')
-    VirtualGatewayListenerTlsValidationContextTrust = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTlsValidationContextTrust')
+    VirtualGatewayListenerTlsValidationContextTrust = Shapes::UnionShape.new(name: 'VirtualGatewayListenerTlsValidationContextTrust')
     VirtualGatewayListeners = Shapes::ListShape.new(name: 'VirtualGatewayListeners')
     VirtualGatewayLogging = Shapes::StructureShape.new(name: 'VirtualGatewayLogging')
     VirtualGatewayPortMapping = Shapes::StructureShape.new(name: 'VirtualGatewayPortMapping')
@@ -304,8 +304,8 @@ module Aws::AppMesh
     VirtualGatewayTlsValidationContextAcmTrust = Shapes::StructureShape.new(name: 'VirtualGatewayTlsValidationContextAcmTrust')
     VirtualGatewayTlsValidationContextFileTrust = Shapes::StructureShape.new(name: 'VirtualGatewayTlsValidationContextFileTrust')
     VirtualGatewayTlsValidationContextSdsTrust = Shapes::StructureShape.new(name: 'VirtualGatewayTlsValidationContextSdsTrust')
-    VirtualGatewayTlsValidationContextTrust = Shapes::StructureShape.new(name: 'VirtualGatewayTlsValidationContextTrust')
-    VirtualNodeConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeConnectionPool')
+    VirtualGatewayTlsValidationContextTrust = Shapes::UnionShape.new(name: 'VirtualGatewayTlsValidationContextTrust')
+    VirtualNodeConnectionPool = Shapes::UnionShape.new(name: 'VirtualNodeConnectionPool')
     VirtualNodeData = Shapes::StructureShape.new(name: 'VirtualNodeData')
     VirtualNodeGrpcConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeGrpcConnectionPool')
     VirtualNodeHttp2ConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeHttp2ConnectionPool')
@@ -329,7 +329,7 @@ module Aws::AppMesh
     VirtualServiceBackend = Shapes::StructureShape.new(name: 'VirtualServiceBackend')
     VirtualServiceData = Shapes::StructureShape.new(name: 'VirtualServiceData')
     VirtualServiceList = Shapes::ListShape.new(name: 'VirtualServiceList')
-    VirtualServiceProvider = Shapes::StructureShape.new(name: 'VirtualServiceProvider')
+    VirtualServiceProvider = Shapes::UnionShape.new(name: 'VirtualServiceProvider')
     VirtualServiceRef = Shapes::StructureShape.new(name: 'VirtualServiceRef')
     VirtualServiceSpec = Shapes::StructureShape.new(name: 'VirtualServiceSpec')
     VirtualServiceStatus = Shapes::StructureShape.new(name: 'VirtualServiceStatus')
@@ -338,6 +338,9 @@ module Aws::AppMesh
     WeightedTargets = Shapes::ListShape.new(name: 'WeightedTargets')
 
     AccessLog.add_member(:file, Shapes::ShapeRef.new(shape: FileAccessLog, location_name: "file"))
+    AccessLog.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AccessLog.add_member_subclass(:file, Types::AccessLog::File)
+    AccessLog.add_member_subclass(:unknown, Types::AccessLog::Unknown)
     AccessLog.struct_class = Types::AccessLog
 
     AwsCloudMapInstanceAttribute.add_member(:key, Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributeKey, required: true, location_name: "key"))
@@ -352,6 +355,9 @@ module Aws::AppMesh
     AwsCloudMapServiceDiscovery.struct_class = Types::AwsCloudMapServiceDiscovery
 
     Backend.add_member(:virtual_service, Shapes::ShapeRef.new(shape: VirtualServiceBackend, location_name: "virtualService"))
+    Backend.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Backend.add_member_subclass(:virtual_service, Types::Backend::VirtualService)
+    Backend.add_member_subclass(:unknown, Types::Backend::Unknown)
     Backend.struct_class = Types::Backend
 
     BackendDefaults.add_member(:client_policy, Shapes::ShapeRef.new(shape: ClientPolicy, location_name: "clientPolicy"))
@@ -375,6 +381,10 @@ module Aws::AppMesh
 
     ClientTlsCertificate.add_member(:file, Shapes::ShapeRef.new(shape: ListenerTlsFileCertificate, location_name: "file"))
     ClientTlsCertificate.add_member(:sds, Shapes::ShapeRef.new(shape: ListenerTlsSdsCertificate, location_name: "sds"))
+    ClientTlsCertificate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ClientTlsCertificate.add_member_subclass(:file, Types::ClientTlsCertificate::File)
+    ClientTlsCertificate.add_member_subclass(:sds, Types::ClientTlsCertificate::Sds)
+    ClientTlsCertificate.add_member_subclass(:unknown, Types::ClientTlsCertificate::Unknown)
     ClientTlsCertificate.struct_class = Types::ClientTlsCertificate
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -700,6 +710,13 @@ module Aws::AppMesh
     GrpcMetadataMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
     GrpcMetadataMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
     GrpcMetadataMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
+    GrpcMetadataMatchMethod.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GrpcMetadataMatchMethod.add_member_subclass(:exact, Types::GrpcMetadataMatchMethod::Exact)
+    GrpcMetadataMatchMethod.add_member_subclass(:prefix, Types::GrpcMetadataMatchMethod::Prefix)
+    GrpcMetadataMatchMethod.add_member_subclass(:range, Types::GrpcMetadataMatchMethod::Range)
+    GrpcMetadataMatchMethod.add_member_subclass(:regex, Types::GrpcMetadataMatchMethod::Regex)
+    GrpcMetadataMatchMethod.add_member_subclass(:suffix, Types::GrpcMetadataMatchMethod::Suffix)
+    GrpcMetadataMatchMethod.add_member_subclass(:unknown, Types::GrpcMetadataMatchMethod::Unknown)
     GrpcMetadataMatchMethod.struct_class = Types::GrpcMetadataMatchMethod
 
     GrpcRetryPolicy.add_member(:grpc_retry_events, Shapes::ShapeRef.new(shape: GrpcRetryPolicyEvents, location_name: "grpcRetryEvents"))
@@ -737,6 +754,13 @@ module Aws::AppMesh
     GrpcRouteMetadataMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
     GrpcRouteMetadataMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
     GrpcRouteMetadataMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
+    GrpcRouteMetadataMatchMethod.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GrpcRouteMetadataMatchMethod.add_member_subclass(:exact, Types::GrpcRouteMetadataMatchMethod::Exact)
+    GrpcRouteMetadataMatchMethod.add_member_subclass(:prefix, Types::GrpcRouteMetadataMatchMethod::Prefix)
+    GrpcRouteMetadataMatchMethod.add_member_subclass(:range, Types::GrpcRouteMetadataMatchMethod::Range)
+    GrpcRouteMetadataMatchMethod.add_member_subclass(:regex, Types::GrpcRouteMetadataMatchMethod::Regex)
+    GrpcRouteMetadataMatchMethod.add_member_subclass(:suffix, Types::GrpcRouteMetadataMatchMethod::Suffix)
+    GrpcRouteMetadataMatchMethod.add_member_subclass(:unknown, Types::GrpcRouteMetadataMatchMethod::Unknown)
     GrpcRouteMetadataMatchMethod.struct_class = Types::GrpcRouteMetadataMatchMethod
 
     GrpcTimeout.add_member(:idle, Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
@@ -748,6 +772,13 @@ module Aws::AppMesh
     HeaderMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
     HeaderMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
     HeaderMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
+    HeaderMatchMethod.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HeaderMatchMethod.add_member_subclass(:exact, Types::HeaderMatchMethod::Exact)
+    HeaderMatchMethod.add_member_subclass(:prefix, Types::HeaderMatchMethod::Prefix)
+    HeaderMatchMethod.add_member_subclass(:range, Types::HeaderMatchMethod::Range)
+    HeaderMatchMethod.add_member_subclass(:regex, Types::HeaderMatchMethod::Regex)
+    HeaderMatchMethod.add_member_subclass(:suffix, Types::HeaderMatchMethod::Suffix)
+    HeaderMatchMethod.add_member_subclass(:unknown, Types::HeaderMatchMethod::Unknown)
     HeaderMatchMethod.struct_class = Types::HeaderMatchMethod
 
     HealthCheckPolicy.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckThreshold, required: true, location_name: "healthyThreshold"))
@@ -937,6 +968,12 @@ module Aws::AppMesh
     ListenerTimeout.add_member(:http, Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "http"))
     ListenerTimeout.add_member(:http2, Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "http2"))
     ListenerTimeout.add_member(:tcp, Shapes::ShapeRef.new(shape: TcpTimeout, location_name: "tcp"))
+    ListenerTimeout.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListenerTimeout.add_member_subclass(:grpc, Types::ListenerTimeout::Grpc)
+    ListenerTimeout.add_member_subclass(:http, Types::ListenerTimeout::Http)
+    ListenerTimeout.add_member_subclass(:http2, Types::ListenerTimeout::Http2)
+    ListenerTimeout.add_member_subclass(:tcp, Types::ListenerTimeout::Tcp)
+    ListenerTimeout.add_member_subclass(:unknown, Types::ListenerTimeout::Unknown)
     ListenerTimeout.struct_class = Types::ListenerTimeout
 
     ListenerTls.add_member(:certificate, Shapes::ShapeRef.new(shape: ListenerTlsCertificate, required: true, location_name: "certificate"))
@@ -950,6 +987,11 @@ module Aws::AppMesh
     ListenerTlsCertificate.add_member(:acm, Shapes::ShapeRef.new(shape: ListenerTlsAcmCertificate, location_name: "acm"))
     ListenerTlsCertificate.add_member(:file, Shapes::ShapeRef.new(shape: ListenerTlsFileCertificate, location_name: "file"))
     ListenerTlsCertificate.add_member(:sds, Shapes::ShapeRef.new(shape: ListenerTlsSdsCertificate, location_name: "sds"))
+    ListenerTlsCertificate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListenerTlsCertificate.add_member_subclass(:acm, Types::ListenerTlsCertificate::Acm)
+    ListenerTlsCertificate.add_member_subclass(:file, Types::ListenerTlsCertificate::File)
+    ListenerTlsCertificate.add_member_subclass(:sds, Types::ListenerTlsCertificate::Sds)
+    ListenerTlsCertificate.add_member_subclass(:unknown, Types::ListenerTlsCertificate::Unknown)
     ListenerTlsCertificate.struct_class = Types::ListenerTlsCertificate
 
     ListenerTlsFileCertificate.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "certificateChain"))
@@ -965,6 +1007,10 @@ module Aws::AppMesh
 
     ListenerTlsValidationContextTrust.add_member(:file, Shapes::ShapeRef.new(shape: TlsValidationContextFileTrust, location_name: "file"))
     ListenerTlsValidationContextTrust.add_member(:sds, Shapes::ShapeRef.new(shape: TlsValidationContextSdsTrust, location_name: "sds"))
+    ListenerTlsValidationContextTrust.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListenerTlsValidationContextTrust.add_member_subclass(:file, Types::ListenerTlsValidationContextTrust::File)
+    ListenerTlsValidationContextTrust.add_member_subclass(:sds, Types::ListenerTlsValidationContextTrust::Sds)
+    ListenerTlsValidationContextTrust.add_member_subclass(:unknown, Types::ListenerTlsValidationContextTrust::Unknown)
     ListenerTlsValidationContextTrust.struct_class = Types::ListenerTlsValidationContextTrust
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
@@ -1062,6 +1108,10 @@ module Aws::AppMesh
 
     ServiceDiscovery.add_member(:aws_cloud_map, Shapes::ShapeRef.new(shape: AwsCloudMapServiceDiscovery, location_name: "awsCloudMap"))
     ServiceDiscovery.add_member(:dns, Shapes::ShapeRef.new(shape: DnsServiceDiscovery, location_name: "dns"))
+    ServiceDiscovery.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ServiceDiscovery.add_member_subclass(:aws_cloud_map, Types::ServiceDiscovery::AwsCloudMap)
+    ServiceDiscovery.add_member_subclass(:dns, Types::ServiceDiscovery::Dns)
+    ServiceDiscovery.add_member_subclass(:unknown, Types::ServiceDiscovery::Unknown)
     ServiceDiscovery.struct_class = Types::ServiceDiscovery
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1117,6 +1167,11 @@ module Aws::AppMesh
     TlsValidationContextTrust.add_member(:acm, Shapes::ShapeRef.new(shape: TlsValidationContextAcmTrust, location_name: "acm"))
     TlsValidationContextTrust.add_member(:file, Shapes::ShapeRef.new(shape: TlsValidationContextFileTrust, location_name: "file"))
     TlsValidationContextTrust.add_member(:sds, Shapes::ShapeRef.new(shape: TlsValidationContextSdsTrust, location_name: "sds"))
+    TlsValidationContextTrust.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TlsValidationContextTrust.add_member_subclass(:acm, Types::TlsValidationContextTrust::Acm)
+    TlsValidationContextTrust.add_member_subclass(:file, Types::TlsValidationContextTrust::File)
+    TlsValidationContextTrust.add_member_subclass(:sds, Types::TlsValidationContextTrust::Sds)
+    TlsValidationContextTrust.add_member_subclass(:unknown, Types::TlsValidationContextTrust::Unknown)
     TlsValidationContextTrust.struct_class = Types::TlsValidationContextTrust
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1216,6 +1271,9 @@ module Aws::AppMesh
     UpdateVirtualServiceOutput[:payload_member] = UpdateVirtualServiceOutput.member(:virtual_service)
 
     VirtualGatewayAccessLog.add_member(:file, Shapes::ShapeRef.new(shape: VirtualGatewayFileAccessLog, location_name: "file"))
+    VirtualGatewayAccessLog.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualGatewayAccessLog.add_member_subclass(:file, Types::VirtualGatewayAccessLog::File)
+    VirtualGatewayAccessLog.add_member_subclass(:unknown, Types::VirtualGatewayAccessLog::Unknown)
     VirtualGatewayAccessLog.struct_class = Types::VirtualGatewayAccessLog
 
     VirtualGatewayBackendDefaults.add_member(:client_policy, Shapes::ShapeRef.new(shape: VirtualGatewayClientPolicy, location_name: "clientPolicy"))
@@ -1234,11 +1292,20 @@ module Aws::AppMesh
 
     VirtualGatewayClientTlsCertificate.add_member(:file, Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsFileCertificate, location_name: "file"))
     VirtualGatewayClientTlsCertificate.add_member(:sds, Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsSdsCertificate, location_name: "sds"))
+    VirtualGatewayClientTlsCertificate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualGatewayClientTlsCertificate.add_member_subclass(:file, Types::VirtualGatewayClientTlsCertificate::File)
+    VirtualGatewayClientTlsCertificate.add_member_subclass(:sds, Types::VirtualGatewayClientTlsCertificate::Sds)
+    VirtualGatewayClientTlsCertificate.add_member_subclass(:unknown, Types::VirtualGatewayClientTlsCertificate::Unknown)
     VirtualGatewayClientTlsCertificate.struct_class = Types::VirtualGatewayClientTlsCertificate
 
     VirtualGatewayConnectionPool.add_member(:grpc, Shapes::ShapeRef.new(shape: VirtualGatewayGrpcConnectionPool, location_name: "grpc"))
     VirtualGatewayConnectionPool.add_member(:http, Shapes::ShapeRef.new(shape: VirtualGatewayHttpConnectionPool, location_name: "http"))
     VirtualGatewayConnectionPool.add_member(:http2, Shapes::ShapeRef.new(shape: VirtualGatewayHttp2ConnectionPool, location_name: "http2"))
+    VirtualGatewayConnectionPool.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualGatewayConnectionPool.add_member_subclass(:grpc, Types::VirtualGatewayConnectionPool::Grpc)
+    VirtualGatewayConnectionPool.add_member_subclass(:http, Types::VirtualGatewayConnectionPool::Http)
+    VirtualGatewayConnectionPool.add_member_subclass(:http2, Types::VirtualGatewayConnectionPool::Http2)
+    VirtualGatewayConnectionPool.add_member_subclass(:unknown, Types::VirtualGatewayConnectionPool::Unknown)
     VirtualGatewayConnectionPool.struct_class = Types::VirtualGatewayConnectionPool
 
     VirtualGatewayData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
@@ -1289,6 +1356,11 @@ module Aws::AppMesh
     VirtualGatewayListenerTlsCertificate.add_member(:acm, Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsAcmCertificate, location_name: "acm"))
     VirtualGatewayListenerTlsCertificate.add_member(:file, Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsFileCertificate, location_name: "file"))
     VirtualGatewayListenerTlsCertificate.add_member(:sds, Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsSdsCertificate, location_name: "sds"))
+    VirtualGatewayListenerTlsCertificate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualGatewayListenerTlsCertificate.add_member_subclass(:acm, Types::VirtualGatewayListenerTlsCertificate::Acm)
+    VirtualGatewayListenerTlsCertificate.add_member_subclass(:file, Types::VirtualGatewayListenerTlsCertificate::File)
+    VirtualGatewayListenerTlsCertificate.add_member_subclass(:sds, Types::VirtualGatewayListenerTlsCertificate::Sds)
+    VirtualGatewayListenerTlsCertificate.add_member_subclass(:unknown, Types::VirtualGatewayListenerTlsCertificate::Unknown)
     VirtualGatewayListenerTlsCertificate.struct_class = Types::VirtualGatewayListenerTlsCertificate
 
     VirtualGatewayListenerTlsFileCertificate.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "certificateChain"))
@@ -1304,6 +1376,10 @@ module Aws::AppMesh
 
     VirtualGatewayListenerTlsValidationContextTrust.add_member(:file, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextFileTrust, location_name: "file"))
     VirtualGatewayListenerTlsValidationContextTrust.add_member(:sds, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextSdsTrust, location_name: "sds"))
+    VirtualGatewayListenerTlsValidationContextTrust.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualGatewayListenerTlsValidationContextTrust.add_member_subclass(:file, Types::VirtualGatewayListenerTlsValidationContextTrust::File)
+    VirtualGatewayListenerTlsValidationContextTrust.add_member_subclass(:sds, Types::VirtualGatewayListenerTlsValidationContextTrust::Sds)
+    VirtualGatewayListenerTlsValidationContextTrust.add_member_subclass(:unknown, Types::VirtualGatewayListenerTlsValidationContextTrust::Unknown)
     VirtualGatewayListenerTlsValidationContextTrust.struct_class = Types::VirtualGatewayListenerTlsValidationContextTrust
 
     VirtualGatewayListeners.member = Shapes::ShapeRef.new(shape: VirtualGatewayListener)
@@ -1349,12 +1425,23 @@ module Aws::AppMesh
     VirtualGatewayTlsValidationContextTrust.add_member(:acm, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextAcmTrust, location_name: "acm"))
     VirtualGatewayTlsValidationContextTrust.add_member(:file, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextFileTrust, location_name: "file"))
     VirtualGatewayTlsValidationContextTrust.add_member(:sds, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextSdsTrust, location_name: "sds"))
+    VirtualGatewayTlsValidationContextTrust.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualGatewayTlsValidationContextTrust.add_member_subclass(:acm, Types::VirtualGatewayTlsValidationContextTrust::Acm)
+    VirtualGatewayTlsValidationContextTrust.add_member_subclass(:file, Types::VirtualGatewayTlsValidationContextTrust::File)
+    VirtualGatewayTlsValidationContextTrust.add_member_subclass(:sds, Types::VirtualGatewayTlsValidationContextTrust::Sds)
+    VirtualGatewayTlsValidationContextTrust.add_member_subclass(:unknown, Types::VirtualGatewayTlsValidationContextTrust::Unknown)
     VirtualGatewayTlsValidationContextTrust.struct_class = Types::VirtualGatewayTlsValidationContextTrust
 
     VirtualNodeConnectionPool.add_member(:grpc, Shapes::ShapeRef.new(shape: VirtualNodeGrpcConnectionPool, location_name: "grpc"))
     VirtualNodeConnectionPool.add_member(:http, Shapes::ShapeRef.new(shape: VirtualNodeHttpConnectionPool, location_name: "http"))
     VirtualNodeConnectionPool.add_member(:http2, Shapes::ShapeRef.new(shape: VirtualNodeHttp2ConnectionPool, location_name: "http2"))
     VirtualNodeConnectionPool.add_member(:tcp, Shapes::ShapeRef.new(shape: VirtualNodeTcpConnectionPool, location_name: "tcp"))
+    VirtualNodeConnectionPool.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualNodeConnectionPool.add_member_subclass(:grpc, Types::VirtualNodeConnectionPool::Grpc)
+    VirtualNodeConnectionPool.add_member_subclass(:http, Types::VirtualNodeConnectionPool::Http)
+    VirtualNodeConnectionPool.add_member_subclass(:http2, Types::VirtualNodeConnectionPool::Http2)
+    VirtualNodeConnectionPool.add_member_subclass(:tcp, Types::VirtualNodeConnectionPool::Tcp)
+    VirtualNodeConnectionPool.add_member_subclass(:unknown, Types::VirtualNodeConnectionPool::Unknown)
     VirtualNodeConnectionPool.struct_class = Types::VirtualNodeConnectionPool
 
     VirtualNodeData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
@@ -1450,6 +1537,10 @@ module Aws::AppMesh
 
     VirtualServiceProvider.add_member(:virtual_node, Shapes::ShapeRef.new(shape: VirtualNodeServiceProvider, location_name: "virtualNode"))
     VirtualServiceProvider.add_member(:virtual_router, Shapes::ShapeRef.new(shape: VirtualRouterServiceProvider, location_name: "virtualRouter"))
+    VirtualServiceProvider.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VirtualServiceProvider.add_member_subclass(:virtual_node, Types::VirtualServiceProvider::VirtualNode)
+    VirtualServiceProvider.add_member_subclass(:virtual_router, Types::VirtualServiceProvider::VirtualRouter)
+    VirtualServiceProvider.add_member_subclass(:unknown, Types::VirtualServiceProvider::Unknown)
     VirtualServiceProvider.struct_class = Types::VirtualServiceProvider
 
     VirtualServiceRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))

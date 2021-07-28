@@ -43,7 +43,7 @@ module Aws::HealthLake
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     ImportJobProperties = Shapes::StructureShape.new(name: 'ImportJobProperties')
     ImportJobPropertiesList = Shapes::ListShape.new(name: 'ImportJobPropertiesList')
-    InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
+    InputDataConfig = Shapes::UnionShape.new(name: 'InputDataConfig')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobName = Shapes::StringShape.new(name: 'JobName')
@@ -60,7 +60,7 @@ module Aws::HealthLake
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
-    OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    OutputDataConfig = Shapes::UnionShape.new(name: 'OutputDataConfig')
     PreloadDataConfig = Shapes::StructureShape.new(name: 'PreloadDataConfig')
     PreloadDataType = Shapes::StringShape.new(name: 'PreloadDataType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -181,6 +181,9 @@ module Aws::HealthLake
     ImportJobPropertiesList.member = Shapes::ShapeRef.new(shape: ImportJobProperties)
 
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    InputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    InputDataConfig.add_member_subclass(:s3_uri, Types::InputDataConfig::S3Uri)
+    InputDataConfig.add_member_subclass(:unknown, Types::InputDataConfig::Unknown)
     InputDataConfig.struct_class = Types::InputDataConfig
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -232,6 +235,9 @@ module Aws::HealthLake
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     OutputDataConfig.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, location_name: "S3Configuration"))
+    OutputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OutputDataConfig.add_member_subclass(:s3_configuration, Types::OutputDataConfig::S3Configuration)
+    OutputDataConfig.add_member_subclass(:unknown, Types::OutputDataConfig::Unknown)
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
     PreloadDataConfig.add_member(:preload_data_type, Shapes::ShapeRef.new(shape: PreloadDataType, required: true, location_name: "PreloadDataType"))
