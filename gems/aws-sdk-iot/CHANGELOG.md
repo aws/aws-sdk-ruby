@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2021-07-29)
+------------------
+
+* Feature - Increase maximum credential duration of role alias to 12 hours.
+
 1.70.0 (2021-07-28)
 ------------------
 

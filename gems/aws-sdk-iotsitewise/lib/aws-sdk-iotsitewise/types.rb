@@ -276,6 +276,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -288,6 +293,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -304,6 +315,9 @@ module Aws::IoTSiteWise
     #                   tumbling: {
     #                     interval: "Interval", # required
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -359,6 +373,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -371,6 +390,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -387,6 +412,9 @@ module Aws::IoTSiteWise
     #                   tumbling: {
     #                     interval: "Interval", # required
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -509,6 +537,11 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -521,6 +554,12 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -537,6 +576,9 @@ module Aws::IoTSiteWise
     #               tumbling: {
     #                 interval: "Interval", # required
     #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -594,6 +636,11 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -606,6 +653,12 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -622,6 +675,9 @@ module Aws::IoTSiteWise
     #               tumbling: {
     #                 interval: "Interval", # required
     #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -1446,6 +1502,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -1458,6 +1519,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -1474,6 +1541,9 @@ module Aws::IoTSiteWise
     #                   tumbling: {
     #                     interval: "Interval", # required
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -1501,6 +1571,11 @@ module Aws::IoTSiteWise
     #                     default_value: "DefaultValue",
     #                   },
     #                   measurement: {
+    #                     processing_config: {
+    #                       forwarding_config: { # required
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   transform: {
     #                     expression: "Expression", # required
@@ -1513,6 +1588,12 @@ module Aws::IoTSiteWise
     #                         },
     #                       },
     #                     ],
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                       forwarding_config: {
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   metric: {
     #                     expression: "Expression", # required
@@ -1529,6 +1610,9 @@ module Aws::IoTSiteWise
     #                       tumbling: {
     #                         interval: "Interval", # required
     #                       },
+    #                     },
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                     },
     #                   },
     #                 },
@@ -1814,8 +1898,11 @@ module Aws::IoTSiteWise
     #       {
     #         gateway_name: "Name", # required
     #         gateway_platform: { # required
-    #           greengrass: { # required
+    #           greengrass: {
     #             group_arn: "ARN", # required
+    #           },
+    #           greengrass_v2: {
+    #             core_device_thing_name: "CoreDeviceThingName", # required
     #           },
     #         },
     #         tags: {
@@ -3182,6 +3269,23 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains detailed error information.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    class DetailedError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateAssetsRequest
     #   data as a hash:
     #
@@ -3241,9 +3345,14 @@ module Aws::IoTSiteWise
     #   The error message.
     #   @return [String]
     #
+    # @!attribute [rw] details
+    #   A list of detailed errors.
+    #   @return [Array<Types::DetailedError>]
+    #
     class ErrorDetails < Struct.new(
       :code,
-      :message)
+      :message,
+      :details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3273,6 +3382,25 @@ module Aws::IoTSiteWise
     class ExpressionVariable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The forwarding configuration for a given property.
+    #
+    # @note When making an API call, you may pass ForwardingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #       }
+    #
+    # @!attribute [rw] state
+    #   The forwarding state for the given property.
+    #   @return [String]
+    #
+    class ForwardingConfig < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3312,8 +3440,11 @@ module Aws::IoTSiteWise
     #   data as a hash:
     #
     #       {
-    #         greengrass: { # required
+    #         greengrass: {
     #           group_arn: "ARN", # required
+    #         },
+    #         greengrass_v2: {
+    #           core_device_thing_name: "CoreDeviceThingName", # required
     #         },
     #       }
     #
@@ -3321,8 +3452,13 @@ module Aws::IoTSiteWise
     #   A gateway that runs on IoT Greengrass.
     #   @return [Types::Greengrass]
     #
+    # @!attribute [rw] greengrass_v2
+    #   A gateway that runs on IoT Greengrass V2.
+    #   @return [Types::GreengrassV2]
+    #
     class GatewayPlatform < Struct.new(
-      :greengrass)
+      :greengrass,
+      :greengrass_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3336,6 +3472,10 @@ module Aws::IoTSiteWise
     # @!attribute [rw] gateway_name
     #   The name of the asset.
     #   @return [String]
+    #
+    # @!attribute [rw] gateway_platform
+    #   Contains a gateway's platform information.
+    #   @return [Types::GatewayPlatform]
     #
     # @!attribute [rw] gateway_capability_summaries
     #   A list of gateway capability summaries that each contain a namespace
@@ -3359,6 +3499,7 @@ module Aws::IoTSiteWise
     class GatewaySummary < Struct.new(
       :gateway_id,
       :gateway_name,
+      :gateway_platform,
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date)
@@ -3762,6 +3903,35 @@ module Aws::IoTSiteWise
     #
     class Greengrass < Struct.new(
       :group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details for a gateway that runs on IoT Greengrass V2. To
+    # create a gateway that runs on IoT Greengrass V2, you must deploy the
+    # IoT SiteWise Edge component to your gateway device. Your [Greengrass
+    # device role][1] must use the `AWSIoTSiteWiseEdgeAccess` policy. For
+    # more information, see [Using IoT SiteWise at the edge][2] in the *IoT
+    # SiteWise User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html
+    #
+    # @note When making an API call, you may pass GreengrassV2
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "CoreDeviceThingName", # required
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the IoT thing for your IoT Greengrass V2 core device.
+    #   @return [String]
+    #
+    class GreengrassV2 < Struct.new(
+      :core_device_thing_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4653,9 +4823,53 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements
     #
-    # @api private
+    # @note When making an API call, you may pass Measurement
+    #   data as a hash:
     #
-    class Measurement < Aws::EmptyStructure; end
+    #       {
+    #         processing_config: {
+    #           forwarding_config: { # required
+    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] processing_config
+    #   The processing configuration for the given measurement property. You
+    #   can configure measurements to be kept at the edge or forwarded to
+    #   the Amazon Web Services Cloud. By default, measurements are
+    #   forwarded to the cloud.
+    #   @return [Types::MeasurementProcessingConfig]
+    #
+    class Measurement < Struct.new(
+      :processing_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processing configuration for the given measurement property. You
+    # can configure measurements to be kept at the edge or forwarded to the
+    # Amazon Web Services Cloud. By default, measurements are forwarded to
+    # the cloud.
+    #
+    # @note When making an API call, you may pass MeasurementProcessingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         forwarding_config: { # required
+    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] forwarding_config
+    #   The forwarding configuration for the given measurement property.
+    #   @return [Types::ForwardingConfig]
+    #
+    class MeasurementProcessingConfig < Struct.new(
+      :forwarding_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains an asset metric property. With metrics, you can calculate
     # aggregate functions, such as an average, maximum, or minimum, as
@@ -4694,6 +4908,9 @@ module Aws::IoTSiteWise
     #             interval: "Interval", # required
     #           },
     #         },
+    #         processing_config: {
+    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #         },
     #       }
     #
     # @!attribute [rw] expression
@@ -4719,10 +4936,38 @@ module Aws::IoTSiteWise
     #   point per `window`.
     #   @return [Types::MetricWindow]
     #
+    # @!attribute [rw] processing_config
+    #   The processing configuration for the given metric property. You can
+    #   configure metrics to be computed at the edge or in the Amazon Web
+    #   Services Cloud. By default, metrics are forwarded to the cloud.
+    #   @return [Types::MetricProcessingConfig]
+    #
     class Metric < Struct.new(
       :expression,
       :variables,
-      :window)
+      :window,
+      :processing_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processing configuration for the given metric property. You can
+    # configure metrics to be computed at the edge or in the Amazon Web
+    # Services Cloud. By default, metrics are forwarded to the cloud.
+    #
+    # @note When making an API call, you may pass MetricProcessingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #       }
+    #
+    # @!attribute [rw] compute_location
+    #   The compute location for the given metric property.
+    #   @return [String]
+    #
+    class MetricProcessingConfig < Struct.new(
+      :compute_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5025,6 +5270,11 @@ module Aws::IoTSiteWise
     #           default_value: "DefaultValue",
     #         },
     #         measurement: {
+    #           processing_config: {
+    #             forwarding_config: { # required
+    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #             },
+    #           },
     #         },
     #         transform: {
     #           expression: "Expression", # required
@@ -5037,6 +5287,12 @@ module Aws::IoTSiteWise
     #               },
     #             },
     #           ],
+    #           processing_config: {
+    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #             forwarding_config: {
+    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #             },
+    #           },
     #         },
     #         metric: {
     #           expression: "Expression", # required
@@ -5053,6 +5309,9 @@ module Aws::IoTSiteWise
     #             tumbling: {
     #               interval: "Interval", # required
     #             },
+    #           },
+    #           processing_config: {
+    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #           },
     #         },
     #       }
@@ -5510,6 +5769,12 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #         ],
+    #         processing_config: {
+    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #           forwarding_config: {
+    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] expression
@@ -5529,9 +5794,47 @@ module Aws::IoTSiteWise
     #   The list of variables used in the expression.
     #   @return [Array<Types::ExpressionVariable>]
     #
+    # @!attribute [rw] processing_config
+    #   The processing configuration for the given transform property. You
+    #   can configure transforms to be kept at the edge or forwarded to the
+    #   Amazon Web Services Cloud. You can also configure transforms to be
+    #   computed at the edge or in the cloud.
+    #   @return [Types::TransformProcessingConfig]
+    #
     class Transform < Struct.new(
       :expression,
-      :variables)
+      :variables,
+      :processing_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processing configuration for the given transform property. You can
+    # configure transforms to be kept at the edge or forwarded to the Amazon
+    # Web Services Cloud. You can also configure transforms to be computed
+    # at the edge or in the cloud.
+    #
+    # @note When making an API call, you may pass TransformProcessingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #         forwarding_config: {
+    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] compute_location
+    #   The compute location for the given transform property.
+    #   @return [String]
+    #
+    # @!attribute [rw] forwarding_config
+    #   The forwarding configuration for a given property.
+    #   @return [Types::ForwardingConfig]
+    #
+    class TransformProcessingConfig < Struct.new(
+      :compute_location,
+      :forwarding_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5697,6 +6000,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -5709,6 +6017,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -5725,6 +6039,9 @@ module Aws::IoTSiteWise
     #                   tumbling: {
     #                     interval: "Interval", # required
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -5754,6 +6071,11 @@ module Aws::IoTSiteWise
     #                     default_value: "DefaultValue",
     #                   },
     #                   measurement: {
+    #                     processing_config: {
+    #                       forwarding_config: { # required
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   transform: {
     #                     expression: "Expression", # required
@@ -5766,6 +6088,12 @@ module Aws::IoTSiteWise
     #                         },
     #                       },
     #                     ],
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                       forwarding_config: {
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   metric: {
     #                     expression: "Expression", # required
@@ -5782,6 +6110,9 @@ module Aws::IoTSiteWise
     #                       tumbling: {
     #                         interval: "Interval", # required
     #                       },
+    #                     },
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                     },
     #                   },
     #                 },

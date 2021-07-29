@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-07-29)
+------------------
+
+* Feature - Documentation update for valid Savings Plans offering ID pattern
+
 1.16.0 (2021-07-28)
 ------------------
 

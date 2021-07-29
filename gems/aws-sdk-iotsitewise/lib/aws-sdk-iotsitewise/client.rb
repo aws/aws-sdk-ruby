@@ -688,6 +688,9 @@ module Aws::IoTSiteWise
     #   resp.asset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
     #   resp.asset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_status.error.message #=> String
+    #   resp.asset_status.error.details #=> Array
+    #   resp.asset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_status.error.details[0].message #=> String
     #
     # @overload create_asset(params = {})
     # @param [Hash] params ({})
@@ -785,6 +788,11 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -797,6 +805,12 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -813,6 +827,9 @@ module Aws::IoTSiteWise
     #               tumbling: {
     #                 interval: "Interval", # required
     #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -840,6 +857,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -852,6 +874,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -868,6 +896,9 @@ module Aws::IoTSiteWise
     #                   tumbling: {
     #                     interval: "Interval", # required
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -888,6 +919,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
     #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
     #
     # @overload create_asset_model(params = {})
     # @param [Hash] params ({})
@@ -998,8 +1032,11 @@ module Aws::IoTSiteWise
     #   resp = client.create_gateway({
     #     gateway_name: "Name", # required
     #     gateway_platform: { # required
-    #       greengrass: { # required
+    #       greengrass: {
     #         group_arn: "ARN", # required
+    #       },
+    #       greengrass_v2: {
+    #         core_device_thing_name: "CoreDeviceThingName", # required
     #       },
     #     },
     #     tags: {
@@ -1296,6 +1333,9 @@ module Aws::IoTSiteWise
     #   resp.asset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
     #   resp.asset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_status.error.message #=> String
+    #   resp.asset_status.error.details #=> Array
+    #   resp.asset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_status.error.details[0].message #=> String
     #
     # @overload delete_asset(params = {})
     # @param [Hash] params ({})
@@ -1342,6 +1382,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
     #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
     #
     # @overload delete_asset_model(params = {})
     # @param [Hash] params ({})
@@ -1569,6 +1612,9 @@ module Aws::IoTSiteWise
     #   resp.asset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
     #   resp.asset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_status.error.message #=> String
+    #   resp.asset_status.error.details #=> Array
+    #   resp.asset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_status.error.details[0].message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1620,17 +1666,21 @@ module Aws::IoTSiteWise
     #   resp.asset_model_properties[0].data_type_spec #=> String
     #   resp.asset_model_properties[0].unit #=> String
     #   resp.asset_model_properties[0].type.attribute.default_value #=> String
+    #   resp.asset_model_properties[0].type.measurement.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_model_properties[0].type.transform.expression #=> String
     #   resp.asset_model_properties[0].type.transform.variables #=> Array
     #   resp.asset_model_properties[0].type.transform.variables[0].name #=> String
     #   resp.asset_model_properties[0].type.transform.variables[0].value.property_id #=> String
     #   resp.asset_model_properties[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_properties[0].type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_properties[0].type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_model_properties[0].type.metric.expression #=> String
     #   resp.asset_model_properties[0].type.metric.variables #=> Array
     #   resp.asset_model_properties[0].type.metric.variables[0].name #=> String
     #   resp.asset_model_properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_properties[0].type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_model_properties[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_hierarchies #=> Array
     #   resp.asset_model_hierarchies[0].id #=> String
     #   resp.asset_model_hierarchies[0].name #=> String
@@ -1646,22 +1696,29 @@ module Aws::IoTSiteWise
     #   resp.asset_model_composite_models[0].properties[0].data_type_spec #=> String
     #   resp.asset_model_composite_models[0].properties[0].unit #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.attribute.default_value #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.measurement.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_model_composite_models[0].properties[0].type.transform.expression #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.transform.variables #=> Array
     #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].name #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.property_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_model_composite_models[0].properties[0].type.metric.expression #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables #=> Array
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].name #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_creation_date #=> Time
     #   resp.asset_model_last_update_date #=> Time
     #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
     #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1726,17 +1783,21 @@ module Aws::IoTSiteWise
     #   resp.asset_property.data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
     #   resp.asset_property.unit #=> String
     #   resp.asset_property.type.attribute.default_value #=> String
+    #   resp.asset_property.type.measurement.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_property.type.transform.expression #=> String
     #   resp.asset_property.type.transform.variables #=> Array
     #   resp.asset_property.type.transform.variables[0].name #=> String
     #   resp.asset_property.type.transform.variables[0].value.property_id #=> String
     #   resp.asset_property.type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_property.type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_property.type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_property.type.metric.expression #=> String
     #   resp.asset_property.type.metric.variables #=> Array
     #   resp.asset_property.type.metric.variables[0].name #=> String
     #   resp.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_property.type.metric.window.tumbling.interval #=> String
+    #   resp.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.composite_model.name #=> String
     #   resp.composite_model.type #=> String
     #   resp.composite_model.asset_property.id #=> String
@@ -1747,17 +1808,21 @@ module Aws::IoTSiteWise
     #   resp.composite_model.asset_property.data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
     #   resp.composite_model.asset_property.unit #=> String
     #   resp.composite_model.asset_property.type.attribute.default_value #=> String
+    #   resp.composite_model.asset_property.type.measurement.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.composite_model.asset_property.type.transform.expression #=> String
     #   resp.composite_model.asset_property.type.transform.variables #=> Array
     #   resp.composite_model.asset_property.type.transform.variables[0].name #=> String
     #   resp.composite_model.asset_property.type.transform.variables[0].value.property_id #=> String
     #   resp.composite_model.asset_property.type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.composite_model.asset_property.type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.composite_model.asset_property.type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.composite_model.asset_property.type.metric.expression #=> String
     #   resp.composite_model.asset_property.type.metric.variables #=> Array
     #   resp.composite_model.asset_property.type.metric.variables[0].name #=> String
     #   resp.composite_model.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.composite_model.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.composite_model.asset_property.type.metric.window.tumbling.interval #=> String
+    #   resp.composite_model.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #
     # @overload describe_asset_property(params = {})
     # @param [Hash] params ({})
@@ -1863,9 +1928,10 @@ module Aws::IoTSiteWise
     #   resp.gateway_name #=> String
     #   resp.gateway_arn #=> String
     #   resp.gateway_platform.greengrass.group_arn #=> String
+    #   resp.gateway_platform.greengrass_v2.core_device_thing_name #=> String
     #   resp.gateway_capability_summaries #=> Array
     #   resp.gateway_capability_summaries[0].capability_namespace #=> String
-    #   resp.gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED"
+    #   resp.gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
     #   resp.creation_date #=> Time
     #   resp.last_update_date #=> Time
     #
@@ -1917,7 +1983,7 @@ module Aws::IoTSiteWise
     #   resp.gateway_id #=> String
     #   resp.capability_namespace #=> String
     #   resp.capability_configuration #=> String
-    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED"
+    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
     #
     # @overload describe_gateway_capability_configuration(params = {})
     # @param [Hash] params ({})
@@ -2047,6 +2113,12 @@ module Aws::IoTSiteWise
 
     # Retrieves information about the storage configuration for IoT
     # SiteWise.
+    #
+    # <note markdown="1"> Exporting data to Amazon S3 is currently in preview release and is
+    # subject to change. We recommend that you use this feature only with
+    # test data, and not in production environments.
+    #
+    #  </note>
     #
     # @return [Types::DescribeStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2609,6 +2681,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_summaries[0].status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
     #   resp.asset_model_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_model_summaries[0].status.error.message #=> String
+    #   resp.asset_model_summaries[0].status.error.details #=> Array
+    #   resp.asset_model_summaries[0].status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_summaries[0].status.error.details[0].message #=> String
     #   resp.next_token #=> String
     #
     # @overload list_asset_models(params = {})
@@ -2742,6 +2817,9 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
     #   resp.asset_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_summaries[0].status.error.message #=> String
+    #   resp.asset_summaries[0].status.error.details #=> Array
+    #   resp.asset_summaries[0].status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_summaries[0].status.error.details[0].message #=> String
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
@@ -2830,6 +2908,9 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
     #   resp.asset_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_summaries[0].status.error.message #=> String
+    #   resp.asset_summaries[0].status.error.details #=> Array
+    #   resp.asset_summaries[0].status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_summaries[0].status.error.details[0].message #=> String
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
@@ -2917,9 +2998,11 @@ module Aws::IoTSiteWise
     #   resp.gateway_summaries #=> Array
     #   resp.gateway_summaries[0].gateway_id #=> String
     #   resp.gateway_summaries[0].gateway_name #=> String
+    #   resp.gateway_summaries[0].gateway_platform.greengrass.group_arn #=> String
+    #   resp.gateway_summaries[0].gateway_platform.greengrass_v2.core_device_thing_name #=> String
     #   resp.gateway_summaries[0].gateway_capability_summaries #=> Array
     #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_namespace #=> String
-    #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED"
+    #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
     #   resp.gateway_summaries[0].creation_date #=> Time
     #   resp.gateway_summaries[0].last_update_date #=> Time
     #   resp.next_token #=> String
@@ -3163,6 +3246,12 @@ module Aws::IoTSiteWise
 
     # Configures storage settings for IoT SiteWise.
     #
+    # <note markdown="1"> Exporting data to Amazon S3 is currently in preview release and is
+    # subject to change. We recommend that you use this feature only with
+    # test data, and not in production environments.
+    #
+    #  </note>
+    #
     # @option params [required, String] :storage_type
     #   The type of storage that you specified for your data. The storage type
     #   can be one of the following values:
@@ -3381,6 +3470,9 @@ module Aws::IoTSiteWise
     #   resp.asset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
     #   resp.asset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_status.error.message #=> String
+    #   resp.asset_status.error.details #=> Array
+    #   resp.asset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_status.error.details[0].message #=> String
     #
     # @overload update_asset(params = {})
     # @param [Hash] params ({})
@@ -3485,6 +3577,11 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -3497,6 +3594,12 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -3513,6 +3616,9 @@ module Aws::IoTSiteWise
     #               tumbling: {
     #                 interval: "Interval", # required
     #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -3542,6 +3648,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -3554,6 +3665,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -3571,6 +3688,9 @@ module Aws::IoTSiteWise
     #                     interval: "Interval", # required
     #                   },
     #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                 },
     #               },
     #             },
     #           },
@@ -3585,6 +3705,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
     #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
     #
     # @overload update_asset_model(params = {})
     # @param [Hash] params ({})
@@ -3783,7 +3906,7 @@ module Aws::IoTSiteWise
     # @example Response structure
     #
     #   resp.capability_namespace #=> String
-    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED"
+    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
     #
     # @overload update_gateway_capability_configuration(params = {})
     # @param [Hash] params ({})
@@ -3937,7 +4060,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

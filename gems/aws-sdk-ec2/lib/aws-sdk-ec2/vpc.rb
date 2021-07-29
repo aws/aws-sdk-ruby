@@ -53,7 +53,7 @@ module Aws::EC2
       data[:state]
     end
 
-    # The ID of the account that owns the VPC.
+    # The ID of the Amazon Web Services account that owns the VPC.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -795,9 +795,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :peer_owner_id
-    #   The account ID of the owner of the accepter VPC.
+    #   The Amazon Web Services account ID of the owner of the accepter VPC.
     #
-    #   Default: Your account ID
+    #   Default: Your Amazon Web Services account ID
     # @option options [String] :peer_vpc_id
     #   The ID of the VPC with which you are creating the VPC peering
     #   connection. You must specify this parameter in the request.
@@ -840,8 +840,8 @@ module Aws::EC2
     #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
     #     VPC.
     #
-    #   * `accepter-vpc-info.owner-id` - The ID of the account that owns the
-    #     accepter VPC.
+    #   * `accepter-vpc-info.owner-id` - The ID of the Amazon Web Services
+    #     account that owns the accepter VPC.
     #
     #   * `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
     #
@@ -851,8 +851,8 @@ module Aws::EC2
     #   * `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
     #     requester's VPC.
     #
-    #   * `requester-vpc-info.owner-id` - The ID of the account that owns the
-    #     requester VPC.
+    #   * `requester-vpc-info.owner-id` - The ID of the Amazon Web Services
+    #     account that owns the requester VPC.
     #
     #   * `requester-vpc-info.vpc-id` - The ID of the requester VPC.
     #
@@ -1130,7 +1130,8 @@ module Aws::EC2
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
-    #   * `owner-id` - The account ID of the instance owner.
+    #   * `owner-id` - The Amazon Web Services account ID of the instance
+    #     owner.
     #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
@@ -1158,8 +1159,8 @@ module Aws::EC2
     #     terminate the instance). Similar to the state-reason-code filter.
     #
     #   * `requester-id` - The ID of the entity that launched the instance on
-    #     your behalf (for example, Management Console, Auto Scaling, and so
-    #     on).
+    #     your behalf (for example, Amazon Web Services Management Console,
+    #     Auto Scaling, and so on).
     #
     #   * `reservation-id` - The ID of the instance's reservation. A
     #     reservation ID is created any time you launch an instance. A
@@ -1265,7 +1266,8 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
-    #   * `owner-id` - The ID of the account that owns the internet gateway.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     internet gateway.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -1361,7 +1363,8 @@ module Aws::EC2
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
-    #   * `owner-id` - The ID of the account that owns the network ACL.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     network ACL.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -1488,7 +1491,8 @@ module Aws::EC2
     #
     #   * `network-interface-id` - The ID of the network interface.
     #
-    #   * `owner-id` - The account ID of the network interface owner.
+    #   * `owner-id` - The Amazon Web Services account ID of the network
+    #     interface owner.
     #
     #   * `private-ip-address` - The private IPv4 address or addresses of the
     #     network interface.
@@ -1496,12 +1500,12 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The alias or account ID of the principal or service
-    #     that created the network interface.
+    #   * `requester-id` - The alias or Amazon Web Services account ID of the
+    #     principal or service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an Amazon Web Service (for example, Management
-    #     Console, Auto Scaling, and so on).
+    #     being managed by an Amazon Web Service (for example, Amazon Web
+    #     Services Management Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
@@ -1578,8 +1582,8 @@ module Aws::EC2
     #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
     #     VPC.
     #
-    #   * `accepter-vpc-info.owner-id` - The ID of the account that owns the
-    #     accepter VPC.
+    #   * `accepter-vpc-info.owner-id` - The ID of the Amazon Web Services
+    #     account that owns the accepter VPC.
     #
     #   * `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
     #
@@ -1589,8 +1593,8 @@ module Aws::EC2
     #   * `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
     #     requester's VPC.
     #
-    #   * `requester-vpc-info.owner-id` - The ID of the account that owns the
-    #     requester VPC.
+    #   * `requester-vpc-info.owner-id` - The ID of the Amazon Web Services
+    #     account that owns the requester VPC.
     #
     #   * `requester-vpc-info.vpc-id` - The ID of the requester VPC.
     #
@@ -1673,7 +1677,8 @@ module Aws::EC2
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
     #
-    #   * `owner-id` - The ID of the account that owns the route table.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     route table.
     #
     #   * `route-table-id` - The ID of the route table.
     #
@@ -1939,7 +1944,8 @@ module Aws::EC2
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
-    #   * `owner-id` - The ID of the account that owns the subnet.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     subnet.
     #
     #   * `state` - The state of the subnet (`pending` \| `available`).
     #

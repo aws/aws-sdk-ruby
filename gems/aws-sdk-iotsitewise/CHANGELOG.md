@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-07-29)
+------------------
+
+* Feature - Added support for AWS IoT SiteWise Edge. You can now create an AWS IoT SiteWise gateway that runs on AWS IoT Greengrass V2. With the gateway,  you can collect local server and equipment data, process the data, and export the selected data from the edge to the AWS Cloud.
+
 1.26.0 (2021-07-28)
 ------------------
 
