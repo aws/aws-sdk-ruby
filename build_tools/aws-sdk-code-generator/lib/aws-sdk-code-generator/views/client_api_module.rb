@@ -271,7 +271,7 @@ module AwsSdkCodeGenerator
         end
         if document_struct?(shape)
           ["Shapes::DocumentShape", shape]
-	elsif shape['union']
+	      elsif shape['union']
           ["Shapes::UnionShape", shape]
         elsif SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]

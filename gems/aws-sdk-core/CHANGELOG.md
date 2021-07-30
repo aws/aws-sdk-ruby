@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support Document Types. (#2523)
+* Feature - Support Document Types. Document types are used to carry open content. A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.(#2523)
 
 3.118.0 (2021-07-28)
 ------------------
