@@ -72,7 +72,7 @@ module Aws::EC2
       data[:instance_id]
     end
 
-    # The ID of account that owns the instance.
+    # The ID of Amazon Web Services account that owns the instance.
     # @return [String]
     def instance_owner_id
       data[:instance_owner_id]

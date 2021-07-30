@@ -41,7 +41,8 @@ module Aws::EC2
       data[:dhcp_configurations]
     end
 
-    # The ID of the account that owns the DHCP options set.
+    # The ID of the Amazon Web Services account that owns the DHCP options
+    # set.
     # @return [String]
     def owner_id
       data[:owner_id]

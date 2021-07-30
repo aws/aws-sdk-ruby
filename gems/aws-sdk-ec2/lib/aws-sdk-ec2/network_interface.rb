@@ -83,7 +83,8 @@ module Aws::EC2
       data[:outpost_arn]
     end
 
-    # The account ID of the owner of the network interface.
+    # The Amazon Web Services account ID of the owner of the network
+    # interface.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -121,8 +122,8 @@ module Aws::EC2
       data[:ipv_6_prefixes]
     end
 
-    # The alias or account ID of the principal or service that created the
-    # network interface.
+    # The alias or Amazon Web Services account ID of the principal or
+    # service that created the network interface.
     # @return [String]
     def requester_id
       data[:requester_id]

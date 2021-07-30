@@ -646,12 +646,12 @@ module Aws::EC2
     #     `false`)
     #
     #   * `owner-alias` - The owner alias, from an Amazon-maintained list
-    #     (`amazon`). This is not the user-configured account alias set using
-    #     the IAM console. We recommend that you use the related parameter
-    #     instead of this filter.
-    #
-    #   * `owner-id` - The account ID of the owner. We recommend that you use
+    #     (`amazon`). This is not the user-configured Amazon Web Services
+    #     account alias set using the IAM console. We recommend that you use
     #     the related parameter instead of this filter.
+    #
+    #   * `owner-id` - The Amazon Web Services account ID of the owner. We
+    #     recommend that you use the related parameter instead of this filter.
     #
     #   * `progress` - The progress of the snapshot, as a percentage (for
     #     example, 80%).
@@ -678,9 +678,11 @@ module Aws::EC2
     #   * `volume-size` - The size of the volume, in GiB.
     # @option options [Array<String>] :owner_ids
     #   Scopes the results to snapshots with the specified owners. You can
-    #   specify a combination of account IDs, `self`, and `amazon`.
+    #   specify a combination of Amazon Web Services account IDs, `self`, and
+    #   `amazon`.
     # @option options [Array<String>] :restorable_by_user_ids
-    #   The IDs of the accounts that can create volumes from the snapshot.
+    #   The IDs of the Amazon Web Services accounts that can create volumes
+    #   from the snapshot.
     # @option options [Array<String>] :snapshot_ids
     #   The snapshot IDs.
     #

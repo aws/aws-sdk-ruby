@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.253.0 (2021-07-29)
+------------------
+
+* Feature - This release adds support for G4ad xlarge and 2xlarge instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
+
+1.252.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.251.0 (2021-07-22)
 ------------------
 

@@ -67,7 +67,7 @@ module Aws::EC2
       data[:kms_key_id]
     end
 
-    # The ID of the account that owns the EBS snapshot.
+    # The ID of the Amazon Web Services account that owns the EBS snapshot.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -116,8 +116,8 @@ module Aws::EC2
     end
 
     # The Amazon Web Services owner alias, from an Amazon-maintained list
-    # (`amazon`). This is not the user-configured account alias set using
-    # the IAM console.
+    # (`amazon`). This is not the user-configured Amazon Web Services
+    # account alias set using the IAM console.
     # @return [String]
     def owner_alias
       data[:owner_alias]

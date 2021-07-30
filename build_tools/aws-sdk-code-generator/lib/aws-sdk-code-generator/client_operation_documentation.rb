@@ -93,7 +93,6 @@ module AwsSdkCodeGenerator
         shape = Api.shape(operation['input'], api)
         return if shape['members'].nil?
         shape['members'].map do |member_name, member_ref|
-
           next if member_ref['documented'] === false
           # input eventstream is not provided by params
           member_shape = Api.shape(member_ref['shape'], api)
@@ -107,6 +106,9 @@ module AwsSdkCodeGenerator
           end
           if member_shape['document']
             docstring = docstring.to_s + "<p>Document type which accepts Open Content - unescaped/unencoded JSON data</p>"
+          end
+          if member_ref['union']
+            docstring = docstring.to_s + "<p>This is a union type and you must set exactly one of the members.</p>"
           end
           YardOptionTag.new(
             name: Underscore.underscore(member_name),

@@ -85,10 +85,12 @@ module Aws::IoTSiteWise
     CapabilitySyncStatus = Shapes::StringShape.new(name: 'CapabilitySyncStatus')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CompositeModelProperty = Shapes::StructureShape.new(name: 'CompositeModelProperty')
+    ComputeLocation = Shapes::StringShape.new(name: 'ComputeLocation')
     ConfigurationErrorDetails = Shapes::StructureShape.new(name: 'ConfigurationErrorDetails')
     ConfigurationState = Shapes::StringShape.new(name: 'ConfigurationState')
     ConfigurationStatus = Shapes::StructureShape.new(name: 'ConfigurationStatus')
     ConflictingOperationException = Shapes::StructureShape.new(name: 'ConflictingOperationException')
+    CoreDeviceThingName = Shapes::StringShape.new(name: 'CoreDeviceThingName')
     CreateAccessPolicyRequest = Shapes::StructureShape.new(name: 'CreateAccessPolicyRequest')
     CreateAccessPolicyResponse = Shapes::StructureShape.new(name: 'CreateAccessPolicyResponse')
     CreateAssetModelRequest = Shapes::StructureShape.new(name: 'CreateAssetModelRequest')
@@ -146,6 +148,10 @@ module Aws::IoTSiteWise
     DescribeStorageConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeStorageConfigurationRequest')
     DescribeStorageConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeStorageConfigurationResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DetailedError = Shapes::StructureShape.new(name: 'DetailedError')
+    DetailedErrorCode = Shapes::StringShape.new(name: 'DetailedErrorCode')
+    DetailedErrorMessage = Shapes::StringShape.new(name: 'DetailedErrorMessage')
+    DetailedErrors = Shapes::ListShape.new(name: 'DetailedErrors')
     DisassociateAssetsRequest = Shapes::StructureShape.new(name: 'DisassociateAssetsRequest')
     Email = Shapes::StringShape.new(name: 'Email')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
@@ -157,6 +163,8 @@ module Aws::IoTSiteWise
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExpressionVariable = Shapes::StructureShape.new(name: 'ExpressionVariable')
     ExpressionVariables = Shapes::ListShape.new(name: 'ExpressionVariables')
+    ForwardingConfig = Shapes::StructureShape.new(name: 'ForwardingConfig')
+    ForwardingConfigState = Shapes::StringShape.new(name: 'ForwardingConfigState')
     GatewayCapabilitySummaries = Shapes::ListShape.new(name: 'GatewayCapabilitySummaries')
     GatewayCapabilitySummary = Shapes::StructureShape.new(name: 'GatewayCapabilitySummary')
     GatewayPlatform = Shapes::StructureShape.new(name: 'GatewayPlatform')
@@ -171,6 +179,7 @@ module Aws::IoTSiteWise
     GetInterpolatedAssetPropertyValuesRequest = Shapes::StructureShape.new(name: 'GetInterpolatedAssetPropertyValuesRequest')
     GetInterpolatedAssetPropertyValuesResponse = Shapes::StructureShape.new(name: 'GetInterpolatedAssetPropertyValuesResponse')
     Greengrass = Shapes::StructureShape.new(name: 'Greengrass')
+    GreengrassV2 = Shapes::StructureShape.new(name: 'GreengrassV2')
     GroupIdentity = Shapes::StructureShape.new(name: 'GroupIdentity')
     IAMRoleIdentity = Shapes::StructureShape.new(name: 'IAMRoleIdentity')
     IAMUserIdentity = Shapes::StructureShape.new(name: 'IAMUserIdentity')
@@ -222,7 +231,9 @@ module Aws::IoTSiteWise
     MaxInterpolatedResults = Shapes::IntegerShape.new(name: 'MaxInterpolatedResults')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Measurement = Shapes::StructureShape.new(name: 'Measurement')
+    MeasurementProcessingConfig = Shapes::StructureShape.new(name: 'MeasurementProcessingConfig')
     Metric = Shapes::StructureShape.new(name: 'Metric')
+    MetricProcessingConfig = Shapes::StructureShape.new(name: 'MetricProcessingConfig')
     MetricWindow = Shapes::StructureShape.new(name: 'MetricWindow')
     MonitorErrorCode = Shapes::StringShape.new(name: 'MonitorErrorCode')
     MonitorErrorDetails = Shapes::StructureShape.new(name: 'MonitorErrorDetails')
@@ -287,6 +298,7 @@ module Aws::IoTSiteWise
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     Transform = Shapes::StructureShape.new(name: 'Transform')
+    TransformProcessingConfig = Shapes::StructureShape.new(name: 'TransformProcessingConfig')
     TraversalDirection = Shapes::StringShape.new(name: 'TraversalDirection')
     TraversalType = Shapes::StringShape.new(name: 'TraversalType')
     TumblingWindow = Shapes::StructureShape.new(name: 'TumblingWindow')
@@ -836,6 +848,12 @@ module Aws::IoTSiteWise
     DescribeStorageConfigurationResponse.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
     DescribeStorageConfigurationResponse.struct_class = Types::DescribeStorageConfigurationResponse
 
+    DetailedError.add_member(:code, Shapes::ShapeRef.new(shape: DetailedErrorCode, required: true, location_name: "code"))
+    DetailedError.add_member(:message, Shapes::ShapeRef.new(shape: DetailedErrorMessage, required: true, location_name: "message"))
+    DetailedError.struct_class = Types::DetailedError
+
+    DetailedErrors.member = Shapes::ShapeRef.new(shape: DetailedError)
+
     DisassociateAssetsRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "assetId"))
     DisassociateAssetsRequest.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "hierarchyId"))
     DisassociateAssetsRequest.add_member(:child_asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "childAssetId"))
@@ -844,6 +862,7 @@ module Aws::IoTSiteWise
 
     ErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
     ErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ErrorDetails.add_member(:details, Shapes::ShapeRef.new(shape: DetailedErrors, location_name: "details"))
     ErrorDetails.struct_class = Types::ErrorDetails
 
     ExpressionVariable.add_member(:name, Shapes::ShapeRef.new(shape: VariableName, required: true, location_name: "name"))
@@ -852,19 +871,24 @@ module Aws::IoTSiteWise
 
     ExpressionVariables.member = Shapes::ShapeRef.new(shape: ExpressionVariable)
 
+    ForwardingConfig.add_member(:state, Shapes::ShapeRef.new(shape: ForwardingConfigState, required: true, location_name: "state"))
+    ForwardingConfig.struct_class = Types::ForwardingConfig
+
     GatewayCapabilitySummaries.member = Shapes::ShapeRef.new(shape: GatewayCapabilitySummary)
 
     GatewayCapabilitySummary.add_member(:capability_namespace, Shapes::ShapeRef.new(shape: CapabilityNamespace, required: true, location_name: "capabilityNamespace"))
     GatewayCapabilitySummary.add_member(:capability_sync_status, Shapes::ShapeRef.new(shape: CapabilitySyncStatus, required: true, location_name: "capabilitySyncStatus"))
     GatewayCapabilitySummary.struct_class = Types::GatewayCapabilitySummary
 
-    GatewayPlatform.add_member(:greengrass, Shapes::ShapeRef.new(shape: Greengrass, required: true, location_name: "greengrass"))
+    GatewayPlatform.add_member(:greengrass, Shapes::ShapeRef.new(shape: Greengrass, location_name: "greengrass"))
+    GatewayPlatform.add_member(:greengrass_v2, Shapes::ShapeRef.new(shape: GreengrassV2, location_name: "greengrassV2"))
     GatewayPlatform.struct_class = Types::GatewayPlatform
 
     GatewaySummaries.member = Shapes::ShapeRef.new(shape: GatewaySummary)
 
     GatewaySummary.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "gatewayId"))
     GatewaySummary.add_member(:gateway_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "gatewayName"))
+    GatewaySummary.add_member(:gateway_platform, Shapes::ShapeRef.new(shape: GatewayPlatform, location_name: "gatewayPlatform"))
     GatewaySummary.add_member(:gateway_capability_summaries, Shapes::ShapeRef.new(shape: GatewayCapabilitySummaries, location_name: "gatewayCapabilitySummaries"))
     GatewaySummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     GatewaySummary.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateDate"))
@@ -930,6 +954,9 @@ module Aws::IoTSiteWise
 
     Greengrass.add_member(:group_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "groupArn"))
     Greengrass.struct_class = Types::Greengrass
+
+    GreengrassV2.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location_name: "coreDeviceThingName"))
+    GreengrassV2.struct_class = Types::GreengrassV2
 
     GroupIdentity.add_member(:id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "id"))
     GroupIdentity.struct_class = Types::GroupIdentity
@@ -1079,12 +1106,20 @@ module Aws::IoTSiteWise
     LoggingOptions.add_member(:level, Shapes::ShapeRef.new(shape: LoggingLevel, required: true, location_name: "level"))
     LoggingOptions.struct_class = Types::LoggingOptions
 
+    Measurement.add_member(:processing_config, Shapes::ShapeRef.new(shape: MeasurementProcessingConfig, location_name: "processingConfig"))
     Measurement.struct_class = Types::Measurement
+
+    MeasurementProcessingConfig.add_member(:forwarding_config, Shapes::ShapeRef.new(shape: ForwardingConfig, required: true, location_name: "forwardingConfig"))
+    MeasurementProcessingConfig.struct_class = Types::MeasurementProcessingConfig
 
     Metric.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "expression"))
     Metric.add_member(:variables, Shapes::ShapeRef.new(shape: ExpressionVariables, required: true, location_name: "variables"))
     Metric.add_member(:window, Shapes::ShapeRef.new(shape: MetricWindow, required: true, location_name: "window"))
+    Metric.add_member(:processing_config, Shapes::ShapeRef.new(shape: MetricProcessingConfig, location_name: "processingConfig"))
     Metric.struct_class = Types::Metric
+
+    MetricProcessingConfig.add_member(:compute_location, Shapes::ShapeRef.new(shape: ComputeLocation, required: true, location_name: "computeLocation"))
+    MetricProcessingConfig.struct_class = Types::MetricProcessingConfig
 
     MetricWindow.add_member(:tumbling, Shapes::ShapeRef.new(shape: TumblingWindow, location_name: "tumbling"))
     MetricWindow.struct_class = Types::MetricWindow
@@ -1221,7 +1256,12 @@ module Aws::IoTSiteWise
 
     Transform.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "expression"))
     Transform.add_member(:variables, Shapes::ShapeRef.new(shape: ExpressionVariables, required: true, location_name: "variables"))
+    Transform.add_member(:processing_config, Shapes::ShapeRef.new(shape: TransformProcessingConfig, location_name: "processingConfig"))
     Transform.struct_class = Types::Transform
+
+    TransformProcessingConfig.add_member(:compute_location, Shapes::ShapeRef.new(shape: ComputeLocation, required: true, location_name: "computeLocation"))
+    TransformProcessingConfig.add_member(:forwarding_config, Shapes::ShapeRef.new(shape: ForwardingConfig, location_name: "forwardingConfig"))
+    TransformProcessingConfig.struct_class = Types::TransformProcessingConfig
 
     TumblingWindow.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "interval"))
     TumblingWindow.struct_class = Types::TumblingWindow

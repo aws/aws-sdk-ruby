@@ -30,7 +30,8 @@ module AwsSdkCodeGenerator
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
         'streaming' => true, # transfer-encoding
-        'requiresLength' => true, # transder-encoding
+        'requiresLength' => true, # transfer-encoding
+        'union' => false,
         'document' => true,
         # event stream modeling
         'event' => false,
@@ -62,7 +63,6 @@ module AwsSdkCodeGenerator
         'wrapper' => false,
         'xmlOrder' => false,
         'retryable' => false,
-        'union' => false
       }
 
       METADATA_KEYS = {
@@ -135,6 +135,15 @@ module AwsSdkCodeGenerator
               shape['members'].each do |member_name, member_ref|
                 lines << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
               end
+            end
+            if shape['union']
+              lines << "#{shape_name}.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))"
+              shape['members'].each do |member_name, member_ref|
+                member_name_underscore = underscore(member_name)
+                member_class_name = pascal_case(member_name_underscore)
+                lines << "#{shape_name}.add_member_subclass(:#{member_name_underscore}, Types::#{shape_name}::#{member_class_name})"
+              end
+              lines << "#{shape_name}.add_member_subclass(:unknown, Types::#{shape_name}::Unknown)"
             end
             lines << "#{shape_name}.struct_class = Types::#{shape_name}"
             if payload = shape['payload']
@@ -262,6 +271,8 @@ module AwsSdkCodeGenerator
         end
         if document_struct?(shape)
           ["Shapes::DocumentShape", shape]
+	elsif shape['union']
+          ["Shapes::UnionShape", shape]
         elsif SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]
         else

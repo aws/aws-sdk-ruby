@@ -48,6 +48,6 @@ require_relative 'aws-sdk-comprehendmedical/customizations'
 # @!group service
 module Aws::ComprehendMedical
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

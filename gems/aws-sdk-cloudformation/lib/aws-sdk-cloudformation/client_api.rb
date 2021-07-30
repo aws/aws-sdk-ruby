@@ -153,6 +153,8 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput = Shapes::StructureShape.new(name: 'GetTemplateSummaryOutput')
     HandlerErrorCode = Shapes::StringShape.new(name: 'HandlerErrorCode')
     IdentityProvider = Shapes::StringShape.new(name: 'IdentityProvider')
+    ImportStacksToStackSetInput = Shapes::StructureShape.new(name: 'ImportStacksToStackSetInput')
+    ImportStacksToStackSetOutput = Shapes::StructureShape.new(name: 'ImportStacksToStackSetOutput')
     Imports = Shapes::ListShape.new(name: 'Imports')
     InProgressStackInstancesCount = Shapes::IntegerShape.new(name: 'InProgressStackInstancesCount')
     InSyncStackInstancesCount = Shapes::IntegerShape.new(name: 'InSyncStackInstancesCount')
@@ -320,6 +322,7 @@ module Aws::CloudFormation
     StackEvent = Shapes::StructureShape.new(name: 'StackEvent')
     StackEvents = Shapes::ListShape.new(name: 'StackEvents')
     StackId = Shapes::StringShape.new(name: 'StackId')
+    StackIdList = Shapes::ListShape.new(name: 'StackIdList')
     StackInstance = Shapes::StructureShape.new(name: 'StackInstance')
     StackInstanceComprehensiveStatus = Shapes::StructureShape.new(name: 'StackInstanceComprehensiveStatus')
     StackInstanceDetailedStatus = Shapes::StringShape.new(name: 'StackInstanceDetailedStatus')
@@ -333,6 +336,7 @@ module Aws::CloudFormation
     StackInstanceSummary = Shapes::StructureShape.new(name: 'StackInstanceSummary')
     StackName = Shapes::StringShape.new(name: 'StackName')
     StackNameOrId = Shapes::StringShape.new(name: 'StackNameOrId')
+    StackNotFoundException = Shapes::StructureShape.new(name: 'StackNotFoundException')
     StackPolicyBody = Shapes::StringShape.new(name: 'StackPolicyBody')
     StackPolicyDuringUpdateBody = Shapes::StringShape.new(name: 'StackPolicyDuringUpdateBody')
     StackPolicyDuringUpdateURL = Shapes::StringShape.new(name: 'StackPolicyDuringUpdateURL')
@@ -598,6 +602,7 @@ module Aws::CloudFormation
     CreateStackSetInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateStackSetInput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
     CreateStackSetInput.add_member(:template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "TemplateURL"))
+    CreateStackSetInput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
     CreateStackSetInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     CreateStackSetInput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     CreateStackSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -907,6 +912,16 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
     GetTemplateSummaryOutput.add_member(:resource_identifier_summaries, Shapes::ShapeRef.new(shape: ResourceIdentifierSummaries, location_name: "ResourceIdentifierSummaries"))
     GetTemplateSummaryOutput.struct_class = Types::GetTemplateSummaryOutput
+
+    ImportStacksToStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
+    ImportStacksToStackSetInput.add_member(:stack_ids, Shapes::ShapeRef.new(shape: StackIdList, required: true, location_name: "StackIds"))
+    ImportStacksToStackSetInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
+    ImportStacksToStackSetInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    ImportStacksToStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    ImportStacksToStackSetInput.struct_class = Types::ImportStacksToStackSetInput
+
+    ImportStacksToStackSetOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
+    ImportStacksToStackSetOutput.struct_class = Types::ImportStacksToStackSetOutput
 
     Imports.member = Shapes::ShapeRef.new(shape: StackName)
 
@@ -1295,6 +1310,8 @@ module Aws::CloudFormation
 
     StackEvents.member = Shapes::ShapeRef.new(shape: StackEvent)
 
+    StackIdList.member = Shapes::ShapeRef.new(shape: StackId)
+
     StackInstance.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
     StackInstance.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
     StackInstance.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))
@@ -1332,6 +1349,8 @@ module Aws::CloudFormation
     StackInstanceSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackInstanceSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackInstanceSummary.struct_class = Types::StackInstanceSummary
+
+    StackNotFoundException.struct_class = Types::StackNotFoundException
 
     StackResource.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
     StackResource.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
@@ -2056,6 +2075,21 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: GetTemplateSummaryInput)
         o.output = Shapes::ShapeRef.new(shape: GetTemplateSummaryOutput)
         o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+      end)
+
+      api.add_operation(:import_stacks_to_stack_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportStacksToStackSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportStacksToStackSetInput)
+        o.output = Shapes::ShapeRef.new(shape: ImportStacksToStackSetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationIdAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: StackNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: StaleRequestException)
       end)
 
       api.add_operation(:list_change_sets, Seahorse::Model::Operation.new.tap do |o|

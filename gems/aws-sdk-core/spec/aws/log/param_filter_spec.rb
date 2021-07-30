@@ -12,6 +12,14 @@ module Aws
         include Aws::Structure
       end
 
+      class UnionType < Struct.new(
+        :member_1,
+        :sensitive_member)
+        SENSITIVE = [:sensitive_member]
+        include Aws::Structure
+        include Aws::Structure::Union
+      end
+
       class OldServiceType < Struct.new(
         :peccy_id,
         :password)
@@ -39,6 +47,12 @@ module Aws
           instance = Struct.new(:peccy_id, :password).new('peccy-id', 'peccy')
           filtered = subject.filter(instance, SensitiveType)
           expect(filtered).to eq(password: '[FILTERED]', peccy_id: 'peccy-id')
+        end
+
+        it 'filters sensitive Union params' do
+          instance = UnionType.new(sensitive_member: 'sensitive')
+          filtered = subject.filter(instance, UnionType)
+          expect(filtered).to eq(sensitive_member: '[FILTERED]')
         end
 
         context 'with additional filters' do

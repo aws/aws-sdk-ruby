@@ -53,7 +53,7 @@ module Aws::EC2
       data[:vpc_id]
     end
 
-    # The ID of the account that owns the route table.
+    # The ID of the Amazon Web Services account that owns the route table.
     # @return [String]
     def owner_id
       data[:owner_id]
