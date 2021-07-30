@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-07-30)
+------------------
+
+* Feature - AWS AppSync now supports a new authorization mode allowing you to define your own authorization logic using an AWS Lambda function.
+
 1.41.0 (2021-07-28)
 ------------------
 

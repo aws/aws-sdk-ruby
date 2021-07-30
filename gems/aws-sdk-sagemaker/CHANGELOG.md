@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2021-07-30)
+------------------
+
+* Feature - API changes with respect to Lambda steps in model building pipelines. Adds several waiters to async Sagemaker Image APIs. Add more instance types to AppInstanceType field
+
 1.94.0 (2021-07-28)
 ------------------
 

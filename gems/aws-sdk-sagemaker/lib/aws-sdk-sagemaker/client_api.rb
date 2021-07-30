@@ -738,6 +738,7 @@ module Aws::SageMaker
     LabelingJobSummary = Shapes::StructureShape.new(name: 'LabelingJobSummary')
     LabelingJobSummaryList = Shapes::ListShape.new(name: 'LabelingJobSummaryList')
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
+    LambdaStepMetadata = Shapes::StructureShape.new(name: 'LambdaStepMetadata')
     LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime')
     LineageEntityParameters = Shapes::MapShape.new(name: 'LineageEntityParameters')
     ListActionsRequest = Shapes::StructureShape.new(name: 'ListActionsRequest')
@@ -4017,6 +4018,10 @@ module Aws::SageMaker
 
     LabelingJobSummaryList.member = Shapes::ShapeRef.new(shape: LabelingJobSummary)
 
+    LambdaStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: String256, location_name: "Arn"))
+    LambdaStepMetadata.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
+    LambdaStepMetadata.struct_class = Types::LambdaStepMetadata
+
     LineageEntityParameters.key = Shapes::ShapeRef.new(shape: StringParameterValue)
     LineageEntityParameters.value = Shapes::ShapeRef.new(shape: StringParameterValue)
 
@@ -5271,6 +5276,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:register_model, Shapes::ShapeRef.new(shape: RegisterModelStepMetadata, location_name: "RegisterModel"))
     PipelineExecutionStepMetadata.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionStepMetadata, location_name: "Condition"))
     PipelineExecutionStepMetadata.add_member(:callback, Shapes::ShapeRef.new(shape: CallbackStepMetadata, location_name: "Callback"))
+    PipelineExecutionStepMetadata.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaStepMetadata, location_name: "Lambda"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))

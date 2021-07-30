@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-07-30)
+------------------
+
+* Feature - Add support for KmsKeyIds in the ListSecretVersionIds API response
+
 1.47.0 (2021-07-28)
 ------------------
 

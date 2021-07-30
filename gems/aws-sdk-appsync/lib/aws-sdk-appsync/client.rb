@@ -484,14 +484,14 @@ module Aws::AppSync
     #   The type of the `DataSource`.
     #
     # @option params [String] :service_role_arn
-    #   The AWS IAM service role ARN for the data source. The system assumes
-    #   this role when accessing the data source.
+    #   The Identity and Access Management service role ARN for the data
+    #   source. The system assumes this role when accessing the data source.
     #
     # @option params [Types::DynamodbDataSourceConfig] :dynamodb_config
     #   Amazon DynamoDB settings.
     #
     # @option params [Types::LambdaDataSourceConfig] :lambda_config
-    #   AWS Lambda settings.
+    #   Amazon Web Services Lambda settings.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
     #   Amazon Elasticsearch Service settings.
@@ -680,8 +680,8 @@ module Aws::AppSync
     #   The Amazon CloudWatch Logs configuration.
     #
     # @option params [required, String] :authentication_type
-    #   The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito
-    #   user pools.
+    #   The authentication type: API key, Identity and Access Management,
+    #   OIDC, or Amazon Cognito user pools.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The Amazon Cognito user pool configuration.
@@ -700,6 +700,9 @@ module Aws::AppSync
     #   A flag indicating whether to enable X-Ray tracing for the
     #   `GraphqlApi`.
     #
+    # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
+    #   Configuration for AWS Lambda function authorization.
+    #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -713,7 +716,7 @@ module Aws::AppSync
     #       cloud_watch_logs_role_arn: "String", # required
     #       exclude_verbose_content: false,
     #     },
-    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
@@ -731,7 +734,7 @@ module Aws::AppSync
     #     },
     #     additional_authentication_providers: [
     #       {
-    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #         open_id_connect_config: {
     #           issuer: "String", # required
     #           client_id: "String",
@@ -743,16 +746,26 @@ module Aws::AppSync
     #           aws_region: "String", # required
     #           app_id_client_regex: "String",
     #         },
+    #         lambda_authorizer_config: {
+    #           authorizer_result_ttl_in_seconds: 1,
+    #           authorizer_uri: "String", # required
+    #           identity_validation_expression: "String",
+    #         },
     #       },
     #     ],
     #     xray_enabled: false,
+    #     lambda_authorizer_config: {
+    #       authorizer_result_ttl_in_seconds: 1,
+    #       authorizer_uri: "String", # required
+    #       identity_validation_expression: "String",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
@@ -770,7 +783,7 @@ module Aws::AppSync
     #   resp.graphql_api.tags #=> Hash
     #   resp.graphql_api.tags["TagKey"] #=> String
     #   resp.graphql_api.additional_authentication_providers #=> Array
-    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
@@ -778,8 +791,14 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
     #   resp.graphql_api.xray_enabled #=> Boolean
     #   resp.graphql_api.waf_web_acl_arn #=> String
+    #   resp.graphql_api.lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_api.lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_api.lambda_authorizer_config.identity_validation_expression #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -1296,7 +1315,7 @@ module Aws::AppSync
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
@@ -1314,7 +1333,7 @@ module Aws::AppSync
     #   resp.graphql_api.tags #=> Hash
     #   resp.graphql_api.tags["TagKey"] #=> String
     #   resp.graphql_api.additional_authentication_providers #=> Array
-    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
@@ -1322,8 +1341,14 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
     #   resp.graphql_api.xray_enabled #=> Boolean
     #   resp.graphql_api.waf_web_acl_arn #=> String
+    #   resp.graphql_api.lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_api.lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_api.lambda_authorizer_config.identity_validation_expression #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -1685,7 +1710,7 @@ module Aws::AppSync
     #   resp.graphql_apis #=> Array
     #   resp.graphql_apis[0].name #=> String
     #   resp.graphql_apis[0].api_id #=> String
-    #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_apis[0].log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_apis[0].log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_apis[0].log_config.exclude_verbose_content #=> Boolean
@@ -1703,7 +1728,7 @@ module Aws::AppSync
     #   resp.graphql_apis[0].tags #=> Hash
     #   resp.graphql_apis[0].tags["TagKey"] #=> String
     #   resp.graphql_apis[0].additional_authentication_providers #=> Array
-    #   resp.graphql_apis[0].additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_apis[0].additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.issuer #=> String
     #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.client_id #=> String
     #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
@@ -1711,8 +1736,14 @@ module Aws::AppSync
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_apis[0].additional_authentication_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
     #   resp.graphql_apis[0].xray_enabled #=> Boolean
     #   resp.graphql_apis[0].waf_web_acl_arn #=> String
+    #   resp.graphql_apis[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_apis[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_apis[0].lambda_authorizer_config.identity_validation_expression #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -2163,7 +2194,7 @@ module Aws::AppSync
     #   The new Amazon DynamoDB configuration.
     #
     # @option params [Types::LambdaDataSourceConfig] :lambda_config
-    #   The new AWS Lambda configuration.
+    #   The new Amazon Web Services Lambda configuration.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
     #   The new Elasticsearch Service configuration.
@@ -2373,6 +2404,9 @@ module Aws::AppSync
     #   A flag indicating whether to enable X-Ray tracing for the
     #   `GraphqlApi`.
     #
+    # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
+    #   Configuration for AWS Lambda function authorization.
+    #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -2387,7 +2421,7 @@ module Aws::AppSync
     #       cloud_watch_logs_role_arn: "String", # required
     #       exclude_verbose_content: false,
     #     },
-    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
@@ -2402,7 +2436,7 @@ module Aws::AppSync
     #     },
     #     additional_authentication_providers: [
     #       {
-    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #         open_id_connect_config: {
     #           issuer: "String", # required
     #           client_id: "String",
@@ -2414,16 +2448,26 @@ module Aws::AppSync
     #           aws_region: "String", # required
     #           app_id_client_regex: "String",
     #         },
+    #         lambda_authorizer_config: {
+    #           authorizer_result_ttl_in_seconds: 1,
+    #           authorizer_uri: "String", # required
+    #           identity_validation_expression: "String",
+    #         },
     #       },
     #     ],
     #     xray_enabled: false,
+    #     lambda_authorizer_config: {
+    #       authorizer_result_ttl_in_seconds: 1,
+    #       authorizer_uri: "String", # required
+    #       identity_validation_expression: "String",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
@@ -2441,7 +2485,7 @@ module Aws::AppSync
     #   resp.graphql_api.tags #=> Hash
     #   resp.graphql_api.tags["TagKey"] #=> String
     #   resp.graphql_api.additional_authentication_providers #=> Array
-    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
@@ -2449,8 +2493,14 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
     #   resp.graphql_api.xray_enabled #=> Boolean
     #   resp.graphql_api.waf_web_acl_arn #=> String
+    #   resp.graphql_api.lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.graphql_api.lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.graphql_api.lambda_authorizer_config.identity_validation_expression #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -2624,7 +2674,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

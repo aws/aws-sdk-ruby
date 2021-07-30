@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2021-07-30)
+------------------
+
+* Feature - Client Port Preservation ALB Attribute Launch
+
 1.65.0 (2021-07-28)
 ------------------
 
