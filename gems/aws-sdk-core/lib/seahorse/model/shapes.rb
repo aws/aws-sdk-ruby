@@ -61,6 +61,9 @@ module Seahorse
         # @return [Boolean]
         attr_accessor :eventheader_type
 
+        # @return [Boolean]
+        attr_accessor :document
+
         # @return [String, nil]
         def location
           @location || (shape && shape[:location])
@@ -285,6 +288,8 @@ module Seahorse
       end
 
       class TimestampShape < Shape; end
+
+      class DocumentShape < Shape; end
 
     end
   end

@@ -48,7 +48,7 @@ module AwsSdkCodeGenerator
           # eventstream shape will be inheriting from enumerator
           if shape['eventstream']
             list
-          elsif shape['type'] == 'structure'
+          elsif shape['type'] == 'structure' && !shape['document']
             struct_members = struct_members(shape)
             sensitive_params = struct_members.select(&:sensitive).map do |m|
               m.member_name.to_sym
