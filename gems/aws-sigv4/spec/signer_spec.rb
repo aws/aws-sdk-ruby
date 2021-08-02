@@ -361,7 +361,7 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com/foo%bar'
           )
-          expect(signature.canonical_request.lines[1]).to eq "/foo%25bar\n"
+          expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%25bar\n"
         end
 
         it 'escapes path for the canonical request if :uri_escape_path is true' do
@@ -370,7 +370,7 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com/foo%bar'
           )
-          expect(signature.canonical_request.lines[1]).to eq "/foo%25bar\n"
+          expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%25bar\n"
         end
 
         it 'does not escape path for the canonical request if :uri_escape_path is false' do
@@ -379,7 +379,7 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com/foo%bar'
           )
-          expect(signature.canonical_request.lines[1]).to eq "/foo%bar\n"
+          expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%bar\n"
         end
 
       end
