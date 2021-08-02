@@ -355,6 +355,18 @@ module Aws::SSMContacts
     # @option params [required, String] :accept_code
     #   The accept code is a 6-digit code used to acknowledge the page.
     #
+    # @option params [String] :accept_code_validation
+    #   An optional field that Incident Manager uses to `ENFORCE` `AcceptCode`
+    #   validation when acknowledging an page. Acknowledgement can occur by
+    #   replying to a page, or when entering the AcceptCode in the console.
+    #   Enforcing AcceptCode validation causes Incident Manager to verify that
+    #   the code entered by the user matches the code sent by Incident Manager
+    #   with the page.
+    #
+    #   Incident Manager can also `IGNORE` `AcceptCode` validation. Ignoring
+    #   `AcceptCode` validation causes Incident Manager to accept any value
+    #   entered for the `AcceptCode`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -365,6 +377,7 @@ module Aws::SSMContacts
     #     accept_type: "DELIVERED", # required, accepts DELIVERED, READ
     #     note: "ReceiptInfo",
     #     accept_code: "AcceptCode", # required
+    #     accept_code_validation: "IGNORE", # accepts IGNORE, ENFORCE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/AcceptPage AWS API Documentation
@@ -1471,7 +1484,7 @@ module Aws::SSMContacts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmcontacts'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

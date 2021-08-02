@@ -24,8 +24,10 @@ module Aws::GreengrassV2
     BatchAssociateClientDeviceWithCoreDeviceResponse = Shapes::StructureShape.new(name: 'BatchAssociateClientDeviceWithCoreDeviceResponse')
     BatchDisassociateClientDeviceFromCoreDeviceRequest = Shapes::StructureShape.new(name: 'BatchDisassociateClientDeviceFromCoreDeviceRequest')
     BatchDisassociateClientDeviceFromCoreDeviceResponse = Shapes::StructureShape.new(name: 'BatchDisassociateClientDeviceFromCoreDeviceResponse')
+    CPU = Shapes::FloatShape.new(name: 'CPU')
     CancelDeploymentRequest = Shapes::StructureShape.new(name: 'CancelDeploymentRequest')
     CancelDeploymentResponse = Shapes::StructureShape.new(name: 'CancelDeploymentResponse')
+    ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
     CloudComponentState = Shapes::StringShape.new(name: 'CloudComponentState')
     CloudComponentStatus = Shapes::StructureShape.new(name: 'CloudComponentStatus')
     Component = Shapes::StructureShape.new(name: 'Component')
@@ -161,6 +163,7 @@ module Aws::GreengrassV2
     ListInstalledComponentsResponse = Shapes::StructureShape.new(name: 'ListInstalledComponentsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Memory = Shapes::IntegerShape.new(name: 'Memory')
     NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NullableString = Shapes::StringShape.new(name: 'NullableString')
@@ -171,6 +174,7 @@ module Aws::GreengrassV2
     Reason = Shapes::StringShape.new(name: 'Reason')
     RecipeBlob = Shapes::BlobShape.new(name: 'RecipeBlob')
     RecipeOutputFormat = Shapes::StringShape.new(name: 'RecipeOutputFormat')
+    RequestAlreadyInProgressException = Shapes::StructureShape.new(name: 'RequestAlreadyInProgressException')
     ResolveComponentCandidatesRequest = Shapes::StructureShape.new(name: 'ResolveComponentCandidatesRequest')
     ResolveComponentCandidatesResponse = Shapes::StructureShape.new(name: 'ResolveComponentCandidatesResponse')
     ResolvedComponentVersion = Shapes::StructureShape.new(name: 'ResolvedComponentVersion')
@@ -180,6 +184,7 @@ module Aws::GreengrassV2
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
+    SystemResourceLimits = Shapes::StructureShape.new(name: 'SystemResourceLimits')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -294,6 +299,7 @@ module Aws::GreengrassV2
     ComponentPlatformList.member = Shapes::ShapeRef.new(shape: ComponentPlatform)
 
     ComponentRunWith.add_member(:posix_user, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "posixUser"))
+    ComponentRunWith.add_member(:system_resource_limits, Shapes::ShapeRef.new(shape: SystemResourceLimits, location_name: "systemResourceLimits"))
     ComponentRunWith.struct_class = Types::ComponentRunWith
 
     ComponentVersionList.member = Shapes::ShapeRef.new(shape: ComponentVersionListItem)
@@ -321,6 +327,7 @@ module Aws::GreengrassV2
     CreateComponentVersionRequest.add_member(:inline_recipe, Shapes::ShapeRef.new(shape: RecipeBlob, location_name: "inlineRecipe"))
     CreateComponentVersionRequest.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunctionRecipeSource, location_name: "lambdaFunction"))
     CreateComponentVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateComponentVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateComponentVersionRequest.struct_class = Types::CreateComponentVersionRequest
 
     CreateComponentVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentVersionARN, location_name: "arn"))
@@ -336,6 +343,7 @@ module Aws::GreengrassV2
     CreateDeploymentRequest.add_member(:iot_job_configuration, Shapes::ShapeRef.new(shape: DeploymentIoTJobConfiguration, location_name: "iotJobConfiguration"))
     CreateDeploymentRequest.add_member(:deployment_policies, Shapes::ShapeRef.new(shape: DeploymentPolicies, location_name: "deploymentPolicies"))
     CreateDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
     CreateDeploymentResponse.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "deploymentId"))
@@ -634,6 +642,9 @@ module Aws::GreengrassV2
     PlatformAttributesMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     PlatformAttributesMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    RequestAlreadyInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RequestAlreadyInProgressException.struct_class = Types::RequestAlreadyInProgressException
+
     ResolveComponentCandidatesRequest.add_member(:platform, Shapes::ShapeRef.new(shape: ComponentPlatform, required: true, location_name: "platform"))
     ResolveComponentCandidatesRequest.add_member(:component_candidates, Shapes::ShapeRef.new(shape: ComponentCandidateList, required: true, location_name: "componentCandidates"))
     ResolveComponentCandidatesRequest.struct_class = Types::ResolveComponentCandidatesRequest
@@ -663,6 +674,10 @@ module Aws::GreengrassV2
 
     StringMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     StringMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    SystemResourceLimits.add_member(:memory, Shapes::ShapeRef.new(shape: Memory, location_name: "memory"))
+    SystemResourceLimits.add_member(:cpus, Shapes::ShapeRef.new(shape: CPU, location_name: "cpus"))
+    SystemResourceLimits.struct_class = Types::SystemResourceLimits
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -768,6 +783,7 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestAlreadyInProgressException)
       end)
 
       api.add_operation(:create_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -781,6 +797,7 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestAlreadyInProgressException)
       end)
 
       api.add_operation(:delete_component, Seahorse::Model::Operation.new.tap do |o|
