@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - add `signing_algorithm` option with `sigv4` default.
+
 1.2.4 (2021-07-08)
 ------------------
 
