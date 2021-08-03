@@ -265,6 +265,24 @@ module Aws
       end
     end
 
+    context 's3_disable_multiregion_access_points' do
+      it 'can resolve s3_disable_multiregion_access_points from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_disable_multiregion_access_points'
+        )
+        expect(config.s3_disable_multiregion_access_points).to eq('true')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_do_not_disable_multiregion_access_points'
+        )
+        expect(config.s3_disable_multiregion_access_points).to eq('false')
+      end
+    end
+
     context 'ec2_metadata_service_endpoint selection' do
       it 'can resolve ec2_metadata_service_endpoint from config file' do
         config = SharedConfig.new(
