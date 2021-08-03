@@ -241,6 +241,7 @@ module Aws::IoTSiteWise
     MultiLayerStorage = Shapes::StructureShape.new(name: 'MultiLayerStorage')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Offset = Shapes::StringShape.new(name: 'Offset')
     OffsetInNanos = Shapes::IntegerShape.new(name: 'OffsetInNanos')
     Permission = Shapes::StringShape.new(name: 'Permission')
     PortalClientId = Shapes::StringShape.new(name: 'PortalClientId')
@@ -1264,6 +1265,7 @@ module Aws::IoTSiteWise
     TransformProcessingConfig.struct_class = Types::TransformProcessingConfig
 
     TumblingWindow.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "interval"))
+    TumblingWindow.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "offset"))
     TumblingWindow.struct_class = Types::TumblingWindow
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))

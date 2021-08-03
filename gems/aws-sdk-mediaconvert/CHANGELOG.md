@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2021-08-03)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added control over the passthrough of XDS captions metadata to outputs.
+
 1.71.0 (2021-07-30)
 ------------------
 

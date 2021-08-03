@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-08-03)
+------------------
+
+* Feature - My AWS Service (placeholder) - This release introduces custom Intervals and offset for tumbling window in metric for AWS IoT SiteWise.
+
 1.28.0 (2021-07-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2021-08-03)
+------------------
+
+* Feature - Add ConcurrentModificationException to create-table, delete-table, create-database, update-database, delete-database
+
 1.92.0 (2021-07-30)
 ------------------
 

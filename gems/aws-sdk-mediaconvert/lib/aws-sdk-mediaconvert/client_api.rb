@@ -132,6 +132,7 @@ module Aws::MediaConvert
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContainerSettings = Shapes::StructureShape.new(name: 'ContainerSettings')
     ContainerType = Shapes::StringShape.new(name: 'ContainerType')
+    CopyProtectionAction = Shapes::StringShape.new(name: 'CopyProtectionAction')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
     CreateJobTemplateRequest = Shapes::StructureShape.new(name: 'CreateJobTemplateRequest')
@@ -221,6 +222,7 @@ module Aws::MediaConvert
     EsamSettings = Shapes::StructureShape.new(name: 'EsamSettings')
     EsamSignalProcessingNotification = Shapes::StructureShape.new(name: 'EsamSignalProcessingNotification')
     ExceptionBody = Shapes::StructureShape.new(name: 'ExceptionBody')
+    ExtendedDataServices = Shapes::StructureShape.new(name: 'ExtendedDataServices')
     F4vMoovPlacement = Shapes::StringShape.new(name: 'F4vMoovPlacement')
     F4vSettings = Shapes::StructureShape.new(name: 'F4vSettings')
     FileGroupSettings = Shapes::StructureShape.new(name: 'FileGroupSettings')
@@ -534,6 +536,7 @@ module Aws::MediaConvert
     Vc3Settings = Shapes::StructureShape.new(name: 'Vc3Settings')
     Vc3SlowPal = Shapes::StringShape.new(name: 'Vc3SlowPal')
     Vc3Telecine = Shapes::StringShape.new(name: 'Vc3Telecine')
+    VchipAction = Shapes::StringShape.new(name: 'VchipAction')
     VideoCodec = Shapes::StringShape.new(name: 'VideoCodec')
     VideoCodecSettings = Shapes::StructureShape.new(name: 'VideoCodecSettings')
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
@@ -1289,6 +1292,10 @@ module Aws::MediaConvert
     ExceptionBody.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ExceptionBody.struct_class = Types::ExceptionBody
 
+    ExtendedDataServices.add_member(:copy_protection_action, Shapes::ShapeRef.new(shape: CopyProtectionAction, location_name: "copyProtectionAction"))
+    ExtendedDataServices.add_member(:vchip_action, Shapes::ShapeRef.new(shape: VchipAction, location_name: "vchipAction"))
+    ExtendedDataServices.struct_class = Types::ExtendedDataServices
+
     F4vSettings.add_member(:moov_placement, Shapes::ShapeRef.new(shape: F4vMoovPlacement, location_name: "moovPlacement"))
     F4vSettings.struct_class = Types::F4vSettings
 
@@ -1626,6 +1633,7 @@ module Aws::MediaConvert
     JobSettings.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     JobSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
     JobSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
+    JobSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
     JobSettings.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOfInput, location_name: "inputs"))
     JobSettings.add_member(:kantar_watermark, Shapes::ShapeRef.new(shape: KantarWatermarkSettings, location_name: "kantarWatermark"))
     JobSettings.add_member(:motion_image_inserter, Shapes::ShapeRef.new(shape: MotionImageInserter, location_name: "motionImageInserter"))
@@ -1654,6 +1662,7 @@ module Aws::MediaConvert
     JobTemplateSettings.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     JobTemplateSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
     JobTemplateSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
+    JobTemplateSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
     JobTemplateSettings.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOfInputTemplate, location_name: "inputs"))
     JobTemplateSettings.add_member(:kantar_watermark, Shapes::ShapeRef.new(shape: KantarWatermarkSettings, location_name: "kantarWatermark"))
     JobTemplateSettings.add_member(:motion_image_inserter, Shapes::ShapeRef.new(shape: MotionImageInserter, location_name: "motionImageInserter"))

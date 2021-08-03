@@ -826,6 +826,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
     #             },
     #             processing_config: {
@@ -895,6 +896,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -1680,6 +1682,7 @@ module Aws::IoTSiteWise
     #   resp.asset_model_properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_properties[0].type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_model_properties[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_properties[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_hierarchies #=> Array
     #   resp.asset_model_hierarchies[0].id #=> String
@@ -1710,6 +1713,7 @@ module Aws::IoTSiteWise
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_creation_date #=> Time
     #   resp.asset_model_last_update_date #=> Time
@@ -1797,6 +1801,7 @@ module Aws::IoTSiteWise
     #   resp.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_property.type.metric.window.tumbling.interval #=> String
+    #   resp.asset_property.type.metric.window.tumbling.offset #=> String
     #   resp.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.composite_model.name #=> String
     #   resp.composite_model.type #=> String
@@ -1822,6 +1827,7 @@ module Aws::IoTSiteWise
     #   resp.composite_model.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.composite_model.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.composite_model.asset_property.type.metric.window.tumbling.interval #=> String
+    #   resp.composite_model.asset_property.type.metric.window.tumbling.offset #=> String
     #   resp.composite_model.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #
     # @overload describe_asset_property(params = {})
@@ -2113,12 +2119,6 @@ module Aws::IoTSiteWise
 
     # Retrieves information about the storage configuration for IoT
     # SiteWise.
-    #
-    # <note markdown="1"> Exporting data to Amazon S3 is currently in preview release and is
-    # subject to change. We recommend that you use this feature only with
-    # test data, and not in production environments.
-    #
-    #  </note>
     #
     # @return [Types::DescribeStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3246,12 +3246,6 @@ module Aws::IoTSiteWise
 
     # Configures storage settings for IoT SiteWise.
     #
-    # <note markdown="1"> Exporting data to Amazon S3 is currently in preview release and is
-    # subject to change. We recommend that you use this feature only with
-    # test data, and not in production environments.
-    #
-    #  </note>
-    #
     # @option params [required, String] :storage_type
     #   The type of storage that you specified for your data. The storage type
     #   can be one of the following values:
@@ -3615,6 +3609,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
     #             },
     #             processing_config: {
@@ -3686,6 +3681,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -4060,7 +4056,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

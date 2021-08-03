@@ -8109,8 +8109,8 @@ module Aws::Glue
     #
     #   * By directly updating the resource policy with `PutResourePolicy`
     #
-    #   * By using the **Grant permissions** command on the Management
-    #     Console.
+    #   * By using the **Grant permissions** command on the Amazon Web
+    #     Services Management Console.
     #
     #   Must be set to `'TRUE'` if you have already used the Management
     #   Console to grant cross-account access, otherwise the call fails.
@@ -10665,7 +10665,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

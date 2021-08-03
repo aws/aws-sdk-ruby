@@ -86,10 +86,12 @@ module Aws::Redshift
   # * {InvalidClusterSubnetGroupStateFault}
   # * {InvalidClusterSubnetStateFault}
   # * {InvalidClusterTrackFault}
+  # * {InvalidDataShareFault}
   # * {InvalidElasticIpFault}
   # * {InvalidEndpointStateFault}
   # * {InvalidHsmClientCertificateStateFault}
   # * {InvalidHsmConfigurationStateFault}
+  # * {InvalidNamespaceFault}
   # * {InvalidReservedNodeStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidRetentionPeriodFault}
@@ -747,6 +749,16 @@ module Aws::Redshift
       end
     end
 
+    class InvalidDataShareFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::InvalidDataShareFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidElasticIpFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -782,6 +794,16 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::InvalidHsmConfigurationStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidNamespaceFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::InvalidNamespaceFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

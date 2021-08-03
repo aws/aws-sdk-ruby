@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-08-03)
+------------------
+
+* Feature - Docs only add idempotent create apis
+
 1.5.0 (2021-07-30)
 ------------------
 

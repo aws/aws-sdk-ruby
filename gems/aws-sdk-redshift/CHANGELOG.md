@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-08-03)
+------------------
+
+* Feature - API support for Redshift Data Sharing feature.
+
 1.67.0 (2021-07-30)
 ------------------
 

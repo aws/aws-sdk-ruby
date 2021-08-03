@@ -2100,8 +2100,9 @@ module Aws::Glue
     #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
     #   * `MARKETPLACE` - Uses configuration settings contained in a
-    #     connector purchased from Marketplace to read from and write to
-    #     data stores that are not natively supported by Glue.
+    #     connector purchased from Amazon Web Services Marketplace to read
+    #     from and write to data stores that are not natively supported by
+    #     Glue.
     #
     #   * `CUSTOM` - Uses configuration settings contained in a custom
     #     connector to read from and write to data stores that are not
@@ -12425,8 +12426,8 @@ module Aws::Glue
     #
     #   * By directly updating the resource policy with `PutResourePolicy`
     #
-    #   * By using the **Grant permissions** command on the Management
-    #     Console.
+    #   * By using the **Grant permissions** command on the Amazon Web
+    #     Services Management Console.
     #
     #   Must be set to `'TRUE'` if you have already used the Management
     #   Console to grant cross-account access, otherwise the call fails.
