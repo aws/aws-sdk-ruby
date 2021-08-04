@@ -11,6 +11,7 @@
 * [Developer Guide](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/welcome.html)
 * [V3 Upgrading Guide](https://github.com/aws/aws-sdk-ruby/blob/version-3/V3_UPGRADING_GUIDE.md)
 * [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/ruby/)
+* [Github Discussions](https://github.com/aws/aws-sdk-ruby/discussions)
 
 ## Installation
 
@@ -256,6 +257,7 @@ Simply downcase the service module name for the helper:
 
 Please use any of these resources for getting help:
 
+* Ask a question on [Github Discussions](https://github.com/aws/aws-sdk-ruby/discussions).
 * Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`.
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
 
