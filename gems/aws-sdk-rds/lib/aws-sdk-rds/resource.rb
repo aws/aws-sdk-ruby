@@ -736,7 +736,8 @@ module Aws::RDS
     #
     #   Example: `mydbinstance`
     # @option options [Integer] :allocated_storage
-    #   The amount of storage (in gibibytes) to allocate for the DB instance.
+    #   The amount of storage in gibibytes (GiB) to allocate for the DB
+    #   instance.
     #
     #   Type: Integer
     #
@@ -1458,8 +1459,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS

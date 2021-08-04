@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-08-04)
+------------------
+
+* Feature - Documentation updates to add EC2 Image Builder as a target on PutTargets.
+
 1.27.0 (2021-07-30)
 ------------------
 

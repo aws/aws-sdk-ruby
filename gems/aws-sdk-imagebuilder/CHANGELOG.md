@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-08-04)
+------------------
+
+* Feature - Updated list actions to include a list of valid filters that can be used in the request.
+
 1.27.0 (2021-07-30)
 ------------------
 

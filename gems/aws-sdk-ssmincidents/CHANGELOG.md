@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-08-04)
+------------------
+
+* Feature - Documentation updates for Incident Manager.
+
 1.2.0 (2021-07-30)
 ------------------
 

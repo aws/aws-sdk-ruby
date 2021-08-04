@@ -376,7 +376,7 @@ module Aws::SSMIncidents
     #   data as a hash:
     #
     #       {
-    #         client_token: "ClientToken", # required
+    #         client_token: "ClientToken",
     #         event_data: "EventData", # required
     #         event_time: Time.now, # required
     #         event_type: "TimelineEventType", # required
@@ -392,7 +392,8 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] event_data
-    #   A short description of the event.
+    #   A valid JSON string. There is no other schema imposed. A short
+    #   description of the event.
     #   @return [String]
     #
     # @!attribute [rw] event_time
@@ -928,8 +929,8 @@ module Aws::SSMIncidents
     #   @return [Time]
     #
     # @!attribute [rw] notification_targets
-    #   The SNS targets that AWS Chatbot uses to notify the chat channels
-    #   and perform actions on the incident record.
+    #   The SNS targets that are notified when updates are made to an
+    #   incident.
     #   @return [Array<Types::NotificationTargetItem>]
     #
     # @!attribute [rw] resolved_time
@@ -1075,9 +1076,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] notification_targets
-    #   The SNS targets that AWS Chatbot uses to notify the chat channel of
-    #   updates to an incident. You can also make updates to the incident
-    #   through the chat channel using the SNS topics.
+    #   The SNS targets that are notified when updates are made to an
+    #   incident.
     #   @return [Array<Types::NotificationTargetItem>]
     #
     # @!attribute [rw] summary
@@ -1514,8 +1514,8 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # The SNS topic that's used by AWS Chatbot to notify the incidents chat
-    # channel.
+    # The SNS targets that are notified when updates are made to an
+    # incident.
     #
     # @note NotificationTargetItem is a union - when making an API calls you must set exactly one of the members.
     #
@@ -1691,6 +1691,10 @@ module Aws::SSMIncidents
     # The set of Regions that your Incident Manager data will be replicated
     # to and the KMS key used to encrypt the data.
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the replication set.
+    #   @return [String]
+    #
     # @!attribute [rw] created_by
     #   Details about who created the replication set.
     #   @return [String]
@@ -1726,6 +1730,7 @@ module Aws::SSMIncidents
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ReplicationSet AWS API Documentation
     #
     class ReplicationSet < Struct.new(
+      :arn,
       :created_by,
       :created_time,
       :deletion_protected,
@@ -2273,9 +2278,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] notification_targets
-    #   The SNS targets that AWS Chatbot uses to notify the chat channel of
-    #   updates to an incident. You can also make updates to the incident
-    #   through the chat channel using the SNS topics.
+    #   The SNS targets that are notified when updates are made to an
+    #   incident.
     #
     #   Using multiple SNS topics creates redundancy in the case that a
     #   Region is down during the incident.
@@ -2499,6 +2503,9 @@ module Aws::SSMIncidents
     # @!attribute [rw] chat_channel
     #   The AWS Chatbot chat channel used for collaboration during an
     #   incident.
+    #
+    #   Use the empty structure to remove the chat channel from the response
+    #   plan.
     #   @return [Types::ChatChannel]
     #
     # @!attribute [rw] client_token
@@ -2540,8 +2547,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] incident_template_notification_targets
-    #   The SNS targets that AWS Chatbot uses to notify the chat channels
-    #   and perform actions on the incident record.
+    #   The SNS targets that are notified when updates are made to an
+    #   incident.
     #   @return [Array<Types::NotificationTargetItem>]
     #
     # @!attribute [rw] incident_template_summary
@@ -2579,7 +2586,7 @@ module Aws::SSMIncidents
     #   data as a hash:
     #
     #       {
-    #         client_token: "ClientToken", # required
+    #         client_token: "ClientToken",
     #         event_data: "EventData",
     #         event_id: "UUID", # required
     #         event_time: Time.now,

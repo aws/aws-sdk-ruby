@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-08-04)
+------------------
+
+* Feature - This release adds support for call analytics (batch) within Amazon Transcribe.
+
 1.57.0 (2021-07-30)
 ------------------
 

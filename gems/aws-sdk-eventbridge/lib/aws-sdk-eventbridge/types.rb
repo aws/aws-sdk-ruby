@@ -181,7 +181,7 @@ module Aws::EventBridge
     # The array properties for the submitted job, such as the size of the
     # array. The array size can be between 2 and 10,000. If you specify
     # array properties for a job, it becomes an array job. This parameter is
-    # used only if the target is an AWS Batch job.
+    # used only if the target is an Batch job.
     #
     # @note When making an API call, you may pass BatchArrayProperties
     #   data as a hash:
@@ -203,7 +203,7 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # The custom parameters to be used when the target is an AWS Batch job.
+    # The custom parameters to be used when the target is an Batch job.
     #
     # @note When making an API call, you may pass BatchParameters
     #   data as a hash:
@@ -221,27 +221,27 @@ module Aws::EventBridge
     #
     # @!attribute [rw] job_definition
     #   The ARN or name of the job definition to use if the event target is
-    #   an AWS Batch job. This job definition must already exist.
+    #   an Batch job. This job definition must already exist.
     #   @return [String]
     #
     # @!attribute [rw] job_name
     #   The name to use for this execution of the job, if the target is an
-    #   AWS Batch job.
+    #   Batch job.
     #   @return [String]
     #
     # @!attribute [rw] array_properties
     #   The array properties for the submitted job, such as the size of the
     #   array. The array size can be between 2 and 10,000. If you specify
     #   array properties for a job, it becomes an array job. This parameter
-    #   is used only if the target is an AWS Batch job.
+    #   is used only if the target is an Batch job.
     #   @return [Types::BatchArrayProperties]
     #
     # @!attribute [rw] retry_strategy
-    #   The retry strategy to use for failed jobs, if the target is an AWS
-    #   Batch job. The retry strategy is the number of times to retry the
-    #   failed job execution. Valid values are 1–10. When you specify a
-    #   retry strategy here, it overrides the retry strategy defined in the
-    #   job definition.
+    #   The retry strategy to use for failed jobs, if the target is an Batch
+    #   job. The retry strategy is the number of times to retry the failed
+    #   job execution. Valid values are 1–10. When you specify a retry
+    #   strategy here, it overrides the retry strategy defined in the job
+    #   definition.
     #   @return [Types::BatchRetryStrategy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/BatchParameters AWS API Documentation
@@ -255,9 +255,9 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # The retry strategy to use for failed jobs, if the target is an AWS
-    # Batch job. If you specify a retry strategy here, it overrides the
-    # retry strategy defined in the job definition.
+    # The retry strategy to use for failed jobs, if the target is an Batch
+    # job. If you specify a retry strategy here, it overrides the retry
+    # strategy defined in the job definition.
     #
     # @note When making an API call, you may pass BatchRetryStrategy
     #   data as a hash:
@@ -373,10 +373,10 @@ module Aws::EventBridge
 
     # A JSON string which you can use to limit the event bus permissions you
     # are granting to only accounts that fulfill the condition. Currently,
-    # the only supported condition is membership in a certain AWS
-    # organization. The string must contain `Type`, `Key`, and `Value`
-    # fields. The `Value` field specifies the ID of the AWS organization.
-    # Following is an example value for `Condition`\:
+    # the only supported condition is membership in a certain Amazon Web
+    # Services organization. The string must contain `Type`, `Key`, and
+    # `Value` fields. The `Value` field specifies the ID of the Amazon Web
+    # Services organization. Following is an example value for `Condition`\:
     #
     # `'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
     # "o-1234567890"\}'`
@@ -828,7 +828,7 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_source_arn
-    #   The ARN of the event source associated with the archive.
+    #   The ARN of the event bus that sends events to the archive.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1332,14 +1332,14 @@ module Aws::EventBridge
     # @!attribute [rw] name
     #   The name of the partner event source. This name must be unique and
     #   must be in the format ` partner_name/event_namespace/event_name `.
-    #   The AWS account that wants to use this partner event source must
-    #   create a partner event bus with a name that matches the name of the
-    #   partner event source.
+    #   The Amazon Web Services account that wants to use this partner event
+    #   source must create a partner event bus with a name that matches the
+    #   name of the partner event source.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The AWS account ID that is permitted to create a matching partner
-    #   event bus for this partner event source.
+    #   The Amazon Web Services account ID that is permitted to create a
+    #   matching partner event bus for this partner event source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreatePartnerEventSourceRequest AWS API Documentation
@@ -1587,8 +1587,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The AWS account ID of the AWS customer that the event source was
-    #   created for.
+    #   The Amazon Web Services account ID of the Amazon Web Services
+    #   customer that the event source was created for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeletePartnerEventSourceRequest AWS API Documentation
@@ -1619,11 +1619,12 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   If this is a managed rule, created by an AWS service on your behalf,
-    #   you must specify `Force` as `True` to delete the rule. This
-    #   parameter is ignored for rules that are not managed rules. You can
-    #   check whether a rule is a managed rule by using `DescribeRule` or
-    #   `ListRules` and checking the `ManagedBy` field of the response.
+    #   If this is a managed rule, created by an Amazon Web Services service
+    #   on your behalf, you must specify `Force` as `True` to delete the
+    #   rule. This parameter is ignored for rules that are not managed
+    #   rules. You can check whether a rule is a managed rule by using
+    #   `DescribeRule` or `ListRules` and checking the `ManagedBy` field of
+    #   the response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteRuleRequest AWS API Documentation
@@ -2176,9 +2177,9 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] managed_by
-    #   If this is a managed rule, created by an AWS service on your behalf,
-    #   this field displays the principal name of the AWS service that
-    #   created the rule.
+    #   If this is a managed rule, created by an Amazon Web Services service
+    #   on your behalf, this field displays the principal name of the Amazon
+    #   Web Services service that created the rule.
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
@@ -2301,9 +2302,9 @@ module Aws::EventBridge
     #   Specifies the launch type on which your task is running. The launch
     #   type that you specify here must match one of the launch type
     #   (compatibilities) of the target task. The `FARGATE` value is
-    #   supported only in the Regions where AWS Fargate with Amazon ECS is
-    #   supported. For more information, see [AWS Fargate on Amazon ECS][1]
-    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #   supported only in the Regions where Fargate witt Amazon ECS is
+    #   supported. For more information, see [Fargate on Amazon ECS][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -2311,8 +2312,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   Use this structure if the ECS task uses the `awsvpc` network mode.
-    #   This structure specifies the VPC subnets and security groups
+    #   Use this structure if the Amazon ECS task uses the `awsvpc` network
+    #   mode. This structure specifies the VPC subnets and security groups
     #   associated with the task, and whether a public IP address is to be
     #   used. This structure is required if `LaunchType` is `FARGATE`
     #   because the `awsvpc` mode is required for Fargate tasks.
@@ -2326,7 +2327,7 @@ module Aws::EventBridge
     #   numeric portion of the platform version, such as `1.1.0`.
     #
     #   This structure is used only if `LaunchType` is `FARGATE`. For more
-    #   information about valid platform versions, see [AWS Fargate Platform
+    #   information about valid platform versions, see [Fargate Platform
     #   Versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
@@ -2447,10 +2448,11 @@ module Aws::EventBridge
 
     # An event bus receives events from a source and routes them to rules
     # associated with that event bus. Your account's default event bus
-    # receives events from AWS services. A custom event bus can receive
-    # events from your custom applications and services. A partner event bus
-    # receives events from an event source created by an SaaS partner. These
-    # events come from the partners services or applications.
+    # receives events from Amazon Web Services services. A custom event bus
+    # can receive events from your custom applications and services. A
+    # partner event bus receives events from an event source created by an
+    # SaaS partner. These events come from the partners services or
+    # applications.
     #
     # @!attribute [rw] name
     #   The name of the event bus.
@@ -2461,8 +2463,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The permissions policy of the event bus, describing which other AWS
-    #   accounts can write events to this event bus.
+    #   The permissions policy of the event bus, describing which other
+    #   Amazon Web Services accounts can write events to this event bus.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EventBus AWS API Documentation
@@ -2476,9 +2478,9 @@ module Aws::EventBridge
     end
 
     # A partner event source is created by an SaaS partner. If a customer
-    # creates a partner event bus that matches this event source, that AWS
-    # account can receive events from the partner's applications or
-    # services.
+    # creates a partner event bus that matches this event source, that
+    # Amazon Web Services account can receive events from the partner's
+    # applications or services.
     #
     # @!attribute [rw] arn
     #   The ARN of the event source.
@@ -2493,8 +2495,8 @@ module Aws::EventBridge
     #   @return [Time]
     #
     # @!attribute [rw] expiration_time
-    #   The date and time that the event source will expire, if the AWS
-    #   account doesn't create a matching event bus for it.
+    #   The date and time that the event source will expire, if the Amazon
+    #   Web Services account doesn't create a matching event bus for it.
     #   @return [Time]
     #
     # @!attribute [rw] name
@@ -2595,7 +2597,7 @@ module Aws::EventBridge
     #   valid JSON path. You can have as many as 100 key-value pairs. You
     #   must use JSON dot notation, not bracket notation.
     #
-    #   The keys cannot start with "AWS."
+    #   The keys cannot start with "Amazon Web Services."
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] input_template
@@ -3133,7 +3135,7 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_source_arn
-    #   The ARN of the event source associated with the replay.
+    #   The ARN of the archive from which the events are replayed.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3379,11 +3381,11 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # This rule was created by an AWS service on behalf of your account. It
-    # is managed by that service. If you see this error in response to
-    # `DeleteRule` or `RemoveTargets`, you can use the `Force` parameter in
-    # those calls to delete the rule or remove targets from the rule. You
-    # cannot modify these managed rules by using `DisableRule`,
+    # This rule was created by an Amazon Web Services service on behalf of
+    # your account. It is managed by that service. If you see this error in
+    # response to `DeleteRule` or `RemoveTargets`, you can use the `Force`
+    # parameter in those calls to delete the rule or remove targets from the
+    # rule. You cannot modify these managed rules by using `DisableRule`,
     # `EnableRule`, `PutTargets`, `PutRule`, `TagResource`, or
     # `UntagResource`.
     #
@@ -3426,9 +3428,9 @@ module Aws::EventBridge
     class OperationDisabledException < Aws::EmptyStructure; end
 
     # A partner event source is created by an SaaS partner. If a customer
-    # creates a partner event bus that matches this event source, that AWS
-    # account can receive events from the partner's applications or
-    # services.
+    # creates a partner event bus that matches this event source, that
+    # Amazon Web Services account can receive events from the partner's
+    # applications or services.
     #
     # @!attribute [rw] arn
     #   The ARN of the partner event source.
@@ -3447,10 +3449,12 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # The AWS account that a partner event source has been offered to.
+    # The Amazon Web Services account that a partner event source has been
+    # offered to.
     #
     # @!attribute [rw] account
-    #   The AWS account ID that the partner event source was offered to.
+    #   The Amazon Web Services account ID that the partner event source was
+    #   offered to.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -3458,8 +3462,8 @@ module Aws::EventBridge
     #   @return [Time]
     #
     # @!attribute [rw] expiration_time
-    #   The date and time that the event source will expire, if the AWS
-    #   account doesn't create a matching event bus for it.
+    #   The date and time that the event source will expire, if the Amazon
+    #   Web Services account doesn't create a matching event bus for it.
     #   @return [Time]
     #
     # @!attribute [rw] state
@@ -3527,7 +3531,7 @@ module Aws::EventBridge
 
     # The task placement strategy for a task or service. To learn more, see
     # [Task Placement Strategies][1] in the Amazon Elastic Container Service
-    # Developer Guide.
+    # Service Developer Guide.
     #
     #
     #
@@ -3626,11 +3630,12 @@ module Aws::EventBridge
     #
     # @!attribute [rw] time
     #   The time stamp of the event, per [RFC3339][1]. If no time stamp is
-    #   provided, the time stamp of the PutEvents call is used.
+    #   provided, the time stamp of the [PutEvents][2] call is used.
     #
     #
     #
     #   [1]: https://www.rfc-editor.org/rfc/rfc3339.txt
+    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
     #   @return [Time]
     #
     # @!attribute [rw] source
@@ -3638,9 +3643,9 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   AWS resources, identified by Amazon Resource Name (ARN), which the
-    #   event primarily concerns. Any number, including zero, may be
-    #   present.
+    #   Amazon Web Services resources, identified by Amazon Resource Name
+    #   (ARN), which the event primarily concerns. Any number, including
+    #   zero, may be present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] detail_type
@@ -3660,11 +3665,11 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] trace_header
-    #   An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id)
+    #   An X-Ray trade header, which is an http header (X-Amzn-Trace-Id)
     #   that contains the trace-id associated with the event.
     #
     #   To learn more about X-Ray trace headers, see [Tracing header][1] in
-    #   the AWS X-Ray Developer Guide.
+    #   the X-Ray Developer Guide.
     #
     #
     #
@@ -3774,13 +3779,13 @@ module Aws::EventBridge
     #   @return [Time]
     #
     # @!attribute [rw] source
-    #   The event source that is generating the evntry.
+    #   The event source that is generating the entry.
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   AWS resources, identified by Amazon Resource Name (ARN), which the
-    #   event primarily concerns. Any number, including zero, may be
-    #   present.
+    #   Amazon Web Services resources, identified by Amazon Resource Name
+    #   (ARN), which the event primarily concerns. Any number, including
+    #   zero, may be present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] detail_type
@@ -3871,13 +3876,12 @@ module Aws::EventBridge
     #
     # @!attribute [rw] action
     #   The action that you are enabling the other account to perform.
-    #   Currently, this must be `events:PutEvents`.
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The 12-digit AWS account ID that you are permitting to put events to
-    #   your default event bus. Specify "*" to permit any account to put
-    #   events to your default event bus.
+    #   The 12-digit Amazon Web Services account ID that you are permitting
+    #   to put events to your default event bus. Specify "*" to permit
+    #   any account to put events to your default event bus.
     #
     #   If you specify "*" without specifying `Condition`, avoid creating
     #   rules that may match undesirable events. To create more secure
@@ -3891,19 +3895,24 @@ module Aws::EventBridge
     #   An identifier string for the external account that you are granting
     #   permissions to. If you later want to revoke the permission for this
     #   external account, specify this `StatementId` when you run
-    #   RemovePermission.
+    #   [RemovePermission][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html
     #   @return [String]
     #
     # @!attribute [rw] condition
     #   This parameter enables you to limit the permission to accounts that
-    #   fulfill a certain condition, such as being a member of a certain AWS
-    #   organization. For more information about AWS Organizations, see
-    #   [What Is AWS Organizations][1] in the *AWS Organizations User
+    #   fulfill a certain condition, such as being a member of a certain
+    #   Amazon Web Services organization. For more information about Amazon
+    #   Web Services Organizations, see [What Is Amazon Web Services
+    #   Organizations][1] in the *Amazon Web Services Organizations User
     #   Guide*.
     #
-    #   If you specify `Condition` with an AWS organization ID, and specify
-    #   "*" as the value for `Principal`, you grant permission to all the
-    #   accounts in the named organization.
+    #   If you specify `Condition` with an Amazon Web Services organization
+    #   ID, and specify "*" as the value for `Principal`, you grant
+    #   permission to all the accounts in the named organization.
     #
     #   The `Condition` is a JSON string which must contain `Type`, `Key`,
     #   and `Value` fields.
@@ -3980,6 +3989,12 @@ module Aws::EventBridge
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role associated with the
     #   rule.
+    #
+    #   If you're setting an event bus in another account as the target and
+    #   that account granted permission to your account through an
+    #   organization instead of directly by the account ID, you must specify
+    #   a `RoleArn` with proper permissions in the `Target` structure,
+    #   instead of here in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4206,9 +4221,9 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # These are custom parameters to be used when the target is a Redshift
-    # cluster to invoke the Redshift Data API ExecuteStatement based on
-    # EventBridge events.
+    # These are custom parameters to be used when the target is a Amazon
+    # Redshift cluster to invoke the Amazon Redshift Data API
+    # ExecuteStatement based on EventBridge events.
     #
     # @note When making an API call, you may pass RedshiftDataParameters
     #   data as a hash:
@@ -4224,7 +4239,8 @@ module Aws::EventBridge
     #
     # @!attribute [rw] secret_manager_arn
     #   The name or ARN of the secret that enables access to the database.
-    #   Required when authenticating using AWS Secrets Manager.
+    #   Required when authenticating using Amazon Web Services Secrets
+    #   Manager.
     #   @return [String]
     #
     # @!attribute [rw] database
@@ -4321,11 +4337,12 @@ module Aws::EventBridge
     #   @return [Array<String>]
     #
     # @!attribute [rw] force
-    #   If this is a managed rule, created by an AWS service on your behalf,
-    #   you must specify `Force` as `True` to remove targets. This parameter
-    #   is ignored for rules that are not managed rules. You can check
-    #   whether a rule is a managed rule by using `DescribeRule` or
-    #   `ListRules` and checking the `ManagedBy` field of the response.
+    #   If this is a managed rule, created by an Amazon Web Services service
+    #   on your behalf, you must specify `Force` as `True` to remove
+    #   targets. This parameter is ignored for rules that are not managed
+    #   rules. You can check whether a rule is a managed rule by using
+    #   `DescribeRule` or `ListRules` and checking the `ManagedBy` field of
+    #   the response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemoveTargetsRequest AWS API Documentation
@@ -4543,18 +4560,29 @@ module Aws::EventBridge
     #
     # @!attribute [rw] schedule_expression
     #   The scheduling expression. For example, "cron(0 20 * * ? *)",
-    #   "rate(5 minutes)".
+    #   "rate(5 minutes)". For more information, see [Creating an Amazon
+    #   EventBridge rule that runs on a schedule][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role that is used for target
     #   invocation.
+    #
+    #   If you're setting an event bus in another account as the target and
+    #   that account granted permission to your account through an
+    #   organization instead of directly by the account ID, you must specify
+    #   a `RoleArn` with proper permissions in the `Target` structure,
+    #   instead of here in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] managed_by
-    #   If the rule was created on behalf of your account by an AWS service,
-    #   this field displays the principal name of the service that created
-    #   the rule.
+    #   If the rule was created on behalf of your account by an Amazon Web
+    #   Services service, this field displays the principal name of the
+    #   service that created the rule.
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
@@ -4801,8 +4829,8 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # A key-value pair associated with an AWS resource. In EventBridge,
-    # rules and event buses support tagging.
+    # A key-value pair associated with an Amazon Web Services resource. In
+    # EventBridge, rules and event buses support tagging.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -4866,18 +4894,19 @@ module Aws::EventBridge
 
     # Targets are the resources to be invoked when a rule is triggered. For
     # a complete list of services and resources that can be set as a target,
-    # see PutTargets.
+    # see [PutTargets][1].
     #
     # If you are setting the event bus of another account as the target, and
     # that account granted permission to your account through an
     # organization instead of directly by the account ID, then you must
     # specify a `RoleArn` with proper permissions in the `Target` structure.
-    # For more information, see [Sending and Receiving Events Between AWS
-    # Accounts][1] in the *Amazon EventBridge User Guide*.
+    # For more information, see [Sending and Receiving Events Between Amazon
+    # Web Services Accounts][2] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html
+    # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -4996,7 +5025,8 @@ module Aws::EventBridge
     #       }
     #
     # @!attribute [rw] id
-    #   The ID of the target.
+    #   The ID of the target. We recommend using a memorable and unique
+    #   string.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -5060,9 +5090,9 @@ module Aws::EventBridge
     #   @return [Types::EcsParameters]
     #
     # @!attribute [rw] batch_parameters
-    #   If the event target is an AWS Batch job, this contains the job
+    #   If the event target is an Batch job, this contains the job
     #   definition, job name, and other parameters. For more information,
-    #   see [Jobs][1] in the *AWS Batch User Guide*.
+    #   see [Jobs][1] in the *Batch User Guide*.
     #
     #
     #
@@ -5091,12 +5121,12 @@ module Aws::EventBridge
     #   @return [Types::HttpParameters]
     #
     # @!attribute [rw] redshift_data_parameters
-    #   Contains the Redshift Data API parameters to use when the target is
-    #   a Redshift cluster.
+    #   Contains the Amazon Redshift Data API parameters to use when the
+    #   target is a Amazon Redshift cluster.
     #
-    #   If you specify a Redshift Cluster as a Target, you can use this to
-    #   specify parameters to invoke the Redshift Data API ExecuteStatement
-    #   based on EventBridge events.
+    #   If you specify a Amazon Redshift Cluster as a Target, you can use
+    #   this to specify parameters to invoke the Amazon Redshift Data API
+    #   ExecuteStatement based on EventBridge events.
     #   @return [Types::RedshiftDataParameters]
     #
     # @!attribute [rw] sage_maker_pipeline_parameters
@@ -5160,8 +5190,8 @@ module Aws::EventBridge
     #
     # @!attribute [rw] event
     #   The event, in JSON format, to test against the event pattern. The
-    #   JSON must follow the format specified in [AWS Events][1], and the
-    #   following fields are mandatory:
+    #   JSON must follow the format specified in [Amazon Web Services
+    #   Events][1], and the following fields are mandatory:
     #
     #   * `id`
     #

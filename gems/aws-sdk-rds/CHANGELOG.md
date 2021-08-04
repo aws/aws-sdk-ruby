@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2021-08-04)
+------------------
+
+* Feature - This release adds AutomaticRestartTime to the DescribeDBInstances and DescribeDBClusters operations. AutomaticRestartTime indicates the time when a stopped DB instance or DB cluster is restarted automatically.
+
 1.124.0 (2021-07-30)
 ------------------
 

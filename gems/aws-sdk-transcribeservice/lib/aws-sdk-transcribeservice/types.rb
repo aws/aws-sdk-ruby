@@ -10,6 +10,67 @@
 module Aws::TranscribeService
   module Types
 
+    # A time range, set in seconds, between two points in the call.
+    #
+    # @note When making an API call, you may pass AbsoluteTimeRange
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: 1,
+    #         end_time: 1,
+    #         first: 1,
+    #         last: 1,
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   A value that indicates the beginning of the time range in seconds.
+    #   To set absolute time range, you must specify a start time and an end
+    #   time. For example, if you specify the following values:
+    #
+    #   * StartTime - 10000
+    #
+    #   * Endtime - 50000
+    #
+    #   The time range is set between 10,000 milliseconds and 50,000
+    #   milliseconds into the call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time
+    #   A value that indicates the end of the time range in milliseconds. To
+    #   set absolute time range, you must specify a start time and an end
+    #   time. For example, if you specify the following values:
+    #
+    #   * StartTime - 10000
+    #
+    #   * Endtime - 50000
+    #
+    #   The time range is set between 10,000 milliseconds and 50,000
+    #   milliseconds into the call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] first
+    #   A time range from the beginning of the call to the value that
+    #   you've specified. For example, if you specify 100000, the time
+    #   range is set to the first 100,000 milliseconds of the call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last
+    #   A time range from the value that you've specified to the end of the
+    #   call. For example, if you specify 100000, the time range is set to
+    #   the last 100,000 milliseconds of the call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/AbsoluteTimeRange AWS API Documentation
+    #
+    class AbsoluteTimeRange < Struct.new(
+      :start_time,
+      :end_time,
+      :first,
+      :last)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request didn't pass one or more validation tests. For example,
     # if the entity that you're trying to delete doesn't exist or if it is
     # in a non-terminal state (for example, it's "in progress"). See the
@@ -22,6 +83,413 @@ module Aws::TranscribeService
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an asynchronous analytics job that was created with the
+    # `StartAnalyticsJob` operation.
+    #
+    # @!attribute [rw] call_analytics_job_name
+    #   The name of the call analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] call_analytics_job_status
+    #   The status of the analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   If you know the language spoken between the customer and the agent,
+    #   specify a language code for this field.
+    #
+    #   If you don't know the language, you can leave this field blank, and
+    #   Amazon Transcribe will use machine learning to automatically
+    #   identify the language. To improve the accuracy of language
+    #   identification, you can provide an array containing the possible
+    #   language codes for the language spoken in your audio.
+    #
+    #   The following list shows the supported languages and corresponding
+    #   language codes for call analytics jobs:
+    #
+    #   * Gulf Arabic (ar-AE)
+    #
+    #   * Mandarin Chinese, Mainland (zh-CN)
+    #
+    #   * Australian English (en-AU)
+    #
+    #   * British English (en-GB)
+    #
+    #   * Indian English (en-IN)
+    #
+    #   * Irish English (en-IE)
+    #
+    #   * Scottish English (en-AB)
+    #
+    #   * US English (en-US)
+    #
+    #   * Welsh English (en-WL)
+    #
+    #   * Spanish (es-ES)
+    #
+    #   * US Spanish (es-US)
+    #
+    #   * French (fr-FR)
+    #
+    #   * Canadian French (fr-CA)
+    #
+    #   * German (de-DE)
+    #
+    #   * Swiss German (de-CH)
+    #
+    #   * Indian Hindi (hi-IN)
+    #
+    #   * Italian (it-IT)
+    #
+    #   * Japanese (ja-JP)
+    #
+    #   * Korean (ko-KR)
+    #
+    #   * Portuguese (pt-PT)
+    #
+    #   * Brazilian Portuguese (pt-BR)
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   The sample rate, in Hertz, of the audio.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_format
+    #   The format of the input audio file. Note: for call analytics jobs,
+    #   only the following media formats are supported: MP3, MP4, WAV, FLAC,
+    #   OGG, and WebM.
+    #   @return [String]
+    #
+    # @!attribute [rw] media
+    #   Describes the input media file in a transcription request.
+    #   @return [Types::Media]
+    #
+    # @!attribute [rw] transcript
+    #   Identifies the location of a transcription.
+    #   @return [Types::Transcript]
+    #
+    # @!attribute [rw] start_time
+    #   A timestamp that shows when the analytics job started processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the analytics job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   A timestamp that shows when the analytics job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `AnalyticsJobStatus` is `FAILED`, this field contains
+    #   information about why the job failed.
+    #
+    #   The `FailureReason` field can contain one of the following values:
+    #
+    #   * `Unsupported media format`\: The media format specified in the
+    #     `MediaFormat` field of the request isn't valid. See the
+    #     description of the `MediaFormat` field for a list of valid values.
+    #
+    #   * `The media format provided does not match the detected media
+    #     format`\: The media format of the audio file doesn't match the
+    #     format specified in the `MediaFormat` field in the request. Check
+    #     the media format of your media file and make sure the two values
+    #     match.
+    #
+    #   * `Invalid sample rate for audio file`\: The sample rate specified
+    #     in the `MediaSampleRateHertz` of the request isn't valid. The
+    #     sample rate must be between 8000 and 48000 Hertz.
+    #
+    #   * `The sample rate provided does not match the detected sample
+    #     rate`\: The sample rate in the audio file doesn't match the
+    #     sample rate specified in the `MediaSampleRateHertz` field in the
+    #     request. Check the sample rate of your media file and make sure
+    #     that the two values match.
+    #
+    #   * `Invalid file size: file size too large`\: The size of your audio
+    #     file is larger than what Amazon Transcribe Medical can process.
+    #     For more information, see *Guidelines and Quotas* in the Amazon
+    #     Transcribe Medical Guide
+    #
+    #   * `Invalid number of channels: number of channels too large`\: Your
+    #     audio contains more channels than Amazon Transcribe Medical is
+    #     configured to process. To request additional channels, see Amazon
+    #     Transcribe Medical Endpoints and Quotas in the [Amazon Web
+    #     Services General Reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/Welcome.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Number (ARN) that you use to get access to the
+    #   analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] identified_language_score
+    #   A value between zero and one that Amazon Transcribe assigned to the
+    #   language that it identified in the source audio. This value appears
+    #   only when you don't provide a single language code. Larger values
+    #   indicate that Amazon Transcribe has higher confidence in the
+    #   language that it identified
+    #   @return [Float]
+    #
+    # @!attribute [rw] settings
+    #   Provides information about the settings used to run a transcription
+    #   job.
+    #   @return [Types::CallAnalyticsJobSettings]
+    #
+    # @!attribute [rw] channel_definitions
+    #   Shows numeric values to indicate the channel assigned to the
+    #   agent's audio and the channel assigned to the customer's audio.
+    #   @return [Array<Types::ChannelDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJob AWS API Documentation
+    #
+    class CallAnalyticsJob < Struct.new(
+      :call_analytics_job_name,
+      :call_analytics_job_status,
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_format,
+      :media,
+      :transcript,
+      :start_time,
+      :creation_time,
+      :completion_time,
+      :failure_reason,
+      :data_access_role_arn,
+      :identified_language_score,
+      :settings,
+      :channel_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides optional settings for the `CallAnalyticsJob` operation.
+    #
+    # @note When making an API call, you may pass CallAnalyticsJobSettings
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName",
+    #         vocabulary_filter_name: "VocabularyFilterName",
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #         language_model_name: "ModelName",
+    #         content_redaction: {
+    #           redaction_type: "PII", # required, accepts PII
+    #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #         },
+    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of a vocabulary to use when processing the call analytics
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter to use when running a call
+    #   analytics job. The filter that you specify must have the same
+    #   language code as the analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   Set to mask to remove filtered text from the transcript and replace
+    #   it with three asterisks ("***") as placeholder text. Set to
+    #   `remove` to remove filtered text from the transcript without using
+    #   placeholder text. Set to `tag` to mark the word in the transcription
+    #   output that matches the vocabulary filter. When you set the filter
+    #   method to `tag`, the words matching your vocabulary filter are not
+    #   masked or removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_model_name
+    #   The structure used to describe a custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_redaction
+    #   Settings for content redaction within a transcription job.
+    #   @return [Types::ContentRedaction]
+    #
+    # @!attribute [rw] language_options
+    #   When you run a call analytics job, you can specify the language
+    #   spoken in the audio, or you can have Amazon Transcribe identify the
+    #   language for you.
+    #
+    #   To specify a language, specify an array with one language code. If
+    #   you don't know the language, you can leave this field blank and
+    #   Amazon Transcribe will use machine learning to identify the language
+    #   for you. To improve the ability of Amazon Transcribe to correctly
+    #   identify the language, you can provide an array of the languages
+    #   that can be present in the audio.
+    #
+    #   The following list shows the supported languages and corresponding
+    #   language codes for call analytics jobs:
+    #
+    #   * Gulf Arabic (ar-AE)
+    #
+    #   * Mandarin Chinese, Mainland (zh-CN)
+    #
+    #   * Australian English (en-AU)
+    #
+    #   * British English (en-GB)
+    #
+    #   * Indian English (en-IN)
+    #
+    #   * Irish English (en-IE)
+    #
+    #   * Scottish English (en-AB)
+    #
+    #   * US English (en-US)
+    #
+    #   * Welsh English (en-WL)
+    #
+    #   * Spanish (es-ES)
+    #
+    #   * US Spanish (es-US)
+    #
+    #   * French (fr-FR)
+    #
+    #   * Canadian French (fr-CA)
+    #
+    #   * German (de-DE)
+    #
+    #   * Swiss German (de-CH)
+    #
+    #   * Indian Hindi (hi-IN)
+    #
+    #   * Italian (it-IT)
+    #
+    #   * Japanese (ja-JP)
+    #
+    #   * Korean (ko-KR)
+    #
+    #   * Portuguese (pt-PT)
+    #
+    #   * Brazilian Portuguese (pt-BR)
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJobSettings AWS API Documentation
+    #
+    class CallAnalyticsJobSettings < Struct.new(
+      :vocabulary_name,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method,
+      :language_model_name,
+      :content_redaction,
+      :language_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about a call analytics job.
+    #
+    # @!attribute [rw] call_analytics_job_name
+    #   The name of the call analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the call analytics job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   A timestamp that shows when the job began processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   A timestamp that shows when the job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the transcript in the source audio file.
+    #   @return [String]
+    #
+    # @!attribute [rw] call_analytics_job_status
+    #   The status of the call analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `CallAnalyticsJobStatus` is `FAILED`, a description of the
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJobSummary AWS API Documentation
+    #
+    class CallAnalyticsJobSummary < Struct.new(
+      :call_analytics_job_name,
+      :creation_time,
+      :start_time,
+      :completion_time,
+      :language_code,
+      :call_analytics_job_status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the rules and additional information about a
+    # call analytics category.
+    #
+    # @!attribute [rw] category_name
+    #   The name of the call analytics category.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   The rules used to create a call analytics category.
+    #   @return [Array<Types::Rule>]
+    #
+    # @!attribute [rw] create_time
+    #   A timestamp that shows when the call analytics category was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_time
+    #   A timestamp that shows when the call analytics category was most
+    #   recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CategoryProperties AWS API Documentation
+    #
+    class CategoryProperties < Struct.new(
+      :category_name,
+      :rules,
+      :create_time,
+      :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For a call analytics job, an object that indicates the audio channel
+    # that belongs to the agent and the audio channel that belongs to the
+    # customer.
+    #
+    # @note When making an API call, you may pass ChannelDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: 1,
+    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   A value that indicates the audio channel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] participant_role
+    #   Indicates whether the person speaking on the audio channel is the
+    #   agent or customer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ChannelDefinition AWS API Documentation
+    #
+    class ChannelDefinition < Struct.new(
+      :channel_id,
+      :participant_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -70,6 +538,117 @@ module Aws::TranscribeService
     class ContentRedaction < Struct.new(
       :redaction_type,
       :redaction_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCallAnalyticsCategoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         category_name: "CategoryName", # required
+    #         rules: [ # required
+    #           {
+    #             non_talk_time_filter: {
+    #               threshold: 1,
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               negate: false,
+    #             },
+    #             interruption_filter: {
+    #               threshold: 1,
+    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               negate: false,
+    #             },
+    #             transcript_filter: {
+    #               transcript_filter_type: "EXACT", # required, accepts EXACT
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #               negate: false,
+    #               targets: ["NonEmptyString"], # required
+    #             },
+    #             sentiment_filter: {
+    #               sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #               negate: false,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] category_name
+    #   The name that you choose for your category when you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   To create a category, you must specify between 1 and 20 rules. For
+    #   each rule, you specify a filter to be applied to the attributes of
+    #   the call. For example, you can specify a sentiment filter to detect
+    #   if the customer's sentiment was negative or neutral.
+    #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateCallAnalyticsCategoryRequest AWS API Documentation
+    #
+    class CreateCallAnalyticsCategoryRequest < Struct.new(
+      :category_name,
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] category_properties
+    #   The rules and associated metadata used to create a category.
+    #   @return [Types::CategoryProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateCallAnalyticsCategoryResponse AWS API Documentation
+    #
+    class CreateCallAnalyticsCategoryResponse < Struct.new(
+      :category_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -172,8 +751,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary. This case-sensitive name must be
-    #   unique within an AWS account. If you try to create a vocabulary with
-    #   the same name as a previous vocabulary, you get a
+    #   unique within an Amazon Web Services account. If you try to create a
+    #   vocabulary with the same name as a previous vocabulary, you get a
     #   `ConflictException` error.
     #   @return [String]
     #
@@ -187,9 +766,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_file_uri
     #   The location in Amazon S3 of the text file you use to define your
-    #   custom vocabulary. The URI must be in the same AWS Region as the
-    #   resource that you're calling. Enter information about your
-    #   `VocabularyFileUri` in the following format:
+    #   custom vocabulary. The URI must be in the same Amazon Web Services
+    #   Region as the resource that you're calling. Enter information about
+    #   your `VocabularyFileUri` in the following format:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -208,8 +787,8 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateMedicalVocabularyRequest AWS API Documentation
@@ -223,8 +802,8 @@ module Aws::TranscribeService
     end
 
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary. The name must be unique within an AWS
-    #   account and is case sensitive.
+    #   The name of the vocabulary. The name must be unique within an Amazon
+    #   Web Services account and is case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -357,10 +936,10 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary. The name must be unique within an AWS
-    #   account. The name is case sensitive. If you try to create a
-    #   vocabulary with the same name as a previous vocabulary you will
-    #   receive a `ConflictException` error.
+    #   The name of the vocabulary. The name must be unique within an Amazon
+    #   Web Services account. The name is case sensitive. If you try to
+    #   create a vocabulary with the same name as a previous vocabulary you
+    #   will receive a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -385,8 +964,8 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest AWS API Documentation
@@ -434,6 +1013,53 @@ module Aws::TranscribeService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteCallAnalyticsCategoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         category_name: "CategoryName", # required
+    #       }
+    #
+    # @!attribute [rw] category_name
+    #   The name of the call analytics category that you're choosing to
+    #   delete. The value is case sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteCallAnalyticsCategoryRequest AWS API Documentation
+    #
+    class DeleteCallAnalyticsCategoryRequest < Struct.new(
+      :category_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteCallAnalyticsCategoryResponse AWS API Documentation
+    #
+    class DeleteCallAnalyticsCategoryResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteCallAnalyticsJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         call_analytics_job_name: "CallAnalyticsJobName", # required
+    #       }
+    #
+    # @!attribute [rw] call_analytics_job_name
+    #   The name of the call analytics job you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteCallAnalyticsJobRequest AWS API Documentation
+    #
+    class DeleteCallAnalyticsJobRequest < Struct.new(
+      :call_analytics_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteCallAnalyticsJobResponse AWS API Documentation
+    #
+    class DeleteCallAnalyticsJobResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteLanguageModelRequest
     #   data as a hash:
@@ -579,6 +1205,70 @@ module Aws::TranscribeService
     #
     class DescribeLanguageModelResponse < Struct.new(
       :language_model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCallAnalyticsCategoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         category_name: "CategoryName", # required
+    #       }
+    #
+    # @!attribute [rw] category_name
+    #   The name of the category you want information about. This value is
+    #   case sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetCallAnalyticsCategoryRequest AWS API Documentation
+    #
+    class GetCallAnalyticsCategoryRequest < Struct.new(
+      :category_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] category_properties
+    #   The rules you've defined for a category.
+    #   @return [Types::CategoryProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetCallAnalyticsCategoryResponse AWS API Documentation
+    #
+    class GetCallAnalyticsCategoryResponse < Struct.new(
+      :category_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCallAnalyticsJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         call_analytics_job_name: "CallAnalyticsJobName", # required
+    #       }
+    #
+    # @!attribute [rw] call_analytics_job_name
+    #   The name of the analytics job you want information about. This value
+    #   is case sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetCallAnalyticsJobRequest AWS API Documentation
+    #
+    class GetCallAnalyticsJobRequest < Struct.new(
+      :call_analytics_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] call_analytics_job
+    #   An object that contains the results of your call analytics job.
+    #   @return [Types::CallAnalyticsJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetCallAnalyticsJobResponse AWS API Documentation
+    #
+    class GetCallAnalyticsJobResponse < Struct.new(
+      :call_analytics_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -869,6 +1559,73 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # An object that enables you to configure your category to be applied to
+    # call analytics jobs where either the customer or agent was
+    # interrupted.
+    #
+    # @note When making an API call, you may pass InterruptionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         threshold: 1,
+    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #         absolute_time_range: {
+    #           start_time: 1,
+    #           end_time: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         relative_time_range: {
+    #           start_percentage: 1,
+    #           end_percentage: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         negate: false,
+    #       }
+    #
+    # @!attribute [rw] threshold
+    #   The duration of the interruption.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] participant_role
+    #   Indicates whether the caller or customer was interrupting.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_time_range
+    #   An object you can use to specify a time range (in milliseconds) for
+    #   when you'd want to find the interruption. For example, you could
+    #   search for an interruption between the 30,000 millisecond mark and
+    #   the 45,000 millisecond mark. You could also specify the time period
+    #   as the first 15,000 milliseconds or the last 15,000 milliseconds.
+    #   @return [Types::AbsoluteTimeRange]
+    #
+    # @!attribute [rw] relative_time_range
+    #   An object that allows percentages to specify the proportion of the
+    #   call where there was a interruption. For example, you can specify
+    #   the first half of the call. You can also specify the period of time
+    #   between halfway through to three-quarters of the way through the
+    #   call. Because the length of conversation can vary between calls, you
+    #   can apply relative time ranges across all calls.
+    #   @return [Types::RelativeTimeRange]
+    #
+    # @!attribute [rw] negate
+    #   Set to `TRUE` to look for a time period where there was no
+    #   interruption.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/InterruptionFilter AWS API Documentation
+    #
+    class InterruptionFilter < Struct.new(
+      :threshold,
+      :participant_role,
+      :absolute_time_range,
+      :relative_time_range,
+      :negate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about when a transcription job should be
     # executed.
     #
@@ -982,6 +1739,129 @@ module Aws::TranscribeService
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCallAnalyticsCategoriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   When included, `NextToken`fetches the next set of categories if the
+    #   result of the previous request was truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of categories to return in the response. If there
+    #   are fewer results in the list, the response contains only the actual
+    #   results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsCategoriesRequest AWS API Documentation
+    #
+    class ListCallAnalyticsCategoriesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The operation returns a page of jobs at a time. The maximum size of
+    #   the list is set by the `MaxResults` parameter. If there are more
+    #   categories in the list than the page size, Amazon Transcribe returns
+    #   the `NextPage` token. Include the token in the next request to the
+    #   operation to return the next page of analytics categories.
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   A list of objects containing information about analytics categories.
+    #   @return [Array<Types::CategoryProperties>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsCategoriesResponse AWS API Documentation
+    #
+    class ListCallAnalyticsCategoriesResponse < Struct.new(
+      :next_token,
+      :categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCallAnalyticsJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
+    #         job_name_contains: "CallAnalyticsJobName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] status
+    #   When specified, returns only call analytics jobs with the specified
+    #   status. Jobs are ordered by creation date, with the most recent jobs
+    #   returned first. If you don't specify a status, Amazon Transcribe
+    #   returns all analytics jobs ordered by creation date.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name_contains
+    #   When specified, the jobs returned in the list are limited to jobs
+    #   whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If you receive a truncated result in the previous request of ,
+    #   include `NextToken` to fetch the next set of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of call analytics jobs to return in the response.
+    #   If there are fewer results in the list, this response contains only
+    #   the actual results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsJobsRequest AWS API Documentation
+    #
+    class ListCallAnalyticsJobsRequest < Struct.new(
+      :status,
+      :job_name_contains,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   When specified, returns only call analytics jobs with that status.
+    #   Jobs are ordered by creation date, with the most recent jobs
+    #   returned first. If you don't specify a status, Amazon Transcribe
+    #   returns all transcription jobs ordered by creation date.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The operation returns a page of jobs at a time. The maximum size of
+    #   the page is set by the `MaxResults` parameter. If there are more
+    #   jobs in the list than the page size, Amazon Transcribe returns the
+    #   `NextPage` token. Include the token in your next request to the
+    #   operation to return next page of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] call_analytics_job_summaries
+    #   A list of objects containing summary information for a transcription
+    #   job.
+    #   @return [Array<Types::CallAnalyticsJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsJobsResponse AWS API Documentation
+    #
+    class ListCallAnalyticsJobsResponse < Struct.new(
+      :status,
+      :next_token,
+      :call_analytics_job_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1411,6 +2291,7 @@ module Aws::TranscribeService
     #
     #       {
     #         media_file_uri: "Uri",
+    #         redacted_media_file_uri: "Uri",
     #       }
     #
     # @!attribute [rw] media_file_uri
@@ -1425,13 +2306,19 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   @return [String]
+    #
+    # @!attribute [rw] redacted_media_file_uri
+    #   The S3 object location for your redacted output media file. This is
+    #   only supported for call analytics jobs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Media AWS API Documentation
     #
     class Media < Struct.new(
-      :media_file_uri)
+      :media_file_uri,
+      :redacted_media_file_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1478,8 +2365,8 @@ module Aws::TranscribeService
     #   If you don't specify the sample rate, Amazon Transcribe Medical
     #   determines it for you. If you choose to specify the sample rate, it
     #   must match the rate detected by Amazon Transcribe Medical. In most
-    #   cases, you should leave the `MediaSampleHertz` blank and let Amazon
-    #   Transcribe Medical determine the sample rate.
+    #   cases, you should leave the `MedicalMediaSampleHertz` blank and let
+    #   Amazon Transcribe Medical determine the sample rate.
     #   @return [Integer]
     #
     # @!attribute [rw] media_format
@@ -1576,7 +2463,11 @@ module Aws::TranscribeService
     #   The type of speech in the transcription job. `CONVERSATION` is
     #   generally used for patient-physician dialogues. `DICTATION` is the
     #   setting for physicians speaking their notes after seeing a patient.
-    #   For more information, see how-it-works-med
+    #   For more information, see [What is Amazon Transcribe Medical?][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe-med.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscriptionJob AWS API Documentation
@@ -1777,6 +2668,67 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # An object that enables you to configure your category to be applied to
+    # call analytics jobs where either the customer or agent was
+    # interrupted.
+    #
+    # @note When making an API call, you may pass NonTalkTimeFilter
+    #   data as a hash:
+    #
+    #       {
+    #         threshold: 1,
+    #         absolute_time_range: {
+    #           start_time: 1,
+    #           end_time: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         relative_time_range: {
+    #           start_percentage: 1,
+    #           end_percentage: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         negate: false,
+    #       }
+    #
+    # @!attribute [rw] threshold
+    #   The duration of the period when neither the customer nor agent was
+    #   talking.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] absolute_time_range
+    #   An object you can use to specify a time range (in milliseconds) for
+    #   when no one is talking. For example, you could specify a time period
+    #   between the 30,000 millisecond mark and the 45,000 millisecond mark.
+    #   You could also specify the time period as the first 15,000
+    #   milliseconds or the last 15,000 milliseconds.
+    #   @return [Types::AbsoluteTimeRange]
+    #
+    # @!attribute [rw] relative_time_range
+    #   An object that allows percentages to specify the proportion of the
+    #   call where there was silence. For example, you can specify the first
+    #   half of the call. You can also specify the period of time between
+    #   halfway through to three-quarters of the way through the call.
+    #   Because the length of conversation can vary between calls, you can
+    #   apply relative time ranges across all calls.
+    #   @return [Types::RelativeTimeRange]
+    #
+    # @!attribute [rw] negate
+    #   Set to `TRUE` to look for a time period when people were talking.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/NonTalkTimeFilter AWS API Documentation
+    #
+    class NonTalkTimeFilter < Struct.new(
+      :threshold,
+      :absolute_time_range,
+      :relative_time_range,
+      :negate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # We can't find the requested resource. Check the name and try your
     # request again.
     #
@@ -1787,6 +2739,189 @@ module Aws::TranscribeService
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that allows percentages to specify the proportion of the
+    # call where you would like to apply a filter. For example, you can
+    # specify the first half of the call. You can also specify the period of
+    # time between halfway through to three-quarters of the way through the
+    # call. Because the length of conversation can vary between calls, you
+    # can apply relative time ranges across all calls.
+    #
+    # @note When making an API call, you may pass RelativeTimeRange
+    #   data as a hash:
+    #
+    #       {
+    #         start_percentage: 1,
+    #         end_percentage: 1,
+    #         first: 1,
+    #         last: 1,
+    #       }
+    #
+    # @!attribute [rw] start_percentage
+    #   A value that indicates the percentage of the beginning of the time
+    #   range. To set a relative time range, you must specify a start
+    #   percentage and an end percentage. For example, if you specify the
+    #   following values:
+    #
+    #   * StartPercentage - 10
+    #
+    #   * EndPercentage - 50
+    #
+    #   This looks at the time range starting from 10% of the way into the
+    #   call to 50% of the way through the call. For a call that lasts
+    #   100,000 milliseconds, this example range would apply from the 10,000
+    #   millisecond mark to the 50,000 millisecond mark.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_percentage
+    #   A value that indicates the percentage of the end of the time range.
+    #   To set a relative time range, you must specify a start percentage
+    #   and an end percentage. For example, if you specify the following
+    #   values:
+    #
+    #   * StartPercentage - 10
+    #
+    #   * EndPercentage - 50
+    #
+    #   This looks at the time range starting from 10% of the way into the
+    #   call to 50% of the way through the call. For a call that lasts
+    #   100,000 milliseconds, this example range would apply from the 10,000
+    #   millisecond mark to the 50,000 millisecond mark.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] first
+    #   A range that takes the portion of the call up to the time in
+    #   milliseconds set by the value that you've specified. For example,
+    #   if you specify `120000`, the time range is set for the first 120,000
+    #   milliseconds of the call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last
+    #   A range that takes the portion of the call from the time in
+    #   milliseconds set by the value that you've specified to the end of
+    #   the call. For example, if you specify `120000`, the time range is
+    #   set for the last 120,000 milliseconds of the call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/RelativeTimeRange AWS API Documentation
+    #
+    class RelativeTimeRange < Struct.new(
+      :start_percentage,
+      :end_percentage,
+      :first,
+      :last)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition in the call between the customer and the agent that you
+    # want to filter for.
+    #
+    # @note Rule is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Rule is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Rule corresponding to the set member.
+    #
+    # @!attribute [rw] non_talk_time_filter
+    #   A condition for a time period when neither the customer nor the
+    #   agent was talking.
+    #   @return [Types::NonTalkTimeFilter]
+    #
+    # @!attribute [rw] interruption_filter
+    #   A condition for a time period when either the customer or agent was
+    #   interrupting the other person.
+    #   @return [Types::InterruptionFilter]
+    #
+    # @!attribute [rw] transcript_filter
+    #   A condition that catches particular words or phrases based on a
+    #   exact match. For example, if you set the phrase "I want to speak to
+    #   the manager", only that exact phrase will be returned.
+    #   @return [Types::TranscriptFilter]
+    #
+    # @!attribute [rw] sentiment_filter
+    #   A condition that is applied to a particular customer sentiment.
+    #   @return [Types::SentimentFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Rule AWS API Documentation
+    #
+    class Rule < Struct.new(
+      :non_talk_time_filter,
+      :interruption_filter,
+      :transcript_filter,
+      :sentiment_filter,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class NonTalkTimeFilter < Rule; end
+      class InterruptionFilter < Rule; end
+      class TranscriptFilter < Rule; end
+      class SentimentFilter < Rule; end
+      class Unknown < Rule; end
+    end
+
+    # An object that enables you to specify a particular customer or agent
+    # sentiment. If at least 50 percent of the conversation turns (the
+    # back-and-forth between two speakers) in a specified time period match
+    # the specified sentiment, Amazon Transcribe will consider the sentiment
+    # a match.
+    #
+    # @note When making an API call, you may pass SentimentFilter
+    #   data as a hash:
+    #
+    #       {
+    #         sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
+    #         absolute_time_range: {
+    #           start_time: 1,
+    #           end_time: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         relative_time_range: {
+    #           start_percentage: 1,
+    #           end_percentage: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #         negate: false,
+    #       }
+    #
+    # @!attribute [rw] sentiments
+    #   An array that enables you to specify sentiments for the customer or
+    #   agent. You can specify one or more values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] absolute_time_range
+    #   The time range, measured in seconds, of the sentiment.
+    #   @return [Types::AbsoluteTimeRange]
+    #
+    # @!attribute [rw] relative_time_range
+    #   The time range, set in percentages, that correspond to proportion of
+    #   the call.
+    #   @return [Types::RelativeTimeRange]
+    #
+    # @!attribute [rw] participant_role
+    #   A value that determines whether the sentiment belongs to the
+    #   customer or the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] negate
+    #   Set to `TRUE` to look for sentiments that weren't specified in the
+    #   request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SentimentFilter AWS API Documentation
+    #
+    class SentimentFilter < Struct.new(
+      :sentiments,
+      :absolute_time_range,
+      :relative_time_range,
+      :participant_role,
+      :negate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1891,6 +3026,158 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartCallAnalyticsJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         call_analytics_job_name: "CallAnalyticsJobName", # required
+    #         media: { # required
+    #           media_file_uri: "Uri",
+    #           redacted_media_file_uri: "Uri",
+    #         },
+    #         output_location: "Uri",
+    #         output_encryption_kms_key_id: "KMSKeyId",
+    #         data_access_role_arn: "DataAccessRoleArn", # required
+    #         settings: {
+    #           vocabulary_name: "VocabularyName",
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #           language_model_name: "ModelName",
+    #           content_redaction: {
+    #             redaction_type: "PII", # required, accepts PII
+    #             redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #           },
+    #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         },
+    #         channel_definitions: [
+    #           {
+    #             channel_id: 1,
+    #             participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] call_analytics_job_name
+    #   The name of the call analytics job. You can't use the string "."
+    #   or ".." by themselves as the job name. The name must also be
+    #   unique within an AWS account. If you try to create a call analytics
+    #   job with the same name as a previous call analytics job, you get a
+    #   `ConflictException` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] media
+    #   Describes the input media file in a transcription request.
+    #   @return [Types::Media]
+    #
+    # @!attribute [rw] output_location
+    #   The Amazon S3 location where the output of the call analytics job is
+    #   stored. You can provide the following location types to store the
+    #   output of call analytics job:
+    #
+    #   * s3://DOC-EXAMPLE-BUCKET1
+    #
+    #     If you specify a bucket, Amazon Transcribe saves the output of the
+    #     analytics job as a JSON file at the root level of the bucket.
+    #
+    #   * s3://DOC-EXAMPLE-BUCKET1/folder/
+    #
+    #     f you specify a path, Amazon Transcribe saves the output of the
+    #     analytics job as
+    #     s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json
+    #
+    #     If you specify a folder, you must provide a trailing slash.
+    #
+    #   * s3://DOC-EXAMPLE-BUCKET1/folder/filename.json
+    #
+    #     If you provide a path that has the filename specified, Amazon
+    #     Transcribe saves the output of the analytics job as
+    #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json
+    #
+    #   You can specify an AWS Key Management Service key to encrypt the
+    #   output of our analytics job using the `OutputEncryptionKMSKeyId`
+    #   parameter. If you don't specify a KMS key, Amazon Transcribe uses
+    #   the default Amazon S3 key for server-side encryption of the
+    #   analytics job output that is placed in your S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_encryption_kms_key_id
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service key
+    #   used to encrypt the output of the call analytics job. The user
+    #   calling the operation must have permission to use the specified KMS
+    #   key.
+    #
+    #   You use either of the following to identify an AWS KMS key in the
+    #   current account:
+    #
+    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * KMS Key Alias: "alias/ExampleAlias"
+    #
+    #   You can use either of the following to identify a KMS key in the
+    #   current account or another account:
+    #
+    #   * Amazon Resource Name (ARN) of a KMS key in the current account or
+    #     another account: "arn:aws:kms:region:account
+    #     ID:key/1234abcd-12ab-34cd-56ef1234567890ab"
+    #
+    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
+    #     ID:alias/ExampleAlias"
+    #
+    #   If you don't specify an encryption key, the output of the call
+    #   analytics job is encrypted with the default Amazon S3 key (SSE-S3).
+    #
+    #   If you specify a KMS key to encrypt your output, you must also
+    #   specify an output location in the `OutputLocation` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of a role that has access to the S3
+    #   bucket that contains your input files. Amazon Transcribe assumes
+    #   this role to read queued audio files. If you have specified an
+    #   output S3 bucket for your transcription results, this role should
+    #   have access to the output bucket as well.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   A `Settings` object that provides optional settings for a call
+    #   analytics job.
+    #   @return [Types::CallAnalyticsJobSettings]
+    #
+    # @!attribute [rw] channel_definitions
+    #   When you start a call analytics job, you must pass an array that
+    #   maps the agent and the customer to specific audio channels. The
+    #   values you can assign to a channel are 0 and 1. The agent and the
+    #   customer must each have their own channel. You can't assign more
+    #   than one channel to an agent or customer.
+    #   @return [Array<Types::ChannelDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartCallAnalyticsJobRequest AWS API Documentation
+    #
+    class StartCallAnalyticsJobRequest < Struct.new(
+      :call_analytics_job_name,
+      :media,
+      :output_location,
+      :output_encryption_kms_key_id,
+      :data_access_role_arn,
+      :settings,
+      :channel_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] call_analytics_job
+    #   An object containing the details of the asynchronous call analytics
+    #   job.
+    #   @return [Types::CallAnalyticsJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartCallAnalyticsJobResponse AWS API Documentation
+    #
+    class StartCallAnalyticsJobResponse < Struct.new(
+      :call_analytics_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartMedicalTranscriptionJobRequest
     #   data as a hash:
     #
@@ -1901,6 +3188,7 @@ module Aws::TranscribeService
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #         media: { # required
     #           media_file_uri: "Uri",
+    #           redacted_media_file_uri: "Uri",
     #         },
     #         output_bucket_name: "OutputBucketName", # required
     #         output_key: "OutputKey",
@@ -1921,9 +3209,10 @@ module Aws::TranscribeService
     # @!attribute [rw] medical_transcription_job_name
     #   The name of the medical transcription job. You can't use the
     #   strings "`.`" or "`..`" by themselves as the job name. The name
-    #   must also be unique within an AWS account. If you try to create a
-    #   medical transcription job with the same name as a previous medical
-    #   transcription job, you get a `ConflictException` error.
+    #   must also be unique within an Amazon Web Services account. If you
+    #   try to create a medical transcription job with the same name as a
+    #   previous medical transcription job, you get a `ConflictException`
+    #   error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1963,8 +3252,8 @@ module Aws::TranscribeService
     #   Transcribe Medical to put files in the bucket. For more information,
     #   see [Permissions Required for IAM User Roles][1].
     #
-    #   You can specify an AWS Key Management Service (KMS) key to encrypt
-    #   the output of your transcription using the
+    #   You can specify an Amazon Web Services Key Management Service (KMS)
+    #   key to encrypt the output of your transcription using the
     #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS
     #   key, Amazon Transcribe Medical uses the default Amazon S3 key for
     #   server-side encryption of transcripts that are placed in your S3
@@ -1999,10 +3288,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (KMS) key used to encrypt the output of the transcription job. The
-    #   user calling the StartMedicalTranscriptionJob operation must have
-    #   permission to use the specified KMS key.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service (KMS) key used to encrypt the output of the
+    #   transcription job. The user calling the StartMedicalTranscriptionJob
+    #   operation must have permission to use the specified KMS key.
     #
     #   You use either of the following to identify a KMS key in the current
     #   account:
@@ -2092,6 +3381,7 @@ module Aws::TranscribeService
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #         media: { # required
     #           media_file_uri: "Uri",
+    #           redacted_media_file_uri: "Uri",
     #         },
     #         output_bucket_name: "OutputBucketName",
     #         output_key: "OutputKey",
@@ -2124,8 +3414,8 @@ module Aws::TranscribeService
     # @!attribute [rw] transcription_job_name
     #   The name of the job. You can't use the strings "`.`" or "`..`"
     #   by themselves as the job name. The name must also be unique within
-    #   an AWS account. If you try to create a transcription job with the
-    #   same name as a previous transcription job, you get a
+    #   an Amazon Web Services account. If you try to create a transcription
+    #   job with the same name as a previous transcription job, you get a
     #   `ConflictException` error.
     #   @return [String]
     #
@@ -2170,8 +3460,8 @@ module Aws::TranscribeService
     #   Amazon Transcribe to put files in the bucket. For more information,
     #   see [Permissions Required for IAM User Roles][1].
     #
-    #   You can specify an AWS Key Management Service (KMS) key to encrypt
-    #   the output of your transcription using the
+    #   You can specify an Amazon Web Services Key Management Service (KMS)
+    #   key to encrypt the output of your transcription using the
     #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS
     #   key, Amazon Transcribe uses the default Amazon S3 key for
     #   server-side encryption of transcripts that are placed in your S3
@@ -2212,10 +3502,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (KMS) key used to encrypt the output of the transcription job. The
-    #   user calling the `StartTranscriptionJob` operation must have
-    #   permission to use the specified KMS key.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service (KMS) key used to encrypt the output of the
+    #   transcription job. The user calling the `StartTranscriptionJob`
+    #   operation must have permission to use the specified KMS key.
     #
     #   You can use either of the following to identify a KMS key in the
     #   current account:
@@ -2276,6 +3566,10 @@ module Aws::TranscribeService
     #   your collection of audio files. Automatic language identification
     #   chooses a language that best matches the source audio from that
     #   list.
+    #
+    #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio
+    #   or video file must be encoded at a sample rate of 16000 Hz or
+    #   higher.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobRequest AWS API Documentation
@@ -2338,6 +3632,79 @@ module Aws::TranscribeService
     class Transcript < Struct.new(
       :transcript_file_uri,
       :redacted_transcript_file_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Matches the output of the transcription to either the specific phrases
+    # that you specify, or the intent of the phrases that you specify.
+    #
+    # @note When making an API call, you may pass TranscriptFilter
+    #   data as a hash:
+    #
+    #       {
+    #         transcript_filter_type: "EXACT", # required, accepts EXACT
+    #         absolute_time_range: {
+    #           start_time: 1,
+    #           end_time: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         relative_time_range: {
+    #           start_percentage: 1,
+    #           end_percentage: 1,
+    #           first: 1,
+    #           last: 1,
+    #         },
+    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #         negate: false,
+    #         targets: ["NonEmptyString"], # required
+    #       }
+    #
+    # @!attribute [rw] transcript_filter_type
+    #   Matches the phrase to the transcription output in a word for word
+    #   fashion. For example, if you specify the phrase "I want to speak to
+    #   the manager." Amazon Transcribe attempts to match that specific
+    #   phrase to the transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_time_range
+    #   A time range, set in seconds, between two points in the call.
+    #   @return [Types::AbsoluteTimeRange]
+    #
+    # @!attribute [rw] relative_time_range
+    #   An object that allows percentages to specify the proportion of the
+    #   call where you would like to apply a filter. For example, you can
+    #   specify the first half of the call. You can also specify the period
+    #   of time between halfway through to three-quarters of the way through
+    #   the call. Because the length of conversation can vary between calls,
+    #   you can apply relative time ranges across all calls.
+    #   @return [Types::RelativeTimeRange]
+    #
+    # @!attribute [rw] participant_role
+    #   Determines whether the customer or the agent is speaking the phrases
+    #   that you've specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] negate
+    #   If `TRUE`, the rule that you specify is applied to everything except
+    #   for the phrases that you specify.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] targets
+    #   The phrases that you're specifying for the transcript filter to
+    #   match.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptFilter AWS API Documentation
+    #
+    class TranscriptFilter < Struct.new(
+      :transcript_filter_type,
+      :absolute_time_range,
+      :relative_time_range,
+      :participant_role,
+      :negate,
+      :targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2575,6 +3942,121 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateCallAnalyticsCategoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         category_name: "CategoryName", # required
+    #         rules: [ # required
+    #           {
+    #             non_talk_time_filter: {
+    #               threshold: 1,
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               negate: false,
+    #             },
+    #             interruption_filter: {
+    #               threshold: 1,
+    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               negate: false,
+    #             },
+    #             transcript_filter: {
+    #               transcript_filter_type: "EXACT", # required, accepts EXACT
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #               negate: false,
+    #               targets: ["NonEmptyString"], # required
+    #             },
+    #             sentiment_filter: {
+    #               sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
+    #               absolute_time_range: {
+    #                 start_time: 1,
+    #                 end_time: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               relative_time_range: {
+    #                 start_percentage: 1,
+    #                 end_percentage: 1,
+    #                 first: 1,
+    #                 last: 1,
+    #               },
+    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #               negate: false,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] category_name
+    #   The name of the analytics category to update. The name is case
+    #   sensitive. If you try to update a call analytics category with the
+    #   same name as a previous category you will receive a
+    #   `ConflictException` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   The rules used for the updated analytics category. The rules that
+    #   you provide in this field replace the ones that are currently being
+    #   used.
+    #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateCallAnalyticsCategoryRequest AWS API Documentation
+    #
+    class UpdateCallAnalyticsCategoryRequest < Struct.new(
+      :category_name,
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] category_properties
+    #   The attributes describing the analytics category. You can see
+    #   information such as the rules that you've used to update the
+    #   category and when the category was originally created.
+    #   @return [Types::CategoryProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateCallAnalyticsCategoryResponse AWS API Documentation
+    #
+    class UpdateCallAnalyticsCategoryResponse < Struct.new(
+      :category_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateMedicalVocabularyRequest
     #   data as a hash:
     #
@@ -2598,9 +4080,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_file_uri
     #   The location in Amazon S3 of the text file that contains the you use
-    #   for your custom vocabulary. The URI must be in the same AWS Region
-    #   as the resource that you are calling. The following is the format
-    #   for a URI:
+    #   for your custom vocabulary. The URI must be in the same Amazon Web
+    #   Services Region as the resource that you are calling. The following
+    #   is the format for a URI:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -2618,8 +4100,8 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateMedicalVocabularyRequest AWS API Documentation
@@ -2780,8 +4262,8 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyRequest AWS API Documentation

@@ -251,7 +251,7 @@ module Aws::SSMIncidents
     CreateResponsePlanOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     CreateResponsePlanOutput.struct_class = Types::CreateResponsePlanOutput
 
-    CreateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateTimelineEventInput.add_member(:event_data, Shapes::ShapeRef.new(shape: EventData, required: true, location_name: "eventData"))
     CreateTimelineEventInput.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "eventTime"))
     CreateTimelineEventInput.add_member(:event_type, Shapes::ShapeRef.new(shape: TimelineEventType, required: true, location_name: "eventType"))
@@ -506,6 +506,7 @@ module Aws::SSMIncidents
     RelatedItemsUpdate.add_member_subclass(:unknown, Types::RelatedItemsUpdate::Unknown)
     RelatedItemsUpdate.struct_class = Types::RelatedItemsUpdate
 
+    ReplicationSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     ReplicationSet.add_member(:created_by, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "createdBy"))
     ReplicationSet.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
     ReplicationSet.add_member(:deletion_protected, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "deletionProtected"))
@@ -662,7 +663,7 @@ module Aws::SSMIncidents
 
     UpdateResponsePlanOutput.struct_class = Types::UpdateResponsePlanOutput
 
-    UpdateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateTimelineEventInput.add_member(:event_data, Shapes::ShapeRef.new(shape: EventData, location_name: "eventData"))
     UpdateTimelineEventInput.add_member(:event_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "eventId"))
     UpdateTimelineEventInput.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "eventTime"))

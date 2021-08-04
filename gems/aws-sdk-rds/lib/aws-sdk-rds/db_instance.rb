@@ -61,6 +61,12 @@ module Aws::RDS
       data[:db_instance_status]
     end
 
+    # The time when a stopped DB instance is restarted automatically.
+    # @return [Time]
+    def automatic_restart_time
+      data[:automatic_restart_time]
+    end
+
     # Contains the master username for the DB instance.
     # @return [String]
     def master_username
@@ -89,12 +95,17 @@ module Aws::RDS
     end
 
     # Specifies the connection endpoint.
+    #
+    # <note markdown="1"> The endpoint might not be shown for instances whose status is
+    # `creating`.
+    #
+    #  </note>
     # @return [Types::Endpoint]
     def endpoint
       data[:endpoint]
     end
 
-    # Specifies the allocated storage size specified in gibibytes.
+    # Specifies the allocated storage size specified in gibibytes (GiB).
     # @return [Integer]
     def allocated_storage
       data[:allocated_storage]
@@ -524,8 +535,8 @@ module Aws::RDS
       data[:listener_endpoint]
     end
 
-    # The upper limit to which Amazon RDS can automatically scale the
-    # storage of the DB instance.
+    # The upper limit in gibibytes (GiB) to which Amazon RDS can
+    # automatically scale the storage of the DB instance.
     # @return [Integer]
     def max_allocated_storage
       data[:max_allocated_storage]
@@ -910,7 +921,8 @@ module Aws::RDS
     #
     #   * It can't be a word reserved by the database engine.
     # @option options [Integer] :allocated_storage
-    #   The amount of storage (in gibibytes) to allocate for the DB instance.
+    #   The amount of storage in gibibytes (GiB) to allocate for the DB
+    #   instance.
     #
     #   Type: Integer
     #
@@ -1632,8 +1644,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -2066,8 +2078,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     # @option options [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -2252,7 +2264,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
-    #   The new amount of storage (in gibibytes) to allocate for the DB
+    #   The new amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
     #
     #   For MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must be
@@ -2809,8 +2821,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -3271,8 +3283,8 @@ module Aws::RDS
     # @option options [String] :source_dbi_resource_id
     #   The resource ID of the source DB instance from which to restore.
     # @option options [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS

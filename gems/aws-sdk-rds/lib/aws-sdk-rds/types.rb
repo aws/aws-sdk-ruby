@@ -2653,7 +2653,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   The amount of storage (in gibibytes) to allocate for the DB
+    #   The amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
     #
     #   Type: Integer
@@ -3469,8 +3469,8 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -4064,8 +4064,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -5098,6 +5098,10 @@ module Aws::RDS
     #   Specifies the current state of this DB cluster.
     #   @return [String]
     #
+    # @!attribute [rw] automatic_restart_time
+    #   The time when a stopped DB cluster is restarted automatically.
+    #   @return [Time]
+    #
     # @!attribute [rw] percent_progress
     #   Specifies the progress of the operation as a percentage.
     #   @return [String]
@@ -5409,6 +5413,7 @@ module Aws::RDS
       :db_cluster_parameter_group,
       :db_subnet_group,
       :status,
+      :automatic_restart_time,
       :percent_progress,
       :earliest_restorable_time,
       :endpoint,
@@ -6381,6 +6386,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/accessing-monitoring.html#Overview.DBInstance.Status
     #   @return [String]
     #
+    # @!attribute [rw] automatic_restart_time
+    #   The time when a stopped DB instance is restarted automatically.
+    #   @return [Time]
+    #
     # @!attribute [rw] master_username
     #   Contains the master username for the DB instance.
     #   @return [String]
@@ -6407,10 +6416,15 @@ module Aws::RDS
     #
     # @!attribute [rw] endpoint
     #   Specifies the connection endpoint.
+    #
+    #   <note markdown="1"> The endpoint might not be shown for instances whose status is
+    #   `creating`.
+    #
+    #    </note>
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] allocated_storage
-    #   Specifies the allocated storage size specified in gibibytes.
+    #   Specifies the allocated storage size specified in gibibytes (GiB).
     #   @return [Integer]
     #
     # @!attribute [rw] instance_create_time
@@ -6740,8 +6754,8 @@ module Aws::RDS
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] tag_list
@@ -6820,6 +6834,7 @@ module Aws::RDS
       :db_instance_class,
       :engine,
       :db_instance_status,
+      :automatic_restart_time,
       :master_username,
       :db_name,
       :endpoint,
@@ -14206,7 +14221,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   The new amount of storage (in gibibytes) to allocate for the DB
+    #   The new amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
     #
     #   For MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must
@@ -14850,8 +14865,8 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -16670,7 +16685,7 @@ module Aws::RDS
     #
     # @!attribute [rw] allocated_storage
     #   The allocated storage size for the DB instance specified in
-    #   gibibytes .
+    #   gibibytes (GiB).
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
@@ -19716,8 +19731,8 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -20166,8 +20181,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -21454,7 +21469,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] storage_size
-    #   The valid range of storage in gibibytes. For example, 100 to 16384.
+    #   The valid range of storage in gibibytes (GiB). For example, 100 to
+    #   16384.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] provisioned_iops
