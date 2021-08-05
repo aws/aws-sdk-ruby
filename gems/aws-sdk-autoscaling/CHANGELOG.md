@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-08-05)
+------------------
+
+* Feature - EC2 Auto Scaling adds configuration checks and Launch Template validation to Instance Refresh.
+
 1.66.0 (2021-07-30)
 ------------------
 

@@ -1078,10 +1078,12 @@ module Aws::LexModelsV2
     InputContextsList.member = Shapes::ShapeRef.new(shape: InputContext)
 
     IntentClosingSetting.add_member(:closing_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "closingResponse"))
+    IntentClosingSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     IntentClosingSetting.struct_class = Types::IntentClosingSetting
 
     IntentConfirmationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, required: true, location_name: "promptSpecification"))
     IntentConfirmationSetting.add_member(:declination_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "declinationResponse"))
+    IntentConfirmationSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     IntentConfirmationSetting.struct_class = Types::IntentConfirmationSetting
 
     IntentFilter.add_member(:name, Shapes::ShapeRef.new(shape: IntentFilterName, required: true, location_name: "name"))
@@ -1654,6 +1656,7 @@ module Aws::LexModelsV2
     WaitAndContinueSpecification.add_member(:waiting_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "waitingResponse"))
     WaitAndContinueSpecification.add_member(:continue_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "continueResponse"))
     WaitAndContinueSpecification.add_member(:still_waiting_response, Shapes::ShapeRef.new(shape: StillWaitingResponseSpecification, location_name: "stillWaitingResponse"))
+    WaitAndContinueSpecification.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     WaitAndContinueSpecification.struct_class = Types::WaitAndContinueSpecification
 
 

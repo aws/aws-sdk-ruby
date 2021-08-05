@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2021-08-05)
+------------------
+
+* Feature - Customers can now toggle the active field on prompts and responses.
+
 1.8.0 (2021-07-30)
 ------------------
 
