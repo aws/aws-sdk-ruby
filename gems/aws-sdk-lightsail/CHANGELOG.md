@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-08-06)
+------------------
+
+* Feature - This release adds support to track when a bucket access key was last used.
+
 1.54.0 (2021-07-30)
 ------------------
 

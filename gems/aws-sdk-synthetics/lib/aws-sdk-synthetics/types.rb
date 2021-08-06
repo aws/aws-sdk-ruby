@@ -10,6 +10,9 @@
 module Aws::Synthetics
   module Types
 
+    # A structure representing a screenshot that is used as a baseline
+    # during visual monitoring comparisons made by the canary.
+    #
     # @note When making an API call, you may pass BaseScreenshot
     #   data as a hash:
     #
@@ -19,9 +22,16 @@ module Aws::Synthetics
     #       }
     #
     # @!attribute [rw] screenshot_name
+    #   The name of the screenshot. This is generated the first time the
+    #   canary is run after the `UpdateCanary` operation that specified for
+    #   this canary to perform visual monitoring.
     #   @return [String]
     #
     # @!attribute [rw] ignore_coordinates
+    #   Coordinates that define the part of a screen to ignore during
+    #   screenshot comparisons. To obtain the coordinates to use here, use
+    #   the CloudWatch Logs console to draw the boundaries on the screen.
+    #   For more information, see \\\{LINK\\}
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/BaseScreenshot AWS API Documentation
@@ -119,6 +129,10 @@ module Aws::Synthetics
     #   @return [Types::VpcConfigOutput]
     #
     # @!attribute [rw] visual_reference
+    #   If this canary performs visual monitoring by comparing screenshots,
+    #   this structure contains the ID of the canary run to use as the
+    #   baseline for screenshots, and the coordinates of any parts of the
+    #   screen to ignore during the visual monitoring comparison.
     #   @return [Types::VisualReferenceOutput]
     #
     # @!attribute [rw] tags
@@ -188,7 +202,7 @@ module Aws::Synthetics
     #   If you input your canary script directly into the canary instead of
     #   referring to an S3 location, the value of this parameter is the
     #   base64-encoded contents of the .zip file that contains the script.
-    #   It can be up to 5 MB.
+    #   It must be smaller than 256 Kb.
     #   @return [String]
     #
     # @!attribute [rw] handler
@@ -1368,6 +1382,19 @@ module Aws::Synthetics
     #   @return [Types::VpcConfigInput]
     #
     # @!attribute [rw] visual_reference
+    #   Defines the screenshots to use as the baseline for comparisons
+    #   during visual monitoring comparisons during future runs of this
+    #   canary. If you omit this parameter, no changes are made to any
+    #   baseline screenshots that the canary might be using already.
+    #
+    #   Visual monitoring is supported only on canaries running the
+    #   **syn-puppeteer-node-3.2** runtime or later. For more information,
+    #   see [ Visual monitoring][1] and [ Visual monitoring blueprint][2]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
     #   @return [Types::VisualReferenceInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanaryRequest AWS API Documentation
@@ -1404,6 +1431,19 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # An object that specifies what screenshots to use as a baseline for
+    # visual monitoring by this canary, and optionally the parts of the
+    # screenshots to ignore during the visual monitoring comparison.
+    #
+    # Visual monitoring is supported only on canaries running the
+    # **syn-puppeteer-node-3.2** runtime or later. For more information, see
+    # [ Visual monitoring][1] and [ Visual monitoring blueprint][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
+    #
     # @note When making an API call, you may pass VisualReferenceInput
     #   data as a hash:
     #
@@ -1418,9 +1458,23 @@ module Aws::Synthetics
     #       }
     #
     # @!attribute [rw] base_screenshots
+    #   An array of screenshots that will be used as the baseline for visual
+    #   monitoring in future runs of this canary. If there is a screenshot
+    #   that you don't want to be used for visual monitoring, remove it
+    #   from this array.
     #   @return [Array<Types::BaseScreenshot>]
     #
     # @!attribute [rw] base_canary_run_id
+    #   Specifies which canary run to use the screenshots from as the
+    #   baseline for future visual monitoring with this canary. Valid values
+    #   are `nextrun` to use the screenshots from the next run after this
+    #   update is made, `lastrun` to use the screenshots from the most
+    #   recent run before this update was made, or the value of `Id` in the
+    #   [ CanaryRun][1] from any past run of this canary.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/VisualReferenceInput AWS API Documentation
@@ -1432,10 +1486,23 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # If this canary performs visual monitoring by comparing screenshots,
+    # this structure contains the ID of the canary run that is used as the
+    # baseline for screenshots, and the coordinates of any parts of those
+    # screenshots that are ignored during visual monitoring comparison.
+    #
+    # Visual monitoring is supported only on canaries running the
+    # **syn-puppeteer-node-3.2** runtime or later.
+    #
     # @!attribute [rw] base_screenshots
+    #   An array of screenshots that are used as the baseline for
+    #   comparisons during visual monitoring.
     #   @return [Array<Types::BaseScreenshot>]
     #
     # @!attribute [rw] base_canary_run_id
+    #   The ID of the canary run that produced the screenshots that are used
+    #   as the baseline for visual monitoring comparisons during future runs
+    #   of this canary.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/VisualReferenceOutput AWS API Documentation

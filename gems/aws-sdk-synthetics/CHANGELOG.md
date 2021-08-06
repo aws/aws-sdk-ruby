@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-08-06)
+------------------
+
+* Feature - Documentation updates for Visual Monitoring feature and other doc ticket fixes.
+
 1.15.0 (2021-07-30)
 ------------------
 

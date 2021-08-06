@@ -16,6 +16,7 @@ module Aws::Lightsail
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDirection = Shapes::StringShape.new(name: 'AccessDirection')
     AccessKey = Shapes::StructureShape.new(name: 'AccessKey')
+    AccessKeyLastUsed = Shapes::StructureShape.new(name: 'AccessKeyLastUsed')
     AccessKeyList = Shapes::ListShape.new(name: 'AccessKeyList')
     AccessReceiverList = Shapes::ListShape.new(name: 'AccessReceiverList')
     AccessRules = Shapes::StructureShape.new(name: 'AccessRules')
@@ -618,7 +619,13 @@ module Aws::Lightsail
     AccessKey.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secretAccessKey"))
     AccessKey.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "status"))
     AccessKey.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    AccessKey.add_member(:last_used, Shapes::ShapeRef.new(shape: AccessKeyLastUsed, location_name: "lastUsed"))
     AccessKey.struct_class = Types::AccessKey
+
+    AccessKeyLastUsed.add_member(:last_used_date, Shapes::ShapeRef.new(shape: IsoDate, location_name: "lastUsedDate"))
+    AccessKeyLastUsed.add_member(:region, Shapes::ShapeRef.new(shape: string, location_name: "region"))
+    AccessKeyLastUsed.add_member(:service_name, Shapes::ShapeRef.new(shape: string, location_name: "serviceName"))
+    AccessKeyLastUsed.struct_class = Types::AccessKeyLastUsed
 
     AccessKeyList.member = Shapes::ShapeRef.new(shape: AccessKey)
 

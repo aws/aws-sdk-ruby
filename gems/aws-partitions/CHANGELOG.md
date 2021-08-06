@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.484.0 (2021-08-06)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKMessaging`.
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKIdentity`.
+
 1.483.0 (2021-08-04)
 ------------------
 

@@ -917,7 +917,7 @@ module Aws::Lightsail
     #   in the bucket.
     #
     #   For more information about versioning, see [Enabling and suspending
-    #   bucket object versioning in Amazon Lightsail][1] in the *Amazon
+    #   object versioning in a bucket in Amazon Lightsail][1] in the *Amazon
     #   Lightsail Developer Guide*.
     #
     #
@@ -1034,6 +1034,9 @@ module Aws::Lightsail
     #   resp.access_key.secret_access_key #=> String
     #   resp.access_key.status #=> String, one of "Active", "Inactive"
     #   resp.access_key.created_at #=> Time
+    #   resp.access_key.last_used.last_used_date #=> Time
+    #   resp.access_key.last_used.region #=> String
+    #   resp.access_key.last_used.service_name #=> String
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
@@ -5343,6 +5346,9 @@ module Aws::Lightsail
     #   resp.access_keys[0].secret_access_key #=> String
     #   resp.access_keys[0].status #=> String, one of "Active", "Inactive"
     #   resp.access_keys[0].created_at #=> Time
+    #   resp.access_keys[0].last_used.last_used_date #=> Time
+    #   resp.access_keys[0].last_used.region #=> String
+    #   resp.access_keys[0].last_used.service_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketAccessKeys AWS API Documentation
     #
@@ -11419,7 +11425,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

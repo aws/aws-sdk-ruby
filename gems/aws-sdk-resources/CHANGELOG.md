@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.107.0 (2021-08-06)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkmessaging` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkidentity` gem.
+
 3.106.0 (2021-07-27)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-08-06)
+------------------
+
+* Feature - Documentation updates for Athena.
+
 1.39.0 (2021-07-30)
 ------------------
 

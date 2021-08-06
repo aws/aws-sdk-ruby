@@ -96,6 +96,12 @@
   "Chime": {
     "models": "chime/2018-05-01"
   },
+  "ChimeSDKIdentity": {
+    "models": "chime-sdk-identity/2021-04-20"
+  },
+  "ChimeSDKMessaging": {
+    "models": "chime-sdk-messaging/2021-05-15"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },

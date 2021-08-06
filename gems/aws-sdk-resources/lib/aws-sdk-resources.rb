@@ -36,6 +36,8 @@ module Aws
   autoload :Braket, 'aws-sdk-braket'
   autoload :Budgets, 'aws-sdk-budgets'
   autoload :Chime, 'aws-sdk-chime'
+  autoload :ChimeSDKIdentity, 'aws-sdk-chimesdkidentity'
+  autoload :ChimeSDKMessaging, 'aws-sdk-chimesdkmessaging'
   autoload :Cloud9, 'aws-sdk-cloud9'
   autoload :CloudDirectory, 'aws-sdk-clouddirectory'
   autoload :CloudFormation, 'aws-sdk-cloudformation'
