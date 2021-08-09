@@ -591,12 +591,12 @@ module Aws::SSM
     #   Don't enter personally identifiable information in this field.
     #
     # @option params [required, String] :iam_role
-    #   The Identity and Access Management (IAM) role that you want to assign
-    #   to the managed instance. This IAMrole must provide AssumeRole
-    #   permissions for the Amazon Web Services Systems Manager service
-    #   principal `ssm.amazonaws.com`. For more information, see [Create an
-    #   IAM service role for a hybrid environment][1] in the *Amazon Web
-    #   Services Systems Manager User Guide*.
+    #   The name of the Identity and Access Management (IAM) role that you
+    #   want to assign to the managed instance. This IAM role must provide
+    #   AssumeRole permissions for the Amazon Web Services Systems Manager
+    #   service principal `ssm.amazonaws.com`. For more information, see
+    #   [Create an IAM service role for a hybrid environment][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -698,8 +698,8 @@ module Aws::SSM
     #   account.
     #
     #   For Systems Manager documents (SSM documents) that are shared with you
-    #   from other accounts, you must specify the complete SSM document ARN,
-    #   in the following format:
+    #   from other Amazon Web Services accounts, you must specify the complete
+    #   SSM document ARN, in the following format:
     #
     #   `arn:partition:ssm:region:account-id:document/document-name `
     #
@@ -734,9 +734,9 @@ module Aws::SSM
     #
     # @option params [Array<Types::Target>] :targets
     #   The targets for the association. You can target instances by using
-    #   tags, Amazon Web Services resource groups, all instances in an
-    #   account, or individual instance IDs. For more information about
-    #   choosing targets for an association, see [Using targets and rate
+    #   tags, Amazon Web Services resource groups, all instances in an Amazon
+    #   Web Services account, or individual instance IDs. For more information
+    #   about choosing targets for an association, see [Using targets and rate
     #   controls with State Manager associations][1] in the *Amazon Web
     #   Services Systems Manager User Guide*.
     #
@@ -826,9 +826,10 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
     #
     # @option params [Array<Types::TargetLocation>] :target_locations
-    #   A location is a combination of Regions and accounts where you want to
-    #   run the association. Use this action to create an association in
-    #   multiple Regions and multiple accounts.
+    #   A location is a combination of Amazon Web Services Regions and Amazon
+    #   Web Services accounts where you want to run the association. Use this
+    #   action to create an association in multiple Regions and multiple
+    #   accounts.
     #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1617,8 +1618,8 @@ module Aws::SSM
     #   maximum of five tags for an OpsMetadata object. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner, or
     #   environment. For example, you might want to tag an OpsMetadata object
-    #   to identify an environment or target Region. In this case, you could
-    #   specify the following key-value pairs:
+    #   to identify an environment or target Amazon Web Services Region. In
+    #   this case, you could specify the following key-value pairs:
     #
     #   * `Key=Environment,Value=Production`
     #
@@ -1836,18 +1837,20 @@ module Aws::SSM
     #
     # You can configure Systems Manager Inventory to use the
     # `SyncToDestination` type to synchronize Inventory data from multiple
-    # Regions to a single Amazon Simple Storage Service (Amazon S3) bucket.
-    # For more information, see [Configuring resource data sync for
-    # Inventory][1] in the *Amazon Web Services Systems Manager User Guide*.
+    # Amazon Web Services Regions to a single Amazon Simple Storage Service
+    # (Amazon S3) bucket. For more information, see [Configuring resource
+    # data sync for Inventory][1] in the *Amazon Web Services Systems
+    # Manager User Guide*.
     #
     # You can configure Systems Manager Explorer to use the `SyncFromSource`
     # type to synchronize operational work items (OpsItems) and operational
-    # data (OpsData) from multiple Regions to a single Amazon S3 bucket.
-    # This type can synchronize OpsItems and OpsData from multiple accounts
-    # and Regions or `EntireOrganization` by using Organizations. For more
-    # information, see [Setting up Systems Manager Explorer to display data
-    # from multiple accounts and Regions][2] in the *Amazon Web Services
-    # Systems Manager User Guide*.
+    # data (OpsData) from multiple Amazon Web Services Regions to a single
+    # Amazon S3 bucket. This type can synchronize OpsItems and OpsData from
+    # multiple Amazon Web Services accounts and Amazon Web Services Regions
+    # or `EntireOrganization` by using Organizations. For more information,
+    # see [Setting up Systems Manager Explorer to display data from multiple
+    # accounts and Regions][2] in the *Amazon Web Services Systems Manager
+    # User Guide*.
     #
     # A resource data sync is an asynchronous operation that returns
     # immediately. After a successful initial sync is completed, the system
@@ -1878,10 +1881,10 @@ module Aws::SSM
     #   synchronizes data to an S3 bucket for Inventory. If you specify
     #   `SyncToDestination`, you must provide a value for `S3Destination`.
     #   Specify `SyncFromSource` to synchronize data from a single account and
-    #   multiple Regions, or multiple accounts and Regions, as listed in
-    #   Organizations for Explorer. If you specify `SyncFromSource`, you must
-    #   provide a value for `SyncSource`. The default value is
-    #   `SyncToDestination`.
+    #   multiple Regions, or multiple Amazon Web Services accounts and Amazon
+    #   Web Services Regions, as listed in Organizations for Explorer. If you
+    #   specify `SyncFromSource`, you must provide a value for `SyncSource`.
+    #   The default value is `SyncToDestination`.
     #
     # @option params [Types::ResourceDataSyncSource] :sync_source
     #   Specify information about the data sources to synchronize. This
@@ -1956,7 +1959,9 @@ module Aws::SSM
     end
 
     # Disassociates the specified Amazon Web Services Systems Manager
-    # document (SSM document) from the specified instance.
+    # document (SSM document) from the specified instance. If you created
+    # the association by using the `Targets` parameter, then you must delete
+    # the association by using the association ID.
     #
     # When you disassociate a document from an instance, it doesn't change
     # the configuration of the instance. To change the configuration state
@@ -1968,7 +1973,18 @@ module Aws::SSM
     #   The name of the SSM document.
     #
     # @option params [String] :instance_id
-    #   The ID of the instance.
+    #   The instance ID.
+    #
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   association, use the `Targets` parameter. Requests that include the
+    #   parameter `InstanceID` with Systems Manager documents (SSM documents)
+    #   that use schema version 2.0 or later will fail. In addition, if you
+    #   use the parameter `InstanceId`, you can't use the parameters
+    #   `AssociationName`, `DocumentVersion`, `MaxErrors`, `MaxConcurrency`,
+    #   `OutputLocation`, or `ScheduleExpression`. To use these parameters,
+    #   you must use the `Targets` parameter.
+    #
+    #    </note>
     #
     # @option params [String] :association_id
     #   The association ID that you want to delete.
@@ -2157,7 +2173,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Delete a parameter from the system.
+    # Delete a parameter from the system. After deleting a parameter, wait
+    # for at least 30 seconds to create a parameter with the same name.
     #
     # @option params [required, String] :name
     #   The name of the parameter to delete.
@@ -2179,10 +2196,12 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Delete a list of parameters.
+    # Delete a list of parameters. After deleting a parameter, wait for at
+    # least 30 seconds to create a parameter with the same name.
     #
     # @option params [required, Array<String>] :names
-    #   The names of the parameters to delete.
+    #   The names of the parameters to delete. After deleting a parameter,
+    #   wait for at least 30 seconds to create a parameter with the same name.
     #
     # @return [Types::DeleteParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2468,10 +2487,7 @@ module Aws::SSM
 
     # Describes the association for the specified target or instance. If you
     # created the association by using the `Targets` parameter, then you
-    # must retrieve the association by using the association ID. If you
-    # created the association by specifying an instance ID and an Amazon Web
-    # Services Systems Manager document (SSM document), then you retrieve
-    # the association by specifying the document name and the instance ID.
+    # must retrieve the association by using the association ID.
     #
     # @option params [String] :name
     #   The name of the SSM document.
@@ -3157,7 +3173,8 @@ module Aws::SSM
     # Describes the permissions for a Amazon Web Services Systems Manager
     # document (SSM document). If you created the document, you are the
     # owner. If a document is shared, it can either be shared privately (by
-    # specifying a user's account ID) or publicly (*All*).
+    # specifying a user's Amazon Web Services account ID) or publicly
+    # (*All*).
     #
     # @option params [required, String] :name
     #   The name of the document for which you are the owner.
@@ -4188,7 +4205,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the maintenance windows in an account.
+    # Retrieves the maintenance windows in an Amazon Web Services account.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned
@@ -4530,7 +4547,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the patch baselines in your account.
+    # Lists the patch baselines in your Amazon Web Services account.
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Each element in the array is a structure containing a key-value pair.
@@ -5217,7 +5234,7 @@ module Aws::SSM
     # connections.
     #
     # @option params [required, String] :target
-    #   The ID of the instance.
+    #   The instance ID.
     #
     # @return [Types::GetConnectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5285,13 +5302,14 @@ module Aws::SSM
     # Manager document (SSM document).
     #
     # <note markdown="1"> If you run the command locally, such as with the Command Line
-    # Interface (CLI), the system attempts to use your local AWS credentials
-    # and the operation fails. To avoid this, you can run the command in the
-    # Amazon Web Services Systems Manager console. Use Run Command, a
-    # capability of Amazon Web Services Systems Manager, with an SSM
-    # document that enables you to target an instance with a script or
-    # command. For example, run the command using the `AWS-RunShellScript`
-    # document or the `AWS-RunPowerShellScript` document.
+    # Interface (CLI), the system attempts to use your local Amazon Web
+    # Services credentials and the operation fails. To avoid this, you can
+    # run the command in the Amazon Web Services Systems Manager console.
+    # Use Run Command, a capability of Amazon Web Services Systems Manager,
+    # with an SSM document that enables you to target an instance with a
+    # script or command. For example, run the command using the
+    # `AWS-RunShellScript` document or the `AWS-RunPowerShellScript`
+    # document.
     #
     #  </note>
     #
@@ -5452,7 +5470,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Query inventory information.
+    # Query inventory information. This includes instance status, such as
+    # `Stopped` or `Terminated`.
     #
     # @option params [Array<Types::InventoryFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
@@ -6130,11 +6149,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get information about a parameter by using the parameter name. Don't
-    # confuse this API operation with the GetParameters API operation.
+    # Get information about a single parameter by specifying the parameter
+    # name.
+    #
+    # <note markdown="1"> To get information about more than one parameter at a time, use the
+    # GetParameters operation.
+    #
+    #  </note>
     #
     # @option params [required, String] :name
     #   The name of the parameter you want to query.
+    #
+    #   To query by parameter label, use `"Name": "name:label"`. To query by
+    #   parameter version, use `"Name": "name:version"`.
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted values for secure string parameters. This flag is
@@ -6237,11 +6264,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get details of a parameter. Don't confuse this API operation with the
-    # GetParameter API operation.
+    # Get information about one or more parameters by specifying multiple
+    # parameter names.
+    #
+    # <note markdown="1"> To get information about a single parameter, you can use the
+    # GetParameter operation instead.
+    #
+    #  </note>
     #
     # @option params [required, Array<String>] :names
     #   Names of the parameters for which you want to query information.
+    #
+    #   To query by parameter label, use `"Name": "name:label"`. To query by
+    #   parameter version, use `"Name": "name:version"`.
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted secure string value. Return decrypted values for
@@ -6389,6 +6424,15 @@ module Aws::SSM
     # @option params [required, String] :baseline_id
     #   The ID of the patch baseline to retrieve.
     #
+    #   <note markdown="1"> To retrieve information about an Amazon Web Services managed patch
+    #   baseline, specify the full Amazon Resource Name (ARN) of the baseline.
+    #   For example, for the baseline `AWS-AmazonLinuxDefaultPatchBaseline`,
+    #   specify
+    #   `arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7`
+    #   instead of `pb-0e392de35e7c563b7`.
+    #
+    #    </note>
+    #
     # @return [Types::GetPatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPatchBaselineResult#baseline_id #baseline_id} => String
@@ -6514,7 +6558,7 @@ module Aws::SSM
     # back to the original value defined by the Amazon Web Services service
     # team.
     #
-    # Query the current service setting for the account.
+    # Query the current service setting for the Amazon Web Services account.
     #
     # @option params [required, String] :setting_id
     #   The ID of the service setting to get. The setting ID can be one of the
@@ -6707,10 +6751,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Returns all State Manager associations in the current account and
-    # Region. You can limit the results to a specific State Manager
-    # association document or instance by specifying a filter. State Manager
-    # is a capability of Amazon Web Services Systems Manager.
+    # Returns all State Manager associations in the current Amazon Web
+    # Services account and Amazon Web Services Region. You can limit the
+    # results to a specific State Manager association document or instance
+    # by specifying a filter. State Manager is a capability of Amazon Web
+    # Services Systems Manager.
     #
     # @option params [Array<Types::AssociationFilter>] :association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
@@ -6881,7 +6926,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the commands requested by users of the account.
+    # Lists the commands requested by users of the Amazon Web Services
+    # account.
     #
     # @option params [String] :command_id
     #   (Optional) If provided, lists only the specified command.
@@ -7121,13 +7167,14 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Information about approval reviews for a version of an SSM document.
+    # Information about approval reviews for a version of a change template
+    # in Change Manager.
     #
     # @option params [required, String] :name
-    #   The name of the document.
+    #   The name of the change template.
     #
     # @option params [String] :document_version
-    #   The version of the document.
+    #   The version of the change template.
     #
     # @option params [required, String] :metadata
     #   The type of data for which details are being requested. Currently, the
@@ -7238,8 +7285,9 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Returns all Systems Manager (SSM) documents in the current account and
-    # Region. You can limit the results of this request by using a filter.
+    # Returns all Systems Manager (SSM) documents in the current Amazon Web
+    # Services account and Amazon Web Services Region. You can limit the
+    # results of this request by using a filter.
     #
     # @option params [Array<Types::DocumentFilter>] :document_filter_list
     #   This data type is deprecated. Instead, use `Filters`.
@@ -7394,9 +7442,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Returns a list of all OpsItem events in the current Region and
-    # account. You can limit the results to events associated with specific
-    # OpsItems by specifying a filter.
+    # Returns a list of all OpsItem events in the current Amazon Web
+    # Services Region and Amazon Web Services account. You can limit the
+    # results to events associated with specific OpsItems by specifying a
+    # filter.
     #
     # @option params [Array<Types::OpsItemEventFilter>] :filters
     #   One or more OpsItem filters. Use a filter to return a more specific
@@ -7664,7 +7713,7 @@ module Aws::SSM
     #   View a list of resource data syncs according to the sync type. Specify
     #   `SyncToDestination` to view resource data syncs that synchronize data
     #   to an Amazon S3 bucket. Specify `SyncFromSource` to view resource data
-    #   syncs from Organizations or from multiple Regions.
+    #   syncs from Organizations or from multiple Amazon Web Services Regions.
     #
     # @option params [String] :next_token
     #   A token to start the list. Use this token to get the next set of
@@ -8002,7 +8051,7 @@ module Aws::SSM
     #
     #   * Parameter names are case sensitive.
     #
-    #   * A parameter name must be unique within an Region
+    #   * A parameter name must be unique within an Amazon Web Services Region
     #
     #   * A parameter name can't be prefixed with "`aws`" or "`ssm`"
     #     (case-insensitive).
@@ -8073,11 +8122,11 @@ module Aws::SSM
     # @option params [String] :key_id
     #   The Key Management Service (KMS) ID that you want to use to encrypt a
     #   parameter. Either the default KMS key automatically assigned to your
-    #   account or a custom key. Required for parameters that use the
-    #   `SecureString` data type.
+    #   Amazon Web Services account or a custom key. Required for parameters
+    #   that use the `SecureString` data type.
     #
     #   If you don't specify a key ID, the system uses the default key
-    #   associated with your account.
+    #   associated with your Amazon Web Services account.
     #
     #   * To use your default KMS key, choose the `SecureString` data type,
     #     and do *not* specify the `Key ID` when you create the parameter. The
@@ -8120,15 +8169,16 @@ module Aws::SSM
     #   Parameter Store offers a standard tier and an advanced tier for
     #   parameters. Standard parameters have a content size limit of 4 KB and
     #   can't be configured to use parameter policies. You can create a
-    #   maximum of 10,000 standard parameters for each Region in an account.
-    #   Standard parameters are offered at no additional cost.
+    #   maximum of 10,000 standard parameters for each Region in an Amazon Web
+    #   Services account. Standard parameters are offered at no additional
+    #   cost.
     #
     #   Advanced parameters have a content size limit of 8 KB and can be
     #   configured to use parameter policies. You can create a maximum of
-    #   100,000 advanced parameters for each Region in an account. Advanced
-    #   parameters incur a charge. For more information, see [Standard and
-    #   advanced parameter tiers][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   100,000 advanced parameters for each Region in an Amazon Web Services
+    #   account. Advanced parameters incur a charge. For more information, see
+    #   [Standard and advanced parameter tiers][1] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
     #
     #   You can change a standard parameter to an advanced parameter any time.
     #   But you can't revert an advanced parameter to a standard parameter.
@@ -8178,8 +8228,8 @@ module Aws::SSM
     #
     #   * The parameter uses a parameter policy.
     #
-    #   * More than 10,000 parameters already exist in your account in the
-    #     current Region.
+    #   * More than 10,000 parameters already exist in your Amazon Web
+    #     Services account in the current Amazon Web Services Region.
     #
     #   For more information about configuring the default tier option, see
     #   [Specifying a default parameter tier][2] in the *Amazon Web Services
@@ -8232,9 +8282,10 @@ module Aws::SSM
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
     #   in the required format, such as `ami-12345abcdeEXAMPLE`, and that the
-    #   specified AMI is available in your account. For more information, see
-    #   [Native parameter support for Amazon Machine Image (AMI) IDs][1] in
-    #   the *Amazon Web Services Systems Manager User Guide*.
+    #   specified AMI is available in your Amazon Web Services account. For
+    #   more information, see [Native parameter support for Amazon Machine
+    #   Image (AMI) IDs][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -8984,7 +9035,7 @@ module Aws::SSM
     # @option params [String] :output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
     #   ignores it. Instead, Systems Manager automatically determines the
-    #   Region of the S3 bucket.
+    #   Amazon Web Services Region of the S3 bucket.
     #
     # @option params [String] :output_s3_bucket_name
     #   The name of the S3 bucket where command execution responses should be
@@ -9205,11 +9256,13 @@ module Aws::SSM
     #   executions proceed one at a time.
     #
     # @option params [Array<Types::TargetLocation>] :target_locations
-    #   A location is a combination of Regions and/or accounts where you want
-    #   to run the automation. Use this operation to start an automation in
-    #   multiple Regions and multiple accounts. For more information, see
-    #   [Running Automation workflows in multiple Regions and accounts][1] in
-    #   the *Amazon Web Services Systems Manager User Guide*.
+    #   A location is a combination of Amazon Web Services Regions and/or
+    #   Amazon Web Services accounts where you want to run the automation. Use
+    #   this operation to start an automation in multiple Amazon Web Services
+    #   Regions and multiple Amazon Web Services accounts. For more
+    #   information, see [Running Automation workflows in multiple Amazon Web
+    #   Services Regions and Amazon Web Services accounts][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -9339,8 +9392,8 @@ module Aws::SSM
     #   maximum of five tags for a change request. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner, or
     #   environment. For example, you might want to tag a change request to
-    #   identify an environment or target Region. In this case, you could
-    #   specify the following key-value pairs:
+    #   identify an environment or target Amazon Web Services Region. In this
+    #   case, you could specify the following key-value pairs:
     #
     #   * `Key=Environment,Value=Production`
     #
@@ -9628,8 +9681,8 @@ module Aws::SSM
     #   account.
     #
     #   For Systems Manager document (SSM document) that are shared with you
-    #   from other accounts, you must specify the complete SSM document ARN,
-    #   in the following format:
+    #   from other Amazon Web Services accounts, you must specify the complete
+    #   SSM document ARN, in the following format:
     #
     #   `arn:aws:ssm:region:account-id:document/document-name `
     #
@@ -9732,9 +9785,10 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
     #
     # @option params [Array<Types::TargetLocation>] :target_locations
-    #   A location is a combination of Regions and accounts where you want to
-    #   run the association. Use this action to update an association in
-    #   multiple Regions and multiple accounts.
+    #   A location is a combination of Amazon Web Services Regions and Amazon
+    #   Web Services accounts where you want to run the association. Use this
+    #   action to update an association in multiple Regions and multiple
+    #   accounts.
     #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9843,11 +9897,16 @@ module Aws::SSM
     # Updates the status of the Amazon Web Services Systems Manager document
     # (SSM document) associated with the specified instance.
     #
+    # `UpdateAssociationStatus` is primarily used by the Amazon Web Services
+    # Systems Manager Agent (SSM Agent) to report status updates about your
+    # associations and is only used for associations created with the
+    # `InstanceId` legacy parameter.
+    #
     # @option params [required, String] :name
     #   The name of the SSM document.
     #
     # @option params [required, String] :instance_id
-    #   The ID of the instance.
+    #   The instance ID.
     #
     # @option params [required, Types::AssociationStatus] :association_status
     #   The association status.
@@ -10076,16 +10135,17 @@ module Aws::SSM
     end
 
     # Updates information related to approval reviews for a specific version
-    # of a document.
+    # of a change template in Change Manager.
     #
     # @option params [required, String] :name
-    #   The name of the document for which a version is to be updated.
+    #   The name of the change template for which a version's metadata is to
+    #   be updated.
     #
     # @option params [String] :document_version
-    #   The version of a document to update.
+    #   The version of a change template in which to update approval metadata.
     #
     # @option params [required, Types::DocumentReviews] :document_reviews
-    #   The document review details to update.
+    #   The change template review details to update.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -11234,7 +11294,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

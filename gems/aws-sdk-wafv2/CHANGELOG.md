@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-08-09)
+------------------
+
+* Feature - This release adds APIs to support versioning feature of AWS WAF Managed rule groups
+
 1.23.0 (2021-07-30)
 ------------------
 

@@ -10,11 +10,12 @@
 module Aws::SSM
   module Types
 
-    # Information includes the account ID where the current document is
-    # shared and the version shared with that account.
+    # Information includes the Amazon Web Services account ID where the
+    # current document is shared and the version shared with that account.
     #
     # @!attribute [rw] account_id
-    #   The account ID where the current document is shared.
+    #   The Amazon Web Services account ID where the current document is
+    #   shared.
     #   @return [String]
     #
     # @!attribute [rw] shared_document_version
@@ -263,7 +264,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance.
+    #   The instance ID.
     #   @return [String]
     #
     # @!attribute [rw] association_id
@@ -331,7 +332,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance.
+    #   The instance ID.
     #   @return [String]
     #
     # @!attribute [rw] association_version
@@ -471,8 +472,8 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_locations
-    #   The combination of Regions and accounts where you want to run the
-    #   association.
+    #   The combination of Amazon Web Services Regions and Amazon Web
+    #   Services accounts where you want to run the association.
     #   @return [Array<Types::TargetLocation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
@@ -922,8 +923,9 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_locations
-    #   The combination of Regions and accounts where you wanted to run the
-    #   association when this association version was created.
+    #   The combination of Amazon Web Services Regions and Amazon Web
+    #   Services accounts where you wanted to run the association when this
+    #   association version was created.
     #   @return [Array<Types::TargetLocation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
@@ -1223,8 +1225,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] target_locations
-    #   The combination of Regions and/or accounts where you want to run the
-    #   Automation.
+    #   The combination of Amazon Web Services Regions and/or Amazon Web
+    #   Services accounts where you want to run the Automation.
     #   @return [Array<Types::TargetLocation>]
     #
     # @!attribute [rw] progress_counters
@@ -1441,9 +1443,10 @@ module Aws::SSM
     # @!attribute [rw] automation_type
     #   Use this filter with DescribeAutomationExecutions. Specify either
     #   Local or CrossAccount. CrossAccount is an Automation that runs in
-    #   multiple Regions and accounts. For more information, see [Running
-    #   Automation workflows in multiple Regions and accounts][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   multiple Amazon Web Services Regions and Amazon Web Services
+    #   accounts. For more information, see [Running Automation workflows in
+    #   multiple Amazon Web Services Regions and accounts][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -1868,7 +1871,7 @@ module Aws::SSM
     # @!attribute [rw] output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
     #   ignores it. Instead, Systems Manager automatically determines the
-    #   Region of the S3 bucket.
+    #   Amazon Web Services Region of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -2657,12 +2660,12 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] iam_role
-    #   The Identity and Access Management (IAM) role that you want to
-    #   assign to the managed instance. This IAMrole must provide AssumeRole
-    #   permissions for the Amazon Web Services Systems Manager service
-    #   principal `ssm.amazonaws.com`. For more information, see [Create an
-    #   IAM service role for a hybrid environment][1] in the *Amazon Web
-    #   Services Systems Manager User Guide*.
+    #   The name of the Identity and Access Management (IAM) role that you
+    #   want to assign to the managed instance. This IAM role must provide
+    #   AssumeRole permissions for the Amazon Web Services Systems Manager
+    #   service principal `ssm.amazonaws.com`. For more information, see
+    #   [Create an IAM service role for a hybrid environment][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -2855,8 +2858,9 @@ module Aws::SSM
     #   you created, or a document that is shared with you from another
     #   account.
     #
-    #   For SSM documents that are shared with you from other accounts, you
-    #   must specify the complete SSM document ARN, in the following format:
+    #   For SSM documents that are shared with you from other Amazon Web
+    #   Services accounts, you must specify the complete SSM document ARN,
+    #   in the following format:
     #
     #   `arn:aws:ssm:region:account-id:document/document-name `
     #
@@ -2870,7 +2874,18 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance.
+    #   The instance ID.
+    #
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   association, use the `Targets` parameter. Requests that include the
+    #   parameter `InstanceID` with Systems Manager documents (SSM
+    #   documents) that use schema version 2.0 or later will fail. In
+    #   addition, if you use the parameter `InstanceId`, you can't use the
+    #   parameters `AssociationName`, `DocumentVersion`, `MaxErrors`,
+    #   `MaxConcurrency`, `OutputLocation`, or `ScheduleExpression`. To use
+    #   these parameters, you must use the `Targets` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -3073,8 +3088,8 @@ module Aws::SSM
     #   account.
     #
     #   For Systems Manager documents (SSM documents) that are shared with
-    #   you from other accounts, you must specify the complete SSM document
-    #   ARN, in the following format:
+    #   you from other Amazon Web Services accounts, you must specify the
+    #   complete SSM document ARN, in the following format:
     #
     #   `arn:partition:ssm:region:account-id:document/document-name `
     #
@@ -3114,10 +3129,10 @@ module Aws::SSM
     # @!attribute [rw] targets
     #   The targets for the association. You can target instances by using
     #   tags, Amazon Web Services resource groups, all instances in an
-    #   account, or individual instance IDs. For more information about
-    #   choosing targets for an association, see [Using targets and rate
-    #   controls with State Manager associations][1] in the *Amazon Web
-    #   Services Systems Manager User Guide*.
+    #   Amazon Web Services account, or individual instance IDs. For more
+    #   information about choosing targets for an association, see [Using
+    #   targets and rate controls with State Manager associations][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -3217,9 +3232,10 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_locations
-    #   A location is a combination of Regions and accounts where you want
-    #   to run the association. Use this action to create an association in
-    #   multiple Regions and multiple accounts.
+    #   A location is a combination of Amazon Web Services Regions and
+    #   Amazon Web Services accounts where you want to run the association.
+    #   Use this action to create an association in multiple Regions and
+    #   multiple accounts.
     #   @return [Array<Types::TargetLocation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
@@ -3808,8 +3824,9 @@ module Aws::SSM
     #   maximum of five tags for an OpsMetadata object. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner,
     #   or environment. For example, you might want to tag an OpsMetadata
-    #   object to identify an environment or target Region. In this case,
-    #   you could specify the following key-value pairs:
+    #   object to identify an environment or target Amazon Web Services
+    #   Region. In this case, you could specify the following key-value
+    #   pairs:
     #
     #   * `Key=Environment,Value=Production`
     #
@@ -4079,10 +4096,10 @@ module Aws::SSM
     #   synchronizes data to an S3 bucket for Inventory. If you specify
     #   `SyncToDestination`, you must provide a value for `S3Destination`.
     #   Specify `SyncFromSource` to synchronize data from a single account
-    #   and multiple Regions, or multiple accounts and Regions, as listed in
-    #   Organizations for Explorer. If you specify `SyncFromSource`, you
-    #   must provide a value for `SyncSource`. The default value is
-    #   `SyncToDestination`.
+    #   and multiple Regions, or multiple Amazon Web Services accounts and
+    #   Amazon Web Services Regions, as listed in Organizations for
+    #   Explorer. If you specify `SyncFromSource`, you must provide a value
+    #   for `SyncSource`. The default value is `SyncToDestination`.
     #   @return [String]
     #
     # @!attribute [rw] sync_source
@@ -4156,7 +4173,18 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance.
+    #   The instance ID.
+    #
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   association, use the `Targets` parameter. Requests that include the
+    #   parameter `InstanceID` with Systems Manager documents (SSM
+    #   documents) that use schema version 2.0 or later will fail. In
+    #   addition, if you use the parameter `InstanceId`, you can't use the
+    #   parameters `AssociationName`, `DocumentVersion`, `MaxErrors`,
+    #   `MaxConcurrency`, `OutputLocation`, or `ScheduleExpression`. To use
+    #   these parameters, you must use the `Targets` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] association_id
@@ -4396,7 +4424,9 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] names
-    #   The names of the parameters to delete.
+    #   The names of the parameters to delete. After deleting a parameter,
+    #   wait for at least 30 seconds to create a parameter with the same
+    #   name.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParametersRequest AWS API Documentation
@@ -4711,7 +4741,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] activation_list
-    #   A list of activations for your account.
+    #   A list of activations for your Amazon Web Services account.
     #   @return [Array<Types::Activation>]
     #
     # @!attribute [rw] next_token
@@ -5252,12 +5282,12 @@ module Aws::SSM
 
     # @!attribute [rw] account_ids
     #   The account IDs that have permission to use this document. The ID
-    #   can be either an account or *All*.
+    #   can be either an Amazon Web Services account or *All*.
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_sharing_info_list
-    #   A list of accounts where the current document is shared and the
-    #   version shared with each account.
+    #   A list of Amazon Web Services accounts where the current document is
+    #   shared and the version shared with each account.
     #   @return [Array<Types::AccountSharingInfo>]
     #
     # @!attribute [rw] next_token
@@ -8201,7 +8231,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] target
-    #   The ID of the instance.
+    #   The instance ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusRequest AWS API Documentation
@@ -8341,7 +8371,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] instance_id
-    #   The ID of the instance.
+    #   The instance ID.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -9384,7 +9414,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] entities
-    #   The list of aggregated and filtered OpsData.
+    #   The list of aggregated details and filtered OpsData.
     #   @return [Array<Types::OpsEntity>]
     #
     # @!attribute [rw] next_token
@@ -9470,6 +9500,9 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the parameter you want to query.
+    #
+    #   To query by parameter label, use `"Name": "name:label"`. To query by
+    #   parameter version, use `"Name": "name:version"`.
     #   @return [String]
     #
     # @!attribute [rw] with_decryption
@@ -9604,6 +9637,9 @@ module Aws::SSM
     #
     # @!attribute [rw] names
     #   Names of the parameters for which you want to query information.
+    #
+    #   To query by parameter label, use `"Name": "name:label"`. To query by
+    #   parameter version, use `"Name": "name:version"`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] with_decryption
@@ -9699,6 +9735,15 @@ module Aws::SSM
     #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to retrieve.
+    #
+    #   <note markdown="1"> To retrieve information about an Amazon Web Services managed patch
+    #   baseline, specify the full Amazon Resource Name (ARN) of the
+    #   baseline. For example, for the baseline
+    #   `AWS-AmazonLinuxDefaultPatchBaseline`, specify
+    #   `arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7`
+    #   instead of `pb-0e392de35e7c563b7`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineRequest AWS API Documentation
@@ -12143,11 +12188,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the document.
+    #   The name of the change template.
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The version of the document.
+    #   The version of the change template.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -12179,20 +12224,21 @@ module Aws::SSM
     end
 
     # @!attribute [rw] name
-    #   The name of the document.
+    #   The name of the change template.
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The version of the document.
+    #   The version of the change template.
     #   @return [String]
     #
     # @!attribute [rw] author
     #   The user ID of the person in the organization who requested the
-    #   document review.
+    #   review of the change template.
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   Information about the response to the document approval request.
+    #   Information about the response to the change template approval
+    #   request.
     #   @return [Types::DocumentMetadataResponseInfo]
     #
     # @!attribute [rw] next_token
@@ -12697,8 +12743,8 @@ module Aws::SSM
     #   View a list of resource data syncs according to the sync type.
     #   Specify `SyncToDestination` to view resource data syncs that
     #   synchronize data to an Amazon S3 bucket. Specify `SyncFromSource` to
-    #   view resource data syncs from Organizations or from multiple
-    #   Regions.
+    #   view resource data syncs from Organizations or from multiple Amazon
+    #   Web Services Regions.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -12809,7 +12855,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] s3_region
-    #   The Region where the S3 bucket is located.
+    #   The Amazon Web Services Region where the S3 bucket is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LoggingInfo AWS API Documentation
@@ -13991,17 +14037,33 @@ module Aws::SSM
 
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
-    # operational issues impacting the performance and health of their
-    # Amazon Web Services resources. For more information, see
-    # [OpsCenter][1] in the *Amazon Web Services Systems Manager User
-    # Guide*.
+    # operational work items (OpsItems) impacting the performance and health
+    # of their Amazon Web Services resources. OpsCenter is integrated with
+    # Amazon EventBridge and Amazon CloudWatch. This means you can configure
+    # these services to automatically create an OpsItem in OpsCenter when a
+    # CloudWatch alarm enters the ALARM state or when EventBridge processes
+    # an event from any Amazon Web Services service that publishes events.
+    # Configuring Amazon CloudWatch alarms and EventBridge events to
+    # automatically create OpsItems allows you to quickly diagnose and
+    # remediate issues with Amazon Web Services resources from a single
+    # console.
+    #
+    # To help you diagnose issues, each OpsItem includes contextually
+    # relevant information such as the name and ID of the Amazon Web
+    # Services resource that generated the OpsItem, alarm or event details,
+    # alarm history, and an alarm timeline graph. For the Amazon Web
+    # Services resource, OpsCenter aggregates information from Config,
+    # CloudTrail logs, and EventBridge, so you don't have to navigate
+    # across multiple console pages during your investigation. For more
+    # information, see [OpsCenter][1] in the *Amazon Web Services Systems
+    # Manager User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @!attribute [rw] created_by
-    #   The ARN of the account that created the OpsItem.
+    #   The ARN of the Amazon Web Services account that created the OpsItem.
     #   @return [String]
     #
     # @!attribute [rw] ops_item_type
@@ -14018,7 +14080,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] last_modified_by
-    #   The ARN of the account that last updated the OpsItem.
+    #   The ARN of the Amazon Web Services account that last updated the
+    #   OpsItem.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -15036,8 +15099,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # You have exceeded the number of parameters for this account. Delete
-    # one or more parameters and try again.
+    # You have exceeded the number of parameters for this Amazon Web
+    # Services account. Delete one or more parameters and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -15877,28 +15940,33 @@ module Aws::SSM
     # Automation execution.
     #
     # @!attribute [rw] total_steps
-    #   The total number of steps run in all specified Regions and accounts
-    #   for the current Automation execution.
+    #   The total number of steps run in all specified Amazon Web Services
+    #   Regions and Amazon Web Services accounts for the current Automation
+    #   execution.
     #   @return [Integer]
     #
     # @!attribute [rw] success_steps
     #   The total number of steps that successfully completed in all
-    #   specified Regions and accounts for the current Automation execution.
+    #   specified Amazon Web Services Regions and Amazon Web Services
+    #   accounts for the current Automation execution.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_steps
-    #   The total number of steps that failed to run in all specified
-    #   Regions and accounts for the current Automation execution.
+    #   The total number of steps that failed to run in all specified Amazon
+    #   Web Services Regions and Amazon Web Services accounts for the
+    #   current Automation execution.
     #   @return [Integer]
     #
     # @!attribute [rw] cancelled_steps
     #   The total number of steps that the system cancelled in all specified
-    #   Regions and accounts for the current Automation execution.
+    #   Amazon Web Services Regions and Amazon Web Services accounts for the
+    #   current Automation execution.
     #   @return [Integer]
     #
     # @!attribute [rw] timed_out_steps
-    #   The total number of steps that timed out in all specified Regions
-    #   and accounts for the current Automation execution.
+    #   The total number of steps that timed out in all specified Amazon Web
+    #   Services Regions and Amazon Web Services accounts for the current
+    #   Automation execution.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ProgressCounters AWS API Documentation
@@ -16095,7 +16163,8 @@ module Aws::SSM
     #
     #   * Parameter names are case sensitive.
     #
-    #   * A parameter name must be unique within an Region
+    #   * A parameter name must be unique within an Amazon Web Services
+    #     Region
     #
     #   * A parameter name can't be prefixed with "`aws`" or "`ssm`"
     #     (case-insensitive).
@@ -16171,11 +16240,11 @@ module Aws::SSM
     # @!attribute [rw] key_id
     #   The Key Management Service (KMS) ID that you want to use to encrypt
     #   a parameter. Either the default KMS key automatically assigned to
-    #   your account or a custom key. Required for parameters that use the
-    #   `SecureString` data type.
+    #   your Amazon Web Services account or a custom key. Required for
+    #   parameters that use the `SecureString` data type.
     #
     #   If you don't specify a key ID, the system uses the default key
-    #   associated with your account.
+    #   associated with your Amazon Web Services account.
     #
     #   * To use your default KMS key, choose the `SecureString` data type,
     #     and do *not* specify the `Key ID` when you create the parameter.
@@ -16223,15 +16292,16 @@ module Aws::SSM
     #   Parameter Store offers a standard tier and an advanced tier for
     #   parameters. Standard parameters have a content size limit of 4 KB
     #   and can't be configured to use parameter policies. You can create a
-    #   maximum of 10,000 standard parameters for each Region in an account.
-    #   Standard parameters are offered at no additional cost.
+    #   maximum of 10,000 standard parameters for each Region in an Amazon
+    #   Web Services account. Standard parameters are offered at no
+    #   additional cost.
     #
     #   Advanced parameters have a content size limit of 8 KB and can be
     #   configured to use parameter policies. You can create a maximum of
-    #   100,000 advanced parameters for each Region in an account. Advanced
-    #   parameters incur a charge. For more information, see [Standard and
-    #   advanced parameter tiers][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   100,000 advanced parameters for each Region in an Amazon Web
+    #   Services account. Advanced parameters incur a charge. For more
+    #   information, see [Standard and advanced parameter tiers][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #   You can change a standard parameter to an advanced parameter any
     #   time. But you can't revert an advanced parameter to a standard
@@ -16281,8 +16351,8 @@ module Aws::SSM
     #
     #   * The parameter uses a parameter policy.
     #
-    #   * More than 10,000 parameters already exist in your account in the
-    #     current Region.
+    #   * More than 10,000 parameters already exist in your Amazon Web
+    #     Services account in the current Amazon Web Services Region.
     #
     #   For more information about configuring the default tier option, see
     #   [Specifying a default parameter tier][2] in the *Amazon Web Services
@@ -16338,10 +16408,10 @@ module Aws::SSM
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
     #   in the required format, such as `ami-12345abcdeEXAMPLE`, and that
-    #   the specified AMI is available in your account. For more
-    #   information, see [Native parameter support for Amazon Machine Image
-    #   (AMI) IDs][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   the specified AMI is available in your Amazon Web Services account.
+    #   For more information, see [Native parameter support for Amazon
+    #   Machine Image (AMI) IDs][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
     #
     #
     #
@@ -17060,7 +17130,7 @@ module Aws::SSM
     # Information about the `AwsOrganizationsSource` resource data sync
     # source. A sync source of this type can synchronize data from
     # Organizations or, if an Amazon Web Services organization isn't
-    # present, from multiple Regions.
+    # present, from multiple Amazon Web Services Regions.
     #
     # @note When making an API call, you may pass ResourceDataSyncAwsOrganizationsSource
     #   data as a hash:
@@ -17123,9 +17193,10 @@ module Aws::SSM
     end
 
     # Synchronize Amazon Web Services Systems Manager Inventory data from
-    # multiple accounts defined in Organizations to a centralized Amazon S3
-    # bucket. Data is synchronized to individual key prefixes in the central
-    # bucket. Each key prefix represents a different account ID.
+    # multiple Amazon Web Services accounts defined in Organizations to a
+    # centralized Amazon S3 bucket. Data is synchronized to individual key
+    # prefixes in the central bucket. Each key prefix represents a different
+    # Amazon Web Services account ID.
     #
     # @note When making an API call, you may pass ResourceDataSyncDestinationDataSharing
     #   data as a hash:
@@ -17171,7 +17242,7 @@ module Aws::SSM
     #   `SyncToDestination`, then the resource data sync synchronizes data
     #   to an S3 bucket. If the `SyncType` is `SyncFromSource` then the
     #   resource data sync synchronizes data from Organizations or from
-    #   multiple Regions.
+    #   multiple Amazon Web Services Regions.
     #   @return [String]
     #
     # @!attribute [rw] sync_source
@@ -17296,7 +17367,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region with the S3 bucket targeted by the resource data sync.
+    #   The Amazon Web Services Region with the S3 bucket targeted by the
+    #   resource data sync.
     #   @return [String]
     #
     # @!attribute [rw] awskms_key_arn
@@ -17355,21 +17427,23 @@ module Aws::SSM
     #   @return [Types::ResourceDataSyncAwsOrganizationsSource]
     #
     # @!attribute [rw] source_regions
-    #   The `SyncSource` Regions included in the resource data sync.
+    #   The `SyncSource` Amazon Web Services Regions included in the
+    #   resource data sync.
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_future_regions
     #   Whether to automatically synchronize and aggregate data from new
-    #   Regions when those Regions come online.
+    #   Amazon Web Services Regions when those Regions come online.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_all_ops_data_sources
     #   When you create a resource data sync, if you choose one of the
     #   Organizations options, then Systems Manager automatically enables
-    #   all OpsData sources in the selected Regions for all accounts in your
-    #   organization (or in the selected organization units). For more
-    #   information, see [About multiple account and Region resource data
-    #   syncs][1] in the *Amazon Web Services Systems Manager User Guide*.
+    #   all OpsData sources in the selected Amazon Web Services Regions for
+    #   all Amazon Web Services accounts in your organization (or in the
+    #   selected organization units). For more information, see [About
+    #   multiple account and Region resource data syncs][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -17415,12 +17489,13 @@ module Aws::SSM
     #   @return [Types::ResourceDataSyncAwsOrganizationsSource]
     #
     # @!attribute [rw] source_regions
-    #   The `SyncSource` Regions included in the resource data sync.
+    #   The `SyncSource` Amazon Web Services Regions included in the
+    #   resource data sync.
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_future_regions
     #   Whether to automatically synchronize and aggregate data from new
-    #   Regions when those Regions come online.
+    #   Amazon Web Services Regions when those Regions come online.
     #   @return [Boolean]
     #
     # @!attribute [rw] state
@@ -17443,10 +17518,11 @@ module Aws::SSM
     # @!attribute [rw] enable_all_ops_data_sources
     #   When you create a resource data sync, if you choose one of the
     #   Organizations options, then Systems Manager automatically enables
-    #   all OpsData sources in the selected Regions for all accounts in your
-    #   organization (or in the selected organization units). For more
-    #   information, see [About multiple account and Region resource data
-    #   syncs][1] in the *Amazon Web Services Systems Manager User Guide*.
+    #   all OpsData sources in the selected Amazon Web Services Regions for
+    #   all Amazon Web Services accounts in your organization (or in the
+    #   selected organization units). For more information, see [About
+    #   multiple account and Region resource data syncs][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -17559,11 +17635,12 @@ module Aws::SSM
     #   Format:
     #   `wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
     #
-    #   **region** represents the Region identifier for an Region supported
-    #   by Amazon Web Services Systems Manager, such as `us-east-2` for the
-    #   US East (Ohio) Region. For a list of supported **region** values,
-    #   see the **Region** column in [Systems Manager service endpoints][1]
-    #   in the *Amazon Web Services General Reference*.
+    #   **region** represents the Region identifier for an Amazon Web
+    #   Services Region supported by Amazon Web Services Systems Manager,
+    #   such as `us-east-2` for the US East (Ohio) Region. For a list of
+    #   supported **region** values, see the **Region** column in [Systems
+    #   Manager service endpoints][1] in the *Amazon Web Services General
+    #   Reference*.
     #
     #   **session-id** represents the ID of a Session Manager session, such
     #   as `1a2b3c4dEXAMPLE`.
@@ -17682,8 +17759,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] target_locations
-    #   Information about the Regions and accounts targeted by the current
-    #   Runbook operation.
+    #   Information about the Amazon Web Services Regions and Amazon Web
+    #   Services accounts targeted by the current Runbook operation.
     #   @return [Array<Types::TargetLocation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Runbook AWS API Documentation
@@ -17971,7 +18048,7 @@ module Aws::SSM
     # @!attribute [rw] output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
     #   ignores it. Instead, Systems Manager automatically determines the
-    #   Region of the S3 bucket.
+    #   Amazon Web Services Region of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -18475,12 +18552,13 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] target_locations
-    #   A location is a combination of Regions and/or accounts where you
-    #   want to run the automation. Use this operation to start an
-    #   automation in multiple Regions and multiple accounts. For more
-    #   information, see [Running Automation workflows in multiple Regions
-    #   and accounts][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   A location is a combination of Amazon Web Services Regions and/or
+    #   Amazon Web Services accounts where you want to run the automation.
+    #   Use this operation to start an automation in multiple Amazon Web
+    #   Services Regions and multiple Amazon Web Services accounts. For more
+    #   information, see [Running Automation workflows in multiple Amazon
+    #   Web Services Regions and Amazon Web Services accounts][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -18637,8 +18715,8 @@ module Aws::SSM
     #   maximum of five tags for a change request. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner,
     #   or environment. For example, you might want to tag a change request
-    #   to identify an environment or target Region. In this case, you could
-    #   specify the following key-value pairs:
+    #   to identify an environment or target Amazon Web Services Region. In
+    #   this case, you could specify the following key-value pairs:
     #
     #   * `Key=Environment,Value=Production`
     #
@@ -18739,11 +18817,12 @@ module Aws::SSM
     #   Format:
     #   `wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
     #
-    #   **region** represents the Region identifier for an Region supported
-    #   by Amazon Web Services Systems Manager, such as `us-east-2` for the
-    #   US East (Ohio) Region. For a list of supported **region** values,
-    #   see the **Region** column in [Systems Manager service endpoints][1]
-    #   in the *Amazon Web Services General Reference*.
+    #   **region** represents the Region identifier for an Amazon Web
+    #   Services Region supported by Amazon Web Services Systems Manager,
+    #   such as `us-east-2` for the US East (Ohio) Region. For a list of
+    #   supported **region** values, see the **Region** column in [Systems
+    #   Manager service endpoints][1] in the *Amazon Web Services General
+    #   Reference*.
     #
     #   **session-id** represents the ID of a Session Manager session, such
     #   as `1a2b3c4dEXAMPLE`.
@@ -18869,8 +18948,8 @@ module Aws::SSM
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] target_location
-    #   The combination of Regions and accounts targeted by the current
-    #   Automation execution.
+    #   The combination of Amazon Web Services Regions and Amazon Web
+    #   Services accounts targeted by the current Automation execution.
     #   @return [Types::TargetLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
@@ -19066,7 +19145,7 @@ module Aws::SSM
     #   `Key=InstanceIds,Values=* `
     #
     #   This example demonstrates how to target all managed instances in the
-    #   Region where the association was created.
+    #   Amazon Web Services Region where the association was created.
     #
     # For more information about how to send commands that target instances
     # using `Key,Value` parameters, see [Targeting multiple instances][2] in
@@ -19124,8 +19203,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The combination of Regions and accounts targeted by the current
-    # Automation execution.
+    # The combination of Amazon Web Services Regions and Amazon Web Services
+    # accounts targeted by the current Automation execution.
     #
     # @note When making an API call, you may pass TargetLocation
     #   data as a hash:
@@ -19139,16 +19218,18 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] accounts
-    #   The accounts targeted by the current Automation execution.
+    #   The Amazon Web Services accounts targeted by the current Automation
+    #   execution.
     #   @return [Array<String>]
     #
     # @!attribute [rw] regions
-    #   The Regions targeted by the current Automation execution.
+    #   The Amazon Web Services Regions targeted by the current Automation
+    #   execution.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_location_max_concurrency
-    #   The maximum number of Regions and accounts allowed to run the
-    #   Automation concurrently.
+    #   The maximum number of Amazon Web Services Regions and Amazon Web
+    #   Services accounts allowed to run the Automation concurrently.
     #   @return [String]
     #
     # @!attribute [rw] target_location_max_errors
@@ -19501,8 +19582,8 @@ module Aws::SSM
     #   account.
     #
     #   For Systems Manager document (SSM document) that are shared with you
-    #   from other accounts, you must specify the complete SSM document ARN,
-    #   in the following format:
+    #   from other Amazon Web Services accounts, you must specify the
+    #   complete SSM document ARN, in the following format:
     #
     #   `arn:aws:ssm:region:account-id:document/document-name `
     #
@@ -19617,9 +19698,10 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_locations
-    #   A location is a combination of Regions and accounts where you want
-    #   to run the association. Use this action to update an association in
-    #   multiple Regions and multiple accounts.
+    #   A location is a combination of Amazon Web Services Regions and
+    #   Amazon Web Services accounts where you want to run the association.
+    #   Use this action to update an association in multiple Regions and
+    #   multiple accounts.
     #   @return [Array<Types::TargetLocation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
@@ -19677,7 +19759,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance.
+    #   The instance ID.
     #   @return [String]
     #
     # @!attribute [rw] association_status
@@ -19764,15 +19846,17 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the document for which a version is to be updated.
+    #   The name of the change template for which a version's metadata is
+    #   to be updated.
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The version of a document to update.
+    #   The version of a change template in which to update approval
+    #   metadata.
     #   @return [String]
     #
     # @!attribute [rw] document_reviews
-    #   The document review details to update.
+    #   The change template review details to update.
     #   @return [Types::DocumentReviews]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentMetadataRequest AWS API Documentation

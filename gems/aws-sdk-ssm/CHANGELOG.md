@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2021-08-09)
+------------------
+
+* Feature - Documentation updates for AWS Systems Manager.
+
 1.114.0 (2021-07-30)
 ------------------
 
