@@ -601,7 +601,7 @@ module Aws::Chime
     # and membership types.
     #
     # @!attribute [rw] invited_by
-    #   The details of a user.
+    #   The identifier of the member who invited another member.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] type
@@ -1237,7 +1237,7 @@ module Aws::Chime
     #   @return [Types::ChannelSummary]
     #
     # @!attribute [rw] app_instance_user_membership_summary
-    #   Returns the channel membership data for an `AppInstance`.
+    #   Summary of the membership details of an `AppInstanceUser`.
     #   @return [Types::AppInstanceUserMembershipSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelMembershipForAppInstanceUserSummary AWS API Documentation
@@ -4182,7 +4182,7 @@ module Aws::Chime
     #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
     #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #         vocabulary_name: "String",
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
     #       }
     #
     # @!attribute [rw] language_code
@@ -4204,8 +4204,7 @@ module Aws::Chime
     #
     # @!attribute [rw] region
     #   The AWS Region passed to Amazon Transcribe Medical. If you don't
-    #   specify a Region, Amazon Chime uses the Region closest to the
-    #   meeting's Region.
+    #   specify a Region, Amazon Chime uses the meeting's Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EngineTranscribeMedicalSettings AWS API Documentation
@@ -4230,7 +4229,7 @@ module Aws::Chime
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
-    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1
+    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
     #       }
     #
     # @!attribute [rw] language_code
@@ -4251,8 +4250,7 @@ module Aws::Chime
     #
     # @!attribute [rw] region
     #   The AWS Region passed to Amazon Transcribe. If you don't specify a
-    #   Region, Amazon Chime uses the Region closest to the meeting's
-    #   Region.
+    #   Region, Amazon Chime uses the meeting's Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EngineTranscribeSettings AWS API Documentation
@@ -9083,14 +9081,14 @@ module Aws::Chime
     #             vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #             vocabulary_filter_name: "String",
     #             vocabulary_name: "String",
-    #             region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1
+    #             region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
     #           },
     #           engine_transcribe_medical_settings: {
     #             language_code: "en-US", # required, accepts en-US
     #             specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
     #             type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #             vocabulary_name: "String",
-    #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1
+    #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
     #           },
     #         },
     #       }
@@ -9459,14 +9457,14 @@ module Aws::Chime
     #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #           vocabulary_filter_name: "String",
     #           vocabulary_name: "String",
-    #           region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1
+    #           region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
     #         },
     #         engine_transcribe_medical_settings: {
     #           language_code: "en-US", # required, accepts en-US
     #           specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
     #           type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #           vocabulary_name: "String",
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1
+    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
     #         },
     #       }
     #

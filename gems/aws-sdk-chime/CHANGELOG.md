@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-08-10)
+------------------
+
+* Feature - Add support for "auto" in Region field of StartMeetingTranscription API request.
+
 1.54.0 (2021-07-30)
 ------------------
 
