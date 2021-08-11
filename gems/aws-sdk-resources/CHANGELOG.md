@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.108.0 (2021-08-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-snowdevicemanagement` gem.
+
 3.107.0 (2021-08-06)
 ------------------
 

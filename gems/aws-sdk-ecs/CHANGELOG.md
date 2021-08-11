@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2021-08-11)
+------------------
+
+* Feature - Documentation updates for ECS.
+
 1.83.0 (2021-07-30)
 ------------------
 

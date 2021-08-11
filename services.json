@@ -886,6 +886,9 @@
   "SimpleDB": {
     "models": "sdb/2009-04-15"
   },
+  "SnowDeviceManagement": {
+    "models": "snow-device-management/2021-08-04"
+  },
   "Snowball": {
     "models": "snowball/2016-06-30"
   },

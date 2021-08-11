@@ -404,6 +404,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
 | AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-core                            | 2019-06-10  |
 | AWS Single Sign-On Admin                              | Aws::SSOAdmin                        | aws-sdk-ssoadmin                        | 2020-07-20  |
+| AWS Snow Device Management                            | Aws::SnowDeviceManagement            | aws-sdk-snowdevicemanagement            | 2021-08-04  |
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |

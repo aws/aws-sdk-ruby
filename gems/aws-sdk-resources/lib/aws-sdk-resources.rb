@@ -260,6 +260,7 @@ module Aws
   autoload :Shield, 'aws-sdk-shield'
   autoload :Signer, 'aws-sdk-signer'
   autoload :SimpleDB, 'aws-sdk-simpledb'
+  autoload :SnowDeviceManagement, 'aws-sdk-snowdevicemanagement'
   autoload :Snowball, 'aws-sdk-snowball'
   autoload :States, 'aws-sdk-states'
   autoload :StorageGateway, 'aws-sdk-storagegateway'

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-08-11)
+------------------
+
+* Feature - Documentation updates for Amazon EBS direct APIs.
+
 1.15.0 (2021-07-30)
 ------------------
 

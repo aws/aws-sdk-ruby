@@ -426,6 +426,9 @@ module Aws::ECS
     # available to all accounts and only need to be associated with a
     # cluster to be used in a capacity provider strategy.
     #
+    # A capacity provider strategy may contain a maximum of 6 capacity
+    # providers.
+    #
     # @note When making an API call, you may pass CapacityProviderStrategyItem
     #   data as a hash:
     #
@@ -505,8 +508,8 @@ module Aws::ECS
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) that identifies the cluster. The ARN
     #   contains the `arn:aws:ecs` namespace, followed by the Region of the
-    #   cluster, the account ID of the cluster owner, the `cluster`
-    #   namespace, and then the cluster name. For example,
+    #   cluster, the Amazon Web Services account ID of the cluster owner,
+    #   the `cluster` namespace, and then the cluster name. For example,
     #   `arn:aws:ecs:region:012345678910:cluster/test`.
     #   @return [String]
     #
@@ -2054,9 +2057,9 @@ module Aws::ECS
     # @!attribute [rw] container_instance_arn
     #   The Amazon Resource Name (ARN) of the container instance. The ARN
     #   contains the `arn:aws:ecs` namespace, followed by the Region of the
-    #   container instance, the account ID of the container instance owner,
-    #   the `container-instance` namespace, and then the container instance
-    #   ID. For example,
+    #   container instance, the Amazon Web Services account ID of the
+    #   container instance owner, the `container-instance` namespace, and
+    #   then the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #   @return [String]
     #
@@ -2600,7 +2603,7 @@ module Aws::ECS
     # @!attribute [rw] default_capacity_provider_strategy
     #   The capacity provider strategy to set as the default for the
     #   cluster. When a default capacity provider strategy is set for a
-    #   cluster, when calling the RunTask or CreateService APIs wtih no
+    #   cluster, when calling the RunTask or CreateService APIs with no
     #   capacity provider strategy or launch type specified, the default
     #   capacity provider strategy for the cluster is used.
     #
@@ -2862,6 +2865,9 @@ module Aws::ECS
     #   parameter must be omitted. If no `capacityProviderStrategy` or
     #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
     #   the cluster is used.
+    #
+    #   A capacity provider strategy may contain a maximum of 6 capacity
+    #   providers.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
@@ -2924,7 +2930,7 @@ module Aws::ECS
     #
     # @!attribute [rw] placement_strategy
     #   The placement strategy objects to use for tasks in your service. You
-    #   can specify a maximum of five strategy rules per service.
+    #   can specify a maximum of 5 strategy rules per service.
     #   @return [Array<Types::PlacementStrategy>]
     #
     # @!attribute [rw] network_configuration
@@ -3938,9 +3944,9 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance to
     #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed
-    #   by the Region of the container instance, the account ID of the
-    #   container instance owner, the `container-instance` namespace, and
-    #   then the container instance ID. For example,
+    #   by the Region of the container instance, the Amazon Web Services
+    #   account ID of the container instance owner, the `container-instance`
+    #   namespace, and then the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #   @return [String]
     #
@@ -4125,6 +4131,9 @@ module Aws::ECS
     #
     #   If `SETTINGS` is specified, the settings for the cluster are
     #   included.
+    #
+    #   If `CONFIGURATIONS` is specified, the configuration for the cluster
+    #   is included.
     #
     #   If `STATISTICS` is specified, the task and service count is
     #   included, separated by launch type.
@@ -4503,9 +4512,9 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance. The
     #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
-    #   the container instance, the account ID of the container instance
-    #   owner, the `container-instance` namespace, and then the container
-    #   instance ID. For example,
+    #   the container instance, the Amazon Web Services account ID of the
+    #   container instance owner, the `container-instance` namespace, and
+    #   then the container instance ID. For example,
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #   @return [String]
     #
@@ -5298,9 +5307,18 @@ module Aws::ECS
     #   A string array representing the command that the container runs to
     #   determine if it is healthy. The string array must start with `CMD`
     #   to execute the command arguments directly, or `CMD-SHELL` to run the
-    #   command with the container's default shell. For example:
+    #   command with the container's default shell.
+    #
+    #   When you use the Amazon Web Services Management Console JSON panel,
+    #   the Command Line Interface, or the APIs, you should enclose the list
+    #   of commands in brackets, as shown below.
     #
     #   `[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]`
+    #
+    #   You do not need to include the brackets when you use the Amazon Web
+    #   Services Management Consoleas shown below.
+    #
+    #   ` "CMD-SHELL", "curl -f http://localhost/ || exit 1" `
     #
     #   An exit code of 0 indicates success, and non-zero exit code
     #   indicates failure. For more information, see `HealthCheck` in the
@@ -7070,11 +7088,11 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] expression
-    #   A cluster query language expression to apply to the constraint. You
-    #   cannot specify an expression if the constraint type is
-    #   `distinctInstance`. For more information, see [Cluster Query
-    #   Language][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   A cluster query language expression to apply to the constraint. The
+    #   expression can have a maximum length of 2000 characters. You can't
+    #   specify an expression if the constraint type is `distinctInstance`.
+    #   For more information, see [Cluster query language][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -8579,6 +8597,9 @@ module Aws::ECS
     #
     #   When you use cluster auto scaling, you must specify
     #   `capacityProviderStrategy` and not `launchType`.
+    #
+    #   A capacity provider strategy may contain a maximum of 6 capacity
+    #   providers.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] cluster
@@ -8611,7 +8632,7 @@ module Aws::ECS
     # @!attribute [rw] group
     #   The name of the task group to associate with the task. The default
     #   value is the family name of the task definition (for example,
-    #   family:my-family-name).
+    #   `family:my-family-name`).
     #   @return [String]
     #
     # @!attribute [rw] launch_type
@@ -8651,7 +8672,7 @@ module Aws::ECS
     #   The network configuration for the task. This parameter is required
     #   for task definitions that use the `awsvpc` network mode to receive
     #   their own elastic network interface, and it is not supported for
-    #   other network modes. For more information, see [Task Networking][1]
+    #   other network modes. For more information, see [Task networking][1]
     #   in the *Amazon Elastic Container Service Developer Guide*.
     #
     #
@@ -8669,10 +8690,8 @@ module Aws::ECS
     #   image) on a container or add new environment variables to it with an
     #   `environment` override.
     #
-    #   <note markdown="1"> A total of 8192 characters are allowed for overrides. This limit
+    #   A total of 8192 characters are allowed for overrides. This limit
     #   includes the JSON formatting characters of the override structure.
-    #
-    #    </note>
     #   @return [Types::TaskOverride]
     #
     # @!attribute [rw] placement_constraints
@@ -8683,15 +8702,15 @@ module Aws::ECS
     #
     # @!attribute [rw] placement_strategy
     #   The placement strategy objects to use for the task. You can specify
-    #   a maximum of five strategy rules per task.
+    #   a maximum of 5 strategy rules per task.
     #   @return [Array<Types::PlacementStrategy>]
     #
     # @!attribute [rw] platform_version
-    #   The platform version the task should run. A platform version is only
-    #   specified for tasks using the Fargate launch type. If one is not
-    #   specified, the `LATEST` platform version is used by default. For
-    #   more information, see [Fargate Platform Versions][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   The platform version the task should use. A platform version is only
+    #   specified for tasks hosted on Fargate. If one is not specified, the
+    #   `LATEST` platform version is used by default. For more information,
+    #   see [Fargate platform versions][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
     #
     #
     #
@@ -8711,7 +8730,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] reference_id
-    #   The reference ID to use for the task.
+    #   The reference ID to use for the task. The reference ID can have a
+    #   maximum length of 1024 characters.
     #   @return [String]
     #
     # @!attribute [rw] started_by
@@ -8904,8 +8924,8 @@ module Aws::ECS
     # @!attribute [rw] service_arn
     #   The ARN that identifies the service. The ARN contains the
     #   `arn:aws:ecs` namespace, followed by the Region of the service, the
-    #   account ID of the service owner, the `service` namespace, and then
-    #   the service name. For example,
+    #   Amazon Web Services account ID of the service owner, the `service`
+    #   namespace, and then the service name. For example,
     #   `arn:aws:ecs:region:012345678910:service/my-service`.
     #   @return [String]
     #

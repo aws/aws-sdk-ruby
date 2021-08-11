@@ -477,6 +477,7 @@ module Aws
             'Shield' => 'shield',
             'Signer' => 'signer',
             'SimpleDB' => 'sdb',
+            'SnowDeviceManagement' => 'snow-device-management',
             'Snowball' => 'snowball',
             'States' => 'states',
             'StorageGateway' => 'storagegateway',

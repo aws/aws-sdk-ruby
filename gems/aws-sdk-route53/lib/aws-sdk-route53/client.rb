@@ -373,12 +373,12 @@ module Aws::Route53
     # already exist. You can't convert a public hosted zone into a private
     # hosted zone.
     #
-    # <note markdown="1"> If you want to associate a VPC that was created by using one account
-    # with a private hosted zone that was created by using a different
-    # account, the account that created the private hosted zone must first
-    # submit a `CreateVPCAssociationAuthorization` request. Then the account
-    # that created the VPC must submit an `AssociateVPCWithHostedZone`
-    # request.
+    # <note markdown="1"> If you want to associate a VPC that was created by using one Amazon
+    # Web Services account with a private hosted zone that was created by
+    # using a different account, the Amazon Web Services account that
+    # created the private hosted zone must first submit a
+    # `CreateVPCAssociationAuthorization` request. Then the account that
+    # created the VPC must submit an `AssociateVPCWithHostedZone` request.
     #
     #  </note>
     #
@@ -1739,8 +1739,9 @@ module Aws::Route53
     #
     #       * You must create the log group in the us-east-1 region.
     #
-    #       * You must use the same account to create the log group and the
-    #         hosted zone that you want to configure query logging for.
+    #       * You must use the same Amazon Web Services account to create
+    #         the log group and the hosted zone that you want to configure
+    #         query logging for.
     #
     #       * When you create log groups for query logging, we recommend
     #         that you use a consistent prefix, for example:
@@ -1884,7 +1885,8 @@ module Aws::Route53
     end
 
     # Creates a delegation set (a group of four name servers) that can be
-    # reused by multiple hosted zones that were created by the same account.
+    # reused by multiple hosted zones that were created by the same Amazon
+    # Web Services account.
     #
     # You can also create a reusable delegation set that uses the four name
     # servers that are associated with an existing hosted zone. Specify the
@@ -2158,12 +2160,12 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Authorizes the account that created a specified VPC to submit an
-    # `AssociateVPCWithHostedZone` request to associate the VPC with a
-    # specified hosted zone that was created by a different account. To
-    # submit a `CreateVPCAssociationAuthorization` request, you must use the
-    # account that created the hosted zone. After you authorize the
-    # association, use the account that created the VPC to submit an
+    # Authorizes the Amazon Web Services account that created a specified
+    # VPC to submit an `AssociateVPCWithHostedZone` request to associate the
+    # VPC with a specified hosted zone that was created by a different
+    # account. To submit a `CreateVPCAssociationAuthorization` request, you
+    # must use the account that created the hosted zone. After you authorize
+    # the association, use the account that created the VPC to submit an
     # `AssociateVPCWithHostedZone` request.
     #
     # <note markdown="1"> If you want to associate multiple VPCs that you created by using one
@@ -2337,7 +2339,7 @@ module Aws::Route53
     #   hosted zone.
     #
     # * Use the `ListHostedZones` action to get a list of the hosted zones
-    #   associated with the current account.
+    #   associated with the current Amazon Web Services account.
     #
     #
     #
@@ -2558,22 +2560,23 @@ module Aws::Route53
     # the hosted zone to submit a `DeleteVPCAssociationAuthorization`
     # request.
     #
-    # Sending this request only prevents the account that created the VPC
-    # from associating the VPC with the Amazon Route 53 hosted zone in the
-    # future. If the VPC is already associated with the hosted zone,
-    # `DeleteVPCAssociationAuthorization` won't disassociate the VPC from
-    # the hosted zone. If you want to delete an existing association, use
-    # `DisassociateVPCFromHostedZone`.
+    # Sending this request only prevents the Amazon Web Services account
+    # that created the VPC from associating the VPC with the Amazon Route 53
+    # hosted zone in the future. If the VPC is already associated with the
+    # hosted zone, `DeleteVPCAssociationAuthorization` won't disassociate
+    # the VPC from the hosted zone. If you want to delete an existing
+    # association, use `DisassociateVPCFromHostedZone`.
     #
     # @option params [required, String] :hosted_zone_id
     #   When removing authorization to associate a VPC that was created by one
-    #   account with a hosted zone that was created with a different account,
-    #   the ID of the hosted zone.
+    #   Amazon Web Services account with a hosted zone that was created with a
+    #   different Amazon Web Services account, the ID of the hosted zone.
     #
     # @option params [required, Types::VPC] :vpc
     #   When removing authorization to associate a VPC that was created by one
-    #   account with a hosted zone that was created with a different account,
-    #   a complex type that includes the ID and region of the VPC.
+    #   Amazon Web Services account with a hosted zone that was created with a
+    #   different Amazon Web Services account, a complex type that includes
+    #   the ID and region of the VPC.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2737,8 +2740,8 @@ module Aws::Route53
     # Developer Guide*. To request a higher limit, [open a case][2].
     #
     # <note markdown="1"> You can also view account limits in Amazon Web Services Trusted
-    # Advisor. Sign in to the Management Console and open the Trusted
-    # Advisor console at
+    # Advisor. Sign in to the Amazon Web Services Management Console and
+    # open the Trusted Advisor console at
     # [https://console.aws.amazon.com/trustedadvisor/][3]. Then choose
     # **Service limits** in the navigation pane.
     #
@@ -3080,7 +3083,7 @@ module Aws::Route53
     end
 
     # Retrieves the number of health checks that are associated with the
-    # current account.
+    # current Amazon Web Services account.
     #
     # @return [Types::GetHealthCheckCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3261,7 +3264,7 @@ module Aws::Route53
     end
 
     # Retrieves the number of hosted zones that are associated with the
-    # current account.
+    # current Amazon Web Services account.
     #
     # @return [Types::GetHostedZoneCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3546,7 +3549,7 @@ module Aws::Route53
     end
 
     # Gets the number of traffic policy instances that are associated with
-    # the current account.
+    # the current Amazon Web Services account.
     #
     # @return [Types::GetTrafficPolicyInstanceCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3662,7 +3665,7 @@ module Aws::Route53
     end
 
     # Retrieve a list of the health checks that are associated with the
-    # current account.
+    # current Amazon Web Services account.
     #
     # @option params [String] :marker
     #   If the value of `IsTruncated` in the previous response was `true`, you
@@ -3753,8 +3756,8 @@ module Aws::Route53
     end
 
     # Retrieves a list of the public and private hosted zones that are
-    # associated with the current account. The response includes a
-    # `HostedZones` child element for each hosted zone.
+    # associated with the current Amazon Web Services account. The response
+    # includes a `HostedZones` child element for each hosted zone.
     #
     # Amazon Route 53 returns a maximum of 100 items in each response. If
     # you have a lot of hosted zones, you can use the `maxitems` parameter
@@ -3829,7 +3832,7 @@ module Aws::Route53
 
     # Retrieves a list of your hosted zones in lexicographic order. The
     # response includes a `HostedZones` child element for each hosted zone
-    # created by the current account.
+    # created by the current Amazon Web Services account.
     #
     # `ListHostedZonesByName` sorts hosted zones by name with the labels
     # reversed. For example:
@@ -3867,7 +3870,8 @@ module Aws::Route53
     #   produced the current response.
     #
     # * If the value of `IsTruncated` in the response is true, there are
-    #   more hosted zones associated with the current account.
+    #   more hosted zones associated with the current Amazon Web Services
+    #   account.
     #
     #   If `IsTruncated` is false, this response includes the last hosted
     #   zone that is associated with the current account. The `NextDNSName`
@@ -3876,8 +3880,8 @@ module Aws::Route53
     #
     # * The `NextDNSName` and `NextHostedZoneId` elements in the response
     #   contain the domain name and the hosted zone ID of the next hosted
-    #   zone that is associated with the current account. If you want to
-    #   list more hosted zones, make another call to
+    #   zone that is associated with the current Amazon Web Services
+    #   account. If you want to list more hosted zones, make another call to
     #   `ListHostedZonesByName`, and specify the value of `NextDNSName` and
     #   `NextHostedZoneId` in the `dnsname` and `hostedzoneid` parameters,
     #   respectively.
@@ -3891,10 +3895,10 @@ module Aws::Route53
     #   the `dnsname` parameter only if you want to specify the name of the
     #   first hosted zone in the response. If you don't include the `dnsname`
     #   parameter, Amazon Route 53 returns all of the hosted zones that were
-    #   created by the current account, in ASCII order. For subsequent
-    #   requests, include both `dnsname` and `hostedzoneid` parameters. For
-    #   `dnsname`, specify the value of `NextDNSName` from the previous
-    #   response.
+    #   created by the current Amazon Web Services account, in ASCII order.
+    #   For subsequent requests, include both `dnsname` and `hostedzoneid`
+    #   parameters. For `dnsname`, specify the value of `NextDNSName` from the
+    #   previous response.
     #
     # @option params [String] :hosted_zone_id
     #   (Optional) For your first request to `ListHostedZonesByName`, do not
@@ -3961,13 +3965,14 @@ module Aws::Route53
     end
 
     # Lists all the private hosted zones that a specified VPC is associated
-    # with, regardless of which account or Amazon Web Services service owns
-    # the hosted zones. The `HostedZoneOwner` structure in the response
-    # contains one of the following values:
+    # with, regardless of which Amazon Web Services account or Amazon Web
+    # Services service owns the hosted zones. The `HostedZoneOwner`
+    # structure in the response contains one of the following values:
     #
     # * An `OwningAccount` element, which contains the account number of
-    #   either the current account or another account. Some services, such
-    #   as Cloud Map, create hosted zones using the current account.
+    #   either the current Amazon Web Services account or another Amazon Web
+    #   Services account. Some services, such as Cloud Map, create hosted
+    #   zones using the current account.
     #
     # * An `OwningService` element, which identifies the Amazon Web Services
     #   service that created and owns the hosted zone. For example, if a
@@ -4034,8 +4039,8 @@ module Aws::Route53
     end
 
     # Lists the configurations for DNS query logging that are associated
-    # with the current account or the configuration that is associated with
-    # a specified hosted zone.
+    # with the current Amazon Web Services account or the configuration that
+    # is associated with a specified hosted zone.
     #
     # For more information about DNS query logs, see
     # [CreateQueryLoggingConfig][1]. Additional information, including the
@@ -4053,12 +4058,12 @@ module Aws::Route53
     #
     #   If you don't specify a hosted zone ID, `ListQueryLoggingConfigs`
     #   returns all of the configurations that are associated with the current
-    #   account.
+    #   Amazon Web Services account.
     #
     # @option params [String] :next_token
-    #   (Optional) If the current account has more than `MaxResults` query
-    #   logging configurations, use `NextToken` to get the second and
-    #   subsequent pages of results.
+    #   (Optional) If the current Amazon Web Services account has more than
+    #   `MaxResults` query logging configurations, use `NextToken` to get the
+    #   second and subsequent pages of results.
     #
     #   For the first `ListQueryLoggingConfigs` request, omit this value.
     #
@@ -4069,9 +4074,9 @@ module Aws::Route53
     # @option params [String] :max_results
     #   (Optional) The maximum number of query logging configurations that you
     #   want Amazon Route 53 to return in response to the current request. If
-    #   the current account has more than `MaxResults` configurations, use the
-    #   value of [NextToken][1] in the response to get the next page of
-    #   results.
+    #   the current Amazon Web Services account has more than `MaxResults`
+    #   configurations, use the value of [NextToken][1] in the response to get
+    #   the next page of results.
     #
     #   If you don't specify a value for `MaxResults`, Route 53 returns up to
     #   100 configurations.
@@ -4297,7 +4302,7 @@ module Aws::Route53
     end
 
     # Retrieves a list of the reusable delegation sets that are associated
-    # with the current account.
+    # with the current Amazon Web Services account.
     #
     # @option params [String] :marker
     #   If the value of `IsTruncated` in the previous response was `true`, you
@@ -4450,8 +4455,8 @@ module Aws::Route53
     end
 
     # Gets information about the latest version for every traffic policy
-    # that is associated with the current account. Policies are listed in
-    # the order that they were created in.
+    # that is associated with the current Amazon Web Services account.
+    # Policies are listed in the order that they were created in.
     #
     # For information about how of deleting a traffic policy affects the
     # response from `ListTrafficPolicies`, see [DeleteTrafficPolicy][1].
@@ -4515,7 +4520,7 @@ module Aws::Route53
     end
 
     # Gets information about the traffic policy instances that you created
-    # by using the current account.
+    # by using the current Amazon Web Services account.
     #
     # <note markdown="1"> After you submit an `UpdateTrafficPolicyInstance` request, there's a
     # brief delay while Amazon Route 53 creates the resource record sets
@@ -5620,7 +5625,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

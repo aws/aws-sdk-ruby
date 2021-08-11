@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-08-11)
+------------------
+
+* Feature - Add new attribute 'ownedBy' in Streaming Session APIs. 'ownedBy' represents the AWS SSO Identity Store User ID of the owner of the Streaming Session resource.
+
 1.3.0 (2021-07-30)
 ------------------
 

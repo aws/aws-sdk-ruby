@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.486.0 (2021-08-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SnowDeviceManagement`.
+
 1.485.0 (2021-08-10)
 ------------------
 
