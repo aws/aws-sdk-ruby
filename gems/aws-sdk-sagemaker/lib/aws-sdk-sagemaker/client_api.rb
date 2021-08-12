@@ -879,10 +879,13 @@ module Aws::SageMaker
     MetadataProperties = Shapes::StructureShape.new(name: 'MetadataProperties')
     MetadataPropertyValue = Shapes::StringShape.new(name: 'MetadataPropertyValue')
     MetricData = Shapes::StructureShape.new(name: 'MetricData')
+    MetricDataList = Shapes::ListShape.new(name: 'MetricDataList')
+    MetricDatum = Shapes::StructureShape.new(name: 'MetricDatum')
     MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
     MetricDefinitionList = Shapes::ListShape.new(name: 'MetricDefinitionList')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricRegex = Shapes::StringShape.new(name: 'MetricRegex')
+    MetricSetSource = Shapes::StringShape.new(name: 'MetricSetSource')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
     ModelApprovalStatus = Shapes::StringShape.new(name: 'ModelApprovalStatus')
@@ -1718,6 +1721,7 @@ module Aws::SageMaker
     CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
 
     CandidateProperties.add_member(:candidate_artifact_locations, Shapes::ShapeRef.new(shape: CandidateArtifactLocations, location_name: "CandidateArtifactLocations"))
+    CandidateProperties.add_member(:candidate_metrics, Shapes::ShapeRef.new(shape: MetricDataList, location_name: "CandidateMetrics"))
     CandidateProperties.struct_class = Types::CandidateProperties
 
     CandidateSteps.member = Shapes::ShapeRef.new(shape: AutoMLCandidateStep)
@@ -4780,6 +4784,13 @@ module Aws::SageMaker
     MetricData.add_member(:value, Shapes::ShapeRef.new(shape: Float, location_name: "Value"))
     MetricData.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     MetricData.struct_class = Types::MetricData
+
+    MetricDataList.member = Shapes::ShapeRef.new(shape: MetricDatum)
+
+    MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, location_name: "MetricName"))
+    MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: Float, location_name: "Value"))
+    MetricDatum.add_member(:set, Shapes::ShapeRef.new(shape: MetricSetSource, location_name: "Set"))
+    MetricDatum.struct_class = Types::MetricDatum
 
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
     MetricDefinition.add_member(:regex, Shapes::ShapeRef.new(shape: MetricRegex, required: true, location_name: "Regex"))

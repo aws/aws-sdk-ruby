@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-08-12)
+------------------
+
+* Feature - Adding support for ACM imported or private CA certificates for mTLS enabled domain names
+
 1.64.0 (2021-07-30)
 ------------------
 

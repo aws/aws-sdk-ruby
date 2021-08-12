@@ -1055,7 +1055,7 @@ module Aws::SageMaker
 
     # Creates an Autopilot job.
     #
-    # Find the best performing model after you run an Autopilot job by
+    # Find the best-performing model after you run an Autopilot job by
     # calling .
     #
     # For information about how to use Autopilot, see [Automate Model
@@ -3218,7 +3218,15 @@ module Aws::SageMaker
     #   configuration file. To learn how, see [Create a Labeling Category
     #   Configuration File for 3D Point Cloud Labeling Jobs][1].
     #
-    #   For all other [built-in task types][2] and [custom tasks][3], your
+    #   For named entity recognition jobs, in addition to `"labels"`, you must
+    #   provide worker instructions in the label category configuration file
+    #   using the `"instructions"` parameter: `"instructions":
+    #   \{"shortInstruction":"<h1>Add header</h1><p>Add Instructions</p>",
+    #   "fullInstruction":"<p>Add additional instructions.</p>"\}`. For
+    #   details and an example, see [Create a Named Entity Recognition
+    #   Labeling Job (API) ][2].
+    #
+    #   For all other [built-in task types][3] and [custom tasks][4], your
     #   label category configuration file must be a JSON file in the following
     #   format. Identify the labels you want to use by replacing `label_1`,
     #   `label_2`,`...`,`label_n` with your label categories.
@@ -3245,15 +3253,16 @@ module Aws::SageMaker
     #   * If you create a 3D point cloud or video frame adjustment or
     #     verification labeling job, you must include
     #     `auditLabelAttributeName` in the label category configuration. Use
-    #     this parameter to enter the [ `LabelAttributeName` ][4] of the
+    #     this parameter to enter the [ `LabelAttributeName` ][5] of the
     #     labeling job you want to adjust or verify annotations of.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
-    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html
-    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateLabelingJob.html#sagemaker-CreateLabelingJob-request-LabelAttributeName
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-named-entity-recg.html#sms-creating-ner-api
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html
+    #   [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateLabelingJob.html#sagemaker-CreateLabelingJob-request-LabelAttributeName
     #
     # @option params [Types::LabelingJobStoppingConditions] :stopping_conditions
     #   A set of conditions for stopping the labeling job. If any of the
@@ -7719,6 +7728,10 @@ module Aws::SageMaker
     #   resp.best_candidate.last_modified_time #=> Time
     #   resp.best_candidate.failure_reason #=> String
     #   resp.best_candidate.candidate_properties.candidate_artifact_locations.explainability #=> String
+    #   resp.best_candidate.candidate_properties.candidate_metrics #=> Array
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].value #=> Float
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
     #   resp.auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
     #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError"
     #   resp.generate_candidate_definitions_only #=> Boolean
@@ -11457,6 +11470,10 @@ module Aws::SageMaker
     #   resp.candidates[0].last_modified_time #=> Time
     #   resp.candidates[0].failure_reason #=> String
     #   resp.candidates[0].candidate_properties.candidate_artifact_locations.explainability #=> String
+    #   resp.candidates[0].candidate_properties.candidate_metrics #=> Array
+    #   resp.candidates[0].candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
+    #   resp.candidates[0].candidate_properties.candidate_metrics[0].value #=> Float
+    #   resp.candidates[0].candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCandidatesForAutoMLJob AWS API Documentation
@@ -16101,6 +16118,8 @@ module Aws::SageMaker
 
     # Stops a pipeline execution.
     #
+    # **Callback Step**
+    #
     # A pipeline execution won't stop while a callback step is running.
     # When you call `StopPipelineExecution` on a pipeline execution with a
     # running callback step, SageMaker Pipelines sends an additional Amazon
@@ -16114,6 +16133,17 @@ module Aws::SageMaker
     #
     # Only when SageMaker Pipelines receives one of these calls will it stop
     # the pipeline execution.
+    #
+    # **Lambda Step**
+    #
+    # A pipeline execution can't be stopped while a lambda step is running
+    # because the Lambda function invoked by the lambda step can't be
+    # stopped. If you attempt to stop the execution while the Lambda
+    # function is running, the pipeline waits for the Lambda function to
+    # finish or until the timeout is hit, whichever occurs first, and then
+    # stops. If the Lambda function finishes, the pipeline execution status
+    # is `Stopped`. If the timeout is hit the pipeline execution status is
+    # `Failed`.
     #
     # @option params [required, String] :pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
@@ -17702,7 +17732,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

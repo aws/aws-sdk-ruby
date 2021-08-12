@@ -848,7 +848,7 @@ module Aws::GlueDataBrew
     #     outputs: [
     #       {
     #         compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
+    #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
     #         partition_columns: ["ColumnName"],
     #         location: { # required
     #           bucket: "Bucket", # required
@@ -1255,7 +1255,7 @@ module Aws::GlueDataBrew
     #   resp.max_retries #=> Integer
     #   resp.outputs #=> Array
     #   resp.outputs[0].compression_format #=> String, one of "GZIP", "LZ4", "SNAPPY", "BZIP2", "DEFLATE", "LZO", "BROTLI", "ZSTD", "ZLIB"
-    #   resp.outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML"
+    #   resp.outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML", "TABLEAUHYPER"
     #   resp.outputs[0].partition_columns #=> Array
     #   resp.outputs[0].partition_columns[0] #=> String
     #   resp.outputs[0].location.bucket #=> String
@@ -1386,7 +1386,7 @@ module Aws::GlueDataBrew
     #   resp.log_group_name #=> String
     #   resp.outputs #=> Array
     #   resp.outputs[0].compression_format #=> String, one of "GZIP", "LZ4", "SNAPPY", "BZIP2", "DEFLATE", "LZO", "BROTLI", "ZSTD", "ZLIB"
-    #   resp.outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML"
+    #   resp.outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML", "TABLEAUHYPER"
     #   resp.outputs[0].partition_columns #=> Array
     #   resp.outputs[0].partition_columns[0] #=> String
     #   resp.outputs[0].location.bucket #=> String
@@ -1718,7 +1718,7 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].log_group_name #=> String
     #   resp.job_runs[0].outputs #=> Array
     #   resp.job_runs[0].outputs[0].compression_format #=> String, one of "GZIP", "LZ4", "SNAPPY", "BZIP2", "DEFLATE", "LZO", "BROTLI", "ZSTD", "ZLIB"
-    #   resp.job_runs[0].outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML"
+    #   resp.job_runs[0].outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML", "TABLEAUHYPER"
     #   resp.job_runs[0].outputs[0].partition_columns #=> Array
     #   resp.job_runs[0].outputs[0].partition_columns[0] #=> String
     #   resp.job_runs[0].outputs[0].location.bucket #=> String
@@ -1811,7 +1811,7 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].max_retries #=> Integer
     #   resp.jobs[0].outputs #=> Array
     #   resp.jobs[0].outputs[0].compression_format #=> String, one of "GZIP", "LZ4", "SNAPPY", "BZIP2", "DEFLATE", "LZO", "BROTLI", "ZSTD", "ZLIB"
-    #   resp.jobs[0].outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML"
+    #   resp.jobs[0].outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML", "TABLEAUHYPER"
     #   resp.jobs[0].outputs[0].partition_columns #=> Array
     #   resp.jobs[0].outputs[0].partition_columns[0] #=> String
     #   resp.jobs[0].outputs[0].location.bucket #=> String
@@ -2783,7 +2783,7 @@ module Aws::GlueDataBrew
     #     outputs: [
     #       {
     #         compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
+    #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
     #         partition_columns: ["ColumnName"],
     #         location: { # required
     #           bucket: "Bucket", # required
@@ -2903,7 +2903,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

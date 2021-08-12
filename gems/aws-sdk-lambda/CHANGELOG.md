@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-08-12)
+------------------
+
+* Feature - Lambda Python 3.9 runtime launch
+
 1.66.0 (2021-07-30)
 ------------------
 
