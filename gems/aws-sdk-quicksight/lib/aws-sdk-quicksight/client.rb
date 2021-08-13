@@ -369,10 +369,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates Amazon QuickSight customizations the current Region;.
-    # Currently, you can add a custom default theme by using the
-    # `CreateAccountCustomization` or `UpdateAccountCustomization` API
-    # operation. To further customize QuickSight by removing QuickSight
+    # Creates Amazon QuickSight customizations the current Amazon Web
+    # Services Region;. Currently, you can add a custom default theme by
+    # using the `CreateAccountCustomization` or `UpdateAccountCustomization`
+    # API operation. To further customize QuickSight by removing QuickSight
     # sample assets and videos for all new users, see [Customizing
     # QuickSight][1] in the *Amazon QuickSight User Guide.*
     #
@@ -404,9 +404,9 @@ module Aws::QuickSight
     #   The QuickSight namespace that you want to add customizations to.
     #
     # @option params [required, Types::AccountCustomization] :account_customization
-    #   The QuickSight customizations you're adding in the current Region;.
-    #   You can add these to an Amazon Web Services account; and a QuickSight
-    #   namespace.
+    #   The QuickSight customizations you're adding in the current Amazon Web
+    #   Services Region;. You can add these to an Amazon Web Services account;
+    #   and a QuickSight namespace.
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme: `"AccountCustomization":
@@ -628,7 +628,7 @@ module Aws::QuickSight
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate`ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Region;.
+    #   any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list the
     #   replacement datasets for the placeholders listed in the original. The
@@ -769,7 +769,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   An ID for the dataset that you want to create. This ID is unique per
-    #   Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account;.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -1007,8 +1007,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account; ID.
     #
     # @option params [required, String] :data_source_id
-    #   An ID for the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   An ID for the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
@@ -1736,7 +1736,8 @@ module Aws::QuickSight
     #
     # @option params [required, String] :template_id
     #   An ID for the template that you want to create. This template is
-    #   unique per Region; in each Amazon Web Services account;.
+    #   unique per Amazon Web Services Region; in each Amazon Web Services
+    #   account;.
     #
     # @option params [String] :name
     #   A display name for the template.
@@ -1752,7 +1753,7 @@ module Aws::QuickSight
     #   For `SourceTemplate`, specify the ARN of the source template. For
     #   `SourceAnalysis`, specify the ARN of the source analysis. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Region;.
+    #   any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the placeholders
@@ -1897,7 +1898,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :theme_id
     #   An ID for the theme that you want to create. The theme ID is unique
-    #   per Region; in each Amazon Web Services account;.
+    #   per Amazon Web Services Region; in each Amazon Web Services account;.
     #
     # @option params [required, String] :name
     #   A display name for the theme.
@@ -2062,12 +2063,13 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Deletes all Amazon QuickSight customizations in this Region; for the
-    # specified Amazon Web Services account; and QuickSight namespace.
+    # Deletes all Amazon QuickSight customizations in this Amazon Web
+    # Services Region; for the specified Amazon Web Services account; and
+    # QuickSight namespace.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the Amazon Web Services account; that you want to delete
-    #   QuickSight customizations from in this Region;.
+    #   QuickSight customizations from in this Amazon Web Services Region;.
     #
     # @option params [String] :namespace
     #   The QuickSight namespace that you're deleting the customizations
@@ -2219,7 +2221,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account;.
     #
     # @return [Types::DeleteDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2258,8 +2260,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account; ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #
     # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2812,38 +2814,41 @@ module Aws::QuickSight
     end
 
     # Describes the customizations associated with the provided Amazon Web
-    # Services account; and Amazon QuickSight namespace in an Region;. The
-    # QuickSight console evaluates which customizations to apply by running
-    # this API operation with the `Resolved` flag included.
+    # Services account; and Amazon QuickSight namespace in an Amazon Web
+    # Services Region;. The QuickSight console evaluates which
+    # customizations to apply by running this API operation with the
+    # `Resolved` flag included.
     #
     # To determine what customizations display when you run this command, it
     # can help to visualize the relationship of the entities involved.
     #
     # * `Amazon Web Services account;` - The Amazon Web Services account;
     #   exists at the top of the hierarchy. It has the potential to use all
-    #   of the Regions; and AWS Services. When you subscribe to QuickSight,
-    #   you choose one Region; to use as your home Region. That's where
-    #   your free SPICE capacity is located. You can use QuickSight in any
-    #   supported Region;.
+    #   of the Amazon Web Services Regions; and AWS Services. When you
+    #   subscribe to QuickSight, you choose one Amazon Web Services Region;
+    #   to use as your home Region. That's where your free SPICE capacity
+    #   is located. You can use QuickSight in any supported Amazon Web
+    #   Services Region;.
     #
-    # * `Region;` - In each Region; where you sign in to QuickSight at least
-    #   once, QuickSight acts as a separate instance of the same service. If
-    #   you have a user directory, it resides in us-east-1, which is the US
-    #   East (N. Virginia). Generally speaking, these users have access to
-    #   QuickSight in any Region;, unless they are constrained to a
+    # * `Amazon Web Services Region;` - In each Amazon Web Services Region;
+    #   where you sign in to QuickSight at least once, QuickSight acts as a
+    #   separate instance of the same service. If you have a user directory,
+    #   it resides in us-east-1, which is the US East (N. Virginia).
+    #   Generally speaking, these users have access to QuickSight in any
+    #   Amazon Web Services Region;, unless they are constrained to a
     #   namespace.
     #
-    #   To run the command in a different Region;, you change your Region
-    #   settings. If you're using the AWS CLI, you can use one of the
-    #   following options:
+    #   To run the command in a different Amazon Web Services Region;, you
+    #   change your Region settings. If you're using the AWS CLI, you can
+    #   use one of the following options:
     #
     #   * Use [command line options][1].
     #
     #   * Use [named profiles][2].
     #
-    #   * Run `aws configure` to change your default Region;. Use Enter to
-    #     key the same settings for your keys. For more information, see
-    #     [Configuring the AWS CLI][3].
+    #   * Run `aws configure` to change your default Amazon Web Services
+    #     Region;. Use Enter to key the same settings for your keys. For
+    #     more information, see [Configuring the AWS CLI][3].
     #
     # * `Namespace` - A QuickSight namespace is a partition that contains
     #   users and assets (data sources, datasets, dashboards, and so on). To
@@ -2851,15 +2856,16 @@ module Aws::QuickSight
     #   must also be part of the same namespace. People who share a
     #   namespace are completely isolated from users and assets in other
     #   namespaces, even if they are in the same Amazon Web Services
-    #   account; and Region;.
+    #   account; and Amazon Web Services Region;.
     #
-    # * `Applied customizations` - Within an Region;, a set of QuickSight
-    #   customizations can apply to an Amazon Web Services account; or to a
-    #   namespace. Settings that you apply to a namespace override settings
-    #   that you apply to an Amazon Web Services account;. All settings are
-    #   isolated to a single Region;. To apply them in other Regions;, run
-    #   the `CreateAccountCustomization` command in each Region; where you
-    #   want to apply the same customizations.
+    # * `Applied customizations` - Within an Amazon Web Services Region;, a
+    #   set of QuickSight customizations can apply to an Amazon Web Services
+    #   account; or to a namespace. Settings that you apply to a namespace
+    #   override settings that you apply to an Amazon Web Services account;.
+    #   All settings are isolated to a single Amazon Web Services Region;.
+    #   To apply them in other Amazon Web Services Regions;, run the
+    #   `CreateAccountCustomization` command in each Amazon Web Services
+    #   Region; where you want to apply the same customizations.
     #
     #
     #
@@ -3171,7 +3177,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account;.
     #
     # @return [Types::DescribeDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3295,7 +3301,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account;.
     #
     # @return [Types::DescribeDataSetPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3338,8 +3344,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account; ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3480,8 +3486,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account; ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #
     # @return [Types::DescribeDataSourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4450,8 +4456,8 @@ module Aws::QuickSight
     #
     # * The resulting user session is valid for 10 hours.
     #
-    # For more information, see [Embedded Analytics][1] in the *Amazon
-    # QuickSight User Guide*.
+    # For more information, see [Embedding Analytics Using
+    # GetDashboardEmbedUrl][1] in the *Amazon QuickSight User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
@@ -4459,7 +4465,7 @@ module Aws::QuickSight
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html
     # [2]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
     #
     # @option params [required, String] :aws_account_id
@@ -4574,13 +4580,14 @@ module Aws::QuickSight
     # permission profile attached. For more information, see the following
     # sections in the *Amazon QuickSight User Guide*\:
     #
-    # * [Embedding the Amazon QuickSight Console][1]
+    # * [Embedding the Amazon QuickSight Console Using
+    #   GetSessionEmbedUrl][1]
     #
     # * [Customizing Access to the Amazon QuickSight Console][2]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-the-quicksight-console.html
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users-get.html
     # [2]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
     #
     # @option params [required, String] :aws_account_id
@@ -4818,7 +4825,7 @@ module Aws::QuickSight
     end
 
     # Lists all of the datasets belonging to the current Amazon Web Services
-    # account; in an Region;.
+    # account; in an Amazon Web Services Region;.
     #
     # The permissions resource is
     # `arn:aws:quicksight:region:aws-account-id:dataset/*`.
@@ -4879,8 +4886,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists data sources in current Region; that belong to this Amazon Web
-    # Services account;.
+    # Lists data sources in current Amazon Web Services Region; that belong
+    # to this Amazon Web Services account;.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account; ID.
@@ -6449,8 +6456,9 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates Amazon QuickSight customizations the current Region;.
-    # Currently, the only customization you can use is a theme.
+    # Updates Amazon QuickSight customizations the current Amazon Web
+    # Services Region;. Currently, the only customization you can use is a
+    # theme.
     #
     # You can use customizations for your Amazon Web Services account; or,
     # if you specify a namespace, for a QuickSight namespace instead.
@@ -6467,7 +6475,8 @@ module Aws::QuickSight
     #   The namespace that you want to update QuickSight customizations for.
     #
     # @option params [required, Types::AccountCustomization] :account_customization
-    #   The QuickSight customizations you're updating in the current Region;.
+    #   The QuickSight customizations you're updating in the current Amazon
+    #   Web Services Region;.
     #
     # @return [Types::UpdateAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6745,7 +6754,7 @@ module Aws::QuickSight
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Region;.
+    #   any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list the
     #   replacement datasets for the placeholders listed in the original. The
@@ -6981,7 +6990,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to update. This ID is unique per
-    #   Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account;.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -7203,7 +7212,8 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset whose permissions you want to update. This ID
-    #   is unique per Region; for each Amazon Web Services account;.
+    #   is unique per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   The resource permissions that you want to grant to the dataset.
@@ -7259,8 +7269,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account; ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
@@ -7518,8 +7528,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account; ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   A list of resource permissions that you want to grant on the data
@@ -7820,7 +7830,7 @@ module Aws::QuickSight
     #   For `SourceTemplate`, specify the ARN of the source template. For
     #   `SourceAnalysis`, specify the ARN of the source analysis. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Region;.
+    #   any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the placeholders
@@ -8405,7 +8415,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

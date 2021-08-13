@@ -33,7 +33,8 @@ module Aws::QuickSight
     end
 
     # The Amazon QuickSight customizations associated with your Amazon Web
-    # Services account; or a QuickSight namespace in a specific Region;.
+    # Services account; or a QuickSight namespace in a specific Amazon Web
+    # Services Region;.
     #
     # @note When making an API call, you may pass AccountCustomization
     #   data as a hash:
@@ -910,9 +911,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're adding in the current Region;.
-    #   You can add these to an Amazon Web Services account; and a
-    #   QuickSight namespace.
+    #   The QuickSight customizations you're adding in the current Amazon
+    #   Web Services Region;. You can add these to an Amazon Web Services
+    #   account; and a QuickSight namespace.
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
@@ -954,7 +955,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're adding in the current Region;.
+    #   The QuickSight customizations you're adding in the current Amazon
+    #   Web Services Region;.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -1267,7 +1269,7 @@ module Aws::QuickSight
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate`ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Region;.
+    #   any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list
     #   the replacement datasets for the placeholders listed in the
@@ -1534,7 +1536,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   An ID for the dataset that you want to create. This ID is unique per
-    #   Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1615,7 +1617,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_arn
@@ -1873,8 +1876,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   An ID for the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   An ID for the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1943,8 +1946,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] creation_status
@@ -2492,9 +2495,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] capacity_region
-    #   The Region; that you want to use for the free SPICE capacity for the
-    #   new namespace. This is set to the region that you run
-    #   CreateNamespace in.
+    #   The Amazon Web Services Region; that you want to use for the free
+    #   SPICE capacity for the new namespace. This is set to the region that
+    #   you run CreateNamespace in.
     #   @return [String]
     #
     # @!attribute [rw] creation_status
@@ -2638,7 +2641,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] template_id
     #   An ID for the template that you want to create. This template is
-    #   unique per Region; in each Amazon Web Services account;.
+    #   unique per Amazon Web Services Region; in each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2657,7 +2661,7 @@ module Aws::QuickSight
     #   (ARN). For `SourceTemplate`, specify the ARN of the source template.
     #   For `SourceAnalysis`, specify the ARN of the source analysis. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account;
-    #   and any QuickSight-supported Region;.
+    #   and any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the
@@ -2862,7 +2866,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] theme_id
     #   An ID for the theme that you want to create. The theme ID is unique
-    #   per Region; in each Amazon Web Services account;.
+    #   per Amazon Web Services Region; in each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3729,8 +3734,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4225,7 +4230,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account; that you want to delete
-    #   QuickSight customizations from in this Region;.
+    #   QuickSight customizations from in this Amazon Web Services Region;.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -4410,7 +4415,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDataSetRequest AWS API Documentation
@@ -4428,7 +4434,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -4463,8 +4470,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDataSourceRequest AWS API Documentation
@@ -4481,8 +4488,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -5225,7 +5232,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations that exist in the current Region;.
+    #   The QuickSight customizations that exist in the current Amazon Web
+    #   Services Region;.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -5278,7 +5286,8 @@ module Aws::QuickSight
     #   "account" even though it's technically not an account by itself.
     #   Instead, it's a subscription to the QuickSight service for your
     #   Amazon Web Services account;. The edition that you subscribe to
-    #   applies to QuickSight in every Region; where you use it.
+    #   applies to QuickSight in every Amazon Web Services Region; where you
+    #   use it.
     #   @return [Types::AccountSettings]
     #
     # @!attribute [rw] request_id
@@ -5545,7 +5554,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetPermissionsRequest AWS API Documentation
@@ -5563,7 +5573,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @!attribute [rw] permissions
@@ -5604,7 +5615,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetRequest AWS API Documentation
@@ -5651,8 +5663,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSourcePermissionsRequest AWS API Documentation
@@ -5669,8 +5681,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] permissions
@@ -5710,8 +5722,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSourceRequest AWS API Documentation
@@ -6096,11 +6108,11 @@ module Aws::QuickSight
 
     # @!attribute [rw] namespace
     #   The information about the namespace that you're describing. The
-    #   response includes the namespace ARN, name, Region;, creation status,
-    #   and identity store. `DescribeNamespace` also works for namespaces
-    #   that are in the process of being created. For incomplete namespaces,
-    #   this API operation lists the namespace error types and messages
-    #   associated with the creation process.
+    #   response includes the namespace ARN, name, Amazon Web Services
+    #   Region;, creation status, and identity store. `DescribeNamespace`
+    #   also works for namespaces that are in the process of being created.
+    #   For incomplete namespaces, this API operation lists the namespace
+    #   error types and messages associated with the creation process.
     #   @return [Types::NamespaceInfoV2]
     #
     # @!attribute [rw] request_id
@@ -8482,8 +8494,9 @@ module Aws::QuickSight
 
     # @!attribute [rw] namespaces
     #   The information about the namespaces in this Amazon Web Services
-    #   account;. The response includes the namespace ARN, name, Region;,
-    #   notification email address, creation status, and identity store.
+    #   account;. The response includes the namespace ARN, name, Amazon Web
+    #   Services Region;, notification email address, creation status, and
+    #   identity store.
     #   @return [Array<Types::NamespaceInfoV2>]
     #
     # @!attribute [rw] next_token
@@ -9391,7 +9404,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] capacity_region
-    #   The namespace Region;.
+    #   The namespace Amazon Web Services Region;.
     #   @return [String]
     #
     # @!attribute [rw] creation_status
@@ -11292,8 +11305,8 @@ module Aws::QuickSight
     #   @return [Types::TemplateVersion]
     #
     # @!attribute [rw] template_id
-    #   The ID for the template. This is unique per Region; for each Amazon
-    #   Web Services account;.
+    #   The ID for the template. This is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
@@ -11459,8 +11472,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   The ID of the template. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the template. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -11787,8 +11800,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] theme_id
-    #   The ID of the theme. This ID is unique per Region; for each Amazon
-    #   Web Services account;.
+    #   The ID of the theme. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] latest_version_number
@@ -12330,8 +12343,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're updating in the current
-    #   Region;.
+    #   The QuickSight customizations you're updating in the current Amazon
+    #   Web Services Region;.
     #   @return [Types::AccountCustomization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomizationRequest AWS API Documentation
@@ -12360,8 +12373,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're updating in the current
-    #   Region;.
+    #   The QuickSight customizations you're updating in the current Amazon
+    #   Web Services Region;.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -12869,7 +12882,7 @@ module Aws::QuickSight
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account;
-    #   and any QuickSight-supported Region;.
+    #   and any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list
     #   the replacement datasets for the placeholders listed in the
@@ -12991,7 +13004,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset whose permissions you want to update. This ID
-    #   is unique per Region; for each Amazon Web Services account;.
+    #   is unique per Amazon Web Services Region; for each Amazon Web
+    #   Services account;.
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
@@ -13019,7 +13033,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset whose permissions you want to update. This ID
-    #   is unique per Region; for each Amazon Web Services account;.
+    #   is unique per Amazon Web Services Region; for each Amazon Web
+    #   Services account;.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -13198,7 +13213,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to update. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -13268,7 +13284,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
-    #   per Region; for each Amazon Web Services account;.
+    #   per Amazon Web Services Region; for each Amazon Web Services
+    #   account;.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_arn
@@ -13327,8 +13344,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
@@ -13357,8 +13374,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -13591,8 +13608,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -13639,8 +13656,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The ID of the data source. This ID is unique per Region; for each
-    #   Amazon Web Services account;.
+    #   The ID of the data source. This ID is unique per Amazon Web Services
+    #   Region; for each Amazon Web Services account;.
     #   @return [String]
     #
     # @!attribute [rw] update_status
@@ -14167,7 +14184,7 @@ module Aws::QuickSight
     #   (ARN). For `SourceTemplate`, specify the ARN of the source template.
     #   For `SourceAnalysis`, specify the ARN of the source analysis. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account;
-    #   and any QuickSight-supported Region;.
+    #   and any QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the

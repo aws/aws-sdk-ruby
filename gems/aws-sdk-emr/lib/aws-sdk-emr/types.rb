@@ -50,6 +50,7 @@ module Aws::EMR
     #                   },
     #                 },
     #               ],
+    #               custom_ami_id: "XmlStringMaxLen256",
     #             },
     #           ],
     #           launch_specifications: {
@@ -186,6 +187,7 @@ module Aws::EMR
     #                 },
     #               ],
     #             },
+    #             custom_ami_id: "XmlStringMaxLen256",
     #           },
     #         ],
     #         job_flow_id: "XmlStringMaxLen256", # required
@@ -899,14 +901,13 @@ module Aws::EMR
     #   actions, regardless of IAM permissions policies attached to other
     #   IAM principals.
     #
-    #   The default value is `false` if a value is not provided when
-    #   creating a cluster using the EMR API RunJobFlow command or the CLI
-    #   [create-cluster][1] command. The default value is `true` when a
-    #   cluster is created using the Management Console. IAM principals that
-    #   are allowed to perform actions on the cluster can use the
-    #   SetVisibleToAllUsers action to change the value on a running
+    #   The default value is `true` if a value is not provided when creating
+    #   a cluster using the EMR API RunJobFlow command, the CLI
+    #   [create-cluster][1] command, or the Management Console. IAM
+    #   principals that are allowed to perform actions on the cluster can
+    #   use the SetVisibleToAllUsers action to change the value on a running
     #   cluster. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMR Management Guide*.
+    #   VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
     #
     #
     #
@@ -1509,7 +1510,7 @@ module Aws::EMR
     #   Amazon Web Services SSO Identity Store. For more information, see
     #   [UserId][1] and [GroupId][2] in the *Amazon Web Services SSO
     #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
-    #   must be specified.
+    #   must be specified, but not both.
     #
     #
     #
@@ -1521,7 +1522,7 @@ module Aws::EMR
     #   The name of the user or group. For more information, see
     #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
     #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
-    #   must be specified.
+    #   must be specified, but not both.
     #
     #
     #
@@ -2690,6 +2691,7 @@ module Aws::EMR
     #                 },
     #               },
     #             ],
+    #             custom_ami_id: "XmlStringMaxLen256",
     #           },
     #         ],
     #         launch_specifications: {
@@ -3086,6 +3088,10 @@ module Aws::EMR
     #   PutAutoScalingPolicy.
     #   @return [Types::AutoScalingPolicyDescription]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the provisioned instance group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroup AWS API Documentation
     #
     class InstanceGroup < Struct.new(
@@ -3105,7 +3111,8 @@ module Aws::EMR
       :ebs_block_devices,
       :ebs_optimized,
       :shrink_policy,
-      :auto_scaling_policy)
+      :auto_scaling_policy,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3184,6 +3191,7 @@ module Aws::EMR
     #             },
     #           ],
     #         },
+    #         custom_ami_id: "XmlStringMaxLen256",
     #       }
     #
     # @!attribute [rw] name
@@ -3236,6 +3244,10 @@ module Aws::EMR
     #   PutAutoScalingPolicy.
     #   @return [Types::AutoScalingPolicy]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the provisioned instance group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupConfig AWS API Documentation
     #
     class InstanceGroupConfig < Struct.new(
@@ -3247,7 +3259,8 @@ module Aws::EMR
       :instance_count,
       :configurations,
       :ebs_configuration,
-      :auto_scaling_policy)
+      :auto_scaling_policy,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3314,6 +3327,10 @@ module Aws::EMR
     #   The date/time the instance group was terminated.
     #   @return [Time]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the provisioned instance group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupDetail AWS API Documentation
     #
     class InstanceGroupDetail < Struct.new(
@@ -3330,7 +3347,8 @@ module Aws::EMR
       :creation_date_time,
       :start_date_time,
       :ready_date_time,
-      :end_date_time)
+      :end_date_time,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3621,6 +3639,7 @@ module Aws::EMR
     #             },
     #           },
     #         ],
+    #         custom_ami_id: "XmlStringMaxLen256",
     #       }
     #
     # @!attribute [rw] instance_type
@@ -3661,6 +3680,10 @@ module Aws::EMR
     #   and software that run on the cluster.
     #   @return [Array<Types::Configuration>]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the instance type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeConfig AWS API Documentation
     #
     class InstanceTypeConfig < Struct.new(
@@ -3669,7 +3692,8 @@ module Aws::EMR
       :bid_price,
       :bid_price_as_percentage_of_on_demand_price,
       :ebs_configuration,
-      :configurations)
+      :configurations,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3721,6 +3745,10 @@ module Aws::EMR
     #   EBS-optimized.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the instance type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeSpecification AWS API Documentation
     #
     class InstanceTypeSpecification < Struct.new(
@@ -3730,7 +3758,8 @@ module Aws::EMR
       :bid_price_as_percentage_of_on_demand_price,
       :configurations,
       :ebs_block_devices,
-      :ebs_optimized)
+      :ebs_optimized,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3831,14 +3860,13 @@ module Aws::EMR
     #   and the account root user can perform EMR actions, regardless of IAM
     #   permissions policies attached to other IAM principals.
     #
-    #   The default value is `false` if a value is not provided when
-    #   creating a cluster using the EMR API RunJobFlow command or the CLI
-    #   [create-cluster][1] command. The default value is `true` when a
-    #   cluster is created using the Management Console. IAM principals that
-    #   are authorized to perform actions on the cluster can use the
-    #   SetVisibleToAllUsers action to change the value on a running
+    #   The default value is `true` if a value is not provided when creating
+    #   a cluster using the EMR API RunJobFlow command, the CLI
+    #   [create-cluster][1] command, or the Management Console. IAM
+    #   principals that are authorized to perform actions on the cluster can
+    #   use the SetVisibleToAllUsers action to change the value on a running
     #   cluster. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMR Management Guide*.
+    #   VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
     #
     #
     #
@@ -4026,6 +4054,7 @@ module Aws::EMR
     #                 },
     #               ],
     #             },
+    #             custom_ami_id: "XmlStringMaxLen256",
     #           },
     #         ],
     #         instance_fleets: [
@@ -4064,6 +4093,7 @@ module Aws::EMR
     #                     },
     #                   },
     #                 ],
+    #                 custom_ami_id: "XmlStringMaxLen256",
     #               },
     #             ],
     #             launch_specifications: {
@@ -4814,9 +4844,9 @@ module Aws::EMR
     #   which is usually the case for the first request of
     #   ListReleaseLabels, the first page of results are determined by other
     #   filtering parameters or by the latest version. The
-    #   `ListReleaseLabels` request fails if the identity (AWS AccountID)
-    #   and all filtering parameters are different from the original
-    #   request, or if the `NextToken` is expired or tampered with.
+    #   `ListReleaseLabels` request fails if the identity (account ID) and
+    #   all filtering parameters are different from the original request, or
+    #   if the `NextToken` is expired or tampered with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6016,6 +6046,7 @@ module Aws::EMR
     #                   },
     #                 ],
     #               },
+    #               custom_ami_id: "XmlStringMaxLen256",
     #             },
     #           ],
     #           instance_fleets: [
@@ -6054,6 +6085,7 @@ module Aws::EMR
     #                       },
     #                     },
     #                   ],
+    #                   custom_ami_id: "XmlStringMaxLen256",
     #                 },
     #               ],
     #               launch_specifications: {
@@ -6315,7 +6347,7 @@ module Aws::EMR
     # @!attribute [rw] visible_to_all_users
     #   Set this value to `true` so that IAM principals in the account
     #   associated with the cluster can perform EMR actions on the cluster
-    #   that their IAM policies allow. This value defaults to `false` for
+    #   that their IAM policies allow. This value defaults to `true` for
     #   clusters created using the EMR API or the CLI [create-cluster][1]
     #   command.
     #
@@ -6323,7 +6355,7 @@ module Aws::EMR
     #   and the account root user can perform EMR actions for the cluster,
     #   regardless of the IAM permissions policies attached to other IAM
     #   principals. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMR Management Guide*.
+    #   VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
     #
     #
     #

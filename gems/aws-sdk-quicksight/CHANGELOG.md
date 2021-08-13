@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-08-13)
+------------------
+
+* Feature - Documentation updates for QuickSight.
+
 1.50.0 (2021-07-30)
 ------------------
 

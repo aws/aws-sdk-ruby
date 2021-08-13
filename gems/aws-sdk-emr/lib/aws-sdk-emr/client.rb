@@ -395,6 +395,7 @@ module Aws::EMR
     #               },
     #             },
     #           ],
+    #           custom_ami_id: "XmlStringMaxLen256",
     #         },
     #       ],
     #       launch_specifications: {
@@ -518,6 +519,7 @@ module Aws::EMR
     #             },
     #           ],
     #         },
+    #         custom_ami_id: "XmlStringMaxLen256",
     #       },
     #     ],
     #     job_flow_id: "XmlStringMaxLen256", # required
@@ -856,7 +858,7 @@ module Aws::EMR
     #   Amazon Web Services SSO Identity Store. For more information, see
     #   [UserId][1] and [GroupId][2] in the *Amazon Web Services SSO Identity
     #   Store API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   specified, but not both.
     #
     #
     #
@@ -867,7 +869,7 @@ module Aws::EMR
     #   The name of the user or group. For more information, see [UserName][1]
     #   and [DisplayName][2] in the *Amazon Web Services SSO Identity Store
     #   API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   specified, but not both.
     #
     #
     #
@@ -1187,6 +1189,7 @@ module Aws::EMR
     #   resp.job_flows[0].instances.instance_groups[0].start_date_time #=> Time
     #   resp.job_flows[0].instances.instance_groups[0].ready_date_time #=> Time
     #   resp.job_flows[0].instances.instance_groups[0].end_date_time #=> Time
+    #   resp.job_flows[0].instances.instance_groups[0].custom_ami_id #=> String
     #   resp.job_flows[0].instances.normalized_instance_hours #=> Integer
     #   resp.job_flows[0].instances.ec2_key_name #=> String
     #   resp.job_flows[0].instances.ec2_subnet_id #=> String
@@ -1749,6 +1752,7 @@ module Aws::EMR
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.size_in_gb #=> Integer
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].device #=> String
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_optimized #=> Boolean
+    #   resp.instance_fleets[0].instance_type_specifications[0].custom_ami_id #=> String
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_duration_minutes #=> Integer
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_action #=> String, one of "SWITCH_TO_ON_DEMAND", "TERMINATE_CLUSTER"
     #   resp.instance_fleets[0].launch_specifications.spot_specification.block_duration_minutes #=> Integer
@@ -1855,6 +1859,7 @@ module Aws::EMR
     #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions #=> Array
     #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
     #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
+    #   resp.instance_groups[0].custom_ami_id #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroups AWS API Documentation
@@ -2049,9 +2054,9 @@ module Aws::EMR
     #   which is usually the case for the first request of ListReleaseLabels,
     #   the first page of results are determined by other filtering parameters
     #   or by the latest version. The `ListReleaseLabels` request fails if the
-    #   identity (AWS AccountID) and all filtering parameters are different
-    #   from the original request, or if the `NextToken` is expired or
-    #   tampered with.
+    #   identity (account ID) and all filtering parameters are different from
+    #   the original request, or if the `NextToken` is expired or tampered
+    #   with.
     #
     # @option params [Integer] :max_results
     #   Defines the maximum number of release labels to return in a single
@@ -2862,7 +2867,7 @@ module Aws::EMR
     # @option params [Boolean] :visible_to_all_users
     #   Set this value to `true` so that IAM principals in the account
     #   associated with the cluster can perform EMR actions on the cluster
-    #   that their IAM policies allow. This value defaults to `false` for
+    #   that their IAM policies allow. This value defaults to `true` for
     #   clusters created using the EMR API or the CLI [create-cluster][1]
     #   command.
     #
@@ -2870,7 +2875,7 @@ module Aws::EMR
     #   and the account root user can perform EMR actions for the cluster,
     #   regardless of the IAM permissions policies attached to other IAM
     #   principals. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMR Management Guide*.
+    #   VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
     #
     #
     #
@@ -3056,6 +3061,7 @@ module Aws::EMR
     #               },
     #             ],
     #           },
+    #           custom_ami_id: "XmlStringMaxLen256",
     #         },
     #       ],
     #       instance_fleets: [
@@ -3094,6 +3100,7 @@ module Aws::EMR
     #                   },
     #                 },
     #               ],
+    #               custom_ami_id: "XmlStringMaxLen256",
     #             },
     #           ],
     #           launch_specifications: {
@@ -3302,7 +3309,7 @@ module Aws::EMR
     # the RunJobFlowInput$VisibleToAllUsers parameter.
     #
     # For more information, see [Understanding the EMR Cluster
-    # VisibleToAllUsers Setting][1] in the *Amazon EMR Management Guide*.
+    # VisibleToAllUsers Setting][1] in the *Amazon EMRManagement Guide*.
     #
     #
     #
@@ -3584,7 +3591,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

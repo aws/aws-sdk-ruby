@@ -97,6 +97,7 @@ module Aws::CustomerProfiles
     MergeProfilesRequest = Shapes::StructureShape.new(name: 'MergeProfilesRequest')
     MergeProfilesResponse = Shapes::StructureShape.new(name: 'MergeProfilesResponse')
     Object = Shapes::StringShape.new(name: 'Object')
+    ObjectFilter = Shapes::StructureShape.new(name: 'ObjectFilter')
     ObjectTypeField = Shapes::StructureShape.new(name: 'ObjectTypeField')
     ObjectTypeKey = Shapes::StructureShape.new(name: 'ObjectTypeKey')
     ObjectTypeKeyList = Shapes::ListShape.new(name: 'ObjectTypeKeyList')
@@ -513,6 +514,7 @@ module Aws::CustomerProfiles
     ListProfileObjectsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     ListProfileObjectsRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
     ListProfileObjectsRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
+    ListProfileObjectsRequest.add_member(:object_filter, Shapes::ShapeRef.new(shape: ObjectFilter, location_name: "ObjectFilter"))
     ListProfileObjectsRequest.struct_class = Types::ListProfileObjectsRequest
 
     ListProfileObjectsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ProfileObjectList, location_name: "Items"))
@@ -548,6 +550,10 @@ module Aws::CustomerProfiles
 
     MergeProfilesResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     MergeProfilesResponse.struct_class = Types::MergeProfilesResponse
+
+    ObjectFilter.add_member(:key_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "KeyName"))
+    ObjectFilter.add_member(:values, Shapes::ShapeRef.new(shape: requestValueList, required: true, location_name: "Values"))
+    ObjectFilter.struct_class = Types::ObjectFilter
 
     ObjectTypeField.add_member(:source, Shapes::ShapeRef.new(shape: text, location_name: "Source"))
     ObjectTypeField.add_member(:target, Shapes::ShapeRef.new(shape: text, location_name: "Target"))
