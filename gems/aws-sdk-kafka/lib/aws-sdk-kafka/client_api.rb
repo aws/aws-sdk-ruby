@@ -67,6 +67,7 @@ module Aws::Kafka
     GetBootstrapBrokersResponse = Shapes::StructureShape.new(name: 'GetBootstrapBrokersResponse')
     GetCompatibleKafkaVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleKafkaVersionsRequest')
     GetCompatibleKafkaVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleKafkaVersionsResponse')
+    Iam = Shapes::StructureShape.new(name: 'Iam')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JmxExporter = Shapes::StructureShape.new(name: 'JmxExporter')
     JmxExporterInfo = Shapes::StructureShape.new(name: 'JmxExporterInfo')
@@ -393,6 +394,7 @@ module Aws::Kafka
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerString"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringTls"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_scram, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslScram"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_iam, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslIam"))
     GetBootstrapBrokersResponse.struct_class = Types::GetBootstrapBrokersResponse
 
     GetCompatibleKafkaVersionsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "clusterArn"))
@@ -400,6 +402,9 @@ module Aws::Kafka
 
     GetCompatibleKafkaVersionsResponse.add_member(:compatible_kafka_versions, Shapes::ShapeRef.new(shape: __listOfCompatibleKafkaVersion, location_name: "compatibleKafkaVersions"))
     GetCompatibleKafkaVersionsResponse.struct_class = Types::GetCompatibleKafkaVersionsResponse
+
+    Iam.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
+    Iam.struct_class = Types::Iam
 
     InternalServerErrorException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -541,6 +546,7 @@ module Aws::Kafka
     S3.struct_class = Types::S3
 
     Sasl.add_member(:scram, Shapes::ShapeRef.new(shape: Scram, location_name: "scram"))
+    Sasl.add_member(:iam, Shapes::ShapeRef.new(shape: Iam, location_name: "iam"))
     Sasl.struct_class = Types::Sasl
 
     Scram.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))

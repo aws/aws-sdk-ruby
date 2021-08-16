@@ -1029,7 +1029,7 @@ module Aws::ServiceCatalog
 
     ListAcceptedPortfolioSharesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListAcceptedPortfolioSharesInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListAcceptedPortfolioSharesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListAcceptedPortfolioSharesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListAcceptedPortfolioSharesInput.add_member(:portfolio_share_type, Shapes::ShapeRef.new(shape: PortfolioShareType, location_name: "PortfolioShareType"))
     ListAcceptedPortfolioSharesInput.struct_class = Types::ListAcceptedPortfolioSharesInput
 
@@ -1093,7 +1093,7 @@ module Aws::ServiceCatalog
     ListPortfoliosForProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListPortfoliosForProductInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
     ListPortfoliosForProductInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListPortfoliosForProductInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListPortfoliosForProductInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListPortfoliosForProductInput.struct_class = Types::ListPortfoliosForProductInput
 
     ListPortfoliosForProductOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
@@ -1102,7 +1102,7 @@ module Aws::ServiceCatalog
 
     ListPortfoliosInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListPortfoliosInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListPortfoliosInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListPortfoliosInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListPortfoliosInput.struct_class = Types::ListPortfoliosInput
 
     ListPortfoliosOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
@@ -1582,7 +1582,7 @@ module Aws::ServiceCatalog
 
     SearchProductsInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     SearchProductsInput.add_member(:filters, Shapes::ShapeRef.new(shape: ProductViewFilters, location_name: "Filters"))
-    SearchProductsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    SearchProductsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     SearchProductsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: ProductViewSortBy, location_name: "SortBy"))
     SearchProductsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     SearchProductsInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))

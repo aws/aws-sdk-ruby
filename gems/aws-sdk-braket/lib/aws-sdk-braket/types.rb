@@ -173,6 +173,19 @@ module Aws::Braket
       include Aws::Structure
     end
 
+    # The specified device has been retired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/DeviceRetiredException AWS API Documentation
+    #
+    class DeviceRetiredException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Includes information about the device.
     #
     # @!attribute [rw] device_arn
@@ -706,7 +719,7 @@ module Aws::Braket
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   pecify the keys for the tags to remove from the resource.
+    #   Specify the keys for the tags to remove from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UntagResourceRequest AWS API Documentation

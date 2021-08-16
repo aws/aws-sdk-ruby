@@ -544,11 +544,11 @@ module Aws::EFS
     #   used to protect the encrypted file system.
     #
     # @option params [String] :kms_key_id
-    #   The ID of the AWS KMS CMK to be used to protect the encrypted file
-    #   system. This parameter is only required if you want to use a
-    #   non-default CMK. If this parameter is not specified, the default CMK
-    #   for Amazon EFS is used. This ID can be in one of the following
-    #   formats:
+    #   The ID of the AWS KMS CMK that you want to use to protect the
+    #   encrypted file system. This parameter is only required if you want to
+    #   use a non-default KMS key. If this parameter is not specified, the
+    #   default CMK for Amazon EFS is used. This ID can be in one of the
+    #   following formats:
     #
     #   * Key ID - A unique identifier of the key, for example
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
@@ -565,8 +565,8 @@ module Aws::EFS
     #   If `KmsKeyId` is specified, the CreateFileSystemRequest$Encrypted
     #   parameter must be set to true.
     #
-    #   EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with
-    #   EFS file systems.
+    #   EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS
+    #   keys with EFS file systems.
     #
     # @option params [String] :throughput_mode
     #   Specifies the throughput mode for the file system, either `bursting`
@@ -960,6 +960,11 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # <note markdown="1"> DEPRECATED - CreateTags is deprecated and not maintained. Please use
+    # the API action to create tags for EFS resources.
+    #
+    #  </note>
+    #
     # Creates or overwrites tags associated with a file system. Each tag is
     # a key-value pair. If a tag key specified in the request already exists
     # on the file system, this operation overwrites its value with the value
@@ -1188,6 +1193,11 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # <note markdown="1"> DEPRECATED - DeleteTags is deprecated and not maintained. Please use
+    # the API action to remove tags from EFS resources.
+    #
+    #  </note>
+    #
     # Deletes the specified tags from a file system. If the `DeleteTags`
     # request includes a tag key that doesn't exist, Amazon EFS ignores it
     # and doesn't cause an error. For more information about tags and
@@ -1309,6 +1319,40 @@ module Aws::EFS
     # @param [Hash] params ({})
     def describe_access_points(params = {}, options = {})
       req = build_request(:describe_access_points, params)
+      req.send_request(options)
+    end
+
+    # @option params [String] :next_token
+    #   Token used for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   Max results used for pagination.
+    #
+    # @return [Types::DescribeAccountPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountPreferencesResponse#resource_id_preference #resource_id_preference} => Types::ResourceIdPreference
+    #   * {Types::DescribeAccountPreferencesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_preferences({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_id_preference.resource_id_type #=> String, one of "LONG_ID", "SHORT_ID"
+    #   resp.resource_id_preference.resources #=> Array
+    #   resp.resource_id_preference.resources[0] #=> String, one of "FILE_SYSTEM", "MOUNT_TARGET"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccountPreferences AWS API Documentation
+    #
+    # @overload describe_account_preferences(params = {})
+    # @param [Hash] params ({})
+    def describe_account_preferences(params = {}, options = {})
+      req = build_request(:describe_account_preferences, params)
       req.send_request(options)
     end
 
@@ -1724,6 +1768,11 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # <note markdown="1"> DEPRECATED - The DeleteTags action is deprecated and not maintained.
+    # Please use the API action to remove tags from EFS resources.
+    #
+    #  </note>
+    #
     # Returns the tags associated with a file system. The order of tags
     # returned in the response of one `DescribeTags` call and the order of
     # tags returned across the responses of a multiple-call iteration (when
@@ -1814,8 +1863,9 @@ module Aws::EFS
     #   the response. The default value is 100.
     #
     # @option params [String] :next_token
-    #   You can use `NextToken` in a subsequent request to fetch the next page
-    #   of access point descriptions if the response payload was paginated.
+    #   (Optional) You can use `NextToken` in a subsequent request to fetch
+    #   the next page of access point descriptions if the response payload was
+    #   paginated.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1899,6 +1949,35 @@ module Aws::EFS
     # @param [Hash] params ({})
     def modify_mount_target_security_groups(params = {}, options = {})
       req = build_request(:modify_mount_target_security_groups, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_id_type
+    #   A preference indicating a choice to use 63bit/32bit IDs for all
+    #   applicable resources.
+    #
+    # @return [Types::PutAccountPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountPreferencesResponse#resource_id_preference #resource_id_preference} => Types::ResourceIdPreference
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_preferences({
+    #     resource_id_type: "LONG_ID", # required, accepts LONG_ID, SHORT_ID
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_id_preference.resource_id_type #=> String, one of "LONG_ID", "SHORT_ID"
+    #   resp.resource_id_preference.resources #=> Array
+    #   resp.resource_id_preference.resources[0] #=> String, one of "FILE_SYSTEM", "MOUNT_TARGET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutAccountPreferences AWS API Documentation
+    #
+    # @overload put_account_preferences(params = {})
+    # @param [Hash] params ({})
+    def put_account_preferences(params = {}, options = {})
+      req = build_request(:put_account_preferences, params)
       req.send_request(options)
     end
 
@@ -2112,6 +2191,8 @@ module Aws::EFS
     #   The ID specifying the EFS resource that you want to create a tag for.
     #
     # @option params [required, Array<Types::Tag>] :tags
+    #   An array of `Tag` objects to add. Each `Tag` object is a key-value
+    #   pair.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2262,7 +2343,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

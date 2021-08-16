@@ -1,6 +1,49 @@
 Unreleased Changes
 ------------------
 
+3.108.0 (2021-08-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-snowdevicemanagement` gem.
+
+3.107.0 (2021-08-06)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkmessaging` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkidentity` gem.
+
+3.106.0 (2021-07-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-route53recoveryreadiness` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-route53recoverycontrolconfig` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-route53recoverycluster` gem.
+
+3.105.0 (2021-06-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-proton` gem.
+
+3.104.0 (2021-05-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-apprunner` gem.
+
+3.103.0 (2021-05-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-applicationcostprofiler` gem.
+
+3.102.0 (2021-05-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssmincidents` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ssmcontacts` gem.
+
 3.101.0 (2021-05-03)
 ------------------
 

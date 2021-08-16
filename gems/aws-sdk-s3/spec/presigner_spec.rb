@@ -16,17 +16,9 @@ module Aws
         )
       end
 
-      let(:now) { double('now') }
-      let(:utc) { double('utc-time') }
-      let(:datetime) { '20130524T000000Z' }
-
       subject { Presigner.new(client: client) }
 
-      before do
-        allow(Time).to receive(:now).and_return(now)
-        allow(now).to receive(:utc).and_return(utc)
-        allow(utc).to receive(:strftime).and_return(datetime)
-      end
+      before { allow(Time).to receive(:now).and_return(Time.utc(2021, 8, 27)) }
 
       describe '#initialize' do
         it 'accepts an injected S3 client' do
@@ -63,11 +55,11 @@ module Aws
         it 'can presign #get_object to spec' do
           expected_url = 'https://examplebucket.s3.amazonaws.com/test.txt?'\
                          'X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential='\
-                         'ACCESS_KEY_ID%2F20130524%2Fus-east-1%2Fs3%2F'\
-                         'aws4_request&X-Amz-Date=20130524T000000Z'\
+                         'ACCESS_KEY_ID%2F20210827%2Fus-east-1%2Fs3%2F'\
+                         'aws4_request&X-Amz-Date=20210827T000000Z'\
                          '&X-Amz-Expires=86400&X-Amz-SignedHeaders=host'\
-                         '&X-Amz-Signature=5da845a038b194a3826362ecd698f78fb1e'\
-                         '26cb44b25af49263f0a0983870f57'
+                         '&X-Amz-Signature=cd4953fc4c1ebb97c3ca18ce433b4bc9ff9'\
+                         'f9f6a54eb47c31d908e0e7ecf524c'
           actual_url = subject.presigned_url(
             :get_object,
             bucket: 'examplebucket',
@@ -186,11 +178,11 @@ module Aws
         it 'can presign #get_object to spec' do
           expected_url = 'https://examplebucket.s3.amazonaws.com/test.txt?'\
                          'X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential='\
-                         'ACCESS_KEY_ID%2F20130524%2Fus-east-1%2Fs3%2F'\
-                         'aws4_request&X-Amz-Date=20130524T000000Z'\
+                         'ACCESS_KEY_ID%2F20210827%2Fus-east-1%2Fs3%2F'\
+                         'aws4_request&X-Amz-Date=20210827T000000Z'\
                          '&X-Amz-Expires=86400&X-Amz-SignedHeaders=host'\
-                         '&X-Amz-Signature=5da845a038b194a3826362ecd698f78fb1e'\
-                         '26cb44b25af49263f0a0983870f57'
+                         '&X-Amz-Signature=cd4953fc4c1ebb97c3ca18ce433b4bc9ff9'\
+                         'f9f6a54eb47c31d908e0e7ecf524c'
           actual_url, = subject.presigned_request(
             :get_object,
             bucket: 'examplebucket',
@@ -291,30 +283,50 @@ module Aws
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
           expected_service = 's3-outposts'
-          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2Fus-west-2%2F#{expected_service}%2Faws4_request")
+          expect(url).to include(
+            "20210827%2Fus-west-2%2F#{expected_service}%2Faws4_request"
+          )
+          expect(url).to include(
+            'a944fbe2bfbae429f922746546d1c6f890649c88ba7826bd1d258ac13f327e09'
+          )
         end
 
         it 'uses the resolved-region' do
           arn_region = 'us-east-1'
           arn = "arn:aws:s3-outposts:#{arn_region}:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
           url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
-          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F#{arn_region}%2Fs3-outposts%2Faws4_request")
+          expect(url).to include(
+            "20210827%2F#{arn_region}%2Fs3-outposts%2Faws4_request"
+          )
+          expect(url).to include(
+            '7f93df0b81f80e590d95442d579bd6cf749a35ff4bbdc6373fa669b89c7fce4e'
+          )
         end
       end
 
       context 'access point ARN' do
-        it 'uses s3as the service' do
+        it 'uses s3 as the service' do
           arn = 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
           url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
           expected_service = 's3'
-          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2Fus-west-2%2F#{expected_service}%2Faws4_request")
+          expect(url).to include(
+            "20210827%2Fus-west-2%2F#{expected_service}%2Faws4_request"
+          )
+          expect(url).to include(
+            'd6b2a8840209fa40456c97ae99f9fab2526316d70f3ebaa75c22d654b90e9da9'
+          )
         end
 
         it 'uses the resolved-region' do
           arn_region = 'us-east-1'
           arn = "arn:aws:s3:#{arn_region}:123456789012:accesspoint/myendpoint"
           url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
-          expect(url).to include("X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F#{arn_region}%2Fs3%2Faws4_request")
+          expect(url).to include(
+            "20210827%2F#{arn_region}%2Fs3%2Faws4_request"
+          )
+          expect(url).to include(
+            '5a27899693cea5f6ccf9dc26a3e44c4a3d45ae57a441954fb4b7cdc8c2ef45ea'
+          )
         end
       end
     end

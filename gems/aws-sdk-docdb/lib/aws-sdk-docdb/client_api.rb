@@ -47,6 +47,8 @@ module Aws::DocDB
     CreateDBSubnetGroupResult = Shapes::StructureShape.new(name: 'CreateDBSubnetGroupResult')
     CreateEventSubscriptionMessage = Shapes::StructureShape.new(name: 'CreateEventSubscriptionMessage')
     CreateEventSubscriptionResult = Shapes::StructureShape.new(name: 'CreateEventSubscriptionResult')
+    CreateGlobalClusterMessage = Shapes::StructureShape.new(name: 'CreateGlobalClusterMessage')
+    CreateGlobalClusterResult = Shapes::StructureShape.new(name: 'CreateGlobalClusterResult')
     DBCluster = Shapes::StructureShape.new(name: 'DBCluster')
     DBClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterAlreadyExistsFault')
     DBClusterList = Shapes::ListShape.new(name: 'DBClusterList')
@@ -106,6 +108,8 @@ module Aws::DocDB
     DeleteDBSubnetGroupMessage = Shapes::StructureShape.new(name: 'DeleteDBSubnetGroupMessage')
     DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
     DeleteEventSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionResult')
+    DeleteGlobalClusterMessage = Shapes::StructureShape.new(name: 'DeleteGlobalClusterMessage')
+    DeleteGlobalClusterResult = Shapes::StructureShape.new(name: 'DeleteGlobalClusterResult')
     DescribeCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeCertificatesMessage')
     DescribeDBClusterParameterGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterParameterGroupsMessage')
     DescribeDBClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterParametersMessage')
@@ -121,6 +125,7 @@ module Aws::DocDB
     DescribeEventCategoriesMessage = Shapes::StructureShape.new(name: 'DescribeEventCategoriesMessage')
     DescribeEventSubscriptionsMessage = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsMessage')
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
+    DescribeGlobalClustersMessage = Shapes::StructureShape.new(name: 'DescribeGlobalClustersMessage')
     DescribeOrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableDBInstanceOptionsMessage')
     DescribePendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'DescribePendingMaintenanceActionsMessage')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
@@ -141,6 +146,15 @@ module Aws::DocDB
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    GlobalCluster = Shapes::StructureShape.new(name: 'GlobalCluster')
+    GlobalClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'GlobalClusterAlreadyExistsFault')
+    GlobalClusterIdentifier = Shapes::StringShape.new(name: 'GlobalClusterIdentifier')
+    GlobalClusterList = Shapes::ListShape.new(name: 'GlobalClusterList')
+    GlobalClusterMember = Shapes::StructureShape.new(name: 'GlobalClusterMember')
+    GlobalClusterMemberList = Shapes::ListShape.new(name: 'GlobalClusterMemberList')
+    GlobalClusterNotFoundFault = Shapes::StructureShape.new(name: 'GlobalClusterNotFoundFault')
+    GlobalClusterQuotaExceededFault = Shapes::StructureShape.new(name: 'GlobalClusterQuotaExceededFault')
+    GlobalClustersMessage = Shapes::StructureShape.new(name: 'GlobalClustersMessage')
     InstanceQuotaExceededFault = Shapes::StructureShape.new(name: 'InstanceQuotaExceededFault')
     InsufficientDBClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientDBClusterCapacityFault')
     InsufficientDBInstanceCapacityFault = Shapes::StructureShape.new(name: 'InsufficientDBInstanceCapacityFault')
@@ -156,6 +170,7 @@ module Aws::DocDB
     InvalidDBSubnetGroupStateFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetGroupStateFault')
     InvalidDBSubnetStateFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetStateFault')
     InvalidEventSubscriptionStateFault = Shapes::StructureShape.new(name: 'InvalidEventSubscriptionStateFault')
+    InvalidGlobalClusterStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalClusterStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
@@ -174,6 +189,8 @@ module Aws::DocDB
     ModifyDBSubnetGroupResult = Shapes::StructureShape.new(name: 'ModifyDBSubnetGroupResult')
     ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
     ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
+    ModifyGlobalClusterMessage = Shapes::StructureShape.new(name: 'ModifyGlobalClusterMessage')
+    ModifyGlobalClusterResult = Shapes::StructureShape.new(name: 'ModifyGlobalClusterResult')
     OrderableDBInstanceOption = Shapes::StructureShape.new(name: 'OrderableDBInstanceOption')
     OrderableDBInstanceOptionsList = Shapes::ListShape.new(name: 'OrderableDBInstanceOptionsList')
     OrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'OrderableDBInstanceOptionsMessage')
@@ -185,8 +202,12 @@ module Aws::DocDB
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
     PendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'PendingMaintenanceActionsMessage')
     PendingModifiedValues = Shapes::StructureShape.new(name: 'PendingModifiedValues')
+    ReadReplicaIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaIdentifierList')
+    ReadersArnList = Shapes::ListShape.new(name: 'ReadersArnList')
     RebootDBInstanceMessage = Shapes::StructureShape.new(name: 'RebootDBInstanceMessage')
     RebootDBInstanceResult = Shapes::StructureShape.new(name: 'RebootDBInstanceResult')
+    RemoveFromGlobalClusterMessage = Shapes::StructureShape.new(name: 'RemoveFromGlobalClusterMessage')
+    RemoveFromGlobalClusterResult = Shapes::StructureShape.new(name: 'RemoveFromGlobalClusterResult')
     RemoveSourceIdentifierFromSubscriptionMessage = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionMessage')
     RemoveSourceIdentifierFromSubscriptionResult = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionResult')
     RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
@@ -309,8 +330,8 @@ module Aws::DocDB
     CreateDBClusterMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
     CreateDBClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     CreateDBClusterMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
-    CreateDBClusterMessage.add_member(:master_username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MasterUsername"))
-    CreateDBClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MasterUserPassword"))
+    CreateDBClusterMessage.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
+    CreateDBClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserPassword"))
     CreateDBClusterMessage.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
     CreateDBClusterMessage.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
     CreateDBClusterMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -319,6 +340,7 @@ module Aws::DocDB
     CreateDBClusterMessage.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: String, location_name: "PreSignedUrl"))
     CreateDBClusterMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     CreateDBClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    CreateDBClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, location_name: "GlobalClusterIdentifier"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
 
@@ -377,6 +399,18 @@ module Aws::DocDB
     CreateEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
     CreateEventSubscriptionResult.struct_class = Types::CreateEventSubscriptionResult
 
+    CreateGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
+    CreateGlobalClusterMessage.add_member(:source_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBClusterIdentifier"))
+    CreateGlobalClusterMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    CreateGlobalClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    CreateGlobalClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    CreateGlobalClusterMessage.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    CreateGlobalClusterMessage.add_member(:storage_encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "StorageEncrypted"))
+    CreateGlobalClusterMessage.struct_class = Types::CreateGlobalClusterMessage
+
+    CreateGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
+    CreateGlobalClusterResult.struct_class = Types::CreateGlobalClusterResult
+
     DBCluster.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     DBCluster.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
     DBCluster.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
@@ -395,6 +429,8 @@ module Aws::DocDB
     DBCluster.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
     DBCluster.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
     DBCluster.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
+    DBCluster.add_member(:replication_source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationSourceIdentifier"))
+    DBCluster.add_member(:read_replica_identifiers, Shapes::ShapeRef.new(shape: ReadReplicaIdentifierList, location_name: "ReadReplicaIdentifiers"))
     DBCluster.add_member(:db_cluster_members, Shapes::ShapeRef.new(shape: DBClusterMemberList, location_name: "DBClusterMembers"))
     DBCluster.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: VpcSecurityGroupMembershipList, location_name: "VpcSecurityGroups"))
     DBCluster.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "HostedZoneId"))
@@ -626,6 +662,12 @@ module Aws::DocDB
     DeleteEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
     DeleteEventSubscriptionResult.struct_class = Types::DeleteEventSubscriptionResult
 
+    DeleteGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
+    DeleteGlobalClusterMessage.struct_class = Types::DeleteGlobalClusterMessage
+
+    DeleteGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
+    DeleteGlobalClusterResult.struct_class = Types::DeleteGlobalClusterResult
+
     DescribeCertificatesMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
     DescribeCertificatesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeCertificatesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -720,6 +762,12 @@ module Aws::DocDB
     DescribeEventsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeEventsMessage.struct_class = Types::DescribeEventsMessage
 
+    DescribeGlobalClustersMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, location_name: "GlobalClusterIdentifier"))
+    DescribeGlobalClustersMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeGlobalClustersMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeGlobalClustersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeGlobalClustersMessage.struct_class = Types::DescribeGlobalClustersMessage
+
     DescribeOrderableDBInstanceOptionsMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
     DescribeOrderableDBInstanceOptionsMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     DescribeOrderableDBInstanceOptionsMessage.add_member(:db_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceClass"))
@@ -806,6 +854,37 @@ module Aws::DocDB
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: String, location_name: "Value")
 
+    GlobalCluster.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, location_name: "GlobalClusterIdentifier"))
+    GlobalCluster.add_member(:global_cluster_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterResourceId"))
+    GlobalCluster.add_member(:global_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterArn"))
+    GlobalCluster.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    GlobalCluster.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    GlobalCluster.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    GlobalCluster.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    GlobalCluster.add_member(:storage_encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "StorageEncrypted"))
+    GlobalCluster.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    GlobalCluster.add_member(:global_cluster_members, Shapes::ShapeRef.new(shape: GlobalClusterMemberList, location_name: "GlobalClusterMembers"))
+    GlobalCluster.struct_class = Types::GlobalCluster
+
+    GlobalClusterAlreadyExistsFault.struct_class = Types::GlobalClusterAlreadyExistsFault
+
+    GlobalClusterList.member = Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalClusterMember")
+
+    GlobalClusterMember.add_member(:db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterArn"))
+    GlobalClusterMember.add_member(:readers, Shapes::ShapeRef.new(shape: ReadersArnList, location_name: "Readers"))
+    GlobalClusterMember.add_member(:is_writer, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsWriter"))
+    GlobalClusterMember.struct_class = Types::GlobalClusterMember
+
+    GlobalClusterMemberList.member = Shapes::ShapeRef.new(shape: GlobalClusterMember, location_name: "GlobalClusterMember")
+
+    GlobalClusterNotFoundFault.struct_class = Types::GlobalClusterNotFoundFault
+
+    GlobalClusterQuotaExceededFault.struct_class = Types::GlobalClusterQuotaExceededFault
+
+    GlobalClustersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    GlobalClustersMessage.add_member(:global_clusters, Shapes::ShapeRef.new(shape: GlobalClusterList, location_name: "GlobalClusters"))
+    GlobalClustersMessage.struct_class = Types::GlobalClustersMessage
+
     InstanceQuotaExceededFault.struct_class = Types::InstanceQuotaExceededFault
 
     InsufficientDBClusterCapacityFault.struct_class = Types::InsufficientDBClusterCapacityFault
@@ -831,6 +910,8 @@ module Aws::DocDB
     InvalidDBSubnetStateFault.struct_class = Types::InvalidDBSubnetStateFault
 
     InvalidEventSubscriptionStateFault.struct_class = Types::InvalidEventSubscriptionStateFault
+
+    InvalidGlobalClusterStateFault.struct_class = Types::InvalidGlobalClusterStateFault
 
     InvalidRestoreFault.struct_class = Types::InvalidRestoreFault
 
@@ -910,6 +991,14 @@ module Aws::DocDB
     ModifyEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
     ModifyEventSubscriptionResult.struct_class = Types::ModifyEventSubscriptionResult
 
+    ModifyGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
+    ModifyGlobalClusterMessage.add_member(:new_global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, location_name: "NewGlobalClusterIdentifier"))
+    ModifyGlobalClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    ModifyGlobalClusterMessage.struct_class = Types::ModifyGlobalClusterMessage
+
+    ModifyGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
+    ModifyGlobalClusterResult.struct_class = Types::ModifyGlobalClusterResult
+
     OrderableDBInstanceOption.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     OrderableDBInstanceOption.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     OrderableDBInstanceOption.add_member(:db_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceClass"))
@@ -974,12 +1063,23 @@ module Aws::DocDB
     PendingModifiedValues.add_member(:pending_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: PendingCloudwatchLogsExports, location_name: "PendingCloudwatchLogsExports"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
+    ReadReplicaIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaIdentifier")
+
+    ReadersArnList.member = Shapes::ShapeRef.new(shape: String)
+
     RebootDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     RebootDBInstanceMessage.add_member(:force_failover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceFailover"))
     RebootDBInstanceMessage.struct_class = Types::RebootDBInstanceMessage
 
     RebootDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     RebootDBInstanceResult.struct_class = Types::RebootDBInstanceResult
+
+    RemoveFromGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
+    RemoveFromGlobalClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DbClusterIdentifier"))
+    RemoveFromGlobalClusterMessage.struct_class = Types::RemoveFromGlobalClusterMessage
+
+    RemoveFromGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
+    RemoveFromGlobalClusterResult.struct_class = Types::RemoveFromGlobalClusterResult
 
     RemoveSourceIdentifierFromSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
     RemoveSourceIdentifierFromSubscriptionMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceIdentifier"))
@@ -1206,6 +1306,8 @@ module Aws::DocDB
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
       end)
 
       api.add_operation(:create_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1282,6 +1384,18 @@ module Aws::DocDB
         o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
       end)
 
+      api.add_operation(:create_global_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGlobalCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGlobalClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+      end)
+
       api.add_operation(:delete_db_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDBCluster"
         o.http_method = "POST"
@@ -1347,6 +1461,16 @@ module Aws::DocDB
         o.output = Shapes::ShapeRef.new(shape: DeleteEventSubscriptionResult)
         o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEventSubscriptionStateFault)
+      end)
+
+      api.add_operation(:delete_global_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGlobalCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGlobalClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
       end)
 
       api.add_operation(:describe_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -1522,6 +1646,21 @@ module Aws::DocDB
         )
       end)
 
+      api.add_operation(:describe_global_clusters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGlobalClusters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGlobalClustersMessage)
+        o.output = Shapes::ShapeRef.new(shape: GlobalClustersMessage)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_orderable_db_instance_options, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeOrderableDBInstanceOptions"
         o.http_method = "POST"
@@ -1661,6 +1800,16 @@ module Aws::DocDB
         o.errors << Shapes::ShapeRef.new(shape: SubscriptionCategoryNotFoundFault)
       end)
 
+      api.add_operation(:modify_global_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyGlobalCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyGlobalClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+      end)
+
       api.add_operation(:reboot_db_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RebootDBInstance"
         o.http_method = "POST"
@@ -1669,6 +1818,17 @@ module Aws::DocDB
         o.output = Shapes::ShapeRef.new(shape: RebootDBInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+      end)
+
+      api.add_operation(:remove_from_global_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveFromGlobalCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveFromGlobalClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: RemoveFromGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:remove_source_identifier_from_subscription, Seahorse::Model::Operation.new.tap do |o|

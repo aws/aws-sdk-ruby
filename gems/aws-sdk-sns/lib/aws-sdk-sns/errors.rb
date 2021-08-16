@@ -42,6 +42,7 @@ module Aws::SNS
   # * {KMSOptInRequired}
   # * {KMSThrottlingException}
   # * {NotFoundException}
+  # * {OptedOutException}
   # * {PlatformApplicationDisabledException}
   # * {ResourceNotFoundException}
   # * {StaleTagException}
@@ -50,6 +51,9 @@ module Aws::SNS
   # * {TagPolicyException}
   # * {ThrottledException}
   # * {TopicLimitExceededException}
+  # * {UserErrorException}
+  # * {ValidationException}
+  # * {VerificationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -282,6 +286,21 @@ module Aws::SNS
       end
     end
 
+    class OptedOutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::OptedOutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class PlatformApplicationDisabledException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -399,6 +418,56 @@ module Aws::SNS
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class UserErrorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::UserErrorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::ValidationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class VerificationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::VerificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def status
+        @data[:status]
       end
     end
 

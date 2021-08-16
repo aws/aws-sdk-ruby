@@ -356,6 +356,7 @@ module Aws::ManagedBlockchain
     Member.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Member.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
     Member.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
+    Member.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyArn"))
     Member.struct_class = Types::Member
 
     MemberConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMemberNameString, required: true, location_name: "Name"))
@@ -363,6 +364,7 @@ module Aws::ManagedBlockchain
     MemberConfiguration.add_member(:framework_configuration, Shapes::ShapeRef.new(shape: MemberFrameworkConfiguration, required: true, location_name: "FrameworkConfiguration"))
     MemberConfiguration.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: MemberLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     MemberConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
+    MemberConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "KmsKeyArn"))
     MemberConfiguration.struct_class = Types::MemberConfiguration
 
     MemberFabricAttributes.add_member(:admin_username, Shapes::ShapeRef.new(shape: UsernameString, location_name: "AdminUsername"))
@@ -451,6 +453,7 @@ module Aws::ManagedBlockchain
     Node.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Node.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
     Node.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
+    Node.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyArn"))
     Node.struct_class = Types::Node
 
     NodeConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, required: true, location_name: "InstanceType"))

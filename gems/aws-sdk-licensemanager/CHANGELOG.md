@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2021-06-23)
+------------------
+
+* Feature - AWS License Manager now allows license administrators and end users to communicate to each other by setting custom status reasons when updating the status on a granted license.
+
+1.27.0 (2021-05-18)
+------------------
+
+* Feature - AWS License Manager now supports periodic report generation.
+
 1.26.0 (2021-03-10)
 ------------------
 

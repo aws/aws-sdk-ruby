@@ -603,7 +603,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] tags
     #   The tags associated with the bundle.
     #
-    #   <note markdown="1"> To add tags at the same time that you're creating the bundle, you
+    #   <note markdown="1"> To add tags at the same time when you're creating the bundle, you
     #   must create an IAM policy that grants your IAM user permissions to
     #   use `workspaces:CreateTags`.
     #
@@ -2095,6 +2095,7 @@ module Aws::WorkSpaces
     #           device_type_android: "ALLOW", # accepts ALLOW, DENY
     #           device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
     #           device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #           device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #         },
     #       }
     #
@@ -3205,6 +3206,7 @@ module Aws::WorkSpaces
     #         device_type_android: "ALLOW", # accepts ALLOW, DENY
     #         device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
     #         device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #         device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #       }
     #
     # @!attribute [rw] device_type_windows
@@ -3256,6 +3258,11 @@ module Aws::WorkSpaces
     #   WorkSpaces.
     #   @return [String]
     #
+    # @!attribute [rw] device_type_linux
+    #   Indicates whether users can use Linux clients to access their
+    #   WorkSpaces.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceAccessProperties AWS API Documentation
     #
     class WorkspaceAccessProperties < Struct.new(
@@ -3265,7 +3272,8 @@ module Aws::WorkSpaces
       :device_type_ios,
       :device_type_android,
       :device_type_chrome_os,
-      :device_type_zero_client)
+      :device_type_zero_client,
+      :device_type_linux)
       SENSITIVE = []
       include Aws::Structure
     end

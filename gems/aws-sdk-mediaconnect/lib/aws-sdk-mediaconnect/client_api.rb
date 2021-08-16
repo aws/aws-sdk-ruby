@@ -13,6 +13,8 @@ module Aws::MediaConnect
 
     include Seahorse::Model
 
+    AddFlowMediaStreamsRequest = Shapes::StructureShape.new(name: 'AddFlowMediaStreamsRequest')
+    AddFlowMediaStreamsResponse = Shapes::StructureShape.new(name: 'AddFlowMediaStreamsResponse')
     AddFlowOutputs420Exception = Shapes::StructureShape.new(name: 'AddFlowOutputs420Exception')
     AddFlowOutputsRequest = Shapes::StructureShape.new(name: 'AddFlowOutputsRequest')
     AddFlowOutputsResponse = Shapes::StructureShape.new(name: 'AddFlowOutputsResponse')
@@ -20,9 +22,11 @@ module Aws::MediaConnect
     AddFlowSourcesResponse = Shapes::StructureShape.new(name: 'AddFlowSourcesResponse')
     AddFlowVpcInterfacesRequest = Shapes::StructureShape.new(name: 'AddFlowVpcInterfacesRequest')
     AddFlowVpcInterfacesResponse = Shapes::StructureShape.new(name: 'AddFlowVpcInterfacesResponse')
+    AddMediaStreamRequest = Shapes::StructureShape.new(name: 'AddMediaStreamRequest')
     AddOutputRequest = Shapes::StructureShape.new(name: 'AddOutputRequest')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Colorimetry = Shapes::StringShape.new(name: 'Colorimetry')
     CreateFlow420Exception = Shapes::StructureShape.new(name: 'CreateFlow420Exception')
     CreateFlowRequest = Shapes::StructureShape.new(name: 'CreateFlowRequest')
     CreateFlowResponse = Shapes::StructureShape.new(name: 'CreateFlowResponse')
@@ -34,17 +38,30 @@ module Aws::MediaConnect
     DescribeOfferingResponse = Shapes::StructureShape.new(name: 'DescribeOfferingResponse')
     DescribeReservationRequest = Shapes::StructureShape.new(name: 'DescribeReservationRequest')
     DescribeReservationResponse = Shapes::StructureShape.new(name: 'DescribeReservationResponse')
+    DestinationConfiguration = Shapes::StructureShape.new(name: 'DestinationConfiguration')
+    DestinationConfigurationRequest = Shapes::StructureShape.new(name: 'DestinationConfigurationRequest')
     DurationUnits = Shapes::StringShape.new(name: 'DurationUnits')
+    EncoderProfile = Shapes::StringShape.new(name: 'EncoderProfile')
+    EncodingName = Shapes::StringShape.new(name: 'EncodingName')
+    EncodingParameters = Shapes::StructureShape.new(name: 'EncodingParameters')
+    EncodingParametersRequest = Shapes::StructureShape.new(name: 'EncodingParametersRequest')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
     EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
     FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
+    FailoverMode = Shapes::StringShape.new(name: 'FailoverMode')
     Flow = Shapes::StructureShape.new(name: 'Flow')
+    Fmtp = Shapes::StructureShape.new(name: 'Fmtp')
+    FmtpRequest = Shapes::StructureShape.new(name: 'FmtpRequest')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GrantEntitlementRequest = Shapes::StructureShape.new(name: 'GrantEntitlementRequest')
     GrantFlowEntitlements420Exception = Shapes::StructureShape.new(name: 'GrantFlowEntitlements420Exception')
     GrantFlowEntitlementsRequest = Shapes::StructureShape.new(name: 'GrantFlowEntitlementsRequest')
     GrantFlowEntitlementsResponse = Shapes::StructureShape.new(name: 'GrantFlowEntitlementsResponse')
+    InputConfiguration = Shapes::StructureShape.new(name: 'InputConfiguration')
+    InputConfigurationRequest = Shapes::StructureShape.new(name: 'InputConfigurationRequest')
+    Interface = Shapes::StructureShape.new(name: 'Interface')
+    InterfaceRequest = Shapes::StructureShape.new(name: 'InterfaceRequest')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     ListEntitlementsRequest = Shapes::StructureShape.new(name: 'ListEntitlementsRequest')
@@ -60,7 +77,16 @@ module Aws::MediaConnect
     ListedEntitlement = Shapes::StructureShape.new(name: 'ListedEntitlement')
     ListedFlow = Shapes::StructureShape.new(name: 'ListedFlow')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MediaStream = Shapes::StructureShape.new(name: 'MediaStream')
+    MediaStreamAttributes = Shapes::StructureShape.new(name: 'MediaStreamAttributes')
+    MediaStreamAttributesRequest = Shapes::StructureShape.new(name: 'MediaStreamAttributesRequest')
+    MediaStreamOutputConfiguration = Shapes::StructureShape.new(name: 'MediaStreamOutputConfiguration')
+    MediaStreamOutputConfigurationRequest = Shapes::StructureShape.new(name: 'MediaStreamOutputConfigurationRequest')
+    MediaStreamSourceConfiguration = Shapes::StructureShape.new(name: 'MediaStreamSourceConfiguration')
+    MediaStreamSourceConfigurationRequest = Shapes::StructureShape.new(name: 'MediaStreamSourceConfigurationRequest')
+    MediaStreamType = Shapes::StringShape.new(name: 'MediaStreamType')
     Messages = Shapes::StructureShape.new(name: 'Messages')
+    NetworkInterfaceType = Shapes::StringShape.new(name: 'NetworkInterfaceType')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Offering = Shapes::StructureShape.new(name: 'Offering')
     Output = Shapes::StructureShape.new(name: 'Output')
@@ -68,6 +94,9 @@ module Aws::MediaConnect
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
+    Range = Shapes::StringShape.new(name: 'Range')
+    RemoveFlowMediaStreamRequest = Shapes::StructureShape.new(name: 'RemoveFlowMediaStreamRequest')
+    RemoveFlowMediaStreamResponse = Shapes::StructureShape.new(name: 'RemoveFlowMediaStreamResponse')
     RemoveFlowOutputRequest = Shapes::StructureShape.new(name: 'RemoveFlowOutputRequest')
     RemoveFlowOutputResponse = Shapes::StructureShape.new(name: 'RemoveFlowOutputResponse')
     RemoveFlowSourceRequest = Shapes::StructureShape.new(name: 'RemoveFlowSourceRequest')
@@ -81,9 +110,11 @@ module Aws::MediaConnect
     ResponseError = Shapes::StructureShape.new(name: 'ResponseError')
     RevokeFlowEntitlementRequest = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementRequest')
     RevokeFlowEntitlementResponse = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementResponse')
+    ScanMode = Shapes::StringShape.new(name: 'ScanMode')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetSourceRequest = Shapes::StructureShape.new(name: 'SetSourceRequest')
     Source = Shapes::StructureShape.new(name: 'Source')
+    SourcePriority = Shapes::StructureShape.new(name: 'SourcePriority')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartFlowRequest = Shapes::StructureShape.new(name: 'StartFlowRequest')
     StartFlowResponse = Shapes::StructureShape.new(name: 'StartFlowResponse')
@@ -92,6 +123,7 @@ module Aws::MediaConnect
     StopFlowRequest = Shapes::StructureShape.new(name: 'StopFlowRequest')
     StopFlowResponse = Shapes::StructureShape.new(name: 'StopFlowResponse')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    Tcs = Shapes::StringShape.new(name: 'Tcs')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     Transport = Shapes::StructureShape.new(name: 'Transport')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -99,6 +131,8 @@ module Aws::MediaConnect
     UpdateFailoverConfig = Shapes::StructureShape.new(name: 'UpdateFailoverConfig')
     UpdateFlowEntitlementRequest = Shapes::StructureShape.new(name: 'UpdateFlowEntitlementRequest')
     UpdateFlowEntitlementResponse = Shapes::StructureShape.new(name: 'UpdateFlowEntitlementResponse')
+    UpdateFlowMediaStreamRequest = Shapes::StructureShape.new(name: 'UpdateFlowMediaStreamRequest')
+    UpdateFlowMediaStreamResponse = Shapes::StructureShape.new(name: 'UpdateFlowMediaStreamResponse')
     UpdateFlowOutputRequest = Shapes::StructureShape.new(name: 'UpdateFlowOutputRequest')
     UpdateFlowOutputResponse = Shapes::StructureShape.new(name: 'UpdateFlowOutputResponse')
     UpdateFlowRequest = Shapes::StructureShape.new(name: 'UpdateFlowRequest')
@@ -111,11 +145,21 @@ module Aws::MediaConnect
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
+    __listOfAddMediaStreamRequest = Shapes::ListShape.new(name: '__listOfAddMediaStreamRequest')
     __listOfAddOutputRequest = Shapes::ListShape.new(name: '__listOfAddOutputRequest')
+    __listOfDestinationConfiguration = Shapes::ListShape.new(name: '__listOfDestinationConfiguration')
+    __listOfDestinationConfigurationRequest = Shapes::ListShape.new(name: '__listOfDestinationConfigurationRequest')
     __listOfEntitlement = Shapes::ListShape.new(name: '__listOfEntitlement')
     __listOfGrantEntitlementRequest = Shapes::ListShape.new(name: '__listOfGrantEntitlementRequest')
+    __listOfInputConfiguration = Shapes::ListShape.new(name: '__listOfInputConfiguration')
+    __listOfInputConfigurationRequest = Shapes::ListShape.new(name: '__listOfInputConfigurationRequest')
     __listOfListedEntitlement = Shapes::ListShape.new(name: '__listOfListedEntitlement')
     __listOfListedFlow = Shapes::ListShape.new(name: '__listOfListedFlow')
+    __listOfMediaStream = Shapes::ListShape.new(name: '__listOfMediaStream')
+    __listOfMediaStreamOutputConfiguration = Shapes::ListShape.new(name: '__listOfMediaStreamOutputConfiguration')
+    __listOfMediaStreamOutputConfigurationRequest = Shapes::ListShape.new(name: '__listOfMediaStreamOutputConfigurationRequest')
+    __listOfMediaStreamSourceConfiguration = Shapes::ListShape.new(name: '__listOfMediaStreamSourceConfiguration')
+    __listOfMediaStreamSourceConfigurationRequest = Shapes::ListShape.new(name: '__listOfMediaStreamSourceConfigurationRequest')
     __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
@@ -130,6 +174,14 @@ module Aws::MediaConnect
     __string = Shapes::StringShape.new(name: '__string')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
+
+    AddFlowMediaStreamsRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn", metadata: {"pattern"=>"^arn:.+:mediaconnect.+:flow:.+$"}))
+    AddFlowMediaStreamsRequest.add_member(:media_streams, Shapes::ShapeRef.new(shape: __listOfAddMediaStreamRequest, required: true, location_name: "mediaStreams"))
+    AddFlowMediaStreamsRequest.struct_class = Types::AddFlowMediaStreamsRequest
+
+    AddFlowMediaStreamsResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    AddFlowMediaStreamsResponse.add_member(:media_streams, Shapes::ShapeRef.new(shape: __listOfMediaStream, location_name: "mediaStreams"))
+    AddFlowMediaStreamsResponse.struct_class = Types::AddFlowMediaStreamsResponse
 
     AddFlowOutputs420Exception.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     AddFlowOutputs420Exception.struct_class = Types::AddFlowOutputs420Exception
@@ -158,11 +210,21 @@ module Aws::MediaConnect
     AddFlowVpcInterfacesResponse.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterface, location_name: "vpcInterfaces"))
     AddFlowVpcInterfacesResponse.struct_class = Types::AddFlowVpcInterfacesResponse
 
+    AddMediaStreamRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: MediaStreamAttributesRequest, location_name: "attributes"))
+    AddMediaStreamRequest.add_member(:clock_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "clockRate"))
+    AddMediaStreamRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    AddMediaStreamRequest.add_member(:media_stream_id, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "mediaStreamId"))
+    AddMediaStreamRequest.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "mediaStreamName"))
+    AddMediaStreamRequest.add_member(:media_stream_type, Shapes::ShapeRef.new(shape: MediaStreamType, required: true, location_name: "mediaStreamType"))
+    AddMediaStreamRequest.add_member(:video_format, Shapes::ShapeRef.new(shape: __string, location_name: "videoFormat"))
+    AddMediaStreamRequest.struct_class = Types::AddMediaStreamRequest
+
     AddOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     AddOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     AddOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     AddOutputRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     AddOutputRequest.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
+    AddOutputRequest.add_member(:media_stream_output_configurations, Shapes::ShapeRef.new(shape: __listOfMediaStreamOutputConfigurationRequest, location_name: "mediaStreamOutputConfigurations"))
     AddOutputRequest.add_member(:min_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "minLatency"))
     AddOutputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     AddOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
@@ -181,6 +243,7 @@ module Aws::MediaConnect
 
     CreateFlowRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZone"))
     CreateFlowRequest.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfGrantEntitlementRequest, location_name: "entitlements"))
+    CreateFlowRequest.add_member(:media_streams, Shapes::ShapeRef.new(shape: __listOfAddMediaStreamRequest, location_name: "mediaStreams"))
     CreateFlowRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateFlowRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfAddOutputRequest, location_name: "outputs"))
     CreateFlowRequest.add_member(:source, Shapes::ShapeRef.new(shape: SetSourceRequest, location_name: "source"))
@@ -218,6 +281,25 @@ module Aws::MediaConnect
     DescribeReservationResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
     DescribeReservationResponse.struct_class = Types::DescribeReservationResponse
 
+    DestinationConfiguration.add_member(:destination_ip, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "destinationIp"))
+    DestinationConfiguration.add_member(:destination_port, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "destinationPort"))
+    DestinationConfiguration.add_member(:interface, Shapes::ShapeRef.new(shape: Interface, required: true, location_name: "interface"))
+    DestinationConfiguration.add_member(:outbound_ip, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "outboundIp"))
+    DestinationConfiguration.struct_class = Types::DestinationConfiguration
+
+    DestinationConfigurationRequest.add_member(:destination_ip, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "destinationIp"))
+    DestinationConfigurationRequest.add_member(:destination_port, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "destinationPort"))
+    DestinationConfigurationRequest.add_member(:interface, Shapes::ShapeRef.new(shape: InterfaceRequest, required: true, location_name: "interface"))
+    DestinationConfigurationRequest.struct_class = Types::DestinationConfigurationRequest
+
+    EncodingParameters.add_member(:compression_factor, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "compressionFactor"))
+    EncodingParameters.add_member(:encoder_profile, Shapes::ShapeRef.new(shape: EncoderProfile, required: true, location_name: "encoderProfile"))
+    EncodingParameters.struct_class = Types::EncodingParameters
+
+    EncodingParametersRequest.add_member(:compression_factor, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "compressionFactor"))
+    EncodingParametersRequest.add_member(:encoder_profile, Shapes::ShapeRef.new(shape: EncoderProfile, required: true, location_name: "encoderProfile"))
+    EncodingParametersRequest.struct_class = Types::EncodingParametersRequest
+
     Encryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, location_name: "algorithm"))
     Encryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
     Encryption.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, location_name: "deviceId"))
@@ -238,7 +320,9 @@ module Aws::MediaConnect
     Entitlement.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subscribers"))
     Entitlement.struct_class = Types::Entitlement
 
+    FailoverConfig.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     FailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: __integer, location_name: "recoveryWindow"))
+    FailoverConfig.add_member(:source_priority, Shapes::ShapeRef.new(shape: SourcePriority, location_name: "sourcePriority"))
     FailoverConfig.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     FailoverConfig.struct_class = Types::FailoverConfig
 
@@ -247,6 +331,7 @@ module Aws::MediaConnect
     Flow.add_member(:egress_ip, Shapes::ShapeRef.new(shape: __string, location_name: "egressIp"))
     Flow.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfEntitlement, required: true, location_name: "entitlements"))
     Flow.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "flowArn"))
+    Flow.add_member(:media_streams, Shapes::ShapeRef.new(shape: __listOfMediaStream, location_name: "mediaStreams"))
     Flow.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Flow.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfOutput, required: true, location_name: "outputs"))
     Flow.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
@@ -255,6 +340,24 @@ module Aws::MediaConnect
     Flow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     Flow.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterface, location_name: "vpcInterfaces"))
     Flow.struct_class = Types::Flow
+
+    Fmtp.add_member(:channel_order, Shapes::ShapeRef.new(shape: __string, location_name: "channelOrder"))
+    Fmtp.add_member(:colorimetry, Shapes::ShapeRef.new(shape: Colorimetry, location_name: "colorimetry"))
+    Fmtp.add_member(:exact_framerate, Shapes::ShapeRef.new(shape: __string, location_name: "exactFramerate"))
+    Fmtp.add_member(:par, Shapes::ShapeRef.new(shape: __string, location_name: "par"))
+    Fmtp.add_member(:range, Shapes::ShapeRef.new(shape: Range, location_name: "range"))
+    Fmtp.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "scanMode"))
+    Fmtp.add_member(:tcs, Shapes::ShapeRef.new(shape: Tcs, location_name: "tcs"))
+    Fmtp.struct_class = Types::Fmtp
+
+    FmtpRequest.add_member(:channel_order, Shapes::ShapeRef.new(shape: __string, location_name: "channelOrder"))
+    FmtpRequest.add_member(:colorimetry, Shapes::ShapeRef.new(shape: Colorimetry, location_name: "colorimetry"))
+    FmtpRequest.add_member(:exact_framerate, Shapes::ShapeRef.new(shape: __string, location_name: "exactFramerate"))
+    FmtpRequest.add_member(:par, Shapes::ShapeRef.new(shape: __string, location_name: "par"))
+    FmtpRequest.add_member(:range, Shapes::ShapeRef.new(shape: Range, location_name: "range"))
+    FmtpRequest.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "scanMode"))
+    FmtpRequest.add_member(:tcs, Shapes::ShapeRef.new(shape: Tcs, location_name: "tcs"))
+    FmtpRequest.struct_class = Types::FmtpRequest
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
@@ -277,6 +380,21 @@ module Aws::MediaConnect
     GrantFlowEntitlementsResponse.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfEntitlement, location_name: "entitlements"))
     GrantFlowEntitlementsResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     GrantFlowEntitlementsResponse.struct_class = Types::GrantFlowEntitlementsResponse
+
+    InputConfiguration.add_member(:input_ip, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "inputIp"))
+    InputConfiguration.add_member(:input_port, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "inputPort"))
+    InputConfiguration.add_member(:interface, Shapes::ShapeRef.new(shape: Interface, required: true, location_name: "interface"))
+    InputConfiguration.struct_class = Types::InputConfiguration
+
+    InputConfigurationRequest.add_member(:input_port, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "inputPort"))
+    InputConfigurationRequest.add_member(:interface, Shapes::ShapeRef.new(shape: InterfaceRequest, required: true, location_name: "interface"))
+    InputConfigurationRequest.struct_class = Types::InputConfigurationRequest
+
+    Interface.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    Interface.struct_class = Types::Interface
+
+    InterfaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    InterfaceRequest.struct_class = Types::InterfaceRequest
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
@@ -332,6 +450,46 @@ module Aws::MediaConnect
     ListedFlow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     ListedFlow.struct_class = Types::ListedFlow
 
+    MediaStream.add_member(:attributes, Shapes::ShapeRef.new(shape: MediaStreamAttributes, location_name: "attributes"))
+    MediaStream.add_member(:clock_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "clockRate"))
+    MediaStream.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    MediaStream.add_member(:fmt, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "fmt"))
+    MediaStream.add_member(:media_stream_id, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "mediaStreamId"))
+    MediaStream.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "mediaStreamName"))
+    MediaStream.add_member(:media_stream_type, Shapes::ShapeRef.new(shape: MediaStreamType, required: true, location_name: "mediaStreamType"))
+    MediaStream.add_member(:video_format, Shapes::ShapeRef.new(shape: __string, location_name: "videoFormat"))
+    MediaStream.struct_class = Types::MediaStream
+
+    MediaStreamAttributes.add_member(:fmtp, Shapes::ShapeRef.new(shape: Fmtp, required: true, location_name: "fmtp"))
+    MediaStreamAttributes.add_member(:lang, Shapes::ShapeRef.new(shape: __string, location_name: "lang"))
+    MediaStreamAttributes.struct_class = Types::MediaStreamAttributes
+
+    MediaStreamAttributesRequest.add_member(:fmtp, Shapes::ShapeRef.new(shape: FmtpRequest, location_name: "fmtp"))
+    MediaStreamAttributesRequest.add_member(:lang, Shapes::ShapeRef.new(shape: __string, location_name: "lang"))
+    MediaStreamAttributesRequest.struct_class = Types::MediaStreamAttributesRequest
+
+    MediaStreamOutputConfiguration.add_member(:destination_configurations, Shapes::ShapeRef.new(shape: __listOfDestinationConfiguration, location_name: "destinationConfigurations"))
+    MediaStreamOutputConfiguration.add_member(:encoding_name, Shapes::ShapeRef.new(shape: EncodingName, required: true, location_name: "encodingName"))
+    MediaStreamOutputConfiguration.add_member(:encoding_parameters, Shapes::ShapeRef.new(shape: EncodingParameters, location_name: "encodingParameters"))
+    MediaStreamOutputConfiguration.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "mediaStreamName"))
+    MediaStreamOutputConfiguration.struct_class = Types::MediaStreamOutputConfiguration
+
+    MediaStreamOutputConfigurationRequest.add_member(:destination_configurations, Shapes::ShapeRef.new(shape: __listOfDestinationConfigurationRequest, location_name: "destinationConfigurations"))
+    MediaStreamOutputConfigurationRequest.add_member(:encoding_name, Shapes::ShapeRef.new(shape: EncodingName, required: true, location_name: "encodingName"))
+    MediaStreamOutputConfigurationRequest.add_member(:encoding_parameters, Shapes::ShapeRef.new(shape: EncodingParametersRequest, location_name: "encodingParameters"))
+    MediaStreamOutputConfigurationRequest.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "mediaStreamName"))
+    MediaStreamOutputConfigurationRequest.struct_class = Types::MediaStreamOutputConfigurationRequest
+
+    MediaStreamSourceConfiguration.add_member(:encoding_name, Shapes::ShapeRef.new(shape: EncodingName, required: true, location_name: "encodingName"))
+    MediaStreamSourceConfiguration.add_member(:input_configurations, Shapes::ShapeRef.new(shape: __listOfInputConfiguration, location_name: "inputConfigurations"))
+    MediaStreamSourceConfiguration.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "mediaStreamName"))
+    MediaStreamSourceConfiguration.struct_class = Types::MediaStreamSourceConfiguration
+
+    MediaStreamSourceConfigurationRequest.add_member(:encoding_name, Shapes::ShapeRef.new(shape: EncodingName, required: true, location_name: "encodingName"))
+    MediaStreamSourceConfigurationRequest.add_member(:input_configurations, Shapes::ShapeRef.new(shape: __listOfInputConfigurationRequest, location_name: "inputConfigurations"))
+    MediaStreamSourceConfigurationRequest.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "mediaStreamName"))
+    MediaStreamSourceConfigurationRequest.struct_class = Types::MediaStreamSourceConfigurationRequest
+
     Messages.add_member(:errors, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "errors"))
     Messages.struct_class = Types::Messages
 
@@ -355,6 +513,7 @@ module Aws::MediaConnect
     Output.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, location_name: "entitlementArn"))
     Output.add_member(:listener_address, Shapes::ShapeRef.new(shape: __string, location_name: "listenerAddress"))
     Output.add_member(:media_live_input_arn, Shapes::ShapeRef.new(shape: __string, location_name: "mediaLiveInputArn"))
+    Output.add_member(:media_stream_output_configurations, Shapes::ShapeRef.new(shape: __listOfMediaStreamOutputConfiguration, location_name: "mediaStreamOutputConfigurations"))
     Output.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Output.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "outputArn"))
     Output.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
@@ -369,6 +528,14 @@ module Aws::MediaConnect
 
     PurchaseOfferingResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
     PurchaseOfferingResponse.struct_class = Types::PurchaseOfferingResponse
+
+    RemoveFlowMediaStreamRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn", metadata: {"pattern"=>"^arn:.+:mediaconnect.+:flow:.+$"}))
+    RemoveFlowMediaStreamRequest.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "mediaStreamName"))
+    RemoveFlowMediaStreamRequest.struct_class = Types::RemoveFlowMediaStreamRequest
+
+    RemoveFlowMediaStreamResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    RemoveFlowMediaStreamResponse.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "mediaStreamName"))
+    RemoveFlowMediaStreamResponse.struct_class = Types::RemoveFlowMediaStreamResponse
 
     RemoveFlowOutputRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     RemoveFlowOutputRequest.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "outputArn"))
@@ -434,6 +601,8 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:ingest_port, Shapes::ShapeRef.new(shape: __integer, location_name: "ingestPort"))
     SetSourceRequest.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     SetSourceRequest.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
+    SetSourceRequest.add_member(:max_sync_buffer, Shapes::ShapeRef.new(shape: __integer, location_name: "maxSyncBuffer"))
+    SetSourceRequest.add_member(:media_stream_source_configurations, Shapes::ShapeRef.new(shape: __listOfMediaStreamSourceConfigurationRequest, location_name: "mediaStreamSourceConfigurations"))
     SetSourceRequest.add_member(:min_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "minLatency"))
     SetSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     SetSourceRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
@@ -448,12 +617,16 @@ module Aws::MediaConnect
     Source.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, location_name: "entitlementArn"))
     Source.add_member(:ingest_ip, Shapes::ShapeRef.new(shape: __string, location_name: "ingestIp"))
     Source.add_member(:ingest_port, Shapes::ShapeRef.new(shape: __integer, location_name: "ingestPort"))
+    Source.add_member(:media_stream_source_configurations, Shapes::ShapeRef.new(shape: __listOfMediaStreamSourceConfiguration, location_name: "mediaStreamSourceConfigurations"))
     Source.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Source.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "sourceArn"))
     Source.add_member(:transport, Shapes::ShapeRef.new(shape: Transport, location_name: "transport"))
     Source.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
     Source.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))
     Source.struct_class = Types::Source
+
+    SourcePriority.add_member(:primary_source, Shapes::ShapeRef.new(shape: __string, location_name: "primarySource"))
+    SourcePriority.struct_class = Types::SourcePriority
 
     StartFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     StartFlowRequest.struct_class = Types::StartFlowRequest
@@ -479,6 +652,7 @@ module Aws::MediaConnect
     Transport.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     Transport.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     Transport.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
+    Transport.add_member(:max_sync_buffer, Shapes::ShapeRef.new(shape: __integer, location_name: "maxSyncBuffer"))
     Transport.add_member(:min_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "minLatency"))
     Transport.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
     Transport.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
@@ -501,7 +675,9 @@ module Aws::MediaConnect
     UpdateEncryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     UpdateEncryption.struct_class = Types::UpdateEncryption
 
+    UpdateFailoverConfig.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     UpdateFailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: __integer, location_name: "recoveryWindow"))
+    UpdateFailoverConfig.add_member(:source_priority, Shapes::ShapeRef.new(shape: SourcePriority, location_name: "sourcePriority"))
     UpdateFailoverConfig.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     UpdateFailoverConfig.struct_class = Types::UpdateFailoverConfig
 
@@ -517,12 +693,26 @@ module Aws::MediaConnect
     UpdateFlowEntitlementResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     UpdateFlowEntitlementResponse.struct_class = Types::UpdateFlowEntitlementResponse
 
+    UpdateFlowMediaStreamRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: MediaStreamAttributesRequest, location_name: "attributes"))
+    UpdateFlowMediaStreamRequest.add_member(:clock_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "clockRate"))
+    UpdateFlowMediaStreamRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    UpdateFlowMediaStreamRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn", metadata: {"pattern"=>"^arn:.+:mediaconnect.+:flow:.+$"}))
+    UpdateFlowMediaStreamRequest.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "mediaStreamName"))
+    UpdateFlowMediaStreamRequest.add_member(:media_stream_type, Shapes::ShapeRef.new(shape: MediaStreamType, location_name: "mediaStreamType"))
+    UpdateFlowMediaStreamRequest.add_member(:video_format, Shapes::ShapeRef.new(shape: __string, location_name: "videoFormat"))
+    UpdateFlowMediaStreamRequest.struct_class = Types::UpdateFlowMediaStreamRequest
+
+    UpdateFlowMediaStreamResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    UpdateFlowMediaStreamResponse.add_member(:media_stream, Shapes::ShapeRef.new(shape: MediaStream, location_name: "mediaStream"))
+    UpdateFlowMediaStreamResponse.struct_class = Types::UpdateFlowMediaStreamResponse
+
     UpdateFlowOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     UpdateFlowOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateFlowOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     UpdateFlowOutputRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: UpdateEncryption, location_name: "encryption"))
     UpdateFlowOutputRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     UpdateFlowOutputRequest.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
+    UpdateFlowOutputRequest.add_member(:media_stream_output_configurations, Shapes::ShapeRef.new(shape: __listOfMediaStreamOutputConfigurationRequest, location_name: "mediaStreamOutputConfigurations"))
     UpdateFlowOutputRequest.add_member(:min_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "minLatency"))
     UpdateFlowOutputRequest.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "outputArn"))
     UpdateFlowOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
@@ -551,6 +741,8 @@ module Aws::MediaConnect
     UpdateFlowSourceRequest.add_member(:ingest_port, Shapes::ShapeRef.new(shape: __integer, location_name: "ingestPort"))
     UpdateFlowSourceRequest.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     UpdateFlowSourceRequest.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
+    UpdateFlowSourceRequest.add_member(:max_sync_buffer, Shapes::ShapeRef.new(shape: __integer, location_name: "maxSyncBuffer"))
+    UpdateFlowSourceRequest.add_member(:media_stream_source_configurations, Shapes::ShapeRef.new(shape: __listOfMediaStreamSourceConfigurationRequest, location_name: "mediaStreamSourceConfigurations"))
     UpdateFlowSourceRequest.add_member(:min_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "minLatency"))
     UpdateFlowSourceRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     UpdateFlowSourceRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceArn"))
@@ -565,6 +757,7 @@ module Aws::MediaConnect
 
     VpcInterface.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     VpcInterface.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "networkInterfaceIds"))
+    VpcInterface.add_member(:network_interface_type, Shapes::ShapeRef.new(shape: NetworkInterfaceType, required: true, location_name: "networkInterfaceType"))
     VpcInterface.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
     VpcInterface.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "securityGroupIds"))
     VpcInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "subnetId"))
@@ -574,20 +767,41 @@ module Aws::MediaConnect
     VpcInterfaceAttachment.struct_class = Types::VpcInterfaceAttachment
 
     VpcInterfaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    VpcInterfaceRequest.add_member(:network_interface_type, Shapes::ShapeRef.new(shape: NetworkInterfaceType, location_name: "networkInterfaceType"))
     VpcInterfaceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
     VpcInterfaceRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "securityGroupIds"))
     VpcInterfaceRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "subnetId"))
     VpcInterfaceRequest.struct_class = Types::VpcInterfaceRequest
 
+    __listOfAddMediaStreamRequest.member = Shapes::ShapeRef.new(shape: AddMediaStreamRequest)
+
     __listOfAddOutputRequest.member = Shapes::ShapeRef.new(shape: AddOutputRequest)
+
+    __listOfDestinationConfiguration.member = Shapes::ShapeRef.new(shape: DestinationConfiguration)
+
+    __listOfDestinationConfigurationRequest.member = Shapes::ShapeRef.new(shape: DestinationConfigurationRequest)
 
     __listOfEntitlement.member = Shapes::ShapeRef.new(shape: Entitlement)
 
     __listOfGrantEntitlementRequest.member = Shapes::ShapeRef.new(shape: GrantEntitlementRequest)
 
+    __listOfInputConfiguration.member = Shapes::ShapeRef.new(shape: InputConfiguration)
+
+    __listOfInputConfigurationRequest.member = Shapes::ShapeRef.new(shape: InputConfigurationRequest)
+
     __listOfListedEntitlement.member = Shapes::ShapeRef.new(shape: ListedEntitlement)
 
     __listOfListedFlow.member = Shapes::ShapeRef.new(shape: ListedFlow)
+
+    __listOfMediaStream.member = Shapes::ShapeRef.new(shape: MediaStream)
+
+    __listOfMediaStreamOutputConfiguration.member = Shapes::ShapeRef.new(shape: MediaStreamOutputConfiguration)
+
+    __listOfMediaStreamOutputConfigurationRequest.member = Shapes::ShapeRef.new(shape: MediaStreamOutputConfigurationRequest)
+
+    __listOfMediaStreamSourceConfiguration.member = Shapes::ShapeRef.new(shape: MediaStreamSourceConfiguration)
+
+    __listOfMediaStreamSourceConfigurationRequest.member = Shapes::ShapeRef.new(shape: MediaStreamSourceConfigurationRequest)
 
     __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
 
@@ -627,6 +841,20 @@ module Aws::MediaConnect
         "signingName" => "mediaconnect",
         "uid" => "mediaconnect-2018-11-14",
       }
+
+      api.add_operation(:add_flow_media_streams, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddFlowMediaStreams"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/flows/{flowArn}/mediaStreams"
+        o.input = Shapes::ShapeRef.new(shape: AddFlowMediaStreamsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddFlowMediaStreamsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
 
       api.add_operation(:add_flow_outputs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddFlowOutputs"
@@ -851,6 +1079,20 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:remove_flow_media_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveFlowMediaStream"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}"
+        o.input = Shapes::ShapeRef.new(shape: RemoveFlowMediaStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveFlowMediaStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:remove_flow_output, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveFlowOutput"
         o.http_method = "DELETE"
@@ -977,6 +1219,20 @@ module Aws::MediaConnect
         o.http_request_uri = "/v1/flows/{flowArn}/entitlements/{entitlementArn}"
         o.input = Shapes::ShapeRef.new(shape: UpdateFlowEntitlementRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFlowEntitlementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_flow_media_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFlowMediaStream"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFlowMediaStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFlowMediaStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

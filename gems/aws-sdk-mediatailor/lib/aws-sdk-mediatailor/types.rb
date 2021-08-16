@@ -16,7 +16,12 @@ module Aws::MediaTailor
     #   data as a hash:
     #
     #       {
-    #         access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #         access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
+    #         secrets_manager_access_token_configuration: {
+    #           header_name: "__string",
+    #           secret_arn: "__string",
+    #           secret_string_key: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] access_type
@@ -48,10 +53,15 @@ module Aws::MediaTailor
     #   VodSource packaging configurations.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_access_token_configuration
+    #   AWS Secrets Manager access token configuration parameters.
+    #   @return [Types::SecretsManagerAccessTokenConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AccessConfiguration AWS API Documentation
     #
     class AccessConfiguration < Struct.new(
-      :access_type)
+      :access_type,
+      :secrets_manager_access_token_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -130,6 +140,41 @@ module Aws::MediaTailor
     #
     class AdMarkerPassthrough < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Alert configuration parameters.
+    #
+    # @!attribute [rw] alert_code
+    #   The code for the alert. For example, NOT\_PROCESSED.
+    #   @return [String]
+    #
+    # @!attribute [rw] alert_message
+    #   If an alert is generated for a resource, an explanation of the
+    #   reason for the alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the alert was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] related_resource_arns
+    #   The Amazon Resource Names (ARNs) related to this alert.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Alert AWS API Documentation
+    #
+    class Alert < Struct.new(
+      :alert_code,
+      :alert_message,
+      :last_modified_time,
+      :related_resource_arns,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -522,7 +567,12 @@ module Aws::MediaTailor
     #
     #       {
     #         access_configuration: {
-    #           access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #           access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
+    #           secrets_manager_access_token_configuration: {
+    #             header_name: "__string",
+    #             secret_arn: "__string",
+    #             secret_string_key: "__string",
+    #           },
     #         },
     #         default_segment_delivery_configuration: {
     #           base_url: "__string",
@@ -1623,6 +1673,54 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAlertsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlertsRequest AWS API Documentation
+    #
+    class ListAlertsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists the alerts for a given resource.
+    #
+    # @!attribute [rw] items
+    #   An array of alerts that are associated with this resource.
+    #   @return [Array<Types::Alert>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token from the list request. Use the token to fetch the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlertsResponse AWS API Documentation
+    #
+    class ListAlertsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListChannelsRequest
     #   data as a hash:
     #
@@ -2444,6 +2542,36 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The schedule's ad break properties.
+    #
+    # @!attribute [rw] approximate_duration_seconds
+    #   The approximate duration of the ad break, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] approximate_start_time
+    #   The approximate time that the ad will start playing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_location_name
+    #   The name of the source location containing the VOD source used for
+    #   the ad break.
+    #   @return [String]
+    #
+    # @!attribute [rw] vod_source_name
+    #   The name of the VOD source used for the ad break.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ScheduleAdBreak AWS API Documentation
+    #
+    class ScheduleAdBreak < Struct.new(
+      :approximate_duration_seconds,
+      :approximate_start_time,
+      :source_location_name,
+      :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Schedule configuration parameters. A channel must be stopped before
     # changes can be made to the schedule.
     #
@@ -2492,6 +2620,10 @@ module Aws::MediaTailor
     #   The name of the program.
     #   @return [String]
     #
+    # @!attribute [rw] schedule_ad_breaks
+    #   The schedule's ad break properties.
+    #   @return [Array<Types::ScheduleAdBreak>]
+    #
     # @!attribute [rw] source_location_name
     #   The name of the source location.
     #   @return [String]
@@ -2508,8 +2640,56 @@ module Aws::MediaTailor
       :arn,
       :channel_name,
       :program_name,
+      :schedule_ad_breaks,
       :source_location_name,
       :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS Secrets Manager access token configuration parameters. For
+    # information about Secrets Manager access token authentication, see
+    # [Working with AWS Secrets Manager access token authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html
+    #
+    # @note When making an API call, you may pass SecretsManagerAccessTokenConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         header_name: "__string",
+    #         secret_arn: "__string",
+    #         secret_string_key: "__string",
+    #       }
+    #
+    # @!attribute [rw] header_name
+    #   The name of the HTTP header used to supply the access token in
+    #   requests to the source location.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
+    #   that contains the access token.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_string_key
+    #   The AWS Secrets Manager [SecretString][1] key associated with the
+    #   access token. MediaTailor uses the key to look up SecretString key
+    #   and value pair containing the access token.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/SecretsManagerAccessTokenConfiguration AWS API Documentation
+    #
+    class SecretsManagerAccessTokenConfiguration < Struct.new(
+      :header_name,
+      :secret_arn,
+      :secret_string_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2855,7 +3035,12 @@ module Aws::MediaTailor
     #
     #       {
     #         access_configuration: {
-    #           access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #           access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
+    #           secrets_manager_access_token_configuration: {
+    #             header_name: "__string",
+    #             secret_arn: "__string",
+    #             secret_string_key: "__string",
+    #           },
     #         },
     #         default_segment_delivery_configuration: {
     #           base_url: "__string",

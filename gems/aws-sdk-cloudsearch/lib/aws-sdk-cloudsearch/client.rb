@@ -1466,7 +1466,7 @@ module Aws::CloudSearch
     #
     # @example Response structure
     #
-    #   resp.scaling_parameters.options.desired_instance_type #=> String, one of "search.m1.small", "search.m1.large", "search.m2.xlarge", "search.m2.2xlarge", "search.m3.medium", "search.m3.large", "search.m3.xlarge", "search.m3.2xlarge", "search.small", "search.medium", "search.large", "search.xlarge", "search.2xlarge"
+    #   resp.scaling_parameters.options.desired_instance_type #=> String, one of "search.m1.small", "search.m1.large", "search.m2.xlarge", "search.m2.2xlarge", "search.m3.medium", "search.m3.large", "search.m3.xlarge", "search.m3.2xlarge", "search.small", "search.medium", "search.large", "search.xlarge", "search.2xlarge", "search.previousgeneration.small", "search.previousgeneration.large", "search.previousgeneration.xlarge", "search.previousgeneration.2xlarge"
     #   resp.scaling_parameters.options.desired_replication_count #=> Integer
     #   resp.scaling_parameters.options.desired_partition_count #=> Integer
     #   resp.scaling_parameters.status.creation_date #=> Time
@@ -1763,7 +1763,7 @@ module Aws::CloudSearch
     #   resp = client.update_scaling_parameters({
     #     domain_name: "DomainName", # required
     #     scaling_parameters: { # required
-    #       desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge
+    #       desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge, search.previousgeneration.small, search.previousgeneration.large, search.previousgeneration.xlarge, search.previousgeneration.2xlarge
     #       desired_replication_count: 1,
     #       desired_partition_count: 1,
     #     },
@@ -1771,7 +1771,7 @@ module Aws::CloudSearch
     #
     # @example Response structure
     #
-    #   resp.scaling_parameters.options.desired_instance_type #=> String, one of "search.m1.small", "search.m1.large", "search.m2.xlarge", "search.m2.2xlarge", "search.m3.medium", "search.m3.large", "search.m3.xlarge", "search.m3.2xlarge", "search.small", "search.medium", "search.large", "search.xlarge", "search.2xlarge"
+    #   resp.scaling_parameters.options.desired_instance_type #=> String, one of "search.m1.small", "search.m1.large", "search.m2.xlarge", "search.m2.2xlarge", "search.m3.medium", "search.m3.large", "search.m3.xlarge", "search.m3.2xlarge", "search.small", "search.medium", "search.large", "search.xlarge", "search.2xlarge", "search.previousgeneration.small", "search.previousgeneration.large", "search.previousgeneration.xlarge", "search.previousgeneration.2xlarge"
     #   resp.scaling_parameters.options.desired_replication_count #=> Integer
     #   resp.scaling_parameters.options.desired_partition_count #=> Integer
     #   resp.scaling_parameters.status.creation_date #=> Time
@@ -1845,7 +1845,7 @@ module Aws::CloudSearch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudsearch'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

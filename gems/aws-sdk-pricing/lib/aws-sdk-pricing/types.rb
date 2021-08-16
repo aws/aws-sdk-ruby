@@ -349,7 +349,7 @@ module Aws::Pricing
     # attribute names.
     #
     # @!attribute [rw] service_code
-    #   The code for the AWS service.
+    #   The code for the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] attribute_names

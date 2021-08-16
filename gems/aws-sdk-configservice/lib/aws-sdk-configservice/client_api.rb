@@ -2195,6 +2195,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_aggregate_compliance_by_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
@@ -2207,6 +2213,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_aggregation_authorizations, Seahorse::Model::Operation.new.tap do |o|
@@ -2218,6 +2230,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_compliance_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2229,6 +2247,11 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_compliance_by_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2239,6 +2262,12 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeComplianceByResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_config_rule_evaluation_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2250,6 +2279,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_config_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -2260,6 +2295,11 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeConfigRulesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_configuration_aggregator_sources_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2272,6 +2312,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_configuration_aggregators, Seahorse::Model::Operation.new.tap do |o|
@@ -2284,6 +2330,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_configuration_recorder_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2315,6 +2367,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleInConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_conformance_pack_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2326,6 +2384,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
@@ -2338,6 +2402,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_delivery_channel_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2368,6 +2438,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_organization_config_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -2380,6 +2456,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_organization_conformance_pack_statuses, Seahorse::Model::Operation.new.tap do |o|
@@ -2392,6 +2474,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_organization_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
@@ -2404,6 +2492,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_pending_aggregation_requests, Seahorse::Model::Operation.new.tap do |o|
@@ -2415,6 +2509,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_remediation_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -2467,6 +2567,11 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_compliance_details_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2479,6 +2584,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_config_rule_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -2491,6 +2602,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_conformance_pack_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -2503,6 +2620,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_discovered_resource_counts, Seahorse::Model::Operation.new.tap do |o|
@@ -2515,6 +2638,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2538,6 +2667,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_compliance_details_by_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2547,6 +2682,11 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: GetComplianceDetailsByResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetComplianceDetailsByResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_compliance_summary_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2577,6 +2717,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleInConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_conformance_pack_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -2588,6 +2734,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_discovered_resource_counts, Seahorse::Model::Operation.new.tap do |o|
@@ -2599,6 +2751,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_organization_config_rule_detailed_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2611,6 +2769,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_organization_conformance_pack_detailed_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2623,6 +2787,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_resource_config_history, Seahorse::Model::Operation.new.tap do |o|
@@ -2665,6 +2835,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
@@ -2677,6 +2853,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_stored_queries, Seahorse::Model::Operation.new.tap do |o|
@@ -2705,6 +2887,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_aggregation_authorization, Seahorse::Model::Operation.new.tap do |o|
@@ -2901,7 +3089,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
+          limit_key: "limit",
           tokens: {
             "next_token" => "next_token"
           }
@@ -2917,6 +3105,12 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidExpressionException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:start_config_rules_evaluation, Seahorse::Model::Operation.new.tap do |o|

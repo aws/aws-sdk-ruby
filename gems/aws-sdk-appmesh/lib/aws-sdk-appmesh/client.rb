@@ -393,6 +393,11 @@ module Aws::AppMesh
     #     spec: { # required
     #       grpc_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -400,11 +405,43 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
     #           service_name: "ServiceName",
     #         },
     #       },
     #       http2_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -412,11 +449,56 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
     #       http_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -424,9 +506,43 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
+    #       priority: 1,
     #     },
     #     tags: [
     #       {
@@ -448,12 +564,67 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
     #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
@@ -685,7 +856,19 @@ module Aws::AppMesh
     #             },
     #           ],
     #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #           prefix: "String", # required
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
@@ -735,7 +918,19 @@ module Aws::AppMesh
     #             },
     #           ],
     #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #           prefix: "String", # required
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
@@ -836,7 +1031,12 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
     #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
@@ -862,7 +1062,12 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
     #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
@@ -1151,13 +1356,11 @@ module Aws::AppMesh
     # and traces. You can override this behavior by setting the
     # `APPMESH_RESOURCE_CLUSTER` environment variable with your own name.
     #
-    #  AWS Cloud Map is not available in the eu-south-1 Region.
-    #
     #  </note>
     #
     # For more information about virtual nodes, see [Virtual nodes][1]. You
     # must be using `1.15.0` or later of the Envoy image when setting these
-    # variables. For more information about App Mesh Envoy variables, see
+    # variables. For more information aboutApp Mesh Envoy variables, see
     # [Envoy image][2] in the AWS App Mesh User Guide.
     #
     #
@@ -1418,6 +1621,7 @@ module Aws::AppMesh
     #         },
     #         dns: {
     #           hostname: "Hostname", # required
+    #           response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #         },
     #       },
     #     },
@@ -1517,6 +1721,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
@@ -1782,12 +1987,67 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
     #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
@@ -1926,7 +2186,12 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
     #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
@@ -1952,7 +2217,12 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
     #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
@@ -2192,6 +2462,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
@@ -2362,12 +2633,67 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
     #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
@@ -2513,7 +2839,12 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
     #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
@@ -2539,7 +2870,12 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
     #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
@@ -2775,6 +3111,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
@@ -3544,6 +3881,11 @@ module Aws::AppMesh
     #     spec: { # required
     #       grpc_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -3551,11 +3893,43 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
     #           service_name: "ServiceName",
     #         },
     #       },
     #       http2_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -3563,11 +3937,56 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
     #       http_route: {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -3575,9 +3994,43 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       },
+    #       priority: 1,
     #     },
     #     virtual_gateway_name: "ResourceName", # required
     #   })
@@ -3593,12 +4046,67 @@ module Aws::AppMesh
     #   resp.gateway_route.metadata.resource_owner #=> String
     #   resp.gateway_route.metadata.uid #=> String
     #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
     #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata #=> Array
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].invert #=> Boolean
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.exact #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.prefix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.regex #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].match.suffix #=> String
+    #   resp.gateway_route.spec.grpc_route.match.metadata[0].name #=> String
     #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http2_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http2_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http2_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http2_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.hostname.default_target_hostname #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.default_prefix #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_route.spec.http_route.action.rewrite.prefix.value #=> String
     #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.headers #=> Array
+    #   resp.gateway_route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.headers[0].name #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.hostname.suffix #=> String
+    #   resp.gateway_route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.gateway_route.spec.http_route.match.path.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.path.regex #=> String
     #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters #=> Array
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.gateway_route.spec.http_route.match.query_parameters[0].name #=> String
+    #   resp.gateway_route.spec.priority #=> Integer
     #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.gateway_route.virtual_gateway_name #=> String
     #
@@ -3788,7 +4296,19 @@ module Aws::AppMesh
     #             },
     #           ],
     #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #           prefix: "String", # required
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
@@ -3838,7 +4358,19 @@ module Aws::AppMesh
     #             },
     #           ],
     #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #           prefix: "String", # required
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
@@ -3933,7 +4465,12 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http2_route.match.headers[0].name #=> String
     #   resp.route.spec.http2_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http2_route.match.path.exact #=> String
+    #   resp.route.spec.http2_route.match.path.regex #=> String
     #   resp.route.spec.http2_route.match.prefix #=> String
+    #   resp.route.spec.http2_route.match.query_parameters #=> Array
+    #   resp.route.spec.http2_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http2_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http2_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http2_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.http_retry_events[0] #=> String
@@ -3959,7 +4496,12 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
     #   resp.route.spec.http_route.match.method #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
+    #   resp.route.spec.http_route.match.path.exact #=> String
+    #   resp.route.spec.http_route.match.path.regex #=> String
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.query_parameters #=> Array
+    #   resp.route.spec.http_route.match.query_parameters[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.query_parameters[0].name #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
@@ -4442,6 +4984,7 @@ module Aws::AppMesh
     #         },
     #         dns: {
     #           hostname: "Hostname", # required
+    #           response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #         },
     #       },
     #     },
@@ -4535,6 +5078,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.response_type #=> String, one of "LOADBALANCER", "ENDPOINTS"
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_node.virtual_node_name #=> String
     #
@@ -4715,7 +5259,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

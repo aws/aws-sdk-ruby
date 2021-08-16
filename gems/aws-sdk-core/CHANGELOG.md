@@ -3,6 +3,49 @@ Unreleased Changes
 
 * Issue - Fix an issue where Rest JSON services do not have a `Content-Type` header.
 
+3.119.0 (2021-07-30)
+------------------
+
+* Feature - Support Document Types. Document types are used to carry open content. A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.(#2523)
+
+3.118.0 (2021-07-28)
+------------------
+
+* Feature - Add support for Tagged Unions using a "sealed" classes like approach where each union member has a corresponding subclass.
+
+3.117.0 (2021-07-12)
+------------------
+
+* Feature - Support IPv6 endpoints for `Aws::InstanceProfileCredentials`. It supports two shared configuration options (`ec2_metadata_service_endpoint` & `ec2_metadata_service_endpoint_mode`), two ENV variables (`AWS_EC2_METADATA_SERVICE_ENDPOINT` & `AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE`), and two constructor options (`:endpoint` & `:endpoint_mode`).
+
+* Feature - Support IPv6 endpoint for `Aws::EC2Metadata` client. It can be configured with `:endpoint` or `:endpoint_mode`.
+
+3.116.0 (2021-07-07)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.115.0 (2021-06-23)
+------------------
+
+* Feature - Add support for Assume Role Chaining in profiles. (#2531)
+* Issue - Fixed an issue with `Seahorse::Client::H2::Connection` for non-https endpoints. (#2542)
+
+3.114.3 (2021-06-15)
+------------------
+
+* Issue - Fixed an issue with `Aws::PageableResponse` where it was modifying original params hash, causing frozen hashes to fail.
+
+3.114.2 (2021-06-09)
+------------------
+
+* Issue - Fixed an issue with `Aws::PageableResponse` where intentionally nil tokens were not merged into the params for the next call.
+
+3.114.1 (2021-06-02)
+------------------
+
+* Issue - Change XML Builder to not indent by default
+
 3.114.0 (2021-04-13)
 ------------------
 

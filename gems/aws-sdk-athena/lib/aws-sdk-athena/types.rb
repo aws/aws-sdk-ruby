@@ -187,19 +187,14 @@ module Aws::Athena
     #
     # @!attribute [rw] name
     #   The name of the data catalog to create. The catalog name must be
-    #   unique for the AWS account and can use a maximum of 128
-    #   alphanumeric, underscore, at sign, or hyphen characters.
+    #   unique for the Amazon Web Services account and can use a maximum of
+    #   128 alphanumeric, underscore, at sign, or hyphen characters.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of data catalog to create: `LAMBDA` for a federated catalog
-    #   or `HIVE` for an external hive metastore.
-    #
-    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
-    #   already exists in your account, of which you can have only one.
-    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
-    #
-    #    </note>
+    #   The type of data catalog to create: `LAMBDA` for a federated
+    #   catalog, `HIVE` for an external hive metastore, or `GLUE` for an
+    #   Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -232,6 +227,23 @@ module Aws::Athena
     #       Lambda function.
     #
     #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type takes a catalog ID parameter and is required. The
+    #     ` catalog_id ` is the account ID of the Amazon Web Services
+    #     account to which the Glue Data Catalog belongs.
+    #
+    #     `catalog-id=catalog_id `
+    #
+    #     * The `GLUE` data catalog type also applies to the default
+    #       `AwsDataCatalog` that already exists in your account, of which
+    #       you can have only one and cannot modify.
+    #
+    #     * Queries that specify a Glue Data Catalog other than the default
+    #       `AwsDataCatalog` must be run on Athena engine version 2.
+    #
+    #     * In Regions where Athena engine version 2 is not available,
+    #       creating new Glue data catalogs results in an `INVALID_INPUT`
+    #       error.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -290,10 +302,11 @@ module Aws::Athena
     #   returned and another query is not created. If a parameter has
     #   changed, for example, the `QueryString`, an error is returned.
     #
-    #   This token is listed as not required because AWS SDKs (for example
-    #   the AWS SDK for Java) auto-generate the token for users. If you are
-    #   not using the AWS SDK or the AWS CLI, you must provide this token or
-    #   the action will fail.
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for users. If you are not using the Amazon
+    #   Web Services SDK or the Amazon Web Services CLI, you must provide
+    #   this token or the action will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -411,7 +424,7 @@ module Aws::Athena
     #   the Amazon CloudWatch Metrics are enabled for the workgroup, the
     #   limit for the amount of bytes scanned (cutoff) per query, if it is
     #   specified, and whether workgroup's settings (specified with
-    #   EnforceWorkGroupConfiguration) in the WorkGroupConfiguration
+    #   `EnforceWorkGroupConfiguration`) in the `WorkGroupConfiguration`
     #   override client-side settings. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #   @return [Types::WorkGroupConfiguration]
@@ -440,12 +453,13 @@ module Aws::Athena
     #
     class CreateWorkGroupOutput < Aws::EmptyStructure; end
 
-    # Contains information about a data catalog in an AWS account.
+    # Contains information about a data catalog in an Amazon Web Services
+    # account.
     #
     # @!attribute [rw] name
     #   The name of the data catalog. The catalog name must be unique for
-    #   the AWS account and can use a maximum of 128 alphanumeric,
-    #   underscore, at sign, or hyphen characters.
+    #   the Amazon Web Services account and can use a maximum of 128
+    #   alphanumeric, underscore, at sign, or hyphen characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -453,10 +467,9 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of data catalog: `LAMBDA` for a federated catalog or `HIVE`
-    #   for an external hive metastore. `GLUE` refers to the
-    #   `AwsDataCatalog` that already exists in your account, of which you
-    #   can have only one.
+    #   The type of data catalog to create: `LAMBDA` for a federated
+    #   catalog, `HIVE` for an external hive metastore, or `GLUE` for an
+    #   Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -484,6 +497,19 @@ module Aws::Athena
     #       Lambda function.
     #
     #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type takes a catalog ID parameter and is required. The
+    #     ` catalog_id ` is the account ID of the Amazon Web Services
+    #     account to which the Glue catalog belongs.
+    #
+    #     `catalog-id=catalog_id `
+    #
+    #     * The `GLUE` data catalog type also applies to the default
+    #       `AwsDataCatalog` that already exists in your account, of which
+    #       you can have only one and cannot modify.
+    #
+    #     * Queries that specify a Glue Data Catalog other than the default
+    #       `AwsDataCatalog` must be run on Athena engine version 2.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalog AWS API Documentation
@@ -936,7 +962,8 @@ module Aws::Athena
     end
 
     # @!attribute [rw] update_count
-    #   The number of rows inserted with a CREATE TABLE AS SELECT statement.
+    #   The number of rows inserted with a `CREATE TABLE AS SELECT`
+    #   statement.
     #   @return [Integer]
     #
     # @!attribute [rw] result_set
@@ -1677,7 +1704,7 @@ module Aws::Athena
     #   statements. `DML` indicates DML (Data Manipulation Language) query
     #   statements, such as `CREATE TABLE AS SELECT`. `UTILITY` indicates
     #   query statements other than DDL and DML, such as `SHOW CREATE
-    #   TABLE`, or `DESCRIBE <table>`.
+    #   TABLE`, or `DESCRIBE TABLE`.
     #   @return [String]
     #
     # @!attribute [rw] result_configuration
@@ -1740,7 +1767,8 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] database
-    #   The name of the database used in the query execution.
+    #   The name of the database used in the query execution. The database
+    #   must exist in the catalog.
     #   @return [String]
     #
     # @!attribute [rw] catalog
@@ -1959,8 +1987,8 @@ module Aws::Athena
     #   then the query uses the location for the query results and the
     #   encryption configuration that are specified for the workgroup. The
     #   "workgroup settings override" is specified in
-    #   EnforceWorkGroupConfiguration (true/false) in the
-    #   WorkGroupConfiguration. See
+    #   `EnforceWorkGroupConfiguration` (true/false) in the
+    #   `WorkGroupConfiguration`. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     #
@@ -1972,9 +2000,9 @@ module Aws::Athena
     #   If set to "true", indicates that the previously-specified query
     #   results location (also known as a client-side setting) for queries
     #   in this workgroup should be ignored and set to null. If set to
-    #   "false" or not set, and a value is present in the OutputLocation
-    #   in ResultConfigurationUpdates (the client-side setting), the
-    #   OutputLocation in the workgroup's ResultConfiguration will be
+    #   "false" or not set, and a value is present in the `OutputLocation`
+    #   in `ResultConfigurationUpdates` (the client-side setting), the
+    #   `OutputLocation` in the workgroup's `ResultConfiguration` will be
     #   updated with the new value. For more information, see [Workgroup
     #   Settings Override Client-Side Settings][1].
     #
@@ -1992,11 +2020,11 @@ module Aws::Athena
     #   encryption configuration (also known as the client-side setting) for
     #   queries in this workgroup should be ignored and set to null. If set
     #   to "false" or not set, and a value is present in the
-    #   EncryptionConfiguration in ResultConfigurationUpdates (the
-    #   client-side setting), the EncryptionConfiguration in the
-    #   workgroup's ResultConfiguration will be updated with the new value.
-    #   For more information, see [Workgroup Settings Override Client-Side
-    #   Settings][1].
+    #   `EncryptionConfiguration` in `ResultConfigurationUpdates` (the
+    #   client-side setting), the `EncryptionConfiguration` in the
+    #   workgroup's `ResultConfiguration` will be updated with the new
+    #   value. For more information, see [Workgroup Settings Override
+    #   Client-Side Settings][1].
     #
     #
     #
@@ -2097,10 +2125,11 @@ module Aws::Athena
     #   returned and another query is not created. If a parameter has
     #   changed, for example, the `QueryString`, an error is returned.
     #
-    #   This token is listed as not required because AWS SDKs (for example
-    #   the AWS SDK for Java) auto-generate the token for users. If you are
-    #   not using the AWS SDK or the AWS CLI, you must provide this token or
-    #   the action will fail.
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for users. If you are not using the Amazon
+    #   Web Services SDK or the Amazon Web Services CLI, you must provide
+    #   this token or the action will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2417,19 +2446,14 @@ module Aws::Athena
     #
     # @!attribute [rw] name
     #   The name of the data catalog to update. The catalog name must be
-    #   unique for the AWS account and can use a maximum of 128
-    #   alphanumeric, underscore, at sign, or hyphen characters.
+    #   unique for the Amazon Web Services account and can use a maximum of
+    #   128 alphanumeric, underscore, at sign, or hyphen characters.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   Specifies the type of data catalog to update. Specify `LAMBDA` for a
-    #   federated catalog or `HIVE` for an external hive metastore.
-    #
-    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
-    #   already exists in your account, of which you can have only one.
-    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
-    #
-    #    </note>
+    #   federated catalog, `HIVE` for an external hive metastore, or `GLUE`
+    #   for an Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2589,8 +2613,8 @@ module Aws::Athena
     # settings), to enable sending query metrics to Amazon CloudWatch, and
     # to establish per-query data usage control limits for all queries in a
     # workgroup. The workgroup settings override is specified in
-    # EnforceWorkGroupConfiguration (true/false) in the
-    # WorkGroupConfiguration. See
+    # `EnforceWorkGroupConfiguration` (true/false) in the
+    # `WorkGroupConfiguration`. See
     # WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     # @!attribute [rw] name
@@ -2609,8 +2633,8 @@ module Aws::Athena
     #   settings override client-side settings; and the data usage limits
     #   for the amount of data scanned per query or per workgroup. The
     #   workgroup settings override is specified in
-    #   EnforceWorkGroupConfiguration (true/false) in the
-    #   WorkGroupConfiguration. See
+    #   `EnforceWorkGroupConfiguration` (true/false) in the
+    #   `WorkGroupConfiguration`. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #   @return [Types::WorkGroupConfiguration]
     #
@@ -2640,8 +2664,8 @@ module Aws::Athena
     # enabled for the workgroup and whether workgroup settings override
     # query settings, and the data usage limits for the amount of data
     # scanned per query or per workgroup. The workgroup settings override is
-    # specified in EnforceWorkGroupConfiguration (true/false) in the
-    # WorkGroupConfiguration. See
+    # specified in `EnforceWorkGroupConfiguration` (true/false) in the
+    # `WorkGroupConfiguration`. See
     # WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     # @note When making an API call, you may pass WorkGroupConfiguration

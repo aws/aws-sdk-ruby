@@ -21,6 +21,7 @@ module Aws::CloudFront
     AliasList = Shapes::ListShape.new(name: 'AliasList')
     Aliases = Shapes::StructureShape.new(name: 'Aliases')
     AllowedMethods = Shapes::StructureShape.new(name: 'AllowedMethods')
+    AssociateAliasRequest = Shapes::StructureShape.new(name: 'AssociateAliasRequest')
     AwsAccountNumberList = Shapes::ListShape.new(name: 'AwsAccountNumberList')
     BatchTooLarge = Shapes::StructureShape.new(name: 'BatchTooLarge')
     CNAMEAlreadyExists = Shapes::StructureShape.new(name: 'CNAMEAlreadyExists')
@@ -52,6 +53,9 @@ module Aws::CloudFront
     CloudFrontOriginAccessIdentitySummary = Shapes::StructureShape.new(name: 'CloudFrontOriginAccessIdentitySummary')
     CloudFrontOriginAccessIdentitySummaryList = Shapes::ListShape.new(name: 'CloudFrontOriginAccessIdentitySummaryList')
     CommentType = Shapes::StringShape.new(name: 'CommentType')
+    ConflictingAlias = Shapes::StructureShape.new(name: 'ConflictingAlias')
+    ConflictingAliases = Shapes::ListShape.new(name: 'ConflictingAliases')
+    ConflictingAliasesList = Shapes::StructureShape.new(name: 'ConflictingAliasesList')
     ContentTypeProfile = Shapes::StructureShape.new(name: 'ContentTypeProfile')
     ContentTypeProfileConfig = Shapes::StructureShape.new(name: 'ContentTypeProfileConfig')
     ContentTypeProfileList = Shapes::ListShape.new(name: 'ContentTypeProfileList')
@@ -267,6 +271,8 @@ module Aws::CloudFront
     ListCachePoliciesResult = Shapes::StructureShape.new(name: 'ListCachePoliciesResult')
     ListCloudFrontOriginAccessIdentitiesRequest = Shapes::StructureShape.new(name: 'ListCloudFrontOriginAccessIdentitiesRequest')
     ListCloudFrontOriginAccessIdentitiesResult = Shapes::StructureShape.new(name: 'ListCloudFrontOriginAccessIdentitiesResult')
+    ListConflictingAliasesRequest = Shapes::StructureShape.new(name: 'ListConflictingAliasesRequest')
+    ListConflictingAliasesResult = Shapes::StructureShape.new(name: 'ListConflictingAliasesResult')
     ListDistributionsByCachePolicyIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByCachePolicyIdRequest')
     ListDistributionsByCachePolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByCachePolicyIdResult')
     ListDistributionsByKeyGroupRequest = Shapes::StructureShape.new(name: 'ListDistributionsByKeyGroupRequest')
@@ -489,8 +495,11 @@ module Aws::CloudFront
     UpdateStreamingDistributionResult = Shapes::StructureShape.new(name: 'UpdateStreamingDistributionResult')
     ViewerCertificate = Shapes::StructureShape.new(name: 'ViewerCertificate')
     ViewerProtocolPolicy = Shapes::StringShape.new(name: 'ViewerProtocolPolicy')
+    aliasString = Shapes::StringShape.new(name: 'aliasString')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
+    distributionIdString = Shapes::StringShape.new(name: 'distributionIdString')
     integer = Shapes::IntegerShape.new(name: 'integer')
+    listConflictingAliasesMaxItemsInteger = Shapes::IntegerShape.new(name: 'listConflictingAliasesMaxItemsInteger')
     long = Shapes::IntegerShape.new(name: 'long')
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
@@ -524,6 +533,10 @@ module Aws::CloudFront
     AllowedMethods.add_member(:items, Shapes::ShapeRef.new(shape: MethodsList, required: true, location_name: "Items"))
     AllowedMethods.add_member(:cached_methods, Shapes::ShapeRef.new(shape: CachedMethods, location_name: "CachedMethods"))
     AllowedMethods.struct_class = Types::AllowedMethods
+
+    AssociateAliasRequest.add_member(:target_distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "TargetDistributionId"))
+    AssociateAliasRequest.add_member(:alias, Shapes::ShapeRef.new(shape: string, required: true, location: "querystring", location_name: "Alias"))
+    AssociateAliasRequest.struct_class = Types::AssociateAliasRequest
 
     AwsAccountNumberList.member = Shapes::ShapeRef.new(shape: string, location_name: "AwsAccountNumber")
 
@@ -638,6 +651,19 @@ module Aws::CloudFront
     CloudFrontOriginAccessIdentitySummary.struct_class = Types::CloudFrontOriginAccessIdentitySummary
 
     CloudFrontOriginAccessIdentitySummaryList.member = Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentitySummary, location_name: "CloudFrontOriginAccessIdentitySummary")
+
+    ConflictingAlias.add_member(:alias, Shapes::ShapeRef.new(shape: string, location_name: "Alias"))
+    ConflictingAlias.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, location_name: "DistributionId"))
+    ConflictingAlias.add_member(:account_id, Shapes::ShapeRef.new(shape: string, location_name: "AccountId"))
+    ConflictingAlias.struct_class = Types::ConflictingAlias
+
+    ConflictingAliases.member = Shapes::ShapeRef.new(shape: ConflictingAlias, location_name: "ConflictingAlias")
+
+    ConflictingAliasesList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    ConflictingAliasesList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location_name: "MaxItems"))
+    ConflictingAliasesList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, location_name: "Quantity"))
+    ConflictingAliasesList.add_member(:items, Shapes::ShapeRef.new(shape: ConflictingAliases, location_name: "Items"))
+    ConflictingAliasesList.struct_class = Types::ConflictingAliasesList
 
     ContentTypeProfile.add_member(:format, Shapes::ShapeRef.new(shape: Format, required: true, location_name: "Format"))
     ContentTypeProfile.add_member(:profile_id, Shapes::ShapeRef.new(shape: string, location_name: "ProfileId"))
@@ -1555,6 +1581,17 @@ module Aws::CloudFront
     ListCloudFrontOriginAccessIdentitiesResult[:payload] = :cloud_front_origin_access_identity_list
     ListCloudFrontOriginAccessIdentitiesResult[:payload_member] = ListCloudFrontOriginAccessIdentitiesResult.member(:cloud_front_origin_access_identity_list)
 
+    ListConflictingAliasesRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: distributionIdString, required: true, location: "querystring", location_name: "DistributionId"))
+    ListConflictingAliasesRequest.add_member(:alias, Shapes::ShapeRef.new(shape: aliasString, required: true, location: "querystring", location_name: "Alias"))
+    ListConflictingAliasesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListConflictingAliasesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListConflictingAliasesRequest.struct_class = Types::ListConflictingAliasesRequest
+
+    ListConflictingAliasesResult.add_member(:conflicting_aliases_list, Shapes::ShapeRef.new(shape: ConflictingAliasesList, location_name: "ConflictingAliasesList"))
+    ListConflictingAliasesResult.struct_class = Types::ListConflictingAliasesResult
+    ListConflictingAliasesResult[:payload] = :conflicting_aliases_list
+    ListConflictingAliasesResult[:payload_member] = ListConflictingAliasesResult.member(:conflicting_aliases_list)
+
     ListDistributionsByCachePolicyIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListDistributionsByCachePolicyIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
     ListDistributionsByCachePolicyIdRequest.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "CachePolicyId"))
@@ -2424,6 +2461,19 @@ module Aws::CloudFront
         "uid" => "cloudfront-2020-05-31",
       }
 
+      api.add_operation(:associate_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateAlias2020_05_31"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-05-31/distribution/{TargetDistributionId}/associate-alias"
+        o.input = Shapes::ShapeRef.new(shape: AssociateAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
       api.add_operation(:create_cache_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCachePolicy2020_05_31"
         o.http_method = "POST"
@@ -2631,6 +2681,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: FunctionAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: FunctionSizeLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:create_invalidation, Seahorse::Model::Operation.new.tap do |o|
@@ -2832,6 +2883,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: FunctionInUse)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:delete_key_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2921,6 +2973,7 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: DescribeFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFunctionResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:get_cache_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3030,6 +3083,7 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: GetFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFunctionResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:get_invalidation, Seahorse::Model::Operation.new.tap do |o|
@@ -3175,6 +3229,16 @@ module Aws::CloudFront
         )
       end)
 
+      api.add_operation(:list_conflicting_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConflictingAliases2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/conflicting-alias"
+        o.input = Shapes::ShapeRef.new(shape: ListConflictingAliasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConflictingAliasesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+      end)
+
       api.add_operation(:list_distributions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDistributions2020_05_31"
         o.http_method = "GET"
@@ -3272,6 +3336,7 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: ListFunctionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFunctionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:list_invalidations, Seahorse::Model::Operation.new.tap do |o|
@@ -3370,6 +3435,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -3399,6 +3465,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: TestFunctionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -3568,6 +3635,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: FunctionSizeLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:update_key_group, Seahorse::Model::Operation.new.tap do |o|

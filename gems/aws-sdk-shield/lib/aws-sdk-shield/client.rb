@@ -337,11 +337,12 @@ module Aws::Shield
 
     # @!group API Operations
 
-    # Authorizes the DDoS Response Team (DRT) to access the specified Amazon
-    # S3 bucket containing your AWS WAF logs. You can associate up to 10
-    # Amazon S3 buckets with your subscription.
+    # Authorizes the Shield Response Team (SRT) to access the specified
+    # Amazon S3 bucket containing log data such as Application Load Balancer
+    # access logs, CloudFront logs, or logs from third party sources. You
+    # can associate up to 10 Amazon S3 buckets with your subscription.
     #
-    # To use the services of the DRT and make an `AssociateDRTLogBucket`
+    # To use the services of the SRT and make an `AssociateDRTLogBucket`
     # request, you must be subscribed to the [Business Support plan][1] or
     # the [Enterprise Support plan][2].
     #
@@ -351,7 +352,7 @@ module Aws::Shield
     # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
-    #   The Amazon S3 bucket that contains your AWS WAF logs.
+    #   The Amazon S3 bucket that contains the logs that you want to share.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -370,10 +371,10 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Authorizes the DDoS Response Team (DRT), using the specified role, to
-    # access your AWS account to assist with DDoS attack mitigation during
-    # potential attacks. This enables the DRT to inspect your AWS WAF
-    # configuration and create or update AWS WAF rules and web ACLs.
+    # Authorizes the Shield Response Team (SRT) using the specified role, to
+    # access your Amazon Web Services account to assist with DDoS attack
+    # mitigation during potential attacks. This enables the SRT to inspect
+    # your WAF configuration and create or update WAF rules and web ACLs.
     #
     # You can associate only one `RoleArn` with your subscription. If you
     # submit an `AssociateDRTRole` request for an account that already has
@@ -389,17 +390,17 @@ module Aws::Shield
     # drt.shield.amazonaws.com`. For more information, see [IAM JSON Policy
     # Elements: Principal][2].
     #
-    # The DRT will have access only to your AWS WAF and Shield resources. By
-    # submitting this request, you authorize the DRT to inspect your AWS WAF
-    # and Shield configuration and create and update AWS WAF rules and web
-    # ACLs on your behalf. The DRT takes these actions only if explicitly
-    # authorized by you.
+    # The SRT will have access only to your WAF and Shield resources. By
+    # submitting this request, you authorize the SRT to inspect your WAF and
+    # Shield configuration and create and update WAF rules and web ACLs on
+    # your behalf. The SRT takes these actions only if explicitly authorized
+    # by you.
     #
     # You must have the `iam:PassRole` permission to make an
     # `AssociateDRTRole` request. For more information, see [Granting a User
-    # Permissions to Pass a Role to an AWS Service][3].
+    # Permissions to Pass a Role to an Amazon Web Services Service][3].
     #
-    # To use the services of the DRT and make an `AssociateDRTRole` request,
+    # To use the services of the SRT and make an `AssociateDRTRole` request,
     # you must be subscribed to the [Business Support plan][4] or the
     # [Enterprise Support plan][5].
     #
@@ -412,8 +413,8 @@ module Aws::Shield
     # [5]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the role the DRT will use to access
-    #   your AWS account.
+    #   The Amazon Resource Name (ARN) of the role the SRT will use to access
+    #   your Amazon Web Services account.
     #
     #   Prior to making the `AssociateDRTRole` request, you must attach the
     #   [AWSShieldDRTAccessPolicy][1] managed policy to this role. For more
@@ -443,18 +444,16 @@ module Aws::Shield
 
     # Adds health-based detection to the Shield Advanced protection for a
     # resource. Shield Advanced health-based detection uses the health of
-    # your AWS resource to improve responsiveness and accuracy in attack
-    # detection and mitigation.
+    # your Amazon Web Services resource to improve responsiveness and
+    # accuracy in attack detection and mitigation.
     #
     # You define the health check in Route 53 and then associate it with
     # your Shield Advanced protection. For more information, see [Shield
-    # Advanced Health-Based Detection][1] in the [AWS WAF and AWS Shield
-    # Developer Guide][2].
+    # Advanced Health-Based Detection][1] in the *WAF Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option
-    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :protection_id
     #   The unique identifier (ID) for the Protection object to add the health
@@ -483,7 +482,7 @@ module Aws::Shield
     end
 
     # Initializes proactive engagement and sets the list of contacts for the
-    # DDoS Response Team (DRT) to use. You must provide at least one phone
+    # Shield Response Team (SRT) to use. You must provide at least one phone
     # number in the emergency contact list.
     #
     # After you have initialized proactive engagement using this call, to
@@ -491,8 +490,8 @@ module Aws::Shield
     # `DisableProactiveEngagement` and `EnableProactiveEngagement`.
     #
     # <note markdown="1"> This call defines the list of email addresses and phone numbers that
-    # the DDoS Response Team (DRT) can use to contact you for escalations to
-    # the DRT and to initiate proactive customer support.
+    # the SRT can use to contact you for escalations to the SRT and to
+    # initiate proactive customer support.
     #
     #  The contacts that you provide in the request replace any contacts that
     # were already defined. If you already have contacts defined and want to
@@ -502,8 +501,8 @@ module Aws::Shield
     #  </note>
     #
     # @option params [required, Array<Types::EmergencyContact>] :emergency_contact_list
-    #   A list of email addresses and phone numbers that the DDoS Response
-    #   Team (DRT) can use to contact you for escalations to the DRT and to
+    #   A list of email addresses and phone numbers that the Shield Response
+    #   Team (SRT) can use to contact you for escalations to the SRT and to
     #   initiate proactive customer support.
     #
     #   To enable proactive engagement, the contact list must include at least
@@ -539,16 +538,16 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Enables AWS Shield Advanced for a specific AWS resource. The resource
-    # can be an Amazon CloudFront distribution, Elastic Load Balancing load
-    # balancer, AWS Global Accelerator accelerator, Elastic IP Address, or
-    # an Amazon Route 53 hosted zone.
+    # Enables Shield Advanced for a specific Amazon Web Services resource.
+    # The resource can be an Amazon CloudFront distribution, Elastic Load
+    # Balancing load balancer, Global Accelerator accelerator, Elastic IP
+    # Address, or an Amazon Route 53 hosted zone.
     #
     # You can add protection to only a single resource with each
     # CreateProtection request. If you want to add protection to multiple
-    # resources at once, use the [AWS WAF console][1]. For more information
-    # see [Getting Started with AWS Shield Advanced][2] and [Add AWS Shield
-    # Advanced Protection to more AWS Resources][3].
+    # resources at once, use the [WAF console][1]. For more information see
+    # [Getting Started with Shield Advanced][2] and [Add Shield Advanced
+    # Protection to more Amazon Web Services Resources][3].
     #
     #
     #
@@ -572,10 +571,10 @@ module Aws::Shield
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
     #     `
     #
-    #   * For an AWS CloudFront distribution:
+    #   * For an Amazon CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
     #
-    #   * For an AWS Global Accelerator accelerator:
+    #   * For an Global Accelerator accelerator:
     #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id `
     #
     #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id `
@@ -627,8 +626,8 @@ module Aws::Shield
     #   example to update, delete, or describe it.
     #
     # @option params [required, String] :aggregation
-    #   Defines how AWS Shield combines resource data for the group in order
-    #   to detect, mitigate, and report events.
+    #   Defines how Shield combines resource data for the group in order to
+    #   detect, mitigate, and report events.
     #
     #   * Sum - Use the total traffic across the group. This is a good choice
     #     for most cases. Examples include Elastic IP addresses for EC2
@@ -640,8 +639,8 @@ module Aws::Shield
     #
     #   * Max - Use the highest traffic from each resource. This is useful for
     #     resources that don't share traffic and for resources that share
-    #     that traffic in a non-uniform way. Examples include CloudFront
-    #     distributions and origin resources for CloudFront distributions.
+    #     that traffic in a non-uniform way. Examples include Amazon
+    #     CloudFront and origin resources for CloudFront distributions.
     #
     # @option params [required, String] :pattern
     #   The criteria to use to choose the protected resources for inclusion in
@@ -691,7 +690,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Activates AWS Shield Advanced for an account.
+    # Activates Shield Advanced for an account.
     #
     # When you initally create a subscription, your subscription is set to
     # be automatically renewed at the end of the existing subscription
@@ -709,7 +708,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Deletes an AWS Shield Advanced Protection.
+    # Deletes an Shield Advanced Protection.
     #
     # @option params [required, String] :protection_id
     #   The unique identifier (ID) for the Protection object to be deleted.
@@ -755,9 +754,9 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes AWS Shield Advanced from an account. AWS Shield Advanced
-    # requires a 1-year subscription commitment. You cannot delete a
-    # subscription prior to the completion of that commitment.
+    # Removes Shield Advanced from an account. Shield Advanced requires a
+    # 1-year subscription commitment. You cannot delete a subscription prior
+    # to the completion of that commitment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -837,8 +836,8 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Provides information about the number and type of attacks AWS Shield
-    # has detected in the last year for all resources that belong to your
+    # Provides information about the number and type of attacks Shield has
+    # detected in the last year for all resources that belong to your
     # account, regardless of whether you've defined Shield protections for
     # them. This operation is available to Shield customers as well as to
     # Shield Advanced customers.
@@ -877,8 +876,8 @@ module Aws::Shield
     end
 
     # Returns the current role and list of Amazon S3 log buckets used by the
-    # DDoS Response Team (DRT) to access your AWS account while assisting
-    # with attack mitigation.
+    # Shield Response Team (SRT) to access your Amazon Web Services account
+    # while assisting with attack mitigation.
     #
     # @return [Types::DescribeDRTAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -900,9 +899,9 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # A list of email addresses and phone numbers that the DDoS Response
-    # Team (DRT) can use to contact you if you have proactive engagement
-    # enabled, for escalations to the DRT and to initiate proactive customer
+    # A list of email addresses and phone numbers that the Shield Response
+    # Team (SRT) can use to contact you if you have proactive engagement
+    # enabled, for escalations to the SRT and to initiate proactive customer
     # support.
     #
     # @return [Types::DescribeEmergencyContactSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -933,10 +932,10 @@ module Aws::Shield
     #   provide either the `ResourceArn` or the `ProtectionID`, but not both.
     #
     # @option params [String] :resource_arn
-    #   The ARN (Amazon Resource Name) of the AWS resource for the Protection
-    #   object that is described. When submitting the `DescribeProtection`
-    #   request you must provide either the `ResourceArn` or the
-    #   `ProtectionID`, but not both.
+    #   The ARN (Amazon Resource Name) of the Amazon Web Services resource for
+    #   the Protection object that is described. When submitting the
+    #   `DescribeProtection` request you must provide either the `ResourceArn`
+    #   or the `ProtectionID`, but not both.
     #
     # @return [Types::DescribeProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1003,7 +1002,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Provides details about the AWS Shield Advanced subscription for an
+    # Provides details about the Shield Advanced subscription for an
     # account.
     #
     # @return [Types::DescribeSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1036,8 +1035,8 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes authorization from the DDoS Response Team (DRT) to notify
-    # contacts about escalations to the DRT and to initiate proactive
+    # Removes authorization from the Shield Response Team (SRT) to notify
+    # contacts about escalations to the SRT and to initiate proactive
     # customer support.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1051,13 +1050,13 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes the DDoS Response Team's (DRT) access to the specified Amazon
-    # S3 bucket containing your AWS WAF logs.
+    # Removes the Shield Response Team's (SRT) access to the specified
+    # Amazon S3 bucket containing the logs that you shared previously.
     #
     # To make a `DisassociateDRTLogBucket` request, you must be subscribed
     # to the [Business Support plan][1] or the [Enterprise Support plan][2].
     # However, if you are not subscribed to one of these support plans, but
-    # had been previously and had granted the DRT access to your account,
+    # had been previously and had granted the SRT access to your account,
     # you can submit a `DisassociateDRTLogBucket` request to remove this
     # access.
     #
@@ -1067,7 +1066,7 @@ module Aws::Shield
     # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
-    #   The Amazon S3 bucket that contains your AWS WAF logs.
+    #   The Amazon S3 bucket that contains the logs that you want to share.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1086,12 +1085,13 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes the DDoS Response Team's (DRT) access to your AWS account.
+    # Removes the Shield Response Team's (SRT) access to your Amazon Web
+    # Services account.
     #
     # To make a `DisassociateDRTRole` request, you must be subscribed to the
     # [Business Support plan][1] or the [Enterprise Support plan][2].
     # However, if you are not subscribed to one of these support plans, but
-    # had been previously and had granted the DRT access to your account,
+    # had been previously and had granted the SRT access to your account,
     # you can submit a `DisassociateDRTRole` request to remove this access.
     #
     #
@@ -1112,18 +1112,17 @@ module Aws::Shield
 
     # Removes health-based detection from the Shield Advanced protection for
     # a resource. Shield Advanced health-based detection uses the health of
-    # your AWS resource to improve responsiveness and accuracy in attack
-    # detection and mitigation.
+    # your Amazon Web Services resource to improve responsiveness and
+    # accuracy in attack detection and mitigation.
     #
     # You define the health check in Route 53 and then associate or
     # disassociate it with your Shield Advanced protection. For more
     # information, see [Shield Advanced Health-Based Detection][1] in the
-    # [AWS WAF and AWS Shield Developer Guide][2].
+    # *WAF Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option
-    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :protection_id
     #   The unique identifier (ID) for the Protection object to remove the
@@ -1151,8 +1150,8 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Authorizes the DDoS Response Team (DRT) to use email and phone to
-    # notify contacts about escalations to the DRT and to initiate proactive
+    # Authorizes the Shield Response Team (SRT) to use email and phone to
+    # notify contacts about escalations to the SRT and to initiate proactive
     # customer support.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1426,8 +1425,8 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Gets information about AWS tags for a specified Amazon Resource Name
-    # (ARN) in AWS Shield.
+    # Gets information about Amazon Web Services tags for a specified Amazon
+    # Resource Name (ARN) in Shield.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to get tags for.
@@ -1457,7 +1456,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Adds or updates tags for a resource in AWS Shield.
+    # Adds or updates tags for a resource in Shield.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to add or
@@ -1489,7 +1488,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes tags from a resource in AWS Shield.
+    # Removes tags from a resource in Shield.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to remove
@@ -1517,14 +1516,14 @@ module Aws::Shield
     end
 
     # Updates the details of the list of email addresses and phone numbers
-    # that the DDoS Response Team (DRT) can use to contact you if you have
-    # proactive engagement enabled, for escalations to the DRT and to
+    # that the Shield Response Team (SRT) can use to contact you if you have
+    # proactive engagement enabled, for escalations to the SRT and to
     # initiate proactive customer support.
     #
     # @option params [Array<Types::EmergencyContact>] :emergency_contact_list
-    #   A list of email addresses and phone numbers that the DDoS Response
-    #   Team (DRT) can use to contact you if you have proactive engagement
-    #   enabled, for escalations to the DRT and to initiate proactive customer
+    #   A list of email addresses and phone numbers that the Shield Response
+    #   Team (SRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the SRT and to initiate proactive customer
     #   support.
     #
     #   If you have proactive engagement enabled, the contact list must
@@ -1564,8 +1563,8 @@ module Aws::Shield
     #   example to update, delete, or describe it.
     #
     # @option params [required, String] :aggregation
-    #   Defines how AWS Shield combines resource data for the group in order
-    #   to detect, mitigate, and report events.
+    #   Defines how Shield combines resource data for the group in order to
+    #   detect, mitigate, and report events.
     #
     #   * Sum - Use the total traffic across the group. This is a good choice
     #     for most cases. Examples include Elastic IP addresses for EC2
@@ -1577,8 +1576,9 @@ module Aws::Shield
     #
     #   * Max - Use the highest traffic from each resource. This is useful for
     #     resources that don't share traffic and for resources that share
-    #     that traffic in a non-uniform way. Examples include CloudFront
-    #     distributions and origin resources for CloudFront distributions.
+    #     that traffic in a non-uniform way. Examples include Amazon
+    #     CloudFront distributions and origin resources for CloudFront
+    #     distributions.
     #
     # @option params [required, String] :pattern
     #   The criteria to use to choose the protected resources for inclusion in
@@ -1659,7 +1659,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

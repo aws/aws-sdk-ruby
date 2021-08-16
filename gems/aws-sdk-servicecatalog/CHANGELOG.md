@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2021-06-08)
+------------------
+
+* Feature - increase max pagesize for List/Search apis
+
 1.59.0 (2021-03-10)
 ------------------
 

@@ -54,7 +54,7 @@ module Aws::SNS
     #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and GCM
     #   (Firebase Cloud Messaging).
     # @option options [required, Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1]
+    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
     #
     #
     #
@@ -109,12 +109,12 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
-    #   The following attribute applies only to [server-side-encryption][1]\:
+    #   The following attribute applies only to [server-side encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
-    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
+    #     master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
@@ -135,8 +135,8 @@ module Aws::SNS
     #       the body of the message (but not the attributes of the message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the the `MessageDeduplicationId` parameter for the
-    #       `Publish` action.
+    #       value for the `MessageDeduplicationId` parameter for the `Publish`
+    #       action.
     #
     #
     #

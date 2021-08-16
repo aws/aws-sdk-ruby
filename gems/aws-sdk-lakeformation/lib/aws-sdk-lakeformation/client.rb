@@ -337,6 +337,99 @@ module Aws::LakeFormation
 
     # @!group API Operations
 
+    # Attaches one or more tags to an existing resource.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, Types::Resource] :resource
+    #   The resource to which to attach a tag.
+    #
+    # @option params [required, Array<Types::LFTagPair>] :lf_tags
+    #   The tags to attach to the resource.
+    #
+    # @return [Types::AddLFTagsToResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddLFTagsToResourceResponse#failures #failures} => Array&lt;Types::LFTagError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_lf_tags_to_resource({
+    #     catalog_id: "CatalogIdString",
+    #     resource: { # required
+    #       catalog: {
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"],
+    #         },
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     lf_tags: [ # required
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "LFTagKey", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].lf_tag.catalog_id #=> String
+    #   resp.failures[0].lf_tag.tag_key #=> String
+    #   resp.failures[0].lf_tag.tag_values #=> Array
+    #   resp.failures[0].lf_tag.tag_values[0] #=> String
+    #   resp.failures[0].error.error_code #=> String
+    #   resp.failures[0].error.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AddLFTagsToResource AWS API Documentation
+    #
+    # @overload add_lf_tags_to_resource(params = {})
+    # @param [Hash] params ({})
+    def add_lf_tags_to_resource(params = {}, options = {})
+      req = build_request(:add_lf_tags_to_resource, params)
+      req.send_request(options)
+    end
+
     # Batch operation to grant permissions to the principal.
     #
     # @option params [String] :catalog_id
@@ -390,9 +483,24 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           lf_tag: {
+    #             catalog_id: "CatalogIdString",
+    #             tag_key: "NameString", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #           lf_tag_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #             expression: [ # required
+    #               {
+    #                 tag_key: "LFTagKey", # required
+    #                 tag_values: ["LFTagValue"], # required
+    #               },
+    #             ],
+    #           },
     #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
     #       },
     #     ],
     #   })
@@ -416,10 +524,20 @@ module Aws::LakeFormation
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.failures[0].request_entry.resource.data_location.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.data_location.resource_arn #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag.catalog_id #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag.tag_key #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag.tag_values #=> Array
+    #   resp.failures[0].request_entry.resource.lf_tag.tag_values[0] #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.catalog_id #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.resource_type #=> String, one of "DATABASE", "TABLE"
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression #=> Array
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression[0].tag_key #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression[0].tag_values #=> Array
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression[0].tag_values[0] #=> String
     #   resp.failures[0].request_entry.permissions #=> Array
-    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.failures[0].request_entry.permissions_with_grant_option #=> Array
-    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.failures[0].error.error_code #=> String
     #   resp.failures[0].error.error_message #=> String
     #
@@ -485,9 +603,24 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           lf_tag: {
+    #             catalog_id: "CatalogIdString",
+    #             tag_key: "NameString", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #           lf_tag_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #             expression: [ # required
+    #               {
+    #                 tag_key: "LFTagKey", # required
+    #                 tag_values: ["LFTagValue"], # required
+    #               },
+    #             ],
+    #           },
     #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
     #       },
     #     ],
     #   })
@@ -511,10 +644,20 @@ module Aws::LakeFormation
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.failures[0].request_entry.resource.data_location.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.data_location.resource_arn #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag.catalog_id #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag.tag_key #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag.tag_values #=> Array
+    #   resp.failures[0].request_entry.resource.lf_tag.tag_values[0] #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.catalog_id #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.resource_type #=> String, one of "DATABASE", "TABLE"
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression #=> Array
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression[0].tag_key #=> String
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression[0].tag_values #=> Array
+    #   resp.failures[0].request_entry.resource.lf_tag_policy.expression[0].tag_values[0] #=> String
     #   resp.failures[0].request_entry.permissions #=> Array
-    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.failures[0].request_entry.permissions_with_grant_option #=> Array
-    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.failures[0].error.error_code #=> String
     #   resp.failures[0].error.error_message #=> String
     #
@@ -524,6 +667,74 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def batch_revoke_permissions(params = {}, options = {})
       req = build_request(:batch_revoke_permissions, params)
+      req.send_request(options)
+    end
+
+    # Creates a tag with the specified name and values.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, String] :tag_key
+    #   The key-name for the tag.
+    #
+    # @option params [required, Array<String>] :tag_values
+    #   A list of possible values an attribute can take.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lf_tag({
+    #     catalog_id: "CatalogIdString",
+    #     tag_key: "LFTagKey", # required
+    #     tag_values: ["LFTagValue"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLFTag AWS API Documentation
+    #
+    # @overload create_lf_tag(params = {})
+    # @param [Hash] params ({})
+    def create_lf_tag(params = {}, options = {})
+      req = build_request(:create_lf_tag, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified tag key name. If the attribute key does not
+    # exist or the tag does not exist, then the operation will not do
+    # anything. If the attribute key exists, then the operation checks if
+    # any resources are tagged with this attribute key, if yes, the API
+    # throws a 400 Exception with the message "Delete not allowed" as the
+    # tag key is still attached with resources. You can consider untagging
+    # resources with this tag key.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, String] :tag_key
+    #   The key-name for the tag to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lf_tag({
+    #     catalog_id: "CatalogIdString",
+    #     tag_key: "LFTagKey", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLFTag AWS API Documentation
+    #
+    # @overload delete_lf_tag(params = {})
+    # @param [Hash] params ({})
+    def delete_lf_tag(params = {}, options = {})
+      req = build_request(:delete_lf_tag, params)
       req.send_request(options)
     end
 
@@ -610,11 +821,11 @@ module Aws::LakeFormation
     #   resp.data_lake_settings.create_database_default_permissions #=> Array
     #   resp.data_lake_settings.create_database_default_permissions[0].principal.data_lake_principal_identifier #=> String
     #   resp.data_lake_settings.create_database_default_permissions[0].permissions #=> Array
-    #   resp.data_lake_settings.create_database_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.data_lake_settings.create_database_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.data_lake_settings.create_table_default_permissions #=> Array
     #   resp.data_lake_settings.create_table_default_permissions[0].principal.data_lake_principal_identifier #=> String
     #   resp.data_lake_settings.create_table_default_permissions[0].permissions #=> Array
-    #   resp.data_lake_settings.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.data_lake_settings.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.data_lake_settings.trusted_resource_owners #=> Array
     #   resp.data_lake_settings.trusted_resource_owners[0] #=> String
     #
@@ -683,10 +894,20 @@ module Aws::LakeFormation
     #   resp.permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.permissions[0].resource.data_location.catalog_id #=> String
     #   resp.permissions[0].resource.data_location.resource_arn #=> String
+    #   resp.permissions[0].resource.lf_tag.catalog_id #=> String
+    #   resp.permissions[0].resource.lf_tag.tag_key #=> String
+    #   resp.permissions[0].resource.lf_tag.tag_values #=> Array
+    #   resp.permissions[0].resource.lf_tag.tag_values[0] #=> String
+    #   resp.permissions[0].resource.lf_tag_policy.catalog_id #=> String
+    #   resp.permissions[0].resource.lf_tag_policy.resource_type #=> String, one of "DATABASE", "TABLE"
+    #   resp.permissions[0].resource.lf_tag_policy.expression #=> Array
+    #   resp.permissions[0].resource.lf_tag_policy.expression[0].tag_key #=> String
+    #   resp.permissions[0].resource.lf_tag_policy.expression[0].tag_values #=> Array
+    #   resp.permissions[0].resource.lf_tag_policy.expression[0].tag_values[0] #=> String
     #   resp.permissions[0].permissions #=> Array
-    #   resp.permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.permissions[0].permissions_with_grant_option #=> Array
-    #   resp.permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.permissions[0].additional_details.resource_share #=> Array
     #   resp.permissions[0].additional_details.resource_share[0] #=> String
     #   resp.next_token #=> String
@@ -697,6 +918,145 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def get_effective_permissions_for_path(params = {}, options = {})
       req = build_request(:get_effective_permissions_for_path, params)
+      req.send_request(options)
+    end
+
+    # Returns a tag definition.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, String] :tag_key
+    #   The key-name for the tag.
+    #
+    # @return [Types::GetLFTagResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLFTagResponse#catalog_id #catalog_id} => String
+    #   * {Types::GetLFTagResponse#tag_key #tag_key} => String
+    #   * {Types::GetLFTagResponse#tag_values #tag_values} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lf_tag({
+    #     catalog_id: "CatalogIdString",
+    #     tag_key: "LFTagKey", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_id #=> String
+    #   resp.tag_key #=> String
+    #   resp.tag_values #=> Array
+    #   resp.tag_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetLFTag AWS API Documentation
+    #
+    # @overload get_lf_tag(params = {})
+    # @param [Hash] params ({})
+    def get_lf_tag(params = {}, options = {})
+      req = build_request(:get_lf_tag, params)
+      req.send_request(options)
+    end
+
+    # Returns the tags applied to a resource.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, Types::Resource] :resource
+    #   The resource for which you want to return tags.
+    #
+    # @option params [Boolean] :show_assigned_lf_tags
+    #   Indicates whether to show the assigned tags.
+    #
+    # @return [Types::GetResourceLFTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceLFTagsResponse#lf_tag_on_database #lf_tag_on_database} => Array&lt;Types::LFTagPair&gt;
+    #   * {Types::GetResourceLFTagsResponse#lf_tags_on_table #lf_tags_on_table} => Array&lt;Types::LFTagPair&gt;
+    #   * {Types::GetResourceLFTagsResponse#lf_tags_on_columns #lf_tags_on_columns} => Array&lt;Types::ColumnLFTag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_lf_tags({
+    #     catalog_id: "CatalogIdString",
+    #     resource: { # required
+    #       catalog: {
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"],
+    #         },
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     show_assigned_lf_tags: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lf_tag_on_database #=> Array
+    #   resp.lf_tag_on_database[0].catalog_id #=> String
+    #   resp.lf_tag_on_database[0].tag_key #=> String
+    #   resp.lf_tag_on_database[0].tag_values #=> Array
+    #   resp.lf_tag_on_database[0].tag_values[0] #=> String
+    #   resp.lf_tags_on_table #=> Array
+    #   resp.lf_tags_on_table[0].catalog_id #=> String
+    #   resp.lf_tags_on_table[0].tag_key #=> String
+    #   resp.lf_tags_on_table[0].tag_values #=> Array
+    #   resp.lf_tags_on_table[0].tag_values[0] #=> String
+    #   resp.lf_tags_on_columns #=> Array
+    #   resp.lf_tags_on_columns[0].name #=> String
+    #   resp.lf_tags_on_columns[0].lf_tags #=> Array
+    #   resp.lf_tags_on_columns[0].lf_tags[0].catalog_id #=> String
+    #   resp.lf_tags_on_columns[0].lf_tags[0].tag_key #=> String
+    #   resp.lf_tags_on_columns[0].lf_tags[0].tag_values #=> Array
+    #   resp.lf_tags_on_columns[0].lf_tags[0].tag_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetResourceLFTags AWS API Documentation
+    #
+    # @overload get_resource_lf_tags(params = {})
+    # @param [Hash] params ({})
+    def get_resource_lf_tags(params = {}, options = {})
+      req = build_request(:get_resource_lf_tags, params)
       req.send_request(options)
     end
 
@@ -778,9 +1138,24 @@ module Aws::LakeFormation
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
     #     },
-    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GrantPermissions AWS API Documentation
@@ -789,6 +1164,60 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def grant_permissions(params = {}, options = {})
       req = build_request(:grant_permissions, params)
+      req.send_request(options)
+    end
+
+    # Lists tags that the requester has permission to view.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [String] :resource_share_type
+    #   If resource share type is `ALL`, returns both in-account tags and
+    #   shared tags that the requester has permission to view. If resource
+    #   share type is `FOREIGN`, returns all share tags that the requester can
+    #   view. If no resource share type is passed, lists tags in the given
+    #   catalog ID that the requester has permission to view.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #
+    # @return [Types::ListLFTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLFTagsResponse#lf_tags #lf_tags} => Array&lt;Types::LFTagPair&gt;
+    #   * {Types::ListLFTagsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lf_tags({
+    #     catalog_id: "CatalogIdString",
+    #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lf_tags #=> Array
+    #   resp.lf_tags[0].catalog_id #=> String
+    #   resp.lf_tags[0].tag_key #=> String
+    #   resp.lf_tags[0].tag_values #=> Array
+    #   resp.lf_tags[0].tag_values[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListLFTags AWS API Documentation
+    #
+    # @overload list_lf_tags(params = {})
+    # @param [Hash] params ({})
+    def list_lf_tags(params = {}, options = {})
+      req = build_request(:list_lf_tags, params)
       req.send_request(options)
     end
 
@@ -847,7 +1276,7 @@ module Aws::LakeFormation
     #     principal: {
     #       data_lake_principal_identifier: "DataLakePrincipalString",
     #     },
-    #     resource_type: "CATALOG", # accepts CATALOG, DATABASE, TABLE, DATA_LOCATION
+    #     resource_type: "CATALOG", # accepts CATALOG, DATABASE, TABLE, DATA_LOCATION, LF_TAG, LF_TAG_POLICY, LF_TAG_POLICY_DATABASE, LF_TAG_POLICY_TABLE
     #     resource: {
     #       catalog: {
     #       },
@@ -875,6 +1304,21 @@ module Aws::LakeFormation
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     next_token: "Token",
     #     max_results: 1,
@@ -898,10 +1342,20 @@ module Aws::LakeFormation
     #   resp.principal_resource_permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.principal_resource_permissions[0].resource.data_location.catalog_id #=> String
     #   resp.principal_resource_permissions[0].resource.data_location.resource_arn #=> String
+    #   resp.principal_resource_permissions[0].resource.lf_tag.catalog_id #=> String
+    #   resp.principal_resource_permissions[0].resource.lf_tag.tag_key #=> String
+    #   resp.principal_resource_permissions[0].resource.lf_tag.tag_values #=> Array
+    #   resp.principal_resource_permissions[0].resource.lf_tag.tag_values[0] #=> String
+    #   resp.principal_resource_permissions[0].resource.lf_tag_policy.catalog_id #=> String
+    #   resp.principal_resource_permissions[0].resource.lf_tag_policy.resource_type #=> String, one of "DATABASE", "TABLE"
+    #   resp.principal_resource_permissions[0].resource.lf_tag_policy.expression #=> Array
+    #   resp.principal_resource_permissions[0].resource.lf_tag_policy.expression[0].tag_key #=> String
+    #   resp.principal_resource_permissions[0].resource.lf_tag_policy.expression[0].tag_values #=> Array
+    #   resp.principal_resource_permissions[0].resource.lf_tag_policy.expression[0].tag_values[0] #=> String
     #   resp.principal_resource_permissions[0].permissions #=> Array
-    #   resp.principal_resource_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.principal_resource_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.principal_resource_permissions[0].permissions_with_grant_option #=> Array
-    #   resp.principal_resource_permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.principal_resource_permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.principal_resource_permissions[0].additional_details.resource_share #=> Array
     #   resp.principal_resource_permissions[0].additional_details.resource_share[0] #=> String
     #   resp.next_token #=> String
@@ -1005,7 +1459,7 @@ module Aws::LakeFormation
     #           principal: {
     #             data_lake_principal_identifier: "DataLakePrincipalString",
     #           },
-    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
     #         },
     #       ],
     #       create_table_default_permissions: [
@@ -1013,7 +1467,7 @@ module Aws::LakeFormation
     #           principal: {
     #             data_lake_principal_identifier: "DataLakePrincipalString",
     #           },
-    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
     #         },
     #       ],
     #       trusted_resource_owners: ["CatalogIdString"],
@@ -1090,6 +1544,101 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Removes a tag from the resource. Only database, table, or
+    # tableWithColumns resource are allowed. To tag columns, use the column
+    # inclusion list in `tableWithColumns` to specify column input.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, Types::Resource] :resource
+    #   The resource where you want to remove a tag.
+    #
+    # @option params [required, Array<Types::LFTagPair>] :lf_tags
+    #   The tags to be removed from the resource.
+    #
+    # @return [Types::RemoveLFTagsFromResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveLFTagsFromResourceResponse#failures #failures} => Array&lt;Types::LFTagError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_lf_tags_from_resource({
+    #     catalog_id: "CatalogIdString",
+    #     resource: { # required
+    #       catalog: {
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"],
+    #         },
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     lf_tags: [ # required
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "LFTagKey", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].lf_tag.catalog_id #=> String
+    #   resp.failures[0].lf_tag.tag_key #=> String
+    #   resp.failures[0].lf_tag.tag_values #=> Array
+    #   resp.failures[0].lf_tag.tag_values[0] #=> String
+    #   resp.failures[0].error.error_code #=> String
+    #   resp.failures[0].error.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RemoveLFTagsFromResource AWS API Documentation
+    #
+    # @overload remove_lf_tags_from_resource(params = {})
+    # @param [Hash] params ({})
+    def remove_lf_tags_from_resource(params = {}, options = {})
+      req = build_request(:remove_lf_tags_from_resource, params)
+      req.send_request(options)
+    end
+
     # Revokes permissions to the principal to access metadata in the Data
     # Catalog and data organized in underlying data storage such as Amazon
     # S3.
@@ -1155,9 +1704,24 @@ module Aws::LakeFormation
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
     #     },
-    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RevokePermissions AWS API Documentation
@@ -1166,6 +1730,188 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def revoke_permissions(params = {}, options = {})
       req = build_request(:revoke_permissions, params)
+      req.send_request(options)
+    end
+
+    # This operation allows a search on `DATABASE` resources by
+    # `TagCondition`. This operation is used by admins who want to grant
+    # user permissions on certain `TagConditions`. Before making a grant,
+    # the admin can use `SearchDatabasesByTags` to find all resources where
+    # the given `TagConditions` are valid to verify whether the returned
+    # resources can be shared.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, Array<Types::LFTag>] :expression
+    #   A list of conditions (`LFTag` structures) to search for in database
+    #   resources.
+    #
+    # @return [Types::SearchDatabasesByLFTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchDatabasesByLFTagsResponse#next_token #next_token} => String
+    #   * {Types::SearchDatabasesByLFTagsResponse#database_list #database_list} => Array&lt;Types::TaggedDatabase&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_databases_by_lf_tags({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #     catalog_id: "CatalogIdString",
+    #     expression: [ # required
+    #       {
+    #         tag_key: "LFTagKey", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.database_list #=> Array
+    #   resp.database_list[0].database.catalog_id #=> String
+    #   resp.database_list[0].database.name #=> String
+    #   resp.database_list[0].lf_tags #=> Array
+    #   resp.database_list[0].lf_tags[0].catalog_id #=> String
+    #   resp.database_list[0].lf_tags[0].tag_key #=> String
+    #   resp.database_list[0].lf_tags[0].tag_values #=> Array
+    #   resp.database_list[0].lf_tags[0].tag_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/SearchDatabasesByLFTags AWS API Documentation
+    #
+    # @overload search_databases_by_lf_tags(params = {})
+    # @param [Hash] params ({})
+    def search_databases_by_lf_tags(params = {}, options = {})
+      req = build_request(:search_databases_by_lf_tags, params)
+      req.send_request(options)
+    end
+
+    # This operation allows a search on `TABLE` resources by `LFTag`s. This
+    # will be used by admins who want to grant user permissions on certain
+    # LFTags. Before making a grant, the admin can use
+    # `SearchTablesByLFTags` to find all resources where the given `LFTag`s
+    # are valid to verify whether the returned resources can be shared.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, Array<Types::LFTag>] :expression
+    #   A list of conditions (`LFTag` structures) to search for in table
+    #   resources.
+    #
+    # @return [Types::SearchTablesByLFTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchTablesByLFTagsResponse#next_token #next_token} => String
+    #   * {Types::SearchTablesByLFTagsResponse#table_list #table_list} => Array&lt;Types::TaggedTable&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_tables_by_lf_tags({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #     catalog_id: "CatalogIdString",
+    #     expression: [ # required
+    #       {
+    #         tag_key: "LFTagKey", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.table_list #=> Array
+    #   resp.table_list[0].table.catalog_id #=> String
+    #   resp.table_list[0].table.database_name #=> String
+    #   resp.table_list[0].table.name #=> String
+    #   resp.table_list[0].lf_tag_on_database #=> Array
+    #   resp.table_list[0].lf_tag_on_database[0].catalog_id #=> String
+    #   resp.table_list[0].lf_tag_on_database[0].tag_key #=> String
+    #   resp.table_list[0].lf_tag_on_database[0].tag_values #=> Array
+    #   resp.table_list[0].lf_tag_on_database[0].tag_values[0] #=> String
+    #   resp.table_list[0].lf_tags_on_table #=> Array
+    #   resp.table_list[0].lf_tags_on_table[0].catalog_id #=> String
+    #   resp.table_list[0].lf_tags_on_table[0].tag_key #=> String
+    #   resp.table_list[0].lf_tags_on_table[0].tag_values #=> Array
+    #   resp.table_list[0].lf_tags_on_table[0].tag_values[0] #=> String
+    #   resp.table_list[0].lf_tags_on_columns #=> Array
+    #   resp.table_list[0].lf_tags_on_columns[0].name #=> String
+    #   resp.table_list[0].lf_tags_on_columns[0].lf_tags #=> Array
+    #   resp.table_list[0].lf_tags_on_columns[0].lf_tags[0].catalog_id #=> String
+    #   resp.table_list[0].lf_tags_on_columns[0].lf_tags[0].tag_key #=> String
+    #   resp.table_list[0].lf_tags_on_columns[0].lf_tags[0].tag_values #=> Array
+    #   resp.table_list[0].lf_tags_on_columns[0].lf_tags[0].tag_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/SearchTablesByLFTags AWS API Documentation
+    #
+    # @overload search_tables_by_lf_tags(params = {})
+    # @param [Hash] params ({})
+    def search_tables_by_lf_tags(params = {}, options = {})
+      req = build_request(:search_tables_by_lf_tags, params)
+      req.send_request(options)
+    end
+
+    # Updates the list of possible values for the specified tag key. If the
+    # tag does not exist, the operation throws an EntityNotFoundException.
+    # The values in the delete key values will be deleted from list of
+    # possible values. If any value in the delete key values is attached to
+    # a resource, then API errors out with a 400 Exception - "Update not
+    # allowed". Untag the attribute before deleting the tag key's value.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your AWS Lake Formation environment.
+    #
+    # @option params [required, String] :tag_key
+    #   The key-name for the tag for which to add or delete values.
+    #
+    # @option params [Array<String>] :tag_values_to_delete
+    #   A list of tag values to delete from the tag.
+    #
+    # @option params [Array<String>] :tag_values_to_add
+    #   A list of tag values to add from the tag.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lf_tag({
+    #     catalog_id: "CatalogIdString",
+    #     tag_key: "LFTagKey", # required
+    #     tag_values_to_delete: ["LFTagValue"],
+    #     tag_values_to_add: ["LFTagValue"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLFTag AWS API Documentation
+    #
+    # @overload update_lf_tag(params = {})
+    # @param [Hash] params ({})
+    def update_lf_tag(params = {}, options = {})
+      req = build_request(:update_lf_tag, params)
       req.send_request(options)
     end
 
@@ -1210,7 +1956,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

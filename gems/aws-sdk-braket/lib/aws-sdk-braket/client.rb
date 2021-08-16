@@ -459,7 +459,7 @@ module Aws::Braket
     #   resp.device_arn #=> String
     #   resp.device_capabilities #=> String
     #   resp.device_name #=> String
-    #   resp.device_status #=> String, one of "ONLINE", "OFFLINE"
+    #   resp.device_status #=> String, one of "ONLINE", "OFFLINE", "RETIRED"
     #   resp.device_type #=> String, one of "QPU", "SIMULATOR"
     #   resp.provider_name #=> String
     #
@@ -588,7 +588,7 @@ module Aws::Braket
     #   resp.devices #=> Array
     #   resp.devices[0].device_arn #=> String
     #   resp.devices[0].device_name #=> String
-    #   resp.devices[0].device_status #=> String, one of "ONLINE", "OFFLINE"
+    #   resp.devices[0].device_status #=> String, one of "ONLINE", "OFFLINE", "RETIRED"
     #   resp.devices[0].device_type #=> String, one of "QPU", "SIMULATOR"
     #   resp.devices[0].provider_name #=> String
     #   resp.next_token #=> String
@@ -696,7 +696,7 @@ module Aws::Braket
     #   tags.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   pecify the keys for the tags to remove from the resource.
+    #   Specify the keys for the tags to remove from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -729,7 +729,7 @@ module Aws::Braket
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-braket'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -45,7 +45,7 @@ module Aws::IAM
     # @option options [required, String] :old_password
     #   The IAM user's current password.
     # @option options [required, String] :new_password
-    #   The new password. The new password must conform to the AWS account's
+    #   The new password. The new password must conform to the account's
     #   password policy, if one exists.
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
@@ -54,8 +54,8 @@ module Aws::IAM
     #   character range (`\u00FF`). You can also include the tab (`\u0009`),
     #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
     #   of these characters are valid in a password. However, many tools, such
-    #   as the AWS Management Console, might restrict the ability to type
-    #   certain characters because they have special meaning within that tool.
+    #   as the Management Console, might restrict the ability to type certain
+    #   characters because they have special meaning within that tool.
     #
     #
     #
@@ -139,8 +139,8 @@ module Aws::IAM
     #   uses the default value of `false`. The result is that passwords do not
     #   require at least one lowercase character.
     # @option options [Boolean] :allow_users_to_change_password
-    #   Allows all IAM users in your account to use the AWS Management Console
-    #   to change their own passwords. For more information, see [Letting IAM
+    #   Allows all IAM users in your account to use the Management Console to
+    #   change their own passwords. For more information, see [Letting IAM
     #   users change their own passwords][1] in the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
@@ -333,12 +333,20 @@ module Aws::IAM
     #   The JSON policy document that you want to use as the content for the
     #   new policy.
     #
-    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   You must provide policies in JSON format in IAM. However, for
     #   CloudFormation templates formatted in YAML, you can provide the policy
-    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
-    #   policy to JSON format before submitting it to IAM.
+    #   in JSON or YAML format. CloudFormation always converts a YAML policy
+    #   to JSON format before submitting it to IAM.
     #
-    #   The [regex pattern][1] used to validate this parameter is a string of
+    #   The maximum length of the policy document that you can pass in this
+    #   operation, including whitespace, is listed below. To view the maximum
+    #   character counts of a managed policy with no whitespaces, see [IAM and
+    #   STS character quotas][1].
+    #
+    #   To learn more about JSON policy grammar, see [Grammar of the IAM JSON
+    #   policy language][2] in the *IAM User Guide*.
+    #
+    #   The [regex pattern][3] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
@@ -352,7 +360,9 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_grammar.html
+    #   [3]: http://wikipedia.org/wiki/regex
     # @option options [String] :description
     #   A friendly description of the policy.
     #
@@ -432,10 +442,9 @@ module Aws::IAM
     #   permission to assume the role.
     #
     #   In IAM, you must provide a JSON policy that has been converted to a
-    #   string. However, for AWS CloudFormation templates formatted in YAML,
-    #   you can provide the policy in JSON or YAML format. AWS CloudFormation
-    #   always converts a YAML policy to JSON format before submitting it to
-    #   IAM.
+    #   string. However, for CloudFormation templates formatted in YAML, you
+    #   can provide the policy in JSON or YAML format. CloudFormation always
+    #   converts a YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -463,7 +472,7 @@ module Aws::IAM
     #   default maximum of one hour is applied. This setting can have a value
     #   from 1 hour to 12 hours.
     #
-    #   Anyone who assumes the role from the AWS CLI or API can use the
+    #   Anyone who assumes the role from the or API can use the
     #   `DurationSeconds` API parameter or the `duration-seconds` CLI
     #   parameter to request a longer session. The `MaxSessionDuration`
     #   setting determines the maximum duration that can be requested using
@@ -1005,9 +1014,9 @@ module Aws::IAM
     # @option options [String] :scope
     #   The scope to use for filtering the results.
     #
-    #   To list only AWS managed policies, set `Scope` to `AWS`. To list only
-    #   the customer managed policies in your AWS account, set `Scope` to
-    #   `Local`.
+    #   To list only Amazon Web Services managed policies, set `Scope` to
+    #   `AWS`. To list only the customer managed policies in your account, set
+    #   `Scope` to `Local`.
     #
     #   This parameter is optional. If it is not included, or if it is set to
     #   `All`, all policies are returned.

@@ -10,6 +10,377 @@
 module Aws::IoTEventsData
   module Types
 
+    # Contains the configuration information of an acknowledge action.
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you acknowledge the alarm.
+    #   @return [String]
+    #
+    class AcknowledgeActionConfiguration < Struct.new(
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information needed to acknowledge the alarm.
+    #
+    # @note When making an API call, you may pass AcknowledgeAlarmActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_id: "RequestId", # required
+    #         alarm_model_name: "AlarmModelName", # required
+    #         key_value: "KeyValue",
+    #         note: "Note",
+    #       }
+    #
+    # @!attribute [rw] request_id
+    #   The request ID. Each ID must be unique within each batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you acknowledge the alarm.
+    #   @return [String]
+    #
+    class AcknowledgeAlarmActionRequest < Struct.new(
+      :request_id,
+      :alarm_model_name,
+      :key_value,
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an alarm.
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_model_version
+    #   The version of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_state
+    #   Contains information about the current state of the alarm.
+    #   @return [Types::AlarmState]
+    #
+    # @!attribute [rw] severity
+    #   A non-negative integer that reflects the severity level of the
+    #   alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the alarm was created, in the Unix epoch format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_time
+    #   The time the alarm was last updated, in the Unix epoch format.
+    #   @return [Time]
+    #
+    class Alarm < Struct.new(
+      :alarm_model_name,
+      :alarm_model_version,
+      :key_value,
+      :alarm_state,
+      :severity,
+      :creation_time,
+      :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the current state of the alarm.
+    #
+    # @!attribute [rw] state_name
+    #   The name of the alarm state. The state name can be one of the
+    #   following values:
+    #
+    #   * `DISABLED` - When the alarm is in the `DISABLED` state, it isn't
+    #     ready to evaluate data. To enable the alarm, you must change the
+    #     alarm to the `NORMAL` state.
+    #
+    #   * `NORMAL` - When the alarm is in the `NORMAL` state, it's ready to
+    #     evaluate data.
+    #
+    #   * `ACTIVE` - If the alarm is in the `ACTIVE` state, the alarm is
+    #     invoked.
+    #
+    #   * `ACKNOWLEDGED` - When the alarm is in the `ACKNOWLEDGED` state,
+    #     the alarm was invoked and you acknowledged the alarm.
+    #
+    #   * `SNOOZE_DISABLED` - When the alarm is in the `SNOOZE_DISABLED`
+    #     state, the alarm is disabled for a specified period of time. After
+    #     the snooze time, the alarm automatically changes to the `NORMAL`
+    #     state.
+    #
+    #   * `LATCHED` - When the alarm is in the `LATCHED` state, the alarm
+    #     was invoked. However, the data that the alarm is currently
+    #     evaluating is within the specified range. To change the alarm to
+    #     the `NORMAL` state, you must acknowledge the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_evaluation
+    #   Information needed to evaluate data.
+    #   @return [Types::RuleEvaluation]
+    #
+    # @!attribute [rw] customer_action
+    #   Contains information about the action that you can take to respond
+    #   to the alarm.
+    #   @return [Types::CustomerAction]
+    #
+    # @!attribute [rw] system_event
+    #   Contains information about alarm state changes.
+    #   @return [Types::SystemEvent]
+    #
+    class AlarmState < Struct.new(
+      :state_name,
+      :rule_evaluation,
+      :customer_action,
+      :system_event)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of an alarm.
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_model_version
+    #   The version of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    # @!attribute [rw] state_name
+    #   The name of the alarm state. The state name can be one of the
+    #   following values:
+    #
+    #   * `DISABLED` - When the alarm is in the `DISABLED` state, it isn't
+    #     ready to evaluate data. To enable the alarm, you must change the
+    #     alarm to the `NORMAL` state.
+    #
+    #   * `NORMAL` - When the alarm is in the `NORMAL` state, it's ready to
+    #     evaluate data.
+    #
+    #   * `ACTIVE` - If the alarm is in the `ACTIVE` state, the alarm is
+    #     invoked.
+    #
+    #   * `ACKNOWLEDGED` - When the alarm is in the `ACKNOWLEDGED` state,
+    #     the alarm was invoked and you acknowledged the alarm.
+    #
+    #   * `SNOOZE_DISABLED` - When the alarm is in the `SNOOZE_DISABLED`
+    #     state, the alarm is disabled for a specified period of time. After
+    #     the snooze time, the alarm automatically changes to the `NORMAL`
+    #     state.
+    #
+    #   * `LATCHED` - When the alarm is in the `LATCHED` state, the alarm
+    #     was invoked. However, the data that the alarm is currently
+    #     evaluating is within the specified range. To change the alarm to
+    #     the `NORMAL` state, you must acknowledge the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the alarm was created, in the Unix epoch format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_time
+    #   The time the alarm was last updated, in the Unix epoch format.
+    #   @return [Time]
+    #
+    class AlarmSummary < Struct.new(
+      :alarm_model_name,
+      :alarm_model_version,
+      :key_value,
+      :state_name,
+      :creation_time,
+      :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchAcknowledgeAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         acknowledge_action_requests: [ # required
+    #           {
+    #             request_id: "RequestId", # required
+    #             alarm_model_name: "AlarmModelName", # required
+    #             key_value: "KeyValue",
+    #             note: "Note",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] acknowledge_action_requests
+    #   The list of acknowledge action requests. You can specify up to 10
+    #   requests per operation.
+    #   @return [Array<Types::AcknowledgeAlarmActionRequest>]
+    #
+    class BatchAcknowledgeAlarmRequest < Struct.new(
+      :acknowledge_action_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of errors associated with the request, or `null` if there are
+    #   no errors. Each error entry contains an entry ID that helps you
+    #   identify the entry that failed.
+    #   @return [Array<Types::BatchAlarmActionErrorEntry>]
+    #
+    class BatchAcknowledgeAlarmResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains error messages associated with one of the following requests:
+    #
+    # * [BatchAcknowledgeAlarm][1]
+    #
+    # * [BatchDisableAlarm][2]
+    #
+    # * [BatchEnableAlarm][3]
+    #
+    # * [BatchResetAlarm][4]
+    #
+    # * [BatchSnoozeAlarm][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html
+    # [2]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html
+    # [3]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html
+    # [4]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html
+    # [5]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html
+    #
+    # @!attribute [rw] request_id
+    #   The request ID. Each ID must be unique within each batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message that describes the error.
+    #   @return [String]
+    #
+    class BatchAlarmActionErrorEntry < Struct.new(
+      :request_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisableAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disable_action_requests: [ # required
+    #           {
+    #             request_id: "RequestId", # required
+    #             alarm_model_name: "AlarmModelName", # required
+    #             key_value: "KeyValue",
+    #             note: "Note",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] disable_action_requests
+    #   The list of disable action requests. You can specify up to 10
+    #   requests per operation.
+    #   @return [Array<Types::DisableAlarmActionRequest>]
+    #
+    class BatchDisableAlarmRequest < Struct.new(
+      :disable_action_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of errors associated with the request, or `null` if there are
+    #   no errors. Each error entry contains an entry ID that helps you
+    #   identify the entry that failed.
+    #   @return [Array<Types::BatchAlarmActionErrorEntry>]
+    #
+    class BatchDisableAlarmResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchEnableAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enable_action_requests: [ # required
+    #           {
+    #             request_id: "RequestId", # required
+    #             alarm_model_name: "AlarmModelName", # required
+    #             key_value: "KeyValue",
+    #             note: "Note",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] enable_action_requests
+    #   The list of enable action requests. You can specify up to 10
+    #   requests per operation.
+    #   @return [Array<Types::EnableAlarmActionRequest>]
+    #
+    class BatchEnableAlarmRequest < Struct.new(
+      :enable_action_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of errors associated with the request, or `null` if there are
+    #   no errors. Each error entry contains an entry ID that helps you
+    #   identify the entry that failed.
+    #   @return [Array<Types::BatchAlarmActionErrorEntry>]
+    #
+    class BatchEnableAlarmResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the errors encountered.
     #
     # @!attribute [rw] message_id
@@ -18,11 +389,11 @@ module Aws::IoTEventsData
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The code associated with the error.
+    #   The error code.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   More information about the error.
+    #   A message that describes the error.
     #   @return [String]
     #
     class BatchPutMessageErrorEntry < Struct.new(
@@ -40,8 +411,11 @@ module Aws::IoTEventsData
     #         messages: [ # required
     #           {
     #             message_id: "MessageId", # required
-    #             input_name: "InputName", # required
+    #             input_name: "EphemeralInputName", # required
     #             payload: "data", # required
+    #             timestamp: {
+    #               time_in_millis: 1,
+    #             },
     #           },
     #         ],
     #       }
@@ -68,7 +442,82 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # Information about the error that occured when attempting to update a
+    # @note When making an API call, you may pass BatchResetAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reset_action_requests: [ # required
+    #           {
+    #             request_id: "RequestId", # required
+    #             alarm_model_name: "AlarmModelName", # required
+    #             key_value: "KeyValue",
+    #             note: "Note",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] reset_action_requests
+    #   The list of reset action requests. You can specify up to 10 requests
+    #   per operation.
+    #   @return [Array<Types::ResetAlarmActionRequest>]
+    #
+    class BatchResetAlarmRequest < Struct.new(
+      :reset_action_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of errors associated with the request, or `null` if there are
+    #   no errors. Each error entry contains an entry ID that helps you
+    #   identify the entry that failed.
+    #   @return [Array<Types::BatchAlarmActionErrorEntry>]
+    #
+    class BatchResetAlarmResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchSnoozeAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         snooze_action_requests: [ # required
+    #           {
+    #             request_id: "RequestId", # required
+    #             alarm_model_name: "AlarmModelName", # required
+    #             key_value: "KeyValue",
+    #             note: "Note",
+    #             snooze_duration: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] snooze_action_requests
+    #   The list of snooze action requests. You can specify up to 10
+    #   requests per operation.
+    #   @return [Array<Types::SnoozeAlarmActionRequest>]
+    #
+    class BatchSnoozeAlarmRequest < Struct.new(
+      :snooze_action_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of errors associated with the request, or `null` if there are
+    #   no errors. Each error entry contains an entry ID that helps you
+    #   identify the entry that failed.
+    #   @return [Array<Types::BatchAlarmActionErrorEntry>]
+    #
+    class BatchSnoozeAlarmResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the error that occurred when attempting to update a
     # detector.
     #
     # @!attribute [rw] message_id
@@ -78,11 +527,11 @@ module Aws::IoTEventsData
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The code of the error.
+    #   The error code.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   A message describing the error.
+    #   A message that describes the error.
     #   @return [String]
     #
     class BatchUpdateDetectorErrorEntry < Struct.new(
@@ -139,6 +588,104 @@ module Aws::IoTEventsData
     #
     class BatchUpdateDetectorResponse < Struct.new(
       :batch_update_detector_error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the action that you can take to respond to
+    # the alarm.
+    #
+    # @!attribute [rw] action_name
+    #   The name of the action. The action name can be one of the following
+    #   values:
+    #
+    #   * `SNOOZE` - When you snooze the alarm, the alarm state changes to
+    #     `SNOOZE_DISABLED`.
+    #
+    #   * `ENABLE` - When you enable the alarm, the alarm state changes to
+    #     `NORMAL`.
+    #
+    #   * `DISABLE` - When you disable the alarm, the alarm state changes to
+    #     `DISABLED`.
+    #
+    #   * `ACKNOWLEDGE` - When you acknowledge the alarm, the alarm state
+    #     changes to `ACKNOWLEDGED`.
+    #
+    #   * `RESET` - When you reset the alarm, the alarm state changes to
+    #     `NORMAL`.
+    #
+    #   For more information, see the [AlarmState][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html
+    #   @return [String]
+    #
+    # @!attribute [rw] snooze_action_configuration
+    #   Contains the configuration information of a snooze action.
+    #   @return [Types::SnoozeActionConfiguration]
+    #
+    # @!attribute [rw] enable_action_configuration
+    #   Contains the configuration information of an enable action.
+    #   @return [Types::EnableActionConfiguration]
+    #
+    # @!attribute [rw] disable_action_configuration
+    #   Contains the configuration information of a disable action.
+    #   @return [Types::DisableActionConfiguration]
+    #
+    # @!attribute [rw] acknowledge_action_configuration
+    #   Contains the configuration information of an acknowledge action.
+    #   @return [Types::AcknowledgeActionConfiguration]
+    #
+    # @!attribute [rw] reset_action_configuration
+    #   Contains the configuration information of a reset action.
+    #   @return [Types::ResetActionConfiguration]
+    #
+    class CustomerAction < Struct.new(
+      :action_name,
+      :snooze_action_configuration,
+      :enable_action_configuration,
+      :disable_action_configuration,
+      :acknowledge_action_configuration,
+      :reset_action_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alarm_model_name: "AlarmModelName", # required
+    #         key_value: "KeyValue",
+    #       }
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    class DescribeAlarmRequest < Struct.new(
+      :alarm_model_name,
+      :key_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarm
+    #   Contains information about an alarm.
+    #   @return [Types::Alarm]
+    #
+    class DescribeAlarmResponse < Struct.new(
+      :alarm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -336,7 +883,115 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # An internal failure occured.
+    # Contains the configuration information of a disable action.
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you disable the alarm.
+    #   @return [String]
+    #
+    class DisableActionConfiguration < Struct.new(
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information used to disable the alarm.
+    #
+    # @note When making an API call, you may pass DisableAlarmActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_id: "RequestId", # required
+    #         alarm_model_name: "AlarmModelName", # required
+    #         key_value: "KeyValue",
+    #         note: "Note",
+    #       }
+    #
+    # @!attribute [rw] request_id
+    #   The request ID. Each ID must be unique within each batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you disable the alarm.
+    #   @return [String]
+    #
+    class DisableAlarmActionRequest < Struct.new(
+      :request_id,
+      :alarm_model_name,
+      :key_value,
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration information of an enable action.
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you enable the alarm.
+    #   @return [String]
+    #
+    class EnableActionConfiguration < Struct.new(
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information needed to enable the alarm.
+    #
+    # @note When making an API call, you may pass EnableAlarmActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_id: "RequestId", # required
+    #         alarm_model_name: "AlarmModelName", # required
+    #         key_value: "KeyValue",
+    #         note: "Note",
+    #       }
+    #
+    # @!attribute [rw] request_id
+    #   The request ID. Each ID must be unique within each batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you enable the alarm.
+    #   @return [String]
+    #
+    class EnableAlarmActionRequest < Struct.new(
+      :request_id,
+      :alarm_model_name,
+      :key_value,
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An internal failure occurred.
     #
     # @!attribute [rw] message
     #   The message for the exception.
@@ -356,6 +1011,51 @@ module Aws::IoTEventsData
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAlarmsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alarm_model_name: "AlarmModelName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can use to return the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    class ListAlarmsRequest < Struct.new(
+      :alarm_model_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarm_summaries
+    #   A list that summarizes each alarm.
+    #   @return [Array<Types::AlarmSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can use to return the next set of results, or
+    #   `null` if there are no more results.
+    #   @return [String]
+    #
+    class ListAlarmsResponse < Struct.new(
+      :alarm_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -381,11 +1081,11 @@ module Aws::IoTEventsData
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token that you can use to return the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to be returned per request.
     #   @return [Integer]
     #
     class ListDetectorsRequest < Struct.new(
@@ -402,8 +1102,8 @@ module Aws::IoTEventsData
     #   @return [Array<Types::DetectorSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next set of results, or `null` if there are
-    #   no additional results.
+    #   The token that you can use to return the next set of results, or
+    #   `null` if there are no more results.
     #   @return [String]
     #
     class ListDetectorsResponse < Struct.new(
@@ -420,8 +1120,11 @@ module Aws::IoTEventsData
     #
     #       {
     #         message_id: "MessageId", # required
-    #         input_name: "InputName", # required
+    #         input_name: "EphemeralInputName", # required
     #         payload: "data", # required
+    #         timestamp: {
+    #           time_in_millis: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] message_id
@@ -439,10 +1142,69 @@ module Aws::IoTEventsData
     #   must decode it).
     #   @return [String]
     #
+    # @!attribute [rw] timestamp
+    #   The timestamp associated with the message.
+    #   @return [Types::TimestampValue]
+    #
     class Message < Struct.new(
       :message_id,
       :input_name,
-      :payload)
+      :payload,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration information of a reset action.
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you reset the alarm.
+    #   @return [String]
+    #
+    class ResetActionConfiguration < Struct.new(
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information needed to reset the alarm.
+    #
+    # @note When making an API call, you may pass ResetAlarmActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_id: "RequestId", # required
+    #         alarm_model_name: "AlarmModelName", # required
+    #         key_value: "KeyValue",
+    #         note: "Note",
+    #       }
+    #
+    # @!attribute [rw] request_id
+    #   The request ID. Each ID must be unique within each batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you reset the alarm.
+    #   @return [String]
+    #
+    class ResetAlarmActionRequest < Struct.new(
+      :request_id,
+      :alarm_model_name,
+      :key_value,
+      :note)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -459,6 +1221,18 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
+    # Information needed to evaluate data.
+    #
+    # @!attribute [rw] simple_rule_evaluation
+    #   Information needed to compare two values with a comparison operator.
+    #   @return [Types::SimpleRuleEvaluation]
+    #
+    class RuleEvaluation < Struct.new(
+      :simple_rule_evaluation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service is currently unavailable.
     #
     # @!attribute [rw] message
@@ -467,6 +1241,128 @@ module Aws::IoTEventsData
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information needed to compare two values with a comparison operator.
+    #
+    # @!attribute [rw] input_property_value
+    #   The value of the input property, on the left side of the comparison
+    #   operator.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold_value
+    #   The threshold value, on the right side of the comparison operator.
+    #   @return [String]
+    #
+    class SimpleRuleEvaluation < Struct.new(
+      :input_property_value,
+      :operator,
+      :threshold_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration information of a snooze action.
+    #
+    # @!attribute [rw] snooze_duration
+    #   The snooze time in seconds. The alarm automatically changes to the
+    #   `NORMAL` state after this duration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you snooze the alarm.
+    #   @return [String]
+    #
+    class SnoozeActionConfiguration < Struct.new(
+      :snooze_duration,
+      :note)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information needed to snooze the alarm.
+    #
+    # @note When making an API call, you may pass SnoozeAlarmActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_id: "RequestId", # required
+    #         alarm_model_name: "AlarmModelName", # required
+    #         key_value: "KeyValue",
+    #         note: "Note",
+    #         snooze_duration: 1, # required
+    #       }
+    #
+    # @!attribute [rw] request_id
+    #   The request ID. Each ID must be unique within each batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_model_name
+    #   The name of the alarm model.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the key used as a filter to select only the alarms
+    #   associated with the [key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+    #   @return [String]
+    #
+    # @!attribute [rw] note
+    #   The note that you can leave when you snooze the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] snooze_duration
+    #   The snooze time in seconds. The alarm automatically changes to the
+    #   `NORMAL` state after this duration.
+    #   @return [Integer]
+    #
+    class SnoozeAlarmActionRequest < Struct.new(
+      :request_id,
+      :alarm_model_name,
+      :key_value,
+      :note,
+      :snooze_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration information of alarm state changes.
+    #
+    # @!attribute [rw] trigger_type
+    #   The trigger type. If the value is `SNOOZE_TIMEOUT`, the snooze
+    #   duration ends and the alarm automatically changes to the `NORMAL`
+    #   state.
+    #   @return [String]
+    #
+    class StateChangeConfiguration < Struct.new(
+      :trigger_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about alarm state changes.
+    #
+    # @!attribute [rw] event_type
+    #   The event type. If the value is `STATE_CHANGE`, the event contains
+    #   information about alarm state changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_configuration
+    #   Contains the configuration information of alarm state changes.
+    #   @return [Types::StateChangeConfiguration]
+    #
+    class SystemEvent < Struct.new(
+      :event_type,
+      :state_change_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -522,6 +1418,25 @@ module Aws::IoTEventsData
     class TimerDefinition < Struct.new(
       :name,
       :seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a timestamp.
+    #
+    # @note When making an API call, you may pass TimestampValue
+    #   data as a hash:
+    #
+    #       {
+    #         time_in_millis: 1,
+    #       }
+    #
+    # @!attribute [rw] time_in_millis
+    #   The value of the timestamp, in the Unix epoch format.
+    #   @return [Integer]
+    #
+    class TimestampValue < Struct.new(
+      :time_in_millis)
       SENSITIVE = []
       include Aws::Structure
     end

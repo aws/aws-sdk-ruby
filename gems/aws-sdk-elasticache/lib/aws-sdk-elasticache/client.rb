@@ -335,11 +335,11 @@ module Aws::ElastiCache
     # information, see [Resource-level permissions][1].
     #
     # For example, you can use cost-allocation tags to your ElastiCache
-    # resources, AWS generates a cost allocation report as a comma-separated
-    # value (CSV) file with your usage and costs aggregated by your tags.
-    # You can apply tags that represent business categories (such as cost
-    # centers, application names, or owners) to organize your costs across
-    # multiple services.
+    # resources, Amazon generates a cost allocation report as a
+    # comma-separated value (CSV) file with your usage and costs aggregated
+    # by your tags. You can apply tags that represent business categories
+    # (such as cost centers, application names, or owners) to organize your
+    # costs across multiple services.
     #
     # For more information, see [Using Cost Allocation Tags in Amazon
     # ElastiCache][2] in the *ElastiCache User Guide*.
@@ -357,7 +357,7 @@ module Aws::ElastiCache
     #   ElastiCache resources are *cluster* and *snapshot*.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   Amazon Service Namespaces][1].
     #
     #
     #
@@ -449,9 +449,9 @@ module Aws::ElastiCache
     #   cache security group.
     #
     # @option params [required, String] :ec2_security_group_owner_id
-    #   The AWS account number of the Amazon EC2 security group owner. Note
-    #   that this is not the same thing as an AWS access key ID - you must
-    #   provide a valid AWS account number for this parameter.
+    #   The Amazon account number of the Amazon EC2 security group owner. Note
+    #   that this is not the same thing as an Amazon access key ID - you must
+    #   provide a valid Amazon account number for this parameter.
     #
     # @return [Types::AuthorizeCacheSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -689,6 +689,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -1005,7 +1006,7 @@ module Aws::ElastiCache
     #   For clusters running Redis, this value must be 1. For clusters running
     #   Memcached, this value must be between 1 and 40.
     #
-    #   If you need more than 20 nodes for your Memcached cluster, please fill
+    #   If you need more than 40 nodes for your Memcached cluster, please fill
     #   out the ElastiCache Limit Increase Request form at
     #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request/][1].
     #
@@ -1792,14 +1793,15 @@ module Aws::ElastiCache
     # @option params [required, String] :global_replication_group_id_suffix
     #   The suffix name of a Global datastore. Amazon ElastiCache
     #   automatically applies a prefix to the Global datastore ID when it is
-    #   created. Each AWS Region has its own prefix. For instance, a Global
+    #   created. Each Amazon Region has its own prefix. For instance, a Global
     #   datastore ID created in the US-West-1 region will begin with "dsdfu"
     #   along with the suffix name you provide. The suffix, combined with the
     #   auto-generated prefix, guarantees uniqueness of the Global datastore
     #   name across multiple regions.
     #
-    #   For a full list of AWS Regions and their respective Global datastore
-    #   iD prefixes, see [Using the AWS CLI with Global datastores ][1].
+    #   For a full list of Amazon Regions and their respective Global
+    #   datastore iD prefixes, see [Using the Amazon CLI with Global
+    #   datastores ][1].
     #
     #
     #
@@ -1884,7 +1886,7 @@ module Aws::ElastiCache
     # see [Creating a Subnet Group][1]. For versions below 5.0.6, the limit
     # is 250 per cluster.
     #
-    # To request a limit increase, see [AWS Service Limits][2] and choose
+    # To request a limit increase, see [Amazon Service Limits][2] and choose
     # the limit type **Nodes per cluster per instance type**.
     #
     # When a Redis (cluster mode disabled) replication group has been
@@ -2321,7 +2323,7 @@ module Aws::ElastiCache
     #   The ID of the KMS key used to encrypt the disk in the cluster.
     #
     # @option params [Array<String>] :user_group_ids
-    #   The list of user groups to associate with the replication group.
+    #   The user group to associate with the replication group.
     #
     # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
     #   Specifies the destination, format and type of the logs.
@@ -2555,6 +2557,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -3141,6 +3144,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -3628,6 +3632,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -6236,6 +6241,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_groups[0].log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_groups[0].log_delivery_configurations[0].message #=> String
+    #   resp.replication_groups[0].replication_group_create_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -7432,7 +7438,7 @@ module Aws::ElastiCache
     # Remove a secondary cluster from the Global datastore using the Global
     # datastore name. The secondary cluster will no longer receive updates
     # from the primary cluster, but will remain as a standalone cluster in
-    # that AWS region.
+    # that Amazon region.
     #
     # @option params [required, String] :global_replication_group_id
     #   The name of the Global datastore
@@ -7442,8 +7448,8 @@ module Aws::ElastiCache
     #   datastore
     #
     # @option params [required, String] :replication_group_region
-    #   The AWS region of secondary cluster you wish to remove from the Global
-    #   datastore
+    #   The Amazon region of secondary cluster you wish to remove from the
+    #   Global datastore
     #
     # @return [Types::DisassociateGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7497,7 +7503,7 @@ module Aws::ElastiCache
     #   The name of the Global datastore
     #
     # @option params [required, String] :primary_region
-    #   The AWS region of the primary cluster of the Global datastore
+    #   The Amazon region of the primary cluster of the Global datastore
     #
     # @option params [required, String] :primary_replication_group_id
     #   The name of the primary replication group
@@ -7555,7 +7561,7 @@ module Aws::ElastiCache
     #   The number of node groups you wish to add
     #
     # @option params [Array<Types::RegionalConfiguration>] :regional_configurations
-    #   Describes the replication group IDs, the AWS regions where they are
+    #   Describes the replication group IDs, the Amazon regions where they are
     #   stored and the shard configuration for each that comprise the Global
     #   datastore
     #
@@ -7732,6 +7738,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -7856,7 +7863,7 @@ module Aws::ElastiCache
     #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -8671,9 +8678,7 @@ module Aws::ElastiCache
     #   Valid values: `true` \| `false`
     #
     # @option params [Boolean] :multi_az_enabled
-    #   A list of tags to be added to this resource. A tag is a key-value
-    #   pair. A tag key must be accompanied by a tag value, although null is
-    #   accepted.
+    #   A flag to indicate MultiAZ is enabled.
     #
     # @option params [String] :node_group_id
     #   Deprecated. This parameter is not used.
@@ -8830,11 +8835,11 @@ module Aws::ElastiCache
     #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
     # @option params [Array<String>] :user_group_ids_to_add
-    #   A list of user group IDs.
+    #   The user group you are associating with the replication group.
     #
     # @option params [Array<String>] :user_group_ids_to_remove
-    #   A list of users groups to remove, meaning the users in the group no
-    #   longer can access thereplication group.
+    #   The user group to remove, meaning the users in the group no longer can
+    #   access the replication group.
     #
     # @option params [Boolean] :remove_user_groups
     #   Removes the user groups that can access this replication group.
@@ -9028,6 +9033,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -9170,6 +9176,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -9620,7 +9627,7 @@ module Aws::ElastiCache
     #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   Amazon Service Namespaces][1].
     #
     #
     #
@@ -9774,9 +9781,9 @@ module Aws::ElastiCache
     #   The name of the Amazon EC2 security group to revoke access from.
     #
     # @option params [required, String] :ec2_security_group_owner_id
-    #   The AWS account number of the Amazon EC2 security group owner. Note
-    #   that this is not the same thing as an AWS access key ID - you must
-    #   provide a valid AWS account number for this parameter.
+    #   The Amazon account number of the Amazon EC2 security group owner. Note
+    #   that this is not the same thing as an Amazon access key ID - you must
+    #   provide a valid Amazon account number for this parameter.
     #
     # @return [Types::RevokeCacheSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9913,6 +9920,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -9930,8 +9938,8 @@ module Aws::ElastiCache
     # **Note the following**
     #
     # * A customer can use this operation to test automatic failover on up
-    #   to 5 shards (called node groups in the ElastiCache API and AWS CLI)
-    #   in any rolling 24-hour period.
+    #   to 5 shards (called node groups in the ElastiCache API and Amazon
+    #   CLI) in any rolling 24-hour period.
     #
     # * If calling this operation on shards in different clusters (called
     #   replication groups in the API and CLI), the calls can be made
@@ -9944,7 +9952,7 @@ module Aws::ElastiCache
     #   replacement must complete before a subsequent call can be made.
     #
     # * To determine whether the node replacement is complete you can check
-    #   Events using the Amazon ElastiCache console, the AWS CLI, or the
+    #   Events using the Amazon ElastiCache console, the Amazon CLI, or the
     #   ElastiCache API. Look for the following automatic failover related
     #   events, listed here in order of occurrance:
     #
@@ -10063,6 +10071,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -10086,7 +10095,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

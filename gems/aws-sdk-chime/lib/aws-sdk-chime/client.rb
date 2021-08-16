@@ -726,8 +726,9 @@ module Aws::Chime
     # Removes the suspension from up to 50 previously suspended users for
     # the specified Amazon Chime `EnterpriseLWA` account. Only users on
     # `EnterpriseLWA` accounts can be unsuspended using this action. For
-    # more information about different account types, see [Managing Your
-    # Amazon Chime Accounts][1] in the *Amazon Chime Administration Guide*.
+    # more information about different account types, see [ Managing Your
+    # Amazon Chime Accounts ][1] in the account types, in the *Amazon Chime
+    # Administration Guide*.
     #
     # Previously suspended users who are unsuspended using this action are
     # returned to `Registered` status. Users who are not previously
@@ -775,10 +776,10 @@ module Aws::Chime
     # example, you can update the product type or the calling name.
     #
     # For toll-free numbers, you cannot use the Amazon Chime Business
-    # Calling product type. For numbers outside the US, you must use the
+    # Calling product type. For numbers outside the U.S., you must use the
     # Amazon Chime SIP Media Application Dial-In product type.
     #
-    # Updates to outbound calling names can take 72 hours to complete.
+    # Updates to outbound calling names can take up to 72 hours to complete.
     # Pending updates to outbound calling names must be complete before you
     # can request another update.
     #
@@ -898,6 +899,7 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.account_status #=> String, one of "Suspended", "Active"
     #   resp.account.signin_delegate_groups #=> Array
     #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
@@ -1409,6 +1411,62 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates a media capture pipeline.
+    #
+    # @option params [required, String] :source_type
+    #   Source type from which the media artifacts will be captured. A Chime
+    #   SDK Meeting is the only supported source.
+    #
+    # @option params [required, String] :source_arn
+    #   ARN of the source from which the media artifacts are captured.
+    #
+    # @option params [required, String] :sink_type
+    #   Destination type to which the media artifacts are saved. You must use
+    #   an S3 bucket.
+    #
+    # @option params [required, String] :sink_arn
+    #   The ARN of the sink type.
+    #
+    # @option params [String] :client_request_token
+    #   The token assigned to the client making the pipeline request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateMediaCapturePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaCapturePipelineResponse#media_capture_pipeline #media_capture_pipeline} => Types::MediaCapturePipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_capture_pipeline({
+    #     source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
+    #     source_arn: "Arn", # required
+    #     sink_type: "S3Bucket", # required, accepts S3Bucket
+    #     sink_arn: "Arn", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_capture_pipeline.media_pipeline_id #=> String
+    #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_capture_pipeline.source_arn #=> String
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
+    #   resp.media_capture_pipeline.sink_arn #=> String
+    #   resp.media_capture_pipeline.created_timestamp #=> Time
+    #   resp.media_capture_pipeline.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipeline AWS API Documentation
+    #
+    # @overload create_media_capture_pipeline(params = {})
+    # @param [Hash] params ({})
+    def create_media_capture_pipeline(params = {}, options = {})
+      req = build_request(:create_media_capture_pipeline, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon Chime SDK meeting in the specified media Region
     # with no initial attendees. For more information about specifying media
     # Regions, see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime
@@ -1484,6 +1542,7 @@ module Aws::Chime
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.signaling_url #=> String
     #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.media_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeeting AWS API Documentation
@@ -1640,6 +1699,7 @@ module Aws::Chime
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.signaling_url #=> String
     #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.media_region #=> String
     #   resp.attendees #=> Array
     #   resp.attendees[0].external_user_id #=> String
@@ -1661,7 +1721,7 @@ module Aws::Chime
 
     # Creates an order for phone numbers to be provisioned. For toll-free
     # numbers, you cannot use the Amazon Chime Business Calling product
-    # type. For numbers outside the US, you must use the Amazon Chime SIP
+    # type. For numbers outside the U.S., you must use the Amazon Chime SIP
     # Media Application Dial-In product type.
     #
     # @option params [required, String] :product_type
@@ -2552,6 +2612,28 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Deletes the media capture pipeline.
+    #
+    # @option params [required, String] :media_pipeline_id
+    #   The ID of the media capture pipeline being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_media_capture_pipeline({
+    #     media_pipeline_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteMediaCapturePipeline AWS API Documentation
+    #
+    # @overload delete_media_capture_pipeline(params = {})
+    # @param [Hash] params ({})
+    def delete_media_capture_pipeline(params = {}, options = {})
+      req = build_request(:delete_media_capture_pipeline, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Amazon Chime SDK meeting. The operation deletes
     # all attendees, disconnects all clients, and prevents new clients from
     # joining the meeting. For more information about the Amazon Chime SDK,
@@ -3008,7 +3090,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Returns the full details of an `AppInstanceUser` .
+    # Returns the full details of an `AppInstanceUser`.
     #
     # @option params [required, String] :app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
@@ -3481,6 +3563,7 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.account_status #=> String, one of "Suspended", "Active"
     #   resp.account.signin_delegate_groups #=> Array
     #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
@@ -3782,6 +3865,41 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Gets an existing media capture pipeline.
+    #
+    # @option params [required, String] :media_pipeline_id
+    #   The ID of the pipeline that you want to get.
+    #
+    # @return [Types::GetMediaCapturePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMediaCapturePipelineResponse#media_capture_pipeline #media_capture_pipeline} => Types::MediaCapturePipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_media_capture_pipeline({
+    #     media_pipeline_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_capture_pipeline.media_pipeline_id #=> String
+    #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_capture_pipeline.source_arn #=> String
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
+    #   resp.media_capture_pipeline.sink_arn #=> String
+    #   resp.media_capture_pipeline.created_timestamp #=> Time
+    #   resp.media_capture_pipeline.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMediaCapturePipeline AWS API Documentation
+    #
+    # @overload get_media_capture_pipeline(params = {})
+    # @param [Hash] params ({})
+    def get_media_capture_pipeline(params = {}, options = {})
+      req = build_request(:get_media_capture_pipeline, params)
+      req.send_request(options)
+    end
+
     # Gets the Amazon Chime SDK meeting details for the specified meeting
     # ID. For more information about the Amazon Chime SDK, see [Using the
     # Amazon Chime SDK][1] in the *Amazon Chime Developer Guide* .
@@ -3814,6 +3932,7 @@ module Aws::Chime
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.signaling_url #=> String
     #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.media_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMeeting AWS API Documentation
@@ -4003,8 +4122,8 @@ module Aws::Chime
 
     # Gets the retention settings for the specified Amazon Chime Enterprise
     # account. For more information about retention settings, see [Managing
-    # Chat Retention Policies][1] in the *Amazon Chime Administration Guide*
-    # .
+    # Chat Retention Policies][1] in the *Amazon Chime Administration
+    # Guide*.
     #
     #
     #
@@ -4332,7 +4451,7 @@ module Aws::Chime
     end
 
     # Retrieves details for the specified Amazon Chime Voice Connector
-    # group, such as timestamps,name, and associated `VoiceConnectorItems` .
+    # group, such as timestamps,name, and associated `VoiceConnectorItems`.
     #
     # @option params [required, String] :voice_connector_group_id
     #   The Amazon Chime Voice Connector group ID.
@@ -4651,6 +4770,7 @@ module Aws::Chime
     #   resp.accounts[0].default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.accounts[0].supported_licenses #=> Array
     #   resp.accounts[0].supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.accounts[0].account_status #=> String, one of "Suspended", "Active"
     #   resp.accounts[0].signin_delegate_groups #=> Array
     #   resp.accounts[0].signin_delegate_groups[0].group_name #=> String
     #   resp.next_token #=> String
@@ -4832,7 +4952,7 @@ module Aws::Chime
 
     # Lists the attendees for the specified Amazon Chime SDK meeting. For
     # more information about the Amazon Chime SDK, see [Using the Amazon
-    # Chime SDK][1] in the *Amazon Chime Developer Guide* .
+    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
     #
     #
     #
@@ -5375,6 +5495,51 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Returns a list of media capture pipelines.
+    #
+    # @option params [String] :next_token
+    #   The token used to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid Range:
+    #   1 - 99.
+    #
+    # @return [Types::ListMediaCapturePipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMediaCapturePipelinesResponse#media_capture_pipelines #media_capture_pipelines} => Array&lt;Types::MediaCapturePipeline&gt;
+    #   * {Types::ListMediaCapturePipelinesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_media_capture_pipelines({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_capture_pipelines #=> Array
+    #   resp.media_capture_pipelines[0].media_pipeline_id #=> String
+    #   resp.media_capture_pipelines[0].source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_capture_pipelines[0].source_arn #=> String
+    #   resp.media_capture_pipelines[0].status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipelines[0].sink_type #=> String, one of "S3Bucket"
+    #   resp.media_capture_pipelines[0].sink_arn #=> String
+    #   resp.media_capture_pipelines[0].created_timestamp #=> Time
+    #   resp.media_capture_pipelines[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMediaCapturePipelines AWS API Documentation
+    #
+    # @overload list_media_capture_pipelines(params = {})
+    # @param [Hash] params ({})
+    def list_media_capture_pipelines(params = {}, options = {})
+      req = build_request(:list_media_capture_pipelines, params)
+      req.send_request(options)
+    end
+
     # Lists the tags applied to an Amazon Chime SDK meeting resource.
     #
     # @option params [required, String] :meeting_id
@@ -5407,7 +5572,7 @@ module Aws::Chime
 
     # Lists up to 100 active Amazon Chime SDK meetings. For more information
     # about the Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the
-    # *Amazon Chime Developer Guide* .
+    # *Amazon Chime Developer Guide*.
     #
     #
     #
@@ -5445,6 +5610,7 @@ module Aws::Chime
     #   resp.meetings[0].media_placement.screen_viewing_url #=> String
     #   resp.meetings[0].media_placement.signaling_url #=> String
     #   resp.meetings[0].media_placement.turn_control_url #=> String
+    #   resp.meetings[0].media_placement.event_ingestion_url #=> String
     #   resp.meetings[0].media_region #=> String
     #   resp.next_token #=> String
     #
@@ -6240,13 +6406,13 @@ module Aws::Chime
     # account. We recommend using AWS CloudTrail to monitor usage of this
     # API for your account. For more information, see [Logging Amazon Chime
     # API Calls with AWS CloudTrail][1] in the *Amazon Chime Administration
-    # Guide* .
+    # Guide*.
     #
     # To turn off existing retention settings, remove the number of days
     # from the corresponding **RetentionDays** field in the
     # **RetentionSettings** object. For more information about retention
     # settings, see [Managing Chat Retention Policies][2] in the *Amazon
-    # Chime Administration Guide* .
+    # Chime Administration Guide*.
     #
     #
     #
@@ -7027,6 +7193,71 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Start transcription for the specified `meetingId`.
+    #
+    # @option params [required, String] :meeting_id
+    #   The unique ID of the meeting being transcribed.
+    #
+    # @option params [required, Types::TranscriptionConfiguration] :transcription_configuration
+    #   The configuration for the current transcription operation. Must
+    #   contain `EngineTranscribeSettings` or
+    #   `EngineTranscribeMedicalSettings`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_meeting_transcription({
+    #     meeting_id: "GuidString", # required
+    #     transcription_configuration: { # required
+    #       engine_transcribe_settings: {
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #         vocabulary_filter_name: "String",
+    #         vocabulary_name: "String",
+    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #       },
+    #       engine_transcribe_medical_settings: {
+    #         language_code: "en-US", # required, accepts en-US
+    #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
+    #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #         vocabulary_name: "String",
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StartMeetingTranscription AWS API Documentation
+    #
+    # @overload start_meeting_transcription(params = {})
+    # @param [Hash] params ({})
+    def start_meeting_transcription(params = {}, options = {})
+      req = build_request(:start_meeting_transcription, params)
+      req.send_request(options)
+    end
+
+    # Stops transcription for the specified `meetingId`.
+    #
+    # @option params [required, String] :meeting_id
+    #   The unique ID of the meeting for which you stop transcription.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_meeting_transcription({
+    #     meeting_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StopMeetingTranscription AWS API Documentation
+    #
+    # @overload stop_meeting_transcription(params = {})
+    # @param [Hash] params ({})
+    def stop_meeting_transcription(params = {}, options = {})
+      req = build_request(:stop_meeting_transcription, params)
+      req.send_request(options)
+    end
+
     # Applies the specified tags to the specified Amazon Chime SDK attendee.
     #
     # @option params [required, String] :meeting_id
@@ -7210,13 +7441,18 @@ module Aws::Chime
     end
 
     # Updates account details for the specified Amazon Chime account.
-    # Currently, only account name updates are supported for this action.
+    # Currently, only account name and default license updates are supported
+    # for this action.
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
     #
     # @option params [String] :name
     #   The new name for the specified Amazon Chime account.
+    #
+    # @option params [String] :default_license
+    #   The default license applied when you add users to an Amazon Chime
+    #   account.
     #
     # @return [Types::UpdateAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7227,6 +7463,7 @@ module Aws::Chime
     #   resp = client.update_account({
     #     account_id: "NonEmptyString", # required
     #     name: "AccountName",
+    #     default_license: "Basic", # accepts Basic, Plus, Pro, ProTrial
     #   })
     #
     # @example Response structure
@@ -7239,6 +7476,7 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.account_status #=> String, one of "Suspended", "Active"
     #   resp.account.signin_delegate_groups #=> Array
     #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
@@ -7867,6 +8105,47 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Allows you to trigger a Lambda function at any time while a call is
+    # active, and replace the current actions with new actions returned by
+    # the invocation.
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The ID of the SIP media application handling the call.
+    #
+    # @option params [required, String] :transaction_id
+    #   The ID of the call transaction.
+    #
+    # @option params [required, Hash<String,String>] :arguments
+    #   Arguments made available to the Lambda function as part of the
+    #   `CALL_UPDATE_REQUESTED` event. Can contain 0-20 key-value pairs.
+    #
+    # @return [Types::UpdateSipMediaApplicationCallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSipMediaApplicationCallResponse#sip_media_application_call #sip_media_application_call} => Types::SipMediaApplicationCall
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sip_media_application_call({
+    #     sip_media_application_id: "NonEmptyString", # required
+    #     transaction_id: "NonEmptyString", # required
+    #     arguments: { # required
+    #       "SensitiveString" => "SensitiveString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application_call.transaction_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationCall AWS API Documentation
+    #
+    # @overload update_sip_media_application_call(params = {})
+    # @param [Hash] params ({})
+    def update_sip_media_application_call(params = {}, options = {})
+      req = build_request(:update_sip_media_application_call, params)
+      req.send_request(options)
+    end
+
     # Updates the details of the specified SIP rule.
     #
     # @option params [required, String] :sip_rule_id
@@ -8126,7 +8405,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

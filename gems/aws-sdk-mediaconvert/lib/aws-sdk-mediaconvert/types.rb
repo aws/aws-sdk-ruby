@@ -424,10 +424,12 @@ module Aws::MediaConvert
     #         eac_3_atmos_settings: {
     #           bitrate: 1,
     #           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #           coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #           coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #           dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #           downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #           dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #           dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #           dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #           lo_ro_center_mix_level: 1.0,
     #           lo_ro_surround_mix_level: 1.0,
     #           lt_rt_center_mix_level: 1.0,
@@ -637,10 +639,12 @@ module Aws::MediaConvert
     #           eac_3_atmos_settings: {
     #             bitrate: 1,
     #             bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #             coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #             coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #             dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #             downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #             dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #             dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #             dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #             lo_ro_center_mix_level: 1.0,
     #             lo_ro_surround_mix_level: 1.0,
     #             lt_rt_center_mix_level: 1.0,
@@ -919,7 +923,12 @@ module Aws::MediaConvert
     #       {
     #         custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #         default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #         external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #         external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #         hls_rendition_group_settings: {
+    #           rendition_group_id: "__string",
+    #           rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #           rendition_name: "__string",
+    #         },
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         offset: 1,
     #         pids: [1],
@@ -936,7 +945,7 @@ module Aws::MediaConvert
     #           channels_in: 1,
     #           channels_out: 1,
     #         },
-    #         selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #         selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #         tracks: [1],
     #       }
     #
@@ -955,6 +964,19 @@ module Aws::MediaConvert
     # @!attribute [rw] external_audio_file_input
     #   Specifies audio data from an external file source.
     #   @return [String]
+    #
+    # @!attribute [rw] hls_rendition_group_settings
+    #   Settings specific to audio sources in an HLS alternate rendition
+    #   group. Specify the properties (renditionGroupId, renditionName or
+    #   renditionLanguageCode) to identify the unique audio track among the
+    #   alternative rendition groups present in the HLS manifest. If no
+    #   unique track is found, or multiple tracks match the properties
+    #   provided, the job fails. If no properties in
+    #   hlsRenditionGroupSettings are specified, the default audio track
+    #   within the video segment is chosen. If there is no audio within
+    #   video segment, the alternative audio with DEFAULT=YES is chosen
+    #   instead.
+    #   @return [Types::HlsRenditionGroupSettings]
     #
     # @!attribute [rw] language_code
     #   Selects a specific language code from within an audio source.
@@ -1009,6 +1031,7 @@ module Aws::MediaConvert
       :custom_language_code,
       :default_selection,
       :external_audio_file_input,
+      :hls_rendition_group_settings,
       :language_code,
       :offset,
       :pids,
@@ -1127,10 +1150,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for quality-defined variable bitrate encoding with the AV1
-    # codec. Required when you set Rate control mode to QVBR. Not valid when
-    # you set Rate control mode to a value other than QVBR, or when you
-    # don't define Rate control mode.
+    # Settings for quality-defined variable bitrate encoding with the H.265
+    # codec. Use these settings only when you set QVBR for Rate control mode
+    # (RateControlMode).
     #
     # @note When making an API call, you may pass Av1QvbrSettings
     #   data as a hash:
@@ -1141,15 +1163,20 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] qvbr_quality_level
-    #   Required when you use QVBR rate control mode. That is, when you
-    #   specify qvbrSettings within av1Settings. Specify the general target
-    #   quality level for this output, from 1 to 10. Use higher numbers for
-    #   greater quality. Level 10 results in nearly lossless compression.
-    #   The quality level for most broadcast-quality transcodes is between 6
-    #   and 9. Optionally, to specify a value between whole numbers, also
-    #   provide a value for the setting qvbrQualityLevelFineTune. For
-    #   example, if you want your QVBR quality level to be 7.33, set
-    #   qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+    #   Use this setting only when you set Rate control mode
+    #   (RateControlMode) to QVBR. Specify the target quality level for this
+    #   output. MediaConvert determines the right number of bits to use for
+    #   each part of the video to maintain the video quality that you
+    #   specify. When you keep the default value, AUTO, MediaConvert picks a
+    #   quality level for you, based on characteristics of your input video.
+    #   If you prefer to specify a quality level, specify a number from 1
+    #   through 10. Use higher numbers for greater quality. Level 10 results
+    #   in nearly lossless compression. The quality level for most
+    #   broadcast-quality transcodes is between 6 and 9. Optionally, to
+    #   specify a value between whole numbers, also provide a value for the
+    #   setting qvbrQualityLevelFineTune. For example, if you want your QVBR
+    #   quality level to be 7.33, set qvbrQualityLevel to 7 and set
+    #   qvbrQualityLevelFineTune to .33.
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level_fine_tune
@@ -1273,10 +1300,9 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_settings
-    #   Settings for quality-defined variable bitrate encoding with the AV1
-    #   codec. Required when you set Rate control mode to QVBR. Not valid
-    #   when you set Rate control mode to a value other than QVBR, or when
-    #   you don't define Rate control mode.
+    #   Settings for quality-defined variable bitrate encoding with the
+    #   H.265 codec. Use these settings only when you set QVBR for Rate
+    #   control mode (RateControlMode).
     #   @return [Types::Av1QvbrSettings]
     #
     # @!attribute [rw] rate_control_mode
@@ -1804,11 +1830,15 @@ module Aws::MediaConvert
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
+    #             dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #             dds_x_coordinate: 1,
+    #             dds_y_coordinate: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
+    #             height: 1,
     #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #             outline_size: 1,
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1817,6 +1847,7 @@ module Aws::MediaConvert
     #             shadow_y_offset: 1,
     #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             width: 1,
     #             x_position: 1,
     #             y_position: 1,
     #           },
@@ -1829,6 +1860,9 @@ module Aws::MediaConvert
     #           },
     #           scc_destination_settings: {
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #           },
+    #           srt_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           teletext_destination_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -1932,11 +1966,15 @@ module Aws::MediaConvert
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
+    #             dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #             dds_x_coordinate: 1,
+    #             dds_y_coordinate: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
+    #             height: 1,
     #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #             outline_size: 1,
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1945,6 +1983,7 @@ module Aws::MediaConvert
     #             shadow_y_offset: 1,
     #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             width: 1,
     #             x_position: 1,
     #             y_position: 1,
     #           },
@@ -1957,6 +1996,9 @@ module Aws::MediaConvert
     #           },
     #           scc_destination_settings: {
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #           },
+    #           srt_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           teletext_destination_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -2059,11 +2101,15 @@ module Aws::MediaConvert
     #           alignment: "CENTERED", # accepts CENTERED, LEFT
     #           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #           background_opacity: 1,
+    #           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #           dds_x_coordinate: 1,
+    #           dds_y_coordinate: 1,
     #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #           font_opacity: 1,
     #           font_resolution: 1,
     #           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #           font_size: 1,
+    #           height: 1,
     #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #           outline_size: 1,
     #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -2072,6 +2118,7 @@ module Aws::MediaConvert
     #           shadow_y_offset: 1,
     #           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #           width: 1,
     #           x_position: 1,
     #           y_position: 1,
     #         },
@@ -2084,6 +2131,9 @@ module Aws::MediaConvert
     #         },
     #         scc_destination_settings: {
     #           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #         },
+    #         srt_destination_settings: {
+    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         teletext_destination_settings: {
     #           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -2160,6 +2210,10 @@ module Aws::MediaConvert
     #   SCC.
     #   @return [Types::SccDestinationSettings]
     #
+    # @!attribute [rw] srt_destination_settings
+    #   SRT Destination Settings
+    #   @return [Types::SrtDestinationSettings]
+    #
     # @!attribute [rw] teletext_destination_settings
     #   Settings related to teletext captions. Set up teletext captions in
     #   the same output as your video. For more information, see
@@ -2193,6 +2247,7 @@ module Aws::MediaConvert
       :embedded_destination_settings,
       :imsc_destination_settings,
       :scc_destination_settings,
+      :srt_destination_settings,
       :teletext_destination_settings,
       :ttml_destination_settings,
       :webvtt_destination_settings)
@@ -2231,7 +2286,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #             },
-    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #             time_delta: 1,
     #           },
     #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -2240,6 +2295,11 @@ module Aws::MediaConvert
     #           },
     #           track_source_settings: {
     #             track_number: 1,
+    #           },
+    #           webvtt_hls_source_settings: {
+    #             rendition_group_id: "__string",
+    #             rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #             rendition_name: "__string",
     #           },
     #         },
     #       }
@@ -2351,7 +2411,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #           },
-    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #           time_delta: 1,
     #         },
     #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -2360,6 +2420,11 @@ module Aws::MediaConvert
     #         },
     #         track_source_settings: {
     #           track_number: 1,
+    #         },
+    #         webvtt_hls_source_settings: {
+    #           rendition_group_id: "__string",
+    #           rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #           rendition_name: "__string",
     #         },
     #       }
     #
@@ -2399,6 +2464,18 @@ module Aws::MediaConvert
     #   FileSourceSettings instead of TrackSourceSettings.
     #   @return [Types::TrackSourceSettings]
     #
+    # @!attribute [rw] webvtt_hls_source_settings
+    #   Settings specific to WebVTT sources in HLS alternative rendition
+    #   group. Specify the properties (renditionGroupId, renditionName or
+    #   renditionLanguageCode) to identify the unique subtitle track among
+    #   the alternative rendition groups present in the HLS manifest. If no
+    #   unique track is found, or multiple tracks match the specified
+    #   properties, the job fails. If there is only one subtitle track in
+    #   the rendition group, the settings can be left empty and the default
+    #   subtitle track will be chosen. If your caption source is a sidecar
+    #   file, use FileSourceSettings instead of WebvttHlsSourceSettings.
+    #   @return [Types::WebvttHlsSourceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSourceSettings AWS API Documentation
     #
     class CaptionSourceSettings < Struct.new(
@@ -2408,7 +2485,8 @@ module Aws::MediaConvert
       :file_source_settings,
       :source_type,
       :teletext_source_settings,
-      :track_source_settings)
+      :track_source_settings,
+      :webvtt_hls_source_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2620,6 +2698,7 @@ module Aws::MediaConvert
     #           type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #         },
     #         fragment_length: 1,
+    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #         min_buffer_time: 1,
@@ -2629,6 +2708,7 @@ module Aws::MediaConvert
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #         write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -2687,6 +2767,23 @@ module Aws::MediaConvert
     #   fragmentation is internal to a single output file and it does not
     #   cause the creation of many output files as in other output types.
     #   @return [Integer]
+    #
+    # @!attribute [rw] image_based_trick_play
+    #   Specify whether MediaConvert generates images for trick play. Keep
+    #   the default value, None (NONE), to not generate any images. Choose
+    #   Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail
+    #   and full frame (THUMBNAIL\_AND\_FULLFRAME) to generate tiled
+    #   thumbnails and full-resolution images of single frames. When you
+    #   enable Write HLS manifest (WriteHlsManifest), MediaConvert creates a
+    #   child manifest for each set of images that you generate and adds
+    #   corresponding entries to the parent manifest. When you enable Write
+    #   DASH manifest (WriteDashManifest), MediaConvert adds an entry in the
+    #   .mpd manifest for each set of images that you generate. A common
+    #   application for these images is Roku trick mode. The thumbnails and
+    #   full-frame images that MediaConvert creates with this feature are
+    #   compatible with this Roku specification:
+    #   https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
+    #   @return [String]
     #
     # @!attribute [rw] manifest_compression
     #   When set to GZIP, compresses HLS playlist.
@@ -2767,6 +2864,19 @@ module Aws::MediaConvert
     #   EXT-X-STREAM-INF tag of variant manifest.
     #   @return [String]
     #
+    # @!attribute [rw] target_duration_compatibility_mode
+    #   When set to LEGACY, the segment target duration is always rounded up
+    #   to the nearest integer value above its current value in seconds.
+    #   When set to SPEC\\\\\_COMPLIANT, the segment target duration is
+    #   rounded up to the nearest integer value if fraction seconds are
+    #   greater than or equal to 0.5 (>= 0.5) and rounded down if less than
+    #   0.5 (< 0.5). You may need to use LEGACY if your client needs to
+    #   ensure that the target duration is always longer than the actual
+    #   duration of the segment. Some older players may experience
+    #   interrupted playback when the actual duration of a track in a
+    #   segment is longer than the target duration.
+    #   @return [String]
+    #
     # @!attribute [rw] write_dash_manifest
     #   When set to ENABLED, a DASH MPD manifest will be generated for this
     #   output.
@@ -2799,6 +2909,7 @@ module Aws::MediaConvert
       :destination_settings,
       :encryption,
       :fragment_length,
+      :image_based_trick_play,
       :manifest_compression,
       :manifest_duration_format,
       :min_buffer_time,
@@ -2808,6 +2919,7 @@ module Aws::MediaConvert
       :segment_control,
       :segment_length,
       :stream_inf_resolution,
+      :target_duration_compatibility_mode,
       :write_dash_manifest,
       :write_hls_manifest,
       :write_segment_timeline_in_representation)
@@ -2984,6 +3096,7 @@ module Aws::MediaConvert
     #           white_point_y: 1,
     #         },
     #         hue: 1,
+    #         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #         saturation: 1,
     #       }
     #
@@ -3026,6 +3139,21 @@ module Aws::MediaConvert
     #   Hue in degrees.
     #   @return [Integer]
     #
+    # @!attribute [rw] sample_range_conversion
+    #   Specify the video color sample range for this output. To create a
+    #   full range output, you must start with a full range YUV input and
+    #   keep the default value, None (NONE). To create a limited range
+    #   output from a full range input, choose Limited range
+    #   (LIMITED\_RANGE\_SQUEEZE). With RGB inputs, your output is always
+    #   limited range, regardless of your choice here. When you create a
+    #   limited range output from a full range input, MediaConvert limits
+    #   the active pixel values in a way that depends on the output's bit
+    #   depth: 8-bit outputs contain only values from 16 through 235 and
+    #   10-bit outputs contain only values from 64 through 940. With this
+    #   conversion, MediaConvert also changes the output metadata to note
+    #   the limited range.
+    #   @return [String]
+    #
     # @!attribute [rw] saturation
     #   Saturation level.
     #   @return [Integer]
@@ -3038,6 +3166,7 @@ module Aws::MediaConvert
       :contrast,
       :hdr_10_metadata,
       :hue,
+      :sample_range_conversion,
       :saturation)
       SENSITIVE = []
       include Aws::Structure
@@ -3130,6 +3259,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -3169,7 +3299,11 @@ module Aws::MediaConvert
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #           profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #           xavc_profile_settings: {
+    #             duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #             max_anc_data_size: 1,
+    #           },
     #         },
     #       }
     #
@@ -3279,6 +3413,10 @@ module Aws::MediaConvert
     #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #             },
     #           },
+    #           extended_data_services: {
+    #             copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #             vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           },
     #           inputs: [
     #             {
     #               audio_selector_groups: {
@@ -3290,7 +3428,12 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #                   hls_rendition_group_settings: {
+    #                     rendition_group_id: "__string",
+    #                     rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                     rendition_name: "__string",
+    #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -3307,7 +3450,7 @@ module Aws::MediaConvert
     #                     channels_in: 1,
     #                     channels_out: 1,
     #                   },
-    #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #                   tracks: [1],
     #                 },
     #               },
@@ -3336,7 +3479,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                       },
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -3345,6 +3488,11 @@ module Aws::MediaConvert
     #                     },
     #                     track_source_settings: {
     #                       track_number: 1,
+    #                     },
+    #                     webvtt_hls_source_settings: {
+    #                       rendition_group_id: "__string",
+    #                       rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                       rendition_name: "__string",
     #                     },
     #                   },
     #                 },
@@ -3363,7 +3511,7 @@ module Aws::MediaConvert
     #                 kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #               },
     #               denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #               file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
+    #               file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS",
     #               filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #               filter_strength: 1,
     #               image_inserter: {
@@ -3422,9 +3570,25 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #                 sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #               },
     #             },
     #           ],
+    #           kantar_watermark: {
+    #             channel_name: "__stringMin1Max20",
+    #             content_reference: "__stringMin1Max50PatternAZAZ09",
+    #             credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #             file_offset: 1.0,
+    #             kantar_license_id: 1,
+    #             kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #             log_destination: "__stringPatternS3",
+    #             metadata_3: "__stringMin1Max50",
+    #             metadata_4: "__stringMin1Max50",
+    #             metadata_5: "__stringMin1Max50",
+    #             metadata_6: "__stringMin1Max50",
+    #             metadata_7: "__stringMin1Max50",
+    #             metadata_8: "__stringMin1Max50",
+    #           },
     #           motion_image_inserter: {
     #             framerate: {
     #               framerate_denominator: 1,
@@ -3510,6 +3674,7 @@ module Aws::MediaConvert
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
     #                   fragment_length: 1,
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
@@ -3519,6 +3684,7 @@ module Aws::MediaConvert
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -3555,6 +3721,7 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -3630,6 +3797,7 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_final_segment_length: 1.0,
@@ -3641,6 +3809,7 @@ module Aws::MediaConvert
     #                   segment_length: 1,
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
@@ -3729,10 +3898,12 @@ module Aws::MediaConvert
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                           coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                           coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                           dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                           downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                           dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                           dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                           dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                           lo_ro_center_mix_level: 1.0,
     #                           lo_ro_surround_mix_level: 1.0,
     #                           lt_rt_center_mix_level: 1.0,
@@ -3842,11 +4013,15 @@ module Aws::MediaConvert
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
+    #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                           dds_x_coordinate: 1,
+    #                           dds_y_coordinate: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
+    #                           height: 1,
     #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                           outline_size: 1,
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -3855,6 +4030,7 @@ module Aws::MediaConvert
     #                           shadow_y_offset: 1,
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
@@ -3867,6 +4043,9 @@ module Aws::MediaConvert
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         },
+    #                         srt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -3954,6 +4133,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -3993,7 +4173,11 @@ module Aws::MediaConvert
     #                     },
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #                       xavc_profile_settings: {
+    #                         duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                         max_anc_data_size: 1,
+    #                       },
     #                     },
     #                   },
     #                   extension: "__string",
@@ -4045,7 +4229,7 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
-    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -4179,7 +4363,8 @@ module Aws::MediaConvert
     #                         temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
     #                       prores_settings: {
-    #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                         chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
@@ -4233,6 +4418,49 @@ module Aws::MediaConvert
     #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                         rate_control_mode: "VBR", # accepts VBR
     #                       },
+    #                       xavc_settings: {
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         softness: 1,
+    #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         xavc_4k_intra_cbg_profile_settings: {
+    #                           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                         },
+    #                         xavc_4k_intra_vbr_profile_settings: {
+    #                           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                         },
+    #                         xavc_4k_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                           codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                           slices: 1,
+    #                         },
+    #                         xavc_hd_intra_cbg_profile_settings: {
+    #                           xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         },
+    #                         xavc_hd_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                           slices: 1,
+    #                           telecine: "NONE", # accepts NONE, HARD
+    #                         },
+    #                       },
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
@@ -4274,6 +4502,7 @@ module Aws::MediaConvert
     #                           white_point_y: 1,
     #                         },
     #                         hue: 1,
+    #                         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                         saturation: 1,
     #                       },
     #                       deinterlacer: {
@@ -4288,6 +4517,10 @@ module Aws::MediaConvert
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                       },
+    #                       hdr_10_plus: {
+    #                         mastering_monitor_nits: 1,
+    #                         target_monitor_nits: 1,
     #                       },
     #                       image_inserter: {
     #                         insertable_images: [
@@ -4531,6 +4764,10 @@ module Aws::MediaConvert
     #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #             },
     #           },
+    #           extended_data_services: {
+    #             copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #             vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           },
     #           inputs: [
     #             {
     #               audio_selector_groups: {
@@ -4542,7 +4779,12 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #                   hls_rendition_group_settings: {
+    #                     rendition_group_id: "__string",
+    #                     rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                     rendition_name: "__string",
+    #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -4559,7 +4801,7 @@ module Aws::MediaConvert
     #                     channels_in: 1,
     #                     channels_out: 1,
     #                   },
-    #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #                   tracks: [1],
     #                 },
     #               },
@@ -4588,7 +4830,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                       },
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -4597,6 +4839,11 @@ module Aws::MediaConvert
     #                     },
     #                     track_source_settings: {
     #                       track_number: 1,
+    #                     },
+    #                     webvtt_hls_source_settings: {
+    #                       rendition_group_id: "__string",
+    #                       rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                       rendition_name: "__string",
     #                     },
     #                   },
     #                 },
@@ -4666,9 +4913,25 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #                 sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #               },
     #             },
     #           ],
+    #           kantar_watermark: {
+    #             channel_name: "__stringMin1Max20",
+    #             content_reference: "__stringMin1Max50PatternAZAZ09",
+    #             credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #             file_offset: 1.0,
+    #             kantar_license_id: 1,
+    #             kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #             log_destination: "__stringPatternS3",
+    #             metadata_3: "__stringMin1Max50",
+    #             metadata_4: "__stringMin1Max50",
+    #             metadata_5: "__stringMin1Max50",
+    #             metadata_6: "__stringMin1Max50",
+    #             metadata_7: "__stringMin1Max50",
+    #             metadata_8: "__stringMin1Max50",
+    #           },
     #           motion_image_inserter: {
     #             framerate: {
     #               framerate_denominator: 1,
@@ -4754,6 +5017,7 @@ module Aws::MediaConvert
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
     #                   fragment_length: 1,
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
@@ -4763,6 +5027,7 @@ module Aws::MediaConvert
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -4799,6 +5064,7 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -4874,6 +5140,7 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_final_segment_length: 1.0,
@@ -4885,6 +5152,7 @@ module Aws::MediaConvert
     #                   segment_length: 1,
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
@@ -4973,10 +5241,12 @@ module Aws::MediaConvert
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                           coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                           coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                           dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                           downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                           dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                           dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                           dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                           lo_ro_center_mix_level: 1.0,
     #                           lo_ro_surround_mix_level: 1.0,
     #                           lt_rt_center_mix_level: 1.0,
@@ -5086,11 +5356,15 @@ module Aws::MediaConvert
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
+    #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                           dds_x_coordinate: 1,
+    #                           dds_y_coordinate: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
+    #                           height: 1,
     #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                           outline_size: 1,
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -5099,6 +5373,7 @@ module Aws::MediaConvert
     #                           shadow_y_offset: 1,
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
@@ -5111,6 +5386,9 @@ module Aws::MediaConvert
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         },
+    #                         srt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -5198,6 +5476,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -5237,7 +5516,11 @@ module Aws::MediaConvert
     #                     },
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #                       xavc_profile_settings: {
+    #                         duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                         max_anc_data_size: 1,
+    #                       },
     #                     },
     #                   },
     #                   extension: "__string",
@@ -5289,7 +5572,7 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
-    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -5423,7 +5706,8 @@ module Aws::MediaConvert
     #                         temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
     #                       prores_settings: {
-    #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                         chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
@@ -5477,6 +5761,49 @@ module Aws::MediaConvert
     #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                         rate_control_mode: "VBR", # accepts VBR
     #                       },
+    #                       xavc_settings: {
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         softness: 1,
+    #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         xavc_4k_intra_cbg_profile_settings: {
+    #                           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                         },
+    #                         xavc_4k_intra_vbr_profile_settings: {
+    #                           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                         },
+    #                         xavc_4k_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                           codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                           slices: 1,
+    #                         },
+    #                         xavc_hd_intra_cbg_profile_settings: {
+    #                           xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         },
+    #                         xavc_hd_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                           slices: 1,
+    #                           telecine: "NONE", # accepts NONE, HARD
+    #                         },
+    #                       },
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
@@ -5518,6 +5845,7 @@ module Aws::MediaConvert
     #                           white_point_y: 1,
     #                         },
     #                         hue: 1,
+    #                         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                         saturation: 1,
     #                       },
     #                       deinterlacer: {
@@ -5532,6 +5860,10 @@ module Aws::MediaConvert
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                       },
+    #                       hdr_10_plus: {
+    #                         mastering_monitor_nits: 1,
+    #                         target_monitor_nits: 1,
     #                       },
     #                       image_inserter: {
     #                         insertable_images: [
@@ -5759,10 +6091,12 @@ module Aws::MediaConvert
     #                 eac_3_atmos_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                   coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                   coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                   dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                   downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                   dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                   dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                   dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                   lo_ro_center_mix_level: 1.0,
     #                   lo_ro_surround_mix_level: 1.0,
     #                   lt_rt_center_mix_level: 1.0,
@@ -5871,11 +6205,15 @@ module Aws::MediaConvert
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
+    #                   dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                   dds_x_coordinate: 1,
+    #                   dds_y_coordinate: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
+    #                   height: 1,
     #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                   outline_size: 1,
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -5884,6 +6222,7 @@ module Aws::MediaConvert
     #                   shadow_y_offset: 1,
     #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
@@ -5896,6 +6235,9 @@ module Aws::MediaConvert
     #                 },
     #                 scc_destination_settings: {
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                 },
+    #                 srt_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 teletext_destination_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -5983,6 +6325,7 @@ module Aws::MediaConvert
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               max_pcr_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -6022,7 +6365,11 @@ module Aws::MediaConvert
     #             },
     #             mxf_settings: {
     #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #               profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #               profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #               xavc_profile_settings: {
+    #                 duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                 max_anc_data_size: 1,
+    #               },
     #             },
     #           },
     #           video_description: {
@@ -6060,7 +6407,7 @@ module Aws::MediaConvert
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
-    #               codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #               codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -6194,7 +6541,8 @@ module Aws::MediaConvert
     #                 temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
     #               prores_settings: {
-    #                 codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                 chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                 codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
@@ -6248,6 +6596,49 @@ module Aws::MediaConvert
     #                 quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                 rate_control_mode: "VBR", # accepts VBR
     #               },
+    #               xavc_settings: {
+    #                 adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                 softness: 1,
+    #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 xavc_4k_intra_cbg_profile_settings: {
+    #                   xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                 },
+    #                 xavc_4k_intra_vbr_profile_settings: {
+    #                   xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                 },
+    #                 xavc_4k_profile_settings: {
+    #                   bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                   codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_closed_cadence: 1,
+    #                   hrd_buffer_size: 1,
+    #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                   slices: 1,
+    #                 },
+    #                 xavc_hd_intra_cbg_profile_settings: {
+    #                   xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                 },
+    #                 xavc_hd_profile_settings: {
+    #                   bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_closed_cadence: 1,
+    #                   hrd_buffer_size: 1,
+    #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                   slices: 1,
+    #                   telecine: "NONE", # accepts NONE, HARD
+    #                 },
+    #               },
     #             },
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #             crop: {
@@ -6289,6 +6680,7 @@ module Aws::MediaConvert
     #                   white_point_y: 1,
     #                 },
     #                 hue: 1,
+    #                 sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                 saturation: 1,
     #               },
     #               deinterlacer: {
@@ -6303,6 +6695,10 @@ module Aws::MediaConvert
     #                 },
     #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                 profile: "PROFILE_5", # accepts PROFILE_5
+    #               },
+    #               hdr_10_plus: {
+    #                 mastering_monitor_nits: 1,
+    #                 target_monitor_nits: 1,
     #               },
     #               image_inserter: {
     #                 insertable_images: [
@@ -6616,6 +7012,7 @@ module Aws::MediaConvert
     #         },
     #         fragment_length: 1,
     #         hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #         min_buffer_time: 1,
     #         min_final_segment_length: 1.0,
     #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -6682,6 +7079,19 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] hbbtv_compliance
     #   Supports HbbTV specification as indicated
+    #   @return [String]
+    #
+    # @!attribute [rw] image_based_trick_play
+    #   Specify whether MediaConvert generates images for trick play. Keep
+    #   the default value, None (NONE), to not generate any images. Choose
+    #   Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail
+    #   and full frame (THUMBNAIL\_AND\_FULLFRAME) to generate tiled
+    #   thumbnails and full-resolution images of single frames. MediaConvert
+    #   adds an entry in the .mpd manifest for each set of images that you
+    #   generate. A common application for these images is Roku trick mode.
+    #   The thumbnails and full-frame images that MediaConvert creates with
+    #   this feature are compatible with this Roku specification:
+    #   https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
     #   @return [String]
     #
     # @!attribute [rw] min_buffer_time
@@ -6767,6 +7177,7 @@ module Aws::MediaConvert
       :encryption,
       :fragment_length,
       :hbbtv_compliance,
+      :image_based_trick_play,
       :min_buffer_time,
       :min_final_segment_length,
       :mpd_profile,
@@ -7216,11 +7627,15 @@ module Aws::MediaConvert
     #         alignment: "CENTERED", # accepts CENTERED, LEFT
     #         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #         background_opacity: 1,
+    #         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #         dds_x_coordinate: 1,
+    #         dds_y_coordinate: 1,
     #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #         font_opacity: 1,
     #         font_resolution: 1,
     #         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #         font_size: 1,
+    #         height: 1,
     #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #         outline_size: 1,
     #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -7229,6 +7644,7 @@ module Aws::MediaConvert
     #         shadow_y_offset: 1,
     #         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #         width: 1,
     #         x_position: 1,
     #         y_position: 1,
     #       }
@@ -7258,8 +7674,55 @@ module Aws::MediaConvert
     #   must match.
     #   @return [Integer]
     #
+    # @!attribute [rw] dds_handling
+    #   Specify how MediaConvert handles the display definition segment
+    #   (DDS). Keep the default, None (NONE), to exclude the DDS from this
+    #   set of captions. Choose No display window (NO\_DISPLAY\_WINDOW) to
+    #   have MediaConvert include the DDS but not include display window
+    #   data. In this case, MediaConvert writes that information to the page
+    #   composition segment (PCS) instead. Choose Specify (SPECIFIED) to
+    #   have MediaConvert set up the display window based on the values that
+    #   you specify in related job settings. For video resolutions that are
+    #   576 pixels or smaller in height, MediaConvert doesn't include the
+    #   DDS, regardless of the value you choose for DDS handling
+    #   (ddsHandling). In this case, it doesn't write the display window
+    #   data to the PCS either. Related settings: Use the settings DDS
+    #   x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate)
+    #   to specify the offset between the top left corner of the display
+    #   window and the top left corner of the video frame. All burn-in and
+    #   DVB-Sub font settings must match.
+    #   @return [String]
+    #
+    # @!attribute [rw] dds_x_coordinate
+    #   Use this setting, along with DDS y-coordinate (ddsYCoordinate), to
+    #   specify the upper left corner of the display definition segment
+    #   (DDS) display window. With this setting, specify the distance, in
+    #   pixels, between the left side of the frame and the left side of the
+    #   DDS display window. Keep the default value, 0, to have MediaConvert
+    #   automatically choose this offset. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). MediaConvert uses these values to determine
+    #   whether to write page position data to the DDS or to the page
+    #   composition segment (PCS). All burn-in and DVB-Sub font settings
+    #   must match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dds_y_coordinate
+    #   Use this setting, along with DDS x-coordinate (ddsXCoordinate), to
+    #   specify the upper left corner of the display definition segment
+    #   (DDS) display window. With this setting, specify the distance, in
+    #   pixels, between the top of the frame and the top of the DDS display
+    #   window. Keep the default value, 0, to have MediaConvert
+    #   automatically choose this offset. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). MediaConvert uses these values to determine
+    #   whether to write page position data to the DDS or to the page
+    #   composition segment (PCS). All burn-in and DVB-Sub font settings
+    #   must match.
+    #   @return [Integer]
+    #
     # @!attribute [rw] font_color
-    #   Specifies the color of the burned-in captions. This option is not
+    #   Specifies the color of the DVB-SUB captions. This option is not
     #   valid for source captions that are STL, 608/embedded or teletext.
     #   These source settings are already pre-defined by the caption stream.
     #   All burn-in and DVB-Sub font settings must match.
@@ -7287,6 +7750,13 @@ module Aws::MediaConvert
     #   A positive integer indicates the exact font size in points. Set to 0
     #   for automatic font size selection. All burn-in and DVB-Sub font
     #   settings must match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   Specify the height, in pixels, of this set of DVB-Sub captions. The
+    #   default value is 576 pixels. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
     #
     # @!attribute [rw] outline_color
@@ -7344,6 +7814,13 @@ module Aws::MediaConvert
     #   if the captions are closed caption.
     #   @return [String]
     #
+    # @!attribute [rw] width
+    #   Specify the width, in pixels, of this set of DVB-Sub captions. The
+    #   default value is 720 pixels. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). All burn-in and DVB-Sub font settings must match.
+    #   @return [Integer]
+    #
     # @!attribute [rw] x_position
     #   Specifies the horizontal position of the caption relative to the
     #   left side of the output in pixels. A value of 10 would result in the
@@ -7372,11 +7849,15 @@ module Aws::MediaConvert
       :alignment,
       :background_color,
       :background_opacity,
+      :dds_handling,
+      :dds_x_coordinate,
+      :dds_y_coordinate,
       :font_color,
       :font_opacity,
       :font_resolution,
       :font_script,
       :font_size,
+      :height,
       :outline_color,
       :outline_size,
       :shadow_color,
@@ -7385,6 +7866,7 @@ module Aws::MediaConvert
       :shadow_y_offset,
       :subtitling_type,
       :teletext_spacing,
+      :width,
       :x_position,
       :y_position)
       SENSITIVE = []
@@ -7449,10 +7931,12 @@ module Aws::MediaConvert
     #       {
     #         bitrate: 1,
     #         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #         coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #         coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #         dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #         downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #         dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #         dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #         dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #         lo_ro_center_mix_level: 1.0,
     #         lo_ro_surround_mix_level: 1.0,
     #         lt_rt_center_mix_level: 1.0,
@@ -7465,8 +7949,12 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] bitrate
-    #   Specify the average bitrate in bits per second. Valid values: 384k,
-    #   448k, 640k, 768k
+    #   Specify the average bitrate for this output in bits per second.
+    #   Valid values: 384k, 448k, 576k, 640k, 768k, 1024k Default value:
+    #   448k Note that MediaConvert supports 384k only with channel-based
+    #   immersive (CBI) 7.1.4 and 5.1.4 inputs. For CBI 9.1.6 and other
+    #   input types, MediaConvert automatically increases your output
+    #   bitrate to 448k.
     #   @return [Integer]
     #
     # @!attribute [rw] bitstream_mode
@@ -7476,8 +7964,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] coding_mode
-    #   The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6
-    #   (CODING\_MODE\_9\_1\_6).
+    #   The coding mode for Dolby Digital Plus JOC (Atmos).
     #   @return [String]
     #
     # @!attribute [rw] dialogue_intelligence
@@ -7485,48 +7972,117 @@ module Aws::MediaConvert
     #   dialogue analysis.
     #   @return [String]
     #
+    # @!attribute [rw] downmix_control
+    #   Specify whether MediaConvert should use any downmix metadata from
+    #   your input file. Keep the default value, Custom (SPECIFIED) to
+    #   provide downmix values in your job settings. Choose Follow source
+    #   (INITIALIZE\_FROM\_SOURCE) to use the metadata from your input.
+    #   Related settings--Use these settings to specify your downmix values:
+    #   Left only/Right only surround (LoRoSurroundMixLevel), Left
+    #   total/Right total surround (LtRtSurroundMixLevel), Left total/Right
+    #   total center (LtRtCenterMixLevel), Left only/Right only center
+    #   (LoRoCenterMixLevel), and Stereo downmix (StereoDownmix). When you
+    #   keep Custom (SPECIFIED) for Downmix control (DownmixControl) and you
+    #   don't specify values for the related settings, MediaConvert uses
+    #   default values for those settings.
+    #   @return [String]
+    #
     # @!attribute [rw] dynamic_range_compression_line
-    #   Specify the absolute peak level for a signal with dynamic range
-    #   compression.
+    #   Choose the Dolby dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby stream for
+    #   the line operating mode. Default value: Film light
+    #   (ATMOS\_STORAGE\_DDP\_COMPR\_FILM\_LIGHT) Related setting: To have
+    #   MediaConvert use the value you specify here, keep the default value,
+    #   Custom (SPECIFIED) for the setting Dynamic range control
+    #   (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range
+    #   compression line (DynamicRangeCompressionLine). For information
+    #   about the Dolby DRC operating modes and profiles, see the Dynamic
+    #   Range Control chapter of the Dolby Metadata Guide at
+    #   https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
     #   @return [String]
     #
     # @!attribute [rw] dynamic_range_compression_rf
-    #   Specify how the service limits the audio dynamic range when
-    #   compressing the audio.
+    #   Choose the Dolby dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby stream for
+    #   the RF operating mode. Default value: Film light
+    #   (ATMOS\_STORAGE\_DDP\_COMPR\_FILM\_LIGHT) Related setting: To have
+    #   MediaConvert use the value you specify here, keep the default value,
+    #   Custom (SPECIFIED) for the setting Dynamic range control
+    #   (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range
+    #   compression RF (DynamicRangeCompressionRf). For information about
+    #   the Dolby DRC operating modes and profiles, see the Dynamic Range
+    #   Control chapter of the Dolby Metadata Guide at
+    #   https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_range_control
+    #   Specify whether MediaConvert should use any dynamic range control
+    #   metadata from your input file. Keep the default value, Custom
+    #   (SPECIFIED), to provide dynamic range control values in your job
+    #   settings. Choose Follow source (INITIALIZE\_FROM\_SOURCE) to use the
+    #   metadata from your input. Related settings--Use these settings to
+    #   specify your dynamic range control values: Dynamic range compression
+    #   line (DynamicRangeCompressionLine) and Dynamic range compression RF
+    #   (DynamicRangeCompressionRf). When you keep the value Custom
+    #   (SPECIFIED) for Dynamic range control (DynamicRangeControl) and you
+    #   don't specify values for the related settings, MediaConvert uses
+    #   default values for those settings.
     #   @return [String]
     #
     # @!attribute [rw] lo_ro_center_mix_level
     #   Specify a value for the following Dolby Atmos setting: Left
     #   only/Right only center mix (Lo/Ro center). MediaConvert uses this
-    #   value for downmixing. How the service uses this value depends on the
-    #   value that you choose for Stereo downmix (Eac3AtmosStereoDownmix).
-    #   Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
+    #   value for downmixing. Default value: -3 dB
+    #   (ATMOS\_STORAGE\_DDP\_MIXLEV\_MINUS\_3\_DB). Valid values: 3.0, 1.5,
+    #   0.0, -1.5, -3.0, -4.5, and -6.0. Related setting: How the service
+    #   uses this value depends on the value that you choose for Stereo
+    #   downmix (Eac3AtmosStereoDownmix). Related setting: To have
+    #   MediaConvert use this value, keep the default value, Custom
+    #   (SPECIFIED) for the setting Downmix control (DownmixControl).
+    #   Otherwise, MediaConvert ignores Left only/Right only center
+    #   (LoRoCenterMixLevel).
     #   @return [Float]
     #
     # @!attribute [rw] lo_ro_surround_mix_level
     #   Specify a value for the following Dolby Atmos setting: Left
     #   only/Right only (Lo/Ro surround). MediaConvert uses this value for
-    #   downmixing. How the service uses this value depends on the value
-    #   that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid
-    #   values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the
-    #   channel.
+    #   downmixing. Default value: -3 dB
+    #   (ATMOS\_STORAGE\_DDP\_MIXLEV\_MINUS\_3\_DB). Valid values: -1.5,
+    #   -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. Related
+    #   setting: How the service uses this value depends on the value that
+    #   you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related
+    #   setting: To have MediaConvert use this value, keep the default
+    #   value, Custom (SPECIFIED) for the setting Downmix control
+    #   (DownmixControl). Otherwise, MediaConvert ignores Left only/Right
+    #   only surround (LoRoSurroundMixLevel).
     #   @return [Float]
     #
     # @!attribute [rw] lt_rt_center_mix_level
     #   Specify a value for the following Dolby Atmos setting: Left
     #   total/Right total center mix (Lt/Rt center). MediaConvert uses this
-    #   value for downmixing. How the service uses this value depends on the
-    #   value that you choose for Stereo downmix (Eac3AtmosStereoDownmix).
-    #   Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
+    #   value for downmixing. Default value: -3 dB
+    #   (ATMOS\_STORAGE\_DDP\_MIXLEV\_MINUS\_3\_DB) Valid values: 3.0, 1.5,
+    #   0.0, -1.5, -3.0, -4.5, and -6.0. Related setting: How the service
+    #   uses this value depends on the value that you choose for Stereo
+    #   downmix (Eac3AtmosStereoDownmix). Related setting: To have
+    #   MediaConvert use this value, keep the default value, Custom
+    #   (SPECIFIED) for the setting Downmix control (DownmixControl).
+    #   Otherwise, MediaConvert ignores Left total/Right total center
+    #   (LtRtCenterMixLevel).
     #   @return [Float]
     #
     # @!attribute [rw] lt_rt_surround_mix_level
     #   Specify a value for the following Dolby Atmos setting: Left
     #   total/Right total surround mix (Lt/Rt surround). MediaConvert uses
-    #   this value for downmixing. How the service uses this value depends
-    #   on the value that you choose for Stereo downmix
-    #   (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and
-    #   -60. The value -60 mutes the channel.
+    #   this value for downmixing. Default value: -3 dB
+    #   (ATMOS\_STORAGE\_DDP\_MIXLEV\_MINUS\_3\_DB) Valid values: -1.5,
+    #   -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. Related
+    #   setting: How the service uses this value depends on the value that
+    #   you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related
+    #   setting: To have MediaConvert use this value, keep the default
+    #   value, Custom (SPECIFIED) for the setting Downmix control
+    #   (DownmixControl). Otherwise, the service ignores Left total/Right
+    #   total surround (LtRtSurroundMixLevel).
     #   @return [Float]
     #
     # @!attribute [rw] metering_mode
@@ -7538,13 +8094,18 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] speech_threshold
-    #   Specify the percentage of audio content that must be speech before
-    #   the encoder uses the measured speech loudness as the overall program
-    #   loudness.
+    #   Specify the percentage of audio content, from 0% to 100%, that must
+    #   be speech in order for the encoder to use the measured speech
+    #   loudness as the overall program loudness. Default value: 15%
     #   @return [Integer]
     #
     # @!attribute [rw] stereo_downmix
-    #   Choose how the service does stereo downmixing.
+    #   Choose how the service does stereo downmixing. Default value: Not
+    #   indicated (ATMOS\_STORAGE\_DDP\_DMIXMOD\_NOT\_INDICATED) Related
+    #   setting: To have MediaConvert use this value, keep the default
+    #   value, Custom (SPECIFIED) for the setting Downmix control
+    #   (DownmixControl). Otherwise, MediaConvert ignores Stereo downmix
+    #   (StereoDownmix).
     #   @return [String]
     #
     # @!attribute [rw] surround_ex_mode
@@ -7560,8 +8121,10 @@ module Aws::MediaConvert
       :bitstream_mode,
       :coding_mode,
       :dialogue_intelligence,
+      :downmix_control,
       :dynamic_range_compression_line,
       :dynamic_range_compression_rf,
+      :dynamic_range_control,
       :lo_ro_center_mix_level,
       :lo_ro_surround_mix_level,
       :lt_rt_center_mix_level,
@@ -8013,6 +8576,38 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Hexadecimal value as per EIA-608 Line 21 Data Services, section
+    # 9.5.1.5 05h Content Advisory.
+    #
+    # @note When making an API call, you may pass ExtendedDataServices
+    #   data as a hash:
+    #
+    #       {
+    #         copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #       }
+    #
+    # @!attribute [rw] copy_protection_action
+    #   The action to take on copy and redistribution control XDS packets.
+    #   If you select PASSTHROUGH, packets will not be changed. If you
+    #   select STRIP, any packets will be removed in output captions.
+    #   @return [String]
+    #
+    # @!attribute [rw] vchip_action
+    #   The action to take on content advisory XDS packets. If you select
+    #   PASSTHROUGH, packets will not be changed. If you select STRIP, any
+    #   packets will be removed in output captions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ExtendedDataServices AWS API Documentation
+    #
+    class ExtendedDataServices < Struct.new(
+      :copy_protection_action,
+      :vchip_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings for F4v container
     #
     # @note When making an API call, you may pass F4vSettings
@@ -8096,7 +8691,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #         time_delta: 1,
     #       }
     #
@@ -8122,7 +8717,7 @@ module Aws::MediaConvert
     # @!attribute [rw] source_file
     #   External caption file used for loading captions. Accepted file
     #   extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt',
-    #   'xml', 'smi', and 'vtt'.
+    #   'xml', 'smi', 'webvtt', and 'vtt'.
     #   @return [String]
     #
     # @!attribute [rw] time_delta
@@ -8357,10 +8952,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for quality-defined variable bitrate encoding with the H.264
-    # codec. Required when you set Rate control mode to QVBR. Not valid when
-    # you set Rate control mode to a value other than QVBR, or when you
-    # don't define Rate control mode.
+    # Settings for quality-defined variable bitrate encoding with the H.265
+    # codec. Use these settings only when you set QVBR for Rate control mode
+    # (RateControlMode).
     #
     # @note When making an API call, you may pass H264QvbrSettings
     #   data as a hash:
@@ -8382,15 +8976,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level
-    #   Required when you use QVBR rate control mode. That is, when you
-    #   specify qvbrSettings within h264Settings. Specify the general target
-    #   quality level for this output, from 1 to 10. Use higher numbers for
-    #   greater quality. Level 10 results in nearly lossless compression.
-    #   The quality level for most broadcast-quality transcodes is between 6
-    #   and 9. Optionally, to specify a value between whole numbers, also
-    #   provide a value for the setting qvbrQualityLevelFineTune. For
-    #   example, if you want your QVBR quality level to be 7.33, set
-    #   qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+    #   Use this setting only when you set Rate control mode
+    #   (RateControlMode) to QVBR. Specify the target quality level for this
+    #   output. MediaConvert determines the right number of bits to use for
+    #   each part of the video to maintain the video quality that you
+    #   specify. When you keep the default value, AUTO, MediaConvert picks a
+    #   quality level for you, based on characteristics of your input video.
+    #   If you prefer to specify a quality level, specify a number from 1
+    #   through 10. Use higher numbers for greater quality. Level 10 results
+    #   in nearly lossless compression. The quality level for most
+    #   broadcast-quality transcodes is between 6 and 9. Optionally, to
+    #   specify a value between whole numbers, also provide a value for the
+    #   setting qvbrQualityLevelFineTune. For example, if you want your QVBR
+    #   quality level to be 7.33, set qvbrQualityLevel to 7 and set
+    #   qvbrQualityLevelFineTune to .33.
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level_fine_tune
@@ -8701,9 +9300,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] qvbr_settings
     #   Settings for quality-defined variable bitrate encoding with the
-    #   H.264 codec. Required when you set Rate control mode to QVBR. Not
-    #   valid when you set Rate control mode to a value other than QVBR, or
-    #   when you don't define Rate control mode.
+    #   H.265 codec. Use these settings only when you set QVBR for Rate
+    #   control mode (RateControlMode).
     #   @return [Types::H264QvbrSettings]
     #
     # @!attribute [rw] rate_control_mode
@@ -8903,9 +9501,8 @@ module Aws::MediaConvert
     end
 
     # Settings for quality-defined variable bitrate encoding with the H.265
-    # codec. Required when you set Rate control mode to QVBR. Not valid when
-    # you set Rate control mode to a value other than QVBR, or when you
-    # don't define Rate control mode.
+    # codec. Use these settings only when you set QVBR for Rate control mode
+    # (RateControlMode).
     #
     # @note When making an API call, you may pass H265QvbrSettings
     #   data as a hash:
@@ -8927,15 +9524,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level
-    #   Required when you use QVBR rate control mode. That is, when you
-    #   specify qvbrSettings within h265Settings. Specify the general target
-    #   quality level for this output, from 1 to 10. Use higher numbers for
-    #   greater quality. Level 10 results in nearly lossless compression.
-    #   The quality level for most broadcast-quality transcodes is between 6
-    #   and 9. Optionally, to specify a value between whole numbers, also
-    #   provide a value for the setting qvbrQualityLevelFineTune. For
-    #   example, if you want your QVBR quality level to be 7.33, set
-    #   qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+    #   Use this setting only when you set Rate control mode
+    #   (RateControlMode) to QVBR. Specify the target quality level for this
+    #   output. MediaConvert determines the right number of bits to use for
+    #   each part of the video to maintain the video quality that you
+    #   specify. When you keep the default value, AUTO, MediaConvert picks a
+    #   quality level for you, based on characteristics of your input video.
+    #   If you prefer to specify a quality level, specify a number from 1
+    #   through 10. Use higher numbers for greater quality. Level 10 results
+    #   in nearly lossless compression. The quality level for most
+    #   broadcast-quality transcodes is between 6 and 9. Optionally, to
+    #   specify a value between whole numbers, also provide a value for the
+    #   setting qvbrQualityLevelFineTune. For example, if you want your QVBR
+    #   quality level to be 7.33, set qvbrQualityLevel to 7 and set
+    #   qvbrQualityLevelFineTune to .33.
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level_fine_tune
@@ -9226,9 +9828,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] qvbr_settings
     #   Settings for quality-defined variable bitrate encoding with the
-    #   H.265 codec. Required when you set Rate control mode to QVBR. Not
-    #   valid when you set Rate control mode to a value other than QVBR, or
-    #   when you don't define Rate control mode.
+    #   H.265 codec. Use these settings only when you set QVBR for Rate
+    #   control mode (RateControlMode).
     #   @return [Types::H265QvbrSettings]
     #
     # @!attribute [rw] rate_control_mode
@@ -9543,6 +10144,37 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Setting for HDR10+ metadata insertion
+    #
+    # @note When making an API call, you may pass Hdr10Plus
+    #   data as a hash:
+    #
+    #       {
+    #         mastering_monitor_nits: 1,
+    #         target_monitor_nits: 1,
+    #       }
+    #
+    # @!attribute [rw] mastering_monitor_nits
+    #   Specify the HDR10+ mastering display normalized peak luminance, in
+    #   nits. This is the normalized actual peak luminance of the mastering
+    #   display, as defined by ST 2094-40.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_monitor_nits
+    #   Specify the HDR10+ target display nominal peak luminance, in nits.
+    #   This is the nominal maximum luminance of the target display as
+    #   defined by ST 2094-40.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Hdr10Plus AWS API Documentation
+    #
+    class Hdr10Plus < Struct.new(
+      :mastering_monitor_nits,
+      :target_monitor_nits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specify the details for each additional HLS manifest that you want the
     # service to generate for this output group. Each manifest can reference
     # a different subset of outputs in the group.
@@ -9767,6 +10399,7 @@ module Aws::MediaConvert
     #           },
     #           type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #         },
+    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #         min_final_segment_length: 1.0,
@@ -9778,6 +10411,7 @@ module Aws::MediaConvert
     #         segment_length: 1,
     #         segments_per_subdirectory: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #         timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #         timed_metadata_id_3_period: 1,
     #         timestamp_delta_milliseconds: 1,
@@ -9861,6 +10495,20 @@ module Aws::MediaConvert
     #   DRM settings.
     #   @return [Types::HlsEncryptionSettings]
     #
+    # @!attribute [rw] image_based_trick_play
+    #   Specify whether MediaConvert generates images for trick play. Keep
+    #   the default value, None (NONE), to not generate any images. Choose
+    #   Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail
+    #   and full frame (THUMBNAIL\_AND\_FULLFRAME) to generate tiled
+    #   thumbnails and full-resolution images of single frames. MediaConvert
+    #   creates a child manifest for each set of images that you generate
+    #   and adds corresponding entries to the parent manifest. A common
+    #   application for these images is Roku trick mode. The thumbnails and
+    #   full-frame images that MediaConvert creates with this feature are
+    #   compatible with this Roku specification:
+    #   https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
+    #   @return [String]
+    #
     # @!attribute [rw] manifest_compression
     #   When set to GZIP, compresses HLS playlist.
     #   @return [String]
@@ -9932,6 +10580,19 @@ module Aws::MediaConvert
     #   EXT-X-STREAM-INF tag of variant manifest.
     #   @return [String]
     #
+    # @!attribute [rw] target_duration_compatibility_mode
+    #   When set to LEGACY, the segment target duration is always rounded up
+    #   to the nearest integer value above its current value in seconds.
+    #   When set to SPEC\\\\\_COMPLIANT, the segment target duration is
+    #   rounded up to the nearest integer value if fraction seconds are
+    #   greater than or equal to 0.5 (>= 0.5) and rounded down if less than
+    #   0.5 (< 0.5). You may need to use LEGACY if your client needs to
+    #   ensure that the target duration is always longer than the actual
+    #   duration of the segment. Some older players may experience
+    #   interrupted playback when the actual duration of a track in a
+    #   segment is longer than the target duration.
+    #   @return [String]
+    #
     # @!attribute [rw] timed_metadata_id_3_frame
     #   Indicates ID3 frame that has the timecode.
     #   @return [String]
@@ -9960,6 +10621,7 @@ module Aws::MediaConvert
       :destination_settings,
       :directory_structure,
       :encryption,
+      :image_based_trick_play,
       :manifest_compression,
       :manifest_duration_format,
       :min_final_segment_length,
@@ -9971,9 +10633,52 @@ module Aws::MediaConvert
       :segment_length,
       :segments_per_subdirectory,
       :stream_inf_resolution,
+      :target_duration_compatibility_mode,
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
       :timestamp_delta_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings specific to audio sources in an HLS alternate rendition
+    # group. Specify the properties (renditionGroupId, renditionName or
+    # renditionLanguageCode) to identify the unique audio track among the
+    # alternative rendition groups present in the HLS manifest. If no unique
+    # track is found, or multiple tracks match the properties provided, the
+    # job fails. If no properties in hlsRenditionGroupSettings are
+    # specified, the default audio track within the video segment is chosen.
+    # If there is no audio within video segment, the alternative audio with
+    # DEFAULT=YES is chosen instead.
+    #
+    # @note When making an API call, you may pass HlsRenditionGroupSettings
+    #   data as a hash:
+    #
+    #       {
+    #         rendition_group_id: "__string",
+    #         rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #         rendition_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] rendition_group_id
+    #   Optional. Specify alternative group ID
+    #   @return [String]
+    #
+    # @!attribute [rw] rendition_language_code
+    #   Optional. Specify ISO 639-2 or ISO 639-3 code in the language
+    #   property
+    #   @return [String]
+    #
+    # @!attribute [rw] rendition_name
+    #   Optional. Specify media name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsRenditionGroupSettings AWS API Documentation
+    #
+    class HlsRenditionGroupSettings < Struct.new(
+      :rendition_group_id,
+      :rendition_language_code,
+      :rendition_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10237,7 +10942,12 @@ module Aws::MediaConvert
     #           "__string" => {
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #             external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #             hls_rendition_group_settings: {
+    #               rendition_group_id: "__string",
+    #               rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #               rendition_name: "__string",
+    #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
@@ -10254,7 +10964,7 @@ module Aws::MediaConvert
     #               channels_in: 1,
     #               channels_out: 1,
     #             },
-    #             selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #             selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #             tracks: [1],
     #           },
     #         },
@@ -10283,7 +10993,7 @@ module Aws::MediaConvert
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                 },
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                 time_delta: 1,
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -10292,6 +11002,11 @@ module Aws::MediaConvert
     #               },
     #               track_source_settings: {
     #                 track_number: 1,
+    #               },
+    #               webvtt_hls_source_settings: {
+    #                 rendition_group_id: "__string",
+    #                 rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                 rendition_name: "__string",
     #               },
     #             },
     #           },
@@ -10310,7 +11025,7 @@ module Aws::MediaConvert
     #           kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #         },
     #         denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #         file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
+    #         file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS",
     #         filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #         filter_strength: 1,
     #         image_inserter: {
@@ -10369,6 +11084,7 @@ module Aws::MediaConvert
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #           sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #         },
     #       }
     #
@@ -10682,7 +11398,12 @@ module Aws::MediaConvert
     #           "__string" => {
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #             external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #             hls_rendition_group_settings: {
+    #               rendition_group_id: "__string",
+    #               rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #               rendition_name: "__string",
+    #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
@@ -10699,7 +11420,7 @@ module Aws::MediaConvert
     #               channels_in: 1,
     #               channels_out: 1,
     #             },
-    #             selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #             selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #             tracks: [1],
     #           },
     #         },
@@ -10728,7 +11449,7 @@ module Aws::MediaConvert
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                 },
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                 time_delta: 1,
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -10737,6 +11458,11 @@ module Aws::MediaConvert
     #               },
     #               track_source_settings: {
     #                 track_number: 1,
+    #               },
+    #               webvtt_hls_source_settings: {
+    #                 rendition_group_id: "__string",
+    #                 rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                 rendition_name: "__string",
     #               },
     #             },
     #           },
@@ -10806,6 +11532,7 @@ module Aws::MediaConvert
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #           sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #         },
     #       }
     #
@@ -11314,6 +12041,10 @@ module Aws::MediaConvert
     #             scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #           },
     #         },
+    #         extended_data_services: {
+    #           copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         },
     #         inputs: [
     #           {
     #             audio_selector_groups: {
@@ -11325,7 +12056,12 @@ module Aws::MediaConvert
     #               "__string" => {
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                 external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #                 hls_rendition_group_settings: {
+    #                   rendition_group_id: "__string",
+    #                   rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                   rendition_name: "__string",
+    #                 },
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
@@ -11342,7 +12078,7 @@ module Aws::MediaConvert
     #                   channels_in: 1,
     #                   channels_out: 1,
     #                 },
-    #                 selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #                 selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #                 tracks: [1],
     #               },
     #             },
@@ -11371,7 +12107,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                     },
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                     time_delta: 1,
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -11380,6 +12116,11 @@ module Aws::MediaConvert
     #                   },
     #                   track_source_settings: {
     #                     track_number: 1,
+    #                   },
+    #                   webvtt_hls_source_settings: {
+    #                     rendition_group_id: "__string",
+    #                     rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                     rendition_name: "__string",
     #                   },
     #                 },
     #               },
@@ -11398,7 +12139,7 @@ module Aws::MediaConvert
     #               kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #             },
     #             denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #             file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
+    #             file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS",
     #             filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #             filter_strength: 1,
     #             image_inserter: {
@@ -11457,9 +12198,25 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #               sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #             },
     #           },
     #         ],
+    #         kantar_watermark: {
+    #           channel_name: "__stringMin1Max20",
+    #           content_reference: "__stringMin1Max50PatternAZAZ09",
+    #           credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #           file_offset: 1.0,
+    #           kantar_license_id: 1,
+    #           kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #           log_destination: "__stringPatternS3",
+    #           metadata_3: "__stringMin1Max50",
+    #           metadata_4: "__stringMin1Max50",
+    #           metadata_5: "__stringMin1Max50",
+    #           metadata_6: "__stringMin1Max50",
+    #           metadata_7: "__stringMin1Max50",
+    #           metadata_8: "__stringMin1Max50",
+    #         },
     #         motion_image_inserter: {
     #           framerate: {
     #             framerate_denominator: 1,
@@ -11545,6 +12302,7 @@ module Aws::MediaConvert
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
     #                 fragment_length: 1,
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
@@ -11554,6 +12312,7 @@ module Aws::MediaConvert
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -11590,6 +12349,7 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -11665,6 +12425,7 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_final_segment_length: 1.0,
@@ -11676,6 +12437,7 @@ module Aws::MediaConvert
     #                 segment_length: 1,
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                 timed_metadata_id_3_period: 1,
     #                 timestamp_delta_milliseconds: 1,
@@ -11764,10 +12526,12 @@ module Aws::MediaConvert
     #                       eac_3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                         coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                         coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                         dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                         downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                         dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                         dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                         dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                         lo_ro_center_mix_level: 1.0,
     #                         lo_ro_surround_mix_level: 1.0,
     #                         lt_rt_center_mix_level: 1.0,
@@ -11877,11 +12641,15 @@ module Aws::MediaConvert
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
+    #                         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                         dds_x_coordinate: 1,
+    #                         dds_y_coordinate: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
+    #                         height: 1,
     #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                         outline_size: 1,
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -11890,6 +12658,7 @@ module Aws::MediaConvert
     #                         shadow_y_offset: 1,
     #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         width: 1,
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
@@ -11902,6 +12671,9 @@ module Aws::MediaConvert
     #                       },
     #                       scc_destination_settings: {
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       },
+    #                       srt_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       teletext_destination_settings: {
     #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -11989,6 +12761,7 @@ module Aws::MediaConvert
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     max_pcr_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -12028,7 +12801,11 @@ module Aws::MediaConvert
     #                   },
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #                     profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #                     profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #                     xavc_profile_settings: {
+    #                       duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                       max_anc_data_size: 1,
+    #                     },
     #                   },
     #                 },
     #                 extension: "__string",
@@ -12080,7 +12857,7 @@ module Aws::MediaConvert
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
-    #                     codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #                     codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -12214,7 +12991,8 @@ module Aws::MediaConvert
     #                       temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
     #                     prores_settings: {
-    #                       codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                       chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                       codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
@@ -12268,6 +13046,49 @@ module Aws::MediaConvert
     #                       quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                       rate_control_mode: "VBR", # accepts VBR
     #                     },
+    #                     xavc_settings: {
+    #                       adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                       softness: 1,
+    #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                       temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                       xavc_4k_intra_cbg_profile_settings: {
+    #                         xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                       },
+    #                       xavc_4k_intra_vbr_profile_settings: {
+    #                         xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                       },
+    #                       xavc_4k_profile_settings: {
+    #                         bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                         codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_closed_cadence: 1,
+    #                         hrd_buffer_size: 1,
+    #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                         slices: 1,
+    #                       },
+    #                       xavc_hd_intra_cbg_profile_settings: {
+    #                         xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                       },
+    #                       xavc_hd_profile_settings: {
+    #                         bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_closed_cadence: 1,
+    #                         hrd_buffer_size: 1,
+    #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                         slices: 1,
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                       },
+    #                     },
     #                   },
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   crop: {
@@ -12309,6 +13130,7 @@ module Aws::MediaConvert
     #                         white_point_y: 1,
     #                       },
     #                       hue: 1,
+    #                       sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                       saturation: 1,
     #                     },
     #                     deinterlacer: {
@@ -12323,6 +13145,10 @@ module Aws::MediaConvert
     #                       },
     #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                       profile: "PROFILE_5", # accepts PROFILE_5
+    #                     },
+    #                     hdr_10_plus: {
+    #                       mastering_monitor_nits: 1,
+    #                       target_monitor_nits: 1,
     #                     },
     #                     image_inserter: {
     #                       insertable_images: [
@@ -12409,11 +13235,26 @@ module Aws::MediaConvert
     #   ad insertion, you can ignore these settings.
     #   @return [Types::EsamSettings]
     #
+    # @!attribute [rw] extended_data_services
+    #   Hexadecimal value as per EIA-608 Line 21 Data Services, section
+    #   9.5.1.5 05h Content Advisory.
+    #   @return [Types::ExtendedDataServices]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs (inputs) to define source file used in the transcode job.
     #   There can be multiple inputs add in a job. These inputs will be
     #   concantenated together to create the output.
     #   @return [Array<Types::Input>]
+    #
+    # @!attribute [rw] kantar_watermark
+    #   Use these settings only when you use Kantar watermarking. Specify
+    #   the values that MediaConvert uses to generate and place Kantar
+    #   watermarks in your output audio. These settings apply to every
+    #   output in your job. In addition to specifying these values, you also
+    #   need to store your Kantar credentials in AWS Secrets Manager. For
+    #   more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+    #   @return [Types::KantarWatermarkSettings]
     #
     # @!attribute [rw] motion_image_inserter
     #   Overlay motion graphics on top of your video. The motion graphics
@@ -12478,7 +13319,9 @@ module Aws::MediaConvert
       :ad_avail_offset,
       :avail_blanking,
       :esam,
+      :extended_data_services,
       :inputs,
+      :kantar_watermark,
       :motion_image_inserter,
       :nielsen_configuration,
       :nielsen_non_linear_watermark,
@@ -12595,6 +13438,10 @@ module Aws::MediaConvert
     #             scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #           },
     #         },
+    #         extended_data_services: {
+    #           copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         },
     #         inputs: [
     #           {
     #             audio_selector_groups: {
@@ -12606,7 +13453,12 @@ module Aws::MediaConvert
     #               "__string" => {
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                 external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #                 hls_rendition_group_settings: {
+    #                   rendition_group_id: "__string",
+    #                   rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                   rendition_name: "__string",
+    #                 },
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
@@ -12623,7 +13475,7 @@ module Aws::MediaConvert
     #                   channels_in: 1,
     #                   channels_out: 1,
     #                 },
-    #                 selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #                 selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #                 tracks: [1],
     #               },
     #             },
@@ -12652,7 +13504,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                     },
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                     time_delta: 1,
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -12661,6 +13513,11 @@ module Aws::MediaConvert
     #                   },
     #                   track_source_settings: {
     #                     track_number: 1,
+    #                   },
+    #                   webvtt_hls_source_settings: {
+    #                     rendition_group_id: "__string",
+    #                     rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                     rendition_name: "__string",
     #                   },
     #                 },
     #               },
@@ -12730,9 +13587,25 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #               sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #             },
     #           },
     #         ],
+    #         kantar_watermark: {
+    #           channel_name: "__stringMin1Max20",
+    #           content_reference: "__stringMin1Max50PatternAZAZ09",
+    #           credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #           file_offset: 1.0,
+    #           kantar_license_id: 1,
+    #           kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #           log_destination: "__stringPatternS3",
+    #           metadata_3: "__stringMin1Max50",
+    #           metadata_4: "__stringMin1Max50",
+    #           metadata_5: "__stringMin1Max50",
+    #           metadata_6: "__stringMin1Max50",
+    #           metadata_7: "__stringMin1Max50",
+    #           metadata_8: "__stringMin1Max50",
+    #         },
     #         motion_image_inserter: {
     #           framerate: {
     #             framerate_denominator: 1,
@@ -12818,6 +13691,7 @@ module Aws::MediaConvert
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
     #                 fragment_length: 1,
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
@@ -12827,6 +13701,7 @@ module Aws::MediaConvert
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -12863,6 +13738,7 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -12938,6 +13814,7 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_final_segment_length: 1.0,
@@ -12949,6 +13826,7 @@ module Aws::MediaConvert
     #                 segment_length: 1,
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                 timed_metadata_id_3_period: 1,
     #                 timestamp_delta_milliseconds: 1,
@@ -13037,10 +13915,12 @@ module Aws::MediaConvert
     #                       eac_3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                         coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                         coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                         dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                         downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                         dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                         dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                         dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                         lo_ro_center_mix_level: 1.0,
     #                         lo_ro_surround_mix_level: 1.0,
     #                         lt_rt_center_mix_level: 1.0,
@@ -13150,11 +14030,15 @@ module Aws::MediaConvert
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
+    #                         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                         dds_x_coordinate: 1,
+    #                         dds_y_coordinate: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
+    #                         height: 1,
     #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                         outline_size: 1,
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -13163,6 +14047,7 @@ module Aws::MediaConvert
     #                         shadow_y_offset: 1,
     #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         width: 1,
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
@@ -13175,6 +14060,9 @@ module Aws::MediaConvert
     #                       },
     #                       scc_destination_settings: {
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       },
+    #                       srt_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       teletext_destination_settings: {
     #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -13262,6 +14150,7 @@ module Aws::MediaConvert
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     max_pcr_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -13301,7 +14190,11 @@ module Aws::MediaConvert
     #                   },
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #                     profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #                     profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #                     xavc_profile_settings: {
+    #                       duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                       max_anc_data_size: 1,
+    #                     },
     #                   },
     #                 },
     #                 extension: "__string",
@@ -13353,7 +14246,7 @@ module Aws::MediaConvert
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
-    #                     codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #                     codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -13487,7 +14380,8 @@ module Aws::MediaConvert
     #                       temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
     #                     prores_settings: {
-    #                       codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                       chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                       codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
@@ -13541,6 +14435,49 @@ module Aws::MediaConvert
     #                       quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                       rate_control_mode: "VBR", # accepts VBR
     #                     },
+    #                     xavc_settings: {
+    #                       adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                       softness: 1,
+    #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                       temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                       xavc_4k_intra_cbg_profile_settings: {
+    #                         xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                       },
+    #                       xavc_4k_intra_vbr_profile_settings: {
+    #                         xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                       },
+    #                       xavc_4k_profile_settings: {
+    #                         bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                         codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_closed_cadence: 1,
+    #                         hrd_buffer_size: 1,
+    #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                         slices: 1,
+    #                       },
+    #                       xavc_hd_intra_cbg_profile_settings: {
+    #                         xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                       },
+    #                       xavc_hd_profile_settings: {
+    #                         bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                         gop_closed_cadence: 1,
+    #                         hrd_buffer_size: 1,
+    #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                         slices: 1,
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                       },
+    #                     },
     #                   },
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   crop: {
@@ -13582,6 +14519,7 @@ module Aws::MediaConvert
     #                         white_point_y: 1,
     #                       },
     #                       hue: 1,
+    #                       sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                       saturation: 1,
     #                     },
     #                     deinterlacer: {
@@ -13596,6 +14534,10 @@ module Aws::MediaConvert
     #                       },
     #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                       profile: "PROFILE_5", # accepts PROFILE_5
+    #                     },
+    #                     hdr_10_plus: {
+    #                       mastering_monitor_nits: 1,
+    #                       target_monitor_nits: 1,
     #                     },
     #                     image_inserter: {
     #                       insertable_images: [
@@ -13682,11 +14624,26 @@ module Aws::MediaConvert
     #   ad insertion, you can ignore these settings.
     #   @return [Types::EsamSettings]
     #
+    # @!attribute [rw] extended_data_services
+    #   Hexadecimal value as per EIA-608 Line 21 Data Services, section
+    #   9.5.1.5 05h Content Advisory.
+    #   @return [Types::ExtendedDataServices]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs (inputs) to define the source file used in the transcode
     #   job. There can only be one input in a job template. Using the API,
     #   you can include multiple inputs when referencing a job template.
     #   @return [Array<Types::InputTemplate>]
+    #
+    # @!attribute [rw] kantar_watermark
+    #   Use these settings only when you use Kantar watermarking. Specify
+    #   the values that MediaConvert uses to generate and place Kantar
+    #   watermarks in your output audio. These settings apply to every
+    #   output in your job. In addition to specifying these values, you also
+    #   need to store your Kantar credentials in AWS Secrets Manager. For
+    #   more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+    #   @return [Types::KantarWatermarkSettings]
     #
     # @!attribute [rw] motion_image_inserter
     #   Overlay motion graphics on top of your video. The motion graphics
@@ -13751,13 +14708,140 @@ module Aws::MediaConvert
       :ad_avail_offset,
       :avail_blanking,
       :esam,
+      :extended_data_services,
       :inputs,
+      :kantar_watermark,
       :motion_image_inserter,
       :nielsen_configuration,
       :nielsen_non_linear_watermark,
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use these settings only when you use Kantar watermarking. Specify the
+    # values that MediaConvert uses to generate and place Kantar watermarks
+    # in your output audio. These settings apply to every output in your
+    # job. In addition to specifying these values, you also need to store
+    # your Kantar credentials in AWS Secrets Manager. For more information,
+    # see
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+    #
+    # @note When making an API call, you may pass KantarWatermarkSettings
+    #   data as a hash:
+    #
+    #       {
+    #         channel_name: "__stringMin1Max20",
+    #         content_reference: "__stringMin1Max50PatternAZAZ09",
+    #         credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #         file_offset: 1.0,
+    #         kantar_license_id: 1,
+    #         kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #         log_destination: "__stringPatternS3",
+    #         metadata_3: "__stringMin1Max50",
+    #         metadata_4: "__stringMin1Max50",
+    #         metadata_5: "__stringMin1Max50",
+    #         metadata_6: "__stringMin1Max50",
+    #         metadata_7: "__stringMin1Max50",
+    #         metadata_8: "__stringMin1Max50",
+    #       }
+    #
+    # @!attribute [rw] channel_name
+    #   Provide an audio channel name from your Kantar audio license.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_reference
+    #   Specify a unique identifier for Kantar to use for this piece of
+    #   content.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_secret_name
+    #   Provide the name of the AWS Secrets Manager secret where your Kantar
+    #   credentials are stored. Note that your MediaConvert service role
+    #   must provide access to this secret. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html.
+    #   For instructions on creating a secret, see
+    #   https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials\_basic.html,
+    #   in the AWS Secrets Manager User Guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_offset
+    #   Optional. Specify an offset, in whole seconds, from the start of
+    #   your output and the beginning of the watermarking. When you don't
+    #   specify an offset, Kantar defaults to zero.
+    #   @return [Float]
+    #
+    # @!attribute [rw] kantar_license_id
+    #   Provide your Kantar license ID number. You should get this number
+    #   from Kantar.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kantar_server_url
+    #   Provide the HTTPS endpoint to the Kantar server. You should get this
+    #   endpoint from Kantar.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination
+    #   Optional. Specify the Amazon S3 bucket where you want MediaConvert
+    #   to store your Kantar watermark XML logs. When you don't specify a
+    #   bucket, MediaConvert doesn't save these logs. Note that your
+    #   MediaConvert service role must provide access to this location. For
+    #   more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_3
+    #   You can optionally use this field to specify the first timestamp
+    #   that Kantar embeds during watermarking. Kantar suggests that you be
+    #   very cautious when using this Kantar feature, and that you use it
+    #   only on channels that are managed specifically for use with this
+    #   feature by your Audience Measurement Operator. For more information
+    #   about this feature, contact Kantar technical support.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_4
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_5
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_6
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_7
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_8
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/KantarWatermarkSettings AWS API Documentation
+    #
+    class KantarWatermarkSettings < Struct.new(
+      :channel_name,
+      :content_reference,
+      :credentials_secret_name,
+      :file_offset,
+      :kantar_license_id,
+      :kantar_server_url,
+      :log_destination,
+      :metadata_3,
+      :metadata_4,
+      :metadata_5,
+      :metadata_6,
+      :metadata_7,
+      :metadata_8)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14505,6 +15589,7 @@ module Aws::MediaConvert
     #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
+    #         max_pcr_interval: 1,
     #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #         pat_interval: 1,
     #         pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -14549,6 +15634,11 @@ module Aws::MediaConvert
     #   transport stream. Multiple values are accepted, and can be entered
     #   in ranges and/or by comma separation.
     #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] max_pcr_interval
+    #   Specify the maximum time, in milliseconds, between Program Clock
+    #   References (PCRs) inserted into the transport stream.
+    #   @return [Integer]
     #
     # @!attribute [rw] nielsen_id_3
     #   If INSERT, Nielsen inaudible tones for media tracking will be
@@ -14636,6 +15726,7 @@ module Aws::MediaConvert
       :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
+      :max_pcr_interval,
       :nielsen_id_3,
       :pat_interval,
       :pcr_control,
@@ -15673,7 +16764,11 @@ module Aws::MediaConvert
     #
     #       {
     #         afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #         profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #         profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #         xavc_profile_settings: {
+    #           duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #           max_anc_data_size: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] afd_signaling
@@ -15699,11 +16794,59 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
     #   @return [String]
     #
+    # @!attribute [rw] xavc_profile_settings
+    #   Specify the XAVC profile settings for MXF outputs when you set your
+    #   MXF profile to XAVC.
+    #   @return [Types::MxfXavcProfileSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MxfSettings AWS API Documentation
     #
     class MxfSettings < Struct.new(
       :afd_signaling,
-      :profile)
+      :profile,
+      :xavc_profile_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify the XAVC profile settings for MXF outputs when you set your
+    # MXF profile to XAVC.
+    #
+    # @note When making an API call, you may pass MxfXavcProfileSettings
+    #   data as a hash:
+    #
+    #       {
+    #         duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #         max_anc_data_size: 1,
+    #       }
+    #
+    # @!attribute [rw] duration_mode
+    #   To create an output that complies with the XAVC file format
+    #   guidelines for interoperability, keep the default value, Drop frames
+    #   for compliance (DROP\_FRAMES\_FOR\_COMPLIANCE). To include all
+    #   frames from your input in this output, keep the default setting,
+    #   Allow any duration (ALLOW\_ANY\_DURATION). The number of frames that
+    #   MediaConvert excludes when you set this to Drop frames for
+    #   compliance depends on the output frame rate and duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_anc_data_size
+    #   Specify a value for this setting only for outputs that you set up
+    #   with one of these two XAVC profiles: XAVC HD Intra CBG
+    #   (XAVC\_HD\_INTRA\_CBG) or XAVC 4K Intra CBG (XAVC\_4K\_INTRA\_CBG).
+    #   Specify the amount of space in each frame that the service reserves
+    #   for ancillary data, such as teletext captions. The default value for
+    #   this setting is 1492 bytes per frame. This should be sufficient to
+    #   prevent overflow unless you have multiple pages of teletext captions
+    #   data. If you have a large amount of teletext data, specify a larger
+    #   number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MxfXavcProfileSettings AWS API Documentation
+    #
+    class MxfXavcProfileSettings < Struct.new(
+      :duration_mode,
+      :max_anc_data_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16217,10 +17360,12 @@ module Aws::MediaConvert
     #               eac_3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                 coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                 coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                 dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                 downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                 dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                 dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                 dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                 lo_ro_center_mix_level: 1.0,
     #                 lo_ro_surround_mix_level: 1.0,
     #                 lt_rt_center_mix_level: 1.0,
@@ -16330,11 +17475,15 @@ module Aws::MediaConvert
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
+    #                 dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                 dds_x_coordinate: 1,
+    #                 dds_y_coordinate: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
+    #                 height: 1,
     #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                 outline_size: 1,
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -16343,6 +17492,7 @@ module Aws::MediaConvert
     #                 shadow_y_offset: 1,
     #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
@@ -16355,6 +17505,9 @@ module Aws::MediaConvert
     #               },
     #               scc_destination_settings: {
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #               },
+    #               srt_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               teletext_destination_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -16442,6 +17595,7 @@ module Aws::MediaConvert
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             max_pcr_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -16481,7 +17635,11 @@ module Aws::MediaConvert
     #           },
     #           mxf_settings: {
     #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #             profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #             profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #             xavc_profile_settings: {
+    #               duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #               max_anc_data_size: 1,
+    #             },
     #           },
     #         },
     #         extension: "__string",
@@ -16533,7 +17691,7 @@ module Aws::MediaConvert
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
-    #             codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #             codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -16667,7 +17825,8 @@ module Aws::MediaConvert
     #               temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
     #             prores_settings: {
-    #               codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #               chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #               codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
@@ -16721,6 +17880,49 @@ module Aws::MediaConvert
     #               quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #               rate_control_mode: "VBR", # accepts VBR
     #             },
+    #             xavc_settings: {
+    #               adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #               softness: 1,
+    #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               xavc_4k_intra_cbg_profile_settings: {
+    #                 xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #               },
+    #               xavc_4k_intra_vbr_profile_settings: {
+    #                 xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #               },
+    #               xavc_4k_profile_settings: {
+    #                 bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                 codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_closed_cadence: 1,
+    #                 hrd_buffer_size: 1,
+    #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                 slices: 1,
+    #               },
+    #               xavc_hd_intra_cbg_profile_settings: {
+    #                 xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #               },
+    #               xavc_hd_profile_settings: {
+    #                 bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_closed_cadence: 1,
+    #                 hrd_buffer_size: 1,
+    #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                 slices: 1,
+    #                 telecine: "NONE", # accepts NONE, HARD
+    #               },
+    #             },
     #           },
     #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #           crop: {
@@ -16762,6 +17964,7 @@ module Aws::MediaConvert
     #                 white_point_y: 1,
     #               },
     #               hue: 1,
+    #               sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #               saturation: 1,
     #             },
     #             deinterlacer: {
@@ -16776,6 +17979,10 @@ module Aws::MediaConvert
     #               },
     #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #               profile: "PROFILE_5", # accepts PROFILE_5
+    #             },
+    #             hdr_10_plus: {
+    #               mastering_monitor_nits: 1,
+    #               target_monitor_nits: 1,
     #             },
     #             image_inserter: {
     #               insertable_images: [
@@ -17007,6 +18214,7 @@ module Aws::MediaConvert
     #               type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #             },
     #             fragment_length: 1,
+    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #             min_buffer_time: 1,
@@ -17016,6 +18224,7 @@ module Aws::MediaConvert
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #             write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -17052,6 +18261,7 @@ module Aws::MediaConvert
     #             },
     #             fragment_length: 1,
     #             hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #             min_buffer_time: 1,
     #             min_final_segment_length: 1.0,
     #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -17127,6 +18337,7 @@ module Aws::MediaConvert
     #               },
     #               type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #             },
+    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #             min_final_segment_length: 1.0,
@@ -17138,6 +18349,7 @@ module Aws::MediaConvert
     #             segment_length: 1,
     #             segments_per_subdirectory: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #             timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #             timed_metadata_id_3_period: 1,
     #             timestamp_delta_milliseconds: 1,
@@ -17226,10 +18438,12 @@ module Aws::MediaConvert
     #                   eac_3_atmos_settings: {
     #                     bitrate: 1,
     #                     bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                     coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                     coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                     dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                     downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                     dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                     dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                     dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                     lo_ro_center_mix_level: 1.0,
     #                     lo_ro_surround_mix_level: 1.0,
     #                     lt_rt_center_mix_level: 1.0,
@@ -17339,11 +18553,15 @@ module Aws::MediaConvert
     #                     alignment: "CENTERED", # accepts CENTERED, LEFT
     #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                     background_opacity: 1,
+    #                     dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                     dds_x_coordinate: 1,
+    #                     dds_y_coordinate: 1,
     #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                     font_opacity: 1,
     #                     font_resolution: 1,
     #                     font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                     font_size: 1,
+    #                     height: 1,
     #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                     outline_size: 1,
     #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -17352,6 +18570,7 @@ module Aws::MediaConvert
     #                     shadow_y_offset: 1,
     #                     subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                     teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                     width: 1,
     #                     x_position: 1,
     #                     y_position: 1,
     #                   },
@@ -17364,6 +18583,9 @@ module Aws::MediaConvert
     #                   },
     #                   scc_destination_settings: {
     #                     framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                   },
+    #                   srt_destination_settings: {
+    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                   },
     #                   teletext_destination_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -17451,6 +18673,7 @@ module Aws::MediaConvert
     #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
+    #                 max_pcr_interval: 1,
     #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                 pat_interval: 1,
     #                 pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -17490,7 +18713,11 @@ module Aws::MediaConvert
     #               },
     #               mxf_settings: {
     #                 afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #                 profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #                 profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #                 xavc_profile_settings: {
+    #                   duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                   max_anc_data_size: 1,
+    #                 },
     #               },
     #             },
     #             extension: "__string",
@@ -17542,7 +18769,7 @@ module Aws::MediaConvert
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                   telecine: "NONE", # accepts NONE, HARD
     #                 },
-    #                 codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #                 codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #                 frame_capture_settings: {
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -17676,7 +18903,8 @@ module Aws::MediaConvert
     #                   temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 },
     #                 prores_settings: {
-    #                   codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                   chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                   codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
@@ -17730,6 +18958,49 @@ module Aws::MediaConvert
     #                   quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                   rate_control_mode: "VBR", # accepts VBR
     #                 },
+    #                 xavc_settings: {
+    #                   adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                   entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                   profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                   softness: 1,
+    #                   spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   xavc_4k_intra_cbg_profile_settings: {
+    #                     xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                   },
+    #                   xavc_4k_intra_vbr_profile_settings: {
+    #                     xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                   },
+    #                   xavc_4k_profile_settings: {
+    #                     bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                     codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                     gop_closed_cadence: 1,
+    #                     hrd_buffer_size: 1,
+    #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                     slices: 1,
+    #                   },
+    #                   xavc_hd_intra_cbg_profile_settings: {
+    #                     xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                   },
+    #                   xavc_hd_profile_settings: {
+    #                     bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                     gop_closed_cadence: 1,
+    #                     hrd_buffer_size: 1,
+    #                     interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                     slices: 1,
+    #                     telecine: "NONE", # accepts NONE, HARD
+    #                   },
+    #                 },
     #               },
     #               color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #               crop: {
@@ -17771,6 +19042,7 @@ module Aws::MediaConvert
     #                     white_point_y: 1,
     #                   },
     #                   hue: 1,
+    #                   sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                   saturation: 1,
     #                 },
     #                 deinterlacer: {
@@ -17785,6 +19057,10 @@ module Aws::MediaConvert
     #                   },
     #                   l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                   profile: "PROFILE_5", # accepts PROFILE_5
+    #                 },
+    #                 hdr_10_plus: {
+    #                   mastering_monitor_nits: 1,
+    #                   target_monitor_nits: 1,
     #                 },
     #                 image_inserter: {
     #                   insertable_images: [
@@ -17941,6 +19217,7 @@ module Aws::MediaConvert
     #             type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #           },
     #           fragment_length: 1,
+    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #           min_buffer_time: 1,
@@ -17950,6 +19227,7 @@ module Aws::MediaConvert
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #           write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -17986,6 +19264,7 @@ module Aws::MediaConvert
     #           },
     #           fragment_length: 1,
     #           hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #           min_buffer_time: 1,
     #           min_final_segment_length: 1.0,
     #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -18061,6 +19340,7 @@ module Aws::MediaConvert
     #             },
     #             type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #           },
+    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #           min_final_segment_length: 1.0,
@@ -18072,6 +19352,7 @@ module Aws::MediaConvert
     #           segment_length: 1,
     #           segments_per_subdirectory: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #           timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #           timed_metadata_id_3_period: 1,
     #           timestamp_delta_milliseconds: 1,
@@ -18339,10 +19620,12 @@ module Aws::MediaConvert
     #               eac_3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                 coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                 coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                 dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                 downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                 dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                 dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                 dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                 lo_ro_center_mix_level: 1.0,
     #                 lo_ro_surround_mix_level: 1.0,
     #                 lt_rt_center_mix_level: 1.0,
@@ -18451,11 +19734,15 @@ module Aws::MediaConvert
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
+    #                 dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                 dds_x_coordinate: 1,
+    #                 dds_y_coordinate: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
+    #                 height: 1,
     #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                 outline_size: 1,
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -18464,6 +19751,7 @@ module Aws::MediaConvert
     #                 shadow_y_offset: 1,
     #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
@@ -18476,6 +19764,9 @@ module Aws::MediaConvert
     #               },
     #               scc_destination_settings: {
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #               },
+    #               srt_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               teletext_destination_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -18563,6 +19854,7 @@ module Aws::MediaConvert
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             max_pcr_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -18602,7 +19894,11 @@ module Aws::MediaConvert
     #           },
     #           mxf_settings: {
     #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #             profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #             profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #             xavc_profile_settings: {
+    #               duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #               max_anc_data_size: 1,
+    #             },
     #           },
     #         },
     #         video_description: {
@@ -18640,7 +19936,7 @@ module Aws::MediaConvert
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
-    #             codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #             codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -18774,7 +20070,8 @@ module Aws::MediaConvert
     #               temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
     #             prores_settings: {
-    #               codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #               chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #               codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
@@ -18828,6 +20125,49 @@ module Aws::MediaConvert
     #               quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #               rate_control_mode: "VBR", # accepts VBR
     #             },
+    #             xavc_settings: {
+    #               adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #               softness: 1,
+    #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               xavc_4k_intra_cbg_profile_settings: {
+    #                 xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #               },
+    #               xavc_4k_intra_vbr_profile_settings: {
+    #                 xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #               },
+    #               xavc_4k_profile_settings: {
+    #                 bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                 codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_closed_cadence: 1,
+    #                 hrd_buffer_size: 1,
+    #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                 slices: 1,
+    #               },
+    #               xavc_hd_intra_cbg_profile_settings: {
+    #                 xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #               },
+    #               xavc_hd_profile_settings: {
+    #                 bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                 gop_closed_cadence: 1,
+    #                 hrd_buffer_size: 1,
+    #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                 slices: 1,
+    #                 telecine: "NONE", # accepts NONE, HARD
+    #               },
+    #             },
     #           },
     #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #           crop: {
@@ -18869,6 +20209,7 @@ module Aws::MediaConvert
     #                 white_point_y: 1,
     #               },
     #               hue: 1,
+    #               sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #               saturation: 1,
     #             },
     #             deinterlacer: {
@@ -18883,6 +20224,10 @@ module Aws::MediaConvert
     #               },
     #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #               profile: "PROFILE_5", # accepts PROFILE_5
+    #             },
+    #             hdr_10_plus: {
+    #               mastering_monitor_nits: 1,
+    #               target_monitor_nits: 1,
     #             },
     #             image_inserter: {
     #               insertable_images: [
@@ -18978,7 +20323,8 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #         chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
@@ -18991,6 +20337,25 @@ module Aws::MediaConvert
     #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #         telecine: "NONE", # accepts NONE, HARD
     #       }
+    #
+    # @!attribute [rw] chroma_sampling
+    #   This setting applies only to ProRes 4444 and ProRes 4444 XQ outputs
+    #   that you create from inputs that use 4:4:4 chroma sampling. Set
+    #   Preserve 4:4:4 sampling (PRESERVE\_444\_SAMPLING) to allow outputs
+    #   to also use 4:4:4 chroma sampling. You must specify a value for this
+    #   setting when your output codec profile supports 4:4:4 chroma
+    #   sampling. Related Settings: When you set Chroma sampling to Preserve
+    #   4:4:4 sampling (PRESERVE\_444\_SAMPLING), you must choose an output
+    #   codec profile that supports 4:4:4 chroma sampling. These values for
+    #   Profile (CodecProfile) support 4:4:4 chroma sampling: Apple ProRes
+    #   4444 (APPLE\_PRORES\_4444) or Apple ProRes 4444 XQ
+    #   (APPLE\_PRORES\_4444\_XQ). When you set Chroma sampling to Preserve
+    #   4:4:4 sampling, you must disable all video preprocessors except for
+    #   Nexguard file marker (PartnerWatermarking). When you set Chroma
+    #   sampling to Preserve 4:4:4 sampling and use framerate conversion,
+    #   you must set Frame rate conversion algorithm
+    #   (FramerateConversionAlgorithm) to Drop duplicate (DUPLICATE\_DROP).
+    #   @return [String]
     #
     # @!attribute [rw] codec_profile
     #   Use Profile (ProResCodecProfile) to specify the type of Apple ProRes
@@ -19136,6 +20501,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProresSettings AWS API Documentation
     #
     class ProresSettings < Struct.new(
+      :chroma_sampling,
       :codec_profile,
       :framerate_control,
       :framerate_conversion_algorithm,
@@ -19736,6 +21102,30 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # SRT Destination Settings
+    #
+    # @note When making an API call, you may pass SrtDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] style_passthrough
+    #   Choose Enabled (ENABLED) to have MediaConvert use the font style,
+    #   color, and position information from the captions source in the
+    #   input. Keep the default value, Disabled (DISABLED), for simplified
+    #   output captions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SrtDestinationSettings AWS API Documentation
+    #
+    class SrtDestinationSettings < Struct.new(
+      :style_passthrough)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use these settings to set up encryption with a static key provider.
     #
     # @note When making an API call, you may pass StaticKeyProvider
@@ -20197,6 +21587,10 @@ module Aws::MediaConvert
     #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #             },
     #           },
+    #           extended_data_services: {
+    #             copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #             vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           },
     #           inputs: [
     #             {
     #               audio_selector_groups: {
@@ -20208,7 +21602,12 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #                   hls_rendition_group_settings: {
+    #                     rendition_group_id: "__string",
+    #                     rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                     rendition_name: "__string",
+    #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -20225,7 +21624,7 @@ module Aws::MediaConvert
     #                     channels_in: 1,
     #                     channels_out: 1,
     #                   },
-    #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
+    #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #                   tracks: [1],
     #                 },
     #               },
@@ -20254,7 +21653,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                       },
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
@@ -20263,6 +21662,11 @@ module Aws::MediaConvert
     #                     },
     #                     track_source_settings: {
     #                       track_number: 1,
+    #                     },
+    #                     webvtt_hls_source_settings: {
+    #                       rendition_group_id: "__string",
+    #                       rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #                       rendition_name: "__string",
     #                     },
     #                   },
     #                 },
@@ -20332,9 +21736,25 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #                 sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #               },
     #             },
     #           ],
+    #           kantar_watermark: {
+    #             channel_name: "__stringMin1Max20",
+    #             content_reference: "__stringMin1Max50PatternAZAZ09",
+    #             credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #             file_offset: 1.0,
+    #             kantar_license_id: 1,
+    #             kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #             log_destination: "__stringPatternS3",
+    #             metadata_3: "__stringMin1Max50",
+    #             metadata_4: "__stringMin1Max50",
+    #             metadata_5: "__stringMin1Max50",
+    #             metadata_6: "__stringMin1Max50",
+    #             metadata_7: "__stringMin1Max50",
+    #             metadata_8: "__stringMin1Max50",
+    #           },
     #           motion_image_inserter: {
     #             framerate: {
     #               framerate_denominator: 1,
@@ -20420,6 +21840,7 @@ module Aws::MediaConvert
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
     #                   fragment_length: 1,
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
@@ -20429,6 +21850,7 @@ module Aws::MediaConvert
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -20465,6 +21887,7 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -20540,6 +21963,7 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_final_segment_length: 1.0,
@@ -20551,6 +21975,7 @@ module Aws::MediaConvert
     #                   segment_length: 1,
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
@@ -20639,10 +22064,12 @@ module Aws::MediaConvert
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                           coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                           coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                           dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                           downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                           dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                           dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                           dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                           lo_ro_center_mix_level: 1.0,
     #                           lo_ro_surround_mix_level: 1.0,
     #                           lt_rt_center_mix_level: 1.0,
@@ -20752,11 +22179,15 @@ module Aws::MediaConvert
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
+    #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                           dds_x_coordinate: 1,
+    #                           dds_y_coordinate: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
+    #                           height: 1,
     #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                           outline_size: 1,
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -20765,6 +22196,7 @@ module Aws::MediaConvert
     #                           shadow_y_offset: 1,
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
@@ -20777,6 +22209,9 @@ module Aws::MediaConvert
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         },
+    #                         srt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -20864,6 +22299,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -20903,7 +22339,11 @@ module Aws::MediaConvert
     #                     },
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #                       xavc_profile_settings: {
+    #                         duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                         max_anc_data_size: 1,
+    #                       },
     #                     },
     #                   },
     #                   extension: "__string",
@@ -20955,7 +22395,7 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
-    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -21089,7 +22529,8 @@ module Aws::MediaConvert
     #                         temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
     #                       prores_settings: {
-    #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                         chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
@@ -21143,6 +22584,49 @@ module Aws::MediaConvert
     #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                         rate_control_mode: "VBR", # accepts VBR
     #                       },
+    #                       xavc_settings: {
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         softness: 1,
+    #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                         xavc_4k_intra_cbg_profile_settings: {
+    #                           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                         },
+    #                         xavc_4k_intra_vbr_profile_settings: {
+    #                           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                         },
+    #                         xavc_4k_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                           codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                           slices: 1,
+    #                         },
+    #                         xavc_hd_intra_cbg_profile_settings: {
+    #                           xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         },
+    #                         xavc_hd_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                           slices: 1,
+    #                           telecine: "NONE", # accepts NONE, HARD
+    #                         },
+    #                       },
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
@@ -21184,6 +22668,7 @@ module Aws::MediaConvert
     #                           white_point_y: 1,
     #                         },
     #                         hue: 1,
+    #                         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                         saturation: 1,
     #                       },
     #                       deinterlacer: {
@@ -21198,6 +22683,10 @@ module Aws::MediaConvert
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                       },
+    #                       hdr_10_plus: {
+    #                         mastering_monitor_nits: 1,
+    #                         target_monitor_nits: 1,
     #                       },
     #                       image_inserter: {
     #                         insertable_images: [
@@ -21412,10 +22901,12 @@ module Aws::MediaConvert
     #                 eac_3_atmos_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
-    #                   coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                   coding_mode: "CODING_MODE_AUTO", # accepts CODING_MODE_AUTO, CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
     #                   dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                   downmix_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                   dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
     #                   dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                   dynamic_range_control: "SPECIFIED", # accepts SPECIFIED, INITIALIZE_FROM_SOURCE
     #                   lo_ro_center_mix_level: 1.0,
     #                   lo_ro_surround_mix_level: 1.0,
     #                   lt_rt_center_mix_level: 1.0,
@@ -21524,11 +23015,15 @@ module Aws::MediaConvert
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
+    #                   dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                   dds_x_coordinate: 1,
+    #                   dds_y_coordinate: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
+    #                   height: 1,
     #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                   outline_size: 1,
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -21537,6 +23032,7 @@ module Aws::MediaConvert
     #                   shadow_y_offset: 1,
     #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
@@ -21549,6 +23045,9 @@ module Aws::MediaConvert
     #                 },
     #                 scc_destination_settings: {
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                 },
+    #                 srt_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 teletext_destination_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -21636,6 +23135,7 @@ module Aws::MediaConvert
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               max_pcr_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -21675,7 +23175,11 @@ module Aws::MediaConvert
     #             },
     #             mxf_settings: {
     #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #               profile: "D_10", # accepts D_10, XDCAM, OP1A
+    #               profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #               xavc_profile_settings: {
+    #                 duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
+    #                 max_anc_data_size: 1,
+    #               },
     #             },
     #           },
     #           video_description: {
@@ -21713,7 +23217,7 @@ module Aws::MediaConvert
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
-    #               codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #               codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -21847,7 +23351,8 @@ module Aws::MediaConvert
     #                 temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
     #               prores_settings: {
-    #                 codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #                 chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #                 codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
@@ -21901,6 +23406,49 @@ module Aws::MediaConvert
     #                 quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #                 rate_control_mode: "VBR", # accepts VBR
     #               },
+    #               xavc_settings: {
+    #                 adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                 softness: 1,
+    #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 xavc_4k_intra_cbg_profile_settings: {
+    #                   xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                 },
+    #                 xavc_4k_intra_vbr_profile_settings: {
+    #                   xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #                 },
+    #                 xavc_4k_profile_settings: {
+    #                   bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #                   codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_closed_cadence: 1,
+    #                   hrd_buffer_size: 1,
+    #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                   slices: 1,
+    #                 },
+    #                 xavc_hd_intra_cbg_profile_settings: {
+    #                   xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                 },
+    #                 xavc_hd_profile_settings: {
+    #                   bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #                   gop_closed_cadence: 1,
+    #                   hrd_buffer_size: 1,
+    #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #                   slices: 1,
+    #                   telecine: "NONE", # accepts NONE, HARD
+    #                 },
+    #               },
     #             },
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #             crop: {
@@ -21942,6 +23490,7 @@ module Aws::MediaConvert
     #                   white_point_y: 1,
     #                 },
     #                 hue: 1,
+    #                 sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                 saturation: 1,
     #               },
     #               deinterlacer: {
@@ -21956,6 +23505,10 @@ module Aws::MediaConvert
     #                 },
     #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #                 profile: "PROFILE_5", # accepts PROFILE_5
+    #               },
+    #               hdr_10_plus: {
+    #                 mastering_monitor_nits: 1,
+    #                 target_monitor_nits: 1,
     #               },
     #               image_inserter: {
     #                 insertable_images: [
@@ -22272,7 +23825,7 @@ module Aws::MediaConvert
     # AvcIntraSettings * FRAME\_CAPTURE, FrameCaptureSettings * H\_264,
     # H264Settings * H\_265, H265Settings * MPEG2, Mpeg2Settings *
     # PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9,
-    # Vp9Settings
+    # Vp9Settings * XAVC, XavcSettings
     #
     # @note When making an API call, you may pass VideoCodecSettings
     #   data as a hash:
@@ -22309,7 +23862,7 @@ module Aws::MediaConvert
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #           telecine: "NONE", # accepts NONE, HARD
     #         },
-    #         codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #         codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #         frame_capture_settings: {
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
@@ -22443,7 +23996,8 @@ module Aws::MediaConvert
     #           temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         },
     #         prores_settings: {
-    #           codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #           chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #           codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
@@ -22496,6 +24050,49 @@ module Aws::MediaConvert
     #           par_numerator: 1,
     #           quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #           rate_control_mode: "VBR", # accepts VBR
+    #         },
+    #         xavc_settings: {
+    #           adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #           entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #           profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #           softness: 1,
+    #           spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           xavc_4k_intra_cbg_profile_settings: {
+    #             xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #           },
+    #           xavc_4k_intra_vbr_profile_settings: {
+    #             xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #           },
+    #           xavc_4k_profile_settings: {
+    #             bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #             codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #             gop_closed_cadence: 1,
+    #             hrd_buffer_size: 1,
+    #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #             slices: 1,
+    #           },
+    #           xavc_hd_intra_cbg_profile_settings: {
+    #             xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #           },
+    #           xavc_hd_profile_settings: {
+    #             bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #             gop_closed_cadence: 1,
+    #             hrd_buffer_size: 1,
+    #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #             slices: 1,
+    #             telecine: "NONE", # accepts NONE, HARD
+    #           },
     #         },
     #       }
     #
@@ -22557,6 +24154,11 @@ module Aws::MediaConvert
     #   (VideoDescription)>(CodecSettings) to the value VP9.
     #   @return [Types::Vp9Settings]
     #
+    # @!attribute [rw] xavc_settings
+    #   Required when you set (Codec) under
+    #   (VideoDescription)>(CodecSettings) to the value XAVC.
+    #   @return [Types::XavcSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoCodecSettings AWS API Documentation
     #
     class VideoCodecSettings < Struct.new(
@@ -22570,7 +24172,8 @@ module Aws::MediaConvert
       :prores_settings,
       :vc_3_settings,
       :vp_8_settings,
-      :vp_9_settings)
+      :vp_9_settings,
+      :xavc_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22618,7 +24221,7 @@ module Aws::MediaConvert
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #           },
-    #           codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
+    #           codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9, XAVC
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -22752,7 +24355,8 @@ module Aws::MediaConvert
     #             temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           prores_settings: {
-    #             codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
+    #             chroma_sampling: "PRESERVE_444_SAMPLING", # accepts PRESERVE_444_SAMPLING, SUBSAMPLE_TO_422
+    #             codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY, APPLE_PRORES_4444, APPLE_PRORES_4444_XQ
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
@@ -22806,6 +24410,49 @@ module Aws::MediaConvert
     #             quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
     #             rate_control_mode: "VBR", # accepts VBR
     #           },
+    #           xavc_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #             softness: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             xavc_4k_intra_cbg_profile_settings: {
+    #               xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #             },
+    #             xavc_4k_intra_vbr_profile_settings: {
+    #               xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #             },
+    #             xavc_4k_profile_settings: {
+    #               bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #               codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #               gop_closed_cadence: 1,
+    #               hrd_buffer_size: 1,
+    #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #               slices: 1,
+    #             },
+    #             xavc_hd_intra_cbg_profile_settings: {
+    #               xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #             },
+    #             xavc_hd_profile_settings: {
+    #               bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #               gop_closed_cadence: 1,
+    #               hrd_buffer_size: 1,
+    #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #               slices: 1,
+    #               telecine: "NONE", # accepts NONE, HARD
+    #             },
+    #           },
     #         },
     #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #         crop: {
@@ -22847,6 +24494,7 @@ module Aws::MediaConvert
     #               white_point_y: 1,
     #             },
     #             hue: 1,
+    #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #             saturation: 1,
     #           },
     #           deinterlacer: {
@@ -22861,6 +24509,10 @@ module Aws::MediaConvert
     #             },
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #             profile: "PROFILE_5", # accepts PROFILE_5
+    #           },
+    #           hdr_10_plus: {
+    #             mastering_monitor_nits: 1,
+    #             target_monitor_nits: 1,
     #           },
     #           image_inserter: {
     #             insertable_images: [
@@ -22939,7 +24591,7 @@ module Aws::MediaConvert
     #   AvcIntraSettings * FRAME\_CAPTURE, FrameCaptureSettings * H\_264,
     #   H264Settings * H\_265, H265Settings * MPEG2, Mpeg2Settings *
     #   PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings *
-    #   VP9, Vp9Settings
+    #   VP9, Vp9Settings * XAVC, XavcSettings
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] color_metadata
@@ -23108,6 +24760,7 @@ module Aws::MediaConvert
     #             white_point_y: 1,
     #           },
     #           hue: 1,
+    #           sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #           saturation: 1,
     #         },
     #         deinterlacer: {
@@ -23122,6 +24775,10 @@ module Aws::MediaConvert
     #           },
     #           l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #           profile: "PROFILE_5", # accepts PROFILE_5
+    #         },
+    #         hdr_10_plus: {
+    #           mastering_monitor_nits: 1,
+    #           target_monitor_nits: 1,
     #         },
     #         image_inserter: {
     #           insertable_images: [
@@ -23190,6 +24847,11 @@ module Aws::MediaConvert
     #   output.
     #   @return [Types::DolbyVision]
     #
+    # @!attribute [rw] hdr_10_plus
+    #   Enable HDR10+ analyis and metadata injection. Compatible with HEVC
+    #   only.
+    #   @return [Types::Hdr10Plus]
+    #
     # @!attribute [rw] image_inserter
     #   Enable the Image inserter (ImageInserter) feature to include a
     #   graphic overlay on your video. Enable or disable this feature for
@@ -23219,6 +24881,7 @@ module Aws::MediaConvert
       :color_corrector,
       :deinterlacer,
       :dolby_vision,
+      :hdr_10_plus,
       :image_inserter,
       :noise_reducer,
       :partner_watermarking,
@@ -23254,6 +24917,7 @@ module Aws::MediaConvert
     #         pid: 1,
     #         program_number: 1,
     #         rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #         sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #       }
     #
     # @!attribute [rw] alpha_behavior
@@ -23338,6 +25002,21 @@ module Aws::MediaConvert
     #   service doesn't pass through rotation metadata.
     #   @return [String]
     #
+    # @!attribute [rw] sample_range
+    #   Use this setting when your input video codec is AVC-Intra. Ignore
+    #   this setting for all other inputs. If the sample range metadata in
+    #   your input video is accurate, or if you don't know about sample
+    #   range, keep the default value, Follow (FOLLOW), for this setting.
+    #   When you do, the service automatically detects your input sample
+    #   range. If your input video has metadata indicating the wrong sample
+    #   range, specify the accurate sample range here. When you do,
+    #   MediaConvert ignores any sample range information in the input
+    #   metadata. Regardless of whether MediaConvert uses the input sample
+    #   range or the sample range that you specify, MediaConvert uses the
+    #   sample range for transcoding and also writes it to the output
+    #   metadata.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
     #
     class VideoSelector < Struct.new(
@@ -23347,7 +25026,8 @@ module Aws::MediaConvert
       :hdr_10_metadata,
       :pid,
       :program_number,
-      :rotate)
+      :rotate,
+      :sample_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23762,6 +25442,603 @@ module Aws::MediaConvert
     #
     class WebvttDestinationSettings < Struct.new(
       :style_passthrough)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings specific to WebVTT sources in HLS alternative rendition
+    # group. Specify the properties (renditionGroupId, renditionName or
+    # renditionLanguageCode) to identify the unique subtitle track among the
+    # alternative rendition groups present in the HLS manifest. If no unique
+    # track is found, or multiple tracks match the specified properties, the
+    # job fails. If there is only one subtitle track in the rendition group,
+    # the settings can be left empty and the default subtitle track will be
+    # chosen. If your caption source is a sidecar file, use
+    # FileSourceSettings instead of WebvttHlsSourceSettings.
+    #
+    # @note When making an API call, you may pass WebvttHlsSourceSettings
+    #   data as a hash:
+    #
+    #       {
+    #         rendition_group_id: "__string",
+    #         rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
+    #         rendition_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] rendition_group_id
+    #   Optional. Specify alternative group ID
+    #   @return [String]
+    #
+    # @!attribute [rw] rendition_language_code
+    #   Optional. Specify ISO 639-2 or ISO 639-3 code in the language
+    #   property
+    #   @return [String]
+    #
+    # @!attribute [rw] rendition_name
+    #   Optional. Specify media name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/WebvttHlsSourceSettings AWS API Documentation
+    #
+    class WebvttHlsSourceSettings < Struct.new(
+      :rendition_group_id,
+      :rendition_language_code,
+      :rendition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set (Profile) under
+    # (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    # XAVC\_4K\_INTRA\_CBG.
+    #
+    # @note When making an API call, you may pass Xavc4kIntraCbgProfileSettings
+    #   data as a hash:
+    #
+    #       {
+    #         xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #       }
+    #
+    # @!attribute [rw] xavc_class
+    #   Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your
+    #   output. Outputs of the same class have similar image quality over
+    #   the operating points that are valid for that class.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Xavc4kIntraCbgProfileSettings AWS API Documentation
+    #
+    class Xavc4kIntraCbgProfileSettings < Struct.new(
+      :xavc_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set (Profile) under
+    # (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    # XAVC\_4K\_INTRA\_VBR.
+    #
+    # @note When making an API call, you may pass Xavc4kIntraVbrProfileSettings
+    #   data as a hash:
+    #
+    #       {
+    #         xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #       }
+    #
+    # @!attribute [rw] xavc_class
+    #   Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your
+    #   output. Outputs of the same class have similar image quality over
+    #   the operating points that are valid for that class.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Xavc4kIntraVbrProfileSettings AWS API Documentation
+    #
+    class Xavc4kIntraVbrProfileSettings < Struct.new(
+      :xavc_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set (Profile) under
+    # (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    # XAVC\_4K.
+    #
+    # @note When making an API call, you may pass Xavc4kProfileSettings
+    #   data as a hash:
+    #
+    #       {
+    #         bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #         codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #         gop_closed_cadence: 1,
+    #         hrd_buffer_size: 1,
+    #         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #         slices: 1,
+    #       }
+    #
+    # @!attribute [rw] bitrate_class
+    #   Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of
+    #   your output. Outputs of the same class have similar image quality
+    #   over the operating points that are valid for that class.
+    #   @return [String]
+    #
+    # @!attribute [rw] codec_profile
+    #   Specify the codec profile for this output. Choose High, 8-bit, 4:2:0
+    #   (HIGH) or High, 10-bit, 4:2:2 (HIGH\_422). These profiles are
+    #   specified in ITU-T H.264.
+    #   @return [String]
+    #
+    # @!attribute [rw] flicker_adaptive_quantization
+    #   The best way to set up adaptive quantization is to keep the default
+    #   value, Auto (AUTO), for the setting Adaptive quantization
+    #   (XavcAdaptiveQuantization). When you do so, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. Include this setting in your JSON job specification only
+    #   when you choose to change the default value for Adaptive
+    #   quantization. Enable this setting to have the encoder reduce I-frame
+    #   pop. I-frame pop appears as a visual flicker that can arise when the
+    #   encoder saves bits by copying some macroblocks many times from frame
+    #   to frame, and then refreshes them at the I-frame. When you enable
+    #   this setting, the encoder updates these macroblocks slightly more
+    #   often to smooth out the flicker. This setting is disabled by
+    #   default. Related setting: In addition to enabling this setting, you
+    #   must also set Adaptive quantization (adaptiveQuantization) to a
+    #   value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization
+    #   to adjust the degree of smoothing that Flicker adaptive quantization
+    #   provides.
+    #   @return [String]
+    #
+    # @!attribute [rw] gop_b_reference
+    #   Specify whether the encoder uses B-frames as reference frames for
+    #   other pictures in the same GOP. Choose Allow (ENABLED) to allow the
+    #   encoder to use B-frames as reference frames. Choose Don't allow
+    #   (DISABLED) to prevent the encoder from using B-frames as reference
+    #   frames.
+    #   @return [String]
+    #
+    # @!attribute [rw] gop_closed_cadence
+    #   Frequency of closed GOPs. In streaming applications, it is
+    #   recommended that this be set to 1 so a decoder joining mid-stream
+    #   will receive an IDR frame as quickly as possible. Setting this value
+    #   to 0 will break output segmenting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hrd_buffer_size
+    #   Specify the size of the buffer that MediaConvert uses in the HRD
+    #   buffer model for this output. Specify this value in bits; for
+    #   example, enter five megabits as 5000000. When you don't set this
+    #   value, or you set it to zero, MediaConvert calculates the default by
+    #   doubling the bitrate of this output point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quality_tuning_level
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how you want to trade off encoding speed for output video quality.
+    #   The default behavior is faster, lower quality, single-pass encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] slices
+    #   Number of slices per picture. Must be less than or equal to the
+    #   number of macroblock rows for progressive pictures, and less than or
+    #   equal to half the number of macroblock rows for interlaced pictures.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Xavc4kProfileSettings AWS API Documentation
+    #
+    class Xavc4kProfileSettings < Struct.new(
+      :bitrate_class,
+      :codec_profile,
+      :flicker_adaptive_quantization,
+      :gop_b_reference,
+      :gop_closed_cadence,
+      :hrd_buffer_size,
+      :quality_tuning_level,
+      :slices)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set (Profile) under
+    # (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    # XAVC\_HD\_INTRA\_CBG.
+    #
+    # @note When making an API call, you may pass XavcHdIntraCbgProfileSettings
+    #   data as a hash:
+    #
+    #       {
+    #         xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #       }
+    #
+    # @!attribute [rw] xavc_class
+    #   Specify the XAVC Intra HD (CBG) Class to set the bitrate of your
+    #   output. Outputs of the same class have similar image quality over
+    #   the operating points that are valid for that class.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/XavcHdIntraCbgProfileSettings AWS API Documentation
+    #
+    class XavcHdIntraCbgProfileSettings < Struct.new(
+      :xavc_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set (Profile) under
+    # (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    # XAVC\_HD.
+    #
+    # @note When making an API call, you may pass XavcHdProfileSettings
+    #   data as a hash:
+    #
+    #       {
+    #         bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #         gop_closed_cadence: 1,
+    #         hrd_buffer_size: 1,
+    #         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #         slices: 1,
+    #         telecine: "NONE", # accepts NONE, HARD
+    #       }
+    #
+    # @!attribute [rw] bitrate_class
+    #   Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of
+    #   your output. Outputs of the same class have similar image quality
+    #   over the operating points that are valid for that class.
+    #   @return [String]
+    #
+    # @!attribute [rw] flicker_adaptive_quantization
+    #   The best way to set up adaptive quantization is to keep the default
+    #   value, Auto (AUTO), for the setting Adaptive quantization
+    #   (XavcAdaptiveQuantization). When you do so, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. Include this setting in your JSON job specification only
+    #   when you choose to change the default value for Adaptive
+    #   quantization. Enable this setting to have the encoder reduce I-frame
+    #   pop. I-frame pop appears as a visual flicker that can arise when the
+    #   encoder saves bits by copying some macroblocks many times from frame
+    #   to frame, and then refreshes them at the I-frame. When you enable
+    #   this setting, the encoder updates these macroblocks slightly more
+    #   often to smooth out the flicker. This setting is disabled by
+    #   default. Related setting: In addition to enabling this setting, you
+    #   must also set Adaptive quantization (adaptiveQuantization) to a
+    #   value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization
+    #   to adjust the degree of smoothing that Flicker adaptive quantization
+    #   provides.
+    #   @return [String]
+    #
+    # @!attribute [rw] gop_b_reference
+    #   Specify whether the encoder uses B-frames as reference frames for
+    #   other pictures in the same GOP. Choose Allow (ENABLED) to allow the
+    #   encoder to use B-frames as reference frames. Choose Don't allow
+    #   (DISABLED) to prevent the encoder from using B-frames as reference
+    #   frames.
+    #   @return [String]
+    #
+    # @!attribute [rw] gop_closed_cadence
+    #   Frequency of closed GOPs. In streaming applications, it is
+    #   recommended that this be set to 1 so a decoder joining mid-stream
+    #   will receive an IDR frame as quickly as possible. Setting this value
+    #   to 0 will break output segmenting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hrd_buffer_size
+    #   Specify the size of the buffer that MediaConvert uses in the HRD
+    #   buffer model for this output. Specify this value in bits; for
+    #   example, enter five megabits as 5000000. When you don't set this
+    #   value, or you set it to zero, MediaConvert calculates the default by
+    #   doubling the bitrate of this output point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interlace_mode
+    #   Choose the scan line type for the output. Keep the default value,
+    #   Progressive (PROGRESSIVE) to create a progressive output, regardless
+    #   of the scan type of your input. Use Top field first (TOP\_FIELD) or
+    #   Bottom field first (BOTTOM\_FIELD) to create an output that's
+    #   interlaced with the same field polarity throughout. Use Follow,
+    #   default top (FOLLOW\_TOP\_FIELD) or Follow, default bottom
+    #   (FOLLOW\_BOTTOM\_FIELD) to produce outputs with the same field
+    #   polarity as the source. For jobs that have multiple inputs, the
+    #   output field polarity might change over the course of the output.
+    #   Follow behavior depends on the input scan type. If the source is
+    #   interlaced, the output will be interlaced with the same polarity as
+    #   the source. If the source is progressive, the output will be
+    #   interlaced with top field bottom field first, depending on which of
+    #   the Follow options you choose.
+    #   @return [String]
+    #
+    # @!attribute [rw] quality_tuning_level
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how you want to trade off encoding speed for output video quality.
+    #   The default behavior is faster, lower quality, single-pass encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] slices
+    #   Number of slices per picture. Must be less than or equal to the
+    #   number of macroblock rows for progressive pictures, and less than or
+    #   equal to half the number of macroblock rows for interlaced pictures.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] telecine
+    #   Ignore this setting unless you set Frame rate (framerateNumerator
+    #   divided by framerateDenominator) to 29.970. If your input framerate
+    #   is 23.976, choose Hard (HARD). Otherwise, keep the default value
+    #   None (NONE). For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/XavcHdProfileSettings AWS API Documentation
+    #
+    class XavcHdProfileSettings < Struct.new(
+      :bitrate_class,
+      :flicker_adaptive_quantization,
+      :gop_b_reference,
+      :gop_closed_cadence,
+      :hrd_buffer_size,
+      :interlace_mode,
+      :quality_tuning_level,
+      :slices,
+      :telecine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
+    # to the value XAVC.
+    #
+    # @note When making an API call, you may pass XavcSettings
+    #   data as a hash:
+    #
+    #       {
+    #         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #         entropy_encoding: "AUTO", # accepts AUTO, CABAC, CAVLC
+    #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #         profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
+    #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #         softness: 1,
+    #         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #         temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #         xavc_4k_intra_cbg_profile_settings: {
+    #           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #         },
+    #         xavc_4k_intra_vbr_profile_settings: {
+    #           xavc_class: "CLASS_100", # accepts CLASS_100, CLASS_300, CLASS_480
+    #         },
+    #         xavc_4k_profile_settings: {
+    #           bitrate_class: "BITRATE_CLASS_100", # accepts BITRATE_CLASS_100, BITRATE_CLASS_140, BITRATE_CLASS_200
+    #           codec_profile: "HIGH", # accepts HIGH, HIGH_422
+    #           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #           gop_closed_cadence: 1,
+    #           hrd_buffer_size: 1,
+    #           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #           slices: 1,
+    #         },
+    #         xavc_hd_intra_cbg_profile_settings: {
+    #           xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #         },
+    #         xavc_hd_profile_settings: {
+    #           bitrate_class: "BITRATE_CLASS_25", # accepts BITRATE_CLASS_25, BITRATE_CLASS_35, BITRATE_CLASS_50
+    #           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
+    #           gop_closed_cadence: 1,
+    #           hrd_buffer_size: 1,
+    #           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
+    #           slices: 1,
+    #           telecine: "NONE", # accepts NONE, HARD
+    #         },
+    #       }
+    #
+    # @!attribute [rw] adaptive_quantization
+    #   Keep the default value, Auto (AUTO), for this setting to have
+    #   MediaConvert automatically apply the best types of quantization for
+    #   your video content. When you want to apply your quantization
+    #   settings manually, you must set Adaptive quantization
+    #   (adaptiveQuantization) to a value other than Auto (AUTO). Use this
+    #   setting to specify the strength of any adaptive quantization filters
+    #   that you enable. If you don't want MediaConvert to do any adaptive
+    #   quantization in this transcode, set Adaptive quantization to Off
+    #   (OFF). Related settings: The value that you choose here applies to
+    #   the following settings: Flicker adaptive quantization
+    #   (flickerAdaptiveQuantization), Spatial adaptive quantization
+    #   (spatialAdaptiveQuantization), and Temporal adaptive quantization
+    #   (temporalAdaptiveQuantization).
+    #   @return [String]
+    #
+    # @!attribute [rw] entropy_encoding
+    #   Optional. Choose a specific entropy encoding mode only when you want
+    #   to override XAVC recommendations. If you choose the value auto,
+    #   MediaConvert uses the mode that the XAVC file format specifies given
+    #   this output's operating point.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_control
+    #   If you are using the console, use the Frame rate setting to specify
+    #   the frame rate for this output. If you want to keep the same frame
+    #   rate as the input video, choose Follow source. If you want to do
+    #   frame rate conversion, choose a frame rate from the dropdown list.
+    #   The framerates shown in the dropdown list are decimal approximations
+    #   of fractions. If you are creating your transcoding job specification
+    #   as a JSON file without the console, use FramerateControl to specify
+    #   which value the service uses for the frame rate for this output.
+    #   Choose INITIALIZE\_FROM\_SOURCE if you want the service to use the
+    #   frame rate from the input. Choose SPECIFIED if you want the service
+    #   to use the frame rate that you specify in the settings
+    #   FramerateNumerator and FramerateDenominator.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_conversion_algorithm
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Frame rate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   Specify the XAVC profile for this output. For more information, see
+    #   the Sony documentation at https://www.xavc-info.org/. Note that
+    #   MediaConvert doesn't support the interlaced video XAVC operating
+    #   points for XAVC\_HD\_INTRA\_CBG. To create an interlaced XAVC
+    #   output, choose the profile XAVC\_HD.
+    #   @return [String]
+    #
+    # @!attribute [rw] slow_pal
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output
+    #   by relabeling the video frames and resampling your audio. Note that
+    #   enabling this setting will slightly reduce the duration of your
+    #   video. Related settings: You must also set Frame rate to 25. In your
+    #   JSON job specification, set (framerateControl) to (SPECIFIED),
+    #   (framerateNumerator) to 25 and (framerateDenominator) to 1.
+    #   @return [String]
+    #
+    # @!attribute [rw] softness
+    #   Ignore this setting unless your downstream workflow requires that
+    #   you specify it explicitly. Otherwise, we recommend that you adjust
+    #   the softness of your output by using a lower value for the setting
+    #   Sharpness (sharpness) or by enabling a noise reducer filter
+    #   (noiseReducerFilter). The Softness (softness) setting specifies the
+    #   quantization matrices that the encoder uses. Keep the default value,
+    #   0, for flat quantization. Choose the value 1 or 16 to use the
+    #   default JVT softening quantization matricies from the H.264
+    #   specification. Choose a value from 17 to 128 to use planar
+    #   interpolation. Increasing values from 17 to 128 result in increasing
+    #   reduction of high-frequency data. The value 128 results in the
+    #   softest video.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spatial_adaptive_quantization
+    #   The best way to set up adaptive quantization is to keep the default
+    #   value, Auto (AUTO), for the setting Adaptive quantization
+    #   (adaptiveQuantization). When you do so, MediaConvert automatically
+    #   applies the best types of quantization for your video content.
+    #   Include this setting in your JSON job specification only when you
+    #   choose to change the default value for Adaptive quantization. For
+    #   this setting, keep the default value, Enabled (ENABLED), to adjust
+    #   quantization within each frame based on spatial variation of content
+    #   complexity. When you enable this feature, the encoder uses fewer
+    #   bits on areas that can sustain more distortion with no noticeable
+    #   visual degradation and uses more bits on areas where any small
+    #   distortion will be noticeable. For example, complex textured blocks
+    #   are encoded with fewer bits and smooth textured blocks are encoded
+    #   with more bits. Enabling this feature will almost always improve
+    #   your video quality. Note, though, that this feature doesn't take
+    #   into account where the viewer's attention is likely to be. If
+    #   viewers are likely to be focusing their attention on a part of the
+    #   screen with a lot of complex texture, you might choose to disable
+    #   this feature. Related setting: When you enable spatial adaptive
+    #   quantization, set the value for Adaptive quantization
+    #   (adaptiveQuantization) depending on your content. For homogeneous
+    #   content, such as cartoons and video games, set it to Low. For
+    #   content with a wider variety of textures, set it to High or Higher.
+    #   @return [String]
+    #
+    # @!attribute [rw] temporal_adaptive_quantization
+    #   The best way to set up adaptive quantization is to keep the default
+    #   value, Auto (AUTO), for the setting Adaptive quantization
+    #   (adaptiveQuantization). When you do so, MediaConvert automatically
+    #   applies the best types of quantization for your video content.
+    #   Include this setting in your JSON job specification only when you
+    #   choose to change the default value for Adaptive quantization. For
+    #   this setting, keep the default value, Enabled (ENABLED), to adjust
+    #   quantization within each frame based on temporal variation of
+    #   content complexity. When you enable this feature, the encoder uses
+    #   fewer bits on areas of the frame that aren't moving and uses more
+    #   bits on complex objects with sharp edges that move a lot. For
+    #   example, this feature improves the readability of text tickers on
+    #   newscasts and scoreboards on sports matches. Enabling this feature
+    #   will almost always improve your video quality. Note, though, that
+    #   this feature doesn't take into account where the viewer's
+    #   attention is likely to be. If viewers are likely to be focusing
+    #   their attention on a part of the screen that doesn't have moving
+    #   objects with sharp edges, such as sports athletes' faces, you might
+    #   choose to disable this feature. Related setting: When you enable
+    #   temporal adaptive quantization, adjust the strength of the filter
+    #   with the setting Adaptive quantization (adaptiveQuantization).
+    #   @return [String]
+    #
+    # @!attribute [rw] xavc_4k_intra_cbg_profile_settings
+    #   Required when you set (Profile) under
+    #   (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    #   XAVC\_4K\_INTRA\_CBG.
+    #   @return [Types::Xavc4kIntraCbgProfileSettings]
+    #
+    # @!attribute [rw] xavc_4k_intra_vbr_profile_settings
+    #   Required when you set (Profile) under
+    #   (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    #   XAVC\_4K\_INTRA\_VBR.
+    #   @return [Types::Xavc4kIntraVbrProfileSettings]
+    #
+    # @!attribute [rw] xavc_4k_profile_settings
+    #   Required when you set (Profile) under
+    #   (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    #   XAVC\_4K.
+    #   @return [Types::Xavc4kProfileSettings]
+    #
+    # @!attribute [rw] xavc_hd_intra_cbg_profile_settings
+    #   Required when you set (Profile) under
+    #   (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    #   XAVC\_HD\_INTRA\_CBG.
+    #   @return [Types::XavcHdIntraCbgProfileSettings]
+    #
+    # @!attribute [rw] xavc_hd_profile_settings
+    #   Required when you set (Profile) under
+    #   (VideoDescription)>(CodecSettings)>(XavcSettings) to the value
+    #   XAVC\_HD.
+    #   @return [Types::XavcHdProfileSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/XavcSettings AWS API Documentation
+    #
+    class XavcSettings < Struct.new(
+      :adaptive_quantization,
+      :entropy_encoding,
+      :framerate_control,
+      :framerate_conversion_algorithm,
+      :framerate_denominator,
+      :framerate_numerator,
+      :profile,
+      :slow_pal,
+      :softness,
+      :spatial_adaptive_quantization,
+      :temporal_adaptive_quantization,
+      :xavc_4k_intra_cbg_profile_settings,
+      :xavc_4k_intra_vbr_profile_settings,
+      :xavc_4k_profile_settings,
+      :xavc_hd_intra_cbg_profile_settings,
+      :xavc_hd_profile_settings)
       SENSITIVE = []
       include Aws::Structure
     end

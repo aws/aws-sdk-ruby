@@ -49,6 +49,6 @@ require_relative 'aws-sdk-elasticbeanstalk/customizations'
 # @!group service
 module Aws::ElasticBeanstalk
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.44.0'
 
 end

@@ -487,10 +487,21 @@ module Aws::Snowball
     #   The type of job for this cluster. Currently, the only job type
     #   supported for clusters is `LOCAL_USE`.
     #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
+    #
     # @option params [required, Types::JobResource] :resources
     #   The resources associated with the cluster job. These resources include
     #   Amazon S3 buckets and optional AWS Lambda functions written in the
     #   Python language.
+    #
+    # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
+    #   Specifies the service or services on the Snow Family device that your
+    #   transferred data will be exported from or imported into. AWS Snow
+    #   Family supports Amazon S3 and NFS (Network File System).
     #
     # @option params [String] :description
     #   An optional description of this specific cluster, for example
@@ -517,13 +528,19 @@ module Aws::Snowball
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
-    # @option params [String] :snowball_type
+    # @option params [required, String] :snowball_type
     #   The type of AWS Snow Family device to use for this cluster.
     #
     #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
     #   device type.
     #
     #    </note>
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
     #
     # @option params [required, String] :shipping_option
     #   The shipping speed for each node in this cluster. This speed doesn't
@@ -539,7 +556,7 @@ module Aws::Snowball
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snow device are delivered in one to seven days.
+    #   * In India, Snow devices are delivered in one to seven days.
     #
     #   * In the United States of America (US), you have access to one-day
     #     shipping and two-day shipping.
@@ -553,7 +570,7 @@ module Aws::Snowball
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snow device are delivered in one to seven days.
+    #   * In India, Snow devices are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day shipping.
     #
@@ -567,6 +584,13 @@ module Aws::Snowball
     #
     # @option params [Types::TaxDocuments] :tax_documents
     #   The tax documents required in your AWS Region.
+    #
+    # @option params [String] :remote_management
+    #   Allows you to securely operate and manage Snow devices in a cluster
+    #   remotely from outside of your internal network. When set to
+    #   `INSTALLED_AUTOSTART`, remote management will automatically be
+    #   available when the device arrives at your location. Otherwise, you
+    #   need to use the Snowball Client to manage the device.
     #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -619,6 +643,12 @@ module Aws::Snowball
     #             begin_marker: "String",
     #             end_marker: "String",
     #           },
+    #           target_on_device_services: [
+    #             {
+    #               service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
+    #               transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
+    #             },
+    #           ],
     #         },
     #       ],
     #       lambda_resources: [
@@ -638,11 +668,17 @@ module Aws::Snowball
     #         },
     #       ],
     #     },
+    #     on_device_service_configuration: {
+    #       nfs_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
+    #     },
     #     description: "String",
     #     address_id: "AddressId", # required
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN", # required
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
+    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -655,6 +691,7 @@ module Aws::Snowball
     #         gstin: "GSTIN",
     #       },
     #     },
+    #     remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART
     #   })
     #
     # @example Response structure
@@ -677,6 +714,97 @@ module Aws::Snowball
     # provide the `clusterId` value; the other job attributes are inherited
     # from the cluster.
     #
+    # <note markdown="1"> Only the Snowball; Edge device type is supported when ordering
+    # clustered jobs.
+    #
+    #  The device capacity is optional.
+    #
+    #  Availability of device types differ by AWS Region. For more
+    # information about Region availability, see [AWS Regional Services][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # **AWS Snow Family device types and their capacities.**
+    #
+    # * Snow Family device type: **SNC1\_SSD**
+    #
+    #   * Capacity: T14
+    #
+    #   * Description: Snowcone
+    #
+    #
+    #
+    # * Snow Family device type: **SNC1\_HDD**
+    #
+    #   * Capacity: T8
+    #
+    #   * Description: Snowcone
+    #
+    #
+    #
+    # * Device type: **EDGE\_S**
+    #
+    #   * Capacity: T98
+    #
+    #   * Description: Snowball Edge Storage Optimized for data transfer
+    #     only
+    #
+    #
+    #
+    # * Device type: **EDGE\_CG**
+    #
+    #   * Capacity: T42
+    #
+    #   * Description: Snowball Edge Compute Optimized with GPU
+    #
+    #
+    #
+    # * Device type: **EDGE\_C**
+    #
+    #   * Capacity: T42
+    #
+    #   * Description: Snowball Edge Compute Optimized without GPU
+    #
+    #
+    #
+    # * Device type: **EDGE**
+    #
+    #   * Capacity: T100
+    #
+    #   * Description: Snowball Edge Storage Optimized with EC2 Compute
+    #
+    #
+    #
+    # * Device type: **STANDARD**
+    #
+    #   * Capacity: T50
+    #
+    #   * Description: Original Snowball device
+    #
+    #     <note markdown="1"> This device is only available in the Ningxia, Beijing, and
+    #     Singapore AWS Regions.
+    #
+    #      </note>
+    #
+    #
+    #
+    # * Device type: **STANDARD**
+    #
+    #   * Capacity: T80
+    #
+    #   * Description: Original Snowball device
+    #
+    #     <note markdown="1"> This device is only available in the Ningxia, Beijing, and
+    #     Singapore AWS Regions.
+    #
+    #      </note>
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&amp;loc=4
+    #
     # @option params [String] :job_type
     #   Defines the type of job that you're creating.
     #
@@ -692,6 +820,11 @@ module Aws::Snowball
     #   define the length of the range by providing either an inclusive
     #   `BeginMarker` value, an inclusive `EndMarker` value, or both. Ranges
     #   are UTF-8 binary sorted.
+    #
+    # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
+    #   Specifies the service or services on the Snow Family device that your
+    #   transferred data will be exported from or imported into. AWS Snow
+    #   Family supports Amazon S3 and NFS (Network File System).
     #
     # @option params [String] :description
     #   Defines an optional description of this specific job, for example
@@ -722,6 +855,12 @@ module Aws::Snowball
     #   If your job is being created in one of the US regions, you have the
     #   option of specifying what size Snow device you'd like for this job.
     #   In all other regions, Snowballs come with 80 TB in storage capacity.
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
     #
     # @option params [String] :shipping_option
     #   The shipping speed for this job. This speed doesn't dictate how soon
@@ -764,19 +903,41 @@ module Aws::Snowball
     #   For more information, see [Snowball Edge Device Options][1] in the
     #   Snowball Edge Developer Guide.
     #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
     #
     # @option params [String] :forwarding_address_id
     #   The forwarding address ID for a job. This field is not supported in
-    #   most regions.
+    #   most Regions.
     #
     # @option params [Types::TaxDocuments] :tax_documents
     #   The tax documents required in your AWS Region.
     #
     # @option params [Types::DeviceConfiguration] :device_configuration
     #   Defines the device configuration for an AWS Snowcone job.
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
+    #
+    # @option params [String] :remote_management
+    #   Allows you to securely operate and manage Snowcone devices remotely
+    #   from outside of your internal network. When set to
+    #   `INSTALLED_AUTOSTART`, remote management will automatically be
+    #   available when the device arrives at your location. Otherwise, you
+    #   need to use the Snowball Client to manage the device.
+    #
+    # @option params [String] :long_term_pricing_id
+    #   The ID of the long-term pricing type for the device.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -831,6 +992,12 @@ module Aws::Snowball
     #             begin_marker: "String",
     #             end_marker: "String",
     #           },
+    #           target_on_device_services: [
+    #             {
+    #               service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
+    #               transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
+    #             },
+    #           ],
     #         },
     #       ],
     #       lambda_resources: [
@@ -850,11 +1017,17 @@ module Aws::Snowball
     #         },
     #       ],
     #     },
+    #     on_device_service_configuration: {
+    #       nfs_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
+    #     },
     #     description: "String",
     #     address_id: "AddressId",
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -862,7 +1035,7 @@ module Aws::Snowball
     #       notify_all: false,
     #     },
     #     cluster_id: "ClusterId",
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
     #     forwarding_address_id: "AddressId",
     #     tax_documents: {
     #       ind: {
@@ -876,6 +1049,8 @@ module Aws::Snowball
     #         },
     #       },
     #     },
+    #     remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART
+    #     long_term_pricing_id: "LongTermPricingId",
     #   })
     #
     # @example Response structure
@@ -891,12 +1066,54 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # Creates a job with the long-term usage option for a device. The
+    # long-term usage is a 1-year or 3-year long-term pricing type for the
+    # device. You are billed upfront, and AWS provides discounts for
+    # long-term pricing.
+    #
+    # @option params [required, String] :long_term_pricing_type
+    #   The type of long-term pricing option you want for the device, either
+    #   1-year or 3-year long-term pricing.
+    #
+    # @option params [Boolean] :is_long_term_pricing_auto_renew
+    #   Specifies whether the current long-term pricing type for the device
+    #   should be renewed.
+    #
+    # @option params [String] :snowball_type
+    #   The type of AWS Snow Family device to use for the long-term pricing
+    #   job.
+    #
+    # @return [Types::CreateLongTermPricingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLongTermPricingResult#long_term_pricing_id #long_term_pricing_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_long_term_pricing({
+    #     long_term_pricing_type: "OneYear", # required, accepts OneYear, ThreeYear
+    #     is_long_term_pricing_auto_renew: false,
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.long_term_pricing_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateLongTermPricing AWS API Documentation
+    #
+    # @overload create_long_term_pricing(params = {})
+    # @param [Hash] params ({})
+    def create_long_term_pricing(params = {}, options = {})
+      req = build_request(:create_long_term_pricing, params)
+      req.send_request(options)
+    end
+
     # Creates a shipping label that will be used to return the Snow device
     # to AWS.
     #
     # @option params [required, String] :job_id
     #   The ID for a job that you want to create the return shipping label
-    #   for. For example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #   for; for example, `JID123e4567-e89b-12d3-a456-426655440000`.
     #
     # @option params [String] :shipping_option
     #   The shipping speed for a particular job. This speed doesn't dictate
@@ -1138,12 +1355,15 @@ module Aws::Snowball
     #   resp.cluster_metadata.role_arn #=> String
     #   resp.cluster_metadata.cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
     #   resp.cluster_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
+    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
     #   resp.cluster_metadata.creation_date #=> Time
     #   resp.cluster_metadata.resources.s3_resources #=> Array
     #   resp.cluster_metadata.resources.s3_resources[0].bucket_arn #=> String
     #   resp.cluster_metadata.resources.s3_resources[0].key_range.begin_marker #=> String
     #   resp.cluster_metadata.resources.s3_resources[0].key_range.end_marker #=> String
+    #   resp.cluster_metadata.resources.s3_resources[0].target_on_device_services #=> Array
+    #   resp.cluster_metadata.resources.s3_resources[0].target_on_device_services[0].service_name #=> String, one of "NFS_ON_DEVICE_SERVICE", "S3_ON_DEVICE_SERVICE"
+    #   resp.cluster_metadata.resources.s3_resources[0].target_on_device_services[0].transfer_option #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.cluster_metadata.resources.lambda_resources #=> Array
     #   resp.cluster_metadata.resources.lambda_resources[0].lambda_arn #=> String
     #   resp.cluster_metadata.resources.lambda_resources[0].event_triggers #=> Array
@@ -1159,6 +1379,8 @@ module Aws::Snowball
     #   resp.cluster_metadata.notification.notify_all #=> Boolean
     #   resp.cluster_metadata.forwarding_address_id #=> String
     #   resp.cluster_metadata.tax_documents.ind.gstin #=> String
+    #   resp.cluster_metadata.on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
+    #   resp.cluster_metadata.on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster AWS API Documentation
     #
@@ -1234,12 +1456,15 @@ module Aws::Snowball
     #   resp.job_metadata.job_id #=> String
     #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
+    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
     #   resp.job_metadata.creation_date #=> Time
     #   resp.job_metadata.resources.s3_resources #=> Array
     #   resp.job_metadata.resources.s3_resources[0].bucket_arn #=> String
     #   resp.job_metadata.resources.s3_resources[0].key_range.begin_marker #=> String
     #   resp.job_metadata.resources.s3_resources[0].key_range.end_marker #=> String
+    #   resp.job_metadata.resources.s3_resources[0].target_on_device_services #=> Array
+    #   resp.job_metadata.resources.s3_resources[0].target_on_device_services[0].service_name #=> String, one of "NFS_ON_DEVICE_SERVICE", "S3_ON_DEVICE_SERVICE"
+    #   resp.job_metadata.resources.s3_resources[0].target_on_device_services[0].transfer_option #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.job_metadata.resources.lambda_resources #=> Array
     #   resp.job_metadata.resources.lambda_resources[0].lambda_arn #=> String
     #   resp.job_metadata.resources.lambda_resources[0].event_triggers #=> Array
@@ -1256,7 +1481,7 @@ module Aws::Snowball
     #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "NoPreference"
+    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
     #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1272,16 +1497,23 @@ module Aws::Snowball
     #   resp.job_metadata.forwarding_address_id #=> String
     #   resp.job_metadata.tax_documents.ind.gstin #=> String
     #   resp.job_metadata.device_configuration.snowcone_device_configuration.wireless_connection.is_wifi_enabled #=> Boolean
+    #   resp.job_metadata.remote_management #=> String, one of "INSTALLED_ONLY", "INSTALLED_AUTOSTART"
+    #   resp.job_metadata.long_term_pricing_id #=> String
+    #   resp.job_metadata.on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
+    #   resp.job_metadata.on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
+    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
     #   resp.sub_job_metadata[0].creation_date #=> Time
     #   resp.sub_job_metadata[0].resources.s3_resources #=> Array
     #   resp.sub_job_metadata[0].resources.s3_resources[0].bucket_arn #=> String
     #   resp.sub_job_metadata[0].resources.s3_resources[0].key_range.begin_marker #=> String
     #   resp.sub_job_metadata[0].resources.s3_resources[0].key_range.end_marker #=> String
+    #   resp.sub_job_metadata[0].resources.s3_resources[0].target_on_device_services #=> Array
+    #   resp.sub_job_metadata[0].resources.s3_resources[0].target_on_device_services[0].service_name #=> String, one of "NFS_ON_DEVICE_SERVICE", "S3_ON_DEVICE_SERVICE"
+    #   resp.sub_job_metadata[0].resources.s3_resources[0].target_on_device_services[0].transfer_option #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
     #   resp.sub_job_metadata[0].resources.lambda_resources #=> Array
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].lambda_arn #=> String
     #   resp.sub_job_metadata[0].resources.lambda_resources[0].event_triggers #=> Array
@@ -1298,7 +1530,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "NoPreference"
+    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
     #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1314,6 +1546,10 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].forwarding_address_id #=> String
     #   resp.sub_job_metadata[0].tax_documents.ind.gstin #=> String
     #   resp.sub_job_metadata[0].device_configuration.snowcone_device_configuration.wireless_connection.is_wifi_enabled #=> Boolean
+    #   resp.sub_job_metadata[0].remote_management #=> String, one of "INSTALLED_ONLY", "INSTALLED_AUTOSTART"
+    #   resp.sub_job_metadata[0].long_term_pricing_id #=> String
+    #   resp.sub_job_metadata[0].on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
+    #   resp.sub_job_metadata[0].on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -1327,7 +1563,7 @@ module Aws::Snowball
     # Information on the shipping label of a Snow device that is being
     # returned to AWS.
     #
-    # @option params [String] :job_id
+    # @option params [required, String] :job_id
     #   The automatically generated ID for a job, for example
     #   `JID123e4567-e89b-12d3-a456-426655440000`.
     #
@@ -1339,7 +1575,7 @@ module Aws::Snowball
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_return_shipping_label({
-    #     job_id: "JobId",
+    #     job_id: "JobId", # required
     #   })
     #
     # @example Response structure
@@ -1374,7 +1610,7 @@ module Aws::Snowball
     # gaining access to the Snow device associated with that job.
     #
     # The credentials of a given job, including its manifest file and unlock
-    # code, expire 90 days after the job is created.
+    # code, expire 360 days after the job is created.
     #
     # @option params [required, String] :job_id
     #   The ID for a job that you want to get the manifest file for, for
@@ -1427,7 +1663,7 @@ module Aws::Snowball
     end
 
     # Returns the `UnlockCode` code value for the specified job. A
-    # particular `UnlockCode` value can be accessed for up to 90 days after
+    # particular `UnlockCode` value can be accessed for up to 360 days after
     # the associated job has been created.
     #
     # The `UnlockCode` value is a 29-character code with 25 alphanumeric
@@ -1659,7 +1895,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -1841,7 +2077,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -1852,6 +2088,52 @@ module Aws::Snowball
     # @param [Hash] params ({})
     def list_jobs(params = {}, options = {})
       req = build_request(:list_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all long-term pricing types.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of `ListLongTermPricing` objects to return.
+    #
+    # @option params [String] :next_token
+    #   Because HTTP requests are stateless, this is the starting point for
+    #   your next list of `ListLongTermPricing` to return.
+    #
+    # @return [Types::ListLongTermPricingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLongTermPricingResult#long_term_pricing_entries #long_term_pricing_entries} => Array&lt;Types::LongTermPricingListEntry&gt;
+    #   * {Types::ListLongTermPricingResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_long_term_pricing({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.long_term_pricing_entries #=> Array
+    #   resp.long_term_pricing_entries[0].long_term_pricing_id #=> String
+    #   resp.long_term_pricing_entries[0].long_term_pricing_end_date #=> Time
+    #   resp.long_term_pricing_entries[0].long_term_pricing_start_date #=> Time
+    #   resp.long_term_pricing_entries[0].long_term_pricing_type #=> String, one of "OneYear", "ThreeYear"
+    #   resp.long_term_pricing_entries[0].current_active_job #=> String
+    #   resp.long_term_pricing_entries[0].replacement_job #=> String
+    #   resp.long_term_pricing_entries[0].is_long_term_pricing_auto_renew #=> Boolean
+    #   resp.long_term_pricing_entries[0].long_term_pricing_status #=> String
+    #   resp.long_term_pricing_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
+    #   resp.long_term_pricing_entries[0].job_ids #=> Array
+    #   resp.long_term_pricing_entries[0].job_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListLongTermPricing AWS API Documentation
+    #
+    # @overload list_long_term_pricing(params = {})
+    # @param [Hash] params ({})
+    def list_long_term_pricing(params = {}, options = {})
+      req = build_request(:list_long_term_pricing, params)
       req.send_request(options)
     end
 
@@ -1880,6 +2162,11 @@ module Aws::Snowball
     # @option params [Types::JobResource] :resources
     #   The updated arrays of JobResource objects that can include updated
     #   S3Resource objects or LambdaResource objects.
+    #
+    # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
+    #   Specifies the service or services on the Snow Family device that your
+    #   transferred data will be exported from or imported into. AWS Snow
+    #   Family supports Amazon S3 and NFS (Network File System).
     #
     # @option params [String] :address_id
     #   The ID of the updated Address object.
@@ -1923,6 +2210,12 @@ module Aws::Snowball
     #             begin_marker: "String",
     #             end_marker: "String",
     #           },
+    #           target_on_device_services: [
+    #             {
+    #               service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
+    #               transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
+    #             },
+    #           ],
     #         },
     #       ],
     #       lambda_resources: [
@@ -1941,6 +2234,12 @@ module Aws::Snowball
     #           snowball_ami_id: "String",
     #         },
     #       ],
+    #     },
+    #     on_device_service_configuration: {
+    #       nfs_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -1985,6 +2284,11 @@ module Aws::Snowball
     # @option params [Types::JobResource] :resources
     #   The updated `JobResource` object, or the updated JobResource object.
     #
+    # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
+    #   Specifies the service or services on the Snow Family device that your
+    #   transferred data will be exported from or imported into. AWS Snow
+    #   Family supports Amazon S3 and NFS (Network File System).
+    #
     # @option params [String] :address_id
     #   The ID of the updated Address object.
     #
@@ -1998,6 +2302,12 @@ module Aws::Snowball
     # @option params [String] :snowball_capacity_preference
     #   The updated `SnowballCapacityPreference` of this job's JobMetadata
     #   object. The 50 TB Snowballs are only available in the US regions.
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
     #
     # @option params [String] :forwarding_address_id
     #   The updated ID for the forwarding address for a job. This field is not
@@ -2037,6 +2347,12 @@ module Aws::Snowball
     #             begin_marker: "String",
     #             end_marker: "String",
     #           },
+    #           target_on_device_services: [
+    #             {
+    #               service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
+    #               transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
+    #             },
+    #           ],
     #         },
     #       ],
     #       lambda_resources: [
@@ -2056,10 +2372,16 @@ module Aws::Snowball
     #         },
     #       ],
     #     },
+    #     on_device_service_configuration: {
+    #       nfs_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
+    #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference
     #     forwarding_address_id: "AddressId",
     #   })
     #
@@ -2072,8 +2394,7 @@ module Aws::Snowball
       req.send_request(options)
     end
 
-    # Updates the state when a the shipment states changes to a different
-    # state.
+    # Updates the state when a shipment state changes to a different state.
     #
     # @option params [required, String] :job_id
     #   The job ID of the job whose shipment date you want to update, for
@@ -2104,6 +2425,39 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # Updates the long-term pricing type.
+    #
+    # @option params [required, String] :long_term_pricing_id
+    #   The ID of the long-term pricing type for the device.
+    #
+    # @option params [String] :replacement_job
+    #   Specifies that a device that is ordered with long-term pricing should
+    #   be replaced with a new device.
+    #
+    # @option params [Boolean] :is_long_term_pricing_auto_renew
+    #   If set to `true`, specifies that the current long-term pricing type
+    #   for the device should be automatically renewed before the long-term
+    #   pricing contract expires.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_long_term_pricing({
+    #     long_term_pricing_id: "LongTermPricingId", # required
+    #     replacement_job: "JobId",
+    #     is_long_term_pricing_auto_renew: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateLongTermPricing AWS API Documentation
+    #
+    # @overload update_long_term_pricing(params = {})
+    # @param [Hash] params ({})
+    def update_long_term_pricing(params = {}, options = {})
+      req = build_request(:update_long_term_pricing, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2117,7 +2471,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

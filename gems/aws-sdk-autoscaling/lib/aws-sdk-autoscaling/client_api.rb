@@ -37,6 +37,7 @@ module Aws::AutoScaling
     AutoScalingGroupMinSize = Shapes::IntegerShape.new(name: 'AutoScalingGroupMinSize')
     AutoScalingGroupNames = Shapes::ListShape.new(name: 'AutoScalingGroupNames')
     AutoScalingGroupNamesType = Shapes::StructureShape.new(name: 'AutoScalingGroupNamesType')
+    AutoScalingGroupPredictedCapacity = Shapes::IntegerShape.new(name: 'AutoScalingGroupPredictedCapacity')
     AutoScalingGroupState = Shapes::StringShape.new(name: 'AutoScalingGroupState')
     AutoScalingGroups = Shapes::ListShape.new(name: 'AutoScalingGroups')
     AutoScalingGroupsType = Shapes::StructureShape.new(name: 'AutoScalingGroupsType')
@@ -52,18 +53,21 @@ module Aws::AutoScaling
     BlockDeviceEbsDeleteOnTermination = Shapes::BooleanShape.new(name: 'BlockDeviceEbsDeleteOnTermination')
     BlockDeviceEbsEncrypted = Shapes::BooleanShape.new(name: 'BlockDeviceEbsEncrypted')
     BlockDeviceEbsIops = Shapes::IntegerShape.new(name: 'BlockDeviceEbsIops')
+    BlockDeviceEbsThroughput = Shapes::IntegerShape.new(name: 'BlockDeviceEbsThroughput')
     BlockDeviceEbsVolumeSize = Shapes::IntegerShape.new(name: 'BlockDeviceEbsVolumeSize')
     BlockDeviceEbsVolumeType = Shapes::StringShape.new(name: 'BlockDeviceEbsVolumeType')
     BlockDeviceMapping = Shapes::StructureShape.new(name: 'BlockDeviceMapping')
     BlockDeviceMappings = Shapes::ListShape.new(name: 'BlockDeviceMappings')
     CancelInstanceRefreshAnswer = Shapes::StructureShape.new(name: 'CancelInstanceRefreshAnswer')
     CancelInstanceRefreshType = Shapes::StructureShape.new(name: 'CancelInstanceRefreshType')
+    CapacityForecast = Shapes::StructureShape.new(name: 'CapacityForecast')
     CapacityRebalanceEnabled = Shapes::BooleanShape.new(name: 'CapacityRebalanceEnabled')
     CheckpointDelay = Shapes::IntegerShape.new(name: 'CheckpointDelay')
     CheckpointPercentages = Shapes::ListShape.new(name: 'CheckpointPercentages')
     ClassicLinkVPCSecurityGroups = Shapes::ListShape.new(name: 'ClassicLinkVPCSecurityGroups')
     CompleteLifecycleActionAnswer = Shapes::StructureShape.new(name: 'CompleteLifecycleActionAnswer')
     CompleteLifecycleActionType = Shapes::StructureShape.new(name: 'CompleteLifecycleActionType')
+    Context = Shapes::StringShape.new(name: 'Context')
     Cooldown = Shapes::IntegerShape.new(name: 'Cooldown')
     CreateAutoScalingGroupType = Shapes::StructureShape.new(name: 'CreateAutoScalingGroupType')
     CreateLaunchConfigurationType = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationType')
@@ -101,6 +105,7 @@ module Aws::AutoScaling
     DescribeTerminationPolicyTypesAnswer = Shapes::StructureShape.new(name: 'DescribeTerminationPolicyTypesAnswer')
     DescribeWarmPoolAnswer = Shapes::StructureShape.new(name: 'DescribeWarmPoolAnswer')
     DescribeWarmPoolType = Shapes::StructureShape.new(name: 'DescribeWarmPoolType')
+    DesiredConfiguration = Shapes::StructureShape.new(name: 'DesiredConfiguration')
     DetachInstancesAnswer = Shapes::StructureShape.new(name: 'DetachInstancesAnswer')
     DetachInstancesQuery = Shapes::StructureShape.new(name: 'DetachInstancesQuery')
     DetachLoadBalancerTargetGroupsResultType = Shapes::StructureShape.new(name: 'DetachLoadBalancerTargetGroupsResultType')
@@ -125,6 +130,8 @@ module Aws::AutoScaling
     Filter = Shapes::StructureShape.new(name: 'Filter')
     Filters = Shapes::ListShape.new(name: 'Filters')
     ForceDelete = Shapes::BooleanShape.new(name: 'ForceDelete')
+    GetPredictiveScalingForecastAnswer = Shapes::StructureShape.new(name: 'GetPredictiveScalingForecastAnswer')
+    GetPredictiveScalingForecastType = Shapes::StructureShape.new(name: 'GetPredictiveScalingForecastType')
     GlobalTimeout = Shapes::IntegerShape.new(name: 'GlobalTimeout')
     HealthCheckGracePeriod = Shapes::IntegerShape.new(name: 'HealthCheckGracePeriod')
     HeartbeatTimeout = Shapes::IntegerShape.new(name: 'HeartbeatTimeout')
@@ -176,6 +183,8 @@ module Aws::AutoScaling
     LoadBalancerStates = Shapes::ListShape.new(name: 'LoadBalancerStates')
     LoadBalancerTargetGroupState = Shapes::StructureShape.new(name: 'LoadBalancerTargetGroupState')
     LoadBalancerTargetGroupStates = Shapes::ListShape.new(name: 'LoadBalancerTargetGroupStates')
+    LoadForecast = Shapes::StructureShape.new(name: 'LoadForecast')
+    LoadForecasts = Shapes::ListShape.new(name: 'LoadForecasts')
     MaxGroupPreparedCapacity = Shapes::IntegerShape.new(name: 'MaxGroupPreparedCapacity')
     MaxInstanceLifetime = Shapes::IntegerShape.new(name: 'MaxInstanceLifetime')
     MaxNumberOfAutoScalingGroups = Shapes::IntegerShape.new(name: 'MaxNumberOfAutoScalingGroups')
@@ -216,7 +225,22 @@ module Aws::AutoScaling
     PolicyIncrement = Shapes::IntegerShape.new(name: 'PolicyIncrement')
     PolicyNames = Shapes::ListShape.new(name: 'PolicyNames')
     PolicyTypes = Shapes::ListShape.new(name: 'PolicyTypes')
+    PredefinedLoadMetricType = Shapes::StringShape.new(name: 'PredefinedLoadMetricType')
+    PredefinedMetricPairType = Shapes::StringShape.new(name: 'PredefinedMetricPairType')
     PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
+    PredefinedScalingMetricType = Shapes::StringShape.new(name: 'PredefinedScalingMetricType')
+    PredictiveScalingConfiguration = Shapes::StructureShape.new(name: 'PredictiveScalingConfiguration')
+    PredictiveScalingForecastTimestamps = Shapes::ListShape.new(name: 'PredictiveScalingForecastTimestamps')
+    PredictiveScalingForecastValues = Shapes::ListShape.new(name: 'PredictiveScalingForecastValues')
+    PredictiveScalingMaxCapacityBreachBehavior = Shapes::StringShape.new(name: 'PredictiveScalingMaxCapacityBreachBehavior')
+    PredictiveScalingMaxCapacityBuffer = Shapes::IntegerShape.new(name: 'PredictiveScalingMaxCapacityBuffer')
+    PredictiveScalingMetricSpecification = Shapes::StructureShape.new(name: 'PredictiveScalingMetricSpecification')
+    PredictiveScalingMetricSpecifications = Shapes::ListShape.new(name: 'PredictiveScalingMetricSpecifications')
+    PredictiveScalingMode = Shapes::StringShape.new(name: 'PredictiveScalingMode')
+    PredictiveScalingPredefinedLoadMetric = Shapes::StructureShape.new(name: 'PredictiveScalingPredefinedLoadMetric')
+    PredictiveScalingPredefinedMetricPair = Shapes::StructureShape.new(name: 'PredictiveScalingPredefinedMetricPair')
+    PredictiveScalingPredefinedScalingMetric = Shapes::StructureShape.new(name: 'PredictiveScalingPredefinedScalingMetric')
+    PredictiveScalingSchedulingBufferTime = Shapes::IntegerShape.new(name: 'PredictiveScalingSchedulingBufferTime')
     ProcessNames = Shapes::ListShape.new(name: 'ProcessNames')
     ProcessType = Shapes::StructureShape.new(name: 'ProcessType')
     Processes = Shapes::ListShape.new(name: 'Processes')
@@ -259,6 +283,7 @@ module Aws::AutoScaling
     SetInstanceProtectionQuery = Shapes::StructureShape.new(name: 'SetInstanceProtectionQuery')
     ShouldDecrementDesiredCapacity = Shapes::BooleanShape.new(name: 'ShouldDecrementDesiredCapacity')
     ShouldRespectGracePeriod = Shapes::BooleanShape.new(name: 'ShouldRespectGracePeriod')
+    SkipMatching = Shapes::BooleanShape.new(name: 'SkipMatching')
     SpotInstancePools = Shapes::IntegerShape.new(name: 'SpotInstancePools')
     SpotPrice = Shapes::StringShape.new(name: 'SpotPrice')
     StartInstanceRefreshAnswer = Shapes::StructureShape.new(name: 'StartInstanceRefreshAnswer')
@@ -363,6 +388,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, required: true, location_name: "MinSize"))
     AutoScalingGroup.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, required: true, location_name: "MaxSize"))
     AutoScalingGroup.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, required: true, location_name: "DesiredCapacity"))
+    AutoScalingGroup.add_member(:predicted_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupPredictedCapacity, location_name: "PredictedCapacity"))
     AutoScalingGroup.add_member(:default_cooldown, Shapes::ShapeRef.new(shape: Cooldown, required: true, location_name: "DefaultCooldown"))
     AutoScalingGroup.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, required: true, location_name: "AvailabilityZones"))
     AutoScalingGroup.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, location_name: "LoadBalancerNames"))
@@ -384,6 +410,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: CapacityRebalanceEnabled, location_name: "CapacityRebalance"))
     AutoScalingGroup.add_member(:warm_pool_configuration, Shapes::ShapeRef.new(shape: WarmPoolConfiguration, location_name: "WarmPoolConfiguration"))
     AutoScalingGroup.add_member(:warm_pool_size, Shapes::ShapeRef.new(shape: WarmPoolSize, location_name: "WarmPoolSize"))
+    AutoScalingGroup.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -449,6 +476,10 @@ module Aws::AutoScaling
     CancelInstanceRefreshType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     CancelInstanceRefreshType.struct_class = Types::CancelInstanceRefreshType
 
+    CapacityForecast.add_member(:timestamps, Shapes::ShapeRef.new(shape: PredictiveScalingForecastTimestamps, required: true, location_name: "Timestamps"))
+    CapacityForecast.add_member(:values, Shapes::ShapeRef.new(shape: PredictiveScalingForecastValues, required: true, location_name: "Values"))
+    CapacityForecast.struct_class = Types::CapacityForecast
+
     CheckpointPercentages.member = Shapes::ShapeRef.new(shape: NonZeroIntPercent)
 
     ClassicLinkVPCSecurityGroups.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -485,6 +516,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAutoScalingGroupType.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ServiceLinkedRoleARN"))
     CreateAutoScalingGroupType.add_member(:max_instance_lifetime, Shapes::ShapeRef.new(shape: MaxInstanceLifetime, location_name: "MaxInstanceLifetime"))
+    CreateAutoScalingGroupType.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
     CreateLaunchConfigurationType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
@@ -657,6 +689,10 @@ module Aws::AutoScaling
     DescribeWarmPoolType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeWarmPoolType.struct_class = Types::DescribeWarmPoolType
 
+    DesiredConfiguration.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    DesiredConfiguration.add_member(:mixed_instances_policy, Shapes::ShapeRef.new(shape: MixedInstancesPolicy, location_name: "MixedInstancesPolicy"))
+    DesiredConfiguration.struct_class = Types::DesiredConfiguration
+
     DetachInstancesAnswer.add_member(:activities, Shapes::ShapeRef.new(shape: Activities, location_name: "Activities"))
     DetachInstancesAnswer.struct_class = Types::DetachInstancesAnswer
 
@@ -687,6 +723,7 @@ module Aws::AutoScaling
     Ebs.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: BlockDeviceEbsDeleteOnTermination, location_name: "DeleteOnTermination"))
     Ebs.add_member(:iops, Shapes::ShapeRef.new(shape: BlockDeviceEbsIops, location_name: "Iops"))
     Ebs.add_member(:encrypted, Shapes::ShapeRef.new(shape: BlockDeviceEbsEncrypted, location_name: "Encrypted"))
+    Ebs.add_member(:throughput, Shapes::ShapeRef.new(shape: BlockDeviceEbsThroughput, location_name: "Throughput"))
     Ebs.struct_class = Types::Ebs
 
     EnableMetricsCollectionQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
@@ -735,6 +772,17 @@ module Aws::AutoScaling
 
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
 
+    GetPredictiveScalingForecastAnswer.add_member(:load_forecast, Shapes::ShapeRef.new(shape: LoadForecasts, required: true, location_name: "LoadForecast"))
+    GetPredictiveScalingForecastAnswer.add_member(:capacity_forecast, Shapes::ShapeRef.new(shape: CapacityForecast, required: true, location_name: "CapacityForecast"))
+    GetPredictiveScalingForecastAnswer.add_member(:update_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "UpdateTime"))
+    GetPredictiveScalingForecastAnswer.struct_class = Types::GetPredictiveScalingForecastAnswer
+
+    GetPredictiveScalingForecastType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    GetPredictiveScalingForecastType.add_member(:policy_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "PolicyName"))
+    GetPredictiveScalingForecastType.add_member(:start_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "StartTime"))
+    GetPredictiveScalingForecastType.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "EndTime"))
+    GetPredictiveScalingForecastType.struct_class = Types::GetPredictiveScalingForecastType
+
     Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, required: true, location_name: "InstanceId"))
     Instance.add_member(:instance_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceType"))
     Instance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AvailabilityZone"))
@@ -765,6 +813,8 @@ module Aws::AutoScaling
     InstanceRefresh.add_member(:percentage_complete, Shapes::ShapeRef.new(shape: IntPercent, location_name: "PercentageComplete"))
     InstanceRefresh.add_member(:instances_to_update, Shapes::ShapeRef.new(shape: InstancesToUpdate, location_name: "InstancesToUpdate"))
     InstanceRefresh.add_member(:progress_details, Shapes::ShapeRef.new(shape: InstanceRefreshProgressDetails, location_name: "ProgressDetails"))
+    InstanceRefresh.add_member(:preferences, Shapes::ShapeRef.new(shape: RefreshPreferences, location_name: "Preferences"))
+    InstanceRefresh.add_member(:desired_configuration, Shapes::ShapeRef.new(shape: DesiredConfiguration, location_name: "DesiredConfiguration"))
     InstanceRefresh.struct_class = Types::InstanceRefresh
 
     InstanceRefreshIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -894,6 +944,13 @@ module Aws::AutoScaling
 
     LoadBalancerTargetGroupStates.member = Shapes::ShapeRef.new(shape: LoadBalancerTargetGroupState)
 
+    LoadForecast.add_member(:timestamps, Shapes::ShapeRef.new(shape: PredictiveScalingForecastTimestamps, required: true, location_name: "Timestamps"))
+    LoadForecast.add_member(:values, Shapes::ShapeRef.new(shape: PredictiveScalingForecastValues, required: true, location_name: "Values"))
+    LoadForecast.add_member(:metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingMetricSpecification, required: true, location_name: "MetricSpecification"))
+    LoadForecast.struct_class = Types::LoadForecast
+
+    LoadForecasts.member = Shapes::ShapeRef.new(shape: LoadForecast)
+
     MetricCollectionType.add_member(:metric, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "Metric"))
     MetricCollectionType.struct_class = Types::MetricCollectionType
 
@@ -941,6 +998,37 @@ module Aws::AutoScaling
     PredefinedMetricSpecification.add_member(:resource_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "ResourceLabel"))
     PredefinedMetricSpecification.struct_class = Types::PredefinedMetricSpecification
 
+    PredictiveScalingConfiguration.add_member(:metric_specifications, Shapes::ShapeRef.new(shape: PredictiveScalingMetricSpecifications, required: true, location_name: "MetricSpecifications"))
+    PredictiveScalingConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: PredictiveScalingMode, location_name: "Mode"))
+    PredictiveScalingConfiguration.add_member(:scheduling_buffer_time, Shapes::ShapeRef.new(shape: PredictiveScalingSchedulingBufferTime, location_name: "SchedulingBufferTime"))
+    PredictiveScalingConfiguration.add_member(:max_capacity_breach_behavior, Shapes::ShapeRef.new(shape: PredictiveScalingMaxCapacityBreachBehavior, location_name: "MaxCapacityBreachBehavior"))
+    PredictiveScalingConfiguration.add_member(:max_capacity_buffer, Shapes::ShapeRef.new(shape: PredictiveScalingMaxCapacityBuffer, location_name: "MaxCapacityBuffer"))
+    PredictiveScalingConfiguration.struct_class = Types::PredictiveScalingConfiguration
+
+    PredictiveScalingForecastTimestamps.member = Shapes::ShapeRef.new(shape: TimestampType)
+
+    PredictiveScalingForecastValues.member = Shapes::ShapeRef.new(shape: MetricScale)
+
+    PredictiveScalingMetricSpecification.add_member(:target_value, Shapes::ShapeRef.new(shape: MetricScale, required: true, location_name: "TargetValue"))
+    PredictiveScalingMetricSpecification.add_member(:predefined_metric_pair_specification, Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedMetricPair, location_name: "PredefinedMetricPairSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:predefined_scaling_metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedScalingMetric, location_name: "PredefinedScalingMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:predefined_load_metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedLoadMetric, location_name: "PredefinedLoadMetricSpecification"))
+    PredictiveScalingMetricSpecification.struct_class = Types::PredictiveScalingMetricSpecification
+
+    PredictiveScalingMetricSpecifications.member = Shapes::ShapeRef.new(shape: PredictiveScalingMetricSpecification)
+
+    PredictiveScalingPredefinedLoadMetric.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: PredefinedLoadMetricType, required: true, location_name: "PredefinedMetricType"))
+    PredictiveScalingPredefinedLoadMetric.add_member(:resource_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "ResourceLabel"))
+    PredictiveScalingPredefinedLoadMetric.struct_class = Types::PredictiveScalingPredefinedLoadMetric
+
+    PredictiveScalingPredefinedMetricPair.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: PredefinedMetricPairType, required: true, location_name: "PredefinedMetricType"))
+    PredictiveScalingPredefinedMetricPair.add_member(:resource_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "ResourceLabel"))
+    PredictiveScalingPredefinedMetricPair.struct_class = Types::PredictiveScalingPredefinedMetricPair
+
+    PredictiveScalingPredefinedScalingMetric.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: PredefinedScalingMetricType, required: true, location_name: "PredefinedMetricType"))
+    PredictiveScalingPredefinedScalingMetric.add_member(:resource_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "ResourceLabel"))
+    PredictiveScalingPredefinedScalingMetric.struct_class = Types::PredictiveScalingPredefinedScalingMetric
+
     ProcessNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
     ProcessType.add_member(:process_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "ProcessName"))
@@ -981,6 +1069,7 @@ module Aws::AutoScaling
     PutScalingPolicyType.add_member(:estimated_instance_warmup, Shapes::ShapeRef.new(shape: EstimatedInstanceWarmup, location_name: "EstimatedInstanceWarmup"))
     PutScalingPolicyType.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, location_name: "TargetTrackingConfiguration"))
     PutScalingPolicyType.add_member(:enabled, Shapes::ShapeRef.new(shape: ScalingPolicyEnabled, location_name: "Enabled"))
+    PutScalingPolicyType.add_member(:predictive_scaling_configuration, Shapes::ShapeRef.new(shape: PredictiveScalingConfiguration, location_name: "PredictiveScalingConfiguration"))
     PutScalingPolicyType.struct_class = Types::PutScalingPolicyType
 
     PutScheduledUpdateGroupActionType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
@@ -1015,6 +1104,7 @@ module Aws::AutoScaling
     RefreshPreferences.add_member(:instance_warmup, Shapes::ShapeRef.new(shape: RefreshInstanceWarmup, location_name: "InstanceWarmup"))
     RefreshPreferences.add_member(:checkpoint_percentages, Shapes::ShapeRef.new(shape: CheckpointPercentages, location_name: "CheckpointPercentages"))
     RefreshPreferences.add_member(:checkpoint_delay, Shapes::ShapeRef.new(shape: CheckpointDelay, location_name: "CheckpointDelay"))
+    RefreshPreferences.add_member(:skip_matching, Shapes::ShapeRef.new(shape: SkipMatching, location_name: "SkipMatching"))
     RefreshPreferences.struct_class = Types::RefreshPreferences
 
     ResourceContentionFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
@@ -1043,6 +1133,7 @@ module Aws::AutoScaling
     ScalingPolicy.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
     ScalingPolicy.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, location_name: "TargetTrackingConfiguration"))
     ScalingPolicy.add_member(:enabled, Shapes::ShapeRef.new(shape: ScalingPolicyEnabled, location_name: "Enabled"))
+    ScalingPolicy.add_member(:predictive_scaling_configuration, Shapes::ShapeRef.new(shape: PredictiveScalingConfiguration, location_name: "PredictiveScalingConfiguration"))
     ScalingPolicy.struct_class = Types::ScalingPolicy
 
     ScalingProcessQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
@@ -1109,6 +1200,7 @@ module Aws::AutoScaling
 
     StartInstanceRefreshType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     StartInstanceRefreshType.add_member(:strategy, Shapes::ShapeRef.new(shape: RefreshStrategy, location_name: "Strategy"))
+    StartInstanceRefreshType.add_member(:desired_configuration, Shapes::ShapeRef.new(shape: DesiredConfiguration, location_name: "DesiredConfiguration"))
     StartInstanceRefreshType.add_member(:preferences, Shapes::ShapeRef.new(shape: RefreshPreferences, location_name: "Preferences"))
     StartInstanceRefreshType.struct_class = Types::StartInstanceRefreshType
 
@@ -1179,6 +1271,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ServiceLinkedRoleARN"))
     UpdateAutoScalingGroupType.add_member(:max_instance_lifetime, Shapes::ShapeRef.new(shape: MaxInstanceLifetime, location_name: "MaxInstanceLifetime"))
     UpdateAutoScalingGroupType.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: CapacityRebalanceEnabled, location_name: "CapacityRebalance"))
+    UpdateAutoScalingGroupType.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     Values.member = Shapes::ShapeRef.new(shape: XmlString)
@@ -1701,6 +1794,15 @@ module Aws::AutoScaling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExitStandbyQuery)
         o.output = Shapes::ShapeRef.new(shape: ExitStandbyAnswer)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+      end)
+
+      api.add_operation(:get_predictive_scaling_forecast, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPredictiveScalingForecast"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPredictiveScalingForecastType)
+        o.output = Shapes::ShapeRef.new(shape: GetPredictiveScalingForecastAnswer)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
       end)
 

@@ -44,12 +44,14 @@ module Aws::TranscribeStreamingService
     MedicalTranscriptEvent = Shapes::StructureShape.new(name: 'MedicalTranscriptEvent')
     MedicalTranscriptResultStream = Shapes::StructureShape.new(name: 'MedicalTranscriptResultStream')
     NumberOfChannels = Shapes::IntegerShape.new(name: 'NumberOfChannels')
+    PartialResultsStability = Shapes::StringShape.new(name: 'PartialResultsStability')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     Result = Shapes::StructureShape.new(name: 'Result')
     ResultList = Shapes::ListShape.new(name: 'ResultList')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     Specialty = Shapes::StringShape.new(name: 'Specialty')
+    Stable = Shapes::BooleanShape.new(name: 'Stable')
     StartMedicalStreamTranscriptionRequest = Shapes::StructureShape.new(name: 'StartMedicalStreamTranscriptionRequest')
     StartMedicalStreamTranscriptionResponse = Shapes::StructureShape.new(name: 'StartMedicalStreamTranscriptionResponse')
     StartStreamTranscriptionRequest = Shapes::StructureShape.new(name: 'StartStreamTranscriptionRequest')
@@ -91,6 +93,7 @@ module Aws::TranscribeStreamingService
     Item.add_member(:vocabulary_filter_match, Shapes::ShapeRef.new(shape: Boolean, location_name: "VocabularyFilterMatch"))
     Item.add_member(:speaker, Shapes::ShapeRef.new(shape: String, location_name: "Speaker"))
     Item.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
+    Item.add_member(:stable, Shapes::ShapeRef.new(shape: Stable, location_name: "Stable"))
     Item.struct_class = Types::Item
 
     ItemList.member = Shapes::ShapeRef.new(shape: Item)
@@ -205,6 +208,8 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionRequest.add_member(:show_speaker_label, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-show-speaker-label"))
     StartStreamTranscriptionRequest.add_member(:enable_channel_identification, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-channel-identification"))
     StartStreamTranscriptionRequest.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, location: "header", location_name: "x-amzn-transcribe-number-of-channels"))
+    StartStreamTranscriptionRequest.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-partial-results-stabilization"))
+    StartStreamTranscriptionRequest.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location: "header", location_name: "x-amzn-transcribe-partial-results-stability"))
     StartStreamTranscriptionRequest.struct_class = Types::StartStreamTranscriptionRequest
     StartStreamTranscriptionRequest[:payload] = :audio_stream
     StartStreamTranscriptionRequest[:payload_member] = StartStreamTranscriptionRequest.member(:audio_stream)
@@ -221,6 +226,8 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionResponse.add_member(:show_speaker_label, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-show-speaker-label"))
     StartStreamTranscriptionResponse.add_member(:enable_channel_identification, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-channel-identification"))
     StartStreamTranscriptionResponse.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, location: "header", location_name: "x-amzn-transcribe-number-of-channels"))
+    StartStreamTranscriptionResponse.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-partial-results-stabilization"))
+    StartStreamTranscriptionResponse.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location: "header", location_name: "x-amzn-transcribe-partial-results-stability"))
     StartStreamTranscriptionResponse.struct_class = Types::StartStreamTranscriptionResponse
     StartStreamTranscriptionResponse[:payload] = :transcript_result_stream
     StartStreamTranscriptionResponse[:payload_member] = StartStreamTranscriptionResponse.member(:transcript_result_stream)

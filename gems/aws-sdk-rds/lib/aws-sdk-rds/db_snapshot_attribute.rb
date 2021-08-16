@@ -46,10 +46,10 @@ module Aws::RDS
     # The value or values for the manual DB snapshot attribute.
     #
     # If the `AttributeName` field is set to `restore`, then this element
-    # returns a list of IDs of the AWS accounts that are authorized to copy
-    # or restore the manual DB snapshot. If a value of `all` is in the list,
-    # then the manual DB snapshot is public and available for any AWS
-    # account to copy or restore.
+    # returns a list of IDs of the Amazon Web Services accounts that are
+    # authorized to copy or restore the manual DB snapshot. If a value of
+    # `all` is in the list, then the manual DB snapshot is public and
+    # available for any Amazon Web Services account to copy or restore.
     # @return [Array<String>]
     def attribute_values
       data[:attribute_values]
@@ -195,19 +195,21 @@ module Aws::RDS
     #   A list of DB snapshot attributes to add to the attribute specified by
     #   `AttributeName`.
     #
-    #   To authorize other AWS accounts to copy or restore a manual snapshot,
-    #   set this list to include one or more AWS account IDs, or `all` to make
-    #   the manual DB snapshot restorable by any AWS account. Do not add the
-    #   `all` value for any manual DB snapshots that contain private
-    #   information that you don't want available to all AWS accounts.
+    #   To authorize other Amazon Web Services accounts to copy or restore a
+    #   manual snapshot, set this list to include one or more Amazon Web
+    #   Services account IDs, or `all` to make the manual DB snapshot
+    #   restorable by any Amazon Web Services account. Do not add the `all`
+    #   value for any manual DB snapshots that contain private information
+    #   that you don't want available to all Amazon Web Services accounts.
     # @option options [Array<String>] :values_to_remove
     #   A list of DB snapshot attributes to remove from the attribute
     #   specified by `AttributeName`.
     #
-    #   To remove authorization for other AWS accounts to copy or restore a
-    #   manual snapshot, set this list to include one or more AWS account
-    #   identifiers, or `all` to remove authorization for any AWS account to
-    #   copy or restore the DB snapshot. If you specify `all`, an AWS account
+    #   To remove authorization for other Amazon Web Services accounts to copy
+    #   or restore a manual snapshot, set this list to include one or more
+    #   Amazon Web Services account identifiers, or `all` to remove
+    #   authorization for any Amazon Web Services account to copy or restore
+    #   the DB snapshot. If you specify `all`, an Amazon Web Services account
     #   whose account ID is explicitly added to the `restore` attribute can
     #   still copy or restore the manual DB snapshot.
     # @return [Types::ModifyDBSnapshotAttributeResult]

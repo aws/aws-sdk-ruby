@@ -359,6 +359,28 @@ module Aws
           end.to raise_error(ArgumentError)
         end
 
+        it 'raises for FIPS region in ARN (prefix)' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1'
+          )
+          arn = 'arn:aws-us-gov:s3:fips-us-gov-west-1:123456789012:accesspoint/myendpoint'
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
+        it 'raises for FIPS region in ARN (suffix)' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1'
+          )
+          arn = 'arn:aws-us-gov:s3:us-gov-west-1-fips:123456789012:accesspoint/myendpoint'
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
         it 'validates account id' do
           client = Aws::S3::Client.new(
             stub_responses: true,
@@ -917,6 +939,29 @@ module Aws
             client.get_object(bucket: arn, key: 'obj')
           end.to raise_error(ArgumentError)
         end
+
+        it 'raises for FIPS region in ARN (prefix)' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1'
+          )
+          arn = 'arn:aws-us-gov:s3-object-lambda:fips-us-gov-west-1:123456789012:accesspoint/myendpoint'
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
+        it 'raises for FIPS region in ARN (suffix)' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1'
+          )
+          arn = 'arn:aws-us-gov:s3-object-lambda:us-gov-west-1-fips:123456789012:accesspoint/myendpoint'
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
 
         it 'validates account id' do
           client = Aws::S3::Client.new(

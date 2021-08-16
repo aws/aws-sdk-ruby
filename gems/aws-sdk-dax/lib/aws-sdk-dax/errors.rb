@@ -45,6 +45,7 @@ module Aws::DAX
   # * {ParameterGroupNotFoundFault}
   # * {ParameterGroupQuotaExceededFault}
   # * {ServiceLinkedRoleNotFoundFault}
+  # * {ServiceQuotaExceededException}
   # * {SubnetGroupAlreadyExistsFault}
   # * {SubnetGroupInUseFault}
   # * {SubnetGroupNotFoundFault}
@@ -245,6 +246,16 @@ module Aws::DAX
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DAX::Types::ServiceLinkedRoleNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DAX::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

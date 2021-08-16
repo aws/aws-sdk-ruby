@@ -338,10 +338,10 @@ module Aws::ACM
     # @!group API Operations
 
     # Adds one or more tags to an ACM certificate. Tags are labels that you
-    # can use to identify and organize your AWS resources. Each tag consists
-    # of a `key` and an optional `value`. You specify the certificate on
-    # input by its Amazon Resource Name (ARN). You specify the tag by using
-    # a key-value pair.
+    # can use to identify and organize your Amazon Web Services resources.
+    # Each tag consists of a `key` and an optional `value`. You specify the
+    # certificate on input by its Amazon Resource Name (ARN). You specify
+    # the tag by using a key-value pair.
     #
     # You can apply a tag to just one certificate if you want to identify a
     # specific characteristic of that certificate, or you can apply the same
@@ -404,11 +404,11 @@ module Aws::ACM
     # succeeds, the certificate no longer appears in the list that can be
     # displayed by calling the ListCertificates action or be retrieved by
     # calling the GetCertificate action. The certificate will not be
-    # available for use by AWS services integrated with ACM.
+    # available for use by Amazon Web Services services integrated with ACM.
     #
-    # <note markdown="1"> You cannot delete an ACM certificate that is being used by another AWS
-    # service. To delete a certificate that is in use, the certificate
-    # association must first be removed.
+    # <note markdown="1"> You cannot delete an ACM certificate that is being used by another
+    # Amazon Web Services service. To delete a certificate that is in use,
+    # the certificate association must first be removed.
     #
     #  </note>
     #
@@ -494,7 +494,7 @@ module Aws::ACM
     #   resp.certificate.revocation_reason #=> String, one of "UNSPECIFIED", "KEY_COMPROMISE", "CA_COMPROMISE", "AFFILIATION_CHANGED", "SUPERCEDED", "CESSATION_OF_OPERATION", "CERTIFICATE_HOLD", "REMOVE_FROM_CRL", "PRIVILEGE_WITHDRAWN", "A_A_COMPROMISE"
     #   resp.certificate.not_before #=> Time
     #   resp.certificate.not_after #=> Time
-    #   resp.certificate.key_algorithm #=> String, one of "RSA_2048", "RSA_1024", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1"
+    #   resp.certificate.key_algorithm #=> String, one of "RSA_1024", "RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1"
     #   resp.certificate.signature_algorithm #=> String
     #   resp.certificate.in_use_by #=> Array
     #   resp.certificate.in_use_by[0] #=> String
@@ -592,8 +592,8 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Returns the account configuration options associated with an AWS
-    # account.
+    # Returns the account configuration options associated with an Amazon
+    # Web Services account.
     #
     # @return [Types::GetAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -659,14 +659,15 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Imports a certificate into AWS Certificate Manager (ACM) to use with
-    # services that are integrated with ACM. Note that [integrated
-    # services][1] allow only certificate types and keys they support to be
-    # associated with their resources. Further, their support differs
-    # depending on whether the certificate is imported into IAM or into ACM.
-    # For more information, see the documentation for each service. For more
-    # information about importing certificates into ACM, see [Importing
-    # Certificates][2] in the *AWS Certificate Manager User Guide*.
+    # Imports a certificate into Amazon Web Services Certificate Manager
+    # (ACM) to use with services that are integrated with ACM. Note that
+    # [integrated services][1] allow only certificate types and keys they
+    # support to be associated with their resources. Further, their support
+    # differs depending on whether the certificate is imported into IAM or
+    # into ACM. For more information, see the documentation for each
+    # service. For more information about importing certificates into ACM,
+    # see [Importing Certificates][2] in the *Amazon Web Services
+    # Certificate Manager User Guide*.
     #
     # <note markdown="1"> ACM does not provide [managed renewal][3] for certificates that you
     # import.
@@ -822,7 +823,7 @@ module Aws::ACM
     #     includes: {
     #       extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
     #       key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
-    #       key_types: ["RSA_2048"], # accepts RSA_2048, RSA_1024, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #       key_types: ["RSA_1024"], # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
     #     },
     #     next_token: "NextToken",
     #     max_items: 1,
@@ -1016,10 +1017,11 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Requests an ACM certificate for use with other AWS services. To
-    # request an ACM certificate, you must specify a fully qualified domain
-    # name (FQDN) in the `DomainName` parameter. You can also specify
-    # additional FQDNs in the `SubjectAlternativeNames` parameter.
+    # Requests an ACM certificate for use with other Amazon Web Services
+    # services. To request an ACM certificate, you must specify a fully
+    # qualified domain name (FQDN) in the `DomainName` parameter. You can
+    # also specify additional FQDNs in the `SubjectAlternativeNames`
+    # parameter.
     #
     # If you are requesting a private certificate, domain validation is not
     # required. If you are requesting a public certificate, each domain name
@@ -1028,10 +1030,19 @@ module Aws::ACM
     # We recommend that you use DNS validation. ACM issues public
     # certificates after receiving approval from the domain owner.
     #
+    # <note markdown="1"> ACM behavior differs from the
+    # [https://tools.ietf.org/html/rfc6125#appendix-B.2][3]RFC 6125
+    # specification of the certificate validation process. first checks for
+    # a subject alternative name, and, if it finds one, ignores the common
+    # name (CN)
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
     # [2]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    # [3]: https://tools.ietf.org/html/rfc6125#appendix-B.2
     #
     # @option params [required, String] :domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, that you
@@ -1115,8 +1126,9 @@ module Aws::ACM
     #   (CA) that will be used to issue the certificate. If you do not provide
     #   an ARN and you are trying to request a private certificate, ACM will
     #   attempt to issue a public certificate. For more information about
-    #   private CAs, see the [AWS Certificate Manager Private Certificate
-    #   Authority (PCA)][1] user guide. The ARN must have the following form:
+    #   private CAs, see the [Amazon Web Services Certificate Manager Private
+    #   Certificate Authority (PCA)][1] user guide. The ARN must have the
+    #   following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #
@@ -1294,7 +1306,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

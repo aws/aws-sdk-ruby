@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2021-07-21)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.56.0 (2021-07-07)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.55.0 (2021-06-02)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.54.0 (2021-05-20)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.53.0 (2021-05-19)
+------------------
+
+* Feature - Add pagination to ListUserTags operation
+
 1.52.0 (2021-03-29)
 ------------------
 

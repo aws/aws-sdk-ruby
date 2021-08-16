@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2021-07-22)
+------------------
+
+* Feature - Amazon QLDB now supports ledgers encrypted with customer managed KMS keys. Changes in CreateLedger, UpdateLedger and DescribeLedger APIs to support the changes.
+
+1.15.0 (2021-06-04)
+------------------
+
+* Feature - Documentation updates for Amazon QLDB
+
+1.14.0 (2021-05-26)
+------------------
+
+* Feature - Support STANDARD permissions mode in CreateLedger and DescribeLedger. Add UpdateLedgerPermissionsMode to update permissions mode on existing ledgers.
+
 1.13.0 (2021-03-10)
 ------------------
 

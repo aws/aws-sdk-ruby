@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2021-06-25)
+------------------
+
+* Feature - AWS Snow Family customers can remotely monitor and operate their connected AWS Snowcone devices. AWS Snowball Edge Storage Optimized customers can now import and export their data using NFS.
+
+1.38.0 (2021-05-06)
+------------------
+
+* Feature - AWS Snow Family adds APIs for ordering and managing Snow jobs with long term pricing
+
 1.37.0 (2021-03-10)
 ------------------
 

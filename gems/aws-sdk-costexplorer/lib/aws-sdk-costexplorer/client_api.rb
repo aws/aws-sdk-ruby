@@ -80,6 +80,7 @@ module Aws::CostExplorer
     DimensionValues = Shapes::StructureShape.new(name: 'DimensionValues')
     DimensionValuesWithAttributes = Shapes::StructureShape.new(name: 'DimensionValuesWithAttributes')
     DimensionValuesWithAttributesList = Shapes::ListShape.new(name: 'DimensionValuesWithAttributesList')
+    DiskResourceUtilization = Shapes::StructureShape.new(name: 'DiskResourceUtilization')
     EBSResourceUtilization = Shapes::StructureShape.new(name: 'EBSResourceUtilization')
     EC2InstanceDetails = Shapes::StructureShape.new(name: 'EC2InstanceDetails')
     EC2ResourceDetails = Shapes::StructureShape.new(name: 'EC2ResourceDetails')
@@ -92,6 +93,8 @@ module Aws::CostExplorer
     Estimated = Shapes::BooleanShape.new(name: 'Estimated')
     Expression = Shapes::StructureShape.new(name: 'Expression')
     Expressions = Shapes::ListShape.new(name: 'Expressions')
+    FindingReasonCode = Shapes::StringShape.new(name: 'FindingReasonCode')
+    FindingReasonCodes = Shapes::ListShape.new(name: 'FindingReasonCodes')
     ForecastResult = Shapes::StructureShape.new(name: 'ForecastResult')
     ForecastResultsByTime = Shapes::ListShape.new(name: 'ForecastResultsByTime')
     GenericBoolean = Shapes::BooleanShape.new(name: 'GenericBoolean')
@@ -164,6 +167,7 @@ module Aws::CostExplorer
     MonitorDimension = Shapes::StringShape.new(name: 'MonitorDimension')
     MonitorType = Shapes::StringShape.new(name: 'MonitorType')
     NetRISavings = Shapes::StringShape.new(name: 'NetRISavings')
+    NetworkResourceUtilization = Shapes::StructureShape.new(name: 'NetworkResourceUtilization')
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     NullableNonNegativeDouble = Shapes::FloatShape.new(name: 'NullableNonNegativeDouble')
@@ -175,6 +179,8 @@ module Aws::CostExplorer
     OnDemandNormalizedUnits = Shapes::StringShape.new(name: 'OnDemandNormalizedUnits')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
+    PlatformDifference = Shapes::StringShape.new(name: 'PlatformDifference')
+    PlatformDifferences = Shapes::ListShape.new(name: 'PlatformDifferences')
     PredictionIntervalLevel = Shapes::IntegerShape.new(name: 'PredictionIntervalLevel')
     ProvideAnomalyFeedbackRequest = Shapes::StructureShape.new(name: 'ProvideAnomalyFeedbackRequest')
     ProvideAnomalyFeedbackResponse = Shapes::StructureShape.new(name: 'ProvideAnomalyFeedbackResponse')
@@ -487,6 +493,12 @@ module Aws::CostExplorer
 
     DimensionValuesWithAttributesList.member = Shapes::ShapeRef.new(shape: DimensionValuesWithAttributes)
 
+    DiskResourceUtilization.add_member(:disk_read_ops_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "DiskReadOpsPerSecond"))
+    DiskResourceUtilization.add_member(:disk_write_ops_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "DiskWriteOpsPerSecond"))
+    DiskResourceUtilization.add_member(:disk_read_bytes_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "DiskReadBytesPerSecond"))
+    DiskResourceUtilization.add_member(:disk_write_bytes_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "DiskWriteBytesPerSecond"))
+    DiskResourceUtilization.struct_class = Types::DiskResourceUtilization
+
     EBSResourceUtilization.add_member(:ebs_read_ops_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "EbsReadOpsPerSecond"))
     EBSResourceUtilization.add_member(:ebs_write_ops_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "EbsWriteOpsPerSecond"))
     EBSResourceUtilization.add_member(:ebs_read_bytes_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "EbsReadBytesPerSecond"))
@@ -518,6 +530,8 @@ module Aws::CostExplorer
     EC2ResourceUtilization.add_member(:max_memory_utilization_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "MaxMemoryUtilizationPercentage"))
     EC2ResourceUtilization.add_member(:max_storage_utilization_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "MaxStorageUtilizationPercentage"))
     EC2ResourceUtilization.add_member(:ebs_resource_utilization, Shapes::ShapeRef.new(shape: EBSResourceUtilization, location_name: "EBSResourceUtilization"))
+    EC2ResourceUtilization.add_member(:disk_resource_utilization, Shapes::ShapeRef.new(shape: DiskResourceUtilization, location_name: "DiskResourceUtilization"))
+    EC2ResourceUtilization.add_member(:network_resource_utilization, Shapes::ShapeRef.new(shape: NetworkResourceUtilization, location_name: "NetworkResourceUtilization"))
     EC2ResourceUtilization.struct_class = Types::EC2ResourceUtilization
 
     EC2Specification.add_member(:offering_class, Shapes::ShapeRef.new(shape: OfferingClass, location_name: "OfferingClass"))
@@ -547,6 +561,8 @@ module Aws::CostExplorer
     Expression.struct_class = Types::Expression
 
     Expressions.member = Shapes::ShapeRef.new(shape: Expression)
+
+    FindingReasonCodes.member = Shapes::ShapeRef.new(shape: FindingReasonCode)
 
     ForecastResult.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     ForecastResult.add_member(:mean_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "MeanValue"))
@@ -853,6 +869,14 @@ module Aws::CostExplorer
 
     MonitorArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
+    NetworkResourceUtilization.add_member(:network_in_bytes_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "NetworkInBytesPerSecond"))
+    NetworkResourceUtilization.add_member(:network_out_bytes_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "NetworkOutBytesPerSecond"))
+    NetworkResourceUtilization.add_member(:network_packets_in_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "NetworkPacketsInPerSecond"))
+    NetworkResourceUtilization.add_member(:network_packets_out_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "NetworkPacketsOutPerSecond"))
+    NetworkResourceUtilization.struct_class = Types::NetworkResourceUtilization
+
+    PlatformDifferences.member = Shapes::ShapeRef.new(shape: PlatformDifference)
+
     ProvideAnomalyFeedbackRequest.add_member(:anomaly_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AnomalyId"))
     ProvideAnomalyFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, required: true, location_name: "Feedback"))
     ProvideAnomalyFeedbackRequest.struct_class = Types::ProvideAnomalyFeedbackRequest
@@ -979,6 +1003,7 @@ module Aws::CostExplorer
     RightsizingRecommendation.add_member(:rightsizing_type, Shapes::ShapeRef.new(shape: RightsizingType, location_name: "RightsizingType"))
     RightsizingRecommendation.add_member(:modify_recommendation_detail, Shapes::ShapeRef.new(shape: ModifyRecommendationDetail, location_name: "ModifyRecommendationDetail"))
     RightsizingRecommendation.add_member(:terminate_recommendation_detail, Shapes::ShapeRef.new(shape: TerminateRecommendationDetail, location_name: "TerminateRecommendationDetail"))
+    RightsizingRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: FindingReasonCodes, location_name: "FindingReasonCodes"))
     RightsizingRecommendation.struct_class = Types::RightsizingRecommendation
 
     RightsizingRecommendationConfiguration.add_member(:recommendation_target, Shapes::ShapeRef.new(shape: RecommendationTarget, required: true, location_name: "RecommendationTarget"))
@@ -1145,6 +1170,7 @@ module Aws::CostExplorer
     TargetInstance.add_member(:default_target_instance, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "DefaultTargetInstance"))
     TargetInstance.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
     TargetInstance.add_member(:expected_resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "ExpectedResourceUtilization"))
+    TargetInstance.add_member(:platform_differences, Shapes::ShapeRef.new(shape: PlatformDifferences, location_name: "PlatformDifferences"))
     TargetInstance.struct_class = Types::TargetInstance
 
     TargetInstancesList.member = Shapes::ShapeRef.new(shape: TargetInstance)
